@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1444">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1444: Number of Ways of Cutting a Pizza in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1444: Number of Ways of Cutting a Pizza">
-  <meta name="twitter:description" content="Solution to Leetcode 1444">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1444: Number of Ways of Cutting a Pizza in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1444/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1444: Number of Ways of Cutting a Pizza">
-  <meta property="og:description" content="Solution to Leetcode 1444">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1444: Number of Ways of Cutting a Pizza in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -220,7 +220,187 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode508s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine how many ways you can cut a pizza (represented as a grid of characters) into <code>k</code> pieces such that each piece contains at least one slice of apple (&lsquo;A&rsquo;). The pizza is represented as a two-dimensional grid of characters, where each cell can either be &lsquo;A&rsquo; (indicating the presence of an apple) or &lsquo;.&rsquo; (indicating an empty cell). The goal is to count the distinct ways to make these cuts while ensuring that each piece has at least one apple.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a combination of depth-first search (DFS) and dynamic programming (DP). The strategy involves:</p>
+<ol>
+<li>
+<p><strong>Precomputation with Prefix Sums</strong>: Create a prefix sum array that allows us to quickly check the number of apples in any subgrid of the pizza.</p>
+</li>
+<li>
+<p><strong>DFS with Memoization</strong>: Use DFS to explore the possible cuts of the pizza. For each position, recursively check how many valid ways exist to make a cut while reducing the number of pieces left to cut (<code>k</code>).</p>
+</li>
+<li>
+<p><strong>Dynamic Programming Table</strong>: Store results in a 3D DP table to avoid redundant calculations for the same state.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code provided into understandable sections:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> which will contain the method to calculate the number of ways to cut the pizza.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">ways</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">pizza</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>ways</code> takes a 2D vector of strings representing the pizza and an integer <code>k</code> representing the number of pieces to cut the pizza into.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">pizza</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pizza</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">vector</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">preSum</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>We initialize variables <code>m</code> and <code>n</code> to represent the dimensions of the pizza.</li>
+<li>We create a 3D DP vector <code>dp</code> initialized to -1, where <code>dp[k][r][c]</code> represents the number of ways to cut the pizza starting from cell <code>(r, c)</code> with <code>k</code> pieces remaining.</li>
+<li>We also create a 2D prefix sum vector <code>preSum</code> to quickly calculate the number of apples in any subgrid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">r</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">c</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">pizza</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;A&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We compute the prefix sums by iterating from the bottom-right corner of the pizza grid. This allows us to efficiently count the number of apples in any rectangle defined by two corners in constant time.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Call</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">preSum</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We initiate the DFS process starting from the top-left corner <code>(0, 0)</code> of the pizza with <code>k-1</code> pieces remaining (since the first piece is already counted).</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;&amp;</span> <span class="n">dp</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">preSum</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function is defined to explore the pizza recursively. It takes the current position <code>(r, c)</code>, the number of remaining pieces <code>k</code>, and the <code>dp</code> and <code>preSum</code> structures.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We check:
+<ul>
+<li>If there are no apples in the remaining part of the pizza starting from <code>(r, c)</code>, return 0 (no valid cuts).</li>
+<li>If <code>k</code> is 0 (no more pieces left to cut), return 1 (one valid way to have cut the pizza).</li>
+<li>If we have already computed the result for this state, return it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">nr</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">nr</span><span class="o">++</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">preSum</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nr</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">preSum</span><span class="p">))</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">nc</span><span class="o">++</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">preSum</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">preSum</span><span class="p">))</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>ans</code> to count the number of valid ways.</li>
+<li>We check all possible horizontal cuts from the current row <code>r</code> to every row below it.</li>
+<li>We check all possible vertical cuts from the current column <code>c</code> to every column to the right.</li>
+<li>If cutting the pizza at that point results in a valid piece containing at least one apple, we proceed with the recursive DFS call.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store and Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we store the result in the DP table and return it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(m^2 \cdot n^2 \cdot k)). The nested loops involve iterating over the grid and performing the DFS, leading to a significant number of recursive calls.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m \cdot n \cdot k)) due to the DP table and the prefix sum array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of ways to cut a pizza into <code>k</code> pieces, each containing at least one apple, using a combination of DFS and dynamic programming. The use of a prefix sum array allows for quick checks of the number of apples in subgrids, and memoization avoids redundant calculations.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>: This approach allows for efficient solving of problems with overlapping subproblems, such as counting distinct configurations.</p>
+</li>
+<li>
+<p><strong>Prefix Sums</strong>: Using prefix sums can greatly speed up the process of checking conditions in subarrays, especially when dealing with grid-like structures.</p>
+</li>
+<li>
+<p><strong>DFS for Combinatorial Problems</strong>: Depth-first search is a powerful technique for exploring possible configurations or combinations, especially in grid or tree-like structures.</p>
+</li>
+</ol>
+<p>In summary, the provided code effectively demonstrates a solution to a complex combinatorial problem, making it a valuable reference for similar challenges in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode508s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

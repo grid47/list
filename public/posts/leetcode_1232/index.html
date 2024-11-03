@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1232">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1232: Check If It Is a Straight Line in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1232: Check If It Is a Straight Line">
-  <meta name="twitter:description" content="Solution to Leetcode 1232">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1232: Check If It Is a Straight Line in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1232/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1232: Check If It Is a Straight Line">
-  <meta property="og:description" content="Solution to Leetcode 1232">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1232: Check If It Is a Straight Line in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,7 +204,107 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode272s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine if a given set of points, represented as coordinates in a 2D space, lies on a straight line. Each point is provided as a pair of integers corresponding to its (x) and (y) coordinates. The challenge is to efficiently ascertain whether all these points share the same slope when compared to each other, thus confirming they lie on a linear path.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we utilize the properties of slopes in geometry. The slope between any two points ((x_1, y_1)) and ((x_2, y_2)) can be calculated using the formula:</p>
+<p>[
+\text{slope} = \frac{y_2 - y_1}{x_2 - x_1}
+]</p>
+<p>For all the points to lie on a straight line, the slopes formed between the first point and all other points should be equal. However, directly comparing slopes could lead to division by zero errors when dealing with vertical lines (where (x_1 = x_2)). Therefore, we can circumvent this by comparing the cross products instead, which avoids division and provides a reliable way to determine collinearity.</p>
+<ol>
+<li>Calculate the slope between the first two points to establish a reference slope.</li>
+<li>For each subsequent point, calculate its slope with the first point and compare it to the reference slope.</li>
+<li>If any point has a different slope, return false. If all points share the same slope, return true.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-2</strong>: The <code>Solution</code> class is defined, and the public method <code>checkStraightLine</code> is declared, which takes a vector of vectors (2D array) representing coordinates.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">checkStraightLine</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">cord</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 3</strong>: The method <code>checkStraightLine</code> begins its implementation, accepting a reference to a 2D vector named <code>cord</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">slopt</span> <span class="o">=</span> <span class="p">(</span><span class="n">cord</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="nl">INT_MAX</span><span class="p">:</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">cord</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">cord</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 4</strong>: The slope between the first two points is calculated. If the (x) coordinates of the first two points are the same (indicating a vertical line), <code>slopt</code> is set to <code>INT_MAX</code> to represent an undefined slope. Otherwise, the slope is calculated as the change in (y) divided by the change in (x).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cord</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 5</strong>: A loop is initiated that iterates from the third point (index 2) to the last point in the coordinates list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">slp</span> <span class="o">=</span> <span class="p">(</span><span class="n">cord</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span><span class="nl">INT_MAX</span><span class="p">:</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">cord</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">cord</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">cord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 6</strong>: Inside the loop, the slope for the current point (with respect to the first point) is calculated using the same logic as before. If the (x) coordinates match, <code>slp</code> is set to <code>INT_MAX</code>, otherwise it is computed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">slp</span> <span class="o">!=</span> <span class="n">slopt</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 7</strong>: A comparison is made between the current slope (<code>slp</code>) and the reference slope (<code>slopt</code>). If they are not equal, it indicates that the points do not lie on the same straight line, and the function immediately returns <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 8-10</strong>: If the loop completes without finding any differing slopes, the function returns <code>true</code>, indicating that all points are collinear. The method and class definitions are closed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this function is ( O(n) ), where ( n ) is the number of points in the input vector. The function iterates through the list of points once to check their slopes.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since only a constant amount of additional space is used for variables, regardless of the input size.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>checkStraightLine</code> function effectively determines whether a given set of coordinates forms a straight line by analyzing the slopes between points in a systematic way. Utilizing cross products avoids the pitfalls of division by zero and ensures accurate comparisons of slopes. This solution is efficient, with linear time complexity and constant space usage, making it suitable for handling large datasets of points in Cartesian space. Understanding the geometry of points and lines is crucial for solving such problems, and this implementation serves as an excellent example of applying mathematical concepts in programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode272s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

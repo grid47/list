@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1074">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1074: Number of Submatrices That Sum to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1074: Number of Submatrices That Sum to Target">
-  <meta name="twitter:description" content="Solution to Leetcode 1074">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1074: Number of Submatrices That Sum to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1074/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1074: Number of Submatrices That Sum to Target">
-  <meta property="og:description" content="Solution to Leetcode 1074">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1074: Number of Submatrices That Sum to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,127 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode95s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the number of submatrices in a given 2D matrix (<code>mtx</code>) that sum to a specified target value (<code>post</code>). A submatrix is defined by selecting two rows and two columns in the matrix. The challenge lies in efficiently calculating the sums of potentially many submatrices, especially as the size of the matrix grows.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a combination of prefix sums and a hash map to track the number of times a particular sum occurs as we iterate through the matrix. The main steps of the approach are as follows:</p>
+<ol>
+<li>Calculate the prefix sums for each row to facilitate quick sum calculations for any submatrix.</li>
+<li>Iterate over all possible pairs of columns to consider every submatrix formed between those columns.</li>
+<li>For each pair of columns, compute the sum of elements in each row for the selected columns and use a hash map to count how many times each sum has been seen.</li>
+<li>For each computed sum, check if there exists a prefix sum that would make the current sum equal to the target. If so, increment the result count.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:
+The <code>Solution</code> class encapsulates the method for finding the number of submatrices summing to a target.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>:
+The method <code>numSubmatrixSumTarget</code> takes a reference to a 2D vector (<code>mtx</code>) representing the matrix and an integer (<code>post</code>) representing the target sum.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numSubmatrixSumTarget</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mtx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">post</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>:
+We start by initializing a result counter <code>res</code> to 0, along with <code>m</code> and <code>n</code>, which store the number of rows and columns in the matrix.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mtx</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mtx</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Prefix Sums</strong>:
+To facilitate fast sum calculations, we modify the input matrix to store the prefix sums of each row. This is done by iterating over each row and updating each element to be the sum of itself and the element to its left.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mtx</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mtx</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Over Column Pairs</strong>:
+We use two nested loops to iterate over all pairs of columns (i.e., from <code>i</code> to <code>j</code>) that define the boundaries of our submatrices.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Using a Hash Map to Count Prefix Sums</strong>:
+Inside the loop for column pairs, we initialize a variable <code>cur</code> to track the cumulative sum of the current submatrix, and a hash map <code>maap</code> to count the occurrences of each sum. We start by adding an entry for sum 0, which allows us to handle cases where the current sum exactly matches the target.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">maap</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">maap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Row Sums and Updating Counts</strong>:
+We then iterate over each row to calculate the sum of the submatrix defined by the current column pair. For each row, we update <code>cur</code> with the sum of the current column minus the appropriate prefix sum for the left column. We check how many times <code>cur - post</code> has occurred using the hash map, and we increment the result counter accordingly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur</span> <span class="o">+=</span> <span class="n">mtx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="n">mtx</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">+=</span> <span class="n">maap</span><span class="p">[</span><span class="n">cur</span> <span class="o">-</span> <span class="n">post</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maap</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:
+Finally, we return the total count of submatrices that sum to the target value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(m \cdot n^2)), where (m) is the number of rows and (n) is the number of columns. This complexity arises because we iterate through all pairs of columns, and for each pair, we traverse all rows to calculate sums.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for the hash map, which stores the counts of the current sums as we iterate through the rows. In the worst case, we could have up to (n) unique sums in the map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code efficiently finds the number of submatrices in a given 2D matrix that sum to a specified target value by employing prefix sums and a hash map. This method allows us to avoid the naive approach of iterating through all possible submatrices explicitly, which would be computationally expensive.</p>
+<p>By leveraging the properties of prefix sums and the efficiency of hash maps, this solution is both optimal and elegant, making it suitable for competitive programming and applications requiring matrix analysis. The approach ensures that we can handle larger matrices within reasonable time limits, providing a practical solution to the problem of submatrix sum queries.</p>
+<p>In summary, this implementation demonstrates the effective use of data structures and algorithms to tackle a common problem in computational geometry, showcasing the importance of understanding matrix operations and optimizations in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode95s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

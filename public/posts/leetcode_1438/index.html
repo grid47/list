@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1438">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit">
-  <meta name="twitter:description" content="Solution to Leetcode 1438">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1438/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit">
-  <meta property="og:description" content="Solution to Leetcode 1438">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -208,7 +208,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode501s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the length of the longest contiguous subarray in a given list of integers such that the difference between the maximum and minimum elements in the subarray does not exceed a specified limit. This problem can be understood as a sliding window problem, where we want to maintain a window of numbers that satisfies a certain condition regarding their maximum and minimum values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a sliding window technique combined with a multiset data structure to keep track of the elements in the current window. The general steps involved in the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: We will use a multiset to store the elements of the current window. We also maintain pointers to define the start and end of the window and a variable to store the maximum length of valid subarrays found so far.</p>
+</li>
+<li>
+<p><strong>Iterate Over the Array</strong>: We will traverse through the array using a loop, expanding the window by adding elements to the multiset.</p>
+</li>
+<li>
+<p><strong>Check Validity of the Window</strong>: For each new element added, we will check if the condition (difference between max and min elements in the window) is violated. If it is, we will shrink the window from the left by removing elements from the multiset until the condition is satisfied again.</p>
+</li>
+<li>
+<p><strong>Update Result</strong>: After adjusting the window, we will compute the length of the current valid window and update our maximum length variable if needed.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the maximum length of the valid subarrays found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code step by step:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> which will contain our method to compute the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">longestSubarray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>longestSubarray</code> takes two parameters: a vector of integers <code>nums</code> and an integer <code>limit</code> which defines the maximum allowed difference between the maximum and minimum elements in a valid subarray.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">multiset</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ms</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a <code>multiset&lt;int&gt;</code> named <code>ms</code> to store the elements of the current subarray. The integer <code>res</code> will store the maximum length of valid subarrays found, and <code>j</code> is used as a pointer to the start of the current window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ms</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates over each element in the <code>nums</code> array. The current element <code>nums[i]</code> is inserted into the multiset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Window Validity</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">ms</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">ms</span><span class="p">.</span><span class="n">rbegin</span><span class="p">()</span> <span class="o">-</span> <span class="o">*</span><span class="n">ms</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ms</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">ms</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We check if the difference between the maximum element (<code>*ms.rbegin()</code>) and the minimum element (<code>*ms.begin()</code>) in the multiset exceeds the specified <code>limit</code>. If it does, we remove the leftmost element from the window (pointed to by <code>j</code>) until the condition is satisfied.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum Length</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>After ensuring the window is valid, we calculate the current length of the window (<code>i - j + 1</code>) and update <code>res</code> if this length is greater than the previously recorded maximum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum length of the valid subarray stored in <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \log n)), where (n) is the number of elements in the input array. This complexity arises from the insertion and deletion operations on the multiset, which take (O(\log n)) time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) in the worst case, as we may store all elements in the multiset if the entire array satisfies the condition.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively finds the longest contiguous subarray that meets the specified condition using a sliding window approach and a multiset for dynamic maintenance of the window&rsquo;s elements. It showcases the power of combining data structures with algorithmic strategies to solve complex problems efficiently.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sliding Window Technique</strong>: The sliding window technique is a common pattern for solving problems related to subarrays, allowing for efficient tracking of conditions over a range of elements.</p>
+</li>
+<li>
+<p><strong>Multiset Usage</strong>: Using a multiset provides an easy way to maintain a sorted order of elements and allows quick access to the maximum and minimum elements, which is crucial for this problem.</p>
+</li>
+<li>
+<p><strong>Dynamic Problem Solving</strong>: The method illustrates how to dynamically adjust the size of the solution set (the window) based on the input conditions, demonstrating an effective approach to managing constraints in array problems.</p>
+</li>
+</ol>
+<p>Overall, this implementation serves as a practical example of leveraging data structures to achieve efficient algorithms in solving array-related challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode501s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

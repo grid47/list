@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1247">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1247: Minimum Swaps to Make Strings Equal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1247: Minimum Swaps to Make Strings Equal">
-  <meta name="twitter:description" content="Solution to Leetcode 1247">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1247: Minimum Swaps to Make Strings Equal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1247/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1247: Minimum Swaps to Make Strings Equal">
-  <meta property="og:description" content="Solution to Leetcode 1247">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1247: Minimum Swaps to Make Strings Equal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -206,7 +206,121 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">xy</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">yx</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">xy</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode287s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum number of swaps needed to make two strings equal. The strings, <code>s1</code> and <code>s2</code>, consist only of characters &lsquo;x&rsquo; and &lsquo;y&rsquo;. A swap is defined as exchanging one &lsquo;x&rsquo; from <code>s1</code> with one &lsquo;y&rsquo; from <code>s2</code> (or vice versa) at the same index. If it is impossible to make the strings equal through swaps, the function should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Count Mismatches</strong>: Traverse both strings simultaneously to count the number of mismatched pairs:</p>
+<ul>
+<li>Count how many times an &lsquo;x&rsquo; in <code>s1</code> is paired with a &lsquo;y&rsquo; in <code>s2</code> (let&rsquo;s call this count <code>xy</code>).</li>
+<li>Count how many times a &lsquo;y&rsquo; in <code>s1</code> is paired with an &lsquo;x&rsquo; in <code>s2</code> (let&rsquo;s call this count <code>yx</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Parity</strong>: After counting the mismatched pairs, we check the parity (even or odd) of both <code>xy</code> and <code>yx</code>. If their parities differ (i.e., one is even and the other is odd), it is impossible to make the strings equal through any number of swaps, so we return -1.</p>
+</li>
+<li>
+<p><strong>Calculate Minimum Swaps</strong>: If the parities are the same, the minimum number of swaps required can be calculated using the formula:</p>
+<ul>
+<li>Each pair of <code>xy</code> or <code>yx</code> can be resolved with one swap, which means <code>xy / 2</code> swaps can fix <code>xy</code> mismatches and <code>yx / 2</code> swaps can fix <code>yx</code> mismatches.</li>
+<li>If there is an odd mismatch, it can be resolved with two swaps (one additional swap is needed for one unmatched pair). Thus, we account for this by adding <code>(xy % 2) * 2</code> to the total swaps.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumSwap</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-2</strong>: We define the <code>Solution</code> class and declare the public method <code>minimumSwap</code>, which takes two strings <code>s1</code> and <code>s2</code> as input parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">xy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">yx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span><span class="p">)</span> <span class="n">xy</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;y&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;x&#39;</span><span class="p">)</span> <span class="n">yx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-9</strong>: We initialize two integer variables <code>xy</code> and <code>yx</code> to count the mismatches. We then loop through the characters of <code>s1</code> and <code>s2</code>. For each index <code>i</code>:
+<ul>
+<li>If <code>s1[i]</code> is &lsquo;x&rsquo; and <code>s2[i]</code> is &lsquo;y&rsquo;, we increment <code>xy</code>.</li>
+<li>If <code>s1[i]</code> is &lsquo;y&rsquo; and <code>s2[i]</code> is &lsquo;x&rsquo;, we increment <code>yx</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">xy</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="n">yx</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 10</strong>: After counting the mismatches, we check if the parities of <code>xy</code> and <code>yx</code> are different. If they are, it implies that it is impossible to make the strings equal through swaps, and we return -1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">xy</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">yx</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">xy</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 11-12</strong>: If we reach this point, it means that it is possible to make the strings equal. We calculate the minimum number of swaps:
+<ul>
+<li><code>xy / 2</code> gives the swaps needed for <code>xy</code> pairs.</li>
+<li><code>yx / 2</code> gives the swaps needed for <code>yx</code> pairs.</li>
+<li><code>(xy % 2) * 2</code> accounts for any additional unmatched pair that requires two swaps.</li>
+</ul>
+</li>
+<li>Finally, we return the total number of swaps calculated.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ), where ( n ) is the length of the input strings. We make a single pass through both strings to count the mismatches.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we only use a constant amount of space for the integer counters <code>xy</code> and <code>yx</code>.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minimumSwap</code> function efficiently determines the minimum number of swaps required to make two strings equal by counting mismatched pairs and utilizing simple arithmetic operations to compute the result. The approach leverages the properties of mismatched characters to ensure that it handles even and odd cases appropriately. With a linear time complexity and constant space usage, this solution is both optimal and easy to understand, making it suitable for similar problems involving character manipulation in strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode287s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

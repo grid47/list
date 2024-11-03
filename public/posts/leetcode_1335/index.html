@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1335">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1335: Minimum Difficulty of a Job Schedule in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1335: Minimum Difficulty of a Job Schedule">
-  <meta name="twitter:description" content="Solution to Leetcode 1335">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1335: Minimum Difficulty of a Job Schedule in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1335/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1335: Minimum Difficulty of a Job Schedule">
-  <meta property="og:description" content="Solution to Leetcode 1335">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1335: Minimum Difficulty of a Job Schedule in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,7 +224,139 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode387s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to schedule a list of jobs over a given number of days such that the total difficulty is minimized. The difficulty of a schedule is defined as the maximum difficulty of any single day. The task is to partition the job list into <code>d</code> contiguous segments and minimize the sum of the maximum job difficulty for each segment.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we employ a dynamic programming (DP) strategy. We define a DP function that calculates the minimum difficulty of scheduling the jobs starting from a certain index and using a specified number of days. The key steps in the approach are:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Set up a memoization table to cache results and improve efficiency.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>: Define base cases for the recursive function:</p>
+<ul>
+<li>If we have scheduled all jobs with the required number of days, the total difficulty is zero.</li>
+<li>If we have jobs left but no days, return infinity (impossible to schedule).</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion</strong>: For each job, consider it as the start of a new segment. Calculate the maximum difficulty of jobs in that segment and recursively calculate the minimum difficulty for the remaining jobs and days.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: Store results in the memoization table to avoid redundant calculations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">301</span><span class="p">][</span><span class="mi">11</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined, which contains a vector <code>job</code> for storing the job difficulties and a 2D array <code>memo</code> for memoization.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">job</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">job</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">||</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">INT_MAX</span><span class="p">;</span>        
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function is defined to recursively calculate the minimum difficulty. It takes the current job index <code>idx</code> and the remaining days <code>d</code>.</li>
+<li>The base cases check if all jobs have been scheduled with the required days (returning 0) or if there are jobs left but no days (returning infinity).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">d</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>If the result for the current state has already been computed, return the cached value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Initialize <code>mx</code> to the difficulty of the current job and <code>ans</code> to infinity. <code>mx</code> will track the maximum difficulty of the current segment.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">job</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">job</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="n">INT_MAX</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">mx</span> <span class="o">+</span> <span class="n">ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Iterate through the jobs starting from the current index <code>idx</code>. For each job:
+<ul>
+<li>Update the maximum difficulty of the current segment.</li>
+<li>Call the <code>dp</code> function recursively for the remaining jobs and decreased days.</li>
+<li>If the result from the recursive call is valid (not infinity), update the minimum difficulty found so far.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Store the computed answer in the memoization table and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minDifficulty</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">job</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">job</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">job</span> <span class="o">=</span> <span class="n">job</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>minDifficulty</code> function is defined, which initializes the job list and checks if the number of jobs is sufficient for the number of days. It prepares the memoization table and calls the <code>dp</code> function starting from index 0 and using <code>d</code> days.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n^2 \cdot d)), where (n) is the number of jobs and (d) is the number of days. This is due to the nested loops in the <code>dp</code> function where we explore all job combinations for each day.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n \cdot d)) due to the memoization table used to store intermediate results.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code effectively addresses the problem of job scheduling by using a dynamic programming approach to minimize the total difficulty across a specified number of days. By breaking down the problem into smaller subproblems, we can efficiently compute the optimal solution while keeping track of previous results with memoization.</p>
+<p>The implementation highlights the power of recursion and dynamic programming in solving complex scheduling problems. Understanding and applying these techniques can significantly enhance problem-solving skills, especially in scenarios where resource allocation and time management are crucial, such as in job scheduling, project management, and operations research.</p>
+<p>The solution provided is a valuable example of algorithmic thinking, demonstrating how to tackle optimization problems with structured approaches that balance efficiency and clarity. This kind of methodology is essential for developers and engineers who aim to build robust applications capable of handling complex tasks in various domains.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode387s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

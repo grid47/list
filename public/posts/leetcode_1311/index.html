@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1311">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1311: Get Watched Videos by Your Friends">
-  <meta name="twitter:description" content="Solution to Leetcode 1311">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1311/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1311: Get Watched Videos by Your Friends">
-  <meta property="og:description" content="Solution to Leetcode 1311">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -241,7 +241,170 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode356s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a social network represented as an adjacency list, where each node represents a person, we are given:</p>
+<ol>
+<li>A 2D list <code>wv</code> where <code>wv[i]</code> is a list of videos watched by person <code>i</code>.</li>
+<li>A 2D list <code>f</code> where <code>f[i]</code> contains the IDs of person <code>i</code>&rsquo;s friends.</li>
+<li>An integer <code>id</code>, representing a specific person&rsquo;s ID.</li>
+<li>An integer <code>k</code>, representing the &ldquo;friendship level&rdquo; (or depth of connections).</li>
+</ol>
+<p>The goal is to retrieve a list of videos watched by friends exactly <code>k</code> levels away from the given <code>id</code>, sorted by frequency and then alphabetically.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach is to use a Breadth-First Search (BFS) to find friends at the exact &ldquo;friendship level&rdquo; <code>k</code> and then determine which videos were watched by these friends. BFS is ideal here because it explores each friendship level layer by layer.</p>
+<ol>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
+<ul>
+<li>Initialize a <code>queue</code> with the start person (<code>id</code>) and mark them as visited.</li>
+<li>For each level up to <code>k</code>, process the current level&rsquo;s friends and add their friends (if unvisited) to the queue.</li>
+<li>After reaching exactly <code>k</code> levels, the queue will contain the IDs of friends who are exactly <code>k</code> levels away from <code>id</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Video Frequencies</strong>:</p>
+<ul>
+<li>Use a map to count the frequency of each video watched by the friends at level <code>k</code>. For each friend at level <code>k</code>, add their watched videos to the map, incrementing the count for each video.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Videos by Frequency and Name</strong>:</p>
+<ul>
+<li>Sort the videos based on frequency and then lexicographically for videos with the same frequency.</li>
+<li>Return a list of video names in the desired sorted order.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize the BFS and Visited Array</strong>:</p>
+<ul>
+<li>Mark the starting person as visited, push them to the queue, and set up a <code>vis</code> array to avoid revisiting.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vis</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Perform BFS up to <code>k</code> Levels</strong>:</p>
+<ul>
+<li>For each level up to <code>k</code>, process each friend in the queue.</li>
+<li>For each friend, push their unvisited friends to the queue for the next level.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">f</span><span class="p">[</span><span class="n">top</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Video Frequencies for Friends at Level <code>k</code></strong>:</p>
+<ul>
+<li>For each friend remaining in the queue after <code>k</code> levels, update the frequency map for their watched videos.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fr</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">string</span> <span class="nl">x</span><span class="p">:</span> <span class="n">wv</span><span class="p">[</span><span class="n">fr</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sort Videos by Frequency and Alphabetically</strong>:</p>
+<ul>
+<li>Convert the map into a vector of pairs and sort them by frequency and then alphabetically.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">ans</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ans</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Extract Sorted Video Names</strong>:</p>
+<ul>
+<li>Create a result vector with only the sorted video names and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">ans</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n + e + m \log m))</p>
+<ul>
+<li>(O(n + e)) for BFS traversal where (n) is the number of people and (e) is the number of friendships.</li>
+<li>Counting video frequencies is (O(m)), where (m) is the total number of videos by level <code>k</code> friends.</li>
+<li>Sorting the videos takes (O(m \log m)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n + m)) for the queue, visited array, map, and result vector.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the most-watched videos by friends at a specified friendship level using BFS and frequency-based sorting. It is well-suited for large social networks, as BFS efficiently explores levels and ensures that only friends exactly <code>k</code> levels away are considered. By organizing and sorting based on video popularity and lexicographical order, the solution provides clear and accurate results. This approach is both scalable and effective for friendship-based video recommendation systems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode356s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

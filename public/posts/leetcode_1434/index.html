@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1434">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1434: Number of Ways to Wear Different Hats to Each Other in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1434: Number of Ways to Wear Different Hats to Each Other">
-  <meta name="twitter:description" content="Solution to Leetcode 1434">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1434: Number of Ways to Wear Different Hats to Each Other in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1434/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1434: Number of Ways to Wear Different Hats to Each Other">
-  <meta property="og:description" content="Solution to Leetcode 1434">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1434: Number of Ways to Wear Different Hats to Each Other in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,7 +221,182 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">hatsToPeople</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode497s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves distributing hats to people with certain constraints. Each person can wear specific hats, and we want to count the number of valid ways to assign hats to people such that every person gets exactly one hat. The input is represented as a list of lists, where each inner list contains the hat numbers that a specific person can wear. The goal is to find the total number of ways to distribute these hats under the given constraints.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use a Depth-First Search (DFS) approach combined with memoization (dynamic programming). Here’s a step-by-step explanation of the approach:</p>
+<ol>
+<li><strong>Data Structure Setup</strong>: Create an array that keeps track of which people can wear each hat.</li>
+<li><strong>Bitmasking</strong>: Use a bitmask to represent the set of people who have been assigned hats. This allows us to efficiently check which people have already received hats.</li>
+<li><strong>Recursive DFS Function</strong>: Implement a recursive function that explores all possible distributions of hats to people.</li>
+<li><strong>Memoization</strong>: Store intermediate results in a 2D array to avoid redundant calculations.</li>
+<li><strong>Base Cases</strong>: Define base cases for the recursion to return results when all people have been assigned hats or when all hats have been considered.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code for clarity:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with public member variables. <code>n</code> stores the number of people, and <code>M</code> is used for the modulo operation to prevent overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">hatsToPeople</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">dp</span><span class="p">,</span> <span class="kt">int</span> <span class="n">hat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mask</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function takes the following parameters:
+<ul>
+<li><code>hatsToPeople</code>: a 2D vector mapping hats to people.</li>
+<li><code>dp</code>: a memoization table to store computed results.</li>
+<li><code>hat</code>: the current hat being considered.</li>
+<li><code>mask</code>: a bitmask representing the current state of which people have been assigned hats.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If <code>mask</code> is equal to <code>(1 &lt;&lt; n) - 1</code>, it means all people have been assigned hats, and we return 1 as a valid configuration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Out of Bounds Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">hat</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If we have considered all hats (up to 40), we return 0 since no further valid assignments can be made.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="n">hat</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="n">hat</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>Before proceeding, we check if we have already computed the result for the current <code>mask</code> and <code>hat</code>. If so, return that value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Calls</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">hatsToPeople</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">hat</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">person</span><span class="p">:</span> <span class="n">hatsToPeople</span><span class="p">[</span><span class="n">hat</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">person</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">res</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">hatsToPeople</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">hat</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mask</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">person</span><span class="p">)))</span> <span class="o">%=</span> <span class="n">M</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>First, we compute the number of ways without using the current hat by making a recursive call with <code>hat + 1</code>.</li>
+<li>Then, for each person that can wear the current hat, we check if they have already been assigned a hat using the bitmask. If they haven’t, we make a recursive call with the updated mask (marking the person as assigned) and continue to the next hat.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store and Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="n">hat</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After computing the total number of ways for the current state, we store the result in the memoization table and return it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numberWays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">hats</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">hats</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">hatsToPeople</span><span class="p">(</span><span class="mi">41</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">h</span> <span class="p">:</span> <span class="n">hats</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">hatsToPeople</span><span class="p">[</span><span class="n">h</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">hatsToPeople</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>In the <code>numberWays</code> function:
+<ul>
+<li>We initialize <code>n</code> with the number of people.</li>
+<li>We build the <code>hatsToPeople</code> vector to map hats to the people who can wear them.</li>
+<li>We initialize the <code>dp</code> table with <code>-1</code> to signify that no states have been computed yet.</li>
+<li>Finally, we call the <code>dfs</code> function to start the recursive search.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(2^n \cdot 40)). The (2^n) comes from the number of possible combinations of people that can receive hats (since we use a bitmask of size (n)), and (40) is the maximum number of hats we iterate over.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(2^n \cdot 41)) due to the memoization table storing results for every combination of people and each hat.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code efficiently counts the number of ways to distribute hats to people, ensuring that all constraints are satisfied through a depth-first search approach with memoization. The bitmasking technique simplifies the tracking of which people have already received hats, allowing for a clear and manageable recursive implementation.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>DFS with Memoization</strong>: This approach illustrates the power of combining DFS with memoization to reduce redundant calculations in recursive problems.</p>
+</li>
+<li>
+<p><strong>Bitmasking for State Representation</strong>: The use of bitmasking to represent the state of assigned hats is an effective technique in combinatorial problems, providing a compact and efficient way to track multiple binary states.</p>
+</li>
+<li>
+<p><strong>Modular Arithmetic</strong>: Utilizing modular arithmetic helps prevent overflow issues and ensures results remain within acceptable limits, which is crucial in competitive programming scenarios.</p>
+</li>
+</ol>
+<p>Overall, this solution is a robust example of algorithmic problem-solving that effectively combines data structures and recursive techniques to tackle a complex distribution problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode497s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

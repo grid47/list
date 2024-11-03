@@ -39,6 +39,8 @@ public:
 ---
 {{< youtube IIt_ARZzclY >}}
 
+"| 1904: The Number of Full Rounds You Have Played |"
+
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

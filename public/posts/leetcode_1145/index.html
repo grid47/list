@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1145">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1145: Binary Tree Coloring Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1145: Binary Tree Coloring Game">
-  <meta name="twitter:description" content="Solution to Leetcode 1145">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1145: Binary Tree Coloring Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1145/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1145: Binary Tree Coloring Game">
-  <meta property="og:description" content="Solution to Leetcode 1145">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1145: Binary Tree Coloring Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,7 +225,140 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode174s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In the &ldquo;Binary Tree Coloring Game,&rdquo; two players take turns coloring nodes on a binary tree. Player 1 starts by coloring a node, referred to as <code>x</code>. Player 2 then has the option to color any uncolored node on the tree. The objective of the game is for one player to gain control over more than half of the tree nodes.</p>
+<p>Given the root of a binary tree, the total number of nodes <code>n</code>, and the initial node <code>x</code> that Player 1 colors, determine whether Player 2 can make a move to win the game by controlling more than half of the nodes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution takes a recursive approach to count the nodes in the binary tree, and it calculates the number of nodes on each side of the tree relative to the node <code>x</code>. The strategy focuses on Player 2&rsquo;s winning options by dividing the tree into three regions:</p>
+<ol>
+<li><strong>Left Subtree of Node <code>x</code></strong> (<code>lft</code>)</li>
+<li><strong>Right Subtree of Node <code>x</code></strong> (<code>rht</code>)</li>
+<li><strong>Remaining nodes excluding the subtree rooted at <code>x</code></strong></li>
+</ol>
+<p>To determine if Player 2 can win:</p>
+<ol>
+<li>The algorithm checks whether the largest region among these three has more than half of the total nodes.</li>
+<li>If the largest region has more than <code>n / 2</code> nodes, Player 2 can win by coloring a node in that region.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a breakdown of each part of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-12</strong>: The code begins by defining the <code>TreeNode</code> structure and a <code>Solution</code> class that contains the solution to the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">lft</span><span class="p">,</span> <span class="n">rht</span><span class="p">,</span> <span class="n">val</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 13</strong>: These are instance variables:
+<ul>
+<li><code>lft</code> and <code>rht</code> store the number of nodes in the left and right subtrees of the node <code>x</code>, respectively.</li>
+<li><code>val</code> stores the value of node <code>x</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">btreeGameWinningMove</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 14-16</strong>: The <code>btreeGameWinningMove</code> function is defined with three parameters: the root of the tree, the total number of nodes <code>n</code>, and the value <code>x</code> representing the initial node chosen by Player 1. The value of <code>x</code> is stored in <code>val</code> for reference.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 17-18</strong>: The <code>count</code> function is called to calculate the number of nodes in the tree and to populate the values of <code>lft</code> and <code>rht</code> by traversing the tree. The output <code>n</code> is re-assigned the result of <code>count</code> for further use.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">lft</span><span class="p">,</span> <span class="n">rht</span><span class="p">),</span> <span class="n">n</span> <span class="o">-</span> <span class="n">lft</span> <span class="o">-</span> <span class="n">rht</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 19</strong>: The function returns a boolean result. It calculates the maximum node count in any of the three regions and checks if it exceeds <code>n / 2</code>. If it does, Player 2 has a winning move by taking control of that region.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">count</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 20-21</strong>: The <code>count</code> helper function is defined, which recursively counts the number of nodes in the binary tree. If <code>root</code> is null, it returns <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 22-23</strong>: The function calls itself recursively for both the left and right subtrees, storing the count of nodes in <code>l</code> and <code>r</code>, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lft</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">rht</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 24-25</strong>: If the current node has the same value as <code>val</code> (i.e., it’s the node <code>x</code> chosen by Player 1), the values of <code>lft</code> and <code>rht</code> are set to <code>l</code> and <code>r</code>. This allows us to know the number of nodes in the left and right subtrees of <code>x</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 26-28</strong>: The function returns the total node count for the current subtree, which is the sum of nodes in the left and right subtrees plus the root node itself.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n) ) because the <code>count</code> function traverses all nodes in the binary tree once to determine the node counts for each subtree.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(h) ), where ( h ) is the height of the binary tree. This accounts for the recursive stack used in the depth-first traversal, which can go as deep as the height of the tree.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This C++ solution effectively determines whether Player 2 can win the &ldquo;Binary Tree Coloring Game&rdquo; by using a recursive function to count the nodes in the left and right subtrees of node <code>x</code>. The code then assesses whether any of the three possible regions has more than half of the total nodes, which would allow Player 2 to win. By taking advantage of a well-structured recursive approach, this solution provides an efficient way to handle binary tree manipulation and maximize control in a competitive game scenario.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode174s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1305">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1305: All Elements in Two Binary Search Trees">
-  <meta name="twitter:description" content="Solution to Leetcode 1305">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1305/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1305: All Elements in Two Binary Search Trees">
-  <meta property="og:description" content="Solution to Leetcode 1305">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -233,7 +233,139 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode349s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two binary search trees (BSTs), the task is to merge all of their elements into a single sorted list. This requires performing an in-order traversal on both trees to access their elements in ascending order, and then merging the results. The solution should have a time complexity close to (O(m + n)), where (m) and (n) are the number of nodes in each tree, and it should avoid using extra space beyond the necessary output list.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses <strong>in-order traversal</strong> and <strong>two stacks</strong> to simulate iterators for each BST:</p>
+<ol>
+<li><strong>In-Order Traversal</strong>: Since BSTs have elements in sorted order when traversed in-order, this traversal helps us access each tree’s elements in ascending order.</li>
+<li><strong>Stack-Based Iterative In-Order Traversal</strong>: Instead of recursive traversal, this approach uses stacks to store nodes from each tree, simulating an in-order traversal. Each time the traversal visits a node, it either processes the node if it’s the smallest available node or goes to the next node’s right child.</li>
+<li><strong>Simultaneous Traversal and Merge</strong>: By pushing nodes from both trees onto their respective stacks, we can compare the current smallest elements of each tree. The smaller value is added to the result list, and the corresponding traversal continues.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>:</p>
+<ul>
+<li>We define a class <code>Solution</code> with a public method <code>getAllElements</code> that takes pointers to two tree roots, <code>root1</code> and <code>root2</code>, as input and returns a sorted list of all elements from both trees.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getAllElements</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root1</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Stacks and Result Vector</strong>:</p>
+<ul>
+<li>Two stacks, <code>st1</code> and <code>st2</code>, are initialized to store nodes for in-order traversal. A vector <code>res</code> is also initialized to store the sorted result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">st1</span><span class="p">,</span> <span class="n">st2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop until Traversal is Complete</strong>:</p>
+<ul>
+<li>The main <code>while</code> loop continues until both trees are completely traversed, which occurs when both <code>root1</code> and <code>root2</code> are <code>NULL</code> and both stacks are empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">root1</span> <span class="o">||</span> <span class="n">root2</span> <span class="o">||</span> <span class="o">!</span><span class="n">st1</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">st2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Push All Left Children to Stack</strong>:</p>
+<ul>
+<li>For both <code>root1</code> and <code>root2</code>, a nested <code>while</code> loop pushes all left children onto their respective stacks. This simulates moving to the smallest element in each tree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">root1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root1</span> <span class="o">=</span> <span class="n">root1</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st2</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root2</span> <span class="o">=</span> <span class="n">root2</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Merge Elements from Stacks</strong>:</p>
+<ul>
+<li>After both stacks are set up with left children, the code compares the top elements of each stack (the smallest unprocessed elements in each tree):
+<ul>
+<li>If <code>st2</code> is empty or <code>st1</code> has a smaller value than <code>st2</code>, the top element of <code>st1</code> is added to the result, and traversal continues to the right child of that element in <code>root1</code>.</li>
+<li>Otherwise, the top element of <code>st2</code> is processed, added to the result, and traversal moves to its right child in <code>root2</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">st2</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">st1</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">st1</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">st2</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root1</span> <span class="o">=</span> <span class="n">st1</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root1</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root1</span> <span class="o">=</span> <span class="n">root1</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root2</span> <span class="o">=</span> <span class="n">st2</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st2</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">root2</span> <span class="o">=</span> <span class="n">root2</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all nodes, the result vector <code>res</code> contains all elements from both trees in sorted order.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(m + n)), where (m) and (n) are the number of nodes in <code>root1</code> and <code>root2</code>, respectively. Each node is visited exactly once, and the operations performed at each node are constant time.</li>
+<li><strong>Space Complexity</strong>: (O(h1 + h2)), where (h1) and (h2) are the heights of the two trees. The stacks store at most <code>h1</code> and <code>h2</code> nodes, respectively, which is the space needed for a complete in-order traversal.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient and scalable way to merge elements from two BSTs into a sorted list by simulating in-order traversal iteratively with two stacks. By managing left children and comparisons iteratively, the approach avoids recursion and minimizes space usage beyond the necessary result list. This algorithm is particularly effective for balanced BSTs, where the time complexity is close to linear, and is adaptable for trees with varying structures or heights.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode349s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

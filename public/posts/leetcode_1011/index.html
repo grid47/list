@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1011">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1011: Capacity To Ship Packages Within D Days in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1011: Capacity To Ship Packages Within D Days">
-  <meta name="twitter:description" content="Solution to Leetcode 1011">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1011: Capacity To Ship Packages Within D Days in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1011/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1011: Capacity To Ship Packages Within D Days">
-  <meta property="og:description" content="Solution to Leetcode 1011">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1011: Capacity To Ship Packages Within D Days in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,123 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode27s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the minimum shipping capacity of a ship such that a set of packages can be delivered within a specified number of days. Each package has a specific weight, and the ship can carry a maximum weight in a single day. The goal is to minimize the weight capacity of the ship while ensuring that all packages are delivered within the given number of days.</p>
+<p>For example, given weights <code>[1, 2, 3, 4, 5]</code> and a limit of <code>3</code> days, we want to find the smallest capacity that allows these packages to be shipped within that timeframe.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a binary search strategy to efficiently determine the minimum ship capacity:</p>
+<ol>
+<li><strong>Initialize Bounds</strong>: Set the lower bound (<code>left</code>) to the heaviest package and the upper bound (<code>right</code>) to the sum of all package weights. The ship must be able to carry at least the heaviest package and at most all packages in one trip.</li>
+<li><strong>Binary Search</strong>: Perform a binary search between these bounds to find the minimum capacity. For each mid-point capacity, determine whether it is possible to ship all packages within the allowed number of days.</li>
+<li><strong>Feasibility Check</strong>: Implement a helper mechanism that checks how many days are needed to ship all packages for a given capacity. If it exceeds the allowed days, we need to increase the capacity.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>shipWithinDays</code> is defined as a public member of the <code>Solution</code> class, taking a vector of integers <code>weights</code> and an integer <code>days</code> as parameters.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initializing Bounds</strong>:</p>
+<ul>
+<li>We initialize <code>left</code> to 0 and <code>right</code> to a large number, specifically <code>25,000,000</code>. This upper bound is significantly higher than any possible total weight, ensuring we have a reasonable search space.</li>
+<li>We then iterate through the <code>weights</code> array to find the maximum weight of a single package. This value is assigned to <code>left</code> since the ship&rsquo;s capacity must be at least as large as the heaviest package.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Loop</strong>:</p>
+<ul>
+<li>A <code>while</code> loop runs as long as <code>left</code> is less than <code>right</code>. This loop will narrow down the search space for the minimum capacity.</li>
+<li>Inside the loop, we calculate the midpoint <code>mid</code> between <code>left</code> and <code>right</code>. This value represents the current capacity being tested.</li>
+</ul>
+</li>
+<li>
+<p><strong>Feasibility Check for Current Capacity</strong>:</p>
+<ul>
+<li>We initialize <code>need</code> to 1, representing the number of days required, and <code>cur</code> to 0, which tracks the current weight being loaded onto the ship.</li>
+<li>A <code>for</code> loop iterates through each weight in <code>weights</code>. The condition <code>need &lt;= days</code> ensures that we do not exceed the allowed number of days:
+<ul>
+<li>In each iteration, we check if adding the current weight <code>weights[i]</code> to <code>cur</code> exceeds the <code>mid</code> capacity.</li>
+<li>If it does exceed, we reset <code>cur</code> to 0 and increment <code>need</code> by 1 to indicate we need another day for shipping.</li>
+<li>If <code>need</code> exceeds <code>days</code>, it indicates that the current capacity is insufficient.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjusting Search Bounds</strong>:</p>
+<ul>
+<li>After checking all weights, we determine if the current capacity (<code>mid</code>) is feasible:
+<ul>
+<li>If <code>need</code> is greater than <code>days</code>, we increase the lower bound (<code>left = mid + 1</code>), indicating we need a larger capacity.</li>
+<li>If it is within the limit, we reduce the upper bound (<code>right = mid</code>), indicating the current capacity might be sufficient.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Once the binary search concludes, the function returns the value of <code>left</code>, which represents the minimum capacity of the ship needed to ship all packages within the allowed number of days.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this function is O(n log m), where <code>n</code> is the number of packages (the size of the <code>weights</code> vector) and <code>m</code> is the sum of weights (the range of possible capacities). The binary search operates in O(log m), while the inner loop that checks the feasibility runs in O(n).</li>
+<li><strong>Space Complexity</strong>: The space complexity is O(1) because we are only using a fixed amount of additional space for variables, regardless of the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>shipWithinDays</code> function effectively determines the minimum shipping capacity required to deliver packages within a specified timeframe by utilizing a binary search strategy. This method efficiently narrows down potential capacities while leveraging a linear scan to validate feasibility for each midpoint capacity.</p>
+<p>This solution highlights the importance of combining binary search with greedy strategies to solve optimization problems, particularly those involving constraints. Understanding this approach can significantly enhance problem-solving skills in algorithmic challenges, especially in scenarios that require efficiency and correctness.</p>
+<p>Moreover, this implementation showcases the utility of careful management of search bounds and iterations, making it a valuable tool for similar problems encountered in competitive programming and technical interviews. The clarity of the algorithm allows for easy adaptations to related challenges, ensuring its relevance in a variety of contexts.</p>
+<p>In summary, the <code>shipWithinDays</code> function serves as an excellent example of how to leverage efficient searching and evaluation techniques to solve real-world problems involving logistics and constraints, demonstrating the power of algorithmic thinking in practical applications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode27s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

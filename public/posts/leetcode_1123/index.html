@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1123">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1123: Lowest Common Ancestor of Deepest Leaves in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1123: Lowest Common Ancestor of Deepest Leaves">
-  <meta name="twitter:description" content="Solution to Leetcode 1123">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1123: Lowest Common Ancestor of Deepest Leaves in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1123/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1123: Lowest Common Ancestor of Deepest Leaves">
-  <meta property="og:description" content="Solution to Leetcode 1123">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1123: Lowest Common Ancestor of Deepest Leaves in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -221,7 +221,122 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">root</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode151s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the lowest common ancestor (LCA) of the deepest leaves in a binary tree. The LCA of two nodes <code>A</code> and <code>B</code> in a binary tree is defined as the deepest node that is an ancestor of both <code>A</code> and <code>B</code>. If the tree has multiple deepest leaves, the LCA should be the deepest node that connects them.</p>
+<p>For instance, consider the binary tree below:</p>
+<pre tabindex="0"><code>        1
+       / \
+      2   3
+     / \   \
+    4   5   6
+   /
+  7
+</code></pre><p>In this example, the deepest leaves are <code>7</code>, and the LCA of the deepest leaves is <code>4</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the algorithm follows a recursive approach:</p>
+<ol>
+<li><strong>Depth-First Search (DFS)</strong>: The algorithm traverses the tree using DFS to calculate the depth of each node and identify the deepest leaves.</li>
+<li><strong>Pair Return</strong>: The recursive helper function returns a pair consisting of:
+<ul>
+<li>The deepest node found (LCA candidate).</li>
+<li>The depth of that node.</li>
+</ul>
+</li>
+<li><strong>Comparison of Depths</strong>: While traversing the tree, if the left child is deeper, the left node is returned as the potential LCA. If the right child is deeper, the right node is returned. If both children are at the same depth, the current node is returned as the LCA.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Solution</code> class is defined, which contains the method <code>lcaDeepestLeaves</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Definition</strong>: The public method <code>lcaDeepestLeaves</code> accepts a pointer to the root of the binary tree and calls the helper function.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">lcaDeepestLeaves</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">).</span><span class="n">first</span><span class="p">;</span> <span class="c1">// Returns the first element of the pair returned by helper
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Helper Function</strong>: The <code>helper</code> function is defined, which is responsible for traversing the tree recursively.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">pair</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case</strong>: The base case checks if the current node (<code>root</code>) is <code>NULL</code>. If it is, the function returns a pair with <code>NULL</code> and depth <code>0</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span> <span class="c1">// Base case
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Calls</strong>: The function recursively calls itself for the left and right children of the current node to compute their respective depths and potential LCAs.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>   <span class="c1">// Left subtree
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">auto</span> <span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span> <span class="c1">// Right subtree
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Depth Comparison</strong>: The function compares the depths of the left and right subtrees. Depending on which subtree is deeper, it returns the appropriate node and its depth.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="n">left</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">};</span> <span class="c1">// Left subtree is deeper
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="n">right</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">};</span> <span class="c1">// Right subtree is deeper
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Same Depth Case</strong>: If both left and right depths are equal, the current node is the LCA of the deepest leaves.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">root</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="mi">1</span><span class="p">};</span> <span class="c1">// Current node is LCA
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The overall time complexity of this solution is (O(N)), where (N) is the number of nodes in the tree. This is because the algorithm performs a single traversal of the tree.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(H)), where (H) is the height of the tree. This accounts for the space used by the call stack during the recursive traversal. In the worst case of a skewed tree, this could be (O(N)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>lcaDeepestLeaves</code> function efficiently computes the lowest common ancestor of the deepest leaves in a binary tree using a depth-first search approach. By leveraging recursion, the algorithm explores each node while simultaneously calculating depths and potential ancestors.</p>
+<p>This implementation exemplifies a clear and efficient method to tackle tree-related problems in C++. The use of a pair to return both the node and its depth is a clever way to maintain the necessary information during the recursive calls.</p>
+<p>In summary, the solution showcases effective techniques for tree traversal and ancestor identification, making it a valuable reference for developers working on similar problems in binary trees. By emphasizing clarity and efficiency, this code serves as a strong example of best practices in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode151s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

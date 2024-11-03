@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1131">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1131: Maximum of Absolute Value Expression in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1131: Maximum of Absolute Value Expression">
-  <meta name="twitter:description" content="Solution to Leetcode 1131">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1131: Maximum of Absolute Value Expression in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1131/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1131: Maximum of Absolute Value Expression">
-  <meta property="og:description" content="Solution to Leetcode 1131">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1131: Maximum of Absolute Value Expression in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -210,7 +210,118 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode160s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum absolute value of the expression defined as:</p>
+<p>[
+| (x[i] - x[j]) + (y[i] - y[j]) |
+]</p>
+<p>for all pairs of indices (i) and (j) in the given arrays (x) and (y). This expression can be rewritten in a way that simplifies the calculation and enables efficient computation. The goal is to determine this maximum value in a time-efficient manner.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize the properties of absolute values and the idea of calculating the expression in a manner that avoids direct pairwise comparisons, which would be inefficient. The core concept is to reformulate the expression and analyze it under different configurations:</p>
+<ol>
+<li>
+<p><strong>Reformulation</strong>: The expression can be expressed in various forms based on the signs of (p) and (q) (which represent potential configurations for (x) and (y)):</p>
+<ul>
+<li>( p \in {1, -1} )</li>
+<li>( q \in {1, -1} )</li>
+</ul>
+<p>This gives us four combinations to evaluate:</p>
+<ul>
+<li>( (x[i] + y[i]) )</li>
+<li>( (x[i] - y[i]) )</li>
+<li>( (-x[i] + y[i]) )</li>
+<li>( (-x[i] - y[i]) )</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through configurations</strong>: For each combination of (p) and (q), the algorithm calculates a transformed value for each index and keeps track of the smallest value observed thus far.</p>
+</li>
+<li>
+<p><strong>Maximize the expression</strong>: The maximum absolute value is updated based on the current transformed value minus the smallest value seen for that configuration, allowing us to effectively compute the maximum absolute difference without needing a nested loop for all pairs.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxAbsValExpr</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Variable to hold the maximum absolute value found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Size of the input arrays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">smallest</span><span class="p">,</span> <span class="n">cur</span><span class="p">;</span> <span class="c1">// Variables for current calculation and smallest value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">p</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span> <span class="p">{</span> <span class="c1">// Loop over possible values for p
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">q</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span> <span class="p">{</span> <span class="c1">// Loop over possible values for q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">smallest</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize smallest for this configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Loop through the elements of the arrays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">cur</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Calculate the current expression value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur</span> <span class="o">-</span> <span class="n">smallest</span><span class="p">);</span> <span class="c1">// Update result if current value is greater
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">smallest</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">smallest</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span> <span class="c1">// Update smallest value found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the maximum absolute value found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 2-3</strong>: Define the function <code>maxAbsValExpr</code> which takes two vectors of integers, <code>x</code> and <code>y</code>, as input. Initialize the result variable <code>res</code> to zero and determine the size of the input arrays.</li>
+<li><strong>Line 4-5</strong>: Two nested loops iterate through the combinations of (p) and (q) which take values of either 1 or -1. This allows us to compute all possible configurations of the expression.</li>
+<li><strong>Line 6</strong>: The variable <code>smallest</code> is initialized with the first calculated value for the given configuration of (p) and (q).</li>
+<li><strong>Line 7-10</strong>: For each index starting from 1:
+<ul>
+<li>Compute the current transformed value <code>cur</code>.</li>
+<li>Update <code>res</code> by calculating the difference between <code>cur</code> and <code>smallest</code>.</li>
+<li>Update <code>smallest</code> if the current value is less than the previously recorded smallest value.</li>
+</ul>
+</li>
+<li><strong>Line 11</strong>: Finally, return the maximum absolute value stored in <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is (O(n)), where (n) is the length of the input vectors (x) and (y). The outer loops run a constant number of times (four combinations of (p) and (q)), and the inner loop iterates through the elements of the input arrays only once. The space complexity is (O(1)) as we are using only a few additional variables.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ solution effectively computes the maximum absolute value of the specified expression derived from two input vectors by utilizing a systematic approach with nested loops for sign configurations. This method avoids the inefficiencies of a direct pairwise comparison and ensures that we only perform linear work relative to the size of the input arrays. The use of minimal additional space makes this solution both time-efficient and space-efficient, suitable for large datasets in competitive programming and algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode160s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

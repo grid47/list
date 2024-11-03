@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1220">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1220: Count Vowels Permutation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1220: Count Vowels Permutation">
-  <meta name="twitter:description" content="Solution to Leetcode 1220">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1220: Count Vowels Permutation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1220/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1220: Count Vowels Permutation">
-  <meta property="og:description" content="Solution to Leetcode 1220">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1220: Count Vowels Permutation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
           
@@ -256,7 +256,171 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode260s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the number of strings of length ( n ) that can be formed using vowels (a, e, i, o, u) with the following constraints:</p>
+<ul>
+<li>The string can only consist of the characters &lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, and &lsquo;u&rsquo;.</li>
+<li>The character &lsquo;a&rsquo; can only be followed by &rsquo;e&rsquo;.</li>
+<li>The character &rsquo;e&rsquo; can only be followed by &lsquo;a&rsquo; or &lsquo;i&rsquo;.</li>
+<li>The character &lsquo;i&rsquo; can be followed by &lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;o&rsquo;, or &lsquo;u&rsquo;.</li>
+<li>The character &lsquo;o&rsquo; can only be followed by &lsquo;i&rsquo; or &lsquo;u&rsquo;.</li>
+<li>The character &lsquo;u&rsquo; can only be followed by &lsquo;a&rsquo;.</li>
+</ul>
+<p>The goal is to count how many valid strings of length ( n ) can be generated under these rules, returning the result modulo ( 10^9 + 7 ) to avoid overflow.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use dynamic programming (DP) and recursion with memoization. The main steps in our approach are:</p>
+<ol>
+<li><strong>Define a Recursive Function</strong>: Create a recursive function that explores all possible transitions from the current vowel to the next, keeping track of the length of the string being formed.</li>
+<li><strong>Base Case</strong>: When the length reaches ( n ), it indicates a valid string has been formed, so we return 1.</li>
+<li><strong>Memoization</strong>: Store results of already computed states to avoid redundant calculations and improve efficiency.</li>
+<li><strong>Dynamic Transitions</strong>: Use a switch statement to manage transitions based on the current vowel.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-3</strong>: Define the <code>Solution</code> class, and declare necessary variables: <code>n</code> for the length of the string, <code>mod</code> for taking results modulo ( 10^9 + 7 ), and <code>mem</code> to store memoized results.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">prv</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 4-5</strong>: Define the recursive function <code>dp</code>, which takes two parameters: <code>prv</code> (the previous vowel) and <code>cur</code> (the current length of the string being formed). If <code>cur</code> equals <code>n</code>, return 1, indicating that a valid string has been formed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">prv</span><span class="p">][</span><span class="n">cur</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">prv</span><span class="p">][</span><span class="n">cur</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 6</strong>: Check if the current state has already been computed (i.e., if <code>mem[prv][cur]</code> is not -1). If so, return the stored result to avoid redundant calculations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 7</strong>: Initialize a variable <code>ans</code> to accumulate the count of valid strings formed from the current state.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">switch</span><span class="p">(</span><span class="n">prv</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 8</strong>: Begin a switch statement to handle different cases based on the value of <code>prv</code> (the previous vowel).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 9-15</strong>: If <code>prv</code> is <code>0</code>, it means that we can use any vowel (&lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, &lsquo;u&rsquo;) next. Each valid transition is calculated recursively, increasing <code>cur</code> by 1 and adding to <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="c1">// &#39;a&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;e&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;i&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;u&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 16-20</strong>: If <code>prv</code> is <code>1</code> (indicating the previous character is &lsquo;a&rsquo;), the next character can only be &rsquo;e&rsquo;, &lsquo;i&rsquo;, or &lsquo;u&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="c1">// &#39;e&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;a&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;i&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 21-25</strong>: If <code>prv</code> is <code>2</code> (previous character &rsquo;e&rsquo;), the next can be &lsquo;a&rsquo; or &lsquo;i&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">3</span><span class="o">:</span> <span class="c1">// &#39;i&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;e&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;o&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 26-30</strong>: If <code>prv</code> is <code>3</code> (previous character &lsquo;i&rsquo;), the next can be &rsquo;e&rsquo; or &lsquo;o&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">4</span><span class="o">:</span> <span class="c1">// &#39;o&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;i&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;u&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 31-35</strong>: If <code>prv</code> is <code>4</code> (previous character &lsquo;o&rsquo;), the next can be &lsquo;i&rsquo; or &lsquo;u&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">5</span><span class="o">:</span> <span class="c1">// &#39;u&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// can go to &#39;i&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="p">;</span>                                                                        
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 36-40</strong>: If <code>prv</code> is <code>5</code> (previous character &lsquo;u&rsquo;), the next can only be &lsquo;i&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">prv</span><span class="p">][</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 41</strong>: Store the computed value of <code>ans</code> in <code>mem[prv][cur]</code> before returning it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">countVowelPermutation</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 42-45</strong>: Define the <code>countVowelPermutation</code> function. It initializes <code>n</code> and resizes the memoization table <code>mem</code> to hold results for all possible previous vowels and string lengths. It then calls the <code>dp</code> function starting with <code>prv = 0</code> (indicating no previous vowel) and <code>cur = 0</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n)), where (n) is the length of the strings being generated. This is because we calculate the number of valid strings recursively while storing results in a memoization table to avoid duplicate computations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also (O(n)) due to the memoization table, which holds results for each combination of previous vowel and current length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countVowelPermutation</code> function provides an efficient way to calculate the number of valid vowel strings of length ( n ) using dynamic programming and memoization. By carefully managing transitions between vowels and utilizing recursion, the solution ensures that all possible valid strings are counted while minimizing redundant calculations. This method demonstrates the power of dynamic programming in solving combinatorial problems and can be applied to various similar challenges in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode260s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

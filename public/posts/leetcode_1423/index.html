@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1423">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1423: Maximum Points You Can Obtain from Cards in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1423: Maximum Points You Can Obtain from Cards">
-  <meta name="twitter:description" content="Solution to Leetcode 1423">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1423: Maximum Points You Can Obtain from Cards in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1423/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1423: Maximum Points You Can Obtain from Cards">
-  <meta property="og:description" content="Solution to Leetcode 1423">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1423: Maximum Points You Can Obtain from Cards in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -215,7 +215,177 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode491s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum score obtainable from a given array of cards by drawing cards from both ends. Specifically, given an array <code>card</code> and an integer <code>k</code>, we can select up to <code>k</code> cards from either the front or the back of the array. The goal is to maximize the sum of the selected cards.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired result, we can employ the following approach:</p>
+<ol>
+<li>
+<p><strong>Prefix and Suffix Sums</strong>: We will create two auxiliary arrays:</p>
+<ul>
+<li><code>frt</code>: This array will store the cumulative sum of cards from the front (left side).</li>
+<li><code>bck</code>: This array will store the cumulative sum of cards from the back (right side).</li>
+</ul>
+</li>
+<li>
+<p><strong>Cumulative Sums Calculation</strong>:</p>
+<ul>
+<li>For the <code>frt</code> array, we calculate the cumulative sums as we traverse from the beginning of the <code>card</code> array.</li>
+<li>For the <code>bck</code> array, we calculate the cumulative sums while traversing from the end of the <code>card</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximizing the Score</strong>: After obtaining the cumulative sums in both arrays:</p>
+<ul>
+<li>We iterate through the possible selections of cards from both ends. Specifically, we can take <code>i</code> cards from the front and <code>k-i</code> cards from the back.</li>
+<li>For each possible split, we calculate the total score and update the maximum score found.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the maximum score obtained from the iterations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the implementation step by step:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>This declares a <code>Solution</code> class where our method for computing the maximum score will be implemented.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">maxScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">card</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>maxScore</code> takes a vector of integers <code>card</code> and an integer <code>k</code>, returning the maximum score as an integer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">card</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frt</span><span class="p">,</span> <span class="n">bck</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">frt</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">bck</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We store the size of the <code>card</code> array in <code>n</code>. We then initialize two vectors, <code>frt</code> and <code>bck</code>, both starting with a <code>0</code> to account for the cumulative sum calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cumulative Sums Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">frt</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">frt</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">+</span> <span class="n">card</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bck</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">bck</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">+</span> <span class="n">card</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the <code>card</code> array. For each card:
+<ul>
+<li>We append the cumulative sum of cards from the front to <code>frt</code>.</li>
+<li>We append the cumulative sum of cards from the back to <code>bck</code>. Here, <code>n - 1 - i</code> accesses the elements from the back of the array.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Initial Maximum Score</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">bck</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We set the initial answer to the score obtained by taking the first <code>k</code> cards from the back (<code>bck[k]</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximizing the Score</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">frt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">bck</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate from <code>1</code> to <code>k</code> to check different combinations of taking cards from the front and back:
+<ul>
+<li>For each <code>i</code>, we take <code>i</code> cards from the front (<code>frt[i]</code>) and <code>k-i</code> cards from the back (<code>bck[k-i]</code>).</li>
+<li>We update <code>ans</code> with the maximum value obtained.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum score calculated.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this solution is (O(n)), where (n) is the length of the <code>card</code> array. This is due to the single pass required to compute the cumulative sums and another pass to compute the maximum score.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) as we are using additional space for the <code>frt</code> and <code>bck</code> vectors to store the cumulative sums.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxScore</code> function efficiently calculates the maximum score obtainable by selecting up to <code>k</code> cards from both ends of the <code>card</code> array. By utilizing cumulative sums and iterating over possible selections, we minimize unnecessary calculations while maximizing the score.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Cumulative Sum Optimization</strong>: This approach highlights how cumulative sums can simplify and optimize calculations involving contiguous subarrays or selections.</li>
+<li><strong>Flexible Selection</strong>: The method elegantly allows for flexible selections from both ends of an array, showcasing versatility in problem-solving.</li>
+<li><strong>Efficiency</strong>: The use of simple loops and cumulative storage results in an efficient solution that operates in linear time, making it suitable for larger inputs.</li>
+</ul>
+<p>Overall, the provided solution offers a clear and efficient way to tackle the problem of maximizing the score with a clever use of data structures and algorithmic principles, demonstrating both effective problem-solving and computational efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode491s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

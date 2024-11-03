@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1302">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1302: Deepest Leaves Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1302: Deepest Leaves Sum">
-  <meta name="twitter:description" content="Solution to Leetcode 1302">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1302: Deepest Leaves Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1302/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1302: Deepest Leaves Sum">
-  <meta property="og:description" content="Solution to Leetcode 1302">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1302: Deepest Leaves Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -225,7 +225,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode360s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to calculate the sum of the values of the deepest (or lowest) leaves in a binary tree. A &ldquo;leaf&rdquo; node is a node that does not have any children. We need to identify the nodes at the deepest level of the tree and then calculate their total sum. If the tree is empty, the function should return <code>0</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem uses a <strong>breadth-first search (BFS)</strong> or <strong>level-order traversal</strong> strategy:</p>
+<ol>
+<li><strong>Initialize BFS</strong>: Begin the BFS traversal from the root node using a queue.</li>
+<li><strong>Process Level by Level</strong>: At each level, reset the sum to <code>0</code>, then calculate the sum of values for all nodes at that level. This ensures that the <code>sum</code> variable always contains the sum of the values of nodes from the current, deepest level being processed.</li>
+<li><strong>Store the Deepest Level’s Sum</strong>: By the end of the traversal, the <code>sum</code> variable holds the sum of the values of the nodes at the deepest level.</li>
+<li><strong>Return the Result</strong>: After finishing the traversal, return the sum of the deepest leaves.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>:</p>
+<ul>
+<li>We define a class <code>Solution</code> and a public method <code>deepestLeavesSum</code> that takes a <code>TreeNode</code> pointer <code>root</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">deepestLeavesSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handle Edge Case</strong>:</p>
+<ul>
+<li>If the root is <code>NULL</code>, the function returns <code>0</code>, which represents an empty tree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize BFS</strong>:</p>
+<ul>
+<li>A queue <code>q</code> is created to perform the BFS. Push the root node into this queue. Initialize <code>sum</code> to store the sum of the deepest leaves.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Level Order Traversal</strong>:</p>
+<ul>
+<li>Use a <code>while</code> loop to iterate through each level of the tree until the queue is empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Process Each Level</strong>:</p>
+<ul>
+<li>For each level:
+<ul>
+<li>Reset <code>sum</code> to <code>0</code> at the start of processing a level.</li>
+<li>Determine the number of nodes in the current level using <code>sz = q.size()</code>.</li>
+<li>Use a <code>while</code> loop to iterate through nodes of the current level, adding their values to <code>sum</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">TreeNode</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Add Child Nodes</strong>:</p>
+<ul>
+<li>For each node, if it has a left child, push it into the queue. If it has a right child, push that as well.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all levels, the <code>sum</code> variable contains the sum of the values of nodes at the deepest level. Return this sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the tree. We visit each node exactly once during the BFS traversal.</li>
+<li><strong>Space Complexity</strong>: (O(W)), where (W) is the maximum width of the tree (i.e., the maximum number of nodes at any level). This is the space required to store nodes in the queue.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation efficiently calculates the sum of the deepest leaves in a binary tree by leveraging the level-order traversal (BFS) approach. By resetting <code>sum</code> at the beginning of each level and summing values only for nodes at the current depth, this solution ensures that the <code>sum</code> variable ultimately contains the values of the nodes at the deepest level. This approach works well for all tree structures, including highly unbalanced trees, and guarantees that only nodes at the lowest depth are included in the final sum calculation.</p>
+<p>This code effectively balances simplicity and efficiency, providing a quick and readable solution to the problem of calculating the sum of the deepest leaves in a binary tree.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode360s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

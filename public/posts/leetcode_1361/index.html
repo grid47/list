@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1361">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1361: Validate Binary Tree Nodes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1361: Validate Binary Tree Nodes">
-  <meta name="twitter:description" content="Solution to Leetcode 1361">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1361: Validate Binary Tree Nodes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1361/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1361: Validate Binary Tree Nodes">
-  <meta property="og:description" content="Solution to Leetcode 1361">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1361: Validate Binary Tree Nodes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -266,7 +266,150 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">uf</span><span class="p">.</span><span class="n">net</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode422s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves validating a binary tree structure given the number of nodes and their respective left and right children. Each node in the tree is represented by its index, and the input includes two arrays, <code>lc</code> and <code>rc</code>, which represent the left and right children of each node, respectively. The task is to determine whether these nodes form a valid binary tree, meaning:</p>
+<ol>
+<li>There should be exactly one root node (no cycles).</li>
+<li>Each node should have at most one parent (no two nodes should point to the same child).</li>
+<li>The tree should contain all <code>n</code> nodes with no unconnected nodes.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To validate the binary tree, we can utilize the union-find data structure, which efficiently handles merging and finding components within a set. The main steps are:</p>
+<ol>
+<li><strong>Initialize Union-Find Structure</strong>: Create a union-find structure to manage the nodes and track their connected components.</li>
+<li><strong>Union Operations</strong>: For each node, perform union operations for its left and right children, ensuring that no cycles are formed and no node has more than one parent.</li>
+<li><strong>Check Conditions</strong>: After processing all nodes, check if there is exactly one connected component, which would indicate the presence of a valid binary tree.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UF</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">chd</span><span class="p">,</span> <span class="n">rnk</span><span class="p">;</span> <span class="c1">// chd: parent pointers; rnk: rank for union by rank
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">net</span><span class="p">;</span> <span class="c1">// number of components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="n">UF</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chd</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// Resize the child vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rnk</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Initialize rank vector with zero
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">chd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Each node is its own parent initially
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">net</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Initially, there are n components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">uni</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="c1">// Find the root of i
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// Find the root of j
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// If they are already connected, return false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">chd</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// Connect the two components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">net</span><span class="o">--</span><span class="p">;</span> <span class="c1">// Reduce the number of components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">chd</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">chd</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">chd</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span> <span class="c1">// Path compression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">chd</span><span class="p">[</span><span class="n">x</span><span class="p">];</span> <span class="c1">// Return the root of the component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">validateBinaryTreeNodes</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">lc</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">rc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UF</span> <span class="n">uf</span> <span class="o">=</span> <span class="n">UF</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// Initialize union-find structure with n nodes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">lc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">uf</span><span class="p">.</span><span class="n">uni</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">lc</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="c1">// Union current node with left child
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">rc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">uf</span><span class="p">.</span><span class="n">uni</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rc</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="c1">// Union current node with right child
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">uf</span><span class="p">.</span><span class="n">net</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Check if there is exactly one component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Union-Find Class (UF)</strong>:</p>
+<ul>
+<li>The <code>UF</code> class initializes two vectors: <code>chd</code> to maintain parent-child relationships and <code>rnk</code> to manage the rank for union operations. It also keeps track of the number of components (initially set to <code>n</code>).</li>
+<li>The <code>uni</code> method connects two nodes, decrementing the component count if they are successfully united.</li>
+<li>The <code>find</code> method retrieves the root of the node, using path compression to flatten the structure and speed up future queries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<ul>
+<li>The <code>validateBinaryTreeNodes</code> method initializes a union-find structure for <code>n</code> nodes.</li>
+<li>It iterates over each node to perform union operations with its left and right children (if they exist). If any union operation fails (indicating a cycle or multiple parents), the method returns <code>false</code>.</li>
+<li>Finally, it checks if there is exactly one component left, which confirms that the structure is a valid binary tree.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n \cdot \alpha(n))), where (\alpha) is the inverse Ackermann function. This is effectively constant time for practical input sizes, due to the efficiency of the union-find operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) due to the storage used for the <code>chd</code> and <code>rnk</code> vectors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>validateBinaryTreeNodes</code> method effectively uses the union-find data structure to determine whether a given set of nodes and their respective children can form a valid binary tree. By ensuring that each node adheres to the constraints of having only one parent and connecting all nodes into a single component, the solution provides a robust approach to validating tree structures. The implementation demonstrates the utility of union-find in graph-related problems, particularly in maintaining component connectivity efficiently.</p>
+<p>This explanation serves as a comprehensive guide for understanding the algorithm and its implementation, making it a valuable resource for both beginners and experienced programmers looking to deepen their understanding of tree validation using union-find techniques.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode422s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

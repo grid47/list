@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1157">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1157: Online Majority Element In Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1157: Online Majority Element In Subarray">
-  <meta name="twitter:description" content="Solution to Leetcode 1157">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1157: Online Majority Element In Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1157/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1157: Online Majority Element In Subarray">
-  <meta property="og:description" content="Solution to Leetcode 1157">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1157: Online Majority Element In Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -232,7 +232,149 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * MajorityChecker* obj = new MajorityChecker(arr);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_1 = obj-&gt;query(left,right,threshold);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode187s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>MajorityChecker</code> class is created to support efficient majority element queries in a fixed integer array. A majority element in this context is defined as an element that appears at least a certain number of times (given by a threshold) within a specified subrange. The primary goal of the class is to quickly determine if there exists such a majority element within any arbitrary subrange <code>[left, right]</code> of the array and return it. If no element meets the threshold, the function should return -1.</p>
+<p>The <code>MajorityChecker</code> class is initialized as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">MajorityChecker</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">);</span>
+</span></span></code></pre></div><p>and has a method to query the majority element:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">,</span> <span class="kt">int</span> <span class="n">threshold</span><span class="p">);</span>
+</span></span></code></pre></div><p>where <code>left</code> and <code>right</code> define the bounds of the subarray, and <code>threshold</code> is the minimum number of times an element must appear to be considered the majority.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach used here combines hash mapping, binary search, and randomization. Here&rsquo;s a breakdown of the methods and logic:</p>
+<ol>
+<li>
+<p><strong>Hash Mapping with Indices Tracking</strong>:</p>
+<ul>
+<li>The constructor stores the array elements in <code>arr</code> and initializes a hash map, <code>mp</code>, which stores indices of each element in the array. This way, for any element, we can access the indices where it appears, allowing for efficient range counting using binary search.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search for Frequency Count</strong>:</p>
+<ul>
+<li>The function <code>frq</code> calculates the frequency of a specified number within a range <code>[l, r]</code>. It uses <code>lower_bound</code> and <code>upper_bound</code> to locate the indices within the given range and quickly count the occurrences of the number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Randomized Selection for Majority Candidate</strong>:</p>
+<ul>
+<li>To find the majority element, the code samples random indices within <code>[left, right]</code> up to 20 times, ensuring that if a majority element exists, it’s likely to be picked and checked within these samples. By picking random indices and verifying the threshold using the <code>frq</code> function, this approach avoids the inefficiency of a brute-force search.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning Majority Element</strong>:</p>
+<ul>
+<li>If an element in the sample meets the required threshold, it is returned as the majority element. If no sampled element meets the threshold, -1 is returned, indicating the absence of a majority.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is divided into methods and setup as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MajorityChecker</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MajorityChecker</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-9</strong>: The constructor <code>MajorityChecker</code> initializes the <code>arr</code> vector with the given array and builds a hash map <code>mp</code>. Each unique element in <code>arr</code> is mapped to a vector containing all of its indices, making it easy to locate occurrences within specific subranges.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">frq</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span> <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span> <span class="n">l</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">it2</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span> <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">it2</span> <span class="o">-</span> <span class="n">it</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 10-15</strong>: The <code>frq</code> function takes a number <code>num</code> and calculates how many times it appears between indices <code>l</code> and <code>r</code>. It first checks if the number exists in <code>mp</code>; if not, it returns 0. Using <code>lower_bound</code> and <code>upper_bound</code>, it locates the range of indices that fall within <code>[l, r]</code> and returns the count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">idx</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">l</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 16-18</strong>: The helper function <code>idx</code> generates a random index within <code>[l, r]</code>, enabling the main query function to randomly sample elements in the range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">,</span> <span class="kt">int</span> <span class="n">thq</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">frq</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">thq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 19-27</strong>: The <code>query</code> function performs the majority element search within the range <code>[left, right]</code> with the specified <code>threshold</code> <code>thq</code>. It attempts up to 20 random samples from the range. For each sampled element, the code checks its frequency using <code>frq</code>, and if it meets or exceeds <code>thq</code>, the element is returned. If no sampled element meets the threshold, the function returns -1.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructor <code>MajorityChecker</code>: (O(N)), where (N) is the length of <code>arr</code>. Each element and its index are stored in <code>mp</code>.</li>
+<li><code>frq</code> function: (O(\log N)) for each frequency check due to binary search on the pre-sorted list of indices.</li>
+<li><code>query</code> function: The time complexity depends on the number of samples (20), with each frequency check taking (O(\log N)). This makes the average complexity of <code>query</code> approximately (O(20 \cdot \log N) = O(\log N)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The hash map <code>mp</code> stores up to (N) indices, resulting in (O(N)) space usage. Other auxiliary space includes only a few integer variables, making it efficient in terms of space.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>MajorityChecker</code> class provides a robust solution for majority element queries in a subarray. Utilizing a hash map for indexing, binary search for fast frequency calculation, and random sampling for optimized majority detection, this approach is both time-efficient and memory-efficient. The randomized sampling, while theoretically probabilistic, ensures that any majority element is highly likely to be found within 20 samples, keeping query times low.</p>
+<p>The combination of efficient data structures (hash map and binary search) and the probabilistic method makes this approach suitable for real-time, large-scale applications where fast majority queries are essential.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode187s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

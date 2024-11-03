@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1268">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1268: Search Suggestions System in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1268: Search Suggestions System">
-  <meta name="twitter:description" content="Solution to Leetcode 1268">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1268: Search Suggestions System in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1268/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1268: Search Suggestions System">
-  <meta property="og:description" content="Solution to Leetcode 1268">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1268: Search Suggestions System in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -217,7 +217,156 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode310s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to provide product suggestions based on a prefix derived from a given input string. Given a list of product names and a string <code>w</code>, you need to return a list of suggested products for each prefix of <code>w</code>. Each suggestion list should contain up to three products that start with the corresponding prefix.</p>
+<p>For example, if the product list is <code>[&quot;mobile&quot;, &quot;mouse&quot;, &quot;moneypot&quot;, &quot;monitor&quot;, &quot;mousepad&quot;]</code> and the input string is <code>&quot;mouse&quot;</code>, the function should return:</p>
+<ul>
+<li>For prefix <code>&quot;m&quot;</code>: <code>[&quot;mobile&quot;, &quot;moneypot&quot;, &quot;monitor&quot;]</code></li>
+<li>For prefix <code>&quot;mo&quot;</code>: <code>[&quot;mobile&quot;, &quot;moneypot&quot;, &quot;monitor&quot;]</code></li>
+<li>For prefix <code>&quot;mou&quot;</code>: <code>[&quot;mouse&quot;, &quot;mousepad&quot;]</code></li>
+<li>For prefix <code>&quot;mous&quot;</code>: <code>[&quot;mouse&quot;]</code></li>
+<li>For prefix <code>&quot;mouse&quot;</code>: <code>[&quot;mouse&quot;]</code></li>
+</ul>
+<p>The function should efficiently return these suggestions even as the prefixes grow longer.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired results efficiently, we can use the following approach:</p>
+<ol>
+<li><strong>Sorting the Product List</strong>: First, sort the product names lexicographically. This enables efficient searching and makes it easy to find products that start with a given prefix.</li>
+<li><strong>Prefix Iteration</strong>: For each character in the input string <code>w</code>, construct the current prefix and find the range of products that match this prefix.</li>
+<li><strong>Binary Search</strong>: Use binary search to find the starting position of products that match the current prefix using <code>lower_bound</code>.</li>
+<li><strong>Gather Suggestions</strong>: Collect up to three products that start with the current prefix and store them in the result list.</li>
+</ol>
+<p>This method ensures that we can efficiently find suggestions with minimal comparisons.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">suggestedProducts</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="n">string</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: The <code>Solution</code> class is defined with a public member function <code>suggestedProducts</code>, which takes a vector of strings <code>A</code> (the product list) and a string <code>w</code> (the input string) as arguments.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">cur</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 3-6</strong>:
+<ul>
+<li><code>it</code> is initialized to the beginning of the vector <code>A</code>.</li>
+<li>The products are sorted to prepare for binary search.</li>
+<li>A 2D vector <code>res</code> is initialized to store the lists of suggested products for each prefix.</li>
+<li>An empty string <code>cur</code> is initialized to build prefixes.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">sdg</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 7-9</strong>: A loop iterates over each character <code>c</code> in the string <code>w</code>:
+<ul>
+<li>The current character <code>c</code> is appended to the prefix <code>cur</code>.</li>
+<li>A temporary vector <code>sdg</code> is initialized to hold the suggestions for the current prefix.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">it</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">cur</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 10</strong>: We find the position of the first product that is not less than the current prefix <code>cur</code> using <code>lower_bound</code>. This ensures that we start checking for matches from this position onwards.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">it</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: A loop iterates up to 3 times to gather suggestions:
+<ul>
+<li>We check if we are within the bounds of the vector <code>A</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">cur</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sdg</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 12-14</strong>:
+<ul>
+<li>We access the string at position <code>it + i</code>.</li>
+<li>We check if the string <code>s</code> contains the current prefix <code>cur</code> using <code>find</code>. Note that this should ideally check if <code>s</code> starts with <code>cur</code> (i.e., <code>s.find(cur) == 0</code>), as the current implementation checks if the prefix exists anywhere in the string.</li>
+<li>If the prefix is found, we break the loop. Otherwise, we add <code>s</code> to the suggestions vector <code>sdg</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sdg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 15-16</strong>: After checking for the current prefix, the collected suggestions <code>sdg</code> are added to the results <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 17-18</strong>: Finally, the function returns the result vector <code>res</code>, containing all suggested products for each prefix of <code>w</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the product list takes (O(n \log n)), where (n) is the number of products in <code>A</code>.</li>
+<li>For each character in <code>w</code>, the function performs a binary search (<code>lower_bound</code>) and then checks up to 3 products for each prefix, resulting in a linear complexity relative to the length of <code>w</code>. Thus, the overall complexity is (O(n \log n + m)), where (m) is the length of <code>w</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m + n)) for storing the result and temporary variables.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>suggestedProducts</code> function efficiently provides product suggestions based on prefixes derived from the input string <code>w</code>. By leveraging sorting and binary search, the function minimizes the number of comparisons needed to find matching products, ensuring optimal performance even for larger inputs. This solution illustrates the power of combining data structures with algorithmic techniques to solve problems effectively in a competitive programming context.</p>
+<p>In summary, this implementation is a prime example of how to handle string prefix searching efficiently while maintaining clear and readable code. The use of STL functions like <code>sort</code> and <code>lower_bound</code> showcases the elegance of C++&rsquo;s Standard Library, making it a valuable approach for developers seeking to optimize their solutions.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode310s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

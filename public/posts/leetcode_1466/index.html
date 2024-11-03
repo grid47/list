@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1466">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero">
-  <meta name="twitter:description" content="Solution to Leetcode 1466">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1466/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero">
-  <meta property="og:description" content="Solution to Leetcode 1466">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -226,7 +226,173 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode531s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of the problem is to determine the minimum number of roads that need to be reversed in order to ensure that all paths lead from a given starting city (city <code>0</code>) to all other cities in a directed graph. The input consists of an integer <code>n</code>, representing the number of cities, and a list of connections, where each connection represents a bidirectional road between two cities. The problem can be visualized as a graph traversal challenge, where we must count how many edges need to be reversed to create a path from the starting city to every other city.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves a breadth-first search (BFS) approach to traverse the graph from the starting city. Here&rsquo;s the high-level overview of the approach:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: The cities and their connections are represented using an adjacency list (<code>grid</code>). Additionally, a mapping (<code>mp</code>) is used to keep track of which connections are directed (i.e., which way they need to be reversed).</p>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>: A BFS algorithm is initiated from city <code>0</code>. As we traverse through the cities, we keep track of visited cities and count how many roads would need to be reversed to reach each city.</p>
+</li>
+<li>
+<p><strong>Counting Reversals</strong>: While traversing, whenever we reach a city through a directed road (as per our mapping), we increment the count of roads that need to be reversed.</p>
+</li>
+<li>
+<p><strong>Result</strong>: Finally, the count of reversed roads is returned, representing the minimum number of roads to reverse in order to connect all cities back to city <code>0</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minReorder</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">conn</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>minReorder</code> function takes an integer <code>n</code> (the number of cities) and a vector of vectors <code>conn</code> (the connections between cities) as inputs and returns the minimum number of roads to reverse.</li>
+</ul>
+</li>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">grid</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>An adjacency list <code>grid</code> is created with <code>n</code> empty vectors, where each vector will hold the connected cities. A nested map <code>mp</code> is also initialized to track the directed roads.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Graph</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">conn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mp</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each connection in <code>conn</code>, we update the adjacency list and populate the mapping to indicate that there is a direct road from <code>it[0]</code> to <code>it[1]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A counter <code>cnt</code> is initialized to count the number of roads that need to be reversed. A queue <code>q</code> is initialized for BFS, starting with city <code>0</code>. A <code>vis</code> vector keeps track of visited cities.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">it</span><span class="p">:</span> <span class="n">grid</span><span class="p">[</span><span class="n">tmp</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmp</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The outer while loop continues until there are no more cities to explore. The inner while loop processes each city in the queue:
+<ul>
+<li>Each connected city is checked to see if it has already been visited.</li>
+<li>If it has not been visited, it is marked as visited.</li>
+<li>If there is a direct road leading to it (as per the <code>mp</code> mapping), the count of roads to reverse is incremented.</li>
+<li>The city is then added to the queue for further exploration.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The function returns the count of roads that need to be reversed to ensure all paths lead back to city <code>0</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n + e)), where (n) is the number of cities and (e) is the number of roads (or connections). This is due to the BFS traversal through the graph.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + e)) as well, due to the storage of the graph in the adjacency list and the visited vector.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The presented solution efficiently determines the minimum number of road reversals needed to ensure that all paths lead back to the starting city using a breadth-first search strategy. Key aspects of the solution include:</p>
+<ol>
+<li>
+<p><strong>Graph Traversal</strong>: The use of BFS allows for efficient exploration of all connected cities from the starting point.</p>
+</li>
+<li>
+<p><strong>Directed Connection Tracking</strong>: By maintaining a mapping of connections, the solution effectively counts the necessary reversals, ensuring correctness.</p>
+</li>
+<li>
+<p><strong>Clarity and Structure</strong>: The structured approach of separating graph construction, traversal, and counting enhances the readability and maintainability of the code.</p>
+</li>
+</ol>
+<p>Overall, this solution demonstrates effective use of graph theory concepts and algorithmic design to solve a practical problem, making it a valuable reference for similar challenges in competitive programming and algorithm studies.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode531s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

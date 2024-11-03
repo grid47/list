@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1008">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1008: Construct Binary Search Tree from Preorder Traversal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1008: Construct Binary Search Tree from Preorder Traversal">
-  <meta name="twitter:description" content="Solution to Leetcode 1008">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1008: Construct Binary Search Tree from Preorder Traversal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1008/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1008: Construct Binary Search Tree from Preorder Traversal">
-  <meta property="og:description" content="Solution to Leetcode 1008">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1008: Construct Binary Search Tree from Preorder Traversal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,125 @@
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode23s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to construct a binary search tree (BST) from a given preorder traversal of its nodes. In a BST, for any given node:</p>
+<ul>
+<li>The left child must contain a value less than the node&rsquo;s value.</li>
+<li>The right child must contain a value greater than the node&rsquo;s value.</li>
+</ul>
+<p>Given a sequence of integers that represent the preorder traversal of a BST, our goal is to reconstruct the tree structure. The preorder traversal is defined as visiting the root node first, followed by the left subtree and then the right subtree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will utilize a recursive approach that exploits the properties of BSTs and the characteristics of preorder traversal. The strategy involves:</p>
+<ol>
+<li>Iterating through the values in the preorder array while keeping track of the current index.</li>
+<li>Using a bound to ensure that the values inserted into the left and right subtrees adhere to the BST properties.</li>
+<li>Recursively constructing the left and right subtrees by calling the same function with updated bounds.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:</p>
+<ul>
+<li>The code begins with a definition of the <code>TreeNode</code> structure, which contains an integer value (<code>val</code>), a pointer to the left child (<code>left</code>), and a pointer to the right child (<code>right</code>). This structure serves as the building block for our binary search tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Solution Class Declaration</strong>:</p>
+<ul>
+<li>The <code>Solution</code> class encapsulates our method for constructing the BST. It maintains a class member variable <code>i</code> that tracks the current index in the preorder array as we build the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>bstFromPreorder</code> is defined as a public member of the <code>Solution</code> class. It takes a vector of integers (<code>pre</code>) representing the preorder traversal of the BST and an optional <code>bound</code> parameter that defaults to <code>INT_MAX</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>The function begins by checking two conditions:
+<ul>
+<li>If <code>i</code> equals the size of the preorder array (<code>pre.size()</code>), it indicates that we have processed all nodes, and the function returns <code>NULL</code>.</li>
+<li>If the current value <code>pre[i]</code> exceeds the provided <code>bound</code>, it means that the value cannot be placed in the current subtree (as it violates the BST property). In this case, the function also returns <code>NULL</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Creating a New Node</strong>:</p>
+<ul>
+<li>When both conditions are satisfied, we create a new <code>TreeNode</code> with the value <code>pre[i]</code>. After creating the node, we increment the index <code>i</code> to move to the next element in the preorder array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Calls for Subtrees</strong>:</p>
+<ul>
+<li>The function then recursively constructs the left subtree by calling <code>bstFromPreorder</code> with the updated bound set to the value of the current node (<code>root-&gt;val</code>). This ensures that all values in the left subtree will be less than the current node&rsquo;s value.</li>
+<li>After the left subtree is constructed, the function constructs the right subtree by calling <code>bstFromPreorder</code> with the original bound. This ensures that all values in the right subtree are greater than the current node&rsquo;s value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Root</strong>:</p>
+<ul>
+<li>Finally, after constructing both subtrees, the function returns the root of the newly constructed BST.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this function is O(n), where <code>n</code> is the number of nodes in the input preorder array. Each node is processed exactly once, leading to a linear runtime.</li>
+<li><strong>Space Complexity</strong>: The space complexity is O(h), where <code>h</code> is the height of the tree. This space is utilized by the call stack due to recursion. In the worst case (for a completely unbalanced tree), the height can be O(n). For a balanced tree, the height would be O(log n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>bstFromPreorder</code> function provides an efficient and elegant solution for reconstructing a binary search tree from a preorder traversal. By leveraging recursion and the properties of BSTs, the function successfully builds the tree while maintaining the required constraints on node values.</p>
+<p>This approach highlights the utility of recursion in tree construction problems and demonstrates how properties of binary search trees can guide the reconstruction process. Understanding this method is beneficial for solving related problems in data structures and algorithms, especially those involving tree traversal and manipulation.</p>
+<p>The implementation also underscores the importance of managing indices and bounds when working with recursive algorithms, allowing for clean and readable code. This technique can be adapted for various tree-related challenges, making it a versatile tool in algorithm design.</p>
+<p>In summary, the <code>bstFromPreorder</code> function is a valuable contribution to the toolkit of anyone working with binary trees, enabling the efficient reconstruction of BSTs and facilitating further operations such as searching, insertion, and traversal in a structured manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode23s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

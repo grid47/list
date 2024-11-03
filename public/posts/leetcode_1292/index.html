@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1292">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold">
-  <meta name="twitter:description" content="Solution to Leetcode 1292">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1292/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold">
-  <meta property="og:description" content="Solution to Leetcode 1292">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -211,7 +211,128 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode336s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the maximum side length of a square submatrix within a given matrix of integers where the sum of the elements in the square submatrix does not exceed a specified value (<code>hit</code>).</p>
+<p>For example, given the matrix:</p>
+<pre tabindex="0"><code>[
+ [1, 1, 1],
+ [1, 1, 1],
+ [1, 1, 1]
+]
+</code></pre><p>and <code>hit = 4</code>, the largest square submatrix would be of size <code>2</code>, as a <code>2x2</code> square can be formed, summing up to <code>4</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a technique involving prefix sums to efficiently calculate the sum of any square submatrix. The steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Create a Prefix Sum Matrix</strong>: Construct a 2D array <code>sum</code> where each element <code>sum[i][j]</code> contains the sum of all elements in the matrix from the top-left corner (0,0) to the position (i-1, j-1).</p>
+</li>
+<li>
+<p><strong>Iterate through Possible Square Sizes</strong>: Use two nested loops to iterate over each position in the matrix. For each position, check if it can serve as the bottom-right corner of a square submatrix of increasing sizes (starting from size 1).</p>
+</li>
+<li>
+<p><strong>Check the Sum of the Square Submatrix</strong>: For each possible square, calculate its sum using the prefix sum matrix and check if it is less than or equal to <code>hit</code>. Keep track of the maximum side length of all valid squares found.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After examining all possible positions and square sizes, return the maximum side length found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxSideLength</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">hit</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: The class <code>Solution</code> is defined, and the method <code>maxSideLength</code> begins, which takes a 2D vector <code>mat</code> and an integer <code>hit</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">sum</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-6</strong>: The variables <code>m</code> and <code>n</code> store the dimensions of the input matrix. The variable <code>res</code> initializes the result for the maximum side length, while <code>len</code> is used to track the current side length being evaluated. A prefix sum matrix <code>sum</code> is initialized, with dimensions <code>(m+1) x (n+1)</code> to accommodate cumulative sums.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 7-10</strong>: Nested loops iterate over the dimensions of the matrix starting from <code>1</code>, allowing us to fill in the prefix sum matrix starting from the top-left corner.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: Here, we compute the prefix sum for the current cell <code>sum[i][j]</code> using the formula which accumulates the values from the left, above, subtracts the overlap, and adds the current matrix value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">len</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">len</span><span class="p">]</span> <span class="o">+</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">len</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">len</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">res</span> <span class="o">=</span> <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 12-14</strong>: We check if the current indices allow for a square of side length <code>len</code> (i.e., if the current position can serve as the bottom-right corner of such a square). We calculate the sum of the square submatrix using the prefix sums and check if it does not exceed <code>hit</code>. If valid, we update the result and increment the <code>len</code> for the next square size.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 15-18</strong>: After finishing the loops, the function returns the maximum side length of the square submatrix found.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(m \times n)), where (m) is the number of rows and (n) is the number of columns in the matrix. Each cell of the matrix is visited once to compute the prefix sums.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m \times n)) due to the additional prefix sum matrix we create to store cumulative sums.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxSideLength</code> function efficiently computes the maximum side length of square submatrices whose sum is within a specified threshold using a prefix sum technique. This approach ensures that the sum of any square can be calculated in constant time after an initial setup phase, which is critical for handling larger matrices.</p>
+<p>By breaking down the problem systematically and employing an effective algorithm, this solution demonstrates the utility of prefix sums in optimizing 2D range sum queries. This makes the function suitable for competitive programming, coding interviews, and practical applications involving matrix manipulations.</p>
+<p>Overall, understanding and implementing this approach equips developers with powerful tools for tackling similar problems involving submatrices and constraints on their sums. This detailed analysis should serve as a valuable resource for anyone looking to deepen their understanding of matrix operations and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode336s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1110">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1110: Delete Nodes And Return Forest in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1110: Delete Nodes And Return Forest">
-  <meta name="twitter:description" content="Solution to Leetcode 1110">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1110: Delete Nodes And Return Forest in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1110/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1110: Delete Nodes And Return Forest">
-  <meta property="og:description" content="Solution to Leetcode 1110">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1110: Delete Nodes And Return Forest in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -224,7 +224,134 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode135s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to delete specific nodes from a binary tree and return all the remaining trees as a list of root nodes. Given a binary tree and an array of values representing the nodes to be deleted, your goal is to:</p>
+<ul>
+<li>Remove the specified nodes from the tree.</li>
+<li>If a node is deleted, its children should be treated as new root nodes in the resulting forest.</li>
+</ul>
+<p><strong>Input:</strong></p>
+<ul>
+<li>A pointer to the root of the binary tree.</li>
+<li>A list of integers representing the values of nodes to delete.</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>A vector containing pointers to the root nodes of the remaining trees.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a recursive approach:</p>
+<ol>
+<li>Create a set to efficiently check which nodes need to be deleted.</li>
+<li>Traverse the tree recursively. For each node:
+<ul>
+<li>If it is marked for deletion, recursively call the function on its children.</li>
+<li>If it is not marked for deletion and is considered a root node (i.e., its parent is deleted), add it to the result list.</li>
+</ul>
+</li>
+<li>Return <code>nullptr</code> for deleted nodes, and the original node for non-deleted nodes.</li>
+<li>Utilize a helper function to facilitate the recursion and maintain clarity.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Struct Definition</strong>: The <code>TreeNode</code> structure defines the structure of each node in the binary tree.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Solution Class</strong>: The <code>Solution</code> class contains the method to perform the node deletions.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">to_del</span><span class="p">;</span>  <span class="c1">// Set to store values of nodes to delete
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Main Method</strong>: The <code>delNodes</code> method initializes the deletion process.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">delNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">to_delete</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">i</span><span class="p">:</span> <span class="n">to_delete</span><span class="p">)</span> <span class="n">to_del</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>  <span class="c1">// Insert to_delete values into the set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>  <span class="c1">// Start the recursive helper function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>  <span class="c1">// Return the list of remaining trees
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Helper Function</strong>: The <code>helper</code> method performs the recursive traversal of the tree.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>  <span class="c1">// Base case: if the node is null, return null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">bool</span> <span class="n">del</span> <span class="o">=</span> <span class="n">to_del</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">!=</span> <span class="n">to_del</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>  <span class="c1">// Check if current node should be deleted
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Checking for Root Nodes</strong>: If the node is not marked for deletion and is a root node (i.e., <code>is_root</code> is true), it is added to the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">is_root</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">del</span><span class="p">)</span> <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>  <span class="c1">// Add to result if it&#39;s a root and not deleted
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Calls</strong>: The function calls itself for the left and right children of the current node, updating the <code>is_root</code> flag based on whether the current node is deleted.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">del</span><span class="p">);</span>  <span class="c1">// Recursively process left child
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">del</span><span class="p">);</span>  <span class="c1">// Recursively process right child
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">del</span> <span class="o">?</span> <span class="nb">NULL</span> <span class="o">:</span> <span class="n">root</span><span class="p">;</span>  <span class="c1">// Return null if deleted, otherwise return the current node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of the algorithm is (O(n)), where (n) is the number of nodes in the tree. Each node is visited once to check for deletion and to build the list of remaining trees.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(h)), where (h) is the height of the tree. This space is used by the recursion stack. The set <code>to_del</code> requires (O(k)) space, where (k) is the number of nodes to delete.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code effectively deletes specified nodes from a binary tree and constructs a forest of remaining trees using a recursive approach. By leveraging a set for fast lookups and a helper function to manage the traversal, the algorithm maintains clarity and efficiency.</p>
+<p>This solution exemplifies a common pattern in tree-related problems, showcasing how to manipulate trees through recursion. The use of a set enhances performance, allowing for quick checks on whether nodes should be deleted.</p>
+<p>Overall, this implementation serves as a valuable reference for those looking to understand tree manipulations and recursive algorithms in competitive programming or software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode135s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

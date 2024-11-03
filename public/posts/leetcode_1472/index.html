@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1472">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1472: Design Browser History in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1472: Design Browser History">
-  <meta name="twitter:description" content="Solution to Leetcode 1472">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1472: Design Browser History in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1472/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1472: Design Browser History">
-  <meta property="og:description" content="Solution to Leetcode 1472">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1472: Design Browser History in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -234,7 +234,181 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * string param_2 = obj-&gt;back(steps);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * string param_3 = obj-&gt;forward(steps);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode539s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to implement a <code>BrowserHistory</code> class that simulates the behavior of a web browser&rsquo;s history. The class should allow users to visit new pages, go back a certain number of steps in history, and move forward a certain number of steps. The requirements for the class methods are as follows:</p>
+<ol>
+<li><strong>Initialization</strong>: The browser history should start with a single homepage.</li>
+<li><strong>Visit</strong>: When a user visits a new URL, it should be added to the browsing history, and the forward history should be cleared.</li>
+<li><strong>Back</strong>: The user should be able to go back in history by a specified number of steps, ensuring they cannot go further back than the homepage.</li>
+<li><strong>Forward</strong>: The user should also be able to move forward in history by a specified number of steps, ensuring they cannot go beyond the most recently visited page.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To effectively implement the browser history functionality, we can use two stacks (or vectors in this case) to manage the back and forward history:</p>
+<ul>
+<li><strong>Backward History (bwd)</strong>: This will store all the URLs visited in the order they were accessed, allowing us to go back in history.</li>
+<li><strong>Forward History (fwd)</strong>: This will store the URLs that the user can navigate forward to after going back.</li>
+</ul>
+<p>The basic operations can be described as follows:</p>
+<ol>
+<li><strong>Visit</strong>: Add a new URL to the backward history and clear the forward history.</li>
+<li><strong>Back</strong>: Remove the last URL from the backward history (if not at the homepage) and add it to the forward history.</li>
+<li><strong>Forward</strong>: Remove the last URL from the forward history (if available) and add it back to the backward history.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the provided code for the <code>BrowserHistory</code> class:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BrowserHistory</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>BrowserHistory</code> class is defined to encapsulate the browser&rsquo;s history functionalities.</li>
+</ul>
+</li>
+<li>
+<p><strong>Member Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">fwd</span><span class="p">,</span> <span class="n">bwd</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Two vectors are declared:
+<ul>
+<li><code>fwd</code>: To store URLs available for forward navigation.</li>
+<li><code>bwd</code>: To store the browsing history for backward navigation.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructor</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">BrowserHistory</span><span class="p">(</span><span class="n">string</span> <span class="n">homepage</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bwd</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">homepage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fwd</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the browsing history by adding the homepage to the backward vector and ensuring the forward vector is empty.</li>
+</ul>
+</li>
+<li>
+<p><strong>Visit Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">visit</span><span class="p">(</span><span class="n">string</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bwd</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fwd</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>visit</code> method is responsible for:
+<ul>
+<li>Adding the new <code>url</code> to the end of the <code>bwd</code> vector.</li>
+<li>Clearing the <code>fwd</code> vector since the user cannot go forward after visiting a new page.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Back Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">back</span><span class="p">(</span><span class="kt">int</span> <span class="n">steps</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">bwd</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">steps</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">bwd</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">p</span> <span class="o">=</span> <span class="n">bwd</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fwd</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bwd</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">bwd</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>back</code> method allows the user to navigate backward:
+<ul>
+<li>A loop runs for the number of steps specified or until the user reaches the homepage (when there is only one URL in <code>bwd</code>).</li>
+<li>The last URL is removed from <code>bwd</code>, added to <code>fwd</code>, and the method returns the current page after all valid back operations.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Forward Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">forward</span><span class="p">(</span><span class="kt">int</span> <span class="n">steps</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">fwd</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">steps</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">fwd</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">p</span> <span class="o">=</span> <span class="n">fwd</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bwd</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fwd</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">bwd</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>        
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>forward</code> method allows the user to move forward in history:
+<ul>
+<li>Similar to <code>back</code>, a loop runs for the specified steps or until there are no more URLs in <code>fwd</code>.</li>
+<li>The last URL is removed from <code>fwd</code>, added back to <code>bwd</code>, and the current page is returned.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for each of the methods (<code>visit</code>, <code>back</code>, and <code>forward</code>) is (O(1)) on average. However, in the worst case, the <code>back</code> and <code>forward</code> methods can take (O(n)) if all URLs are traversed, where (n) is the number of URLs in the respective history.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) for storing the browsing history in the backward and forward vectors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided implementation of the <code>BrowserHistory</code> class effectively simulates the basic functionalities of a web browser&rsquo;s history. Key features of this implementation include:</p>
+<ol>
+<li><strong>Two-Pointer Approach</strong>: By using two vectors to manage forward and backward navigation, the code remains clean and efficient.</li>
+<li><strong>Dynamic Size Management</strong>: The vectors dynamically resize as URLs are added or removed, maintaining optimal performance without fixed-size limitations.</li>
+<li><strong>Robustness</strong>: The code correctly handles edge cases such as navigating back from the homepage or forward when no forward history exists.</li>
+</ol>
+<p>This solution serves as an excellent reference for understanding how to implement a history management system for a browser-like application, providing insights into stack-based data management and user navigation logic. The clear structure and efficient handling of browser actions make it a strong candidate for educational purposes in data structures and algorithms.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode539s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

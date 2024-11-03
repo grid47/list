@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1081">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1081: Smallest Subsequence of Distinct Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1081: Smallest Subsequence of Distinct Characters">
-  <meta name="twitter:description" content="Solution to Leetcode 1081">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1081: Smallest Subsequence of Distinct Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1081/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1081: Smallest Subsequence of Distinct Characters">
-  <meta property="og:description" content="Solution to Leetcode 1081">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1081: Smallest Subsequence of Distinct Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -223,7 +223,131 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// that problem was there were
 </span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode105s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the smallest lexicographical subsequence of a string that contains all unique characters. A subsequence is defined as a sequence derived from another sequence where elements are deleted without changing the order of the remaining elements. The goal is to ensure that the resultant subsequence is as small as possible while including each character only once and maintaining the lexicographical order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we will use a greedy algorithm with the help of a stack. The basic idea is to iterate through the string while maintaining a stack that contains the characters of the smallest subsequence. We will also use two auxiliary arrays: one to track the last occurrence of each character and another to check if a character is already included in the stack.</p>
+<ol>
+<li><strong>Track Last Occurrences</strong>: First, we traverse the string to record the last index of each character.</li>
+<li><strong>Use a Stack</strong>: We maintain a stack to build the smallest subsequence. As we iterate through the string:
+<ul>
+<li>If the character is already in the stack, we skip it.</li>
+<li>If the current character is smaller than the character at the top of the stack, and if the character at the top of the stack appears later in the string, we pop the stack.</li>
+<li>Finally, we push the current character onto the stack.</li>
+</ul>
+</li>
+<li><strong>Build Result</strong>: After processing all characters, we convert the stack to a string, which represents the desired smallest subsequence.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The class <code>Solution</code> contains the method <code>smallestSubsequence</code> that will implement the solution.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">smallestSubsequence</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: We declare a string <code>res</code> to hold the result and two vectors, <code>in</code> and <code>seen</code>, to track the last occurrence of each character and whether a character has been added to the stack, respectively.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">seen</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recording Last Occurrences</strong>: We iterate through the string and record the last index for each character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">in</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Stack for Result</strong>: We declare a vector <code>stk</code> to act as a stack for building our result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Loop</strong>: We iterate through each character in the string <code>s</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Skip Seen Characters</strong>: If the character has already been added to the stack (i.e., <code>seen[c]</code> is greater than zero), we skip it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">seen</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">++</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Pop from Stack</strong>: While the stack is not empty, and the top character of the stack is lexicographically larger than the current character, we check if the top character appears later in the string using the <code>in</code> array. If it does, we can safely pop it from the stack.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">in</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">()])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">seen</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">()]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Push Current Character</strong>: We push the current character onto the stack.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">stk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Build the Result String</strong>: Finally, we convert the stack into a string <code>res</code> by appending the characters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span> <span class="o">+</span> <span class="n">stk</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the algorithm is (O(N)), where (N) is the length of the input string. This is because we make a single pass through the string and each character is pushed and popped from the stack at most once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) in terms of the character set, as we are using fixed-size arrays of size 26 for the English alphabet. The stack can grow up to the size of the input string in the worst case, leading to a potential space complexity of (O(N)) for the stack itself.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code efficiently solves the problem of finding the smallest lexicographical subsequence of a string containing all unique characters. By leveraging a greedy approach with a stack, the algorithm ensures that each character is included only once and that the order is maintained, resulting in an optimal solution.</p>
+<p>This algorithm is useful in various applications, such as text processing, data compression, and similar problems where maintaining unique characters in a specific order is essential. Its linear time complexity and minimal space usage make it a robust choice for efficiently handling this type of problem.</p>
+<p>In summary, the <code>smallestSubsequence</code> method demonstrates a clear and effective technique to achieve the desired result, showcasing the power of greedy algorithms and stack data structures in solving string-related challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode105s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

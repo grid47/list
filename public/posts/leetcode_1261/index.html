@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1261">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1261: Find Elements in a Contaminated Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1261: Find Elements in a Contaminated Binary Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1261">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1261: Find Elements in a Contaminated Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1261/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1261: Find Elements in a Contaminated Binary Tree">
-  <meta property="og:description" content="Solution to Leetcode 1261">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1261: Find Elements in a Contaminated Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -228,7 +228,142 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * FindElements* obj = new FindElements(root);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;find(target);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode301s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves recovering a binary tree that has been corrupted such that all nodes have been set to <code>NULL</code>. Given a binary tree that represents a unique structure where nodes should have values derived from their positions, the task is to reconstruct the values based on the binary tree&rsquo;s structure. The values should be assigned such that:</p>
+<ul>
+<li>The value of the root node is <code>0</code>.</li>
+<li>For any node with value <code>x</code>, the left child node should have a value of <code>2 * x + 1</code>, and the right child should have a value of <code>2 * x + 2</code>.</li>
+</ul>
+<p>After recovering the values of the binary tree nodes, we should provide a method to determine if a given target value exists in the recovered tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will implement the following steps:</p>
+<ol>
+<li><strong>Recursive Recovery</strong>: Create a recursive function to traverse the tree and assign values to each node based on its position.</li>
+<li><strong>Storage of Values</strong>: Utilize a data structure (such as an unordered set) to store the recovered values for quick lookups.</li>
+<li><strong>Find Method</strong>: Implement a method to check if a target value exists within the recovered values.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-10</strong>: The definition of the <code>TreeNode</code> structure, which represents a node in a binary tree. It contains an integer value (<code>val</code>), pointers to the left child (<code>left</code>), and the right child (<code>right</code>). It includes constructors for easy initialization of tree nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FindElements</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">set</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: The class <code>FindElements</code> is defined. Within this class, we declare an unordered set named <code>set</code> to store the recovered values from the binary tree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">recover</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recover</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recover</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 12-18</strong>: The <code>recover</code> function is defined. This is a recursive function that assigns values to the tree nodes.
+<ul>
+<li><strong>Line 13</strong>: If the current node (<code>root</code>) is <code>NULL</code>, the function returns, terminating that branch of recursion.</li>
+<li><strong>Line 14</strong>: The value of the current node is set to <code>x</code>.</li>
+<li><strong>Line 15</strong>: The value <code>x</code> is added to the unordered set <code>set</code>, ensuring all unique values are stored for later lookups.</li>
+<li><strong>Line 16-17</strong>: The function recursively calls itself for the left and right children of the current node. The left child&rsquo;s value is set to <code>2 * x + 1</code>, and the right child&rsquo;s value is set to <code>2 * x + 2</code>, thus adhering to the problem&rsquo;s requirements.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">FindElements</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recover</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 19-21</strong>: The constructor for the <code>FindElements</code> class initializes the object with the given tree root. It calls the <code>recover</code> function with the root and the initial value <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">set</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 22-25</strong>: The <code>find</code> method checks whether a given <code>target</code> value exists in the unordered set <code>set</code>. The <code>count</code> function of the unordered set returns <code>1</code> if the value exists and <code>0</code> otherwise, enabling an efficient search operation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your FindElements object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * FindElements* obj = new FindElements(root);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;find(target);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 26-29</strong>: This commented section provides an example of how to instantiate the <code>FindElements</code> class and use the <code>find</code> method to check for the presence of a target value.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The recovery of the tree through the <code>recover</code> method takes (O(n)), where (n) is the number of nodes in the binary tree. Each node is visited once to assign its value.</li>
+<li>The <code>find</code> method operates in (O(1)) on average due to the properties of the unordered set, providing constant time complexity for lookups.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) as we are storing the values of all (n) nodes in the unordered set <code>set</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>FindElements</code> class provides an efficient way to recover a binary tree&rsquo;s node values based on a specific structure and enables rapid queries to check for the existence of these values. By utilizing recursive depth-first traversal to assign values and an unordered set for quick lookups, this solution achieves optimal time and space complexity.</p>
+<p>This approach demonstrates not only the ability to manipulate tree structures in C++ but also the effectiveness of using data structures like sets for efficient data retrieval. The combination of these techniques makes the <code>FindElements</code> class a robust solution for the problem at hand, illustrating key concepts in data structures and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode301s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1029">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1029: Two City Scheduling in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1029: Two City Scheduling">
-  <meta name="twitter:description" content="Solution to Leetcode 1029">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1029: Two City Scheduling in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1029/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1029: Two City Scheduling">
-  <meta property="og:description" content="Solution to Leetcode 1029">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1029: Two City Scheduling in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -219,7 +219,131 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mc</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode42s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires minimizing the cost of sending <code>2n</code> people to two cities, City A and City B. Each person has two associated costs: one for traveling to City A and another for traveling to City B. The objective is to send <code>n</code> people to each city such that the total travel cost is minimized.</p>
+<p>For example, if we have the following costs for four people:</p>
+<ul>
+<li>Person 1: City A costs $10, City B costs $20</li>
+<li>Person 2: City A costs $30, City B costs $50</li>
+<li>Person 3: City A costs $20, City B costs $40</li>
+<li>Person 4: City A costs $30, City B costs $10</li>
+</ul>
+<p>The goal is to select two people for City A and two people for City B while minimizing the total cost.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem optimally:</p>
+<ol>
+<li><strong>Initial Cost Calculation</strong>: First, calculate the total cost of sending everyone to City A. This serves as a baseline cost.</li>
+<li><strong>Refund Calculation</strong>: Create a list of &ldquo;refunds,&rdquo; which represent the difference in cost for sending each person to City B instead of City A. If sending someone to City B is cheaper than sending them to City A, the refund will be a positive value.</li>
+<li><strong>Sorting Refunds</strong>: Sort the list of refunds. The smallest refunds indicate the most cost-effective switches from City A to City B.</li>
+<li><strong>Selecting the Cheapest Refunds</strong>: To ensure that exactly <code>n</code> people are sent to each city, select the first <code>n</code> elements from the sorted refund list and add them to the initial cost.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>twoCitySchedCost</code> is declared within the <code>Solution</code> class and takes a 2D vector of integers (<code>vector&lt;vector&lt;int&gt;&gt;&amp; costs</code>) representing the costs for each person traveling to the two cities.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>An integer variable <code>mc</code> is initialized to <code>0</code>. This variable will store the minimum cost.</li>
+<li>A vector of integers <code>refund</code> is declared to store the cost differences between sending each person to City B versus City A.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Initial Costs and Refunds</strong>:</p>
+<ul>
+<li>A range-based for loop iterates through each person&rsquo;s costs:
+<ul>
+<li><code>mc</code> is incremented by the cost of sending each person to City A (<code>c[0]</code>).</li>
+<li>The refund value (<code>c[1] - c[0]</code>), which indicates how much more it costs to send a person to City B compared to City A, is calculated and added to the <code>refund</code> vector.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Refunds</strong>:</p>
+<ul>
+<li>The <code>refund</code> vector is sorted in ascending order. This sorting allows us to prioritize the smallest refund values, which represent the best candidates for switching to City B.</li>
+</ul>
+</li>
+<li>
+<p><strong>Selecting the Cheapest Refunds</strong>:</p>
+<ul>
+<li>The variable <code>n</code> is computed as half the size of the costs vector (<code>costs.size() / 2</code>), indicating how many people should be sent to City A and how many to City B.</li>
+<li>A for loop runs from <code>0</code> to <code>n - 1</code>:
+<ul>
+<li>For each iteration, the smallest refunds are added to <code>mc</code>. This accounts for the cost of sending the first <code>n</code> cheapest individuals to City B.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Finally, the function returns <code>mc</code>, which now contains the total minimized cost of sending <code>n</code> people to each city.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)) due to the sorting of the refund vector, where (n) is half the number of total individuals (or the number of cost pairs). The initial cost calculation is (O(n)), making the dominant factor the sorting operation.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) to store the refund values, which is necessary to keep track of the cost differences.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>twoCitySchedCost</code> function effectively minimizes the travel cost of sending <code>2n</code> individuals to two cities using a straightforward approach based on cost comparisons. By leveraging sorting and careful selection of individuals based on their travel costs, the function guarantees that the minimum possible cost is achieved while meeting the requirement of sending exactly <code>n</code> people to each city.</p>
+<p>This method is particularly useful in scenarios such as resource allocation, transportation optimization, and cost management in logistics. The clarity and efficiency of the algorithm demonstrate its practical applicability in real-world situations where minimizing costs while satisfying constraints is critical.</p>
+<p>In summary, this implementation showcases how to balance decision-making with computational efficiency in algorithm design, providing a robust solution to a common problem in operations research and optimization. Understanding such techniques is valuable for software engineers and data scientists aiming to tackle complex optimization challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode42s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

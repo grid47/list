@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1418">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1418: Display Table of Food Orders in a Restaurant in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1418: Display Table of Food Orders in a Restaurant">
-  <meta name="twitter:description" content="Solution to Leetcode 1418">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1418: Display Table of Food Orders in a Restaurant in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1418/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1418: Display Table of Food Orders in a Restaurant">
-  <meta property="og:description" content="Solution to Leetcode 1418">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1418: Display Table of Food Orders in a Restaurant in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,7 +221,171 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode478s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to generate a display table for a restaurant based on customer orders. Each order consists of a table number, the name of the food item ordered, and the quantity of the item ordered. The goal is to organize this information in a structured format that allows easy viewing of how many times each food item was ordered at each table. The display table should have a specific header structure, where the first row contains the table numbers (starting with &ldquo;Table&rdquo; for the first column) and subsequent columns represent the different food items. Each cell in the table will indicate the total count of orders for that particular food item at that table.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a combination of data structures: an unordered map for counting orders and a set for unique food items. The main steps of the approach are:</p>
+<ol>
+<li>
+<p><strong>Data Structures</strong>: Use a vector of unordered maps to count the orders for each table, and a set to store unique food items.</p>
+</li>
+<li>
+<p><strong>Processing Orders</strong>: Loop through the orders to populate the count of each food item per table. The food item names are collected in a set to ensure uniqueness.</p>
+</li>
+<li>
+<p><strong>Constructing the Result</strong>: Build the resulting display table by iterating through the range of table numbers. For each table, add its corresponding food item counts to the result vector.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>: Ensure that the food items are sorted in alphabetical order for consistent display.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code into its components for clarity:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>This defines a class named <code>Solution</code> which will contain the method to generate the display table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">displayTable</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;&amp;</span> <span class="n">orders</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>displayTable</code> takes a vector of orders as input, where each order is represented as a vector of strings. It returns a 2D vector of strings that represents the display table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Structure Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">table</span><span class="p">(</span><span class="mi">501</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>An unordered map <code>table</code> is initialized to track food item counts for up to 500 tables (indexed from 1 to 500).</li>
+<li>A set <code>s</code> is initialized to collect unique food items from the orders.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Orders</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">v</span> <span class="p">:</span> <span class="n">orders</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">table</span><span class="p">[</span><span class="n">stoi</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])][</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates through each order vector <code>v</code>.</li>
+<li>The food item (found at <code>v[2]</code>) is added to the set <code>s</code> to ensure uniqueness.</li>
+<li>The count for the food item in the corresponding table (indexed by <code>v[1]</code>) is incremented.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">501</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">table</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="s">&#34;Table&#34;</span> <span class="o">:</span> <span class="n">to_string</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="o">*</span><span class="nl">it</span> <span class="p">:</span> <span class="n">to_string</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="o">*</span><span class="n">it</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>A result vector <code>res</code> is initialized to store the final output.</li>
+<li>A loop iterates from 0 to 500 to fill the display table:
+<ul>
+<li>If <code>t &gt; 0</code> and the table map is empty, it continues to the next iteration.</li>
+<li>A new vector is added to <code>res</code> for each table. The first column is set to &ldquo;Table&rdquo; for the first row (t=0) or the table number for subsequent rows.</li>
+<li>For each unique food item in the set <code>s</code>, the corresponding order count for that table is added to the current row. If it’s the first row, the food item name is added; otherwise, the count is added.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the constructed result table <code>res</code> is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of processing the orders is (O(n)), where (n) is the number of orders. This includes inserting into the unordered map and set.</li>
+<li>Constructing the result involves iterating through the tables (up to 500) and food items (at most (m), the number of unique food items), resulting in a complexity of (O(t \cdot m)), where (t) is the maximum table count.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m + t)), where (m) is the number of unique food items stored in the set and (t) is the number of tables.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>displayTable</code> function efficiently processes a list of customer orders to generate a structured display table for a restaurant. By utilizing a combination of unordered maps and sets, the solution effectively counts the number of orders for each food item at every table while ensuring unique food item entries. The approach is optimized for both time and space, making it suitable for handling a considerable volume of orders.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Efficient Data Structures</strong>: Using unordered maps and sets allows for fast insertion and look-up operations, essential for counting orders efficiently.</li>
+<li><strong>Structured Output</strong>: The method effectively constructs a 2D vector for clear presentation of the results, ensuring the display format meets the specified requirements.</li>
+<li><strong>Scalability</strong>: The solution is designed to handle up to 500 tables and a dynamic number of food items, making it adaptable to various restaurant sizes.</li>
+</ul>
+<p>Overall, the code demonstrates a clear and efficient way to aggregate and present restaurant order data in a tabular format, illustrating the practical use of fundamental data structures in C++.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode478s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

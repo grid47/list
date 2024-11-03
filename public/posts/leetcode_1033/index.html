@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1033">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1033: Moving Stones Until Consecutive in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1033: Moving Stones Until Consecutive">
-  <meta name="twitter:description" content="Solution to Leetcode 1033">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1033: Moving Stones Until Consecutive in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1033/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1033: Moving Stones Until Consecutive">
-  <meta property="og:description" content="Solution to Leetcode 1033">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1033: Moving Stones Until Consecutive in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -206,7 +206,126 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">min</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode51s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given three distinct integers representing the positions of three stones placed on a number line. The task is to determine how many moves are needed to position these stones such that they are aligned with each other. A &ldquo;move&rdquo; is defined as moving a stone from its current position to an adjacent empty position (i.e., moving it to either the left or the right).</p>
+<p>The output should consist of two numbers:</p>
+<ol>
+<li>The minimum number of moves required to align the stones.</li>
+<li>The maximum number of moves required to align the stones.</li>
+</ol>
+<p>For example, if the positions of the stones are (a = 1), (b = 2), and (c = 5), the output should indicate how to achieve alignment in the minimum and maximum moves possible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the approach involves the following steps:</p>
+<ol>
+<li><strong>Sorting the Positions</strong>: Since the stones can be in any order, sorting their positions helps in easily determining the gaps between them.</li>
+<li><strong>Analyzing Gaps</strong>: After sorting, we can check the distances (or gaps) between the stones:
+<ul>
+<li>If the distance between the stones is exactly 2, they are already aligned and no moves are required.</li>
+<li>Otherwise, we calculate the minimum and maximum number of moves based on the gaps between the stones.</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: Based on the analysis of the gaps, we return the required moves.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+</li>
+<li>
+<p><strong>Function Definition</strong>: The function <code>numMovesStones</code> takes three integer parameters representing the positions of the stones.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numMovesStones</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting the Positions</strong>:</p>
+<ul>
+<li>A vector <code>s</code> is created and initialized with the positions of the stones.</li>
+<li>The <code>sort</code> function is then used to arrange the positions in ascending order.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span> <span class="p">{</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Immediate Alignment</strong>:</p>
+<ul>
+<li>The first check is to see if the distance between the first and the last stone is exactly 2, which means they are adjacent.</li>
+<li>If true, return <code>{0, 0}</code> as no moves are needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Minimum Moves</strong>:</p>
+<ul>
+<li>The minimum moves required to align the stones is determined by checking the smallest gap between adjacent stones.</li>
+<li>If the gap between the first and second stone or the second and third stone is less than or equal to 2, it means only one move is needed to bring the stones together.</li>
+<li>Otherwise, it takes two moves to align them.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="p">{</span><span class="n">min</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<ul>
+<li>The function returns a vector containing two values:
+<ul>
+<li>The minimum number of moves (calculated as explained above).</li>
+<li>The maximum number of moves, which is simply the total distance between the first and last stone minus 2 (to account for the stones themselves).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this solution is (O(1)) because we are performing a constant amount of work regardless of the input size. The only significant operation is sorting three numbers, which can be considered constant time.</li>
+<li><strong>Space Complexity</strong>: The space complexity is also (O(1)) since we are only using a fixed amount of additional space for the vector <code>s</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code efficiently computes the minimum and maximum moves required to align three stones on a number line. By utilizing sorting and straightforward calculations of gaps between the stones, the solution elegantly determines the required values in constant time and space.</p>
+<p>This approach is optimal for this problem due to the limited number of stones (three), which allows for rapid calculations and a clean implementation. Such a solution is particularly useful in scenarios where positional alignment or optimization of resources is required, making it relevant in various practical applications such as robotics, game development, and scheduling tasks.</p>
+<p>In summary, the <code>numMovesStones</code> function provides a robust and efficient means of solving the problem of aligning stones with minimal moves while ensuring clarity and maintainability in the code structure.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode51s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

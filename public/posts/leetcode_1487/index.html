@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1487">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1487: Making File Names Unique in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1487: Making File Names Unique">
-  <meta name="twitter:description" content="Solution to Leetcode 1487">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1487: Making File Names Unique in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1487/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1487: Making File Names Unique">
-  <meta property="og:description" content="Solution to Leetcode 1487">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1487: Making File Names Unique in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,7 +215,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">names</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode552s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to create a unique list of folder names based on the input array of folder names, which may contain duplicates. If a duplicate folder name is encountered, the solution must append a number to the folder name in the format <code>(k)</code> where <code>k</code> is the smallest integer that makes the name unique. For example, if the input folder name is <code>&quot;doc&quot;</code> and it appears again, it should be renamed to <code>&quot;doc(1)&quot;</code>, and if <code>&quot;doc(1)&quot;</code> also exists, it should be renamed to <code>&quot;doc(2)&quot;</code>, and so on.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this, we can use a hash map (or a <code>std::map</code> in C++) to keep track of the occurrences of folder names. The main steps of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Iterate through the Names</strong>: Loop through each folder name in the input list.</p>
+</li>
+<li>
+<p><strong>Check for Duplicates</strong>: For each name, check if it already exists in the hash map. If it does, we need to create a unique version of that name.</p>
+</li>
+<li>
+<p><strong>Generate Unique Names</strong>: If a duplicate is found, append <code>(k)</code> where <code>k</code> is the smallest integer that ensures uniqueness. Continue incrementing <code>k</code> until we find a name that does not exist in the map.</p>
+</li>
+<li>
+<p><strong>Store Unique Names</strong>: Update the map with the new unique name and store it in the result list.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Once all names are processed, return the list of unique folder names.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">getFolderNames</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>  <span class="c1">// Map to store folder names and their counts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">names</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>  <span class="c1">// Check if the name already exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>  <span class="c1">// Get the current count for the name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// Find the next available unique name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">while</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#34;(&#34;</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">k</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// Increment k if the generated name already exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">mp</span><span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// Update the count for the original name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// Update the folder name to the unique version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mp</span><span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// Increment for the original name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#34;(&#34;</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="p">;</span>  <span class="c1">// Create unique name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Register the original or new name in the map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mp</span><span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Set the count to 1 for the new/updated name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">names</span><span class="p">;</span>  <span class="c1">// Return the final list of unique names
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Data Structure</strong>: A <code>std::map&lt;string, int&gt;</code> named <code>mp</code> is used to track the number of times each folder name has been encountered. The key is the folder name, and the value is the integer indicating how many duplicates have been found.</p>
+</li>
+<li>
+<p><strong>Loop Through Names</strong>: The outer loop goes through each name in the <code>names</code> vector.</p>
+</li>
+<li>
+<p><strong>Duplicate Check</strong>: The <code>if(mp.count(names[i]))</code> condition checks if the current name has been seen before.</p>
+</li>
+<li>
+<p><strong>Finding Unique Names</strong>: If a name is duplicated, we initiate a counter <code>k</code> starting from the count of the name in the map. A nested <code>while</code> loop generates the new name by appending <code>(k)</code>. It checks if this new name already exists in <code>mp</code>. If it does, it increments <code>k</code> until a unique name is found.</p>
+</li>
+<li>
+<p><strong>Update Map and List</strong>: After generating a unique name, the map is updated, and the current name in the list is replaced with its unique version.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After processing all names, the updated list of unique names is returned.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is (O(n \cdot m)), where (n) is the number of folder names and (m) is the average length of the folder names. In the worst case, we may have to append several integers to find a unique name, leading to the multiplication by (m).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage of folder names in the map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>getFolderNames</code> function effectively resolves the challenge of creating unique folder names from a potentially non-unique list by leveraging a hash map to track occurrences. It systematically generates unique names using an efficient strategy, ensuring that no two folder names clash in the final output.</p>
+<p>Key points of interest include:</p>
+<ol>
+<li>
+<p><strong>Robust Duplicate Handling</strong>: The method efficiently addresses duplicate folder names by using a counter to append the appropriate integer suffix.</p>
+</li>
+<li>
+<p><strong>Use of Data Structures</strong>: The choice of <code>std::map</code> enables quick lookups and inserts, crucial for maintaining performance, especially with larger input sizes.</p>
+</li>
+<li>
+<p><strong>Practical Applications</strong>: This algorithm is applicable not only in file management systems but also in any context where unique identifiers are necessary, such as user registrations, resource naming in programming, or even task management systems.</p>
+</li>
+</ol>
+<p>Overall, the solution highlights a fundamental approach to solving name uniqueness problems in a clear and maintainable way, demonstrating effective use of C++ features and data structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode552s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

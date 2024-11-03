@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1330">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1330: Reverse Subarray To Maximize Array Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1330: Reverse Subarray To Maximize Array Value">
-  <meta name="twitter:description" content="Solution to Leetcode 1330">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1330: Reverse Subarray To Maximize Array Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1330/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1330: Reverse Subarray To Maximize Array Value">
-  <meta property="og:description" content="Solution to Leetcode 1330">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1330: Reverse Subarray To Maximize Array Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,125 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">net</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">(</span><span class="n">mx</span> <span class="o">-</span> <span class="n">mn</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode381s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to maximize the total difference between adjacent elements in an array after reversing any segment of the array. Given an array <code>nums</code>, the goal is to find the maximum possible sum of absolute differences after reversing a contiguous segment of <code>nums</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to:</p>
+<ol>
+<li>
+<p><strong>Calculate the Initial Total Difference</strong>: First, we need to compute the total sum of absolute differences between adjacent elements in the original array.</p>
+</li>
+<li>
+<p><strong>Explore Potential Changes</strong>: We will evaluate the potential improvements in the sum of absolute differences that can be achieved by reversing segments of the array. This involves checking each adjacent pair and considering the effects of reversing the segment around them.</p>
+</li>
+<li>
+<p><strong>Track Min and Max Values</strong>: As we analyze the pairs, we will also keep track of the minimum and maximum values in order to evaluate the maximum possible gain from reversing segments effectively.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxValueAfterReverse</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">net</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>maxValueAfterReverse</code> function is defined within the <code>Solution</code> class. It takes a vector of integers <code>nums</code> as input, representing the array.</li>
+<li>The variable <code>n</code> holds the size of the array, and <code>net</code> will store the initial total difference between adjacent elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">net</span> <span class="o">+=</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates from the second element to the last element of the array, computing the total sum of absolute differences between adjacent elements using the <code>abs</code> function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">,</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">,</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>Here, <code>res</code> is initialized to the smallest possible integer to track the maximum possible change from reversing segments. <code>mn</code> and <code>mx</code> are initialized to extreme values to find the minimum and maximum values effectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]));</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>For each adjacent pair, two main calculations are performed:</p>
+<ul>
+<li>The first calculation determines the potential improvement by considering the effect of bringing the first element into the segment.</li>
+<li>The second calculation checks the impact of bringing the last element into the segment.</li>
+</ul>
+</li>
+<li>
+<p>Both calculations evaluate the difference between the current total difference and the difference after the proposed change, updating <code>res</code> accordingly.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mn</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">mn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">mx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Within the same loop, we keep track of the minimum and maximum values found in the current adjacent pairs. The maximum value <code>mx</code> is updated with the smaller value of the current pair, while the minimum value <code>mn</code> is updated with the larger value of the current pair.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">net</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">(</span><span class="n">mx</span> <span class="o">-</span> <span class="n">mn</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the maximum possible sum of absolute differences, which is calculated as the initial total difference <code>net</code> plus the maximum value from <code>res</code> and the potential gain from reversing a segment defined by the minimum and maximum values, multiplied by 2. The multiplication by 2 accounts for the total difference change when reversing.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this algorithm is (O(n)), where (n) is the number of elements in the input array. This is because we only loop through the array a constant number of times.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a constant amount of additional space for variables, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively maximizes the total difference between adjacent elements in an array after reversing a segment by efficiently computing the initial total difference and exploring potential improvements through pairwise comparisons.</p>
+<p>By keeping track of the minimum and maximum values in the relevant segments, the algorithm ensures that we explore all possible enhancements, culminating in an optimal result.</p>
+<p>This approach is particularly beneficial for scenarios where you need to handle similar problems involving array manipulation and maximization. Understanding how to leverage mathematical properties, such as absolute differences and segment manipulation, is crucial for developing efficient solutions in competitive programming and algorithmic challenges.</p>
+<p>Overall, mastering techniques like this can significantly enhance one&rsquo;s problem-solving skills in computer science, enabling individuals to tackle complex challenges with confidence and clarity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode381s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

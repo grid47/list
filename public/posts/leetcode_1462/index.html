@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1462">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1462: Course Schedule IV in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1462: Course Schedule IV">
-  <meta name="twitter:description" content="Solution to Leetcode 1462">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1462: Course Schedule IV in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1462/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1462: Course Schedule IV">
-  <meta property="og:description" content="Solution to Leetcode 1462">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1462: Course Schedule IV in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -234,7 +234,197 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode527s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine if there exists a prerequisite relationship between courses based on a list of prerequisite pairs. We are given <code>num</code> courses (indexed from <code>0</code> to <code>num-1</code>) and a list of prerequisite pairs <code>pre</code>, where each pair <code>[a, b]</code> indicates that course <code>a</code> is a prerequisite for course <code>b</code>. Additionally, we are provided with a list of queries <code>q</code>, where each query asks if course <code>q[i][0]</code> is a prerequisite for course <code>q[i][1]</code>. The function should return a boolean vector indicating the answers to each query.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a breadth-first search (BFS) algorithm to build a reachability matrix that indicates whether one course is a prerequisite for another. Here’s how the solution is structured:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>We represent the prerequisite relationships using an adjacency list (a grid), where each index corresponds to a course, and the values at each index are the courses that depend on it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reachability Matrix</strong>:</p>
+<ul>
+<li>We maintain a <code>reach</code> matrix where <code>reach[i][j]</code> is <code>true</code> if course <code>i</code> is a prerequisite for course <code>j</code>. This matrix is initialized to <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS for Reachability</strong>:</p>
+<ul>
+<li>For each course, we perform a BFS to determine all courses that can be reached starting from that course. During the BFS traversal, we mark reachable courses in the <code>reach</code> matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Answering Queries</strong>:</p>
+<ul>
+<li>After constructing the <code>reach</code> matrix, we can easily answer each query by checking the corresponding entry in the matrix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the detailed breakdown of the code implementation:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>The solution is encapsulated in a class named <code>Solution</code>, which is typical in programming contests.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">checkIfPrerequisite</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pre</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>This function takes the total number of courses <code>num</code>, a vector of prerequisite pairs <code>pre</code>, and a vector of queries <code>q</code>, and returns a vector of booleans.</li>
+</ul>
+</li>
+<li>
+<p><strong>Matrix Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">reach</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">grid</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><code>reach</code>: A 2D vector initialized to <code>false</code>, representing the reachability between courses.</li>
+<li><code>grid</code>: An adjacency list representation of the graph where each index corresponds to a course and contains a list of courses that depend on it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Graph</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">pre</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We populate the <code>grid</code> based on the prerequisite pairs given in <code>pre</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS for Each Course</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>            
+</span></span><span class="line"><span class="cl">    <span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">it</span><span class="p">:</span> <span class="n">grid</span><span class="p">[</span><span class="n">tmp</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reach</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each course <code>i</code>, we initiate a BFS:
+<ul>
+<li>We enqueue the current course and mark it as visited.</li>
+<li>While there are nodes in the queue, we process each course:
+<ul>
+<li>For each dependent course <code>it</code>, we mark it as reachable from <code>i</code> in the <code>reach</code> matrix.</li>
+<li>If the dependent course hasn’t been visited, we mark it as visited and enqueue it for further exploration.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Preparing the Answer Vector</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reach</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After processing all courses, we prepare the result vector <code>ans</code>:
+<ul>
+<li>For each query, we check if the prerequisite relationship exists using the <code>reach</code> matrix.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>ans</code> vector containing the results for all queries.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n^2 + m) ), where ( n ) is the number of courses and ( m ) is the number of prerequisite pairs. Each course undergoes a BFS, which can visit all edges in the worst case.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n^2) ) for the reachability matrix and ( O(n + m) ) for the adjacency list representation. Thus, the overall space complexity is dominated by the reachability matrix.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively determines the prerequisite relationships between courses using a breadth-first search approach to populate a reachability matrix. This matrix allows for efficient querying of prerequisite relationships. Key takeaways from the implementation include:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: The use of an adjacency list makes it easy to represent relationships between courses.</p>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>: Utilizing BFS ensures that all reachable courses from a given course are identified, allowing for accurate population of the reachability matrix.</p>
+</li>
+<li>
+<p><strong>Efficiency in Querying</strong>: By preprocessing the prerequisite relationships into a matrix, we can answer each query in constant time ( O(1) ).</p>
+</li>
+</ol>
+<p>Overall, this approach is efficient and well-suited for solving the problem within the constraints typically found in programming challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode527s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

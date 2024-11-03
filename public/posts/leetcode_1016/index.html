@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1016">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1016: Binary String With Substrings Representing 1 To N in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1016: Binary String With Substrings Representing 1 To N">
-  <meta name="twitter:description" content="Solution to Leetcode 1016">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1016: Binary String With Substrings Representing 1 To N in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1016/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1016: Binary String With Substrings Representing 1 To N">
-  <meta property="og:description" content="Solution to Leetcode 1016">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1016: Binary String With Substrings Representing 1 To N in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,7 +204,110 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode33s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires checking if the binary representations of all integers from 1 to ( n ) are present as substrings within a given binary string ( s ). For example, if ( s ) is &ldquo;0110&rdquo; and ( n ) is 3, the binary representations of 1 (&ldquo;1&rdquo;) and 2 (&ldquo;10&rdquo;) are found in ( s ), but we must also check for 3 (&ldquo;11&rdquo;), which is also present. Therefore, the output for this case would be <code>true</code>.</p>
+<p>The challenge is to efficiently determine if every integer from 1 to ( n ) has its binary form included in ( s ).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the properties of binary representation and substring searching:</p>
+<ol>
+<li><strong>Iterate Over Numbers</strong>: We will iterate from ( n ) down to ( n/2 ) because any number greater than ( n/2 ) will have its binary representation containing more leading zeros.</li>
+<li><strong>Binary Conversion</strong>: For each number, convert it to its binary representation.</li>
+<li><strong>Substring Check</strong>: Use the <code>find</code> method to check if the binary representation exists as a substring within ( s ).</li>
+<li><strong>Return Result</strong>: If all binary representations from ( n ) down to ( n/2 ) are found, return <code>true</code>; otherwise, return <code>false</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>queryString</code> is defined as a public member of the <code>Solution</code> class, taking a string ( s ) and an integer ( n ) as input parameters.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through Numbers</strong>:</p>
+<ul>
+<li>A <code>for</code> loop is initiated, iterating ( i ) from ( n ) down to ( n/2 ). This range is chosen because the binary representations of numbers larger than ( n/2 ) can be determined without leading zeros.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Conversion</strong>:</p>
+<ul>
+<li>Within the loop, the current number ( i ) is converted to a binary string using <code>bitset&lt;32&gt;(i).to_string()</code>. This constructs a 32-bit binary representation of ( i ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Extracting Relevant Substring</strong>:</p>
+<ul>
+<li>The line <code>b.substr(b.find('1'))</code> extracts the relevant substring of the binary string ( b ) that starts from the first occurrence of &lsquo;1&rsquo;. This is done to eliminate any leading zeros which would not affect substring matching in ( s ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Substring Check</strong>:</p>
+<ul>
+<li>The <code>find</code> method is then used to determine if the extracted substring exists within the string ( s ). If the substring is not found (i.e., <code>string::npos</code>), it means that the binary representation for ( i ) is missing from ( s ), and the function returns <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning True</strong>:</p>
+<ul>
+<li>If the loop completes without returning <code>false</code>, the function returns <code>true</code>, indicating that all required binary representations have been found in ( s ).</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this function is ( O(n \cdot k) ), where ( k ) is the average length of the binary representations of the integers being checked (approximately ( \log_2 n )). The outer loop runs ( n/2 ) times, and each binary conversion and substring check can take ( O(k) ).</li>
+<li><strong>Space Complexity</strong>: The space complexity is ( O(1) ) if we disregard the input storage since we are using only a fixed number of additional variables for computation, regardless of the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>queryString</code> function efficiently checks whether all binary representations of numbers from 1 to ( n ) are present as substrings within the given binary string ( s ). By iterating only through relevant numbers and utilizing binary conversion combined with substring searching, the solution achieves a balance between clarity and performance.</p>
+<p>This implementation highlights the practical application of binary representation and substring searching techniques in algorithm design. Understanding such techniques can significantly enhance problem-solving capabilities, particularly in competitive programming and coding interviews.</p>
+<p>Furthermore, the approach can be adapted to similar problems involving substring checks or binary manipulations, reinforcing the versatility and utility of this solution. The function exemplifies a straightforward yet effective method for solving a common class of problems related to binary strings and numeric representations.</p>
+<p>In summary, the <code>queryString</code> function showcases an intelligent application of number theory and string manipulation, making it a valuable addition to any programmer’s toolkit. The function&rsquo;s efficiency, combined with its clear logic, makes it a strong candidate for use in a variety of scenarios where substring presence is a critical factor in determining the validity of numeric properties.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode33s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1130">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1130: Minimum Cost Tree From Leaf Values in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1130: Minimum Cost Tree From Leaf Values">
-  <meta name="twitter:description" content="Solution to Leetcode 1130">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1130: Minimum Cost Tree From Leaf Values in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1130/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1130: Minimum Cost Tree From Leaf Values">
-  <meta property="og:description" content="Solution to Leetcode 1130">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1130: Minimum Cost Tree From Leaf Values in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -216,7 +216,106 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode159s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem of constructing a Minimum Cost Tree from Leaf Values involves building a binary tree from an array of integers such that each internal node in the tree represents the product of the two leaf values beneath it. The goal is to minimize the total cost of the tree, which is the sum of all products calculated for each internal node. Given an array of leaf values, the challenge is to determine the minimum possible cost of such a binary tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle the MCT problem, a greedy algorithm utilizing a stack is employed. The idea is to maintain a monotonic stack of leaf values, ensuring that we can efficiently compute the cost of merging leaf values into internal nodes while keeping track of the minimum cost at each step.</p>
+<p>The algorithm can be summarized in the following steps:</p>
+<ol>
+<li><strong>Initialization</strong>: Start by initializing the result (<code>res</code>) to 0 and create a stack with a single value of <code>INT_MAX</code> to handle edge cases effectively.</li>
+<li><strong>Iterate through the array</strong>: For each value in the array:
+<ul>
+<li>While the top of the stack is less than or equal to the current value, pop the stack and compute the cost using the popped value and the minimum of the current value and the next top of the stack.</li>
+<li>Push the current value onto the stack.</li>
+</ul>
+</li>
+<li><strong>Final pass</strong>: After processing all values in the array, there may still be elements in the stack. Perform a final pass to compute the remaining products of the leaf values to finalize the cost.</li>
+<li><strong>Return the result</strong>: The final computed value is returned as the minimum cost.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mctFromLeafValues</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize the result to 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span> <span class="o">=</span> <span class="p">{</span> <span class="n">INT_MAX</span> <span class="p">};</span> <span class="c1">// Create a stack initialized with INT_MAX
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Iterate over each leaf value in the input array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// While the top of the stack is less than or equal to the current value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="c1">// Store the top value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">stk</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">// Pop the top value off the stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// Calculate the cost using the product of mid and the minimum of the new top of the stack and current value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">res</span> <span class="o">+=</span> <span class="n">mid</span> <span class="o">*</span> <span class="n">min</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="c1">// Push the current value onto the stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Final pass to calculate the remaining products for values left in the stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">stk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">stk</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the total minimum cost
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 2-3</strong>: Define the function <code>mctFromLeafValues</code> that takes a vector of integers as input. Initialize the result variable to zero and create a stack initialized with <code>INT_MAX</code>.</li>
+<li><strong>Line 4-14</strong>: The main logic that processes each element in the array:
+<ul>
+<li>If the current value is greater than the top of the stack, pop the stack and calculate the cost, updating <code>res</code>.</li>
+<li>Push the current value onto the stack for further processing.</li>
+</ul>
+</li>
+<li><strong>Line 16-18</strong>: After processing all values, handle any remaining values in the stack by computing their products and adding them to the result.</li>
+<li><strong>Line 20</strong>: Return the final minimum cost.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is (O(n)), where (n) is the number of elements in the input array. Each element is pushed and popped from the stack at most once, leading to a linear traversal of the array. The space complexity is (O(n)) in the worst case due to the stack storing the elements.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation of the MCT problem provides an efficient way to calculate the minimum cost of merging leaf values into a binary tree. By utilizing a greedy approach with a monotonic stack, the algorithm ensures that the cost is minimized at every step of merging. The method is both optimal and straightforward, making it a robust solution for similar problems involving tree constructions and cost minimization in computational scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode159s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

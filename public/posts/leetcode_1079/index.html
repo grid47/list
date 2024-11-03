@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1079">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1079: Letter Tile Possibilities in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1079: Letter Tile Possibilities">
-  <meta name="twitter:description" content="Solution to Leetcode 1079">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1079: Letter Tile Possibilities in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1079/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1079: Letter Tile Possibilities">
-  <meta property="og:description" content="Solution to Leetcode 1079">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1079: Letter Tile Possibilities in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,7 +215,140 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode100s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the number of distinct combinations that can be formed from a given string of tiles, where each tile can be used only once in each combination. For example, given the string &ldquo;AAB&rdquo;, we can form combinations such as &ldquo;A&rdquo;, &ldquo;AA&rdquo;, &ldquo;AB&rdquo;, &ldquo;B&rdquo;, and &ldquo;AAB&rdquo;. The task is to return the total number of unique combinations that can be created using the tiles, including all possible lengths.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem employs a backtracking technique. We recursively generate all possible combinations of tiles by choosing each tile and generating new combinations without repeating the same tile. The key steps in the approach are:</p>
+<ol>
+<li>Use a set to store unique combinations of tile arrangements.</li>
+<li>Use a helper function to explore all possible combinations recursively.</li>
+<li>Keep track of which tiles have been used in the current combination to avoid duplicates.</li>
+<li>Generate combinations of varying lengths by continuously adding tiles to the current result until all possibilities are explored.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:
+The <code>Solution</code> class encapsulates the method for finding the number of tile possibilities.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function</strong>:
+The method <code>numTilePossibilities</code> takes a string <code>tiles</code> as input and initializes the process to find all unique combinations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numTilePossibilities</span><span class="p">(</span><span class="n">string</span> <span class="n">tiles</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">seen</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Generating Combinations</strong>:
+A set called <code>ans</code> is created to store unique combinations, and another set <code>seen</code> is created to track the indices of tiles used in the current combination. The function <code>gen</code> is called to start generating combinations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">gen</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">seen</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Function Definition</strong>:
+The <code>gen</code> function is defined to recursively explore combinations of tiles.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">gen</span><span class="p">(</span><span class="n">string</span> <span class="n">tiles</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="n">string</span> <span class="n">res</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ans</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vis</span> <span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case</strong>:
+The base case for the recursion checks if the index <code>idx</code> equals the size of the string. If true, the function simply returns, as there are no more tiles to process.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">tiles</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Exploring Tile Combinations</strong>:
+A loop iterates through each tile in the <code>tiles</code> string. If a tile at index <code>i</code> has not been visited (<code>!vis.count(i)</code>), we proceed to include it in the current combination.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tiles</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Marking Tiles as Used</strong>:
+The current tile index <code>i</code> is added to the <code>vis</code> set to indicate that this tile is currently being used in the combination.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Storing the Combination</strong>:
+The combination formed by appending the current tile to <code>res</code> is inserted into the <code>ans</code> set to ensure uniqueness.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Call</strong>:
+The <code>gen</code> function is called recursively, incrementing the index to explore further combinations that include the current tile.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">gen</span><span class="p">(</span><span class="n">tiles</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span> <span class="o">+</span> <span class="n">tiles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ans</span><span class="p">,</span> <span class="n">vis</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Backtracking</strong>:
+After exploring combinations with the current tile, we remove the index from <code>vis</code>, allowing the tile to be used in other combinations.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="11">
+<li><strong>Return Statement</strong>:
+The <code>numTilePossibilities</code> function returns the size of the <code>ans</code> set, which represents the total number of unique tile arrangements.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm can be estimated as (O(N!)), where (N) is the length of the <code>tiles</code> string. This is because we are generating all possible permutations of the string, which grows factorially as the number of tiles increases. The set operations (insertion and lookup) are average (O(1)) time, but due to the recursive nature, the depth can lead to exponential growth in combinations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(N)) due to the space used by the recursion stack in the backtracking approach and the space used to store unique combinations in the set. In the worst case, the set can hold up to (N!) combinations, depending on the tiles provided.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code efficiently calculates the number of distinct combinations that can be formed using a given set of tiles. By leveraging backtracking and a set to store unique combinations, the solution systematically explores all possible arrangements, ensuring no duplicates. This approach is particularly effective for generating combinations from a collection with potentially repeating elements.</p>
+<p>This implementation highlights the power of recursion in solving combinatorial problems and showcases efficient handling of unique data using sets. For larger strings of tiles, the performance may vary, but the algorithm remains an excellent approach for understanding the fundamentals of combinatorial generation and backtracking techniques.</p>
+<p>In summary, this solution provides a robust and efficient way to count unique tile arrangements, making it suitable for various applications, including games and puzzles that involve string manipulations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode100s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

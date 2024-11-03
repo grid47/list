@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1146">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1146: Snapshot Array in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1146: Snapshot Array">
-  <meta name="twitter:description" content="Solution to Leetcode 1146">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1146: Snapshot Array in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1146/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1146: Snapshot Array">
-  <meta property="og:description" content="Solution to Leetcode 1146">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1146: Snapshot Array in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -230,7 +230,122 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_2 = obj-&gt;snap();
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_3 = obj-&gt;get(index,snap_id);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode175s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The &ldquo;Snapshot Array&rdquo; problem involves creating a data structure that allows you to efficiently store and retrieve snapshots of an array at various points in time. This data structure should support the following operations:</p>
+<ol>
+<li><strong>set(index, val)</strong>: Sets the value of an element at a given index in the array.</li>
+<li><strong>snap()</strong>: Takes a snapshot of the array and returns a unique <code>snap_id</code>.</li>
+<li><strong>get(index, snap_id)</strong>: Retrieves the value of the element at the specified index from the snapshot with the given <code>snap_id</code>.</li>
+</ol>
+<p>The objective is to create a data structure that can handle multiple snapshots efficiently without the need to store each version of the entire array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation of <code>SnapshotArray</code> uses a hash map combined with a nested ordered map to efficiently handle the snapshots:</p>
+<ol>
+<li><strong>Outer Hash Map</strong> (<code>unordered_map&lt;int, map&lt;int, int&gt;&gt; snaps</code>): Maps each index in the array to a time-sorted map (<code>map&lt;int, int&gt;</code>), which stores the values of that index across different snapshots.</li>
+<li><strong>Inner Ordered Map</strong> (<code>map&lt;int, int&gt;</code>): Stores the snapshot IDs as keys and the corresponding values at that index as values. Using an ordered map ensures that we can efficiently find the most recent snapshot value for a given <code>snap_id</code>.</li>
+</ol>
+<p>The structure of this data structure allows for fast retrieval of values for specific snapshots without duplicating the entire array at each snapshot. Each index only stores the updates it has received, making the approach both memory- and time-efficient.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SnapshotArray</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">snaps</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">snap_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-4</strong>: The <code>SnapshotArray</code> class is defined. The variable <code>snaps</code> is an <code>unordered_map</code> where each key represents an index in the array, and the value is an ordered <code>map</code> that tracks snapshot IDs and values for that index. <code>snap_id</code> keeps track of the current snapshot ID, starting at 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">SnapshotArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">snaps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 5-10</strong>: The constructor initializes the array. For each index, an ordered map is created with an initial snapshot ID of <code>0</code> and a value of <code>0</code>. This ensures that every index starts with a default value of <code>0</code> in snapshot <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">set</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">snaps</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">snap_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 11-13</strong>: The <code>set</code> method updates the value at a specified <code>index</code> in the array. It assigns the value <code>val</code> for the current <code>snap_id</code>, indicating that <code>index</code> should have this value in the current snapshot.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">snap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">snap_id</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">snap_id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 14-17</strong>: The <code>snap</code> method increments the <code>snap_id</code> to create a new snapshot, then returns the previous <code>snap_id</code> as the ID of the snapshot that was just taken.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">snid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">snaps</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">snid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">it</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 18-22</strong>: The <code>get</code> method retrieves the value at <code>index</code> for a specified <code>snap_id</code> (<code>snid</code>). Using <code>upper_bound</code>, it locates the smallest snapshot ID greater than <code>snid</code>. The iterator is decremented (<code>it--</code>) to access the snapshot at or before <code>snid</code>. The retrieved value, <code>it-&gt;second</code>, represents the value at <code>index</code> for <code>snid</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>set</strong>: ( O(\log S) ), where ( S ) is the number of snapshots taken for a specific index, because of insertion into an ordered map.</li>
+<li><strong>snap</strong>: ( O(1) ), since it only increments the snapshot ID.</li>
+<li><strong>get</strong>: ( O(\log S) ), where ( S ) is the number of snapshots at the given index. The <code>upper_bound</code> operation takes ( O(\log S) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: ( O(n + k) ), where ( n ) is the number of indices and ( k ) is the total number of updates across snapshots. This space complexity accounts for the storage of only modified values for each index.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This C++ implementation of the <code>SnapshotArray</code> class offers an efficient way to store and retrieve array states across snapshots. By using a hash map of ordered maps, the solution ensures fast retrieval for specific snapshots without duplicating the array at each snapshot. The design is optimal for scenarios requiring frequent snapshots and updates to individual elements, making it a powerful solution for managing time-versioned data in applications like undo functionality, version control, or real-time state tracking.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode175s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

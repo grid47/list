@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1489">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1489">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1489/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree">
-  <meta property="og:description" content="Solution to Leetcode 1489">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
           
@@ -260,7 +260,207 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">weight</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode557s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to identify critical and pseudo-critical edges in a graph represented by a list of edges. Critical edges are those that, if removed, increase the weight of the minimum spanning tree (MST). Pseudo-critical edges are those that can be part of the MST but do not affect its total weight. The input consists of <code>n</code> vertices and a list of <code>edges</code>, each defined by two vertices and a weight. The goal is to return two lists: one containing the indices of critical edges and the other containing the indices of pseudo-critical edges.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we will utilize a union-find data structure (also known as Disjoint Set Union, DSU) to efficiently manage and find connected components of the graph. The main steps involved in the solution are:</p>
+<ol>
+<li>
+<p><strong>Edge Preparation</strong>: Augment the list of edges to include their original indices, then sort the edges based on their weights. This will allow us to process them in the order necessary for MST calculations.</p>
+</li>
+<li>
+<p><strong>Calculate the Original MST</strong>: Compute the weight of the MST using all edges to establish a baseline for comparison when edges are either omitted or included.</p>
+</li>
+<li>
+<p><strong>Evaluate Each Edge</strong>: For each edge in the sorted list, we will:</p>
+<ul>
+<li>Check if removing the edge results in a higher MST weight, marking it as critical if true.</li>
+<li>Check if including the edge maintains the same MST weight, marking it as pseudo-critical if true.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Results</strong>: Compile the results into two lists: one for critical edges and another for pseudo-critical edges.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="unionfind-class">
+  UnionFind Class
+  <a class="heading-link" href="#unionfind-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This class manages the union-find operations, including the path compression technique for efficient searching and union operations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UnionFind</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">UnionFind</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rank</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// Initialize rank for union by rank
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">f</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>  <span class="c1">// Initialize parent vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>  <span class="c1">// Each node is its own parent initially
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">Find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">return</span> <span class="n">x</span><span class="p">;</span>  <span class="c1">// If x is the root, return x
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="k">return</span> <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Find</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>  <span class="c1">// Path compression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">Union</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">Find</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">Find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>  <span class="c1">// Find roots of x and y
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">fx</span> <span class="o">==</span> <span class="n">fy</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>  <span class="c1">// They are already in the same set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">fy</span><span class="p">])</span> <span class="n">swap</span><span class="p">(</span><span class="n">fx</span><span class="p">,</span> <span class="n">fy</span><span class="p">);</span>  <span class="c1">// Union by rank
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">f</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span><span class="p">;</span>  <span class="c1">// Make fy the parent of fx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">==</span> <span class="n">rank</span><span class="p">[</span><span class="n">fy</span><span class="p">])</span> <span class="n">rank</span><span class="p">[</span><span class="n">fy</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// Increment rank if equal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">,</span> <span class="n">rank</span><span class="p">;</span>  <span class="c1">// f for parent pointers, rank for union by rank
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></div><h4 id="solution-class">
+  Solution Class
+  <a class="heading-link" href="#solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The main class that implements the logic to find critical and pseudo-critical edges.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">findCriticalAndPseudoCriticalEdges</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Step 1: Append the index to each edge and sort them by weight
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>  <span class="c1">// Add index to edges
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">edges</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">edges</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[](</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// Sort by weight
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Step 2: Get the original MST weight
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">origin_mst</span> <span class="o">=</span> <span class="n">GetMST</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">critical</span><span class="p">,</span> <span class="n">non_critical</span><span class="p">;</span>  <span class="c1">// Prepare lists for edges
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Step 3: Evaluate each edge for criticality
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">origin_mst</span> <span class="o">&lt;</span> <span class="n">GetMST</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">critical</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>  <span class="c1">// Edge is critical
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">origin_mst</span> <span class="o">==</span> <span class="n">GetMST</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">non_critical</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>  <span class="c1">// Edge is pseudo-critical
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">critical</span><span class="p">,</span> <span class="n">non_critical</span><span class="p">};</span>  <span class="c1">// Return both lists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Helper function to calculate the MST weight with options to block an edge or include a pre-edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">GetMST</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">,</span> <span class="kt">int</span> <span class="n">blockedge</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pre_edge</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UnionFind</span> <span class="nf">uf</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>  <span class="c1">// Create a new UnionFind structure for MST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">weight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// Initialize weight of MST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">pre_edge</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">weight</span> <span class="o">+=</span> <span class="n">edges</span><span class="p">[</span><span class="n">pre_edge</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// Add weight of pre-edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">uf</span><span class="p">.</span><span class="n">Union</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">pre_edge</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">pre_edge</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>  <span class="c1">// Union pre-edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Iterate over edges to form the MST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">blockedge</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>  <span class="c1">// Skip the blocked edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">edge</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>  <span class="c1">// Current edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">uf</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="n">uf</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="k">continue</span><span class="p">;</span>  <span class="c1">// Skip if already connected
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">uf</span><span class="p">.</span><span class="n">Union</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>  <span class="c1">// Union the edge
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">weight</span> <span class="o">+=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// Add weight to the MST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Check if all vertices are connected
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">uf</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">uf</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="k">return</span> <span class="mf">1e9</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>  <span class="c1">// If not connected, return a large value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">weight</span><span class="p">;</span>  <span class="c1">// Return the total weight of the MST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="detailed-steps">
+  Detailed Steps:
+  <a class="heading-link" href="#detailed-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Edge Preparation</strong>: Each edge is extended to include its index, allowing us to identify edges later. We then sort the edges by weight using a lambda function.</p>
+</li>
+<li>
+<p><strong>Calculate Original MST</strong>:</p>
+<ul>
+<li>The <code>GetMST</code> function is called with all edges included to calculate the weight of the original MST. This establishes a baseline for comparing critical and pseudo-critical edges.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Edges</strong>:</p>
+<ul>
+<li>For each edge, we check if it is critical by determining if removing it causes the MST weight to increase.</li>
+<li>If removing the edge increases the MST weight, we classify it as a critical edge.</li>
+<li>We also check if including the edge maintains the same weight for the MST, classifying it as a pseudo-critical edge.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the algorithm is (O(E \log E + E \alpha(N))), where (E) is the number of edges, (N) is the number of vertices, and (\alpha(N)) is the inverse Ackermann function which is nearly constant for all practical purposes. The sorting step contributes (O(E \log E)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(N + E)) due to the storage of the union-find structure and the edge list.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively identifies critical and pseudo-critical edges in a graph using a union-find data structure to manage connected components efficiently. The approach involves sorting edges, calculating the original MST, and evaluating each edge&rsquo;s impact on the MST&rsquo;s weight.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Union-Find Optimization</strong>: The use of union-find with path compression and union by rank makes it efficient for dynamic connectivity queries.</li>
+<li><strong>Graph Theory Application</strong>: The problem demonstrates practical applications in network design, reliability, and optimization problems.</li>
+<li><strong>Performance Considerations</strong>: The algorithm&rsquo;s efficiency allows it to handle large graphs within reasonable time constraints, making it suitable for real-world applications.</li>
+</ol>
+<p>Overall, this implementation showcases strong algorithmic design principles while addressing a critical problem in graph theory, making it a valuable reference for similar challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode557s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1296">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1296: Divide Array in Sets of K Consecutive Numbers in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1296: Divide Array in Sets of K Consecutive Numbers">
-  <meta name="twitter:description" content="Solution to Leetcode 1296">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1296: Divide Array in Sets of K Consecutive Numbers in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1296/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1296: Divide Array in Sets of K Consecutive Numbers">
-  <meta property="og:description" content="Solution to Leetcode 1296">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1296: Divide Array in Sets of K Consecutive Numbers in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,7 +216,131 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode341s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine whether an array of integers can be divided into <code>n</code> groups of <code>k</code> consecutive integers each, where <code>n</code> is the total number of groups formed. Each group must contain consecutive numbers, meaning that if the smallest number in a group is <code>x</code>, then the group must include <code>x</code>, <code>x+1</code>, &hellip;, <code>x+k-1</code>.</p>
+<p>For example, given an input array like <code>[1, 2, 3, 3, 4, 4, 5, 6]</code> and <code>k = 4</code>, it should return <code>true</code> because we can form the following groups:</p>
+<ul>
+<li>Group 1: <code>[1, 2, 3, 4]</code></li>
+<li>Group 2: <code>[3, 4, 5, 6]</code></li>
+</ul>
+<p>Conversely, an input like <code>[1, 2, 3, 4, 5]</code> with <code>k = 4</code> would return <code>false</code>, as it&rsquo;s impossible to form two groups of four consecutive integers from this array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Count Frequencies</strong>: Use a map (or unordered_map) to count the frequency of each integer in the array. This helps us track how many times each number appears.</p>
+</li>
+<li>
+<p><strong>Iterate Through Unique Numbers</strong>: Iterate through the sorted unique numbers in the map. For each number, check if we can form a group starting with that number.</p>
+</li>
+<li>
+<p><strong>Form Groups</strong>: For each number that still has a positive frequency, attempt to form a complete group of <code>k</code> consecutive integers. If any of the required integers in the group is not available in sufficient frequency, return <code>false</code>.</p>
+</li>
+<li>
+<p><strong>Adjust Frequencies</strong>: If a group is formed successfully, reduce the frequency counts of all integers in that group.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: If we can form all required groups, return <code>true</code>; otherwise, return <code>false</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isPossibleDivide</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: The <code>Solution</code> class is defined, and the <code>isPossibleDivide</code> function begins, taking a vector <code>nums</code> and an integer <code>k</code> as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-6</strong>: We create a map <code>cnt</code> to count the frequency of each number in <code>nums</code>. The variable <code>n</code> stores the size of the input array. The loop iterates through <code>nums</code>, incrementing the count for each integer.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">frq</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">frq</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 7-9</strong>: We iterate through each unique number in the frequency map. The variable <code>frq</code> stores the current number&rsquo;s frequency. We check if <code>frq</code> is greater than zero, meaning there are still numbers available to form groups.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">frq</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 10-12</strong>: We enter a loop that runs <code>k</code> times to check for all consecutive integers starting from <code>it.first</code>. If the count of any required consecutive integer (i.e., <code>it.first + i</code>) is less than the frequency of the starting integer, we return <code>false</code>, as we can&rsquo;t form a complete group.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">else</span> <span class="n">cnt</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">frq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 13-16</strong>: If the check passes, we reduce the count for each integer in the group by <code>frq</code>, indicating that we&rsquo;ve used these integers to form a group. Finally, after checking all unique numbers, if no conditions for failure were triggered, we return <code>true</code>, indicating it&rsquo;s possible to divide the array into groups of consecutive integers.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n + m)), where (n) is the number of elements in the <code>nums</code> array and (m) is the number of unique integers in <code>nums</code>. The loop for counting frequencies runs in (O(n)), and the loop for forming groups runs in (O(m \cdot k)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m)) due to the storage required for the frequency map, where (m) is the number of unique integers in the input array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>isPossibleDivide</code> function effectively checks if an array can be divided into groups of consecutive integers using a frequency counting approach. By leveraging a map to track the number of occurrences of each integer, the function ensures that all necessary conditions for forming the groups are met.</p>
+<p>This solution is efficient, clear, and well-suited for competitive programming scenarios and coding interviews where similar problems are commonly encountered. Understanding this approach enhances one&rsquo;s problem-solving skills, especially in dealing with collections of numbers and constraints regarding their arrangement or grouping.</p>
+<p>In summary, this detailed breakdown not only explains how the code works but also provides insight into the underlying algorithmic principles, making it a valuable resource for anyone looking to deepen their knowledge of algorithms and data structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode341s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

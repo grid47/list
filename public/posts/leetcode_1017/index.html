@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1017">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1017: Convert to Base -2 in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1017: Convert to Base -2">
-  <meta name="twitter:description" content="Solution to Leetcode 1017">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1017: Convert to Base -2 in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1017/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1017: Convert to Base -2">
-  <meta property="og:description" content="Solution to Leetcode 1017">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1017: Convert to Base -2 in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -206,7 +206,111 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="o">?</span> <span class="s">&#34;0&#34;</span><span class="o">:</span><span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode34s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to convert an integer ( n ) into its base -2 representation. In base -2, the digits are represented as ( 0 ) and ( 1 ), and each digit&rsquo;s position corresponds to a power of -2. For example:</p>
+<ul>
+<li>The decimal number ( 2 ) in base -2 is represented as &ldquo;110&rdquo;, since ( 2 = 1 \times (-2)^2 + 1 \times (-2)^1 + 0 \times (-2)^0 ).</li>
+<li>The number ( 3 ) would be &ldquo;111&rdquo;, since ( 3 = 1 \times (-2)^2 + 1 \times (-2)^1 + 1 \times (-2)^0 ).</li>
+</ul>
+<p>The challenge is to create a function that takes an integer ( n ) and returns its base -2 representation as a string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To convert an integer ( n ) into base -2:</p>
+<ol>
+<li><strong>Repeated Division</strong>: Similar to converting to any other base, we repeatedly divide ( n ) by -2.</li>
+<li><strong>Tracking Remainders</strong>: Instead of just tracking the quotient, we also need to track the remainder, which will be either ( 0 ) or ( 1 ) (the digits in base -2).</li>
+<li><strong>Adjustments</strong>: When dividing by -2, if the remainder is negative, adjustments must be made to ensure it falls within the ( 0-1 ) range. This is achieved by modifying the quotient accordingly.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>baseNeg2</code> is defined as a public member of the <code>Solution</code> class, taking an integer ( n ) as an input parameter.</li>
+</ul>
+</li>
+<li>
+<p><strong>String Initialization</strong>:</p>
+<ul>
+<li>A string variable <code>res</code> is initialized to hold the resulting base -2 representation.</li>
+</ul>
+</li>
+<li>
+<p><strong>While Loop</strong>:</p>
+<ul>
+<li>The loop continues as long as ( n ) is non-zero.</li>
+<li>Inside the loop, the least significant bit (LSB) is obtained using the expression <code>n &amp; 1</code>. This effectively gives the remainder when ( n ) is divided by -2.</li>
+<li>The result is then prepended to the string <code>res</code> using <code>to_string(n &amp; 1) + res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating ( n )</strong>:</p>
+<ul>
+<li>The next step involves updating ( n ). The new value of ( n ) is calculated using <code>-(n &gt;&gt; 1)</code>. The right shift operator <code>&gt;&gt;</code> divides ( n ) by 2, and negating it provides the required adjustment for the base -2 conversion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result Handling</strong>:</p>
+<ul>
+<li>After the loop, if <code>res</code> is still an empty string (which means ( n ) was 0 initially), the function returns &ldquo;0&rdquo;.</li>
+<li>Otherwise, it returns the constructed string <code>res</code>, which represents ( n ) in base -2.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this function is ( O(\log |n|) ). The number of iterations of the loop corresponds to the number of digits in the base -2 representation of ( n ), which is logarithmic in relation to ( n ).</li>
+<li><strong>Space Complexity</strong>: The space complexity is ( O(1) ) for auxiliary space, as we are using a fixed number of variables for computation and the output string, which grows with the number of digits in the result.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>baseNeg2</code> function efficiently converts an integer ( n ) to its representation in base -2. By employing a straightforward iterative approach that utilizes bitwise operations for efficiency, the solution is both clear and optimal.</p>
+<p>Understanding this approach provides insight into how number systems can be represented differently, particularly with non-standard bases such as negative bases. This highlights the flexibility and versatility of numeral systems beyond the common binary, decimal, and hexadecimal systems.</p>
+<p>This implementation showcases the importance of adjusting typical algorithms for base conversion to handle special cases like negative bases. It serves as a practical example of combining mathematical logic with programming techniques to solve problems that require a deeper understanding of number theory.</p>
+<p>In summary, the <code>baseNeg2</code> function exemplifies how to handle non-standard numeral systems in programming. It combines efficiency and clarity, making it an excellent reference for anyone looking to deepen their understanding of numerical base conversions.</p>
+<p>Additionally, this function can be applied in scenarios requiring representation in unusual numeral systems, which can be beneficial in theoretical computer science and algorithm design. The skills demonstrated in this solution can also translate to a broader range of problems involving different numeral systems, making it a valuable addition to any programmer&rsquo;s skill set.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode34s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

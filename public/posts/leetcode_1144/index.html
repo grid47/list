@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1144">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1144: Decrease Elements To Make Array Zigzag in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1144: Decrease Elements To Make Array Zigzag">
-  <meta name="twitter:description" content="Solution to Leetcode 1144">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1144: Decrease Elements To Make Array Zigzag in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1144/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1144: Decrease Elements To Make Array Zigzag">
-  <meta property="og:description" content="Solution to Leetcode 1144">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1144: Decrease Elements To Make Array Zigzag in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -209,7 +209,123 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode179s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we have an array of integers, and the goal is to transform it into a zigzag array by making the minimum number of operations. An array is in zigzag order if each element alternates between being smaller and larger than its neighbors:</p>
+<ul>
+<li>For even-indexed elements, the element should be smaller than its adjacent elements.</li>
+<li>For odd-indexed elements, the element should be larger than its adjacent elements.</li>
+</ul>
+<p>An operation consists of reducing the value of any element by 1. Given an integer array <code>nums</code>, the task is to find the minimum number of moves needed to transform the array into a zigzag array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a straightforward approach with a greedy technique to evaluate the number of moves required for two possible zigzag patterns:</p>
+<ol>
+<li><strong>Pattern 1 (Even Smaller)</strong>: Every element at an even index is smaller than its adjacent elements.</li>
+<li><strong>Pattern 2 (Odd Smaller)</strong>: Every element at an odd index is smaller than its adjacent elements.</li>
+</ol>
+<p>The algorithm iterates through each element and calculates the number of moves needed to satisfy both patterns. It then returns the minimum of the two values, which represents the optimal number of moves.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: A class named <code>Solution</code> is defined, marking the beginning of the code.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">movesToMakeZigzag</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 3</strong>: The function <code>movesToMakeZigzag</code> is defined, which takes a reference to a vector <code>nums</code> as an argument.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 4</strong>: The variable <code>n</code> stores the size of the input array <code>nums</code>. The variables <code>left</code> and <code>right</code> will be used to store the values of the left and right neighbors of the current element.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 5</strong>: A vector <code>res</code> is initialized with two elements set to <code>0</code>. <code>res[0]</code> will store the moves required for the &ldquo;even smaller&rdquo; pattern, and <code>res[1]</code> will store the moves for the &ldquo;odd smaller&rdquo; pattern.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 6</strong>: A loop is initiated to iterate through each element in <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">left</span>  <span class="o">=</span> <span class="p">(</span> <span class="n">i</span>     <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">?</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="mi">1001</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">right</span> <span class="o">=</span> <span class="p">(</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="p">)</span> <span class="o">?</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="mi">1001</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 7-8</strong>: <code>left</code> and <code>right</code> are assigned values based on the presence of neighboring elements:
+<ul>
+<li>If <code>i &gt; 0</code>, <code>left</code> is assigned the value of the left neighbor <code>nums[i - 1]</code>. If <code>i</code> is at the start of the array, <code>left</code> is set to <code>1001</code>, which is a value greater than any possible element in <code>nums</code> (since constraints ensure elements are at most <code>1000</code>).</li>
+<li>Similarly, <code>right</code> is set to the value of the right neighbor if it exists; otherwise, it’s set to <code>1001</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">min</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 9</strong>: This line calculates the number of moves needed for the current element <code>nums[i]</code> to satisfy the zigzag condition. The index <code>i % 2</code> is used to determine whether we’re calculating for an &ldquo;even smaller&rdquo; or &ldquo;odd smaller&rdquo; pattern:
+<ul>
+<li><code>min(left, right)</code> gives the minimum value between the neighboring elements.</li>
+<li><code>nums[i] - min(left, right) + 1</code> calculates how much we need to reduce <code>nums[i]</code> to make it less than both neighbors by at least <code>1</code>. If this value is positive, it is added to <code>res[i % 2]</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 10-12</strong>: The function returns the minimum of <code>res[0]</code> and <code>res[1]</code>, which represents the least number of moves needed to transform the array into a zigzag pattern.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n) ), where ( n ) is the length of the input array <code>nums</code>. The algorithm iterates over each element only once, making it efficient for large inputs.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ), as the algorithm only uses a fixed number of additional variables (<code>left</code>, <code>right</code>, and <code>res</code>), regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This C++ solution efficiently calculates the minimum moves needed to transform an array into a zigzag pattern by evaluating two possible patterns and returning the optimal solution. By systematically applying a greedy approach and only requiring a single pass through the array, the code ensures minimal time complexity and space usage. This approach is particularly useful in scenarios involving sequence pattern transformations, especially where minimum adjustments are desired.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode179s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

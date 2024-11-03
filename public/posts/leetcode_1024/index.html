@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1024">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1024: Video Stitching in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1024: Video Stitching">
-  <meta name="twitter:description" content="Solution to Leetcode 1024">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1024: Video Stitching in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1024/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1024: Video Stitching">
-  <meta property="og:description" content="Solution to Leetcode 1024">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1024: Video Stitching in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -206,7 +206,123 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode47s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of the problem is to cover a specified duration of time using the minimum number of video clips. Each clip has a start time and an end time, and you need to determine how many clips you need to stitch together to cover the entire duration from 0 to the given time. If it is not possible to cover the entire duration, the function should return -1.</p>
+<p>For instance, given clips <code>[[0, 2], [2, 5], [5, 8]]</code> and <code>time = 8</code>, you can stitch together the clips <code>[0, 2]</code> and <code>[2, 5]</code> to cover up to 5, and then add the clip <code>[5, 8]</code> to cover the full duration. Therefore, the output would be 3 clips.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the video stitching problem, the following approach is adopted:</p>
+<ol>
+<li><strong>Sort the Clips</strong>: First, sort the clips based on their start times. This ensures that we can process them in a sequential manner.</li>
+<li><strong>Iterate Over Time</strong>: Use a loop to traverse the time intervals from <code>0</code> to <code>time</code>.</li>
+<li><strong>Track the Maximum End</strong>: For each starting point, find the maximum end time of the clips that start at or before the current starting point.</li>
+<li><strong>Count the Clips</strong>: Increment the count of clips each time a new segment is added. If at any point the start time equals the end time (meaning no further clips can extend the coverage), return -1.</li>
+<li><strong>Return the Result</strong>: Finally, return the count of clips needed to cover the specified duration.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>videoStitching</code> is defined within the <code>Solution</code> class, taking a reference to a 2D vector of integers <code>clips</code> and an integer <code>time</code> as its parameters.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Clips</strong>:</p>
+<ul>
+<li>The <code>sort</code> function is called to sort the <code>clips</code> vector in ascending order based on the starting times of the clips. This allows for efficient processing in sequential order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Variables <code>res</code> (to count the number of clips used), <code>st</code> (the starting time for the current segment), and <code>end</code> (the farthest point that can be reached) are initialized.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outer Loop</strong>:</p>
+<ul>
+<li>A <code>for</code> loop runs until <code>st</code> is less than <code>time</code>, where <code>st</code> is updated to the value of <code>end</code> at the beginning of each iteration. The loop continues to increment <code>res</code> each time a new clip is added.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inner Loop</strong>:</p>
+<ul>
+<li>A nested <code>for</code> loop is used to check which clips can be used starting from the current <code>st</code>. This loop continues as long as:
+<ul>
+<li><code>i</code> is less than the size of the <code>clips</code> vector.</li>
+<li>The start time of the current clip is less than or equal to <code>st</code>.</li>
+</ul>
+</li>
+<li>Inside this loop, the <code>end</code> variable is updated to the maximum of its current value and the end time of the clip being checked (<code>clips[i][1]</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>End Check</strong>:</p>
+<ul>
+<li>After processing all applicable clips, the code checks if <code>st</code> is equal to <code>end</code>. If they are equal, it means no further progress can be made (i.e., no clip can extend the current coverage), and the function returns -1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<ul>
+<li>If the loop completes successfully (indicating that the entire time interval has been covered), the function returns the value of <code>res</code>, which indicates the minimum number of clips required.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \log n)), where (n) is the number of clips. This complexity arises from the sorting step. The iteration through the clips occurs in linear time, which is (O(n)).</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(1)) for the auxiliary space, as we are using a fixed number of variables for counting and tracking indices. The input clips array is not counted towards space complexity since it is provided as input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>videoStitching</code> function provides an efficient solution to the problem of determining the minimum number of video clips needed to cover a specific duration of time. By sorting the clips and using a systematic approach to find the maximum coverage possible at each step, the algorithm efficiently calculates the required number of clips.</p>
+<p>This solution is practical for real-world scenarios where video segments may need to be stitched together, such as in video editing software, streaming services, and content creation applications. The ability to handle dynamic inputs and provide a quick response on the feasibility of covering a duration is crucial in these contexts.</p>
+<p>In summary, the function illustrates the effective use of sorting and greedy algorithms in solving problems related to interval coverage. By focusing on maintaining the maximum reach at each step, the solution ensures that the minimum number of clips is used while effectively handling edge cases where coverage may not be possible.</p>
+<p>Overall, this implementation serves as a valuable reference for solving similar problems in competitive programming and software development, showcasing the importance of structured approaches in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode47s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

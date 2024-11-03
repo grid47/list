@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1448">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1448: Count Good Nodes in Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1448: Count Good Nodes in Binary Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1448">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1448: Count Good Nodes in Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1448/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1448: Count Good Nodes in Binary Tree">
-  <meta property="og:description" content="Solution to Leetcode 1448">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1448: Count Good Nodes in Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,157 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode514s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to count the number of &ldquo;good&rdquo; nodes in a binary tree. A node is considered &ldquo;good&rdquo; if, along the path from the root to that node, the value of that node is greater than or equal to the maximum value encountered along the path from the root to that node.</p>
+<p>For example, in a binary tree where the root has a value of 3 and its left child has a value of 1, the left child is a good node because it is greater than the maximum value encountered so far (which is 3).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a depth-first search (DFS) approach, which will allow us to traverse the tree while keeping track of the maximum value encountered along the path. The main steps are as follows:</p>
+<ol>
+<li><strong>Recursive Traversal</strong>: We will recursively traverse the binary tree, starting from the root.</li>
+<li><strong>Tracking Maximum Value</strong>: At each node, we will compare the current node&rsquo;s value with the maximum value encountered so far on the path from the root.</li>
+<li><strong>Counting Good Nodes</strong>: We will maintain a count of good nodes as we traverse the tree, incrementing the count whenever we encounter a good node.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the provided code to understand how it works:</p>
+<ol>
+<li>
+<p><strong>Structure Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>This structure defines a binary tree node, including the value of the node (<code>val</code>) and pointers to the left and right children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The code is encapsulated within a class named <code>Solution</code>, which is common in competitive programming and coding challenges.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">goodNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">good</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="o">-</span><span class="mi">100000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>goodNodes</code> function is the entry point, taking the root of the binary tree as input.</li>
+<li>It calls the helper function <code>good</code>, initializing the maximum value <code>mx</code> to a very small number (e.g., <code>-100000</code>), which ensures that the first node is always counted as good.</li>
+</ul>
+</li>
+<li>
+<p><strong>Helper Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">good</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>good</code> function performs the actual traversal. If the current node is <code>NULL</code>, it returns <code>0</code>, indicating that there are no good nodes to count in this path.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Good Nodes</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;=</span> <span class="n">mx</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to <code>1</code> if the current node&rsquo;s value is greater than or equal to the maximum value <code>mx</code>, meaning it&rsquo;s a good node; otherwise, it&rsquo;s initialized to <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Calls</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">+=</span> <span class="n">good</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">+=</span> <span class="n">good</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>We recursively call the <code>good</code> function on the left and right children of the current node. The maximum value is updated to be the greater of <code>mx</code> or the current node&rsquo;s value.</li>
+<li>The results from both recursive calls are added to <code>res</code>, counting good nodes from both subtrees.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the count of good nodes found in the current subtree.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(N)), where (N) is the number of nodes in the binary tree. Each node is visited exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(H)), where (H) is the height of the binary tree. This is due to the recursive call stack. In the worst case (for a skewed tree), this could be (O(N)), but for a balanced tree, it would be (O(\log N)).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code effectively counts the number of good nodes in a binary tree using a depth-first search approach, maintaining the maximum value along the path from the root.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>: DFS is a common technique used to traverse trees and graphs, allowing us to explore all nodes efficiently.</p>
+</li>
+<li>
+<p><strong>Maintaining State</strong>: By passing the maximum value encountered so far down through the recursive calls, we can make decisions based on the path history without requiring additional data structures.</p>
+</li>
+<li>
+<p><strong>Clear Logic</strong>: The logic of counting good nodes based on comparisons is clear and concise, making the solution easy to understand.</p>
+</li>
+</ol>
+<p>In summary, the provided code serves as a clear and efficient solution to the problem of counting good nodes in a binary tree, demonstrating the effectiveness of recursive algorithms in tree traversal tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode514s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

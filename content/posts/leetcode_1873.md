@@ -30,6 +30,8 @@ SELECT employee_id, salary * (employee_id % 2) * (name NOT LIKE 'M%') AS bonus F
 ---
 
 
+"| 1874: Minimize Product Sum of Two Arrays |"
+
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

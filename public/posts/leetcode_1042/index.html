@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1042">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1042: Flower Planting With No Adjacent in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1042: Flower Planting With No Adjacent">
-  <meta name="twitter:description" content="Solution to Leetcode 1042">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1042: Flower Planting With No Adjacent in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1042/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1042: Flower Planting With No Adjacent">
-  <meta property="og:description" content="Solution to Leetcode 1042">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1042: Flower Planting With No Adjacent in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -215,7 +215,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode61s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a number of gardens arranged in a graph-like structure where each garden can be connected to others via paths. The objective is to assign one of four colors to each garden in such a way that no two adjacent gardens share the same color. This is a classic graph coloring problem that can be efficiently solved using greedy algorithms.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: Represent the gardens and their connections as a graph using an adjacency list. Each garden corresponds to a node, and each path corresponds to an edge between two nodes.</p>
+</li>
+<li>
+<p><strong>Color Assignment</strong>: For each garden, determine which colors are already used by its adjacent gardens. Based on this information, assign the first available color that hasn&rsquo;t been used.</p>
+</li>
+<li>
+<p><strong>Iterative Coloring</strong>: Iterate through each garden, check the colors of its neighbors, and assign an appropriate color accordingly.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>:</p>
+<ul>
+<li>The <code>gardenNoAdj</code> function takes an integer <code>n</code> representing the number of gardens and a 2D vector <code>paths</code> representing the connections between the gardens. It returns a vector of integers representing the color assigned to each garden.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">gardenNoAdj</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initializing Results and Graph Structure</strong>:</p>
+<ul>
+<li>A result vector <code>res</code> is initialized with size <code>n</code>, where each element starts with 0 (indicating no color assigned).</li>
+<li>An adjacency list <code>gph</code> is created to store the graph representation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Building the Graph</strong>:</p>
+<ul>
+<li>The input <code>paths</code> is iterated over to populate the adjacency list. For each path, both gardens are updated to reflect their mutual connection.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">p</span><span class="p">:</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gph</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gph</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Coloring the Gardens</strong>:</p>
+<ul>
+<li>The outer loop iterates through each garden to assign colors.</li>
+<li>An auxiliary array <code>colors</code> of size 5 is used to track which colors are already used by the adjacent gardens (index 0 is ignored).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">colors</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">j</span><span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">colors</span><span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Mark the colors used by neighbors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Assigning Available Color</strong>:</p>
+<ul>
+<li>A nested loop iterates through potential colors from 4 to 1 (to prioritize higher colors) and checks if the color is available (not used by adjacent gardens). When an available color is found, it is assigned to the garden.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">c</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// Assign the first available color
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Finally, the function returns the result vector containing the assigned colors for each garden.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(V + E)), where (V) is the number of gardens (nodes) and (E) is the number of paths (edges). This is efficient because we are essentially visiting each node and its neighbors a limited number of times.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(V + E)) due to the storage required for the adjacency list.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively addresses the garden coloring problem by utilizing a greedy algorithm to ensure that no two adjacent gardens are assigned the same color.</p>
+<p>The implementation first constructs a graph using an adjacency list, allowing for efficient access to neighboring gardens during the coloring process. By iterating through each garden and checking the colors of adjacent gardens, the algorithm ensures that each garden receives a valid color assignment.</p>
+<p>This solution is not only optimal but also straightforward, making it easy to understand and adapt for similar problems involving graph coloring. The approach illustrates the utility of greedy algorithms in solving real-world problems efficiently, providing a clear path from problem statement to solution.</p>
+<p>In summary, the <code>gardenNoAdj</code> function demonstrates a robust method for assigning colors to gardens, ensuring proper differentiation between adjacent gardens while adhering to the constraints of the problem. This efficient algorithm can be applied to various scenarios within graph theory, highlighting its versatility and effectiveness.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode61s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

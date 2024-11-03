@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1366">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1366: Rank Teams by Votes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1366: Rank Teams by Votes">
-  <meta name="twitter:description" content="Solution to Leetcode 1366">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1366: Rank Teams by Votes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1366/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1366: Rank Teams by Votes">
-  <meta property="og:description" content="Solution to Leetcode 1366">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1366: Rank Teams by Votes in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,149 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode416s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves ranking teams based on votes received from a group of voters. Each voter casts a ranked vote for a set of teams (represented by uppercase letters). The goal is to determine the final ranking of teams based on these votes, with ties broken by lexicographical order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired ranking, we can follow these steps:</p>
+<ol>
+<li><strong>Count Votes</strong>: For each team (denoted by letters), maintain a count of their rankings based on the votes. The ranking is such that the higher the rank (lower index), the more negative the score.</li>
+<li><strong>Store Team Information</strong>: Use a 2D array to store the score and character for each team, enabling easy sorting.</li>
+<li><strong>Sort Teams</strong>: Sort the teams based on the negative ranking scores and lexicographically to break ties.</li>
+<li><strong>Construct Result</strong>: Extract the sorted team characters to form the final ranking string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">rankTeams</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">votes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Initialize a count array to store rankings for each team
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">count</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">27</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Store the team character for each index in the last position of the subarray
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="o">&amp;</span><span class="nl">c</span><span class="p">:</span> <span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">count</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">][</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Iterate through each vote and adjust the ranking scores
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;</span> <span class="nl">vote</span><span class="p">:</span> <span class="n">votes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">vote</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="o">--</span><span class="n">count</span><span class="p">[</span><span class="n">vote</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Sort the count array to determine final rankings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">sort</span><span class="p">(</span><span class="n">count</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">count</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Construct the resulting ranking string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">string</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">26</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<ul>
+<li>The <code>Solution</code> class contains a single public method named <code>rankTeams</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization of the Count Array</strong>:</p>
+<ul>
+<li>A 2D vector <code>count</code> is created to hold the rankings of the 26 teams (A-Z). Each sub-array holds 27 integers where the first 26 indices represent the negative rankings and the last index (26) stores the team character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storing Team Characters</strong>:</p>
+<ul>
+<li>The first loop iterates over the first vote string to initialize the last element of each sub-array with the corresponding team character. For example, for team &lsquo;A&rsquo;, it sets <code>count[0][26] = 'A'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjusting Rankings</strong>:</p>
+<ul>
+<li>The second nested loop processes each vote, decrementing the count for the corresponding team&rsquo;s rank position. This means that higher-ranked teams will accumulate more negative scores.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Teams</strong>:</p>
+<ul>
+<li>The <code>sort</code> function sorts the <code>count</code> array based on the first 26 elements (the scores). Since the sort is based on the vector&rsquo;s natural ordering, teams with higher negative scores (i.e., better rankings) will come first. In case of a tie in scores, the lexicographical order of team characters (stored in the last position) will be used to break ties.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result</strong>:</p>
+<ul>
+<li>The final loop constructs the result string <code>res</code> by appending the team characters in the order determined by the sorted <code>count</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<ul>
+<li>Finally, the method returns the constructed ranking string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is (O(V + T \log T)), where (V) is the total number of votes and (T) is the number of teams (which is fixed at 26). Sorting the teams dominates the complexity due to the sorting operation, but since (T) is a constant, this can be simplified to (O(V)) for practical input sizes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) in terms of extra space, as the size of the <code>count</code> array is constant (26 for teams). However, the space used to store the input (votes) can be considered (O(V)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>rankTeams</code> function efficiently calculates the final rankings of teams based on voters&rsquo; preferences using a systematic counting and sorting approach. By representing the rankings as negative scores and leveraging lexicographical ordering to resolve ties, the algorithm ensures accurate and fair rankings. This solution is particularly well-suited for scenarios involving ranked voting systems, providing a clear demonstration of using data structures like arrays and sorting algorithms in competitive programming.</p>
+<p>This comprehensive breakdown elucidates the code&rsquo;s logic and performance, making it accessible for readers interested in understanding how to solve ranking problems in programming contests.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode416s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

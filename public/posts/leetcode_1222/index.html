@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1222">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1222: Queens That Can Attack the King in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1222: Queens That Can Attack the King">
-  <meta name="twitter:description" content="Solution to Leetcode 1222">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1222: Queens That Can Attack the King in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1222/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1222: Queens That Can Attack the King">
-  <meta property="og:description" content="Solution to Leetcode 1222">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1222: Queens That Can Attack the King in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,128 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode263s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a chessboard where a king is positioned at a specific location, and there are several queens placed on the board. The goal is to determine which queens can attack the king based on their current positions on the board. The chessboard is represented as an 8x8 grid, where rows and columns are indexed from 0 to 7. A queen can attack any piece located in the same row, column, or diagonal. Given the positions of the queens and the position of the king, the task is to return the coordinates of the queens that can attack the king.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we follow these steps:</p>
+<ol>
+<li><strong>Initialize a Board</strong>: Create an 8x8 boolean grid to represent the positions of the queens.</li>
+<li><strong>Mark Queen Positions</strong>: Loop through the list of queens and mark their positions on the board.</li>
+<li><strong>Check Attack Paths</strong>: For each of the eight possible directions a queen can attack (up, down, left, right, and the four diagonals), traverse the board in that direction starting from the king&rsquo;s position.</li>
+<li><strong>Record Attacking Queens</strong>: If a queen is found in the path, record its position and stop checking further in that direction.</li>
+<li><strong>Return Results</strong>: Return the list of positions of queens that can attack the king.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">queensAttacktheKing</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">queens</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: Define the <code>Solution</code> class and the function <code>queensAttacktheKing</code> which takes two parameters: a vector of vectors representing the positions of the queens and a vector representing the position of the king.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">q</span><span class="p">:</span> <span class="n">queens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-5</strong>: Create a boolean 2D vector <code>b</code> of size 8x8 initialized to <code>false</code>. Loop through each queen&rsquo;s position in the input vector <code>queens</code>, and set the corresponding position in the boolean vector <code>b</code> to <code>true</code>, indicating that a queen is present at that location.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 6</strong>: Declare a vector <code>res</code> to store the positions of the queens that can attack the king.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 7-11</strong>: Use nested loops to iterate through the eight possible directions a queen can attack. The variables <code>i</code> and <code>j</code> represent the row and column offsets from the king&rsquo;s position. If both <code>i</code> and <code>j</code> are zero, skip this iteration since it represents the king&rsquo;s position itself.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 12</strong>: Initialize <code>x</code> and <code>y</code> as the starting coordinates for checking in the current direction. This is done by adding the offsets <code>i</code> and <code>j</code> to the king&rsquo;s position, <code>k[0]</code> and <code>k[1]</code>, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 13</strong>: Begin a while loop that continues as long as the current position <code>(x, y)</code> is within the bounds of the chessboard (0 to 7).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 14-17</strong>: Inside the loop, check if there is a queen at position <code>(x, y)</code> by looking it up in the boolean vector <code>b</code>. If a queen is found, add its position to the <code>res</code> vector and break out of the loop to stop checking in this direction.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">x</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">y</span> <span class="o">+=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 18-20</strong>: If no queen is found, move to the next position in the current direction by adding the offsets <code>i</code> and <code>j</code> to <code>x</code> and <code>y</code>, respectively. This continues until a queen is found or the bounds are exceeded.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 21-22</strong>: After all directions have been checked, return the list of positions of queens that can attack the king.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is (O(1)) in terms of the chessboard size since the maximum number of queens can only be 8. The loops that check each direction are limited by the fixed board size, making this approach very efficient.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also (O(1)) since the auxiliary space used for the boolean grid and the result vector does not depend on the input size in a dynamic way. The boolean grid is always fixed at 8x8.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>queensAttacktheKing</code> function efficiently determines which queens can attack the king by leveraging the fixed size of the chessboard and the properties of queen movements in chess. By marking queen positions in a boolean array and checking attack paths in eight possible directions, the function quickly identifies the attacking queens. This solution demonstrates a clear and effective use of algorithms and data structures to solve a combinatorial problem within the constraints of chess. The time and space complexity analysis further confirms the efficiency of the approach, making it suitable for real-time applications in chess engines and similar scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode263s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

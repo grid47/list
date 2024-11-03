@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1048">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1048: Longest String Chain in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1048: Longest String Chain">
-  <meta name="twitter:description" content="Solution to Leetcode 1048">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1048: Longest String Chain in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1048/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1048: Longest String Chain">
-  <meta property="og:description" content="Solution to Leetcode 1048">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1048: Longest String Chain in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -219,7 +219,124 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode67s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the longest possible string chain that can be formed from a list of words. A string chain is defined such that each word in the chain can be formed by removing exactly one letter from the previous word. For example, if &ldquo;a&rdquo; can be extended to &ldquo;ab&rdquo;, and &ldquo;ab&rdquo; can be extended to &ldquo;abc&rdquo;, then the chain &ldquo;a&rdquo; -&gt; &ldquo;ab&rdquo; -&gt; &ldquo;abc&rdquo; is valid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves:</p>
+<ol>
+<li><strong>Sorting the Words</strong>: First, we sort the words by their lengths. This ensures that when we process each word, we have already considered all shorter words that can form a chain with it.</li>
+<li><strong>Dynamic Programming</strong>: We use a dynamic programming (DP) strategy to keep track of the longest chain that ends with each word.</li>
+<li><strong>Building Chains</strong>: For each word, we generate all possible predecessor words by removing one letter at a time. If a predecessor exists in our DP map, we update the current word&rsquo;s chain length accordingly.</li>
+<li><strong>Tracking the Maximum Chain Length</strong>: Throughout this process, we keep track of the maximum chain length encountered.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The code begins with the definition of a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Custom Comparator</strong>: A static method <code>cmp</code> is defined to sort the words based on their lengths.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">bool</span> <span class="nf">cmp</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function</strong>: The function <code>longestStrChain</code> takes a vector of strings, <code>words</code>, as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">longestStrChain</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting the Words</strong>: The words are sorted using the previously defined comparator. This allows us to ensure that we only look at shorter words when processing a longer word.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">words</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">cmp</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Dynamic Programming Map</strong>: A map <code>dp</code> is initialized to store the longest chain length for each word, with <code>mx</code> initialized to track the maximum chain length found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Processing Each Word</strong>: A loop iterates through each word in the sorted list.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">w</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Generating Predecessor Words</strong>: For each character in the word, we create a predecessor by removing that character. The new string <code>w1</code> is formed using the <code>substr</code> method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">w1</span> <span class="o">=</span> <span class="n">w</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">w</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating DP Values</strong>: If the predecessor <code>w1</code> exists in the <code>dp</code> map, we update the current word&rsquo;s chain length by comparing it with the existing value and the predecessor&rsquo;s value incremented by one. If <code>w1</code> does not exist, we initialize the chain length for <code>w</code> to 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">dp</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">dp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span> <span class="o">?</span> <span class="n">dp</span><span class="p">[</span><span class="n">w1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating Maximum Length</strong>: After processing each word, we check if the current word&rsquo;s chain length exceeds the maximum found so far and update <code>mx</code> accordingly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: Finally, the function returns the maximum length of the chain found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of the algorithm is (O(n \cdot m^2)), where (n) is the number of words and (m) is the average length of the words. This complexity arises from the fact that for each word, we potentially generate (m) predecessors, and each predecessor generation involves string operations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage of the longest chain lengths for each word in the map <code>dp</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>longestStrChain</code> function effectively finds the longest string chain by utilizing sorting and dynamic programming. By processing the words in order of length, the algorithm ensures that all possible predecessor relationships are considered, enabling accurate computation of chain lengths.</p>
+<p>This solution is an excellent example of applying dynamic programming principles to string manipulation problems. It highlights the importance of efficiently checking for possible predecessors and updating results in a systematic manner.</p>
+<p>The clarity and efficiency of this implementation make it a strong candidate for interviews and competitive programming contexts, demonstrating a solid understanding of both algorithm design and data structure utilization.</p>
+<p>This code is a practical demonstration of how to solve complex problems with a structured approach, making it an essential study point for anyone looking to deepen their knowledge in algorithms and problem-solving techniques.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode67s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

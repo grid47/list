@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1195">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1195: Fizz Buzz Multithreaded in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1195: Fizz Buzz Multithreaded">
-  <meta name="twitter:description" content="Solution to Leetcode 1195">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1195: Fizz Buzz Multithreaded in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1195/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1195: Fizz Buzz Multithreaded">
-  <meta property="og:description" content="Solution to Leetcode 1195">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1195: Fizz Buzz Multithreaded in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
           
@@ -303,7 +303,167 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode231s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The FizzBuzz problem is a classic programming challenge often used in technical interviews. The task is to print the numbers from <code>1</code> to <code>n</code>, but for multiples of <code>3</code>, print <code>&quot;fizz&quot;</code> instead of the number, for multiples of <code>5</code>, print <code>&quot;buzz&quot;</code>, and for numbers that are multiples of both <code>3</code> and <code>5</code>, print <code>&quot;fizzbuzz&quot;</code>. The challenge is to implement this in a concurrent manner, allowing multiple threads to print their respective outputs correctly.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem in a concurrent environment, the <code>FizzBuzz</code> class utilizes synchronization mechanisms to ensure that the correct outputs are printed in the right order. The main components of the approach are:</p>
+<ol>
+<li><strong>Mutex Locks</strong>: Four mutexes are used to control access to printing based on the current number&rsquo;s divisibility by <code>3</code> and <code>5</code>.</li>
+<li><strong>Shared State</strong>: A shared variable <code>i</code> tracks the current number being processed, ensuring that threads do not interfere with one another.</li>
+<li><strong>Thread Coordination</strong>: Each function (<code>fizz</code>, <code>buzz</code>, <code>fizzbuzz</code>, and <code>number</code>) checks conditions and releases locks appropriately to allow other threads to proceed when it&rsquo;s their turn.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FizzBuzz</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mutex</span> <span class="n">f</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">fz</span><span class="p">,</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FizzBuzz</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fz</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-8</strong>: The <code>FizzBuzz</code> class is defined with private member variables <code>n</code> (the upper limit), <code>i</code> (the current number), and four mutexes (<code>f</code>, <code>b</code>, <code>fz</code>, and <code>num</code>). The constructor initializes the mutexes and sets <code>i</code> to <code>1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">fizz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFizz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>            
+</span></span><span class="line"><span class="cl">                <span class="n">printFizz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Unlock logic follows...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 10-22</strong>: The <code>fizz</code> method is defined. It loops while <code>i</code> is less than or equal to <code>n</code>. It locks the <code>f</code> mutex to ensure that only one thread can execute this section at a time. If the current number <code>i</code> is a valid output (not exceeding <code>n</code>), it calls <code>printFizz()</code> to print <code>&quot;fizz&quot;</code>, then increments <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 23-35</strong>: The method then checks the divisibility of <code>i</code>. Depending on the result:
+<ul>
+<li>If <code>i</code> is divisible by both <code>3</code> and <code>5</code>, it unlocks <code>fz</code>.</li>
+<li>If <code>i</code> is divisible by <code>3</code>, it unlocks <code>f</code>.</li>
+<li>If <code>i</code> is divisible by <code>5</code>, it unlocks <code>b</code>.</li>
+<li>If <code>i</code> does not match any of these conditions and is still valid, it unlocks <code>num</code>.</li>
+<li>The last case ensures that if the current number exceeds <code>n</code>, it unlocks all mutexes.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buzz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printBuzz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">b</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>            
+</span></span><span class="line"><span class="cl">                <span class="n">printBuzz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Unlock logic follows...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 37-49</strong>: The <code>buzz</code> method works similarly to <code>fizz</code>. It locks the <code>b</code> mutex to print <code>&quot;buzz&quot;</code> for numbers divisible by <code>5</code>, then checks the conditions to unlock the appropriate mutexes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFizzBuzz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fz</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">printFizzBuzz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Unlock logic follows...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 51-63</strong>: The <code>fizzbuzz</code> method locks the <code>fz</code> mutex and prints <code>&quot;fizzbuzz&quot;</code> for numbers divisible by both <code>3</code> and <code>5</code>, similarly unlocking the necessary mutexes afterward.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">number</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">printNumber</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">num</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">printNumber</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Unlock logic follows...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 65-77</strong>: The <code>number</code> method locks the <code>num</code> mutex and prints the current number <code>i</code>, following the same unlocking logic.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n)), as the algorithm needs to process each number from <code>1</code> to <code>n</code>. Each thread will execute in a loop, performing a constant amount of work for each number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)), not accounting for the input size since only a fixed number of variables are used (i.e., mutexes and counters).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>FizzBuzz</code> class implementation demonstrates a robust approach to solving the FizzBuzz problem in a multithreaded context. By utilizing mutexes for synchronization, it ensures that the output remains correct even when multiple threads are attempting to print at the same time. This design highlights the importance of thread safety in concurrent programming, making it an excellent example for understanding synchronization mechanisms and their practical applications in real-world scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode231s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

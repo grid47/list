@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1300">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1300: Sum of Mutated Array Closest to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1300: Sum of Mutated Array Closest to Target">
-  <meta name="twitter:description" content="Solution to Leetcode 1300">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1300: Sum of Mutated Array Closest to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1300/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1300: Sum of Mutated Array Closest to Target">
-  <meta property="og:description" content="Solution to Leetcode 1300">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1300: Sum of Mutated Array Closest to Target in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,135 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode367s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the best value that can replace all elements in an array such that the sum of the modified array is as close to a given target as possible. Specifically, if you replace all elements in the array with a value <code>x</code>, the resulting array&rsquo;s sum should ideally equal <code>target</code>. However, you want to minimize the absolute difference between the actual sum and the target.</p>
+<p>The goal is to determine the optimal integer <code>x</code> such that replacing all elements of the array <code>A</code> with <code>x</code> yields the sum closest to the <code>target</code>. If there are two values that yield the same difference, return the smaller one.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>: Begin by sorting the array <code>A</code> to facilitate the determination of how many elements can be replaced without exceeding the target.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Sorted Array</strong>: We will maintain a cumulative sum of the elements processed so far and check if replacing the remaining elements with the current element value exceeds the target.</p>
+</li>
+<li>
+<p><strong>Determine the Best Value</strong>:</p>
+<ul>
+<li>If we reach the end of the array and the sum is less than the target, the best value would be the maximum value in the array.</li>
+<li>If not, calculate the average of the remaining elements that can be replaced. Depending on how the remaining target compares to this average, we can determine whether to round down or up to find the best value.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">findBestValue</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: The <code>Solution</code> class is defined, and the <code>findBestValue</code> method begins. It takes a vector <code>A</code> and an integer <code>target</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 3</strong>: Sort the array <code>A</code> in non-decreasing order. This will help in determining how many elements can be replaced while keeping the sum under the target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 4</strong>: Initialize <code>n</code> as the size of the array <code>A</code> and <code>i</code> as an index to iterate through the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">target</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">target</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Lines 5-7</strong>: This while loop checks two conditions:</p>
+<ul>
+<li><code>i &lt; n</code>: Ensure we don&rsquo;t exceed the bounds of the array.</li>
+<li><code>target &gt; A[i] * (n - i)</code>: Check if the remaining target is greater than the maximum possible sum if the current element and all subsequent elements were set to <code>A[i]</code>.</li>
+</ul>
+<p>If both conditions are satisfied, subtract the current element <code>A[i]</code> from <code>target</code> and increment the index <code>i</code>.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 8</strong>: If <code>i</code> reaches <code>n</code>, it means we have considered all elements in <code>A</code>. In this case, the best value is simply the maximum value of the array, <code>A[n - 1]</code>, as replacing all values with the maximum will not exceed the target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">target</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 9</strong>: Calculate the base result <code>res</code>, which is the integer division of the remaining target by the number of elements left to consider, <code>n - i</code>. This gives us an average value for the remaining elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">res</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">target</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 10-12</strong>: Here we check whether increasing <code>res</code> by one will yield a closer sum to the target. The condition checks if the difference between the remaining target and the product of <code>res</code> with the number of remaining elements is greater than the difference produced by using <code>res + 1</code>. If true, we increment <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 13-14</strong>: Finally, return <code>res</code>, which represents the best value that can be used to replace elements in the array <code>A</code> to achieve the target sum as closely as possible.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The sorting operation takes (O(n \log n)), where (n) is the number of elements in the array. The subsequent loop for processing the elements is (O(n)). Thus, the overall time complexity is dominated by the sorting step, leading to a total time complexity of (O(n \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since we are using only a few extra variables and no significant additional data structures that scale with input size.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>findBestValue</code> function provides an efficient solution to determine the optimal value to replace all elements in an array while ensuring the total sum is as close to a specified target as possible. By leveraging sorting and a greedy approach to iterate through the sorted values, the function efficiently calculates the best possible replacement value.</p>
+<p>This implementation exemplifies the use of sorting and cumulative analysis in solving numerical optimization problems, showcasing the importance of algorithmic thinking in competitive programming and real-world applications. With a robust time complexity, the solution is both efficient and effective, making it suitable for larger datasets typically encountered in practical scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode367s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1051">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1051: Height Checker in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1051: Height Checker">
-  <meta name="twitter:description" content="Solution to Leetcode 1051">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1051: Height Checker in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1051/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1051: Height Checker">
-  <meta property="og:description" content="Solution to Leetcode 1051">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1051: Height Checker in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,113 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode71s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task at hand is to determine how many students are standing in the wrong heights in a class when compared to their expected heights in a non-decreasing order. Given an array of integers representing the heights of students, the goal is to count the number of positions where the actual height differs from the expected height if the heights were sorted in ascending order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can employ the following steps:</p>
+<ol>
+<li>Identify the maximum height in the array to determine the range of possible heights.</li>
+<li>Create an array to count the frequency of each height.</li>
+<li>Compare the original array with the expected sorted order by iterating through the counted frequencies, incrementing a mismatch counter when heights differ.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:
+The function <code>heightChecker</code> takes a vector of integers <code>h</code>, which represents the heights of the students.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">heightChecker</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">h</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding Maximum Height</strong>:
+We first find the maximum height using <code>max_element</code> from the standard library. This gives us the highest value present in the heights array, which helps us define the size of our frequency array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">max_element</span><span class="p">(</span><span class="n">h</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">h</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initializing Frequency Array</strong>:
+Next, we initialize a frequency array <code>exp</code> with a size of <code>*m + 1</code> (to account for heights ranging from 0 to maximum height). This array will keep track of the counts of each height.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">exp</span><span class="p">(</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Heights</strong>:
+We then iterate through the original heights array <code>h</code>, populating the frequency array. For each height encountered, we increment the corresponding index in <code>exp</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">height</span> <span class="p">:</span> <span class="n">h</span><span class="p">)</span> <span class="n">exp</span><span class="p">[</span><span class="n">height</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Mismatch Counting</strong>:
+We initialize a result variable <code>res</code> to store the count of mismatches. Using a nested loop, we compare the expected heights (represented by the indices of <code>exp</code>) to the original heights in <code>h</code>. For each expected height, we check if the current height matches. If it does not match, we increment the mismatch counter.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">exp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">exp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">--</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">!=</span> <span class="n">j</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates over the possible heights (from 1 to the maximum height).</li>
+<li>The inner loop iterates as many times as the count of that height (from <code>exp</code>).</li>
+<li>The comparison <code>(h[i++] != j)</code> checks if the actual height differs from the expected height <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:
+Finally, we return the total number of mismatches counted.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(n)), where (n) is the number of students (or the length of the heights array). This is because we make a single pass to count the heights and another pass to count the mismatches.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(k)), where (k) is the range of heights, which is determined by the maximum height found in the input array. In the worst case, this space complexity is proportional to the maximum height value.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>heightChecker</code> function effectively counts the number of students standing in the wrong order according to their heights. By utilizing a frequency array to track height counts, the function avoids the need for explicitly sorting the heights, thereby optimizing both time and space efficiency.</p>
+<p>This approach can be particularly beneficial when working with a large dataset, as it provides a clear and direct method of identifying discrepancies in expected versus actual heights without incurring the overhead of sorting algorithms. As a result, this function serves as a robust solution to the problem of verifying students&rsquo; height alignment in an educational setting.</p>
+<p>Overall, this code snippet showcases the effectiveness of using counting techniques combined with basic array operations to solve problems related to sorting and order verification efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode71s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

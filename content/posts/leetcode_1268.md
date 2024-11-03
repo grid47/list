@@ -52,6 +52,8 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 ---
 {{< youtube PLNDfB0Vg9Y >}}
 
+"| 1269: Number of Ways to Stay in the Same Place After Some Steps |"
+
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

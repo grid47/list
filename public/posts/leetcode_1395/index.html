@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1395">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1395: Count Number of Teams in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1395: Count Number of Teams">
-  <meta name="twitter:description" content="Solution to Leetcode 1395">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1395: Count Number of Teams in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1395/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1395: Count Number of Teams">
-  <meta property="og:description" content="Solution to Leetcode 1395">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1395: Count Number of Teams in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,7 +225,212 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res1</span> <span class="o">+</span> <span class="n">res2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode467s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to count the number of teams that can be formed based on the ratings of players, given specific constraints on team composition. A team is defined as a trio of players ( (i, j, k) ) such that ( i &lt; j &lt; k ). The ratings of the players must satisfy one of two conditions:</p>
+<ol>
+<li>The ratings are in increasing order: ( \text{rate}[i] &lt; \text{rate}[j] &lt; \text{rate}[k] ).</li>
+<li>The ratings are in decreasing order: ( \text{rate}[i] &gt; \text{rate}[j] &gt; \text{rate}[k] ).</li>
+</ol>
+<p>The objective is to find the total number of valid teams that can be formed from the given list of player ratings.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we utilize a dynamic programming (DP) approach. The key idea is to recursively explore the possibilities of forming valid teams while using memoization to avoid redundant calculations. Here are the steps involved in our approach:</p>
+<ol>
+<li>
+<p><strong>Recursive Function</strong>: We define a recursive function that tries to build teams starting from a given player index. This function will keep track of the current player&rsquo;s index, the previous player&rsquo;s index, and the count of players chosen so far.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If three players have been selected (i.e., the count reaches three), we return 1 to signify that a valid team has been formed.</li>
+<li>If the index exceeds the size of the rating list, we return 0 since no more players are left to choose from.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: We maintain a memoization table to store previously computed results based on the current index, the previous index, and the count of selected players. This significantly speeds up the computation by avoiding recalculating results for the same state.</p>
+</li>
+<li>
+<p><strong>Choices</strong>:</p>
+<ul>
+<li>For each player at the current index, we can either include them in the team (if they can form a valid increasing or decreasing sequence with previously selected players) or skip them.</li>
+<li>We recursively call our function to explore both choices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Combining Results</strong>: Since we want to count both increasing and decreasing teams, we reverse the list of ratings and apply the same logic to count decreasing teams.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the provided C++ code:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined, encapsulating the solution method.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">1001</span><span class="p">][</span><span class="mi">1001</span><span class="p">][</span><span class="mi">4</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>A 3D array <code>memo</code> is initialized to store results of subproblems, where:
+<ul>
+<li>The first dimension represents the current index of the player being considered.</li>
+<li>The second dimension represents the index of the previously selected player.</li>
+<li>The third dimension indicates how many players have been selected so far (0 to 3).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Ratings Vector</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rate</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A vector to hold the ratings of the players is defined.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prv</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The recursive function <code>dp</code> takes the current index <code>idx</code>, the previous selected player index <code>prv</code>, and the count of selected players <code>cnt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">rate</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">prv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">cnt</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">prv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">cnt</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>If three players are selected, it returns 1.</li>
+<li>If the index exceeds the number of players, it returns 0.</li>
+<li>If the result for the current state is already computed, it is returned from the memoization table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Selecting Current Player</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">prv</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">rate</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rate</span><span class="p">[</span><span class="n">prv</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If no previous player has been selected or the current player can form an increasing sequence with the previous player, we recursively count the teams that can be formed by including the current player.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skipping Current Player</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">prv</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Regardless of the choice made, we also consider the scenario where we skip the current player.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">prv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The result is stored in the memoization table before returning.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Teams</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numTeams</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">rate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">rate</span> <span class="o">=</span> <span class="n">rate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res1</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The <code>numTeams</code> function initializes the ratings and the memoization table.</li>
+<li>It computes the count of increasing teams starting from the first player.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reversing Ratings for Decreasing Teams</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">       <span class="n">reverse</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">rate</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">rate</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">       <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>        
+</span></span><span class="line"><span class="cl">       <span class="kt">int</span> <span class="n">res2</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The ratings are reversed to count decreasing teams.</li>
+<li>The memoization table is reset, and the count of decreasing teams is computed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning Total Teams</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">       <span class="k">return</span> <span class="n">res1</span> <span class="o">+</span> <span class="n">res2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<p>};
+```
+- The total number of valid teams is returned by adding both counts.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is ( O(n^2) ), where ( n ) is the size of the ratings array. This is due to the double recursion where we explore choices based on player indices and previously selected players.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) due to the memoization table used for storing results of subproblems.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code effectively solves the problem of counting the number of valid teams that can be formed from player ratings using a dynamic programming approach combined with memoization.</p>
+<p>Key insights from the solution include:</p>
+<ul>
+<li>The importance of systematically exploring choices in a recursive manner while avoiding redundant computations through memoization.</li>
+<li>The ability to count distinct configurations (increasing and decreasing) by leveraging the same logic with slight modifications (reversing the input).</li>
+<li>Understanding how to structure the recursive function to handle base cases and choices intuitively.</li>
+</ul>
+<p>Such techniques are crucial for tackling combinatorial problems and can be extended to similar challenges in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode467s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

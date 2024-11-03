@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1382">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1382: Balance a Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1382: Balance a Binary Search Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1382">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1382: Balance a Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1382/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1382: Balance a Binary Search Tree">
-  <meta property="og:description" content="Solution to Leetcode 1382">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1382: Balance a Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -228,7 +228,143 @@
 </span></span><span class="line"><span class="cl">     <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode439s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves balancing a binary search tree (BST). A binary search tree is balanced if, for every node, the height of its left and right subtrees differs by at most one. If a given BST is unbalanced, we need to restructure it to create a new BST that maintains its properties while ensuring it is balanced. This solution focuses on converting an unbalanced BST into a balanced one by utilizing in-order traversal and reformation techniques.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To balance the BST, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>In-Order Traversal</strong>: First, we perform an in-order traversal of the given BST. This traversal collects the values of the nodes in a sorted order because, by definition, in-order traversal of a BST returns values in ascending order.</p>
+</li>
+<li>
+<p><strong>Reconstruction of the BST</strong>: After obtaining the sorted values, we reconstruct a new balanced BST. We do this by recursively selecting the middle element of the current range as the root of the subtree, ensuring that the left subtree consists of elements smaller than the root and the right subtree consists of elements larger than the root. This method guarantees that the newly formed tree is balanced.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code implements the above approach with the following components:</p>
+<ol>
+<li>
+<p><strong>TreeNode Structure</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>TreeNode</code> structure represents a node in the binary tree. Each node contains an integer value (<code>val</code>), a pointer to the left child (<code>left</code>), and a pointer to the right child (<code>right</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">balanceBST</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">reform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains a public method <code>balanceBST</code>, which takes the root of the unbalanced BST as an argument.</li>
+<li>A vector <code>arr</code> is declared to store the sorted values collected during the in-order traversal.</li>
+</ul>
+</li>
+<li>
+<p><strong>In-Order Traversal Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>inorder</code> method performs an in-order traversal of the BST.</li>
+<li>If the current node (<code>root</code>) is <code>NULL</code>, it returns without doing anything. Otherwise, it recursively traverses the left subtree, adds the current node&rsquo;s value to the <code>arr</code> vector, and then traverses the right subtree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reconstruction Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">reform</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">reform</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">reform</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>reform</code> method takes two indices, <code>l</code> and <code>r</code>, which represent the current range of the <code>arr</code> vector.</li>
+<li>If <code>l</code> is greater than <code>r</code>, it returns <code>NULL</code>, indicating there are no nodes to create.</li>
+<li>The middle index (<code>mid</code>) is calculated, and a new <code>TreeNode</code> is created using the value at this index. This node becomes the root of the current subtree.</li>
+<li>The left and right subtrees are constructed recursively by calling <code>reform</code> on the appropriate segments of the array.</li>
+<li>Finally, the newly constructed node is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for this solution is (O(N)), where (N) is the number of nodes in the binary search tree. This is due to the two main operations: in-order traversal (to collect the values) and reconstruction (to form the new balanced BST).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(N)) as well, primarily due to the storage of the sorted values in the <code>arr</code> vector. Additionally, the recursion stack could take up to (O(H)) space, where (H) is the height of the tree. In the worst case (for a skewed tree), this could also be (O(N)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively balances a binary search tree by utilizing in-order traversal to collect the node values in a sorted manner, followed by reconstructing the tree from these values. This approach ensures that the resulting tree maintains the properties of a BST while being balanced. The implementation is efficient and straightforward, making it an excellent reference for developers and students studying tree data structures and algorithms in computer science. Understanding this method not only aids in mastering tree manipulations but also lays the groundwork for tackling more complex problems involving tree balancing and restructuring in various applications. Overall, the code exemplifies best practices in algorithm design and offers insights into the intricacies of binary search trees.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode439s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

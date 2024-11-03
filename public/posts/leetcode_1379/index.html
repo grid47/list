@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1379">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1379">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1379/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree">
-  <meta property="og:description" content="Solution to Leetcode 1379">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -217,7 +217,130 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode435s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves two binary trees: an original tree and a cloned tree, both of which are structurally identical but may differ in node memory addresses. The goal is to find a reference to a specific target node in the cloned tree that corresponds to a given target node in the original tree. This is particularly useful in scenarios where we need to perform operations on a cloned version of a tree without modifying the original tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a depth-first search (DFS) strategy to traverse the cloned tree while simultaneously searching for the target node from the original tree. The process involves:</p>
+<ol>
+<li><strong>Recursive Traversal</strong>: We will traverse the cloned tree using a recursive approach, comparing each node&rsquo;s value with the target node&rsquo;s value.</li>
+<li><strong>Target Node Comparison</strong>: When we find a node in the cloned tree that matches the value of the target node in the original tree, we will store a reference to this node.</li>
+<li><strong>Return the Result</strong>: After traversing the tree, we will return the reference to the found node.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code implements the above approach. Here&rsquo;s a detailed breakdown of how it works:</p>
+<ol>
+<li>
+<p><strong>TreeNode Structure</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>TreeNode</code> structure defines a node in the binary tree, containing an integer value and pointers to its left and right children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains a public member <code>ans</code>, which will store the reference to the found target node in the cloned tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>getTargetCopy Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">getTargetCopy</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">original</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">cloned</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">target</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cloned</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cloned</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This method takes three parameters: pointers to the original tree, the cloned tree, and the target node to find.</li>
+<li>The first check ensures that if the current node in the cloned tree is <code>NULL</code>, we return <code>NULL</code>, indicating the end of that path in the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Target Node Comparison</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cloned</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="c1">// If target node found in cloned tree save it into a variable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="n">cloned</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the value of the current node in the cloned tree matches the value of the target node, we store the reference to the cloned node in <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Calls</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">getTargetCopy</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">cloned</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">getTargetCopy</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">cloned</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The method recursively calls itself to traverse the left and right children of the current node in the cloned tree, effectively performing a DFS traversal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, after the recursive traversal, the method returns the <code>ans</code> variable, which will contain the reference to the target node in the cloned tree if found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(N)), where (N) is the number of nodes in the cloned tree. In the worst case, we may have to visit all nodes to find the target node.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(H)), where (H) is the height of the tree. This accounts for the space used by the recursion stack during the DFS traversal. In a balanced binary tree, this would be (O(\log N)), and in the worst-case scenario (skewed tree), it could be (O(N)).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively finds the corresponding node in the cloned binary tree that matches the target node from the original tree by utilizing a depth-first search approach. By traversing the cloned tree and comparing node values, the algorithm efficiently identifies the desired node. This method is particularly useful in applications where maintaining the integrity of the original tree is crucial while performing operations on a cloned version. The clear structure and systematic approach of the code make it a valuable reference for developers and students working with binary trees and tree traversal algorithms. Overall, this problem highlights key concepts in tree data structures, recursion, and memory management, contributing to a deeper understanding of algorithmic problem-solving in computer science.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode435s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

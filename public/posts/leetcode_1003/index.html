@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1003">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1003: Check If Word Is Valid After Substitutions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1003: Check If Word Is Valid After Substitutions">
-  <meta name="twitter:description" content="Solution to Leetcode 1003">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1003: Check If Word Is Valid After Substitutions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1003/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1003: Check If Word Is Valid After Substitutions">
-  <meta property="og:description" content="Solution to Leetcode 1003">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1003: Check If Word Is Valid After Substitutions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,114 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode19s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine whether a given string <code>s</code> consisting of the characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo; is valid based on specific rules. The string is valid if every substring &ldquo;abc&rdquo; can be removed. That means for every occurrence of &lsquo;c&rsquo; in the string, it should have a preceding &lsquo;b&rsquo; and an &lsquo;a&rsquo; in that order. If the string can be entirely reduced by removing all such &ldquo;abc&rdquo; patterns, it is considered valid; otherwise, it is not.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a stack-based approach. The idea is to iterate through each character of the string and maintain a stack to track the characters. When we encounter a &lsquo;c&rsquo;, we check if the last two characters in the stack are &lsquo;b&rsquo; and &lsquo;a&rsquo;, respectively. If they are, we pop them from the stack; otherwise, we return false. After processing all characters, if the stack is empty, the string is valid.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isValid</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span> <span class="c1">// Create a vector to act as a stack to hold characters.
+</span></span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and within it, a public member function <code>isValid</code> that takes a string <code>s</code>.</li>
+<li>A vector <code>stk</code> is initialized to store characters as we process the string. This acts as our stack.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A for-each loop iterates through each character <code>c</code> in the input string <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;c&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We check if the current character is &lsquo;c&rsquo;. This is the key character for our validation logic.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">stk</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;b&#39;</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">stk</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;a&#39;</span> <span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the character is &lsquo;c&rsquo;, we first get the current size of the stack <code>n</code>.</li>
+<li>We then check three conditions:
+<ul>
+<li>If the stack has less than 2 characters (<code>n &lt; 2</code>), it is impossible to have the required &lsquo;a&rsquo; and &lsquo;b&rsquo; before &lsquo;c&rsquo;, so we return false.</li>
+<li>If the last character in the stack is not &lsquo;b&rsquo; (<code>stk[n - 1] != 'b'</code>), we cannot form &ldquo;abc&rdquo;, hence return false.</li>
+<li>If the second last character is not &lsquo;a&rsquo; (<code>stk[n - 2] != 'a'</code>), again return false.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">// Pop &#39;b&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">stk</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">// Pop &#39;a&#39;
+</span></span></span></code></pre></div><ul>
+<li>If all conditions are satisfied, we pop the last two characters from the stack, which are &lsquo;b&rsquo; and &lsquo;a&rsquo;, effectively removing the &ldquo;abc&rdquo; pattern.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="n">stk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="c1">// If not &#39;c&#39;, push current character to the stack.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the character is not &lsquo;c&rsquo;, it is pushed onto the stack for further evaluation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Check if the stack is empty.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After the loop completes, we return true if the stack is empty (indicating all characters formed valid &ldquo;abc&rdquo; patterns) or false otherwise.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The function runs in O(n) time, where n is the length of the input string <code>s</code>. This is because we make a single pass through the string and perform constant-time operations (push/pop) on the stack.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(n) in the worst case when all characters are pushed onto the stack without forming any &ldquo;abc&rdquo; sequences.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>isValid</code> function efficiently checks the validity of a string composed of the characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;. By leveraging a stack to track the necessary characters, it ensures that all &ldquo;abc&rdquo; sequences are effectively removed, validating the string in a linear time complexity. This approach is not only intuitive but also elegant, allowing for easy maintenance and readability in code. The algorithm can be particularly useful in scenarios such as parsing nested structures or validating sequences in various programming challenges.</p>
+<p>By understanding this method, programmers can enhance their problem-solving skills related to string manipulation and stack usage, making it a valuable addition to their coding toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode19s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

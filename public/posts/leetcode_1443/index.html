@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1443">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1443: Minimum Time to Collect All Apples in a Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1443: Minimum Time to Collect All Apples in a Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1443">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1443: Minimum Time to Collect All Apples in a Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1443/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1443: Minimum Time to Collect All Apples in a Tree">
-  <meta property="og:description" content="Solution to Leetcode 1443">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1443: Minimum Time to Collect All Apples in a Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,7 +221,191 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">childcost</span> <span class="o">+</span> <span class="n">mycost</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode507s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the minimum time required to collect all the apples from a tree-like structure represented by a graph. Each node in the graph represents a location (like a branch of a tree), and the edges represent paths between these locations. Some of these locations contain apples, and we want to find out how much time it would take to collect all apples by starting from the root node (node 0). The cost to traverse from one node to another is given as 2 units of time for each edge traversed.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use Depth First Search (DFS) to traverse the graph. The steps involved in the solution are:</p>
+<ol>
+<li>
+<p><strong>Graph Construction</strong>: Build an undirected graph using an adjacency list representation from the provided edges.</p>
+</li>
+<li>
+<p><strong>DFS Traversal</strong>: Use DFS to traverse the graph starting from the root node (node 0). During traversal, accumulate the cost of moving through nodes.</p>
+</li>
+<li>
+<p><strong>Apple Collection Logic</strong>: For each node, check if:</p>
+<ul>
+<li>It has an apple.</li>
+<li>It has children nodes from which apples can be collected. If a node has no children and does not have an apple, then it does not contribute to the total cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cost Calculation</strong>: Keep track of the total cost incurred to collect all apples while ensuring we only count the cost of edges that lead to nodes with apples.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code provided step by step:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> which contains the method to calculate the minimum time to collect apples.</li>
+</ul>
+</li>
+<li>
+<p><strong>Member Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">visited</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">hasApple</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a map <code>gph</code> to represent the graph as an adjacency list.</li>
+<li>The <code>visited</code> map keeps track of whether a node has been visited during the DFS traversal.</li>
+<li>The vector <code>hasApple</code> stores information about which nodes have apples.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minTime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&amp;</span> <span class="n">hasApple</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>minTime</code> takes three parameters: the number of nodes (n), the edges of the graph, and a boolean vector indicating the presence of apples at each node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Graph Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">this</span><span class="o">-&gt;</span><span class="n">hasApple</span> <span class="o">=</span> <span class="n">hasApple</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gph</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gph</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>hasApple</code> member variable.</li>
+<li>We construct the graph from the <code>edges</code> list, where each edge connects two nodes bidirectionally.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calling DFS</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We initiate the DFS traversal from the root node (node 0) with an initial cost of 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">mycost</span><span class="p">,</span> <span class="kt">int</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function is responsible for traversing the graph. It takes two parameters: the current cost to reach a node and the current node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the current node has already been visited, we return 0 to prevent counting the same node multiple times. Otherwise, we mark it as visited.</li>
+</ul>
+</li>
+<li>
+<p><strong>Child Cost Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">childcost</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">childcost</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>childcost</code> to track the total cost incurred to collect apples from child nodes.</li>
+<li>We iterate through all adjacent nodes of the current node and call <code>dfs</code> recursively, adding the result to <code>childcost</code>. Each traversal to a child node incurs a cost of 2.</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition for No Apples</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">childcost</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">hasApple</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the cumulative cost from the child nodes is zero and the current node does not have an apple, we return 0, indicating that this node does not contribute to the total time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Total Cost</strong>:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">childcost</span> <span class="o">+</span> <span class="n">mycost</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total cost, which is the sum of the child costs and the cost to reach the current node.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the number of nodes. Each node is visited once during the DFS traversal.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(n)) due to the space used by the adjacency list for the graph representation and the <code>visited</code> map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively calculates the minimum time required to collect all apples from a tree represented as a graph using DFS. By constructing an adjacency list and traversing the graph while checking for apples, we can efficiently accumulate the total cost of traversal.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: Using an adjacency list is a standard way to represent a graph, allowing efficient traversal of nodes.</p>
+</li>
+<li>
+<p><strong>Depth First Search</strong>: DFS is a powerful algorithm for exploring graphs and can be adapted for various problems, including those involving costs and constraints.</p>
+</li>
+<li>
+<p><strong>Condition Checking</strong>: Ensuring that we only count the cost of traversing to nodes with apples is crucial to solving the problem optimally.</p>
+</li>
+</ol>
+<p>In summary, the code presented provides a clear and efficient solution to the problem of collecting apples from a graph, making use of fundamental graph traversal techniques and properties of DFS.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode507s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

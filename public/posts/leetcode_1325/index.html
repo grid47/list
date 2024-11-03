@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1325">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1325: Delete Leaves With a Given Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1325: Delete Leaves With a Given Value">
-  <meta name="twitter:description" content="Solution to Leetcode 1325">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1325: Delete Leaves With a Given Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1325/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1325: Delete Leaves With a Given Value">
-  <meta property="og:description" content="Solution to Leetcode 1325">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1325: Delete Leaves With a Given Value in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,141 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">target</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span> <span class="n">root</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode386s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to remove all leaf nodes from a binary tree whose values equal a given target value. A leaf node is defined as a node that has no left or right children. If a parent node becomes a leaf (meaning both its children were removed), we need to propagate this up the tree and potentially remove the parent as well.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach taken in this solution is a recursive depth-first traversal of the binary tree. During the traversal, the algorithm performs the following tasks:</p>
+<ol>
+<li>
+<p><strong>Recursively Traverse</strong>:</p>
+<ul>
+<li>First, the function checks the left child of the current node and recursively calls itself to process the left subtree.</li>
+<li>Then, it checks the right child and processes the right subtree similarly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition for Removal</strong>:</p>
+<ul>
+<li>After processing both children, the function checks if the current node has become a leaf node (both left and right children are null) and if its value matches the target.</li>
+<li>If both conditions are satisfied, the function returns <code>nullptr</code>, effectively removing the node.</li>
+<li>If the node should not be removed, it returns the current node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>The base case for the recursion is when the node is null. The function should handle this case to avoid dereferencing a null pointer.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:</p>
+<ul>
+<li>This structure defines a binary tree node with integer values, along with pointers to left and right children.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TreeNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Remove Leaf Nodes Function</strong>:</p>
+<ul>
+<li>This is the main function that initiates the removal process for leaf nodes with the target value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">removeLeafNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Calls</strong>:</p>
+<ul>
+<li>The function makes recursive calls for both the left and right children of the current node.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">removeLeafNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">removeLeafNodes</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Leaf Node</strong>:</p>
+<ul>
+<li>After the recursive calls, the function checks if both left and right pointers are <code>nullptr</code> and if the current node&rsquo;s value equals the target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">target</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span> <span class="n">root</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Return</strong>:</p>
+<ul>
+<li>The function returns either <code>nullptr</code> (if the current node needs to be removed) or the current node itself (if it should be retained in the tree).</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is (O(N)), where (N) is the number of nodes in the binary tree. In the worst case, the function visits every node once to determine whether it should be removed or retained.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(H)), where (H) is the height of the binary tree. This accounts for the recursion stack. In the case of a balanced tree, the height would be (O(\log N)), and in the worst case of a skewed tree, it could be (O(N)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently removes leaf nodes from a binary tree that match a specified target value using a straightforward recursive approach. The depth-first traversal ensures that each node is checked and potentially modified based on its children. This implementation demonstrates the power of recursion in tree structures, allowing for elegant solutions to problems involving tree manipulation. By maintaining clear conditions for removal, the code effectively cleans up the tree while preserving the overall structure where necessary. This problem showcases important concepts in tree traversal and dynamic modification of tree structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode386s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1337">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1337: The K Weakest Rows in a Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1337: The K Weakest Rows in a Matrix">
-  <meta name="twitter:description" content="Solution to Leetcode 1337">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1337: The K Weakest Rows in a Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1337/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1337: The K Weakest Rows in a Matrix">
-  <meta property="og:description" content="Solution to Leetcode 1337">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1337: The K Weakest Rows in a Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,7 +208,114 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode389s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective is to find the k weakest rows in a binary matrix (or 2D array), where each row represents soldiers in a military unit. In the matrix, <code>1</code>s represent soldiers and <code>0</code>s represent civilians. The strength of a row is determined by the number of soldiers present (the count of <code>1</code>s). If two rows have the same number of soldiers, the row that appears first in the matrix is considered weaker. The task is to return the indices of the k weakest rows in ascending order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we follow these steps:</p>
+<ol>
+<li>
+<p><strong>Count Soldiers</strong>: For each row in the matrix, count the number of soldiers (the number of <code>1</code>s).</p>
+</li>
+<li>
+<p><strong>Attach Row Index</strong>: Append the original index of each row to help identify the original position after sorting.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>: Sort the rows based on the number of soldiers. If two rows have the same number of soldiers, the row with the smaller index should come first.</p>
+</li>
+<li>
+<p><strong>Extract Indices</strong>: Once sorted, extract the indices of the first k weakest rows.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">kWeakestRows</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined with a public method <code>kWeakestRows</code> that takes a matrix <code>mat</code> and an integer <code>k</code> as inputs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Here, we first store the number of columns in <code>n</code>.</li>
+<li>We then iterate over each row of the matrix. For each row, we append its index (i) to the end of the row. This allows us to keep track of the original indices after sorting.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">mat</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">mat</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>We sort the matrix. The default sort behavior in C++ sorts primarily by the first element of each row (the count of <code>1</code>s). If the counts are equal, it uses the second element (the index we just appended) to maintain order. Hence, this operation effectively sorts the rows by their soldier count and their original position.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">n</span><span class="p">];</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>ans</code> to store the indices of the k weakest rows.</li>
+<li>We iterate through the first k rows of the sorted matrix and extract the indices (stored in the last column of each row) into the <code>ans</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the vector containing the indices of the k weakest rows.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(m \cdot n + m \log m)), where (m) is the number of rows in the matrix, and (n) is the number of columns. The (O(m \cdot n)) comes from appending indices to each row, and (O(m \log m)) is the complexity for sorting the rows.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) for the sorting in-place, plus (O(k)) for storing the result vector, where (k) is the number of weakest rows required.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code efficiently identifies the k weakest rows in a binary matrix by utilizing a straightforward counting and sorting strategy. By augmenting the original rows with their indices, we preserve the necessary order for resolving ties in soldier counts. This method demonstrates effective use of C++ STL features such as vectors and the sort function, making it an elegant solution to the problem.</p>
+<p>The approach is not only efficient in terms of time complexity but also maintains clarity in logic and implementation. Understanding this code enhances problem-solving skills related to matrix manipulation and sorting in competitive programming and algorithmic challenges.</p>
+<p>The code is applicable in various scenarios, such as military simulations, resource allocation tasks, and any context where strength or efficiency needs to be measured and compared across multiple units or entities.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode389s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

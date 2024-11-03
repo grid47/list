@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1420">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons">
-  <meta name="twitter:description" content="Solution to Leetcode 1420">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1420/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons">
-  <meta property="og:description" content="Solution to Leetcode 1420">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -221,7 +221,180 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode482s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves finding the number of different arrays of length <code>n</code>, where each element in the array is an integer from <code>1</code> to <code>m</code>, such that the array contains exactly <code>k</code> different integers. This is a combinatorial problem that requires a dynamic programming approach to efficiently compute the number of valid arrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we will use a dynamic programming (DP) technique. The key idea is to maintain a three-dimensional DP table where:</p>
+<ul>
+<li>The first dimension represents the current length of the array (<code>n</code>).</li>
+<li>The second dimension represents the maximum value of elements in the array (<code>m</code>).</li>
+<li>The third dimension represents the count of distinct integers (<code>k</code>).</li>
+</ul>
+<p>We will build this DP table iteratively, computing the number of valid arrays of different lengths, maximum values, and distinct integers. The following steps summarize the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Create a DP table <code>ways</code> of size <code>(n + 1) x (m + 1) x (k + 1)</code> and initialize it to zero. Set the base case for arrays of length 1 that have 1 distinct integer.</p>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<ul>
+<li>For each possible length from <code>1</code> to <code>n</code>, for each possible maximum value from <code>1</code> to <code>m</code>, and for each possible distinct integer count from <code>1</code> to <code>k</code>, compute the number of valid arrays.</li>
+<li>Use the relation that counts the number of ways to form an array based on previous results in the DP table, considering both the addition of the current maximum value and the distribution of previous distinct integers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute the Result</strong>: After filling the DP table, sum up all valid configurations for the full length <code>n</code> that contain exactly <code>k</code> distinct integers.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the code implementation step by step:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>This defines the <code>Solution</code> class where our method to solve the problem will be contained.</li>
+</ul>
+</li>
+<li>
+<p><strong>Member Variable for Modulus</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a member variable <code>mod</code> to perform modulo operations, ensuring our results do not exceed typical integer limits and conform to the constraints specified in the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numOfArrays</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>numOfArrays</code> takes three parameters: <code>n</code> (length of the array), <code>m</code> (maximum integer value), and <code>k</code> (exact number of distinct integers) and returns an integer.</li>
+</ul>
+</li>
+<li>
+<p><strong>DP Table Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">ways</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)));</span>
+</span></span></code></pre></div><ul>
+<li>We create a three-dimensional vector <code>ways</code> initialized to zero, with dimensions <code>(n + 1)</code>, <code>(m + 1)</code>, and <code>(k + 1)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">ways</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize the base case where an array of length <code>1</code> can have any integer from <code>1</code> to <code>m</code>, contributing exactly <code>1</code> way to form an array with <code>1</code> distinct integer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">ii</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">ii</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">ij</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">ij</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">ij</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">ik</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">ik</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">ik</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>These nested loops iterate over each dimension of the DP table. The outermost loop iterates over lengths, the middle loop iterates over maximum values, and the innermost loop iterates over distinct integers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Ways for Current State</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="p">((</span><span class="kt">long</span><span class="p">)</span> <span class="n">ij</span> <span class="o">*</span> <span class="n">ways</span><span class="p">[</span><span class="n">ii</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">ij</span><span class="p">][</span><span class="n">ik</span><span class="p">])</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">ij</span><span class="p">;</span> <span class="n">l</span><span class="o">++</span><span class="p">)</span> <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">ways</span><span class="p">[</span><span class="n">ii</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">l</span><span class="p">][</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ways</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">ij</span><span class="p">][</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ways</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">ij</span><span class="p">][</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Here, we compute the number of ways to create an array of the current length (<code>ii</code>), maximum value (<code>ij</code>), and distinct integers (<code>ik</code>):
+<ul>
+<li>The first part counts the configurations where the current maximum integer <code>ij</code> is included.</li>
+<li>The second part considers arrays formed by previous lengths with distinct integers reduced by one, while allowing for the inclusion of smaller integers.</li>
+</ul>
+</li>
+<li>We then store the computed result back into the DP table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Computation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">ii</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="n">ii</span><span class="o">++</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="n">ways</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">ii</span><span class="p">][</span><span class="n">k</span><span class="p">])</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After populating the DP table, we sum up all ways to form arrays of length <code>n</code> using all possible maximum values that contain exactly <code>k</code> distinct integers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">res</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we cast the result to an integer and return it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n \cdot m \cdot k^2)). This is because for every combination of <code>n</code>, <code>m</code>, and <code>k</code>, we perform operations that can involve iterating over <code>m</code> again.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n \cdot m \cdot k)) due to the storage of the three-dimensional DP table.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numOfArrays</code> function effectively calculates the number of valid arrays of a specified length with a defined range of integers and distinct count requirements using dynamic programming. The solution demonstrates the power of combinatorial counting, using a structured approach to build up from simpler subproblems.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Dynamic Programming</strong>: This problem exemplifies how dynamic programming can be used to solve combinatorial problems by breaking them down into smaller, manageable subproblems.</li>
+<li><strong>Efficiency</strong>: The implementation effectively leverages modular arithmetic to keep values manageable, ensuring compliance with constraints typically found in competitive programming.</li>
+<li><strong>Combinatorial Counting</strong>: The method illustrates how to count arrangements under specific conditions, which is a crucial skill in algorithm design.</li>
+</ul>
+<p>Overall, the provided solution showcases a well-structured approach to a challenging combinatorial problem, effectively leveraging the principles of dynamic programming for an efficient resolution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode482s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

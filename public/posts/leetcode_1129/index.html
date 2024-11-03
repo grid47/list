@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1129">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1129: Shortest Path with Alternating Colors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1129: Shortest Path with Alternating Colors">
-  <meta name="twitter:description" content="Solution to Leetcode 1129">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1129: Shortest Path with Alternating Colors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1129/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1129: Shortest Path with Alternating Colors">
-  <meta property="og:description" content="Solution to Leetcode 1129">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1129: Shortest Path with Alternating Colors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -236,7 +236,163 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode157s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the shortest path from node <code>0</code> to every other node in a directed graph, where the edges are colored either red or green. You can only traverse the graph by alternating between red and green edges. If it’s impossible to reach a node, the output should be <code>-1</code>.</p>
+<p>You are given:</p>
+<ul>
+<li>An integer <code>n</code>, the number of nodes (0-indexed) in the graph.</li>
+<li>A list of edges <code>redEdges</code>, where each edge is represented as a vector of two integers <code>[u, v]</code> indicating a directed red edge from node <code>u</code> to node <code>v</code>.</li>
+<li>A list of edges <code>greenEdges</code>, represented similarly, indicating directed green edges.</li>
+</ul>
+<p>Your goal is to return a vector of integers representing the shortest path lengths from node <code>0</code> to each node, where paths must alternate colors.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem utilizes a modified breadth-first search (BFS) algorithm. Here are the main steps involved:</p>
+<ol>
+<li><strong>Graph Representation</strong>: Use an adjacency list to represent the directed graph, storing edges separately for red and green.</li>
+<li><strong>Length Initialization</strong>: Create a 2D vector <code>len</code> to keep track of the shortest path lengths for both edge colors, initializing with a value larger than any possible path length (e.g., <code>2 * n</code>).</li>
+<li><strong>Queue for BFS</strong>: Utilize a queue to facilitate the BFS traversal. Each entry in the queue will store a pair representing the current node and the last edge color used to reach that node.</li>
+<li><strong>BFS Traversal</strong>: Start from node <code>0</code> and traverse through the graph, alternating edge colors. Update the shortest path lengths as you find valid paths.</li>
+<li><strong>Result Construction</strong>: After BFS completes, construct the result vector by taking the minimum length found for each node from both colors. If a node remains unreachable, set its value to <code>-1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>:</p>
+<ul>
+<li>We define a class <code>Solution</code> with the public method <code>shortestAlternatingPaths</code> which takes parameters <code>n</code>, <code>redEdges</code>, and <code>greenEdges</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">shortestAlternatingPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">redEdges</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">greenEdges</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Graph Initialization</strong>:</p>
+<ul>
+<li>Create a 2D vector <code>gph</code> for the graph and another 2D vector <code>grid</code> to hold edges grouped by their colors.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">grid</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">gph</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Populating the Graph</strong>:</p>
+<ul>
+<li>Fill <code>grid[0]</code> with red edges and <code>grid[1]</code> with green edges by iterating over the input edge lists.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">redEdges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">redEdges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">redEdges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">greenEdges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">greenEdges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">greenEdges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initializing Lengths</strong>:</p>
+<ul>
+<li>Create a <code>len</code> array to store the minimum lengths, initialized to <code>2 * n</code> (representing infinity).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">len</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Queue Initialization</strong>:</p>
+<ul>
+<li>Initialize a queue for BFS and set the starting conditions for both edge colors from node <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">len</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Starting point for red
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">len</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Starting point for green
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span> <span class="c1">// Starting from node 0 with red
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span> <span class="c1">// Starting from node 0 with green
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>BFS Traversal</strong>:</p>
+<ul>
+<li>While the queue is not empty, process each node and explore its neighbors. Update the lengths if a shorter path is found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">node</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">nxt</span><span class="p">:</span> <span class="n">grid</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">][</span><span class="n">node</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">len</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">][</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">len</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">][</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">len</span><span class="p">[</span><span class="n">color</span><span class="p">][</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">nxt</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Result Construction</strong>:</p>
+<ul>
+<li>Create the result vector by taking the minimum path length from both colors for each node, setting unreachable nodes to <code>-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">len</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">len</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the final result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(V + E)), where (V) is the number of nodes (n) and (E) is the total number of edges in both <code>redEdges</code> and <code>greenEdges</code>. This is because each edge and node is processed at most once during BFS.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(V + E)) as well, which is required to store the adjacency list and the lengths.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>shortestAlternatingPaths</code> function efficiently computes the shortest paths from the starting node to all other nodes in a directed graph with alternating edge colors. By leveraging a breadth-first search strategy, this implementation effectively explores the graph while maintaining the constraints of alternating colors.</p>
+<p>This approach is optimal for problems involving paths with constraints, as it systematically explores valid paths while minimizing the use of additional resources. The method highlights the usefulness of BFS in exploring paths in graphs and demonstrates an effective way to manage edge color constraints through organized graph representation and careful state management.</p>
+<p>Overall, this code serves as a solid example of how to tackle graph traversal problems with specific constraints, providing a clear solution to the alternating path problem in directed graphs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode157s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

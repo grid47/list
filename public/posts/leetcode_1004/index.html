@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1004">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1004: Max Consecutive Ones III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1004: Max Consecutive Ones III">
-  <meta name="twitter:description" content="Solution to Leetcode 1004">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1004: Max Consecutive Ones III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1004/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1004: Max Consecutive Ones III">
-  <meta property="og:description" content="Solution to Leetcode 1004">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1004: Max Consecutive Ones III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -209,7 +209,102 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode13s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the longest contiguous subarray within a binary array (<code>nums</code>) consisting only of <code>1</code>s, where we are allowed to flip at most <code>k</code> <code>0</code>s to <code>1</code>s. This is a common problem encountered in coding interviews and algorithm challenges that tests the candidate’s ability to manipulate and traverse arrays effectively.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will employ a sliding window technique. This approach allows us to dynamically adjust the size of our window (or subarray) while maintaining the conditions required for our solution. We will maintain a count of <code>0</code>s within our current window and ensure that it does not exceed <code>k</code>. If it does exceed <code>k</code>, we will shift the left side of the window to the right until the condition is satisfied again.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We declare an array <code>cnt[2]</code> to keep track of the counts of <code>0</code>s and <code>1</code>s in the current window.</li>
+<li>We initialize <code>res</code> to store the result, representing the maximum length of valid subarrays found, and <code>j</code>, which serves as the left boundary of our window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>:</p>
+<ul>
+<li>We use a <code>for</code> loop to iterate over each element in the input vector <code>nums</code> using the variable <code>i</code>, which represents the right boundary of the window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Current Element</strong>:</p>
+<ul>
+<li>For each element <code>nums[i]</code>, we increment the corresponding count in our <code>cnt</code> array. If the element is <code>0</code>, <code>cnt[0]</code> is incremented; if it&rsquo;s <code>1</code>, <code>cnt[1]</code> is incremented.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjust the Window</strong>:</p>
+<ul>
+<li>We enter a <code>while</code> loop that checks if the count of <code>0</code>s exceeds <code>k</code>. If it does, we need to move the left boundary <code>j</code> to the right until the count of <code>0</code>s is within the allowed limit.</li>
+<li>In this loop, we decrement the count for the element at <code>nums[j]</code> (which is leaving the window) and increment <code>j</code> to effectively &ldquo;remove&rdquo; that element from our current window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Result</strong>:</p>
+<ul>
+<li>After adjusting the window, we calculate the length of the current valid subarray as <code>(i - j + 1)</code> and update <code>res</code> to be the maximum of its current value and this newly calculated length.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After processing all elements in the array, we return the maximum length found, which is stored in <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this algorithm is O(n), where n is the length of the input array. This is because both <code>i</code> and <code>j</code> traverse the array at most once.</li>
+<li><strong>Space Complexity</strong>: The space complexity is O(1) as we are only using a fixed amount of additional space (the <code>cnt</code> array).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The sliding window technique effectively optimizes the process of finding the longest contiguous subarray of <code>1</code>s in a binary array with a limited number of <code>0</code>s allowed to be flipped. This algorithm is efficient and easy to implement, making it a valuable tool for solving similar problems related to array manipulation. Understanding this approach can help in tackling a variety of problems that involve finding subarrays or substrings under certain constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode13s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

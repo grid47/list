@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1353">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1353: Maximum Number of Events That Can Be Attended in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1353: Maximum Number of Events That Can Be Attended">
-  <meta name="twitter:description" content="Solution to Leetcode 1353">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1353: Maximum Number of Events That Can Be Attended in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1353/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1353: Maximum Number of Events That Can Be Attended">
-  <meta property="og:description" content="Solution to Leetcode 1353">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1353: Maximum Number of Events That Can Be Attended in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,7 +224,135 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode406s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to maximize the number of events that can be attended given a list of events, where each event has a start and an end date. You can attend one event per day, and your objective is to find out how many events you can attend in total. Each event is represented as a pair of integers <code>[start, end]</code>, where <code>start</code> is the starting day of the event, and <code>end</code> is the ending day of the event.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem effectively, the approach is as follows:</p>
+<ol>
+<li>
+<p><strong>Sorting Events</strong>: First, sort the events based on their start time. If two events start on the same day, sort them by their end time. This allows for efficient processing of events as we iterate through each day.</p>
+</li>
+<li>
+<p><strong>Using a Min-Heap (Priority Queue)</strong>: A priority queue (min-heap) is employed to keep track of the end times of events that are available to be attended on a given day. This allows for quick access to the event that finishes the earliest, maximizing the potential to attend subsequent events.</p>
+</li>
+<li>
+<p><strong>Iterating Through Days</strong>: Iterate through each day from <code>1</code> to <code>100,000</code> (as specified in the problem constraints). For each day:</p>
+<ul>
+<li>Remove events from the heap that have already ended.</li>
+<li>Add new events starting on that day to the heap.</li>
+<li>If there are any events available to attend, select the one that ends the earliest (using the priority queue), thus allowing room for more future events.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">bool</span> <span class="n">cmp</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>cmp</code> function is a comparator for sorting events. It sorts events first by their start day. If two events start on the same day, it sorts them by their end day to facilitate easy management of the events in the priority queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxEvents</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">e</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">cmp</span><span class="p">);</span> <span class="c1">// Sort the events based on start and end times
+</span></span></span></code></pre></div><ul>
+<li>The <code>maxEvents</code> function starts by determining the number of events <code>n</code> and sorts the events using the previously defined comparator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// `i` tracks the current event and `cnt` counts attended events
+</span></span></span></code></pre></div><ul>
+<li>A priority queue <code>pq</code> is initialized to store the end times of the events that can be attended. The variables <code>i</code> and <code>cnt</code> track the index of the current event being processed and the count of events attended, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">100000</span><span class="p">;</span> <span class="n">d</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// Remove events that have already ended
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// Add events starting on day `d`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each day from <code>1</code> to <code>100,000</code>. The inner loop first removes any events from the priority queue that have ended before the current day. Then, it adds all events that start on the current day to the priority queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// Attend the event that ends the earliest
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the count of attended events
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After processing the events for the current day, if the priority queue is not empty, it pops the event that ends first, indicating that one event has been attended, and the count is incremented.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span> <span class="c1">// Return the total count of attended events
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the total count of attended events <code>cnt</code> is returned.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the events takes (O(n \log n)).</li>
+<li>The overall processing involves iterating through <code>100,000</code> days. Each day can involve operations with the priority queue, which takes (O(\log n)). Therefore, the total time complexity is (O(n \log n + d \log n)), where (d) is <code>100,000</code>. Given that (n) is generally smaller than <code>d</code>, we can simplify this to (O(n \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) for storing the events in the priority queue and any additional space used by the vector of events.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxEvents</code> function efficiently determines the maximum number of events that can be attended given their start and end days. By utilizing a combination of sorting and a priority queue, the algorithm ensures optimal event management, allowing for quick access to the next available event to attend.</p>
+<p>This approach demonstrates a solid understanding of greedy algorithms and data structures, particularly how priority queues can optimize decision-making processes in time-based problems. The clear structure and efficiency of this implementation make it a strong solution to the problem, suitable for competitive programming and interview settings.</p>
+<p>By breaking down each part of the code and the overall logic, this explanation serves as a valuable resource for those learning about algorithms related to scheduling and event management, providing insights that can be applied to similar problems in various contexts.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode406s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

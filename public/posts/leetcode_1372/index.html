@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1372">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1372: Longest ZigZag Path in a Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1372: Longest ZigZag Path in a Binary Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1372">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1372: Longest ZigZag Path in a Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1372/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1372: Longest ZigZag Path in a Binary Tree">
-  <meta property="og:description" content="Solution to Leetcode 1372">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1372: Longest ZigZag Path in a Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -234,7 +234,119 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode428s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves finding the longest ZigZag path in a binary tree. A ZigZag path starts at any node and alternates between left and right children. The objective is to return the length of the longest such path in the tree. The length is defined as the number of edges traversed in this alternating pattern.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can utilize a depth-first search (DFS) strategy combined with dynamic programming techniques to efficiently compute the lengths of ZigZag paths originating from each node in the binary tree. The solution can be divided into several key components:</p>
+<ol>
+<li>
+<p><strong>Understanding ZigZag Movement</strong>: The ZigZag path is defined such that from any node, we can move left and then right or right and then left. This means at each step, the direction of the traversal will alternate.</p>
+</li>
+<li>
+<p><strong>Recursive Traversal</strong>: We&rsquo;ll employ a recursive function that takes a node and a boolean variable indicating the current direction of the ZigZag movement. The function will return the maximum length of the ZigZag path starting from that node in the given direction.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid recalculating the lengths for nodes we&rsquo;ve already processed, we will use a memoization technique. We will store the results of previously computed ZigZag lengths in a map, allowing us to retrieve them in constant time.</p>
+</li>
+<li>
+<p><strong>Two Possible Directions</strong>: From each node, we will consider both possible starting directions (left and right) and compute the maximum ZigZag path length from both. The overall result will be the maximum of these values.</p>
+</li>
+<li>
+<p><strong>Final Computation</strong>: After initiating the recursive process for the root node, we will traverse both left and right children of the tree to ensure that all possible ZigZag paths are considered.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code implements the above approach. Here&rsquo;s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>TreeNode Structure</strong>:
+The structure <code>TreeNode</code> defines the binary tree nodes, each having a value, a left child, and a right child. It includes constructors to initialize these values.</p>
+</li>
+<li>
+<p><strong>Solution Class</strong>:
+The <code>Solution</code> class contains two primary methods: <code>zigzag</code> and <code>longestZigZag</code>.</p>
+</li>
+<li>
+<p><strong>Zigzag Method</strong>:</p>
+<ul>
+<li><strong>Parameters</strong>: The method <code>zigzag(TreeNode* root, bool dir)</code> takes a pointer to the current node (<code>root</code>) and a boolean (<code>dir</code>) indicating the direction of traversal.</li>
+<li><strong>Base Case</strong>: If the current node is <code>nullptr</code>, it returns <code>-1</code>, indicating no path can be formed.</li>
+<li><strong>Memoization Check</strong>: The code checks if the ZigZag length for the current node and direction has been computed before. If so, it returns the stored result.</li>
+<li><strong>Recursive Calls</strong>: Depending on the direction:
+<ul>
+<li>If moving left (<code>dir = true</code>), it recursively calls <code>zigzag</code> on the left child, changing the direction to right (<code>!dir</code>).</li>
+<li>If moving right (<code>dir = false</code>), it recursively calls <code>zigzag</code> on the right child, changing the direction to left.</li>
+</ul>
+</li>
+<li><strong>Result Storage</strong>: The result is stored in the map <code>mp</code> for future reference.</li>
+</ul>
+</li>
+<li>
+<p><strong>LongestZigZag Method</strong>:</p>
+<ul>
+<li><strong>Parameters</strong>: The method <code>longestZigZag(TreeNode* root)</code> computes the longest ZigZag path in the binary tree rooted at <code>root</code>.</li>
+<li><strong>Base Case</strong>: It first checks if the <code>root</code> is <code>nullptr</code>, returning <code>0</code> as the length.</li>
+<li><strong>Max Calculation</strong>: It computes the maximum ZigZag lengths starting in both directions from the root and updates the <code>ans</code> variable.</li>
+<li><strong>Recursive Traversal</strong>: It recursively computes the longest ZigZag path for the left and right subtrees of the current node.</li>
+<li><strong>Return Value</strong>: The method returns the overall maximum ZigZag length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(N)), where (N) is the number of nodes in the binary tree. Each node is visited once, and the memoization ensures that we do not recompute ZigZag lengths unnecessarily.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(N)) due to the storage requirements of the memoization map and the recursive call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which can be (O(N)) for a skewed tree.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the longest ZigZag path in a binary tree by employing a combination of depth-first search and memoization techniques. By systematically exploring each node and considering both directions of movement, we ensure that all potential paths are evaluated. The approach not only optimizes performance through memoization but also provides a clear and understandable structure for tackling similar tree traversal problems in the future. This makes it a valuable reference for developers and computer science enthusiasts seeking to enhance their algorithmic problem-solving skills in binary trees.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode428s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

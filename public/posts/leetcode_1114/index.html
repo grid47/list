@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1114">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1114: Print in Order in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1114: Print in Order">
-  <meta name="twitter:description" content="Solution to Leetcode 1114">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1114: Print in Order in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1114/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1114: Print in Order">
-  <meta property="og:description" content="Solution to Leetcode 1114">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1114: Print in Order in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -235,7 +235,132 @@
 </span></span><span class="line"><span class="cl">        <span class="n">curVal</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode145s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to implement a class <code>Foo</code> that can synchronize the execution of three methods: <code>first</code>, <code>second</code>, and <code>third</code>. The goal is to ensure that:</p>
+<ol>
+<li>The <code>first</code> method prints &ldquo;first&rdquo;.</li>
+<li>The <code>second</code> method prints &ldquo;second&rdquo;.</li>
+<li>The <code>third</code> method prints &ldquo;third&rdquo;.</li>
+</ol>
+<p>The challenge is to ensure that these methods are called in the correct order: <code>first</code> must be called before <code>second</code>, and <code>second</code> must be called before <code>third</code>. The class must be thread-safe, meaning that multiple threads may call these methods concurrently without leading to race conditions or incorrect ordering.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a mutex for synchronization and an integer to keep track of the current method being executed. The main steps involved in the implementation are:</p>
+<ol>
+<li><strong>Initialization</strong>: A mutex is used to protect shared state, and an integer variable (<code>curVal</code>) is initialized to 1 to indicate that the <code>first</code> method should be called first.</li>
+<li><strong>Method Implementations</strong>:
+<ul>
+<li>In the <code>first</code> method, the thread will lock the mutex, execute the provided function to print &ldquo;first&rdquo;, increment the tracking variable, and unlock the mutex.</li>
+<li>In the <code>second</code> method, the thread will lock the mutex and check whether it is its turn to execute. If not, it will repeatedly unlock and relock the mutex until it is allowed to print &ldquo;second&rdquo;.</li>
+<li>In the <code>third</code> method, a similar approach is taken, ensuring that it waits until <code>second</code> has been executed.</li>
+</ul>
+</li>
+<li><strong>Synchronization</strong>: Proper locking and unlocking of the mutex ensures that the shared variable is accessed in a thread-safe manner, preventing race conditions.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Foo</code> class is defined with private members to manage state and synchronization.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">curVal</span><span class="p">;</span>      <span class="c1">// Tracks the current method that can execute
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">mtx</span><span class="p">;</span>  <span class="c1">// Mutex for synchronizing access
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Constructor</strong>: The constructor initializes <code>curVal</code> to 1, indicating that the <code>first</code> method should be executed first.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Foo</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curVal</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// Start with curVal set to 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>First Method</strong>: The <code>first</code> method locks the mutex, prints &ldquo;first&rdquo;, increments <code>curVal</code>, and then unlocks the mutex.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">first</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFirst</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>          <span class="c1">// Lock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">printFirst</span><span class="p">();</span>        <span class="c1">// Print &#34;first&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">curVal</span><span class="o">++</span><span class="p">;</span>            <span class="c1">// Move to the next method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mtx</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>        <span class="c1">// Unlock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Second Method</strong>: The <code>second</code> method locks the mutex and uses a while loop to check whether it&rsquo;s the correct turn to execute. If not, it releases the lock and rechecks.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">second</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printSecond</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>          <span class="c1">// Lock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span><span class="p">(</span><span class="n">curVal</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Wait until it&#39;s this method&#39;s turn
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>    <span class="c1">// Unlock and wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>      <span class="c1">// Lock again for rechecking
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>        <span class="c1">// Unlock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">printSecond</span><span class="p">();</span>       <span class="c1">// Print &#34;second&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">curVal</span><span class="o">++</span><span class="p">;</span>            <span class="c1">// Move to the next method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Third Method</strong>: The <code>third</code> method follows the same pattern as <code>second</code>, waiting for <code>curVal</code> to equal 3 before proceeding.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">third</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printThird</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>          <span class="c1">// Lock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span><span class="p">(</span><span class="n">curVal</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Wait until it&#39;s this method&#39;s turn
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>    <span class="c1">// Unlock and wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>      <span class="c1">// Lock again for rechecking
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>        <span class="c1">// Unlock the mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">printThird</span><span class="p">();</span>        <span class="c1">// Print &#34;third&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">curVal</span><span class="o">++</span><span class="p">;</span>            <span class="c1">// Increment to finish
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of each method is (O(n)) in the worst-case scenario, where (n) is the number of threads waiting for the mutex to be available. However, since the methods are executed sequentially in a correct order, the average time is effectively constant per call.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a fixed amount of space for variables like <code>curVal</code> and <code>mtx</code>, regardless of the number of threads or method calls.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code effectively implements a solution to synchronize the execution order of three methods using a mutex and an integer to track the current state. The design ensures that <code>first</code> is always called before <code>second</code>, and <code>second</code> is always called before <code>third</code>, achieving the desired output sequence without any race conditions or deadlocks.</p>
+<p>This implementation serves as a practical example of how to handle synchronization in multithreaded programming. The use of mutexes and condition checks demonstrates an essential pattern in concurrent programming, making it a valuable reference for developers dealing with similar challenges.</p>
+<p>Overall, the solution is both efficient and straightforward, showcasing effective synchronization techniques in C++. Readers interested in thread management and method synchronization will find this example beneficial for understanding key concepts in concurrent programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode145s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

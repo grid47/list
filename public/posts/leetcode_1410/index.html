@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1410">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1410: HTML Entity Parser in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1410: HTML Entity Parser">
-  <meta name="twitter:description" content="Solution to Leetcode 1410">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1410: HTML Entity Parser in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1410/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1410: HTML Entity Parser">
-  <meta property="og:description" content="Solution to Leetcode 1410">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1410: HTML Entity Parser in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -235,7 +235,206 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode471s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to convert a string containing HTML entities into its corresponding characters. HTML entities are special character sequences that start with an ampersand (<code>&amp;</code>) and end with a semicolon (<code>;</code>). For example, <code>&amp;quot;</code> represents a double quote (<code>&quot;</code>), <code>&amp;apos;</code> represents an apostrophe (<code>'</code>), <code>&amp;amp;</code> represents an ampersand (<code>&amp;</code>), and so on. The challenge is to parse a given string, replace all HTML entities with their actual characters, and return the resulting string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow a systematic approach:</p>
+<ol>
+<li>
+<p><strong>Mapping HTML Entities</strong>: Create a map (or dictionary) that associates each HTML entity with its corresponding character.</p>
+</li>
+<li>
+<p><strong>Iterating Through the String</strong>: Traverse the input string character by character:</p>
+<ul>
+<li>When an ampersand (<code>&amp;</code>) is encountered, start building a potential HTML entity string.</li>
+<li>Continue appending characters until a semicolon (<code>;</code>) is found or another ampersand is detected.</li>
+<li>If a semicolon is reached, check if the collected string matches any key in the map.</li>
+<li>Replace the entity with the mapped character if it exists; otherwise, include it as is.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result</strong>: Construct the result string by appending either the mapped character or the original sequence to it.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Below is a detailed breakdown of the provided C++ code that implements the above approach:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined, containing the method <code>entityParser</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">entityParser</span><span class="p">(</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>entityParser</code> function takes a single parameter <code>text</code>, which is a string that may contain HTML entities.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mapping HTML Entities</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;quot;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;</span><span class="se">\&#34;</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;apos;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;</span><span class="se">\&#39;</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;amp;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;&amp;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;gt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;lt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;&lt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="s">&#34;&amp;frasl;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;/&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A map named <code>mp</code> is created to store the mapping of HTML entities to their respective characters.</li>
+<li>Each entity is associated with its corresponding character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>An empty string <code>res</code> is initialized to build the final result.</li>
+<li>A variable <code>i</code> is initialized to iterate through the characters of the input string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the String</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;&amp;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A while loop is set up to traverse the string until all characters are processed.</li>
+<li>Inside the loop, a check is performed to see if the current character is an ampersand (<code>&amp;</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Entity String</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;;&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">tmp</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;&amp;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">res</span> <span class="o">+=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If an ampersand is found, a temporary string <code>tmp</code> is initialized to collect characters for the entity.</li>
+<li>A nested while loop collects characters until a semicolon (<code>;</code>) is reached or another ampersand is encountered.</li>
+<li>If another ampersand is detected before the semicolon, the collected characters are added to the result, and the temporary string is reset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the Semicolon</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">tmp</span> <span class="o">+=</span> <span class="sc">&#39;;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">res</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmp</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">res</span> <span class="o">+=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">res</span> <span class="o">+=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If a semicolon is reached, it is appended to <code>tmp</code>, and the program checks if <code>tmp</code> is a valid HTML entity in the map.</li>
+<li>If it is, the corresponding character is appended to <code>res</code>. If not, the original <code>tmp</code> (which contains the entity without translation) is added to the result.</li>
+<li>If the current character is not an ampersand, it is simply appended to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After processing the entire input string, the function returns the constructed result string <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is ( O(n) ), where ( n ) is the length of the input string. This is because we traverse the string character by character, processing each character in constant time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(m) ), where ( m ) is the number of unique HTML entities stored in the map. Additionally, the space required for the output string <code>res</code> is also accounted for in this complexity.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implementation of the <code>entityParser</code> function effectively converts HTML entities into their respective characters using a straightforward mapping approach and string traversal. This solution is efficient and clean, demonstrating a solid understanding of string manipulation and the use of maps for quick lookups.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>String Processing</strong>: This code exemplifies the importance of careful string manipulation, especially when dealing with special characters or encodings.</p>
+</li>
+<li>
+<p><strong>Mapping for Efficiency</strong>: Using a map to store the relationships between entities and characters allows for rapid lookups, making the parsing efficient.</p>
+</li>
+<li>
+<p><strong>Robustness in Handling Input</strong>: The algorithm is robust enough to handle cases where entities might be malformed or where there are adjacent ampersands, ensuring that the output remains consistent with the input requirements.</p>
+</li>
+</ul>
+<p>Overall, this solution serves as an excellent example of parsing problems in programming, offering insights into effective techniques for handling strings and special characters in a computational context.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode471s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

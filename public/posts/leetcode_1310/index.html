@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1310">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1310: XOR Queries of a Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1310: XOR Queries of a Subarray">
-  <meta name="twitter:description" content="Solution to Leetcode 1310">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1310: XOR Queries of a Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1310/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1310: XOR Queries of a Subarray">
-  <meta property="og:description" content="Solution to Leetcode 1310">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1310: XOR Queries of a Subarray in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -208,7 +208,110 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode355s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to process multiple XOR range queries on an array <code>arr</code>. Given <code>arr</code> and a list of queries <code>q</code>, each query specifies two indices <code>[L, R]</code>. For each query, we need to find the XOR of elements in <code>arr</code> from index <code>L</code> to <code>R</code>, inclusive. The goal is to answer all queries efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages the concept of <strong>prefix XOR arrays</strong> to quickly calculate the XOR for any subarray in constant time. In a prefix XOR array:</p>
+<ul>
+<li>The XOR up to any index <code>i</code> is stored in <code>xr[i+1]</code>, where <code>xr[i+1]</code> contains the XOR of all elements from the start of <code>arr</code> up to <code>i</code>.</li>
+<li>Using this, the XOR for any subarray <code>[L, R]</code> can be computed as <code>xr[R+1] ^ xr[L]</code>. This works because elements from the start to <code>L-1</code> cancel out, leaving only the XOR from <code>L</code> to <code>R</code>.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Define the Class and Method</strong>:</p>
+<ul>
+<li>The method <code>xorQueries</code> takes in the integer vector <code>arr</code> and the list of queries <code>q</code>. It returns a vector containing the XOR results for each query.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">xorQueries</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize and Populate the Prefix XOR Array</strong>:</p>
+<ul>
+<li><code>xr</code> is a prefix XOR array initialized with size <code>n + 1</code>, where <code>n</code> is the length of <code>arr</code>.</li>
+<li><code>xr[i]</code> stores the XOR of all elements in <code>arr</code> from the start up to <code>i-1</code>. By initializing <code>xr[0] = 0</code>, it allows us to calculate the XOR of any subarray directly.</li>
+<li>A loop populates <code>xr</code> such that <code>xr[i] = xr[i-1] ^ arr[i-1]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">xr</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">xr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Process Each Query Using the Prefix XOR Array</strong>:</p>
+<ul>
+<li>The <code>res</code> vector stores results for each query.</li>
+<li>For each query <code>q[i] = [L, R]</code>, the XOR from <code>L</code> to <code>R</code> is calculated as <code>xr[R+1] ^ xr[L]</code>. This operation uses the properties of XOR to get the result for the subarray in constant time.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="o">&amp;</span><span class="n">v</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">xr</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">xr</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Results</strong>:</p>
+<ul>
+<li>The method returns <code>res</code>, which contains the XOR results for all queries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n + m)), where (n) is the length of <code>arr</code> and (m) is the number of queries. Calculating the prefix XOR array requires (O(n)), and each query is processed in (O(1)), totaling (O(m)) for (m) queries.</li>
+<li><strong>Space Complexity</strong>: (O(n)) for storing the prefix XOR array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution optimally answers each XOR query using a prefix XOR array to achieve constant-time lookup for any subarray XOR. This technique significantly reduces computational complexity compared to directly computing the XOR for each subarray, making it ideal for scenarios with a large number of queries or large arrays. The solution is efficient, scalable, and leverages bitwise operations effectively, showcasing an advanced approach to handling XOR queries in linear time.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode355s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

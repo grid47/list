@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1015">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1015: Smallest Integer Divisible by K in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1015: Smallest Integer Divisible by K">
-  <meta name="twitter:description" content="Solution to Leetcode 1015">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1015: Smallest Integer Divisible by K in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1015/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1015: Smallest Integer Divisible by K">
-  <meta property="og:description" content="Solution to Leetcode 1015">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1015: Smallest Integer Divisible by K in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -201,7 +201,108 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode32s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>A repunit is a number that consists only of the digit &lsquo;1&rsquo;. For example, the numbers 1, 11, 111, and 1111 are all repunits. The task is to find the smallest repunit number that is divisible by a given integer ( k ).</p>
+<p>For instance, if ( k = 3 ), the smallest repunit number is 111, which equals 3 × 37. However, if ( k = 2 ), the result should be -1 because no repunit number can be even and divisible by 2.</p>
+<p>The goal is to implement a function that takes ( k ) as input and returns the length of the smallest repunit number that is divisible by ( k ) or -1 if no such number exists within the constraints.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To find the smallest repunit divisible by ( k ), we can use a straightforward simulation approach that leverages properties of modular arithmetic:</p>
+<ol>
+<li><strong>Iterate Through Possible Lengths</strong>: We&rsquo;ll generate repunit numbers of increasing length and check their divisibility by ( k ).</li>
+<li><strong>Use Remainders</strong>: Instead of constructing large numbers, we can keep track of the remainder when divided by ( k ) to avoid overflow and to optimize our checks.</li>
+<li><strong>Stop When Divisible</strong>: If at any point the remainder becomes zero, we return the current length of the repunit. If we reach ( k ) without finding a divisible repunit, we return -1.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The function <code>smallestRepunitDivByK</code> is defined as a public member of the <code>Solution</code> class, taking an integer ( k ) as input.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initializing Loop Variables</strong>:</p>
+<ul>
+<li>We initialize a loop that will iterate ( N ) from 1 to ( k ). The variable ( N ) will represent the number of ones in our repunit.</li>
+<li>A variable ( r ) is initialized to zero. This variable will store the remainder when the current repunit (expressed as a number of ones) is divided by ( k ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through Lengths</strong>:</p>
+<ul>
+<li>Within the loop, we update the remainder ( r ) using the formula:
+[
+r = (r \times 10 + 1) \mod k
+]
+This formula essentially constructs the number of ones in modular form:
+<ul>
+<li>The multiplication by 10 shifts the number left (increasing its place value) and adding 1 appends another &lsquo;1&rsquo; to the end.</li>
+</ul>
+</li>
+<li>After updating ( r ), we check if it equals zero. If it does, we return the current value of ( N ) because this means we have found a repunit of length ( N ) that is divisible by ( k ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning -1</strong>:</p>
+<ul>
+<li>If the loop completes without finding a divisible repunit (i.e., we checked all lengths up to ( k )), we return -1.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this function is ( O(k) ). We loop through values from 1 to ( k ), performing a constant amount of work in each iteration.</li>
+<li><strong>Space Complexity</strong>: The space complexity is ( O(1) ) because we only use a fixed number of variables regardless of the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>smallestRepunitDivByK</code> function provides an efficient method for finding the length of the smallest repunit that is divisible by a given integer ( k ). By leveraging modular arithmetic to track remainders, we avoid the need to handle potentially large numbers and instead focus on their properties.</p>
+<p>This solution showcases the application of number theory and modular arithmetic in algorithm design, offering a clear path to solving problems involving divisibility. Understanding this approach not only aids in tackling similar problems but also enhances overall algorithmic thinking skills.</p>
+<p>Furthermore, the simplicity and efficiency of this implementation make it ideal for competitive programming and technical interviews. The method is easy to grasp and can be adapted to solve related problems, such as finding patterns in numerical sequences or exploring properties of modular arithmetic.</p>
+<p>In summary, the <code>smallestRepunitDivByK</code> function exemplifies how to effectively use mathematical properties to derive solutions in a computational context. It highlights the intersection of theory and practical application, reinforcing the value of mathematical insights in programming challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode32s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

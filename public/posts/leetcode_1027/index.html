@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1027">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1027: Longest Arithmetic Subsequence in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1027: Longest Arithmetic Subsequence">
-  <meta name="twitter:description" content="Solution to Leetcode 1027">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1027: Longest Arithmetic Subsequence in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1027/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1027: Longest Arithmetic Subsequence">
-  <meta property="og:description" content="Solution to Leetcode 1027">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1027: Longest Arithmetic Subsequence in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,128 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode39s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the length of the longest arithmetic subsequence in a given array of integers. An arithmetic subsequence is a sequence of numbers such that the difference between consecutive elements is constant. For example, in the array <code>[3, 6, 9, 12]</code>, the longest arithmetic subsequence is the entire array itself, with a common difference of <code>3</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem of finding the longest arithmetic subsequence:</p>
+<ol>
+<li><strong>Dynamic Programming with Hash Maps</strong>: The solution utilizes a dynamic programming approach where a vector of hash maps is employed to track the lengths of arithmetic subsequences for each pair of indices in the array.</li>
+<li><strong>Calculate Differences</strong>: For every pair of indices <code>(i, j)</code> where <code>j &lt; i</code>, the difference <code>d = nums[j] - nums[i]</code> is calculated. This difference represents the common difference of the arithmetic sequence formed by <code>nums[j]</code> and <code>nums[i]</code>.</li>
+<li><strong>Update Lengths</strong>: The lengths of the arithmetic subsequences are updated based on whether the difference <code>d</code> has been seen before for the index <code>j</code>. If it has, the length of the arithmetic sequence ending at <code>i</code> can be extended from that of <code>j</code>. Otherwise, a new sequence of length <code>2</code> is started from this pair.</li>
+<li><strong>Track Maximum Length</strong>: Throughout the iteration, the maximum length of any arithmetic subsequence found is updated.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The <code>longestArithSeqLength</code> function is defined in the <code>Solution</code> class. It takes a vector of integers (<code>vector&lt;int&gt;&amp; nums</code>) as its parameter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The size of the input vector <code>nums</code> is stored in <code>n</code>.</li>
+<li>A vector of unordered maps (<code>mp</code>) is created, where each index corresponds to an element in <code>nums</code>. Each map will store the common difference as the key and the length of the longest arithmetic subsequence ending at that index as the value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Variable</strong>:</p>
+<ul>
+<li>The variable <code>res</code> is initialized to <code>1</code>, which represents the minimum possible length of an arithmetic subsequence (a single number).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over Pairs</strong>:</p>
+<ul>
+<li>A nested loop structure is established:
+<ul>
+<li>The outer loop iterates over each element <code>i</code> in <code>nums</code>.</li>
+<li>The inner loop iterates over each preceding element <code>j</code> (where <code>j &lt; i</code>) to compare with the current element.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Difference</strong>:</p>
+<ul>
+<li>For each pair <code>(j, i)</code>, the difference <code>d</code> is calculated as <code>nums[j] - nums[i]</code>. This difference is essential in determining the arithmetic nature of the subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Existing Differences</strong>:</p>
+<ul>
+<li>A check is performed to see if the difference <code>d</code> exists in the map at index <code>j</code> (<code>mp[j].count(d)</code>).</li>
+<li>If it does, the length of the arithmetic subsequence can be extended. The length at index <code>i</code> for difference <code>d</code> is updated to the maximum of its current value and the value at <code>mp[j][d] + 1</code>.</li>
+<li>If the difference does not exist in the map for <code>j</code>, it initializes <code>mp[i][d]</code> to <code>2</code>, indicating that a new arithmetic sequence can be formed starting from the pair <code>(nums[j], nums[i])</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum Length</strong>:</p>
+<ul>
+<li>The maximum length found so far (<code>res</code>) is updated by comparing it to the current length at <code>mp[i][d]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Once all pairs have been processed, the function returns <code>res</code>, which now holds the length of the longest arithmetic subsequence in the array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of the solution is (O(n^2)), where (n) is the number of elements in the input array. This is due to the nested loops that iterate over pairs of elements.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(n \cdot k)), where (k) is the average number of unique differences. In the worst case, this can also approach (O(n^2)) if all differences are unique.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>longestArithSeqLength</code> function effectively finds the length of the longest arithmetic subsequence using a dynamic programming approach enhanced by hash maps. By tracking the lengths of subsequences based on common differences, the algorithm efficiently computes the desired result.</p>
+<p>This solution is particularly valuable in scenarios involving numerical sequences, such as in data analysis, statistics, and algorithm design competitions, where understanding patterns and subsequences is critical. The approach demonstrates how to combine mathematical reasoning with computational techniques to solve complex problems in a manageable way.</p>
+<p>In summary, the implementation showcases the versatility of dynamic programming and hash maps in handling sequence-related problems, making it a valuable asset for any programmer&rsquo;s repertoire. The clarity in problem breakdown and structured approach underscores the importance of systematic problem-solving in computer science, contributing to a deeper understanding of algorithm design principles.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode39s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1156">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1156: Swap For Longest Repeated Character Substring in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1156: Swap For Longest Repeated Character Substring">
-  <meta name="twitter:description" content="Solution to Leetcode 1156">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1156: Swap For Longest Repeated Character Substring in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1156/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1156: Swap For Longest Repeated Character Substring">
-  <meta property="og:description" content="Solution to Leetcode 1156">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1156: Swap For Longest Repeated Character Substring in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,7 +215,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode185s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The function <code>maxRepOpt1</code> is designed to find the longest contiguous block of identical characters in a given string <code>text</code>, with the option of swapping two identical characters at most once to achieve the longest possible block. The task is to maximize the length of this block, utilizing up to one swap, if needed. This is useful for applications like text pattern matching, substring analysis, and optimal grouping of similar items.</p>
+<p>The function has the signature:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">maxRepOpt1</span><span class="p">(</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span>
+</span></span></code></pre></div><p>where <code>text</code> is a non-empty string containing only lowercase English letters. The function returns the maximum number of repeated characters in a contiguous block with the optimal arrangement.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function uses an <strong>index tracking approach</strong> combined with <strong>two-pointer sliding window</strong> logic to identify the longest contiguous block of identical characters. The goal is to take advantage of any potential swap to further extend contiguous blocks. The approach is broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Index Tracking</strong>: Each character&rsquo;s index positions are stored in a vector of vectors, <code>idx</code>. This allows us to efficiently locate positions of each character in <code>text</code> and assess the potential for extending contiguous blocks by checking adjacent positions.</p>
+</li>
+<li>
+<p><strong>Looping Through Character Indices</strong>:</p>
+<ul>
+<li>For each character in the alphabet (26 letters), the code iterates through its occurrence positions in the string, aiming to find the maximum contiguous segment of that character.</li>
+<li>It maintains two counters:
+<ul>
+<li><code>cnt</code>: Counts consecutive occurrences in a segment.</li>
+<li><code>cnt1</code>: Tracks if a single character gap can be filled by a swap to extend the block.</li>
+</ul>
+</li>
+<li>If consecutive characters are interrupted by a single character, the code checks if this gap can be filled by a swap. This allows the function to consider the potential of a longer contiguous block with only one swap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum Block Length</strong>:</p>
+<ul>
+<li>The maximum block length (<code>mx</code>) is updated as each segment is analyzed, taking into account potential swaps.</li>
+<li>The result (<code>res</code>) is updated for each character to keep track of the largest contiguous block found for any character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Adjustment</strong>: Finally, if the maximum block for any character (<code>mx</code>) is smaller than the total occurrences of that character, the result is incremented by 1. This adjustment accounts for the possibility of extending the block by swapping one character occurrence from elsewhere.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code line by line for a clearer understanding.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxRepOpt1</span><span class="p">(</span><span class="n">string</span> <span class="n">text</span><span class="p">,</span> <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">idx</span><span class="p">(</span><span class="mi">26</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">idx</span><span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-6</strong>: The function begins by initializing <code>idx</code>, a vector of vectors to store the positions of each character in <code>text</code>. Each character’s occurrences are indexed by subtracting &lsquo;a&rsquo; from the character to map it to an array index (0-25).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cnt1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cnt1</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">?</span> <span class="nl">cnt</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">+</span> <span class="n">cnt1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Outer Loop (Lines 7-9)</strong>: For each character (represented by <code>n</code>), the function initializes <code>cnt</code> to 1 (tracking consecutive characters), <code>cnt1</code> to 0 (for counting the gap potential), and <code>mx</code> to track the maximum segment length for the current character.</li>
+<li><strong>Inner Loop (Lines 10-18)</strong>: Iterates through all occurrences of the character in <code>text</code>:
+<ul>
+<li>If consecutive occurrences are found (distance of 1), it increments <code>cnt</code>.</li>
+<li>Otherwise, if there is a gap of exactly one character, it checks if this gap can be filled (updating <code>cnt1</code>), and resets <code>cnt</code>.</li>
+<li>After each segment, <code>mx</code> is updated to reflect the maximum contiguous block length with a potential swap.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">mx</span> <span class="o">+</span> <span class="p">(</span> <span class="n">idx</span><span class="p">[</span><span class="n">n</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">mx</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Result Update (Line 19-21)</strong>:
+<ul>
+<li>For each character, <code>res</code> is updated by comparing it with the calculated maximum segment <code>mx</code> and adding 1 if additional occurrences are available for potential swapping.</li>
+<li>Finally, the function returns <code>res</code>, the length of the longest contiguous block found.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(N)), where (N) is the length of <code>text</code>. The code loops through the string once to build <code>idx</code>, and each character’s occurrences are processed individually. The operations within each loop are efficient, making this solution optimized.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(26 + N) = O(N)) for storing the occurrences of each character. Given that there are only 26 lowercase letters, the space complexity depends mainly on the size of <code>text</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxRepOpt1</code> function is an efficient and optimized solution for finding the maximum contiguous block of identical characters in a string with an optional swap. Using an index-based approach to track positions and two-pointer logic for gap-checking, it efficiently identifies the best possible arrangement for each character’s occurrences, ensuring the optimal result. The algorithm is well-suited for handling longer strings and provides quick, reliable results with minimal space complexity. This approach is ideal for applications where optimizing grouping and arranging similar items is essential, such as data segmentation or text pattern analysis.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode185s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

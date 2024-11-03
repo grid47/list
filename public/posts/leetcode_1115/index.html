@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1115">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1115: Print FooBar Alternately in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1115: Print FooBar Alternately">
-  <meta name="twitter:description" content="Solution to Leetcode 1115">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1115: Print FooBar Alternately in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1115/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1115: Print FooBar Alternately">
-  <meta property="og:description" content="Solution to Leetcode 1115">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1115: Print FooBar Alternately in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -223,7 +223,118 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode154s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to implement a class <code>FooBar</code> that can synchronize the execution of two methods: <code>foo</code> and <code>bar</code>. The goal is to ensure that:</p>
+<ol>
+<li>The <code>foo</code> method prints &ldquo;foo&rdquo;.</li>
+<li>The <code>bar</code> method prints &ldquo;bar&rdquo;.</li>
+</ol>
+<p>The challenge is to ensure that these methods are called in the correct order: <code>foo</code> must be called before <code>bar</code>, and this must happen alternately for a specified number of times. If <code>n</code> is the number of times the printing should occur, then the expected output sequence is: <code>foo</code>, <code>bar</code>, <code>foo</code>, <code>bar</code>, &hellip;, continuing until both functions have printed <code>n</code> times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use two mutexes to manage synchronization between the <code>foo</code> and <code>bar</code> methods. The main steps involved in the implementation are:</p>
+<ol>
+<li><strong>Initialization</strong>: Two mutexes are declared: <code>mtx1</code> for controlling access to the <code>foo</code> method and <code>mtx2</code> for controlling access to the <code>bar</code> method. Initially, <code>mtx2</code> is locked to prevent <code>bar</code> from executing until <code>foo</code> has run at least once.</li>
+<li><strong>Method Implementations</strong>:
+<ul>
+<li>In the <code>foo</code> method, the thread locks <code>mtx1</code>, prints &ldquo;foo&rdquo;, and then unlocks <code>mtx2</code> to allow the <code>bar</code> method to execute.</li>
+<li>In the <code>bar</code> method, the thread locks <code>mtx2</code>, prints &ldquo;bar&rdquo;, and then unlocks <code>mtx1</code> to allow the <code>foo</code> method to execute.</li>
+</ul>
+</li>
+<li><strong>Thread Safety</strong>: The use of mutexes ensures that only one thread can execute its respective function at a time, enforcing the correct order of execution.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>FooBar</code> class is defined with private members for synchronization and tracking the number of iterations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FooBar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>                    <span class="c1">// Number of times to print &#34;foo&#34; and &#34;bar&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mutex</span> <span class="n">mtx1</span><span class="p">,</span> <span class="n">mtx2</span><span class="p">;</span>        <span class="c1">// Mutexes for synchronization
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Constructor</strong>: The constructor initializes <code>n</code> and locks <code>mtx2</code>, ensuring that <code>bar</code> cannot be executed until after <code>foo</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">FooBar</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mtx2</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>      <span class="c1">// Lock mtx2 to block bar initially
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>      <span class="c1">// Set the number of iterations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Foo Method</strong>: The <code>foo</code> method loops <code>n</code> times, locking <code>mtx1</code> before printing &ldquo;foo&rdquo; and unlocking <code>mtx2</code> afterward.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFoo</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx1</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>                  <span class="c1">// Lock for foo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">printFoo</span><span class="p">();</span>                    <span class="c1">// Print &#34;foo&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx2</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>                 <span class="c1">// Unlock for bar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Bar Method</strong>: The <code>bar</code> method also loops <code>n</code> times, locking <code>mtx2</code> before printing &ldquo;bar&rdquo; and unlocking <code>mtx1</code> afterward.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">bar</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printBar</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx2</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>                  <span class="c1">// Lock for bar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">printBar</span><span class="p">();</span>                   <span class="c1">// Print &#34;bar&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mtx1</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>                <span class="c1">// Unlock for foo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of each method is (O(n)), where (n) is the number of times the printing occurs. Each method will run exactly (n) iterations, performing constant-time operations (locking, printing, unlocking).</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(1)) since the space used is constant and does not grow with the input size. We only use a fixed number of variables (e.g., <code>n</code>, mutexes).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code successfully implements a solution for synchronizing the printing of two functions, <code>foo</code> and <code>bar</code>, in the specified alternating order. By leveraging two mutexes, the solution effectively manages access to shared resources, ensuring thread-safe execution and the correct sequence of function calls.</p>
+<p>This implementation serves as an excellent example of how to handle synchronization in multithreaded programming. The use of mutexes and careful management of thread execution order are critical concepts in concurrent programming, making this code a valuable reference for developers working on similar synchronization challenges.</p>
+<p>The simplicity of the design, combined with the effectiveness of mutexes, makes this code both efficient and easy to understand. It provides a clear approach to ensuring that two methods can be executed in an alternating fashion while maintaining the integrity of shared resources.</p>
+<p>Overall, the <code>FooBar</code> class provides a practical solution to a common problem in concurrent programming, demonstrating important techniques in synchronization and thread management. Readers interested in these concepts will find this example informative and applicable to their own programming tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode154s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

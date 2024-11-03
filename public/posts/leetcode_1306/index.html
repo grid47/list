@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1306">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1306: Jump Game III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1306: Jump Game III">
-  <meta name="twitter:description" content="Solution to Leetcode 1306">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1306: Jump Game III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1306/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1306: Jump Game III">
-  <meta property="og:description" content="Solution to Leetcode 1306">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1306: Jump Game III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -217,7 +217,145 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode350s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>arr</code> and a starting index <code>start</code>, each element in <code>arr</code> represents the maximum number of steps you can move either left or right. The task is to determine if you can reach any index with a value of zero by jumping to the left or right. You can only visit each index once. If it’s possible to reach an element with a value of zero, return <code>true</code>; otherwise, return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution utilizes <strong>Breadth-First Search (BFS)</strong> to explore each possible index that can be reached by jumping left or right:</p>
+<ol>
+<li><strong>Initialize Queue for BFS</strong>: A queue is used to explore each index, starting from the given <code>start</code> index.</li>
+<li><strong>Explore Each Jump</strong>: For each index, the solution calculates two possible moves:
+<ul>
+<li><strong>Left Jump</strong>: Move to <code>i - arr[i]</code>.</li>
+<li><strong>Right Jump</strong>: Move to <code>i + arr[i]</code>.</li>
+</ul>
+</li>
+<li><strong>Mark Visited Indices</strong>: To prevent revisiting indices, each visited index is marked by negating its value, ensuring it will not be added back into the queue.</li>
+<li><strong>Check for Target Value</strong>: If any of the indices have a value of zero, return <code>true</code>. If the queue becomes empty without finding a zero, return <code>false</code>.</li>
+</ol>
+<p>This BFS approach is efficient because it explores each reachable index only once, leveraging the negation technique to mark visited indices.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>:</p>
+<ul>
+<li>The class <code>Solution</code> has a public method <code>canReach</code> that takes an integer array <code>arr</code> and an integer <code>start</code> as input and returns a boolean indicating if reaching a zero is possible.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canReach</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>n</code> stores the size of <code>arr</code>.</li>
+<li>A queue <code>q</code> is initialized with the <code>start</code> index to begin BFS from this index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>BFS Loop</strong>:</p>
+<ul>
+<li>The loop runs while there are indices to explore in <code>q</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Zero</strong>:</p>
+<ul>
+<li>If <code>arr[i]</code> is zero, the function returns <code>true</code> since a zero has been reached.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Left and Right Jumps</strong>:</p>
+<ul>
+<li><code>l</code> stores the left jump index (<code>i - arr[i]</code>), and <code>r</code> stores the right jump index (<code>i + arr[i]</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Mark Index as Visited</strong>:</p>
+<ul>
+<li>To prevent revisiting <code>i</code>, its value in <code>arr</code> is negated.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Add Valid Jumps to Queue</strong>:</p>
+<ul>
+<li>The code checks if <code>l</code> and <code>r</code> are within bounds and have not been visited (i.e., have a positive value). If valid, they are added to <code>q</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">n</span>  <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return False if No Zero is Found</strong>:</p>
+<ul>
+<li>If the loop completes without finding a zero, return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>arr</code>. In the worst case, each element is added to the queue once and processed once.</li>
+<li><strong>Space Complexity</strong>: (O(n)), as the queue could potentially hold up to all elements in the worst case.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses BFS to explore each possible index in <code>arr</code> starting from the <code>start</code> index. By using a queue and marking visited indices by negation, the algorithm efficiently explores reachable indices without revisiting them, ensuring optimal performance. The BFS approach is well-suited to this problem as it allows systematic exploration of all possible paths to find a zero, returning true if one is found or false otherwise. This solution is both time-efficient and memory-efficient for large arrays.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode350s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1328">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1328: Break a Palindrome in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1328: Break a Palindrome">
-  <meta name="twitter:description" content="Solution to Leetcode 1328">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1328: Break a Palindrome in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1328/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1328: Break a Palindrome">
-  <meta property="og:description" content="Solution to Leetcode 1328">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1328: Break a Palindrome in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,7 +207,107 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="s">&#34;&#34;</span> <span class="o">:</span> <span class="n">palindrome</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode378s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to modify a given string that is a palindrome in such a way that it is no longer a palindrome, while aiming to achieve this with the minimum lexicographical change. A palindrome is a string that reads the same forward and backward. The problem specifically requires replacing characters in the palindrome string to ensure that the result is still a valid string and is not empty. If it is impossible to break the palindrome, the function should return an empty string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a straightforward strategy:</p>
+<ol>
+<li>
+<p><strong>Iterate through the First Half</strong>: The algorithm iterates through the first half of the string to find the first character that is not &lsquo;a&rsquo;. This is crucial because replacing any character with &lsquo;a&rsquo; will generally yield a lexicographically smaller string.</p>
+</li>
+<li>
+<p><strong>Replace the Character</strong>: If a character other than &lsquo;a&rsquo; is found, it is replaced with &lsquo;a&rsquo;, and the modified string is returned. This ensures that the palindrome is broken by the smallest possible change.</p>
+</li>
+<li>
+<p><strong>Special Case for All &lsquo;a&rsquo; Palindromes</strong>: If the entire palindrome consists of the letter &lsquo;a&rsquo;, the last character is changed to &lsquo;b&rsquo; to break the palindrome. Additionally, if the length of the string is less than 2, returning an empty string is necessary, as a single character or an empty string cannot form a non-palindromic result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">breakPalindrome</span><span class="p">(</span><span class="n">string</span> <span class="n">palindrome</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">palindrome</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>The <code>breakPalindrome</code> function is defined within the <code>Solution</code> class. It takes a string <code>palindrome</code> as input and determines its length, <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">palindrome</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">palindrome</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">palindrome</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>for</code> loop iterates from the beginning of the string up to the middle (<code>n / 2</code>). For each character, it checks if it is not &lsquo;a&rsquo;. If a non-&lsquo;a&rsquo; character is found, it is replaced with &lsquo;a&rsquo;, effectively breaking the palindrome, and the modified string is returned immediately.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">palindrome</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="s">&#34;&#34;</span> <span class="o">:</span> <span class="n">palindrome</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If the loop completes without finding a non-&lsquo;a&rsquo; character, it means the string is composed entirely of &lsquo;a&rsquo;s. The last character is then changed to &lsquo;b&rsquo;, ensuring the string is no longer a palindrome. The function then checks if the length of the string is less than 2; if true, it returns an empty string, as no valid modification can be made.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The overall time complexity is (O(n)), where (n) is the length of the input string. This is due to the single traversal through half of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since the modifications are made in-place, and no additional data structures are required.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively addresses the problem of breaking a palindrome by utilizing a simple yet efficient strategy. By modifying the first non-&lsquo;a&rsquo; character to &lsquo;a&rsquo;, the algorithm achieves the desired outcome of creating a non-palindromic string with the least lexicographical impact. The special handling for all-&lsquo;a strings demonstrates a careful consideration of edge cases, ensuring robust functionality.</p>
+<p>In practical applications, understanding how to manipulate strings and maintain efficiency is crucial. This solution exemplifies how basic string operations and condition checks can yield effective results in algorithm design. The ability to break a palindrome while adhering to constraints is a valuable skill in competitive programming and coding interviews, making this solution a useful addition to any programmer&rsquo;s toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode378s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

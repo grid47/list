@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1038">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1038: Binary Search Tree to Greater Sum Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1038: Binary Search Tree to Greater Sum Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1038">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1038: Binary Search Tree to Greater Sum Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1038/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1038: Binary Search Tree to Greater Sum Tree">
-  <meta property="og:description" content="Solution to Leetcode 1038">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1038: Binary Search Tree to Greater Sum Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -214,7 +214,124 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode56s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves transforming a binary search tree (BST) into a greater sum tree (GST). In a GST, each node&rsquo;s value is replaced by the sum of all values greater than or equal to that node&rsquo;s original value in the BST. This transformation must maintain the binary tree structure, ensuring that for every node, the left subtree contains only values less than the node&rsquo;s value, while the right subtree contains values greater than the node&rsquo;s value.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this transformation, we will employ a reverse in-order traversal of the BST. The key steps in our approach include:</p>
+<ol>
+<li><strong>Reverse In-Order Traversal</strong>: This traversal method processes nodes in decreasing order of their values. We start from the rightmost node and move to the left.</li>
+<li><strong>Cumulative Sum Calculation</strong>: We maintain a running total of the sum of the values processed so far. When visiting a node, we update its value to the cumulative sum, and then we add the node&rsquo;s original value to this sum for subsequent nodes.</li>
+<li><strong>Recursive Function</strong>: We implement the transformation using a recursive function that traverses the tree and updates node values accordingly.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+</li>
+<li>
+<p><strong>Member Variables</strong>:</p>
+<ul>
+<li><code>pre</code>: An integer that holds the cumulative sum of node values as we traverse the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Signature</strong>:</p>
+<ul>
+<li>The <code>bstToGst</code> function takes a pointer to the root of the BST and returns a pointer to the modified root after transformation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">TreeNode</span><span class="o">*</span> <span class="nf">bstToGst</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case and Recursive Traversal</strong>:</p>
+<ul>
+<li>The function first checks if the right child of the current node exists. If it does, it recursively calls <code>bstToGst</code> on the right child. This ensures we process larger values first, adhering to the reverse in-order traversal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">bstToGst</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating Node Values</strong>:</p>
+<ul>
+<li>Once we are at a node, we update its value to include the cumulative sum of values processed thus far. The <code>pre</code> variable is updated to include the original value of the current node.</li>
+<li>This line effectively performs two actions: updating the node&rsquo;s value and maintaining the cumulative sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">pre</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">pre</span> <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Processing the Left Subtree</strong>:</p>
+<ul>
+<li>After updating the current node, the function checks for the existence of a left child. If present, it recursively processes the left child, allowing us to continue the transformation for all nodes in the tree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">bstToGst</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Root</strong>:</p>
+<ul>
+<li>Finally, the modified root node is returned after the entire tree has been processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is (O(n)), where (n) is the number of nodes in the binary search tree. This is because each node is visited exactly once during the traversal.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(h)), where (h) is the height of the tree. This accounts for the space used by the call stack during the recursive traversal. In the worst case (for a skewed tree), this could be (O(n)), but for balanced trees, it would be (O(\log n)).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively transforms a binary search tree into a greater sum tree using a reverse in-order traversal approach. This transformation updates each node&rsquo;s value to be the sum of all values greater than or equal to its original value, preserving the binary tree structure.</p>
+<p>The algorithm&rsquo;s efficiency, with a linear time complexity, makes it suitable for large trees, ensuring that each node is processed with minimal overhead. Additionally, the use of a single member variable for cumulative sums simplifies the implementation while maintaining clarity.</p>
+<p>This approach demonstrates the utility of tree traversal techniques in modifying data structures, making it applicable in various scenarios involving hierarchical data representations. The clarity and conciseness of the code enhance its maintainability and adaptability for further enhancements or modifications.</p>
+<p>In summary, the <code>bstToGst</code> function provides a robust solution to the problem, showcasing the effectiveness of recursive algorithms in tree manipulations and their relevance in practical applications such as data analysis, computational algorithms, and software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode56s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

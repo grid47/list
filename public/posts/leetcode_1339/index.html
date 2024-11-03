@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1339">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1339: Maximum Product of Splitted Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1339: Maximum Product of Splitted Binary Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1339">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1339: Maximum Product of Splitted Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1339/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1339: Maximum Product of Splitted Binary Tree">
-  <meta property="og:description" content="Solution to Leetcode 1339">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1339: Maximum Product of Splitted Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,7 +221,131 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sub</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode391s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a binary tree, and the goal is to find the maximum product of the sums of two subtrees formed by removing an edge from the tree. When an edge is cut, it divides the tree into two disjoint subtrees. The product of the sums of these two subtrees should be maximized. The output should be returned modulo (10^9 + 7).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use a depth-first search (DFS) strategy to traverse the tree and calculate the sum of the entire tree and the sums of its subtrees. The main steps of the approach include:</p>
+<ol>
+<li>
+<p><strong>Calculate Total Sum</strong>: First, calculate the total sum of all the nodes in the binary tree. This is essential because the sum of one subtree can be derived from the total sum minus the sum of the other subtree.</p>
+</li>
+<li>
+<p><strong>DFS for Subtree Sums</strong>: Use a recursive function to calculate the sum of each subtree and during this process, compute the product of the sums of the two resulting subtrees whenever an edge is virtually cut.</p>
+</li>
+<li>
+<p><strong>Maximize the Product</strong>: Keep track of the maximum product encountered during the traversal of the tree.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the maximum product modulo (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li>The code begins by defining the structure for a binary tree node using a <code>struct TreeNode</code>, which includes member variables for the value of the node and pointers to its left and right children.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>A class <code>Solution</code> is defined with two member variables: <code>sum</code> to hold the total sum of all nodes and <code>ans</code> to track the maximum product of sums of the two subtrees.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxProduct</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">=</span> <span class="n">ino</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ino</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">ans</span> <span class="o">%</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>maxProduct</code> takes the root of the binary tree as input. It first calculates the total sum of the tree by calling the <code>ino</code> function. It then calls <code>ino</code> again to calculate the maximum product of the sums of the two resulting subtrees. The final result is returned modulo (10^9 + 7).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="nf">ino</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>ino</code> function is a recursive function that returns the sum of the subtree rooted at the given node. If the current node is <code>NULL</code>, it returns 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">ino</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                      <span class="o">+</span> <span class="n">ino</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                      <span class="o">+</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The function computes the sum of the current subtree by recursively calculating the sums of the left and right subtrees and adding the value of the current node.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">sub</span> <span class="o">*</span> <span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">sub</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>It calculates the product of the sum of the current subtree (<code>sub</code>) and the sum of the other subtree formed by removing the edge (<code>sum - sub</code>). The maximum product is updated if the current product is greater than the previously recorded maximum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sub</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the calculated sum of the current subtree.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of the solution is (O(n)), where (n) is the number of nodes in the binary tree. This is because we perform a single traversal of the tree to calculate both the total sum and the maximum product.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(h)), where (h) is the height of the binary tree, due to the recursion stack used during the DFS. In the worst case, the height of the tree could be (O(n)) for a skewed tree.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively finds the maximum product of the sums of two disjoint subtrees that can be formed by removing an edge from a binary tree. By utilizing depth-first search, it computes both the total sum and subtree sums in a single traversal. The use of modulo (10^9 + 7) ensures that the result fits within standard integer limits and avoids overflow.</p>
+<p>This solution is efficient and well-structured, demonstrating key concepts such as tree traversal, recursion, and dynamic product calculation. Understanding this implementation can enhance problem-solving skills related to binary trees and similar computational tasks.</p>
+<p>The approach can be applied in various scenarios involving tree structures, optimization problems, and partitioning, making it a valuable technique in algorithm design and competitive programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode391s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

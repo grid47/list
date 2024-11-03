@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1419">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1419: Minimum Number of Frogs Croaking in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1419: Minimum Number of Frogs Croaking">
-  <meta name="twitter:description" content="Solution to Leetcode 1419">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1419: Minimum Number of Frogs Croaking in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1419/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1419: Minimum Number of Frogs Croaking">
-  <meta property="og:description" content="Solution to Leetcode 1419">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1419: Minimum Number of Frogs Croaking in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -207,7 +207,152 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">frogs</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="nl">max_frog</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode480s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the minimum number of frogs needed to produce a given sequence of croaks, represented by the string <code>croakOfFrogs</code>. Each frog can only croak in the sequence &ldquo;croak&rdquo;, meaning it must croak the letters &lsquo;c&rsquo;, &lsquo;r&rsquo;, &lsquo;o&rsquo;, &lsquo;a&rsquo;, and &lsquo;k&rsquo; in that order. The goal is to find the minimum number of frogs that are simultaneously croaking to produce the entire string without any interruptions or violations of the sequence.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will maintain a count of how many frogs are in different stages of the croaking sequence at any given time. The approach can be summarized as follows:</p>
+<ol>
+<li>
+<p><strong>Counting Stages</strong>: Use an array to count how many frogs are currently croaking each letter of the word &ldquo;croak&rdquo;. Each index in the array corresponds to a letter in the sequence.</p>
+</li>
+<li>
+<p><strong>Tracking Frogs</strong>: Maintain a variable to track the number of frogs currently croaking and another variable to track the maximum number of frogs needed at any point in time.</p>
+</li>
+<li>
+<p><strong>Processing the String</strong>: Iterate through each character in the input string:</p>
+<ul>
+<li>Increase the count for &lsquo;c&rsquo; and increase the frog count.</li>
+<li>For subsequent characters (&lsquo;r&rsquo;, &lsquo;o&rsquo;, &lsquo;a&rsquo;), check if there are frogs in the previous stage of the sequence. If there are none when needed, it means an error has occurred, and the function should return -1.</li>
+<li>For &lsquo;k&rsquo;, decrease the current frog count as this indicates the frog has finished croaking.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>: At the end of the iteration, ensure that all frogs have completed their croaking sequence. If any frogs are still active (i.e., not completed the sequence), return -1.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code to understand each part of the implementation:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>This line defines the class <code>Solution</code>, which encapsulates the function to solve the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minNumberOfFrogs</span><span class="p">(</span><span class="n">string</span> <span class="n">croakOfFrogs</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>minNumberOfFrogs</code> function takes a string <code>croakOfFrogs</code> as input and returns an integer representing the minimum number of frogs required.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">frogs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_frog</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>An array <code>cnt</code> of size 5 is initialized to count the frogs at each stage of the croaking sequence (&lsquo;c&rsquo;, &lsquo;r&rsquo;, &lsquo;o&rsquo;, &lsquo;a&rsquo;, &lsquo;k&rsquo;).</li>
+<li>The variable <code>frogs</code> tracks the current number of frogs croaking, and <code>max_frog</code> tracks the maximum number of frogs needed at any point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">croakOfFrogs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="s">&#34;croak&#34;</span><span class="p">).</span><span class="n">find</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>A for-each loop iterates through each character <code>ch</code> in the input string <code>croakOfFrogs</code>.</li>
+<li>The variable <code>n</code> is set to the index of <code>ch</code> in the string &ldquo;croak&rdquo;. This determines which stage of the croaking sequence the character represents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Each Character</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">max_frog</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">max_frog</span><span class="p">,</span> <span class="o">++</span><span class="n">frogs</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="o">--</span><span class="n">cnt</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>   <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>             <span class="o">--</span><span class="n">frogs</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the character is &lsquo;c&rsquo; (index 0), increase the <code>frogs</code> count and update <code>max_frog</code> if this count exceeds the previous maximum.</li>
+<li>If the character is not &lsquo;c&rsquo;, decrement the count of the previous stage (<code>cnt[n - 1]</code>). If this count goes below zero, it means there are no frogs available to transition to the current stage, so return -1.</li>
+<li>If the character is &lsquo;k&rsquo; (index 4), decrement the <code>frogs</code> count, indicating a frog has finished croaking.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">frogs</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">max_frog</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After processing all characters, check if <code>frogs</code> is zero. If it is, return the maximum number of frogs used at any point; otherwise, return -1 if some frogs are still in the croaking process.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(n)), where (n) is the length of the input string <code>croakOfFrogs</code>. This is due to the single pass through the string to count the stages of croaking.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since the array <code>cnt</code> is of fixed size (5) and does not depend on the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minNumberOfFrogs</code> function efficiently determines the minimum number of frogs required to produce a given sequence of croaks. By keeping track of the stages of the croaking sequence using a simple counting array and two variables to monitor active frogs and maximum frogs needed, the solution operates in linear time and constant space.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Stage Tracking</strong>: Using an array to keep track of different stages in a sequence can simplify complex counting problems.</li>
+<li><strong>Error Handling</strong>: The approach incorporates robust error checking to ensure that the croaking sequence is valid, returning early if any inconsistencies are found.</li>
+<li><strong>Performance</strong>: The solution is optimized for performance with linear time complexity and minimal space usage, making it suitable for processing large inputs efficiently.</li>
+</ul>
+<p>Overall, this implementation demonstrates the power of structured counting and careful condition checking to solve real-world problems involving sequences and states, specifically in the context of the frog croaking challenge.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode480s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

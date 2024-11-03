@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1359">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1359: Count All Valid Pickup and Delivery Options in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1359: Count All Valid Pickup and Delivery Options">
-  <meta name="twitter:description" content="Solution to Leetcode 1359">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1359: Count All Valid Pickup and Delivery Options in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1359/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1359: Count All Valid Pickup and Delivery Options">
-  <meta property="og:description" content="Solution to Leetcode 1359">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1359: Count All Valid Pickup and Delivery Options in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,7 +204,124 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode413s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves counting the number of valid ways to deliver <code>n</code> orders, where each order consists of a unique food item that needs to be picked up and delivered. The constraints of the problem state that:</p>
+<ul>
+<li>Each order can only be delivered after it has been picked up.</li>
+<li>The pickup and delivery of orders must occur in such a way that the order of pickups and deliveries maintains the sequence of the orders.</li>
+</ul>
+<p>For example, if you have 3 orders, denoted as 1, 2, and 3, you can pick them up in any order, but you must deliver them following the rule that an order can only be delivered after it has been picked up.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize combinatorial mathematics. The key insight is that the number of valid sequences for picking up and delivering <code>n</code> orders can be represented using a specific formula:</p>
+<ul>
+<li>For each order <code>i</code>, there are <code>2 * i - 1</code> positions to place its delivery after its pickup, as there will be <code>i</code> pickups before it and <code>i-1</code> deliveries already completed.</li>
+<li>The total number of sequences can be calculated iteratively using the formula:
+[
+\text{countOrders}(n) = \prod_{i=1}^{n} (2i - 1) \times i
+]
+This accounts for both the ways to pick up and deliver the orders while maintaining the constraints.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countOrders</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize result variable to store the count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// Define modulo value to prevent overflow
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// Iterate from 1 to n to compute the total valid orderings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Update result using the derived formula
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the final result as an integer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>A variable <code>res</code> is initialized to <code>1</code>, which will store the cumulative product of valid order counts.</li>
+<li>A variable <code>mod</code> is set to (10^9 + 7), which is a common modulus used in programming contests to handle large numbers and prevent overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through Orders</strong>:</p>
+<ul>
+<li>A <code>for</code> loop runs from <code>1</code> to <code>n</code>, representing each order:
+<ul>
+<li>In each iteration, the result <code>res</code> is updated by multiplying it with the current order&rsquo;s contribution to valid sequences, calculated as <code>(2 * i - 1) * i</code>.</li>
+<li>The modulo operation is applied to keep <code>res</code> within bounds.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Finally, the function returns <code>res</code> cast to an integer, which is the total number of valid ways to arrange the pickup and delivery of <code>n</code> orders.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is (O(n)) because we iterate through each order exactly once to compute the total number of valid sequences.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since we are only using a few integer variables to store results and counts, independent of the size of <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countOrders</code> method provides an efficient solution to the problem of counting valid pickup and delivery sequences for <code>n</code> orders by leveraging combinatorial mathematics. The approach ensures that the solution runs in linear time, making it suitable for large inputs. This method highlights the power of mathematical formulas in solving combinatorial problems efficiently, allowing for concise and clear code that adheres to the constraints given.</p>
+<p>This detailed explanation serves as an educational resource for understanding how to approach combinatorial problems and the mathematical foundations that can simplify complex counting scenarios. The implementation illustrates how to maintain clarity in code while ensuring optimal performance.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode413s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

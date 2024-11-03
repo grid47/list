@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1237">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1237: Find Positive Integer Solution for a Given Equation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1237: Find Positive Integer Solution for a Given Equation">
-  <meta name="twitter:description" content="Solution to Leetcode 1237">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1237: Find Positive Integer Solution for a Given Equation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1237/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1237: Find Positive Integer Solution for a Given Equation">
-  <meta property="og:description" content="Solution to Leetcode 1237">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1237: Find Positive Integer Solution for a Given Equation in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -232,7 +232,122 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode276s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding all pairs of positive integers ( (x, y) ) such that a given function ( f(x, y) ) equals a target value ( z ). The function ( f ) is strictly increasing in both ( x ) and ( y ). This means that for any fixed ( x ), if you increase ( y ), the output of ( f(x, y) ) also increases, and similarly, for any fixed ( y ), increasing ( x ) will also result in a higher output. Given this property, the objective is to efficiently identify all such pairs ( (x, y) ) within the range ( 1 ) to ( 1000 ).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize a nested search strategy involving two loops:</p>
+<ol>
+<li><strong>Outer Loop</strong>: Iterate through all possible values of ( x ) from ( 1 ) to ( 1000 ).</li>
+<li><strong>Inner Loop</strong>: For each ( x ), perform a binary search on ( y ) to find values such that ( f(x, y) = z ).
+<ul>
+<li>If ( f(x, 0) ) exceeds ( z ), we can break early from the outer loop since all subsequent values of ( x ) will also result in outputs greater than ( z ).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">findSolution</span><span class="p">(</span><span class="n">CustomFunction</span><span class="o">&amp;</span> <span class="n">cf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">z</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">xl</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">xr</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-4</strong>: We define the <code>Solution</code> class and declare the public method <code>findSolution</code>, which takes a <code>CustomFunction</code> reference and an integer <code>z</code> as inputs. We also initialize the bounds for ( x ) and an empty result vector <code>res</code> to store the valid pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cf</span><span class="p">.</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">z</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 5-7</strong>: We begin an outer loop that iterates ( x ) from ( 1 ) to ( 1000 ). Inside this loop, we check if ( f(x, 0) ) is greater than ( z ). If it is, we break out of the loop, as all further values of ( x ) will also yield results greater than ( z ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">yl</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">yr</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>            
+</span></span></code></pre></div><ul>
+<li><strong>Lines 8-10</strong>: We initialize <code>ans</code> to store the valid ( y ) value when found and set the binary search bounds for ( y ) from ( 1 ) to ( 1000 ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">yl</span> <span class="o">&lt;=</span> <span class="n">yr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">ymid</span> <span class="o">=</span> <span class="n">yl</span> <span class="o">+</span> <span class="p">(</span><span class="n">yr</span> <span class="o">-</span> <span class="n">yl</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">sol</span> <span class="o">=</span> <span class="n">cf</span><span class="p">.</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ymid</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 11-13</strong>: We start a while loop for binary search, continuing as long as the lower bound ( yl ) is less than or equal to the upper bound ( yr ). We calculate the midpoint ( ymid ) and call the function ( f ) to evaluate ( sol ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">sol</span> <span class="o">==</span> <span class="n">z</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ans</span> <span class="o">=</span> <span class="n">ymid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 14-16</strong>: If ( sol ) equals ( z ), we have found a valid ( y ) for the current ( x ). We store this ( y ) in <code>ans</code> and break out of the binary search.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">sol</span> <span class="o">&lt;</span> <span class="n">z</span><span class="p">)</span> <span class="n">yl</span> <span class="o">=</span> <span class="n">ymid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span>        <span class="n">yr</span> <span class="o">=</span> <span class="n">ymid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 17-20</strong>: If ( sol ) is less than ( z ), we adjust the lower bound ( yl ) to ( ymid + 1 ) to search for higher ( y ) values. Conversely, if ( sol ) is greater than ( z ), we adjust the upper bound ( yr ) to ( ymid - 1 ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">ans</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">ans</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 21-23</strong>: After the binary search completes, if <code>ans</code> has been updated (i.e., it is not -1), we push the pair ( (x, ans) ) into the result vector <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 24-26</strong>: Finally, we return the result vector containing all pairs ( (x, y) ) that satisfy the equation ( f(x, y) = z ).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this solution is ( O(1000 \log(1000)) ). The outer loop iterates ( 1000 ) times (for each possible ( x )), and for each ( x ), we perform a binary search over ( y ), which also runs in logarithmic time relative to the upper limit of ( 1000 ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) for auxiliary space used, aside from the output space, since we are only using a few additional integer variables.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>findSolution</code> function provides an efficient solution for finding pairs of integers ( (x, y) ) such that ( f(x, y) = z ) using a structured approach that leverages the increasing properties of the function. The combination of an outer loop to iterate over ( x ) values and an inner binary search for ( y ) values ensures that we minimize the number of function calls while systematically exploring the possible pairs. This algorithm effectively addresses the problem within the defined constraints, making it a suitable choice for applications requiring similar pair-finding logic.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode276s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

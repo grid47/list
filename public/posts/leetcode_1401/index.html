@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1401">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1401: Circle and Rectangle Overlapping in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1401: Circle and Rectangle Overlapping">
-  <meta name="twitter:description" content="Solution to Leetcode 1401">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1401: Circle and Rectangle Overlapping in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1401/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1401: Circle and Rectangle Overlapping">
-  <meta property="og:description" content="Solution to Leetcode 1401">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1401: Circle and Rectangle Overlapping in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -205,7 +205,152 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span> <span class="o">+</span> <span class="n">my</span> <span class="o">&lt;=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode459s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves determining whether a circle and a rectangle overlap. The circle is defined by its center coordinates and radius, while the rectangle is specified by its lower-left and upper-right corner coordinates. The goal is to ascertain whether there is any intersection between the two shapes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow a geometric approach to determine the relationship between the circle and the rectangle. The solution involves the following key steps:</p>
+<ol>
+<li>
+<p><strong>Coordinate Adjustment</strong>: First, we will adjust the rectangle’s coordinates based on the center of the circle. This allows us to simplify the overlap check by shifting the coordinate system such that the circle’s center is at the origin (0,0).</p>
+</li>
+<li>
+<p><strong>Distance Calculation</strong>: We need to find the distance from the circle&rsquo;s center (now at the origin) to the nearest edge of the rectangle. The overlap condition is based on comparing this distance to the circle’s radius.</p>
+</li>
+<li>
+<p><strong>Edge Cases Handling</strong>: If the rectangle is entirely to the left, right, above, or below the circle, there is no overlap. We must also account for scenarios where the circle intersects with the corners of the rectangle.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a breakdown of the provided C++ code, detailing each part of the implementation:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> which contains the method for checking overlap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method Signature</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">checkOverlap</span><span class="p">(</span><span class="kt">int</span> <span class="n">radius</span><span class="p">,</span> <span class="kt">int</span> <span class="n">xCenter</span><span class="p">,</span> <span class="kt">int</span> <span class="n">yCenter</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>checkOverlap</code> method takes six integer parameters:
+<ul>
+<li><code>radius</code>: The radius of the circle.</li>
+<li><code>xCenter</code>: The x-coordinate of the circle&rsquo;s center.</li>
+<li><code>yCenter</code>: The y-coordinate of the circle&rsquo;s center.</li>
+<li><code>x1</code>, <code>y1</code>: The coordinates of the bottom-left corner of the rectangle.</li>
+<li><code>x2</code>, <code>y2</code>: The coordinates of the top-right corner of the rectangle.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Coordinate Adjustment</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">x1</span> <span class="o">-=</span> <span class="n">xCenter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x2</span> <span class="o">-=</span> <span class="n">xCenter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y1</span> <span class="o">-=</span> <span class="n">yCenter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y2</span> <span class="o">-=</span> <span class="n">yCenter</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The coordinates of the rectangle are adjusted by subtracting the circle&rsquo;s center coordinates. This transforms the coordinate system so that the circle&rsquo;s center is at the origin (0,0). After this adjustment, <code>x1</code>, <code>y1</code>, <code>x2</code>, and <code>y2</code> represent the rectangle’s corners relative to the circle&rsquo;s center.</li>
+</ul>
+</li>
+<li>
+<p><strong>Distance Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">?</span> <span class="n">min</span><span class="p">(</span><span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">x2</span><span class="p">)</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">my</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">*</span> <span class="n">y2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">?</span> <span class="n">min</span><span class="p">(</span><span class="n">y1</span> <span class="o">*</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">*</span> <span class="n">y2</span><span class="p">)</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Here, we calculate the minimum squared distance from the center of the circle to the edges of the rectangle:
+<ul>
+<li><code>mx</code> computes the x-axis contribution. If <code>x1</code> and <code>x2</code> have the same sign (both are positive or both are negative), we find the minimum squared distance to the rectangle&rsquo;s edges using <code>min(x1 * x1, x2 * x2)</code>. If they are on opposite sides of the center, we set <code>mx</code> to 0.</li>
+<li><code>my</code> performs a similar calculation for the y-axis.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Overlap Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span> <span class="o">+</span> <span class="n">my</span> <span class="o">&lt;=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we check if the sum of the squared distances (<code>mx + my</code>) is less than or equal to the square of the radius (<code>radius * radius</code>). If this condition holds, it means that the circle and rectangle overlap, and the function returns <code>true</code>. Otherwise, it returns <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is ( O(1) ) since we are only performing a constant number of arithmetic operations regardless of the size of the inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also ( O(1) ) because we are using a fixed amount of space for variables and not allocating any additional data structures that depend on input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation provides an efficient method to determine if a circle and a rectangle overlap based on geometric principles. By translating the problem into a simple coordinate system, we can use basic arithmetic operations to ascertain overlap without the need for more complex geometrical computations.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Geometric Intuition</strong>: Understanding how to manipulate coordinates based on geometric shapes is crucial for solving problems in computational geometry.</li>
+<li><strong>Efficiency</strong>: The approach achieves constant time complexity, making it suitable for high-performance applications where rapid computations are necessary.</li>
+<li><strong>Scalability</strong>: Since the solution does not depend on the size of the inputs beyond a fixed number of variables, it is scalable for large coordinate values.</li>
+</ul>
+<p>This solution serves as a prime example of how to effectively tackle geometric overlap problems in computer science and algorithm design, offering a blend of mathematical understanding and programming techniques.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode459s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

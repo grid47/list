@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1441">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1441: Build an Array With Stack Operations in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1441: Build an Array With Stack Operations">
-  <meta name="twitter:description" content="Solution to Leetcode 1441">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1441: Build an Array With Stack Operations in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1441/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1441: Build an Array With Stack Operations">
-  <meta property="og:description" content="Solution to Leetcode 1441">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1441: Build an Array With Stack Operations in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -210,7 +210,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode505s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to construct an array using a sequence of operations defined as &ldquo;Push&rdquo; and &ldquo;Pop&rdquo;. You are given a target array, and you need to build this array from the empty state using integers from 1 to <code>n</code> sequentially. The operations &ldquo;Push&rdquo; and &ldquo;Pop&rdquo; correspond to pushing an integer onto a stack and removing the last pushed integer, respectively. The goal is to determine the exact sequence of operations needed to achieve the target array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we need to simulate the process of building the target array step by step. We can do this by iterating through the elements of the target array and performing the necessary operations. The approach can be summarized in the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: We will maintain a result vector to store the operations and a variable to track the current integer being considered.</p>
+</li>
+<li>
+<p><strong>Iterate Through Target Elements</strong>: For each element in the target array:</p>
+<ul>
+<li>If the current integer is less than the target element, we perform &ldquo;Push&rdquo; for the current integer and &ldquo;Pop&rdquo; for all integers up to but not including the target element.</li>
+<li>Once the current integer matches the target element, we perform a &ldquo;Push&rdquo; to add the current integer to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After processing all elements in the target array, we will return the sequence of operations stored in the result vector.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code in detail:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code>, which encapsulates the method to generate the required operation sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">buildArray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">target</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>buildArray</code> accepts two parameters: a vector of integers <code>target</code>, representing the desired array, and an integer <code>n</code>, representing the range of numbers that can be used (from 1 to <code>n</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">currElem</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a vector of strings <code>ans</code> to store the sequence of operations. The integer <code>currElem</code> is initialized to 1, indicating the next integer to consider for pushing onto the stack.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Target Elements</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates through each element in the target array using the index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inner While Loop for Non-Matching Elements</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">currElem</span> <span class="o">!=</span> <span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Push&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Pop&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">currElem</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we check if the current element (<code>currElem</code>) is not equal to the target element at index <code>i</code>. If they are not equal, we perform the &ldquo;Push&rdquo; operation followed by the &ldquo;Pop&rdquo; operation. This is repeated until <code>currElem</code> matches the target element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Push the Current Element</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Push&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">currElem</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Once <code>currElem</code> matches the target element, we perform a final &ldquo;Push&rdquo; operation to add this element to the sequence and increment <code>currElem</code> for the next iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After processing all elements in the target array, we return the vector <code>ans</code>, which contains the complete sequence of operations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(m)), where (m) is the length of the target array. In the worst-case scenario, the number of operations performed may approach (2m) (when each target element requires pushing and popping for all preceding elements). However, since we are effectively processing each element in the target once, the overall complexity remains linear with respect to the length of the target array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(m)) due to the space required to store the output operations in the result vector.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently constructs the desired array from a sequence of &ldquo;Push&rdquo; and &ldquo;Pop&rdquo; operations using a straightforward approach. By maintaining a counter for the current integer and iterating through the target elements, we ensure that the operations are performed in a manner that accurately reflects the rules of stack manipulation.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Stack Operations</strong>: Understanding the operations of a stack (LIFO - Last In First Out) is crucial in solving problems involving dynamic construction of arrays or sequences.</p>
+</li>
+<li>
+<p><strong>Simulation Approach</strong>: The approach taken in this solution is a simulation of the desired process, highlighting how simple algorithms can effectively solve complex problems.</p>
+</li>
+<li>
+<p><strong>Efficiency Considerations</strong>: The solution is optimized to operate in linear time and space relative to the input size, making it suitable for scenarios where performance is critical.</p>
+</li>
+</ol>
+<p>Overall, this implementation serves as a solid example of how to model array construction using stack operations, and it can be extended or modified for similar problems in competitive programming or software development tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode505s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

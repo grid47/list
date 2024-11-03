@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1498">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition">
-  <meta name="twitter:description" content="Solution to Leetcode 1498">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1498/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition">
-  <meta property="og:description" content="Solution to Leetcode 1498">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -230,7 +230,172 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode567s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the number of non-empty subsequences of a given array <code>nums</code> such that the sum of the minimum and maximum elements in each subsequence is less than or equal to a specified value <code>target</code>. Given the potential size of the input and the constraints, we need an efficient approach to count these subsequences.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can leverage sorting and binary search, along with properties of subsequences. Here’s a high-level breakdown of our approach:</p>
+<ol>
+<li><strong>Sorting</strong>: First, we sort the input array. Sorting allows us to easily identify the minimum and maximum elements of any subsequence.</li>
+<li><strong>Two-Pointer Technique</strong>: By iterating over each element of the sorted array as a potential minimum, we can use binary search to find the maximum valid element that, when combined with the current minimum, satisfies the target condition.</li>
+<li><strong>Counting Subsequences</strong>: For each valid pair of minimum and maximum, we can compute the number of valid subsequences that can be formed by combining elements between these two indices using the formula (2^{(index_{max} - index_{min} - 1)}). This is derived from the fact that each element can either be included or excluded in the subsequence.</li>
+<li><strong>Modular Arithmetic</strong>: Since the result can be large, we perform calculations modulo (10^9 + 7).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, we define a class <code>Solution</code> with a member variable <code>mod</code>, which is the modulus used for calculations to prevent overflow.</p>
+<h4 id="step-1-power-of-2-function">
+  Step 1: Power of 2 Function
+  <a class="heading-link" href="#step-1-power-of-2-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">pow2</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">pow2</span><span class="p">(</span><span class="n">idx</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">*</span> <span class="n">res</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">pow2</span><span class="p">(</span><span class="n">idx</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">*</span> <span class="n">res</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>This recursive function computes (2^{idx} \mod \text{mod}):</p>
+<ul>
+<li>If ( idx ) is 0, we return 1 (the base case).</li>
+<li>If ( idx ) is odd, we compute the power for half the index, square it, and multiply by 2.</li>
+<li>If ( idx ) is even, we just square the power computed for half the index.</li>
+</ul>
+<p>This function allows us to efficiently calculate powers of 2 using recursion and modular arithmetic.</p>
+<h4 id="step-2-main-function-to-count-subsequences">
+  Step 2: Main Function to Count Subsequences
+  <a class="heading-link" href="#step-2-main-function-to-count-subsequences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numSubseq</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><p>We define the main function <code>numSubseq</code>, which first sorts the input array <code>nums</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to accumulate the count of valid subsequences.</li>
+<li>If the current minimum element multiplied by 2 exceeds the target, we break out of the loop as no valid maximum can be found.</li>
+</ul>
+<h4 id="step-3-finding-valid-maximum-elements">
+  Step 3: Finding Valid Maximum Elements
+  <a class="heading-link" href="#step-3-finding-valid-maximum-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">end</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">it</span> <span class="o">-</span> <span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We compute <code>end</code>, which is the maximum valid value that can be paired with the current minimum <code>nums[i]</code>.</li>
+<li>Using <code>upper_bound</code>, we find the first index in <code>nums</code> that exceeds <code>end</code>. This allows us to count how many elements can be paired with the current minimum.</li>
+</ul>
+<h4 id="step-4-counting-subsequences">
+  Step 4: Counting Subsequences
+  <a class="heading-link" href="#step-4-counting-subsequences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="n">pow2</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>For each valid pair of indices, we compute the number of subsequences formed by the elements between the indices (i.e., <code>idx - i - 1</code>), and add this to <code>res</code>, taking care to apply the modulus to keep the number manageable.</li>
+<li>Finally, we return the result <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Sorting the array takes (O(n \log n)).</li>
+<li>The loop iterates through the array once, and for each element, we perform a binary search, leading to a complexity of (O(n \log n)).</li>
+<li>Thus, the overall time complexity is (O(n \log n)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) if we consider only variables used in calculations. However, the input array may be considered to use additional space for sorting.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively counts the valid subsequences where the sum of the minimum and maximum elements does not exceed the target value. By combining sorting with binary search and leveraging modular arithmetic for efficiency, we ensure that the approach is both optimal and scalable for larger inputs.</p>
+<p><strong>Key Points</strong>:</p>
+<ul>
+<li><strong>Efficiency</strong>: The combination of sorting and binary search enables an efficient solution.</li>
+<li><strong>Modular Arithmetic</strong>: Ensures results remain within manageable bounds.</li>
+<li><strong>Power of Two Calculation</strong>: The recursive approach for calculating powers is elegant and efficient.</li>
+</ul>
+<p>Overall, this approach provides a robust framework for solving similar combinatorial problems involving subsequences and conditions based on their values.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode567s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

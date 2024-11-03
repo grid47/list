@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1160">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1160: Find Words That Can Be Formed by Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1160: Find Words That Can Be Formed by Characters">
-  <meta name="twitter:description" content="Solution to Leetcode 1160">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1160: Find Words That Can Be Formed by Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1160/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1160: Find Words That Can Be Formed by Characters">
-  <meta property="og:description" content="Solution to Leetcode 1160">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1160: Find Words That Can Be Formed by Characters in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,130 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode191s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of the <code>countCharacters</code> function is to determine how many characters are in words that can be formed using a specified set of characters. We are given an array of words, <code>words</code>, and a string of characters, <code>chars</code>. For each word, if all the letters in that word can be made using the letters in <code>chars</code> (with each letter used at most as many times as it appears in <code>chars</code>), then the length of the word is added to the result. Ultimately, the function returns the sum of the lengths of such words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The function utilizes character frequency counting to ensure each word can be formed from the characters in <code>chars</code>:</p>
+<ol>
+<li><strong>Frequency Counting</strong>:
+<ul>
+<li>An array <code>cnt</code> of size 26 (representing each letter in the English alphabet) counts the frequency of each character in <code>chars</code>.</li>
+<li>For each character in <code>chars</code>, the respective count is incremented in <code>cnt</code>.</li>
+</ul>
+</li>
+<li><strong>Validation Check for Each Word</strong>:
+<ul>
+<li>For each word in <code>words</code>, a separate frequency array, <code>cnt1</code>, is used to track character counts within that word.</li>
+<li>As we iterate over each character in the word, we check if adding that character would exceed its count in <code>cnt</code>. If it does, the word cannot be formed, so we move to the next word.</li>
+<li>If all characters in the word stay within the limits of <code>cnt</code>, we add the word’s length to the result.</li>
+</ul>
+</li>
+<li><strong>Result Accumulation</strong>:
+<ul>
+<li>The function accumulates the length of each valid word into <code>res</code>, which is returned at the end.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a line-by-line breakdown of the function and what each section accomplishes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countCharacters</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">,</span> <span class="n">string</span> <span class="n">chars</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 3-4</strong>: The function starts by declaring a <code>cnt</code> array to store character frequencies for <code>chars</code>, initialized to zero for each of the 26 letters. An integer <code>res</code> is also initialized to accumulate the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">chars</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">            <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 5-6</strong>: We populate the <code>cnt</code> array by iterating over each character in <code>chars</code>. The <code>ch - 'a'</code> operation calculates the index for each letter, storing its count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">w</span> <span class="p">:</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">cnt1</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">match</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 7-8</strong>: For each word in <code>words</code>, we declare <code>cnt1</code> to store frequencies of the word’s characters and initialize a <code>match</code> flag to <code>true</code>. This flag will track whether the word can be constructed from <code>chars</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">cnt1</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cnt</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">match</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 9-12</strong>: As we iterate over each character in the word, <code>cnt1</code> records the frequency. If any character’s count in <code>cnt1</code> exceeds its count in <code>cnt</code>, <code>match</code> is set to <code>false</code> and we exit the loop.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 13-15</strong>: If <code>match</code> remains <code>true</code> (indicating the word can be formed from <code>chars</code>), we add the word’s length to <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 16</strong>: Finally, we return <code>res</code>, which is the total length of words that can be formed using <code>chars</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>The time complexity is (O(N \times M)), where (N) is the number of words, and (M) is the average length of the words in <code>words</code>.</li>
+<li>For each word, we iterate through its characters and perform checks against the <code>cnt</code> array.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>The space complexity is (O(1)) because the <code>cnt</code> and <code>cnt1</code> arrays are of fixed size (26) regardless of the input size.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countCharacters</code> function provides an efficient solution for finding the total length of words that can be constructed from a given set of characters. It relies on frequency counting for quick validation, allowing each word to be checked in constant time relative to its length. This approach is especially efficient for cases with a large number of words and characters, providing a clear and scalable solution.</p>
+<p>By focusing on character frequency comparison, this function avoids unnecessary complexity and ensures optimal performance. Its structure, using auxiliary arrays and conditional checks, demonstrates a common pattern in string and character counting problems, making it applicable to similar challenges in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode191s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     

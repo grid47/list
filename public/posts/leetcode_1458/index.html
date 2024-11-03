@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1458">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1458: Max Dot Product of Two Subsequences in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1458: Max Dot Product of Two Subsequences">
-  <meta name="twitter:description" content="Solution to Leetcode 1458">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1458: Max Dot Product of Two Subsequences in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1458/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1458: Max Dot Product of Two Subsequences">
-  <meta property="og:description" content="Solution to Leetcode 1458">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1458: Max Dot Product of Two Subsequences in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -226,7 +226,200 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode522s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the maximum dot product of two vectors, <code>nums1</code> and <code>nums2</code>, by selecting a non-empty subset from each vector. The dot product of two vectors is the sum of the products of their corresponding elements. For instance, given two vectors <code>A</code> and <code>B</code>, the dot product is calculated as:</p>
+<p>[ \text{dot product} = A[0] \times B[0] + A[1] \times B[1] + &hellip; + A[n] \times B[n] ]</p>
+<p>In this problem, we can only compute the dot product using corresponding elements from both vectors when both subsets are selected simultaneously. The goal is to determine the maximum possible dot product.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a dynamic programming (DP) approach. The idea is to create a 2D DP table where each cell ( dp[i][j] ) will store the maximum dot product that can be obtained by considering the first ( i ) elements of <code>nums1</code> and the first ( j ) elements of <code>nums2</code>.</p>
+<ol>
+<li>
+<p><strong>Recursive Function with Memoization</strong>:</p>
+<ul>
+<li>We define a recursive function <code>dot(i, j)</code> which calculates the maximum dot product using elements starting from index <code>i</code> in <code>nums1</code> and index <code>j</code> in <code>nums2</code>.</li>
+<li>The function utilizes memoization to store previously computed results in a DP table, which prevents redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If either index exceeds the bounds of the respective array (i.e., ( i ) or ( j ) reaches the size of <code>nums1</code> or <code>nums2</code>), we return a very small value (like <code>INT_MIN</code>) indicating that the dot product cannot be computed further.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<ul>
+<li>For each combination of indices ( (i, j) ):
+<ul>
+<li>We consider three scenarios:
+<ul>
+<li>Not including the current element from <code>nums1</code> and moving to the next element in <code>nums1</code>.</li>
+<li>Not including the current element from <code>nums2</code> and moving to the next element in <code>nums2</code>.</li>
+<li>Including the product of the current elements ( n1[i] ) and ( n2[j] ).</li>
+<li>If we include both ( n1[i] ) and ( n2[j] ), we recursively calculate the dot product of the remaining elements.</li>
+</ul>
+</li>
+<li>We update the maximum dot product found from these scenarios.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The final result is stored in <code>dp[0][0]</code>, representing the maximum dot product that can be obtained using all elements of both vectors.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The solution is encapsulated within a class named <code>Solution</code>, which is standard for competitive programming.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Members</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><code>dp</code>: A 2D vector to store the maximum dot products for given indices.</li>
+<li><code>n1</code> and <code>n2</code>: Vectors to hold the input arrays <code>nums1</code> and <code>nums2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Dot Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dot</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>This function calculates the maximum dot product starting from indices <code>i</code> and <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">n1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If we have exceeded the bounds of either vector, we return <code>INT_MIN</code> to indicate that this path does not contribute to a valid dot product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>If the result for ( dp[i][j] ) has already been computed, we return it to avoid recalculating.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Dot Product Scenarios</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">n2</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>The first line calculates the maximum dot product by excluding the current element of <code>nums1</code>.</li>
+<li>The second line excludes the current element of <code>nums2</code>.</li>
+<li>The third line considers the product of the current elements from both vectors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Combining Products</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">n2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dot</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">q</span> <span class="o">&lt;=</span> <span class="n">INT_MAX</span> <span class="o">&amp;&amp;</span> <span class="n">q</span> <span class="o">&gt;=</span> <span class="n">INT_MIN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">q</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>This line checks if including both <code>n1[i]</code> and <code>n2[j]</code> yields a valid product and recursively computes the dot product of the remaining elements.</li>
+<li>The long cast ensures that we do not encounter overflow when multiplying two integers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store Result in DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we store the calculated maximum dot product in the DP table for future reference.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function to Initialize DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">maxDotProduct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dp</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n1</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n2</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>This function initializes the DP table with <code>-1</code> to indicate uncomputed states.</li>
+<li>It sets the input vectors and calls the recursive function starting from indices <code>0</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the algorithm is ( O(N \times M) ), where ( N ) is the size of <code>nums1</code> and ( M ) is the size of <code>nums2</code>. This is due to the DP table being filled out for all combinations of indices from both vectors.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also ( O(N \times M) ) for the DP table. Additionally, there is some constant space used for other variables, but the main contribution comes from the DP table.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum dot product of two vectors by utilizing a dynamic programming approach combined with memoization. The key points of the approach include:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>: Utilizing a DP table to store intermediate results allows us to avoid redundant calculations and improve performance.</p>
+</li>
+<li>
+<p><strong>Recursive Structure</strong>: The recursive function breaks down the problem into smaller subproblems, making it easier to handle the complex conditions required for the dot product.</p>
+</li>
+<li>
+<p><strong>Bitwise Manipulation</strong>: Using bitwise operations and conditions to handle the inclusion and exclusion of elements simplifies the logic of the solution.</p>
+</li>
+</ol>
+<p>Overall, the code demonstrates an effective algorithm for maximizing the dot product while ensuring that we efficiently manage overlapping subproblems through memoization. The approach can be applied to various similar problems involving subsets and maximum calculations, highlighting the power of dynamic programming in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode522s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

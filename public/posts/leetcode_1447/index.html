@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1447">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1447: Simplified Fractions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1447: Simplified Fractions">
-  <meta name="twitter:description" content="Solution to Leetcode 1447">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1447: Simplified Fractions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1447/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1447: Simplified Fractions">
-  <meta property="og:description" content="Solution to Leetcode 1447">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1447: Simplified Fractions in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,159 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode516s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to generate all simplified fractions between <code>0</code> and <code>1</code> for a given integer <code>n</code>. A fraction is represented as <code>num/den</code> where <code>num</code> is the numerator and <code>den</code> is the denominator. The fractions should be in their simplest form, meaning that the greatest common divisor (GCD) of the numerator and denominator should be <code>1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will use a breadth-first search (BFS) strategy to explore all possible fractions. The main steps in our approach include:</p>
+<ol>
+<li><strong>Queue for BFS</strong>: We will use a queue to explore all possible fractions in a systematic manner, starting from the smallest fractions and building up to larger ones.</li>
+<li><strong>Tuple Representation</strong>: Each fraction will be represented as a tuple of numerators and denominators so we can efficiently compute new fractions.</li>
+<li><strong>Constraints on Denominators</strong>: We need to ensure that the denominators do not exceed <code>n</code> and are always larger than the numerators to maintain the fraction between <code>0</code> and <code>1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code to understand how it works:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The code is encapsulated within a class named <code>Solution</code>, which is a common practice in competitive programming and coding challenges.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">simplifiedFractions</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>simplifiedFractions</code> takes an integer <code>n</code> as an argument and returns a vector of strings representing the simplified fractions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Case for <code>n = 1</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="p">{};</span>
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is <code>1</code>, there are no fractions between <code>0</code> and <code>1</code> that can be formed, so the function immediately returns an empty vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">queue</span><span class="o">&lt;</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>res</code> to hold the resulting fractions.</li>
+<li>We initialize a queue <code>q</code> that will hold tuples representing the fractions in the form <code>(num1, den1, num2, den2)</code>. This is initialized with the tuple <code>(0, 1, 1, 1)</code>, representing the fractions <code>0/1</code> and <code>1/1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="p">[</span><span class="n">num1</span><span class="p">,</span> <span class="n">den1</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">den2</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We enter a loop that continues until the queue is empty. In each iteration, we pop the front tuple from the queue and unpack it into <code>num1</code>, <code>den1</code>, <code>num2</code>, and <code>den2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Create New Fraction</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">den</span> <span class="o">=</span> <span class="n">den1</span> <span class="o">+</span> <span class="n">den2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">to_string</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;/&#34;</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">den</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>We compute a new fraction by adding the numerators and denominators from the two fractions represented by the current tuple.</li>
+<li>The new fraction <code>num/den</code> is then converted to a string and added to the result vector <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enqueue New Fractions</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">den</span> <span class="o">+</span> <span class="n">den1</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">den1</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">den</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">den</span> <span class="o">+</span> <span class="n">den2</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">den</span><span class="p">,</span> <span class="n">num2</span><span class="p">,</span> <span class="n">den2</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We check if we can create new fractions by combining the current fraction with the existing ones.</li>
+<li>If the denominator of the new fraction does not exceed <code>n</code>, we enqueue the new tuples for further exploration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After the BFS completes, we return the vector <code>res</code> containing all the simplified fractions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is primarily determined by the number of fractions we can generate, which is related to the values of <code>n</code>. The exact complexity may vary, but it generally grows with the size of <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(N)), where (N) is the number of fractions generated. This includes space for the result vector and the queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code provides an efficient and straightforward method to generate all simplified fractions between <code>0</code> and <code>1</code> for a given integer <code>n</code>. The BFS approach allows us to systematically explore the possible fractions while ensuring they remain in their simplest form.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>: BFS is a powerful technique for exploring combinatorial structures in a systematic way, ensuring all possible combinations are explored.</p>
+</li>
+<li>
+<p><strong>Tuple Utilization</strong>: Using tuples to represent multiple related values (numerators and denominators) simplifies the process of generating new fractions.</p>
+</li>
+<li>
+<p><strong>Efficiency Considerations</strong>: The checks to limit denominators ensure we only generate valid fractions, helping keep our solution efficient.</p>
+</li>
+</ol>
+<p>In summary, the provided code effectively demonstrates a method to compute all simplified fractions within a specific range, making it a valuable reference for similar problems involving combinatorial generation and simplification.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode516s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

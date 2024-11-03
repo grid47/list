@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1104">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1104: Path In Zigzag Labelled Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1104: Path In Zigzag Labelled Binary Tree">
-  <meta name="twitter:description" content="Solution to Leetcode 1104">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1104: Path In Zigzag Labelled Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1104/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1104: Path In Zigzag Labelled Binary Tree">
-  <meta property="og:description" content="Solution to Leetcode 1104">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1104: Path In Zigzag Labelled Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -216,7 +216,119 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode128s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the path from a given label to the root in a zigzag binary tree. In this tree:</p>
+<ul>
+<li>Each level alternates between left-to-right and right-to-left numbering.</li>
+<li>The root is labeled as 1, its children as 2 and 3, the next level as 4 to 7, and so on. For even levels, the numbering goes from right to left.</li>
+</ul>
+<p>Given a label, the task is to construct the path from the node with that label to the root of the tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can leverage the properties of the zigzag binary tree. The key steps are:</p>
+<ol>
+<li><strong>Identify the Level</strong>: Determine the level of the given label using the logarithm base 2.</li>
+<li><strong>Calculate Parent Node</strong>: Use the properties of the zigzag tree to calculate the parent node by:
+<ul>
+<li>Identifying the left and right bounds for that level.</li>
+<li>Applying the zigzag transformation to find the parent node.</li>
+</ul>
+</li>
+<li><strong>Trace the Path to Root</strong>: Continue calculating the parent nodes until reaching the root, storing the results along the way.</li>
+<li><strong>Reverse the Result</strong>: Since the path is constructed from the label to the root, reverse the result to get it in the correct order.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Solution</code> class encapsulates the method to find the path.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>pathInZigZagTree</code> takes an integer <code>label</code> and returns a vector of integers representing the path.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pathInZigZagTree</span><span class="p">(</span><span class="kt">int</span> <span class="n">label</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determine the Level</strong>: Calculate the level of the label in the binary tree using the base-2 logarithm.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">log2</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop to Trace the Path</strong>: Use a loop to compute the path to the root. The loop continues until the level reaches zero.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">level</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="mi">2</span> <span class="p">,</span> <span class="p">(</span><span class="n">level</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="mi">2</span> <span class="p">,</span> <span class="n">level</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">label</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span> <span class="n">right</span> <span class="o">-</span> <span class="n">label</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Left and Right Bounds</strong>: The variables <code>left</code> and <code>right</code> represent the start and end of the current level.</li>
+<li><strong>Find the Parent</strong>: The expression <code>left + (right - label / 2)</code> determines the parent node in the zigzag pattern.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reverse the Result</strong>: After constructing the path in reverse order, it is reversed to return the correct order from root to the label.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this solution is (O(\log n)), where (n) is the label value. This is because the number of levels in the tree is logarithmic relative to the value of the label.</li>
+<li><strong>Space Complexity</strong>: The space complexity is also (O(\log n)) due to the storage of the result vector that holds the path from the label to the root.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided C++ code efficiently finds the path from a given label to the root in a zigzag binary tree. By leveraging the logarithmic properties of binary trees and the specific structure of the zigzag arrangement, the solution efficiently calculates parent nodes and constructs the path.</p>
+<p>The method <code>pathInZigZagTree</code> is both concise and effective, demonstrating how understanding tree properties can lead to elegant solutions. This approach not only showcases the mathematical foundations of binary trees but also highlights efficient coding practices that minimize unnecessary computations, making it suitable for larger values of labels.</p>
+<p>Overall, this implementation is an excellent example of applying theoretical concepts in computer science to practical programming problems, and it serves as a useful reference for those looking to understand tree traversal in non-standard binary tree structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode128s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

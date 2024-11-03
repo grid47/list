@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1072">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1072: Flip Columns For Maximum Number of Equal Rows in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1072: Flip Columns For Maximum Number of Equal Rows">
-  <meta name="twitter:description" content="Solution to Leetcode 1072">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1072: Flip Columns For Maximum Number of Equal Rows in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1072/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1072: Flip Columns For Maximum Number of Equal Rows">
-  <meta property="og:description" content="Solution to Leetcode 1072">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1072: Flip Columns For Maximum Number of Equal Rows in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,7 +212,131 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode91s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the maximum number of rows in a binary matrix that can be made equal after flipping any number of rows. A flip on a row inverts its values (0s become 1s and 1s become 0s). To clarify, two rows are considered equal if one can be transformed into the other through any number of flips.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a hashmap (unordered_map) to keep track of the distinct patterns of the rows. By transforming each row into a binary representation where all equivalent rows (rows that can be made equal through flipping) are treated as the same, we can count how many rows share the same pattern. The maximum count of any pattern in the hashmap will give us the answer.</p>
+<p>Here’s how the approach works:</p>
+<ol>
+<li>Iterate through each row of the matrix.</li>
+<li>For each row, generate a string representation where:
+<ul>
+<li>A &lsquo;1&rsquo; represents the value that is the same as the first element of the row.</li>
+<li>A &lsquo;0&rsquo; represents the value that is different from the first element.</li>
+</ul>
+</li>
+<li>Use a hashmap to count the occurrences of each unique string representation.</li>
+<li>The maximum value in the hashmap represents the maximum number of equal rows that can be obtained after performing the necessary flips.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:
+The <code>Solution</code> class encapsulates the method to solve the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>:
+The method <code>maxEqualRowsAfterFlips</code> takes a 2D vector (matrix) as input and returns an integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">maxEqualRowsAfterFlips</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mtx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>HashMap Initialization</strong>:
+An unordered_map is used to store the frequency of each unique pattern generated from the rows.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through Each Row</strong>:
+The code loops through each row in the matrix.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">mtx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Generating String Representation</strong>:
+For each row, a string <code>s</code> is created. The first element of the row is stored in <code>top</code>. As we iterate through the elements of the row, we build the string based on whether the current element is equal to <code>top</code> or not.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">top</span><span class="p">)</span> <span class="n">s</span> <span class="o">+=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="n">s</span> <span class="o">+=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating the HashMap</strong>:
+The hashmap <code>mp</code> is updated with the generated string <code>s</code> as the key, and the value is incremented to keep track of how many times this pattern has been encountered.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">mp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding the Maximum Count</strong>:
+After processing all rows, we need to find the maximum count of any pattern stored in the hashmap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span><span class="o">:</span> <span class="n">mp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>:
+Finally, the maximum count is returned as the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n \cdot m)), where (n) is the number of rows and (m) is the number of columns in the matrix. This is due to the nested loop where we iterate over each element of each row to build the string representation.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(k)), where (k) is the number of unique row patterns that can be formed. In the worst case, all rows are distinct, and thus the hashmap could potentially store (n) distinct patterns.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution provided effectively addresses the problem of maximizing the number of equal rows in a binary matrix through a systematic approach using a hashmap. By transforming rows into binary strings that capture their equivalence, we can efficiently count and determine the maximum number of equal rows achievable after performing the necessary flips.</p>
+<p>This technique leverages the properties of strings and hashmaps to optimize both the counting process and the retrieval of maximum counts. The approach is straightforward, efficient, and showcases the power of combinatorial counting in algorithm design.</p>
+<p>In summary, this method provides an effective solution to the problem while maintaining optimal performance, making it suitable for competitive programming and practical applications where matrix transformations are required.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode91s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

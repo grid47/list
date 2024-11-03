@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1040">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1040: Moving Stones Until Consecutive II in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1040: Moving Stones Until Consecutive II">
-  <meta name="twitter:description" content="Solution to Leetcode 1040">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1040: Moving Stones Until Consecutive II in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1040/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1040: Moving Stones Until Consecutive II">
-  <meta property="og:description" content="Solution to Leetcode 1040">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1040: Moving Stones Until Consecutive II in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,161 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">low</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">pos</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode75s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves moving stones positioned at distinct integers along a line. Each stone can be moved to an adjacent position, and we aim to determine two values:</p>
+<ol>
+<li>The minimum number of moves required to arrange the stones in a continuous segment.</li>
+<li>The maximum number of moves possible when rearranging the stones under specific constraints.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can break it down into several key steps:</p>
+<ol>
+<li>
+<p><strong>Sorting the Positions</strong>: The first step is to sort the array of stone positions. This will help us easily calculate the number of stones in any segment of the line.</p>
+</li>
+<li>
+<p><strong>Finding the Minimum Moves</strong>:</p>
+<ul>
+<li>Use a sliding window approach to calculate how many stones can fit in a continuous segment of length equal to the total number of stones.</li>
+<li>Maintain a variable to track the minimum number of moves needed to achieve the goal.</li>
+<li>Check for special conditions where moving only one stone might yield a quicker solution.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Maximum Moves</strong>: The maximum number of moves is determined by the gaps between the outermost stones. Specifically, evaluate how many positions can be left empty on the ends after filling in the middle.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>:</p>
+<ul>
+<li>The <code>numMovesStonesII</code> function takes a vector of integers <code>pos</code>, which represents the positions of the stones, and returns a vector of two integers representing the minimum and maximum moves.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numMovesStonesII</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting the Positions</strong>:</p>
+<ul>
+<li>The positions of the stones are sorted in ascending order to facilitate easier calculations for continuous segments.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">pos</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initializing Variables</strong>:</p>
+<ul>
+<li>We initialize <code>low</code> to <code>INT_MAX</code> to keep track of the minimum moves.</li>
+<li>Two pointers <code>j</code> and <code>n</code> are set, where <code>j</code> is for the sliding window, and <code>n</code> is the size of the positions vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pos</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through Stone Positions</strong>:</p>
+<ul>
+<li>We use a loop to iterate through each stone position with index <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adjusting the Sliding Window</strong>:</p>
+<ul>
+<li>For each position, adjust the sliding window with <code>j</code> to ensure the segment of stones can fit within a continuous block of size <code>n</code>. This is done by checking if the current stone&rsquo;s position minus the starting stone&rsquo;s position plus one exceeds <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Count of Stones in the Segment</strong>:</p>
+<ul>
+<li>The variable <code>cnt</code> calculates how many stones fit in the current segment from <code>j</code> to <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determining Minimum Moves</strong>:</p>
+<ul>
+<li>If we have <code>n - 1</code> stones in the current segment and they exactly fill the space, we set <code>low</code> to 2 (special case where one stone can be moved out).</li>
+<li>Otherwise, the minimum moves would be the number of gaps.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">low</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">low</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">cnt</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Maximum Moves</strong>:</p>
+<ul>
+<li>The maximum number of moves is calculated based on the largest gaps between the outermost stones, ensuring we consider the positions of the first two and the last two stones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">low</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">pos</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this solution is (O(n \log n)), where (n) is the number of stones. This complexity arises primarily from the sorting step.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) in terms of extra space since we are not using any additional data structures that grow with input size (excluding the input and output).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively calculates the minimum and maximum number of moves required to align stones positioned along a line using a sorting and sliding window approach.</p>
+<p>By first sorting the positions and then utilizing a two-pointer technique, we can efficiently determine how many moves are necessary to create a continuous segment of stones. The sliding window technique ensures that we only examine feasible segments of positions, thus optimizing our calculations.</p>
+<p>This solution is not only efficient but also clearly structured, making it easy to understand and maintain. The use of the minimum and maximum moves calculations provides a comprehensive overview of the possible configurations of the stones, demonstrating the effectiveness of algorithmic problem-solving in combinatorial scenarios.</p>
+<p>In summary, the <code>numMovesStonesII</code> function presents a robust and efficient method for addressing the challenge of stone positioning, which can be applicable in various scenarios within computational geometry and optimization problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode75s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

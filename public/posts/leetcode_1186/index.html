@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1186">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1186: Maximum Subarray Sum with One Deletion in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1186: Maximum Subarray Sum with One Deletion">
-  <meta name="twitter:description" content="Solution to Leetcode 1186">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1186: Maximum Subarray Sum with One Deletion in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1186/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1186: Maximum Subarray Sum with One Deletion">
-  <meta property="og:description" content="Solution to Leetcode 1186">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1186: Maximum Subarray Sum with One Deletion in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,7 +220,133 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode220s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to find the maximum sum of a contiguous subarray in a given array of integers, with the added twist that you may delete at most one element from the array. If you decide to delete one element, the remaining subarrays can still be combined to maximize the overall sum.</p>
+<p>For example, given an array <code>[-1, -2, 0, 3]</code>, the maximum sum after possibly removing an element is <code>3</code> (removing <code>-1</code> or <code>-2</code>). The solution needs to efficiently handle both the case of deleting an element and not deleting any element.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a dynamic programming approach to keep track of two primary calculations:</p>
+<ol>
+<li><strong>Maximum Subarray Sum Ending at Each Index</strong>: Calculate the maximum sum of subarrays ending at each index, using Kadane&rsquo;s algorithm.</li>
+<li><strong>Maximum Subarray Sum Starting from Each Index</strong>: Calculate the maximum sum of subarrays starting from each index.</li>
+</ol>
+<p>By combining these two arrays, we can efficiently compute the maximum sum possible after removing at most one element.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-3</strong>: The <code>Solution</code> class contains the <code>maximumSum</code> method, which takes a vector of integers <code>arr</code> as input.</li>
+<li>The variable <code>res</code> is initialized to hold the result, while <code>n</code> is the size of the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">curr_mx</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">overall_mx</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 4-7</strong>: Two variables, <code>curr_mx</code> and <code>overall_mx</code>, are initialized to the first element of the array.</li>
+<li>Two vectors <code>f</code> and <code>b</code> are created to store the maximum subarray sums ending at and starting from each index, respectively.</li>
+<li><code>f[0]</code> is set to the first element since it is the only subarray possible at index 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr_mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">curr_mx</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">overall_mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">curr_mx</span><span class="p">,</span> <span class="n">overall_mx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 8-12</strong>: This loop iterates through the array from the second element onwards.</li>
+<li><code>curr_mx</code> is updated to be the maximum of either the current element alone (<code>arr[i]</code>) or the sum of the current element and the maximum subarray sum up to the previous element (<code>curr_mx + arr[i]</code>).</li>
+<li><code>overall_mx</code> is updated to track the maximum value found so far.</li>
+<li>The maximum subarray sum ending at each index <code>i</code> is stored in <code>f[i]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">curr_mx</span> <span class="o">=</span> <span class="n">overall_mx</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 13</strong>: The variables <code>curr_mx</code> and <code>overall_mx</code> are reset for the next calculation. <code>b[n-1]</code> is initialized to the last element, as it&rsquo;s the only subarray at the last index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr_mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">curr_mx</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">overall_mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">overall_mx</span><span class="p">,</span> <span class="n">curr_mx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 14-18</strong>: This loop iterates backward through the array, similar to the previous loop.</li>
+<li>The maximum subarray sums starting from each index are calculated and stored in the vector <code>b</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">overall_mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 19-22</strong>: The variable <code>res</code> is first set to <code>overall_mx</code>, which represents the maximum sum without deleting any element.</li>
+<li>A second loop iterates from the second to the second-to-last element of the array. For each index <code>i</code>, it calculates the sum of the maximum subarray sum ending just before <code>i</code> (<code>f[i-1]</code>) and the maximum subarray sum starting just after <code>i</code> (<code>b[i+1]</code>), which simulates the effect of deleting the element at index <code>i</code>.</li>
+<li>The result is updated to the maximum of the current <code>res</code> and the combined sums.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 23</strong>: Finally, the method returns the maximum sum found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm consists of two linear passes through the array, resulting in a total time complexity of (O(n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The solution uses (O(n)) space for the two additional vectors <code>f</code> and <code>b</code> that store intermediate results.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maximumSum</code> function efficiently computes the maximum possible sum of a contiguous subarray, considering the option to remove at most one element. By utilizing dynamic programming techniques and Kadane&rsquo;s algorithm for tracking maximum sums, the solution is both optimal and straightforward. This approach provides a robust means of tackling the problem while maintaining clarity and efficiency, making it suitable for larger input sizes. The ability to handle both cases—removing an element or not—ensures that all potential solutions are considered, leading to the best possible outcome.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode220s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

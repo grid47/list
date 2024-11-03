@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1362">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1362: Closest Divisors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1362: Closest Divisors">
-  <meta name="twitter:description" content="Solution to Leetcode 1362">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1362: Closest Divisors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1362/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1362: Closest Divisors">
-  <meta property="og:description" content="Solution to Leetcode 1362">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1362: Closest Divisors in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,7 +204,127 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode419s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find two integers (a) and (b) such that:</p>
+<ol>
+<li>Both (a) and (b) are divisors of (num + 1) or (num + 2).</li>
+<li>The product (a \times b) is as close to (num) as possible, where (num) is a given integer.</li>
+<li>If multiple pairs of divisors satisfy this condition, the pair with the larger (a) should be preferred.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the following approach:</p>
+<ol>
+<li><strong>Iterate Backwards</strong>: Start from the square root of (num + 2) and check for divisors in descending order. This helps us find larger divisors first, thus aligning with the requirement to prefer larger values of (a).</li>
+<li><strong>Check Divisibility</strong>: For each integer (a) from the square root down to 1, check if (a) divides (num + 1) or (num + 2). If it does, compute (b) as ((num + 1) / a) or ((num + 2) / a).</li>
+<li><strong>Return Result</strong>: Once a valid pair is found, return it immediately since we start from the largest possible divisor.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">closestDivisors</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Start iterating from the integer part of the square root of (num + 2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">a</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Check if &#39;a&#39; is a divisor of (num + 1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">((</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">a</span><span class="p">};</span> <span class="c1">// Return the pair {a, b}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Check if &#39;a&#39; is a divisor of (num + 2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">((</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">a</span><span class="p">};</span> <span class="c1">// Return the pair {a, b}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Return an empty vector if no divisors are found (shouldn&#39;t happen)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<ul>
+<li>The method <code>closestDivisors</code> is defined as a public member of the <code>Solution</code> class and takes an integer <code>num</code> as input.</li>
+</ul>
+</li>
+<li>
+<p><strong>Looping Through Potential Divisors</strong>:</p>
+<ul>
+<li>The loop begins by calculating the square root of (num + 2) using <code>sqrt(num + 2)</code>. This value is stored in the variable <code>a</code>, which will be decremented in each iteration to check for divisors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Divisibility Checks</strong>:</p>
+<ul>
+<li>In the first condition, the code checks if (num + 1) is divisible by (a). If true, it constructs a vector with the values (a) and ((num + 1) / a) and immediately returns this vector.</li>
+<li>The second condition performs the same check for (num + 2). If this condition holds, it also returns the respective divisor pair.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<ul>
+<li>If no divisors are found (which is unlikely), the function returns an empty vector.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(\sqrt{num})). This is because we iterate from (\sqrt{num + 2}) down to 1 to find divisors. The number of iterations is proportional to the square root of the input, making this approach efficient for large values of <code>num</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since we are using a constant amount of extra space for the variables and the output vector. The vector returned holds two integers, but this does not depend on the size of the input.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>closestDivisors</code> function efficiently finds two integers that are divisors of either (num + 1) or (num + 2) and that multiply to a product closest to (num). By leveraging the properties of divisors and iterating from the square root downwards, the implementation achieves both correctness and optimal performance. This approach is particularly useful in competitive programming and algorithm design, where understanding divisor properties can lead to more efficient solutions.</p>
+<p>This explanation is crafted to provide clarity and understanding to readers, while being optimized for search engines to reach a broader audience interested in algorithm explanations and code analysis.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode419s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

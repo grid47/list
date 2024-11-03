@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1276">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1276: Number of Burgers with No Waste of Ingredients in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1276: Number of Burgers with No Waste of Ingredients">
-  <meta name="twitter:description" content="Solution to Leetcode 1276">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1276: Number of Burgers with No Waste of Ingredients in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1276/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1276: Number of Burgers with No Waste of Ingredients">
-  <meta property="og:description" content="Solution to Leetcode 1276">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1276: Number of Burgers with No Waste of Ingredients in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -231,7 +231,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">jumbo</span><span class="p">,</span> <span class="n">net</span> <span class="o">-</span> <span class="n">jumbo</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode319s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine how many types of burgers can be made given a specific total number of ingredients (tmt) and a specific number of cheese slices (chs). There are two types of burgers:</p>
+<ol>
+<li><strong>Jumbo Burger</strong>: Requires 4 ingredients and 1 cheese slice.</li>
+<li><strong>Small Burger</strong>: Requires 2 ingredients and 1 cheese slice.</li>
+</ol>
+<p>Given <code>tmt</code> (total ingredients) and <code>chs</code> (cheese slices), the goal is to compute how many Jumbo and Small burgers can be made such that all ingredients and cheese slices are used up, and return this as a vector containing the count of Jumbo and Small burgers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem relies on deriving a mathematical relationship rather than brute-forcing through combinations of burger types. The idea is to calculate how many Jumbo burgers can be made from the available ingredients and cheese slices, and then determine how many Small burgers can be made with the remaining resources.</p>
+<ol>
+<li><strong>Calculate Potential Jumbo Burgers</strong>:
+<ul>
+<li>Given that a Jumbo burger requires 4 ingredients and 1 cheese slice, the maximum number of Jumbo burgers is limited by the number of cheese slices and the total ingredients available.</li>
+</ul>
+</li>
+<li><strong>Compute Remaining Ingredients</strong>:
+<ul>
+<li>After determining how many Jumbo burgers can be made, calculate how many ingredients remain and then find how many Small burgers can be made with the remaining ingredients and cheese slices.</li>
+</ul>
+</li>
+<li><strong>Constraints Checking</strong>:
+<ul>
+<li>Ensure that the calculated values for the number of burgers do not violate any ingredient or cheese slice limits.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-3</strong>: We define the <code>Solution</code> class. <code>ans</code> is initialized as an empty vector to store the result, and <code>mp</code> is a nested map used for memoization (though it&rsquo;s not utilized in the final implementation).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">tmt</span><span class="p">,</span> <span class="kt">int</span> <span class="n">chs</span><span class="p">,</span> <span class="kt">int</span> <span class="n">one</span><span class="p">,</span> <span class="kt">int</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">tmt</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">chs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmt</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">chs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">{</span><span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmt</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">chs</span><span class="p">))</span> <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">][</span><span class="n">chs</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 4-11</strong>: This is a recursive helper function <code>dp</code> which aims to explore combinations of burgers (though it&rsquo;s commented out in the main function).
+<ul>
+<li>The base case checks if <code>tmt</code> (total ingredients) or <code>chs</code> (cheese slices) are non-positive.</li>
+<li>If both are exactly zero, it stores the current counts of burgers (<code>one</code>, <code>two</code>) in <code>ans</code> and returns true, indicating a valid combination has been found.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">tmt</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">chs</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="n">chs</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">one</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">two</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">][</span><span class="n">chs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">chs</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">][</span><span class="n">chs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">tmt</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">chs</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">chs</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">][</span><span class="n">chs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">tmt</span><span class="p">][</span><span class="n">chs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 12-23</strong>: This section evaluates possible burger combinations recursively.
+<ul>
+<li>If there are enough ingredients and cheese for a Jumbo burger, it calls <code>dp</code> recursively while subtracting the respective counts.</li>
+<li>If not, but there are enough for a Small burger, it similarly makes that call.</li>
+<li>If neither condition can be met, it marks this state in <code>mp</code> as false, indicating no valid combination was found.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">numOfBurgers</span><span class="p">(</span><span class="kt">int</span> <span class="n">tmt</span><span class="p">,</span> <span class="kt">int</span> <span class="n">chs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">net</span> <span class="o">=</span> <span class="n">chs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">jumbo</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">chs</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 24-28</strong>: The main function <code>numOfBurgers</code> initializes the <code>ans</code> vector. It computes the maximum potential number of Jumbo burgers using the formula <code>(tmt - 2 * chs) / 2</code>. This formula derives from the constraints that a Jumbo burger uses 4 ingredients and 1 cheese slice, while the remaining ingredients after using cheese for the Small burgers will dictate the count of Jumbo burgers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(((</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">chs</span> <span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">((</span><span class="n">tmt</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">chs</span> <span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">net</span> <span class="o">-</span> <span class="n">jumbo</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">jumbo</span><span class="p">,</span> <span class="n">net</span> <span class="o">-</span> <span class="n">jumbo</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 29-32</strong>: Here, the function checks several conditions:
+<ul>
+<li>If <code>tmt - 2 * chs &lt; 0</code>, it indicates that the total ingredients cannot even support the cheese slices, and thus an empty result is returned.</li>
+<li>If <code>tmt - 2 * chs</code> is odd, it cannot be evenly split between the burger types, so it also returns an empty result.</li>
+<li>Finally, if the number of cheese slices is less than the number of Jumbo burgers computed, it also returns an empty vector.</li>
+</ul>
+</li>
+<li>If all conditions are satisfied, it returns a vector containing the counts of Jumbo and Small burgers.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>The time complexity of this implementation is (O(1)) as the calculations performed involve simple arithmetic operations and logical checks, regardless of input size.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>The space complexity is (O(1)) since no additional data structures grow with input size; all calculations are done in constant space.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numOfBurgers</code> function provides an efficient method to determine the number of Jumbo and Small burgers that can be made with given ingredients and cheese slices by leveraging arithmetic relations rather than exhaustive search techniques. The approach is optimal, ensuring constant time complexity, making it suitable for scenarios with large input values.</p>
+<p>This solution exemplifies a clean and concise application of logic to solve a combinatorial problem effectively, demonstrating the importance of understanding constraints and conditions in mathematical problems. Overall, the code is well-structured, and the comments help clarify the thought process behind each section, making it approachable for readers looking to understand the solution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode319s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

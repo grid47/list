@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1488">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1488: Avoid Flood in The City in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1488: Avoid Flood in The City">
-  <meta name="twitter:description" content="Solution to Leetcode 1488">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1488: Avoid Flood in The City in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1488/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1488: Avoid Flood in The City">
-  <meta property="og:description" content="Solution to Leetcode 1488">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1488: Avoid Flood in The City in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -227,7 +227,163 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode556s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the behavior of lakes in a given sequence of rainfalls, represented by an array <code>rains</code>. Each index of the array represents a day, and the value indicates the lake that receives rain on that day. If the value is <code>0</code>, it means no rain falls on that day, and the ground can be dry. The objective is to avoid flooding in the lakes by strategically choosing which dry days to use for draining the lakes when they overflow. The solution must return an array where each element corresponds to a day in <code>rains</code>, with the following meanings:</p>
+<ul>
+<li>If it rains on a lake, the output is <code>-1</code>.</li>
+<li>If it&rsquo;s a dry day that is used to drain a lake, the output is the lake&rsquo;s identifier.</li>
+<li>If a lake overflows and there are no dry days available to drain it, the output should be an empty array indicating the impossibility of avoiding flooding.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to maintain a record of the lakes and their corresponding rain days, as well as a set of dry days available for draining. Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Data Structures</strong>: Utilize a set to keep track of dry days and an unordered map to record the last rainy day for each lake.</p>
+</li>
+<li>
+<p><strong>Iterate Through Rains</strong>: Loop through the <code>rains</code> array. For each day:</p>
+<ul>
+<li>If it rains (<code>rains[i] != 0</code>), check if the corresponding lake has rained before.</li>
+<li>If it has rained before, find the nearest available dry day after the last rainy day for that lake.</li>
+<li>If such a dry day exists, drain the lake on that day.</li>
+<li>If it is a dry day (<code>rains[i] == 0</code>), add it to the set of dry days.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fill the Answer Array</strong>: Create an answer array to store the results for each day as described above.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the constructed answer array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">avoidFlood</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">rains</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dry</span><span class="p">;</span>  <span class="c1">// Set to store indices of dry days
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>  <span class="c1">// Map to track the last rainy day for each lake
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">rains</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>  <span class="c1">// Size of the input array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>  <span class="c1">// Result array to be returned
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">rains</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// If it&#39;s a dry day
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">dry</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>  <span class="c1">// Add the index to the dry set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Mark it as a dry day in the answer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">lake</span> <span class="o">=</span> <span class="n">rains</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>  <span class="c1">// Identify the lake that is receiving rain
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">lake</span><span class="p">))</span> <span class="p">{</span>  <span class="c1">// If this lake has rained before
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">dry</span><span class="p">.</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">lake</span><span class="p">]);</span>  <span class="c1">// Find the next available dry day
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">dry</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="p">{};</span>  <span class="c1">// If no dry day is available, return empty array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    
+</span></span><span class="line"><span class="cl">                    <span class="n">ans</span><span class="p">[</span><span class="o">*</span><span class="n">it</span><span class="p">]</span> <span class="o">=</span> <span class="n">lake</span><span class="p">;</span>  <span class="c1">// Drain the lake on the dry day found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">dry</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>  <span class="c1">// Remove that day from the dry set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">lake</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>  <span class="c1">// Update the last rainy day for this lake
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Mark the day as a rainy day in the answer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>  <span class="c1">// Return the final answer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Set Initialization</strong>: A <code>set&lt;int&gt; dry</code> is used to track indices of dry days, allowing for efficient insertion and lookups.</p>
+</li>
+<li>
+<p><strong>Map Initialization</strong>: An <code>unordered_map&lt;int, int&gt; mp</code> keeps the last day when it rained for each lake, allowing for quick access.</p>
+</li>
+<li>
+<p><strong>Loop Through the Input</strong>: The main loop iterates through the <code>rains</code> array, checking each day&rsquo;s weather conditions.</p>
+</li>
+<li>
+<p><strong>Handling Dry Days</strong>: When encountering a dry day, the index is added to the <code>dry</code> set and <code>1</code> is appended to the result array.</p>
+</li>
+<li>
+<p><strong>Handling Rainy Days</strong>:</p>
+<ul>
+<li>If it rains on a lake that has rained before, the code checks for a dry day to drain it.</li>
+<li>Using <code>lower_bound</code>, it finds the smallest index in the dry set that is greater than or equal to the last rainy day of the lake.</li>
+<li>If a suitable dry day is found, the lake is drained on that day by updating the result array and removing that index from the dry set.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>: The function returns the result array, which contains the operations performed on each day.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)), where (n) is the length of the <code>rains</code> array. This is due to the logarithmic time complexity for operations on the set (insertion, deletion, and finding the lower bound).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)), as we maintain a set for dry days and a map for the last rainy days, which can grow up to the size of the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>avoidFlood</code> function efficiently determines how to manage lake flooding based on a given sequence of rainfall events. It adeptly utilizes a combination of a set and a hash map to track dry days and rainy occurrences, ensuring optimal performance even with large inputs.</p>
+<p>Key highlights include:</p>
+<ol>
+<li>
+<p><strong>Effective Use of Data Structures</strong>: The solution employs <code>set</code> and <code>unordered_map</code> to facilitate quick lookups and updates, enhancing performance.</p>
+</li>
+<li>
+<p><strong>Logical Flow</strong>: The step-by-step approach logically handles different scenarios (rainy and dry days) in a clear manner.</p>
+</li>
+<li>
+<p><strong>Real-world Applications</strong>: This solution is applicable in scenarios involving resource management, such as water reservoir systems, where the optimal handling of resources is critical.</p>
+</li>
+</ol>
+<p>Overall, this solution effectively addresses the problem while demonstrating good coding practices and efficient algorithms, making it a robust and scalable implementation for managing lake flooding during rain events.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode556s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

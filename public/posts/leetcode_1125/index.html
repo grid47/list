@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1125">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1125: Smallest Sufficient Team in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1125: Smallest Sufficient Team">
-  <meta name="twitter:description" content="Solution to Leetcode 1125">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1125: Smallest Sufficient Team in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1125/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1125: Smallest Sufficient Team">
-  <meta property="og:description" content="Solution to Leetcode 1125">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1125: Smallest Sufficient Team in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,7 +225,132 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode153s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to assemble the smallest team of people such that all the required skills are covered. We are given:</p>
+<ul>
+<li>An array of strings <code>req</code>, where each string represents a unique skill.</li>
+<li>A 2D array <code>people</code>, where each sub-array contains the skills of a person.</li>
+</ul>
+<p>Our goal is to return the indices of the smallest subset of people who can collectively cover all the skills specified in <code>req</code>.</p>
+<p>For example, given:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">req</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#34;coding&#34;</span><span class="p">,</span> <span class="s">&#34;design&#34;</span><span class="p">,</span> <span class="s">&#34;testing&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">people</span> <span class="o">=</span> <span class="na">[[&#34;coding&#34;], [&#34;design&#34;], [&#34;coding&#34;, &#34;testing&#34;], [&#34;design&#34;, &#34;testing&#34;]]</span><span class="p">;</span>
+</span></span></code></pre></div><p>The expected output would be <code>[0, 2]</code>, indicating that the first and third people together cover all required skills.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a bitmasking approach along with dynamic programming:</p>
+<ol>
+<li><strong>Bitmask Representation</strong>: Each skill can be represented as a bit in an integer. If a person has a skill, the corresponding bit is set. This allows us to easily combine skills using bitwise operations.</li>
+<li><strong>Dynamic Programming Table</strong>: We will maintain a dictionary <code>dp</code> where the keys are bitmasks representing the set of skills covered, and the values are lists of indices representing the team members that achieve this coverage.</li>
+<li><strong>Updating the DP Table</strong>: For each person, we compute their skill mask and iterate through the existing entries in <code>dp</code> to update the possible combinations of skills covered.</li>
+<li><strong>Final Result</strong>: The final answer will be the value corresponding to the bitmask that represents all required skills.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class <code>Solution</code> with a public member function <code>smallestSufficientTeam</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Declaration</strong>: The <code>smallestSufficientTeam</code> function takes a reference to a vector of strings for required skills and a reference to a 2D vector for people’s skills.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">smallestSufficientTeam</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">req</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;&amp;</span> <span class="n">people</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Mapping Skills to Indices</strong>: We create a map <code>mp</code> to associate each required skill with its index for easier bit manipulation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">req</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">req</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of DP Table</strong>: We create a map <code>dp</code> to store the minimum team required to cover the skills. The initial state represents no skills covered with an empty team.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span> <span class="c1">// Reserve space for all possible combinations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// Base case: no skills require no team
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Processing Each Person</strong>: We iterate through each person in <code>people</code> to calculate their skill mask.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">people</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Skill mask for the current person
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="n">string</span> <span class="nl">x</span><span class="p">:</span> <span class="n">people</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">m</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span> <span class="c1">// Set the corresponding bit for each skill
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating the DP Table</strong>: For each existing combination of skills in <code>dp</code>, we check if adding the current person&rsquo;s skills results in a new combination with a smaller team.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">dp</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">comb</span> <span class="o">=</span> <span class="n">m</span> <span class="o">|</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span> <span class="c1">// Combine current person&#39;s skills with existing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// Check if this new combination either does not exist or can be formed with fewer people
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">comb</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">].</span><span class="n">size</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dp</span><span class="p">[</span><span class="n">comb</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span> <span class="c1">// Update the team for the new combination
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">dp</span><span class="p">[</span><span class="n">comb</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="c1">// Add current person&#39;s index to the team
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Statement</strong>: Finally, we return the list of indices that represent the smallest team covering all required skills.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// Return the team for all skills covered
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The algorithm runs in (O(N \cdot 2^M)), where (N) is the number of people and (M) is the number of required skills. This is because for each person, we may update the state for every possible skill combination.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(2^M)) due to the storage of all possible combinations of skills in the <code>dp</code> map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>smallestSufficientTeam</code> function effectively utilizes bitmasking and dynamic programming to solve the problem of assembling the smallest team that covers all required skills. This approach allows for efficient representation and combination of skills, making it well-suited for problems involving subsets and constraints.</p>
+<p>By mapping skills to bit positions, we can efficiently combine and check coverage using bitwise operations, significantly reducing the complexity compared to naive solutions. This method highlights the power of bit manipulation in optimizing combinatorial problems, providing an elegant and efficient solution to the team selection challenge.</p>
+<p>Overall, this code showcases a strong understanding of algorithm design and the effective use of data structures to solve complex problems efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode153s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip

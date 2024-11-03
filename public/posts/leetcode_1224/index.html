@@ -13,19 +13,19 @@
 
 
 <meta name="author" content="Mohammed Yasir Eramangadan">
-<meta name="description" content="Solution to Leetcode 1224">
+<meta name="description" content="In-depth solution and explanation for Leetcode 1224: Maximum Equal Frequency in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Leetcode 1224: Maximum Equal Frequency">
-  <meta name="twitter:description" content="Solution to Leetcode 1224">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1224: Maximum Equal Frequency in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1224/">
   <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1224: Maximum Equal Frequency">
-  <meta property="og:description" content="Solution to Leetcode 1224">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1224: Maximum Equal Frequency in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -214,7 +214,129 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode262s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In the problem of finding the maximum length of a prefix from an array of integers such that the frequencies of the integers can be equalized with one removal of a single integer, we need to determine the longest prefix where the following conditions are met:</p>
+<ol>
+<li>All elements have the same frequency.</li>
+<li>All elements can be adjusted to have the same frequency by removing one occurrence of any integer from the prefix.</li>
+<li>If there is only one distinct integer, removing it still allows the prefix to be valid.</li>
+</ol>
+<p>Given an array of integers <code>nums</code>, the task is to compute the length of the longest prefix that satisfies these conditions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we use a combination of frequency counting and logic to track the occurrence of frequencies. The main steps involved in the approach are as follows:</p>
+<ol>
+<li><strong>Frequency Maps</strong>: Use two maps: one (<code>cnt</code>) to keep track of how many times each number appears, and another (<code>frq</code>) to keep track of how many numbers have a specific frequency.</li>
+<li><strong>Iterate Through Numbers</strong>: For each number in the array, update its count in <code>cnt</code> and adjust the frequency counts in <code>frq</code>.</li>
+<li><strong>Track Maximum Frequency</strong>: During the iteration, keep track of the maximum frequency encountered.</li>
+<li><strong>Check Conditions</strong>: For each index, check whether the current prefix can be valid by comparing frequencies and their counts according to the specified rules.</li>
+<li><strong>Return Result</strong>: Return the length of the longest valid prefix found.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxEqualFreq</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-3</strong>: Define the <code>Solution</code> class and the <code>maxEqualFreq</code> function which takes a vector of integers <code>nums</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 4-7</strong>: Declare two frequency maps: <code>frq</code> for frequency counts of occurrences and <code>cnt</code> for how many times each number appears. Initialize variables <code>mx</code> to track the maximum frequency of any number, <code>res</code> for the result (the length of the longest prefix), and <code>n</code> for the size of the input array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 8</strong>: Start a loop to iterate through each element in the <code>nums</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span>  <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frq</span><span class="p">[</span><span class="n">f</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frq</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 9-11</strong>: For the current number <code>nums[i]</code>, increment its count in <code>cnt</code> to get its frequency <code>f</code>. Decrement the frequency count for <code>f-1</code> in <code>frq</code>, and increment the frequency count for <code>f</code> in <code>frq</code>. This maintains an accurate representation of how many numbers have each frequency.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">cnt</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Line 12</strong>: Update <code>mx</code> to be the maximum frequency seen so far among the numbers in the prefix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">((</span><span class="n">mx</span> <span class="o">*</span> <span class="n">frq</span><span class="p">[</span><span class="n">mx</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">||</span> <span class="p">((</span><span class="n">mx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">mx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">mx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 13-15</strong>: Check the three conditions for a valid prefix:
+<ol>
+<li><strong>Condition 1</strong>: If all numbers with maximum frequency contribute exactly to the prefix length <code>i + 1</code>, meaning all occurrences form the prefix.</li>
+<li><strong>Condition 2</strong>: If the prefix length can be formed by removing one element from the numbers that have the second highest frequency, thereby allowing one element to have a different frequency.</li>
+<li><strong>Condition 3</strong>: If the maximum frequency is <code>1</code>, it means there is only one distinct number in the prefix, which is valid by itself.</li>
+</ol>
+</li>
+<li>If any of these conditions are true, update <code>res</code> to <code>i + 1</code> (the current prefix length).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lines 16-18</strong>: After iterating through all numbers, return the result <code>res</code>, which holds the length of the longest valid prefix.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the number of elements in the input array <code>nums</code>. Each element is processed once in the loop, and operations on the maps are efficient on average due to their underlying implementations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) in the worst case for the <code>cnt</code> and <code>frq</code> maps. However, since the values in <code>cnt</code> are limited by the number of distinct integers in <code>nums</code>, the effective space used may be significantly lower.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxEqualFreq</code> function provides an efficient solution to determine the longest prefix of an array of integers such that the frequencies of the integers can be equalized by potentially removing one integer. By leveraging frequency maps and simple arithmetic checks, the function effectively counts valid prefixes while ensuring performance remains optimal. The complexity analysis indicates that this method is scalable for large input sizes, making it a robust approach for similar problems involving frequency analysis and prefix validation. Overall, this solution showcases the power of dynamic counting and condition checking in solving complex array-related problems efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode262s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
