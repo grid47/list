@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube uiku9RcHpP8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3327: Check if DFS Strings Are Palindromes](https://grid47.xyz/posts/leetcode_3327) |
 | --- |
 {{< notice tip >}}

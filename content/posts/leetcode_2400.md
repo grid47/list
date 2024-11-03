@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube gFsI5OR-GfQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2401: Longest Nice Subarray](https://grid47.xyz/posts/leetcode_2401) |
 | --- |
 {{< notice tip >}}

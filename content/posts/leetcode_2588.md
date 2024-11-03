@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube JokGqRfyMPU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2589: Minimum Time to Complete All Tasks](https://grid47.xyz/posts/leetcode_2589) |
 | --- |
 {{< notice tip >}}

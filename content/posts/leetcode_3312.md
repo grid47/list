@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QcQcNZPeRcM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3313: Find the Last Marked Nodes in Tree](https://grid47.xyz/posts/leetcode_3313) |
 | --- |
 {{< notice tip >}}

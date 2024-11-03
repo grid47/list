@@ -36,7 +36,7 @@ vector<int> decode(vector<int>& encoded, int first) {
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1720.md" >}}
 ---
-
+{{< youtube sthGfBi890o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1721: Swapping Nodes in a Linked List](https://grid47.xyz/posts/leetcode_1721) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oTJ7NdlaGsE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3319: K-th Largest Perfect Subtree Size in Binary Tree](https://grid47.xyz/posts/leetcode_3319) |
 | --- |
 {{< notice tip >}}

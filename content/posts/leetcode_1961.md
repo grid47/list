@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1961.md" >}}
 ---
-
+{{< youtube msS6F5DL8gQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1962: Remove Stones to Minimize the Total](https://grid47.xyz/posts/leetcode_1962) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1154.md" >}}
 ---
-
+{{< youtube ThUlGDeVxcQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1155: Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode_1155) |
 | --- |
 {{< notice tip >}}

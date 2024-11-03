@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1016.md" >}}
 ---
-
+{{< youtube EAHOzX67VB8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1017: Convert to Base -2](https://grid47.xyz/posts/leetcode_1017) |
 | --- |
 {{< notice tip >}}

@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube K4SJb0I-_hw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2537: Count the Number of Good Subarrays](https://grid47.xyz/posts/leetcode_2537) |
 | --- |
 {{< notice tip >}}

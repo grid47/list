@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8FtYp66jelI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3259: Maximum Energy Boost From Two Drinks](https://grid47.xyz/posts/leetcode_3259) |
 | --- |
 {{< notice tip >}}

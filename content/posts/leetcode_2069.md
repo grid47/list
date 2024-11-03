@@ -79,7 +79,7 @@ public:
 
 
 ---
-
+{{< youtube 10111CfY7GQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2070: Most Beautiful Item for Each Query](https://grid47.xyz/posts/leetcode_2070) |
 | --- |
 {{< notice tip >}}

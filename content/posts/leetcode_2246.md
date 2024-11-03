@@ -78,7 +78,7 @@ public:
 
 
 ---
-
+{{< youtube qToN0ZHVoaE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2247: Maximum Cost of Trip With K Highways](https://grid47.xyz/posts/leetcode_2247) |
 | --- |
 {{< notice tip >}}

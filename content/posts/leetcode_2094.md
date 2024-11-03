@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rKt8Gjmhjos >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2095: Delete the Middle Node of a Linked List](https://grid47.xyz/posts/leetcode_2095) |
 | --- |
 {{< notice tip >}}

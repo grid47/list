@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1773.md" >}}
 ---
-
+{{< youtube FL3vJlSmq7w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1774: Closest Dessert Cost](https://grid47.xyz/posts/leetcode_1774) |
 | --- |
 {{< notice tip >}}

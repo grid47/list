@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1854.md" >}}
 ---
-
+{{< youtube 2W2yijatcTY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1855: Maximum Distance Between a Pair of Values](https://grid47.xyz/posts/leetcode_1855) |
 | --- |
 {{< notice tip >}}

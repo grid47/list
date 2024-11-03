@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Qs5TPsU3XR0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3162: Find the Number of Good Pairs I](https://grid47.xyz/posts/leetcode_3162) |
 | --- |
 {{< notice tip >}}

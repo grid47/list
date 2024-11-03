@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube AHh-9CcUtuE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2474: Customers With Strictly Increasing Purchases](https://grid47.xyz/posts/leetcode_2474) |
 | --- |
 {{< notice tip >}}

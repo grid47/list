@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube jcapiQysmZg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3267: Count Almost Equal Pairs II](https://grid47.xyz/posts/leetcode_3267) |
 | --- |
 {{< notice tip >}}

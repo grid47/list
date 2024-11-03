@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XN9GqDRPv34 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2061: Number of Spaces Cleaning Robot Cleaned](https://grid47.xyz/posts/leetcode_2061) |
 | --- |
 {{< notice tip >}}

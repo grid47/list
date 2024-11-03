@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/356.md" >}}
 ---
-
+{{< youtube b6fSk9FY188 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #357: Count Numbers with Unique Digits](https://grid47.xyz/posts/leetcode_357) |
 | --- |
 {{< notice tip >}}

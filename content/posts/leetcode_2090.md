@@ -46,7 +46,7 @@ public:
 
 
 ---
-
+{{< youtube rdKE6yZ_D3A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2091: Removing Minimum and Maximum From Array](https://grid47.xyz/posts/leetcode_2091) |
 | --- |
 {{< notice tip >}}

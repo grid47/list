@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1732.md" >}}
 ---
-
+{{< youtube rizlq7r8_Zg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1733: Minimum Number of People to Teach](https://grid47.xyz/posts/leetcode_1733) |
 | --- |
 {{< notice tip >}}

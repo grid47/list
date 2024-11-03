@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/379.md" >}}
 ---
-
+{{< youtube Yuo0oHw4J2c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #380: Insert Delete GetRandom O(1)](https://grid47.xyz/posts/leetcode_380) |
 | --- |
 {{< notice tip >}}

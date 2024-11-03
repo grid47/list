@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube D3Sg1a3q514 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3135: Equalize Strings by Adding or Removing Characters at Ends](https://grid47.xyz/posts/leetcode_3135) |
 | --- |
 {{< notice tip >}}

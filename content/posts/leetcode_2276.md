@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XS4wCS9sLsk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2277: Closest Node to Path in Tree](https://grid47.xyz/posts/leetcode_2277) |
 | --- |
 {{< notice tip >}}

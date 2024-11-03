@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1800.md" >}}
 ---
-
+{{< youtube uiCLUTepEJA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1801: Number of Orders in the Backlog](https://grid47.xyz/posts/leetcode_1801) |
 | --- |
 {{< notice tip >}}

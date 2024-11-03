@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1638.md" >}}
 ---
-
+{{< youtube QOmHQiUMBuI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1639: Number of Ways to Form a Target String Given a Dictionary](https://grid47.xyz/posts/leetcode_1639) |
 | --- |
 {{< notice tip >}}

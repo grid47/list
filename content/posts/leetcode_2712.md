@@ -92,7 +92,7 @@ public:
 
 
 ---
-
+{{< youtube 8MHnlNroHaU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2713: Maximum Strictly Increasing Cells in a Matrix](https://grid47.xyz/posts/leetcode_2713) |
 | --- |
 {{< notice tip >}}

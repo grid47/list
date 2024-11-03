@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube R-i07SNF_JY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3049: Earliest Second to Mark Indices II](https://grid47.xyz/posts/leetcode_3049) |
 | --- |
 {{< notice tip >}}

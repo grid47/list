@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube lczABRsdGaY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3261: Count Substrings That Satisfy K-Constraint II](https://grid47.xyz/posts/leetcode_3261) |
 | --- |
 {{< notice tip >}}

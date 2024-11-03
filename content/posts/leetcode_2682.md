@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube bNZuwqt1pg0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2683: Neighboring Bitwise XOR](https://grid47.xyz/posts/leetcode_2683) |
 | --- |
 {{< notice tip >}}

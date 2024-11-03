@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube TuYD0m2DZWw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2473: Minimum Cost to Buy Apples](https://grid47.xyz/posts/leetcode_2473) |
 | --- |
 {{< notice tip >}}

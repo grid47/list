@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube uAtbe8polsI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3149: Find the Minimum Cost Array Permutation](https://grid47.xyz/posts/leetcode_3149) |
 | --- |
 {{< notice tip >}}

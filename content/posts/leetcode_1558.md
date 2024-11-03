@@ -60,7 +60,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1558.md" >}}
 ---
-
+{{< youtube CYAW6stML14 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1559: Detect Cycles in 2D Grid](https://grid47.xyz/posts/leetcode_1559) |
 | --- |
 {{< notice tip >}}

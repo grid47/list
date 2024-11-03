@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube CYAB28a5VEk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3113: Find the Number of Subarrays Where Boundary Elements Are Maximum](https://grid47.xyz/posts/leetcode_3113) |
 | --- |
 {{< notice tip >}}

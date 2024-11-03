@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gVuJKXDIihA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2308: Arrange Table by Gender](https://grid47.xyz/posts/leetcode_2308) |
 | --- |
 {{< notice tip >}}

@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube U0abRgobTKg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2874: Maximum Value of an Ordered Triplet II](https://grid47.xyz/posts/leetcode_2874) |
 | --- |
 {{< notice tip >}}

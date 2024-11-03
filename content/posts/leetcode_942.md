@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/942.md" >}}
 ---
-
+{{< youtube 480vrbuUmes >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #943: Find the Shortest Superstring](https://grid47.xyz/posts/leetcode_943) |
 | --- |
 {{< notice tip >}}

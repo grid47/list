@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube KvdPgFfH1t0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2145: Count the Hidden Sequences](https://grid47.xyz/posts/leetcode_2145) |
 | --- |
 {{< notice tip >}}

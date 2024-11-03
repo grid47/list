@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8Nu1gDhvKik >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2672: Number of Adjacent Elements With the Same Color](https://grid47.xyz/posts/leetcode_2672) |
 | --- |
 {{< notice tip >}}

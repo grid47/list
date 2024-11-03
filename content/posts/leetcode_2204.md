@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube o1lDEF2FhnI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2205: The Number of Users That Are Eligible for Discount](https://grid47.xyz/posts/leetcode_2205) |
 | --- |
 {{< notice tip >}}

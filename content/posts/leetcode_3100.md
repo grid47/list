@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube Ll_mTkG1rEc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3101: Count Alternating Subarrays](https://grid47.xyz/posts/leetcode_3101) |
 | --- |
 {{< notice tip >}}

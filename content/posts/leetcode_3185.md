@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ceOrEV9GQDs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3186: Maximum Total Damage With Spell Casting](https://grid47.xyz/posts/leetcode_3186) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1788.md" >}}
 ---
-
+{{< youtube LkxQckXQq8c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1789: Primary Department for Each Employee](https://grid47.xyz/posts/leetcode_1789) |
 | --- |
 {{< notice tip >}}

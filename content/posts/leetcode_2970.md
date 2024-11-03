@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 7x8Oyag5Puc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2971: Find Polygon With the Largest Perimeter](https://grid47.xyz/posts/leetcode_2971) |
 | --- |
 {{< notice tip >}}

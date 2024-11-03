@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0Bkzym1EM58 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3094: Guess the Number Using Bitwise Questions II](https://grid47.xyz/posts/leetcode_3094) |
 | --- |
 {{< notice tip >}}

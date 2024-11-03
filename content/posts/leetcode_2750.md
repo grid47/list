@@ -46,7 +46,7 @@ public:
 
 
 ---
-
+{{< youtube T8f9ppAJHbY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2751: Robot Collisions](https://grid47.xyz/posts/leetcode_2751) |
 | --- |
 {{< notice tip >}}

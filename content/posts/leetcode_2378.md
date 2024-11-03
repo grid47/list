@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube CxbiZLtfl7o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2379: Minimum Recolors to Get K Consecutive Black Blocks](https://grid47.xyz/posts/leetcode_2379) |
 | --- |
 {{< notice tip >}}

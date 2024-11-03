@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube dzfCI3Ymj-A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3219: Minimum Cost for Cutting Cake II](https://grid47.xyz/posts/leetcode_3219) |
 | --- |
 {{< notice tip >}}

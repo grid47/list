@@ -39,7 +39,7 @@ int captureForts(vector<int>& forts) {
 
 
 ---
-
+{{< youtube y7BwYY4UFak >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2512: Reward Top K Students](https://grid47.xyz/posts/leetcode_2512) |
 | --- |
 {{< notice tip >}}

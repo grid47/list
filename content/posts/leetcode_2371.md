@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube X9gbT5Cu4ZQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2372: Calculate the Influence of Each Salesperson](https://grid47.xyz/posts/leetcode_2372) |
 | --- |
 {{< notice tip >}}

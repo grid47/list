@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0VCKeovGmG0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2968: Apply Operations to Maximize Frequency Score](https://grid47.xyz/posts/leetcode_2968) |
 | --- |
 {{< notice tip >}}

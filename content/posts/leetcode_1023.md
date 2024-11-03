@@ -62,7 +62,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1023.md" >}}
 ---
-
+{{< youtube h9I_yFNeMgo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1024: Video Stitching](https://grid47.xyz/posts/leetcode_1024) |
 | --- |
 {{< notice tip >}}

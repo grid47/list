@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube S_pCzVdQX9U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2612: Minimum Reverse Operations](https://grid47.xyz/posts/leetcode_2612) |
 | --- |
 {{< notice tip >}}

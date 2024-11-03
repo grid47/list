@@ -34,7 +34,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1844.md" >}}
 ---
-
+{{< youtube L5P6zYBLP3s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1845: Seat Reservation Manager](https://grid47.xyz/posts/leetcode_1845) |
 | --- |
 {{< notice tip >}}

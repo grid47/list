@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1006.md" >}}
 ---
-
+{{< youtube DxcqMnUON_I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1007: Minimum Domino Rotations For Equal Row](https://grid47.xyz/posts/leetcode_1007) |
 | --- |
 {{< notice tip >}}

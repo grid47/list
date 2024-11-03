@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube spBTOPQq8QY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3255: Find the Power of K-Size Subarrays II](https://grid47.xyz/posts/leetcode_3255) |
 | --- |
 {{< notice tip >}}

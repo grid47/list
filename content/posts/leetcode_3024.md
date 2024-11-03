@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube MwTXeQR4Mok >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3025: Find the Number of Ways to Place People I](https://grid47.xyz/posts/leetcode_3025) |
 | --- |
 {{< notice tip >}}

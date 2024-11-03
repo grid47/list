@@ -55,7 +55,7 @@ public:
 
 
 ---
-
+{{< youtube 9K92zYtgjrk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2321: Maximum Score Of Spliced Array](https://grid47.xyz/posts/leetcode_2321) |
 | --- |
 {{< notice tip >}}

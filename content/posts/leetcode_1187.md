@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1187.md" >}}
 ---
-
+{{< youtube 7mrS4ilTINA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1188: Design Bounded Blocking Queue](https://grid47.xyz/posts/leetcode_1188) |
 | --- |
 {{< notice tip >}}

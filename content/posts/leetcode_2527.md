@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube V12dkKaSdnw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2528: Maximize the Minimum Powered City](https://grid47.xyz/posts/leetcode_2528) |
 | --- |
 {{< notice tip >}}

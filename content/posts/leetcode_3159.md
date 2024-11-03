@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube xC9SJiN4dOk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3160: Find the Number of Distinct Colors Among the Balls](https://grid47.xyz/posts/leetcode_3160) |
 | --- |
 {{< notice tip >}}

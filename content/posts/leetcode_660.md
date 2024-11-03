@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/660.md" >}}
 ---
-
+{{< youtube lhvYITcMg2k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #661: Image Smoother](https://grid47.xyz/posts/leetcode_661) |
 | --- |
 {{< notice tip >}}

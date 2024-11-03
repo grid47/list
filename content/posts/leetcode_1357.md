@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1357.md" >}}
 ---
-
+{{< youtube A-PXwozdaCg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1358: Number of Substrings Containing All Three Characters](https://grid47.xyz/posts/leetcode_1358) |
 | --- |
 {{< notice tip >}}

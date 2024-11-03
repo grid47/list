@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube uGUaazmui2k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2497: Maximum Star Sum of a Graph](https://grid47.xyz/posts/leetcode_2497) |
 | --- |
 {{< notice tip >}}

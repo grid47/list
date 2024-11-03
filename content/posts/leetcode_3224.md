@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HdGhhlVYj80 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3225: Maximum Score From Grid Operations](https://grid47.xyz/posts/leetcode_3225) |
 | --- |
 {{< notice tip >}}

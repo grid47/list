@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Mzxl7qa3a-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2926: Maximum Balanced Subsequence Sum](https://grid47.xyz/posts/leetcode_2926) |
 | --- |
 {{< notice tip >}}

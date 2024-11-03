@@ -32,7 +32,7 @@ bool checkString(string s) {
 
 
 ---
-
+{{< youtube RgzM3HRkdp8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode_2125) |
 | --- |
 {{< notice tip >}}

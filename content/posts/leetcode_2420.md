@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube 3JIMkdeoF1c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2421: Number of Good Paths](https://grid47.xyz/posts/leetcode_2421) |
 | --- |
 {{< notice tip >}}

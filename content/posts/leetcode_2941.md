@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube GUGrzFRmwhU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2942: Find Words Containing Character](https://grid47.xyz/posts/leetcode_2942) |
 | --- |
 {{< notice tip >}}

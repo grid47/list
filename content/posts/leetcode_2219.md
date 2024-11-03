@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 48Zl907WahY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2220: Minimum Bit Flips to Convert Number](https://grid47.xyz/posts/leetcode_2220) |
 | --- |
 {{< notice tip >}}

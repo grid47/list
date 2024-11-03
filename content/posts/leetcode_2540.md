@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube pbKnQYJuSY0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2541: Minimum Operations to Make Array Equal II](https://grid47.xyz/posts/leetcode_2541) |
 | --- |
 {{< notice tip >}}

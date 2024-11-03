@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _uiqoiELPNI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2057: Smallest Index With Equal Value](https://grid47.xyz/posts/leetcode_2057) |
 | --- |
 {{< notice tip >}}

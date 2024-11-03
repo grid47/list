@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube aVQmXUdHRwg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2066: Account Balance](https://grid47.xyz/posts/leetcode_2066) |
 | --- |
 {{< notice tip >}}

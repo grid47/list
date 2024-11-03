@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1946.md" >}}
 ---
-
+{{< youtube Xgfpwe6B7zY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1947: Maximum Compatibility Score Sum](https://grid47.xyz/posts/leetcode_1947) |
 | --- |
 {{< notice tip >}}

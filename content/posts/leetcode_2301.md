@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Dn95FQ1CcNY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2302: Count Subarrays With Score Less Than K](https://grid47.xyz/posts/leetcode_2302) |
 | --- |
 {{< notice tip >}}

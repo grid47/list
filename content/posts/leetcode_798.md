@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/798.md" >}}
 ---
-
+{{< youtube UsAmnJUWz18 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #799: Champagne Tower](https://grid47.xyz/posts/leetcode_799) |
 | --- |
 {{< notice tip >}}

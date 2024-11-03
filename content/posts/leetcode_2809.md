@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube p_gKl6cPnd8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2810: Faulty Keyboard](https://grid47.xyz/posts/leetcode_2810) |
 | --- |
 {{< notice tip >}}

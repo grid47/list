@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube HmEYKbfjCLA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2601: Prime Subtraction Operation](https://grid47.xyz/posts/leetcode_2601) |
 | --- |
 {{< notice tip >}}

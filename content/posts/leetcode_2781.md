@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4Gyk4Xy6Rkk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2782: Number of Unique Categories](https://grid47.xyz/posts/leetcode_2782) |
 | --- |
 {{< notice tip >}}

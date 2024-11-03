@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube wbXDrozEtOs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2790: Maximum Number of Groups With Increasing Length](https://grid47.xyz/posts/leetcode_2790) |
 | --- |
 {{< notice tip >}}

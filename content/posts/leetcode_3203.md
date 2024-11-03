@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube uh-XIcyWAds >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3204: Bitwise User Permissions Analysis](https://grid47.xyz/posts/leetcode_3204) |
 | --- |
 {{< notice tip >}}

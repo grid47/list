@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4xG1p-W7k_0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2897: Apply Operations on Array to Maximize Sum of Squares](https://grid47.xyz/posts/leetcode_2897) |
 | --- |
 {{< notice tip >}}

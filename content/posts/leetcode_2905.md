@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube TZFQMCeNEho >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2906: Construct Product Matrix](https://grid47.xyz/posts/leetcode_2906) |
 | --- |
 {{< notice tip >}}

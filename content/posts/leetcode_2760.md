@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube _XNaJUXSh04 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2761: Prime Pairs With Target Sum](https://grid47.xyz/posts/leetcode_2761) |
 | --- |
 {{< notice tip >}}

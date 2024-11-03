@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1887.md" >}}
 ---
-
+{{< youtube 1etc9Ip8Xm8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1888: Minimum Number of Flips to Make the Binary String Alternating](https://grid47.xyz/posts/leetcode_1888) |
 | --- |
 {{< notice tip >}}

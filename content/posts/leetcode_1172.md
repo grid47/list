@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1172.md" >}}
 ---
-
+{{< youtube dYPEGh8HDfk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1173: Immediate Food Delivery I](https://grid47.xyz/posts/leetcode_1173) |
 | --- |
 {{< notice tip >}}

@@ -80,7 +80,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/327.md" >}}
 ---
-
+{{< youtube NByLAtqweaw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #328: Odd Even Linked List](https://grid47.xyz/posts/leetcode_328) |
 | --- |
 {{< notice tip >}}

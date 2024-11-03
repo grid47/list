@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HemVnZlJhvY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2450: Number of Distinct Binary Strings After Applying Operations](https://grid47.xyz/posts/leetcode_2450) |
 | --- |
 {{< notice tip >}}

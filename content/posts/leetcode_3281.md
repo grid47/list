@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0K1JWchUcLw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3282: Reach End of Array With Max Score](https://grid47.xyz/posts/leetcode_3282) |
 | --- |
 {{< notice tip >}}

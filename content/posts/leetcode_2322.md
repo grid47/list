@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hZRn3ZL0NVE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2323: Find Minimum Time to Finish All Jobs II](https://grid47.xyz/posts/leetcode_2323) |
 | --- |
 {{< notice tip >}}

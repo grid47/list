@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oY6RkKtqzq8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3086: Minimum Moves to Pick K Ones](https://grid47.xyz/posts/leetcode_3086) |
 | --- |
 {{< notice tip >}}

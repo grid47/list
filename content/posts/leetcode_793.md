@@ -64,7 +64,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/793.md" >}}
 ---
-
+{{< youtube sUrsII_fvJE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #794: Valid Tic-Tac-Toe State](https://grid47.xyz/posts/leetcode_794) |
 | --- |
 {{< notice tip >}}

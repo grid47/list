@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1668.md" >}}
 ---
-
+{{< youtube glQm_MZJywk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1669: Merge In Between Linked Lists](https://grid47.xyz/posts/leetcode_1669) |
 | --- |
 {{< notice tip >}}

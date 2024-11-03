@@ -60,7 +60,7 @@ public:
 
 
 ---
-
+{{< youtube rCLdAlt05XE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2592: Maximize Greatness of an Array](https://grid47.xyz/posts/leetcode_2592) |
 | --- |
 {{< notice tip >}}

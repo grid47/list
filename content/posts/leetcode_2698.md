@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube wnPlr6Z_Zg4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2699: Modify Graph Edge Weights](https://grid47.xyz/posts/leetcode_2699) |
 | --- |
 {{< notice tip >}}

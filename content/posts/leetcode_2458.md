@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8_N0miBg-mA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2459: Sort Array by Moving Items to Empty Space](https://grid47.xyz/posts/leetcode_2459) |
 | --- |
 {{< notice tip >}}

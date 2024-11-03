@@ -70,7 +70,7 @@ public:
 
 
 ---
-
+{{< youtube lrZM1nLXcmc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2831: Find the Longest Equal Subarray](https://grid47.xyz/posts/leetcode_2831) |
 | --- |
 {{< notice tip >}}

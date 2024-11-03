@@ -59,7 +59,7 @@ public:
 
 
 ---
-
+{{< youtube skEtLRG05RQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2101: Detonate the Maximum Bombs](https://grid47.xyz/posts/leetcode_2101) |
 | --- |
 {{< notice tip >}}

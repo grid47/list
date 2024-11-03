@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1806.md" >}}
 ---
-
+{{< youtube MT7Qo0LmoFo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1807: Evaluate the Bracket Pairs of a String](https://grid47.xyz/posts/leetcode_1807) |
 | --- |
 {{< notice tip >}}

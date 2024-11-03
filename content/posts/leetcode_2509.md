@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hYLkxg8XPkw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2510: Check if There is a Path With Equal Number of 0's And 1's](https://grid47.xyz/posts/leetcode_2510) |
 | --- |
 {{< notice tip >}}

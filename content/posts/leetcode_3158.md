@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube X37VmzHOKFA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3159: Find Occurrences of an Element in an Array](https://grid47.xyz/posts/leetcode_3159) |
 | --- |
 {{< notice tip >}}

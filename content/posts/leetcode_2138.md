@@ -35,7 +35,7 @@ public:
 
 
 ---
-
+{{< youtube J_aEpIkTv4k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2139: Minimum Moves to Reach Target Score](https://grid47.xyz/posts/leetcode_2139) |
 | --- |
 {{< notice tip >}}

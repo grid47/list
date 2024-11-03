@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1S9Abz2UA_g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3120: Count the Number of Special Characters I](https://grid47.xyz/posts/leetcode_3120) |
 | --- |
 {{< notice tip >}}

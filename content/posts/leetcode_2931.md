@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 9s_ku0h1yZQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2932: Maximum Strong Pair XOR I](https://grid47.xyz/posts/leetcode_2932) |
 | --- |
 {{< notice tip >}}

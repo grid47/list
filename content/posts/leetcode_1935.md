@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1935.md" >}}
 ---
-
+{{< youtube FLMJwdw9Kqc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1936: Add Minimum Number of Rungs](https://grid47.xyz/posts/leetcode_1936) |
 | --- |
 {{< notice tip >}}

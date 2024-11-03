@@ -46,7 +46,7 @@ public:
 
 
 ---
-
+{{< youtube ao6glAa0ljY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2846: Minimum Edge Weight Equilibrium Queries in a Tree](https://grid47.xyz/posts/leetcode_2846) |
 | --- |
 {{< notice tip >}}

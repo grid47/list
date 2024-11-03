@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8yRJghyGSlQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2941: Maximum GCD-Sum of a Subarray](https://grid47.xyz/posts/leetcode_2941) |
 | --- |
 {{< notice tip >}}

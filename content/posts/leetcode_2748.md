@@ -41,7 +41,7 @@ int countBeautifulPairs(vector<int>& nums) {
 
 
 ---
-
+{{< youtube mjceDBNh7vg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2749: Minimum Operations to Make the Integer Zero](https://grid47.xyz/posts/leetcode_2749) |
 | --- |
 {{< notice tip >}}

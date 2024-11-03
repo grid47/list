@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/768.md" >}}
 ---
-
+{{< youtube 6jrh2Gn0KiQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #769: Max Chunks To Make Sorted](https://grid47.xyz/posts/leetcode_769) |
 | --- |
 {{< notice tip >}}

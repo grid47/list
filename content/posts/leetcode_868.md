@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/868.md" >}}
 ---
-
+{{< youtube I5pfHLmrBrA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #869: Reordered Power of 2](https://grid47.xyz/posts/leetcode_869) |
 | --- |
 {{< notice tip >}}

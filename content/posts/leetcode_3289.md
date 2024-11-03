@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 7hfwVVnLmxc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3290: Maximum Multiplication Score](https://grid47.xyz/posts/leetcode_3290) |
 | --- |
 {{< notice tip >}}

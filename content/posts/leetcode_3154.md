@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube AWVbq_kNI80 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3155: Maximum Number of Upgradable Servers](https://grid47.xyz/posts/leetcode_3155) |
 | --- |
 {{< notice tip >}}

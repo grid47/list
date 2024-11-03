@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube r4FmpsbHcnc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3326: Minimum Division Operations to Make Array Non Decreasing](https://grid47.xyz/posts/leetcode_3326) |
 | --- |
 {{< notice tip >}}

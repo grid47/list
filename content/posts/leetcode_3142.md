@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sTafZnh7wS0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3143: Maximum Points Inside the Square](https://grid47.xyz/posts/leetcode_3143) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube h5pqtWCr0SY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3266: Final Array State After K Multiplication Operations II](https://grid47.xyz/posts/leetcode_3266) |
 | --- |
 {{< notice tip >}}

@@ -34,7 +34,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1812.md" >}}
 ---
-
+{{< youtube 7qcZLTyTl5s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1813: Sentence Similarity III](https://grid47.xyz/posts/leetcode_1813) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/976.md" >}}
 ---
-
+{{< youtube b6qE5k_-eGk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #977: Squares of a Sorted Array](https://grid47.xyz/posts/leetcode_977) |
 | --- |
 {{< notice tip >}}

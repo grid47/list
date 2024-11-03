@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1206.md" >}}
 ---
-
+{{< youtube mufu0FDOMys >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1207: Unique Number of Occurrences](https://grid47.xyz/posts/leetcode_1207) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube aN2aZyvMKWY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3299: Sum of Consecutive Subsequences](https://grid47.xyz/posts/leetcode_3299) |
 | --- |
 {{< notice tip >}}

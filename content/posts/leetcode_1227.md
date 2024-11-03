@@ -33,7 +33,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1227.md" >}}
 ---
-
+{{< youtube pHgWf79hNoY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1228: Missing Number In Arithmetic Progression](https://grid47.xyz/posts/leetcode_1228) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yC72p0rp0iQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3171: Find Subarray With Bitwise OR Closest to K](https://grid47.xyz/posts/leetcode_3171) |
 | --- |
 {{< notice tip >}}

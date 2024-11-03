@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/699.md" >}}
 ---
-
+{{< youtube ygxcNixDtFI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #700: Search in a Binary Search Tree](https://grid47.xyz/posts/leetcode_700) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sqQm-ruZRyI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2737: Find the Closest Marked Node](https://grid47.xyz/posts/leetcode_2737) |
 | --- |
 {{< notice tip >}}

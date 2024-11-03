@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oVoDuc1N57w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3275: K-th Nearest Obstacle Queries](https://grid47.xyz/posts/leetcode_3275) |
 | --- |
 {{< notice tip >}}

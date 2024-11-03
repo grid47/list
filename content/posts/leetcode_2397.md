@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube scBL7uQiPMg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2398: Maximum Number of Robots Within Budget](https://grid47.xyz/posts/leetcode_2398) |
 | --- |
 {{< notice tip >}}

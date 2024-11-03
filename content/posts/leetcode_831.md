@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/831.md" >}}
 ---
-
+{{< youtube gBPqkLohQvg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #832: Flipping an Image](https://grid47.xyz/posts/leetcode_832) |
 | --- |
 {{< notice tip >}}

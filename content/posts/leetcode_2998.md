@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube eDjgUqtxAak >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2999: Count the Number of Powerful Integers](https://grid47.xyz/posts/leetcode_2999) |
 | --- |
 {{< notice tip >}}

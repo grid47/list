@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Oa5qTM6rSZg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3011: Find if Array Can Be Sorted](https://grid47.xyz/posts/leetcode_3011) |
 | --- |
 {{< notice tip >}}

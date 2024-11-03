@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XmaKWXirS3g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2894: Divisible and Non-divisible Sums Difference](https://grid47.xyz/posts/leetcode_2894) |
 | --- |
 {{< notice tip >}}

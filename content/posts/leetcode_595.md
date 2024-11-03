@@ -28,7 +28,7 @@ SELECT name, population, area FROM World WHERE area >= 3000000 OR population >= 
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/595.md" >}}
 ---
-
+{{< youtube VfZ4zt81qXE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #596: Classes More Than 5 Students](https://grid47.xyz/posts/leetcode_596) |
 | --- |
 {{< notice tip >}}

@@ -35,7 +35,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2000.md" >}}
 ---
-
+{{< youtube jVRdLKA6t4k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2001: Number of Pairs of Interchangeable Rectangles](https://grid47.xyz/posts/leetcode_2001) |
 | --- |
 {{< notice tip >}}

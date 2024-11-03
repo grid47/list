@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube z2DCQtu-qps >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2409: Count Days Spent Together](https://grid47.xyz/posts/leetcode_2409) |
 | --- |
 {{< notice tip >}}

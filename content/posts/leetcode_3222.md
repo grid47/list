@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 10tLRc4c_vc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3223: Minimum Length of String After Operations](https://grid47.xyz/posts/leetcode_3223) |
 | --- |
 {{< notice tip >}}

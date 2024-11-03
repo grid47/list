@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ngPN-ptIMh8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2245: Maximum Trailing Zeros in a Cornered Path](https://grid47.xyz/posts/leetcode_2245) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/965.md" >}}
 ---
-
+{{< youtube YLcZdq4g1dg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #966: Vowel Spellchecker](https://grid47.xyz/posts/leetcode_966) |
 | --- |
 {{< notice tip >}}

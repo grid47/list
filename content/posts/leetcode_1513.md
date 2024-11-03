@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1513.md" >}}
 ---
-
+{{< youtube 9cPoRqw5I_8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1514: Path with Maximum Probability](https://grid47.xyz/posts/leetcode_1514) |
 | --- |
 {{< notice tip >}}

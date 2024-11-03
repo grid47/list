@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube yVDIm1IfG2c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2064: Minimized Maximum of Products Distributed to Any Store](https://grid47.xyz/posts/leetcode_2064) |
 | --- |
 {{< notice tip >}}

@@ -62,7 +62,7 @@ public:
 
 
 ---
-
+{{< youtube aDb0N0ZBvZQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2087: Minimum Cost Homecoming of a Robot in a Grid](https://grid47.xyz/posts/leetcode_2087) |
 | --- |
 {{< notice tip >}}

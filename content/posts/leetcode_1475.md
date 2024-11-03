@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1475.md" >}}
 ---
-
+{{< youtube Aclq_uxP0Kc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1476: Subrectangle Queries](https://grid47.xyz/posts/leetcode_1476) |
 | --- |
 {{< notice tip >}}

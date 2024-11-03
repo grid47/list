@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1724.md" >}}
 ---
-
+{{< youtube sBUY_cl8FPo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1725: Number Of Rectangles That Can Form The Largest Square](https://grid47.xyz/posts/leetcode_1725) |
 | --- |
 {{< notice tip >}}

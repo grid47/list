@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4sF1v0YuTvM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3234: Count the Number of Substrings With Dominant Ones](https://grid47.xyz/posts/leetcode_3234) |
 | --- |
 {{< notice tip >}}

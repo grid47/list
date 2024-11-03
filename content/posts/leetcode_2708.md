@@ -70,7 +70,7 @@ public:
 
 
 ---
-
+{{< youtube Kqv0-lRVYwM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2709: Greatest Common Divisor Traversal](https://grid47.xyz/posts/leetcode_2709) |
 | --- |
 {{< notice tip >}}

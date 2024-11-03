@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1362.md" >}}
 ---
-
+{{< youtube wx3731P3At4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1363: Largest Multiple of Three](https://grid47.xyz/posts/leetcode_1363) |
 | --- |
 {{< notice tip >}}

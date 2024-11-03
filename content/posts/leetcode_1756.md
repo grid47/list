@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1756.md" >}}
 ---
-
+{{< youtube YSDLF4xABdo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1757: Recyclable and Low Fat Products](https://grid47.xyz/posts/leetcode_1757) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube 1wXkWZtSD28 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2800: Shortest String That Contains Three Strings](https://grid47.xyz/posts/leetcode_2800) |
 | --- |
 {{< notice tip >}}

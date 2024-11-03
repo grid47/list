@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube QEvLvINq730 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2448: Minimum Cost to Make Array Equal](https://grid47.xyz/posts/leetcode_2448) |
 | --- |
 {{< notice tip >}}

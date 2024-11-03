@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube WeaM8AiavbY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2741: Special Permutations](https://grid47.xyz/posts/leetcode_2741) |
 | --- |
 {{< notice tip >}}

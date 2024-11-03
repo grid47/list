@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/411.md" >}}
 ---
-
+{{< youtube wQ0f-wt7sDM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #412: Fizz Buzz](https://grid47.xyz/posts/leetcode_412) |
 | --- |
 {{< notice tip >}}

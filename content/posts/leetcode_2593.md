@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube 6KKgxkXPtsQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2594: Minimum Time to Repair Cars](https://grid47.xyz/posts/leetcode_2594) |
 | --- |
 {{< notice tip >}}

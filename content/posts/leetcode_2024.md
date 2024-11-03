@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube XYJv2pySK44 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2025: Maximum Number of Ways to Partition an Array](https://grid47.xyz/posts/leetcode_2025) |
 | --- |
 {{< notice tip >}}

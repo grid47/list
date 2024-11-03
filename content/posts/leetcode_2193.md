@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hLRr0h5nBYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2194: Cells in a Range on an Excel Sheet](https://grid47.xyz/posts/leetcode_2194) |
 | --- |
 {{< notice tip >}}

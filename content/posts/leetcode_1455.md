@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1455.md" >}}
 ---
-
+{{< youtube xR31jAMFU_Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1456: Maximum Number of Vowels in a Substring of Given Length](https://grid47.xyz/posts/leetcode_1456) |
 | --- |
 {{< notice tip >}}

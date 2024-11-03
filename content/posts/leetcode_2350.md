@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gnr4Tjda1v0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2351: First Letter to Appear Twice](https://grid47.xyz/posts/leetcode_2351) |
 | --- |
 {{< notice tip >}}

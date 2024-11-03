@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/998.md" >}}
 ---
-
+{{< youtube 9Mr8YfV6hA4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #999: Available Captures for Rook](https://grid47.xyz/posts/leetcode_999) |
 | --- |
 {{< notice tip >}}

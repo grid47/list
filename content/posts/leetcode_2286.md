@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube CXGBjTax9sM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2287: Rearrange Characters to Make Target String](https://grid47.xyz/posts/leetcode_2287) |
 | --- |
 {{< notice tip >}}

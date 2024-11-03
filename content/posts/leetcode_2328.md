@@ -57,7 +57,7 @@ public:
 
 
 ---
-
+{{< youtube jqPLjcYEV64 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2329: Product Sales Analysis V](https://grid47.xyz/posts/leetcode_2329) |
 | --- |
 {{< notice tip >}}

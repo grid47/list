@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1025.md" >}}
 ---
-
+{{< youtube -la2XRFNo2o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1026: Maximum Difference Between Node and Ancestor](https://grid47.xyz/posts/leetcode_1026) |
 | --- |
 {{< notice tip >}}

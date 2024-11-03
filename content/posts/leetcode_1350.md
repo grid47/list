@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1350.md" >}}
 ---
-
+{{< youtube XR7WGt4Tyzg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1351: Count Negative Numbers in a Sorted Matrix](https://grid47.xyz/posts/leetcode_1351) |
 | --- |
 {{< notice tip >}}

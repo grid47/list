@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube EwSIfXGq2B4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2607: Make K-Subarray Sums Equal](https://grid47.xyz/posts/leetcode_2607) |
 | --- |
 {{< notice tip >}}

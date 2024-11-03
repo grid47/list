@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube swv1D5tovNk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3303: Find the Occurrence of First Almost Equal Substring](https://grid47.xyz/posts/leetcode_3303) |
 | --- |
 {{< notice tip >}}

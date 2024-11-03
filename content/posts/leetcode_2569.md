@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 9rJgppI9TkE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2570: Merge Two 2D Arrays by Summing Values](https://grid47.xyz/posts/leetcode_2570) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube PFJ7Rv0HDtU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2078: Two Furthest Houses With Different Colors](https://grid47.xyz/posts/leetcode_2078) |
 | --- |
 {{< notice tip >}}

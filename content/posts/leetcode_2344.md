@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube PWsoQ3z3z5Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2345: Finding the Number of Visible Mountains](https://grid47.xyz/posts/leetcode_2345) |
 | --- |
 {{< notice tip >}}

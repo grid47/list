@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube 8UaltcVnL5E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2425: Bitwise XOR of All Pairings](https://grid47.xyz/posts/leetcode_2425) |
 | --- |
 {{< notice tip >}}

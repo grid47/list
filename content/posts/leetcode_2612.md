@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube a3ddaXrP4yY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2613: Beautiful Pairs](https://grid47.xyz/posts/leetcode_2613) |
 | --- |
 {{< notice tip >}}

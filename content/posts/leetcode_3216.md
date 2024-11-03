@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4ENmUud4qxI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3217: Delete Nodes From Linked List Present in Array](https://grid47.xyz/posts/leetcode_3217) |
 | --- |
 {{< notice tip >}}

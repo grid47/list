@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1476.md" >}}
 ---
-
+{{< youtube cMBkZMNVDdE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1477: Find Two Non-overlapping Sub-arrays Each With Target Sum](https://grid47.xyz/posts/leetcode_1477) |
 | --- |
 {{< notice tip >}}

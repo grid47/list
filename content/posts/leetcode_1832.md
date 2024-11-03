@@ -34,7 +34,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1832.md" >}}
 ---
-
+{{< youtube rk82ArzlPHM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1833: Maximum Ice Cream Bars](https://grid47.xyz/posts/leetcode_1833) |
 | --- |
 {{< notice tip >}}

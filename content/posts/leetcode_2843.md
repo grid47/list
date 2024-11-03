@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube KHRfRTVqpVc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2844: Minimum Operations to Make a Special Number](https://grid47.xyz/posts/leetcode_2844) |
 | --- |
 {{< notice tip >}}

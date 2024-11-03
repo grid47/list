@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube bt2SQhi2qds >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2120: Execution of All Suffix Instructions Staying in a Grid](https://grid47.xyz/posts/leetcode_2120) |
 | --- |
 {{< notice tip >}}

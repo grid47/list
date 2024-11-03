@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube v2m9_RwVTY8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3004: Maximum Subtree of the Same Color](https://grid47.xyz/posts/leetcode_3004) |
 | --- |
 {{< notice tip >}}

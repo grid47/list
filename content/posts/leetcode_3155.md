@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube kixPslyn8l8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3156: Employee Task Duration and Concurrent Tasks](https://grid47.xyz/posts/leetcode_3156) |
 | --- |
 {{< notice tip >}}

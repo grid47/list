@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube IWuoAncBFMk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2965: Find Missing and Repeated Values](https://grid47.xyz/posts/leetcode_2965) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/758.md" >}}
 ---
-
+{{< youtube MFFJlPLBF90 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #759: Employee Free Time](https://grid47.xyz/posts/leetcode_759) |
 | --- |
 {{< notice tip >}}

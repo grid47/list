@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/869.md" >}}
 ---
-
+{{< youtube rJu123dgDy8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #870: Advantage Shuffle](https://grid47.xyz/posts/leetcode_870) |
 | --- |
 {{< notice tip >}}

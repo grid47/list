@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/982.md" >}}
 ---
-
+{{< youtube 7ibf14FeknE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #983: Minimum Cost For Tickets](https://grid47.xyz/posts/leetcode_983) |
 | --- |
 {{< notice tip >}}

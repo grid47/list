@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 2KP9YVWFwWg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2159: Order Two Columns Independently](https://grid47.xyz/posts/leetcode_2159) |
 | --- |
 {{< notice tip >}}

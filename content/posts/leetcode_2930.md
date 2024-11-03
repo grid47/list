@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube auyYTF32V_0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2931: Maximum Spending After Buying Items](https://grid47.xyz/posts/leetcode_2931) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube KUdgDzyeKPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2335: Minimum Amount of Time to Fill Cups](https://grid47.xyz/posts/leetcode_2335) |
 | --- |
 {{< notice tip >}}

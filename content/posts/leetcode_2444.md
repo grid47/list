@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube utbe24g2khs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2445: Number of Nodes With Value One](https://grid47.xyz/posts/leetcode_2445) |
 | --- |
 {{< notice tip >}}

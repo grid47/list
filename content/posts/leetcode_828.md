@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/828.md" >}}
 ---
-
+{{< youtube icdH-hoxpfs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #829: Consecutive Numbers Sum](https://grid47.xyz/posts/leetcode_829) |
 | --- |
 {{< notice tip >}}

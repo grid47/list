@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube og_X-1siNJI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2946: Matrix Similarity After Cyclic Shifts](https://grid47.xyz/posts/leetcode_2946) |
 | --- |
 {{< notice tip >}}

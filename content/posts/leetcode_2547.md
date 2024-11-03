@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube G4AJ2O5I0jA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2548: Maximum Price to Fill a Bag](https://grid47.xyz/posts/leetcode_2548) |
 | --- |
 {{< notice tip >}}

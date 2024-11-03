@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0MBZ-cOyuno >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2431: Maximize Total Tastiness of Purchased Fruits](https://grid47.xyz/posts/leetcode_2431) |
 | --- |
 {{< notice tip >}}

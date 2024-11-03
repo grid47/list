@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JLjyPr0tBWE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3131: Find the Integer Added to Array I](https://grid47.xyz/posts/leetcode_3131) |
 | --- |
 {{< notice tip >}}

@@ -69,7 +69,7 @@ public:
 
 
 ---
-
+{{< youtube rT4w58kX818 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2573: Find the String with LCP](https://grid47.xyz/posts/leetcode_2573) |
 | --- |
 {{< notice tip >}}

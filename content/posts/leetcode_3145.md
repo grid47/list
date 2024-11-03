@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube TtBpS8bxetw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3146: Permutation Difference between Two Strings](https://grid47.xyz/posts/leetcode_3146) |
 | --- |
 {{< notice tip >}}

@@ -39,7 +39,7 @@ vector<int> applyOperations(vector<int>& A) {
 
 
 ---
-
+{{< youtube SykhaokFEIM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2461: Maximum Sum of Distinct Subarrays With Length K](https://grid47.xyz/posts/leetcode_2461) |
 | --- |
 {{< notice tip >}}

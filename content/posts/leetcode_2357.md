@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube rtGJycuTSUo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2358: Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode_2358) |
 | --- |
 {{< notice tip >}}

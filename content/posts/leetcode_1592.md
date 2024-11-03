@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1592.md" >}}
 ---
-
+{{< youtube MKAtXxaI9IM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1593: Split a String Into the Max Number of Unique Substrings](https://grid47.xyz/posts/leetcode_1593) |
 | --- |
 {{< notice tip >}}

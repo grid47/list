@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Yz-fbUgXNYc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3097: Shortest Subarray With OR at Least K II](https://grid47.xyz/posts/leetcode_3097) |
 | --- |
 {{< notice tip >}}

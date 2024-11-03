@@ -52,7 +52,7 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1177.md" >}}
 ---
-
+{{< youtube tCr-y-1P2J8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1178: Number of Valid Words for Each Puzzle](https://grid47.xyz/posts/leetcode_1178) |
 | --- |
 {{< notice tip >}}

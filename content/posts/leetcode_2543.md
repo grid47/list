@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube QD0ZSHeDb8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2544: Alternating Digit Sum](https://grid47.xyz/posts/leetcode_2544) |
 | --- |
 {{< notice tip >}}

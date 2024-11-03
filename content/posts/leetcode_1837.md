@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1837.md" >}}
 ---
-
+{{< youtube tPbypmspAi8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1838: Frequency of the Most Frequent Element](https://grid47.xyz/posts/leetcode_1838) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WcWa5lir_7U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2114: Maximum Number of Words Found in Sentences](https://grid47.xyz/posts/leetcode_2114) |
 | --- |
 {{< notice tip >}}

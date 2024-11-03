@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hw3Mnht0i1g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3035: Maximum Palindromes After Operations](https://grid47.xyz/posts/leetcode_3035) |
 | --- |
 {{< notice tip >}}

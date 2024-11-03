@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube k9-t1kOmEHs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2586: Count the Number of Vowel Strings in Range](https://grid47.xyz/posts/leetcode_2586) |
 | --- |
 {{< notice tip >}}

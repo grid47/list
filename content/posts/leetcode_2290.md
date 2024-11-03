@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 9EdgGCbwEgo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2291: Maximum Profit From Trading Stocks](https://grid47.xyz/posts/leetcode_2291) |
 | --- |
 {{< notice tip >}}

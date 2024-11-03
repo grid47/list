@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube oHUiH7SxewY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3046: Split the Array](https://grid47.xyz/posts/leetcode_3046) |
 | --- |
 {{< notice tip >}}

@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube I3XEMabQJxE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2807: Insert Greatest Common Divisors in Linked List](https://grid47.xyz/posts/leetcode_2807) |
 | --- |
 {{< notice tip >}}

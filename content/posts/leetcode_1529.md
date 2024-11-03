@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1529.md" >}}
 ---
-
+{{< youtube qaAFcG4ORqM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1530: Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode_1530) |
 | --- |
 {{< notice tip >}}

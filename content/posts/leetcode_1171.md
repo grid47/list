@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1171.md" >}}
 ---
-
+{{< youtube xZRozZEjizg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1172: Dinner Plate Stacks](https://grid47.xyz/posts/leetcode_1172) |
 | --- |
 {{< notice tip >}}

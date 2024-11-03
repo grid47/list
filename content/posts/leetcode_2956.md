@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube jb1IbKe3bPE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2957: Remove Adjacent Almost-Equal Characters](https://grid47.xyz/posts/leetcode_2957) |
 | --- |
 {{< notice tip >}}

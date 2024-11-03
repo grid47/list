@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube dfY7EDy0sQc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3304: Find the K-th Character in String Game I](https://grid47.xyz/posts/leetcode_3304) |
 | --- |
 {{< notice tip >}}

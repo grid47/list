@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/481.md" >}}
 ---
-
+{{< youtube -iFDu2kaCpY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #482: License Key Formatting](https://grid47.xyz/posts/leetcode_482) |
 | --- |
 {{< notice tip >}}

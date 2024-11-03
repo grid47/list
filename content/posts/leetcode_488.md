@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/488.md" >}}
 ---
-
+{{< youtube qlKrhktI-DM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #489: Robot Room Cleaner](https://grid47.xyz/posts/leetcode_489) |
 | --- |
 {{< notice tip >}}

@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube f8qWoxowloA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2745: Construct the Longest New String](https://grid47.xyz/posts/leetcode_2745) |
 | --- |
 {{< notice tip >}}

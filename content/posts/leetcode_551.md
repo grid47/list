@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/551.md" >}}
 ---
-
+{{< youtube wVWlisjXQEw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #552: Student Attendance Record II](https://grid47.xyz/posts/leetcode_552) |
 | --- |
 {{< notice tip >}}

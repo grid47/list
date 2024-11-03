@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube S0IIToKrsp0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2324: Product Sales Analysis IV](https://grid47.xyz/posts/leetcode_2324) |
 | --- |
 {{< notice tip >}}

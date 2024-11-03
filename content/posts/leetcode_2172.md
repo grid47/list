@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sstaFJUuAqs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2173: Longest Winning Streak](https://grid47.xyz/posts/leetcode_2173) |
 | --- |
 {{< notice tip >}}

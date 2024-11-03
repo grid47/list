@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Vl_d1SUI1Zo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3136: Valid Word](https://grid47.xyz/posts/leetcode_3136) |
 | --- |
 {{< notice tip >}}

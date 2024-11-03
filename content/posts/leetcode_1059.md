@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1059.md" >}}
 ---
-
+{{< youtube FMiBKDXCCsQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1060: Missing Element in Sorted Array](https://grid47.xyz/posts/leetcode_1060) |
 | --- |
 {{< notice tip >}}

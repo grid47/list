@@ -67,7 +67,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1000.md" >}}
 ---
-
+{{< youtube ATtOK12kfH4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1001: Grid Illumination](https://grid47.xyz/posts/leetcode_1001) |
 | --- |
 {{< notice tip >}}

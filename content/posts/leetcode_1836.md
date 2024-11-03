@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1836.md" >}}
 ---
-
+{{< youtube WHTWqRiHXjA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1837: Sum of Digits in Base K](https://grid47.xyz/posts/leetcode_1837) |
 | --- |
 {{< notice tip >}}

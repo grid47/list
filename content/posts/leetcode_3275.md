@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Th7rQQ0_iaE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3276: Select Cells in Grid With Maximum Score](https://grid47.xyz/posts/leetcode_3276) |
 | --- |
 {{< notice tip >}}

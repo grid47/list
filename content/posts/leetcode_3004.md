@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube evJQ2UC4zNQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3005: Count Elements With Maximum Frequency](https://grid47.xyz/posts/leetcode_3005) |
 | --- |
 {{< notice tip >}}

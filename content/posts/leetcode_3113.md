@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XY5LmjVYOII >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3114: Latest Time You Can Obtain After Replacing Characters](https://grid47.xyz/posts/leetcode_3114) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube a7E-WUb-MaY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3277: Maximum XOR Score Subarray Queries](https://grid47.xyz/posts/leetcode_3277) |
 | --- |
 {{< notice tip >}}

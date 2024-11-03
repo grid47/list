@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RP7o5m4vliI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3126: Server Utilization Time](https://grid47.xyz/posts/leetcode_3126) |
 | --- |
 {{< notice tip >}}

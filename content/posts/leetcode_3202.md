@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube pmDNT6wbygs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3203: Find Minimum Diameter After Merging Two Trees](https://grid47.xyz/posts/leetcode_3203) |
 | --- |
 {{< notice tip >}}

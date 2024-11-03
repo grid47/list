@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube fHFotCayOiU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3147: Taking Maximum Energy From the Mystic Dungeon](https://grid47.xyz/posts/leetcode_3147) |
 | --- |
 {{< notice tip >}}

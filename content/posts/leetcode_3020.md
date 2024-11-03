@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gI0NLbnwUSE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3021: Alice and Bob Playing Flower Game](https://grid47.xyz/posts/leetcode_3021) |
 | --- |
 {{< notice tip >}}

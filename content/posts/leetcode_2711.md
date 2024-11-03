@@ -57,7 +57,7 @@ public:
 
 
 ---
-
+{{< youtube i166oIOHaPE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2712: Minimum Cost to Make All Characters Equal](https://grid47.xyz/posts/leetcode_2712) |
 | --- |
 {{< notice tip >}}

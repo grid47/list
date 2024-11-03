@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube n6Wg_vntUAA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2734: Lexicographically Smallest String After Substring Operation](https://grid47.xyz/posts/leetcode_2734) |
 | --- |
 {{< notice tip >}}

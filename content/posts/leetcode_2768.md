@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube qnbzbMmLK8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2769: Find the Maximum Achievable Number](https://grid47.xyz/posts/leetcode_2769) |
 | --- |
 {{< notice tip >}}

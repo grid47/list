@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube Z7hDq-nGzUI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2858: Minimum Edge Reversals So Every Node Is Reachable](https://grid47.xyz/posts/leetcode_2858) |
 | --- |
 {{< notice tip >}}

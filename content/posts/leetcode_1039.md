@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1039.md" >}}
 ---
-
+{{< youtube plKzOVMehqo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1040: Moving Stones Until Consecutive II](https://grid47.xyz/posts/leetcode_1040) |
 | --- |
 {{< notice tip >}}

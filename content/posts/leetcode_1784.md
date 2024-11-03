@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1784.md" >}}
 ---
-
+{{< youtube CRjRphrOkNA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1785: Minimum Elements to Add to Form a Given Sum](https://grid47.xyz/posts/leetcode_1785) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6wdYNwe8gug >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2921: Maximum Profitable Triplets With Increasing Prices II](https://grid47.xyz/posts/leetcode_2921) |
 | --- |
 {{< notice tip >}}

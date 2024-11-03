@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1765.md" >}}
 ---
-
+{{< youtube 0BNHd7a_ozc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1766: Tree of Coprimes](https://grid47.xyz/posts/leetcode_1766) |
 | --- |
 {{< notice tip >}}

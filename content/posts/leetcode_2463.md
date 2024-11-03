@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube IPhKheQWtyk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2464: Minimum Subarrays in a Valid Split](https://grid47.xyz/posts/leetcode_2464) |
 | --- |
 {{< notice tip >}}

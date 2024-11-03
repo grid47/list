@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube wIzlhdYo-9E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3230: Customer Purchasing Behavior Analysis](https://grid47.xyz/posts/leetcode_3230) |
 | --- |
 {{< notice tip >}}

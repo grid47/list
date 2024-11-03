@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oM0NL_SwTRE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2814: Minimum Time Takes to Reach Destination Without Drowning](https://grid47.xyz/posts/leetcode_2814) |
 | --- |
 {{< notice tip >}}

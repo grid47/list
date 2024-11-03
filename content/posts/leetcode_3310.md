@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube P7Txr3Y4GSQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3311: Construct 2D Grid Matching Graph Layout](https://grid47.xyz/posts/leetcode_3311) |
 | --- |
 {{< notice tip >}}

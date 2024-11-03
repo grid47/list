@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube E2QJBICLeqg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2269: Find the K-Beauty of a Number](https://grid47.xyz/posts/leetcode_2269) |
 | --- |
 {{< notice tip >}}

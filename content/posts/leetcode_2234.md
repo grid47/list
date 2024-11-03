@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube jJjzdJ2Rqx0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2235: Add Two Integers](https://grid47.xyz/posts/leetcode_2235) |
 | --- |
 {{< notice tip >}}

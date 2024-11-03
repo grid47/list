@@ -36,7 +36,7 @@ int countAsterisks(string s) {
 
 
 ---
-
+{{< youtube tpgDi9Saq_s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2316: Count Unreachable Pairs of Nodes in an Undirected Graph](https://grid47.xyz/posts/leetcode_2316) |
 | --- |
 {{< notice tip >}}

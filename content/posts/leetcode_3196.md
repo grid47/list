@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube txyQ_LzgNq8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3197: Find the Minimum Area to Cover All Ones II](https://grid47.xyz/posts/leetcode_3197) |
 | --- |
 {{< notice tip >}}

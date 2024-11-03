@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zFAAH5r0-us >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3184: Count Pairs That Form a Complete Day I](https://grid47.xyz/posts/leetcode_3184) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube xscWfVU4vMg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2494: Merge Overlapping Events in the Same Hall](https://grid47.xyz/posts/leetcode_2494) |
 | --- |
 {{< notice tip >}}

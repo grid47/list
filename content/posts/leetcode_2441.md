@@ -38,7 +38,7 @@ int findMaxK(vector<int>& nums) {
 
 
 ---
-
+{{< youtube Ec0T3so3m2Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2442: Count Number of Distinct Integers After Reverse Operations](https://grid47.xyz/posts/leetcode_2442) |
 | --- |
 {{< notice tip >}}

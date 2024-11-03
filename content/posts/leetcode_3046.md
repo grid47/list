@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube ItimQQYIHEw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3047: Find the Largest Area of Square Inside Two Rectangles](https://grid47.xyz/posts/leetcode_3047) |
 | --- |
 {{< notice tip >}}

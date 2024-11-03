@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1796.md" >}}
 ---
-
+{{< youtube hyQUsjKrq1s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1797: Design Authentication Manager](https://grid47.xyz/posts/leetcode_1797) |
 | --- |
 {{< notice tip >}}

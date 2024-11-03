@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube ydihp-cBFqw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3006: Find Beautiful Indices in the Given Array I](https://grid47.xyz/posts/leetcode_3006) |
 | --- |
 {{< notice tip >}}

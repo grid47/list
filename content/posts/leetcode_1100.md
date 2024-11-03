@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1100.md" >}}
 ---
-
+{{< youtube hbew360TTmY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1101: The Earliest Moment When Everyone Become Friends](https://grid47.xyz/posts/leetcode_1101) |
 | --- |
 {{< notice tip >}}

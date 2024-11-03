@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1491.md" >}}
 ---
-
+{{< youtube hTEVGYRGLsQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1492: The kth Factor of n](https://grid47.xyz/posts/leetcode_1492) |
 | --- |
 {{< notice tip >}}

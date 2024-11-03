@@ -95,7 +95,7 @@ public:
 
 
 ---
-
+{{< youtube edP4gaMO80E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2242: Maximum Score of a Node Sequence](https://grid47.xyz/posts/leetcode_2242) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/817.md" >}}
 ---
-
+{{< youtube Vxbd1u86p9c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #818: Race Car](https://grid47.xyz/posts/leetcode_818) |
 | --- |
 {{< notice tip >}}

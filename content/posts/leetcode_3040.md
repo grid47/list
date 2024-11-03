@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube X1565TSx2C0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3041: Maximize Consecutive Elements in an Array After Modification](https://grid47.xyz/posts/leetcode_3041) |
 | --- |
 {{< notice tip >}}

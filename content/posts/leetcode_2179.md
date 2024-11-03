@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hFwY1L80tns >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2180: Count Integers With Even Digit Sum](https://grid47.xyz/posts/leetcode_2180) |
 | --- |
 {{< notice tip >}}

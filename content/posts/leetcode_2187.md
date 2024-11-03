@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube M5moLQ_6Xs4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2188: Minimum Time to Finish the Race](https://grid47.xyz/posts/leetcode_2188) |
 | --- |
 {{< notice tip >}}

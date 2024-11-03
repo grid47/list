@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ZQSSJG6OjP0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2432: The Employee That Worked on the Longest Task](https://grid47.xyz/posts/leetcode_2432) |
 | --- |
 {{< notice tip >}}

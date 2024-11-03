@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/811.md" >}}
 ---
-
+{{< youtube oe_eXlH5dUM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #812: Largest Triangle Area](https://grid47.xyz/posts/leetcode_812) |
 | --- |
 {{< notice tip >}}

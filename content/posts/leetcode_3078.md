@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Vu2G8YqMwC4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3079: Find the Sum of Encrypted Integers](https://grid47.xyz/posts/leetcode_3079) |
 | --- |
 {{< notice tip >}}

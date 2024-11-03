@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube OnPL2JuJrCQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2201: Count Artifacts That Can Be Extracted](https://grid47.xyz/posts/leetcode_2201) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube e4T6MyG9nLE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3081: Replace Question Marks in String to Minimize Its Value](https://grid47.xyz/posts/leetcode_3081) |
 | --- |
 {{< notice tip >}}

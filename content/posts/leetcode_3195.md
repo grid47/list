@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube H96ZkKc7WLI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3196: Maximize Total Cost of Alternating Subarrays](https://grid47.xyz/posts/leetcode_3196) |
 | --- |
 {{< notice tip >}}

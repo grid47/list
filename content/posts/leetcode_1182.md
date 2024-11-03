@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1182.md" >}}
 ---
-
+{{< youtube rqV_oUpLcso >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1183: Maximum Number of Ones](https://grid47.xyz/posts/leetcode_1183) |
 | --- |
 {{< notice tip >}}

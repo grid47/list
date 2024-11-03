@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ctrq8gAFMzE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3207: Maximum Points After Enemy Battles](https://grid47.xyz/posts/leetcode_3207) |
 | --- |
 {{< notice tip >}}

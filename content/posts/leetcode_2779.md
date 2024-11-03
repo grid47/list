@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube i2vf577Cr4c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2780: Minimum Index of a Valid Split](https://grid47.xyz/posts/leetcode_2780) |
 | --- |
 {{< notice tip >}}

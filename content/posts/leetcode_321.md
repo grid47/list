@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/321.md" >}}
 ---
-
+{{< youtube P_AyGh2mic0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #322: Coin Change](https://grid47.xyz/posts/leetcode_322) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/298.md" >}}
 ---
-
+{{< youtube JkxgBmg9OaQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #299: Bulls and Cows](https://grid47.xyz/posts/leetcode_299) |
 | --- |
 {{< notice tip >}}

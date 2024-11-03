@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube 1v-XTlRvUvU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2396: Strictly Palindromic Number](https://grid47.xyz/posts/leetcode_2396) |
 | --- |
 {{< notice tip >}}

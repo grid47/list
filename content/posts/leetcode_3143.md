@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube aercIqWsTGc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3144: Minimum Substring Partition of Equal Character Frequency](https://grid47.xyz/posts/leetcode_3144) |
 | --- |
 {{< notice tip >}}

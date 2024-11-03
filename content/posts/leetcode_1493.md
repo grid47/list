@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1493.md" >}}
 ---
-
+{{< youtube PnzvwU4CFg8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1494: Parallel Courses II](https://grid47.xyz/posts/leetcode_1494) |
 | --- |
 {{< notice tip >}}

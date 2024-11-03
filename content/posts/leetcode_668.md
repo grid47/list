@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/668.md" >}}
 ---
-
+{{< youtube SInj0SjGA_k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #669: Trim a Binary Search Tree](https://grid47.xyz/posts/leetcode_669) |
 | --- |
 {{< notice tip >}}

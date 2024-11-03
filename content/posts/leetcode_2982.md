@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube k1ko2-n0UZs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2983: Palindrome Rearrangement Queries](https://grid47.xyz/posts/leetcode_2983) |
 | --- |
 {{< notice tip >}}

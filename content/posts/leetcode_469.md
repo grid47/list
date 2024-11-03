@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/469.md" >}}
 ---
-
+{{< youtube 5xvMeI0R6uY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #470: Implement Rand10() Using Rand7()](https://grid47.xyz/posts/leetcode_470) |
 | --- |
 {{< notice tip >}}

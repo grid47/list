@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube FJ0CqsxYilk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3150: Invalid Tweets II](https://grid47.xyz/posts/leetcode_3150) |
 | --- |
 {{< notice tip >}}

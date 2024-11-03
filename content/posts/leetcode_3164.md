@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HjESdrv_n8o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3165: Maximum Sum of Subsequence With Non-adjacent Elements](https://grid47.xyz/posts/leetcode_3165) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube W-bDJmSxflA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2479: Maximum XOR of Two Non-Overlapping Subtrees](https://grid47.xyz/posts/leetcode_2479) |
 | --- |
 {{< notice tip >}}

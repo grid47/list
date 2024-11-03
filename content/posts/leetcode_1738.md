@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1738.md" >}}
 ---
-
+{{< youtube 3geaHSLu4PA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1739: Building Boxes](https://grid47.xyz/posts/leetcode_1739) |
 | --- |
 {{< notice tip >}}

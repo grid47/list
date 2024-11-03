@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gYYBiflEjEU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3105: Longest Strictly Increasing or Strictly Decreasing Subarray](https://grid47.xyz/posts/leetcode_3105) |
 | --- |
 {{< notice tip >}}

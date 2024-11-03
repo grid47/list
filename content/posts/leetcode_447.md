@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/447.md" >}}
 ---
-
+{{< youtube QPsEA1Ls3jQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #448: Find All Numbers Disappeared in an Array](https://grid47.xyz/posts/leetcode_448) |
 | --- |
 {{< notice tip >}}

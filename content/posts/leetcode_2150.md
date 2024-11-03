@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube oX00CiVJ00Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2151: Maximum Good People Based on Statements](https://grid47.xyz/posts/leetcode_2151) |
 | --- |
 {{< notice tip >}}

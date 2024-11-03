@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1465.md" >}}
 ---
-
+{{< youtube koGHcwtIaLY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1466: Reorder Routes to Make All Paths Lead to the City Zero](https://grid47.xyz/posts/leetcode_1466) |
 | --- |
 {{< notice tip >}}

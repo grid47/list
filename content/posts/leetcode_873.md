@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/873.md" >}}
 ---
-
+{{< youtube BWj2qT3aTrA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #874: Walking Robot Simulation](https://grid47.xyz/posts/leetcode_874) |
 | --- |
 {{< notice tip >}}

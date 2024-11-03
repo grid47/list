@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube PySNBQsl4L4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3065: Minimum Operations to Exceed Threshold Value I](https://grid47.xyz/posts/leetcode_3065) |
 | --- |
 {{< notice tip >}}

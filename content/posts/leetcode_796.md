@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/796.md" >}}
 ---
-
+{{< youtube 4eOpV-6NR1o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #797: All Paths From Source to Target](https://grid47.xyz/posts/leetcode_797) |
 | --- |
 {{< notice tip >}}

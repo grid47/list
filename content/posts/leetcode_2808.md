@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube NgWw6HIyCWE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2809: Minimum Time to Make Array Sum At Most x](https://grid47.xyz/posts/leetcode_2809) |
 | --- |
 {{< notice tip >}}

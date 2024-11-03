@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HV4Vo5ErPsw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3107: Minimum Operations to Make Median of Array Equal to K](https://grid47.xyz/posts/leetcode_3107) |
 | --- |
 {{< notice tip >}}

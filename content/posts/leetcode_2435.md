@@ -56,7 +56,7 @@ public:
 
 
 ---
-
+{{< youtube YG02DVAh5gQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2436: Minimum Split Into Subarrays With GCD Greater Than One](https://grid47.xyz/posts/leetcode_2436) |
 | --- |
 {{< notice tip >}}

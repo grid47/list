@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Qm8rHwvhVhQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3154: Find Number of Ways to Reach the K-th Stair](https://grid47.xyz/posts/leetcode_3154) |
 | --- |
 {{< notice tip >}}

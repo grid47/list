@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ZI6rCECY170 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3283: Maximum Number of Moves to Kill All Pawns](https://grid47.xyz/posts/leetcode_3283) |
 | --- |
 {{< notice tip >}}

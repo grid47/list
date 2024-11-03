@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/506.md" >}}
 ---
-
+{{< youtube ezc3J9qJ7sI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #507: Perfect Number](https://grid47.xyz/posts/leetcode_507) |
 | --- |
 {{< notice tip >}}

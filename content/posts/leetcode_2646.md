@@ -91,7 +91,7 @@ public:
 
 
 ---
-
+{{< youtube eyNvxXbyyWY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2647: Color the Triangle Red](https://grid47.xyz/posts/leetcode_2647) |
 | --- |
 {{< notice tip >}}

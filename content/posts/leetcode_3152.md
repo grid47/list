@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Qt1mXGX8q7w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3153: Sum of Digit Differences of All Pairs](https://grid47.xyz/posts/leetcode_3153) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _C7R201TLBU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3226: Number of Bit Changes to Make Two Integers Equal](https://grid47.xyz/posts/leetcode_3226) |
 | --- |
 {{< notice tip >}}

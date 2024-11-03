@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1785.md" >}}
 ---
-
+{{< youtube UDAGlLHIeT4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1786: Number of Restricted Paths From First to Last Node](https://grid47.xyz/posts/leetcode_1786) |
 | --- |
 {{< notice tip >}}

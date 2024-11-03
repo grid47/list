@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube SirdMrpnzKA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2377: Sort the Olympic Table](https://grid47.xyz/posts/leetcode_2377) |
 | --- |
 {{< notice tip >}}

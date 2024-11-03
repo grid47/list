@@ -60,7 +60,7 @@ public:
 
 
 ---
-
+{{< youtube B5YiuyNSVP0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2748: Number of Beautiful Pairs](https://grid47.xyz/posts/leetcode_2748) |
 | --- |
 {{< notice tip >}}

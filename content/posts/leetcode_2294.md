@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _j1PZ13ZSQk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2295: Replace Elements in an Array](https://grid47.xyz/posts/leetcode_2295) |
 | --- |
 {{< notice tip >}}

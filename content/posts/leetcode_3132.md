@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Zhecln9im2Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3133: Minimum Array End](https://grid47.xyz/posts/leetcode_3133) |
 | --- |
 {{< notice tip >}}

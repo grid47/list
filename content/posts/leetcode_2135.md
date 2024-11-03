@@ -56,7 +56,7 @@ public:
 
 
 ---
-
+{{< youtube Ag3bur1amBs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2136: Earliest Possible Day of Full Bloom](https://grid47.xyz/posts/leetcode_2136) |
 | --- |
 {{< notice tip >}}

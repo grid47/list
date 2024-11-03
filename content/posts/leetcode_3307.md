@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube SuI95YEsFik >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3308: Find Top Performing Driver](https://grid47.xyz/posts/leetcode_3308) |
 | --- |
 {{< notice tip >}}

@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1680.md" >}}
 ---
-
+{{< youtube 1ZtYzuWUFwA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1681: Minimum Incompatibility](https://grid47.xyz/posts/leetcode_1681) |
 | --- |
 {{< notice tip >}}

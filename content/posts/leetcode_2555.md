@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube trj4pn5uzZ0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2556: Disconnect Path in a Binary Matrix by at Most One Flip](https://grid47.xyz/posts/leetcode_2556) |
 | --- |
 {{< notice tip >}}

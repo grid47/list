@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Qx0mXyrrAEc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3080: Mark Elements on Array by Performing Queries](https://grid47.xyz/posts/leetcode_3080) |
 | --- |
 {{< notice tip >}}

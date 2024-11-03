@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1742.md" >}}
 ---
-
+{{< youtube bRjEkQZ1R7Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1743: Restore the Array From Adjacent Pairs](https://grid47.xyz/posts/leetcode_1743) |
 | --- |
 {{< notice tip >}}

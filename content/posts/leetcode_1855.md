@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1855.md" >}}
 ---
-
+{{< youtube ksN__viaDFs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1856: Maximum Subarray Min-Product](https://grid47.xyz/posts/leetcode_1856) |
 | --- |
 {{< notice tip >}}

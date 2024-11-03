@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yxqlcR5ocyQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2214: Minimum Health to Beat Game](https://grid47.xyz/posts/leetcode_2214) |
 | --- |
 {{< notice tip >}}

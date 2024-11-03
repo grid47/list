@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8x1WpYOmHbk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3000: Maximum Area of Longest Diagonal Rectangle](https://grid47.xyz/posts/leetcode_3000) |
 | --- |
 {{< notice tip >}}

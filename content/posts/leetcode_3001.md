@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QQisOX1Q1sc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3002: Maximum Size of a Set After Removals](https://grid47.xyz/posts/leetcode_3002) |
 | --- |
 {{< notice tip >}}

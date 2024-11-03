@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube xpjC9rt9xsM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2773: Height of Special Binary Tree](https://grid47.xyz/posts/leetcode_2773) |
 | --- |
 {{< notice tip >}}

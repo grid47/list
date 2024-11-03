@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Q3KqndxHn_Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3325: Count Substrings With K-Frequency Characters I](https://grid47.xyz/posts/leetcode_3325) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube llzYaO1MEfk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3115: Maximum Prime Difference](https://grid47.xyz/posts/leetcode_3115) |
 | --- |
 {{< notice tip >}}

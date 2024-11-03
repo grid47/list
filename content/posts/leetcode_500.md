@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/500.md" >}}
 ---
-
+{{< youtube nDGtW1vF-QQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #501: Find Mode in Binary Search Tree](https://grid47.xyz/posts/leetcode_501) |
 | --- |
 {{< notice tip >}}

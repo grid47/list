@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8pdISoibKIc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3068: Find the Maximum Sum of Node Values](https://grid47.xyz/posts/leetcode_3068) |
 | --- |
 {{< notice tip >}}

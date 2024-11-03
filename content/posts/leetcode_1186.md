@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1186.md" >}}
 ---
-
+{{< youtube EWCdm1cKtrA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1187: Make Array Strictly Increasing](https://grid47.xyz/posts/leetcode_1187) |
 | --- |
 {{< notice tip >}}

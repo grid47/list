@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube JtogyeIxGWE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2787: Ways to Express an Integer as Sum of Powers](https://grid47.xyz/posts/leetcode_2787) |
 | --- |
 {{< notice tip >}}

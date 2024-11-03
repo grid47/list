@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1904.md" >}}
 ---
-
+{{< youtube kwvB82HHvoQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1905: Count Sub Islands](https://grid47.xyz/posts/leetcode_1905) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1494.md" >}}
 ---
-
+{{< youtube p0wmkvWY_uE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1495: Friendly Movies Streamed Last Month](https://grid47.xyz/posts/leetcode_1495) |
 | --- |
 {{< notice tip >}}

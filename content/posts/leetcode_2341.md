@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube 9KeeDZ6tcy4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2342: Max Sum of a Pair With Equal Sum of Digits](https://grid47.xyz/posts/leetcode_2342) |
 | --- |
 {{< notice tip >}}

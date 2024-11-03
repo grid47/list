@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/829.md" >}}
 ---
-
+{{< youtube VESN_DQCQNY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #830: Positions of Large Groups](https://grid47.xyz/posts/leetcode_830) |
 | --- |
 {{< notice tip >}}

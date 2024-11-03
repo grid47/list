@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube TGkCRo1H27k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3140: Consecutive Available Seats II](https://grid47.xyz/posts/leetcode_3140) |
 | --- |
 {{< notice tip >}}

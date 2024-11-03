@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rEjIV84sDeU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3236: CEO Subordinate Hierarchy](https://grid47.xyz/posts/leetcode_3236) |
 | --- |
 {{< notice tip >}}

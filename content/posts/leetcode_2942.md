@@ -43,7 +43,7 @@ private:
 
 
 ---
-
+{{< youtube gJCrdytYtDY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2943: Maximize Area of Square Hole in Grid](https://grid47.xyz/posts/leetcode_2943) |
 | --- |
 {{< notice tip >}}

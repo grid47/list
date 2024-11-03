@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ezA4VMcGyVs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2099: Find Subsequence of Length K With the Largest Sum](https://grid47.xyz/posts/leetcode_2099) |
 | --- |
 {{< notice tip >}}

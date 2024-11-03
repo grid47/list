@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube edkJIpwb_yU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3161: Block Placement Queries](https://grid47.xyz/posts/leetcode_3161) |
 | --- |
 {{< notice tip >}}

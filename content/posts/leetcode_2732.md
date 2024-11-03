@@ -61,7 +61,7 @@ public:
 
 
 ---
-
+{{< youtube 3NB86-4aEkI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2733: Neither Minimum nor Maximum](https://grid47.xyz/posts/leetcode_2733) |
 | --- |
 {{< notice tip >}}

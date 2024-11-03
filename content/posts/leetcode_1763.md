@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1763.md" >}}
 ---
-
+{{< youtube 6WvZrynlCdk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1764: Form Array by Concatenating Subarrays of Another Array](https://grid47.xyz/posts/leetcode_1764) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6m3F_15yMh0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3220: Odd and Even Transactions](https://grid47.xyz/posts/leetcode_3220) |
 | --- |
 {{< notice tip >}}

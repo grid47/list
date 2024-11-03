@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1205.md" >}}
 ---
-
+{{< youtube DrQMQM4-rr0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1206: Design Skiplist](https://grid47.xyz/posts/leetcode_1206) |
 | --- |
 {{< notice tip >}}

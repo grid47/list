@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube mWUMfdloybo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2430: Maximum Deletions on a String](https://grid47.xyz/posts/leetcode_2430) |
 | --- |
 {{< notice tip >}}

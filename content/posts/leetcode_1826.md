@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1826.md" >}}
 ---
-
+{{< youtube sev4wdCD6gU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1827: Minimum Operations to Make the Array Increasing](https://grid47.xyz/posts/leetcode_1827) |
 | --- |
 {{< notice tip >}}

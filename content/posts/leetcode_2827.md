@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8MV_GuCEYnQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2828: Check if a String Is an Acronym of Words](https://grid47.xyz/posts/leetcode_2828) |
 | --- |
 {{< notice tip >}}

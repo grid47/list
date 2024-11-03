@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/370.md" >}}
 ---
-
+{{< youtube sSStYLGgFQc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #371: Sum of Two Integers](https://grid47.xyz/posts/leetcode_371) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube crx8NkO5Idw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3085: Minimum Deletions to Make String K-Special](https://grid47.xyz/posts/leetcode_3085) |
 | --- |
 {{< notice tip >}}

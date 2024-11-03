@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Da1Z5wncNu8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3109: Find the Index of Permutation](https://grid47.xyz/posts/leetcode_3109) |
 | --- |
 {{< notice tip >}}

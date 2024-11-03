@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0BE7yxxcV4k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2169: Count Operations to Obtain Zero](https://grid47.xyz/posts/leetcode_2169) |
 | --- |
 {{< notice tip >}}

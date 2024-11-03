@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1954.md" >}}
 ---
-
+{{< youtube AItMwRnJRVk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1955: Count Number of Special Subsequences](https://grid47.xyz/posts/leetcode_1955) |
 | --- |
 {{< notice tip >}}

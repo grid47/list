@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/944.md" >}}
 ---
-
+{{< youtube Aux3FW2xjEQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #945: Minimum Increment to Make Array Unique](https://grid47.xyz/posts/leetcode_945) |
 | --- |
 {{< notice tip >}}

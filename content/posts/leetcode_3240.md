@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 556ZquRu1Sw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3241: Time Taken to Mark All Nodes](https://grid47.xyz/posts/leetcode_3241) |
 | --- |
 {{< notice tip >}}

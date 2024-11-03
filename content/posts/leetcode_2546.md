@@ -33,7 +33,7 @@ public:
 
 
 ---
-
+{{< youtube 9aTO0sRtL-s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2547: Minimum Cost to Split an Array](https://grid47.xyz/posts/leetcode_2547) |
 | --- |
 {{< notice tip >}}

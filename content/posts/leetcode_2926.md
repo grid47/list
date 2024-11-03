@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WHHklVu80no >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2927: Distribute Candies Among Children III](https://grid47.xyz/posts/leetcode_2927) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ZjarUSdQjEA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2509: Cycle Length Queries in a Tree](https://grid47.xyz/posts/leetcode_2509) |
 | --- |
 {{< notice tip >}}

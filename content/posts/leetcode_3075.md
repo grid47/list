@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube g-mQV73XEyo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3076: Shortest Uncommon Substring in an Array](https://grid47.xyz/posts/leetcode_3076) |
 | --- |
 {{< notice tip >}}

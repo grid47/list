@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/558.md" >}}
 ---
-
+{{< youtube pVgfCdn2xKI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #559: Maximum Depth of N-ary Tree](https://grid47.xyz/posts/leetcode_559) |
 | --- |
 {{< notice tip >}}

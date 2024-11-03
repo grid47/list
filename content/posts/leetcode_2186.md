@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube U7tKTEdd0Lw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2187: Minimum Time to Complete Trips](https://grid47.xyz/posts/leetcode_2187) |
 | --- |
 {{< notice tip >}}

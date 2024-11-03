@@ -68,7 +68,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/501.md" >}}
 ---
-
+{{< youtube cHwafswjTlE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #502: IPO](https://grid47.xyz/posts/leetcode_502) |
 | --- |
 {{< notice tip >}}

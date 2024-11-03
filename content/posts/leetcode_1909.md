@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1909.md" >}}
 ---
-
+{{< youtube 3NoWO_MD7As >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1910: Remove All Occurrences of a Substring](https://grid47.xyz/posts/leetcode_1910) |
 | --- |
 {{< notice tip >}}

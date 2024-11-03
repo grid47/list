@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1974.md" >}}
 ---
-
+{{< youtube DEMUS-1tq-0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1975: Maximum Matrix Sum](https://grid47.xyz/posts/leetcode_1975) |
 | --- |
 {{< notice tip >}}

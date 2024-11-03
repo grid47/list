@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube NNSzElew804 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2916: Subarrays Distinct Element Sum of Squares II](https://grid47.xyz/posts/leetcode_2916) |
 | --- |
 {{< notice tip >}}

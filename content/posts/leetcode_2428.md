@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube u4dYdiBXAjI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2429: Minimize XOR](https://grid47.xyz/posts/leetcode_2429) |
 | --- |
 {{< notice tip >}}

@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube -VAEXKFWfXo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3169: Count Days Without Meetings](https://grid47.xyz/posts/leetcode_3169) |
 | --- |
 {{< notice tip >}}

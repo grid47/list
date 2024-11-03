@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube -p_fu7YsS8M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2955: Number of Same-End Substrings](https://grid47.xyz/posts/leetcode_2955) |
 | --- |
 {{< notice tip >}}

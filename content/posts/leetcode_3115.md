@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube d8sSpKfKARk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3116: Kth Smallest Amount With Single Denomination Combination](https://grid47.xyz/posts/leetcode_3116) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube vRNDjWJDAJs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3192: Minimum Operations to Make Binary Array Elements Equal to One II](https://grid47.xyz/posts/leetcode_3192) |
 | --- |
 {{< notice tip >}}

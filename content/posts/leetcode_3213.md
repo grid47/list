@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube EVlEMf5ooto >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3214: Year on Year Growth Rate](https://grid47.xyz/posts/leetcode_3214) |
 | --- |
 {{< notice tip >}}

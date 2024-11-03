@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1180.md" >}}
 ---
-
+{{< youtube jnOfC7CJXjs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1181: Before and After Puzzle](https://grid47.xyz/posts/leetcode_1181) |
 | --- |
 {{< notice tip >}}

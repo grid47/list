@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1695.md" >}}
 ---
-
+{{< youtube XIFl0gXnq9s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1696: Jump Game VI](https://grid47.xyz/posts/leetcode_1696) |
 | --- |
 {{< notice tip >}}

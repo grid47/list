@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube BIrywtcqZqE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3012: Minimize Length of Array Using Operations](https://grid47.xyz/posts/leetcode_3012) |
 | --- |
 {{< notice tip >}}

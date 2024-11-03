@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1589.md" >}}
 ---
-
+{{< youtube TyZ_FFGIZgs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1590: Make Sum Divisible by P](https://grid47.xyz/posts/leetcode_1590) |
 | --- |
 {{< notice tip >}}

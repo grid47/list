@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/360.md" >}}
 ---
-
+{{< youtube NMlzPMWi-2Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #361: Bomb Enemy](https://grid47.xyz/posts/leetcode_361) |
 | --- |
 {{< notice tip >}}

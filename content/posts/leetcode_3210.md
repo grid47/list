@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 3mCCSTEB4L8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3211: Generate Binary Strings Without Adjacent Zeros](https://grid47.xyz/posts/leetcode_3211) |
 | --- |
 {{< notice tip >}}

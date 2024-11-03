@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube NacHXIlvyuY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3310: Remove Methods From Project](https://grid47.xyz/posts/leetcode_3310) |
 | --- |
 {{< notice tip >}}

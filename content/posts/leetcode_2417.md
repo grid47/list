@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XQYsDoHfIgQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2418: Sort the People](https://grid47.xyz/posts/leetcode_2418) |
 | --- |
 {{< notice tip >}}

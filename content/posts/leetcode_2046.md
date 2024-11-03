@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube nuqTkfe-0_0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2047: Number of Valid Words in a Sentence](https://grid47.xyz/posts/leetcode_2047) |
 | --- |
 {{< notice tip >}}

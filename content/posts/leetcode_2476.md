@@ -61,7 +61,7 @@ public:
 
 
 ---
-
+{{< youtube KFYvX7u-Hs8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2477: Minimum Fuel Cost to Report to the Capital](https://grid47.xyz/posts/leetcode_2477) |
 | --- |
 {{< notice tip >}}

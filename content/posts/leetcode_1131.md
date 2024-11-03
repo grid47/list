@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1131.md" >}}
 ---
-
+{{< youtube cNEQMhXa1uI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1132: Reported Posts II](https://grid47.xyz/posts/leetcode_1132) |
 | --- |
 {{< notice tip >}}

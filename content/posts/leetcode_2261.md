@@ -47,7 +47,7 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
 
 
 ---
-
+{{< youtube BZdbRvIM-js >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2262: Total Appeal of A String](https://grid47.xyz/posts/leetcode_2262) |
 | --- |
 {{< notice tip >}}

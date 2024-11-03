@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mqYSP4Qe-YM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3174: Clear Digits](https://grid47.xyz/posts/leetcode_3174) |
 | --- |
 {{< notice tip >}}

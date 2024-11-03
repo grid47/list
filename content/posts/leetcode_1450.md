@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1450.md" >}}
 ---
-
+{{< youtube Bo_Qs4Yqzus >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1451: Rearrange Words in a Sentence](https://grid47.xyz/posts/leetcode_1451) |
 | --- |
 {{< notice tip >}}

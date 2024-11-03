@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube OmNZRgKr7GQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2017: Grid Game](https://grid47.xyz/posts/leetcode_2017) |
 | --- |
 {{< notice tip >}}

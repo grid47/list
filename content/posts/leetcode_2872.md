@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _Yu54bmh9X4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2873: Maximum Value of an Ordered Triplet I](https://grid47.xyz/posts/leetcode_2873) |
 | --- |
 {{< notice tip >}}

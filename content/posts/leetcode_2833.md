@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube XD2LVEXo8j8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2834: Find the Minimum Possible Sum of a Beautiful Array](https://grid47.xyz/posts/leetcode_2834) |
 | --- |
 {{< notice tip >}}

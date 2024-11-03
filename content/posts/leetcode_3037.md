@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sXpLHjnvADo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3038: Maximum Number of Operations With the Same Score I](https://grid47.xyz/posts/leetcode_3038) |
 | --- |
 {{< notice tip >}}

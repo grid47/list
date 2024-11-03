@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube USlqAHiX2bE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2387: Median of a Row Wise Sorted Matrix](https://grid47.xyz/posts/leetcode_2387) |
 | --- |
 {{< notice tip >}}

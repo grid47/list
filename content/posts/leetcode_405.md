@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/405.md" >}}
 ---
-
+{{< youtube EUKWcVgow8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #406: Queue Reconstruction by Height](https://grid47.xyz/posts/leetcode_406) |
 | --- |
 {{< notice tip >}}

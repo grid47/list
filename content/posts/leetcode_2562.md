@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube OgX8lEhgW9g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2563: Count the Number of Fair Pairs](https://grid47.xyz/posts/leetcode_2563) |
 | --- |
 {{< notice tip >}}

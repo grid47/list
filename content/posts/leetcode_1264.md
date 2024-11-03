@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1264.md" >}}
 ---
-
+{{< youtube 3ulVilEvPmw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1265: Print Immutable Linked List in Reverse](https://grid47.xyz/posts/leetcode_1265) |
 | --- |
 {{< notice tip >}}

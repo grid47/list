@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube -ev8iu4upRs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3007: Maximum Number That Sum of the Prices Is Less Than or Equal to K](https://grid47.xyz/posts/leetcode_3007) |
 | --- |
 {{< notice tip >}}

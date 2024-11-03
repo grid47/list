@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/761.md" >}}
 ---
-
+{{< youtube pX0OGynuLKo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #762: Prime Number of Set Bits in Binary Representation](https://grid47.xyz/posts/leetcode_762) |
 | --- |
 {{< notice tip >}}

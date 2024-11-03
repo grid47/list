@@ -55,7 +55,7 @@ public:
 
 
 ---
-
+{{< youtube Tq2uKuSciOc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2338: Count the Number of Ideal Arrays](https://grid47.xyz/posts/leetcode_2338) |
 | --- |
 {{< notice tip >}}

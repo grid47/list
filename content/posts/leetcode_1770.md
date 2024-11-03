@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1770.md" >}}
 ---
-
+{{< youtube ilIoqADfcYQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1771: Maximize Palindrome Length From Subsequences](https://grid47.xyz/posts/leetcode_1771) |
 | --- |
 {{< notice tip >}}

@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1111.md" >}}
 ---
-
+{{< youtube lHzdbjyqBG4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1112: Highest Grade For Each Student](https://grid47.xyz/posts/leetcode_1112) |
 | --- |
 {{< notice tip >}}

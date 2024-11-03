@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube C0YrL5_I12E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3246: Premier League Table Ranking](https://grid47.xyz/posts/leetcode_3246) |
 | --- |
 {{< notice tip >}}

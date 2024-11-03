@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1yieeT7-RC8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3013: Divide an Array Into Subarrays With Minimum Cost II](https://grid47.xyz/posts/leetcode_3013) |
 | --- |
 {{< notice tip >}}

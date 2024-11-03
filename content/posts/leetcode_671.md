@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/671.md" >}}
 ---
-
+{{< youtube kXxyCUAVSX8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #672: Bulb Switcher II](https://grid47.xyz/posts/leetcode_672) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1030.md" >}}
 ---
-
+{{< youtube MzCKrBI7j0o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1031: Maximum Sum of Two Non-Overlapping Subarrays](https://grid47.xyz/posts/leetcode_1031) |
 | --- |
 {{< notice tip >}}

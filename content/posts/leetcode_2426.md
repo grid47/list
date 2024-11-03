@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zbB0LhlXhlc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2427: Number of Common Factors](https://grid47.xyz/posts/leetcode_2427) |
 | --- |
 {{< notice tip >}}

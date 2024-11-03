@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube t89bPkaJISM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2969: Minimum Number of Coins for Fruits II](https://grid47.xyz/posts/leetcode_2969) |
 | --- |
 {{< notice tip >}}

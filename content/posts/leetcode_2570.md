@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube Ou0KdT0OgV8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2571: Minimum Operations to Reduce an Integer to 0](https://grid47.xyz/posts/leetcode_2571) |
 | --- |
 {{< notice tip >}}

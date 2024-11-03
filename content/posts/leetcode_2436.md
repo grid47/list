@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube fbW5xiYnnX8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2437: Number of Valid Clock Times](https://grid47.xyz/posts/leetcode_2437) |
 | --- |
 {{< notice tip >}}

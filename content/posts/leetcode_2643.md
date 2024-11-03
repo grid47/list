@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube yieYsDt7yVM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2644: Find the Maximum Divisibility Score](https://grid47.xyz/posts/leetcode_2644) |
 | --- |
 {{< notice tip >}}

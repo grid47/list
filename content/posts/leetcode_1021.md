@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1021.md" >}}
 ---
-
+{{< youtube vTkF3KG4-es >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1022: Sum of Root To Leaf Binary Numbers](https://grid47.xyz/posts/leetcode_1022) |
 | --- |
 {{< notice tip >}}

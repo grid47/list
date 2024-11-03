@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1991.md" >}}
 ---
-
+{{< youtube C9PhqirC9vs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1992: Find All Groups of Farmland](https://grid47.xyz/posts/leetcode_1992) |
 | --- |
 {{< notice tip >}}

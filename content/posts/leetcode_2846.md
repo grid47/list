@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube OAaE6UiVXKQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2847: Smallest Number With Given Digit Product](https://grid47.xyz/posts/leetcode_2847) |
 | --- |
 {{< notice tip >}}

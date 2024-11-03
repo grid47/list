@@ -86,7 +86,7 @@ public:
 
 
 ---
-
+{{< youtube eC62DF5PW6E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2055: Plates Between Candles](https://grid47.xyz/posts/leetcode_2055) |
 | --- |
 {{< notice tip >}}

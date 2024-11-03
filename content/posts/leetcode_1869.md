@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1869.md" >}}
 ---
-
+{{< youtube K0WT66cPNmo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1870: Minimum Speed to Arrive on Time](https://grid47.xyz/posts/leetcode_1870) |
 | --- |
 {{< notice tip >}}

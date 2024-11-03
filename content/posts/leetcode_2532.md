@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube iDLIMoweXco >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2533: Number of Good Binary Strings](https://grid47.xyz/posts/leetcode_2533) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube TN8MC2bpeRM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2912: Number of Ways to Reach Destination in the Grid](https://grid47.xyz/posts/leetcode_2912) |
 | --- |
 {{< notice tip >}}

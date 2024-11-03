@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Iyq6wihZaGQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3209: Number of Subarrays With AND Value of K](https://grid47.xyz/posts/leetcode_3209) |
 | --- |
 {{< notice tip >}}

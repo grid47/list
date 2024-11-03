@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube U7fqZr_ZLd4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2272: Substring With Largest Variance](https://grid47.xyz/posts/leetcode_2272) |
 | --- |
 {{< notice tip >}}

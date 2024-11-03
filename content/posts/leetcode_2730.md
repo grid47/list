@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube x_tHB_M7a_g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2731: Movement of Robots](https://grid47.xyz/posts/leetcode_2731) |
 | --- |
 {{< notice tip >}}

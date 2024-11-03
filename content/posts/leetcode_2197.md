@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube O7phUT7iFYM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2198: Number of Single Divisor Triplets](https://grid47.xyz/posts/leetcode_2198) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 5ePRwqd4pNc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2664: The Knight’s Tour](https://grid47.xyz/posts/leetcode_2664) |
 | --- |
 {{< notice tip >}}

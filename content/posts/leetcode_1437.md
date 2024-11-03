@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1437.md" >}}
 ---
-
+{{< youtube GsqMSazbYMs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit](https://grid47.xyz/posts/leetcode_1438) |
 | --- |
 {{< notice tip >}}

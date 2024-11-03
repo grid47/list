@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1829.md" >}}
 ---
-
+{{< youtube AIGDFYa4aWM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1830: Minimum Number of Operations to Make String Sorted](https://grid47.xyz/posts/leetcode_1830) |
 | --- |
 {{< notice tip >}}

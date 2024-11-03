@@ -60,7 +60,7 @@ public:
 
 
 ---
-
+{{< youtube wDPL8oM9rO8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3043: Find the Length of the Longest Common Prefix](https://grid47.xyz/posts/leetcode_3043) |
 | --- |
 {{< notice tip >}}

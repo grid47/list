@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube nCwsQTMCCcI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3281: Maximize Score of Numbers in Ranges](https://grid47.xyz/posts/leetcode_3281) |
 | --- |
 {{< notice tip >}}

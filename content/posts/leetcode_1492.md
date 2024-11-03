@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1492.md" >}}
 ---
-
+{{< youtube eD7-AQ2nUsI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1493: Longest Subarray of 1's After Deleting One Element](https://grid47.xyz/posts/leetcode_1493) |
 | --- |
 {{< notice tip >}}

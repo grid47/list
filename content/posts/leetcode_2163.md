@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ANkL_nfac7A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2164: Sort Even and Odd Indices Independently](https://grid47.xyz/posts/leetcode_2164) |
 | --- |
 {{< notice tip >}}

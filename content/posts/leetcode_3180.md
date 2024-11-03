@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube lsxaGJ7LnFM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3181: Maximum Total Reward Using Operations II](https://grid47.xyz/posts/leetcode_3181) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube OQ8KuCvtFfs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2998: Minimum Number of Operations to Make X and Y Equal](https://grid47.xyz/posts/leetcode_2998) |
 | --- |
 {{< notice tip >}}

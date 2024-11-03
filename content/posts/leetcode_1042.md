@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1042.md" >}}
 ---
-
+{{< youtube 63xMlAAvEnA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1043: Partition Array for Maximum Sum](https://grid47.xyz/posts/leetcode_1043) |
 | --- |
 {{< notice tip >}}

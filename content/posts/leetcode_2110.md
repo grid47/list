@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube p_hKOwJ7azU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2111: Minimum Operations to Make the Array K-Increasing](https://grid47.xyz/posts/leetcode_2111) |
 | --- |
 {{< notice tip >}}

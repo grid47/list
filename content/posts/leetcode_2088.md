@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube J6AVFM4_tdI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2089: Find Target Indices After Sorting Array](https://grid47.xyz/posts/leetcode_2089) |
 | --- |
 {{< notice tip >}}

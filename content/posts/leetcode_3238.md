@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6uYgPFuPm3I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3239: Minimum Number of Flips to Make Binary Grid Palindromic I](https://grid47.xyz/posts/leetcode_3239) |
 | --- |
 {{< notice tip >}}

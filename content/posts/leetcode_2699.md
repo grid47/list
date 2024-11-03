@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube v-8aRVFZYCw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2700: Differences Between Two Objects](https://grid47.xyz/posts/leetcode_2700) |
 | --- |
 {{< notice tip >}}

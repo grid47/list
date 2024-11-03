@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube e9FIRRXjKJI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2127: Maximum Employees to Be Invited to a Meeting](https://grid47.xyz/posts/leetcode_2127) |
 | --- |
 {{< notice tip >}}

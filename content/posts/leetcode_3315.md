@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JZgd7AlJ8TE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3316: Find Maximum Removals From Source String](https://grid47.xyz/posts/leetcode_3316) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oe2oYD05IUM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3177: Find the Maximum Length of a Good Subsequence II](https://grid47.xyz/posts/leetcode_3177) |
 | --- |
 {{< notice tip >}}

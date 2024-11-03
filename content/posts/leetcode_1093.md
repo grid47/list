@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1093.md" >}}
 ---
-
+{{< youtube 05WQZvhYcAg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1094: Car Pooling](https://grid47.xyz/posts/leetcode_1094) |
 | --- |
 {{< notice tip >}}

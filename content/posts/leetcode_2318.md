@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube dBs8vnvxZes >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2319: Check if Matrix Is X-Matrix](https://grid47.xyz/posts/leetcode_2319) |
 | --- |
 {{< notice tip >}}

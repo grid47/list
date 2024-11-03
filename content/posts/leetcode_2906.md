@@ -70,7 +70,7 @@ public:
 
 
 ---
-
+{{< youtube CXuoLKjEWIs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2907: Maximum Profitable Triplets With Increasing Prices I](https://grid47.xyz/posts/leetcode_2907) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RrmO7rIZM1s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3193: Count the Number of Inversions](https://grid47.xyz/posts/leetcode_3193) |
 | --- |
 {{< notice tip >}}

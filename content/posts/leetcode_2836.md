@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oBy7cUd7Bq0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2837: Total Traveled Distance](https://grid47.xyz/posts/leetcode_2837) |
 | --- |
 {{< notice tip >}}

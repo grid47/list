@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube xkkPiOLS1Oc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2552: Count Increasing Quadruplets](https://grid47.xyz/posts/leetcode_2552) |
 | --- |
 {{< notice tip >}}

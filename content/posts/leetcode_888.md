@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/888.md" >}}
 ---
-
+{{< youtube sVMRTLZnpuU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #889: Construct Binary Tree from Preorder and Postorder Traversal](https://grid47.xyz/posts/leetcode_889) |
 | --- |
 {{< notice tip >}}

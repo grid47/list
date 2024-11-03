@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4xyIKeSeBW0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2859: Sum of Values at Indices With K Set Bits](https://grid47.xyz/posts/leetcode_2859) |
 | --- |
 {{< notice tip >}}

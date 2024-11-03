@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/519.md" >}}
 ---
-
+{{< youtube 9JsC0Dg9oX8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #520: Detect Capital](https://grid47.xyz/posts/leetcode_520) |
 | --- |
 {{< notice tip >}}

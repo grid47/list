@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QJd090T2Jz8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2072: The Winner University](https://grid47.xyz/posts/leetcode_2072) |
 | --- |
 {{< notice tip >}}

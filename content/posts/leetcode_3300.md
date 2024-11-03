@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube npG6h8Kehcw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3301: Maximize the Total Height of Unique Towers](https://grid47.xyz/posts/leetcode_3301) |
 | --- |
 {{< notice tip >}}

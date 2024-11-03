@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube bWOQutblQrE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3032: Count Numbers With Unique Digits II](https://grid47.xyz/posts/leetcode_3032) |
 | --- |
 {{< notice tip >}}

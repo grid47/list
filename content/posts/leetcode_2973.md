@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gw1507HSqcc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2974: Minimum Number Game](https://grid47.xyz/posts/leetcode_2974) |
 | --- |
 {{< notice tip >}}

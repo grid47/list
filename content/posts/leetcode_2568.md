@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube ofCTBFFzB2Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2569: Handling Sum Queries After Update](https://grid47.xyz/posts/leetcode_2569) |
 | --- |
 {{< notice tip >}}

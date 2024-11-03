@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube L-Ebv96M-6U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3029: Minimum Time to Revert Word to Initial State I](https://grid47.xyz/posts/leetcode_3029) |
 | --- |
 {{< notice tip >}}

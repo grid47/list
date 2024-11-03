@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube eHR9LkqodZs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2118: Build the Equation](https://grid47.xyz/posts/leetcode_2118) |
 | --- |
 {{< notice tip >}}

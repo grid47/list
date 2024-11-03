@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1156.md" >}}
 ---
-
+{{< youtube 0kfkOm4b-8I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1157: Online Majority Element In Subarray](https://grid47.xyz/posts/leetcode_1157) |
 | --- |
 {{< notice tip >}}

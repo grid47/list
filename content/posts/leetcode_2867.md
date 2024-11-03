@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yEd8R1nKx-s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2868: The Wording Game](https://grid47.xyz/posts/leetcode_2868) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube A1-KH4x6aY8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2383: Minimum Hours of Training to Win a Competition](https://grid47.xyz/posts/leetcode_2383) |
 | --- |
 {{< notice tip >}}

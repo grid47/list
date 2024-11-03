@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube gpjKAXQpOMM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2392: Build a Matrix With Conditions](https://grid47.xyz/posts/leetcode_2392) |
 | --- |
 {{< notice tip >}}

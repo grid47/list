@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Y7swZGYfKvM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3050: Pizza Toppings Cost Analysis](https://grid47.xyz/posts/leetcode_3050) |
 | --- |
 {{< notice tip >}}

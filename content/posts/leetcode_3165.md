@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _rm2gX72Pk4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3166: Calculate Parking Fees and Duration](https://grid47.xyz/posts/leetcode_3166) |
 | --- |
 {{< notice tip >}}

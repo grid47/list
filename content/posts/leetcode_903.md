@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/903.md" >}}
 ---
-
+{{< youtube cjFzL8b4bME >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #904: Fruit Into Baskets](https://grid47.xyz/posts/leetcode_904) |
 | --- |
 {{< notice tip >}}

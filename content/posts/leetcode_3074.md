@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JV8gGnky8vQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3075: Maximize Happiness of Selected Children](https://grid47.xyz/posts/leetcode_3075) |
 | --- |
 {{< notice tip >}}

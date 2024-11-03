@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yfn8X_JGXGQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3172: Second Day Verification](https://grid47.xyz/posts/leetcode_3172) |
 | --- |
 {{< notice tip >}}

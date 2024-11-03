@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube q3JH6JiwEZk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2936: Number of Equal Numbers Blocks](https://grid47.xyz/posts/leetcode_2936) |
 | --- |
 {{< notice tip >}}

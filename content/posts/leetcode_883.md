@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/883.md" >}}
 ---
-
+{{< youtube oA3AoM96gfY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #884: Uncommon Words from Two Sentences](https://grid47.xyz/posts/leetcode_884) |
 | --- |
 {{< notice tip >}}

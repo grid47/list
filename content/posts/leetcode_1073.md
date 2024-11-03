@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1073.md" >}}
 ---
-
+{{< youtube mrK37adgvjo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1074: Number of Submatrices That Sum to Target](https://grid47.xyz/posts/leetcode_1074) |
 | --- |
 {{< notice tip >}}

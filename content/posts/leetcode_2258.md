@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Pp9-kmiathk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2259: Remove Digit From Number to Maximize Result](https://grid47.xyz/posts/leetcode_2259) |
 | --- |
 {{< notice tip >}}

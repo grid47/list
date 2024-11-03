@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube 6GNga8RRNSQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2080: Range Frequency Queries](https://grid47.xyz/posts/leetcode_2080) |
 | --- |
 {{< notice tip >}}

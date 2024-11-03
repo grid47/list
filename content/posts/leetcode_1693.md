@@ -28,7 +28,7 @@ SELECT date_id, make_name, COUNT(DISTINCT lead_id) AS unique_leads, COUNT(DISTIN
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1693.md" >}}
 ---
-
+{{< youtube LBDQGCxWmRY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1694: Reformat Phone Number](https://grid47.xyz/posts/leetcode_1694) |
 | --- |
 {{< notice tip >}}

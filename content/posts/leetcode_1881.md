@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1881.md" >}}
 ---
-
+{{< youtube AHoQV7JbN2U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1882: Process Tasks Using Servers](https://grid47.xyz/posts/leetcode_1882) |
 | --- |
 {{< notice tip >}}

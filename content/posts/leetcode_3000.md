@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube YU-T68CopbU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3001: Minimum Moves to Capture The Queen](https://grid47.xyz/posts/leetcode_3001) |
 | --- |
 {{< notice tip >}}

@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube E93-thIrUgA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2344: Minimum Deletions to Make Array Divisible](https://grid47.xyz/posts/leetcode_2344) |
 | --- |
 {{< notice tip >}}

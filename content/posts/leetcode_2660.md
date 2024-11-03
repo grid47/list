@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube UzLjzmjhVqs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2661: First Completely Painted Row or Column](https://grid47.xyz/posts/leetcode_2661) |
 | --- |
 {{< notice tip >}}

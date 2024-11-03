@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube iDGxD7evwC4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3014: Minimum Number of Pushes to Type Word I](https://grid47.xyz/posts/leetcode_3014) |
 | --- |
 {{< notice tip >}}

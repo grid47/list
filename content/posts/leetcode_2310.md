@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube o0Q19ZqTcFc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2311: Longest Binary Subsequence Less Than or Equal to K](https://grid47.xyz/posts/leetcode_2311) |
 | --- |
 {{< notice tip >}}

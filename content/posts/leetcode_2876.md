@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube YPVcs8aj-9w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2877: Create a DataFrame from List](https://grid47.xyz/posts/leetcode_2877) |
 | --- |
 {{< notice tip >}}

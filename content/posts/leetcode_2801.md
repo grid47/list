@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RHF4_q8mCuQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2802: Find The K-th Lucky Number](https://grid47.xyz/posts/leetcode_2802) |
 | --- |
 {{< notice tip >}}

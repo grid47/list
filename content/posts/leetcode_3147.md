@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube fn4GEChYzI8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3148: Maximum Difference Score in a Grid](https://grid47.xyz/posts/leetcode_3148) |
 | --- |
 {{< notice tip >}}

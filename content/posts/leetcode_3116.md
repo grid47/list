@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ZNeLEjg2x0w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3117: Minimum Sum of Values by Dividing Array](https://grid47.xyz/posts/leetcode_3117) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1036.md" >}}
 ---
-
+{{< youtube VMmUIxF8ANg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1037: Valid Boomerang](https://grid47.xyz/posts/leetcode_1037) |
 | --- |
 {{< notice tip >}}

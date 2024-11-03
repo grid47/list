@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Pfkg1HDjTvk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2373: Largest Local Values in a Matrix](https://grid47.xyz/posts/leetcode_2373) |
 | --- |
 {{< notice tip >}}

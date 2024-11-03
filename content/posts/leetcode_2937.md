@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube 7F8GNWVlYgM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2938: Separate Black and White Balls](https://grid47.xyz/posts/leetcode_2938) |
 | --- |
 {{< notice tip >}}

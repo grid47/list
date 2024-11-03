@@ -63,7 +63,7 @@ public:
 
 
 ---
-
+{{< youtube y3r6o712auw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2140: Solving Questions With Brainpower](https://grid47.xyz/posts/leetcode_2140) |
 | --- |
 {{< notice tip >}}

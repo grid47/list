@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 5sb88D7OSdw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3030: Find the Grid of Region Average](https://grid47.xyz/posts/leetcode_3030) |
 | --- |
 {{< notice tip >}}

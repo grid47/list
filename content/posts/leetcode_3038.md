@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube kLZXvPMlmp0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3039: Apply Operations to Make String Empty](https://grid47.xyz/posts/leetcode_3039) |
 | --- |
 {{< notice tip >}}

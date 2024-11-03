@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1962.md" >}}
 ---
-
+{{< youtube lLAvgl2voc4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1963: Minimum Number of Swaps to Make the String Balanced](https://grid47.xyz/posts/leetcode_1963) |
 | --- |
 {{< notice tip >}}

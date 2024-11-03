@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _T2GG63qZf0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2566: Maximum Difference by Remapping a Digit](https://grid47.xyz/posts/leetcode_2566) |
 | --- |
 {{< notice tip >}}

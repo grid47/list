@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube vXCTvrwbOOs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3210: Find the Encrypted String](https://grid47.xyz/posts/leetcode_3210) |
 | --- |
 {{< notice tip >}}

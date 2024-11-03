@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube -ect7lESvLg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2088: Count Fertile Pyramids in a Land](https://grid47.xyz/posts/leetcode_2088) |
 | --- |
 {{< notice tip >}}

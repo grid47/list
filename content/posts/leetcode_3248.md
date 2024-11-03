@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube lxq7bNunT-s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3249: Count the Number of Good Nodes](https://grid47.xyz/posts/leetcode_3249) |
 | --- |
 {{< notice tip >}}

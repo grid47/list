@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube lSr-tKjbiAM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2234: Maximum Total Beauty of the Gardens](https://grid47.xyz/posts/leetcode_2234) |
 | --- |
 {{< notice tip >}}

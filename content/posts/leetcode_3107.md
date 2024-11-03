@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube -vmgwwxbAVI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3108: Minimum Cost Walk in Weighted Graph](https://grid47.xyz/posts/leetcode_3108) |
 | --- |
 {{< notice tip >}}

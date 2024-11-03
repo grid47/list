@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube WEyiBgwO4ZA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2368: Reachable Nodes With Restrictions](https://grid47.xyz/posts/leetcode_2368) |
 | --- |
 {{< notice tip >}}

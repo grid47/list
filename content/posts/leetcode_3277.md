@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube keccW7J7NOw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3278: Find Candidates for Data Scientist Position II](https://grid47.xyz/posts/leetcode_3278) |
 | --- |
 {{< notice tip >}}

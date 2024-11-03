@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mpkhM5kEdF8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3103: Find Trending Hashtags II ](https://grid47.xyz/posts/leetcode_3103) |
 | --- |
 {{< notice tip >}}

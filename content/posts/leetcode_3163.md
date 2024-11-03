@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube RWQ8Q_ID23c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3164: Find the Number of Good Pairs II](https://grid47.xyz/posts/leetcode_3164) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/832.md" >}}
 ---
-
+{{< youtube 4gMkVe-Wns4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #833: Find And Replace in String](https://grid47.xyz/posts/leetcode_833) |
 | --- |
 {{< notice tip >}}

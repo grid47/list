@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube CC0X2wxP7dE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2602: Minimum Operations to Make All Array Elements Equal](https://grid47.xyz/posts/leetcode_2602) |
 | --- |
 {{< notice tip >}}

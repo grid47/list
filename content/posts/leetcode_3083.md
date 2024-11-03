@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube SakRw7rJLXE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3084: Count Substrings Starting and Ending with Given Character](https://grid47.xyz/posts/leetcode_3084) |
 | --- |
 {{< notice tip >}}

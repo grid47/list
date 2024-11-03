@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube NLyf3nZLZts >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3022: Minimize OR of Remaining Elements Using Operations](https://grid47.xyz/posts/leetcode_3022) |
 | --- |
 {{< notice tip >}}

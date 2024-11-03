@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 68aRSatagys >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2993: Friday Purchases I](https://grid47.xyz/posts/leetcode_2993) |
 | --- |
 {{< notice tip >}}

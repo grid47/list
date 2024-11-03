@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube IMktz_WlNYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2385: Amount of Time for Binary Tree to Be Infected](https://grid47.xyz/posts/leetcode_2385) |
 | --- |
 {{< notice tip >}}

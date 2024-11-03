@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1519.md" >}}
 ---
-
+{{< youtube 1vni2K0FIg8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1520: Maximum Number of Non-Overlapping Substrings](https://grid47.xyz/posts/leetcode_1520) |
 | --- |
 {{< notice tip >}}

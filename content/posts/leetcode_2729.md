@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube B1JUo4KREiU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2730: Find the Longest Semi-Repetitive Substring](https://grid47.xyz/posts/leetcode_2730) |
 | --- |
 {{< notice tip >}}

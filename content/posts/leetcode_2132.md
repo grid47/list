@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zpR-hly5udk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2133: Check if Every Row and Column Contains All Numbers](https://grid47.xyz/posts/leetcode_2133) |
 | --- |
 {{< notice tip >}}

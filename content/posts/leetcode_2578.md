@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube rRksdLnCAqI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2579: Count Total Number of Colored Cells](https://grid47.xyz/posts/leetcode_2579) |
 | --- |
 {{< notice tip >}}

@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube zIFHijNYeCE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2352: Equal Row and Column Pairs](https://grid47.xyz/posts/leetcode_2352) |
 | --- |
 {{< notice tip >}}

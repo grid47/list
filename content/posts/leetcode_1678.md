@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1678.md" >}}
 ---
-
+{{< youtube l-w3i4_PNUw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1679: Max Number of K-Sum Pairs](https://grid47.xyz/posts/leetcode_1679) |
 | --- |
 {{< notice tip >}}

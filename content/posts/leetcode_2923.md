@@ -35,7 +35,7 @@ public:
 
 
 ---
-
+{{< youtube 23vlLuh_v6c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2924: Find Champion II](https://grid47.xyz/posts/leetcode_2924) |
 | --- |
 {{< notice tip >}}

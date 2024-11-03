@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube -upnA7dVDU0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2911: Minimum Changes to Make K Semi-palindromes](https://grid47.xyz/posts/leetcode_2911) |
 | --- |
 {{< notice tip >}}

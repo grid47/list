@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 2OQAR7YItxg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2839: Check if Strings Can be Made Equal With Operations I](https://grid47.xyz/posts/leetcode_2839) |
 | --- |
 {{< notice tip >}}

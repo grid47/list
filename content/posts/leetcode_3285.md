@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube viSFHilMTOI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3286: Find a Safe Walk Through a Grid](https://grid47.xyz/posts/leetcode_3286) |
 | --- |
 {{< notice tip >}}

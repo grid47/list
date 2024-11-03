@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1176.md" >}}
 ---
-
+{{< youtube fjXW-1knK68 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1177: Can Make Palindrome from Substring](https://grid47.xyz/posts/leetcode_1177) |
 | --- |
 {{< notice tip >}}

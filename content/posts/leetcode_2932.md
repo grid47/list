@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube n6CncKaYGwk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2933: High-Access Employees](https://grid47.xyz/posts/leetcode_2933) |
 | --- |
 {{< notice tip >}}

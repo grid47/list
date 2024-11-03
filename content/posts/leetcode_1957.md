@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1957.md" >}}
 ---
-
+{{< youtube wdve85GSjO8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1958: Check if Move is Legal](https://grid47.xyz/posts/leetcode_1958) |
 | --- |
 {{< notice tip >}}

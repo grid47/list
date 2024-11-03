@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube -MZZQH0ty-E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2204: Distance to a Cycle in Undirected Graph](https://grid47.xyz/posts/leetcode_2204) |
 | --- |
 {{< notice tip >}}

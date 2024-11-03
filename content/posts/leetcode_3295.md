@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sgOGhJpZeVU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3296: Minimum Number of Seconds to Make Mountain Height Zero](https://grid47.xyz/posts/leetcode_3296) |
 | --- |
 {{< notice tip >}}

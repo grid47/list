@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1089.md" >}}
 ---
-
+{{< youtube _506EC5-X4g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1090: Largest Values From Labels](https://grid47.xyz/posts/leetcode_1090) |
 | --- |
 {{< notice tip >}}

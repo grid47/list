@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XvyFITcP5u8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2940: Find Building Where Alice and Bob Can Meet](https://grid47.xyz/posts/leetcode_2940) |
 | --- |
 {{< notice tip >}}

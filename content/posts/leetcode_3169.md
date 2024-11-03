@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube 72-mDiuXbLk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3170: Lexicographically Minimum String After Removing Stars](https://grid47.xyz/posts/leetcode_3170) |
 | --- |
 {{< notice tip >}}

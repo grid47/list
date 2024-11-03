@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1599.md" >}}
 ---
-
+{{< youtube Jn2ELfoSRf0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1600: Throne Inheritance](https://grid47.xyz/posts/leetcode_1600) |
 | --- |
 {{< notice tip >}}

@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube EzAjKrEQLFs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2698: Find the Punishment Number of an Integer](https://grid47.xyz/posts/leetcode_2698) |
 | --- |
 {{< notice tip >}}

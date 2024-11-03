@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube AAgLuyeze-A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2128: Remove All Ones With Row and Column Flips](https://grid47.xyz/posts/leetcode_2128) |
 | --- |
 {{< notice tip >}}

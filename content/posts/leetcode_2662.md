@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Y9OQHKyhxGo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2663: Lexicographically Smallest Beautiful String](https://grid47.xyz/posts/leetcode_2663) |
 | --- |
 {{< notice tip >}}

@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1877.md" >}}
 ---
-
+{{< youtube gAzUiJ1ylQc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1878: Get Biggest Three Rhombus Sums in a Grid](https://grid47.xyz/posts/leetcode_1878) |
 | --- |
 {{< notice tip >}}

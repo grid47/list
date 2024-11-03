@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/762.md" >}}
 ---
-
+{{< youtube KeCWKJxsyxA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #763: Partition Labels](https://grid47.xyz/posts/leetcode_763) |
 | --- |
 {{< notice tip >}}

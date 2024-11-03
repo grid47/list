@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube 8s25uCT7vhY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2280: Minimum Lines to Represent a Line Chart](https://grid47.xyz/posts/leetcode_2280) |
 | --- |
 {{< notice tip >}}

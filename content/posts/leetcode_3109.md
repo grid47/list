@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gPCmQZg9uXw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3110: Score of a String](https://grid47.xyz/posts/leetcode_3110) |
 | --- |
 {{< notice tip >}}

@@ -55,7 +55,7 @@ public:
 
 
 ---
-
+{{< youtube KjqRqf4KZxE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2364: Count Number of Bad Pairs](https://grid47.xyz/posts/leetcode_2364) |
 | --- |
 {{< notice tip >}}

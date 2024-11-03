@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube Q3wrIhMmpfA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2827: Number of Beautiful Integers in the Range](https://grid47.xyz/posts/leetcode_2827) |
 | --- |
 {{< notice tip >}}

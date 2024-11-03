@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube xgzsBxfu8Ew >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2872: Maximum Number of K-Divisible Components](https://grid47.xyz/posts/leetcode_2872) |
 | --- |
 {{< notice tip >}}

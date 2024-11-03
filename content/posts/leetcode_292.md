@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/292.md" >}}
 ---
-
+{{< youtube Y2NrEnitV08 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #293: Flip Game](https://grid47.xyz/posts/leetcode_293) |
 | --- |
 {{< notice tip >}}

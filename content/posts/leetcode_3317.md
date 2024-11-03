@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JJefjVUOjv0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3318: Find X-Sum of All K-Long Subarrays I](https://grid47.xyz/posts/leetcode_3318) |
 | --- |
 {{< notice tip >}}

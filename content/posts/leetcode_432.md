@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/432.md" >}}
 ---
-
+{{< youtube 2tNO6oqY3d8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #433: Minimum Genetic Mutation](https://grid47.xyz/posts/leetcode_433) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/908.md" >}}
 ---
-
+{{< youtube c_R-fy8a2P0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #909: Snakes and Ladders](https://grid47.xyz/posts/leetcode_909) |
 | --- |
 {{< notice tip >}}

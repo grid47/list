@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube XdsMrB7WRUw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2271: Maximum White Tiles Covered by a Carpet](https://grid47.xyz/posts/leetcode_2271) |
 | --- |
 {{< notice tip >}}

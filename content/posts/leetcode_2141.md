@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube 3kyUP_jIDoQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2142: The Number of Passengers in Each Bus I](https://grid47.xyz/posts/leetcode_2142) |
 | --- |
 {{< notice tip >}}

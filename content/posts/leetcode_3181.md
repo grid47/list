@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 0rgawilAzKg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3182: Find Top Scoring Students](https://grid47.xyz/posts/leetcode_3182) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rakwpofLRIU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2893: Calculate Orders Within Each Interval](https://grid47.xyz/posts/leetcode_2893) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _uw42IwMgks >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2016: Maximum Difference Between Increasing Elements](https://grid47.xyz/posts/leetcode_2016) |
 | --- |
 {{< notice tip >}}

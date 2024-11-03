@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 27p41simXX0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3271: Hash Divided String](https://grid47.xyz/posts/leetcode_3271) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hTZzqvIMF5I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3024: Type of Triangle](https://grid47.xyz/posts/leetcode_3024) |
 | --- |
 {{< notice tip >}}

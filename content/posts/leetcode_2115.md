@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XUDa2RC0jhs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2116: Check if a Parentheses String Can Be Valid](https://grid47.xyz/posts/leetcode_2116) |
 | --- |
 {{< notice tip >}}

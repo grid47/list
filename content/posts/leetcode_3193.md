@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube asWK6EEEQSU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3194: Minimum Average of Smallest and Largest Elements](https://grid47.xyz/posts/leetcode_3194) |
 | --- |
 {{< notice tip >}}

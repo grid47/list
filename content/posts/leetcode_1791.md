@@ -32,7 +32,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1791.md" >}}
 ---
-
+{{< youtube jBD2_Eh4SlU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1792: Maximum Average Pass Ratio](https://grid47.xyz/posts/leetcode_1792) |
 | --- |
 {{< notice tip >}}

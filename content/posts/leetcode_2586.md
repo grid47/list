@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube mHra3okBpdQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2587: Rearrange Array to Maximize Prefix Score](https://grid47.xyz/posts/leetcode_2587) |
 | --- |
 {{< notice tip >}}

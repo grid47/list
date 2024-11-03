@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/975.md" >}}
 ---
-
+{{< youtube ZVd7qeDIqsw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #976: Largest Perimeter Triangle](https://grid47.xyz/posts/leetcode_976) |
 | --- |
 {{< notice tip >}}

@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube JykfDvn2o0M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2405: Optimal Partition of String](https://grid47.xyz/posts/leetcode_2405) |
 | --- |
 {{< notice tip >}}

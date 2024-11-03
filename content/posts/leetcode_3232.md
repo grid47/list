@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube W8skeqGmH6I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3233: Find the Count of Numbers Which Are Not Special](https://grid47.xyz/posts/leetcode_3233) |
 | --- |
 {{< notice tip >}}

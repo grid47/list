@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1920.md" >}}
 ---
-
+{{< youtube LoUAGs8fqB0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1921: Eliminate Maximum Number of Monsters](https://grid47.xyz/posts/leetcode_1921) |
 | --- |
 {{< notice tip >}}

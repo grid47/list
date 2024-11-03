@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1818.md" >}}
 ---
-
+{{< youtube PlenJ9Ny45s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1819: Number of Different Subsequences GCDs](https://grid47.xyz/posts/leetcode_1819) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube IDCs0xyVJyw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3071: Minimum Operations to Write the Letter Y on a Grid](https://grid47.xyz/posts/leetcode_3071) |
 | --- |
 {{< notice tip >}}

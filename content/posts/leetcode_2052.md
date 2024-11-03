@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Fhp4Q6Bql-Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2053: Kth Distinct String in an Array](https://grid47.xyz/posts/leetcode_2053) |
 | --- |
 {{< notice tip >}}

@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1975.md" >}}
 ---
-
+{{< youtube Qxyne1oRBm0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1976: Number of Ways to Arrive at Destination](https://grid47.xyz/posts/leetcode_1976) |
 | --- |
 {{< notice tip >}}

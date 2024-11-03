@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube PY0RBqIXZw4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3037: Find Pattern in Infinite Stream II](https://grid47.xyz/posts/leetcode_3037) |
 | --- |
 {{< notice tip >}}

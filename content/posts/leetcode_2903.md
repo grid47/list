@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube R731s1mHVWM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2904: Shortest and Lexicographically Smallest Beautiful String](https://grid47.xyz/posts/leetcode_2904) |
 | --- |
 {{< notice tip >}}

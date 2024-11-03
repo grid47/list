@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _3fvJQk7a0k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2075: Decode the Slanted Ciphertext](https://grid47.xyz/posts/leetcode_2075) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mbJVn3XoaYQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2549: Count Distinct Numbers on Board](https://grid47.xyz/posts/leetcode_2549) |
 | --- |
 {{< notice tip >}}

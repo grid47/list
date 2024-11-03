@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube HuCSgRBf-B8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2811: Check if it is Possible to Split Array](https://grid47.xyz/posts/leetcode_2811) |
 | --- |
 {{< notice tip >}}

@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube 0CU_aJ1SW6k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2367: Number of Arithmetic Triplets](https://grid47.xyz/posts/leetcode_2367) |
 | --- |
 {{< notice tip >}}

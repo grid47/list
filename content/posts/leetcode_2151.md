@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rJ0lkA2FqZ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2152: Minimum Number of Lines to Cover Points](https://grid47.xyz/posts/leetcode_2152) |
 | --- |
 {{< notice tip >}}

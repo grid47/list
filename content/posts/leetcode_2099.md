@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube QXvaOym_Awk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2100: Find Good Days to Rob the Bank](https://grid47.xyz/posts/leetcode_2100) |
 | --- |
 {{< notice tip >}}

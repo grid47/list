@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/672.md" >}}
 ---
-
+{{< youtube wx272jQLwkA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #673: Number of Longest Increasing Subsequence](https://grid47.xyz/posts/leetcode_673) |
 | --- |
 {{< notice tip >}}

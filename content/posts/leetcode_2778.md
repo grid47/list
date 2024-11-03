@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube 7eI3tsBVCi4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2779: Maximum Beauty of an Array After Applying Operation](https://grid47.xyz/posts/leetcode_2779) |
 | --- |
 {{< notice tip >}}

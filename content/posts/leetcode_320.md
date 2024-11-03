@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/320.md" >}}
 ---
-
+{{< youtube 9XqrNvjb-r0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #321: Create Maximum Number](https://grid47.xyz/posts/leetcode_321) |
 | --- |
 {{< notice tip >}}

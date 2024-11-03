@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1DGSlHSFnVk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2970: Count the Number of Incremovable Subarrays I](https://grid47.xyz/posts/leetcode_2970) |
 | --- |
 {{< notice tip >}}

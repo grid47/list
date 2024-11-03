@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube 5eDemRe02LM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2935: Maximum Strong Pair XOR II](https://grid47.xyz/posts/leetcode_2935) |
 | --- |
 {{< notice tip >}}

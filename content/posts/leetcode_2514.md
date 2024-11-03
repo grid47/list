@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube UgHHr8mnY_Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2515: Shortest Distance to Target String in a Circular Array](https://grid47.xyz/posts/leetcode_2515) |
 | --- |
 {{< notice tip >}}

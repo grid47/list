@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube LDYuUXRGMzE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2438: Range Product Queries of Powers](https://grid47.xyz/posts/leetcode_2438) |
 | --- |
 {{< notice tip >}}

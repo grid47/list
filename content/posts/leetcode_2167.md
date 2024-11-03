@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mIcoAPAncWw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2168: Unique Substrings With Equal Digit Frequency](https://grid47.xyz/posts/leetcode_2168) |
 | --- |
 {{< notice tip >}}

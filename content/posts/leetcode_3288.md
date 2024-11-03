@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube BMIiOaawMN8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3289: The Two Sneaky Numbers of Digitville](https://grid47.xyz/posts/leetcode_3289) |
 | --- |
 {{< notice tip >}}

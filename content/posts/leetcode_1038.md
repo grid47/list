@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1038.md" >}}
 ---
-
+{{< youtube FiGdEA4herM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1039: Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode_1039) |
 | --- |
 {{< notice tip >}}

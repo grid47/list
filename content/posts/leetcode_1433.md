@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1433.md" >}}
 ---
-
+{{< youtube H8_hAPOW5UE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1434: Number of Ways to Wear Different Hats to Each Other](https://grid47.xyz/posts/leetcode_1434) |
 | --- |
 {{< notice tip >}}

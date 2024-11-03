@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube NoGK4582ey8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2458: Height of Binary Tree After Subtree Removal Queries](https://grid47.xyz/posts/leetcode_2458) |
 | --- |
 {{< notice tip >}}

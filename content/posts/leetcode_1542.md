@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1542.md" >}}
 ---
-
+{{< youtube 0-HJwJLayps >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1543: Fix Product Name Format](https://grid47.xyz/posts/leetcode_1543) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube KzoCxVl2qkY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2792: Count Nodes That Are Great Enough](https://grid47.xyz/posts/leetcode_2792) |
 | --- |
 {{< notice tip >}}

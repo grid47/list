@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QusBGfWxqYY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3187: Peaks in Array](https://grid47.xyz/posts/leetcode_3187) |
 | --- |
 {{< notice tip >}}

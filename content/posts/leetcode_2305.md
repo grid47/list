@@ -59,7 +59,7 @@ public:
 
 
 ---
-
+{{< youtube 74-V6AjJ4wg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2306: Naming a Company](https://grid47.xyz/posts/leetcode_2306) |
 | --- |
 {{< notice tip >}}

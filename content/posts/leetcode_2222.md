@@ -64,7 +64,7 @@ public:
 
 
 ---
-
+{{< youtube EcQ0uhiF3HU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2223: Sum of Scores of Built Strings](https://grid47.xyz/posts/leetcode_2223) |
 | --- |
 {{< notice tip >}}

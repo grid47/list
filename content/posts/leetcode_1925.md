@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1925.md" >}}
 ---
-
+{{< youtube rWLEDxwWwiU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1926: Nearest Exit from Entrance in Maze](https://grid47.xyz/posts/leetcode_1926) |
 | --- |
 {{< notice tip >}}

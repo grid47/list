@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Sy0DfIuTT8s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3098: Find the Sum of Subsequence Powers](https://grid47.xyz/posts/leetcode_3098) |
 | --- |
 {{< notice tip >}}

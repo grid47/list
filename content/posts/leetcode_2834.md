@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube vT8fUtI_hVo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2835: Minimum Operations to Form Subsequence With Target Sum](https://grid47.xyz/posts/leetcode_2835) |
 | --- |
 {{< notice tip >}}

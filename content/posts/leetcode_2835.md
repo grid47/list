@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8Dz22UIu6W8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2836: Maximize Value of Function in a Ball Passing Game](https://grid47.xyz/posts/leetcode_2836) |
 | --- |
 {{< notice tip >}}

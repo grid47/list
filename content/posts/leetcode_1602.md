@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1602.md" >}}
 ---
-
+{{< youtube y-d8Z9IzxJc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1603: Design Parking System](https://grid47.xyz/posts/leetcode_1603) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ws6DW_63Yqg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2079: Watering Plants](https://grid47.xyz/posts/leetcode_2079) |
 | --- |
 {{< notice tip >}}

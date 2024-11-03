@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6oO9I254Mm0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3028: Ant on the Boundary](https://grid47.xyz/posts/leetcode_3028) |
 | --- |
 {{< notice tip >}}

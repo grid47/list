@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JRd4jYrlYqA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2469: Convert the Temperature](https://grid47.xyz/posts/leetcode_2469) |
 | --- |
 {{< notice tip >}}

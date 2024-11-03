@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube kizI7M64xXQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2576: Find the Maximum Number of Marked Indices](https://grid47.xyz/posts/leetcode_2576) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RsKxc4f15vw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2399: Check Distances Between Same Letters](https://grid47.xyz/posts/leetcode_2399) |
 | --- |
 {{< notice tip >}}

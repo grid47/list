@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sE0VqB8P70k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2853: Highest Salaries Difference](https://grid47.xyz/posts/leetcode_2853) |
 | --- |
 {{< notice tip >}}

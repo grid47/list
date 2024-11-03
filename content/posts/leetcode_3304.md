@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ub4zQnGCb10 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3305: Count of Substrings Containing Every Vowel and K Consonants I](https://grid47.xyz/posts/leetcode_3305) |
 | --- |
 {{< notice tip >}}

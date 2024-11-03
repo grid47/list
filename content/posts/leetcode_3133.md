@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube DgeB_TFiQNY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3134: Find the Median of the Uniqueness Array](https://grid47.xyz/posts/leetcode_3134) |
 | --- |
 {{< notice tip >}}

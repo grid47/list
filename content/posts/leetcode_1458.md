@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1458.md" >}}
 ---
-
+{{< youtube 7qT1syQcPUQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1459: Rectangles Area](https://grid47.xyz/posts/leetcode_1459) |
 | --- |
 {{< notice tip >}}

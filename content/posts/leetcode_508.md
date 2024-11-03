@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/508.md" >}}
 ---
-
+{{< youtube CvmRmzBQhu8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #509: Fibonacci Number](https://grid47.xyz/posts/leetcode_509) |
 | --- |
 {{< notice tip >}}

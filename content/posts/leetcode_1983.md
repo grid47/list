@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1983.md" >}}
 ---
-
+{{< youtube exz3bAKRmL8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1984: Minimum Difference Between Highest and Lowest of K Scores](https://grid47.xyz/posts/leetcode_1984) |
 | --- |
 {{< notice tip >}}

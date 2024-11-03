@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1864.md" >}}
 ---
-
+{{< youtube xSIJz7_6bus >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1865: Finding Pairs With a Certain Sum](https://grid47.xyz/posts/leetcode_1865) |
 | --- |
 {{< notice tip >}}

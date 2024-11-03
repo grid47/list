@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube pf-VbvwTFk4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2922: Market Analysis III](https://grid47.xyz/posts/leetcode_2922) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RbcFVFVCYRk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3273: Minimum Amount of Damage Dealt to Bob](https://grid47.xyz/posts/leetcode_3273) |
 | --- |
 {{< notice tip >}}

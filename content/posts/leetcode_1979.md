@@ -43,7 +43,7 @@ class Solution {
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1979.md" >}}
 ---
-
+{{< youtube sJ5pTyUWOZ0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1980: Find Unique Binary String](https://grid47.xyz/posts/leetcode_1980) |
 | --- |
 {{< notice tip >}}

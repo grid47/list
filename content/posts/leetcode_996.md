@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/996.md" >}}
 ---
-
+{{< youtube cCYbMg7TZbY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #997: Find the Town Judge](https://grid47.xyz/posts/leetcode_997) |
 | --- |
 {{< notice tip >}}

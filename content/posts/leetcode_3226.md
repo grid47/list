@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube tcKUq6HaEnM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3227: Vowels Game in a String](https://grid47.xyz/posts/leetcode_3227) |
 | --- |
 {{< notice tip >}}

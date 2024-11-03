@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube SjtUIzSlcMY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2423: Remove Letter To Equalize Frequency](https://grid47.xyz/posts/leetcode_2423) |
 | --- |
 {{< notice tip >}}

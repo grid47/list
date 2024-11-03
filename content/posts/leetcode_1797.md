@@ -74,7 +74,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1797.md" >}}
 ---
-
+{{< youtube IG6X2CXMdKw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1798: Maximum Number of Consecutive Values You Can Make](https://grid47.xyz/posts/leetcode_1798) |
 | --- |
 {{< notice tip >}}

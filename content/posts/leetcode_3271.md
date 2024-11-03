@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 9P1vZnCyXQs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3272: Find the Count of Good Integers](https://grid47.xyz/posts/leetcode_3272) |
 | --- |
 {{< notice tip >}}

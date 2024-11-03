@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube wWC21MeP0O0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2455: Average Value of Even Numbers That Are Divisible by Three](https://grid47.xyz/posts/leetcode_2455) |
 | --- |
 {{< notice tip >}}

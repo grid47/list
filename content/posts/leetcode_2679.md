@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube oL_BwmPMkng >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2680: Maximum OR](https://grid47.xyz/posts/leetcode_2680) |
 | --- |
 {{< notice tip >}}

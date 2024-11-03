@@ -105,7 +105,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1670.md" >}}
 ---
-
+{{< youtube HSOiUhfXUTg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1671: Minimum Number of Removals to Make Mountain Array](https://grid47.xyz/posts/leetcode_1671) |
 | --- |
 {{< notice tip >}}

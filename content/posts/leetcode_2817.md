@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube iZkBnYIJ9Qc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2818: Apply Operations to Maximize Score](https://grid47.xyz/posts/leetcode_2818) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1072.md" >}}
 ---
-
+{{< youtube xj3ltfSh9Io >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1073: Adding Two Negabinary Numbers](https://grid47.xyz/posts/leetcode_1073) |
 | --- |
 {{< notice tip >}}

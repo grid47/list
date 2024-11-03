@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1124.md" >}}
 ---
-
+{{< youtube 1Cu21ILZBx8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1125: Smallest Sufficient Team](https://grid47.xyz/posts/leetcode_1125) |
 | --- |
 {{< notice tip >}}

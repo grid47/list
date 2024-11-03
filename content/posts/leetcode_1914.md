@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1914.md" >}}
 ---
-
+{{< youtube 3dCs1ZHDNjM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1915: Number of Wonderful Substrings](https://grid47.xyz/posts/leetcode_1915) |
 | --- |
 {{< notice tip >}}

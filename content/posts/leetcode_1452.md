@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1452.md" >}}
 ---
-
+{{< youtube Ok0jYAMnvQI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1453: Maximum Number of Darts Inside of a Circular Dartboard](https://grid47.xyz/posts/leetcode_1453) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube uLhIAACWpFU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2997: Minimum Number of Operations to Make Array XOR Equal to K](https://grid47.xyz/posts/leetcode_2997) |
 | --- |
 {{< notice tip >}}

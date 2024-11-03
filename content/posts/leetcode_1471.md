@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1471.md" >}}
 ---
-
+{{< youtube 5Hie-4QPNtI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1472: Design Browser History](https://grid47.xyz/posts/leetcode_1472) |
 | --- |
 {{< notice tip >}}

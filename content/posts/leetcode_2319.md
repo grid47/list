@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube l7O_4za547A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2320: Count Number of Ways to Place Houses](https://grid47.xyz/posts/leetcode_2320) |
 | --- |
 {{< notice tip >}}

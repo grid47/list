@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 05tboTvkxmo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2982: Find Longest Special Substring That Occurs Thrice II](https://grid47.xyz/posts/leetcode_2982) |
 | --- |
 {{< notice tip >}}

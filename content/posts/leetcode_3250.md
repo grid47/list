@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WUhVoeBUEvo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3251: Find the Count of Monotonic Pairs II](https://grid47.xyz/posts/leetcode_3251) |
 | --- |
 {{< notice tip >}}

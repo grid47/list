@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1790.md" >}}
 ---
-
+{{< youtube n4pxnAHTfeU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1791: Find Center of Star Graph](https://grid47.xyz/posts/leetcode_1791) |
 | --- |
 {{< notice tip >}}

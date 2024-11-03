@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube DDQR_mDTTFI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2684: Maximum Number of Moves in a Grid](https://grid47.xyz/posts/leetcode_2684) |
 | --- |
 {{< notice tip >}}

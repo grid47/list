@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1393.md" >}}
 ---
-
+{{< youtube 05nLDZ4tipM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1394: Find Lucky Integer in an Array](https://grid47.xyz/posts/leetcode_1394) |
 | --- |
 {{< notice tip >}}

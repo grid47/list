@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1451.md" >}}
 ---
-
+{{< youtube ZMdBEJX3gog >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1452: People Whose List of Favorite Companies Is Not a Subset of Another List](https://grid47.xyz/posts/leetcode_1452) |
 | --- |
 {{< notice tip >}}

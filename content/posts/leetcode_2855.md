@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube k3uIpQ54LVY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2856: Minimum Array Length After Pair Removals](https://grid47.xyz/posts/leetcode_2856) |
 | --- |
 {{< notice tip >}}

@@ -67,7 +67,7 @@ public:
 
 
 ---
-
+{{< youtube XiaXIrEHFEY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2681: Power of Heroes](https://grid47.xyz/posts/leetcode_2681) |
 | --- |
 {{< notice tip >}}

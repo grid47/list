@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1507.md" >}}
 ---
-
+{{< youtube Yu2obAFa3HI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1508: Range Sum of Sorted Subarray Sums](https://grid47.xyz/posts/leetcode_1508) |
 | --- |
 {{< notice tip >}}

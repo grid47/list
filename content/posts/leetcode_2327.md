@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube rOnTeyl_njo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2328: Number of Increasing Paths in a Grid](https://grid47.xyz/posts/leetcode_2328) |
 | --- |
 {{< notice tip >}}

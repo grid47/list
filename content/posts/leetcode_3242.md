@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 3sdPRZqPEwk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3243: Shortest Distance After Road Addition Queries I](https://grid47.xyz/posts/leetcode_3243) |
 | --- |
 {{< notice tip >}}

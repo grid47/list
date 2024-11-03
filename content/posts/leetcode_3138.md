@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube T64iR68Fxng >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3139: Minimum Cost to Equalize Array](https://grid47.xyz/posts/leetcode_3139) |
 | --- |
 {{< notice tip >}}

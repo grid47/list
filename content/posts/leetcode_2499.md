@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _yC6RMgwqwY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2500: Delete Greatest Value in Each Row](https://grid47.xyz/posts/leetcode_2500) |
 | --- |
 {{< notice tip >}}

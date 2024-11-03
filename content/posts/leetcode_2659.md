@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8KekjhoJaXo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2660: Determine the Winner of a Bowling Game](https://grid47.xyz/posts/leetcode_2660) |
 | --- |
 {{< notice tip >}}

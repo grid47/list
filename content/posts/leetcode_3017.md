@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube V4tzjTOiyKc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3018: Maximum Number of Removal Queries That Can Be Processed I](https://grid47.xyz/posts/leetcode_3018) |
 | --- |
 {{< notice tip >}}

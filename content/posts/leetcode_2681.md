@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube ijJ025IUyN4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2682: Find the Losers of the Circular Game](https://grid47.xyz/posts/leetcode_2682) |
 | --- |
 {{< notice tip >}}

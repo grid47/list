@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube fmxws-ZnkSE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3328: Find Cities in Each State II](https://grid47.xyz/posts/leetcode_3328) |
 | --- |
 {{< notice tip >}}

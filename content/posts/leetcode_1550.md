@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1550.md" >}}
 ---
-
+{{< youtube 71hgZy3uEJ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1551: Minimum Operations to Make Array Equal](https://grid47.xyz/posts/leetcode_1551) |
 | --- |
 {{< notice tip >}}

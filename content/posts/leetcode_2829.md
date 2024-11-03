@@ -46,7 +46,7 @@ public:
 
 
 ---
-
+{{< youtube EimziJ7mVdE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2830: Maximize the Profit as the Salesman](https://grid47.xyz/posts/leetcode_2830) |
 | --- |
 {{< notice tip >}}

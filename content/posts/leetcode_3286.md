@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube kGz58q622ng >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3287: Find the Maximum Sequence Value of Array](https://grid47.xyz/posts/leetcode_3287) |
 | --- |
 {{< notice tip >}}

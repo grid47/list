@@ -56,7 +56,7 @@ public:
 
 
 ---
-
+{{< youtube MoYeUVe-xPY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2532: Time to Cross a Bridge](https://grid47.xyz/posts/leetcode_2532) |
 | --- |
 {{< notice tip >}}

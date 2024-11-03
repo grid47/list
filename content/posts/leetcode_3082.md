@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube om_58cKPbwQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3083: Existence of a Substring in a String and Its Reverse](https://grid47.xyz/posts/leetcode_3083) |
 | --- |
 {{< notice tip >}}

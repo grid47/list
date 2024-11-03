@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube PVsRUVGHVCY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3130: Find All Possible Stable Binary Arrays II](https://grid47.xyz/posts/leetcode_3130) |
 | --- |
 {{< notice tip >}}

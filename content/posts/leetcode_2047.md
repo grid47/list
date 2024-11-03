@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube sl4thQAqnJg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2048: Next Greater Numerically Balanced Number](https://grid47.xyz/posts/leetcode_2048) |
 | --- |
 {{< notice tip >}}

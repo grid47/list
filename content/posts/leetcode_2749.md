@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Ku8SO51Hz18 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2750: Ways to Split Array Into Good Subarrays](https://grid47.xyz/posts/leetcode_2750) |
 | --- |
 {{< notice tip >}}

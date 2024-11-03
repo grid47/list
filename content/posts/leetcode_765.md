@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/765.md" >}}
 ---
-
+{{< youtube U0f5rx6CVNk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #766: Toeplitz Matrix](https://grid47.xyz/posts/leetcode_766) |
 | --- |
 {{< notice tip >}}

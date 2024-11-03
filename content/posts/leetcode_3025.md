@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ArHEAWYwqIo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3026: Maximum Good Subarray Sum](https://grid47.xyz/posts/leetcode_3026) |
 | --- |
 {{< notice tip >}}

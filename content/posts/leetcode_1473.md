@@ -74,7 +74,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1473.md" >}}
 ---
-
+{{< youtube 7a3OWo1OcVU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1474: Delete N Nodes After M Nodes of a Linked List](https://grid47.xyz/posts/leetcode_1474) |
 | --- |
 {{< notice tip >}}

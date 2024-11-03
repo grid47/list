@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube 6krFbmlIg94 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3128: Right Triangles](https://grid47.xyz/posts/leetcode_3128) |
 | --- |
 {{< notice tip >}}

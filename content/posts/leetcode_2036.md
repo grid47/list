@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WHW-kt16710 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2037: Minimum Number of Moves to Seat Everyone](https://grid47.xyz/posts/leetcode_2037) |
 | --- |
 {{< notice tip >}}

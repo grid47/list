@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube svAaToV9gPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2793: Status of Flight Tickets](https://grid47.xyz/posts/leetcode_2793) |
 | --- |
 {{< notice tip >}}

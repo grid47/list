@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube bH2EmMR5jpU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2767: Partition String Into Minimum Beautiful Substrings](https://grid47.xyz/posts/leetcode_2767) |
 | --- |
 {{< notice tip >}}

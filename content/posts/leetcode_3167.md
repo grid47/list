@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RgashFd2xPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3168: Minimum Number of Chairs in a Waiting Room](https://grid47.xyz/posts/leetcode_3168) |
 | --- |
 {{< notice tip >}}

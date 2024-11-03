@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1749.md" >}}
 ---
-
+{{< youtube XVVB_ZXsbnI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1750: Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode_1750) |
 | --- |
 {{< notice tip >}}

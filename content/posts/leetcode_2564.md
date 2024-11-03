@@ -78,7 +78,7 @@ public:
 
 
 ---
-
+{{< youtube 0J1aVGfArWs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2565: Subsequence With the Minimum Score](https://grid47.xyz/posts/leetcode_2565) |
 | --- |
 {{< notice tip >}}

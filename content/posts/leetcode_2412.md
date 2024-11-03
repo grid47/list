@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube R5q6lwYGTJA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2413: Smallest Even Multiple](https://grid47.xyz/posts/leetcode_2413) |
 | --- |
 {{< notice tip >}}

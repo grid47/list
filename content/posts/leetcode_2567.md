@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube MPtncVNtKW0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2568: Minimum Impossible OR](https://grid47.xyz/posts/leetcode_2568) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube OsaRrf_jDn4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2092: Find All People With Secret](https://grid47.xyz/posts/leetcode_2092) |
 | --- |
 {{< notice tip >}}

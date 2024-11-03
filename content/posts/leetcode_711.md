@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/711.md" >}}
 ---
-
+{{< youtube nYu93d8Fx1k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #712: Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode_712) |
 | --- |
 {{< notice tip >}}

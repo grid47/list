@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1781.md" >}}
 ---
-
+{{< youtube xHNXm6QxvqU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1782: Count Pairs Of Nodes](https://grid47.xyz/posts/leetcode_1782) |
 | --- |
 {{< notice tip >}}

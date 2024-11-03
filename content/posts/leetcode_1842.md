@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1842.md" >}}
 ---
-
+{{< youtube l7DYd8mvR38 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1843: Suspicious Bank Accounts](https://grid47.xyz/posts/leetcode_1843) |
 | --- |
 {{< notice tip >}}

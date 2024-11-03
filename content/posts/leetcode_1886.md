@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1886.md" >}}
 ---
-
+{{< youtube vf_nUx64R0E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1887: Reduction Operations to Make the Array Elements Equal](https://grid47.xyz/posts/leetcode_1887) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6PJx5ygh0u4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3009: Maximum Number of Intersections on the Chart](https://grid47.xyz/posts/leetcode_3009) |
 | --- |
 {{< notice tip >}}

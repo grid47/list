@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1028.md" >}}
 ---
-
+{{< youtube wxPz9yjrklw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1029: Two City Scheduling](https://grid47.xyz/posts/leetcode_1029) |
 | --- |
 {{< notice tip >}}

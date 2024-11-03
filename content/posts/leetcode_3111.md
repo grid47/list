@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube iYM6yYQi3QA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3112: Minimum Time to Visit Disappearing Nodes](https://grid47.xyz/posts/leetcode_3112) |
 | --- |
 {{< notice tip >}}

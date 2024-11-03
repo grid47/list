@@ -64,7 +64,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1161.md" >}}
 ---
-
+{{< youtube v3e5uYmzyxs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1162: As Far from Land as Possible](https://grid47.xyz/posts/leetcode_1162) |
 | --- |
 {{< notice tip >}}

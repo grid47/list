@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube l_Cdr5M1GpQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3274: Check if Two Chessboard Squares Have the Same Color](https://grid47.xyz/posts/leetcode_3274) |
 | --- |
 {{< notice tip >}}

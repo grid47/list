@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube xgpPuMjET9c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2312: Selling Pieces of Wood](https://grid47.xyz/posts/leetcode_2312) |
 | --- |
 {{< notice tip >}}

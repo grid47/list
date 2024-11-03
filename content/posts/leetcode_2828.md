@@ -35,7 +35,7 @@ public:
 
 
 ---
-
+{{< youtube GcgV-AtAmkg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2829: Determine the Minimum Sum of a k-avoiding Array](https://grid47.xyz/posts/leetcode_2829) |
 | --- |
 {{< notice tip >}}

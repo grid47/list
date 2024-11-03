@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yC26rgaTfo8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2978: Symmetric Coordinates](https://grid47.xyz/posts/leetcode_2978) |
 | --- |
 {{< notice tip >}}

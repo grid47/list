@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mBnQPi23Fek >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3245: Alternating Groups III](https://grid47.xyz/posts/leetcode_3245) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube A_ulcrW-zJI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3145: Find Products of Elements of Big Array](https://grid47.xyz/posts/leetcode_3145) |
 | --- |
 {{< notice tip >}}

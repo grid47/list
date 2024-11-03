@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rQZw2CXDUzo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2082: The Number of Rich Customers](https://grid47.xyz/posts/leetcode_2082) |
 | --- |
 {{< notice tip >}}

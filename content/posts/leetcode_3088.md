@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HoMqQQeySCw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3089: Find Bursty Behavior](https://grid47.xyz/posts/leetcode_3089) |
 | --- |
 {{< notice tip >}}

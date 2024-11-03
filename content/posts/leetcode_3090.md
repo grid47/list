@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube K23Q6wqtBkI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3091: Apply Operations to Make Sum of Array Greater Than or Equal to k](https://grid47.xyz/posts/leetcode_3091) |
 | --- |
 {{< notice tip >}}

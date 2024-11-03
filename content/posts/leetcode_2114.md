@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 9c5GeChF1vY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2115: Find All Possible Recipes from Given Supplies](https://grid47.xyz/posts/leetcode_2115) |
 | --- |
 {{< notice tip >}}

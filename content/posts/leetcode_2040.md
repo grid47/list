@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube L6qFlpBIdbQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2041: Accepted Candidates From the Interviews](https://grid47.xyz/posts/leetcode_2041) |
 | --- |
 {{< notice tip >}}

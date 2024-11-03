@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/999.md" >}}
 ---
-
+{{< youtube M0d8H7T74QI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1000: Minimum Cost to Merge Stones](https://grid47.xyz/posts/leetcode_1000) |
 | --- |
 {{< notice tip >}}

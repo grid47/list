@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube aY8fthd1DWg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3036: Number of Subarrays That Match a Pattern II](https://grid47.xyz/posts/leetcode_3036) |
 | --- |
 {{< notice tip >}}

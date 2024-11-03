@@ -28,7 +28,7 @@ select * from Cinema c where MOD(c.id, 2) = 1 and c.description != "boring" orde
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/620.md" >}}
 ---
-
+{{< youtube cWC3Xip8KEM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #621: Task Scheduler](https://grid47.xyz/posts/leetcode_621) |
 | --- |
 {{< notice tip >}}

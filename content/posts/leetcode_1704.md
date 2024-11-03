@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1704.md" >}}
 ---
-
+{{< youtube n6svsUO6X8g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/posts/leetcode_1705) |
 | --- |
 {{< notice tip >}}

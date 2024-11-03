@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube p7EhR4gKFXo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3320: Count The Number of Winning Sequences](https://grid47.xyz/posts/leetcode_3320) |
 | --- |
 {{< notice tip >}}

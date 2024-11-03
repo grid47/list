@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube vDBX2UCuFVM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3067: Count Pairs of Connectable Servers in a Weighted Tree Network](https://grid47.xyz/posts/leetcode_3067) |
 | --- |
 {{< notice tip >}}

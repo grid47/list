@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1482.md" >}}
 ---
-
+{{< youtube C43I3Q0JLB0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1483: Kth Ancestor of a Tree Node](https://grid47.xyz/posts/leetcode_1483) |
 | --- |
 {{< notice tip >}}

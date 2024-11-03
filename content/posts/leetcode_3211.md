@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _Lh045g9YMw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3212: Count Submatrices With Equal Frequency of X and Y](https://grid47.xyz/posts/leetcode_3212) |
 | --- |
 {{< notice tip >}}

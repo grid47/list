@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zFtQ6kvlPHM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2964: Number of Divisible Triplet Sums](https://grid47.xyz/posts/leetcode_2964) |
 | --- |
 {{< notice tip >}}

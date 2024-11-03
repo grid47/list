@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/788.md" >}}
 ---
-
+{{< youtube QOQL3S2BHPs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #789: Escape The Ghosts](https://grid47.xyz/posts/leetcode_789) |
 | --- |
 {{< notice tip >}}

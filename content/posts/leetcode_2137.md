@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 3H3-8Iqhups >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2138: Divide a String Into Groups of Size k](https://grid47.xyz/posts/leetcode_2138) |
 | --- |
 {{< notice tip >}}

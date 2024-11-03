@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ccjqyssgz90 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2210: Count Hills and Valleys in an Array](https://grid47.xyz/posts/leetcode_2210) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/749.md" >}}
 ---
-
+{{< youtube ynaP0LUaqjo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #750: Number Of Corner Rectangles](https://grid47.xyz/posts/leetcode_750) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube -XgxrCAuu68 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2662: Minimum Cost of a Path With Special Roads](https://grid47.xyz/posts/leetcode_2662) |
 | --- |
 {{< notice tip >}}

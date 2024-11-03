@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube N_iV4VXnq6g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2225: Find Players With Zero or One Losses](https://grid47.xyz/posts/leetcode_2225) |
 | --- |
 {{< notice tip >}}

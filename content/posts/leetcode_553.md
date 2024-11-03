@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/553.md" >}}
 ---
-
+{{< youtube SFNvfrvWxVQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #554: Brick Wall](https://grid47.xyz/posts/leetcode_554) |
 | --- |
 {{< notice tip >}}

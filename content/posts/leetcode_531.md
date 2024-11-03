@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/531.md" >}}
 ---
-
+{{< youtube vdqfbQGrCjo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #532: K-diff Pairs in an Array](https://grid47.xyz/posts/leetcode_532) |
 | --- |
 {{< notice tip >}}

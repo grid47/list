@@ -66,7 +66,7 @@ public:
 
 
 ---
-
+{{< youtube QMRHGd9ftz8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2246: Longest Path With Different Adjacent Characters](https://grid47.xyz/posts/leetcode_2246) |
 | --- |
 {{< notice tip >}}

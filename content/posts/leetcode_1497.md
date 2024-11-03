@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1497.md" >}}
 ---
-
+{{< youtube lLEmqIblivA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1498: Number of Subsequences That Satisfy the Given Sum Condition](https://grid47.xyz/posts/leetcode_1498) |
 | --- |
 {{< notice tip >}}

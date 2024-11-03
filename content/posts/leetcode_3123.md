@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1OVFH5SRQOI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3124: Find Longest Calls](https://grid47.xyz/posts/leetcode_3124) |
 | --- |
 {{< notice tip >}}

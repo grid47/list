@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube cinEIxOL0E8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2260: Minimum Consecutive Cards to Pick Up](https://grid47.xyz/posts/leetcode_2260) |
 | --- |
 {{< notice tip >}}

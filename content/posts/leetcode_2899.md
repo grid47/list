@@ -50,7 +50,7 @@ public:
 
 
 ---
-
+{{< youtube vWwJsOGGKu8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2900: Longest Unequal Adjacent Groups Subsequence I](https://grid47.xyz/posts/leetcode_2900) |
 | --- |
 {{< notice tip >}}

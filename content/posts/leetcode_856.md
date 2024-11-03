@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/856.md" >}}
 ---
-
+{{< youtube iO0zA-N575k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #857: Minimum Cost to Hire K Workers](https://grid47.xyz/posts/leetcode_857) |
 | --- |
 {{< notice tip >}}

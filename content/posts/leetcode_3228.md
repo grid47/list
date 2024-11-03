@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Qll4r6KzFak >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3229: Minimum Operations to Make Array Equal to Target](https://grid47.xyz/posts/leetcode_3229) |
 | --- |
 {{< notice tip >}}

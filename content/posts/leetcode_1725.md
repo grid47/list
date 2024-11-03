@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1725.md" >}}
 ---
-
+{{< youtube ajl13jUxfdM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1726: Tuple with Same Product](https://grid47.xyz/posts/leetcode_1726) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1181.md" >}}
 ---
-
+{{< youtube DWNIq8Jj7Yk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1182: Shortest Distance to Target Color](https://grid47.xyz/posts/leetcode_1182) |
 | --- |
 {{< notice tip >}}

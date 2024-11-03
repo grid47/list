@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/866.md" >}}
 ---
-
+{{< youtube MZSbndVpxH8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #867: Transpose Matrix](https://grid47.xyz/posts/leetcode_867) |
 | --- |
 {{< notice tip >}}

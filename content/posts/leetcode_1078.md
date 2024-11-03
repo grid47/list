@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1078.md" >}}
 ---
-
+{{< youtube KzzMqeo_NmE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1079: Letter Tile Possibilities](https://grid47.xyz/posts/leetcode_1079) |
 | --- |
 {{< notice tip >}}

@@ -32,7 +32,7 @@ public:
 
 
 ---
-
+{{< youtube 8a04uEm1FlE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2652: Sum Multiples](https://grid47.xyz/posts/leetcode_2652) |
 | --- |
 {{< notice tip >}}

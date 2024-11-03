@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube RZkkt2b1EcU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2764: Is Array a Preorder of Some ‌Binary Tree](https://grid47.xyz/posts/leetcode_2764) |
 | --- |
 {{< notice tip >}}

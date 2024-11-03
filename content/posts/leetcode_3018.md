@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mPT5JPbbM7E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3019: Number of Changing Keys](https://grid47.xyz/posts/leetcode_3019) |
 | --- |
 {{< notice tip >}}

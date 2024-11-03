@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube yPqe3KshvVo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2170: Minimum Operations to Make the Array Alternating](https://grid47.xyz/posts/leetcode_2170) |
 | --- |
 {{< notice tip >}}

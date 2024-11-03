@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 2Hd2yaXrToY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2346: Compute the Rank as a Percentage](https://grid47.xyz/posts/leetcode_2346) |
 | --- |
 {{< notice tip >}}

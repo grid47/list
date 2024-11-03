@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/892.md" >}}
 ---
-
+{{< youtube jZ-RB6TG62Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #893: Groups of Special-Equivalent Strings](https://grid47.xyz/posts/leetcode_893) |
 | --- |
 {{< notice tip >}}

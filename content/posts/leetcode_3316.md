@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gV9sDhCv1TA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3317: Find the Number of Possible Ways for an Event](https://grid47.xyz/posts/leetcode_3317) |
 | --- |
 {{< notice tip >}}

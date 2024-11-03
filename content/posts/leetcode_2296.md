@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ASWavSuip1I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2297: Jump Game VIII](https://grid47.xyz/posts/leetcode_2297) |
 | --- |
 {{< notice tip >}}

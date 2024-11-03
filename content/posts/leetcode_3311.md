@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube i6FxEQaZgfk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3312: Sorted GCD Pair Queries](https://grid47.xyz/posts/leetcode_3312) |
 | --- |
 {{< notice tip >}}

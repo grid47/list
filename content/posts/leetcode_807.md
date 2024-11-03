@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/807.md" >}}
 ---
-
+{{< youtube uVPkYy5jzRo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #808: Soup Servings](https://grid47.xyz/posts/leetcode_808) |
 | --- |
 {{< notice tip >}}

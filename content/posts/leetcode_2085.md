@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube V_OjksUmqY4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2086: Minimum Number of Food Buckets to Feed the Hamsters](https://grid47.xyz/posts/leetcode_2086) |
 | --- |
 {{< notice tip >}}

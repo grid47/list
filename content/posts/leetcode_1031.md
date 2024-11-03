@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1031.md" >}}
 ---
-
+{{< youtube YAcHH5AVsZg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1032: Stream of Characters](https://grid47.xyz/posts/leetcode_1032) |
 | --- |
 {{< notice tip >}}

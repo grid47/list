@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube UaB17ut8f8U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2903: Find Indices With Index and Value Difference I](https://grid47.xyz/posts/leetcode_2903) |
 | --- |
 {{< notice tip >}}

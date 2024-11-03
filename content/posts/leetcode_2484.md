@@ -71,7 +71,7 @@ public:
 
 
 ---
-
+{{< youtube cn3IrnuHC7Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2485: Find the Pivot Integer](https://grid47.xyz/posts/leetcode_2485) |
 | --- |
 {{< notice tip >}}

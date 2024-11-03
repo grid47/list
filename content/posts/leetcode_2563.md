@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube Z9hOAQFSQ_I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2564: Substring XOR Queries](https://grid47.xyz/posts/leetcode_2564) |
 | --- |
 {{< notice tip >}}

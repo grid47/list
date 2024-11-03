@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube 99KTTNdlKns >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2453: Destroy Sequential Targets](https://grid47.xyz/posts/leetcode_2453) |
 | --- |
 {{< notice tip >}}

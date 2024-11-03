@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/812.md" >}}
 ---
-
+{{< youtube PLqdx7w-oOk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #813: Largest Sum of Averages](https://grid47.xyz/posts/leetcode_813) |
 | --- |
 {{< notice tip >}}

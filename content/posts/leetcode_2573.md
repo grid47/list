@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WL_M1yk1pKE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2574: Left and Right Sum Differences](https://grid47.xyz/posts/leetcode_2574) |
 | --- |
 {{< notice tip >}}

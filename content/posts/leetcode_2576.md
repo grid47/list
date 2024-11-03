@@ -56,7 +56,7 @@ public:
 
 
 ---
-
+{{< youtube NlsyXR7GOJE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2577: Minimum Time to Visit a Cell In a Grid](https://grid47.xyz/posts/leetcode_2577) |
 | --- |
 {{< notice tip >}}

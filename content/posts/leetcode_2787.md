@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube bAvzaaO-lsM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2788: Split Strings by Separator](https://grid47.xyz/posts/leetcode_2788) |
 | --- |
 {{< notice tip >}}

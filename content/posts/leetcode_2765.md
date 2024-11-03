@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube Yg_VhAOIIuk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2766: Relocate Marbles](https://grid47.xyz/posts/leetcode_2766) |
 | --- |
 {{< notice tip >}}

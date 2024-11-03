@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube P84Tz8nt2sw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3093: Longest Common Suffix Queries](https://grid47.xyz/posts/leetcode_3093) |
 | --- |
 {{< notice tip >}}

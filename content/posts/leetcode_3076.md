@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube T9XJIsPijWM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3077: Maximum Strength of K Disjoint Subarrays](https://grid47.xyz/posts/leetcode_3077) |
 | --- |
 {{< notice tip >}}

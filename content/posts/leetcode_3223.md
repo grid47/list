@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HZQ3r-XfScc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3224: Minimum Array Changes to Make Differences Equal](https://grid47.xyz/posts/leetcode_3224) |
 | --- |
 {{< notice tip >}}

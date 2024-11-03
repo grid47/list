@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/773.md" >}}
 ---
-
+{{< youtube P5TKO9VNpcc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #774: Minimize Max Distance to Gas Station](https://grid47.xyz/posts/leetcode_774) |
 | --- |
 {{< notice tip >}}

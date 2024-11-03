@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/899.md" >}}
 ---
-
+{{< youtube TBSxujyNd6M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #900: RLE Iterator](https://grid47.xyz/posts/leetcode_900) |
 | --- |
 {{< notice tip >}}

@@ -33,7 +33,7 @@ public:
 
 
 ---
-
+{{< youtube lA9B6M4E_BQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2657: Find the Prefix Common Array of Two Arrays](https://grid47.xyz/posts/leetcode_2657) |
 | --- |
 {{< notice tip >}}

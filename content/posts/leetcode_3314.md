@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 2ZiqvMJnILI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3315: Construct the Minimum Bitwise Array II](https://grid47.xyz/posts/leetcode_3315) |
 | --- |
 {{< notice tip >}}

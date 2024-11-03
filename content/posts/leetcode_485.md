@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/485.md" >}}
 ---
-
+{{< youtube hN1kE_OMDVI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #486: Predict the Winner](https://grid47.xyz/posts/leetcode_486) |
 | --- |
 {{< notice tip >}}

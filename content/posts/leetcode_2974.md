@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube dJA3D6ubqCw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2975: Maximum Square Area by Removing Fences From a Field](https://grid47.xyz/posts/leetcode_2975) |
 | --- |
 {{< notice tip >}}

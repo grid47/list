@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube Mgtl8CIIWX4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2288: Apply Discount to Prices](https://grid47.xyz/posts/leetcode_2288) |
 | --- |
 {{< notice tip >}}

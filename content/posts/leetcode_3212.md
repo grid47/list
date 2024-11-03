@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube h97VbcSx--g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3213: Construct String with Minimum Cost](https://grid47.xyz/posts/leetcode_3213) |
 | --- |
 {{< notice tip >}}

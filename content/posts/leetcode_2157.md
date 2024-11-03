@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube PyjNsY0lbuA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2158: Amount of New Area Painted Each Day](https://grid47.xyz/posts/leetcode_2158) |
 | --- |
 {{< notice tip >}}

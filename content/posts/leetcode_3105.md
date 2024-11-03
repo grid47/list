@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube WwZfE4OHMjU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3106: Lexicographically Smallest String After Operations With Constraint](https://grid47.xyz/posts/leetcode_3106) |
 | --- |
 {{< notice tip >}}

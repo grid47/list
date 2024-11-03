@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 6_Dqb4zhS9Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2033: Minimum Operations to Make a Uni-Value Grid](https://grid47.xyz/posts/leetcode_2033) |
 | --- |
 {{< notice tip >}}

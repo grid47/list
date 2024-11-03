@@ -96,7 +96,7 @@ public:
 
 
 ---
-
+{{< youtube BJWTAclDvEA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2561: Rearranging Fruits](https://grid47.xyz/posts/leetcode_2561) |
 | --- |
 {{< notice tip >}}

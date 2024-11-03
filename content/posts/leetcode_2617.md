@@ -63,7 +63,7 @@ public:
 
 
 ---
-
+{{< youtube QhXMFMYckPw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2618: Check if Object Instance of Class](https://grid47.xyz/posts/leetcode_2618) |
 | --- |
 {{< notice tip >}}

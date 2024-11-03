@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1012.md" >}}
 ---
-
+{{< youtube LouyOquQEzA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1013: Partition Array Into Three Parts With Equal Sum](https://grid47.xyz/posts/leetcode_1013) |
 | --- |
 {{< notice tip >}}

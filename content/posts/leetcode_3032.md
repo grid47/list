@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube HCDYqLatYwM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3033: Modify the Matrix](https://grid47.xyz/posts/leetcode_3033) |
 | --- |
 {{< notice tip >}}

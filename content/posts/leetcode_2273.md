@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube AdiW8KjFiyg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2274: Maximum Consecutive Floors Without Special Floors](https://grid47.xyz/posts/leetcode_2274) |
 | --- |
 {{< notice tip >}}

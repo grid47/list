@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/233.md" >}}
 ---
-
+{{< youtube 6phFUG9fiv4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #234: Palindrome Linked List](https://grid47.xyz/posts/leetcode_234) |
 | --- |
 {{< notice tip >}}

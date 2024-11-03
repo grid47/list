@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube BNVLO1j2-YE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3042: Count Prefix and Suffix Pairs I](https://grid47.xyz/posts/leetcode_3042) |
 | --- |
 {{< notice tip >}}

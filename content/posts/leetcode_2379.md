@@ -39,7 +39,7 @@ int minimumRecolors(string blocks, int k) {
 
 
 ---
-
+{{< youtube RRmSKRsT9tg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2380: Time Needed to Rearrange a Binary String](https://grid47.xyz/posts/leetcode_2380) |
 | --- |
 {{< notice tip >}}

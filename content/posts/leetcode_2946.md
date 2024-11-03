@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube 7RGWUCc5IHw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2947: Count Beautiful Substrings I](https://grid47.xyz/posts/leetcode_2947) |
 | --- |
 {{< notice tip >}}

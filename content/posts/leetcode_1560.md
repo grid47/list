@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1560.md" >}}
 ---
-
+{{< youtube uxf1Ei0iPKA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1561: Maximum Number of Coins You Can Get](https://grid47.xyz/posts/leetcode_1561) |
 | --- |
 {{< notice tip >}}

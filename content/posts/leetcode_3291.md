@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JeuHDUPuAj8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3292: Minimum Number of Valid Strings to Form Target II](https://grid47.xyz/posts/leetcode_3292) |
 | --- |
 {{< notice tip >}}

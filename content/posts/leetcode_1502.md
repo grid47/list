@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1502.md" >}}
 ---
-
+{{< youtube crVb-Fubs0w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank](https://grid47.xyz/posts/leetcode_1503) |
 | --- |
 {{< notice tip >}}

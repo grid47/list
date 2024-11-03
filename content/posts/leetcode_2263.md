@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Df9N1o21YDc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2264: Largest 3-Same-Digit Number in String](https://grid47.xyz/posts/leetcode_2264) |
 | --- |
 {{< notice tip >}}

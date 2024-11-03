@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube tkXKAJ7jNGo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2864: Maximum Odd Binary Number](https://grid47.xyz/posts/leetcode_2864) |
 | --- |
 {{< notice tip >}}

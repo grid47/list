@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1449.md" >}}
 ---
-
+{{< youtube Ouc4yMO3QjA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1450: Number of Students Doing Homework at a Given Time](https://grid47.xyz/posts/leetcode_1450) |
 | --- |
 {{< notice tip >}}

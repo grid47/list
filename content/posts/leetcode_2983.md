@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube KpAgq-woQ-g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2984: Find Peak Calling Hours for Each City](https://grid47.xyz/posts/leetcode_2984) |
 | --- |
 {{< notice tip >}}

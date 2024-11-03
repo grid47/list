@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube e14eyiS53mI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3152: Special Array II](https://grid47.xyz/posts/leetcode_3152) |
 | --- |
 {{< notice tip >}}

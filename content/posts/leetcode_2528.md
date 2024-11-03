@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube X6Zz55jH2Po >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2529: Maximum Count of Positive Integer and Negative Integer](https://grid47.xyz/posts/leetcode_2529) |
 | --- |
 {{< notice tip >}}

@@ -96,7 +96,7 @@ public:
 
 
 ---
-
+{{< youtube OOBGOENJLYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2147: Number of Ways to Divide a Long Corridor](https://grid47.xyz/posts/leetcode_2147) |
 | --- |
 {{< notice tip >}}

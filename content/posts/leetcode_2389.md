@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube Lb4Dp6gwh6g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2390: Removing Stars From a String](https://grid47.xyz/posts/leetcode_2390) |
 | --- |
 {{< notice tip >}}

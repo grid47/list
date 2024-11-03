@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/529.md" >}}
 ---
-
+{{< youtube zPmuqLKPbE8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #530: Minimum Absolute Difference in BST](https://grid47.xyz/posts/leetcode_530) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube mLsC4-Et-wk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2819: Minimum Relative Loss After Buying Chocolates](https://grid47.xyz/posts/leetcode_2819) |
 | --- |
 {{< notice tip >}}

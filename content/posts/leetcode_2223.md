@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube U_ORy5R-YcE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2224: Minimum Number of Operations to Convert Time](https://grid47.xyz/posts/leetcode_2224) |
 | --- |
 {{< notice tip >}}

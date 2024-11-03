@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube FPkaxgatwoI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2736: Maximum Sum Queries](https://grid47.xyz/posts/leetcode_2736) |
 | --- |
 {{< notice tip >}}

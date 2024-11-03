@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube NztQwlNn1XA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2599: Make the Prefix Sum Non-negative](https://grid47.xyz/posts/leetcode_2599) |
 | --- |
 {{< notice tip >}}

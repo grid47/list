@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1694.md" >}}
 ---
-
+{{< youtube U8EwUjwKYFg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1695: Maximum Erasure Value](https://grid47.xyz/posts/leetcode_1695) |
 | --- |
 {{< notice tip >}}

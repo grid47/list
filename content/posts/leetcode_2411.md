@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube 0xR5bFyo2QA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2412: Minimum Money Required Before Transactions](https://grid47.xyz/posts/leetcode_2412) |
 | --- |
 {{< notice tip >}}

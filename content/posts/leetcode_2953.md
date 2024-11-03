@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube lkua2GfA83g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2954: Count the Number of Infection Sequences](https://grid47.xyz/posts/leetcode_2954) |
 | --- |
 {{< notice tip >}}

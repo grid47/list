@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube TuDoZm9O18A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2960: Count Tested Devices After Test Operations](https://grid47.xyz/posts/leetcode_2960) |
 | --- |
 {{< notice tip >}}

@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/956.md" >}}
 ---
-
+{{< youtube nAqt8y6wwVA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #957: Prison Cells After N Days](https://grid47.xyz/posts/leetcode_957) |
 | --- |
 {{< notice tip >}}

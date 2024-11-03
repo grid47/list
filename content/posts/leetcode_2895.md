@@ -48,7 +48,7 @@ public:
 
 
 ---
-
+{{< youtube Ju6ArOqNhxM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2896: Apply Operations to Make Two Strings Equal](https://grid47.xyz/posts/leetcode_2896) |
 | --- |
 {{< notice tip >}}

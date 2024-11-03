@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube U9ME81R6LjY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3003: Maximize the Number of Partitions After Operations](https://grid47.xyz/posts/leetcode_3003) |
 | --- |
 {{< notice tip >}}

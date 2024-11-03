@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QMmE9Px9tsM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2604: Minimum Time to Eat All Grains](https://grid47.xyz/posts/leetcode_2604) |
 | --- |
 {{< notice tip >}}

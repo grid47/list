@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yFuskOwRAf4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2843:   Count Symmetric Integers](https://grid47.xyz/posts/leetcode_2843) |
 | --- |
 {{< notice tip >}}

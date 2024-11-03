@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1441.md" >}}
 ---
-
+{{< youtube uK6JvnLUcck >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1442: Count Triplets That Can Form Two Arrays of Equal XOR](https://grid47.xyz/posts/leetcode_1442) |
 | --- |
 {{< notice tip >}}

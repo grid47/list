@@ -41,7 +41,7 @@ public:
 
 
 ---
-
+{{< youtube Xf_naKzI_ZI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2121: Intervals Between Identical Elements](https://grid47.xyz/posts/leetcode_2121) |
 | --- |
 {{< notice tip >}}

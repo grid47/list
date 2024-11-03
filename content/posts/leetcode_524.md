@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/524.md" >}}
 ---
-
+{{< youtube tvaZ8-WobKE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #525: Contiguous Array](https://grid47.xyz/posts/leetcode_525) |
 | --- |
 {{< notice tip >}}

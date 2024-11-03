@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1Xd7A-6ldfw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2852: Sum of Remoteness of All Cells](https://grid47.xyz/posts/leetcode_2852) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/391.md" >}}
 ---
-
+{{< youtube X8V4UyDcuYQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #392: Is Subsequence](https://grid47.xyz/posts/leetcode_392) |
 | --- |
 {{< notice tip >}}

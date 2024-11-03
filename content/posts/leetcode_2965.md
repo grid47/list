@@ -94,7 +94,7 @@ public:
 
 
 ---
-
+{{< youtube 6r-PQyoHHoQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode_2966) |
 | --- |
 {{< notice tip >}}

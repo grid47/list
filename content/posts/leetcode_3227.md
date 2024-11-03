@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube GjRqqxYlQds >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3228: Maximum Number of Operations to Move Ones to the End](https://grid47.xyz/posts/leetcode_3228) |
 | --- |
 {{< notice tip >}}

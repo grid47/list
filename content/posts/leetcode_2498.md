@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube 7zFq991SKgQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2499: Minimum Total Cost to Make Arrays Unequal](https://grid47.xyz/posts/leetcode_2499) |
 | --- |
 {{< notice tip >}}

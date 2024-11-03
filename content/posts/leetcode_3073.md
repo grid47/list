@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ntHK8_DrCAk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3074: Apple Redistribution into Boxes](https://grid47.xyz/posts/leetcode_3074) |
 | --- |
 {{< notice tip >}}

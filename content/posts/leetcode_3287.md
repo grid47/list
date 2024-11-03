@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube QCPZAdB6RRk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3288: Length of the Longest Increasing Path](https://grid47.xyz/posts/leetcode_3288) |
 | --- |
 {{< notice tip >}}

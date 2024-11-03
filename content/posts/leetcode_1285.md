@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1285.md" >}}
 ---
-
+{{< youtube yuvZH9qODis >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1286: Iterator for Combination](https://grid47.xyz/posts/leetcode_1286) |
 | --- |
 {{< notice tip >}}

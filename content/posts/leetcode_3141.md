@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube VMeyX7cpZ-s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3142: Check if Grid Satisfies Conditions](https://grid47.xyz/posts/leetcode_3142) |
 | --- |
 {{< notice tip >}}

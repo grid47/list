@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/972.md" >}}
 ---
-
+{{< youtube k517t4HhKa8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #973: K Closest Points to Origin](https://grid47.xyz/posts/leetcode_973) |
 | --- |
 {{< notice tip >}}

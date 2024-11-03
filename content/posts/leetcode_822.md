@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/822.md" >}}
 ---
-
+{{< youtube K-g8sOWW4F0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #823: Binary Trees With Factors](https://grid47.xyz/posts/leetcode_823) |
 | --- |
 {{< notice tip >}}

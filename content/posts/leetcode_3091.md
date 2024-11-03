@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube lW1PujJ_O3U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3092: Most Frequent IDs](https://grid47.xyz/posts/leetcode_3092) |
 | --- |
 {{< notice tip >}}

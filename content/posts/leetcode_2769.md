@@ -32,7 +32,7 @@ public:
 
 
 ---
-
+{{< youtube uj_B91ycSGo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2770: Maximum Number of Jumps to Reach the Last Index](https://grid47.xyz/posts/leetcode_2770) |
 | --- |
 {{< notice tip >}}

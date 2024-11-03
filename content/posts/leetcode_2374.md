@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube 1egOQhIT9Gg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2375: Construct Smallest Number From DI String](https://grid47.xyz/posts/leetcode_2375) |
 | --- |
 {{< notice tip >}}

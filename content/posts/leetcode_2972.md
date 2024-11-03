@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 8LC2AYGgoRM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2973: Find Number of Coins to Place in Tree Nodes](https://grid47.xyz/posts/leetcode_2973) |
 | --- |
 {{< notice tip >}}

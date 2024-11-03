@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/800.md" >}}
 ---
-
+{{< youtube LKe8SxkGFgc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #801: Minimum Swaps To Make Sequences Increasing](https://grid47.xyz/posts/leetcode_801) |
 | --- |
 {{< notice tip >}}

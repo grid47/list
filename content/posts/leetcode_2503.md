@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube JAQJhxqHs6Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2504: Concatenate the Name and the Profession](https://grid47.xyz/posts/leetcode_2504) |
 | --- |
 {{< notice tip >}}

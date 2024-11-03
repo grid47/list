@@ -35,7 +35,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1941.md" >}}
 ---
-
+{{< youtube PG9qfNf5vLw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1942: The Number of the Smallest Unoccupied Chair](https://grid47.xyz/posts/leetcode_1942) |
 | --- |
 {{< notice tip >}}

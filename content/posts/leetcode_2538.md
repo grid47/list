@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1kQN8vR1i5I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2539: Count the Number of Good Subsequences](https://grid47.xyz/posts/leetcode_2539) |
 | --- |
 {{< notice tip >}}

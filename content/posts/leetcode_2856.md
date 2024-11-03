@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube 6IPtNE3fIew >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2857: Count Pairs of Points With Distance k](https://grid47.xyz/posts/leetcode_2857) |
 | --- |
 {{< notice tip >}}

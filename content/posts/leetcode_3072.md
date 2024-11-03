@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube __x1Vn8pO3Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3073: Maximum Increasing Triplet Value](https://grid47.xyz/posts/leetcode_3073) |
 | --- |
 {{< notice tip >}}

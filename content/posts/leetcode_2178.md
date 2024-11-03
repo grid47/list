@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube fM7MJFhrm-8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2179: Count Good Triplets in an Array](https://grid47.xyz/posts/leetcode_2179) |
 | --- |
 {{< notice tip >}}

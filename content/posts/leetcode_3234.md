@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube LqNVe_LLbPQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3235: Check if the Rectangle Corner Is Reachable](https://grid47.xyz/posts/leetcode_3235) |
 | --- |
 {{< notice tip >}}

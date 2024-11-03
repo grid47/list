@@ -60,7 +60,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1652.md" >}}
 ---
-
+{{< youtube r81OUfKmGtM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1653: Minimum Deletions to Make String Balanced](https://grid47.xyz/posts/leetcode_1653) |
 | --- |
 {{< notice tip >}}

@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube X4wzXCe1wvs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2538: Difference Between Maximum and Minimum Price Sum](https://grid47.xyz/posts/leetcode_2538) |
 | --- |
 {{< notice tip >}}

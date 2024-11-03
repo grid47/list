@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube -UE2l-O8_RU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2917: Find the K-or of an Array](https://grid47.xyz/posts/leetcode_2917) |
 | --- |
 {{< notice tip >}}

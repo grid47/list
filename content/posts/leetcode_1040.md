@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1040.md" >}}
 ---
-
+{{< youtube 4Xhq2NDbA-I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1041: Robot Bounded In Circle](https://grid47.xyz/posts/leetcode_1041) |
 | --- |
 {{< notice tip >}}

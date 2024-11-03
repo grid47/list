@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 5eVHHDRsCMM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3242: Design Neighbor Sum Service](https://grid47.xyz/posts/leetcode_3242) |
 | --- |
 {{< notice tip >}}

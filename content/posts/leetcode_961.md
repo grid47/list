@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/961.md" >}}
 ---
-
+{{< youtube JjS53qiUld0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #962: Maximum Width Ramp](https://grid47.xyz/posts/leetcode_962) |
 | --- |
 {{< notice tip >}}

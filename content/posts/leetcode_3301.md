@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube pDEZ1Rmindo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3302: Find the Lexicographically Smallest Valid Sequence](https://grid47.xyz/posts/leetcode_3302) |
 | --- |
 {{< notice tip >}}

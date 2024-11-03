@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube LJRSVWqIIAo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3178: Find the Child Who Has the Ball After K Seconds](https://grid47.xyz/posts/leetcode_3178) |
 | --- |
 {{< notice tip >}}

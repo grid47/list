@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube sf9IQ3P7Bzc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2163: Minimum Difference in Sums After Removal of Elements](https://grid47.xyz/posts/leetcode_2163) |
 | --- |
 {{< notice tip >}}

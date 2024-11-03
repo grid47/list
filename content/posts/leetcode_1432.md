@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1432.md" >}}
 ---
-
+{{< youtube sOnpt2zHWfQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1433: Check If a String Can Break Another String](https://grid47.xyz/posts/leetcode_1433) |
 | --- |
 {{< notice tip >}}

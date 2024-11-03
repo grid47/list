@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube fL07VCLu6nU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2746: Decremental String Concatenation](https://grid47.xyz/posts/leetcode_2746) |
 | --- |
 {{< notice tip >}}

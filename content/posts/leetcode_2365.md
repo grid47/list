@@ -55,7 +55,7 @@ public:
 
 
 ---
-
+{{< youtube iuiNCc0HkX8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2366: Minimum Replacements to Sort the Array](https://grid47.xyz/posts/leetcode_2366) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/492.md" >}}
 ---
-
+{{< youtube Jt4z_0Jp7W8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #493: Reverse Pairs](https://grid47.xyz/posts/leetcode_493) |
 | --- |
 {{< notice tip >}}

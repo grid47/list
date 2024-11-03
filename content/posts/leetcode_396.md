@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/396.md" >}}
 ---
-
+{{< youtube GzBK8dxblaw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #397: Integer Replacement](https://grid47.xyz/posts/leetcode_397) |
 | --- |
 {{< notice tip >}}

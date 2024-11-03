@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oOGFaLpPGpw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3257: Maximum Value Sum by Placing Three Rooks II](https://grid47.xyz/posts/leetcode_3257) |
 | --- |
 {{< notice tip >}}

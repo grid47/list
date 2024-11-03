@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/428.md" >}}
 ---
-
+{{< youtube 8Fhi98LzecM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #429: N-ary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode_429) |
 | --- |
 {{< notice tip >}}

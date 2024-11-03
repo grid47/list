@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube noP_AsQlgQc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2007: Find Original Array From Doubled Array](https://grid47.xyz/posts/leetcode_2007) |
 | --- |
 {{< notice tip >}}

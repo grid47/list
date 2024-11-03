@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube nmN2qyoYMec >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3096: Minimum Levels to Gain More Points](https://grid47.xyz/posts/leetcode_3096) |
 | --- |
 {{< notice tip >}}

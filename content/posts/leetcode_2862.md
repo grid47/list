@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube KvWz_oTRfsE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2863: Maximum Length of Semi-Decreasing Subarrays](https://grid47.xyz/posts/leetcode_2863) |
 | --- |
 {{< notice tip >}}

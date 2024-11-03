@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/794.md" >}}
 ---
-
+{{< youtube 5IGbZyPgjP0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #795: Number of Subarrays with Bounded Maximum](https://grid47.xyz/posts/leetcode_795) |
 | --- |
 {{< notice tip >}}

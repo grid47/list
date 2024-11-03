@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube kbol4qwb9M4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3297: Count Substrings That Can Be Rearranged to Contain a String I](https://grid47.xyz/posts/leetcode_3297) |
 | --- |
 {{< notice tip >}}

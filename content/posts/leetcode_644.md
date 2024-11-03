@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/644.md" >}}
 ---
-
+{{< youtube ic6Si3eQWlI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #645: Set Mismatch](https://grid47.xyz/posts/leetcode_645) |
 | --- |
 {{< notice tip >}}

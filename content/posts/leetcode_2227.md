@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube UhlnQreJL20 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2228: Users With Two Purchases Within Seven Days](https://grid47.xyz/posts/leetcode_2228) |
 | --- |
 {{< notice tip >}}

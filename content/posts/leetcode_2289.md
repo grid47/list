@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube Nb92qaeLcjU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2290: Minimum Obstacle Removal to Reach Corner](https://grid47.xyz/posts/leetcode_2290) |
 | --- |
 {{< notice tip >}}

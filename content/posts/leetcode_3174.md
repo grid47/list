@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube ePb7kJ0nYHM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3175: Find The First Player to win K Games in a Row](https://grid47.xyz/posts/leetcode_3175) |
 | --- |
 {{< notice tip >}}

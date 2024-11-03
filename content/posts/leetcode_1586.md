@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1586.md" >}}
 ---
-
+{{< youtube tx3RjgzHFCc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1587: Bank Account Summary II](https://grid47.xyz/posts/leetcode_1587) |
 | --- |
 {{< notice tip >}}

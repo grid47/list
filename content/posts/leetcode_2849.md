@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube r4MaK8AhoLI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2850: Minimum Moves to Spread Stones Over Grid](https://grid47.xyz/posts/leetcode_2850) |
 | --- |
 {{< notice tip >}}

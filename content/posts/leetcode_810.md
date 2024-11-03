@@ -35,7 +35,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/810.md" >}}
 ---
-
+{{< youtube 6fJ0J6wgXLs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #811: Subdomain Visit Count](https://grid47.xyz/posts/leetcode_811) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oR8UdVUnbWs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2553: Separate the Digits in an Array](https://grid47.xyz/posts/leetcode_2553) |
 | --- |
 {{< notice tip >}}

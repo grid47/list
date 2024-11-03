@@ -60,7 +60,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1488.md" >}}
 ---
-
+{{< youtube EcvhHoFaDoU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://grid47.xyz/posts/leetcode_1489) |
 | --- |
 {{< notice tip >}}

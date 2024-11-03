@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube jfe3txy-Y0E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3099: Harshad Number](https://grid47.xyz/posts/leetcode_3099) |
 | --- |
 {{< notice tip >}}

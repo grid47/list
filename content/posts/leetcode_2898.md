@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube OX1p3uHt7lg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2899: Last Visited Integers](https://grid47.xyz/posts/leetcode_2899) |
 | --- |
 {{< notice tip >}}

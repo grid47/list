@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube p1njSkWtg2U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2593: Find Score of an Array After Marking All Elements](https://grid47.xyz/posts/leetcode_2593) |
 | --- |
 {{< notice tip >}}

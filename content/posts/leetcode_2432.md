@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube BxVwXRLZlhk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2433: Find The Original Array of Prefix Xor](https://grid47.xyz/posts/leetcode_2433) |
 | --- |
 {{< notice tip >}}

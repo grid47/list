@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube B6HL6KE6zZg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3293: Calculate Product Final Price](https://grid47.xyz/posts/leetcode_3293) |
 | --- |
 {{< notice tip >}}

@@ -74,7 +74,7 @@ public:
 
 
 ---
-
+{{< youtube -ZE6ZmNU6KQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2513: Minimize the Maximum of Two Arrays](https://grid47.xyz/posts/leetcode_2513) |
 | --- |
 {{< notice tip >}}

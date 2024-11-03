@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube ctp3MD4jiGg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2256: Minimum Average Difference](https://grid47.xyz/posts/leetcode_2256) |
 | --- |
 {{< notice tip >}}
