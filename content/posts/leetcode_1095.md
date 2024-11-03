@@ -91,7 +91,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1095.md" >}}
 ---
-
+{{< youtube BGgYC-YkGvc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1096: Brace Expansion II](https://grid47.xyz/posts/leetcode_1096) |
 | --- |
 {{< notice tip >}}

@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/840.md" >}}
 ---
-
+{{< youtube FV52wWrivNc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #841: Keys and Rooms](https://grid47.xyz/posts/leetcode_841) |
 | --- |
 {{< notice tip >}}

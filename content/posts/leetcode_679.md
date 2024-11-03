@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/679.md" >}}
 ---
-
+{{< youtube I_Ikfbeop8I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #680: Valid Palindrome II](https://grid47.xyz/posts/leetcode_680) |
 | --- |
 {{< notice tip >}}

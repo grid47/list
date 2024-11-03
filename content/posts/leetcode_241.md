@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/241.md" >}}
 ---
-
+{{< youtube cykVFFm5D3s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #242: Valid Anagram](https://grid47.xyz/posts/leetcode_242) |
 | --- |
 {{< notice tip >}}

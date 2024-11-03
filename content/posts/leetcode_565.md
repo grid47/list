@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/565.md" >}}
 ---
-
+{{< youtube rl_hXXzvTiM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #566: Reshape the Matrix](https://grid47.xyz/posts/leetcode_566) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/732.md" >}}
 ---
-
+{{< youtube K7ZaNoZNUkM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #733: Flood Fill](https://grid47.xyz/posts/leetcode_733) |
 | --- |
 {{< notice tip >}}

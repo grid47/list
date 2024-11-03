@@ -32,7 +32,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/342.md" >}}
 ---
-
+{{< youtube qEYZPwnlM0U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #343: Integer Break](https://grid47.xyz/posts/leetcode_343) |
 | --- |
 {{< notice tip >}}

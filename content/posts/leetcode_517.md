@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/517.md" >}}
 ---
-
+{{< youtube 7xvqjefQkt0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #518: Coin Change II](https://grid47.xyz/posts/leetcode_518) |
 | --- |
 {{< notice tip >}}

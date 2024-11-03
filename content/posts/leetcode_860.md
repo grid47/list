@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/860.md" >}}
 ---
-
+{{< youtube mSVAw0AUZgA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #861: Score After Flipping Matrix](https://grid47.xyz/posts/leetcode_861) |
 | --- |
 {{< notice tip >}}

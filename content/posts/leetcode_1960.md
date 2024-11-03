@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1960.md" >}}
 ---
-
+{{< youtube fWFrAnNQKH8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1961: Check If String Is a Prefix of Array](https://grid47.xyz/posts/leetcode_1961) |
 | --- |
 {{< notice tip >}}

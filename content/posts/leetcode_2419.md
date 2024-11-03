@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube N8lRlRWA_1Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2420: Find All Good Indices](https://grid47.xyz/posts/leetcode_2420) |
 | --- |
 {{< notice tip >}}

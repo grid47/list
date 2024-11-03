@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube M69bjWFarU0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2695: Array Wrapper](https://grid47.xyz/posts/leetcode_2695) |
 | --- |
 {{< notice tip >}}

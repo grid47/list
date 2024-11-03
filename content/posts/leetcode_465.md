@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/465.md" >}}
 ---
-
+{{< youtube B8pPWgLa2lQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #466: Count The Repetitions](https://grid47.xyz/posts/leetcode_466) |
 | --- |
 {{< notice tip >}}

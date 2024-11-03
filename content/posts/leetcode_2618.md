@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube meIo-Q07Ba8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2619: Array Prototype Last](https://grid47.xyz/posts/leetcode_2619) |
 | --- |
 {{< notice tip >}}

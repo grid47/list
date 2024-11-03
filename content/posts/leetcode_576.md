@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/576.md" >}}
 ---
-
+{{< youtube Bg5CLRqtNmk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #577: Employee Bonus](https://grid47.xyz/posts/leetcode_577) |
 | --- |
 {{< notice tip >}}

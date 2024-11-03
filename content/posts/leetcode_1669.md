@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1669.md" >}}
 ---
-
+{{< youtube pI775VutBxg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1670: Design Front Middle Back Queue](https://grid47.xyz/posts/leetcode_1670) |
 | --- |
 {{< notice tip >}}

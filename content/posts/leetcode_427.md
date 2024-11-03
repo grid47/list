@@ -95,7 +95,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/427.md" >}}
 ---
-
+{{< youtube UQ-1sBMV0v4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #428: Serialize and Deserialize N-ary Tree](https://grid47.xyz/posts/leetcode_428) |
 | --- |
 {{< notice tip >}}

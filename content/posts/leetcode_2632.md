@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube pi4kqMWQXxA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2633: Convert Object to JSON String](https://grid47.xyz/posts/leetcode_2633) |
 | --- |
 {{< notice tip >}}

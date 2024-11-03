@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1496.md" >}}
 ---
-
+{{< youtube VWRJBNP7uH8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1497: Check If Array Pairs Are Divisible by k](https://grid47.xyz/posts/leetcode_1497) |
 | --- |
 {{< notice tip >}}

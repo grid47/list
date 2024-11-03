@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1367.md" >}}
 ---
-
+{{< youtube OaA9MgG00AE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1368: Minimum Cost to Make at Least One Valid Path in a Grid](https://grid47.xyz/posts/leetcode_1368) |
 | --- |
 {{< notice tip >}}

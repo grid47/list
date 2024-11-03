@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1745.md" >}}
 ---
-
+{{< youtube K5RzCGYLYLk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1746: Maximum Subarray Sum After One Operation](https://grid47.xyz/posts/leetcode_1746) |
 | --- |
 {{< notice tip >}}

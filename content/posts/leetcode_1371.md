@@ -55,7 +55,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1371.md" >}}
 ---
-
+{{< youtube o17MBWparrI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1372: Longest ZigZag Path in a Binary Tree](https://grid47.xyz/posts/leetcode_1372) |
 | --- |
 {{< notice tip >}}

@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/731.md" >}}
 ---
-
+{{< youtube 7utL5cTDcnA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #732: My Calendar III](https://grid47.xyz/posts/leetcode_732) |
 | --- |
 {{< notice tip >}}

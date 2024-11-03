@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/950.md" >}}
 ---
-
+{{< youtube i2QrUdwWlak >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #951: Flip Equivalent Binary Trees](https://grid47.xyz/posts/leetcode_951) |
 | --- |
 {{< notice tip >}}

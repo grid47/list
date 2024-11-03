@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/497.md" >}}
 ---
-
+{{< youtube 8kwPXbTMSnk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #498: Diagonal Traverse](https://grid47.xyz/posts/leetcode_498) |
 | --- |
 {{< notice tip >}}

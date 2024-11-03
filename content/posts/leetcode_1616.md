@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1616.md" >}}
 ---
-
+{{< youtube s0UlCe7icxs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1617: Count Subtrees With Max Distance Between Cities](https://grid47.xyz/posts/leetcode_1617) |
 | --- |
 {{< notice tip >}}

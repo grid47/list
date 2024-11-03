@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/861.md" >}}
 ---
-
+{{< youtube FbhzRA5den8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #862: Shortest Subarray with Sum at Least K](https://grid47.xyz/posts/leetcode_862) |
 | --- |
 {{< notice tip >}}

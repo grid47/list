@@ -79,7 +79,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/639.md" >}}
 ---
-
+{{< youtube w6xOl_TZ3fQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #640: Solve the Equation](https://grid47.xyz/posts/leetcode_640) |
 | --- |
 {{< notice tip >}}

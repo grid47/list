@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1291.md" >}}
 ---
-
+{{< youtube Q-ca65wRJyI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold](https://grid47.xyz/posts/leetcode_1292) |
 | --- |
 {{< notice tip >}}

@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1329.md" >}}
 ---
-
+{{< youtube 0FheWgwnG-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1330: Reverse Subarray To Maximize Array Value](https://grid47.xyz/posts/leetcode_1330) |
 | --- |
 {{< notice tip >}}

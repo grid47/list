@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/397.md" >}}
 ---
-
+{{< youtube 5ksn2Myjlig >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #398: Random Pick Index](https://grid47.xyz/posts/leetcode_398) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1011.md" >}}
 ---
-
+{{< youtube ER_oLmdc-nw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1012: Numbers With Repeated Digits](https://grid47.xyz/posts/leetcode_1012) |
 | --- |
 {{< notice tip >}}

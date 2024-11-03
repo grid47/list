@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube I3lnDUIzIG4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2478: Number of Beautiful Partitions](https://grid47.xyz/posts/leetcode_2478) |
 | --- |
 {{< notice tip >}}

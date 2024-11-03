@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube 9Ty_eRjoDNM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2491: Divide Players Into Teams of Equal Skill](https://grid47.xyz/posts/leetcode_2491) |
 | --- |
 {{< notice tip >}}

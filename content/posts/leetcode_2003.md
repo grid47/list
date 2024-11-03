@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube in_qO4nOsqA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2004: The Number of Seniors and Juniors to Join the Company](https://grid47.xyz/posts/leetcode_2004) |
 | --- |
 {{< notice tip >}}

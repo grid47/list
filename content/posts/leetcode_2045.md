@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 2F7gwxfy1CU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2046: Sort Linked List Already Sorted Using Absolute Values](https://grid47.xyz/posts/leetcode_2046) |
 | --- |
 {{< notice tip >}}

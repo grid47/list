@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1691.md" >}}
 ---
-
+{{< youtube W6aB2iM7C8g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1692: Count Ways to Distribute Candies](https://grid47.xyz/posts/leetcode_1692) |
 | --- |
 {{< notice tip >}}

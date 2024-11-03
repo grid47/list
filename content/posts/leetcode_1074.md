@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1074.md" >}}
 ---
-
+{{< youtube 43DRBP2DUHg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1075: Project Employees I](https://grid47.xyz/posts/leetcode_1075) |
 | --- |
 {{< notice tip >}}

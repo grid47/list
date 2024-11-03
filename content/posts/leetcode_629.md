@@ -41,7 +41,7 @@ int kInversePairs(int n, int k) {
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/629.md" >}}
 ---
-
+{{< youtube dglwb30bUKI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #630: Course Schedule III](https://grid47.xyz/posts/leetcode_630) |
 | --- |
 {{< notice tip >}}

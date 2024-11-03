@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1879.md" >}}
 ---
-
+{{< youtube 7y5k-mlIpqg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1880: Check if Word Equals Summation of Two Words](https://grid47.xyz/posts/leetcode_1880) |
 | --- |
 {{< notice tip >}}

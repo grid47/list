@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube a_NlRPnqCrg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2051: The Category of Each Member in the Store](https://grid47.xyz/posts/leetcode_2051) |
 | --- |
 {{< notice tip >}}

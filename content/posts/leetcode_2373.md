@@ -39,7 +39,7 @@ vector<vector<int>> largestLocal(vector<vector<int>>& g) {
 
 
 ---
-
+{{< youtube wdTRu9sarFA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2374: Node With Highest Edge Score](https://grid47.xyz/posts/leetcode_2374) |
 | --- |
 {{< notice tip >}}

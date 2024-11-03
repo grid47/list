@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 3JdtfMBrUqc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2620: Counter](https://grid47.xyz/posts/leetcode_2620) |
 | --- |
 {{< notice tip >}}

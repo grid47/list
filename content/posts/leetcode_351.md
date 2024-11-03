@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/351.md" >}}
 ---
-
+{{< youtube 9ciVlXZRW8s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #352: Data Stream as Disjoint Intervals](https://grid47.xyz/posts/leetcode_352) |
 | --- |
 {{< notice tip >}}

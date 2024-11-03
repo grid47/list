@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube AVJhazQsNms >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2977: Minimum Cost to Convert String II](https://grid47.xyz/posts/leetcode_2977) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1027.md" >}}
 ---
-
+{{< youtube -NIlLdVKBFs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1028: Recover a Tree From Preorder Traversal](https://grid47.xyz/posts/leetcode_1028) |
 | --- |
 {{< notice tip >}}

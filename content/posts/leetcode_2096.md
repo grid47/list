@@ -47,7 +47,7 @@ public:
 
 
 ---
-
+{{< youtube JegJNGcwtFg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2097: Valid Arrangement of Pairs](https://grid47.xyz/posts/leetcode_2097) |
 | --- |
 {{< notice tip >}}

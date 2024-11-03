@@ -73,7 +73,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/232.md" >}}
 ---
-
+{{< youtube eanwa3ht3YQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #233: Number of Digit One](https://grid47.xyz/posts/leetcode_233) |
 | --- |
 {{< notice tip >}}

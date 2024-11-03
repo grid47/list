@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1049.md" >}}
 ---
-
+{{< youtube gdXkkmzvR3c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1050: Actors and Directors Who Cooperated At Least Three Times](https://grid47.xyz/posts/leetcode_1050) |
 | --- |
 {{< notice tip >}}

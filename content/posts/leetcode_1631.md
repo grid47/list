@@ -64,7 +64,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1631.md" >}}
 ---
-
+{{< youtube XQlxCCx2vI4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1632: Rank Transform of a Matrix](https://grid47.xyz/posts/leetcode_1632) |
 | --- |
 {{< notice tip >}}

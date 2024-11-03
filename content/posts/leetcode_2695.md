@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube XoGjPdPTAVA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2696: Minimum String Length After Removing Substrings](https://grid47.xyz/posts/leetcode_2696) |
 | --- |
 {{< notice tip >}}

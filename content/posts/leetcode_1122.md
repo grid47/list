@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1122.md" >}}
 ---
-
+{{< youtube OPvcR1e4lfg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1123: Lowest Common Ancestor of Deepest Leaves](https://grid47.xyz/posts/leetcode_1123) |
 | --- |
 {{< notice tip >}}

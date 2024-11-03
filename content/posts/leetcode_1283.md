@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1283.md" >}}
 ---
-
+{{< youtube KGlnb3yT8iY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1284: Minimum Number of Flips to Convert Binary Matrix to Zero Matrix](https://grid47.xyz/posts/leetcode_1284) |
 | --- |
 {{< notice tip >}}

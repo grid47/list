@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/823.md" >}}
 ---
-
+{{< youtube vzjMGYUG7qY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #824: Goat Latin](https://grid47.xyz/posts/leetcode_824) |
 | --- |
 {{< notice tip >}}

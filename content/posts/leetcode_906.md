@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/906.md" >}}
 ---
-
+{{< youtube sgRzd0DtZmM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #907: Sum of Subarray Minimums](https://grid47.xyz/posts/leetcode_907) |
 | --- |
 {{< notice tip >}}

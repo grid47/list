@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/633.md" >}}
 ---
-
+{{< youtube B0UrG_X2faA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #634: Find the Derangement of An Array](https://grid47.xyz/posts/leetcode_634) |
 | --- |
 {{< notice tip >}}

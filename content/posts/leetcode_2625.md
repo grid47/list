@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube _DetLPKtFNk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2626: Array Reduce Transformation](https://grid47.xyz/posts/leetcode_2626) |
 | --- |
 {{< notice tip >}}

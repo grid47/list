@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1208.md" >}}
 ---
-
+{{< youtube 3lsT1Le526U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1209: Remove All Adjacent Duplicates in String II](https://grid47.xyz/posts/leetcode_1209) |
 | --- |
 {{< notice tip >}}

@@ -46,7 +46,7 @@ public:
 
 
 ---
-
+{{< youtube cueOpK5QMEA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2492: Minimum Score of a Path Between Two Cities](https://grid47.xyz/posts/leetcode_2492) |
 | --- |
 {{< notice tip >}}

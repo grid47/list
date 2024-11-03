@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/968.md" >}}
 ---
-
+{{< youtube t3VTGIeNEuI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #969: Pancake Sorting](https://grid47.xyz/posts/leetcode_969) |
 | --- |
 {{< notice tip >}}

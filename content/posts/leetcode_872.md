@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/872.md" >}}
 ---
-
+{{< youtube Nr8dbnL0_cM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #873: Length of Longest Fibonacci Subsequence](https://grid47.xyz/posts/leetcode_873) |
 | --- |
 {{< notice tip >}}

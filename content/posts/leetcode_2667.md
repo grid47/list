@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube P9Ldx1eTlRc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2668: Find Latest Salaries](https://grid47.xyz/posts/leetcode_2668) |
 | --- |
 {{< notice tip >}}

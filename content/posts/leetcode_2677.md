@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube VUN-O3B9ceY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2678: Number of Senior Citizens](https://grid47.xyz/posts/leetcode_2678) |
 | --- |
 {{< notice tip >}}

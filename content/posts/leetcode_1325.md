@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1325.md" >}}
 ---
-
+{{< youtube FqAoYAwbwV8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1326: Minimum Number of Taps to Open to Water a Garden](https://grid47.xyz/posts/leetcode_1326) |
 | --- |
 {{< notice tip >}}

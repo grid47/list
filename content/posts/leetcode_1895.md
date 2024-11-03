@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1895.md" >}}
 ---
-
+{{< youtube bDd-cRjVxmk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1896: Minimum Cost to Change the Final Value of Expression](https://grid47.xyz/posts/leetcode_1896) |
 | --- |
 {{< notice tip >}}

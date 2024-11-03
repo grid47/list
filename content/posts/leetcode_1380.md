@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1380.md" >}}
 ---
-
+{{< youtube ceuQgACqr78 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1381: Design a Stack With Increment Operation](https://grid47.xyz/posts/leetcode_1381) |
 | --- |
 {{< notice tip >}}

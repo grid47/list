@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 4JVZ-mVqJPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2629: Function Composition](https://grid47.xyz/posts/leetcode_2629) |
 | --- |
 {{< notice tip >}}

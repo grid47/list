@@ -61,7 +61,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1942.md" >}}
 ---
-
+{{< youtube LqhxcaCctCc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1943: Describe the Painting](https://grid47.xyz/posts/leetcode_1943) |
 | --- |
 {{< notice tip >}}

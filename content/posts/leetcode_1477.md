@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1477.md" >}}
 ---
-
+{{< youtube uV_JsPPLK9o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1478: Allocate Mailboxes](https://grid47.xyz/posts/leetcode_1478) |
 | --- |
 {{< notice tip >}}

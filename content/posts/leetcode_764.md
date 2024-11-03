@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/764.md" >}}
 ---
-
+{{< youtube dOSQVrCtO9w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #765: Couples Holding Hands](https://grid47.xyz/posts/leetcode_765) |
 | --- |
 {{< notice tip >}}

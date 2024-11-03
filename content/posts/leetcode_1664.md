@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1664.md" >}}
 ---
-
+{{< youtube GS9BQo3-1mg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1665: Minimum Initial Energy to Finish Tasks](https://grid47.xyz/posts/leetcode_1665) |
 | --- |
 {{< notice tip >}}

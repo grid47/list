@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/650.md" >}}
 ---
-
+{{< youtube jNfZH3mdjOA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #651: 4 Keys Keyboard](https://grid47.xyz/posts/leetcode_651) |
 | --- |
 {{< notice tip >}}

@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1436.md" >}}
 ---
-
+{{< youtube Hi8vMnnTZHE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1437: Check If All 1's Are at Least Length K Places Away](https://grid47.xyz/posts/leetcode_1437) |
 | --- |
 {{< notice tip >}}

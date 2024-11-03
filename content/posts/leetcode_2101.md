@@ -68,7 +68,7 @@ public:
 
 
 ---
-
+{{< youtube 8NPbAvVXKR4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2102: Sequentially Ordinal Rank Tracker](https://grid47.xyz/posts/leetcode_2102) |
 | --- |
 {{< notice tip >}}

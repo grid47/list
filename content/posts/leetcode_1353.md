@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1353.md" >}}
 ---
-
+{{< youtube EKZhEN9P2-I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1354: Construct Target Array With Multiple Sums](https://grid47.xyz/posts/leetcode_1354) |
 | --- |
 {{< notice tip >}}

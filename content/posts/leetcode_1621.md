@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1621.md" >}}
 ---
-
+{{< youtube Zl-atHgL8QY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1622: Fancy Sequence](https://grid47.xyz/posts/leetcode_1622) |
 | --- |
 {{< notice tip >}}

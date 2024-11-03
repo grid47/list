@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube gKDmO8ZLRD8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2487: Remove Nodes From Linked List](https://grid47.xyz/posts/leetcode_2487) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/849.md" >}}
 ---
-
+{{< youtube JtpGVqbiegQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #850: Rectangle Area II](https://grid47.xyz/posts/leetcode_850) |
 | --- |
 {{< notice tip >}}

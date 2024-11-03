@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/729.md" >}}
 ---
-
+{{< youtube fIxck3tlId4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #730: Count Different Palindromic Subsequences](https://grid47.xyz/posts/leetcode_730) |
 | --- |
 {{< notice tip >}}

@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1598.md" >}}
 ---
-
+{{< youtube Ur3saIXP7ro >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1599: Maximum Profit of Operating a Centennial Wheel](https://grid47.xyz/posts/leetcode_1599) |
 | --- |
 {{< notice tip >}}

@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1662.md" >}}
 ---
-
+{{< youtube ejBwc2oE7ck >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1663: Smallest String With A Given Numeric Value](https://grid47.xyz/posts/leetcode_1663) |
 | --- |
 {{< notice tip >}}

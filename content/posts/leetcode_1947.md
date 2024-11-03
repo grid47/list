@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1947.md" >}}
 ---
-
+{{< youtube HinLw7adoH8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1948: Delete Duplicate Folders in System](https://grid47.xyz/posts/leetcode_1948) |
 | --- |
 {{< notice tip >}}

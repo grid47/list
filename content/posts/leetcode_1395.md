@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1395.md" >}}
 ---
-
+{{< youtube zONHzIqCr-o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1396: Design Underground System](https://grid47.xyz/posts/leetcode_1396) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/446.md" >}}
 ---
-
+{{< youtube YIMwwT9JdIE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #447: Number of Boomerangs](https://grid47.xyz/posts/leetcode_447) |
 | --- |
 {{< notice tip >}}

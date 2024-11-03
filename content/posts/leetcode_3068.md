@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube bnBp6_b4GCw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3069: Distribute Elements Into Two Arrays I](https://grid47.xyz/posts/leetcode_3069) |
 | --- |
 {{< notice tip >}}

@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1716.md" >}}
 ---
-
+{{< youtube tKK7gvPCQfs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1717: Maximum Score From Removing Substrings](https://grid47.xyz/posts/leetcode_1717) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1622.md" >}}
 ---
-
+{{< youtube vYF1ubJ4-ow >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1623: All Valid Triplets That Can Represent a Country](https://grid47.xyz/posts/leetcode_1623) |
 | --- |
 {{< notice tip >}}

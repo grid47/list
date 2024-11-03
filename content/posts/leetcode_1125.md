@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1125.md" >}}
 ---
-
+{{< youtube yiAaGRWdqVA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1126: Active Businesses](https://grid47.xyz/posts/leetcode_1126) |
 | --- |
 {{< notice tip >}}

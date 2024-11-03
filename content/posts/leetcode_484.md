@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/484.md" >}}
 ---
-
+{{< youtube slFIq997BSE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #485: Max Consecutive Ones](https://grid47.xyz/posts/leetcode_485) |
 | --- |
 {{< notice tip >}}

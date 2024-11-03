@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1743.md" >}}
 ---
-
+{{< youtube SGfdp6CFDrA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode_1744) |
 | --- |
 {{< notice tip >}}

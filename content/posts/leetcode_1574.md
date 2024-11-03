@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1574.md" >}}
 ---
-
+{{< youtube T3mVs4XHV1E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1575: Count All Possible Routes](https://grid47.xyz/posts/leetcode_1575) |
 | --- |
 {{< notice tip >}}

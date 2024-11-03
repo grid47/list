@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/696.md" >}}
 ---
-
+{{< youtube 0O2D-AS2-UI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #697: Degree of an Array](https://grid47.xyz/posts/leetcode_697) |
 | --- |
 {{< notice tip >}}

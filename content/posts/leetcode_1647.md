@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1647.md" >}}
 ---
-
+{{< youtube h8AZEN49gTc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1648: Sell Diminishing-Valued Colored Balls](https://grid47.xyz/posts/leetcode_1648) |
 | --- |
 {{< notice tip >}}

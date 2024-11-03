@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/661.md" >}}
 ---
-
+{{< youtube xa83GG1RIOY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #662: Maximum Width of Binary Tree](https://grid47.xyz/posts/leetcode_662) |
 | --- |
 {{< notice tip >}}

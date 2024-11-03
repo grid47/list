@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1787.md" >}}
 ---
-
+{{< youtube s4laht78pks >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1788: Maximize the Beauty of the Garden](https://grid47.xyz/posts/leetcode_1788) |
 | --- |
 {{< notice tip >}}

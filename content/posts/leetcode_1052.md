@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1052.md" >}}
 ---
-
+{{< youtube pXFbNuEIn8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1053: Previous Permutation With One Swap](https://grid47.xyz/posts/leetcode_1053) |
 | --- |
 {{< notice tip >}}

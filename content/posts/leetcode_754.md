@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/754.md" >}}
 ---
-
+{{< youtube K8yXBn4cCQs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #755: Pour Water](https://grid47.xyz/posts/leetcode_755) |
 | --- |
 {{< notice tip >}}

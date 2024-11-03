@@ -88,7 +88,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1707.md" >}}
 ---
-
+{{< youtube s647rX6tn4g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1708: Largest Subarray Length K](https://grid47.xyz/posts/leetcode_1708) |
 | --- |
 {{< notice tip >}}

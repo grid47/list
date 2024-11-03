@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/546.md" >}}
 ---
-
+{{< youtube 6EfBJX9uLDI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #547: Number of Provinces](https://grid47.xyz/posts/leetcode_547) |
 | --- |
 {{< notice tip >}}

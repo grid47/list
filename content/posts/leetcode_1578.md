@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1578.md" >}}
 ---
-
+{{< youtube 9_9jwd2DHMU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](https://grid47.xyz/posts/leetcode_1579) |
 | --- |
 {{< notice tip >}}

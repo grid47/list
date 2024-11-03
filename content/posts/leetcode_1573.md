@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1573.md" >}}
 ---
-
+{{< youtube DVcHb_poT6E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1574: Shortest Subarray to be Removed to Make Array Sorted](https://grid47.xyz/posts/leetcode_1574) |
 | --- |
 {{< notice tip >}}

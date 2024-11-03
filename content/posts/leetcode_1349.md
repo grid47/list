@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1349.md" >}}
 ---
-
+{{< youtube WBlHRJV3YRs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1350: Students With Invalid Departments](https://grid47.xyz/posts/leetcode_1350) |
 | --- |
 {{< notice tip >}}

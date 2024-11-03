@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/667.md" >}}
 ---
-
+{{< youtube A8-_z6gurGc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #668: Kth Smallest Number in Multiplication Table](https://grid47.xyz/posts/leetcode_668) |
 | --- |
 {{< notice tip >}}

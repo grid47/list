@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/474.md" >}}
 ---
-
+{{< youtube miZ3qV04b1g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #475: Heaters](https://grid47.xyz/posts/leetcode_475) |
 | --- |
 {{< notice tip >}}

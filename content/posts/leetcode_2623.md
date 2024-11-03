@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube oFXyzJt9VeU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2624: Snail Traversal](https://grid47.xyz/posts/leetcode_2624) |
 | --- |
 {{< notice tip >}}

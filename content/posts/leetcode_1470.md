@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1470.md" >}}
 ---
-
+{{< youtube IvIKD_EU8BY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1471: The k Strongest Values in an Array](https://grid47.xyz/posts/leetcode_1471) |
 | --- |
 {{< notice tip >}}

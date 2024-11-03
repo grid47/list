@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1610.md" >}}
 ---
-
+{{< youtube K2ipSrea1Xs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1611: Minimum One Bit Operations to Make Integers Zero](https://grid47.xyz/posts/leetcode_1611) |
 | --- |
 {{< notice tip >}}

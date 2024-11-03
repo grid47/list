@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/630.md" >}}
 ---
-
+{{< youtube q_EX4BV4-Cs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #631: Design Excel Sum Formula](https://grid47.xyz/posts/leetcode_631) |
 | --- |
 {{< notice tip >}}

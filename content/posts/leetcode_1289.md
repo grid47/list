@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1289.md" >}}
 ---
-
+{{< youtube _b8sptrsFEM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1290: Convert Binary Number in a Linked List to Integer](https://grid47.xyz/posts/leetcode_1290) |
 | --- |
 {{< notice tip >}}

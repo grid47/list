@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1606.md" >}}
 ---
-
+{{< youtube d4WJFJ4SoLE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1607: Sellers With No Sales](https://grid47.xyz/posts/leetcode_1607) |
 | --- |
 {{< notice tip >}}

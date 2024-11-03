@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/914.md" >}}
 ---
-
+{{< youtube wN_BIEB73Jc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #915: Partition Array into Disjoint Intervals](https://grid47.xyz/posts/leetcode_915) |
 | --- |
 {{< notice tip >}}

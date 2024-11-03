@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1024.md" >}}
 ---
-
+{{< youtube 4Qho-im90ew >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1025: Divisor Game](https://grid47.xyz/posts/leetcode_1025) |
 | --- |
 {{< notice tip >}}

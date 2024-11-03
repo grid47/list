@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1928.md" >}}
 ---
-
+{{< youtube XuDvyMVZtP8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1929: Concatenation of Array](https://grid47.xyz/posts/leetcode_1929) |
 | --- |
 {{< notice tip >}}

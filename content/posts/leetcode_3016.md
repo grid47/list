@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gvaYi6X6SQw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3017: Count the Number of Houses at a Certain Distance II](https://grid47.xyz/posts/leetcode_3017) |
 | --- |
 {{< notice tip >}}

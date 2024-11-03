@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1438.md" >}}
 ---
-
+{{< youtube V-ecDfY5xEw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1439: Find the Kth Smallest Sum of a Matrix With Sorted Rows](https://grid47.xyz/posts/leetcode_1439) |
 | --- |
 {{< notice tip >}}

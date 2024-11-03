@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/874.md" >}}
 ---
-
+{{< youtube wpglWC6mnLg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #875: Koko Eating Bananas](https://grid47.xyz/posts/leetcode_875) |
 | --- |
 {{< notice tip >}}

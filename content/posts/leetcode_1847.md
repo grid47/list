@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1847.md" >}}
 ---
-
+{{< youtube DWVULNTNtRM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1848: Minimum Distance to the Target Element](https://grid47.xyz/posts/leetcode_1848) |
 | --- |
 {{< notice tip >}}

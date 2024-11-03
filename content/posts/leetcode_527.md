@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/527.md" >}}
 ---
-
+{{< youtube lI1GGOBgmfc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #528: Random Pick with Weight](https://grid47.xyz/posts/leetcode_528) |
 | --- |
 {{< notice tip >}}

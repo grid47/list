@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1248.md" >}}
 ---
-
+{{< youtube 4zNK0rhFfcA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1249: Minimum Remove to Make Valid Parentheses](https://grid47.xyz/posts/leetcode_1249) |
 | --- |
 {{< notice tip >}}

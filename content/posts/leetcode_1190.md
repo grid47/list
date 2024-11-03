@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1190.md" >}}
 ---
-
+{{< youtube n_pCJmg-RyU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1191: K-Concatenation Maximum Sum](https://grid47.xyz/posts/leetcode_1191) |
 | --- |
 {{< notice tip >}}

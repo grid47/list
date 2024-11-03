@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1727.md" >}}
 ---
-
+{{< youtube NYyIVuSCfOA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1728: Cat and Mouse II](https://grid47.xyz/posts/leetcode_1728) |
 | --- |
 {{< notice tip >}}

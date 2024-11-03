@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1168.md" >}}
 ---
-
+{{< youtube Uwy51yJ9tu4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1169: Invalid Transactions](https://grid47.xyz/posts/leetcode_1169) |
 | --- |
 {{< notice tip >}}

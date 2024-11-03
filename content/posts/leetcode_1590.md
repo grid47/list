@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1590.md" >}}
 ---
-
+{{< youtube tZXsLAyE0SE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1591: Strange Printer II](https://grid47.xyz/posts/leetcode_1591) |
 | --- |
 {{< notice tip >}}

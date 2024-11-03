@@ -93,7 +93,7 @@ private:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1489.md" >}}
 ---
-
+{{< youtube 83JnUxrLKJU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1490: Clone N-ary Tree](https://grid47.xyz/posts/leetcode_1490) |
 | --- |
 {{< notice tip >}}

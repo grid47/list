@@ -44,7 +44,7 @@ public:
 
 
 ---
-
+{{< youtube SoPmcGzz9-E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2150: Find All Lonely Numbers in the Array](https://grid47.xyz/posts/leetcode_2150) |
 | --- |
 {{< notice tip >}}

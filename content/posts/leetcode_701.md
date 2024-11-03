@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/701.md" >}}
 ---
-
+{{< youtube Cpg8f79luEA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #702: Search in a Sorted Array of Unknown Size](https://grid47.xyz/posts/leetcode_702) |
 | --- |
 {{< notice tip >}}

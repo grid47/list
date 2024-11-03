@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/962.md" >}}
 ---
-
+{{< youtube 3pTEJ1vzgSI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #963: Minimum Area Rectangle II](https://grid47.xyz/posts/leetcode_963) |
 | --- |
 {{< notice tip >}}

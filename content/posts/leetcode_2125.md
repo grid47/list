@@ -46,7 +46,7 @@ class Solution {
 
 
 ---
-
+{{< youtube KLeKv59LAFY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2126: Destroying Asteroids](https://grid47.xyz/posts/leetcode_2126) |
 | --- |
 {{< notice tip >}}

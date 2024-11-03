@@ -75,7 +75,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/947.md" >}}
 ---
-
+{{< youtube kLUgZzUKEK0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #948: Bag of Tokens](https://grid47.xyz/posts/leetcode_948) |
 | --- |
 {{< notice tip >}}

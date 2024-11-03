@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/745.md" >}}
 ---
-
+{{< youtube rEBnYy2AS2Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #746: Min Cost Climbing Stairs](https://grid47.xyz/posts/leetcode_746) |
 | --- |
 {{< notice tip >}}

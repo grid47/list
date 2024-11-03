@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1563.md" >}}
 ---
-
+{{< youtube 0Bbn3RbXjfQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1564: Put Boxes Into the Warehouse I](https://grid47.xyz/posts/leetcode_1564) |
 | --- |
 {{< notice tip >}}

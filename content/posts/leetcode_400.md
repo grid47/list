@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/400.md" >}}
 ---
-
+{{< youtube 4QAGxDIVpdM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #401: Binary Watch](https://grid47.xyz/posts/leetcode_401) |
 | --- |
 {{< notice tip >}}

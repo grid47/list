@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1665.md" >}}
 ---
-
+{{< youtube ja76NVaneC8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1666: Change the Root of a Binary Tree](https://grid47.xyz/posts/leetcode_1666) |
 | --- |
 {{< notice tip >}}

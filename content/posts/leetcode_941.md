@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/941.md" >}}
 ---
-
+{{< youtube VbZoD-DX99c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #942: DI String Match](https://grid47.xyz/posts/leetcode_942) |
 | --- |
 {{< notice tip >}}

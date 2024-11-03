@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1575.md" >}}
 ---
-
+{{< youtube Uu3gRJu46MQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1576: Replace All ?'s to Avoid Consecutive Repeating Characters](https://grid47.xyz/posts/leetcode_1576) |
 | --- |
 {{< notice tip >}}

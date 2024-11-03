@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/442.md" >}}
 ---
-
+{{< youtube Y8x0iAVEITo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #443: String Compression](https://grid47.xyz/posts/leetcode_443) |
 | --- |
 {{< notice tip >}}

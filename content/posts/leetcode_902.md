@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/902.md" >}}
 ---
-
+{{< youtube msPHbO9qx3E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #903: Valid Permutations for DI Sequence](https://grid47.xyz/posts/leetcode_903) |
 | --- |
 {{< notice tip >}}

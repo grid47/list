@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube XleOio1oJeo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2967: Minimum Cost to Make Array Equalindromic](https://grid47.xyz/posts/leetcode_2967) |
 | --- |
 {{< notice tip >}}

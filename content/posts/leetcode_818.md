@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/818.md" >}}
 ---
-
+{{< youtube LnT0iVLQaMs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #819: Most Common Word](https://grid47.xyz/posts/leetcode_819) |
 | --- |
 {{< notice tip >}}

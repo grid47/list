@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/887.md" >}}
 ---
-
+{{< youtube 2iuvW8q4ToI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #888: Fair Candy Swap](https://grid47.xyz/posts/leetcode_888) |
 | --- |
 {{< notice tip >}}

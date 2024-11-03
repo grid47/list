@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1002.md" >}}
 ---
-
+{{< youtube QEESBA2Q_88 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1003: Check If Word Is Valid After Substitutions](https://grid47.xyz/posts/leetcode_1003) |
 | --- |
 {{< notice tip >}}

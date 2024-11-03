@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube f94fUbHU-FY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2634: Filter Elements from Array](https://grid47.xyz/posts/leetcode_2634) |
 | --- |
 {{< notice tip >}}

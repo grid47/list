@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1703.md" >}}
 ---
-
+{{< youtube 3kdaFA63Zrs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1704: Determine if String Halves Are Alike](https://grid47.xyz/posts/leetcode_1704) |
 | --- |
 {{< notice tip >}}

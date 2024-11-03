@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1688.md" >}}
 ---
-
+{{< youtube lslcc0tumpU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1689: Partitioning Into Minimum Number Of Deci-Binary Numbers](https://grid47.xyz/posts/leetcode_1689) |
 | --- |
 {{< notice tip >}}

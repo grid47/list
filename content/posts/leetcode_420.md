@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/420.md" >}}
 ---
-
+{{< youtube 3j_eAw0B8ko >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #421: Maximum XOR of Two Numbers in an Array](https://grid47.xyz/posts/leetcode_421) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zs9axOyYHRE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2632: Curry](https://grid47.xyz/posts/leetcode_2632) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 7FhJHA5jlYk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2636: Promise Pool](https://grid47.xyz/posts/leetcode_2636) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1518.md" >}}
 ---
-
+{{< youtube V4d6xym5efE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1519: Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode_1519) |
 | --- |
 {{< notice tip >}}

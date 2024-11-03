@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/581.md" >}}
 ---
-
+{{< youtube NzVaNmqPaSo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #582: Kill Process](https://grid47.xyz/posts/leetcode_582) |
 | --- |
 {{< notice tip >}}

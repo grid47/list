@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1446.md" >}}
 ---
-
+{{< youtube TlAvNEo1IIc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1447: Simplified Fractions](https://grid47.xyz/posts/leetcode_1447) |
 | --- |
 {{< notice tip >}}

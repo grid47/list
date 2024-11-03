@@ -58,7 +58,7 @@ private:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/341.md" >}}
 ---
-
+{{< youtube 4ILiBgLokM8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #342: Power of Four](https://grid47.xyz/posts/leetcode_342) |
 | --- |
 {{< notice tip >}}

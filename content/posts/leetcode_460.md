@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/460.md" >}}
 ---
-
+{{< youtube bLEIHn-DgoA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #461: Hamming Distance](https://grid47.xyz/posts/leetcode_461) |
 | --- |
 {{< notice tip >}}

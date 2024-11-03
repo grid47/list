@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube du_GH-Ooa8E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2694: Event Emitter](https://grid47.xyz/posts/leetcode_2694) |
 | --- |
 {{< notice tip >}}

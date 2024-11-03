@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1705.md" >}}
 ---
-
+{{< youtube 1vRYTJqaZ8s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1706: Where Will the Ball Fall](https://grid47.xyz/posts/leetcode_1706) |
 | --- |
 {{< notice tip >}}

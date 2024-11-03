@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1723.md" >}}
 ---
-
+{{< youtube Be4s1gRx7Vc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1724: Checking Existence of Edge Length Limited Paths II](https://grid47.xyz/posts/leetcode_1724) |
 | --- |
 {{< notice tip >}}

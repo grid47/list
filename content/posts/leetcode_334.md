@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/334.md" >}}
 ---
-
+{{< youtube QBiEJul9bUk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #335: Self Crossing](https://grid47.xyz/posts/leetcode_335) |
 | --- |
 {{< notice tip >}}

@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/949.md" >}}
 ---
-
+{{< youtube sn6r0ZV_2y4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #950: Reveal Cards In Increasing Order](https://grid47.xyz/posts/leetcode_950) |
 | --- |
 {{< notice tip >}}

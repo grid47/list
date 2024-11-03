@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/248.md" >}}
 ---
-
+{{< youtube dK25e5q4p0Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #249: Group Shifted Strings](https://grid47.xyz/posts/leetcode_249) |
 | --- |
 {{< notice tip >}}

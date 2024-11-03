@@ -67,7 +67,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1462.md" >}}
 ---
-
+{{< youtube cEW05ofxhn0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1463: Cherry Pickup II](https://grid47.xyz/posts/leetcode_1463) |
 | --- |
 {{< notice tip >}}

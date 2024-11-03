@@ -60,7 +60,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/845.md" >}}
 ---
-
+{{< youtube uGnRaCqWflI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #846: Hand of Straights](https://grid47.xyz/posts/leetcode_846) |
 | --- |
 {{< notice tip >}}

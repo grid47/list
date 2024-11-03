@@ -69,7 +69,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1609.md" >}}
 ---
-
+{{< youtube FkNWN1Fj_TY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1610: Maximum Number of Visible Points](https://grid47.xyz/posts/leetcode_1610) |
 | --- |
 {{< notice tip >}}

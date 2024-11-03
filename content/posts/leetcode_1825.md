@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1825.md" >}}
 ---
-
+{{< youtube z32DPe1tuXM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1826: Faulty Sensor](https://grid47.xyz/posts/leetcode_1826) |
 | --- |
 {{< notice tip >}}

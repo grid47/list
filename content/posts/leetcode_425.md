@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/425.md" >}}
 ---
-
+{{< youtube unLYmWQ9MVI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #426: Convert Binary Search Tree to Sorted Doubly Linked List](https://grid47.xyz/posts/leetcode_426) |
 | --- |
 {{< notice tip >}}

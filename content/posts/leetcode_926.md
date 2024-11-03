@@ -38,7 +38,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/926.md" >}}
 ---
-
+{{< youtube tMq9z5k3umQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #927: Three Equal Parts](https://grid47.xyz/posts/leetcode_927) |
 | --- |
 {{< notice tip >}}

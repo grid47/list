@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube w1o81gbEEJU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2635: Apply Transform Over Each Element in Array](https://grid47.xyz/posts/leetcode_2635) |
 | --- |
 {{< notice tip >}}

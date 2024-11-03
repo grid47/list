@@ -60,7 +60,7 @@ public:
 
 
 ---
-
+{{< youtube Ikp8SgbgbEo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2354: Number of Excellent Pairs](https://grid47.xyz/posts/leetcode_2354) |
 | --- |
 {{< notice tip >}}

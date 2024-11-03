@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/948.md" >}}
 ---
-
+{{< youtube prI82maTivg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #949: Largest Time for Given Digits](https://grid47.xyz/posts/leetcode_949) |
 | --- |
 {{< notice tip >}}

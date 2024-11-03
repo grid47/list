@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1931.md" >}}
 ---
-
+{{< youtube 9ccqkYrH3JM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1932: Merge BSTs to Create Single BST](https://grid47.xyz/posts/leetcode_1932) |
 | --- |
 {{< notice tip >}}

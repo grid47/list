@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1314.md" >}}
 ---
-
+{{< youtube jor18pkf9EE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1315: Sum of Nodes with Even-Valued Grandparent](https://grid47.xyz/posts/leetcode_1315) |
 | --- |
 {{< notice tip >}}

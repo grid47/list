@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1343.md" >}}
 ---
-
+{{< youtube D8B4tKxMTnY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1344: Angle Between Hands of a Clock](https://grid47.xyz/posts/leetcode_1344) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1690.md" >}}
 ---
-
+{{< youtube cOGliK5brbQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1691: Maximum Height by Stacking Cuboids ](https://grid47.xyz/posts/leetcode_1691) |
 | --- |
 {{< notice tip >}}

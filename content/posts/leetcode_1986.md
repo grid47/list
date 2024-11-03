@@ -63,7 +63,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1986.md" >}}
 ---
-
+{{< youtube 8TU3WceDlzI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1987: Number of Unique Good Subsequences](https://grid47.xyz/posts/leetcode_1987) |
 | --- |
 {{< notice tip >}}

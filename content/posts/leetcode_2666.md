@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube m_SWhM9iX3s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2667: Create Hello World Function](https://grid47.xyz/posts/leetcode_2667) |
 | --- |
 {{< notice tip >}}

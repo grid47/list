@@ -43,7 +43,7 @@ public:
 
 
 ---
-
+{{< youtube BTzNimiQdW4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2707: Extra Characters in a String](https://grid47.xyz/posts/leetcode_2707) |
 | --- |
 {{< notice tip >}}

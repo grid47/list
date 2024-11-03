@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube CZ-z1ViskzE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2963: Count the Number of Good Partitions](https://grid47.xyz/posts/leetcode_2963) |
 | --- |
 {{< notice tip >}}

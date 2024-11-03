@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1600.md" >}}
 ---
-
+{{< youtube VId-YNg9IG0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1601: Maximum Number of Achievable Transfer Requests](https://grid47.xyz/posts/leetcode_1601) |
 | --- |
 {{< notice tip >}}

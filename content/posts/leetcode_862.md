@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/862.md" >}}
 ---
-
+{{< youtube aPVelmCFy18 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #863: All Nodes Distance K in Binary Tree](https://grid47.xyz/posts/leetcode_863) |
 | --- |
 {{< notice tip >}}

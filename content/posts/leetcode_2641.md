@@ -75,7 +75,7 @@ public:
 
 
 ---
-
+{{< youtube xvwTd19SncE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2642: Design Graph With Shortest Path Calculator](https://grid47.xyz/posts/leetcode_2642) |
 | --- |
 {{< notice tip >}}

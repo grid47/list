@@ -42,7 +42,7 @@ public:
 
 
 ---
-
+{{< youtube EUKLOAv4-IQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2865: Beautiful Towers I](https://grid47.xyz/posts/leetcode_2865) |
 | --- |
 {{< notice tip >}}

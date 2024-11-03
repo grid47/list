@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1310.md" >}}
 ---
-
+{{< youtube 1Q4lxfSlbPs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1311: Get Watched Videos by Your Friends](https://grid47.xyz/posts/leetcode_1311) |
 | --- |
 {{< notice tip >}}

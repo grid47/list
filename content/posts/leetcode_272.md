@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/272.md" >}}
 ---
-
+{{< youtube YZFfZ3nh3sY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #273: Integer to English Words](https://grid47.xyz/posts/leetcode_273) |
 | --- |
 {{< notice tip >}}

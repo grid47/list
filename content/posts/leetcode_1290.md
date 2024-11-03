@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1290.md" >}}
 ---
-
+{{< youtube CyxbuJwA-0g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1291: Sequential Digits](https://grid47.xyz/posts/leetcode_1291) |
 | --- |
 {{< notice tip >}}

@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/857.md" >}}
 ---
-
+{{< youtube f879mUH6vJk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #858: Mirror Reflection](https://grid47.xyz/posts/leetcode_858) |
 | --- |
 {{< notice tip >}}

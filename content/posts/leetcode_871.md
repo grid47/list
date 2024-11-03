@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/871.md" >}}
 ---
-
+{{< youtube _kgtrSxRNhM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #872: Leaf-Similar Trees](https://grid47.xyz/posts/leetcode_872) |
 | --- |
 {{< notice tip >}}

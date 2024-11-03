@@ -43,7 +43,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/452.md" >}}
 ---
-
+{{< youtube lPmkKnvNPrw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #453: Minimum Moves to Equal Array Elements](https://grid47.xyz/posts/leetcode_453) |
 | --- |
 {{< notice tip >}}

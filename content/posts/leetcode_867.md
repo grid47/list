@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/867.md" >}}
 ---
-
+{{< youtube DzMT3bDgVn0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #868: Binary Gap](https://grid47.xyz/posts/leetcode_868) |
 | --- |
 {{< notice tip >}}

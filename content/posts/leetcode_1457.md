@@ -53,7 +53,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1457.md" >}}
 ---
-
+{{< youtube MBsSpQnaFzg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1458: Max Dot Product of Two Subsequences](https://grid47.xyz/posts/leetcode_1458) |
 | --- |
 {{< notice tip >}}

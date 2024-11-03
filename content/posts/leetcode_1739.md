@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1739.md" >}}
 ---
-
+{{< youtube h3k-xR9qHRs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1740: Find Distance in a Binary Tree](https://grid47.xyz/posts/leetcode_1740) |
 | --- |
 {{< notice tip >}}

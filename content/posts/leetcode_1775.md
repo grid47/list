@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1775.md" >}}
 ---
-
+{{< youtube n-BwszD77og >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1776: Car Fleet II](https://grid47.xyz/posts/leetcode_1776) |
 | --- |
 {{< notice tip >}}

@@ -66,7 +66,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1913.md" >}}
 ---
-
+{{< youtube wBPoEm3r3EA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1914: Cyclically Rotating a Grid](https://grid47.xyz/posts/leetcode_1914) |
 | --- |
 {{< notice tip >}}

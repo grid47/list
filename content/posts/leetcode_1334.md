@@ -61,7 +61,7 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1334.md" >}}
 ---
-
+{{< youtube --wKPR3ByJc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1335: Minimum Difficulty of a Job Schedule](https://grid47.xyz/posts/leetcode_1335) |
 | --- |
 {{< notice tip >}}

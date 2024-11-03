@@ -67,7 +67,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1594.md" >}}
 ---
-
+{{< youtube zGDdmRr1YIQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1595: Minimum Cost to Connect Two Groups of Points](https://grid47.xyz/posts/leetcode_1595) |
 | --- |
 {{< notice tip >}}

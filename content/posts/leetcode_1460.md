@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1460.md" >}}
 ---
-
+{{< youtube XJkd8HKGcQw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1461: Check If a String Contains All Binary Codes of Size K](https://grid47.xyz/posts/leetcode_1461) |
 | --- |
 {{< notice tip >}}

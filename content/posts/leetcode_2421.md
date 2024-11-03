@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube rv2GBYQm7xM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2422: Merge Operations to Turn Array Into a Palindrome](https://grid47.xyz/posts/leetcode_2422) |
 | --- |
 {{< notice tip >}}

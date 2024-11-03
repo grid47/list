@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yEGQQAG5V68 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2621: Sleep](https://grid47.xyz/posts/leetcode_2621) |
 | --- |
 {{< notice tip >}}

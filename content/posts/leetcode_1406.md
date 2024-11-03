@@ -62,7 +62,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1406.md" >}}
 ---
-
+{{< youtube HsLG5QW9CFQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1407: Top Travellers](https://grid47.xyz/posts/leetcode_1407) |
 | --- |
 {{< notice tip >}}

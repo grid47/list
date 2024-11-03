@@ -51,7 +51,7 @@ public:
 
 
 ---
-
+{{< youtube Dle_SpjHTio >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2598: Smallest Missing Non-negative Integer After Operations](https://grid47.xyz/posts/leetcode_2598) |
 | --- |
 {{< notice tip >}}

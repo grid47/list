@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/395.md" >}}
 ---
-
+{{< youtube bHZkCAcj3dc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #396: Rotate Function](https://grid47.xyz/posts/leetcode_396) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1231.md" >}}
 ---
-
+{{< youtube 2_MfTnr1e5M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1232: Check If It Is a Straight Line](https://grid47.xyz/posts/leetcode_1232) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/799.md" >}}
 ---
-
+{{< youtube LQ8TuG_QADM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #800: Similar RGB Color](https://grid47.xyz/posts/leetcode_800) |
 | --- |
 {{< notice tip >}}

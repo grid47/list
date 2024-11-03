@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1266.md" >}}
 ---
-
+{{< youtube jqcmjnXmCaw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1267: Count Servers that Communicate](https://grid47.xyz/posts/leetcode_1267) |
 | --- |
 {{< notice tip >}}

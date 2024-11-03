@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/719.md" >}}
 ---
-
+{{< youtube bQ-QcFKwsZc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #720: Longest Word in Dictionary](https://grid47.xyz/posts/leetcode_720) |
 | --- |
 {{< notice tip >}}

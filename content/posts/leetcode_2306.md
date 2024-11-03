@@ -45,7 +45,7 @@ public:
 
 
 ---
-
+{{< youtube NrHpgTScOcY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2307: Check for Contradictions in Equations](https://grid47.xyz/posts/leetcode_2307) |
 | --- |
 {{< notice tip >}}

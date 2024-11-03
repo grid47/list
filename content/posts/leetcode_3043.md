@@ -69,7 +69,7 @@ public:
 
 
 ---
-
+{{< youtube 06dIUJwdHlQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3044: Most Frequent Prime](https://grid47.xyz/posts/leetcode_3044) |
 | --- |
 {{< notice tip >}}

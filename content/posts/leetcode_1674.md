@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1674.md" >}}
 ---
-
+{{< youtube uyV0p6zy9DU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1675: Minimize Deviation in Array](https://grid47.xyz/posts/leetcode_1675) |
 | --- |
 {{< notice tip >}}

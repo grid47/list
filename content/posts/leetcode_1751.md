@@ -77,7 +77,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1751.md" >}}
 ---
-
+{{< youtube QB0thVxL8ZI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1752: Check if Array Is Sorted and Rotated](https://grid47.xyz/posts/leetcode_1752) |
 | --- |
 {{< notice tip >}}

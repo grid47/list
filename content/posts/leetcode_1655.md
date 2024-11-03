@@ -70,7 +70,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1655.md" >}}
 ---
-
+{{< youtube XwU3Ca6kHSU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1656: Design an Ordered Stream](https://grid47.xyz/posts/leetcode_1656) |
 | --- |
 {{< notice tip >}}

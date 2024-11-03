@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/171.md" >}}
 ---
-
+{{< youtube g-l4UpF62x0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #172: Factorial Trailing Zeroes](https://grid47.xyz/posts/leetcode_172) |
 | --- |
 {{< notice tip >}}

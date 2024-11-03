@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/995.md" >}}
 ---
-
+{{< youtube Fv3M9uO5ovU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #996: Number of Squareful Arrays](https://grid47.xyz/posts/leetcode_996) |
 | --- |
 {{< notice tip >}}

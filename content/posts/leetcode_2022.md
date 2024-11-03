@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube l-VLzZ2riTc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2023: Number of Pairs of Strings With Concatenation Equal to Target](https://grid47.xyz/posts/leetcode_2023) |
 | --- |
 {{< notice tip >}}

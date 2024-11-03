@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube FMV5Pp0tdXY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2752: Customers with Maximum Number of Transactions on Consecutive Days](https://grid47.xyz/posts/leetcode_2752) |
 | --- |
 {{< notice tip >}}

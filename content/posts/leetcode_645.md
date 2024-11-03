@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/645.md" >}}
 ---
-
+{{< youtube d-ulaeRBA64 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #646: Maximum Length of Pair Chain](https://grid47.xyz/posts/leetcode_646) |
 | --- |
 {{< notice tip >}}

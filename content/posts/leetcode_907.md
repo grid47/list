@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/907.md" >}}
 ---
-
+{{< youtube aX1F2-DrBkQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #908: Smallest Range I](https://grid47.xyz/posts/leetcode_908) |
 | --- |
 {{< notice tip >}}

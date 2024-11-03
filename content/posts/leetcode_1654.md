@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1654.md" >}}
 ---
-
+{{< youtube FZaUh9vVcKc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1655: Distribute Repeating Integers](https://grid47.xyz/posts/leetcode_1655) |
 | --- |
 {{< notice tip >}}

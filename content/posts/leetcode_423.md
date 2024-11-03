@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/423.md" >}}
 ---
-
+{{< youtube cGgG0A__wNQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #424: Longest Repeating Character Replacement](https://grid47.xyz/posts/leetcode_424) |
 | --- |
 {{< notice tip >}}

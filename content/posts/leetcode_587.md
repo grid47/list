@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/587.md" >}}
 ---
-
+{{< youtube hVsOpBSqtuc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #588: Design In-Memory File System](https://grid47.xyz/posts/leetcode_588) |
 | --- |
 {{< notice tip >}}

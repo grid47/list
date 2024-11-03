@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/940.md" >}}
 ---
-
+{{< youtube BSOCMf696Ao >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #941: Valid Mountain Array](https://grid47.xyz/posts/leetcode_941) |
 | --- |
 {{< notice tip >}}

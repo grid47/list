@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/967.md" >}}
 ---
-
+{{< youtube TAfXh2l9FyA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #968: Binary Tree Cameras](https://grid47.xyz/posts/leetcode_968) |
 | --- |
 {{< notice tip >}}

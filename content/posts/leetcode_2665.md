@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube UXNXKGFZD08 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2666: Allow One Function Call](https://grid47.xyz/posts/leetcode_2666) |
 | --- |
 {{< notice tip >}}

@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1051.md" >}}
 ---
-
+{{< youtube mQAoeYaE3Xk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1052: Grumpy Bookstore Owner](https://grid47.xyz/posts/leetcode_1052) |
 | --- |
 {{< notice tip >}}

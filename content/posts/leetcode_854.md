@@ -71,7 +71,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/854.md" >}}
 ---
-
+{{< youtube GacKZ1-p3-0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #855: Exam Room](https://grid47.xyz/posts/leetcode_855) |
 | --- |
 {{< notice tip >}}

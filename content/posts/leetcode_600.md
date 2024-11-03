@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/600.md" >}}
 ---
-
+{{< youtube 013SWeW2aqM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #601: Human Traffic of Stadium](https://grid47.xyz/posts/leetcode_601) |
 | --- |
 {{< notice tip >}}

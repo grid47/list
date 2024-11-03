@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1292.md" >}}
 ---
-
+{{< youtube 2Y2a9VbqiC4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1293: Shortest Path in a Grid with Obstacles Elimination](https://grid47.xyz/posts/leetcode_1293) |
 | --- |
 {{< notice tip >}}

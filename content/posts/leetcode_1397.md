@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1397.md" >}}
 ---
-
+{{< youtube S_4il_1M52Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1398: Customers Who Bought Products A and B but Not C](https://grid47.xyz/posts/leetcode_1398) |
 | --- |
 {{< notice tip >}}

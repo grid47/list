@@ -75,7 +75,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1735.md" >}}
 ---
-
+{{< youtube fyGNoJKQBRs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1736: Latest Time by Replacing Hidden Digits](https://grid47.xyz/posts/leetcode_1736) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube hfH57rdZhOk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2638: Count the Number of K-Free Subsets](https://grid47.xyz/posts/leetcode_2638) |
 | --- |
 {{< notice tip >}}

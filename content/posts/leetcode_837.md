@@ -68,7 +68,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/837.md" >}}
 ---
-
+{{< youtube zKi4LzjK27k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #838: Push Dominoes](https://grid47.xyz/posts/leetcode_838) |
 | --- |
 {{< notice tip >}}

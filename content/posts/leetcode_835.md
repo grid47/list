@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/835.md" >}}
 ---
-
+{{< youtube zfjBapE3Y6E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #836: Rectangle Overlap](https://grid47.xyz/posts/leetcode_836) |
 | --- |
 {{< notice tip >}}

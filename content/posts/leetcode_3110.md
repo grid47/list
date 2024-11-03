@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube imbrLFL20tQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3111: Minimum Rectangles to Cover Points](https://grid47.xyz/posts/leetcode_3111) |
 | --- |
 {{< notice tip >}}

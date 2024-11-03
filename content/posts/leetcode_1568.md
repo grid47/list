@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1568.md" >}}
 ---
-
+{{< youtube aO-QbJ5eZwU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1569: Number of Ways to Reorder Array to Get Same BST](https://grid47.xyz/posts/leetcode_1569) |
 | --- |
 {{< notice tip >}}

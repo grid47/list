@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube P0D9Z6H7O00 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2622: Cache With Time Limit](https://grid47.xyz/posts/leetcode_2622) |
 | --- |
 {{< notice tip >}}

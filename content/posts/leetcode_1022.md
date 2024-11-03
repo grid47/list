@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1022.md" >}}
 ---
-
+{{< youtube Wj4mLZ7XW0A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1023: Camelcase Matching](https://grid47.xyz/posts/leetcode_1023) |
 | --- |
 {{< notice tip >}}

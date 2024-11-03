@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1136.md" >}}
 ---
-
+{{< youtube KptcDjF92pE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1137: N-th Tribonacci Number](https://grid47.xyz/posts/leetcode_1137) |
 | --- |
 {{< notice tip >}}

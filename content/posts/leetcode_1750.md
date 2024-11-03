@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1750.md" >}}
 ---
-
+{{< youtube 318hrWVr_5U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1751: Maximum Number of Events That Can Be Attended II](https://grid47.xyz/posts/leetcode_1751) |
 | --- |
 {{< notice tip >}}

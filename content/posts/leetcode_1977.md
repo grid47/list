@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1977.md" >}}
 ---
-
+{{< youtube xe6mfpv1JFA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1978: Employees Whose Manager Left the Company](https://grid47.xyz/posts/leetcode_1978) |
 | --- |
 {{< notice tip >}}

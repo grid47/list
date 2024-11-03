@@ -102,7 +102,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/705.md" >}}
 ---
-
+{{< youtube VymjPQUXjL8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #706: Design HashMap](https://grid47.xyz/posts/leetcode_706) |
 | --- |
 {{< notice tip >}}

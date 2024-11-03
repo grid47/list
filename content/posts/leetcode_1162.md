@@ -58,7 +58,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1162.md" >}}
 ---
-
+{{< youtube fjxb1hQfrZk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1163: Last Substring in Lexicographical Order](https://grid47.xyz/posts/leetcode_1163) |
 | --- |
 {{< notice tip >}}

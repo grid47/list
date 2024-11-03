@@ -55,7 +55,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1223.md" >}}
 ---
-
+{{< youtube zmZXG-Ds75c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1224: Maximum Equal Frequency](https://grid47.xyz/posts/leetcode_1224) |
 | --- |
 {{< notice tip >}}

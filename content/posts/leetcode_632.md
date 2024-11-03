@@ -60,7 +60,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/632.md" >}}
 ---
-
+{{< youtube L_0aPFMgGpU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #633: Sum of Square Numbers](https://grid47.xyz/posts/leetcode_633) |
 | --- |
 {{< notice tip >}}

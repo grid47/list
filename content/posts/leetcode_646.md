@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/646.md" >}}
 ---
-
+{{< youtube LcNNorqMVTw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #647: Palindromic Substrings](https://grid47.xyz/posts/leetcode_647) |
 | --- |
 {{< notice tip >}}

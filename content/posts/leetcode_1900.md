@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1900.md" >}}
 ---
-
+{{< youtube Fv42C4pMYQA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1901: Find a Peak Element II](https://grid47.xyz/posts/leetcode_1901) |
 | --- |
 {{< notice tip >}}

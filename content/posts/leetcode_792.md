@@ -55,7 +55,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/792.md" >}}
 ---
-
+{{< youtube 0zMujz5SYoE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #793: Preimage Size of Factorial Zeroes Function](https://grid47.xyz/posts/leetcode_793) |
 | --- |
 {{< notice tip >}}

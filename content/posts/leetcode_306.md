@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/306.md" >}}
 ---
-
+{{< youtube pKXsbH8-8-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #307: Range Sum Query - Mutable](https://grid47.xyz/posts/leetcode_307) |
 | --- |
 {{< notice tip >}}

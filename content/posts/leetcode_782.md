@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/782.md" >}}
 ---
-
+{{< youtube s67anzv0rGM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #783: Minimum Distance Between BST Nodes](https://grid47.xyz/posts/leetcode_783) |
 | --- |
 {{< notice tip >}}

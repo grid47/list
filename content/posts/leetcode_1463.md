@@ -55,7 +55,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1463.md" >}}
 ---
-
+{{< youtube c1stwk2TbNk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1464: Maximum Product of Two Elements in an Array](https://grid47.xyz/posts/leetcode_1464) |
 | --- |
 {{< notice tip >}}

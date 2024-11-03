@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1793.md" >}}
 ---
-
+{{< youtube _K7oyQlAjv4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1794: Count Pairs of Equal Substrings With Minimum Difference](https://grid47.xyz/posts/leetcode_1794) |
 | --- |
 {{< notice tip >}}

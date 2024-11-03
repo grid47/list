@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/688.md" >}}
 ---
-
+{{< youtube hNovJsUbNjo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #689: Maximum Sum of 3 Non-Overlapping Subarrays](https://grid47.xyz/posts/leetcode_689) |
 | --- |
 {{< notice tip >}}

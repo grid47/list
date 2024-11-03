@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/974.md" >}}
 ---
-
+{{< youtube bcXy-T4Sc3E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #975: Odd Even Jump](https://grid47.xyz/posts/leetcode_975) |
 | --- |
 {{< notice tip >}}

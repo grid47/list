@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1701.md" >}}
 ---
-
+{{< youtube 2fN7uIgCIBA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1702: Maximum Binary String After Change](https://grid47.xyz/posts/leetcode_1702) |
 | --- |
 {{< notice tip >}}

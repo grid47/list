@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1071.md" >}}
 ---
-
+{{< youtube i5I_wrbUdzM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1072: Flip Columns For Maximum Number of Equal Rows](https://grid47.xyz/posts/leetcode_1072) |
 | --- |
 {{< notice tip >}}

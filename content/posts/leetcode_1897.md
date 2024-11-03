@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1897.md" >}}
 ---
-
+{{< youtube a3SmUiimBi8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1898: Maximum Number of Removable Characters](https://grid47.xyz/posts/leetcode_1898) |
 | --- |
 {{< notice tip >}}

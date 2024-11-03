@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1467.md" >}}
 ---
-
+{{< youtube hBHPGupHZb8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1468: Calculate Salaries](https://grid47.xyz/posts/leetcode_1468) |
 | --- |
 {{< notice tip >}}

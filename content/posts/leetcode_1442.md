@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1442.md" >}}
 ---
-
+{{< youtube e4Yx9KjqzQ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1443: Minimum Time to Collect All Apples in a Tree](https://grid47.xyz/posts/leetcode_1443) |
 | --- |
 {{< notice tip >}}

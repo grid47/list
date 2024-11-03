@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube yo-J1jQaZYU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2650: Design Cancellable Function](https://grid47.xyz/posts/leetcode_2650) |
 | --- |
 {{< notice tip >}}

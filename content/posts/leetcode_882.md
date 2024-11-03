@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/882.md" >}}
 ---
-
+{{< youtube X_JDcUXm60A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #883: Projection Area of 3D Shapes](https://grid47.xyz/posts/leetcode_883) |
 | --- |
 {{< notice tip >}}

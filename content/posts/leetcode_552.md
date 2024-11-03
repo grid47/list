@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/552.md" >}}
 ---
-
+{{< youtube BPIJ5ROX0i4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #553: Optimal Division](https://grid47.xyz/posts/leetcode_553) |
 | --- |
 {{< notice tip >}}

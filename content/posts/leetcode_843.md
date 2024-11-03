@@ -80,7 +80,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/843.md" >}}
 ---
-
+{{< youtube KCWGtEcBN6c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #844: Backspace String Compare](https://grid47.xyz/posts/leetcode_844) |
 | --- |
 {{< notice tip >}}

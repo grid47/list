@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/727.md" >}}
 ---
-
+{{< youtube PYEb5UFwz2M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #728: Self Dividing Numbers](https://grid47.xyz/posts/leetcode_728) |
 | --- |
 {{< notice tip >}}

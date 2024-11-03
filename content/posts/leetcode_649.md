@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/649.md" >}}
 ---
-
+{{< youtube zZA5KskfMuQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #650: 2 Keys Keyboard](https://grid47.xyz/posts/leetcode_650) |
 | --- |
 {{< notice tip >}}

@@ -47,7 +47,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1823.md" >}}
 ---
-
+{{< youtube PBBQgW_75e0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1824: Minimum Sideway Jumps](https://grid47.xyz/posts/leetcode_1824) |
 | --- |
 {{< notice tip >}}

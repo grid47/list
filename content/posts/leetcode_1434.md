@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1434.md" >}}
 ---
-
+{{< youtube SlwENy96xdE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1435: Create a Session Bar Chart](https://grid47.xyz/posts/leetcode_1435) |
 | --- |
 {{< notice tip >}}

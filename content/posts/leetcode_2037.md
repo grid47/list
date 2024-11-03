@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube wS7Ag33hf8E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2038: Remove Colored Pieces if Both Neighbors are the Same Color](https://grid47.xyz/posts/leetcode_2038) |
 | --- |
 {{< notice tip >}}

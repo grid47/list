@@ -40,7 +40,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1605.md" >}}
 ---
-
+{{< youtube Ks6fGnXkHPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1606: Find Servers That Handled Most Number of Requests](https://grid47.xyz/posts/leetcode_1606) |
 | --- |
 {{< notice tip >}}

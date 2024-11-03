@@ -46,7 +46,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1760.md" >}}
 ---
-
+{{< youtube znZ4wT1L8Y0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1761: Minimum Degree of a Connected Trio in a Graph](https://grid47.xyz/posts/leetcode_1761) |
 | --- |
 {{< notice tip >}}

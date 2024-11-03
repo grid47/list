@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/741.md" >}}
 ---
-
+{{< youtube x_U3dJhPdlE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #742: Closest Leaf in a Binary Tree](https://grid47.xyz/posts/leetcode_742) |
 | --- |
 {{< notice tip >}}

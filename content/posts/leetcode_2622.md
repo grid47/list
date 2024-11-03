@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube w772gtNK0Gw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2623: Memoize](https://grid47.xyz/posts/leetcode_2623) |
 | --- |
 {{< notice tip >}}

@@ -40,7 +40,7 @@ public:
 
 
 ---
-
+{{< youtube Yk9Mor-Y488 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2972: Count the Number of Incremovable Subarrays II](https://grid47.xyz/posts/leetcode_2972) |
 | --- |
 {{< notice tip >}}

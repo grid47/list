@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/952.md" >}}
 ---
-
+{{< youtube DNfNZwilaC4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #953: Verifying an Alien Dictionary](https://grid47.xyz/posts/leetcode_953) |
 | --- |
 {{< notice tip >}}

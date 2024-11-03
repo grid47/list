@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/713.md" >}}
 ---
-
+{{< youtube Cg6_nF7YIks >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #714: Best Time to Buy and Sell Stock with Transaction Fee](https://grid47.xyz/posts/leetcode_714) |
 | --- |
 {{< notice tip >}}

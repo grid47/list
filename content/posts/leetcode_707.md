@@ -102,7 +102,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/707.md" >}}
 ---
-
+{{< youtube Wf4QhpdVFQo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #708: Insert into a Sorted Circular Linked List](https://grid47.xyz/posts/leetcode_708) |
 | --- |
 {{< notice tip >}}

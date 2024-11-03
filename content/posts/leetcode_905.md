@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/905.md" >}}
 ---
-
+{{< youtube QC4c9fyr8As >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #906: Super Palindromes](https://grid47.xyz/posts/leetcode_906) |
 | --- |
 {{< notice tip >}}

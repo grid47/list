@@ -37,7 +37,7 @@ public:
 
 
 ---
-
+{{< youtube AeHMvcKuR0Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2440: Create Components With Same Value](https://grid47.xyz/posts/leetcode_2440) |
 | --- |
 {{< notice tip >}}

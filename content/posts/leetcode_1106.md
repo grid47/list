@@ -44,7 +44,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1106.md" >}}
 ---
-
+{{< youtube q2L6yHIIbs8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1107: New Users Daily Count](https://grid47.xyz/posts/leetcode_1107) |
 | --- |
 {{< notice tip >}}

@@ -72,7 +72,7 @@ public:
 
 
 ---
-
+{{< youtube ONstwO1cD7c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2708: Maximum Strength of a Group](https://grid47.xyz/posts/leetcode_2708) |
 | --- |
 {{< notice tip >}}

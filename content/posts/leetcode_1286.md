@@ -73,7 +73,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1286.md" >}}
 ---
-
+{{< youtube LzYlG_p1-zs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1287: Element Appearing More Than 25% In Sorted Array](https://grid47.xyz/posts/leetcode_1287) |
 | --- |
 {{< notice tip >}}

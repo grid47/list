@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1216.md" >}}
 ---
-
+{{< youtube JnsLlZcZKus >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1217: Minimum Cost to Move Chips to The Same Position](https://grid47.xyz/posts/leetcode_1217) |
 | --- |
 {{< notice tip >}}

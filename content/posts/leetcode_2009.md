@@ -49,7 +49,7 @@ public:
 
 
 ---
-
+{{< youtube Dd-yJylrcOY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2010: The Number of Seniors and Juniors to Join the Company II](https://grid47.xyz/posts/leetcode_2010) |
 | --- |
 {{< notice tip >}}

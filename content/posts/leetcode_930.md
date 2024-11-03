@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/930.md" >}}
 ---
-
+{{< youtube j4JDr4-jvo4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #931: Minimum Falling Path Sum](https://grid47.xyz/posts/leetcode_931) |
 | --- |
 {{< notice tip >}}

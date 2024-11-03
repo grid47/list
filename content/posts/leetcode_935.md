@@ -63,7 +63,7 @@ long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/935.md" >}}
 ---
-
+{{< youtube vlsUUm_qqsY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #936: Stamping The Sequence](https://grid47.xyz/posts/leetcode_936) |
 | --- |
 {{< notice tip >}}

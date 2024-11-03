@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/801.md" >}}
 ---
-
+{{< youtube 0f4_RNJG2pU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #802: Find Eventual Safe States](https://grid47.xyz/posts/leetcode_802) |
 | --- |
 {{< notice tip >}}

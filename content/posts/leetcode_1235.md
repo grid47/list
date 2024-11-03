@@ -71,7 +71,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1235.md" >}}
 ---
-
+{{< youtube JLoWc3v0SiE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1236: Web Crawler](https://grid47.xyz/posts/leetcode_1236) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/315.md" >}}
 ---
-
+{{< youtube rM81JqFO8uc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #316: Remove Duplicate Letters](https://grid47.xyz/posts/leetcode_316) |
 | --- |
 {{< notice tip >}}

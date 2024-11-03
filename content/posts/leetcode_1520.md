@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1520.md" >}}
 ---
-
+{{< youtube vXXhzSm-RFQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1521: Find a Value of a Mysterious Function Closest to Target](https://grid47.xyz/posts/leetcode_1521) |
 | --- |
 {{< notice tip >}}

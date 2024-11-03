@@ -72,7 +72,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1625.md" >}}
 ---
-
+{{< youtube S_WnsW5cdgI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1626: Best Team With No Conflicts](https://grid47.xyz/posts/leetcode_1626) |
 | --- |
 {{< notice tip >}}

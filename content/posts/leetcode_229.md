@@ -65,7 +65,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/229.md" >}}
 ---
-
+{{< youtube Eua-UrQ_ANo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #230: Kth Smallest Element in a BST](https://grid47.xyz/posts/leetcode_230) |
 | --- |
 {{< notice tip >}}

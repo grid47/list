@@ -34,7 +34,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1015.md" >}}
 ---
-
+{{< youtube kaEYJUNhQ3k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1016: Binary String With Substrings Representing 1 To N](https://grid47.xyz/posts/leetcode_1016) |
 | --- |
 {{< notice tip >}}

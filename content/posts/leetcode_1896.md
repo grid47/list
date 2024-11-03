@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1896.md" >}}
 ---
-
+{{< youtube DTuw-qEbco8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1897: Redistribute Characters to Make All Strings Equal](https://grid47.xyz/posts/leetcode_1897) |
 | --- |
 {{< notice tip >}}

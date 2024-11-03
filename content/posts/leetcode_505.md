@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/505.md" >}}
 ---
-
+{{< youtube fdixclqnT3s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #506: Relative Ranks](https://grid47.xyz/posts/leetcode_506) |
 | --- |
 {{< notice tip >}}

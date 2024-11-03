@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube khTKB1PzCuw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2393: Count Strictly Increasing Subarrays](https://grid47.xyz/posts/leetcode_2393) |
 | --- |
 {{< notice tip >}}

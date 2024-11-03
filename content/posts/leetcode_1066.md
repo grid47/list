@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1066.md" >}}
 ---
-
+{{< youtube x9iOjex5CNE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1067: Digit Count in Range](https://grid47.xyz/posts/leetcode_1067) |
 | --- |
 {{< notice tip >}}

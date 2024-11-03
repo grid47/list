@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/971.md" >}}
 ---
-
+{{< youtube 6L25Q-42OXA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #972: Equal Rational Numbers](https://grid47.xyz/posts/leetcode_972) |
 | --- |
 {{< notice tip >}}

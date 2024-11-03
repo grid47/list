@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1835.md" >}}
 ---
-
+{{< youtube n1rMJWTuqBU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1836: Remove Duplicates From an Unsorted Linked List](https://grid47.xyz/posts/leetcode_1836) |
 | --- |
 {{< notice tip >}}

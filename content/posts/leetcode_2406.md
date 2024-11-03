@@ -52,7 +52,7 @@ public:
 
 
 ---
-
+{{< youtube FVjKrhdMutc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2407: Longest Increasing Subsequence II](https://grid47.xyz/posts/leetcode_2407) |
 | --- |
 {{< notice tip >}}

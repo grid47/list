@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1043.md" >}}
 ---
-
+{{< youtube kWhy4ZUBdOY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1044: Longest Duplicate Substring](https://grid47.xyz/posts/leetcode_1044) |
 | --- |
 {{< notice tip >}}

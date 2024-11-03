@@ -66,7 +66,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1994.md" >}}
 ---
-
+{{< youtube bV5LgQH9ERQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1995: Count Special Quadruplets](https://grid47.xyz/posts/leetcode_1995) |
 | --- |
 {{< notice tip >}}

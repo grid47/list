@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube F-5cmvhLw90 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2417: Closest Fair Integer](https://grid47.xyz/posts/leetcode_2417) |
 | --- |
 {{< notice tip >}}

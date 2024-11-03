@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/593.md" >}}
 ---
-
+{{< youtube 5ErP0_vpzvI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #594: Longest Harmonious Subsequence](https://grid47.xyz/posts/leetcode_594) |
 | --- |
 {{< notice tip >}}

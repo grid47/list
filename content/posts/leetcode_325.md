@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/325.md" >}}
 ---
-
+{{< youtube ReZpa5vxRKc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #326: Power of Three](https://grid47.xyz/posts/leetcode_326) |
 | --- |
 {{< notice tip >}}

@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1219.md" >}}
 ---
-
+{{< youtube I1wllM_pozY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1220: Count Vowels Permutation](https://grid47.xyz/posts/leetcode_1220) |
 | --- |
 {{< notice tip >}}

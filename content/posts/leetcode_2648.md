@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube T643rQ70Jlk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2649: Nested Array Generator](https://grid47.xyz/posts/leetcode_2649) |
 | --- |
 {{< notice tip >}}

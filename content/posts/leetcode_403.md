@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/403.md" >}}
 ---
-
+{{< youtube obi4bangVQc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #404: Sum of Left Leaves](https://grid47.xyz/posts/leetcode_404) |
 | --- |
 {{< notice tip >}}

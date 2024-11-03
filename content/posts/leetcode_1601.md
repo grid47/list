@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1601.md" >}}
 ---
-
+{{< youtube Rb9JFpunOAw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1602: Find Nearest Right Node in Binary Tree](https://grid47.xyz/posts/leetcode_1602) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube zyGZV_fIQWk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2677: Chunk Array](https://grid47.xyz/posts/leetcode_2677) |
 | --- |
 {{< notice tip >}}

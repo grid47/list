@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/539.md" >}}
 ---
-
+{{< youtube LVBDzeUmNIQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #540: Single Element in a Sorted Array](https://grid47.xyz/posts/leetcode_540) |
 | --- |
 {{< notice tip >}}

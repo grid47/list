@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1959.md" >}}
 ---
-
+{{< youtube tz2j-4bP3Kc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1960: Maximum Product of the Length of Two Palindromic Substrings](https://grid47.xyz/posts/leetcode_1960) |
 | --- |
 {{< notice tip >}}

@@ -52,7 +52,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/659.md" >}}
 ---
-
+{{< youtube hbNUEvWyiFU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #660: Remove 9](https://grid47.xyz/posts/leetcode_660) |
 | --- |
 {{< notice tip >}}

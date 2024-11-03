@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1830.md" >}}
 ---
-
+{{< youtube Lfiz6iwp4l8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1831: Maximum Transaction Each Day](https://grid47.xyz/posts/leetcode_1831) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1987.md" >}}
 ---
-
+{{< youtube XXIvNvugeXE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1988: Find Cutoff Score for Each School](https://grid47.xyz/posts/leetcode_1988) |
 | --- |
 {{< notice tip >}}

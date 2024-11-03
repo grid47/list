@@ -67,7 +67,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1671.md" >}}
 ---
-
+{{< youtube Ys-q9qPpleY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1672: Richest Customer Wealth](https://grid47.xyz/posts/leetcode_1672) |
 | --- |
 {{< notice tip >}}

@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1593.md" >}}
 ---
-
+{{< youtube fLjeVALxzjg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1594: Maximum Non Negative Product in a Matrix](https://grid47.xyz/posts/leetcode_1594) |
 | --- |
 {{< notice tip >}}

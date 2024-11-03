@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/884.md" >}}
 ---
-
+{{< youtube 24IYW1kQdYU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #885: Spiral Matrix III](https://grid47.xyz/posts/leetcode_885) |
 | --- |
 {{< notice tip >}}

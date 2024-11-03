@@ -39,7 +39,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/945.md" >}}
 ---
-
+{{< youtube XPPs2Wj2YSk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #946: Validate Stack Sequences](https://grid47.xyz/posts/leetcode_946) |
 | --- |
 {{< notice tip >}}

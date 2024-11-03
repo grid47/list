@@ -36,7 +36,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/991.md" >}}
 ---
-
+{{< youtube XIiLnBV664A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #992: Subarrays with K Different Integers](https://grid47.xyz/posts/leetcode_992) |
 | --- |
 {{< notice tip >}}

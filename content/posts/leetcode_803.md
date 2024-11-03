@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/803.md" >}}
 ---
-
+{{< youtube v3F5yeyeAI4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #804: Unique Morse Code Words](https://grid47.xyz/posts/leetcode_804) |
 | --- |
 {{< notice tip >}}

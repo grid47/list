@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1981.md" >}}
 ---
-
+{{< youtube cfQFu_VDISI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1982: Find Array Given Subset Sums](https://grid47.xyz/posts/leetcode_1982) |
 | --- |
 {{< notice tip >}}

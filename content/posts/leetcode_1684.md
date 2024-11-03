@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1684.md" >}}
 ---
-
+{{< youtube CFa2TgIHMN0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1685: Sum of Absolute Differences in a Sorted Array](https://grid47.xyz/posts/leetcode_1685) |
 | --- |
 {{< notice tip >}}

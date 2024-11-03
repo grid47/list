@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1087.md" >}}
 ---
-
+{{< youtube II3rISJtNS0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1088: Confusing Number II](https://grid47.xyz/posts/leetcode_1088) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube LJwgAMHGcI0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2676: Throttle](https://grid47.xyz/posts/leetcode_2676) |
 | --- |
 {{< notice tip >}}

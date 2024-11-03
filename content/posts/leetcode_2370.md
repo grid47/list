@@ -38,7 +38,7 @@ public:
 
 
 ---
-
+{{< youtube gR1E2oLQYSY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2371: Minimize Maximum Value in a Grid](https://grid47.xyz/posts/leetcode_2371) |
 | --- |
 {{< notice tip >}}

@@ -32,7 +32,7 @@ public:
 
 
 ---
-
+{{< youtube yz48myznqQY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2221: Find Triangular Sum of an Array](https://grid47.xyz/posts/leetcode_2221) |
 | --- |
 {{< notice tip >}}

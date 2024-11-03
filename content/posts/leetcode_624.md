@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/624.md" >}}
 ---
-
+{{< youtube J0yYlj_oVTI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #625: Minimum Factorization](https://grid47.xyz/posts/leetcode_625) |
 | --- |
 {{< notice tip >}}

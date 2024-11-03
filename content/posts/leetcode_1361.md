@@ -99,7 +99,7 @@ if(!uf.uni(i, rc[i]))
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1361.md" >}}
 ---
-
+{{< youtube Mw67DTgUEqk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1362: Closest Divisors](https://grid47.xyz/posts/leetcode_1362) |
 | --- |
 {{< notice tip >}}

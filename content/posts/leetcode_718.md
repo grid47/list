@@ -48,7 +48,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/718.md" >}}
 ---
-
+{{< youtube MynhR1bMtWY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #719: Find K-th Smallest Pair Distance](https://grid47.xyz/posts/leetcode_719) |
 | --- |
 {{< notice tip >}}

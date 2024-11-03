@@ -45,7 +45,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1447.md" >}}
 ---
-
+{{< youtube xAPYdvSkcF8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1448: Count Good Nodes in Binary Tree](https://grid47.xyz/posts/leetcode_1448) |
 | --- |
 {{< notice tip >}}

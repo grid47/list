@@ -67,7 +67,7 @@ public:
 
 
 ---
-
+{{< youtube zY3Uty9IwvY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2252: Dynamic Pivoting of a Table](https://grid47.xyz/posts/leetcode_2252) |
 | --- |
 {{< notice tip >}}

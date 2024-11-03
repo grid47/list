@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/404.md" >}}
 ---
-
+{{< youtube gPj3Fhekys8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #405: Convert a Number to Hexadecimal](https://grid47.xyz/posts/leetcode_405) |
 | --- |
 {{< notice tip >}}

@@ -55,7 +55,7 @@ public:
 
 
 ---
-
+{{< youtube YOTjCd4Eyhc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2148: Count Elements With Strictly Smaller and Greater Elements ](https://grid47.xyz/posts/leetcode_2148) |
 | --- |
 {{< notice tip >}}

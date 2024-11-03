@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1392.md" >}}
 ---
-
+{{< youtube HHrROUH48_s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1393: Capital Gain/Loss](https://grid47.xyz/posts/leetcode_1393) |
 | --- |
 {{< notice tip >}}

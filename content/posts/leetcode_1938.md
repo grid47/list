@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1938.md" >}}
 ---
-
+{{< youtube OqcUWxkd5Rs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1939: Users That Actively Request Confirmation Messages](https://grid47.xyz/posts/leetcode_1939) |
 | --- |
 {{< notice tip >}}

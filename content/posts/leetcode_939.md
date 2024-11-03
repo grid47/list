@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/939.md" >}}
 ---
-
+{{< youtube pFgBZFKJ2Co >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #940: Distinct Subsequences II](https://grid47.xyz/posts/leetcode_940) |
 | --- |
 {{< notice tip >}}

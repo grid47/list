@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1521.md" >}}
 ---
-
+{{< youtube pFpLIo-wpno >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1522: Diameter of N-Ary Tree](https://grid47.xyz/posts/leetcode_1522) |
 | --- |
 {{< notice tip >}}

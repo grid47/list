@@ -57,7 +57,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1547.md" >}}
 ---
-
+{{< youtube EVxTO5I0d7w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1548: The Most Similar Path in a Graph](https://grid47.xyz/posts/leetcode_1548) |
 | --- |
 {{< notice tip >}}

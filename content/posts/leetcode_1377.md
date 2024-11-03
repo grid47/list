@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1377.md" >}}
 ---
-
+{{< youtube DLFeS_vv4Y4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1378: Replace Employee ID With The Unique Identifier](https://grid47.xyz/posts/leetcode_1378) |
 | --- |
 {{< notice tip >}}

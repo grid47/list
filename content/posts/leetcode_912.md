@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/912.md" >}}
 ---
-
+{{< youtube MsYZSinhuFo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #913: Cat and Mouse](https://grid47.xyz/posts/leetcode_913) |
 | --- |
 {{< notice tip >}}

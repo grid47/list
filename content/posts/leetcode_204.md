@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/204.md" >}}
 ---
-
+{{< youtube mv9mycLruJ0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #205: Isomorphic Strings](https://grid47.xyz/posts/leetcode_205) |
 | --- |
 {{< notice tip >}}

@@ -50,7 +50,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/992.md" >}}
 ---
-
+{{< youtube etI6HqWVa8U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #993: Cousins in Binary Tree](https://grid47.xyz/posts/leetcode_993) |
 | --- |
 {{< notice tip >}}

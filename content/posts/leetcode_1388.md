@@ -56,7 +56,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1388.md" >}}
 ---
-
+{{< youtube Dxup4m4Krck >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1389: Create Target Array in the Given Order](https://grid47.xyz/posts/leetcode_1389) |
 | --- |
 {{< notice tip >}}

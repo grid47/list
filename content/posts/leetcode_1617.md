@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1617.md" >}}
 ---
-
+{{< youtube UGA3HRbLYts >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1618: Maximum Font to Fit a Sentence in a Screen](https://grid47.xyz/posts/leetcode_1618) |
 | --- |
 {{< notice tip >}}

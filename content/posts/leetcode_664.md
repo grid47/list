@@ -59,7 +59,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/664.md" >}}
 ---
-
+{{< youtube fIOZkIH5PZU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #665: Non-decreasing Array](https://grid47.xyz/posts/leetcode_665) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube 1sxSpnxNx5w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2628: JSON Deep Equal](https://grid47.xyz/posts/leetcode_2628) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/568.md" >}}
 ---
-
+{{< youtube uXDE665JjZ4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #569: Median Employee Salary](https://grid47.xyz/posts/leetcode_569) |
 | --- |
 {{< notice tip >}}

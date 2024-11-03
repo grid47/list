@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/923.md" >}}
 ---
-
+{{< youtube HQvhAyFqVHY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #924: Minimize Malware Spread](https://grid47.xyz/posts/leetcode_924) |
 | --- |
 {{< notice tip >}}

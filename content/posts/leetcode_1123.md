@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1123.md" >}}
 ---
-
+{{< youtube yVw0Q8QknJg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1124: Longest Well-Performing Interval](https://grid47.xyz/posts/leetcode_1124) |
 | --- |
 {{< notice tip >}}

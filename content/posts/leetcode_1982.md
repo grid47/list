@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1982.md" >}}
 ---
-
+{{< youtube 9yFXUu_dpf0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1983: Widest Pair of Indices With Equal Range Sum](https://grid47.xyz/posts/leetcode_1983) |
 | --- |
 {{< notice tip >}}

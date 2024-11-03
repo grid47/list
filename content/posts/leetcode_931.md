@@ -49,7 +49,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/931.md" >}}
 ---
-
+{{< youtube b_F3mz9l-uQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #932: Beautiful Array](https://grid47.xyz/posts/leetcode_932) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/214.md" >}}
 ---
-
+{{< youtube niOT-FK1RH8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #215: Kth Largest Element in an Array](https://grid47.xyz/posts/leetcode_215) |
 | --- |
 {{< notice tip >}}

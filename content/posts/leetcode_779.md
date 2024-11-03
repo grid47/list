@@ -34,7 +34,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/779.md" >}}
 ---
-
+{{< youtube pmD2HCKaqRQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #780: Reaching Points](https://grid47.xyz/posts/leetcode_780) |
 | --- |
 {{< notice tip >}}

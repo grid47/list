@@ -42,7 +42,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1422.md" >}}
 ---
-
+{{< youtube mc_eSStDrWw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1423: Maximum Points You Can Obtain from Cards](https://grid47.xyz/posts/leetcode_1423) |
 | --- |
 {{< notice tip >}}

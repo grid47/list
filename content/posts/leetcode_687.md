@@ -62,7 +62,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/687.md" >}}
 ---
-
+{{< youtube ZeBr9JMcjrU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #688: Knight Probability in Chessboard](https://grid47.xyz/posts/leetcode_688) |
 | --- |
 {{< notice tip >}}

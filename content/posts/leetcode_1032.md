@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1032.md" >}}
 ---
-
+{{< youtube Y37WA4advWw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1033: Moving Stones Until Consecutive](https://grid47.xyz/posts/leetcode_1033) |
 | --- |
 {{< notice tip >}}

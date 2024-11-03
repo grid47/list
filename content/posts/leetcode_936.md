@@ -54,7 +54,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/936.md" >}}
 ---
-
+{{< youtube 2QN_0tfvB_E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #937: Reorder Data in Log Files](https://grid47.xyz/posts/leetcode_937) |
 | --- |
 {{< notice tip >}}

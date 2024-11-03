@@ -51,7 +51,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1404.md" >}}
 ---
-
+{{< youtube qxt7_HD8Cag >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1405: Longest Happy String](https://grid47.xyz/posts/leetcode_1405) |
 | --- |
 {{< notice tip >}}

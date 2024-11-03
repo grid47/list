@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/774.md" >}}
 ---
-
+{{< youtube gcDUAw3vQlg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #775: Global and Local Inversions](https://grid47.xyz/posts/leetcode_775) |
 | --- |
 {{< notice tip >}}

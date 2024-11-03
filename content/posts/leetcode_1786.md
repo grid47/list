@@ -84,7 +84,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1786.md" >}}
 ---
-
+{{< youtube YmufKoAmthE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1787: Make the XOR of All Segments Equal to Zero](https://grid47.xyz/posts/leetcode_1787) |
 | --- |
 {{< notice tip >}}

@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 
 ---
-
+{{< youtube gH7oZs1WZfg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2701: Consecutive Transactions with Increasing Amounts](https://grid47.xyz/posts/leetcode_2701) |
 | --- |
 {{< notice tip >}}

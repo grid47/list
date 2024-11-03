@@ -62,7 +62,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1140.md" >}}
 ---
-
+{{< youtube I-z-u0zfQtg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1141: User Activity for the Past 30 Days I](https://grid47.xyz/posts/leetcode_1141) |
 | --- |
 {{< notice tip >}}

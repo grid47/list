@@ -39,7 +39,7 @@ public:
 
 
 ---
-
+{{< youtube -VVN0FI0KFo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2939: Maximum Xor Product](https://grid47.xyz/posts/leetcode_2939) |
 | --- |
 {{< notice tip >}}

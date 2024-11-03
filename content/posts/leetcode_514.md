@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/514.md" >}}
 ---
-
+{{< youtube NOgnlTXidSs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #515: Find Largest Value in Each Tree Row](https://grid47.xyz/posts/leetcode_515) |
 | --- |
 {{< notice tip >}}

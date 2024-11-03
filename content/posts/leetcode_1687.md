@@ -27,7 +27,7 @@ series = ["Leetcode"]
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1687.md" >}}
 ---
-
+{{< youtube OkOK8dyOmd8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1688: Count of Matches in Tournament](https://grid47.xyz/posts/leetcode_1688) |
 | --- |
 {{< notice tip >}}

@@ -37,7 +37,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1611.md" >}}
 ---
-
+{{< youtube yRI18_MaG7k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1612: Check If Two Expression Trees are Equivalent](https://grid47.xyz/posts/leetcode_1612) |
 | --- |
 {{< notice tip >}}

@@ -41,7 +41,7 @@ public:
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/583.md" >}}
 ---
-
+{{< youtube tpALbrFWg5U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #584: Find Customer Referee](https://grid47.xyz/posts/leetcode_584) |
 | --- |
 {{< notice tip >}}

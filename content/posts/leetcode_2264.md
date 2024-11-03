@@ -36,7 +36,7 @@ public:
 
 
 ---
-
+{{< youtube vcrOpJQHsSE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2265: Count Nodes Equal to Average of Subtree](https://grid47.xyz/posts/leetcode_2265) |
 | --- |
 {{< notice tip >}}
