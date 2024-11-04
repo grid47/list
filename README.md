@@ -1,5 +1,5 @@
 | Q.No. | Category | Question | Code | Video |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | 
 | 1 | Easy | [Two Sum](https://www.grid47.xyz/posts/leetcode_1) | Available | Available |
 | 2 | Medium | [Add Two Numbers](https://www.grid47.xyz/posts/leetcode_2) | Available | Available |
 | 3 | Medium | [Longest Substring Without Repeating Characters](https://www.grid47.xyz/posts/leetcode_3) | Available | Available |
