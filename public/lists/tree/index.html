@@ -275,7 +275,26 @@
 
 
 
-
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const container = button.closest('.copy-container');
+        const textToCopy = button.getAttribute('data-clipboard-text');
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          container.classList.add('copied');
+          setTimeout(() => {
+            container.classList.remove('copied');
+          }, 300);
+        } catch (err) {
+          console.error('Failed to copy text:', err);
+        }
+      });
+    });
+  });
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6219690368643953"
      crossorigin="anonymous"></script></head>
 
