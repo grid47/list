@@ -16,7 +16,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}
