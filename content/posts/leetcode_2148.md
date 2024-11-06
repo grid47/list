@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2148.md" >}}
 ---
 {{< youtube V3SamYLfPtg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2149: Rearrange Array Elements by Sign](https://grid47.xyz/posts/leetcode_2149) |

@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2270.md" >}}
 ---
 {{< youtube XdsMrB7WRUw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2271: Maximum White Tiles Covered by a Carpet](https://grid47.xyz/posts/leetcode_2271) |

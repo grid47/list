@@ -64,7 +64,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2059.md" >}}
 ---
 {{< youtube jrWEsrkfBjg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2060: Check if an Original String Exists Given Two Encoded Strings](https://grid47.xyz/posts/leetcode_2060) |

@@ -70,7 +70,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2312.md" >}}
 ---
 {{< youtube Zho0AXQr58s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2313: Minimum Flips in Binary Tree to Get Result](https://grid47.xyz/posts/leetcode_2313) |

@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2255.md" >}}
 ---
 {{< youtube ctp3MD4jiGg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2256: Minimum Average Difference](https://grid47.xyz/posts/leetcode_2256) |

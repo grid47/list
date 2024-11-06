@@ -29,7 +29,7 @@ bool checkString(string s) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2124.md" >}}
 ---
 {{< youtube RgzM3HRkdp8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode_2125) |

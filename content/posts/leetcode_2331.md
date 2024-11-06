@@ -47,7 +47,7 @@ return evaluateTree(root->left) && evaluateTree(root->right);
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2331.md" >}}
 ---
 {{< youtube 9a_cP54jn8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2332: The Latest Time to Catch a Bus](https://grid47.xyz/posts/leetcode_2332) |

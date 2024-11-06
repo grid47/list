@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2289.md" >}}
 ---
 {{< youtube Nb92qaeLcjU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2290: Minimum Obstacle Removal to Reach Corner](https://grid47.xyz/posts/leetcode_2290) |

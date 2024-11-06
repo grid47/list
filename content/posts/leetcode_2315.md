@@ -33,7 +33,7 @@ int countAsterisks(string s) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2315.md" >}}
 ---
 {{< youtube tpgDi9Saq_s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2316: Count Unreachable Pairs of Nodes in an Undirected Graph](https://grid47.xyz/posts/leetcode_2316) |

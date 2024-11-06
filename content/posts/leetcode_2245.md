@@ -63,7 +63,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2245.md" >}}
 ---
 {{< youtube QMRHGd9ftz8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2246: Longest Path With Different Adjacent Characters](https://grid47.xyz/posts/leetcode_2246) |

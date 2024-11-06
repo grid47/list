@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2104.md" >}}
 ---
 {{< youtube sMFAjHe3kkw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2105: Watering Plants II](https://grid47.xyz/posts/leetcode_2105) |

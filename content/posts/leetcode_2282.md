@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2282.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2283: Check if Number Has Equal Digit Count and Digit Value](https://grid47.xyz/posts/leetcode_2283) |

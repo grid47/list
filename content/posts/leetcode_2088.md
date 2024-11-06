@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2088.md" >}}
 ---
 {{< youtube J6AVFM4_tdI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2089: Find Target Indices After Sorting Array](https://grid47.xyz/posts/leetcode_2089) |

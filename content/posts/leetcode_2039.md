@@ -81,7 +81,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2039.md" >}}
 ---
 {{< youtube 9URBYJ62lyY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2040: Kth Smallest Product of Two Sorted Arrays](https://grid47.xyz/posts/leetcode_2040) |

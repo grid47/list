@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2300.md" >}}
 ---
 {{< youtube vO6FxLZpKg4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2301: Match Substring After Replacement](https://grid47.xyz/posts/leetcode_2301) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2132.md" >}}
 ---
 {{< youtube zpR-hly5udk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2133: Check if Every Row and Column Contains All Numbers](https://grid47.xyz/posts/leetcode_2133) |

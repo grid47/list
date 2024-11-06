@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2036.md" >}}
 ---
 {{< youtube WHW-kt16710 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2037: Minimum Number of Moves to Seat Everyone](https://grid47.xyz/posts/leetcode_2037) |

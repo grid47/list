@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2306.md" >}}
 ---
 {{< youtube NrHpgTScOcY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2307: Check for Contradictions in Equations](https://grid47.xyz/posts/leetcode_2307) |

@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2012.md" >}}
 ---
 {{< youtube pOb_fN_-rzo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2013: Detect Squares](https://grid47.xyz/posts/leetcode_2013) |

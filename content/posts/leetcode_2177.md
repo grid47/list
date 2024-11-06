@@ -31,7 +31,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2177.md" >}}
 ---
 {{< youtube DMBWjfh33wY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2178: Maximum Split of Positive Even Integers](https://grid47.xyz/posts/leetcode_2178) |

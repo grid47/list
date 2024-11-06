@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2106.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2107: Number of Unique Flavors After Sharing K Candies](https://grid47.xyz/posts/leetcode_2107) |

@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2317.md" >}}
 ---
 {{< youtube aNgStAspl4M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2318: Number of Distinct Roll Sequences](https://grid47.xyz/posts/leetcode_2318) |

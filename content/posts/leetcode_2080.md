@@ -43,7 +43,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2080.md" >}}
 ---
 {{< youtube 1gZinwGx3lk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2081: Sum of k-Mirror Numbers](https://grid47.xyz/posts/leetcode_2081) |

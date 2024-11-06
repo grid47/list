@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2186.md" >}}
 ---
 {{< youtube U7tKTEdd0Lw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2187: Minimum Time to Complete Trips](https://grid47.xyz/posts/leetcode_2187) |

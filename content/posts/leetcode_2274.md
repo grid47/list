@@ -44,7 +44,7 @@ public:
 // 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2274.md" >}}
 ---
 {{< youtube ZQ6iiXxEhRY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2275: Largest Combination With Bitwise AND Greater Than Zero](https://grid47.xyz/posts/leetcode_2275) |

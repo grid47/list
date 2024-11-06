@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2004.md" >}}
 ---
 {{< youtube mLVULApGD0s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2005: Subtree Removal Game with Fibonacci Tree](https://grid47.xyz/posts/leetcode_2005) |

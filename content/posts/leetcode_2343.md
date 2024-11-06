@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2343.md" >}}
 ---
 {{< youtube E93-thIrUgA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2344: Minimum Deletions to Make Array Divisible](https://grid47.xyz/posts/leetcode_2344) |

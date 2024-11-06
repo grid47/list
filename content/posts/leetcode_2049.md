@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2049.md" >}}
 ---
 {{< youtube 4sOMPJvDX_o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2050: Parallel Courses III](https://grid47.xyz/posts/leetcode_2050) |

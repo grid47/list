@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2097.md" >}}
 ---
 {{< youtube pfbepuucpX4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2098: Subsequence of Size K With the Largest Even Sum](https://grid47.xyz/posts/leetcode_2098) |

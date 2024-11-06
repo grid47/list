@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2195.md" >}}
 ---
 {{< youtube FlIMQr3Mp9c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2196: Create Binary Tree From Descriptions](https://grid47.xyz/posts/leetcode_2196) |

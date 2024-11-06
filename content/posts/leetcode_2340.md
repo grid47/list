@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2340.md" >}}
 ---
 {{< youtube UlvnPb0fRlE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2341: Maximum Number of Pairs in Array](https://grid47.xyz/posts/leetcode_2341) |

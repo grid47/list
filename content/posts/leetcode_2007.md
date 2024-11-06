@@ -71,7 +71,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2007.md" >}}
 ---
 {{< youtube z40B-Mr9_qk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2008: Maximum Earnings From Taxi](https://grid47.xyz/posts/leetcode_2008) |

@@ -50,7 +50,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2011.md" >}}
 ---
 {{< youtube xPKIXpfxvZ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2012: Sum of Beauty in the Array](https://grid47.xyz/posts/leetcode_2012) |

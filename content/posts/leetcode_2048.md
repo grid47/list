@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2048.md" >}}
 ---
 {{< youtube VLLBGEWCHqs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2049: Count Nodes With the Highest Score](https://grid47.xyz/posts/leetcode_2049) |

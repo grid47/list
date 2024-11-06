@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2057.md" >}}
 ---
 {{< youtube uSh8DNMRBpc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2058: Find the Minimum and Maximum Number of Nodes Between Critical Points](https://grid47.xyz/posts/leetcode_2058) |

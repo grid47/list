@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2284.md" >}}
 ---
 {{< youtube j5BlwSyz3F8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2285: Maximum Total Importance of Roads](https://grid47.xyz/posts/leetcode_2285) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2344.md" >}}
 ---
 {{< youtube PWsoQ3z3z5Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2345: Finding the Number of Visible Mountains](https://grid47.xyz/posts/leetcode_2345) |

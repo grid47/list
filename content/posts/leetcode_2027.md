@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2027.md" >}}
 ---
 {{< youtube hCuwkDkAXYM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2028: Find Missing Observations](https://grid47.xyz/posts/leetcode_2028) |

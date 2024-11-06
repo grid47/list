@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2280.md" >}}
 ---
 {{< youtube EkoNpVUBSVo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2281: Sum of Total Strength of Wizards](https://grid47.xyz/posts/leetcode_2281) |

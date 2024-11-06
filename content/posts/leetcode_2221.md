@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2221.md" >}}
 ---
 {{< youtube K-IoQp07D8c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2222: Number of Ways to Select Buildings](https://grid47.xyz/posts/leetcode_2222) |

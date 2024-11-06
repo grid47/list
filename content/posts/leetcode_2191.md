@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2191.md" >}}
 ---
 {{< youtube rmkF2mxPoZM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2192: All Ancestors of a Node in a Directed Acyclic Graph](https://grid47.xyz/posts/leetcode_2192) |

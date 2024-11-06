@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2070.md" >}}
 ---
 {{< youtube r1WymhQxLZA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2071: Maximum Number of Tasks You Can Assign](https://grid47.xyz/posts/leetcode_2071) |

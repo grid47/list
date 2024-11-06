@@ -68,7 +68,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2130.md" >}}
 ---
 {{< youtube FnKG0uH2PVc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2131: Longest Palindrome by Concatenating Two Letter Words](https://grid47.xyz/posts/leetcode_2131) |

@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2215.md" >}}
 ---
 {{< youtube oypp_RzI69w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2216: Minimum Deletions to Make Array Beautiful](https://grid47.xyz/posts/leetcode_2216) |

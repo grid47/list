@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2220.md" >}}
 ---
 {{< youtube yz48myznqQY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2221: Find Triangular Sum of an Array](https://grid47.xyz/posts/leetcode_2221) |

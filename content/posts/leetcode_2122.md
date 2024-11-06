@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2122.md" >}}
 ---
 {{< youtube gYoH1INtgM8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2123: Minimum Operations to Remove Adjacent Ones in Matrix](https://grid47.xyz/posts/leetcode_2123) |

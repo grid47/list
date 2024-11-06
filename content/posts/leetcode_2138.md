@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2138.md" >}}
 ---
 {{< youtube J_aEpIkTv4k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2139: Minimum Moves to Reach Target Score](https://grid47.xyz/posts/leetcode_2139) |

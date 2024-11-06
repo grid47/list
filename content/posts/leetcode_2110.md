@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2110.md" >}}
 ---
 {{< youtube p_hKOwJ7azU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2111: Minimum Operations to Make the Array K-Increasing](https://grid47.xyz/posts/leetcode_2111) |

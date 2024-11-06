@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2161.md" >}}
 ---
 {{< youtube Ie7eN2NAa6w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2162: Minimum Cost to Set Cooking Time](https://grid47.xyz/posts/leetcode_2162) |

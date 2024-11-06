@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2266.md" >}}
 ---
 {{< youtube LdM0WLfhF_4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2267:  Check if There Is a Valid Parentheses String Path](https://grid47.xyz/posts/leetcode_2267) |

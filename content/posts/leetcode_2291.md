@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2291.md" >}}
 ---
 {{< youtube AY5xr8o0hj8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2292: Products With Three or More Orders in Two Consecutive Years](https://grid47.xyz/posts/leetcode_2292) |

@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2079.md" >}}
 ---
 {{< youtube 6GNga8RRNSQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2080: Range Frequency Queries](https://grid47.xyz/posts/leetcode_2080) |

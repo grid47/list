@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2287.md" >}}
 ---
 {{< youtube Mgtl8CIIWX4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2288: Apply Discount to Prices](https://grid47.xyz/posts/leetcode_2288) |

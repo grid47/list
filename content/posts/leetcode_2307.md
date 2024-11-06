@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2307.md" >}}
 ---
 {{< youtube gVuJKXDIihA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2308: Arrange Table by Gender](https://grid47.xyz/posts/leetcode_2308) |

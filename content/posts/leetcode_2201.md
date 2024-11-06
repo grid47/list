@@ -51,7 +51,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2201.md" >}}
 ---
 {{< youtube neXgYvigRcI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2202: Maximize the Topmost Element After K Moves](https://grid47.xyz/posts/leetcode_2202) |

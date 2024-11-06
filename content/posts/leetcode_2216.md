@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2216.md" >}}
 ---
 {{< youtube VgyrTbLZie8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2217: Find Palindrome With Fixed Length](https://grid47.xyz/posts/leetcode_2217) |

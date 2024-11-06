@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2089.md" >}}
 ---
 {{< youtube _tYhstE0u_A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2090: K Radius Subarray Averages](https://grid47.xyz/posts/leetcode_2090) |

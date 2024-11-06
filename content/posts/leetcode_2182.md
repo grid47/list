@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2182.md" >}}
 ---
 {{< youtube PZT5c2SFAYs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2183: Count Array Pairs Divisible by K](https://grid47.xyz/posts/leetcode_2183) |

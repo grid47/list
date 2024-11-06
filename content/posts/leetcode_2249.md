@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2249.md" >}}
 ---
 {{< youtube HCLinlC-JWY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2250: Count Number of Rectangles Containing Each Point](https://grid47.xyz/posts/leetcode_2250) |

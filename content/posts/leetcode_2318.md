@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2318.md" >}}
 ---
 {{< youtube dBs8vnvxZes >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2319: Check if Matrix Is X-Matrix](https://grid47.xyz/posts/leetcode_2319) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2172.md" >}}
 ---
 {{< youtube sstaFJUuAqs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2173: Longest Winning Streak](https://grid47.xyz/posts/leetcode_2173) |

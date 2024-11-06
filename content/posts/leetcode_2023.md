@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2023.md" >}}
 ---
 {{< youtube dEwKOofWa3U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2024: Maximize the Confusion of an Exam](https://grid47.xyz/posts/leetcode_2024) |

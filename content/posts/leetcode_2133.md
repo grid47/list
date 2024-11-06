@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2133.md" >}}
 ---
 {{< youtube 6l0_5Weq-3k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2134: Minimum Swaps to Group All 1's Together II](https://grid47.xyz/posts/leetcode_2134) |

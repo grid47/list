@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2235.md" >}}
 ---
 {{< youtube Qubhoqoks6I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2236: Root Equals Sum of Children](https://grid47.xyz/posts/leetcode_2236) |

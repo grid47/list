@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2044.md" >}}
 ---
 {{< youtube _wBj3IMV7tY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2045: Second Minimum Time to Reach Destination](https://grid47.xyz/posts/leetcode_2045) |

@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2116.md" >}}
 ---
 {{< youtube kyyf-hiGeVc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2117: Abbreviating the Product of a Range](https://grid47.xyz/posts/leetcode_2117) |

@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2038.md" >}}
 ---
 {{< youtube 03zIcb12PKo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2039: The Time When the Network Becomes Idle](https://grid47.xyz/posts/leetcode_2039) |

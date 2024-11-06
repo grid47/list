@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2155.md" >}}
 ---
 {{< youtube jAn_1AC2VMo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2156: Find Substring With Given Hash Value](https://grid47.xyz/posts/leetcode_2156) |

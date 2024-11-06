@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2211.md" >}}
 ---
 {{< youtube Cy_E7rABX_U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2212: Maximum Points in an Archery Competition](https://grid47.xyz/posts/leetcode_2212) |

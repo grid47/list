@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2193.md" >}}
 ---
 {{< youtube hLRr0h5nBYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2194: Cells in a Range on an Excel Sheet](https://grid47.xyz/posts/leetcode_2194) |

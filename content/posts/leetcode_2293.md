@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2293.md" >}}
 ---
 {{< youtube ZDZ4KQsbnbc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2294: Partition Array Such That Maximum Difference Is K](https://grid47.xyz/posts/leetcode_2294) |

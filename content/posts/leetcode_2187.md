@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2187.md" >}}
 ---
 {{< youtube M5moLQ_6Xs4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2188: Minimum Time to Finish the Race](https://grid47.xyz/posts/leetcode_2188) |

@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2091.md" >}}
 ---
 {{< youtube OsaRrf_jDn4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2092: Find All People With Secret](https://grid47.xyz/posts/leetcode_2092) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2123.md" >}}
 ---
 {{< youtube twFHO-sOhQ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2124: Check if All A's Appears Before All B's](https://grid47.xyz/posts/leetcode_2124) |

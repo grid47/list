@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2217.md" >}}
 ---
 {{< youtube yHa83HDgTdk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2218: Maximum Value of K Coins From Piles](https://grid47.xyz/posts/leetcode_2218) |

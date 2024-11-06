@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2327.md" >}}
 ---
 {{< youtube rOnTeyl_njo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2328: Number of Increasing Paths in a Grid](https://grid47.xyz/posts/leetcode_2328) |

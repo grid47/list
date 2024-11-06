@@ -64,7 +64,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2043.md" >}}
 ---
 {{< youtube ouflA0KmCnI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2044: Count Number of Maximum Bitwise-OR Subsets](https://grid47.xyz/posts/leetcode_2044) |

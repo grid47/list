@@ -26,7 +26,7 @@ SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
 GROUP BY teacher_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2356.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2357: Make Array Zero by Subtracting Equal Amounts](https://grid47.xyz/posts/leetcode_2357) |

@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2299.md" >}}
 ---
 {{< youtube 0Rn1Lf0mXOI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2300: Successful Pairs of Spells and Potions](https://grid47.xyz/posts/leetcode_2300) |

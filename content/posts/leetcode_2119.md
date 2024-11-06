@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2119.md" >}}
 ---
 {{< youtube bt2SQhi2qds >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2120: Execution of All Suffix Instructions Staying in a Grid](https://grid47.xyz/posts/leetcode_2120) |

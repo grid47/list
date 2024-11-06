@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2169.md" >}}
 ---
 {{< youtube yPqe3KshvVo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2170: Minimum Operations to Make the Array Alternating](https://grid47.xyz/posts/leetcode_2170) |

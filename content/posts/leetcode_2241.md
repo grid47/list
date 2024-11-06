@@ -92,7 +92,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2241.md" >}}
 ---
 {{< youtube edP4gaMO80E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2242: Maximum Score of a Node Sequence](https://grid47.xyz/posts/leetcode_2242) |

@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2325.md" >}}
 ---
 {{< youtube 4XXD2in1hwk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2326: Spiral Matrix IV](https://grid47.xyz/posts/leetcode_2326) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2062.md" >}}
 ---
 {{< youtube wO5xYGzrC-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2063: Vowels of All Substrings](https://grid47.xyz/posts/leetcode_2063) |

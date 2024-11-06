@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2229.md" >}}
 ---
 {{< youtube 6fS4XcUMbJ0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2230: The Users That Are Eligible for Discount](https://grid47.xyz/posts/leetcode_2230) |

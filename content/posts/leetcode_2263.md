@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2263.md" >}}
 ---
 {{< youtube Df9N1o21YDc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2264: Largest 3-Same-Digit Number in String](https://grid47.xyz/posts/leetcode_2264) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2198.md" >}}
 ---
 {{< youtube Hxjg8eP-qrg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2199: Finding the Topic of Each Post](https://grid47.xyz/posts/leetcode_2199) |

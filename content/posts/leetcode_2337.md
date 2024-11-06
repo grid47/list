@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2337.md" >}}
 ---
 {{< youtube Tq2uKuSciOc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2338: Count the Number of Ideal Arrays](https://grid47.xyz/posts/leetcode_2338) |

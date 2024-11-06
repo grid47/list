@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2218.md" >}}
 ---
 {{< youtube 9rRrRXwW0U0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2219: Maximum Sum Score of Array](https://grid47.xyz/posts/leetcode_2219) |

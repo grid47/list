@@ -61,7 +61,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2222.md" >}}
 ---
 {{< youtube EcQ0uhiF3HU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2223: Sum of Scores of Built Strings](https://grid47.xyz/posts/leetcode_2223) |

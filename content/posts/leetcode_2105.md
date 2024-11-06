@@ -75,7 +75,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2105.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2106: Maximum Fruits Harvested After at Most K Steps](https://grid47.xyz/posts/leetcode_2106) |

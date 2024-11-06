@@ -66,7 +66,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2092.md" >}}
 ---
 {{< youtube v8-OkMKBqyA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2093: Minimum Cost to Reach City With Discounts](https://grid47.xyz/posts/leetcode_2093) |

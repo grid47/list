@@ -59,7 +59,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2354.md" >}}
 ---
 {{< youtube yHfTzZ5AJ48 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2355: Maximum Number of Books You Can Take](https://grid47.xyz/posts/leetcode_2355) |

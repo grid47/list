@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2074.md" >}}
 ---
 {{< youtube _3fvJQk7a0k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2075: Decode the Slanted Ciphertext](https://grid47.xyz/posts/leetcode_2075) |

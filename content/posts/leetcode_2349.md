@@ -57,7 +57,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2349.md" >}}
 ---
 {{< youtube mzU9eVB62hA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2350: Shortest Impossible Sequence of Rolls](https://grid47.xyz/posts/leetcode_2350) |

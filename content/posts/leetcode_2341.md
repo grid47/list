@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2341.md" >}}
 ---
 {{< youtube 9KeeDZ6tcy4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2342: Max Sum of a Pair With Equal Sum of Digits](https://grid47.xyz/posts/leetcode_2342) |

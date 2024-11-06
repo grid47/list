@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2213.md" >}}
 ---
 {{< youtube yxqlcR5ocyQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2214: Minimum Health to Beat Game](https://grid47.xyz/posts/leetcode_2214) |

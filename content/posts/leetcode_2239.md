@@ -31,7 +31,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2239.md" >}}
 ---
 {{< youtube dLlKA5DQKYs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2240: Number of Ways to Buy Pens and Pencils](https://grid47.xyz/posts/leetcode_2240) |

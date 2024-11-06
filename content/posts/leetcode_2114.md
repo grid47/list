@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2114.md" >}}
 ---
 {{< youtube 9c5GeChF1vY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2115: Find All Possible Recipes from Given Supplies](https://grid47.xyz/posts/leetcode_2115) |

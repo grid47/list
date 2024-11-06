@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2100.md" >}}
 ---
 {{< youtube skEtLRG05RQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2101: Detonate the Maximum Bombs](https://grid47.xyz/posts/leetcode_2101) |

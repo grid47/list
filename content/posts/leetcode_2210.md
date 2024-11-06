@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2210.md" >}}
 ---
 {{< youtube I9ZXvpleMDk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2211: Count Collisions on a Road](https://grid47.xyz/posts/leetcode_2211) |

@@ -95,7 +95,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2076.md" >}}
 ---
 {{< youtube EVnIVVF-Jfs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2077: Paths in Maze That Lead to Same Room](https://grid47.xyz/posts/leetcode_2077) |

@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2326.md" >}}
 ---
 {{< youtube sOV1nRhmsMQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2327: Number of People Aware of a Secret](https://grid47.xyz/posts/leetcode_2327) |

@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2145.md" >}}
 ---
 {{< youtube kEhFfpz-qps >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2146: K Highest Ranked Items Within a Price Range](https://grid47.xyz/posts/leetcode_2146) |

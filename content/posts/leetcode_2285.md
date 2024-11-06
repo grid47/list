@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2285.md" >}}
 ---
 {{< youtube NIhXLEiQAPM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2286: Booking Concert Tickets in Groups](https://grid47.xyz/posts/leetcode_2286) |

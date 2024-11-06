@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2087.md" >}}
 ---
 {{< youtube -ect7lESvLg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2088: Count Fertile Pyramids in a Land](https://grid47.xyz/posts/leetcode_2088) |

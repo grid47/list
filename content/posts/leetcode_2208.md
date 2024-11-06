@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2208.md" >}}
 ---
 {{< youtube 4HrGj7pwQww >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2209: Minimum White Tiles After Covering With Carpets](https://grid47.xyz/posts/leetcode_2209) |

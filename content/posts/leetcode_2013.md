@@ -54,7 +54,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2013.md" >}}
 ---
 {{< youtube bahebearrDc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2014: Longest Subsequence Repeated k Times](https://grid47.xyz/posts/leetcode_2014) |

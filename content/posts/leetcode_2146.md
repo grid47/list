@@ -93,7 +93,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2146.md" >}}
 ---
 {{< youtube OOBGOENJLYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2147: Number of Ways to Divide a Long Corridor](https://grid47.xyz/posts/leetcode_2147) |

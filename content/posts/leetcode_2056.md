@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2056.md" >}}
 ---
 {{< youtube _uiqoiELPNI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2057: Smallest Index With Equal Value](https://grid47.xyz/posts/leetcode_2057) |

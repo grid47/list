@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2016.md" >}}
 ---
 {{< youtube OmNZRgKr7GQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2017: Grid Game](https://grid47.xyz/posts/leetcode_2017) |

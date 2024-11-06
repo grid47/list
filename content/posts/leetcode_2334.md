@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2334.md" >}}
 ---
 {{< youtube KUdgDzyeKPg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2335: Minimum Amount of Time to Fill Cups](https://grid47.xyz/posts/leetcode_2335) |

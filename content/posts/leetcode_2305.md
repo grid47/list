@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2305.md" >}}
 ---
 {{< youtube 74-V6AjJ4wg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2306: Naming a Company](https://grid47.xyz/posts/leetcode_2306) |

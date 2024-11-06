@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2127.md" >}}
 ---
 {{< youtube AAgLuyeze-A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2128: Remove All Ones With Row and Column Flips](https://grid47.xyz/posts/leetcode_2128) |

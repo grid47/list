@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2075.md" >}}
 ---
 {{< youtube vFxVjspTM-0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2076: Process Restricted Friend Requests](https://grid47.xyz/posts/leetcode_2076) |

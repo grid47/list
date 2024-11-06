@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2259.md" >}}
 ---
 {{< youtube cinEIxOL0E8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2260: Minimum Consecutive Cards to Pick Up](https://grid47.xyz/posts/leetcode_2260) |

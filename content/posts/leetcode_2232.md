@@ -76,7 +76,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2232.md" >}}
 ---
 {{< youtube 8Nt7G6bIkSI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2233: Maximum Product After K Increments](https://grid47.xyz/posts/leetcode_2233) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2077.md" >}}
 ---
 {{< youtube PFJ7Rv0HDtU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2078: Two Furthest Houses With Different Colors](https://grid47.xyz/posts/leetcode_2078) |

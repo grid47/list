@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2265.md" >}}
 ---
 {{< youtube yg9A3yLTcsE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2266: Count Number of Texts](https://grid47.xyz/posts/leetcode_2266) |

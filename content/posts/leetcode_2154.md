@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2154.md" >}}
 ---
 {{< youtube b-6Wf-ZShQQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2155: All Divisions With the Highest Score of a Binary Array](https://grid47.xyz/posts/leetcode_2155) |

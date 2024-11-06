@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2351.md" >}}
 ---
 {{< youtube zIFHijNYeCE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2352: Equal Row and Column Pairs](https://grid47.xyz/posts/leetcode_2352) |

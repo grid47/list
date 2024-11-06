@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2233.md" >}}
 ---
 {{< youtube lSr-tKjbiAM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2234: Maximum Total Beauty of the Gardens](https://grid47.xyz/posts/leetcode_2234) |

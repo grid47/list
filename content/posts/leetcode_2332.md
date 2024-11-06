@@ -59,7 +59,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2332.md" >}}
 ---
 {{< youtube TAbfqi-5Zm0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2333: Minimum Sum of Squared Difference](https://grid47.xyz/posts/leetcode_2333) |

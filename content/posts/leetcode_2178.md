@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2178.md" >}}
 ---
 {{< youtube fM7MJFhrm-8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2179: Count Good Triplets in an Array](https://grid47.xyz/posts/leetcode_2179) |

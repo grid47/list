@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2108.md" >}}
 ---
 {{< youtube 4JA5MW772N0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2109: Adding Spaces to a String](https://grid47.xyz/posts/leetcode_2109) |

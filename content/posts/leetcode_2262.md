@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2262.md" >}}
 ---
 {{< youtube 18Agi7XCGAI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2263: Make Array Non-decreasing or Non-increasing](https://grid47.xyz/posts/leetcode_2263) |

@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2203.md" >}}
 ---
 {{< youtube -MZZQH0ty-E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2204: Distance to a Cycle in Undirected Graph](https://grid47.xyz/posts/leetcode_2204) |

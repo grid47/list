@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2009.md" >}}
 ---
 {{< youtube Dd-yJylrcOY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2010: The Number of Seniors and Juniors to Join the Company II](https://grid47.xyz/posts/leetcode_2010) |

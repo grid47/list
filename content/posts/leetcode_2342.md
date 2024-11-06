@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2342.md" >}}
 ---
 {{< youtube uOPtnfVSFuQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2343: Query Kth Smallest Trimmed Number](https://grid47.xyz/posts/leetcode_2343) |

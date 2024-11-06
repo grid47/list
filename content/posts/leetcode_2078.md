@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2078.md" >}}
 ---
 {{< youtube ws6DW_63Yqg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2079: Watering Plants](https://grid47.xyz/posts/leetcode_2079) |

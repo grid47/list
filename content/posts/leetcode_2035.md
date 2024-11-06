@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2035.md" >}}
 ---
 {{< youtube R9n_Hq2YDhs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2036: Maximum Alternating Subarray Sum](https://grid47.xyz/posts/leetcode_2036) |

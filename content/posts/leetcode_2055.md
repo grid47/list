@@ -76,7 +76,7 @@ int c = count[r] - count[l] +1;
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2055.md" >}}
 ---
 {{< youtube -1IsQyTM6Lg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2056: Number of Valid Move Combinations On Chessboard](https://grid47.xyz/posts/leetcode_2056) |

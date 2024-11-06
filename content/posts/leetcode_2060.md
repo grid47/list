@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2060.md" >}}
 ---
 {{< youtube XN9GqDRPv34 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2061: Number of Spaces Cleaning Robot Cleaned](https://grid47.xyz/posts/leetcode_2061) |

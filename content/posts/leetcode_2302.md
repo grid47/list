@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2302.md" >}}
 ---
 {{< youtube IRUCdJCZxcE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2303: Calculate Amount Paid in Taxes](https://grid47.xyz/posts/leetcode_2303) |

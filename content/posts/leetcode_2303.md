@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2303.md" >}}
 ---
 {{< youtube lYCOA0a4BRM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2304: Minimum Path Cost in a Grid](https://grid47.xyz/posts/leetcode_2304) |

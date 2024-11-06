@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2338.md" >}}
 ---
 {{< youtube wv7Xt0iqIjE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2339: All the Matches of the League](https://grid47.xyz/posts/leetcode_2339) |

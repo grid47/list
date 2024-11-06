@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2243.md" >}}
 ---
 {{< youtube Lyesi93Z6_A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2244: Minimum Rounds to Complete All Tasks](https://grid47.xyz/posts/leetcode_2244) |

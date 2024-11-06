@@ -59,7 +59,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2188.md" >}}
 ---
 {{< youtube GqQISf5I4kk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2189: Number of Ways to Build House of Cards](https://grid47.xyz/posts/leetcode_2189) |

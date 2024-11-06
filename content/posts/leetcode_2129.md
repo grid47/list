@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2129.md" >}}
 ---
 {{< youtube LDlUaEaunY0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2130: Maximum Twin Sum of a Linked List](https://grid47.xyz/posts/leetcode_2130) |

@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2170.md" >}}
 ---
 {{< youtube LkSQby_5YMg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2171: Removing Minimum Number of Magic Beans](https://grid47.xyz/posts/leetcode_2171) |

@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2194.md" >}}
 ---
 {{< youtube jGLLCLtNDbQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2195: Append K Integers With Minimal Sum](https://grid47.xyz/posts/leetcode_2195) |

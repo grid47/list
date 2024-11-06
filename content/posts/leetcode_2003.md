@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2003.md" >}}
 ---
 {{< youtube in_qO4nOsqA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2004: The Number of Seniors and Juniors to Join the Company](https://grid47.xyz/posts/leetcode_2004) |

@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2240.md" >}}
 ---
 {{< youtube WzmIQmBNa0A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2241: Design an ATM Machine](https://grid47.xyz/posts/leetcode_2241) |

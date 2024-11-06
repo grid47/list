@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2223.md" >}}
 ---
 {{< youtube U_ORy5R-YcE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2224: Minimum Number of Operations to Convert Time](https://grid47.xyz/posts/leetcode_2224) |

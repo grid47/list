@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2144.md" >}}
 ---
 {{< youtube KvdPgFfH1t0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2145: Count the Hidden Sequences](https://grid47.xyz/posts/leetcode_2145) |

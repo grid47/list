@@ -69,7 +69,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2064.md" >}}
 ---
 {{< youtube J6D5xPSlGHY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2065: Maximum Path Quality of a Graph](https://grid47.xyz/posts/leetcode_2065) |

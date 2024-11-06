@@ -92,7 +92,7 @@ class Solution {
 }
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2019.md" >}}
 ---
 {{< youtube wXal9t8CsGw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2020: Number of Accounts That Did Not Stream](https://grid47.xyz/posts/leetcode_2020) |

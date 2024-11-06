@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2278.md" >}}
 ---
 {{< youtube aVeeYs2bSzY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2279: Maximum Bags With Full Capacity of Rocks](https://grid47.xyz/posts/leetcode_2279) |

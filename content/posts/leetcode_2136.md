@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2136.md" >}}
 ---
 {{< youtube MPwDbK3oLj4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2137: Pour Water Between Buckets to Make Water Levels Equal](https://grid47.xyz/posts/leetcode_2137) |

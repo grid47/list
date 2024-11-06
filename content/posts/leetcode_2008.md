@@ -70,7 +70,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2008.md" >}}
 ---
 {{< youtube QoAuE1v2vxA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2009: Minimum Number of Operations to Make Array Continuous](https://grid47.xyz/posts/leetcode_2009) |

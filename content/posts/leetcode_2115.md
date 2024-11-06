@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2115.md" >}}
 ---
 {{< youtube XUDa2RC0jhs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2116: Check if a Parentheses String Can Be Valid](https://grid47.xyz/posts/leetcode_2116) |

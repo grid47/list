@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2029.md" >}}
 ---
 {{< youtube 7r34JD5ud-c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2030: Smallest K-Length Subsequence With Occurrences of a Letter](https://grid47.xyz/posts/leetcode_2030) |

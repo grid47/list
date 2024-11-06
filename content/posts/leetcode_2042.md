@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2042.md" >}}
 ---
 {{< youtube dRPoBRO0Lgs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2043: Simple Bank System](https://grid47.xyz/posts/leetcode_2043) |

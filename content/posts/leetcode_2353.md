@@ -57,7 +57,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2353.md" >}}
 ---
 {{< youtube Ikp8SgbgbEo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2354: Number of Excellent Pairs](https://grid47.xyz/posts/leetcode_2354) |

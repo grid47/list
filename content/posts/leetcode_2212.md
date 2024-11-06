@@ -68,7 +68,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2212.md" >}}
 ---
 {{< youtube nnwNXfYz2mo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2213: Longest Substring of One Repeating Character](https://grid47.xyz/posts/leetcode_2213) |

@@ -52,7 +52,7 @@ class Solution {
 }
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2183.md" >}}
 ---
 {{< youtube 1K6O9KtKs1k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2184: Number of Ways to Build Sturdy Brick Wall](https://grid47.xyz/posts/leetcode_2184) |

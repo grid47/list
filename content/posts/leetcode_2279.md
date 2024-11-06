@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2279.md" >}}
 ---
 {{< youtube 8s25uCT7vhY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2280: Minimum Lines to Represent a Line Chart](https://grid47.xyz/posts/leetcode_2280) |

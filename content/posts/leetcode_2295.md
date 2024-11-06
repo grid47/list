@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2295.md" >}}
 ---
 {{< youtube xiY9ORyGnDk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2296: Design a Text Editor](https://grid47.xyz/posts/leetcode_2296) |

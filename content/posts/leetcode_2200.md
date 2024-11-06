@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2200.md" >}}
 ---
 {{< youtube OnPL2JuJrCQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2201: Count Artifacts That Can Be Extracted](https://grid47.xyz/posts/leetcode_2201) |

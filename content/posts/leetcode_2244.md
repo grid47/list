@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2244.md" >}}
 ---
 {{< youtube ngPN-ptIMh8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2245: Maximum Trailing Zeros in a Cornered Path](https://grid47.xyz/posts/leetcode_2245) |

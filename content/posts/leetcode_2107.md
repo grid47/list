@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2107.md" >}}
 ---
 {{< youtube wNgQIlaBe0g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2108: Find First Palindromic String in the Array](https://grid47.xyz/posts/leetcode_2108) |

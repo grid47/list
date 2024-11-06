@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2190.md" >}}
 ---
 {{< youtube 0KHTVvSX7CE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2191: Sort the Jumbled Numbers](https://grid47.xyz/posts/leetcode_2191) |

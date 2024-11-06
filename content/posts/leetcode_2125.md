@@ -43,7 +43,7 @@ class Solution {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2125.md" >}}
 ---
 {{< youtube KLeKv59LAFY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2126: Destroying Asteroids](https://grid47.xyz/posts/leetcode_2126) |

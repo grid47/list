@@ -75,7 +75,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2246.md" >}}
 ---
 {{< youtube qToN0ZHVoaE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2247: Maximum Cost of Trip With K Highways](https://grid47.xyz/posts/leetcode_2247) |

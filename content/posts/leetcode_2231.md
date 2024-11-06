@@ -50,7 +50,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2231.md" >}}
 ---
 {{< youtube UNbggCsJ6LE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2232: Minimize Result by Adding Parentheses to Expression](https://grid47.xyz/posts/leetcode_2232) |

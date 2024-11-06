@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2168.md" >}}
 ---
 {{< youtube 0BE7yxxcV4k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2169: Count Operations to Obtain Zero](https://grid47.xyz/posts/leetcode_2169) |

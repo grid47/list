@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2281.md" >}}
 ---
 {{< youtube ikovCGsD220 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2282: Number of People That Can Be Seen in a Grid](https://grid47.xyz/posts/leetcode_2282) |

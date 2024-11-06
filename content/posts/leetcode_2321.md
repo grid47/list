@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2321.md" >}}
 ---
 {{< youtube YqCtPU8Sxjc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2322: Minimum Score After Removals on a Tree](https://grid47.xyz/posts/leetcode_2322) |

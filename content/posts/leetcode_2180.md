@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2180.md" >}}
 ---
 {{< youtube McbkGprY2C4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2181: Merge Nodes in Between Zeros](https://grid47.xyz/posts/leetcode_2181) |

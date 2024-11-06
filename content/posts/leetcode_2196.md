@@ -77,7 +77,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2196.md" >}}
 ---
 {{< youtube yWkrFfqO7NA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2197: Replace Non-Coprime Numbers in Array](https://grid47.xyz/posts/leetcode_2197) |

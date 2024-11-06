@@ -65,7 +65,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2257.md" >}}
 ---
 {{< youtube V4jbxAhIHJw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2258: Escape the Spreading Fire](https://grid47.xyz/posts/leetcode_2258) |

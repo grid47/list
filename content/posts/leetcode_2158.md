@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2158.md" >}}
 ---
 {{< youtube 2KP9YVWFwWg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2159: Order Two Columns Independently](https://grid47.xyz/posts/leetcode_2159) |

@@ -67,7 +67,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2002.md" >}}
 ---
 {{< youtube aoHbYlO8vDg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2003: Smallest Missing Genetic Value in Each Subtree](https://grid47.xyz/posts/leetcode_2003) |

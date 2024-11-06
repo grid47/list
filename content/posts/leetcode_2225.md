@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2225.md" >}}
 ---
 {{< youtube rHZD8NrMq5s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2226: Maximum Candies Allocated to K Children](https://grid47.xyz/posts/leetcode_2226) |

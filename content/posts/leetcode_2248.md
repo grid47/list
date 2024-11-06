@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2248.md" >}}
 ---
 {{< youtube 1xqSAKvMACM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2249: Count Lattice Points Inside a Circle](https://grid47.xyz/posts/leetcode_2249) |

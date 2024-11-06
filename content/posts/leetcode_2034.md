@@ -65,7 +65,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2034.md" >}}
 ---
 {{< youtube iJqGjXpqdYo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2035: Partition Array Into Two Arrays to Minimize Sum Difference](https://grid47.xyz/posts/leetcode_2035) |

@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2359.md" >}}
 ---
 {{< youtube AZA8orksO4w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2360: Longest Cycle in a Graph](https://grid47.xyz/posts/leetcode_2360) |

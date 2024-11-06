@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2290.md" >}}
 ---
 {{< youtube 9EdgGCbwEgo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2291: Maximum Profit From Trading Stocks](https://grid47.xyz/posts/leetcode_2291) |

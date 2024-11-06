@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2015.md" >}}
 ---
 {{< youtube _uw42IwMgks >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2016: Maximum Difference Between Increasing Elements](https://grid47.xyz/posts/leetcode_2016) |

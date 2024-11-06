@@ -61,7 +61,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2192.md" >}}
 ---
 {{< youtube RdxsvhrTQ0A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2193: Minimum Number of Moves to Make Palindrome](https://grid47.xyz/posts/leetcode_2193) |

@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2111.md" >}}
 ---
 {{< youtube HIpZ5Jz0O_g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2112: The Airport With the Most Traffic](https://grid47.xyz/posts/leetcode_2112) |

@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2140.md" >}}
 ---
 {{< youtube yPaLLSEDlX4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2141: Maximum Running Time of N Computers](https://grid47.xyz/posts/leetcode_2141) |

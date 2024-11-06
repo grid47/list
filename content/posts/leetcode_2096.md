@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2096.md" >}}
 ---
 {{< youtube JegJNGcwtFg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2097: Valid Arrangement of Pairs](https://grid47.xyz/posts/leetcode_2097) |

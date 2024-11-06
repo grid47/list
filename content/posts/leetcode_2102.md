@@ -78,7 +78,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2102.md" >}}
 ---
 {{< youtube 2Axb1zd8eOc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2103: Rings and Rods](https://grid47.xyz/posts/leetcode_2103) |

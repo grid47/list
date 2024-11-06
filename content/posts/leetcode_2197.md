@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2197.md" >}}
 ---
 {{< youtube O7phUT7iFYM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2198: Number of Single Divisor Triplets](https://grid47.xyz/posts/leetcode_2198) |

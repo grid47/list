@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2160.md" >}}
 ---
 {{< youtube wH9FIi-39-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2161: Partition Array According to Given Pivot](https://grid47.xyz/posts/leetcode_2161) |

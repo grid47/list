@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2345.md" >}}
 ---
 {{< youtube 2Hd2yaXrToY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2346: Compute the Rank as a Percentage](https://grid47.xyz/posts/leetcode_2346) |

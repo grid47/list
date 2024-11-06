@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2352.md" >}}
 ---
 {{< youtube TmLXO3ZS6Lw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2353: Design a Food Rating System](https://grid47.xyz/posts/leetcode_2353) |

@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2366.md" >}}
 ---
 {{< youtube 0CU_aJ1SW6k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2367: Number of Arithmetic Triplets](https://grid47.xyz/posts/leetcode_2367) |

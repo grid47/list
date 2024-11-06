@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2037.md" >}}
 ---
 {{< youtube wS7Ag33hf8E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2038: Remove Colored Pieces if Both Neighbors are the Same Color](https://grid47.xyz/posts/leetcode_2038) |

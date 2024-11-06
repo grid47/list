@@ -83,7 +83,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2054.md" >}}
 ---
 {{< youtube eC62DF5PW6E >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2055: Plates Between Candles](https://grid47.xyz/posts/leetcode_2055) |

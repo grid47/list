@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2109.md" >}}
 ---
 {{< youtube HhsyccqLHDw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2110: Number of Smooth Descent Periods of a Stock](https://grid47.xyz/posts/leetcode_2110) |

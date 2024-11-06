@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2250.md" >}}
 ---
 {{< youtube uCTmN3j2hVU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2251: Number of Flowers in Full Bloom](https://grid47.xyz/posts/leetcode_2251) |

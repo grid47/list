@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2219.md" >}}
 ---
 {{< youtube 48Zl907WahY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2220: Minimum Bit Flips to Convert Number](https://grid47.xyz/posts/leetcode_2220) |

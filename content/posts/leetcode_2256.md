@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2256.md" >}}
 ---
 {{< youtube rh8Mnj9Bd64 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2257: Count Unguarded Cells in the Grid](https://grid47.xyz/posts/leetcode_2257) |

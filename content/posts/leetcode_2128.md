@@ -24,7 +24,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2128.md" >}}
 ---
 {{< youtube 1DPw3Xg1Ql4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2129: Capitalize the Title](https://grid47.xyz/posts/leetcode_2129) |
