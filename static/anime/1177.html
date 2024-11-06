@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<bool> canMakePaliQueries(string s, vector<vector<int>>& q) {
+        vector<bool> ans;
+        
+        vector<int> pt(1,0);
+        int mask = 0;
+        
+        for(int i = 0; i < s.length(); i++) {
+        pt.push_back(mask ^= 1 << (s[i] - 'a'));
+        }
+        
+        
+        for(int i = 0; i < q.size(); i++) {
+        
+auto &v = q[i];
+
+  
+int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
+
+    ans.push_back(cnt/2 <= v[2]);
+        }
+        
+        return ans;
+    }
+};
