@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2083: Substrings That Begin and End With the Same Letter"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2083: Substrings That Begin and End With the Same Letter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2083: Substrings That Begin and End With the Same Letter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Hash Table","Math","String","Counting","Prefix Sum"]
 categories = [
     "Medium"
 ]

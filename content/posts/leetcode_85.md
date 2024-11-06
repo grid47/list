@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 85: Maximal Rectangle"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 85: Maximal Rectangle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Dynamic Programming","Stack","Matrix"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 85: Maximal Rectangle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Dynamic Programming","Stack","Matrix","Monotonic Stack"]
 categories = [
     "Hard"
 ]

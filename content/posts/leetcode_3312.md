@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3312: Sorted GCD Pair Queries"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 3312: Sorted GCD Pair Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 3312: Sorted GCD Pair Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Hash Table","Math","Binary Search","Combinatorics","Counting","Number Theory","Prefix Sum"]
 categories = [
     "Hard"
 ]

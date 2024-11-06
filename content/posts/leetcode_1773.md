@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1773: Count Items Matching a Rule"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 1773: Count Items Matching a Rule in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 1773: Count Items Matching a Rule in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","String"]
 categories = [
     "Easy"
 ]

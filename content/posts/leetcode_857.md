@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 857: Minimum Cost to Hire K Workers"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 857: Minimum Cost to Hire K Workers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Greedy","Sorting","Heap"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 857: Minimum Cost to Hire K Workers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Greedy","Sorting","Heap (Priority Queue)"]
 categories = [
     "Hard"
 ]

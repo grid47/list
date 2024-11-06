@@ -3,7 +3,8 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2753: Count Houses in a Circular Street II"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2753: Count Houses in a Circular Street II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2753: Count Houses in a Circular Street II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
 tags = []
 categories = [
     "Hard"

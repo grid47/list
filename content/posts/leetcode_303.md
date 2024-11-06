@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 303: Range Sum Query - Immutable"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 303: Range Sum Query - Immutable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Prefix Sum","Design"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 303: Range Sum Query - Immutable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Design","Prefix Sum"]
 categories = [
     "Easy"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 913: Cat and Mouse"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 913: Cat and Mouse in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Dynamic Programming","Graph","Minimax"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 913: Cat and Mouse in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","Dynamic Programming","Graph","Topological Sort","Memoization","Game Theory"]
 categories = [
     "Hard"
 ]

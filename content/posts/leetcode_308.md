@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 308: Range Sum Query 2D - Mutable"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 308: Range Sum Query 2D - Mutable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Binary Indexed Tree","Segment Tree","Design"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 308: Range Sum Query 2D - Mutable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Design","Binary Indexed Tree","Segment Tree","Matrix"]
 categories = [
     "Hard"
 ]

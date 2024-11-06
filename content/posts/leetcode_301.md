@@ -3,7 +3,8 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 301: Remove Invalid Parentheses"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 301: Remove Invalid Parentheses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 301: Remove Invalid Parentheses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
 tags = ["String","Backtracking","Breadth-First Search"]
 categories = [
     "Hard"

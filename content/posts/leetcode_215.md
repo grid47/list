@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 215: Kth Largest Element in an Array"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 215: Kth Largest Element in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Divide and Conquer","Sorting","Heap"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 215: Kth Largest Element in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Divide and Conquer","Sorting","Heap (Priority Queue)","Quickselect"]
 categories = [
     "Medium"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 220: Contains Duplicate III"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 220: Contains Duplicate III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Hash Table","Sliding Window","Sorting"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 220: Contains Duplicate III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Sliding Window","Sorting","Bucket Sort","Ordered Set"]
 categories = [
     "Hard"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 553: Optimal Division"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 553: Optimal Division in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Math","Dynamic Programming"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 553: Optimal Division in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Math","Dynamic Programming"]
 categories = [
     "Medium"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 362: Design Hit Counter"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 362: Design Hit Counter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Queue","Sliding Window","Design"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 362: Design Hit Counter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Binary Search","Design","Queue","Data Stream"]
 categories = [
     "Medium"
 ]

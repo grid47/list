@@ -3,7 +3,8 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2633: Convert Object to JSON String"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2633: Convert Object to JSON String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2633: Convert Object to JSON String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
 tags = []
 categories = [
     "Medium"

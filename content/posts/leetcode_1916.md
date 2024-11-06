@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1916: Count Ways to Build Rooms in an Ant Colony"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 1916: Count Ways to Build Rooms in an Ant Colony in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 1916: Count Ways to Build Rooms in an Ant Colony in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","Dynamic Programming","Tree","Graph","Topological Sort","Combinatorics"]
 categories = [
     "Hard"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1801: Number of Orders in the Backlog"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 1801: Number of Orders in the Backlog in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 1801: Number of Orders in the Backlog in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Heap (Priority Queue)","Simulation"]
 categories = [
     "Medium"
 ]

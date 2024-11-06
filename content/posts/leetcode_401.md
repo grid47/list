@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 401: Binary Watch"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 401: Binary Watch in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Bit Manipulation","Backtracking"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 401: Binary Watch in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Backtracking","Bit Manipulation"]
 categories = [
     "Easy"
 ]

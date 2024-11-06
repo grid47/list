@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3297: Count Substrings That Can Be Rearranged to Contain a String I"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 3297: Count Substrings That Can Be Rearranged to Contain a String I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 3297: Count Substrings That Can Be Rearranged to Contain a String I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Hash Table","String","Sliding Window"]
 categories = [
     "Medium"
 ]

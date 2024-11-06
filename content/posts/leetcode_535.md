@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 535: Encode and Decode TinyURL"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 535: Encode and Decode TinyURL in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Hash Table","String","Design","Hashing"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 535: Encode and Decode TinyURL in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Hash Table","String","Design","Hash Function"]
 categories = [
     "Medium"
 ]

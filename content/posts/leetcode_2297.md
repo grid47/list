@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2297: Jump Game VIII"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2297: Jump Game VIII in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2297: Jump Game VIII in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Dynamic Programming","Stack","Graph","Monotonic Stack","Shortest Path"]
 categories = [
     "Medium"
 ]

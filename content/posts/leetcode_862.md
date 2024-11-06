@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 862: Shortest Subarray with Sum at Least K"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 862: Shortest Subarray with Sum at Least K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Queue","Sliding Window","Heap","Monotonic Queue"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 862: Shortest Subarray with Sum at Least K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Binary Search","Queue","Sliding Window","Heap (Priority Queue)","Prefix Sum","Monotonic Queue"]
 categories = [
     "Hard"
 ]

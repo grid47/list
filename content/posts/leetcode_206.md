@@ -3,7 +3,8 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 206: Reverse Linked List"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 206: Reverse Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 206: Reverse Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
 tags = ["Linked List","Recursion"]
 categories = [
     "Easy"

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 23: Merge k Sorted Lists"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 23: Merge k Sorted Lists in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Linked List","Divide and Conquer","Heap"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 23: Merge k Sorted Lists in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Linked List","Divide and Conquer","Heap (Priority Queue)","Merge Sort"]
 categories = [
     "Hard"
 ]

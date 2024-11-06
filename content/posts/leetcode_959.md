@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 959: Regions Cut By Slashes"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 959: Regions Cut By Slashes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Depth-First Search","Union Find","Graph"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 959: Regions Cut By Slashes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Hash Table","Depth-First Search","Breadth-First Search","Union Find","Matrix"]
 categories = [
     "Medium"
 ]

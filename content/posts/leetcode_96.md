@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 96: Unique Binary Search Trees"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 96: Unique Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Math","Dynamic Programming","Tree"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 96: Unique Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","Dynamic Programming","Tree","Binary Search Tree","Binary Tree"]
 categories = [
     "Medium"
 ]

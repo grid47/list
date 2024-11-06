@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 113: Path Sum II"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 113: Path Sum II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Tree","Depth-First Search","Backtracking"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 113: Path Sum II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Backtracking","Tree","Depth-First Search","Binary Tree"]
 categories = [
     "Medium"
 ]

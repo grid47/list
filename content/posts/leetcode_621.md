@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 621: Task Scheduler"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 621: Task Scheduler in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Greedy","Queue","Counting"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 621: Task Scheduler in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Hash Table","Greedy","Sorting","Heap (Priority Queue)","Counting"]
 categories = [
     "Medium"
 ]

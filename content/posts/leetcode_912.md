@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 912: Sort an Array"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 912: Sort an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Divide and Conquer","Sorting"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 912: Sort an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Divide and Conquer","Sorting","Heap (Priority Queue)","Merge Sort","Bucket Sort","Radix Sort","Counting Sort"]
 categories = [
     "Medium"
 ]

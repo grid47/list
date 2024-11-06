@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2526: Find Consecutive Integers from a Data Stream"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2526: Find Consecutive Integers from a Data Stream in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2526: Find Consecutive Integers from a Data Stream in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Hash Table","Design","Queue","Counting","Data Stream"]
 categories = [
     "Medium"
 ]

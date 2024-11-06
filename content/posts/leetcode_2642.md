@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2642: Design Graph With Shortest Path Calculator"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2642: Design Graph With Shortest Path Calculator in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2642: Design Graph With Shortest Path Calculator in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Graph","Design","Heap (Priority Queue)","Shortest Path"]
 categories = [
     "Hard"
 ]

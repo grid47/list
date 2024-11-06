@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 478: Generate Random Point in a Circle"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 478: Generate Random Point in a Circle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Math","Rejection Sampling","Randomized"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 478: Generate Random Point in a Circle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","Geometry","Rejection Sampling","Randomized"]
 categories = [
     "Medium"
 ]

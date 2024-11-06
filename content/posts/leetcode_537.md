@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 537: Complex Number Multiplication"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 537: Complex Number Multiplication in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Math","String"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 537: Complex Number Multiplication in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","String","Simulation"]
 categories = [
     "Medium"
 ]

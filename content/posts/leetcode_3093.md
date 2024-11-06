@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3093: Longest Common Suffix Queries"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 3093: Longest Common Suffix Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 3093: Longest Common Suffix Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","String","Trie"]
 categories = [
     "Hard"
 ]

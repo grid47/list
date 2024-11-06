@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1617: Count Subtrees With Max Distance Between Cities"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 1617: Count Subtrees With Max Distance Between Cities in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 1617: Count Subtrees With Max Distance Between Cities in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Dynamic Programming","Bit Manipulation","Tree","Enumeration","Bitmask"]
 categories = [
     "Hard"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 897: Increasing Order Search Tree"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 897: Increasing Order Search Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Tree","Depth-First Search","Binary Search Tree","Binary Tree"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 897: Increasing Order Search Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Stack","Tree","Depth-First Search","Binary Search Tree","Binary Tree"]
 categories = [
     "Easy"
 ]

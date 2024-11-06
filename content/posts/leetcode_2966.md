@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2966: Divide Array Into Arrays With Max Difference"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2966: Divide Array Into Arrays With Max Difference in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2966: Divide Array Into Arrays With Max Difference in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Greedy","Sorting"]
 categories = [
     "Medium"
 ]

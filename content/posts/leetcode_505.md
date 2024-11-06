@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 505: The Maze II"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 505: The Maze II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Depth-First Search","Breadth-First Search","Graph"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 505: The Maze II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Depth-First Search","Breadth-First Search","Graph","Heap (Priority Queue)","Matrix","Shortest Path"]
 categories = [
     "Medium"
 ]

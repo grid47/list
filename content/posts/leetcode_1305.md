@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1305: All Elements in Two Binary Search Trees"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Tree","Depth-First Search","Binary Search Tree","Sorting","Binary Tree"]
 categories = [
     "Medium"
 ]

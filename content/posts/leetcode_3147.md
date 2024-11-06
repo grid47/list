@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Prefix Sum"]
 categories = [
     "Medium"
 ]

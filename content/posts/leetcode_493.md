@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 493: Reverse Pairs"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 493: Reverse Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Binary Indexed Tree","Segment Tree","Merge Sort"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 493: Reverse Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Binary Search","Divide and Conquer","Binary Indexed Tree","Segment Tree","Merge Sort","Ordered Set"]
 categories = [
     "Hard"
 ]

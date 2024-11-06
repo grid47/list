@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2519: Count the Number of K-Big Indices"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2519: Count the Number of K-Big Indices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2519: Count the Number of K-Big Indices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Binary Search","Divide and Conquer","Binary Indexed Tree","Segment Tree","Merge Sort","Ordered Set"]
 categories = [
     "Hard"
 ]

@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 696: Count Binary Substrings"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 696: Count Binary Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["String","Two Pointers","Grouping"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 696: Count Binary Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Two Pointers","String"]
 categories = [
     "Easy"
 ]

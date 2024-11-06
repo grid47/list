@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 384: Shuffle an Array"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 384: Shuffle an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Math","Randomized","Design"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 384: Shuffle an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Math","Randomized"]
 categories = [
     "Medium"
 ]

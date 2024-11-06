@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 949: Largest Time for Given Digits"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 949: Largest Time for Given Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Enumeration"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 949: Largest Time for Given Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","String","Enumeration"]
 categories = [
     "Medium"
 ]

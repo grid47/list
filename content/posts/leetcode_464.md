@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 464: Can I Win"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 464: Can I Win in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Dynamic Programming","Backtracking","Bit Manipulation"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 464: Can I Win in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Math","Dynamic Programming","Bit Manipulation","Memoization","Game Theory","Bitmask"]
 categories = [
     "Medium"
 ]

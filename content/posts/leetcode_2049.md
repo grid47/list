@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2049: Count Nodes With the Highest Score"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2049: Count Nodes With the Highest Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2049: Count Nodes With the Highest Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Tree","Depth-First Search","Binary Tree"]
 categories = [
     "Medium"
 ]

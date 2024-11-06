@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 658: Find K Closest Elements"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 658: Find K Closest Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Array","Two Pointers","Binary Search","Sorting","Heap"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 658: Find K Closest Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Two Pointers","Binary Search","Sliding Window","Sorting","Heap (Priority Queue)"]
 categories = [
     "Medium"
 ]

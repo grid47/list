@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3286: Find a Safe Walk Through a Grid"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 3286: Find a Safe Walk Through a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 3286: Find a Safe Walk Through a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Breadth-First Search","Graph","Heap (Priority Queue)","Matrix","Shortest Path"]
 categories = [
     "Medium"
 ]

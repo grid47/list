@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2343: Query Kth Smallest Trimmed Number"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 2343: Query Kth Smallest Trimmed Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = []
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 2343: Query Kth Smallest Trimmed Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","String","Divide and Conquer","Sorting","Heap (Priority Queue)","Radix Sort","Quickselect"]
 categories = [
     "Medium"
 ]

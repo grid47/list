@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 402: Remove K Digits"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 402: Remove K Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Stack","Greedy","Monotonic Stack"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 402: Remove K Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["String","Stack","Greedy","Monotonic Stack"]
 categories = [
     "Medium"
 ]

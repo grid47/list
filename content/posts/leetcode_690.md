@@ -3,8 +3,9 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 690: Employee Importance"
 date = "2024-11-01"
-description = "In-depth solution and explanation for Leetcode 690: Employee Importance in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = ["Hash Table","Depth-First Search","Breadth-First Search"]
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 690: Employee Importance in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Hash Table","Tree","Depth-First Search","Breadth-First Search"]
 categories = [
     "Medium"
 ]
