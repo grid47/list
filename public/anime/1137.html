@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int tribonacci(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 1;
+        
+        int n0 = 0, n1 = 1, n2 = 1, tmp;
+        
+        for(int i = 3; i < n + 1; i++) {
+            tmp = n2 + n1 + n0;
+            n0  = n1;
+            n1  = n2;
+            n2  = tmp;
+        }
+        
+        return n2;
+    }
+};

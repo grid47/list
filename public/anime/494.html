@@ -1,0 +1,21 @@
+class Solution {
+public:
+    map<int, map<int, int>> mp;
+    vector<int> nums;
+    
+    int dp(int target, int idx) {
+        if(idx == nums.size()) return target == 0;
+        
+        if(mp.count(target))
+            if(mp[target].count(idx)) return mp[target][idx];
+        
+        int res = dp(target - nums[idx], idx + 1);
+        res += dp(target + nums[idx], idx + 1);
+        
+        return mp[target][idx] = res;
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        this->nums = nums;
+        return dp(target, 0);
+    }
+};

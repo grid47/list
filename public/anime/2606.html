@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int maximumCostSubstring(string s, string chars, vector<int>& vals) {
+        map<char, int> mp;
+        for(int i = 0; i < chars.size(); i++) {
+            mp[chars[i]] = vals[i];
+        }
+        for(int i = 0; i < 26; i++) {
+            char x = 'a' + i;
+            if(mp.count(x)) continue;
+            mp[x] = i + 1;
+        }
+        
+        int lmax = 0, gmax = 0;
+        for(int i = 0; i < s.size(); i++) {
+            if(mp[s[i]] < lmax + mp[s[i]]) {
+                lmax = lmax + mp[s[i]];
+            } else lmax = mp[s[i]];
+            
+            gmax = max(gmax, lmax);
+        }
+        return gmax;
+    }
+};
