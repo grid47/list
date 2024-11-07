@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2645.md" >}}
 ---
 {{< youtube 7IAA0sdeACw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2646: Minimize the Total Price of the Trips](https://grid47.xyz/posts/leetcode_2646) |

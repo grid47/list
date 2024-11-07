@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2810.md" >}}
 ---
 {{< youtube HuCSgRBf-B8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2811: Check if it is Possible to Split Array](https://grid47.xyz/posts/leetcode_2811) |

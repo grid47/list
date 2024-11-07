@@ -58,7 +58,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2943.md" >}}
 ---
 {{< youtube PwzZ9UVWqBk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2944: Minimum Number of Coins for Fruits](https://grid47.xyz/posts/leetcode_2944) |

@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2541.md" >}}
 ---
 {{< youtube k9jEPl5tC0s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2542: Maximum Subsequence Score](https://grid47.xyz/posts/leetcode_2542) |

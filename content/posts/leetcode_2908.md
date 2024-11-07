@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2908.md" >}}
 ---
 {{< youtube GegaVi1CeUM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2909: Minimum Sum of Mountain Triplets II](https://grid47.xyz/posts/leetcode_2909) |

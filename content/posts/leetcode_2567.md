@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2567.md" >}}
 ---
 {{< youtube MPtncVNtKW0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2568: Minimum Impossible OR](https://grid47.xyz/posts/leetcode_2568) |

@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2768.md" >}}
 ---
 {{< youtube qnbzbMmLK8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2769: Find the Maximum Achievable Number](https://grid47.xyz/posts/leetcode_2769) |

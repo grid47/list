@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2597.md" >}}
 ---
 {{< youtube Dle_SpjHTio >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2598: Smallest Missing Non-negative Integer After Operations](https://grid47.xyz/posts/leetcode_2598) |

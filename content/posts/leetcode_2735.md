@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2735.md" >}}
 ---
 {{< youtube FPkaxgatwoI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2736: Maximum Sum Queries](https://grid47.xyz/posts/leetcode_2736) |

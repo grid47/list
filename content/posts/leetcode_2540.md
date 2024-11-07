@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2540.md" >}}
 ---
 {{< youtube pbKnQYJuSY0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2541: Minimum Operations to Make Array Equal II](https://grid47.xyz/posts/leetcode_2541) |

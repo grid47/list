@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2383.md" >}}
 ---
 {{< youtube ueU_i8H3-9g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2384: Largest Palindromic Number](https://grid47.xyz/posts/leetcode_2384) |

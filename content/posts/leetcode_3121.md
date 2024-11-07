@@ -58,7 +58,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3121.md" >}}
 ---
 {{< youtube aIR3Iem0jQM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3122: Minimum Number of Operations to Satisfy Conditions](https://grid47.xyz/posts/leetcode_3122) |

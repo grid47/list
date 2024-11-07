@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2914.md" >}}
 ---
 {{< youtube mzozXxrB_fk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2915: Length of the Longest Subsequence That Sums to Target](https://grid47.xyz/posts/leetcode_2915) |

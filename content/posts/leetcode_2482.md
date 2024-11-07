@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2482.md" >}}
 ---
 {{< youtube JwuTsHDJVdI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2483: Minimum Penalty for a Shop](https://grid47.xyz/posts/leetcode_2483) |

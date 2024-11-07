@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2609.md" >}}
 ---
 {{< youtube _nyH2TA95yY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2610: Convert an Array Into a 2D Array With Conditions](https://grid47.xyz/posts/leetcode_2610) |

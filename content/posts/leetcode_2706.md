@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2706.md" >}}
 ---
 {{< youtube BTzNimiQdW4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2707: Extra Characters in a String](https://grid47.xyz/posts/leetcode_2707) |

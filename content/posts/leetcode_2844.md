@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2844.md" >}}
 ---
 {{< youtube xFshDEg_Ul4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2845: Count of Interesting Subarrays](https://grid47.xyz/posts/leetcode_2845) |

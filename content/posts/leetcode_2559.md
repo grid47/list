@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2559.md" >}}
 ---
 {{< youtube hTXRevcm3kI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2560: House Robber IV](https://grid47.xyz/posts/leetcode_2560) |

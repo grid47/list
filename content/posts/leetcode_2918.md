@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2918.md" >}}
 ---
 {{< youtube 0l2IwK_OHac >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2919: Minimum Increment Operations to Make Array Beautiful](https://grid47.xyz/posts/leetcode_2919) |

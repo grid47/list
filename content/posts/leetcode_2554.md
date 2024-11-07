@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2554.md" >}}
 ---
 {{< youtube iLU7ZBtjc-k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2555: Maximize Win From Two Segments](https://grid47.xyz/posts/leetcode_2555) |

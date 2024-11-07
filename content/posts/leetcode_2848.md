@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2848.md" >}}
 ---
 {{< youtube 86n-e3Zwx34 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2849: Determine if a Cell Is Reachable at a Given Time](https://grid47.xyz/posts/leetcode_2849) |

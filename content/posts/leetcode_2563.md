@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2563.md" >}}
 ---
 {{< youtube Z9hOAQFSQ_I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2564: Substring XOR Queries](https://grid47.xyz/posts/leetcode_2564) |

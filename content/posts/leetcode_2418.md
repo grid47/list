@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2418.md" >}}
 ---
 {{< youtube Zv_gXqqslbw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2419: Longest Subarray With Maximum Bitwise AND](https://grid47.xyz/posts/leetcode_2419) |

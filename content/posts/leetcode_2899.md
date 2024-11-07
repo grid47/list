@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2899.md" >}}
 ---
 {{< youtube vWwJsOGGKu8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2900: Longest Unequal Adjacent Groups Subsequence I](https://grid47.xyz/posts/leetcode_2900) |

@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3042.md" >}}
 ---
 {{< youtube wDPL8oM9rO8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3043: Find the Length of the Longest Common Prefix](https://grid47.xyz/posts/leetcode_3043) |

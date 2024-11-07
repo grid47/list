@@ -43,7 +43,7 @@ order by id
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1179.md" >}}
 ---
 {{< youtube XIX8-ljI-qM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1180: Count Substrings with Only One Distinct Letter](https://grid47.xyz/posts/leetcode_1180) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1186: Maximum Subarray Sum with One Deletion](https://grid47.xyz/posts/leetcode_1186) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2608.md" >}}
 ---
 {{< youtube R0XznJ91kEw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2609: Find the Longest Balanced Substring of a Binary String](https://grid47.xyz/posts/leetcode_2609) |

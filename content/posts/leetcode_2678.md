@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2678.md" >}}
 ---
 {{< youtube l6_wwKzFmVo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2679: Sum in a Matrix](https://grid47.xyz/posts/leetcode_2679) |

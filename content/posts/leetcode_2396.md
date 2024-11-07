@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2396.md" >}}
 ---
 {{< youtube 37EtWXDucwQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2397: Maximum Rows Covered by Columns](https://grid47.xyz/posts/leetcode_2397) |

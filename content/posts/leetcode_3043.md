@@ -66,7 +66,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3043.md" >}}
 ---
 {{< youtube 06dIUJwdHlQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3044: Most Frequent Prime](https://grid47.xyz/posts/leetcode_3044) |

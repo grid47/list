@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3120.md" >}}
 ---
 {{< youtube VV4TTRQ5l0s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3121: Count the Number of Special Characters II](https://grid47.xyz/posts/leetcode_3121) |

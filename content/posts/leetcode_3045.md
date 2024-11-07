@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3045.md" >}}
 ---
 {{< youtube oHUiH7SxewY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3046: Split the Array](https://grid47.xyz/posts/leetcode_3046) |

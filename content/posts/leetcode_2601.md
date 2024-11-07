@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2601.md" >}}
 ---
 {{< youtube CC0X2wxP7dE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2602: Minimum Operations to Make All Array Elements Equal](https://grid47.xyz/posts/leetcode_2602) |

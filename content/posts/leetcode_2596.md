@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2596.md" >}}
 ---
 {{< youtube OBht8NT_09c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2597: The Number of Beautiful Subsets](https://grid47.xyz/posts/leetcode_2597) |

@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2769.md" >}}
 ---
 {{< youtube uj_B91ycSGo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2770: Maximum Number of Jumps to Reach the Last Index](https://grid47.xyz/posts/leetcode_2770) |

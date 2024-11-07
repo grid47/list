@@ -68,7 +68,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3128.md" >}}
 ---
 {{< youtube SgwaC6fRCSE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](https://grid47.xyz/posts/leetcode_3129) |

@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2506.md" >}}
 ---
 {{< youtube uWSEfo1DlwY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2507: Smallest Value After Replacing With Sum of Prime Factors](https://grid47.xyz/posts/leetcode_2507) |

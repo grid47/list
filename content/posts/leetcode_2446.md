@@ -30,7 +30,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2446.md" >}}
 ---
 {{< youtube mahSMDuJL9A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2447: Number of Subarrays With GCD Equal to K](https://grid47.xyz/posts/leetcode_2447) |

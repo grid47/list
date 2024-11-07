@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2614.md" >}}
 ---
 {{< youtube PEKRvVTWf4g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2615: Sum of Distances](https://grid47.xyz/posts/leetcode_2615) |

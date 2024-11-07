@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2465.md" >}}
 ---
 {{< youtube 2sWoLnBzuKw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2466: Count Ways To Build Good Strings](https://grid47.xyz/posts/leetcode_2466) |

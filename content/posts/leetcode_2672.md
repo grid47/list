@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2672.md" >}}
 ---
 {{< youtube w3L3-aRiNXE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2673: Make Costs of Paths Equal in a Binary Tree](https://grid47.xyz/posts/leetcode_2673) |

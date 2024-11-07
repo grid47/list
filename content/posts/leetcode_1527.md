@@ -28,7 +28,7 @@ SELECT * FROM Patients WHERE REGEXP_LIKE(conditions,'\\bDIAB1');
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1527.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1528: Shuffle String](https://grid47.xyz/posts/leetcode_1528) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1529: Minimum Suffix Flips](https://grid47.xyz/posts/leetcode_1529) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

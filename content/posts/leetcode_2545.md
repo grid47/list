@@ -67,7 +67,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2545.md" >}}
 ---
 {{< youtube YwAAwSzIavU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2546: Apply Bitwise Operations to Make Strings Equal](https://grid47.xyz/posts/leetcode_2546) |

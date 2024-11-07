@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2437.md" >}}
 ---
 {{< youtube LDYuUXRGMzE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2438: Range Product Queries of Powers](https://grid47.xyz/posts/leetcode_2438) |

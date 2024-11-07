@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2390.md" >}}
 ---
 {{< youtube Qln1aXh2kvQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2391: Minimum Amount of Time to Collect Garbage](https://grid47.xyz/posts/leetcode_2391) |

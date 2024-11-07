@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2582.md" >}}
 ---
 {{< youtube oVvmwsm2dKY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2583: Kth Largest Sum in a Binary Tree](https://grid47.xyz/posts/leetcode_2583) |

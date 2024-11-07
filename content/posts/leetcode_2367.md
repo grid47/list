@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2367.md" >}}
 ---
 {{< youtube WEyiBgwO4ZA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2368: Reachable Nodes With Restrictions](https://grid47.xyz/posts/leetcode_2368) |

@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2839.md" >}}
 ---
 {{< youtube b46PWRWHFp4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2840: Check if Strings Can be Made Equal With Operations II](https://grid47.xyz/posts/leetcode_2840) |

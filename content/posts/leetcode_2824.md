@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2824.md" >}}
 ---
 {{< youtube Xe1teNERwSY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2825: Make String a Subsequence Using Cyclic Increments](https://grid47.xyz/posts/leetcode_2825) |

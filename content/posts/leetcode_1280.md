@@ -34,7 +34,7 @@ ORDER BY s.student_id, sub.subject_name;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1280.md" >}}
 ---
 {{< youtube ThbkV4Fs7iE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1281: Subtract the Product and Sum of Digits of an Integer](https://grid47.xyz/posts/leetcode_1281) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1282: Group the People Given the Group Size They Belong To](https://grid47.xyz/posts/leetcode_1282) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

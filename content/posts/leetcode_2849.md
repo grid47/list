@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2849.md" >}}
 ---
 {{< youtube r4MaK8AhoLI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2850: Minimum Moves to Spread Stones Over Grid](https://grid47.xyz/posts/leetcode_2850) |

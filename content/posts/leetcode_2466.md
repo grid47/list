@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2466.md" >}}
 ---
 {{< youtube t0QkjXhE02g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2467: Most Profitable Path in a Tree](https://grid47.xyz/posts/leetcode_2467) |

@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2447.md" >}}
 ---
 {{< youtube QEvLvINq730 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2448: Minimum Cost to Make Array Equal](https://grid47.xyz/posts/leetcode_2448) |

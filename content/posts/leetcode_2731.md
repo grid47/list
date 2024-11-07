@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2731.md" >}}
 ---
 {{< youtube L86PHNze5RM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2732: Find a Good Subset of the Matrix](https://grid47.xyz/posts/leetcode_2732) |

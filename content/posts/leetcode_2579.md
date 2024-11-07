@@ -59,7 +59,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2579.md" >}}
 ---
 {{< youtube Gso3ss4daQI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2580: Count Ways to Group Overlapping Ranges](https://grid47.xyz/posts/leetcode_2580) |

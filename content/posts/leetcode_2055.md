@@ -79,7 +79,7 @@ int c = count[r] - count[l] +1;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2055.md" >}}
 ---
 {{< youtube -1IsQyTM6Lg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2056: Number of Valid Move Combinations On Chessboard](https://grid47.xyz/posts/leetcode_2056) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2058: Find the Minimum and Maximum Number of Nodes Between Critical Points](https://grid47.xyz/posts/leetcode_2058) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

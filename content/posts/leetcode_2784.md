@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2784.md" >}}
 ---
 {{< youtube le-u0OA8HMM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2785: Sort Vowels in a String](https://grid47.xyz/posts/leetcode_2785) |

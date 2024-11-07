@@ -51,7 +51,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2917.md" >}}
 ---
 {{< youtube jNPKX6McyCg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2918: Minimum Equal Sum of Two Arrays After Replacing Zeros](https://grid47.xyz/posts/leetcode_2918) |

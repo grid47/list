@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2811.md" >}}
 ---
 {{< youtube BVkYLy-gzcg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2812: Find the Safest Path in a Grid](https://grid47.xyz/posts/leetcode_2812) |

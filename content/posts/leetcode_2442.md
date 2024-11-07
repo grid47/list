@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2442.md" >}}
 ---
 {{< youtube YQ_8I9TmsyA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2443: Sum of Number and Its Reverse](https://grid47.xyz/posts/leetcode_2443) |

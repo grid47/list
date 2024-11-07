@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2368.md" >}}
 ---
 {{< youtube XMF3HhULMbM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2369: Check if There is a Valid Partition For The Array](https://grid47.xyz/posts/leetcode_2369) |

@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2515.md" >}}
 ---
 {{< youtube yTpRd3yvyz0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2516: Take K of Each Character From Left and Right](https://grid47.xyz/posts/leetcode_2516) |

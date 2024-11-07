@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2529.md" >}}
 ---
 {{< youtube 4uhvXmOp5Do >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2530: Maximal Score After Applying K Operations](https://grid47.xyz/posts/leetcode_2530) |

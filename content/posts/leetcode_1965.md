@@ -35,7 +35,7 @@ ORDER BY employee_id;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1965.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1966: Binary Searchable Numbers in an Unsorted Array](https://grid47.xyz/posts/leetcode_1966) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1968: Array With Elements Not Equal to Average of Neighbors](https://grid47.xyz/posts/leetcode_1968) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

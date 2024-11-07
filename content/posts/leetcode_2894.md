@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2894.md" >}}
 ---
 {{< youtube CXjNaWOdJ34 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2895: Minimum Processing Time](https://grid47.xyz/posts/leetcode_2895) |

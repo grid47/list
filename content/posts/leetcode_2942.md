@@ -40,7 +40,7 @@ private:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2942.md" >}}
 ---
 {{< youtube gJCrdytYtDY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2943: Maximize Area of Square Hole in Grid](https://grid47.xyz/posts/leetcode_2943) |

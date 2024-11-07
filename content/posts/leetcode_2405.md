@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2405.md" >}}
 ---
 {{< youtube 1Zx7gEznzfI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2406: Divide Intervals Into Minimum Number of Groups](https://grid47.xyz/posts/leetcode_2406) |

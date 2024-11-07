@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2746.md" >}}
 ---
 {{< youtube RxvXIWCooRE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2747: Count Zero Request Servers](https://grid47.xyz/posts/leetcode_2747) |

@@ -62,7 +62,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3044.md" >}}
 ---
 {{< youtube vyLo_FMR3IU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3045: Count Prefix and Suffix Pairs II](https://grid47.xyz/posts/leetcode_3045) |

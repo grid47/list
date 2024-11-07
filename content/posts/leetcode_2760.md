@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2760.md" >}}
 ---
 {{< youtube _XNaJUXSh04 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2761: Prime Pairs With Target Sum](https://grid47.xyz/posts/leetcode_2761) |

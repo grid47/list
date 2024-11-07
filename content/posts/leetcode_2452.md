@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2452.md" >}}
 ---
 {{< youtube 99KTTNdlKns >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2453: Destroy Sequential Targets](https://grid47.xyz/posts/leetcode_2453) |

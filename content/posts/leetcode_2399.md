@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2399.md" >}}
 ---
 {{< youtube uNv8XvliP0o >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2400: Number of Ways to Reach a Position After Exactly k Steps](https://grid47.xyz/posts/leetcode_2400) |

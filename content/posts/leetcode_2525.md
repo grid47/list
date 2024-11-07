@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2525.md" >}}
 ---
 {{< youtube dIciftyQXHo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2526: Find Consecutive Integers from a Data Stream](https://grid47.xyz/posts/leetcode_2526) |

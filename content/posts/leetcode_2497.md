@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2497.md" >}}
 ---
 {{< youtube fmTiTN7Raek >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2498: Frog Jump II](https://grid47.xyz/posts/leetcode_2498) |

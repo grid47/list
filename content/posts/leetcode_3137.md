@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3137.md" >}}
 ---
 {{< youtube iu8AnEQH4U8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3138: Minimum Length of Anagram Concatenation](https://grid47.xyz/posts/leetcode_3138) |

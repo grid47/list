@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2681.md" >}}
 ---
 {{< youtube ijJ025IUyN4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2682: Find the Losers of the Circular Game](https://grid47.xyz/posts/leetcode_2682) |

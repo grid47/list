@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2679.md" >}}
 ---
 {{< youtube oL_BwmPMkng >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2680: Maximum OR](https://grid47.xyz/posts/leetcode_2680) |

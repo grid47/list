@@ -30,7 +30,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2481.md" >}}
 ---
 {{< youtube l5akOAKERoY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2482: Difference Between Ones and Zeros in Row and Column](https://grid47.xyz/posts/leetcode_2482) |

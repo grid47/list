@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2501.md" >}}
 ---
 {{< youtube prcJMNtokGI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2502: Design Memory Allocator](https://grid47.xyz/posts/leetcode_2502) |

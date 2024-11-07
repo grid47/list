@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2580.md" >}}
 ---
 {{< youtube 5-8-2mDdoGs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2581: Count Number of Possible Root Nodes](https://grid47.xyz/posts/leetcode_2581) |

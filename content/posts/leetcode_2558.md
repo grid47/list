@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2558.md" >}}
 ---
 {{< youtube _Nh-PvC1Wkg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2559: Count Vowel Strings in Ranges](https://grid47.xyz/posts/leetcode_2559) |

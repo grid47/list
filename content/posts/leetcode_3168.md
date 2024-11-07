@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3168.md" >}}
 ---
 {{< youtube -VAEXKFWfXo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3169: Count Days Without Meetings](https://grid47.xyz/posts/leetcode_3169) |

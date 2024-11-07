@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2520.md" >}}
 ---
 {{< youtube 7SHHsS5kPJ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2521: Distinct Prime Factors of Product of Array](https://grid47.xyz/posts/leetcode_2521) |

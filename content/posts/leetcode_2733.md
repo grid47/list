@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2733.md" >}}
 ---
 {{< youtube n6Wg_vntUAA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2734: Lexicographically Smallest String After Substring Operation](https://grid47.xyz/posts/leetcode_2734) |

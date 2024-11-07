@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2864.md" >}}
 ---
 {{< youtube EUKLOAv4-IQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2865: Beautiful Towers I](https://grid47.xyz/posts/leetcode_2865) |

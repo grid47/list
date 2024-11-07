@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2651.md" >}}
 ---
 {{< youtube 8a04uEm1FlE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2652: Sum Multiples](https://grid47.xyz/posts/leetcode_2652) |

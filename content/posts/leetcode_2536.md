@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2536.md" >}}
 ---
 {{< youtube K4SJb0I-_hw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2537: Count the Number of Good Subarrays](https://grid47.xyz/posts/leetcode_2537) |

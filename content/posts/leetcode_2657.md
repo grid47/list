@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2657.md" >}}
 ---
 {{< youtube wpffRfDOBSU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2658: Maximum Number of Fish in a Grid](https://grid47.xyz/posts/leetcode_2658) |

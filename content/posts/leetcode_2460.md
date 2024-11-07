@@ -36,7 +36,7 @@ vector<int> applyOperations(vector<int>& A) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2460.md" >}}
 ---
 {{< youtube SykhaokFEIM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2461: Maximum Sum of Distinct Subarrays With Length K](https://grid47.xyz/posts/leetcode_2461) |

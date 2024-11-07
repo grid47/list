@@ -58,7 +58,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2584.md" >}}
 ---
 {{< youtube 9raE-fiwK-w >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2585: Number of Ways to Earn Points](https://grid47.xyz/posts/leetcode_2585) |

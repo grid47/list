@@ -33,7 +33,7 @@ HAVING balance > 10000;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1587.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1588: Sum of All Odd Length Subarrays](https://grid47.xyz/posts/leetcode_1588) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1589: Maximum Sum Obtained of Any Permutation](https://grid47.xyz/posts/leetcode_1589) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

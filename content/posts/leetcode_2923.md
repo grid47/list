@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2923.md" >}}
 ---
 {{< youtube 23vlLuh_v6c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2924: Find Champion II](https://grid47.xyz/posts/leetcode_2924) |

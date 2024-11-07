@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2593.md" >}}
 ---
 {{< youtube 6KKgxkXPtsQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2594: Minimum Time to Repair Cars](https://grid47.xyz/posts/leetcode_2594) |

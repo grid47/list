@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2561.md" >}}
 ---
 {{< youtube 59weIxEmESg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2562: Find the Array Concatenation Value](https://grid47.xyz/posts/leetcode_2562) |

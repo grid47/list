@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2682.md" >}}
 ---
 {{< youtube bNZuwqt1pg0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2683: Neighboring Bitwise XOR](https://grid47.xyz/posts/leetcode_2683) |

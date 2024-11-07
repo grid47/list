@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2913.md" >}}
 ---
 {{< youtube vBSxcFdwcQU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2914: Minimum Number of Changes to Make Binary String Beautiful](https://grid47.xyz/posts/leetcode_2914) |

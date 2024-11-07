@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2937.md" >}}
 ---
 {{< youtube 7F8GNWVlYgM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2938: Separate Black and White Balls](https://grid47.xyz/posts/leetcode_2938) |

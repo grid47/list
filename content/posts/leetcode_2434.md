@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2434.md" >}}
 ---
 {{< youtube -8gRuQFSuX8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2435: Paths in Matrix Whose Sum Is Divisible by K](https://grid47.xyz/posts/leetcode_2435) |

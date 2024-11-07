@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2607.md" >}}
 ---
 {{< youtube aBMFrPs2I5c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2608: Shortest Cycle in a Graph](https://grid47.xyz/posts/leetcode_2608) |

@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2566.md" >}}
 ---
 {{< youtube mmTJskqxquI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2567: Minimum Score by Changing Two Elements](https://grid47.xyz/posts/leetcode_2567) |

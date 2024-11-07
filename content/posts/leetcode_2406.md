@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2406.md" >}}
 ---
 {{< youtube FVjKrhdMutc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2407: Longest Increasing Subsequence II](https://grid47.xyz/posts/leetcode_2407) |

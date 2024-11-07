@@ -91,7 +91,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2965.md" >}}
 ---
 {{< youtube 6r-PQyoHHoQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode_2966) |

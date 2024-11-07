@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2491.md" >}}
 ---
 {{< youtube cueOpK5QMEA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2492: Minimum Score of a Path Between Two Cities](https://grid47.xyz/posts/leetcode_2492) |

@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2652.md" >}}
 ---
 {{< youtube A1BNPgQSHz8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2653: Sliding Subarray Beauty](https://grid47.xyz/posts/leetcode_2653) |

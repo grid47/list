@@ -31,7 +31,7 @@ ORDER BY percentage DESC, contest_id;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1633.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1634: Add Two Polynomials Represented as Linked Lists](https://grid47.xyz/posts/leetcode_1634) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1637: Widest Vertical Area Between Two Points Containing No Points](https://grid47.xyz/posts/leetcode_1637) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

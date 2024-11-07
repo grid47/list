@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2588.md" >}}
 ---
 {{< youtube JokGqRfyMPU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2589: Minimum Time to Complete All Tasks](https://grid47.xyz/posts/leetcode_2589) |

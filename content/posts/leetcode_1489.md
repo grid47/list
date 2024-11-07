@@ -93,7 +93,7 @@ private:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1489.md" >}}
 ---
 {{< youtube 83JnUxrLKJU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1490: Clone N-ary Tree](https://grid47.xyz/posts/leetcode_1490) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1491: Average Salary Excluding the Minimum and Maximum Salary](https://grid47.xyz/posts/leetcode_1491) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2400.md" >}}
 ---
 {{< youtube gFsI5OR-GfQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2401: Longest Nice Subarray](https://grid47.xyz/posts/leetcode_2401) |

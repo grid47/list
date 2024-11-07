@@ -77,7 +77,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2771.md" >}}
 ---
 {{< youtube 2aJYkQsBRbI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2772: Apply Operations to Make All Array Elements Equal to Zero](https://grid47.xyz/posts/leetcode_2772) |

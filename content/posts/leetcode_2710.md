@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2710.md" >}}
 ---
 {{< youtube cY-wxEdhSAY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2711: Difference of Number of Distinct Values on Diagonals](https://grid47.xyz/posts/leetcode_2711) |

@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2770.md" >}}
 ---
 {{< youtube _al08ON26RA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2771: Longest Non-decreasing Subarray From Two Arrays](https://grid47.xyz/posts/leetcode_2771) |

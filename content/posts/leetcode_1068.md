@@ -31,7 +31,7 @@ ON a.product_id = b.product_id;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1068.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1069: Product Sales Analysis II](https://grid47.xyz/posts/leetcode_1069) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1072: Flip Columns For Maximum Number of Equal Rows](https://grid47.xyz/posts/leetcode_1072) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

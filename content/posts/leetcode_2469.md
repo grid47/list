@@ -29,7 +29,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2469.md" >}}
 ---
 {{< youtube pJo95i-uamg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2470: Number of Subarrays With LCM Equal to K](https://grid47.xyz/posts/leetcode_2470) |

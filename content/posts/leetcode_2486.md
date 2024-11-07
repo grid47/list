@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2486.md" >}}
 ---
 {{< youtube gKDmO8ZLRD8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2487: Remove Nodes From Linked List](https://grid47.xyz/posts/leetcode_2487) |

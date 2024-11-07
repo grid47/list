@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2947.md" >}}
 ---
 {{< youtube AnuZGQmVPQM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2948: Make Lexicographically Smallest Array by Swapping Elements](https://grid47.xyz/posts/leetcode_2948) |

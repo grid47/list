@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2653.md" >}}
 ---
 {{< youtube ovFs2xad0_Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2654: Minimum Number of Operations to Make All Array Elements Equal to 1](https://grid47.xyz/posts/leetcode_2654) |

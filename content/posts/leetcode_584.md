@@ -28,7 +28,7 @@ SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id != 2;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/584.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #585: Investments in 2016](https://grid47.xyz/posts/leetcode_585) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #589: N-ary Tree Preorder Traversal](https://grid47.xyz/posts/leetcode_589) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

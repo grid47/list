@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2500.md" >}}
 ---
 {{< youtube xWRu1KHVAIo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2501: Longest Square Streak in an Array](https://grid47.xyz/posts/leetcode_2501) |

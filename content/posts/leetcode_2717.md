@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2717.md" >}}
 ---
 {{< youtube u4bKt4MBHUU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2718: Sum of Matrix After Queries](https://grid47.xyz/posts/leetcode_2718) |

@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2640.md" >}}
 ---
 {{< youtube Xp413jTlTNk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2641: Cousins in Binary Tree II](https://grid47.xyz/posts/leetcode_2641) |

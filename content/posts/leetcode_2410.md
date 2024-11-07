@@ -51,7 +51,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2410.md" >}}
 ---
 {{< youtube rvASCADV4Lw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2411: Smallest Subarrays With Maximum Bitwise OR](https://grid47.xyz/posts/leetcode_2411) |

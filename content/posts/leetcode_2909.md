@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2909.md" >}}
 ---
 {{< youtube PU5YZP1-uVA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2910: Minimum Number of Groups to Create a Valid Assignment](https://grid47.xyz/posts/leetcode_2910) |

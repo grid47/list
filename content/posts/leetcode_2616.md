@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2616.md" >}}
 ---
 {{< youtube lf1Pxg7IrzQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2617: Minimum Number of Visited Cells in a Grid](https://grid47.xyz/posts/leetcode_2617) |

@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2767.md" >}}
 ---
 {{< youtube xV-TA-TtiAg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2768: Number of Black Blocks](https://grid47.xyz/posts/leetcode_2768) |

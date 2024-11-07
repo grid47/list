@@ -28,7 +28,7 @@ SELECT MAX(Salary) AS "SecondHighestSalary" FROM Employee WHERE Salary < (SELECT
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/176.md" >}}
 ---
 {{< youtube 3xc0_XIob1M >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #177: Nth Highest Salary](https://grid47.xyz/posts/leetcode_177) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #182: Duplicate Emails](https://grid47.xyz/posts/leetcode_182) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

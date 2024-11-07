@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2522.md" >}}
 ---
 {{< youtube XQh9V8PEIiI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2523: Closest Prime Numbers in Range](https://grid47.xyz/posts/leetcode_2523) |

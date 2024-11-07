@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2433.md" >}}
 ---
 {{< youtube idcT-p_DDrI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2434: Using a Robot to Print the Lexicographically Smallest String](https://grid47.xyz/posts/leetcode_2434) |

@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3136.md" >}}
 ---
 {{< youtube -sU51QkOwLY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3137: Minimum Number of Operations to Make Word K-Periodic](https://grid47.xyz/posts/leetcode_3137) |

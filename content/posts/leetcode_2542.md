@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2542.md" >}}
 ---
 {{< youtube vJ7ZWmfO1Rw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2543: Check if Point Is Reachable](https://grid47.xyz/posts/leetcode_2543) |

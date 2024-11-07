@@ -66,7 +66,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2741.md" >}}
 ---
 {{< youtube AxXNOXj1upY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2742: Painting the Walls](https://grid47.xyz/posts/leetcode_2742) |

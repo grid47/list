@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2380.md" >}}
 ---
 {{< youtube fP5kg4ETjUc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2381: Shifting Letters II](https://grid47.xyz/posts/leetcode_2381) |

@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2660.md" >}}
 ---
 {{< youtube UzLjzmjhVqs >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2661: First Completely Painted Row or Column](https://grid47.xyz/posts/leetcode_2661) |

@@ -70,7 +70,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2581.md" >}}
 ---
 {{< youtube bcTVO0KNG3A >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2582: Pass the Pillow](https://grid47.xyz/posts/leetcode_2582) |

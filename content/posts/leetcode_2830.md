@@ -67,7 +67,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2830.md" >}}
 ---
 {{< youtube lrZM1nLXcmc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2831: Find the Longest Equal Subarray](https://grid47.xyz/posts/leetcode_2831) |

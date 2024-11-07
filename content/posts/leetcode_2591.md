@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2591.md" >}}
 ---
 {{< youtube rCLdAlt05XE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2592: Maximize Greatness of an Array](https://grid47.xyz/posts/leetcode_2592) |

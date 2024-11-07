@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2639.md" >}}
 ---
 {{< youtube RSRjK563HVY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2640: Find the Score of All Prefixes of an Array](https://grid47.xyz/posts/leetcode_2640) |

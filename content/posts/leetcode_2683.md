@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2683.md" >}}
 ---
 {{< youtube DDQR_mDTTFI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2684: Maximum Number of Moves in a Grid](https://grid47.xyz/posts/leetcode_2684) |

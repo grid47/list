@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2828.md" >}}
 ---
 {{< youtube GcgV-AtAmkg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2829: Determine the Minimum Sum of a k-avoiding Array](https://grid47.xyz/posts/leetcode_2829) |

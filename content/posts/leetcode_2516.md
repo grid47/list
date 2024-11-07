@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2516.md" >}}
 ---
 {{< youtube QI4kCksMru0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2517: Maximum Tastiness of Candy Basket](https://grid47.xyz/posts/leetcode_2517) |

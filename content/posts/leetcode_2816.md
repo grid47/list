@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2816.md" >}}
 ---
 {{< youtube UmqNCKUeIy4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2817: Minimum Absolute Difference Between Elements With Constraint](https://grid47.xyz/posts/leetcode_2817) |

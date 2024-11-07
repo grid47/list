@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2684.md" >}}
 ---
 {{< youtube MQQZiN9CnDk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2685: Count the Number of Complete Components](https://grid47.xyz/posts/leetcode_2685) |

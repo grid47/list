@@ -33,7 +33,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2765.md" >}}
 ---
 {{< youtube Yg_VhAOIIuk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2766: Relocate Marbles](https://grid47.xyz/posts/leetcode_2766) |

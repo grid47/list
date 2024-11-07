@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2807.md" >}}
 ---
 {{< youtube SVnSiD95r-0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2808: Minimum Seconds to Equalize a Circular Array](https://grid47.xyz/posts/leetcode_2808) |

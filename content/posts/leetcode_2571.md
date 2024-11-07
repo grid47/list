@@ -51,7 +51,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2571.md" >}}
 ---
 {{< youtube Z14XgQXPw2I >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2572: Count the Number of Square-Free Subsets](https://grid47.xyz/posts/leetcode_2572) |

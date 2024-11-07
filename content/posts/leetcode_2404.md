@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2404.md" >}}
 ---
 {{< youtube JykfDvn2o0M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2405: Optimal Partition of String](https://grid47.xyz/posts/leetcode_2405) |

@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2389.md" >}}
 ---
 {{< youtube Lb4Dp6gwh6g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2390: Removing Stars From a String](https://grid47.xyz/posts/leetcode_2390) |

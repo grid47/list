@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2870.md" >}}
 ---
 {{< youtube _AcO35R0fss >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2871: Split Array Into Maximum Number of Subarrays](https://grid47.xyz/posts/leetcode_2871) |

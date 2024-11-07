@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2369.md" >}}
 ---
 {{< youtube HywUcx60BRo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2370: Longest Ideal Subsequence](https://grid47.xyz/posts/leetcode_2370) |

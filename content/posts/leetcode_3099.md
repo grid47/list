@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3099.md" >}}
 ---
 {{< youtube QplrY0LW62M >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3100: Water Bottles II](https://grid47.xyz/posts/leetcode_3100) |

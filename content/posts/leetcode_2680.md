@@ -64,7 +64,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2680.md" >}}
 ---
 {{< youtube XiaXIrEHFEY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2681: Power of Heroes](https://grid47.xyz/posts/leetcode_2681) |

@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2530.md" >}}
 ---
 {{< youtube nsOipmYbRlc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2531: Make Number of Distinct Characters Equal](https://grid47.xyz/posts/leetcode_2531) |

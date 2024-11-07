@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2946.md" >}}
 ---
 {{< youtube 7RGWUCc5IHw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2947: Count Beautiful Substrings I](https://grid47.xyz/posts/leetcode_2947) |

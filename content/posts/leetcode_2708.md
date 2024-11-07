@@ -67,7 +67,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2708.md" >}}
 ---
 {{< youtube Kqv0-lRVYwM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2709: Greatest Common Divisor Traversal](https://grid47.xyz/posts/leetcode_2709) |

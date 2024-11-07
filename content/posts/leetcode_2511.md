@@ -36,7 +36,7 @@ int captureForts(vector<int>& forts) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2511.md" >}}
 ---
 {{< youtube y7BwYY4UFak >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2512: Reward Top K Students](https://grid47.xyz/posts/leetcode_2512) |

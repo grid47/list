@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2860.md" >}}
 ---
 {{< youtube dDse65NWFt8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2861: Maximum Number of Alloys](https://grid47.xyz/posts/leetcode_2861) |

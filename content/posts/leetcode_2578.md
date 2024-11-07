@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2578.md" >}}
 ---
 {{< youtube rRksdLnCAqI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2579: Count Total Number of Colored Cells](https://grid47.xyz/posts/leetcode_2579) |

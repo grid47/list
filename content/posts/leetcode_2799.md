@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2799.md" >}}
 ---
 {{< youtube 1wXkWZtSD28 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2800: Shortest String That Contains Three Strings](https://grid47.xyz/posts/leetcode_2800) |

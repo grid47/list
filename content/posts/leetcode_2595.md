@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2595.md" >}}
 ---
 {{< youtube SMk2dF8hReg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2596: Check Knight Tour Configuration](https://grid47.xyz/posts/leetcode_2596) |

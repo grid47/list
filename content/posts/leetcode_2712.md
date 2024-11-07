@@ -89,7 +89,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2712.md" >}}
 ---
 {{< youtube 8MHnlNroHaU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2713: Maximum Strictly Increasing Cells in a Matrix](https://grid47.xyz/posts/leetcode_2713) |

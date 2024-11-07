@@ -54,7 +54,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2711.md" >}}
 ---
 {{< youtube i166oIOHaPE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2712: Minimum Cost to Make All Characters Equal](https://grid47.xyz/posts/leetcode_2712) |

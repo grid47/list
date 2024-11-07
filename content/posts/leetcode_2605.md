@@ -50,7 +50,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2605.md" >}}
 ---
 {{< youtube ZlVNO8BFBCY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2606: Find the Substring With Maximum Cost](https://grid47.xyz/posts/leetcode_2606) |

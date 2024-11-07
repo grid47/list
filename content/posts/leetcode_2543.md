@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2543.md" >}}
 ---
 {{< youtube QD0ZSHeDb8Q >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2544: Alternating Digit Sum](https://grid47.xyz/posts/leetcode_2544) |

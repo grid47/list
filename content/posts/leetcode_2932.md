@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2932.md" >}}
 ---
 {{< youtube n6CncKaYGwk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2933: High-Access Employees](https://grid47.xyz/posts/leetcode_2933) |
