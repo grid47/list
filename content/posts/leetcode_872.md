@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/leaf-similar-trees/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

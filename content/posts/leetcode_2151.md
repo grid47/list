@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-good-people-based-on-statements/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

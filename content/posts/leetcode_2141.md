@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-running-time-of-n-computers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

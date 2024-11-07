@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-winner-of-an-array-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

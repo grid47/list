@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-k-sorted-lists/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

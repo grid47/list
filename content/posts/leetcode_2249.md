@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-lattice-points-inside-a-circle/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

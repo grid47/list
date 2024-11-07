@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-mode-in-binary-search-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

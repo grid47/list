@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/odd-string-difference/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

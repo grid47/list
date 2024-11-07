@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/beautiful-towers-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

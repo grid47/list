@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-shortest-superstring/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

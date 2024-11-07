@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/create-target-array-in-the-given-order/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

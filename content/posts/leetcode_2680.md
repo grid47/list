@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-or/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

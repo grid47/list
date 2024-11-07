@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

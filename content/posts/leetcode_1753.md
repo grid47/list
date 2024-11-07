@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-score-from-removing-stones/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

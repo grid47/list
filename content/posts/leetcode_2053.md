@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-distinct-string-in-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

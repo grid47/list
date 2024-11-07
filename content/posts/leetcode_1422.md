@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-score-after-splitting-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

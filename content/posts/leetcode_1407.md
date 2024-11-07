@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/top-travellers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

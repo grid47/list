@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

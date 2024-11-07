@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

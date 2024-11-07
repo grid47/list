@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

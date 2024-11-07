@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-it-is-possible-to-split-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

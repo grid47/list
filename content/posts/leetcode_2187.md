@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-complete-trips/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

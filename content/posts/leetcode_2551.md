@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/put-marbles-in-bags/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

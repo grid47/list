@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-repeating-character-replacement/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

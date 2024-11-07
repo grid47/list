@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/queries-quality-and-percentage/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

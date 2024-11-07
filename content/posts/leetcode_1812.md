@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-color-of-a-chessboard-square/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

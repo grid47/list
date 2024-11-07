@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-string-with-repeat-limit/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

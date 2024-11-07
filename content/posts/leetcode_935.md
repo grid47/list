@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/knight-dialer/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

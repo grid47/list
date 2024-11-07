@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-strictly-increasing-cells-in-a-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

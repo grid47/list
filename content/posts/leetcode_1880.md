@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

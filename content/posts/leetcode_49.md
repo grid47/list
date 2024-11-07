@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/group-anagrams/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

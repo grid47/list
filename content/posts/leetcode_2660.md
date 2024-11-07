@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

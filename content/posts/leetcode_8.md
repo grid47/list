@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/string-to-integer-atoi/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

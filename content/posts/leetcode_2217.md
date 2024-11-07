@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-palindrome-with-fixed-length/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

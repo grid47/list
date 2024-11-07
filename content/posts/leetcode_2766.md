@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/relocate-marbles/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

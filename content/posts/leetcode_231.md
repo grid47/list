@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/power-of-two/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

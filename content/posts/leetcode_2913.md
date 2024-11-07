@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

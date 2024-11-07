@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/airplane-seat-assignment-probability/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

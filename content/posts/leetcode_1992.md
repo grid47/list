@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-groups-of-farmland/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

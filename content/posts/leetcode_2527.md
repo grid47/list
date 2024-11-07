@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-xor-beauty-of-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

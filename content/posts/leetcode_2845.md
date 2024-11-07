@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-of-interesting-subarrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

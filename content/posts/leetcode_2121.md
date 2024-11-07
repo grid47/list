@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/intervals-between-identical-elements/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

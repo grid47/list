@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

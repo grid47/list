@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/height-checker/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

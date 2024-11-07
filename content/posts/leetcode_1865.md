@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/goal-parser-interpretation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

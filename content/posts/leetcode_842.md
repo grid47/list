@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

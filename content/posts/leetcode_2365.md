@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/task-scheduler-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

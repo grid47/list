@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-node-in-a-linked-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

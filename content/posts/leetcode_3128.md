@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/right-triangles/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

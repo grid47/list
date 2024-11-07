@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-sum-of-averages/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

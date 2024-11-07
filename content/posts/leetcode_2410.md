@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

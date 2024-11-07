@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-original-array-from-doubled-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

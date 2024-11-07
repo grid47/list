@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subdomain-visit-count/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

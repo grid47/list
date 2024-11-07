@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

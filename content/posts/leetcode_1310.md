@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/xor-queries-of-a-subarray/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

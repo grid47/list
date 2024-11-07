@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-a-subsequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

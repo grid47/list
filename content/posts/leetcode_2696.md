@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

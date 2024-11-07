@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/making-a-large-island/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

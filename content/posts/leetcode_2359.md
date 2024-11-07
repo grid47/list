@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-word-in-dictionary/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

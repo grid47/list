@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-maximum-divisibility-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

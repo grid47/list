@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lemonade-change/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

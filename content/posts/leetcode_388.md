@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-absolute-file-path/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

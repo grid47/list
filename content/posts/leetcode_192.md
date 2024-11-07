@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/word-frequency/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

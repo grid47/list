@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/chalkboard-xor-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

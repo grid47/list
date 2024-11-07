@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-zero-request-servers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

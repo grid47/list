@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

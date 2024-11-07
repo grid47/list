@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

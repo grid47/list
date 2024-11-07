@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/score-after-flipping-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

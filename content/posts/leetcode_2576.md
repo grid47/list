@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-pairs-of-points-with-distance-k/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

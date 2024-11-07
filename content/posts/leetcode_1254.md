@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-closed-islands/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

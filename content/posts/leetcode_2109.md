@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/adding-spaces-to-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

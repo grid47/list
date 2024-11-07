@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

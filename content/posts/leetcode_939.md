@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-area-rectangle/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

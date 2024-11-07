@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

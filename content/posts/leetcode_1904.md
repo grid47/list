@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-full-rounds-you-have-played/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

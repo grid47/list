@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/letter-tile-possibilities/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

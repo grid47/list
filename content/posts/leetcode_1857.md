@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

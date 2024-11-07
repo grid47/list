@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/next-greater-numerically-balanced-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

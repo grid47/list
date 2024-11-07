@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

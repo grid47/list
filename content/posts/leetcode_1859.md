@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sorting-the-sentence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

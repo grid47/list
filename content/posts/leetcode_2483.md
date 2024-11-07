@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-penalty-for-a-shop/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

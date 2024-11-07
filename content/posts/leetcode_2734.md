@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

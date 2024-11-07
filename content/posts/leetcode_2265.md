@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

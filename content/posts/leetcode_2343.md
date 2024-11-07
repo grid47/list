@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/query-kth-smallest-trimmed-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

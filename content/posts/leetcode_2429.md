@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-xor/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

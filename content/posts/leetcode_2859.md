@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

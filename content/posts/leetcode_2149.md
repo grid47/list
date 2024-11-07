@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rearrange-array-elements-by-sign/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

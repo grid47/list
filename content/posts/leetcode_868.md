@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-gap/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-product-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

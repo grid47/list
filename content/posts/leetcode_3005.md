@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-elements-with-maximum-frequency/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

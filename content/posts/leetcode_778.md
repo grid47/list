@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swim-in-rising-water/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

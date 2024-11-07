@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-similar-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

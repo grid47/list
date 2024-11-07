@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/soup-servings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-n-th-value-after-k-seconds/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

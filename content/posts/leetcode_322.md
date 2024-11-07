@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/coin-change/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

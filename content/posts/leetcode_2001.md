@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

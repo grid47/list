@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-array-concatenation-value/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

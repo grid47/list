@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/watering-plants/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

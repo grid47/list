@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convex-polygon/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/out-of-boundary-paths/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

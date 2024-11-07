@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-best-non-overlapping-events/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fix-names-in-a-table/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

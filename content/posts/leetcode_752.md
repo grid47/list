@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/open-the-lock/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

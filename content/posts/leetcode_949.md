@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-time-for-given-digits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

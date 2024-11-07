@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

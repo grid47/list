@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/recyclable-and-low-fat-products/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

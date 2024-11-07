@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/bitwise-ors-of-subarrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

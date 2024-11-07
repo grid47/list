@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/prime-pairs-with-target-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

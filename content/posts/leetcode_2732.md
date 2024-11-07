@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-a-good-subset-of-the-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

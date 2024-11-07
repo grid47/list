@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/stone-game-ix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

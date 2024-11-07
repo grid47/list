@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-days-spent-together/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

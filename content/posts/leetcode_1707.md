@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-xor-with-an-element-from-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

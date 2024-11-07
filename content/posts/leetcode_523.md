@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/continuous-subarray-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

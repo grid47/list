@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/incremental-memory-leak/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

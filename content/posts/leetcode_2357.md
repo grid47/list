@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

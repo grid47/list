@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

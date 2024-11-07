@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-inverse-pairs-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

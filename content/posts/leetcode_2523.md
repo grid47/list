@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/closest-prime-numbers-in-range/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

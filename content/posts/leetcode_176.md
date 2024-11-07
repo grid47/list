@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/second-highest-salary/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

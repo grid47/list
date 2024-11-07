@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/water-bottles-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

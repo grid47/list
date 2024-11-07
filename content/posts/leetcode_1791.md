@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-center-of-star-graph/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-adjacent-almost-equal-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/detect-capital/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

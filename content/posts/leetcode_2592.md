@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-greatness-of-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/friends-of-appropriate-ages/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

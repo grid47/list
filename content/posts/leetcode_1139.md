@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-1-bordered-square/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

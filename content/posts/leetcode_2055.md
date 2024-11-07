@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/plates-between-candles/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

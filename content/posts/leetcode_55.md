@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/jump-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

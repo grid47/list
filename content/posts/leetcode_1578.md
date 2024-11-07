@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-make-rope-colorful/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-radius-subarray-averages/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

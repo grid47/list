@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/global-and-local-inversions/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

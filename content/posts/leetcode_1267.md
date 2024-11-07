@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-servers-that-communicate/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

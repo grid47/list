@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/richest-customer-wealth/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

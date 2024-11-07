@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/assign-cookies/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

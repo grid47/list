@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

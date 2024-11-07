@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-if-two-strings-are-close/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

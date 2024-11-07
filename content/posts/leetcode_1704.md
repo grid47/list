@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-if-string-halves-are-alike/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

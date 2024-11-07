@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/mini-parser/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

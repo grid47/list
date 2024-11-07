@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-artifacts-that-can-be-extracted/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

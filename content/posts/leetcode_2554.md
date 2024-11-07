@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

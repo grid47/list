@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/beautiful-arrangement-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

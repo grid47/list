@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

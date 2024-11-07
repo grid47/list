@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fibonacci-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

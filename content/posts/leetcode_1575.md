@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-all-possible-routes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

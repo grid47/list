@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-items-with-the-maximum-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

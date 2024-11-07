@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

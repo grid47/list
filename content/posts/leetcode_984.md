@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/string-without-aaa-or-bbb/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

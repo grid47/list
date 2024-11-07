@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cyclically-rotating-a-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/percentage-of-letter-in-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

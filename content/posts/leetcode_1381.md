@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-a-stack-with-increment-operation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/diameter-of-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

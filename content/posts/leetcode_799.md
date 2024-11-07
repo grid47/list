@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/champagne-tower/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

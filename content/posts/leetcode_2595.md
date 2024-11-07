@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-even-and-odd-bits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sequentially-ordinal-rank-tracker/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

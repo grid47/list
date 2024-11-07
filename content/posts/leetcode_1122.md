@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/relative-sort-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

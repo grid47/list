@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

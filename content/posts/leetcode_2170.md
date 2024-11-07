@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

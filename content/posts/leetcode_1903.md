@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-odd-number-in-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

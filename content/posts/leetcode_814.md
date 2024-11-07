@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-pruning/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/categorize-box-according-to-criteria/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

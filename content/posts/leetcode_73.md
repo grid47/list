@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/set-matrix-zeroes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

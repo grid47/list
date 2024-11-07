@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

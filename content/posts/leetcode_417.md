@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pacific-atlantic-water-flow/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

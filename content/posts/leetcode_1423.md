@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

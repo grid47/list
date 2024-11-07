@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

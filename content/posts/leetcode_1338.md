@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reduce-array-size-to-the-half/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

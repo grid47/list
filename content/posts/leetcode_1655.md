@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distribute-repeating-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

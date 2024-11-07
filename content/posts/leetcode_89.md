@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/gray-code/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

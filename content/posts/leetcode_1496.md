@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/path-crossing/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/frog-jump/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

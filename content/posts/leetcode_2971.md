@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

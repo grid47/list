@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-of-absolute-value-expression/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

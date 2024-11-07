@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

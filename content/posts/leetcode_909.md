@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/snakes-and-ladders/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

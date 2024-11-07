@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-maximum-achievable-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

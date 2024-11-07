@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/brick-wall/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

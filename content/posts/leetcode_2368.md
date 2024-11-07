@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reachable-nodes-with-restrictions/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

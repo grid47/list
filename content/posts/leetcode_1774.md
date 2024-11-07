@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/closest-dessert-cost/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

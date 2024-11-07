@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sender-with-largest-word-count/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

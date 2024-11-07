@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-trailing-zeros-from-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

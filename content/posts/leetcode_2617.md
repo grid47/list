@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-visited-cells-in-a-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

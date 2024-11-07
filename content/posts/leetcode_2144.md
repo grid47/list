@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

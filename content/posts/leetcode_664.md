@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/strange-printer/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-whether-two-strings-are-almost-equivalent/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

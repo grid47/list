@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/vowels-of-all-substrings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

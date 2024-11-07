@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/monotone-increasing-digits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

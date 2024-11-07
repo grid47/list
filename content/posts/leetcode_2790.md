@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-groups-with-increasing-length/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

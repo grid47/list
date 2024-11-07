@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

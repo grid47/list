@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-tested-devices-after-test-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

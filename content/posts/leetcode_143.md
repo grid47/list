@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reorder-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

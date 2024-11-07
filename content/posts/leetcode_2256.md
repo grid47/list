@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-average-difference/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

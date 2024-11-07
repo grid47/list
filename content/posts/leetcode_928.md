@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-malware-spread-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

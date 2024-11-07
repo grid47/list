@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/add-two-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

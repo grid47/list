@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/coordinate-with-maximum-network-quality/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

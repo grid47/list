@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

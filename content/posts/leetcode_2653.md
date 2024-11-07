@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sliding-subarray-beauty/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

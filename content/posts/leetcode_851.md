@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/loud-and-rich/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

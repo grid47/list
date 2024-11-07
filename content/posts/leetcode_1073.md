@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/adding-two-negabinary-numbers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

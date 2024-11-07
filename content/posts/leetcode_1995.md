@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-special-quadruplets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

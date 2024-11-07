@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-labels/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

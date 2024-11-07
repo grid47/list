@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/can-make-palindrome-from-substring/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/broken-calculator/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

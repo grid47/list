@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

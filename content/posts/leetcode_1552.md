@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/magnetic-force-between-two-balls/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

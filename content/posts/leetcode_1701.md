@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/average-waiting-time/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

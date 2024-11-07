@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/mirror-reflection/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

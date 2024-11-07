@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-sudoku/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

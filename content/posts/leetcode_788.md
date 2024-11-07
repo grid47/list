@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotated-digits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

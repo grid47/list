@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

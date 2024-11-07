@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-team-with-no-conflicts/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

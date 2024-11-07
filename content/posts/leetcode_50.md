@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/powx-n/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

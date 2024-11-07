@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/strictly-palindromic-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-two-strings-to-make-palindrome/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

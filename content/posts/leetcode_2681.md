@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/power-of-heroes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

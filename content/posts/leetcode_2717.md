@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/semi-ordered-permutation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

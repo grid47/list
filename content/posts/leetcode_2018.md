@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

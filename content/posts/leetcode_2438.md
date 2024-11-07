@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-product-queries-of-powers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

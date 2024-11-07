@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/avoid-flood-in-the-city/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

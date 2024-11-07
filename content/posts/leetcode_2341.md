@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-pairs-in-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

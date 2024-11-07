@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/greatest-common-divisor-traversal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

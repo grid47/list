@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

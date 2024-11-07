@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/profitable-schemes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

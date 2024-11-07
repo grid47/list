@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-jumps-to-reach-the-last-index/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

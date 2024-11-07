@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-convert-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

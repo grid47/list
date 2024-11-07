@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

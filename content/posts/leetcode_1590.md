@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-sum-divisible-by-p/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

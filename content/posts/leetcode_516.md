@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-palindromic-subsequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

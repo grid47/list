@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rearrange-array-to-maximize-prefix-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

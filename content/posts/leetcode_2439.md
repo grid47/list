@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-maximum-of-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

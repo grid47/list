@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

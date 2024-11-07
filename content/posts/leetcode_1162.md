@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/as-far-from-land-as-possible/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

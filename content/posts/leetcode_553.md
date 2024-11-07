@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/optimal-division/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

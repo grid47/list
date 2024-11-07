@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swap-adjacent-in-lr-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

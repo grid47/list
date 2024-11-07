@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/print-zero-even-odd/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

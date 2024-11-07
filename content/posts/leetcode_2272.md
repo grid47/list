@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/substring-with-largest-variance/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

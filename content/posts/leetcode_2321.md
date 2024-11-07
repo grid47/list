@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-score-of-spliced-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-palindrome-product/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/equal-row-and-column-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

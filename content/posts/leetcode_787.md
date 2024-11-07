@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cheapest-flights-within-k-stops/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

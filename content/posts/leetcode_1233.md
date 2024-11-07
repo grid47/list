@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,8 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum/description/)
 
 ---
-**Visualization:**
-{{< algo-viz "images/anime/1.html" >}}
 **Code:**
 
 {{< highlight cpp >}}

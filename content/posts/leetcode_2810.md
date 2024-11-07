@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/faulty-keyboard/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

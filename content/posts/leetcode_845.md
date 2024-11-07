@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-mountain-in-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-three-strings-equal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

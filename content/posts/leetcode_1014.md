@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-sightseeing-pair/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

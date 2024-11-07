@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

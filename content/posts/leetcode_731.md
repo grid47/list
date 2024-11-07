@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/my-calendar-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

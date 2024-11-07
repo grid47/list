@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/min-cost-climbing-stairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

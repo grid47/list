@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/build-array-from-permutation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

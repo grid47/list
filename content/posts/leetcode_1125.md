@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-sufficient-team/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-dot-product-of-two-subsequences/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

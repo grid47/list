@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distribute-money-to-maximum-children/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

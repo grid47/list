@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-even-numbers-after-queries/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/prime-palindrome/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

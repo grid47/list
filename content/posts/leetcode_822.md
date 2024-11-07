@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/card-flipping-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

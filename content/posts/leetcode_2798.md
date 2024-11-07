@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-employees-who-met-the-target/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

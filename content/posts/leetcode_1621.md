@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

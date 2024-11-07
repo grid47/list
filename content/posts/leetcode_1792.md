@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-average-pass-ratio/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

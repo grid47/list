@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-possible-full-binary-trees/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

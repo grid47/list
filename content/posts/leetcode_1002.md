@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-common-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

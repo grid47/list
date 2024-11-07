@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-and-replace-in-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

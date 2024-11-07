@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/solving-questions-with-brainpower/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

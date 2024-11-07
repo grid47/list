@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/groups-of-special-equivalent-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

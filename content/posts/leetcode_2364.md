@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-number-of-bad-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

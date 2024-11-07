@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

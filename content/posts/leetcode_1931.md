@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/painting-a-grid-with-three-different-colors/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

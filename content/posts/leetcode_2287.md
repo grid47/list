@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rearrange-characters-to-make-target-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

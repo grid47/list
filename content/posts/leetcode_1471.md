@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-k-strongest-values-in-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

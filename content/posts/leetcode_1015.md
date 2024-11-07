@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-integer-divisible-by-k/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

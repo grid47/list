@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-diff-pairs-in-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

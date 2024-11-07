@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/removing-minimum-and-maximum-from-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

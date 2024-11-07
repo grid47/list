@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-increment-operations-to-make-array-beautiful/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

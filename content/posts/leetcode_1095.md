@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-in-mountain-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

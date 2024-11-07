@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/most-popular-video-creator/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

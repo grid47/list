@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-beauty-in-the-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

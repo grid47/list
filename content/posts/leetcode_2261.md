@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-divisible-elements-subarrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

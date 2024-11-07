@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-string-starting-from-leaf/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

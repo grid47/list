@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

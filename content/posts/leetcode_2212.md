@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-points-in-an-archery-competition/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

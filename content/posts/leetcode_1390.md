@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/four-divisors/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

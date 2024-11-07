@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

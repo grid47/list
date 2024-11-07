@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-string-to-monotone-increasing/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

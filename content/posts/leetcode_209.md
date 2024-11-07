@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

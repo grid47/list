@@ -21,7 +21,6 @@
 | LeetCode 952 | [Largest Component Size by Common Factor](https://grid47.xyz/posts/leetcode_952) |
 | LeetCode 733 | [Flood Fill](https://grid47.xyz/posts/leetcode_733) |
 | LeetCode 743 | [Network Delay Time](https://grid47.xyz/posts/leetcode_743) |
-| LeetCode 126 | [Word Ladder II](https://grid47.xyz/posts/leetcode_126) |
 | LeetCode 127 | [Word Ladder](https://grid47.xyz/posts/leetcode_127) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1326900/graph-algorithms-problems-to-practice)

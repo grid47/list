@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-integers-by-the-power-value/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

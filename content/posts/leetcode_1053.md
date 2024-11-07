@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/previous-permutation-with-one-swap/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

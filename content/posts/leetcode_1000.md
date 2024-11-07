@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-merge-stones/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

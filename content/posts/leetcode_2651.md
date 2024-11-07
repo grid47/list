@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/calculate-delayed-arrival-time/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

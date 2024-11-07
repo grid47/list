@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

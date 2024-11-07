@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/super-egg-drop/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

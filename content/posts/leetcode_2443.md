@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-number-and-its-reverse/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

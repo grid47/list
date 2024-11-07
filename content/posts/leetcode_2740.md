@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-value-of-the-partition/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

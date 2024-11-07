@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

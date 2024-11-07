@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-xor-after-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

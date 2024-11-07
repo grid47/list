@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-strength-of-a-group/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

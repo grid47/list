@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-fish-in-a-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

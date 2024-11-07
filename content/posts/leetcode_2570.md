@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

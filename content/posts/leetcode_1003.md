@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

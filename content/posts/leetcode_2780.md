@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-index-of-a-valid-split/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

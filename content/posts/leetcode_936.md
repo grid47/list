@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/stamping-the-sequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

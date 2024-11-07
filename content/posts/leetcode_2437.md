@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-valid-clock-times/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

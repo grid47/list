@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-it-is-a-good-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

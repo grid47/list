@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-common-value/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

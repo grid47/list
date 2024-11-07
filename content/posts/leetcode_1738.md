@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

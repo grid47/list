@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

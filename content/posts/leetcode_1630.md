@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/arithmetic-subarrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

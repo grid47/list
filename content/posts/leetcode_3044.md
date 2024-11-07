@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/most-frequent-prime/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

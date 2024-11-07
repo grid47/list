@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-number-of-rectangles-containing-each-point/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

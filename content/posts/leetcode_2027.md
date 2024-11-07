@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-convert-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

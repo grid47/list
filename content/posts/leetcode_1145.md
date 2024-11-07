@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-coloring-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

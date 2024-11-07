@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

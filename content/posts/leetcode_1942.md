@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

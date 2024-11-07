@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

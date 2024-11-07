@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-valid-parentheses/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

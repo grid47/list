@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minesweeper/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

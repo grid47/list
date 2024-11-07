@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/move-pieces-to-obtain-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

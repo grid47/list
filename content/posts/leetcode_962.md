@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-width-ramp/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

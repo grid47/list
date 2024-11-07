@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-music-playlists/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-distances/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/koko-eating-bananas/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

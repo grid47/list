@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/row-with-maximum-ones/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

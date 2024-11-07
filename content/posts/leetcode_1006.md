@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/clumsy-factorial/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

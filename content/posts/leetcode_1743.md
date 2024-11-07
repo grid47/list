@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-additions-to-make-valid-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

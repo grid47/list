@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/repeated-string-match/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

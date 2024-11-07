@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-submatrix-with-rearrangements/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

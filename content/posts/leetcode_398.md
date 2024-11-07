@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/random-pick-index/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

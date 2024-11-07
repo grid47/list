@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/node-with-highest-edge-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

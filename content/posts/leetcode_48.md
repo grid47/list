@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotate-image/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

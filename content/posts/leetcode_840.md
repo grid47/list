@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/magic-squares-in-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

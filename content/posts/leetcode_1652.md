@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/defuse-the-bomb/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

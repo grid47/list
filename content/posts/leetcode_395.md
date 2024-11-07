@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

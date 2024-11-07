@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/palindromic-substrings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

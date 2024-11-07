@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-pivot-index/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

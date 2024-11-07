@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

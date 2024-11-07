@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

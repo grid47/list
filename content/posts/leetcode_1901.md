@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-a-peak-element-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

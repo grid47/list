@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-area-of-island/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

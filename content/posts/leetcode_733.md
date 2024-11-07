@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flood-fill/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

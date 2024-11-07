@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-prefixes-of-a-given-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

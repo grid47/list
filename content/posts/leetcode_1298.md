@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

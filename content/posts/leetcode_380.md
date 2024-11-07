@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-delete-getrandom-o1/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

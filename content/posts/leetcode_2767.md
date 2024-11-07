@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-string-into-minimum-beautiful-substrings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

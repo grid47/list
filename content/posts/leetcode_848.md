@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shifting-letters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-columns-to-make-sorted-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-all-digits-with-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

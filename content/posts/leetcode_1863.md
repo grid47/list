@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-champion-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

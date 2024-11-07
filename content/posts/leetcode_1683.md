@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/invalid-tweets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

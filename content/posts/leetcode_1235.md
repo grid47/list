@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-profit-in-job-scheduling/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

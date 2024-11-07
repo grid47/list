@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

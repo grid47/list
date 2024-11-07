@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-poker-hand/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

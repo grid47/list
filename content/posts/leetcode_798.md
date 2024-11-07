@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-rotation-with-highest-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-score-triangulation-of-polygon/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

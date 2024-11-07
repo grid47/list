@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/bitwise-xor-of-all-pairings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

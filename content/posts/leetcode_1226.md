@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-dining-philosophers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

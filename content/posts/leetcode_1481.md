@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

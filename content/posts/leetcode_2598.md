@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/making-file-names-unique/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-arithmetic-triplets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

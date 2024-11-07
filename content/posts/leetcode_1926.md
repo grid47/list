@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

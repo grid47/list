@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-people-with-secret/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

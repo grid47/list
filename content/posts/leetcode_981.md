@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/time-based-key-value-store/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

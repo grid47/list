@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

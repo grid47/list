@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-product-difference-between-two-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/most-beautiful-item-for-each-query/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

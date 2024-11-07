@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/points-that-intersect-with-cars/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

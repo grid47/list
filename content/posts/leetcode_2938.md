@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/separate-black-and-white-balls/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

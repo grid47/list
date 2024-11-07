@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

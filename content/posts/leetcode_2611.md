@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/mice-and-cheese/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

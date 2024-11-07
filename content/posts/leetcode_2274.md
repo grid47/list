@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-consecutive-floors-without-special-floors/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

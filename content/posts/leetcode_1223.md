@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/dice-roll-simulation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-distances-between-same-letters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

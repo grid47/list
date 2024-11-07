@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/nth-digit/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

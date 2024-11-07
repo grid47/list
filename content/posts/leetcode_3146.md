@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/permutation-difference-between-two-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

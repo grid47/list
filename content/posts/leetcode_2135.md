@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

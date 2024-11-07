@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-squareful-arrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

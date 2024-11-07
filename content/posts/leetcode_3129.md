@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

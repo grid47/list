@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-eventual-safe-states/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

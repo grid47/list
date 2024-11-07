@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/couples-holding-hands/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

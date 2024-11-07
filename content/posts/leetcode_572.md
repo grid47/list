@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subtree-of-another-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

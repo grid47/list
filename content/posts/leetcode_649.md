@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/dota2-senate/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

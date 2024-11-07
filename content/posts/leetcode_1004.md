@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-consecutive-ones-iii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

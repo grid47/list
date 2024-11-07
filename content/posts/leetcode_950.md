@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reveal-cards-in-increasing-order/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-make-array-complementary/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

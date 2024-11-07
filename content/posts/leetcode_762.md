@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

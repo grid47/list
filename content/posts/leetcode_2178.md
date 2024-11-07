@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-split-of-positive-even-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

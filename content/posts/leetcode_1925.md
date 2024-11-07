@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-square-sum-triples/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

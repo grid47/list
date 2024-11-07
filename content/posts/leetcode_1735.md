@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-ways-to-make-array-with-product/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

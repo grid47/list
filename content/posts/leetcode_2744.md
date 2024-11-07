@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-maximum-number-of-string-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

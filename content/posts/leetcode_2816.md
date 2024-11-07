@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

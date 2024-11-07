@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/furthest-building-you-can-reach/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

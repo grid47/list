@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-linked-list-in-parts/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

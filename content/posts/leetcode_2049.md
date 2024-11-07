@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-nodes-with-the-highest-score/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

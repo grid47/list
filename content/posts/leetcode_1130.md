@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

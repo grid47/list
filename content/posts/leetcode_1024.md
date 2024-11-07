@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/video-stitching/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

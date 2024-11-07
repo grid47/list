@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-the-number-of-fair-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

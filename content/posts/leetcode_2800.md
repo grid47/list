@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

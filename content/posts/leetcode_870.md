@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/advantage-shuffle/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

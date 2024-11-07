@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-in-between-linked-lists/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

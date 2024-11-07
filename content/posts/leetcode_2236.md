@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/root-equals-sum-of-children/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

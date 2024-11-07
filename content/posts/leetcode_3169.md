@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-days-without-meetings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-of-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

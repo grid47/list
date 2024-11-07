@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-words-in-a-string-iii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

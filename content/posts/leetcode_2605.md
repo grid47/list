@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/form-smallest-number-from-two-digit-arrays/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

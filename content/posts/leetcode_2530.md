@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximal-score-after-applying-k-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

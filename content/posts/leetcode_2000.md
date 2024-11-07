@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-prefix-of-word/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

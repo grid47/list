@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/super-pow/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

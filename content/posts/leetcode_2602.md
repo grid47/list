@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

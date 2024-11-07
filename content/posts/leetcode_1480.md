@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/running-sum-of-1d-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

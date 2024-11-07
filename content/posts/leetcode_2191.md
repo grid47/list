@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-the-jumbled-numbers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

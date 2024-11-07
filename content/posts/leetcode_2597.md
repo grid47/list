@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

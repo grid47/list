@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-prefix-and-suffix-pairs-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

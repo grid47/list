@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-height-trees/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

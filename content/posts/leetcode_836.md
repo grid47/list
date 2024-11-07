@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rectangle-overlap/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

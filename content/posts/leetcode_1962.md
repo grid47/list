@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-stones-to-minimize-the-total/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

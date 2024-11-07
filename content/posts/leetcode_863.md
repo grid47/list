@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

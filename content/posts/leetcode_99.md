@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/recover-binary-search-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-nesting/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

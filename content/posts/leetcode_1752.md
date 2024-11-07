@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

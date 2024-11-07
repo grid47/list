@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-the-substring-for-balanced-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

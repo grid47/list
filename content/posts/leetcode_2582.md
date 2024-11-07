@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pass-the-pillow/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

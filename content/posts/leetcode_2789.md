@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-element-in-an-array-after-merge-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

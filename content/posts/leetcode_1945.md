@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

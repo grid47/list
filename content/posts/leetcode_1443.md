@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

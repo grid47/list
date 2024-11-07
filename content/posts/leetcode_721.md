@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/accounts-merge/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

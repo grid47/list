@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/bulb-switcher/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

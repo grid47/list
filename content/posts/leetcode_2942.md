@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-words-containing-character/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

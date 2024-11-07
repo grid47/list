@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-nodes-and-return-forest/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

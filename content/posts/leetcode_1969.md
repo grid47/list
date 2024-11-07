@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-non-zero-product-of-the-array-elements/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-operation-for-two-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

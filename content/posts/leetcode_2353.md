@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-a-food-rating-system/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

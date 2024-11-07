@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-number-in-infinite-set/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

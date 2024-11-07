@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-even-multiple/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

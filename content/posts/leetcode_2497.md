@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-star-sum-of-a-graph/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

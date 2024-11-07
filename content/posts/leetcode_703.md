@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

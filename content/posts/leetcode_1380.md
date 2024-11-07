@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

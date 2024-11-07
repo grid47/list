@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fizz-buzz-multithreaded/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

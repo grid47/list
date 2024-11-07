@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/filling-bookcase-shelves/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

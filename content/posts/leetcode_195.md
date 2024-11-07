@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/tenth-line/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

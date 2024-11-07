@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-array-pairs-divisible-by-k/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

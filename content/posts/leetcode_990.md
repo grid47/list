@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/satisfiability-of-equality-equations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

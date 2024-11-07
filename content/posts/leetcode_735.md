@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/asteroid-collision/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

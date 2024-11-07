@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-good-indices/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

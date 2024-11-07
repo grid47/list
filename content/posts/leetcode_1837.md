@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-digits-in-base-k/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

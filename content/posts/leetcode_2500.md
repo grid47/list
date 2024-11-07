@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-greatest-value-in-each-row/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

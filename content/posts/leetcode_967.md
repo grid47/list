@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/numbers-with-same-consecutive-differences/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

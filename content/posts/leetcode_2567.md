@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-score-by-changing-two-elements/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

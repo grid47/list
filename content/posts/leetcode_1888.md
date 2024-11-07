@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

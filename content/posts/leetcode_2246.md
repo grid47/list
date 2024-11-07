@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-path-with-different-adjacent-characters/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

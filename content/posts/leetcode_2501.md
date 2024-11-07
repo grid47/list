@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-square-streak-in-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

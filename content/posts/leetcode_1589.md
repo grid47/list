@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

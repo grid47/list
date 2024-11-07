@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

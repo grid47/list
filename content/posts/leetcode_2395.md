@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-subarrays-with-equal-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

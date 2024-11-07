@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/movement-of-robots/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

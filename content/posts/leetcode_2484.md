@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-palindromic-subsequences/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

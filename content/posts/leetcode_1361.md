@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/validate-binary-tree-nodes/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

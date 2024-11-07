@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fruit-into-baskets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

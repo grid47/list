@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-kth-factor-of-n/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

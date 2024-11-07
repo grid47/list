@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/tuple-with-same-product/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

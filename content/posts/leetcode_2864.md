@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-odd-binary-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

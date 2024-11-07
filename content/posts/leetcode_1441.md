@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/build-an-array-with-stack-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

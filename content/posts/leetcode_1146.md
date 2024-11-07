@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/snapshot-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

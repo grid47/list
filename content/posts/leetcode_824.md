@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/goat-latin/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

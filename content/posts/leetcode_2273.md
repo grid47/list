@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-number-of-subsequences-in-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

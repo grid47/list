@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/non-overlapping-intervals/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

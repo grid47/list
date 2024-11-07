@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

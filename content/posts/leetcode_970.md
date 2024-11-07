@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/powerful-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

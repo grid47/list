@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-with-alternating-colors/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

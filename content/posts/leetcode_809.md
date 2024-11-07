@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/expressive-words/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

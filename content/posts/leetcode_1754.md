@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-merge-of-two-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

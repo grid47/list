@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

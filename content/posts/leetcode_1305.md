@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-elements-in-two-binary-search-trees/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

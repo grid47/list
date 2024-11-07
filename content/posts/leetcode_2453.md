@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/destroy-sequential-targets/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

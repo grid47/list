@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/string-compression-iii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

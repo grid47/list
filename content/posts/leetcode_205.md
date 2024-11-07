@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/isomorphic-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

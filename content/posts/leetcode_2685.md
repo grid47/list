@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-the-number-of-complete-components/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

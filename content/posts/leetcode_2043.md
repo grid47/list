@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/simple-bank-system/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

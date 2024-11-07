@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-area-of-square-hole-in-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

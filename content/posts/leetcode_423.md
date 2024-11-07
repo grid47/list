@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reconstruct-original-digits-from-english/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

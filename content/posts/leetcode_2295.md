@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-elements-in-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

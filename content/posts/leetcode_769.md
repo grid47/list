@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-chunks-to-make-sorted/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

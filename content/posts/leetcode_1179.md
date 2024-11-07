@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reformat-department-table/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

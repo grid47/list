@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/optimal-partition-of-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

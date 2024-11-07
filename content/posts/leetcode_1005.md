@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

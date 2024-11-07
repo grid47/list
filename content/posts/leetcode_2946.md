@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/matrix-similarity-after-cyclic-shifts/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

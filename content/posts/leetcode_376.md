@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/wiggle-subsequence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subarrays-with-k-different-integers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

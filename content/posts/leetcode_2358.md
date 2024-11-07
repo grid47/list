@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

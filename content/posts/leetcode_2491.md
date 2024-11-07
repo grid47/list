@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

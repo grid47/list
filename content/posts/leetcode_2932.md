@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-strong-pair-xor-i/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

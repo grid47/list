@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/decode-xored-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

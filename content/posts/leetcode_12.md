@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/integer-to-roman/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

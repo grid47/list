@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/process-restricted-friend-requests/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

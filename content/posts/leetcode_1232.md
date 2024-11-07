@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-it-is-a-straight-line/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

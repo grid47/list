@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-falling-path-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

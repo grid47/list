@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fraction-addition-and-subtraction/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

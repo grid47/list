@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-halve-array-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

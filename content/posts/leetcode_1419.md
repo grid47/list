@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-frogs-croaking/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

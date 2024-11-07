@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/buddy-strings/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

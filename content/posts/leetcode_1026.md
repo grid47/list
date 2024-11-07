@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

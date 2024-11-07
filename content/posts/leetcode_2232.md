@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

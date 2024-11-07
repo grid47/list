@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

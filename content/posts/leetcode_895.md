@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-frequency-stack/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

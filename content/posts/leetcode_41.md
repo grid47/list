@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/first-missing-positive/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

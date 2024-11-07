@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

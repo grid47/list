@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/escape-the-ghosts/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

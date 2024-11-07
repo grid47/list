@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-digit-from-number-to-maximize-result/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cousins-in-binary-tree-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

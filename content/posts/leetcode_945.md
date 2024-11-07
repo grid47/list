@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-increment-to-make-array-unique/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

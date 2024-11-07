@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-watched-videos-by-your-friends/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

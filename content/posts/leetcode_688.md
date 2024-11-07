@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/knight-probability-in-chessboard/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

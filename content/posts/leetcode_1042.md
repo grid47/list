@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flower-planting-with-no-adjacent/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

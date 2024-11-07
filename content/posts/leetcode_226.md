@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/invert-binary-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

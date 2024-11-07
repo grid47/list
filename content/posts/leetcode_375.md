@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

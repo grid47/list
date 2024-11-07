@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swap-nodes-in-pairs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

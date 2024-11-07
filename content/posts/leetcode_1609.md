@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/even-odd-tree/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

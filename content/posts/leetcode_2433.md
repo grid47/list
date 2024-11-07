@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-original-array-of-prefix-xor/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

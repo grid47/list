@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-visiting-all-points/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

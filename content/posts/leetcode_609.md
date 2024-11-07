@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-duplicate-file-in-system/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-addition-to-make-integer-beautiful/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

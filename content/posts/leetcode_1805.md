@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-different-integers-in-a-string/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

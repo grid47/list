@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-the-digits-that-divide-a-number/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

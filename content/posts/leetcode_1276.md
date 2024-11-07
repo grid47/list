@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-burgers-with-no-waste-of-ingredients/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

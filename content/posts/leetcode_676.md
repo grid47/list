@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/implement-magic-dictionary/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

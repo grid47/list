@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-array-into-disjoint-intervals/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

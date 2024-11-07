@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/calculate-special-bonus/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

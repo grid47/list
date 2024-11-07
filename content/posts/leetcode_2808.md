@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

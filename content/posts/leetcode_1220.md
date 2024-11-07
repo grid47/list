@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-vowels-permutation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-equal-substrings-within-budget/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

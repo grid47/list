@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-operations-to-obtain-zero/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

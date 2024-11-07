@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/decremental-string-concatenation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

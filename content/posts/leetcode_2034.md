@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/stock-price-fluctuation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

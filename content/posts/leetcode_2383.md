@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-hours-of-training-to-win-a-competition/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

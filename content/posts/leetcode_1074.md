@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

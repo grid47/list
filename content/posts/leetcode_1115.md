@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/print-foobar-alternately/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

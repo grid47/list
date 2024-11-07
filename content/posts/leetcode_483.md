@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-good-base/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

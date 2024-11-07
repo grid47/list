@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/map-of-highest-peak/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-phone-numbers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

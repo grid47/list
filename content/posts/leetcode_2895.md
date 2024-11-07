@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-processing-time/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

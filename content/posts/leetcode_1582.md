@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/special-positions-in-a-binary-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/final-value-of-variable-after-performing-operations/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

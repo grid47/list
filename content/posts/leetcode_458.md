@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/poor-pigs/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

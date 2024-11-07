@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

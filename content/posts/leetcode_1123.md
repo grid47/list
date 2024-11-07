@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

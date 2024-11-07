@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-median-from-data-stream/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

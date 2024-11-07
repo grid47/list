@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-longest-equal-subarray/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-pivot-integer/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

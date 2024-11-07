@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

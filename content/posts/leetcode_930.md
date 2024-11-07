@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-subarrays-with-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

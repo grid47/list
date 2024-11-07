@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-one-bit-operations-to-make-integers-zero/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-number-of-occurrences/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

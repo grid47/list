@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/moving-stones-until-consecutive/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

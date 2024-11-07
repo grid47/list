@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/keys-and-rooms/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

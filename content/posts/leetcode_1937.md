@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-points-with-cost/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

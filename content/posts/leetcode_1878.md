@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

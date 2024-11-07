@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/increment-submatrices-by-one/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

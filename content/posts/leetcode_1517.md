@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-users-with-valid-e-mails/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

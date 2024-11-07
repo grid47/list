@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/iterator-for-combination/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

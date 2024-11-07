@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/counting-bits/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

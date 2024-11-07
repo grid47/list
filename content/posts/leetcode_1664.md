@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ways-to-make-a-fair-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-palindrome/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

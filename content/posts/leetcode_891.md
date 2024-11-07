@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-subsequence-widths/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

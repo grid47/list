@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

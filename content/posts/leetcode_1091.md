@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

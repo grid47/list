@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/account-balance-after-rounded-purchase/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

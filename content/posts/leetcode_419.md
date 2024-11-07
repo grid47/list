@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/battleships-in-a-board/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

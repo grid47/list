@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-words-you-can-type/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

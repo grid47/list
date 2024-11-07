@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-sum-of-squared-difference/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

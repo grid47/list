@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-array-strictly-increasing/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

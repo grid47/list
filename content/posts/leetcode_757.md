@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/set-intersection-size-at-least-two/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

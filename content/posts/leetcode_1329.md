@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-the-matrix-diagonally/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

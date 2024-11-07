@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

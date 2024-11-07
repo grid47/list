@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flatten-nested-list-iterator/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-total-time-spent-by-each-employee/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-substrings-that-differ-by-one-character/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

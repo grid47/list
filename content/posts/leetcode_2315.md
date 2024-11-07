@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-asterisks/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/apply-discount-to-prices/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

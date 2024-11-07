@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-non-coprime-numbers-in-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

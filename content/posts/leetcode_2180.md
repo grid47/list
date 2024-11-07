@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-integers-with-even-digit-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

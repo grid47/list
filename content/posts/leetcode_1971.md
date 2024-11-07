@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

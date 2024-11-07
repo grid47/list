@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/apply-operations-to-an-array/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

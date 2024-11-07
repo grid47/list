@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

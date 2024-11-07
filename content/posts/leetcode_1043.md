@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-array-for-maximum-sum/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

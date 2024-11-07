@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-earnings-from-taxi/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

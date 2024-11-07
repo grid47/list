@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cinema-seat-allocation/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/excel-sheet-column-title/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

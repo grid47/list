@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/keep-multiplying-found-values-by-two/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

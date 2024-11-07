@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-trees-with-factors/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/score-of-parentheses/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

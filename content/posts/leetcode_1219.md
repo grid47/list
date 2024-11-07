@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/path-with-maximum-gold/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}

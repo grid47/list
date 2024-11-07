@@ -17,7 +17,6 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-valid-words-in-a-sentence/description/)
 
 ---
-
 **Code:**
 
 {{< highlight cpp >}}
