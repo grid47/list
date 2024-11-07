@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -230,7 +230,204 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode919s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers <code>nums</code> and an integer <code>k</code>, the problem asks to find the number of contiguous subarrays of <code>nums</code> such that the greatest common divisor (GCD) of the elements in the subarray is equal to <code>k</code>.</p>
+<p>In other words, for each contiguous subarray of <code>nums</code>, we need to check if the GCD of its elements is exactly <code>k</code>, and count how many such subarrays exist.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key challenge in this problem is calculating the GCD of elements in subarrays efficiently and comparing it with <code>k</code>. A brute-force approach would involve calculating the GCD for every possible subarray, which could be computationally expensive. To optimize the process, we can take advantage of the properties of the GCD:</p>
+<ol>
+<li>
+<p><strong>GCD Properties</strong>:</p>
+<ul>
+<li>The GCD of any two numbers divides both numbers, so for a subarray to have a GCD equal to <code>k</code>, every element in that subarray must be divisible by <code>k</code>.</li>
+<li>Once we know that all elements of a subarray are divisible by <code>k</code>, we can divide each element of the subarray by <code>k</code> and check if the GCD of the resulting numbers equals <code>1</code>. This is equivalent to checking if the GCD of the original elements is equal to <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Approach</strong>:</p>
+<ul>
+<li>Start by iterating over all possible starting points of subarrays (<code>i</code>).</li>
+<li>For each starting point <code>i</code>, iterate over all subarrays ending at position <code>j</code> where the elements are divisible by <code>k</code>.</li>
+<li>For each such subarray, compute the GCD of the elements and check if it equals <code>k</code>.</li>
+<li>If the GCD of the subarray equals <code>k</code>, increment the count.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient GCD Calculation</strong>:</p>
+<ul>
+<li>The GCD of two numbers can be computed efficiently using the Euclidean algorithm, which is implemented by the function <code>__gcd</code> in C++.</li>
+<li>To calculate the GCD of a subarray efficiently, we can iteratively update the GCD of the current subarray by including one new element at a time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Breaking Condition</strong>:</p>
+<ul>
+<li>If the GCD of a subarray becomes less than <code>k</code> at any point, we can break the inner loop early since adding more elements will not increase the GCD.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">subarrayGCD</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Outer loop for starting index of the subarray
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Inner loop for ending index of the subarray
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> nums[j] <span style="color:#f92672">%</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Update the GCD of the current subarray from nums[i] to nums[j]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            nums[i] <span style="color:#f92672">=</span> __gcd(nums[i], nums[j]);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// If GCD equals k, increment the counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cnt <span style="color:#f92672">+=</span> (nums[i] <span style="color:#f92672">==</span> k);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>cnt</code>: This variable keeps track of the number of subarrays whose GCD is equal to <code>k</code>.</li>
+<li><code>n</code>: The size of the <code>nums</code> array.</li>
+</ul>
+<h4 id="step-2-outer-loop-for-subarray-starting-index">
+  Step 2: Outer Loop for Subarray Starting Index
+  <a class="heading-link" href="#step-2-outer-loop-for-subarray-starting-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates over all possible starting indices <code>i</code> for subarrays.</li>
+<li>For each starting index <code>i</code>, we will explore all subarrays starting at <code>i</code> and ending at <code>j</code> (where <code>i &lt;= j &lt; n</code>).</li>
+</ul>
+<h4 id="step-3-inner-loop-for-subarray-ending-index">
+  Step 3: Inner Loop for Subarray Ending Index
+  <a class="heading-link" href="#step-3-inner-loop-for-subarray-ending-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> nums[j] <span style="color:#f92672">%</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates over all possible ending indices <code>j</code> of subarrays starting at index <code>i</code>.</li>
+<li>The condition <code>nums[j] % k == 0</code> ensures that we only consider elements that are divisible by <code>k</code>. If an element is not divisible by <code>k</code>, we can skip it since it will never contribute to a valid subarray with a GCD of <code>k</code>.</li>
+</ul>
+<h4 id="step-4-update-gcd-for-the-current-subarray">
+  Step 4: Update GCD for the Current Subarray
+  <a class="heading-link" href="#step-4-update-gcd-for-the-current-subarray">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>nums[i] <span style="color:#f92672">=</span> __gcd(nums[i], nums[j]);
+</span></span></code></pre></div><ul>
+<li>The <code>__gcd(nums[i], nums[j])</code> function computes the GCD of the current subarray from index <code>i</code> to <code>j</code>.</li>
+<li>The value of <code>nums[i]</code> is updated to the GCD of the current subarray as we iterate over <code>j</code>.</li>
+</ul>
+<h4 id="step-5-check-if-the-gcd-equals-k">
+  Step 5: Check if the GCD Equals <code>k</code>
+  <a class="heading-link" href="#step-5-check-if-the-gcd-equals-k">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt <span style="color:#f92672">+=</span> (nums[i] <span style="color:#f92672">==</span> k);
+</span></span></code></pre></div><ul>
+<li>After updating the GCD for the current subarray, we check if the GCD is equal to <code>k</code>.</li>
+<li>If it is, we increment the counter <code>cnt</code> to keep track of the number of valid subarrays.</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After processing all possible subarrays, we return the total count of subarrays where the GCD equals <code>k</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n^2 log m)</strong>, where <code>n</code> is the size of the input array <code>nums</code>, and <code>m</code> is the maximum value of an element in the array.</p>
+<ol>
+<li><strong>Outer Loop</strong>: The outer loop runs <code>n</code> times, where <code>n</code> is the size of the array.</li>
+<li><strong>Inner Loop</strong>: The inner loop runs for each possible subarray starting at <code>i</code>. In the worst case, this loop will run up to <code>n</code> times.</li>
+<li><strong>GCD Calculation</strong>: The GCD of two numbers is calculated using the Euclidean algorithm, which takes <strong>O(log m)</strong> time where <code>m</code> is the value of the numbers. Since we update the GCD for each subarray, the GCD calculation is performed multiple times.</li>
+</ol>
+<p>Thus, the overall time complexity is <strong>O(n^2 log m)</strong>, where <code>n</code> is the length of the array and <code>m</code> is the magnitude of the values in the array.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we are only using a few variables to store intermediate results like <code>cnt</code>, and no extra space is used beyond the input array.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution solves the problem of counting subarrays with a GCD equal to <code>k</code> by iterating through all possible subarrays, calculating the GCD incrementally, and checking if it equals <code>k</code>. The approach is straightforward but requires careful handling of GCD calculations and divisibility conditions to ensure efficient processing of the subarrays.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n^2 log m)</strong>, where <code>n</code> is the length of the array and <code>m</code> is the value of the numbers.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong>, as no additional space is used besides the input array.</li>
+</ul>
+<p>This approach guarantees correctness and handles small to moderate input sizes efficiently, though it may be suboptimal for very large arrays or large numbers.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode919s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

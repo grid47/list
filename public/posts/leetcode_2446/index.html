@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -217,7 +217,147 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode917s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine if two events, represented by two pairs of strings, have a time conflict. Each event has a start time and an end time, and the goal is to check if the events overlap or not.</p>
+<p>The two events are given as two string arrays <code>event1</code> and <code>event2</code>. Each array contains two strings: the start time and the end time of the event. The times are formatted as &ldquo;HH:MM&rdquo; (24-hour clock format). We need to return <code>true</code> if there is a conflict (i.e., the events overlap in time) and <code>false</code> if they do not.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input</strong>: <code>event1 = [&quot;01:00&quot;, &quot;02:00&quot;], event2 = [&quot;01:30&quot;, &quot;02:30&quot;]</code></li>
+<li><strong>Output</strong>: <code>true</code></li>
+</ul>
+<p>Explanation: The first event lasts from &ldquo;01:00&rdquo; to &ldquo;02:00&rdquo;, and the second event lasts from &ldquo;01:30&rdquo; to &ldquo;02:30&rdquo;. Since the two events overlap from &ldquo;01:30&rdquo; to &ldquo;02:00&rdquo;, the function should return <code>true</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To determine if two events overlap, we can break down the problem as follows:</p>
+<ol>
+<li>
+<p><strong>Understanding the Time Intervals</strong>: Each event is defined by two time points: a start time and an end time. We can think of the times as intervals on a number line.</p>
+</li>
+<li>
+<p><strong>Checking for Overlap</strong>: The two events overlap if:</p>
+<ul>
+<li>The start time of <code>event2</code> is before or equal to the end time of <code>event1</code> (<code>event2[0] &lt;= event1[1]</code>), and</li>
+<li>The end time of <code>event2</code> is after or equal to the start time of <code>event1</code> (<code>event2[1] &gt;= event1[0]</code>).</li>
+</ul>
+<p>If both of these conditions are satisfied, then the two events overlap, and we return <code>true</code>. Otherwise, they don&rsquo;t overlap, and we return <code>false</code>.</p>
+</li>
+<li>
+<p><strong>Time Comparison</strong>: Since the times are given in the &ldquo;HH:MM&rdquo; format, string comparison will work directly. Strings in lexicographical order will give the correct chronological order for times in this format, as the hour and minute values will be compared in sequence.</p>
+</li>
+</ol>
+<p>Thus, our task is to compare the start and end times of the two events directly using the above conditions.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-checking-overlap-condition">
+  Step 1: Checking Overlap Condition
+  <a class="heading-link" href="#step-1-checking-overlap-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The function <code>haveConflict</code> takes two input parameters: <code>event1</code> and <code>event2</code>, which are both vectors of strings representing the start and end times of the respective events.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">haveConflict</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> event1, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> event2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (event2[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> event1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;&amp;</span> event2[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;=</span> event1[<span style="color:#ae81ff">0</span>]) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Input Parameters</strong>:</p>
+<ul>
+<li><code>event1</code> is an array containing two strings: <code>event1[0]</code> represents the start time and <code>event1[1]</code> represents the end time.</li>
+<li><code>event2</code> is similarly an array containing two strings: <code>event2[0]</code> represents the start time and <code>event2[1]</code> represents the end time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overlap Condition</strong>:
+The condition inside the <code>if</code> statement checks if the events overlap. Specifically, we check:</p>
+<ul>
+<li>If the start time of <code>event2</code> is before or at the same time as the end time of <code>event1</code> (<code>event2[0] &lt;= event1[1]</code>), and</li>
+<li>If the end time of <code>event2</code> is after or at the same time as the start time of <code>event1</code> (<code>event2[1] &gt;= event1[0]</code>).</li>
+</ul>
+<p>If both conditions are true, then the events overlap, and we return <code>true</code>. If either condition fails, we return <code>false</code> indicating no overlap.</p>
+</li>
+<li>
+<p><strong>Return Statement</strong>:
+If the events overlap, the function returns <code>true</code>; otherwise, it returns <code>false</code>.</p>
+</li>
+</ol>
+<h4 id="step-2-conclusion">
+  Step 2: Conclusion
+  <a class="heading-link" href="#step-2-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This code provides a simple and efficient way to determine if two events overlap by comparing their start and end times using basic string comparisons.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(1)</strong>. The function performs a constant number of string comparisons and logical operations regardless of the size of the input, since it only checks two pairs of times. The comparison operations are performed directly between two time strings, which are fixed in length (&ldquo;HH:MM&rdquo; format), making the operation constant time.</p>
+<p>Thus, the overall time complexity is <strong>O(1)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is <strong>O(1)</strong>, as the function only uses a constant amount of space for storing the input and the result. No additional data structures are used beyond the input arrays, making this solution space-efficient.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides a direct and efficient way to determine if two events overlap. By leveraging simple string comparisons on the time values, we can easily check if the events conflict. The solution works in constant time, <strong>O(1)</strong>, and constant space, <strong>O(1)</strong>, making it highly efficient for this problem.</p>
+<p>In summary:</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(1)</strong> — Only a few string comparisons and logical operations are performed.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong> — No additional space is used apart from the input and output.</li>
+</ul>
+<p>This approach is optimal for checking event conflicts and guarantees correctness due to the simplicity of comparing time intervals using lexicographical string comparison.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode917s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -271,7 +411,6 @@
 
       </div>
 
-      
 
       <footer>
         

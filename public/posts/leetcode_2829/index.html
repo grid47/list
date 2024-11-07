@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -230,7 +230,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1165s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two integers <code>n</code> and <code>k</code>, the task is to compute the sum of <code>n</code> distinct integers such that no two integers in the sum are complementary to <code>k</code>. The complementary pair of any integer <code>i</code> is defined as the number <code>k - i</code>. The integers in the sum must all be distinct, and the goal is to find the minimum sum of these <code>n</code> distinct integers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to carefully select distinct integers while making sure that no two integers sum up to <code>k</code>. The main strategy is as follows:</p>
+<ol>
+<li><strong>Selection Process</strong>: Start with the smallest integers, and at each step, check whether the number and its complement (i.e., <code>k - i</code>) have been used previously.</li>
+<li><strong>Avoid Complementary Pairs</strong>: If both <code>i</code> and <code>k - i</code> are not used, add <code>i</code> to the sum, mark it as used, and continue.</li>
+<li><strong>Fill Remaining Slots</strong>: Once we&rsquo;ve added all the possible numbers that satisfy the complementary condition, continue adding the next available numbers to complete the sum of <code>n</code> integers.</li>
+</ol>
+<p>The solution ensures that the sum is minimized by selecting the smallest possible integers first.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition">
+  1. Function Definition
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumSum</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><ul>
+<li>The function <code>minimumSum</code> takes two parameters:
+<ul>
+<li><code>n</code>: The number of distinct integers we need to select.</li>
+<li><code>k</code>: The number used to define complementary pairs.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-initialization">
+  2. Initialization
+  <a class="heading-link" href="#2-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(<span style="color:#ae81ff">51</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>sum</code>: A variable to store the total sum of the selected integers.</li>
+<li><code>vis</code>: A vector that keeps track of whether a number has been used. It has a size of 51 because the problem constraints are based on numbers between 1 and 50, inclusive.</li>
+<li><code>i</code>: This variable starts from 1 and is used to iterate through the integers.</li>
+</ul>
+<h4 id="3-first-while-loop-select-distinct-integers-and-avoid-complements">
+  3. First While Loop (Select Distinct Integers and Avoid Complements)
+  <a class="heading-link" href="#3-first-while-loop-select-distinct-integers-and-avoid-complements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vis[i] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>vis[k <span style="color:#f92672">-</span> i]) {
+</span></span><span style="display:flex;"><span>            n<span style="color:#f92672">--</span>;                
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> i;
+</span></span><span style="display:flex;"><span>            vis[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The loop runs as long as <code>n &gt; 0</code> (i.e., we still need to select numbers) and <code>i &lt;= k</code> (we are iterating through the possible numbers starting from 1).</li>
+<li>Inside the loop:
+<ul>
+<li>The <code>if</code> condition checks if neither <code>i</code> nor <code>k - i</code> have been used (i.e., both are not marked as <code>true</code> in <code>vis</code>).</li>
+<li>If both <code>i</code> and <code>k - i</code> are unused, it selects <code>i</code>, adds it to the sum, marks it as used in <code>vis[i]</code>, and decreases <code>n</code> by 1 (because we have selected one number).</li>
+</ul>
+</li>
+<li><code>i++</code> moves to the next integer to consider.</li>
+</ul>
+<h4 id="4-second-while-loop-select-remaining-integers">
+  4. Second While Loop (Select Remaining Integers)
+  <a class="heading-link" href="#4-second-while-loop-select-remaining-integers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(n<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>After the first loop, if there are still remaining integers (<code>n &gt; 0</code>), this loop continues from the next available integer <code>i</code> and adds them to the sum.</li>
+<li>The loop continues until all <code>n</code> integers have been selected.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. Return the Result
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the computed sum.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The first while loop runs at most <code>k</code> times, as it iterates through integers from 1 to <code>k</code>.</li>
+<li>The second while loop runs for the remaining <code>n</code> integers after the first loop.</li>
+<li>Therefore, the time complexity is <strong>O(k + n)</strong>. In the worst case, <code>k</code> and <code>n</code> can be up to 50, so the algorithm runs efficiently for the given input limits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a small constant amount of extra space: the <code>vis</code> vector of fixed size (51), and the integer variables <code>sum</code> and <code>i</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the minimum sum of <code>n</code> distinct integers such that no two integers are complementary to <code>k</code>. The approach ensures that the smallest possible integers are selected first to minimize the sum, while avoiding the complementary pairs.</p>
+<p>The time complexity of <strong>O(k + n)</strong> ensures that the solution can handle the given input constraints effectively. The space complexity of <strong>O(1)</strong> makes the solution optimal in terms of memory usage. Thus, this approach provides an optimal and efficient solution for the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1165s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +440,6 @@
 
       </div>
 
-      
 
       <footer>
         

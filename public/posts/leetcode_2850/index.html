@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -260,7 +260,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1153s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum number of moves to arrange the values in a 3x3 grid such that all cells in the grid contain the number <code>1</code>. Each move consists of transferring one unit from a cell with a value greater than <code>1</code> to a neighboring cell with a value of <code>0</code>. The goal is to determine the minimum number of moves needed to achieve this configuration, or to return <code>0</code> if the grid already satisfies the condition where all cells contain <code>1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to this problem is a recursive backtracking approach, where the algorithm explores different possibilities by attempting to move values between neighboring cells. The goal is to reduce the number of moves required to convert the grid into a state where every cell contains the value <code>1</code>. Since the grid size is small (3x3), we can afford to use a brute-force approach with backtracking to explore all possible moves.</p>
+<p>The key insight is to find an empty cell (a cell with the value <code>0</code>) and then attempt to move values from neighboring cells (cells that have values greater than <code>1</code>) into this empty cell. This continues recursively, and at each step, we check how many moves are needed to achieve the desired configuration. The recursion will continue until the grid is fully populated with <code>1</code>s, and the minimum number of moves is returned.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-base-case---check-if-grid-is-already-solved">
+  Step 1: Base Case - Check if Grid is Already Solved
+  <a class="heading-link" href="#step-1-base-case---check-if-grid-is-already-solved">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>j)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            t<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (t <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The function starts by checking if the grid is already solved, meaning all cells are filled with <code>1</code>s. The variable <code>t</code> counts the number of <code>0</code>s in the grid.</li>
+<li>If <code>t</code> is <code>0</code>, meaning there are no <code>0</code>s left in the grid, it means the grid is already in the desired configuration, so the function returns <code>0</code>, indicating that no moves are required.</li>
+</ul>
+<h4 id="step-2-initialize-variables-for-recursive-search">
+  Step 2: Initialize Variables for Recursive Search
+  <a class="heading-link" href="#step-2-initialize-variables-for-recursive-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span></code></pre></div><ul>
+<li>The variable <code>ans</code> is initialized to the maximum possible integer value (<code>INT_MAX</code>). This will be used to store the minimum number of moves found during the recursive search.</li>
+</ul>
+<h4 id="step-3-loop-over-each-cell-to-find-empty-cells">
+  Step 3: Loop Over Each Cell to Find Empty Cells
+  <a class="heading-link" href="#step-3-loop-over-each-cell-to-find-empty-cells">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>j)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span></code></pre></div><ul>
+<li>The algorithm loops over each cell in the grid to find an empty cell (<code>0</code>), which is where we will try to move values into. If an empty cell is found, the algorithm proceeds to explore the neighboring cells.</li>
+</ul>
+<h4 id="step-4-loop-over-neighboring-cells-to-transfer-values">
+  Step 4: Loop Over Neighboring Cells to Transfer Values
+  <a class="heading-link" href="#step-4-loop-over-neighboring-cells-to-transfer-values">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> ni <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; ni <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>ni)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> nj <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; nj <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>nj)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> abs(ni <span style="color:#f92672">-</span> i) <span style="color:#f92672">+</span> abs(nj <span style="color:#f92672">-</span> j);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (grid[ni][nj] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            grid[ni][nj]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            grid[i][j]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, d <span style="color:#f92672">+</span> minimumMoves(grid));
+</span></span><span style="display:flex;"><span>            grid[ni][nj]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            grid[i][j]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After finding an empty cell <code>(i, j)</code>, the algorithm loops over all possible neighboring cells <code>(ni, nj)</code>.</li>
+<li>For each neighboring cell, the algorithm checks if it contains a value greater than <code>1</code> (since we can only move values from cells containing more than <code>1</code>).</li>
+<li>If a valid move is possible, the algorithm decreases the value of the neighboring cell <code>grid[ni][nj]--</code>, increases the value of the empty cell <code>grid[i][j]++</code>, and then recursively calls the <code>minimumMoves</code> function to calculate the number of moves required to solve the grid from this new configuration.</li>
+<li>After the recursive call, the algorithm backtracks by restoring the values of the grid (<code>grid[ni][nj]++</code> and <code>grid[i][j]--</code>).</li>
+</ul>
+<h4 id="step-5-return-the-minimum-moves">
+  Step 5: Return the Minimum Moves
+  <a class="heading-link" href="#step-5-return-the-minimum-moves">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once all possible moves have been explored, the function returns the minimum number of moves required to reach the solved configuration.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this approach is exponential in nature because of the recursive exploration of the grid&rsquo;s state. In the worst case, the algorithm explores all possible grid configurations, leading to a time complexity of O(2^(3x3)) or O(2^9). However, since the grid size is fixed and small (3x3), this is manageable in practice, and the algorithm will run efficiently for the problem&rsquo;s constraints.</li>
+<li>The algorithm also uses a brute-force approach with backtracking, which explores all combinations of moves. The number of recursive calls grows exponentially with each empty cell, and each call explores the grid&rsquo;s state by modifying the values.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is primarily driven by the recursion depth, which depends on the number of empty cells in the grid. In the worst case, the recursion depth will be proportional to the number of empty cells, which is at most 9 (since the grid is 3x3). Therefore, the space complexity is O(9) in the worst case, but since the grid size is small, this is also efficient.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution employs a recursive backtracking approach to explore all possible configurations of the grid, calculating the minimum number of moves required to make all cells contain the value <code>1</code>. Despite the brute-force nature of the algorithm, it is efficient enough for the problem&rsquo;s constraints due to the small grid size (3x3). The recursive approach explores every possible move and backtracks to find the optimal solution, ensuring that the minimum number of moves is found.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1153s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -272,7 +429,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2851"  class="external-link" target="_blank" rel="noopener">LeetCode #2851: String Transformation</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2855"  class="external-link" target="_blank" rel="noopener">LeetCode #2855: Minimum Right Shifts to Sort the Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -314,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

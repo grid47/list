@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -224,7 +224,175 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1245s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to count the number of special characters in a given string <code>word</code>. A &ldquo;special character&rdquo; is defined as any character that appears both in its lowercase and uppercase forms within the string. For example, if the string contains both <code>'a'</code> and <code>'A'</code>, then <code>a</code> is considered a special character.</p>
+<p>Given the string <code>word</code>, the goal is to count how many characters appear in both their lowercase and uppercase forms. We are required to implement a function that takes this string and returns the count of such &ldquo;special characters.&rdquo;</p>
+<p>For instance:</p>
+<ul>
+<li>For the string <code>&quot;aAabB&quot;</code>, the answer is <code>2</code> because <code>'a'</code> and <code>'b'</code> appear in both uppercase and lowercase forms.</li>
+<li>For the string <code>&quot;abc&quot;</code>, the answer is <code>0</code> because no character appears in both forms.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem is to:</p>
+<ol>
+<li>Use a data structure to store the characters in the string.</li>
+<li>Check for each character in the alphabet if it appears in both lowercase and uppercase forms.</li>
+<li>Count how many such special characters exist in the string.</li>
+</ol>
+<h4 id="approach-outline">
+  Approach Outline:
+  <a class="heading-link" href="#approach-outline">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Store characters in a set</strong>: A <code>set</code> data structure can be used to keep track of the unique characters present in the string. Since we only care about the presence of characters and not their frequency, a set is ideal because it automatically handles duplicates.</li>
+<li><strong>Check for both lowercase and uppercase</strong>: For each character from &lsquo;a&rsquo; to &lsquo;z&rsquo;, check if both its lowercase and uppercase versions are present in the set.</li>
+<li><strong>Count the special characters</strong>: If both versions of a character (lowercase and uppercase) are present in the set, increase the count of special characters.</li>
+<li><strong>Return the count</strong>: After iterating over all characters, return the count of special characters.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-set">
+  Step 1: Initialize the Set
+  <a class="heading-link" href="#step-1-initialize-the-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> ch;
+</span></span></code></pre></div><ul>
+<li>A set <code>ch</code> is declared to store the unique characters from the input string <code>word</code>. The set is chosen because it automatically handles duplicate characters, ensuring that each character appears only once.</li>
+</ul>
+<h4 id="step-2-insert-characters-into-the-set">
+  Step 2: Insert Characters into the Set
+  <a class="heading-link" href="#step-2-insert-characters-into-the-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: word)
+</span></span><span style="display:flex;"><span>    ch.insert(x);
+</span></span></code></pre></div><ul>
+<li>We iterate over the string <code>word</code> and insert each character <code>x</code> into the set <code>ch</code>. The <code>insert</code> method ensures that each character appears only once in the set, even if it appears multiple times in the string.</li>
+</ul>
+<h4 id="step-3-initialize-the-counter">
+  Step 3: Initialize the Counter
+  <a class="heading-link" href="#step-3-initialize-the-counter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>A counter <code>cnt</code> is initialized to zero. This will keep track of the number of special characters.</li>
+</ul>
+<h4 id="step-4-iterate-over-the-alphabet-and-check-for-special-characters">
+  Step 4: Iterate Over the Alphabet and Check for Special Characters
+  <a class="heading-link" href="#step-4-iterate-over-the-alphabet-and-check-for-special-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(ch.count(<span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i) <span style="color:#f92672">&amp;&amp;</span> ch.count(<span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">+</span> i))
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates over all 26 letters of the alphabet (<code>'a'</code> to <code>'z'</code>).</li>
+<li>For each letter, we check if both its lowercase (<code>'a' + i</code>) and uppercase (<code>'A' + i</code>) versions are present in the set <code>ch</code>. The <code>count</code> method of the set is used to check if a character is present in the set. It returns <code>1</code> if the character is present, and <code>0</code> if it is not.</li>
+<li>If both versions (lowercase and uppercase) of a character are found, we increment the counter <code>cnt</code>.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After checking all 26 letters, we return the value of <code>cnt</code>, which represents the number of special characters in the string.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n + 26)</strong>, where <code>n</code> is the length of the input string <code>word</code>.
+<ul>
+<li>The first part of the algorithm involves iterating through the string and inserting each character into the set. This takes <strong>O(n)</strong> time.</li>
+<li>The second part involves iterating over the alphabet (26 characters) and checking if both the lowercase and uppercase versions of each letter exist in the set. This part takes <strong>O(26)</strong> time, which is constant.</li>
+<li>Overall, the time complexity is dominated by the first part, so the time complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>word</code>.
+<ul>
+<li>The space complexity is determined by the size of the set <code>ch</code>, which can hold up to <code>n</code> unique characters (in the worst case). Thus, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of &ldquo;special characters&rdquo; in the string, where a special character is defined as a character that appears both in its lowercase and uppercase forms. The use of a set ensures that each character is counted only once, and the checking for both uppercase and lowercase versions of each character is done in constant time.</p>
+<p>The algorithm has a time complexity of <strong>O(n)</strong>, which is optimal for this type of problem, as we must inspect each character in the string. The space complexity is also <strong>O(n)</strong>, which is manageable for typical input sizes.</p>
+<p>This solution is both time-efficient and space-efficient, making it a great choice for solving the problem in real-world scenarios where performance is important. By leveraging the properties of sets and the simplicity of iterating over the alphabet, the solution provides a clean and effective approach to solving the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1245s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -278,7 +446,6 @@
 
       </div>
 
-      
 
       <footer>
         

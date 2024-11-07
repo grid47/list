@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -223,7 +223,134 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> k <span style="color:#f92672">-</span> mb;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode869s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum number of recolors (changes from <code>'B'</code> to <code>'W'</code>) needed to make a contiguous subarray of length <code>k</code> in the given string <code>blocks</code> consist only of <code>'W'</code>. The string <code>blocks</code> contains characters <code>'B'</code> and <code>'W'</code>, where:</p>
+<ul>
+<li><code>'B'</code> represents a black block, and</li>
+<li><code>'W'</code> represents a white block.</li>
+</ul>
+<p>The task is to find the contiguous subarray of length <code>k</code> that contains the maximum number of <code>'B'</code> blocks and then return the difference between <code>k</code> and the count of <code>'B'</code> blocks in that subarray. This difference represents the minimum number of recolors required to turn that subarray into all <code>'W'</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use the <strong>sliding window technique</strong>. The key idea is to keep track of the number of <code>'B'</code> blocks in a sliding window of size <code>k</code> and then determine the minimum number of recolors required to make that window all <code>'W'</code>.</p>
+<p>Here is the step-by-step breakdown of the approach:</p>
+<ol>
+<li><strong>Sliding Window</strong>: The goal is to check every possible contiguous subarray of size <code>k</code> in the given string <code>blocks</code>. As we move the window, we can update the count of <code>'B'</code> blocks by removing the effect of the block that is left behind and adding the effect of the new block that enters the window.</li>
+<li><strong>Count the <code>'B'</code> Blocks</strong>: For each window of size <code>k</code>, count how many <code>'B'</code> blocks are present. Since we need the smallest number of recolors, we want to find the window that has the fewest <code>'B'</code> blocks, and thus the minimum recolors required will be <code>k - (number of 'B's in that window)</code>.</li>
+<li><strong>Sliding Window Efficiency</strong>: By maintaining a running count of <code>'B'</code> blocks in the current window, we can move the window one block at a time in constant time. This makes the algorithm efficient, with a time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>blocks</code>.</li>
+<li><strong>Return the Result</strong>: Once we have determined the maximum number of <code>'B'</code> blocks in any window of size <code>k</code>, the result is simply <code>k - mb</code>, where <code>mb</code> is the maximum number of <code>'B'</code> blocks found in any window of size <code>k</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minimumRecolors(string blocks, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><p>The method <code>minimumRecolors</code> is defined within the <code>Solution</code> class. This method takes two parameters: a string <code>blocks</code> representing the blocks of color, and an integer <code>k</code> representing the length of the contiguous subarray we are considering.</p>
+</li>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mb <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>b</code>: This variable keeps track of the number of <code>'B'</code> blocks in the current sliding window of size <code>k</code>.</li>
+<li><code>mb</code>: This variable stores the maximum number of <code>'B'</code> blocks found in any sliding window of size <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> blocks.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        b <span style="color:#f92672">+=</span> blocks[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>;  <span style="color:#75715e">// Add 1 if the current block is &#39;B&#39;
+</span></span></span></code></pre></div><ul>
+<li>The loop iterates over each index <code>i</code> of the string <code>blocks</code>. For each index, it checks if the block is <code>'B'</code>. If so, it increments the count <code>b</code> by 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjust Window Size</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;=</span> k)
+</span></span><span style="display:flex;"><span>            b <span style="color:#f92672">-=</span> blocks[i <span style="color:#f92672">-</span> k] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>;  <span style="color:#75715e">// Remove the effect of the block that is sliding out of the window
+</span></span></span></code></pre></div><ul>
+<li>When <code>i &gt;= k</code>, the window has reached its full size of <code>k</code>. To maintain the sliding window, we subtract the effect of the block that is sliding out of the window (i.e., the block at index <code>i - k</code>). If this block is <code>'B'</code>, we decrement <code>b</code> by 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum &lsquo;B&rsquo; Count</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mb <span style="color:#f92672">=</span> max(b, mb);  <span style="color:#75715e">// Update the maximum &#39;B&#39; count in any window
+</span></span></span></code></pre></div><ul>
+<li>After adjusting the window, we check if the current window has more <code>'B'</code> blocks than the previously recorded maximum (<code>mb</code>). If so, we update <code>mb</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> k <span style="color:#f92672">-</span> mb;  <span style="color:#75715e">// Return the minimum number of recolors required
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>k - mb</code>, which represents the minimum number of recolors needed to make the window with the maximum <code>'B'</code> count into a window of all <code>'W'</code> blocks.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>blocks</code>. The loop iterates over the entire string once, and within each iteration, only constant-time operations (comparison and updating variables) are performed. This makes the time complexity linear with respect to the size of the input string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity of the solution is <strong>O(1)</strong>. We only use a few integer variables (<code>b</code>, <code>mb</code>) to keep track of the number of <code>'B'</code> blocks in the current window and the maximum number of <code>'B'</code> blocks found in any window. Therefore, the space used by the algorithm is constant.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of recolors required to make a contiguous subarray of length <code>k</code> in the string <code>blocks</code> consist of only <code>'W'</code>. By utilizing the sliding window technique, the algorithm maintains a running count of the number of <code>'B'</code> blocks in the current window and updates the result in constant time as it moves through the string.</p>
+<p>The time complexity of <strong>O(n)</strong> ensures that the solution works efficiently even for larger input sizes, making it suitable for competitive programming and real-world applications. Additionally, the constant space complexity ensures that the solution is memory-efficient, which is important when working with large inputs.</p>
+<p>This approach is a great example of how sliding windows can be used to optimize problems that involve finding a subset or subarray with specific properties, such as the number of <code>'B'</code> blocks in this case. The simplicity and elegance of this solution make it both easy to understand and implement, while also offering optimal performance.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode869s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +404,6 @@
 
       </div>
 
-      
 
       <footer>
         

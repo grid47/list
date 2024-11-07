@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,147 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode773s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to repeatedly reduce a string of digits by summing up groups of <code>k</code> digits until the string&rsquo;s length becomes less than or equal to <code>k</code>. After each sum operation, the resulting string should be formed by concatenating the sums as strings. The task is to return the final reduced string when its length is no longer greater than <code>k</code>.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input</strong>: <code>s = &quot;11111222223&quot;</code>, <code>k = 3</code></li>
+<li><strong>Output</strong>: <code>&quot;27&quot;</code></li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break the string down into smaller groups of <code>k</code> characters, compute the sum of the digits in each group, and concatenate the sums into a new string. This process is repeated until the string&rsquo;s length is reduced to <code>k</code> or fewer characters.</p>
+<p>Here’s how we approach the solution:</p>
+<ol>
+<li><strong>Repeated Summation</strong>: We need to break the string into chunks of <code>k</code> characters. For each chunk, we compute the sum of the digits.</li>
+<li><strong>String Update</strong>: After computing the sums for all chunks, we concatenate the results into a new string.</li>
+<li><strong>Stop When Length is Less Than or Equal to <code>k</code></strong>: We continue performing the above operation until the string’s length becomes less than or equal to <code>k</code>.</li>
+<li><strong>Edge Case Handling</strong>: If the string length is already smaller than or equal to <code>k</code>, we simply return the string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">digitSum</span>(string s, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><ul>
+<li>The function <code>digitSum</code> takes two parameters: <code>s</code>, the string of digits, and <code>k</code>, the group size for summing digits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Until the Length is Less Than or Equal to <code>k</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(s.size() <span style="color:#f92672">&gt;</span> k) {
+</span></span></code></pre></div><ul>
+<li>We continue iterating as long as the length of the string <code>s</code> is greater than <code>k</code>. Each iteration reduces the size of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize a Temporary String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1;
+</span></span></code></pre></div><ul>
+<li>We initialize a new string <code>s1</code> to store the result of the sum operations for the current iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Break String Into Chunks of Size <code>k</code> and Compute Sums</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i <span style="color:#f92672">+=</span> k)
+</span></span><span style="display:flex;"><span>    s1 <span style="color:#f92672">+=</span> to_string(accumulate(begin(s) <span style="color:#f92672">+</span> i, begin(s) <span style="color:#f92672">+</span> min((<span style="color:#66d9ef">int</span>)s.size(), i <span style="color:#f92672">+</span> k), <span style="color:#ae81ff">0</span>, 
+</span></span><span style="display:flex;"><span>        [](<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">char</span> ch){ <span style="color:#66d9ef">return</span> n <span style="color:#f92672">+</span> ch <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>; }));
+</span></span></code></pre></div><ul>
+<li>We loop through the string <code>s</code> in increments of <code>k</code> and extract each chunk. The <code>accumulate</code> function is used to sum the digits of each chunk:
+<ul>
+<li><code>begin(s) + i</code> starts the chunk from index <code>i</code>.</li>
+<li><code>begin(s) + min((int)s.size(), i + k)</code> ensures the chunk does not extend beyond the string&rsquo;s length.</li>
+<li>The lambda function <code>[](int n, char ch){ return n + ch - '0'; }</code> converts each character to an integer (<code>ch - '0'</code>), and the <code>accumulate</code> function calculates the sum of the digits in the chunk.</li>
+</ul>
+</li>
+<li>The sum of each chunk is then converted to a string using <code>to_string</code> and added to <code>s1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Swap the New String to <code>s</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>swap(s1, s);
+</span></span></code></pre></div><ul>
+<li>After processing all chunks, <code>s1</code> contains the new string formed by concatenating the sums. We swap the contents of <code>s</code> with <code>s1</code>, so that <code>s</code> is updated with the reduced string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, meaning the length of the string <code>s</code> is less than or equal to <code>k</code>, we return <code>s</code> as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The main work is done inside the <code>while</code> loop. In each iteration, we process the string in chunks of size <code>k</code>, so the time complexity of one iteration is proportional to the length of the string, <code>O(n)</code>, where <code>n</code> is the current length of the string.</li>
+<li>The string length decreases in each iteration, but we do not have a direct formula for how many iterations will occur. In the worst case, each iteration reduces the string length significantly. However, since the string length can only decrease, the total number of iterations will be logarithmic with respect to the length of the string, i.e., <code>O(log n)</code>, where <code>n</code> is the original length of the string.</li>
+<li>Hence, the overall time complexity is approximately <code>O(n * log n)</code>, where <code>n</code> is the initial length of the string.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(n)</code> because in the worst case, we are storing an intermediate string <code>s1</code> that is the same length as the input string <code>s</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach is efficient for reducing a string by summing groups of <code>k</code> digits until the string becomes sufficiently small. The use of the <code>accumulate</code> function for summing the digits in each chunk simplifies the process, and the loop reduces the string length iteratively. The solution runs in <code>O(n * log n)</code> time and uses <code>O(n)</code> space, making it suitable for moderately large strings. The solution is both intuitive and concise, leveraging built-in functions like <code>accumulate</code> and <code>to_string</code> for clarity and efficiency.</p>
+<p>In summary, this problem demonstrates how to manipulate strings by performing repeated transformations, and this approach efficiently handles the task while adhering to the constraints provided.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode773s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -235,7 +375,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2244"  class="external-link" target="_blank" rel="noopener">LeetCode #2244: Minimum Rounds to Complete All Tasks</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2245"  class="external-link" target="_blank" rel="noopener">LeetCode #2245: Maximum Trailing Zeros in a Cornered Path</a></th>
       </tr>
   </thead>
   <tbody>
@@ -277,7 +417,6 @@
 
       </div>
 
-      
 
       <footer>
         

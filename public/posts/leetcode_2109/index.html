@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -233,7 +233,122 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode688s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires inserting spaces into a given string <code>s</code> at specified indices provided in the <code>spaces</code> vector. The goal is to return a new string with the appropriate spaces added while retaining the original characters of <code>s</code>. If there are multiple spaces specified at the same index, only one space should be added.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem is straightforward:</p>
+<ol>
+<li><strong>Iterate Over Space Indices</strong>: Loop through the indices in the <code>spaces</code> vector, inserting spaces at the correct positions in the output string.</li>
+<li><strong>Build the Result String</strong>: Maintain a result string (<code>res</code>) to which the characters from <code>s</code> and the spaces will be appended.</li>
+<li><strong>Handle Remaining Characters</strong>: After inserting all specified spaces, append any remaining characters from the original string <code>s</code> to the result string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>The variable <code>i</code> is used to track the current index in the original string <code>s</code>, and <code>res</code> is initialized as an empty string to build the resulting string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Through Space Indices</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> idx : spaces) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each index specified in the <code>spaces</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Characters Until the Current Space Index</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> idx) res <span style="color:#f92672">+=</span> s[i<span style="color:#f92672">++</span>];
+</span></span></code></pre></div><ul>
+<li>The inner <code>while</code> loop continues to append characters from <code>s</code> to <code>res</code> until the current index <code>i</code> reaches the specified space index <code>idx</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Space at the Specified Index</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> idx) res <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39; &#39;</span>;
+</span></span></code></pre></div><ul>
+<li>Once the loop reaches the index <code>idx</code>, a space is appended to the result string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle Remaining Characters After Last Space</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> s.size()) res <span style="color:#f92672">+=</span> s[i<span style="color:#f92672">++</span>];
+</span></span></code></pre></div><ul>
+<li>After all space indices have been processed, this final <code>while</code> loop appends any remaining characters from the original string <code>s</code> to <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, the constructed string <code>res</code>, which now contains the original characters and the added spaces, is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n + m)), where (n) is the length of the string <code>s</code> and (m) is the number of space indices provided in <code>spaces</code>.</p>
+<ul>
+<li>The algorithm traverses the original string and the space indices list once, leading to linear time complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n)) for storing the resulting string.</p>
+<ul>
+<li>The space required for the result string is proportional to the size of the input string, as a new string is constructed based on it.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively inserts spaces into the string <code>s</code> at the specified indices, preserving the order of characters while maintaining efficiency. The approach is both clear and concise, making it easy to understand and implement. It handles edge cases, such as when no spaces need to be added or when all spaces are at the end of the string, ensuring robustness in different scenarios. By utilizing simple loops and string concatenation, the solution demonstrates an efficient way to manipulate strings in C++.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode688s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +402,6 @@
 
       </div>
 
-      
 
       <footer>
         

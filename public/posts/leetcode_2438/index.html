@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,153 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode918s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to calculate the product of specific subsets of the binary representation of a number <code>n</code>. The subsets are defined by a range of indices provided in multiple queries. Specifically, for each query, we are given two indices <code>l</code> and <code>r</code> and need to compute the product of all powers of 2 corresponding to the <code>1</code> bits of <code>n</code> between these indices, modulo (10^9 + 7).</p>
+<p>For example:</p>
+<ul>
+<li>Given <code>n = 6</code>, its binary representation is <code>110</code>.</li>
+<li>If a query asks for the product of the powers of 2 corresponding to the bits at indices <code>0</code> to <code>1</code> (inclusive), we compute the product of (2^1) and (2^2), which is (2^1 \times 2^2 = 6).</li>
+</ul>
+<p>The goal is to efficiently compute the results for all the queries.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can break down the problem into a few key steps:</p>
+<ol>
+<li><strong>Extract Powers of 2 from the Binary Representation of <code>n</code></strong>: The number <code>n</code> can be represented as a sum of powers of 2. We need to extract these powers and store them for use in the queries.</li>
+<li><strong>Precompute the Powers of 2</strong>: For each bit in the binary representation of <code>n</code>, we can calculate and store the corresponding powers of 2. This will allow us to answer queries about the product of powers of 2 efficiently.</li>
+<li><strong>Handle Multiple Queries Efficiently</strong>: Each query provides a range of indices, and we need to compute the product of the powers of 2 corresponding to those indices. To do this efficiently, we can use precomputation and cumulative multiplication.</li>
+</ol>
+<h3 id="step-by-step-breakdown-of-the-code">
+  Step-by-Step Breakdown of the Code
+  <a class="heading-link" href="#step-by-step-breakdown-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-extract-powers-of-2-from-the-binary-representation-of-n">
+  Step 1: Extract Powers of 2 from the Binary Representation of <code>n</code>
+  <a class="heading-link" href="#step-1-extract-powers-of-2-from-the-binary-representation-of-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First, we initialize a vector <code>pow</code> to store the powers of 2. We also define an <code>init</code> variable set to 1, which will be used to track the powers of 2.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> pow;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> init <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) pow.push_back(init);
+</span></span><span style="display:flex;"><span>    init <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through the binary representation of <code>n</code> using a <code>while</code> loop.</li>
+<li>For each bit that is set to 1 (i.e., <code>n &amp; 1</code>), we store the corresponding power of 2 in the <code>pow</code> vector.</li>
+<li>We then update <code>init</code> to the next power of 2 by multiplying it by 2 (<code>init *= 2</code>).</li>
+<li>After processing each bit, we divide <code>n</code> by 2 (<code>n /= 2</code>) to move to the next bit.</li>
+</ul>
+<p>At the end of this loop, the <code>pow</code> vector contains the powers of 2 corresponding to the set bits in the binary representation of <code>n</code>.</p>
+<h4 id="step-2-process-each-query">
+  Step 2: Process Each Query
+  <a class="heading-link" href="#step-2-process-each-query">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Next, we initialize a vector <code>ans</code> to store the results of each query. We then process each query in the <code>q</code> vector, where each query is represented by a pair of indices <code>[l, r]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> pow[q[i][<span style="color:#ae81ff">0</span>]];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> q[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> q[i][<span style="color:#ae81ff">1</span>]; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> (tmp <span style="color:#f92672">*</span> pow[j]) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each query using the index <code>i</code>.</li>
+<li>For each query, we initialize a variable <code>tmp</code> with the value of <code>pow[q[i][0]]</code>, which is the power of 2 corresponding to the bit at index <code>q[i][0]</code>.</li>
+<li>We then loop from <code>q[i][0] + 1</code> to <code>q[i][1]</code> and multiply <code>tmp</code> by the corresponding powers of 2 in the <code>pow</code> vector. We also take the result modulo (10^9 + 7) at each step to avoid overflow and to ensure the result fits within the problem&rsquo;s constraints.</li>
+</ul>
+<p>After processing each query, we push the result into the <code>ans</code> vector.</p>
+<h4 id="step-3-return-the-results">
+  Step 3: Return the Results
+  <a class="heading-link" href="#step-3-return-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, after all queries are processed, we return the <code>ans</code> vector, which contains the results for all the queries.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution can be broken down as follows:</p>
+<ul>
+<li><strong>Extracting Powers of 2</strong>: This operation takes (O(\log n)) time because we are iterating through the binary representation of <code>n</code>, which has at most (\log n) bits.</li>
+<li><strong>Processing Queries</strong>: For each query, we need to compute the product of powers of 2 in the range <code>[l, r]</code>. The worst-case time complexity for each query is (O(r - l + 1)), since we iterate over all the indices between <code>l</code> and <code>r</code>.</li>
+<li><strong>Overall Time Complexity</strong>: If there are <code>m</code> queries and the range of each query is up to (O(\log n)), then the overall time complexity is:
+<ul>
+<li>(O(\log n + m \cdot (\text{max range length}))).</li>
+<li>In the worst case, the maximum range length could be (O(\log n)), so the overall time complexity is (O(m \cdot \log n)).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is dominated by the space used to store the powers of 2 and the results:</p>
+<ul>
+<li><strong>Storing Powers of 2</strong>: The <code>pow</code> vector stores the powers of 2 corresponding to the set bits in <code>n</code>. The size of this vector is proportional to the number of set bits in <code>n</code>, which is at most (O(\log n)).</li>
+<li><strong>Storing Results</strong>: The <code>ans</code> vector stores the results for each query, and it has a size equal to the number of queries (m).</li>
+<li><strong>Overall Space Complexity</strong>: The overall space complexity is (O(\log n + m)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the product of powers of 2 corresponding to the set bits in the binary representation of <code>n</code> for each query. By leveraging bitwise operations to extract the relevant powers of 2 and using modular arithmetic to handle large numbers, the solution is both time and space efficient.</p>
+<p>The approach utilizes the precomputation of powers of 2 corresponding to set bits in <code>n</code> and answers each query in linear time relative to the length of the range specified in the query. This makes the solution well-suited for large inputs and multiple queries, achieving a time complexity of (O(m \cdot \log n)), where (m) is the number of queries and (n) is the input number.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode918s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +440,6 @@
 
       </div>
 
-      
 
       <footer>
         

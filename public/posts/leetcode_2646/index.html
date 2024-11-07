@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -290,7 +290,209 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> totalCost <span style="color:#f92672">-</span> red;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1046s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is about finding the minimum total price to travel in a network of cities, where we are given a set of roads connecting cities, a list of prices for each city, and a set of trips between pairs of cities. The goal is to minimize the total cost of all trips by potentially reducing the price of visiting certain cities.</p>
+<p>The conditions for reducing the price are as follows:</p>
+<ol>
+<li>A city can have its price reduced by half, but only once, for any trip that passes through it.</li>
+<li>The aim is to determine the minimum total price for completing all trips by selecting some cities where we reduce the price and others where we keep the price as it is.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach uses dynamic programming (DP) along with depth-first search (DFS) to compute the minimum cost while considering both the possibility of reducing prices and the fact that certain cities may be traversed multiple times.</p>
+<p>Here’s the breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>DFS for Traversing Trips</strong>:</p>
+<ul>
+<li>We need to calculate how many times each city is visited across all trips. This can be done using a DFS approach where we traverse the cities for each trip and update the frequency of visits for each city.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming (DP) Setup</strong>:</p>
+<ul>
+<li>We use a 3D DP table <code>memo[node][par][canReduce]</code> to store the minimum cost for a subtree rooted at <code>node</code>, with the parent node as <code>par</code> and the flag <code>canReduce</code> indicating whether the city’s price can still be reduced.</li>
+<li>If the flag <code>canReduce</code> is true, we consider reducing the city price by half when calculating the cost for that city.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating the Cost for Each Trip</strong>:</p>
+<ul>
+<li>The total cost for each trip is the sum of the prices of cities visited during the trip, and we need to reduce the price of some cities to minimize this total cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Computation</strong>:</p>
+<ul>
+<li>For each city, we compute two possible values:
+<ul>
+<li>The cost of not reducing the city’s price.</li>
+<li>The cost of reducing the city’s price (if it hasn&rsquo;t been reduced already).</li>
+</ul>
+</li>
+<li>We keep track of the maximum reduction in cost and calculate the final minimum cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>The memoization helps in avoiding redundant computations by storing results for each subproblem. We use the <code>memo</code> table to store the minimum costs for different nodes, their parent nodes, and the reduction status.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> totalCost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> price;
+</span></span></code></pre></div><ul>
+<li><code>frq</code>: A vector to store the frequency of visits to each node (city).</li>
+<li><code>totalCost</code>: Keeps track of the total cost of all trips without any price reductions.</li>
+<li><code>grid</code>: An adjacency list to represent the graph, where each city is connected to other cities via edges.</li>
+<li><code>price</code>: A vector that contains the price for visiting each city.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS for Calculating Frequency of Visits</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> og, <span style="color:#66d9ef">int</span> ed, <span style="color:#66d9ef">int</span> par) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(og <span style="color:#f92672">==</span> ed) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: grid[og]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">!=</span> par <span style="color:#f92672">&amp;&amp;</span> dfs(x, ed, og)) {
+</span></span><span style="display:flex;"><span>            frq[x]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            totalCost <span style="color:#f92672">+=</span> price[x];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This DFS function is used to calculate the frequency of visits to each city. It traverses the graph for each trip and updates the visit frequency for cities along the path.</li>
+<li>The <code>frq[x]++</code> statement increments the frequency of city <code>x</code> each time it is visited during a trip.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming (DP) Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> node, <span style="color:#66d9ef">int</span> par, <span style="color:#66d9ef">bool</span> canReduce) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[node][par <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][canReduce] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[node][par <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][canReduce];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(canReduce)
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> (price[node]<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> frq[node];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: grid[node]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">!=</span> par) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(canReduce) {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">=</span> dp(x, node, false);                    
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">=</span> max(dp(x, node, true), dp(x, node, false));                                        
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> cur;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[node][par <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][canReduce] <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function calculates the minimum total cost for a subtree rooted at <code>node</code>, given its parent <code>par</code> and whether the price of <code>node</code> can be reduced (<code>canReduce</code>).</li>
+<li>If <code>canReduce</code> is true, the cost of visiting <code>node</code> is reduced by half (<code>price[node] / 2</code>). The DP function then recurses to calculate the cost for each adjacent city.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function to Solve the Problem</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumTotalPrice</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> price, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> trips) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>price <span style="color:#f92672">=</span> price;
+</span></span><span style="display:flex;"><span>    frq.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    grid.resize(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) {
+</span></span><span style="display:flex;"><span>        grid[e[<span style="color:#ae81ff">0</span>]].insert(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        grid[e[<span style="color:#ae81ff">1</span>]].insert(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> t: trips) {
+</span></span><span style="display:flex;"><span>        frq[t[<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        totalCost <span style="color:#f92672">+=</span> price[t[<span style="color:#ae81ff">0</span>]];
+</span></span><span style="display:flex;"><span>        dfs(t[<span style="color:#ae81ff">0</span>], t[<span style="color:#ae81ff">1</span>], <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> red <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        red <span style="color:#f92672">=</span> max(red, max(dp(i, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, false), dp(i, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, true)));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> totalCost <span style="color:#f92672">-</span> red;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>minimumTotalPrice</code> function initializes the graph and the <code>price</code> vector. It then computes the frequency of visits to each city by calling the <code>dfs</code> function for each trip.</li>
+<li>The <code>dp</code> function is called for each city to calculate the maximum reduction in total cost, and the result is stored in <code>red</code>.</li>
+<li>Finally, the minimum total price is calculated by subtracting the maximum reduction (<code>red</code>) from the total cost of all trips.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructing the graph and calculating the frequency of visits takes <code>O(E + T)</code>, where <code>E</code> is the number of edges and <code>T</code> is the number of trips.</li>
+<li>The dynamic programming step involves recursion over each city and its neighbors. In the worst case, the DP function is called once for each pair of nodes and each reduction state. Hence, the time complexity of the DP computation is <code>O(N^2)</code>, where <code>N</code> is the number of cities.</li>
+<li>Overall time complexity: <code>O(N^2 + E + T)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is primarily determined by the storage for the graph (<code>O(N + E)</code>), the frequency array (<code>O(N)</code>), and the memoization table (<code>O(N^2)</code>), leading to an overall space complexity of <code>O(N^2 + E)</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum total price for completing all trips by using DFS to calculate the frequency of city visits and dynamic programming to consider the optimal reduction in city prices. The solution ensures that the total cost is minimized by carefully choosing which cities should have their prices reduced. With time and space complexity of <code>O(N^2 + E + T)</code>, the approach works efficiently for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1046s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -302,7 +504,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2647"  class="external-link" target="_blank" rel="noopener">LeetCode #2647: Color the Triangle Red</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2651"  class="external-link" target="_blank" rel="noopener">LeetCode #2651: Calculate Delayed Arrival Time</a></th>
       </tr>
   </thead>
   <tbody>
@@ -344,7 +546,6 @@
 
       </div>
 
-      
 
       <footer>
         

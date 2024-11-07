@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -228,7 +228,174 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode749s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the maximum element from a given array <code>nums</code> of integers after performing exactly <code>k</code> operations. Each operation consists of removing the top element from the array, but the top element can either be discarded or pushed back into the array. The objective is to determine the maximum element that can be obtained after performing these operations under the constraint of exactly <code>k</code> operations.</p>
+<p>Given:</p>
+<ul>
+<li>An array <code>nums</code> of integers.</li>
+<li>An integer <code>k</code> representing the number of operations to perform.</li>
+</ul>
+<p>We are to return the maximum value achievable after performing exactly <code>k</code> operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the algorithm needs to account for several edge cases and strategically choose how to handle the array after performing up to <code>k</code> operations. The approach is broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Edge Case Handling</strong>:</p>
+<ul>
+<li>If <code>k == 0</code>, no operations can be performed, and thus the maximum element is the first element of the array (if the array is non-empty).</li>
+<li>If <code>k == 1</code>, only one operation can be performed, so if there&rsquo;s only one element, the answer is <code>-1</code> (since the only element is discarded).</li>
+<li>If the array contains only one element and <code>k</code> is odd, the element is discarded, and the result is <code>-1</code>. If <code>k</code> is even, the single element remains intact.</li>
+</ul>
+</li>
+<li>
+<p><strong>When <code>k &gt; 1</code></strong>:</p>
+<ul>
+<li>If <code>k</code> is less than or equal to the length of the array, we can look at the first <code>k-1</code> elements to determine the maximum value that can remain after some operations. Specifically, we consider removing and potentially returning the first <code>k-1</code> elements, and the maximum element among those should be the result.</li>
+<li>If <code>k</code> is greater than or equal to the length of the array, we can consider the possibility of also including the element at index <code>k</code> (if the array is long enough).</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Maximum Calculation</strong>:</p>
+<ul>
+<li>To find the maximum efficiently, we can compute the maximum of the first <code>k-1</code> elements, and if <code>k</code> is smaller than the length of the array, also compare the element at index <code>k</code> itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimization</strong>:</p>
+<ul>
+<li>The algorithm avoids unnecessary iterations by limiting the scope of the array elements to be considered, thereby ensuring that the solution is efficient even for larger input sizes.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximumTop</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initialize the answer variable.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();  <span style="color:#75715e">// Get the size of the nums array.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Edge case 1: If no operations are performed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> (n <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> nums[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Edge case 2: If only one operation can be performed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> nums[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Edge case 3: If the array contains only one element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> (k <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Case when we have more than one element and k &gt; 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(begin(nums), begin(nums) <span style="color:#f92672">+</span> min(n, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// If there are more elements and the array&#39;s length is greater than k, consider nums[k].
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> n) mx <span style="color:#f92672">=</span> max(mx, nums[k]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mx;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Step 1: Initialize Answer and Array Size</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>ans</code> will store the maximum value that can be obtained after performing <code>k</code> operations.</li>
+<li><code>n</code> stores the size of the <code>nums</code> array.</li>
+</ul>
+<p><strong>Step 2: Handle Special Cases</strong></p>
+<ul>
+<li><strong>Case when <code>k == 0</code></strong>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> (n <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> nums[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>If no operations can be performed (<code>k == 0</code>), simply return the first element of the array (if the array is non-empty). If the array is empty, return <code>-1</code>.</p>
+<ul>
+<li><strong>Case when <code>k == 1</code></strong>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> nums[<span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><p>If exactly one operation is allowed, then we discard the first element and return the second element, unless the array only contains one element, in which case the answer is <code>-1</code>.</p>
+<ul>
+<li><strong>Case when <code>n == 1</code></strong>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> (k <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><p>If there is only one element, the behavior depends on whether <code>k</code> is odd or even. If <code>k</code> is odd, the single element is discarded; if <code>k</code> is even, the single element remains.</p>
+<p><strong>Step 3: Case for General Scenarios (k &gt; 1)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(begin(nums), begin(nums) <span style="color:#f92672">+</span> min(n, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>For the general case where <code>k &gt; 1</code>, find the maximum value from the first <code>k-1</code> elements of the array. We use <code>min(n, k-1)</code> to ensure that we do not go beyond the bounds of the array.</li>
+</ul>
+<p><strong>Step 4: Handle Case when <code>k</code> Exceeds Array Length</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> n) mx <span style="color:#f92672">=</span> max(mx, nums[k]);
+</span></span></code></pre></div><ul>
+<li>If <code>k</code> is less than the size of the array, we need to consider the element at index <code>k</code> since it could still be part of the result.</li>
+</ul>
+<p><strong>Step 5: Return the Maximum</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+</span></span></code></pre></div><ul>
+<li>Finally, return the maximum value obtained after performing up to <code>k</code> operations.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k)</strong> for calculating the maximum over the first <code>k-1</code> elements using <code>max_element</code>.</li>
+<li>The final solution thus runs in <strong>O(k)</strong> time, which is optimal for this problem.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, as the algorithm uses only a constant amount of extra space (excluding the input).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently solves the problem of finding the maximum element obtainable after performing exactly <code>k</code> operations on the array. It handles edge cases such as no operations, a single element in the array, and scenarios where <code>k</code> is larger than the array&rsquo;s length. The solution ensures optimal performance with a time complexity of <strong>O(k)</strong> and space complexity of <strong>O(1)</strong>, making it suitable for large inputs.</p>
+<p>This approach can be useful for problems that involve selecting elements based on specific operations or constraints and demonstrates the importance of handling edge cases correctly.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode749s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -240,7 +407,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2203"  class="external-link" target="_blank" rel="noopener">LeetCode #2203: Minimum Weighted Subgraph With the Required Paths</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2207"  class="external-link" target="_blank" rel="noopener">LeetCode #2207: Maximize Number of Subsequences in a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -282,7 +449,6 @@
 
       </div>
 
-      
 
       <footer>
         

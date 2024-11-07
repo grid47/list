@@ -226,7 +226,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -275,7 +275,177 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1040s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the minimum number of cells visited in a grid starting from the top-left cell (0,0) to the bottom-right cell (m-1, n-1). Each cell in the grid contains a positive integer that indicates how many cells you can move in one step, either horizontally or vertically. The goal is to traverse the grid while minimizing the number of steps taken to reach the target cell.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be approached using a <strong>modified Dijkstra&rsquo;s algorithm</strong> (a shortest-path algorithm), where instead of minimizing the distance between nodes, we are minimizing the number of visited cells. The basic idea is to perform a breadth-first search (BFS) with priority queue, exploring the grid while ensuring that we are visiting the minimum number of cells.</p>
+<ol>
+<li>
+<p><strong>Priority Queue</strong>:</p>
+<ul>
+<li>A priority queue is used to prioritize cells that have the least number of visited cells (similar to Dijkstra&rsquo;s algorithm).</li>
+</ul>
+</li>
+<li>
+<p><strong>Distance Array</strong>:</p>
+<ul>
+<li>A distance array <code>dist[i][j]</code> keeps track of the minimum number of cells visited to reach the cell <code>(i, j)</code>. Initially, all cells are set to infinity except the start cell <code>(0,0)</code> which is initialized with a distance of 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cell Movement</strong>:</p>
+<ul>
+<li>From each cell <code>(i, j)</code>, you can move up to <code>grid[i][j]</code> steps in both the horizontal and vertical directions. For each direction, we check if visiting the new cell will reduce the number of visited cells compared to the current best path. If so, we update the distance for that cell and add it to the priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+<ul>
+<li>The algorithm terminates when we reach the bottom-right cell <code>(m-1, n-1)</code>, and the value in <code>dist[m-1][n-1]</code> will be the minimum number of cells visited to reach the destination. If there is no valid path, the function returns <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialize Variables</strong>:
+<ul>
+<li><code>m</code> and <code>n</code> represent the dimensions of the grid.</li>
+<li><code>dist</code> is a 2D array where each entry stores the minimum number of cells visited to reach that cell. It is initialized with <code>INT_MAX</code> (representing infinity), except for the start cell <code>(0,0)</code>, which is initialized with <code>1</code> since we start from there.</li>
+<li>A priority queue <code>pq</code> is used to explore the cells. It stores pairs where the first value is the number of cells visited, and the second value is a pair of indices <code>(i, j)</code> representing the position of the cell.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dist(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, INT_MAX));
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>pq.push({<span style="color:#ae81ff">1</span>, {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>}});
+</span></span><span style="display:flex;"><span>dist[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ol start="2">
+<li><strong>BFS with Priority Queue</strong>:
+<ul>
+<li>We use a while loop to process the priority queue. Each time we pop the top element, it represents the cell with the minimum number of visited cells.</li>
+<li>From the current cell <code>(i, j)</code>, we attempt to move right and down. For each move, we check if visiting the new cell improves the number of cells visited. If it does, we update the <code>dist</code> array and push the new cell into the priority queue.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> pq.top().first;  <span style="color:#75715e">// Current number of visited cells
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> pq.top().second.first;  <span style="color:#75715e">// Current row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> pq.top().second.second;  <span style="color:#75715e">// Current column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> d;  <span style="color:#75715e">// If we reached the bottom-right cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pq.pop();
+</span></span></code></pre></div><ol start="3">
+<li><strong>Horizontal Moves</strong>:
+<ul>
+<li>For the horizontal moves, we try to move from cell <code>(i, j)</code> to the next cells in the same row, from <code>j+1</code> to <code>min(n-1, j + grid[i][j])</code>. If the new position reduces the number of visited cells, we update the <code>dist</code> array and push the new position into the priority queue.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> min(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">+</span> grid[i][j]); k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(dist[i][k] <span style="color:#f92672">&gt;</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        dist[i][k] <span style="color:#f92672">=</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        pq.push({d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, {i, k}});
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> k <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Check if we reached the target
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="4">
+<li><strong>Vertical Moves</strong>:
+<ul>
+<li>Similarly, for the vertical moves, we try to move from cell <code>(i, j)</code> to the next cells in the same column, from <code>i+1</code> to <code>min(m-1, i + grid[i][j])</code>. Again, if the new position reduces the number of visited cells, we update the <code>dist</code> array and push the new position into the priority queue.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> min(m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> grid[i][j]); k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(dist[k][j] <span style="color:#f92672">&gt;</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        dist[k][j] <span style="color:#f92672">=</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        pq.push({d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, {k, j}});
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(k <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Check if we reached the target
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="5">
+<li><strong>Return Result</strong>:
+<ul>
+<li>If we finish processing all the cells and never reach the bottom-right corner, we return <code>-1</code> indicating that it&rsquo;s not possible to reach the target.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Priority Queue Operations</strong>: The priority queue stores at most <code>m * n</code> elements. For each element, we perform constant-time operations (push and pop). Hence, the total time complexity for priority queue operations is (O((m \cdot n) \log (m \cdot n))).</li>
+<li><strong>Updating Distances</strong>: Each cell is visited at most once, and for each visit, we update the distance for up to 2 directions (right and down). This results in (O(m \cdot n)) operations.</li>
+</ul>
+<p>Thus, the overall time complexity is:</p>
+<p>[
+O((m \cdot n) \log (m \cdot n))
+]</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the space needed for the <code>dist</code> array and the priority queue. Both of these require (O(m \cdot n)) space.</li>
+</ul>
+<p>Thus, the space complexity is:</p>
+<p>[
+O(m \cdot n)
+]</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the minimum number of cells visited to reach the bottom-right cell using a <strong>modified Dijkstra&rsquo;s algorithm</strong> with a priority queue. By using a priority queue, we ensure that we always explore the cell with the least number of visited cells, thus guaranteeing the minimum steps required. The algorithm is efficient with a time complexity of (O((m \cdot n) \log (m \cdot n))), making it suitable for moderately sized grids.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1040s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +457,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2618"  class="external-link" target="_blank" rel="noopener">LeetCode #2618: Check if Object Instance of Class</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2639"  class="external-link" target="_blank" rel="noopener">LeetCode #2639: Find the Width of Columns of a Grid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -329,7 +499,6 @@
 
       </div>
 
-      
 
       <footer>
         

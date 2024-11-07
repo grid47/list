@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -220,7 +220,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> res : <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1105s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the length of the longest subarray of integers in a given array <code>A</code> that satisfies the following condition:</p>
+<ul>
+<li>The elements in the subarray alternate between increasing and decreasing values. That is, for any consecutive elements <code>A[i]</code> and <code>A[i+1]</code>, we have the condition <code>A[i+1] == A[i] + (i+1 - i) % 2</code>.</li>
+</ul>
+<p>If no alternating subarray of length greater than 1 exists, we should return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the key observation is that we need to check for each possible subarray and verify whether the elements alternate between increasing and decreasing values.</p>
+<p>We&rsquo;ll utilize two pointers (<code>i</code> and <code>j</code>) to identify subarrays that fulfill the alternating condition. The idea is to use the pointers to extend the subarray and check if the next element satisfies the alternating condition. If it does, we extend the current subarray, and if not, we restart and look for a new potential subarray.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Alternating Pattern</strong>: The array elements alternate if each subsequent element differs from the previous element in a predictable pattern:</p>
+<ul>
+<li>If <code>i</code> is even, the next element should be greater than the previous one.</li>
+<li>If <code>i</code> is odd, the next element should be smaller than the previous one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Two Pointers</strong>: We use two pointers to explore potential subarrays. The outer loop (<code>i</code>) iterates over possible starting points, while the inner loop (<code>j</code>) expands the subarray as long as the alternating pattern holds.</p>
+</li>
+<li>
+<p><strong>Max Subarray Length</strong>: We track the maximum length of a valid alternating subarray.</p>
+</li>
+<li>
+<p><strong>Edge Case</strong>: If no alternating subarray of length greater than 1 is found, we return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code into manageable sections to understand how it works.</p>
+<ol>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> A.size(), res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the size of the input array <code>A</code>.</li>
+<li><code>res</code> is used to keep track of the length of the longest alternating subarray found.</li>
+<li><code>j</code> is the index used to explore the potential subarrays.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outer Loop (Iterating Over Possible Starting Points)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i)
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates through each element in the array <code>A</code>, starting from index <code>i</code>.</li>
+<li>For each starting element <code>A[i]</code>, we attempt to extend the subarray by adjusting <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inner Loop (Expanding the Subarray)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> A[j] <span style="color:#f92672">==</span> A[i] <span style="color:#f92672">+</span> (j <span style="color:#f92672">-</span> i) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>; <span style="color:#f92672">++</span>j)
+</span></span></code></pre></div><ul>
+<li>The inner loop starts from index <code>i+1</code> and checks if each subsequent element <code>A[j]</code> follows the alternating pattern with respect to <code>A[i]</code>.</li>
+<li>The condition <code>A[j] == A[i] + (j - i) % 2</code> checks whether the current element alternates correctly:
+<ul>
+<li>If <code>(j - i) % 2 == 0</code> (i.e., the index difference is even), the element at <code>A[j]</code> should be greater than <code>A[i]</code>.</li>
+<li>If <code>(j - i) % 2 == 1</code> (i.e., the index difference is odd), the element at <code>A[j]</code> should be smaller than <code>A[i]</code>.</li>
+</ul>
+</li>
+<li>If this condition is satisfied, we continue expanding the subarray, incrementing <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking the Maximum Length</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> max(res, j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>For every valid subarray that we find (where the alternating pattern holds), we update <code>res</code> with the maximum length of the current alternating subarray (<code>j - i + 1</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> res : <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Finally, after processing all possible subarrays, we return <code>res</code>. If <code>res</code> is greater than 1, it means we have found an alternating subarray with a length greater than 1, and we return that length.</li>
+<li>If <code>res</code> is 1 or less, it means no valid alternating subarray of length greater than 1 was found, so we return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Outer Loop</strong>: The outer loop iterates over each element in the array, so it runs <code>n</code> times.</li>
+<li><strong>Inner Loop</strong>: For each starting index <code>i</code>, the inner loop potentially runs <code>n - i</code> times, but the number of iterations is constrained by how long the alternating pattern continues. In the worst case, the inner loop could also run <code>n</code> times for each <code>i</code>.</li>
+</ol>
+<p>Thus, the total time complexity of the algorithm is (O(n^2)), where <code>n</code> is the size of the array <code>A</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>No Additional Space</strong>: The solution uses only a few variables (<code>res</code>, <code>i</code>, <code>j</code>), and it doesn&rsquo;t use any extra space apart from the input array <code>A</code>.</li>
+</ol>
+<p>Thus, the space complexity is (O(1)), which means the algorithm uses constant space in addition to the input.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a brute force approach using two pointers to explore each possible subarray and check if it satisfies the alternating pattern. While this approach has a time complexity of (O(n^2)), it is straightforward and easy to understand.</p>
+<p>In the worst-case scenario, where the entire array could be a valid alternating subarray, the algorithm checks every possible subarray. The space complexity is constant, making the algorithm efficient in terms of space. However, due to its quadratic time complexity, it might not scale well for very large input arrays.</p>
+<p>This approach is suitable for solving smaller or moderate-sized problems but might require optimization techniques, such as dynamic programming or more advanced data structures, for very large arrays.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1105s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -274,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

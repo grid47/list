@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,126 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode686s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find a subsequence of length <code>k</code> from an integer array <code>nums</code> that has the highest possible sum. A subsequence is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. The output should maintain the relative order of the elements in <code>nums</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can leverage the following approach:</p>
+<ol>
+<li>
+<p><strong>Clone and Partially Sort the Array</strong>: To find the <code>k</code> largest elements, we start by creating a copy of the <code>nums</code> array. This allows us to work with the values without modifying the original array’s structure.</p>
+</li>
+<li>
+<p><strong>Use <code>nth_element</code> for Efficient Partial Sorting</strong>: We use <code>nth_element</code> on the copied array to ensure that the <code>k</code> largest elements are positioned in the first <code>k</code> places, sorted in descending order. The function <code>nth_element</code> achieves this with average-case O(n) complexity. This helps us quickly find the k largest elements without fully sorting the array, which would take O(n log n) time.</p>
+</li>
+<li>
+<p><strong>Handle Duplicates Carefully</strong>: The <code>nth_element</code> function sorts the <code>k</code> largest elements but may include duplicate values around the boundary between the k-th and (k+1)-th elements. We handle this by counting the number of times the k-th largest value appears within the selected range.</p>
+</li>
+<li>
+<p><strong>Collect the Elements in Original Order</strong>: After identifying the <code>k</code> largest values, we iterate through the original array to select elements for the final result. For each element in <code>nums</code>:</p>
+<ul>
+<li>If it is larger than the k-th largest value in our partial array, it is included in the result.</li>
+<li>If it equals the k-th largest value and the count has not been fully used, we also include it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The result array is built in the same order as <code>nums</code>, containing the <code>k</code> largest elements with maximum sum and correct relative order.</p>
+</li>
+</ol>
+<p>This approach is optimal for efficiently finding and arranging the desired subsequence while maintaining the necessary order.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code to see how each part works in detail.</p>
+<ol>
+<li>
+<p><strong>Clone and Partially Sort the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>nth_element(v.begin(), v.begin() <span style="color:#f92672">+</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, v.end(), greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>());
+</span></span></code></pre></div><ul>
+<li>Here, we create a copy of <code>nums</code> called <code>v</code> to hold the elements that we want to partially sort.</li>
+<li>Using <code>nth_element</code>, we position the <code>k</code> largest elements at the beginning of <code>v</code>, with <code>v[k - 1]</code> representing the k-th largest value. The <code>greater&lt;int&gt;()</code> comparator ensures that the elements are arranged in descending order for the first <code>k</code> elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Occurrences of the k-th Largest Value</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> count(v.begin(), v.begin() <span style="color:#f92672">+</span> k, v[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div><ul>
+<li>Here, we count how many times the k-th largest value (<code>v[k - 1]</code>) appears in the first <code>k</code> elements of <code>v</code>. This is necessary to manage duplicates correctly when we later select elements from <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Collect Elements in the Original Order</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((nums[i] <span style="color:#f92672">&gt;</span> v[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">||</span> (nums[i] <span style="color:#f92672">==</span> v[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;&amp;</span> (cnt<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)))
+</span></span><span style="display:flex;"><span>        res.push_back(nums[i]);
+</span></span></code></pre></div><ul>
+<li>We initialize an empty vector <code>res</code> to store the final result.</li>
+<li>We iterate over <code>nums</code>, checking each element to see if it should be included in <code>res</code>:
+<ul>
+<li>If <code>nums[i]</code> is greater than the k-th largest value, it is included in <code>res</code>.</li>
+<li>If <code>nums[i]</code> equals the k-th largest value, we include it only if our <code>cnt</code> variable indicates that we still need this value (by checking if <code>cnt-- &gt; 0</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After collecting the required elements in the correct order, we return <code>res</code>, which now contains the <code>k</code> largest elements with maximum sum from <code>nums</code>, maintaining their original order.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The algorithm has an average time complexity of O(n), where <code>n</code> is the number of elements in <code>nums</code>. This is due to the <code>nth_element</code> function, which operates in O(n) on average. The subsequent loop to collect the result has O(n) complexity as well.</li>
+<li><strong>Space Complexity</strong>: The algorithm uses O(n) additional space, as we create a copy of <code>nums</code> and store the result in <code>res</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages efficient sorting techniques and a careful selection process to find a subsequence with maximum sum in optimal time. The use of <code>nth_element</code> allows us to quickly obtain the <code>k</code> largest elements without fully sorting the array, and the counting mechanism ensures that duplicates are handled accurately. This approach highlights the importance of balancing efficiency and correctness in algorithm design, especially in competitive programming and interview settings where both optimal time complexity and precise output are essential.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode686s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +409,6 @@
 
       </div>
 
-      
 
       <footer>
         

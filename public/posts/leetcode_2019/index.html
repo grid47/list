@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -299,7 +299,222 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode641s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves evaluating mathematical expressions represented as strings and scoring the students&rsquo; answers based on their correctness. Given an expression containing non-negative single-digit integers and the operators &lsquo;+&rsquo; and &lsquo;*&rsquo;, students provide their answers, and the goal is to determine how many points each student earns based on the correctness of their answers compared to the correct value of the expression.</p>
+<p>The scoring system is as follows:</p>
+<ul>
+<li>If a student&rsquo;s answer matches the correct answer, they earn 5 points.</li>
+<li>If a student&rsquo;s answer does not match but is found in the set of possible values that could be derived from the expression using the correct order of operations, they earn 2 points.</li>
+<li>If the answer is not correct and not part of the possible values, the student earns 0 points.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, the solution involves the following key steps:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Setup</strong>:</p>
+<ul>
+<li>Utilize a dynamic programming table <code>dp</code> where <code>dp[start][end]</code> stores a set of all possible values that can be computed from the substring of the expression between the indices <code>start</code> and <code>end</code>.</li>
+<li>The size of the table is determined by the number of operands in the expression, as there are <code>n</code> operands and <code>n - 1</code> operators.</li>
+</ul>
+</li>
+<li>
+<p><strong>Parsing the Expression</strong>:</p>
+<ul>
+<li>A helper function <code>parse()</code> computes the correct value of the expression by applying the order of operations (i.e., multiplication before addition).</li>
+<li>The function iterates over the string, processes each character, and handles the operations appropriately, using a stack to manage the current numbers and results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the DP Table</strong>:</p>
+<ul>
+<li>For each possible sub-expression defined by the indices in the <code>dp</code> table, compute all possible values by combining results from left and right partitions around each operator in the expression.</li>
+<li>Use the operator to determine how to combine the values (either summing them for &lsquo;+&rsquo; or multiplying them for &lsquo;*&rsquo;).</li>
+<li>Ensure that only results less than or equal to 1000 are stored in the sets to keep the computation manageable.</li>
+</ul>
+</li>
+<li>
+<p><strong>Scoring the Answers</strong>:</p>
+<ul>
+<li>Compare each student&rsquo;s answer against the correct value obtained from the <code>parse()</code> function and the set of possible values in <code>dp[0][n-1]</code>.</li>
+<li>Calculate the total score based on the defined scoring rules.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Finally, return the total score that the students earned based on their answers.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that will contain the main method to compute the scores.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">scoreOfStudents</span>(String s, <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> answers) {
+</span></span></code></pre></div><ul>
+<li>The <code>scoreOfStudents</code> method takes a string <code>s</code>, representing the mathematical expression, and an array of integers <code>answers</code>, representing the students&rsquo; responses.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) (s.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">/</span> 2 <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;[][]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Set<span style="color:#f92672">[</span>n<span style="color:#f92672">][</span>n<span style="color:#f92672">]</span>;
+</span></span></code></pre></div><ul>
+<li>Calculate the number of operands <code>n</code> in the expression and initialize the <code>dp</code> table.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet();
+</span></span><span style="display:flex;"><span>            dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>i<span style="color:#f92672">]</span>.<span style="color:#a6e22e">add</span>(s.<span style="color:#a6e22e">charAt</span>(2 <span style="color:#f92672">*</span> i) <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>Initialize the diagonal of the <code>dp</code> table. Each operand is stored in its corresponding position in the table.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> dif <span style="color:#f92672">=</span> 1; dif <span style="color:#f92672">&lt;</span> n; dif<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>Iterate over possible differences in the indices, which represent sub-expressions of increasing size.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> 0; start <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> dif; start<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> end <span style="color:#f92672">=</span> start <span style="color:#f92672">+</span> dif;
+</span></span><span style="display:flex;"><span>                dp<span style="color:#f92672">[</span>start<span style="color:#f92672">][</span>end<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;&gt;</span>();
+</span></span></code></pre></div><ul>
+<li>For each pair of start and end indices, initialize a new set to hold possible values for that sub-expression.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 2 <span style="color:#f92672">*</span> start <span style="color:#f92672">+</span> 1; i <span style="color:#f92672">&lt;</span> 2 <span style="color:#f92672">*</span> end; i <span style="color:#f92672">+=</span> 2) {
+</span></span></code></pre></div><ul>
+<li>Iterate over the operators in the current sub-expression.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (s.<span style="color:#a6e22e">charAt</span>(i) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
+</span></span></code></pre></div><ul>
+<li>Check if the current operator is &lsquo;+&rsquo; and calculate possible sums.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> a : dp<span style="color:#f92672">[</span>start<span style="color:#f92672">][</span>(<span style="color:#66d9ef">int</span>) (i <span style="color:#f92672">/</span> 2)<span style="color:#f92672">]</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> b : dp<span style="color:#f92672">[</span>(<span style="color:#66d9ef">int</span>) (i <span style="color:#f92672">/</span> 2) <span style="color:#f92672">+</span> 1<span style="color:#f92672">][</span>end<span style="color:#f92672">]</span>)
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span>(a <span style="color:#f92672">+</span> b <span style="color:#f92672">&lt;=</span> 1000) dp<span style="color:#f92672">[</span>start<span style="color:#f92672">][</span>end<span style="color:#f92672">]</span>.<span style="color:#a6e22e">add</span>(a <span style="color:#f92672">+</span> b);
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
+</span></span></code></pre></div><ul>
+<li>If the operator is &lsquo;*&rsquo;, calculate possible products.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> a : dp<span style="color:#f92672">[</span>start<span style="color:#f92672">][</span>(<span style="color:#66d9ef">int</span>) (i <span style="color:#f92672">/</span> 2)<span style="color:#f92672">]</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> b : dp<span style="color:#f92672">[</span>(<span style="color:#66d9ef">int</span>) (i <span style="color:#f92672">/</span> 2) <span style="color:#f92672">+</span> 1<span style="color:#f92672">][</span>end<span style="color:#f92672">]</span>)
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span>(a <span style="color:#f92672">+</span> b <span style="color:#f92672">&lt;=</span> 1000) dp<span style="color:#f92672">[</span>start<span style="color:#f92672">][</span>end<span style="color:#f92672">]</span>.<span style="color:#a6e22e">add</span>(a <span style="color:#f92672">*</span> b);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>After processing all operators for the current sub-expression, continue to the next size.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> crct <span style="color:#f92672">=</span> parse(s), ans <span style="color:#f92672">=</span> 0;
+</span></span></code></pre></div><ul>
+<li>Calculate the correct value of the expression using the <code>parse</code> function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x : answers) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> crct)                ans <span style="color:#f92672">+=</span> 5;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (dp<span style="color:#f92672">[</span>0<span style="color:#f92672">][</span>n <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>.<span style="color:#a6e22e">contains</span>(x)) ans <span style="color:#f92672">+=</span> 2;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>For each student&rsquo;s answer, compare it to the correct answer and the possible values stored in <code>dp[0][n-1]</code>, updating the score accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">parse</span>(String s) {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> stk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> op <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>parse</code> function initializes a stack to evaluate the expression and tracks the current number and operation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> s.<span style="color:#a6e22e">length</span>(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">char</span> ch <span style="color:#f92672">=</span> s.<span style="color:#a6e22e">charAt</span>(i);
+</span></span></code></pre></div><ul>
+<li>Loop through each character in the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(ch <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&amp;&amp;</span> ch <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;9&#39;</span>) {
+</span></span><span style="display:flex;"><span>                num <span style="color:#f92672">=</span> ch <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>If the character is a digit, convert it to an integer.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> s.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">-</span> 1 <span style="color:#f92672">||</span> ch <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">||</span> ch <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;*&#39;</span> ) {
+</span></span></code></pre></div><ul>
+<li>Check if we have reached the end of the string or found an operator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    stk.<span style="color:#a6e22e">add</span>(num);
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> stk.<span style="color:#a6e22e">get</span>(stk.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>                    stk.<span style="color:#a6e22e">remove</span>(stk.<span style="color:#a6e22e">size</span>() <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>                    stk.<span style="color:#a6e22e">add</span>(y <span style="color:#f92672">*</span> num);
+</span></span><span style="display:flex;"><span>                }
+</span></span></code></pre></div><ul>
+<li>Based on the previous operator, either add the number to the stack or multiply it with the last number in the stack.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                num <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>                op <span style="color:#f92672">=</span> ch;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>Reset the current number and update the operation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x : stk) res <span style="color:#f92672">+=</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Sum all numbers in the stack to get the final result of the expression and return it.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The overall time complexity of this solution is O(n^3), where n is the number of operands. This is due to the nested loops for populating the <code>dp</code> table.</li>
+<li><strong>Space Complexity</strong>: The space complexity is O(n^2) for storing sets of possible values in the <code>dp</code> table.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the solution efficiently evaluates a mathematical expression while scoring students&rsquo; answers based on correctness and the range of possible values derived from the expression. The combination of dynamic programming and parsing allows for a comprehensive yet clear approach to handling this problem.</p>
+<p>The clear structure of the code, with well-defined functions and encapsulated logic, enhances both readability and maintainability. It is an excellent example of how to approach complex evaluations and comparisons in programming contests and practical applications alike. By effectively leveraging data structures like sets and stacks, the solution remains efficient and clear, showcasing best practices in coding and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode641s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -311,7 +526,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2020"  class="external-link" target="_blank" rel="noopener">LeetCode #2020: Number of Accounts That Did Not Stream</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2022"  class="external-link" target="_blank" rel="noopener">LeetCode #2022: Convert 1D Array Into 2D Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -353,7 +568,6 @@
 
       </div>
 
-      
 
       <footer>
         

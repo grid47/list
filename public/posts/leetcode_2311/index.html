@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,190 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">count</span>(s.begin(), s.end(), <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">+</span> cnt;  
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode819s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the longest subsequence in a binary string <code>s</code> such that the subsequence, when interpreted as a binary number, is less than or equal to a given integer <code>k</code>. A subsequence is formed by deleting some or no elements from the string, without changing the order of the remaining characters. The goal is to return the length of the longest subsequence that can be selected, which satisfies the condition that its binary representation is less than or equal to <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The main challenge of this problem is to find the longest subsequence where the binary number formed by the subsequence is less than or equal to <code>k</code>. To achieve this, we can take advantage of the binary representation of <code>k</code> and consider each character of the string from the rightmost side (starting from the least significant bit) to maximize the subsequence length.</p>
+<p>Here’s the approach step-by-step:</p>
+<ol>
+<li>
+<p><strong>Binary Representation of <code>k</code>:</strong></p>
+<ul>
+<li>Since we are working with binary numbers, the key observation is that the binary representation of <code>k</code> plays an important role in determining which bits can be part of the subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate from the Rightmost Bit:</strong></p>
+<ul>
+<li>We start by iterating through the string <code>s</code> from right to left. This allows us to consider the least significant bits first, which gives us more flexibility in adding bits to the subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the Binary Number:</strong></p>
+<ul>
+<li>As we iterate, we maintain a variable <code>val</code> that stores the current value of the binary number formed by the subsequence considered so far.</li>
+<li>We also maintain a variable <code>pow</code>, which represents the value of the current bit position. This is initialized as 1 and doubled at each step (i.e., shifted left) as we move from right to left through the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add <code>1</code> Bits:</strong></p>
+<ul>
+<li>Each time we encounter a &lsquo;1&rsquo; in the string, we try to add it to the subsequence, increasing the subsequence value. If adding this &lsquo;1&rsquo; results in the binary number exceeding <code>k</code>, we stop considering further bits and move to the next part of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count <code>0</code> Bits:</strong></p>
+<ul>
+<li>The &lsquo;0&rsquo; bits in the string can always be included in the subsequence because they do not increase the binary number’s value. Therefore, we simply count the &lsquo;0&rsquo; bits in the string and add them to the final subsequence length.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result:</strong></p>
+<ul>
+<li>The length of the longest subsequence is the sum of the number of &lsquo;0&rsquo; bits and the number of &lsquo;1&rsquo; bits that were successfully added to the subsequence.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, pow <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>val</code> is used to store the current value of the subsequence as we build it from right to left. It starts at 0.</li>
+<li><code>cnt</code> counts how many &lsquo;1&rsquo; bits are successfully added to the subsequence.</li>
+<li><code>pow</code> represents the value of the current bit position (starts at 1 for the least significant bit).</li>
+</ul>
+<h4 id="step-2-iterate-through-the-string">
+  Step 2: Iterate Through the String
+  <a class="heading-link" href="#step-2-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> val <span style="color:#f92672">+</span> pow <span style="color:#f92672">&lt;=</span> k; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">++</span>cnt;
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">+=</span> pow;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    pow <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop starts from the rightmost character of the string <code>s</code> and moves to the left. The condition <code>val + pow &lt;= k</code> ensures that we do not exceed the value of <code>k</code> while building the subsequence.</li>
+<li>For each bit, if it is &lsquo;1&rsquo;, we increment the count <code>cnt</code> (indicating that this &lsquo;1&rsquo; is part of the subsequence) and add its corresponding value (<code>pow</code>) to <code>val</code>.</li>
+<li><code>pow &lt;&lt;= 1</code> shifts the value of <code>pow</code> to the next bit position (multiplying by 2).</li>
+</ul>
+<h4 id="step-3-count-0-bits">
+  Step 3: Count <code>0</code> Bits
+  <a class="heading-link" href="#step-3-count-0-bits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">count</span>(s.begin(), s.end(), <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">+</span> cnt;
+</span></span></code></pre></div><ul>
+<li>The function <code>count(s.begin(), s.end(), '0')</code> counts the number of &lsquo;0&rsquo; bits in the string <code>s</code>. Since &lsquo;0&rsquo; bits can always be included in the subsequence without changing its value, we add this count to <code>cnt</code> to get the total length of the longest subsequence.</li>
+<li>The total subsequence length is returned as the final result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Iterating Over the String:</strong></p>
+<ul>
+<li>The main loop iterates over the string <code>s</code> once, starting from the last character and moving to the first. This loop runs in <code>O(n)</code> time, where <code>n</code> is the length of the string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting <code>0</code> Bits:</strong></p>
+<ul>
+<li>The <code>count(s.begin(), s.end(), '0')</code> function also iterates over the string once to count the number of &lsquo;0&rsquo; bits, which takes <code>O(n)</code> time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity:</strong></p>
+<ul>
+<li>Since both operations (iterating over the string and counting &lsquo;0&rsquo; bits) are linear, the overall time complexity of the solution is <code>O(n)</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Auxiliary Variables:</strong></p>
+<ul>
+<li>The solution uses a constant amount of extra space for the variables <code>val</code>, <code>cnt</code>, and <code>pow</code>, which are all scalar values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity:</strong></p>
+<ul>
+<li>The space complexity is <code>O(1)</code> since the amount of extra space used does not depend on the size of the input string.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the longest subsequence of a binary string whose binary representation is less than or equal to a given integer <code>k</code>. The algorithm makes a single pass through the string to construct the valid subsequence and counts the &lsquo;0&rsquo; bits, ensuring optimal performance. The time complexity of <code>O(n)</code> makes this approach suitable for large input sizes, and the space complexity of <code>O(1)</code> ensures minimal memory usage. The solution is both time-efficient and space-efficient, making it well-suited for practical use cases involving binary strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode819s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

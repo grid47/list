@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> g;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode950s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to calculate a new grid where each element at position <code>(i, j)</code> is the result of a mathematical operation involving the sum of ones and zeros in the corresponding row and column of the original grid. Specifically, for each element, the value should be the result of the formula:</p>
+<p>[ \text{result}(i, j) = 2 \times (\text{number of ones in row } i) + 2 \times (\text{number of ones in column } j) - m - n ]</p>
+<p>Where:</p>
+<ul>
+<li><code>m</code> is the number of rows in the grid.</li>
+<li><code>n</code> is the number of columns in the grid.</li>
+<li>The grid consists of ones and zeros.</li>
+</ul>
+<p>The task is to compute this new grid for a given input <code>grid</code>.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be solved in an efficient manner by breaking the task into two steps:</p>
+<ol>
+<li>
+<p><strong>Precompute row and column sums</strong>:</p>
+<ul>
+<li>The first step is to calculate the number of ones in each row and each column. This can be done using two arrays: one to store the sum of ones for each row and another for each column.</li>
+<li>This will help in reducing the redundant computations for each element of the new grid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the result grid</strong>:</p>
+<ul>
+<li>For each element in the grid, the result can be computed by using the precomputed row and column sums. This way, we avoid counting the ones in the row and column repeatedly for every element of the grid.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code and explain each part in detail:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> onesMinusZeros(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> row(m), col(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                row[i] <span style="color:#f92672">+=</span> grid[i][j];
+</span></span><span style="display:flex;"><span>                col[j] <span style="color:#f92672">+=</span> grid[i][j];
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The function <code>onesMinusZeros</code> takes the input <code>grid</code>, which is a 2D vector of integers representing a grid of zeros and ones.</li>
+<li><code>m</code> stores the number of rows in the grid (<code>grid.size()</code>), and <code>n</code> stores the number of columns in the grid (<code>grid[0].size()</code>).</li>
+<li>Two vectors, <code>row</code> and <code>col</code>, are initialized to store the count of ones in each row and column, respectively. These vectors are of size <code>m</code> and <code>n</code>, initialized with zeros.</li>
+</ul>
+</li>
+<li>
+<p><strong>Precomputing Row and Column Sums</strong>:</p>
+<ul>
+<li>The two nested loops iterate over each element of the grid. For each element <code>grid[i][j]</code>, the value is added to the corresponding row and column count:
+<ul>
+<li><code>row[i] += grid[i][j]</code> increments the count of ones in the <code>i</code>-th row.</li>
+<li><code>col[j] += grid[i][j]</code> increments the count of ones in the <code>j</code>-th column.</li>
+</ul>
+</li>
+<li>This step ensures that after the loops, <code>row[i]</code> contains the total number of ones in row <code>i</code>, and <code>col[j]</code> contains the total number of ones in column <code>j</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> g(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                g[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> row[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> col[j] <span style="color:#f92672">-</span> m <span style="color:#f92672">-</span> n;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> g;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="3">
+<li>
+<p><strong>Constructing the Result Grid</strong>:</p>
+<ul>
+<li>A new grid <code>g</code> is created to store the result. This grid has the same dimensions as the input grid (<code>m</code> rows and <code>n</code> columns). Initially, all elements of <code>g</code> are set to 0.</li>
+<li>The nested loops again iterate through each element <code>g[i][j]</code> of the result grid.</li>
+<li>For each element, the formula <code>g[i][j] = 2 * row[i] + 2 * col[j] - m - n</code> is applied:
+<ul>
+<li><code>2 * row[i]</code> is twice the number of ones in the <code>i</code>-th row.</li>
+<li><code>2 * col[j]</code> is twice the number of ones in the <code>j</code>-th column.</li>
+<li>Subtracting <code>m</code> and <code>n</code> adjusts the value as per the problem&rsquo;s requirements.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After filling in the entire result grid <code>g</code>, it is returned as the final output.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the time and space complexity of the solution:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The first loop that computes the row and column sums takes (O(m \times n)), where <code>m</code> is the number of rows and <code>n</code> is the number of columns. This is because we are iterating over every element in the grid once to compute the row and column sums.</li>
+<li>The second loop that constructs the result grid also takes (O(m \times n)) as we are iterating over every element of the grid once to apply the formula.</li>
+<li>Therefore, the overall time complexity is (O(m \times n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m + n)) due to the two auxiliary vectors <code>row</code> and <code>col</code> that store the counts of ones in each row and column, respectively.</li>
+<li>The result grid <code>g</code> takes (O(m \times n)) space, which dominates the overall space complexity.</li>
+<li>Hence, the overall space complexity is (O(m \times n)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently computes the new grid by first precomputing the number of ones in each row and column. This reduces redundant calculations and allows us to compute the result in a second pass through the grid. The time complexity of (O(m \times n)) and space complexity of (O(m \times n)) ensure that the solution scales well with large grids. This approach is optimal for problems of this nature where we need to compute values based on row and column aggregates, and it avoids recalculating these sums multiple times, ensuring efficient performance.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode950s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +444,6 @@
 
       </div>
 
-      
 
       <footer>
         

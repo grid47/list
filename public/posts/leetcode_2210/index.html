@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -218,7 +218,146 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode752s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to count the number of &ldquo;hill&rdquo; and &ldquo;valley&rdquo; elements in the array <code>nums</code>. A <em>hill</em> is defined as an element that is greater than both its adjacent elements, while a <em>valley</em> is an element that is smaller than both its adjacent elements. The challenge here is to count these hills and valleys efficiently.</p>
+<p>However, there are a few optimizations to consider:</p>
+<ul>
+<li>Consecutive elements that are the same should be removed before counting.</li>
+<li>We need to traverse the array and count hills and valleys while ignoring consecutive duplicates.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be efficiently implemented using a <strong>single pass</strong> through the array with the help of a pointer (<code>j</code>) that skips over consecutive duplicate elements. The approach ensures that we:</p>
+<ol>
+<li>Skip duplicate elements that would otherwise be counted as hills or valleys.</li>
+<li>Check each element in the array (except the first and last elements) to determine whether it qualifies as a hill or valley.</li>
+<li>Count the hills and valleys as we go through the array.</li>
+</ol>
+<p>The strategy is:</p>
+<ol>
+<li>Start by iterating through the array, checking each element and its neighbors.</li>
+<li>Skip consecutive duplicate elements to ensure they don&rsquo;t affect the count.</li>
+<li>For each element, check if it forms a hill or valley by comparing it with its adjacent elements.</li>
+<li>Return the count of hills and valleys.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>res</code> is initialized to 0, which will hold the count of hills and valleys.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating through the Array:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span></code></pre></div><ul>
+<li>The loop starts with <code>j</code> pointing to the first element and <code>i</code> pointing to the second element.</li>
+<li>The loop will continue until <code>i</code> reaches the second-to-last element (<code>nums.size() - 1</code>), since the first and last elements can&rsquo;t be hills or valleys due to their lack of both neighbors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skipping Duplicates:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((nums[j] <span style="color:#f92672">&lt;</span> nums[i] <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&gt;</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>    (nums[j] <span style="color:#f92672">&gt;</span> nums[i] <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&lt;</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>])) {
+</span></span></code></pre></div><ul>
+<li>This condition checks if the current element (<code>nums[i]</code>) is either a hill or a valley.</li>
+<li>If <code>nums[i]</code> is greater than both its neighbors (<code>nums[j]</code> and <code>nums[i + 1]</code>), it forms a hill. Similarly, if <code>nums[i]</code> is smaller than both its neighbors, it forms a valley.</li>
+<li>The condition is written to ensure that we only count the element as a hill or valley when its adjacent elements are not equal, effectively skipping over duplicate numbers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Count:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>j <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><ul>
+<li>If a hill or valley is found, increment <code>res</code> and update <code>j</code> to point to the current element (<code>i</code>).</li>
+<li>This ensures that we skip over consecutive duplicates and only check for hills and valleys after unique elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After completing the iteration, the function returns <code>res</code>, the total count of hills and valleys in the array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The algorithm runs in O(n) time where <code>n</code> is the number of elements in the input array <code>nums</code>. This is because we only iterate through the array once and perform constant-time checks for each element.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The space complexity is O(1) because we are using only a few additional variables (<code>res</code>, <code>j</code>, and <code>i</code>), and no additional space is used that grows with the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of hills and valleys in the input array <code>nums</code> with a single pass. It avoids counting consecutive duplicates and ensures that only elements that form valid hills or valleys are counted. The use of a single iteration through the array ensures optimal time complexity of O(n), making this solution suitable for large input sizes. Additionally, the space complexity is O(1), meaning the solution uses constant space regardless of the input size, which makes it both time and space efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode752s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -272,7 +411,6 @@
 
       </div>
 
-      
 
       <footer>
         

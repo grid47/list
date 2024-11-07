@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,7 +249,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1086s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given two strings <code>num1</code> and <code>num2</code> representing two integers, as well as two integers <code>min_sum</code> and <code>max_sum</code>. The task is to count how many integers <code>x</code> exist in the range from <code>num1</code> to <code>num2</code> (inclusive) such that the sum of the digits of <code>x</code> lies between <code>min_sum</code> and <code>max_sum</code> (inclusive). The result should be returned modulo (10^9 + 7).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we employ a dynamic programming approach that efficiently counts the valid numbers within a given range that meet the specified sum of digits condition. This problem can be framed as a digit DP (Dynamic Programming) problem, where we keep track of several conditions at each step:</p>
+<ol>
+<li><strong>Current Index of Digits</strong>: We process the digits of the numbers from left to right.</li>
+<li><strong>Tightness of the Boundaries</strong>: We maintain whether we are still tightly bound to the current digit in either <code>num1</code> or <code>num2</code> while considering the digits.</li>
+<li><strong>Current Sum of Digits</strong>: We track the running sum of digits as we move through the digits.</li>
+</ol>
+<p>To solve this, we break down the solution into manageable components using recursive dynamic programming. The approach is based on counting valid numbers from 0 to <code>num2</code>, and then subtracting the count of valid numbers from 0 to <code>num1-1</code>, effectively computing the count of valid numbers in the range <code>[num1, num2]</code>.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialization-of-dp-table">
+  Step 1: Initialization of DP Table
+  <a class="heading-link" href="#step-1-initialization-of-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dp[<span style="color:#ae81ff">24</span>][<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">401</span>];
+</span></span><span style="display:flex;"><span>string n1, n2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span></code></pre></div><ul>
+<li>
+<p><code>dp[idx][t1][t2][net]</code>: A 4D dynamic programming array that stores the results for different states:</p>
+<ul>
+<li><code>idx</code>: The current index (position in the string) we are processing.</li>
+<li><code>t1</code>: A boolean representing whether we are still tightly bound to <code>num1</code> at this position.</li>
+<li><code>t2</code>: A boolean representing whether we are still tightly bound to <code>num2</code> at this position.</li>
+<li><code>net</code>: The remaining sum of digits that we are trying to achieve.</li>
+</ul>
+<p>The array is initialized to size 24, because the maximum length of the input strings is 24. The value <code>401</code> represents the maximum sum of digits we might encounter (since the largest possible sum is 9 times the length of the number, and <code>9 * 24 = 216</code>, we account for some buffer).</p>
+</li>
+</ul>
+<h4 id="step-2-recursive-sum-function">
+  Step 2: Recursive <code>sum</code> Function
+  <a class="heading-link" href="#step-2-recursive-sum-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">bool</span> t1, <span style="color:#66d9ef">bool</span> t2, <span style="color:#66d9ef">int</span> net) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(net <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n1.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(dp[idx][t1][t2][net] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> dp[idx][t1][t2][net];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> st <span style="color:#f92672">=</span> t1 <span style="color:#f92672">?</span> n1[idx] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ed <span style="color:#f92672">=</span> t2 <span style="color:#f92672">?</span> n2[idx] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">9</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> st; i <span style="color:#f92672">&lt;=</span> ed; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span>) (cnt <span style="color:#f92672">+</span> sum(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, t1 <span style="color:#f92672">&amp;&amp;</span> (i <span style="color:#f92672">==</span> st), t2 <span style="color:#f92672">&amp;&amp;</span> (i <span style="color:#f92672">==</span> ed), net <span style="color:#f92672">-</span> i)) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp[idx][t1][t2][net] <span style="color:#f92672">=</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This recursive function is the core of the solution and performs the following tasks:</p>
+<ol>
+<li><strong>Base Case</strong>: If the remaining sum (<code>net</code>) is less than 0, it’s not a valid configuration, so return 0. If <code>idx</code> equals the size of <code>n1</code>, we have processed all digits and check if the sum condition is met.</li>
+<li><strong>Memoization</strong>: If this state (<code>idx, t1, t2, net</code>) has already been computed, return the stored value to avoid redundant calculations.</li>
+<li><strong>Digit Range Calculation</strong>: Based on whether we are tightly bound to <code>num1</code> (<code>t1</code>) or <code>num2</code> (<code>t2</code>), we determine the possible range of digits (<code>st</code> to <code>ed</code>) we can use at the current index. If we are tightly bound, the digits must be within the respective boundaries of <code>num1</code> and <code>num2</code>.</li>
+<li><strong>Recursive Calls</strong>: For each possible digit (<code>i</code> from <code>st</code> to <code>ed</code>), we recursively calculate the number of valid numbers that can be formed for the next index with the updated sum (<code>net - i</code>). The tightness conditions (<code>t1</code> and <code>t2</code>) are updated accordingly.</li>
+</ol>
+<h4 id="step-3-main-function-count">
+  Step 3: Main Function (<code>count</code>)
+  <a class="heading-link" href="#step-3-main-function-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">count</span>(string num1, string num2, <span style="color:#66d9ef">int</span> min_sum, <span style="color:#66d9ef">int</span> max_sum) {
+</span></span><span style="display:flex;"><span>    num1 <span style="color:#f92672">=</span> string(num2.size() <span style="color:#f92672">-</span> num1.size(), <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">+</span> num1;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    n1 <span style="color:#f92672">=</span> num1;
+</span></span><span style="display:flex;"><span>    n2 <span style="color:#f92672">=</span> num2;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    memset(dp, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(dp));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> sum(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, max_sum);
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">-=</span> sum(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, min_sum <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Padding <code>num1</code></strong>: If <code>num1</code> is shorter than <code>num2</code>, we pad <code>num1</code> with leading zeros so that both numbers have the same length. This ensures that we treat them as numbers of the same length during processing.</li>
+<li><strong>Resetting <code>dp</code> Table</strong>: We initialize the DP table to <code>-1</code> to indicate that no states have been calculated yet.</li>
+<li><strong>Calling <code>sum</code></strong>: We first calculate the number of valid numbers with a sum of digits ≤ <code>max_sum</code> and then subtract the count of valid numbers with a sum of digits ≤ <code>min_sum - 1</code>. The difference gives the count of valid numbers in the range <code>[min_sum, max_sum]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is dominated by the recursion with memoization:</p>
+<ul>
+<li><strong>State Transitions</strong>: For each position in the string, we explore digits from 0 to 9 (a maximum of 10 options per state). Therefore, at each state, we perform a recursive call with 10 possibilities.</li>
+<li>The number of states is determined by the length of the strings (<code>n</code>), the possible tightness conditions (2 for each of <code>t1</code> and <code>t2</code>), and the sum of digits (up to <code>max_sum</code>).</li>
+</ul>
+<p>Thus, the time complexity is approximately <strong>O(n * 2 * 2 * max_sum * 10)</strong>, where <code>n</code> is the length of the number strings, <code>max_sum</code> is the maximum sum of digits, and the factor of 10 comes from the loop over digits. Given that <code>n</code> can be at most 24, this approach is efficient for typical input sizes.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n * 2 * 2 * max_sum)</strong> due to the DP table, which stores results for each combination of index, tightness conditions, and remaining sum.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses dynamic programming with memoization to efficiently count the number of integers in a given range that satisfy a specific sum of digits constraint. By using a recursive approach with careful tracking of the tightness of the boundaries (<code>num1</code> and <code>num2</code>), the algorithm computes the result in an optimal manner. The approach handles both large numbers and constraints on the sum of digits effectively, making it suitable for competitive programming scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1086s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -261,7 +413,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2720"  class="external-link" target="_blank" rel="noopener">LeetCode #2720: Popularity Percentage</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2729"  class="external-link" target="_blank" rel="noopener">LeetCode #2729: Check if The Number is Fascinating</a></th>
       </tr>
   </thead>
   <tbody>
@@ -303,7 +455,6 @@
 
       </div>
 
-      
 
       <footer>
         

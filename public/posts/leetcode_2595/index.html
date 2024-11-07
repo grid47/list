@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,170 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {a,b};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1024s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer <code>n</code>, the task is to count how many bits at even positions are set to <code>1</code> and how many bits at odd positions are set to <code>1</code>. The positions are indexed from the right starting at <code>0</code> (rightmost bit).</p>
+<ul>
+<li><strong>Even positions</strong>: Bits at indices <code>0, 2, 4, 6, ...</code></li>
+<li><strong>Odd positions</strong>: Bits at indices <code>1, 3, 5, 7, ...</code></li>
+</ul>
+<p>For example, for the input <code>n = 39</code> (which is <code>100111</code> in binary), we want to count:</p>
+<ul>
+<li>Bits at even positions (<code>0, 2, 4</code>): 1s in positions <code>0</code> and <code>4</code> (binary <code>100111</code> has 2 ones at even positions).</li>
+<li>Bits at odd positions (<code>1, 3</code>): 1s in positions <code>1</code> and <code>3</code> (binary <code>100111</code> has 2 ones at odd positions).</li>
+</ul>
+<p>The expected output for this example is <code>[2, 2]</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Binary Representation</strong>: We need to examine the binary representation of the number <code>n</code>. Each bit in the binary representation corresponds to a position that we either consider as even or odd.</p>
+</li>
+<li>
+<p><strong>Bit Manipulation</strong>: We will iterate through the bits of <code>n</code> from right to left. By using the modulo operation (<code>n % 2</code>), we can check if the least significant bit (LSB) is <code>1</code> or <code>0</code>.</p>
+</li>
+<li>
+<p><strong>Tracking Even and Odd Positions</strong>: We will use a counter (<code>c</code>) to track whether we are at an even or odd position while iterating through the binary bits. If <code>c</code> is even, we check and count how many <code>1</code>s appear at even positions. If <code>c</code> is odd, we do the same for odd positions.</p>
+</li>
+<li>
+<p><strong>Updating the Number</strong>: After each check, we shift <code>n</code> one position to the right (<code>n = n / 2</code> or <code>n &gt;&gt;= 1</code>), effectively removing the least significant bit that has already been processed.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After the loop ends, we return the counts of <code>1</code>s at even and odd positions as an array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-declaration">
+  1. <strong>Function Declaration</strong>:
+  <a class="heading-link" href="#1-function-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> evenOddBit(<span style="color:#66d9ef">int</span> n)
+</span></span></code></pre></div><p>This function takes an integer <code>n</code> as input and returns a vector of two integers: the count of <code>1</code>s at even positions and the count of <code>1</code>s at odd positions.</p>
+<h4 id="2-initialize-counters">
+  2. <strong>Initialize Counters</strong>:
+  <a class="heading-link" href="#2-initialize-counters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>a</code> will count the number of <code>1</code> bits at even positions.</li>
+<li><code>b</code> will count the number of <code>1</code> bits at odd positions.</li>
+<li><code>c</code> is a counter to track whether we are at an even or odd position.</li>
+</ul>
+<h4 id="3-iterate-through-the-bits-of-n">
+  3. <strong>Iterate Through the Bits of <code>n</code></strong>:
+  <a class="heading-link" href="#3-iterate-through-the-bits-of-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>This loop will continue until all bits of <code>n</code> have been processed. Since each time we shift the number right, we process one bit, the loop will run as long as <code>n</code> is not zero.</p>
+<h4 id="4-check-even-and-odd-positions">
+  4. <strong>Check Even and Odd Positions</strong>:
+  <a class="heading-link" href="#4-check-even-and-odd-positions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(c <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        a<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) b<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We check if the current position <code>c</code> is even or odd using <code>c % 2 == 0</code>.</li>
+<li>If it is an even position, we check if the least significant bit (<code>n % 2</code>) is <code>1</code>. If it is, we increment the <code>a</code> counter.</li>
+<li>If it is an odd position, we perform the same check and increment the <code>b</code> counter if the bit is <code>1</code>.</li>
+</ul>
+<h4 id="5-shift-the-bits">
+  5. <strong>Shift the Bits</strong>:
+  <a class="heading-link" href="#5-shift-the-bits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>c<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>After processing the least significant bit, we right shift <code>n</code> by one position (<code>n = n / 2</code>). This removes the bit we&rsquo;ve just processed. We also increment <code>c</code> to move to the next bit.</p>
+<h4 id="6-return-the-result">
+  6. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {a, b};
+</span></span></code></pre></div><p>After the loop finishes, we return the counts of <code>1</code>s at even and odd positions as a vector <code>{a, b}</code>.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:
+The function iterates over each bit of <code>n</code> in a loop. In the worst case, <code>n</code> will have <code>O(log n)</code> bits. Therefore, the time complexity is ( O(\log n) ), where <code>n</code> is the input integer.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is ( O(1) ) because we only use a few integer variables (<code>a</code>, <code>b</code>, and <code>c</code>) to store intermediate results, and the result vector has a fixed size of 2.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of <code>1</code> bits at even and odd positions in the binary representation of an integer <code>n</code>. By using simple bit manipulation and modular arithmetic, we can iterate through the bits and track the counts for even and odd positions. This approach is both time-efficient and space-efficient, making it well-suited for large input values.</p>
+<p>The solution performs the task in logarithmic time relative to the size of the input number, ensuring it works even for large numbers, and it operates with constant space usage. This is an optimal solution for the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1024s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +447,6 @@
 
       </div>
 
-      
 
       <footer>
         

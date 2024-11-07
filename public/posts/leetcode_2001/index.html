@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -246,7 +246,110 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode631s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the number of interchangeable rectangles from a given list of rectangles, defined by their width and height. Two rectangles are considered interchangeable if they have the same aspect ratio, which is the ratio of their width to their height. The challenge is to efficiently count how many pairs of rectangles share the same aspect ratio from a potentially large input set.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a hash map (or unordered map) to store the frequency of each unique aspect ratio encountered as we iterate through the list of rectangles. The aspect ratio of each rectangle is calculated by dividing its width by its height. As we process each rectangle:</p>
+<ol>
+<li>We compute its aspect ratio.</li>
+<li>We check if this aspect ratio has been seen before:
+<ul>
+<li>If it has, we can form new pairs of interchangeable rectangles with all previously encountered rectangles having the same aspect ratio.</li>
+<li>We increment our count of pairs accordingly.</li>
+</ul>
+</li>
+<li>We then update the frequency of the current aspect ratio in our hash map.</li>
+</ol>
+<p>This allows us to count the pairs in a single pass through the list of rectangles, making the solution efficient and straightforward.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dive into the code and break it down into its core components:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class named <code>Solution</code> which contains our method for counting interchangeable rectangles.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>interchangeableRectangles</code> takes a vector of rectangles (each represented as a pair of integers for width and height) as input and returns the total count of interchangeable rectangle pairs as a long long integer.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">interchangeableRectangles</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> rectangles) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Data Structures</strong>: We initialize an unordered map <code>mp</code> to store the frequency of each unique aspect ratio and a variable <code>cnt</code> to count the total number of interchangeable pairs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through Rectangles</strong>: We use a range-based for loop to iterate through each rectangle in the input list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> r: rectangles) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Aspect Ratio</strong>: For each rectangle, we calculate its aspect ratio by dividing its width (<code>r[0]</code>) by its height (<code>r[1]</code>). This ratio is stored as a double.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> x <span style="color:#f92672">=</span> (<span style="color:#66d9ef">double</span>)r[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">/</span> r[<span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Pairs</strong>: We check if the calculated aspect ratio already exists in our map:</p>
+<ul>
+<li>If it does, we add the count of rectangles with the same aspect ratio (stored in <code>mp[x]</code>) to <code>cnt</code> because each of these represents a potential pair with the current rectangle.</li>
+<li>We then increment the count of this aspect ratio in the map.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp.find(x) <span style="color:#f92672">!=</span> mp.end())
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">+=</span> mp[x]; <span style="color:#75715e">// Increment cnt by the number of rectangles with the same ratio
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mp[x]<span style="color:#f92672">++</span>; <span style="color:#75715e">// Increase the count of this ratio in the map
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: After processing all rectangles, we return the total count of interchangeable rectangle pairs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is O(n), where n is the number of rectangles. This is because we traverse the list of rectangles once and perform constant time operations (hash map lookups and insertions) for each rectangle. The space complexity is also O(n) in the worst case if all rectangles have unique aspect ratios.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code efficiently counts the number of interchangeable rectangles based on their aspect ratios. By leveraging a hash map to track the frequency of each unique ratio, we can quickly determine how many pairs can be formed with previously seen rectangles. This approach not only simplifies the counting process but also ensures that the solution remains optimal even for large inputs. The logic is straightforward, making it easy to understand how rectangles are processed and counted based on their geometric properties. Thus, this solution effectively combines mathematical insight with efficient data structures to solve the problem of counting interchangeable rectangles in a clean and efficient manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode631s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -300,7 +403,6 @@
 
       </div>
 
-      
 
       <footer>
         

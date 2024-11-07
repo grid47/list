@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,158 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1094s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the minimum difference between any two adjacent elements in the array after sorting it. Specifically, we are given a list of integers, and the task is to return the smallest difference between any two numbers in the sorted version of the array. This problem is typically useful for applications like optimizing resource allocation, determining range spans, or analyzing ordered data for efficient operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow a structured approach:</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<ul>
+<li>The main idea behind this approach is that the smallest difference between any two elements in the array will always occur between adjacent elements when the array is sorted. This is because, in a sorted array, the values that are closest to each other will be placed next to each other.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Difference Between Adjacent Elements</strong>:</p>
+<ul>
+<li>Once the array is sorted, the next step is to traverse through the sorted array and compute the difference between every two consecutive elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Keep Track of the Minimum Difference</strong>:</p>
+<ul>
+<li>As we compute the differences, we keep track of the smallest one. This can be done using a simple comparison mechanism that updates the minimum difference as we progress through the array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code line by line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findValueOfPartition</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li><strong>Sorting the Array</strong>:
+<ul>
+<li>The <code>sort</code> function is used to sort the array in ascending order. This ensures that the smallest and closest numbers in terms of magnitude are placed next to each other, making it easier to find the minimum difference.</li>
+<li>Sorting the array is the first and necessary step to ensure that adjacent numbers in the array will have the smallest possible differences.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><ul>
+<li><strong>Initial Minimum Difference</strong>:
+<ul>
+<li>After sorting, the difference between the first two elements (<code>nums[1] - nums[0]</code>) is calculated and stored in the variable <code>res</code>. This is the starting value of the minimum difference.</li>
+<li>At this point, we assume that the smallest difference is between the first two elements, as this is the only comparison we can make initially.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> min(nums[i] <span style="color:#f92672">-</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], res);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Iterating and Updating the Minimum Difference</strong>:
+<ul>
+<li>A <code>for</code> loop iterates over the array starting from the second element (<code>i = 1</code>) up to the end of the array.</li>
+<li>Inside the loop, the difference between each adjacent pair of numbers (<code>nums[i] - nums[i - 1]</code>) is calculated. This is the key part of the algorithm where we compare each adjacent pair of numbers in the sorted array.</li>
+<li>The <code>min</code> function is used to keep track of the smallest difference encountered so far. At each iteration, we update <code>res</code> to hold the smaller value between the current difference and the previously stored minimum difference.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Return the Result</strong>:
+<ul>
+<li>After the loop finishes, the variable <code>res</code> will hold the smallest difference between any two adjacent numbers in the sorted array.</li>
+<li>The function returns <code>res</code> as the final result.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<ul>
+<li>The <code>sort</code> function has a time complexity of ( O(n \log n) ), where ( n ) is the size of the input array. Sorting is the most time-consuming operation in this approach.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over the Array</strong>:</p>
+<ul>
+<li>The <code>for</code> loop runs once for each element in the array, so the time complexity of this step is ( O(n) ), where ( n ) is the size of the array.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall time complexity of the algorithm is dominated by the sorting step, resulting in ( O(n \log n) ).</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm does not use any extra data structures that grow with the size of the input. It only uses a few variables (<code>res</code>, <code>i</code>), all of which take constant space.</li>
+<li>Thus, the space complexity is ( O(1) ), meaning the algorithm uses constant extra space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem of finding the minimum difference between adjacent elements in an array by first sorting the array and then iterating over it to compute the differences. Sorting ensures that the closest values are adjacent, making it easy to find the minimum difference. The approach is optimal with a time complexity of ( O(n \log n) ), which is suitable for typical input sizes.</p>
+<ul>
+<li><strong>Time Complexity</strong>: ( O(n \log n) ), where <code>n</code> is the size of the input array.</li>
+<li><strong>Space Complexity</strong>: ( O(1) ), as the solution only uses a fixed amount of extra space.</li>
+</ul>
+<p>This method is simple, intuitive, and runs efficiently for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1094s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -275,7 +426,6 @@
 
       </div>
 
-      
 
       <footer>
         

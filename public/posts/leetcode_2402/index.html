@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -276,7 +276,243 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mxi;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode885s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given <code>n</code> rooms, and a list <code>meets</code> of meeting schedules where each meeting is represented by a pair of integers <code>[start, end]</code>, indicating the start and end time of a meeting. Your task is to assign meetings to rooms such that:</p>
+<ol>
+<li>Each meeting occupies one room.</li>
+<li>A room can only be used by one meeting at a time.</li>
+<li>If there are multiple meetings scheduled at the same time, a meeting has to wait for the next available room.</li>
+</ol>
+<p>You need to determine which room is the most frequently used, i.e., the room that is booked the most times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a variant of the &ldquo;meeting rooms&rdquo; or &ldquo;interval scheduling&rdquo; problem. The goal is to efficiently assign meetings to rooms, accounting for both scheduling conflicts (when two meetings overlap) and room availability. The solution involves simulating the allocation of meetings to rooms using a priority queue.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sorting</strong>: First, we sort the meetings based on their start times to ensure that we process meetings in the correct order.</p>
+</li>
+<li>
+<p><strong>Priority Queue for Room Management</strong>: A priority queue (min-heap) is used to keep track of the rooms and their availability. Specifically, we use two priority queues:</p>
+<ul>
+<li>One to manage available rooms (<code>free</code>).</li>
+<li>One to track rooms with ongoing meetings and when they will become available (<code>rvd</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Room Usage</strong>: We need to keep track of how many times each room is booked. This can be done using a simple array <code>frq</code> where each index represents a room and stores the number of times it was used.</p>
+</li>
+<li>
+<p><strong>Greedy Allocation</strong>: For each meeting:</p>
+<ul>
+<li>If a room becomes available before or when the meeting starts, we allocate it immediately.</li>
+<li>If all rooms are occupied, we push the meeting to the room that will be free the soonest.</li>
+</ul>
+</li>
+</ol>
+<h4 id="plan">
+  Plan:
+  <a class="heading-link" href="#plan">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sorting Meetings</strong>: We begin by sorting the meetings by their start time. This helps ensure that we handle the meetings in the correct order, from the earliest to the latest.</p>
+</li>
+<li>
+<p><strong>Room Allocation</strong>:</p>
+<ul>
+<li>For each meeting, we check if any rooms are available by looking at the priority queue <code>rvd</code>.</li>
+<li>If a room is available, we assign the meeting to that room and update the room&rsquo;s availability.</li>
+<li>If no room is available, we delay the meeting by finding the room that will free up the earliest and update its availability accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking the Most Booked Room</strong>: After processing all meetings, we simply find the room with the highest booking count.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sorting-the-meetings">
+  Step 1: Sorting the Meetings
+  <a class="heading-link" href="#step-1-sorting-the-meetings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(meets.begin(), meets.end(), cmp);
+</span></span></code></pre></div><ul>
+<li>We start by sorting the meetings based on their start time using the custom comparator <code>cmp</code>. This ensures that meetings are processed in the order they occur.</li>
+</ul>
+<h4 id="step-2-priority-queues-initialization">
+  Step 2: Priority Queues Initialization
+  <a class="heading-link" href="#step-2-priority-queues-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> rvd;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> free;
+</span></span></code></pre></div><ul>
+<li>
+<p><code>rvd</code>: This priority queue keeps track of rooms that are currently occupied. Each element is a pair, where the first value is the time the room will become available (the meeting&rsquo;s end time), and the second value is the room number.</p>
+</li>
+<li>
+<p><code>free</code>: This priority queue keeps track of rooms that are free. Rooms are pushed into this queue at the beginning and are available for allocation.</p>
+</li>
+</ul>
+<h4 id="step-3-room-usage-tracking">
+  Step 3: Room Usage Tracking
+  <a class="heading-link" href="#step-3-room-usage-tracking">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    free.push(i);
+</span></span></code></pre></div><ul>
+<li><code>frq</code>: This array stores the number of meetings assigned to each room.</li>
+<li>We push all <code>n</code> rooms into the <code>free</code> queue, marking them as available at the start.</li>
+</ul>
+<h4 id="step-4-room-allocation-for-each-meeting">
+  Step 4: Room Allocation for Each Meeting
+  <a class="heading-link" href="#step-4-room-allocation-for-each-meeting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t : meets) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> t[<span style="color:#ae81ff">0</span>], e <span style="color:#f92672">=</span> t[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>rvd.empty() <span style="color:#f92672">&amp;&amp;</span> rvd.top().first <span style="color:#f92672">&lt;=</span> s) {
+</span></span><span style="display:flex;"><span>        free.push(rvd.top().second);
+</span></span><span style="display:flex;"><span>        rvd.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(free.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> room <span style="color:#f92672">=</span> free.top();
+</span></span><span style="display:flex;"><span>        free.pop();
+</span></span><span style="display:flex;"><span>        rvd.push({e, room});
+</span></span><span style="display:flex;"><span>        frq[room]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> newHalt <span style="color:#f92672">=</span> rvd.top().first <span style="color:#f92672">+</span> (e <span style="color:#f92672">-</span> s);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> room <span style="color:#f92672">=</span> rvd.top().second;
+</span></span><span style="display:flex;"><span>        rvd.pop();
+</span></span><span style="display:flex;"><span>        rvd.push({newHalt, room});
+</span></span><span style="display:flex;"><span>        frq[room]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each meeting in the sorted list.</li>
+<li>For each meeting, we check if any room has become free by checking if the room’s next available time (tracked in <code>rvd</code>) is less than or equal to the current meeting&rsquo;s start time (<code>s</code>).</li>
+<li>If a room is available, we assign the meeting to the first available room from the <code>free</code> queue.</li>
+<li>If no room is available, we delay the meeting by finding the room that will be free the soonest (the one with the earliest finish time) and allocate the meeting to it.</li>
+</ul>
+<h4 id="step-5-finding-the-most-booked-room">
+  Step 5: Finding the Most Booked Room
+  <a class="heading-link" href="#step-5-finding-the-most-booked-room">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mxi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(frq[i] <span style="color:#f92672">&gt;</span> frq[mxi])
+</span></span><span style="display:flex;"><span>        mxi <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mxi;
+</span></span></code></pre></div><ul>
+<li>After processing all meetings, we iterate over the <code>frq</code> array to find the room with the highest booking count.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting the Meetings</strong>: Sorting the <code>meets</code> array takes <strong>O(m log m)</strong>, where <code>m</code> is the number of meetings.</li>
+<li><strong>Processing the Meetings</strong>: Each meeting is processed once. For each meeting, we perform constant time operations for room allocation (involving the priority queues), resulting in <strong>O(m log n)</strong> time complexity for room allocation, where <code>n</code> is the number of rooms and <code>m</code> is the number of meetings.</li>
+<li><strong>Finding the Most Booked Room</strong>: Finding the room with the highest booking count takes <strong>O(n)</strong> time.</li>
+</ul>
+<p>Therefore, the overall time complexity is <strong>O(m log m + m log n + n)</strong>, where:</p>
+<ul>
+<li><code>m</code> is the number of meetings,</li>
+<li><code>n</code> is the number of rooms.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Priority Queues</strong>: We use two priority queues to manage the rooms and their availability, which takes <strong>O(n)</strong> space.</li>
+<li><strong>Other Variables</strong>: We use an array <code>frq</code> of size <code>n</code>, which also takes <strong>O(n)</strong> space.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently allocates meetings to rooms using priority queues to manage both room availability and scheduling conflicts. By processing meetings in sorted order and dynamically managing room availability, the algorithm is both time-efficient and space-efficient. The approach guarantees that we can handle large inputs while minimizing the time spent on unnecessary re-evaluations of room status.</p>
+<p>Key Takeaways:</p>
+<ul>
+<li>Priority queues are used to manage room availability dynamically.</li>
+<li>Sorting meetings by start time ensures that we handle them in the correct order.</li>
+<li>The sliding window technique using priority queues allows for efficient room allocation, even when rooms are busy or unavailable.</li>
+</ul>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode885s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +524,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2403"  class="external-link" target="_blank" rel="noopener">LeetCode #2403: Minimum Time to Kill All Monsters</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2404"  class="external-link" target="_blank" rel="noopener">LeetCode #2404: Most Frequent Even Element</a></th>
       </tr>
   </thead>
   <tbody>
@@ -330,7 +566,6 @@
 
       </div>
 
-      
 
       <footer>
         

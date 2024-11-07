@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,180 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode944s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to check whether a given string forms a &ldquo;circular sentence.&rdquo; A string is defined as a circular sentence if:</p>
+<ol>
+<li>The first character of the string is the same as the last character.</li>
+<li>For every space in the string, the character immediately preceding the space must be the same as the character immediately following the space.</li>
+</ol>
+<p>For example:</p>
+<ul>
+<li><code>&quot;abc cba&quot;</code> is a circular sentence because:
+<ul>
+<li>The first character (&lsquo;a&rsquo;) is the same as the last character (&lsquo;a&rsquo;).</li>
+<li>The characters before and after the space (&lsquo;b&rsquo; and &lsquo;c&rsquo;) are the same for both words.</li>
+</ul>
+</li>
+</ul>
+<p>However:</p>
+<ul>
+<li><code>&quot;hello world&quot;</code> is <strong>not</strong> a circular sentence because:
+<ul>
+<li>The first character (&lsquo;h&rsquo;) is not the same as the last character (&rsquo;d&rsquo;).</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to check two conditions for a sentence:</p>
+<ol>
+<li><strong>First and last character match</strong>: The first and last characters of the sentence must be identical.</li>
+<li><strong>Words separated by spaces</strong>: For each space in the string, the character immediately before the space should be the same as the character immediately after the space.</li>
+</ol>
+<p>To solve this problem, the approach involves:</p>
+<ol>
+<li>Checking if the first and last characters of the string are the same.</li>
+<li>Iterating through the string and for every space encountered, checking if the characters before and after the space match.</li>
+<li>If both conditions are satisfied, the string is a circular sentence; otherwise, it is not.</li>
+</ol>
+<p>The solution must efficiently traverse the string once while checking these conditions, which guarantees an optimal time complexity.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initial-setup">
+  1. <strong>Initial Setup</strong>
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span></code></pre></div><ul>
+<li>The size of the string <code>s</code> is stored in the variable <code>n</code> to avoid repeated calls to <code>s.size()</code> throughout the function.</li>
+</ul>
+<h4 id="2-check-if-first-and-last-characters-are-the-same">
+  2. <strong>Check if First and Last Characters are the Same</strong>
+  <a class="heading-link" href="#2-check-if-first-and-last-characters-are-the-same">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((s[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">!=</span> (s[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>The first condition to check is whether the first character <code>s[0]</code> is the same as the last character <code>s[n - 1]</code>.</li>
+<li>If they are not the same, the string cannot be a circular sentence, so the function immediately returns <code>false</code>.</li>
+</ul>
+<h4 id="3-iterate-through-the-string-to-check-each-space">
+  3. <strong>Iterate Through the String to Check Each Space</strong>
+  <a class="heading-link" href="#3-iterate-through-the-string-to-check-each-space">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((s[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">!=</span> (s[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;                
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop starts from the second character (<code>i = 1</code>) and goes until the second-to-last character (<code>i &lt; s.size() - 1</code>). This avoids unnecessary checks at the boundaries (the first and last characters are already checked).</li>
+<li>The condition <code>s[i] == ' '</code> checks if the current character is a space.</li>
+<li>If a space is found, we check if the characters immediately before and after the space are the same (<code>s[i - 1] == s[i + 1]</code>).
+<ul>
+<li>If they are not the same, the function returns <code>false</code> because this violates the circular sentence condition.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-return-true-if-all-checks-pass">
+  4. <strong>Return True if All Checks Pass</strong>
+  <a class="heading-link" href="#4-return-true-if-all-checks-pass">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If all the checks pass (i.e., the first and last characters match, and the characters around each space match), the function returns <code>true</code>, indicating that the string is a circular sentence.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string. This is because:
+<ul>
+<li>The function iterates through the string once to check the characters.</li>
+<li>Each check (comparing characters or checking for spaces) is performed in constant time.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of characters in the string.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as the solution only uses a few integer variables (<code>n</code> and <code>i</code>) to store intermediate values and does not create any additional data structures that grow with the input size.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(1)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if a given string is a circular sentence by validating two key conditions:</p>
+<ol>
+<li>The first and last characters must match.</li>
+<li>For every space in the string, the characters immediately before and after the space must be identical.</li>
+</ol>
+<p>The solution is optimal with a time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the string, and a space complexity of <strong>O(1)</strong>. It uses a single loop to traverse the string and makes constant-time comparisons to ensure the string meets the requirements for being a circular sentence.</p>
+<p>This approach is simple and effective for this type of problem, ensuring that it runs efficiently even for long strings. The logic behind the solution is straightforward, involving basic string traversal and comparisons, making it both easy to understand and implement.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode944s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -275,7 +448,6 @@
 
       </div>
 
-      
 
       <footer>
         

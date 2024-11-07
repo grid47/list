@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -211,7 +211,114 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (at <span style="color:#f92672">+</span> dt) <span style="color:#f92672">%</span> <span style="color:#ae81ff">24</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1047s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the time at which an event will occur given the current time (<code>at</code>) and the delayed time (<code>dt</code>). The time operates on a 24-hour clock, and the result must reflect the correct time modulo 24 hours. This means if the delayed time causes the event to exceed 24 hours, the answer should wrap around to the correct time on the next day.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the approach uses simple modular arithmetic. The key concept here is that the time operates on a 24-hour cycle, and we need to compute the total delayed time modulo 24 hours.</p>
+<p>The problem is asking for the result of adding <code>at</code> (the current time) to <code>dt</code> (the delay), and then ensuring that the result wraps around after reaching 24 hours. This can be easily accomplished by taking the sum of <code>at</code> and <code>dt</code>, then performing a modulo operation by 24. The modulo operator (<code>%</code>) will ensure that if the sum exceeds 24, it wraps back to the beginning of the 24-hour clock cycle.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDelayedArrivalTime</span>(<span style="color:#66d9ef">int</span> at, <span style="color:#66d9ef">int</span> dt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (at <span style="color:#f92672">+</span> dt) <span style="color:#f92672">%</span> <span style="color:#ae81ff">24</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Input Parameters:</strong>
+<ul>
+<li><code>at</code>: The current time in hours (an integer between 0 and 23).</li>
+<li><code>dt</code>: The delay in hours (an integer, could be positive or zero).</li>
+</ul>
+</li>
+<li><strong>Return Value:</strong>
+<ul>
+<li>The time at which the event occurs after the delay, considering the wraparound behavior of a 24-hour clock.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Modular Arithmetic:</strong></p>
+<ul>
+<li>The function adds <code>at</code> and <code>dt</code>, which gives the total hours from midnight.</li>
+<li>The expression <code>(at + dt) % 24</code> ensures that the resulting time is within the bounds of a 24-hour clock.</li>
+<li>If the sum <code>at + dt</code> exceeds 23 (i.e., the 24th hour or beyond), the modulo operation wraps the result back within the range <code>[0, 23]</code>, ensuring a valid time on the clock.</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Calculation:</strong></p>
+<ul>
+<li>The key operation here is <code>(at + dt) % 24</code>. It guarantees that no matter how large <code>dt</code> is, the result will always be between <code>0</code> and <code>23</code>, corresponding to valid hours on a 24-hour clock.</li>
+<li>For instance:
+<ul>
+<li>If <code>at = 22</code> (10 PM) and <code>dt = 5</code>, the result would be <code>(22 + 5) % 24 = 27 % 24 = 3</code>, which represents 3 AM.</li>
+<li>If <code>at = 23</code> (11 PM) and <code>dt = 1</code>, the result would be <code>(23 + 1) % 24 = 24 % 24 = 0</code>, which represents 12 AM (midnight) on the next day.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity:</strong></p>
+<ul>
+<li>The time complexity is <strong>O(1)</strong> since the solution involves only basic arithmetic operations (addition and modulo), which take constant time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity:</strong></p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> as well, because no extra space is used other than for the input parameters and the result.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a simple application of modular arithmetic to ensure that times are calculated correctly on a 24-hour clock. The use of the modulo operator guarantees that the result always falls within the valid range of <code>[0, 23]</code>. The solution is efficient with a constant time and space complexity of <strong>O(1)</strong>, making it well-suited for handling any input within the specified limits. The approach ensures that even if the delay causes the time to exceed 24 hours, the result will be correctly wrapped around to the appropriate hour of the day.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1047s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -265,7 +372,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -225,7 +225,104 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode741s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code> and a key integer <code>key</code>, the task is to find the most frequent integer in <code>nums</code> that appears immediately after an occurrence of <code>key</code>. The solution must return the integer that has the highest frequency of occurrence following <code>key</code> in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is solved efficiently using a counting technique. The solution involves iterating through the array, checking if the previous number is equal to <code>key</code>, and then counting the occurrences of numbers that follow <code>key</code>. The number with the highest count is the answer.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization of Counting Array:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">1001</span>] <span style="color:#f92672">=</span> {}, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The array <code>cnt</code> of size 1001 is used to count the frequency of each number that follows <code>key</code> in the array. The size of 1001 ensures that all possible numbers (from 0 to 1000) can be accounted for.</li>
+<li><code>res</code> is initialized to 0 and will store the most frequent number after <code>key</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Array:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i)
+</span></span></code></pre></div><ul>
+<li>A <code>for</code> loop is used to traverse the array <code>nums</code> starting from the second element (index 1), as we need to compare each element with its previous one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking for the Key and Counting Frequencies:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> key <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">++</span>cnt[nums[i]] <span style="color:#f92672">&gt;</span> cnt[res])
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>The condition <code>nums[i - 1] == key</code> checks if the previous element is equal to <code>key</code>. If this condition is true, the current element <code>nums[i]</code> is the candidate for counting.</li>
+<li>The expression <code>++cnt[nums[i]]</code> increments the count of <code>nums[i]</code> in the <code>cnt</code> array.</li>
+<li>The comparison <code>cnt[nums[i]] &gt; cnt[res]</code> checks if the current number has a higher frequency than the previously stored result. If so, <code>res</code> is updated to store the current number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop completes, <code>res</code> holds the most frequent number that appears after <code>key</code> in the array. This is returned as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>The time complexity of this solution is O(n), where <code>n</code> is the size of the input array <code>nums</code>. This is because the solution iterates through the array once and performs constant-time operations inside the loop.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>The space complexity is O(1), or constant space, since the only additional space used is the fixed-size array <code>cnt</code> of 1001 elements.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code provides an efficient solution to the problem of finding the most frequent integer that appears after a specified key in an array. By using a frequency count array, the algorithm ensures that each number is processed in constant time, making the solution optimal for large arrays. The linear time complexity ensures that the solution can scale well even for large input sizes, and the space complexity remains minimal, using only a fixed amount of additional space for counting occurrences. This approach strikes an ideal balance between simplicity and performance, making it suitable for real-world applications where finding frequent patterns in arrays is a common task.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode741s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +376,6 @@
 
       </div>
 
-      
 
       <footer>
         

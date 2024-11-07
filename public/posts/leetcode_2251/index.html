@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -271,7 +271,195 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode779s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine how many flowers are blooming at each point in time for a given list of people&rsquo;s visit times. The flowers bloom at specific start and end times, and the goal is to count the number of flowers that are blooming at each person&rsquo;s visit time. A person can visit the flowers at any time, and we need to determine the number of flowers blooming at their visit time based on the given bloom and wither times of each flower.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach for solving this problem involves sorting the flower intervals and people’s visit times, using a priority queue to keep track of the active flowers that are blooming, and efficiently counting how many flowers are blooming at each person&rsquo;s visit time.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sort the Flowers by Start Time</strong>: First, sort the list of flowers by their start time. This helps in processing flowers that start blooming in the correct order.</p>
+</li>
+<li>
+<p><strong>Sort the People by Visit Time</strong>: Create a pair of each person&rsquo;s visit time with their index so that after calculating the result, we can put the results back into the correct order.</p>
+</li>
+<li>
+<p><strong>Use a Priority Queue (Min-Heap)</strong>: A priority queue will help us maintain a list of flowers that are blooming at any given time. The flowers in the priority queue are ordered by their wither time (end time), and we can efficiently pop flowers that are no longer blooming.</p>
+</li>
+<li>
+<p><strong>Process Each Person&rsquo;s Visit Time</strong>:</p>
+<ul>
+<li>For each person, we first remove all flowers from the priority queue whose wither time is less than the person&rsquo;s visit time.</li>
+<li>Then, we add all the flowers that have started blooming by the person&rsquo;s visit time (i.e., those flowers whose start time is less than or equal to the person&rsquo;s visit time).</li>
+<li>Finally, the number of flowers in the priority queue represents how many flowers are blooming at that person&rsquo;s visit time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After processing all people, the result vector will contain the number of blooming flowers for each person, indexed by their original position.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sort-the-flowers-and-people">
+  Step 1: Sort the Flowers and People
+  <a class="heading-link" href="#step-1-sort-the-flowers-and-people">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(flo.begin(), flo.end());
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> peo.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pp.push_back(make_pair(peo[i], i));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>sort(pp.begin(), pp.end());
+</span></span></code></pre></div><ul>
+<li>The flowers are sorted by their start time <code>flo[i][0]</code> to ensure that we process them in the correct order.</li>
+<li>The people&rsquo;s visit times are paired with their original indices so that we can return the results in the correct order. The visit times <code>peo[i]</code> are sorted in ascending order to process the people in the order they visit.</li>
+</ul>
+<h4 id="step-2-initialize-the-answer-and-priority-queue">
+  Step 2: Initialize the Answer and Priority Queue
+  <a class="heading-link" href="#step-2-initialize-the-answer-and-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(peo.size(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>A result vector <code>ans</code> is initialized with zeros. This vector will store the number of blooming flowers for each person.</li>
+<li>A priority queue <code>pq</code> is used to track the flowers that are currently blooming. The priority queue is implemented as a min-heap, so the flower with the earliest end time is always at the top.</li>
+</ul>
+<h4 id="step-3-process-each-persons-visit-time">
+  Step 3: Process Each Person’s Visit Time
+  <a class="heading-link" href="#step-3-process-each-persons-visit-time">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> peo.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> pp[i].first <span style="color:#f92672">&gt;</span> pq.top()) {
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> flo.size() <span style="color:#f92672">&amp;&amp;</span> pp[i].first <span style="color:#f92672">&gt;=</span> flo[j][<span style="color:#ae81ff">0</span>]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (pp[i].first <span style="color:#f92672">&lt;=</span> flo[j][<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>            pq.push(flo[j][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ans[pp[i].second] <span style="color:#f92672">=</span> pq.size();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through each person (sorted by their visit time).</li>
+<li>For each person <code>pp[i]</code>, first, we remove any flowers from the priority queue that are no longer blooming at the current visit time (<code>pp[i].first</code>).</li>
+<li>Then, we add all the flowers that start blooming at or before the current visit time. For each such flower <code>flo[j]</code>, we push its wither time (<code>flo[j][1]</code>) into the priority queue.</li>
+<li>Finally, the number of blooming flowers at the person’s visit time is simply the size of the priority queue, which represents the number of flowers that are currently active (blooming).</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all people, we return the <code>ans</code> vector, which contains the number of blooming flowers for each person, in the original order.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Sorting Flowers</strong>: Sorting the flowers takes ( O(m \log m) ), where ( m ) is the number of flowers.</li>
+<li><strong>Sorting People</strong>: Sorting the people based on their visit times takes ( O(n \log n) ), where ( n ) is the number of people.</li>
+<li><strong>Processing People</strong>: For each person, we need to iterate through the flowers and potentially push flowers into the priority queue. In the worst case, we will process all flowers for each person. The priority queue operations (push and pop) take ( O(\log m) ), and for each person, we may perform at most ( m ) such operations. Therefore, the time complexity for processing people is ( O(n \times \log m) ).</li>
+</ol>
+<ul>
+<li>The overall time complexity is ( O(m \log m + n \log n + n \log m) ), where:
+<ul>
+<li>( m ) is the number of flowers,</li>
+<li>( n ) is the number of people.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Priority Queue</strong>: The space required for the priority queue is ( O(m) ), as it stores at most ( m ) flowers.</p>
+</li>
+<li>
+<p><strong>Result Vector</strong>: The result vector <code>ans</code> requires ( O(n) ) space to store the number of blooming flowers for each person.</p>
+</li>
+<li>
+<p><strong>Other Variables</strong>: The space used for sorting the people and storing intermediate pairs is ( O(n) ).</p>
+</li>
+<li>
+<p>Therefore, the overall space complexity is ( O(m + n) ).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts how many flowers are blooming at each person&rsquo;s visit time using sorting and a priority queue. The sorting of flowers and people&rsquo;s visit times ensures that we process the flowers and people in the correct order. The priority queue allows us to efficiently track which flowers are blooming at any given time, and by processing people in sorted order, we can minimize the number of operations required to determine how many flowers are blooming at each person&rsquo;s visit time.</p>
+<p>The overall time complexity of ( O(m \log m + n \log n + n \log m) ) is manageable for typical problem constraints, and the space complexity of ( O(m + n) ) is also efficient. This approach provides an optimal solution to the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode779s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +471,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2252"  class="external-link" target="_blank" rel="noopener">LeetCode #2252: Dynamic Pivoting of a Table</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2255"  class="external-link" target="_blank" rel="noopener">LeetCode #2255: Count Prefixes of a Given String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -325,7 +513,6 @@
 
       </div>
 
-      
 
       <footer>
         

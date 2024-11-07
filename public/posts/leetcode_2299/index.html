@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -219,7 +219,211 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sz <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">&amp;&amp;</span> lo <span style="color:#f92672">&amp;&amp;</span> up <span style="color:#f92672">&amp;&amp;</span> digit <span style="color:#f92672">&amp;&amp;</span> (sz <span style="color:#f92672">-</span> lo <span style="color:#f92672">-</span> up <span style="color:#f92672">-</span> digit <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode821s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to implement a function that checks whether a given password satisfies specific security criteria. The password is considered strong if it meets the following conditions:</p>
+<ol>
+<li>The length of the password must be at least 8 characters.</li>
+<li>The password must contain at least one lowercase letter.</li>
+<li>The password must contain at least one uppercase letter.</li>
+<li>The password must contain at least one digit.</li>
+<li>The password must not contain two consecutive characters that are the same.</li>
+</ol>
+<p>Given a password string <code>p</code>, the goal is to determine whether it meets all these conditions and return <code>true</code> if it is a strong password, or <code>false</code> otherwise.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to check each of the five conditions for a valid password. We will iterate through the password string, checking the following:</p>
+<ul>
+<li>The length of the string.</li>
+<li>Whether the string contains at least one lowercase letter, one uppercase letter, and one digit.</li>
+<li>Whether the string contains any consecutive repeating characters.</li>
+</ul>
+<p>Here is the step-by-step approach to implement the solution:</p>
+<ol>
+<li><strong>Iterate through the password</strong>: Traverse each character of the password string to check if it satisfies the conditions for being a strong password.</li>
+<li><strong>Track the conditions</strong>: Use flags or counters to track whether we’ve encountered at least one lowercase letter, one uppercase letter, and one digit. Also, ensure that no two consecutive characters are the same.</li>
+<li><strong>Early exit</strong>: As soon as we detect a violation of any of the conditions, we can return <code>false</code> early.</li>
+<li><strong>Final checks</strong>: After traversing the string, ensure that the password meets all the conditions. If any of the conditions are violated, return <code>false</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Counters</strong>:</p>
+<ul>
+<li>We use three counters: <code>lo</code>, <code>up</code>, and <code>digit</code> to track the number of lowercase letters, uppercase letters, and digits, respectively.</li>
+<li>We also store the size of the password in <code>sz</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lo <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, up <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, digit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sz <span style="color:#f92672">=</span> p.size();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Through the Password</strong>:</p>
+<ul>
+<li>We use a loop to iterate over each character of the password <code>p</code>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sz; <span style="color:#f92672">++</span>i) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Consecutive Characters</strong>:</p>
+<ul>
+<li>We check whether the current character <code>p[i]</code> is the same as the previous character <code>p[i-1]</code>. If they are the same, we immediately return <code>false</code> because the password contains two consecutive identical characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> p[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> p[i]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Lowercase Letters</strong>:</p>
+<ul>
+<li>We check if the current character is a lowercase letter using the <code>islower()</code> function. If it is, we increment the <code>lo</code> counter by 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>lo <span style="color:#f92672">+=</span> islower(p[i]) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Uppercase Letters</strong>:</p>
+<ul>
+<li>Similarly, we check if the current character is an uppercase letter using the <code>isupper()</code> function. If it is, we increment the <code>up</code> counter by 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>up <span style="color:#f92672">+=</span> isupper(p[i]) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Digits</strong>:</p>
+<ul>
+<li>We check if the current character is a digit using the <code>isdigit()</code> function. If it is, we increment the <code>digit</code> counter by 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>digit <span style="color:#f92672">+=</span> isdigit(p[i]) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Final Check for Password Validity</strong>:</p>
+<ul>
+<li>After finishing the iteration, we check the following conditions:
+<ol>
+<li>The length of the password must be greater than 7 characters (<code>sz &gt; 7</code>).</li>
+<li>There must be at least one lowercase letter (<code>lo</code> must be greater than 0).</li>
+<li>There must be at least one uppercase letter (<code>up</code> must be greater than 0).</li>
+<li>There must be at least one digit (<code>digit</code> must be greater than 0).</li>
+<li>The number of characters that are neither lowercase, uppercase, nor digits (the remaining characters) must be greater than 0. This is checked by the condition <code>(sz - lo - up - digit &gt; 0)</code>.</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sz <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> <span style="color:#f92672">&amp;&amp;</span> lo <span style="color:#f92672">&amp;&amp;</span> up <span style="color:#f92672">&amp;&amp;</span> digit <span style="color:#f92672">&amp;&amp;</span> (sz <span style="color:#f92672">-</span> lo <span style="color:#f92672">-</span> up <span style="color:#f92672">-</span> digit <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><p>If all conditions are satisfied, the function returns <code>true</code>. Otherwise, it returns <code>false</code>.</p>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Password123!&#34;</span>;
+</span></span></code></pre></div><p><strong>Execution</strong>:</p>
+<ol>
+<li>The password length is 12, which is greater than 7, so the length condition is met.</li>
+<li>The password contains at least one lowercase letter (<code>'P'</code>), one uppercase letter (<code>'p'</code>), and one digit (<code>'1'</code>), so the character type conditions are met.</li>
+<li>The password does not contain two consecutive identical characters.</li>
+<li>The number of non-alphabetic and non-digit characters is greater than 0, as there is an exclamation mark <code>!</code>.</li>
+</ol>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>true
+</span></span></code></pre></div><h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;aabbcc&#34;</span>;
+</span></span></code></pre></div><p><strong>Execution</strong>:</p>
+<ol>
+<li>The password length is 6, which is less than 8, so the length condition fails immediately.</li>
+</ol>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>false
+</span></span></code></pre></div><h4 id="example-3">
+  Example 3:
+  <a class="heading-link" href="#example-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Aa1bb!&#34;</span>;
+</span></span></code></pre></div><p><strong>Execution</strong>:</p>
+<ol>
+<li>The password length is 6, which is less than 8, so the length condition fails immediately.</li>
+</ol>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>false
+</span></span></code></pre></div><h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the password. This is because we are iterating over each character of the password exactly once.</li>
+<li>Each condition check (<code>islower()</code>, <code>isupper()</code>, <code>isdigit()</code>, etc.) takes constant time, so the overall time complexity is linear.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we are using a constant amount of extra space (only a few integer variables to store counts and the password length).</li>
+<li>We do not use any additional data structures whose size depends on the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently checks whether a given password satisfies the criteria for being a &ldquo;strong&rdquo; password. It uses a simple linear scan through the string to check the password&rsquo;s length, character types, and consecutive character rules, making the solution both time-efficient and space-efficient. This solution is well-suited for the problem as it guarantees correctness while maintaining optimal performance for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode821s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -273,7 +477,6 @@
 
       </div>
 
-      
 
       <footer>
         

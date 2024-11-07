@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -233,7 +233,189 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode768s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the <code>k</code>-th palindrome number with a specified number of digits <code>sz</code> for each query in the input list. A palindrome is a number that reads the same backward as forward, and the task is to return the <code>k</code>-th palindrome of a given size or return <code>-1</code> if the <code>k</code>-th palindrome does not exist.</p>
+<p>We are given an array <code>queries</code>, where each query <code>q</code> asks for the <code>q</code>-th palindrome with exactly <code>sz</code> digits. If the query exceeds the number of possible palindromes of that size, return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to generate palindromes for a given size <code>sz</code> and identify the <code>q</code>-th palindrome for each query. The key observation is that a palindrome number can be constructed by using its first half digits, and the second half is a mirror of the first half.</p>
+<h4 id="steps-to-solve">
+  Steps to Solve:
+  <a class="heading-link" href="#steps-to-solve">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Understanding Palindromes</strong>:</p>
+<ul>
+<li>For a given size <code>sz</code>, the number of possible palindromes depends on whether the size is even or odd.</li>
+<li>If <code>sz</code> is even, a palindrome consists of two equal halves. For example, a 4-digit palindrome looks like <code>ABBA</code>, where <code>AB</code> is the first half, and the second half mirrors <code>AB</code>.</li>
+<li>If <code>sz</code> is odd, the middle digit is independent, and the palindrome looks like <code>ABA</code>, where <code>AB</code> is the first half, and <code>A</code> is mirrored as the last digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing Palindromes</strong>:</p>
+<ul>
+<li>For each query, calculate the possible range of numbers that can form palindromes with the given size <code>sz</code>.</li>
+<li>Find the first half of the palindrome, and then mirror it to form the full palindrome.</li>
+<li>For odd-sized palindromes, exclude the middle digit from the mirrored portion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Query Resolution</strong>:</p>
+<ul>
+<li>For each query, determine if the requested palindrome index <code>q</code> lies within the valid range of palindromes. If not, return <code>-1</code>.</li>
+<li>Construct the palindrome by manipulating the first half digits and mirroring them.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-helper-function-reverse">
+  Step 1: Helper Function <code>reverse</code>
+  <a class="heading-link" href="#step-1-helper-function-reverse">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">reverse</span>(<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> n, <span style="color:#66d9ef">int</span> skip) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(n <span style="color:#f92672">=</span> skip <span style="color:#f92672">?</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">:</span> n; n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; n <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> res <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This helper function reverses the digits of a number <code>n</code>.</li>
+<li>If the <code>skip</code> flag is set, it removes the last digit of <code>n</code> before starting the reversal process. This is useful for palindromes where we only want to mirror the first half.</li>
+</ul>
+<h4 id="step-2-main-function-kthpalindrome">
+  Step 2: Main Function <code>kthPalindrome</code>
+  <a class="heading-link" href="#step-2-main-function-kthpalindrome">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> kthPalindrome(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> queries, <span style="color:#66d9ef">int</span> sz) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> start <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">10</span>, (sz <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>), 
+</span></span><span style="display:flex;"><span>              end <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">10</span>, (sz <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>), 
+</span></span><span style="display:flex;"><span>              mul <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">10</span>, sz <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> q : queries)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (start <span style="color:#f92672">+</span> q <span style="color:#f92672">&gt;</span> end)
+</span></span><span style="display:flex;"><span>            ans.push_back(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> (start <span style="color:#f92672">+</span> q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> mul <span style="color:#f92672">+</span> reverse(start <span style="color:#f92672">+</span> q <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, sz <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>            ans.push_back(res);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Variables</strong>:</p>
+<ul>
+<li><code>start</code>: The smallest possible number for the first half of a palindrome. This is calculated as <code>pow(10, (sz + 1) / 2 - 1)</code>.</li>
+<li><code>end</code>: The largest possible number for the first half of a palindrome. This is calculated as <code>pow(10, (sz + 1) / 2)</code>.</li>
+<li><code>mul</code>: This is a multiplier used to combine the first half of the palindrome with its mirrored second half. It is calculated as <code>pow(10, sz / 2)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Query Processing</strong>:</p>
+<ul>
+<li>For each query <code>q</code>, the code checks if the <code>q</code>-th palindrome is within the range of possible palindromes. If <code>q</code> exceeds the number of palindromes of size <code>sz</code>, it appends <code>-1</code> to the result.</li>
+<li>Otherwise, it calculates the palindrome by:
+<ul>
+<li>Using the first half of the palindrome, which is <code>(start + q - 1)</code>.</li>
+<li>Mirroring the first half by calling the <code>reverse</code> function (if the palindrome size <code>sz</code> is odd, it skips the middle digit during mirroring).</li>
+<li>Combining the first half and mirrored second half to form the palindrome.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After processing all queries, the function returns the result vector <code>ans</code>, which contains the palindromes or <code>-1</code> for invalid queries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong>, where <code>m</code> is the number of queries in the input <code>queries</code> array.
+<ul>
+<li>For each query, we perform constant-time operations, such as checking if the query is valid and reversing the first half of the palindrome. These operations take constant time relative to the size of the palindrome (<code>sz</code>), which is a constant value in this case.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong>, where <code>m</code> is the number of queries in the input <code>queries</code> array.
+<ul>
+<li>The space complexity is linear in the number of queries because we store the result for each query in the output vector <code>ans</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the task of finding the <code>k</code>-th palindrome for various queries with a given number of digits. By leveraging mathematical properties of palindromes, it calculates the palindrome directly from the first half and mirrors it to form the full palindrome, ensuring that the solution runs in optimal time for each query.</p>
+<p>With a time complexity of <strong>O(m)</strong> and space complexity of <strong>O(m)</strong>, this approach is well-suited for handling large input sizes, making it both time and space-efficient.</p>
+<p>Overall, the solution is elegant, simple, and performs the task optimally for all valid inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode768s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +469,6 @@
 
       </div>
 
-      
 
       <footer>
         

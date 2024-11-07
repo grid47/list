@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1030s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves calculating the minimum number of operations needed to make all elements of an array <code>nums</code> greater than or equal to the values specified in an array <code>q</code>. Each operation consists of incrementing or decrementing the values in the <code>nums</code> array to meet the conditions specified in <code>q</code>. The task is to compute the number of operations for each query efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to efficiently compute how many operations are required for each query in the array <code>q</code> to modify the array <code>nums</code> such that all elements of <code>nums</code> are greater than or equal to the query value. The core challenge is efficiently determining how to make all elements of <code>nums</code> meet the specified threshold and calculating the operations needed.</p>
+<p>The steps in the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>: We first sort the array <code>nums</code>. Sorting helps us efficiently find the elements in <code>nums</code> that are greater than or equal to each query value using binary search. Sorting ensures that we can process the array efficiently with the help of the <code>lower_bound</code> function.</p>
+</li>
+<li>
+<p><strong>Prefix Sum Array</strong>: We compute a prefix sum array <code>pre</code>, where <code>pre[i]</code> stores the sum of the first <code>i+1</code> elements of the sorted <code>nums</code> array. This helps us quickly compute the sum of elements less than or equal to a query value and those greater than the query value.</p>
+</li>
+<li>
+<p><strong>Binary Search</strong>: For each query value <code>q[i]</code>, we use the <code>lower_bound</code> function to find the first index in <code>nums</code> where the value is greater than or equal to <code>q[i]</code>. This binary search helps us efficiently partition the array into two sections: one where elements are smaller than <code>q[i]</code>, and the other where elements are greater than or equal to <code>q[i]</code>.</p>
+</li>
+<li>
+<p><strong>Calculating Operations</strong>: For each query:</p>
+<ul>
+<li>If all elements of <code>nums</code> are smaller than <code>q[i]</code>, we calculate the operations by multiplying <code>q[i]</code> with the total number of elements in <code>nums</code> and subtracting the sum of all elements.</li>
+<li>If there are elements greater than or equal to <code>q[i]</code>, we calculate the operations required for each partition using the prefix sum array. The operations for the left section (smaller elements) involve incrementing them to <code>q[i]</code>, and the operations for the right section (larger elements) involve decrementing them to <code>q[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Results</strong>: After processing each query, we return the results in the form of an array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sorting-the-array">
+  1. <strong>Sorting the Array</strong>:
+  <a class="heading-link" href="#1-sorting-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>The first step is to sort the array <code>nums</code>. Sorting helps us later apply binary search efficiently and ensures we can compute the results for each query in an optimized manner.</li>
+</ul>
+<h4 id="2-initializing-prefix-sum-array">
+  2. <strong>Initializing Prefix Sum Array</strong>:
+  <a class="heading-link" href="#2-initializing-prefix-sum-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> pre(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>pre[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    pre[i] <span style="color:#f92672">=</span> pre[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>We create a prefix sum array <code>pre</code> of size <code>n</code>. This array stores the cumulative sum of the sorted elements of <code>nums</code>. This allows us to efficiently compute the sum of elements less than or equal to a query value and those greater than the query value.</li>
+</ul>
+<h4 id="3-processing-each-query">
+  3. <strong>Processing Each Query</strong>:
+  <a class="heading-link" href="#3-processing-each-query">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> lower_bound(nums.begin(), nums.end(), q[i]);
+</span></span></code></pre></div><ul>
+<li>We iterate over each query in the array <code>q</code>. For each query <code>q[i]</code>, we use the <code>lower_bound</code> function to find the position of the first element in <code>nums</code> that is greater than or equal to <code>q[i]</code>. This helps us partition the array into elements smaller than <code>q[i]</code> and those that are greater than or equal to it.</li>
+</ul>
+<h4 id="4-calculating-the-operations">
+  4. <strong>Calculating the Operations</strong>:
+  <a class="heading-link" href="#4-calculating-the-operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> nums.end()) {
+</span></span><span style="display:flex;"><span>    ans[i] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)q[i] <span style="color:#f92672">*</span> n <span style="color:#f92672">-</span> pre[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> it <span style="color:#f92672">-</span> nums.begin();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> right <span style="color:#f92672">=</span> pre[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> ((idx <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> pre[idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> left <span style="color:#f92672">=</span> idx <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> pre[idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    ans[i] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)q[i] <span style="color:#f92672">*</span> idx <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)left <span style="color:#f92672">+</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)right <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)q[i] <span style="color:#f92672">*</span> ((<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)n <span style="color:#f92672">-</span> idx);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the <code>lower_bound</code> returns <code>nums.end()</code>, it means all elements in <code>nums</code> are smaller than the query value. In this case, we compute the operations as the difference between <code>q[i]</code> multiplied by the number of elements in <code>nums</code> and the sum of all elements in <code>nums</code>.</li>
+<li>If <code>lower_bound</code> finds a position within <code>nums</code>, we compute the operations for both the left section (smaller elements) and the right section (larger elements). The left section needs to be incremented to meet <code>q[i]</code>, and the right section needs to be decremented. We calculate the total operations as the difference between <code>q[i]</code> and the elements in <code>nums</code>.</li>
+</ul>
+<h4 id="5-returning-the-results">
+  5. <strong>Returning the Results</strong>:
+  <a class="heading-link" href="#5-returning-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all the queries, we return the results array <code>ans</code>, which contains the minimum number of operations required for each query in <code>q</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the array <code>nums</code> takes (O(n \log n)), where <code>n</code> is the size of <code>nums</code>.</li>
+<li>For each query, finding the position using <code>lower_bound</code> takes (O(\log n)). Since there are <code>m</code> queries, processing all queries takes (O(m \log n)).</li>
+<li>Therefore, the overall time complexity is (O(n \log n + m \log n)), where <code>n</code> is the size of <code>nums</code> and <code>m</code> is the size of <code>q</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n + m)), as we store the prefix sum array <code>pre</code> of size <code>n</code> and the result array <code>ans</code> of size <code>m</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of operations needed to make all elements in <code>nums</code> greater than or equal to the query values in <code>q</code>. By sorting <code>nums</code> and using binary search, we ensure that each query is processed in logarithmic time with respect to the size of <code>nums</code>. The use of a prefix sum array further optimizes the calculation of required operations. The overall time complexity of (O(n \log n + m \log n)) ensures that the solution is efficient for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1030s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +413,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2603"  class="external-link" target="_blank" rel="noopener">LeetCode #2603: Collect Coins in a Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2605"  class="external-link" target="_blank" rel="noopener">LeetCode #2605: Form Smallest Number From Two Digit Arrays</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +455,6 @@
 
       </div>
 
-      
 
       <footer>
         

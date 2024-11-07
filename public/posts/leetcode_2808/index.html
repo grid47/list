@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -235,7 +235,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1141s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the minimum number of seconds required to make all elements of the array equal, where each second allows one to perform a cyclic shift of any number of positions in the array. The goal is to find the minimal time (in seconds) such that all elements of the array can be made equal after a series of cyclic shifts.</p>
+<p>Given a list of integers, where each element appears one or more times, the task is to compute the minimum seconds it takes to bring all elements in the array to the same value by shifting elements in a cyclic manner.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves understanding the cyclic nature of the array and the distribution of the values within it. The key observation is that the problem essentially boils down to figuring out the maximum gap between two occurrences of the same element in the array. The minimum time to make all elements equal corresponds to the maximum distance between consecutive occurrences of any element (as you can cyclically shift the array and only need to worry about the largest gap).</p>
+<p>Here’s how the solution works step-by-step:</p>
+<ol>
+<li>
+<p><strong>Group Positions of Same Elements</strong>:</p>
+<ul>
+<li>First, we group all the positions of the same element in the array. This helps us understand the spacing between consecutive occurrences of the same number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Gaps Between Consecutive Occurrences</strong>:</p>
+<ul>
+<li>For each number, calculate the gap between its consecutive occurrences. To handle the cyclic nature of the array, we also consider the gap between the last occurrence and the first occurrence, wrapping around the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine the Minimum Time</strong>:</p>
+<ul>
+<li>The minimum time required to equalize the elements corresponds to the largest gap divided by 2. This is because we are concerned with how long it takes for the array to &ldquo;catch up&rdquo; to the target value by shifting the elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over All Values</strong>:</p>
+<ul>
+<li>For each unique value, compute the required time and keep track of the smallest of these times.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize the Necessary Data Structures</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pos;
+</span></span></code></pre></div><ul>
+<li>We use a map <code>pos</code> to store the positions of each unique value in the array. The keys of the map are the unique values in <code>nums</code>, and the values are vectors of integers representing the indices at which each number appears in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store Positions of Each Value</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    pos[nums[i]].push_back(i);
+</span></span></code></pre></div><ul>
+<li>The for loop iterates over the array <code>nums</code>. For each element <code>nums[i]</code>, we store its index in the map <code>pos</code> under the key corresponding to <code>nums[i]</code>. This allows us to efficiently gather all indices for each unique number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Set Initial Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> INT_MAX;
+</span></span></code></pre></div><ul>
+<li>We initialize the variable <code>res</code> to store the minimum number of seconds required. We begin with <code>INT_MAX</code>, which represents an arbitrarily large number, since we are trying to minimize the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Each Unique Value</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [key, val]<span style="color:#f92672">:</span> pos) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sec <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    val.push_back(val[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> n);
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each key-value pair in the map <code>pos</code>, where <code>key</code> is the unique number and <code>val</code> is the vector of indices where this number appears.</li>
+<li>We create a new entry in the <code>val</code> vector by adding the first element of <code>val</code> plus <code>n</code> (the length of the array). This step is used to simulate the circular behavior of the array, effectively &ldquo;wrapping around&rdquo; the indices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Maximum Gap</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> val.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    sec <span style="color:#f92672">=</span> max(sec, (val[i] <span style="color:#f92672">-</span> val[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])<span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After adding the wrapped-around index, we loop through the vector <code>val</code> to calculate the gaps between consecutive indices. We compute the gap as <code>(val[i] - val[i - 1]) / 2</code> to find the largest possible gap. We update the <code>sec</code> variable to keep track of the maximum gap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update the Minimum Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> min(res, sec);
+</span></span></code></pre></div><ul>
+<li>After computing the largest gap for the current value, we update <code>res</code> to be the minimum of <code>res</code> and <code>sec</code>. This ensures that we keep track of the smallest time required across all values in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>res</code>, which contains the minimum number of seconds required to make all elements equal in the array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Storing positions</strong>: The first loop iterates over the array, which takes <strong>O(n)</strong> time, where <code>n</code> is the length of the array <code>nums</code>.</li>
+<li><strong>Calculating gaps</strong>: For each unique value in <code>nums</code>, we calculate the gaps between its consecutive occurrences. In the worst case, if every element in the array is unique, we would process each element separately, but for each element, we are simply iterating over its positions. This means the total number of operations for all values is proportional to the size of the array, so this step also takes <strong>O(n)</strong> time.</li>
+<li><strong>Overall time complexity</strong>: Since each step takes linear time, the overall time complexity of the solution is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the space required to store the positions of the elements. In the worst case, if all elements are unique, the map <code>pos</code> would contain <code>n</code> entries, and each entry would store a single index. Thus, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the minimum number of seconds required to make all elements in the array equal. By using a map to store the positions of each element and calculating the maximum gap between consecutive occurrences, the algorithm effectively handles the cyclic nature of the array. With a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(n)</strong>, this approach is optimal for solving the problem efficiently, even for large arrays.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1141s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +399,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2809"  class="external-link" target="_blank" rel="noopener">LeetCode #2809: Minimum Time to Make Array Sum At Most x</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2810"  class="external-link" target="_blank" rel="noopener">LeetCode #2810: Faulty Keyboard</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +441,6 @@
 
       </div>
 
-      
 
       <footer>
         

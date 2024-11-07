@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,144 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> string(sp.size(), <span style="color:#e6db74">&#39;U&#39;</span>) <span style="color:#f92672">+</span> string(rbegin(dp), rend(dp));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode679s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the path between two nodes in a binary tree, given the values of the two nodes. The path is defined by directions: &ldquo;L&rdquo; for left, &ldquo;R&rdquo; for right, and &ldquo;U&rdquo; for moving up to the parent node. The objective is to return a string that represents the path from the start node to the destination node, including any necessary moves up the tree to reach a common ancestor before proceeding down to the destination node.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will take the following steps:</p>
+<ol>
+<li>
+<p><strong>Traverse the Tree</strong>: We need to locate both the start node and the destination node in the binary tree. This can be accomplished through a depth-first search (DFS) that explores the tree recursively.</p>
+</li>
+<li>
+<p><strong>Record Paths</strong>: As we traverse the tree, we will build paths for both the start and destination nodes. We will store these paths in strings (<code>sp</code> for the start node and <code>dp</code> for the destination node) where each character represents a direction taken during the traversal.</p>
+</li>
+<li>
+<p><strong>Identify the Lowest Common Ancestor (LCA)</strong>: After obtaining both paths, we need to determine the point where the two paths diverge. This point will indicate the lowest common ancestor of the two nodes. We will do this by comparing the characters in both strings from the end until they differ.</p>
+</li>
+<li>
+<p><strong>Construct the Final Path</strong>: Once the divergence point is found, the final path from the start node to the destination node will consist of moving up to the LCA (using &lsquo;U&rsquo; for each move) followed by moving down to the destination node (using the characters from the path to the destination node).</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The final path string will be returned as the output.</p>
+</li>
+</ol>
+<p>This approach efficiently handles the tree traversal and path construction using simple recursion, yielding a clean solution to the problem.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code to understand how it implements the above approach:</p>
+<ol>
+<li>
+<p><strong>TreeNode Structure</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>The <code>TreeNode</code> struct defines a node in the binary tree, containing an integer value (<code>val</code>) and pointers to the left and right child nodes.</p>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Find Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">find</span>(TreeNode<span style="color:#f92672">*</span> n, <span style="color:#66d9ef">int</span> val, string <span style="color:#f92672">&amp;</span>path) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> val) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">&amp;&amp;</span> find(n<span style="color:#f92672">-&gt;</span>left, val, path)) path.push_back(<span style="color:#e6db74">&#39;L&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">&amp;&amp;</span> find(n<span style="color:#f92672">-&gt;</span>right, val, path)) path.push_back(<span style="color:#e6db74">&#39;R&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>path.empty();
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>find</code> function is a helper function that searches for a node with the specified value (<code>val</code>) starting from the current node (<code>n</code>).</li>
+<li>If the current node&rsquo;s value matches <code>val</code>, the function returns <code>true</code>.</li>
+<li>If not, the function checks the left and right children recursively.</li>
+<li>If a node is found in either subtree, it appends &lsquo;L&rsquo; or &lsquo;R&rsquo; to the <code>path</code> string to record the direction taken.</li>
+<li>The function returns <code>true</code> if a path was found and updates the <code>path</code> string accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Get Directions Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#a6e22e">getDirections</span>(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> startValue, <span style="color:#66d9ef">int</span> destValue) {
+</span></span><span style="display:flex;"><span>        string sp, dp;
+</span></span><span style="display:flex;"><span>        find(root, startValue, sp);
+</span></span><span style="display:flex;"><span>        find(root, destValue, dp);
+</span></span></code></pre></div><ul>
+<li>The <code>getDirections</code> function initializes two strings, <code>sp</code> and <code>dp</code>, to store the paths to the start and destination nodes, respectively.</li>
+<li>It calls the <code>find</code> function twice to populate these paths.</li>
+</ul>
+</li>
+<li>
+<p><strong>Identifying the Lowest Common Ancestor (LCA)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>sp.empty() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>dp.empty() <span style="color:#f92672">&amp;&amp;</span> sp.back() <span style="color:#f92672">==</span> dp.back()) {
+</span></span><span style="display:flex;"><span>            sp.pop_back();
+</span></span><span style="display:flex;"><span>            dp.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>This while loop continues as long as the last characters of both path strings are equal, indicating that both paths are still moving up the tree towards the common ancestor.</li>
+<li>When the characters differ, it means we have reached the divergence point. The remaining characters in <code>sp</code> will represent the moves up to the LCA, while <code>dp</code> will contain the moves down to the destination node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Final Path</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">string</span>(sp.size(), <span style="color:#e6db74">&#39;U&#39;</span>) <span style="color:#f92672">+</span> string(rbegin(dp), rend(dp));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The final string is constructed by creating a string of &lsquo;U&rsquo; characters for the number of moves needed to reach the LCA from the start node (<code>sp.size()</code>).</li>
+<li>It then appends the reversed path from the LCA to the destination node (<code>dp</code>), using <code>rbegin</code> and <code>rend</code> to reverse the order of the characters.</li>
+<li>The complete path string is returned as the output of the function.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(n), where <code>n</code> is the number of nodes in the binary tree. This complexity arises from the need to traverse the tree potentially twice (once for each node). The space complexity is O(h), where <code>h</code> is the height of the tree, which accounts for the recursion stack used during the depth-first search.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the solution effectively determines the path between two nodes in a binary tree by leveraging depth-first search to find paths to both nodes and subsequently identifying their lowest common ancestor. This approach is both efficient and straightforward, providing a clear method for navigating binary trees. Understanding how to construct paths and manage tree traversals is crucial for solving similar problems in data structures and algorithms, making this solution an important technique for developers and computer scientists.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode679s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -253,7 +390,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2097"  class="external-link" target="_blank" rel="noopener">LeetCode #2097: Valid Arrangement of Pairs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2099"  class="external-link" target="_blank" rel="noopener">LeetCode #2099: Find Subsequence of Length K With the Largest Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -295,7 +432,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -215,7 +215,127 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode757s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to generate all the cells in a spreadsheet-like grid defined by two corner cells. These cells are provided in the input string <code>s</code>, where <code>s[0]</code> and <code>s[3]</code> represent the column range (from <code>s[0]</code> to <code>s[3]</code>), and <code>s[1]</code> and <code>s[4]</code> represent the row range (from <code>s[1]</code> to <code>s[4]</code>). The task is to return a list of all the cell coordinates (in the form of strings) that lie within the defined rectangular range.</p>
+<p>For example, if the input string is <code>&quot;A1:C3&quot;</code>, the solution should return the cells: <code>&quot;A1&quot;, &quot;A2&quot;, &quot;A3&quot;, &quot;B1&quot;, &quot;B2&quot;, &quot;B3&quot;, &quot;C1&quot;, &quot;C2&quot;, &quot;C3&quot;</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task can be approached by iterating over the columns and rows defined by the string <code>s</code> and collecting the corresponding cells. Specifically, we need to:</p>
+<ol>
+<li>Extract the column range from <code>s[0]</code> to <code>s[3]</code>.</li>
+<li>Extract the row range from <code>s[1]</code> to <code>s[4]</code>.</li>
+<li>Iterate over the columns and rows and construct each cell address by concatenating the column letter and row number.</li>
+<li>Collect all the cell addresses and return them as the result.</li>
+</ol>
+<p>The approach efficiently generates all the cells by leveraging the simple properties of characters for columns (since columns are represented by letters) and numerical values for rows.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> cellsInRange(string s) {
+</span></span></code></pre></div><ul>
+<li>The function <code>cellsInRange</code> takes a single string <code>s</code> as input and returns a vector of strings, where each string represents a cell in the given range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Result Vector</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li>We initialize an empty vector <code>res</code> that will hold the resulting cell addresses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Columns</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> s[<span style="color:#ae81ff">0</span>]; c <span style="color:#f92672">&lt;=</span> s[<span style="color:#ae81ff">3</span>]; <span style="color:#f92672">++</span>c)
+</span></span></code></pre></div><ul>
+<li>The first <code>for</code> loop iterates over the columns, which are represented by the characters <code>s[0]</code> and <code>s[3]</code>. Here, <code>s[0]</code> is the starting column, and <code>s[3]</code> is the ending column. The loop variable <code>c</code> represents the current column letter, starting from <code>s[0]</code> and incrementing until <code>s[3]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Rows</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> r <span style="color:#f92672">=</span> s[<span style="color:#ae81ff">1</span>]; r <span style="color:#f92672">&lt;=</span> s[<span style="color:#ae81ff">4</span>]; <span style="color:#f92672">++</span>r)
+</span></span></code></pre></div><ul>
+<li>The second <code>for</code> loop iterates over the rows, represented by the characters <code>s[1]</code> and <code>s[4]</code>. Similarly, <code>s[1]</code> is the starting row, and <code>s[4]</code> is the ending row. The loop variable <code>r</code> represents the current row number, starting from <code>s[1]</code> and incrementing until <code>s[4]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the Cell Address</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res.push_back({c, r});
+</span></span></code></pre></div><ul>
+<li>For each combination of column <code>c</code> and row <code>r</code>, we create a string in the form of a cell address (e.g., &ldquo;A1&rdquo;, &ldquo;B2&rdquo;, etc.) and add it to the result vector <code>res</code>. The cell is formed by concatenating the column character <code>c</code> and the row character <code>r</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After completing the iteration over all columns and rows, the vector <code>res</code>, which now contains all the cell addresses in the defined range, is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is O(n * m), where <code>n</code> is the number of columns in the range, and <code>m</code> is the number of rows in the range.</li>
+<li>Specifically, we iterate over all columns between <code>s[0]</code> and <code>s[3]</code> (which corresponds to <code>O(n)</code> where <code>n</code> is the number of columns) and for each column, we iterate over all rows between <code>s[1]</code> and <code>s[4]</code> (which corresponds to <code>O(m)</code> where <code>m</code> is the number of rows).</li>
+<li>Thus, the overall time complexity is O(n * m), where <code>n</code> is <code>s[3] - s[0] + 1</code> and <code>m</code> is <code>s[4] - s[1] + 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(n * m), as we are storing all the generated cell addresses in the result vector <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is an efficient and straightforward way to generate all cell addresses in a given range defined by a string input. The approach leverages simple iteration over columns and rows, making it easy to understand and implement. The time complexity is linear with respect to the number of cells in the range, and the space complexity is also linear with respect to the number of cells in the result.</p>
+<p>The code has been optimized to use <code>char</code> values for both columns and rows, simplifying the handling of ranges and providing an intuitive solution. This solution should perform well for most practical input sizes, and its time and space complexity ensure that it scales efficiently. Whether you&rsquo;re working with small or large grid sizes, this approach ensures correctness and optimal performance.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode757s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -227,7 +347,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2195"  class="external-link" target="_blank" rel="noopener">LeetCode #2195: Append K Integers With Minimal Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2196"  class="external-link" target="_blank" rel="noopener">LeetCode #2196: Create Binary Tree From Descriptions</a></th>
       </tr>
   </thead>
   <tbody>
@@ -269,7 +389,6 @@
 
       </div>
 
-      
 
       <footer>
         

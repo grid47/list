@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,143 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(eve, odd);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1119s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the maximum score that can be achieved by considering a sequence of numbers where you alternate between adding even and odd numbers. You can apply a penalty to an odd number when it is added to the score. The problem specifies a score calculation where:</p>
+<ul>
+<li>If the number is <strong>even</strong>, you can add it without penalty.</li>
+<li>If the number is <strong>odd</strong>, you can add it to the score but you incur a penalty of <code>x</code> if it has been preceded by an even number, and no penalty if the odd number follows another odd number.</li>
+</ul>
+<p>Given an array of integers <code>n</code> and a penalty value <code>x</code>, the goal is to maximize the total score based on these rules.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to manage the alternating sequence of even and odd numbers while accounting for penalties when switching between them. We use dynamic programming to maintain two potential outcomes for the score:</p>
+<ul>
+<li>The first is the score if the last number we added is even (<code>eve</code>).</li>
+<li>The second is the score if the last number we added is odd (<code>odd</code>).</li>
+</ul>
+<p>We iterate through the numbers in the array, updating these two possibilities at each step depending on whether the current number is even or odd.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">maxScore</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> n, <span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> eve <span style="color:#f92672">=</span> n[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> (n[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">?</span> x : <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Initial score if first number is even
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> odd <span style="color:#f92672">=</span> n[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> (n[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> x);  <span style="color:#75715e">// Initial score if first number is odd
+</span></span></span></code></pre></div><ul>
+<li><strong>Initialization:</strong>
+<ul>
+<li>We start by considering the first number in the array, <code>n[0]</code>.</li>
+<li>If <code>n[0]</code> is even, the score <code>eve</code> is simply <code>n[0]</code>.</li>
+<li>If <code>n[0]</code> is odd, a penalty of <code>x</code> is applied, so the score <code>odd</code> starts as <code>n[0] - x</code>.</li>
+<li>These two variables <code>eve</code> and <code>odd</code> will represent the best possible scores for an alternating sequence of even and odd numbers starting with <code>n[0]</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)   <span style="color:#75715e">// If n[i] is odd
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            odd <span style="color:#f92672">=</span> n[i] <span style="color:#f92672">+</span> max(odd, eve <span style="color:#f92672">-</span> x);  <span style="color:#75715e">// Choose best outcome: add n[i] or subtract penalty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span>            <span style="color:#75715e">// If n[i] is even
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            eve <span style="color:#f92672">=</span> n[i] <span style="color:#f92672">+</span> max(eve, odd <span style="color:#f92672">-</span> x);  <span style="color:#75715e">// Choose best outcome: add n[i] or subtract penalty
+</span></span></span></code></pre></div><ul>
+<li>
+<p><strong>Iteration and Dynamic Updates:</strong></p>
+<ul>
+<li>We loop over the rest of the elements in the array starting from index 1.</li>
+<li>If <code>n[i]</code> is <strong>odd</strong>, we compute the new possible <code>odd</code> score. We take the maximum of:
+<ul>
+<li>Adding <code>n[i]</code> to the previous <code>odd</code> score (no penalty since the last number was odd).</li>
+<li>Adding <code>n[i]</code> to the <code>eve</code> score and subtracting the penalty <code>x</code> (because we are switching from even to odd).</li>
+</ul>
+</li>
+<li>If <code>n[i]</code> is <strong>even</strong>, we compute the new possible <code>eve</code> score. We take the maximum of:
+<ul>
+<li>Adding <code>n[i]</code> to the previous <code>eve</code> score (no penalty since the last number was even).</li>
+<li>Adding <code>n[i]</code> to the <code>odd</code> score and subtracting the penalty <code>x</code> (because we are switching from odd to even).</li>
+</ul>
+</li>
+</ul>
+<p>This dynamic updating ensures that we always choose the maximum possible score at each step, considering the penalties and alternations between even and odd numbers.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(eve, odd);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Return Result:</strong>
+<ul>
+<li>After processing all the numbers in the array, we return the maximum of <code>eve</code> and <code>odd</code>.</li>
+<li>This gives us the maximum possible score after considering all numbers in the array while alternating between even and odd numbers, applying penalties when necessary.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the input array <code>n</code>.
+<ul>
+<li>We iterate over the array exactly once, and at each step, we perform constant time operations (comparisons, additions, and subtractions).</li>
+<li>Hence, the time complexity is linear with respect to the size of the input array.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, since we only use a constant amount of extra space to store the variables <code>eve</code>, <code>odd</code>, and a few temporary variables for computation. No additional data structures are required, making this a space-efficient solution.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages dynamic programming principles to track the maximum score achievable by alternating between even and odd numbers. We maintain two variables, <code>eve</code> and <code>odd</code>, which represent the best scores for sequences ending in an even or odd number, respectively. As we iterate through the array, we update these variables based on whether the current number is odd or even, considering the penalties for switching between odd and even numbers.</p>
+<p>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the array, and the space complexity is <strong>O(1)</strong>, making this approach both time-efficient and space-efficient. This solution provides an optimal way to maximize the score while adhering to the rules of penalties for odd numbers and the alternation between even and odd numbers.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1119s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -233,7 +369,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2787"  class="external-link" target="_blank" rel="noopener">LeetCode #2787: Ways to Express an Integer as Sum of Powers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2788"  class="external-link" target="_blank" rel="noopener">LeetCode #2788: Split Strings by Separator</a></th>
       </tr>
   </thead>
   <tbody>
@@ -275,7 +411,6 @@
 
       </div>
 
-      
 
       <footer>
         

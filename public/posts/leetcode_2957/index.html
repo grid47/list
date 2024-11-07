@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -227,7 +227,148 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1206s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to remove &ldquo;almost equal&rdquo; characters from a string. Two adjacent characters are considered almost equal if:</p>
+<ul>
+<li>They are the same character (i.e., <code>s[i] == s[i - 1]</code>).</li>
+<li>They differ by exactly 1 in their ASCII values (i.e., <code>abs(s[i] - s[i - 1]) == 1</code>).</li>
+</ul>
+<p>The goal is to remove all pairs of such characters, counting how many such pairs exist, and returning the total count of removals. Once a pair is removed, skip the next adjacent character because it&rsquo;s part of a valid removal operation.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be solved using a <strong>greedy approach</strong> where we traverse the string while checking each pair of adjacent characters:</p>
+<ol>
+<li>For each character, check if it forms a valid &ldquo;almost equal&rdquo; pair with the previous character.</li>
+<li>If it does, increment a counter (<code>cnt</code>), and skip the next character by advancing the index by 2.</li>
+<li>If it doesn&rsquo;t form a valid pair, simply move to the next character.</li>
+<li>The process continues until the entire string is processed.</li>
+</ol>
+<p>This approach ensures that we efficiently check for pairs and remove them, while also keeping track of how many pairs we removed.</p>
+<h3 id="code-breakdown">
+  Code Breakdown:
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The first step in the code is to initialize two variables:</p>
+<ul>
+<li><code>n</code>: The length of the string <code>s</code>, which will be used to ensure we do not exceed the string bounds.</li>
+<li><code>i</code>: A pointer (index) used to traverse through the string.</li>
+<li><code>cnt</code>: A counter initialized to 0. This will track how many &ldquo;almost equal&rdquo; character pairs we remove from the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>i</code> starts from <code>1</code> because we will compare each character <code>s[i]</code> with its previous character <code>s[i - 1]</code>.</li>
+<li><code>cnt</code> will count the number of pairs removed.</li>
+</ul>
+<h4 id="2-while-loop-to-traverse-the-string">
+  2. <strong>While Loop to Traverse the String</strong>:
+  <a class="heading-link" href="#2-while-loop-to-traverse-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>A <code>while</code> loop is used to traverse the string <code>s</code>. The loop continues until <code>i</code> is less than <code>n</code>, ensuring that we do not go beyond the string length.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Check if current and previous characters are almost equal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> s[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">||</span> abs(s[i] <span style="color:#f92672">-</span> s[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>, i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// If so, increment cnt and skip the next character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Otherwise, just move to the next character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we check if the character <code>s[i]</code> is either the same as the previous character <code>s[i-1]</code> or if the difference between their ASCII values is 1 (i.e., <code>abs(s[i] - s[i - 1]) == 1</code>).</li>
+<li>If either of these conditions is true, we have found an &ldquo;almost equal&rdquo; pair. Therefore:
+<ul>
+<li>Increment the <code>cnt</code> counter to signify that we&rsquo;ve removed a pair.</li>
+<li>Skip the next character by incrementing <code>i</code> by <code>2</code> (since both characters are part of the removal).</li>
+</ul>
+</li>
+<li>If the characters don&rsquo;t form a valid pair, we simply move to the next character by incrementing <code>i</code> by 1.</li>
+</ul>
+<h4 id="3-return-the-result">
+  3. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the loop is finished, the total number of &ldquo;almost equal&rdquo; pairs removed is stored in <code>cnt</code>. The final result is returned as the output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><p>This value represents the total number of removals.</p>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Traversal of the string</strong>: The string is traversed once, and for each character, we either increment <code>i</code> by 1 or 2. Thus, the total number of iterations is linear, i.e., O(n), where <code>n</code> is the length of the string.</li>
+<li>The operations inside the loop (such as checking for equality or the difference between ASCII values) are constant time operations, i.e., O(1).</li>
+</ul>
+<p>Thus, the <strong>time complexity</strong> is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We only use a few extra variables (<code>n</code>, <code>i</code>, and <code>cnt</code>), and the space used does not depend on the input size. Therefore, the <strong>space complexity</strong> is <strong>O(1)</strong>, i.e., constant space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using a greedy approach with a single pass through the string. It correctly handles the removal of &ldquo;almost equal&rdquo; character pairs while maintaining a low time complexity of O(n) and constant space complexity. This approach ensures that the problem is solved efficiently even for large input strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1206s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +422,6 @@
 
       </div>
 
-      
 
       <footer>
         

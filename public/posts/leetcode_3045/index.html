@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -254,7 +254,167 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1223s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the number of prefix-suffix pairs from a given list of strings. A prefix-suffix pair consists of two strings where one string is a prefix of the other, and the other string is a suffix of the first string. This needs to be done efficiently for a large list of words, which requires the use of advanced data structures and techniques to reduce the time complexity.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can take advantage of a <strong>Trie</strong> data structure, which allows efficient prefix-based search. The idea behind this solution is to utilize the Trie in such a way that we can track both prefixes and suffixes of the strings. The key challenge is to efficiently count how many times the prefix of one string is a suffix of another string and vice versa. The Trie structure will help in organizing and matching these prefix-suffix pairs.</p>
+<p>We will use a <strong>bidirectional Trie</strong> strategy, where we insert both the prefixes and suffixes of each word into the Trie and track the occurrences of each prefix and suffix pair. This ensures that we can efficiently count how many times a prefix of one word matches a suffix of another word.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-defining-the-trienode-structure">
+  Step 1: Defining the TrieNode Structure
+  <a class="heading-link" href="#step-1-defining-the-trienode-structure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TrieNode</span> {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, TrieNode<span style="color:#f92672">*&gt;</span> next;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>A <code>TrieNode</code> represents a node in the Trie.</li>
+<li>Each node has a <code>next</code> map that stores child nodes. The map key is an integer, which uniquely identifies a string or part of a string (calculated from the characters in the word).</li>
+<li>The <code>count</code> keeps track of how many times a specific string (or its part) has been encountered in the Trie.</li>
+</ul>
+<h4 id="step-2-initializing-the-trie-and-result-variable">
+  Step 2: Initializing the Trie and Result Variable
+  <a class="heading-link" href="#step-2-initializing-the-trie-and-result-variable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We create the root of the Trie. This root node will be the starting point for storing and searching strings.</li>
+<li><code>res</code> is initialized to zero. This variable will store the total number of valid prefix-suffix pairs found.</li>
+</ul>
+<h4 id="step-3-iterating-over-words-and-inserting-prefix-suffix-pairs-into-the-trie">
+  Step 3: Iterating Over Words and Inserting Prefix-Suffix Pairs into the Trie
+  <a class="heading-link" href="#step-3-iterating-over-words-and-inserting-prefix-suffix-pairs-into-the-trie">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> string<span style="color:#f92672">&amp;</span> w : words) {
+</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#f92672">*</span> x <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> w.size(); i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> x<span style="color:#f92672">-&gt;</span>next.insert({w[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">128</span> <span style="color:#f92672">+</span> w[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> i], <span style="color:#66d9ef">new</span> TrieNode()}).first<span style="color:#f92672">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> x<span style="color:#f92672">-&gt;</span>count;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    x<span style="color:#f92672">-&gt;</span>count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each word in the <code>words</code> list.</li>
+<li>For each word, we start at the root of the Trie and insert the prefix-suffix pairs one by one. Each character from the string is used to form a unique key that is a combination of the current character and its corresponding character from the opposite side of the string.</li>
+<li>The key is computed as <code>w[i] * 128 + w[n - 1 - i]</code>, where <code>w[i]</code> is the current character and <code>w[n - 1 - i]</code> is the character from the opposite side of the word. Multiplying by <code>128</code> ensures that we uniquely encode the pair of characters into an integer. This helps to efficiently track both the prefixes and suffixes.</li>
+<li>For each insertion into the Trie, we increase the result <code>res</code> by the <code>count</code> of the TrieNode that corresponds to the current prefix-suffix pair. This allows us to accumulate the count of valid prefix-suffix pairs dynamically as we insert new pairs.</li>
+<li>After inserting all characters of a word, we increment the <code>count</code> of the current node to indicate that we have seen this prefix-suffix pair.</li>
+</ul>
+<h4 id="step-4-returning-the-result">
+  Step 4: Returning the Result
+  <a class="heading-link" href="#step-4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all the words, the variable <code>res</code> will contain the total number of valid prefix-suffix pairs, which is then returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Trie Insertion</strong>:</p>
+<ul>
+<li>For each word, we perform an insert operation for each prefix-suffix pair.</li>
+<li>In the worst case, for a word of length <code>n</code>, we perform <code>n</code> insertions. Each insertion takes constant time because the number of possible keys (prefix-suffix pairs) is bounded by the word length.</li>
+<li>So for a list of <code>m</code> words, the overall time complexity is <code>O(m * n)</code> where <code>m</code> is the number of words and <code>n</code> is the maximum length of the words.</li>
+</ul>
+</li>
+<li>
+<p><strong>Total Time Complexity</strong>:</p>
+<ul>
+<li>The total time complexity of the solution is <code>O(m * n)</code>, where <code>m</code> is the number of words and <code>n</code> is the average length of the words.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Trie Space</strong>:</p>
+<ul>
+<li>The space required by the Trie is proportional to the number of unique prefix-suffix pairs stored in the Trie.</li>
+<li>In the worst case, each word could contribute up to <code>n</code> unique prefix-suffix pairs, leading to a space complexity of <code>O(m * n)</code>, where <code>m</code> is the number of words and <code>n</code> is the maximum length of the words.</li>
+</ul>
+</li>
+<li>
+<p><strong>Total Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <code>O(m * n)</code>, where <code>m</code> is the number of words and <code>n</code> is the maximum length of the words.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach effectively solves the problem of counting prefix-suffix pairs using a Trie data structure. By storing and counting both prefixes and suffixes simultaneously, we avoid the need for nested loops that would otherwise result in inefficient solutions. The Trie enables efficient lookups, and by encoding pairs of characters into a single integer, we streamline the process of managing the strings and counting valid pairs.</p>
+<p>The time and space complexity of the solution are manageable even for large inputs, making it an optimal solution for counting prefix-suffix pairs in a list of words. This approach leverages the Trie structure&rsquo;s ability to handle dynamic insertions and efficiently manage string prefixes and suffixes, leading to a solution that can scale well with the size of the input.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1223s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -308,7 +468,6 @@
 
       </div>
 
-      
 
       <footer>
         

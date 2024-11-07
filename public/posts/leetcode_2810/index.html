@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,165 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1130s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given a string <code>s</code>, and you need to transform it based on specific rules. Whenever the character &lsquo;i&rsquo; appears in the string, the string <code>res</code> (which is initially empty) should be reversed. For all other characters, append them to the string <code>res</code> as they are. Finally, return the modified string <code>res</code> after processing all characters in the input string.</p>
+<p>The task is to process the string efficiently while handling the reverse operations triggered by the character &lsquo;i&rsquo;. Understanding how to manage string reversals dynamically while iterating through the string is key to solving this problem.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to dynamically update the string by reversing it when an &lsquo;i&rsquo; is encountered, while appending other characters without any change. Here’s how we can approach it:</p>
+<ol>
+<li>
+<p><strong>Iterate Over the String</strong>:</p>
+<ul>
+<li>We will iterate through each character of the input string <code>s</code>. For each character:
+<ul>
+<li>If the character is &lsquo;i&rsquo;, we reverse the string <code>res</code>.</li>
+<li>Otherwise, we append the character to <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Use a Temporary Result String (<code>res</code>)</strong>:</p>
+<ul>
+<li>The result string <code>res</code> is built incrementally. For each character:
+<ul>
+<li>If it is &lsquo;i&rsquo;, we reverse the current <code>res</code>.</li>
+<li>If it is not &lsquo;i&rsquo;, we simply append the character to <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Reversal Logic</strong>:</p>
+<ul>
+<li>When encountering an &lsquo;i&rsquo;, we reverse the string using the built-in <code>reverse</code> function in C++ which operates in <strong>O(n)</strong> time, where <code>n</code> is the size of the string.</li>
+<li>The reversal is done directly on <code>res</code>, and we continue appending characters to it after reversing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>If there are multiple consecutive &lsquo;i&rsquo;s, each one will reverse the string, and every second &lsquo;i&rsquo; effectively cancels the previous reversal.</li>
+<li>If there are no &lsquo;i&rsquo;s in the string, the string will remain unchanged.</li>
+<li>If the string starts with &lsquo;i&rsquo;, the result will be an empty string initially, which will then be reversed upon encountering the first &lsquo;i&rsquo;.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">finalString</span>(string s) {
+</span></span></code></pre></div><ul>
+<li>The function <code>finalString</code> takes a string <code>s</code> as input and returns the modified string after applying the rules described.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Result String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize an empty string <code>res</code> that will be used to build the result step by step.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over the Input String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> c : s) {
+</span></span></code></pre></div><ul>
+<li>We iterate over each character <code>c</code> in the input string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle the Character &lsquo;i&rsquo;</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;i&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(res.size()) {
+</span></span><span style="display:flex;"><span>        reverse(res.begin(), res.end());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the character <code>c</code> is &lsquo;i&rsquo;, we check if <code>res</code> has any content (i.e., its size is greater than 0).</li>
+<li>If <code>res</code> is not empty, we reverse it using <code>reverse(res.begin(), res.end())</code>. This is the built-in C++ function to reverse a string in place.</li>
+</ul>
+</li>
+<li>
+<p><strong>Append Other Characters</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> c;
+</span></span></code></pre></div><ul>
+<li>If the character is not &lsquo;i&rsquo;, we simply append it to <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all characters in the string, we return the final string <code>res</code>, which contains the transformed string based on the &lsquo;i&rsquo; reversal rule.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Iterating Through the String</strong>: We iterate over all characters in the input string <code>s</code> once. This takes <strong>O(n)</strong> time, where <code>n</code> is the length of the string.</li>
+<li><strong>Reversal Operation</strong>: Every time we encounter &lsquo;i&rsquo;, we reverse the string <code>res</code>. The reversal operation takes <strong>O(k)</strong> time, where <code>k</code> is the size of the current <code>res</code> string. In the worst case, <code>k</code> could be as large as <code>n</code>, leading to a time complexity of <strong>O(n)</strong> for each reversal.</li>
+<li><strong>Overall Time Complexity</strong>: Since we iterate over the string once and each reversal operation could take up to <strong>O(n)</strong> time, the worst-case time complexity is <strong>O(n^2)</strong>, where <code>n</code> is the length of the input string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a string <code>res</code> to store the result, and the space required for <code>res</code> is proportional to the size of the input string. Therefore, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the reversal of the string when the character &lsquo;i&rsquo; appears. By using a simple loop and dynamically updating the string, we transform the string according to the given rules. The space complexity is linear, and the time complexity is quadratic in the worst case due to the frequent reversal of the result string. This approach is simple to implement and works for typical input sizes, but performance may degrade if the string is very large due to repeated reversals.</p>
+<p>To optimize the solution for larger strings, additional techniques like counting reversals or using more efficient data structures could be explored. However, for most practical cases, this approach should work fine, as the task is inherently based on iterative string manipulation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1130s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -280,7 +438,6 @@
 
       </div>
 
-      
 
       <footer>
         

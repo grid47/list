@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -228,7 +228,144 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1198s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a binary string <code>s</code> consisting of characters <code>'0'</code> and <code>'1'</code>, the task is to find the number of steps required to change all <code>'0'</code> characters to <code>'1'</code>. The problem specifies that the steps must be counted in a way that each step involves flipping a <code>'0'</code> to <code>'1'</code> by considering all previous <code>'1'</code>s to the left of it. Each flip adds a number of steps equal to the number of <code>'1'</code>s seen before the current <code>'0'</code>.</p>
+<p>In simpler terms, we need to count how many <code>'1'</code>s are to the left of each <code>'0'</code>, and the total number of flips is the sum of these counts for all <code>'0'</code>s in the string.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key to solving this problem efficiently lies in iterating over the string and keeping track of how many <code>'1'</code>s we&rsquo;ve encountered as we go through the string. For each <code>'0'</code> encountered, the number of <code>'1'</code>s that have been encountered up to that point is added to the result. This is because every <code>'1'</code> before a <code>'0'</code> represents a valid flip step that will change that <code>'0'</code> into a <code>'1'</code>.</p>
+<p>To summarize, the approach can be outlined as follows:</p>
+<ol>
+<li>Traverse the string from left to right.</li>
+<li>Keep a running count of how many <code>'1'</code>s have been seen up to each position.</li>
+<li>For each <code>'0'</code> encountered, add the count of <code>'1'</code>s to the result, as these represent the number of flips needed to convert that <code>'0'</code>.</li>
+<li>The total result will be the sum of all flips needed to convert every <code>'0'</code> to <code>'1'</code> based on the previous <code>'1'</code>s.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-variable-initialization">
+  1. <strong>Variable Initialization</strong>:
+  <a class="heading-link" href="#1-variable-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by initializing two variables:</p>
+<ul>
+<li><code>res</code>: This will store the total number of steps required to flip all <code>'0'</code>s to <code>'1'</code>s.</li>
+<li><code>cnt</code>: This will keep track of the number of <code>'1'</code>s encountered so far in the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i) {
+</span></span></code></pre></div><h4 id="2-iterating-over-the-string">
+  2. <strong>Iterating Over the String</strong>:
+  <a class="heading-link" href="#2-iterating-over-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We iterate over each character in the string <code>s</code>. The loop variable <code>i</code> is used to track the index of the current character.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i) {
+</span></span></code></pre></div><h4 id="3-handling-1-characters">
+  3. <strong>Handling <code>'1'</code> Characters</strong>:
+  <a class="heading-link" href="#3-handling-1-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Whenever we encounter a <code>'1'</code>, we simply increment the <code>cnt</code> variable because each <code>'1'</code> encountered represents an additional valid flip that can be used for any subsequent <code>'0'</code>s.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>cnt;
+</span></span></code></pre></div><h4 id="4-handling-0-characters">
+  4. <strong>Handling <code>'0'</code> Characters</strong>:
+  <a class="heading-link" href="#4-handling-0-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>If the current character is <code>'0'</code>, we add the number of <code>'1'</code>s encountered so far (<code>cnt</code>) to the result <code>res</code>. This is because each <code>'1'</code> before this <code>'0'</code> represents a valid flip operation that will change this <code>'0'</code> into <code>'1'</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> cnt;
+</span></span></code></pre></div><h4 id="5-return-the-result">
+  5. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the entire string is processed, the variable <code>res</code> contains the total number of flip steps required to convert all <code>'0'</code>s to <code>'1'</code>s. The function then returns <code>res</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We are iterating over the string <code>s</code> once, and for each character, we perform constant time operations (incrementing variables or adding to the result). Therefore, the time complexity is (O(n)), where <code>n</code> is the length of the string <code>s</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We are using only a constant amount of extra space to store the variables <code>res</code> and <code>cnt</code>. Therefore, the space complexity is (O(1)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum number of steps required to change all <code>'0'</code>s to <code>'1'</code>s in a binary string. By keeping track of the number of <code>'1'</code>s encountered as we traverse the string, we can quickly calculate the number of steps for each <code>'0'</code> encountered. The overall time complexity is linear in the size of the input string, and the space complexity is constant. This makes the solution optimal and well-suited for large strings.</p>
+<p>In summary:</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where <code>n</code> is the length of the input string <code>s</code>.</li>
+<li><strong>Space Complexity</strong>: (O(1)).</li>
+</ul>
+<p>This solution ensures that we count the number of steps required in an efficient manner, making it a great fit for competitive programming and scenarios where performance is critical.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1198s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -240,7 +377,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2939"  class="external-link" target="_blank" rel="noopener">LeetCode #2939: Maximum Xor Product</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2942"  class="external-link" target="_blank" rel="noopener">LeetCode #2942: Find Words Containing Character</a></th>
       </tr>
   </thead>
   <tbody>
@@ -282,7 +419,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,201 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> nums;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1202s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to lexicographically rearrange the array <code>nums</code> such that elements are as small as possible, with the condition that two adjacent elements in the rearranged array can only differ by a value less than or equal to a given limit. The goal is to return the lexicographically smallest array possible under this constraint.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be approached by sorting and grouping adjacent elements whose differences do not exceed the given <code>limit</code>. After grouping such elements, each group is sorted individually, and the final array is reconstructed based on these sorted groups.</p>
+<h4 id="step-by-step-approach">
+  Step-by-Step Approach:
+  <a class="heading-link" href="#step-by-step-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Pairing Elements with Indices</strong>:</p>
+<ul>
+<li>We first pair each element in the input array with its original index. This allows us to later reconstruct the original positions after sorting and transforming the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Pairs</strong>:</p>
+<ul>
+<li>We sort the pairs primarily by the value of the elements. This ensures that the elements are processed in ascending order, allowing us to find adjacent groups of elements that can be rearranged.</li>
+</ul>
+</li>
+<li>
+<p><strong>Grouping Elements by Differences</strong>:</p>
+<ul>
+<li>We iterate through the sorted array and group elements where the difference between consecutive elements is less than or equal to the given <code>limit</code>. Each group represents a contiguous subsequence of numbers that can be sorted individually without violating the constraint.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Groups Individually</strong>:</p>
+<ul>
+<li>Once the elements are grouped, each group is sorted based on their values. Sorting each group ensures that the elements within the group are as lexicographically small as possible.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reconstructing the Final Array</strong>:</p>
+<ul>
+<li>Finally, we reconstruct the original array by placing the sorted values back into their original positions based on the indices stored during the pairing process.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown:
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-pairing-elements-with-indices">
+  1. <strong>Pairing Elements with Indices</strong>:
+  <a class="heading-link" href="#1-pairing-elements-with-indices">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>In the beginning, we create an array of pairs, where each pair consists of an element from <code>nums</code> and its original index. This allows us to keep track of the original positions when sorting and rearranging the elements later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> b;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    b.push_back(make_pair(nums[i], i));
+</span></span></code></pre></div><p>Here, <code>b</code> is a vector of pairs where each pair contains:</p>
+<ul>
+<li><code>nums[i]</code>: The element from the input array.</li>
+<li><code>i</code>: The original index of the element in the array.</li>
+</ul>
+<h4 id="2-sorting-the-array-by-element-values">
+  2. <strong>Sorting the Array by Element Values</strong>:
+  <a class="heading-link" href="#2-sorting-the-array-by-element-values">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The next step is to sort the array of pairs. The sorting criterion is the value of the elements, not the indices. This step ensures that we can process the elements in ascending order.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(b.begin(), b.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> x, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x.first <span style="color:#f92672">&lt;</span> y.first;
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>The lambda function <code>[](const auto&amp; x, const auto&amp; y)</code> sorts the pairs based on the element values (<code>x.first &lt; y.first</code>).</p>
+<h4 id="3-grouping-elements">
+  3. <strong>Grouping Elements</strong>:
+  <a class="heading-link" href="#3-grouping-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Next, we group elements whose values differ by no more than <code>limit</code>. We start with the first element as the first group. As we iterate through the sorted list, if the difference between the current element and the previous one is less than or equal to <code>limit</code>, we add the element to the current group. Otherwise, we start a new group.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> c <span style="color:#f92672">=</span> {{b[<span style="color:#ae81ff">0</span>]}};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (b[i].first <span style="color:#f92672">-</span> b[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].first <span style="color:#f92672">&lt;=</span> limit)
+</span></span><span style="display:flex;"><span>        c.back().push_back(b[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        c.push_back({b[i]});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here, <code>c</code> is a 2D vector where each sub-vector represents a group of elements that can be rearranged without violating the <code>limit</code> constraint. We check if the difference between consecutive elements in the sorted list is less than or equal to <code>limit</code>. If so, we add the element to the current group; otherwise, we start a new group.</p>
+<h4 id="4-sorting-each-group">
+  4. <strong>Sorting Each Group</strong>:
+  <a class="heading-link" href="#4-sorting-each-group">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After grouping the elements, we need to sort each group individually to make them lexicographically as small as possible. This is achieved by sorting the indices of the elements in each group.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> t : c) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ind;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> p : t)
+</span></span><span style="display:flex;"><span>        ind.push_back(p.second);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    sort(ind.begin(), ind.end());
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> ind.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>        nums[ind[i]] <span style="color:#f92672">=</span> t[i].first;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here:</p>
+<ul>
+<li><code>t</code> is a group of pairs representing a group of elements.</li>
+<li>We extract the indices of the elements in the group and store them in <code>ind</code>.</li>
+<li>We sort <code>ind</code>, which ensures that the elements in each group are placed in the lexicographically smallest order.</li>
+<li>Finally, we use these sorted indices to place the sorted elements back into their original positions in the <code>nums</code> array.</li>
+</ul>
+<h4 id="5-returning-the-final-array">
+  5. <strong>Returning the Final Array</strong>:
+  <a class="heading-link" href="#5-returning-the-final-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once all the groups are sorted and the original array is reconstructed, we return the modified array <code>nums</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> nums;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Sorting the Pairs</strong>: Sorting the pairs based on the values takes <code>O(n log n)</code>, where <code>n</code> is the size of the array <code>nums</code>.</li>
+<li><strong>Grouping Elements</strong>: The grouping step involves iterating over the array once, so it takes <code>O(n)</code>.</li>
+<li><strong>Sorting Each Group</strong>: Sorting each group takes <code>O(n log n)</code> in the worst case if all elements are in one group. The total time for sorting all groups is at most <code>O(n log n)</code>.</li>
+<li><strong>Final Array Reconstruction</strong>: Reconstructing the final array by sorting the indices and placing elements back into their original positions takes <code>O(n log n)</code>.</li>
+</ol>
+<p>Thus, the overall time complexity is dominated by the sorting step, resulting in <strong>O(n log n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(n)</code> due to the additional storage used for the vector <code>b</code> (pairs of elements and their indices) and the vector <code>c</code> (groups of pairs).</li>
+<li>The space complexity is linear because we store all elements and their indices at different stages.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the lexicographically smallest rearranged array by grouping elements that can be swapped without violating the <code>limit</code> constraint and sorting those groups individually. It leverages sorting and grouping techniques to maintain the necessary constraints while ensuring optimal performance. The solution&rsquo;s time complexity of <code>O(n log n)</code> is efficient for typical input sizes, and its space complexity is linear in the size of the input.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1202s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -262,7 +456,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2949"  class="external-link" target="_blank" rel="noopener">LeetCode #2949: Count Beautiful Substrings II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2951"  class="external-link" target="_blank" rel="noopener">LeetCode #2951: Find the Peaks</a></th>
       </tr>
   </thead>
   <tbody>
@@ -304,7 +498,6 @@
 
       </div>
 
-      
 
       <footer>
         

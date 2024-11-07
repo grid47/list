@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -232,7 +232,207 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode989s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine how many words in a given list of strings begin and end with a vowel. We&rsquo;re provided with an array of strings and a list of query ranges, and our task is to efficiently calculate, for each query, how many words in the specified range begin and end with a vowel.</p>
+<ul>
+<li><strong>Words</strong>: Each word in the list is a string.</li>
+<li><strong>Vowels</strong>: The vowels in this problem are the characters &lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, and &lsquo;u&rsquo;.</li>
+<li><strong>Queries</strong>: Each query is a pair of indices <code>[l, r]</code>, and for each query, we need to find how many words in the range from <code>l</code> to <code>r</code> (inclusive) start and end with a vowel.</li>
+</ul>
+<p>The goal is to efficiently answer all the queries based on the given list of words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we will use <strong>prefix sums</strong> combined with <strong>preprocessing</strong>. The idea is to preprocess the list of words to check whether each word starts and ends with a vowel, then use this information to quickly answer the queries. Here’s a breakdown of how we approach this:</p>
+<ol>
+<li>
+<p><strong>Vowel Check</strong>:</p>
+<ul>
+<li>For each word in the list, check whether the first and last characters are vowels.</li>
+<li>If both characters are vowels, mark that word as valid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum Array</strong>:</p>
+<ul>
+<li>We will create an array <code>cnt</code> where <code>cnt[i]</code> holds the cumulative number of valid words (words that start and end with a vowel) from the start of the list up to index <code>i</code>.</li>
+<li>This allows us to quickly compute the number of valid words in any range <code>[l, r]</code> using the formula:
+[
+\text{cnt}[r] - \text{cnt}[l-1]
+]</li>
+<li>If <code>l</code> is 0, then simply <code>cnt[r]</code> gives the correct result for that query.</li>
+</ul>
+</li>
+<li>
+<p><strong>Answering Queries</strong>:</p>
+<ul>
+<li>For each query <code>[l, r]</code>, the number of valid words in the range can be found by subtracting the cumulative count up to <code>l-1</code> from the cumulative count up to <code>r</code>. This can be done in constant time due to the prefix sum array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step:</p>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> words.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt(n, <span style="color:#ae81ff">0</span>), ans(q.size(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> ch <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;i&#39;</span>, <span style="color:#e6db74">&#39;o&#39;</span>, <span style="color:#e6db74">&#39;u&#39;</span>};
+</span></span></code></pre></div><ul>
+<li><code>n</code>: The number of words in the list.</li>
+<li><code>cnt</code>: A vector that will store the cumulative count of valid words. Initially, all elements are set to 0.</li>
+<li><code>ans</code>: A vector that will store the result for each query. The size of <code>ans</code> is equal to the number of queries (<code>q.size()</code>).</li>
+<li><code>ch</code>: A set containing the vowels (&lsquo;a&rsquo;, &rsquo;e&rsquo;, &lsquo;i&rsquo;, &lsquo;o&rsquo;, &lsquo;u&rsquo;). We use this set to check if a character is a vowel.</li>
+</ul>
+<h4 id="step-2-preprocess-the-words">
+  Step 2: Preprocess the Words
+  <a class="heading-link" href="#step-2-preprocess-the-words">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(ch.count(words[i][<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&amp;&amp;</span> ch.count(words[i][words[i].size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]))
+</span></span><span style="display:flex;"><span>        cnt[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) cnt[i] <span style="color:#f92672">+=</span> cnt[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Vowel Check</strong>: For each word in the <code>words</code> array:</p>
+<ul>
+<li>Check if the first character (<code>words[i][0]</code>) and the last character (<code>words[i][words[i].size() - 1]</code>) are both vowels. This is done using <code>ch.count()</code>, which returns <code>1</code> if the character is in the set of vowels, and <code>0</code> otherwise.</li>
+<li>If both the first and last characters are vowels, mark <code>cnt[i] = 1</code>, indicating that the word is valid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum</strong>: After marking the current word as valid, we update the <code>cnt[i]</code> to be the cumulative sum of valid words up to index <code>i</code>. If <code>i &gt; 0</code>, we add <code>cnt[i - 1]</code> to the current value of <code>cnt[i]</code>. This ensures that <code>cnt[i]</code> will hold the count of valid words from index <code>0</code> to <code>i</code>.</p>
+</li>
+</ul>
+<h4 id="step-3-answer-the-queries">
+  Step 3: Answer the Queries
+  <a class="heading-link" href="#step-3-answer-the-queries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    ans[i] <span style="color:#f92672">=</span> cnt[q[i][<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">-</span> ((q[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">?</span> cnt[q[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Query Loop</strong>: For each query in the list of queries <code>q</code>, which contains pairs <code>[l, r]</code>, the number of valid words in the range <code>[l, r]</code> can be computed as:
+<ul>
+<li>If <code>l &gt; 0</code>, the result is <code>cnt[r] - cnt[l - 1]</code>.</li>
+<li>If <code>l == 0</code>, the result is simply <code>cnt[r]</code>.</li>
+</ul>
+</li>
+</ul>
+<p>This uses the prefix sum approach to compute the result in constant time for each query.</p>
+<h4 id="step-4-return-the-results">
+  Step 4: Return the Results
+  <a class="heading-link" href="#step-4-return-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>ans</code> vector containing the result for each query.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Preprocessing the Words</strong>:</p>
+<ul>
+<li>We iterate over each word in the <code>words</code> array and check the first and last characters. This operation takes (O(n)), where <code>n</code> is the number of words.</li>
+<li>Additionally, we perform the cumulative sum operation, which takes (O(n)).</li>
+</ul>
+<p>Therefore, the time complexity for preprocessing is (O(n)).</p>
+</li>
+<li>
+<p><strong>Answering the Queries</strong>:</p>
+<ul>
+<li>For each query, we compute the result in constant time, i.e., (O(1)).</li>
+<li>If there are <code>m</code> queries, the total time complexity for answering all queries is (O(m)).</li>
+</ul>
+</li>
+</ol>
+<p>Therefore, the total time complexity is:
+[
+O(n + m)
+]
+where <code>n</code> is the number of words and <code>m</code> is the number of queries.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a vector <code>cnt</code> of size <code>n</code> to store the cumulative count of valid words.</li>
+<li>We use a vector <code>ans</code> of size <code>m</code> to store the results of the queries.</li>
+<li>The set <code>ch</code> stores 5 characters (the vowels), which is constant space.</li>
+</ul>
+<p>Thus, the space complexity is:
+[
+O(n + m)
+]
+where <code>n</code> is the number of words and <code>m</code> is the number of queries.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently preprocesses the list of words and answers each query in constant time using a prefix sum approach. The time complexity is linear with respect to the number of words and queries, making this solution optimal for large input sizes. By using a set to check for vowels and maintaining a prefix sum array, we avoid unnecessary recomputation and ensure fast query resolution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode989s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +486,6 @@
 
       </div>
 
-      
 
       <footer>
         

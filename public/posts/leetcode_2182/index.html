@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -257,7 +257,217 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode735s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to generate a string by repeating characters from an input string <code>s</code> while adhering to the following constraints:</p>
+<ol>
+<li>Characters in the output string must appear in non-increasing lexicographical order.</li>
+<li>No character can be repeated more than <code>repeatLimit</code> times consecutively.</li>
+</ol>
+<p>The goal is to construct the longest possible string that satisfies these constraints, leveraging the frequency of characters in the original string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Count the Frequency of Characters</strong>:</p>
+<ul>
+<li>We start by counting how many times each character appears in the string <code>s</code>. This is done by iterating over the string and updating a frequency array for the 26 lowercase English characters.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use a Priority Queue</strong>:</p>
+<ul>
+<li>The characters are then stored in a priority queue (or max-heap) based on their frequency. The queue ensures that characters with higher frequencies are processed first.</li>
+<li>Since we want the characters to be arranged in lexicographical order, we can take advantage of the ASCII value of characters. The characters with higher ASCII values (like &lsquo;z&rsquo;, &lsquo;y&rsquo;, etc.) should appear first in the string. The priority queue is configured to give us the character with the highest frequency and lexicographical order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the Resulting String</strong>:</p>
+<ul>
+<li>The key challenge is to ensure that no character is repeated more than <code>repeatLimit</code> times consecutively.</li>
+<li>We pop the character with the highest frequency from the priority queue, append it to the result string, and continue adding it until we have appended the maximum allowed consecutive repetitions (<code>repeatLimit</code>).</li>
+<li>After using a character, we check if there are still remaining instances of it. If so, we reinsert it into the priority queue to be used later.</li>
+<li>If there are still characters left in the queue, we insert one from the next highest character to break up the repetition and prevent violating the <code>repeatLimit</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>If the string <code>s</code> contains only one type of character, the solution will need to ensure that it doesn&rsquo;t exceed the <code>repeatLimit</code> by managing the remaining count of that character correctly.</li>
+<li>If <code>repeatLimit</code> is 1, we can only add one occurrence of each character before switching to the next one.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string repeatLimitedString(string s, <span style="color:#66d9ef">int</span> repeatLimit) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Count the frequency of each character in the string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> freq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> ch: s) freq[ch <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Update frequency array
+</span></span></span></code></pre></div><ul>
+<li>The <code>freq</code> array stores the count of each character from &lsquo;a&rsquo; to &lsquo;z&rsquo;. We iterate through the string <code>s</code> and update the frequency count for each character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Push characters into a max-heap (priority queue)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Fill the priority queue with character-frequency pairs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(freq[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) pq.push(make_pair((<span style="color:#66d9ef">char</span>) <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i, freq[i]));
+</span></span></code></pre></div><ul>
+<li>We initialize a max-heap (<code>priority_queue</code>) that will store pairs of characters and their frequencies. The heap will ensure that characters with the highest frequency and lexicographically larger characters are processed first.</li>
+<li>For each character in the alphabet, we check if its frequency is greater than zero and then add it to the heap.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Step 3: Build the result string by picking characters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> pq.top();  <span style="color:#75715e">// Get the most frequent character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> p.second;  <span style="color:#75715e">// Frequency of the character
+</span></span></span></code></pre></div><ul>
+<li>Now, we start building the result string by popping the most frequent character from the heap.</li>
+<li>The variable <code>cnt</code> stores the frequency of the character <code>p.first</code> (the character at the top of the heap).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#75715e">// Step 4: Add the character up to the repeatLimit number of times
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> repeatLimit <span style="color:#f92672">&amp;&amp;</span> cnt<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">++</span>) ans.push_back(p.first);
+</span></span></code></pre></div><ul>
+<li>We add the character to the result string <code>repeatLimit</code> times or until its frequency (<code>cnt</code>) is exhausted. This ensures that no character is repeated more than <code>repeatLimit</code> times consecutively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#75715e">// Step 5: Handle remaining characters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Add a different character to break the repetition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sp <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>                pq.pop();
+</span></span><span style="display:flex;"><span>                ans.push_back(sp.first);  <span style="color:#75715e">// Add this different character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// If there are still more of this character, put it back in the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span>(sp.second <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                    sp.second<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>                    pq.push(sp);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Put the original character back into the queue with its reduced count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                p.second <span style="color:#f92672">=</span> cnt;
+</span></span><span style="display:flex;"><span>                pq.push(p);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>After using the most frequent character, if there are still remaining characters, we:
+<ul>
+<li>Pop the next most frequent character (to break the repetition).</li>
+<li>Add it to the result string.</li>
+<li>If there are still more of this character left, we put it back into the queue.</li>
+<li>Then, we put the original character back into the queue if it still has remaining occurrences.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the final result string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return the resulting string that has been built by adhering to the constraints of the problem.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to understand how the solution works:</p>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>: <code>s = &quot;aabbcc&quot;, repeatLimit = 2</code></p>
+<p><strong>Step-by-Step Execution</strong>:</p>
+<ul>
+<li>Count the frequency of each character: <code>a: 2</code>, <code>b: 2</code>, <code>c: 2</code>.</li>
+<li>Push these into the priority queue: <code>pq = [ ('c', 2), ('b', 2), ('a', 2)]</code>.</li>
+<li>Start building the result:
+<ul>
+<li>Add <code>c</code> twice (as <code>repeatLimit = 2</code>).</li>
+<li>Add <code>b</code> once (remaining frequency of <code>b</code> is 1).</li>
+<li>Add <code>a</code> once (remaining frequency of <code>a</code> is 1).</li>
+<li>Put the remaining <code>b</code> and <code>a</code> back into the queue.</li>
+<li>Add the remaining <code>b</code> and <code>a</code> accordingly.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Final Output</strong>: <code>&quot;cbacb&quot;</code></p>
+<h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>: <code>s = &quot;aaabbbccc&quot;, repeatLimit = 2</code></p>
+<p><strong>Step-by-Step Execution</strong>:</p>
+<ul>
+<li>Count the frequency of each character: <code>a: 3</code>, <code>b: 3</code>, <code>c: 3</code>.</li>
+<li>Push into the priority queue: <code>pq = [ ('c', 3), ('b', 3), ('a', 3)]</code>.</li>
+<li>Add <code>c</code> twice, then <code>b</code> once, then <code>a</code> once.</li>
+<li>Reinsert remaining <code>c</code>, <code>b</code>, and <code>a</code> into the queue and continue the process.</li>
+</ul>
+<p><strong>Final Output</strong>: <code>&quot;cbacbac&quot;</code></p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(n log k)</strong>, where <code>n</code> is the length of the input string <code>s</code>, and <code>k</code> is the number of distinct characters in <code>s</code> (at most 26, since there are 26 lowercase letters). The most time-consuming operation is the heap push/pop operation, which takes <code>O(log k)</code> time. Since each character is pushed and popped at most once, the overall complexity is <strong>O(n log k)</strong>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(k)</strong>, where <code>k</code> is the number of distinct characters in the string (at most 26). We store each character and its frequency in a priority queue and an array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently constructs the required string while respecting the lexicographical order and the repetition limit. The use of a priority queue ensures that we can efficiently manage the characters in the required order and process them based on their frequencies. The approach handles edge cases, like when the string contains a small number of characters or when all characters are identical, making it both robust and efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode735s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -311,7 +521,6 @@
 
       </div>
 
-      
 
       <footer>
         

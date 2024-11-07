@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -228,7 +228,142 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> net;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1093s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to calculate the total distance traveled by a vehicle based on the amount of fuel (<code>mt</code>) and the number of available refills (<code>at</code>). The vehicle consumes fuel in chunks, where each chunk (up to 5 units) contributes 10 units of distance per fuel unit. When the vehicle uses a full chunk of 5 units of fuel, and if refills are available, it can refill 1 unit of fuel from the available refills. The goal is to compute the total distance traveled given these conditions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves repeatedly consuming fuel in chunks and adjusting the total distance covered accordingly. For each iteration, we calculate the amount of fuel to be used (up to 5 units). If we use a full chunk of 5 units and refills are still available, we increment the fuel by 1 from the refill count (<code>at</code>) and decrease the refill count. This process continues until we exhaust the available fuel (<code>mt</code>).</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> distanceTraveled(<span style="color:#66d9ef">int</span> mt, <span style="color:#66d9ef">int</span> at) {        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                   <span style="color:#75715e">// Step 1: Initialize total distance covered to zero.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(mt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {                <span style="color:#75715e">// Step 2: Continue until all fuel is consumed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> red <span style="color:#f92672">=</span> min(<span style="color:#ae81ff">5</span>, mt);      <span style="color:#75715e">// Step 3: Consume up to 5 units of fuel or remaining fuel.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mt <span style="color:#f92672">-=</span> red;                 <span style="color:#75715e">// Step 4: Reduce the available fuel by `red`.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            net <span style="color:#f92672">+=</span> red <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;           <span style="color:#75715e">// Step 5: Increase total distance by `red * 10`.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(red <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> at <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {   <span style="color:#75715e">// Step 6: If a full 5-unit chunk is used and refills are available:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;               <span style="color:#75715e">//         - Add 1 unit of fuel from refill.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                at<span style="color:#f92672">--</span>;                  <span style="color:#75715e">//         - Decrease the refill count.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> net;                    <span style="color:#75715e">// Step 7: Return the total distance traveled.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>The <code>net</code> variable will hold the total distance traveled. It starts at zero.</p>
+</li>
+<li>
+<p><strong>Loop Until Fuel is Depleted</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(mt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>This loop iterates as long as there is fuel (<code>mt &gt; 0</code>).</p>
+</li>
+<li>
+<p><strong>Calculate Fuel Consumed in Current Iteration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> red <span style="color:#f92672">=</span> min(<span style="color:#ae81ff">5</span>, mt);
+</span></span></code></pre></div><p>The variable <code>red</code> holds the amount of fuel to consume, which is the smaller of 5 units or the remaining fuel (<code>mt</code>).</p>
+</li>
+<li>
+<p><strong>Update Fuel and Distance</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mt <span style="color:#f92672">-=</span> red;
+</span></span><span style="display:flex;"><span>net <span style="color:#f92672">+=</span> red <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><ul>
+<li>The total distance is updated based on the fuel consumed (<code>red * 10</code>).</li>
+<li>The fuel is reduced by the amount consumed in this iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Refill if Possible</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(red <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> at <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><ul>
+<li>If a full chunk of 5 units was used and refills are still available (<code>at &gt; 0</code>), 1 unit of fuel is added back to <code>mt</code>, and the refill count is decreased by 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Total Distance</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net;
+</span></span></code></pre></div><p>After the loop ends, the function returns the total distance traveled (<code>net</code>).</p>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity is <strong>O(mt / 5)</strong> because each iteration reduces the fuel by up to 5 units. This makes the loop iterate at most <code>mt / 5</code> times.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we are only using a fixed amount of additional space to store variables.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the total distance traveled by consuming fuel in chunks and leveraging refills when available. By limiting each iteration to at most 5 units of fuel and only refilling under specific conditions, the solution ensures minimal operations and handles large inputs effectively. The approach balances the need for accurate distance calculation with fuel management, providing an optimal solution in linear time relative to the available fuel.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1093s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -282,7 +417,6 @@
 
       </div>
 
-      
 
       <footer>
         

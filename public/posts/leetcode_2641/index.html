@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -274,7 +274,182 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1043s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to modify a binary tree such that each node&rsquo;s value is replaced by the sum of all node values in its subtree except for its own value. Specifically, the value of each node should be updated to the sum of the values of all its descendants, excluding the node itself. The tree is represented by a binary tree structure with <code>left</code> and <code>right</code> child pointers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to perform a level-order traversal (breadth-first search, BFS) of the tree, processing each level of the tree at a time and updating the values of the child nodes based on their parent nodes. The key idea is to accumulate the values of the left and right children for each node and update their values accordingly.</p>
+<p>The approach is broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Level-Order Traversal (BFS)</strong>:</p>
+<ul>
+<li>We traverse the tree level by level. For each node at a given level, we calculate the sum of all nodes at that level and update their children&rsquo;s values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Sum of Child Values</strong>:</p>
+<ul>
+<li>While traversing each node, we accumulate the sum of its left and right children into a map. This helps us to efficiently compute the sum of all child values for each node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Node Values</strong>:</p>
+<ul>
+<li>After processing all nodes at a level, we update the values of the children (left and right) of each node in that level to be the sum of all other nodes in their respective subtrees.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through All Levels</strong>:</p>
+<ul>
+<li>We continue this process for all levels of the tree, ensuring each node’s value is updated correctly based on its subtree sum.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initial-setup">
+  1. <strong>Initial Setup</strong>
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We begin by initializing a queue (<code>q</code>) to store nodes while performing the level-order traversal. A <code>map</code> called <code>mp</code> is used to track the sum of child values for each node. We set the root’s value to 0 as part of the tree transformation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>list<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push_back(root);  <span style="color:#75715e">// Start with the root node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Set the root value to 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>map<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;  <span style="color:#75715e">// Map to track the sum of child values for each node
+</span></span></span></code></pre></div><h4 id="2-level-order-traversal-loop">
+  2. <strong>Level-Order Traversal Loop</strong>
+  <a class="heading-link" href="#2-level-order-traversal-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We perform a loop over the queue <code>q</code> that processes each level of the tree. For each level, we calculate the sum of child node values (<code>sum</code>) for all nodes at that level.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();  <span style="color:#75715e">// Size of the current level
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initialize the sum of child values for this level
+</span></span></span></code></pre></div><h4 id="3-processing-nodes-in-the-current-level">
+  3. <strong>Processing Nodes in the Current Level</strong>
+  <a class="heading-link" href="#3-processing-nodes-in-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For each node in the current level:</p>
+<ul>
+<li>We pop the node from the queue and check if it has left or right children.</li>
+<li>If a child exists, we add its value to the sum of child values for that node and enqueue the child for the next level.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();  <span style="color:#75715e">// Get the front node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    q.pop_front();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>        mp[it] <span style="color:#f92672">+=</span> it<span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>val;  <span style="color:#75715e">// Add left child&#39;s value to the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        q.push_back(it<span style="color:#f92672">-&gt;</span>left);  <span style="color:#75715e">// Enqueue left child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>        mp[it] <span style="color:#f92672">+=</span> it<span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>val;  <span style="color:#75715e">// Add right child&#39;s value to the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        q.push_back(it<span style="color:#f92672">-&gt;</span>right);  <span style="color:#75715e">// Enqueue right child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> mp[it];  <span style="color:#75715e">// Add the node&#39;s child sum to the total sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="4-updating-child-node-values">
+  4. <strong>Updating Child Node Values</strong>
+  <a class="heading-link" href="#4-updating-child-node-values">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After processing all nodes at the current level, we update the left and right child values based on the sum calculated previously. We subtract the stored value from the sum (this excludes the current node itself), and assign this new value to the children.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it.first<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>        it.first<span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> sum <span style="color:#f92672">-</span> it.second;  <span style="color:#75715e">// Update left child&#39;s value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it.first<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>        it.first<span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> sum <span style="color:#f92672">-</span> it.second;  <span style="color:#75715e">// Update right child&#39;s value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>mp.clear();  <span style="color:#75715e">// Clear the map for the next level
+</span></span></span></code></pre></div><h4 id="5-returning-the-modified-tree">
+  5. <strong>Returning the Modified Tree</strong>
+  <a class="heading-link" href="#5-returning-the-modified-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the entire tree has been processed and all node values have been updated, we return the modified root node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> root;  <span style="color:#75715e">// Return the modified root
+</span></span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>BFS Traversal</strong>: We perform a level-order traversal of the tree, processing each node once. Since we process every node exactly once, the time complexity is (O(n)), where (n) is the number of nodes in the tree.</li>
+<li><strong>Sum Calculation and Updates</strong>: The operations inside the BFS loop (such as checking children, adding to the map, and updating child values) are constant-time operations. Thus, the overall time complexity remains (O(n)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Queue</strong>: The space required for the queue is proportional to the number of nodes at the widest level of the tree, which is (O(n)) in the worst case (for a completely unbalanced tree). Thus, the space complexity for the queue is (O(n)).</li>
+<li><strong>Map</strong>: The map <code>mp</code> stores values for each node, so the space complexity for the map is (O(n)) in the worst case.</li>
+<li><strong>Total Space Complexity</strong>: The overall space complexity is (O(n)) due to the queue and the map.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively handles the problem using a breadth-first search (BFS) traversal of the binary tree. By maintaining a map to track the sum of child values for each node and updating child node values after processing each level, the algorithm ensures that the tree is modified as required. The time complexity is linear in the number of nodes, and the space complexity is also linear, making this solution efficient for large trees. This approach avoids unnecessary recalculations and ensures that each node&rsquo;s value is updated efficiently based on its descendants.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1043s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -328,7 +503,6 @@
 
       </div>
 
-      
 
       <footer>
         

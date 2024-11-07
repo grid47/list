@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,209 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode911s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the number of paths from the top-left corner (0, 0) to the bottom-right corner (m-1, n-1) in a 2D grid. The grid has integer values, and during the traversal, we need to keep track of the sum of the values along the path. The goal is to count the number of such paths where the sum of all the integers along the path is divisible by a given integer <code>k</code>.</p>
+<ul>
+<li>You can only move either <strong>down</strong> or <strong>right</strong> at each step.</li>
+<li>You need to return the number of such paths modulo ( 10^9 + 7 ).</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a <strong>dynamic programming (DP)</strong> approach. The key idea is to use recursion with memoization to efficiently compute the number of paths that satisfy the sum condition.</p>
+<h4 id="steps-to-solve">
+  Steps to Solve:
+  <a class="heading-link" href="#steps-to-solve">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Recursive Structure</strong>:</p>
+<ul>
+<li>We define a recursive function <code>dp(i, j, sum)</code> that returns the number of valid paths from cell <code>(i, j)</code> to the bottom-right corner <code>(m-1, n-1)</code> such that the sum of the elements along the path is congruent to <code>sum % k</code>.</li>
+<li>At each cell, we have two possible moves: either <strong>down</strong> or <strong>right</strong>. Thus, we calculate the number of valid paths by recursively considering both directions and updating the <code>sum</code> value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid redundant computations, we use memoization to store the results of subproblems. The state is represented by the current cell <code>(i, j)</code> and the running sum modulo <code>k</code>. This allows us to avoid recalculating the number of paths for the same state multiple times.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>When we reach the bottom-right corner <code>(m-1, n-1)</code>, we check if the sum modulo <code>k</code> is zero. If it is, this is a valid path, and we return <code>1</code>, otherwise, we return <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Transitions</strong>:</p>
+<ul>
+<li>From any cell <code>(i, j)</code>, we can move:
+<ul>
+<li><strong>Down</strong>: This means transitioning to <code>(i+1, j)</code> and adding <code>grid[i+1][j]</code> to the running sum.</li>
+<li><strong>Right</strong>: This means transitioning to <code>(i, j+1)</code> and adding <code>grid[i][j+1]</code> to the running sum.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>:</p>
+<ul>
+<li>Since the answer can be very large, we take the result modulo ( 10^9 + 7 ) to prevent integer overflow and meet the problem&rsquo;s requirements.</li>
+</ul>
+</li>
+</ol>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Memoization</strong> optimizes the solution by caching results of subproblems.</li>
+<li><strong>Modulo arithmetic</strong> is used to ensure the sum is divisible by <code>k</code> without overflow.</li>
+<li>The problem can be viewed as finding all paths with a specific sum constraint using dynamic programming.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-state-variables">
+  Step 1: Initialize the State Variables
+  <a class="heading-link" href="#step-1-initialize-the-state-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;    
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m, n, k;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span></code></pre></div><ul>
+<li><code>memo</code> is a 3D vector that stores the results of subproblems. It caches the number of valid paths starting at <code>(i, j)</code> with a sum that is <code>sum % k</code>. The size of the memoization table is <code>(m x n x k)</code>.</li>
+<li><code>grid</code> stores the 2D grid of values.</li>
+<li><code>m</code> and <code>n</code> are the number of rows and columns of the grid, respectively.</li>
+<li><code>k</code> is the divisor used to check if the sum of the path is divisible by <code>k</code>.</li>
+<li><code>mod</code> is the modulus ( 10^9 + 7 ) used for returning the result.</li>
+</ul>
+<h4 id="step-2-define-the-dp-function">
+  Step 2: Define the DP Function
+  <a class="heading-link" href="#step-2-define-the-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> sum) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((i <span style="color:#f92672">==</span> (m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">&amp;&amp;</span> (j <span style="color:#f92672">==</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))) <span style="color:#66d9ef">return</span> (sum <span style="color:#f92672">%</span> k) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[i][j][sum] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[i][j][sum];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> m) ans <span style="color:#f92672">+=</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, (sum <span style="color:#f92672">+</span> grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j]) <span style="color:#f92672">%</span> k);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n) ans <span style="color:#f92672">+=</span> dp(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, (sum <span style="color:#f92672">+</span> grid[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">%</span> k);        
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[i][j][sum] <span style="color:#f92672">=</span> ans <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dp(i, j, sum)</code> function calculates the number of paths from cell <code>(i, j)</code> where the sum of the path modulo <code>k</code> is <code>sum % k</code>.</li>
+<li><strong>Base Case</strong>: When we reach the bottom-right corner <code>(m-1, n-1)</code>, we check if the sum modulo <code>k</code> is zero. If so, it is a valid path, so return <code>1</code>; otherwise, return <code>0</code>.</li>
+<li>If the value is already computed for a given state <code>(i, j, sum)</code>, it is retrieved from <code>memo</code> to avoid redundant computations.</li>
+<li>The recursive function explores two directions: <strong>down</strong> and <strong>right</strong>, updating the sum modulo <code>k</code> as it traverses the grid.</li>
+<li>Finally, the result is stored in <code>memo[i][j][sum]</code> and returned.</li>
+</ul>
+<h4 id="step-3-initialize-memoization-and-start-the-dp-process">
+  Step 3: Initialize Memoization and Start the DP Process
+  <a class="heading-link" href="#step-3-initialize-memoization-and-start-the-dp-process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numberOfPaths</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> grid;
+</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>    memo.resize(m, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">50</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, grid[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> k);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>numberOfPaths</code> function is the entry point. It initializes the grid, the dimensions <code>m</code> and <code>n</code>, and the value <code>k</code>.</li>
+<li><code>memo</code> is resized to hold all possible states of the grid (with dimensions <code>m x n x k</code>).</li>
+<li>The DP process begins by calling <code>dp(0, 0, grid[0][0] % k)</code> to start the calculation from the top-left corner with the initial sum being the value of the grid at <code>(0, 0)</code> modulo <code>k</code>.</li>
+</ul>
+<h4 id="step-4-return-the-final-result">
+  Step 4: Return the Final Result
+  <a class="heading-link" href="#step-4-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The result returned by <code>dp(0, 0, grid[0][0] % k)</code> represents the number of paths that satisfy the sum condition.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(m * n * k)</strong>, where <code>m</code> and <code>n</code> are the number of rows and columns in the grid, respectively, and <code>k</code> is the value used to check the sum condition. This is because the DP function is called for each state <code>(i, j, sum)</code>, and each state is computed at most once due to memoization.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is also <strong>O(m * n * k)</strong> due to the memoization table, which stores the result for each state <code>(i, j, sum)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages dynamic programming and memoization to efficiently count the number of valid paths in the grid. By using recursion and storing intermediate results, we avoid redundant calculations and reduce the problem’s complexity. The approach ensures that we can handle larger grids and large values of <code>k</code> efficiently. The modulo operation ensures that the final result is within the required bounds, and the solution runs in <strong>O(m * n * k)</strong> time and uses <strong>O(m * n * k)</strong> space, making it optimal for this type of problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode911s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +459,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2436"  class="external-link" target="_blank" rel="noopener">LeetCode #2436: Minimum Split Into Subarrays With GCD Greater Than One</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2437"  class="external-link" target="_blank" rel="noopener">LeetCode #2437: Number of Valid Clock Times</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +501,6 @@
 
       </div>
 
-      
 
       <footer>
         

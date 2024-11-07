@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -250,7 +250,167 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode948s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to compute the maximum sum possible for a star-shaped subgraph, where:</p>
+<ul>
+<li>We are given a list of node values (<code>vals</code>) for a graph.</li>
+<li>A set of edges (<code>edges</code>) connecting these nodes.</li>
+<li>A number <code>k</code> which denotes the maximum number of edges we can use to form a star (a node and its neighboring nodes).</li>
+</ul>
+<p>In a star graph, a central node has edges connected to surrounding nodes. The goal is to select a node as the central node and choose at most <code>k</code> of its neighboring nodes, in such a way that the total sum of their values (including the central node) is maximized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can solve this problem by utilizing a greedy approach:</p>
+<ol>
+<li>
+<p><strong>Understanding the Star Graph</strong>: For each node, we consider it as the center of a star. We then try to add its neighboring nodes (connected by edges) and compute the total sum of the node&rsquo;s value plus the values of its neighbors. The neighboring nodes should be selected based on the highest values to maximize the sum.</p>
+</li>
+<li>
+<p><strong>Using Priority Queues</strong>: To efficiently find the largest neighboring nodes&rsquo; values, we can use a max-heap (priority queue). For each node, we store the values of its neighbors in a priority queue. The highest values can then be easily accessed.</p>
+</li>
+<li>
+<p><strong>Greedy Selection</strong>: Starting from a given node, we always select the largest <code>k</code> values (neighbors) and sum them with the node&rsquo;s value. The goal is to find the maximum sum for each node and return the highest possible sum across all nodes.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> vals.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(n);
+</span></span></code></pre></div><p>Here, we initialize <code>n</code> as the number of nodes in the graph. <code>grid</code> is a vector of priority queues where each priority queue will store the values of the neighbors for each node. The reason we use a priority queue is that it allows us to efficiently retrieve the highest value neighbors when we process the node.</p>
+<h4 id="step-2-populate-neighbor-values">
+  Step 2: Populate Neighbor Values
+  <a class="heading-link" href="#step-2-populate-neighbor-values">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: edges) {
+</span></span><span style="display:flex;"><span>    grid[it[<span style="color:#ae81ff">0</span>]].push(vals[it[<span style="color:#ae81ff">1</span>]]);
+</span></span><span style="display:flex;"><span>    grid[it[<span style="color:#ae81ff">1</span>]].push(vals[it[<span style="color:#ae81ff">0</span>]]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For each edge in the graph (represented as a pair of nodes <code>[u, v]</code>), we push the value of the neighboring node into the priority queue of the other node. This ensures that for every node, we can access the values of its neighbors.</p>
+<h4 id="step-3-initialize-the-sum-and-start-calculating">
+  Step 3: Initialize the Sum and Start Calculating
+  <a class="heading-link" href="#step-3-initialize-the-sum-and-start-calculating">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> vals[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">=</span> max(net, sum);
+</span></span></code></pre></div><p>For each node <code>i</code>, we start by setting the initial sum as its value <code>vals[i]</code>. We also initialize <code>tmp</code> to <code>k</code>, which represents the maximum number of neighbors we can select. The initial sum is then compared with the current maximum (<code>sum</code>), ensuring we start with the best possible sum.</p>
+<h4 id="step-4-add-neighbors-to-the-central-node">
+  Step 4: Add Neighbors to the Central Node
+  <a class="heading-link" href="#step-4-add-neighbors-to-the-central-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(tmp<span style="color:#f92672">--</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>grid[i].empty()) {
+</span></span><span style="display:flex;"><span>    net <span style="color:#f92672">+=</span> grid[i].top();
+</span></span><span style="display:flex;"><span>    grid[i].pop();
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">=</span> max(net, sum);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>While we have not yet selected all <code>k</code> neighbors and there are still neighbors available in the priority queue (<code>grid[i]</code>), we keep adding the highest values from the priority queue to the total sum <code>net</code>. Each time a neighbor is added, the sum is updated, and we check if it is the new maximum sum.</p>
+<h4 id="step-5-return-the-maximum-sum">
+  Step 5: Return the Maximum Sum
+  <a class="heading-link" href="#step-5-return-the-maximum-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum;
+</span></span></code></pre></div><p>After processing all nodes and selecting the best possible set of neighbors for each node, we return the maximum sum obtained.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Edge Processing</strong>: For each edge, we add two values into the priority queues (one for each of the two nodes involved in the edge). The total number of edges is <code>m</code>, so this part takes <strong>O(m)</strong> time.</li>
+<li><strong>Priority Queue Operations</strong>: For each node, we process its neighbors stored in the priority queue. Each priority queue can have at most <code>n-1</code> neighbors (one for each other node). The operation of inserting and extracting values from the priority queue takes <strong>O(log n)</strong> time. Since we are processing at most <code>k</code> neighbors per node, the total time complexity for each node is <strong>O(k log n)</strong>.</li>
+<li>The overall time complexity is therefore <strong>O(m + n * k log n)</strong>.</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Space for Priority Queues</strong>: We store the neighbors for each node in a priority queue, and the total space used is proportional to the number of edges. Since each edge connects two nodes, the space complexity is <strong>O(m)</strong>.</li>
+<li><strong>Additional Variables</strong>: The additional variables used for storing the sum and iterating through the nodes require constant space, i.e., <strong>O(1)</strong>.</li>
+</ol>
+<p>Thus, the overall space complexity is <strong>O(m)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum star sum by employing a greedy approach and utilizing priority queues. The algorithm:</p>
+<ul>
+<li>Ensures that for each node, we always pick the highest <code>k</code> neighbors.</li>
+<li>Maximizes the sum for each node by considering both the node&rsquo;s value and the values of its neighbors.</li>
+<li>Processes each edge only once and leverages priority queues for optimal neighbor selection, making it both time and space efficient.</li>
+</ul>
+<p>In summary:</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(m + n * k log n)</strong></li>
+<li><strong>Space Complexity</strong>: <strong>O(m)</strong></li>
+<li>The approach efficiently handles large graphs, making it well-suited for competitive programming and other applications involving graph-based optimization.</li>
+</ul>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode948s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -304,7 +464,6 @@
 
       </div>
 
-      
 
       <footer>
         

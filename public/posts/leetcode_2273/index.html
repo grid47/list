@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,147 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode807s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a list of strings <code>A</code>, the task is to <strong>remove anagrams</strong> such that only the first occurrence of each group of anagrams remains in the list. An anagram is defined as two strings that can be rearranged to form one another, meaning they have the same characters in the same frequencies, but possibly in different orders. The goal is to return a new list where no two strings are anagrams of each other.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach revolves around identifying and removing all subsequent occurrences of anagrams while preserving the first occurrence in the result. This is done by iterating through the list of strings, comparing each string with the others to see if they are anagrams. The core of the solution is the use of an efficient function to check if two strings are anagrams. Once an anagram is found, we skip further checks for that group of anagrams and continue processing the remaining strings.</p>
+<h3 id="detailed-breakdown-of-the-code">
+  Detailed Breakdown of the Code
+  <a class="heading-link" href="#detailed-breakdown-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-the-removeanagrams-function">
+  Step 1: Define the <code>removeAnagrams</code> Function
+  <a class="heading-link" href="#step-1-define-the-removeanagrams-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> removeAnagrams(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> A) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> size(A);
+</span></span></code></pre></div><ul>
+<li><strong><code>ans</code></strong>: This vector will hold the resulting list of strings, where all anagrams are removed, leaving only the first string from each group of anagrams.</li>
+<li><strong><code>n</code></strong>: This variable stores the size of the input vector <code>A</code>, representing the total number of strings.</li>
+</ul>
+<h4 id="step-2-iterating-through-the-list-of-strings">
+  Step 2: Iterating Through the List of Strings
+  <a class="heading-link" href="#step-2-iterating-through-the-list-of-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n;){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> n and isang(A[i], A[j])) j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    ans.push_back(A[i]);
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer loop starts by setting <code>i</code> to 0, iterating over each string in the list.</li>
+<li><strong><code>j</code></strong> is initialized to <code>i + 1</code> and is used to check subsequent strings that might be anagrams of the string at index <code>i</code>.</li>
+<li>The inner <code>while</code> loop checks whether the current string at index <code>i</code> is an anagram of the string at index <code>j</code> by calling the function <code>isang(A[i], A[j])</code>. If they are anagrams, the loop continues to increment <code>j</code> to check the next strings.</li>
+<li>When an anagram is not found, or all anagrams have been skipped, we add <code>A[i]</code> (the first string of the group of anagrams) to the result vector <code>ans</code>.</li>
+<li><strong><code>i = j;</code></strong> ensures that we skip over all the strings that are anagrams of <code>A[i]</code>, and move to the next possible non-anagram string.</li>
+</ul>
+<h4 id="step-3-define-the-isang-function-anagram-check">
+  Step 3: Define the <code>isang</code> Function (Anagram Check)
+  <a class="heading-link" href="#step-3-define-the-isang-function-anagram-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isang</span>(string p, string q) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt(<span style="color:#ae81ff">26</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i : p) cnt[i <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i : q) cnt[i <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i : cnt) <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>cnt</code></strong>: A vector of size 26 is used to count the occurrences of each character in both strings <code>p</code> and <code>q</code>. Since we are working with lowercase English letters, there are 26 possible characters (<code>'a'</code> to <code>'z'</code>), hence the size of the <code>cnt</code> vector is 26.</li>
+<li><strong>First loop</strong>: For each character <code>i</code> in string <code>p</code>, we increment the corresponding count in the <code>cnt</code> vector.</li>
+<li><strong>Second loop</strong>: For each character <code>i</code> in string <code>q</code>, we decrement the corresponding count in the <code>cnt</code> vector.</li>
+<li><strong>Third loop</strong>: After both strings have been processed, if any value in the <code>cnt</code> vector is non-zero, it means the strings are not anagrams (i.e., they do not have the same characters in the same frequencies), and we return <code>false</code>.</li>
+<li>If all counts in the <code>cnt</code> vector are zero, the strings are anagrams, and we return <code>true</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the iteration is complete and the anagrams are removed, the function returns the <code>ans</code> vector, which contains only the first occurrence of each group of anagrams.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * m)</strong>: Here, <code>n</code> is the number of strings in the input list <code>A</code>, and <code>m</code> is the average length of each string. The outer loop iterates over each string once, and for each string, the <code>isang</code> function is called to compare it with others. The <code>isang</code> function checks if two strings are anagrams by comparing their character frequencies, which takes <strong>O(m)</strong> time for each pair of strings. Therefore, the overall time complexity is <strong>O(n * m)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong>: The space complexity is dominated by the space used to store the count of characters in the <code>isang</code> function, which requires an array of size 26 (<code>vector&lt;int&gt; cnt(26)</code>). Therefore, the space complexity is <strong>O(m)</strong>, where <code>m</code> is the maximum length of the strings being compared.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently removes anagrams from a list of strings while ensuring that only the first occurrence of each anagram group remains. By utilizing the <code>isang</code> function to check for anagrams by comparing character frequencies, the solution ensures that we accurately and quickly identify anagram groups. The use of a greedy approach in the <code>removeAnagrams</code> function ensures that once we encounter a non-anagram string, we add it to the result and skip all subsequent anagrams.</p>
+<p>The algorithm has a time complexity of <strong>O(n * m)</strong>, where <code>n</code> is the number of strings in the list, and <code>m</code> is the average length of the strings, making it efficient for most practical inputs. The space complexity is <strong>O(m)</strong> due to the space needed to store character counts for comparison.</p>
+<p>This approach can be useful in various scenarios where we need to filter out anagrams, such as when processing lists of words in dictionaries, or when trying to find unique permutations of strings. The solution demonstrates an effective use of character counting and greedy algorithms to solve the problem efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode807s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +437,6 @@
 
       </div>
 
-      
 
       <footer>
         

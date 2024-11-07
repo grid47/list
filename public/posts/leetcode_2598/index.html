@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,147 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn <span style="color:#f92672">*</span> value <span style="color:#f92672">+</span> idx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1027s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers <code>nums</code> and an integer <code>value</code>, the goal is to find the smallest integer that can be formed by applying a transformation to the elements in <code>nums</code>. Each element <code>num</code> in <code>nums</code> undergoes the transformation of calculating its remainder when divided by <code>value</code> (i.e., <code>num % value</code>). However, there is a special rule for negative numbers: instead of directly using the negative remainder, we apply the transformation <code>((num % value) + value) % value</code> to get a non-negative remainder. The final answer should be the integer formed by adding the minimum remainder to the smallest remainder count, multiplied by <code>value</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be broken down into a few distinct steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Transformation</strong>: For each number in <code>nums</code>, we need to compute its remainder when divided by <code>value</code>. The key difference here is how negative numbers are handled. Normally, for negative numbers, the remainder might be negative, but we want it to be positive. This can be done by applying the formula <code>((num % value) + value) % value</code>.</p>
+</li>
+<li>
+<p><strong>Counting Remainders</strong>: The next step is to count how often each remainder appears. Since the remainders are between <code>0</code> and <code>value-1</code> (for positive and negative numbers), a map (<code>mp</code>) is used to keep track of the frequency of each remainder.</p>
+</li>
+<li>
+<p><strong>Finding the Minimum Frequency</strong>: After counting the frequency of each remainder, the next task is to identify the remainder with the minimum frequency. This will determine the smallest number we can form, which is the remainder with the least frequency, multiplied by <code>value</code> and then added to the smallest remainder itself.</p>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: The final answer is calculated by multiplying the smallest remainder&rsquo;s frequency (<code>mn</code>) by <code>value</code> and then adding the corresponding remainder <code>idx</code> that has the minimum count.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li>We create a map <code>mp</code> to store the count of each remainder.</li>
+<li>We also retrieve the size of the <code>nums</code> array, <code>n</code>, to iterate through the numbers.</li>
+</ul>
+<h4 id="2-calculate-remainders">
+  2. <strong>Calculate Remainders</strong>:
+  <a class="heading-link" href="#2-calculate-remainders">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[(nums[i] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> (nums[i] <span style="color:#f92672">%</span> value <span style="color:#f92672">+</span> value)<span style="color:#f92672">%</span>value: nums[i]<span style="color:#f92672">%</span>value)]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates through the <code>nums</code> array. For each number <code>nums[i]</code>, we compute the remainder when divided by <code>value</code>.</li>
+<li>For negative numbers, we apply the formula <code>((num % value) + value) % value</code> to ensure that the remainder is non-negative.</li>
+<li>After calculating the remainder, we update the count of that remainder in the map <code>mp</code>.</li>
+</ul>
+<h4 id="3-find-the-minimum-frequency">
+  3. <strong>Find the Minimum Frequency</strong>:
+  <a class="heading-link" href="#3-find-the-minimum-frequency">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mn <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> value; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[i] <span style="color:#f92672">&lt;</span> mn) {
+</span></span><span style="display:flex;"><span>        idx <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        mn <span style="color:#f92672">=</span> mp[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>idx</code> to track the remainder with the minimum count, and <code>mn</code> to store the minimum frequency found.</li>
+<li>We then iterate through all possible remainders from <code>0</code> to <code>value-1</code> and check if the current remainder has a lower frequency than the previously found minimum. If so, we update <code>idx</code> and <code>mn</code>.</li>
+</ul>
+<h4 id="4-final-calculation-and-return">
+  4. <strong>Final Calculation and Return</strong>:
+  <a class="heading-link" href="#4-final-calculation-and-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mn <span style="color:#f92672">*</span> value <span style="color:#f92672">+</span> idx;
+</span></span></code></pre></div><ul>
+<li>Once we have identified the remainder <code>idx</code> with the minimum count (<code>mn</code>), we calculate the final result by multiplying the count <code>mn</code> by <code>value</code> and adding the remainder <code>idx</code> to it. This gives the smallest integer formed by applying the transformation and counting the remainders.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Iterating over <code>nums</code></strong>: We iterate through the entire array <code>nums</code>, which takes (O(n)) time, where <code>n</code> is the size of the array.</li>
+<li><strong>Updating the Map</strong>: For each number, we perform a constant-time operation to compute its remainder and update the map. This operation is (O(1)) for each element in <code>nums</code>, leading to a total of (O(n)).</li>
+<li><strong>Iterating over the remainders</strong>: After processing the numbers, we iterate through all possible remainders from <code>0</code> to <code>value-1</code> to find the one with the minimum frequency. This takes (O(value)) time.</li>
+<li>Thus, the overall time complexity is (O(n + value)), which is linear with respect to the size of the input array and the possible range of remainders.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the space used to store the map <code>mp</code>, which holds the frequency of remainders. Since there are at most <code>value</code> possible remainders, the space complexity is (O(value)).</li>
+<li>The overall space complexity is (O(value)), which is the space needed to store the map and a few integer variables.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the smallest integer formed by applying the transformation and counting the remainders for each element in the array <code>nums</code>. By using a map to track the frequency of each remainder and then selecting the remainder with the minimum frequency, we can quickly calculate the final result. The algorithm runs in (O(n + value)) time, which makes it scalable even for larger input sizes. The space complexity is also efficient at (O(value)), making the approach well-suited for the problem constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1027s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -250,7 +390,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2599"  class="external-link" target="_blank" rel="noopener">LeetCode #2599: Make the Prefix Sum Non-negative</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2600"  class="external-link" target="_blank" rel="noopener">LeetCode #2600: K Items With the Maximum Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -292,7 +432,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,127 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode927s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to calculate the number of distinct averages that can be formed from pairs of elements in the array <code>nums</code>. The number of distinct averages is determined by pairing the largest element with the smallest, the second largest with the second smallest, and so on, and then calculating the sum of each pair. The result should be the number of distinct values obtained by these sums.</p>
+<p>Given an array <code>nums</code> of <code>n</code> integers, the task is to find the number of distinct sums that can be made by pairing one element from the left side of the sorted array with one element from the right side.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to perform the following steps:</p>
+<ol>
+<li>
+<p><strong>Sort the Array</strong>: Start by sorting the array <code>nums</code>. Sorting is important because it allows us to pair the smallest element with the largest, the second smallest with the second largest, and so on.</p>
+</li>
+<li>
+<p><strong>Pairing Elements</strong>: After sorting the array, pair the first element with the last element, the second element with the second last element, and so on. Each pair will produce a sum.</p>
+</li>
+<li>
+<p><strong>Store Distinct Sums</strong>: Use a data structure that allows storing distinct sums, such as a <code>map</code> (or <code>unordered_set</code> in some cases). We will store the sums of each pair of elements.</p>
+</li>
+<li>
+<p><strong>Return the Count of Distinct Sums</strong>: The size of the data structure will represent the number of distinct averages or sums that have been computed.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong>map&lt;long, int&gt; mp</strong>: A map (or hash table) is used to store the sums of pairs. The key is the sum of the pair, and the value is set to <code>1</code> (though the value is not used here, it&rsquo;s a standard way to represent stored keys).</li>
+<li><strong>sort(nums.begin(), nums.end())</strong>: The array is sorted to facilitate pairing the smallest and largest elements.</li>
+<li><strong>int i = 0, j = nums.size() - 1</strong>: Two pointers, <code>i</code> and <code>j</code>, are initialized to point to the beginning and the end of the sorted array, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pairing the Elements</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> j){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> nums[j<span style="color:#f92672">--</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> nums[i<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> c <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>    mp[c] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>while(i &lt; j)</strong>: The loop continues as long as the two pointers <code>i</code> and <code>j</code> do not meet.</li>
+<li><strong>int a = nums[j&ndash;]</strong>: <code>a</code> is set to the element at the end of the array (<code>nums[j]</code>), and <code>j</code> is decremented.</li>
+<li><strong>int b = nums[i++]</strong>: <code>b</code> is set to the element at the beginning of the array (<code>nums[i]</code>), and <code>i</code> is incremented.</li>
+<li><strong>long c = a + b</strong>: The sum of the pair <code>(a, b)</code> is computed and stored in <code>c</code>.</li>
+<li><strong>mp[c] = 1</strong>: The sum <code>c</code> is inserted into the map <code>mp</code>. If the sum <code>c</code> already exists, the map does not store it again, ensuring that only distinct sums are stored.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Count of Distinct Averages</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mp.size();
+</span></span></code></pre></div><ul>
+<li>After all pairs are processed, the number of distinct sums (or averages) is simply the size of the map <code>mp</code>. This is returned as the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the array <code>nums</code> takes (O(n \log n)), where <code>n</code> is the size of the array.</li>
+<li>Iterating through the array with two pointers takes (O(n)) because we are processing each element once.</li>
+<li>Inserting the sums into the map takes (O(\log k)) for each insertion, where <code>k</code> is the number of distinct sums. In the worst case, this is (O(n \log n)) because in the worst case, all pairs may have distinct sums.</li>
+<li>Therefore, the overall time complexity is dominated by the sorting step, which is (O(n \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We are using a map to store the distinct sums. In the worst case, all sums might be distinct, requiring (O(n)) space to store the sums.</li>
+<li>Therefore, the space complexity is (O(n)).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the number of distinct sums that can be formed by pairing the smallest and largest elements, the second smallest and second largest, and so on. The sorting of the array ensures that we can pair the elements in the required manner, and the use of a map ensures that we only count distinct sums. With a time complexity of (O(n \log n)) and a space complexity of (O(n)), this approach is optimal for handling large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode927s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -289,7 +409,6 @@
 
       </div>
 
-      
 
       <footer>
         

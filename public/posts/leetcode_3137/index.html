@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,130 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1239s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine the minimum number of operations required to make a string <strong>k-periodic</strong>. A string is said to be <strong>k-periodic</strong> if it consists of the same substring of length <code>k</code> repeated multiple times. For example, if the string is <code>&quot;ababab&quot;</code>, it is 2-periodic because <code>&quot;ab&quot;</code> repeats three times.</p>
+<p>Given a string <code>s</code> of length <code>n</code> and an integer <code>k</code>, the goal is to determine how many operations are required to change characters in <code>s</code> such that <code>s</code> becomes <code>k-periodic</code>. An operation consists of changing a single character in the string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The main goal is to make the string consist of repeated blocks of size <code>k</code>. We can achieve this by analyzing the string in blocks of <code>k</code> characters and then modifying the blocks to make them all identical. The minimal number of changes will be determined by how frequently each substring of length <code>k</code> appears and how we can choose the most frequent substring as the base for the repetition.</p>
+<p>The solution can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Dividing the String into Substrings of Length <code>k</code></strong>:
+We divide the string into substrings of length <code>k</code> (for example, if <code>k = 3</code>, divide the string into chunks like <code>s[0:3]</code>, <code>s[3:6]</code>, etc.).</p>
+</li>
+<li>
+<p><strong>Counting the Frequency of Each Substring</strong>:
+We use a hashmap to count how many times each substring of length <code>k</code> appears. This helps us identify which substring appears most frequently.</p>
+</li>
+<li>
+<p><strong>Calculating the Number of Changes</strong>:
+The optimal strategy to make the string <code>k-periodic</code> is to convert all substrings to the one that appears most frequently. Thus, the minimum number of changes will be the total number of substrings minus the frequency of the most frequent substring.</p>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:
+Finally, the number of operations required is calculated as the difference between the total number of substrings and the number of times the most frequent substring appears.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:
+We first initialize the size of the string <code>n</code> and a hashmap <code>mp</code> to store the frequency of each substring of length <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Dividing the String into Substrings and Counting Frequencies</strong>:
+We loop through the string in steps of <code>k</code>, extracting substrings of length <code>k</code> and counting their frequencies in the map <code>mp</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">/</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[s.substr(i <span style="color:#f92672">*</span> k, k)]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here, <code>s.substr(i * k, k)</code> extracts the substring starting from index <code>i * k</code> of length <code>k</code>. The frequency of each substring is incremented in the map.</p>
+</li>
+<li>
+<p><strong>Finding the Maximum Frequency</strong>:
+We now find the most frequent substring by iterating through the map. <code>lg</code> stores the highest frequency, while <code>net</code> keeps the total number of substrings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lg <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp) {
+</span></span><span style="display:flex;"><span>    lg <span style="color:#f92672">=</span> max(lg, it.second);
+</span></span><span style="display:flex;"><span>    net <span style="color:#f92672">+=</span> it.second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here, <code>lg</code> is updated with the maximum frequency, and <code>net</code> is the sum of all frequencies (i.e., the total number of substrings).</p>
+</li>
+<li>
+<p><strong>Calculating the Result</strong>:
+The minimum number of operations is the total number of substrings (<code>net</code>) minus the number of substrings that are already the most frequent (<code>lg</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net <span style="color:#f92672">-</span> lg;
+</span></span></code></pre></div><p>This is the final step where the result is returned.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n/k)</strong>, where <code>n</code> is the length of the string <code>s</code>. We iterate through the string in chunks of size <code>k</code> to extract substrings. The number of iterations is <code>n/k</code>, and for each iteration, extracting the substring and updating the map takes constant time (since we are working with substrings of fixed length <code>k</code>).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n/k)</strong>, where <code>n</code> is the length of the string <code>s</code>. The space complexity arises from the map <code>mp</code> that stores the frequency of each substring of length <code>k</code>. In the worst case, there could be <code>n/k</code> unique substrings, so the map would require space proportional to <code>n/k</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum number of operations required to make the string <code>k-periodic</code>. By breaking the string into substrings of length <code>k</code> and counting the frequency of each substring, the problem is reduced to finding the most frequent substring and calculating how many changes are needed to make all substrings identical to the most frequent one. The time complexity of the solution is linear in terms of the size of the string, and the space complexity is proportional to the number of unique substrings, making this approach both time and space efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1239s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +413,6 @@
 
       </div>
 
-      
 
       <footer>
         

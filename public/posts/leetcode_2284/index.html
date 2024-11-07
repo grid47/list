@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,195 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode803s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given two vectors:</p>
+<ol>
+<li><strong>messages</strong>: A vector of strings where each string represents a message.</li>
+<li><strong>senders</strong>: A vector of strings where each string represents the sender corresponding to the message at the same index in the <code>messages</code> vector.</li>
+</ol>
+<p>Your task is to identify which sender has sent the most words in total across all their messages. If there is a tie in the number of words, the sender whose name is lexicographically larger should be returned.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The core idea of the solution is to calculate the total number of words sent by each sender and then identify the sender with the highest total word count. In case of a tie, the lexicographically largest sender name is returned. Here&rsquo;s how we can approach the problem:</p>
+<ol>
+<li>
+<p><strong>Counting Words</strong>: The number of words in a message is calculated by counting the number of spaces in the message, as the number of words is always one more than the number of spaces.</p>
+</li>
+<li>
+<p><strong>Tracking Word Counts</strong>: We maintain a hash map (<code>unordered_map</code>) where the keys are the sender&rsquo;s name, and the values are the total number of words sent by that sender across all their messages.</p>
+</li>
+<li>
+<p><strong>Checking the Maximum Word Count</strong>: As we process each message and its corresponding sender, we update the total word count for the sender. At each step, we compare the current sender&rsquo;s total word count with the maximum count found so far. If the current sender has sent more words, or if they tie with the current maximum but their name is lexicographically larger, we update the result.</p>
+</li>
+<li>
+<p><strong>Returning the Result</strong>: After processing all the messages, we return the sender with the highest word count, or the lexicographically largest sender name in case of a tie.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code into manageable sections:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>string res;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> max_cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>unordered_map&lt;string, int&gt; cnt;</code></strong>: This is a hash map used to track the cumulative word count for each sender. The key is the sender&rsquo;s name (<code>string</code>), and the value is the total number of words they have sent (<code>int</code>).</li>
+<li><strong><code>string res;</code></strong>: This variable will store the name of the sender who has sent the most words.</li>
+<li><strong><code>int max_cnt = 0;</code></strong>: This variable keeps track of the maximum word count encountered so far.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> senders.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> words <span style="color:#f92672">=</span> count(begin(messages[i]), end(messages[i]), <span style="color:#e6db74">&#39; &#39;</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> cnt[senders[i]] <span style="color:#f92672">+=</span> words;
+</span></span></code></pre></div><ul>
+<li><strong><code>for(int i = 0; i &lt; senders.size(); i++)</code></strong>: We loop through the messages and senders. The loop runs once for each message and sender.</li>
+<li><strong><code>int words = count(begin(messages[i]), end(messages[i]), ' ') + 1;</code></strong>: The <code>count()</code> function counts the spaces in the message. Since the number of words is always one more than the number of spaces, we add 1 to the count of spaces to get the number of words in the message.</li>
+<li><strong><code>int cur = cnt[senders[i]] += words;</code></strong>: We update the word count for the current sender by adding the number of words in the current message. The <code>cnt</code> map is updated, and <code>cur</code> stores the updated word count for the sender.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((cur <span style="color:#f92672">&gt;</span> max_cnt) <span style="color:#f92672">||</span> (cur <span style="color:#f92672">==</span> max_cnt <span style="color:#f92672">&amp;&amp;</span> senders[i] <span style="color:#f92672">&gt;</span> res)) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> senders[i];
+</span></span><span style="display:flex;"><span>    max_cnt <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>if((cur &gt; max_cnt) || (cur == max_cnt &amp;&amp; senders[i] &gt; res))</code></strong>: This condition checks whether the current sender has sent more words than the previously found maximum word count (<code>max_cnt</code>). If the current sender has sent more words, we update the result (<code>res</code>) and set the new <code>max_cnt</code> to the current sender&rsquo;s word count.
+<ul>
+<li>In case of a tie (<code>cur == max_cnt</code>), we compare the names lexicographically. If the current sender&rsquo;s name is lexicographically larger than the current result (<code>res</code>), we update the result.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> senders[i];
+</span></span><span style="display:flex;"><span>max_cnt <span style="color:#f92672">=</span> cur;
+</span></span></code></pre></div><ul>
+<li><strong><code>res = senders[i];</code></strong>: Updates the result with the name of the sender who has the highest word count (or the lexicographically larger name in case of a tie).</li>
+<li><strong><code>max_cnt = cur;</code></strong>: Updates the maximum word count with the current sender&rsquo;s word count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li><strong><code>return res;</code></strong>: After all the messages have been processed, the sender with the largest total word count (or the lexicographically larger name in case of a tie) is returned as the result.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to see how the algorithm works:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> messages <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Hello world&#34;</span>, <span style="color:#e6db74">&#34;How are you doing?&#34;</span>, <span style="color:#e6db74">&#34;Good morning&#34;</span>, <span style="color:#e6db74">&#34;Have a great day&#34;</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> senders <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Alice&#34;</span>, <span style="color:#e6db74">&#34;Bob&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>First Iteration (i = 0)</strong>:</p>
+<ul>
+<li>Sender: Alice</li>
+<li>Message: &ldquo;Hello world&rdquo;</li>
+<li>Word count: 2</li>
+<li>Cumulative word count for Alice: 2</li>
+<li><code>max_cnt = 2</code>, <code>res = &quot;Alice&quot;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration (i = 1)</strong>:</p>
+<ul>
+<li>Sender: Bob</li>
+<li>Message: &ldquo;How are you doing?&rdquo;</li>
+<li>Word count: 4</li>
+<li>Cumulative word count for Bob: 4</li>
+<li><code>max_cnt = 4</code>, <code>res = &quot;Bob&quot;</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration (i = 2)</strong>:</p>
+<ul>
+<li>Sender: Alice</li>
+<li>Message: &ldquo;Good morning&rdquo;</li>
+<li>Word count: 2</li>
+<li>Cumulative word count for Alice: 4</li>
+<li><code>max_cnt = 4</code>, <code>res = &quot;Bob&quot;</code> (Since &ldquo;Alice&rdquo; has tied with Bob in word count, we keep &ldquo;Bob&rdquo; because it&rsquo;s lexicographically larger than &ldquo;Alice&rdquo;.)</li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Iteration (i = 3)</strong>:</p>
+<ul>
+<li>Sender: Alice</li>
+<li>Message: &ldquo;Have a great day&rdquo;</li>
+<li>Word count: 4</li>
+<li>Cumulative word count for Alice: 8</li>
+<li><code>max_cnt = 8</code>, <code>res = &quot;Alice&quot;</code></li>
+</ul>
+</li>
+</ol>
+<p>Final result: <strong>Alice</strong> has the most words.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Iterating Through the Senders and Messages</strong>: We iterate through all the messages and senders exactly once. For each message, we use the <code>count()</code> function to count spaces, which takes linear time with respect to the length of the message.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is <strong>O(n * m)</strong>, where:
+<ul>
+<li><code>n</code> is the number of messages (or the number of senders).</li>
+<li><code>m</code> is the average length of the messages (since <code>count()</code> takes linear time with respect to the message length).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Storing Word Counts</strong>: The <code>unordered_map</code> <code>cnt</code> stores the word counts for each sender. The number of entries in this map will be equal to the number of unique senders, which is <strong>O(k)</strong>, where <code>k</code> is the number of unique senders.</li>
+<li><strong>Overall Space Complexity</strong>: The space complexity is <strong>O(k)</strong>, where <code>k</code> is the number of unique senders.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently tracks the total word count for each sender and determines which sender has sent the most words. In case of a tie, it returns the lexicographically larger sender. The algorithm runs in <strong>O(n * m)</strong> time complexity, which makes it efficient for typical input sizes. The use of an unordered map ensures that the space complexity remains manageable.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode803s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -251,7 +439,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2285"  class="external-link" target="_blank" rel="noopener">LeetCode #2285: Maximum Total Importance of Roads</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2287"  class="external-link" target="_blank" rel="noopener">LeetCode #2287: Rearrange Characters to Make Target String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -293,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

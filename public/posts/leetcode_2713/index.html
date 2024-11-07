@@ -226,7 +226,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -272,7 +272,174 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> max(<span style="color:#f92672">*</span>max_element(row.begin(), row.end()), <span style="color:#f92672">*</span>max_element(col.begin(), col.end()));
 </span></span><span style="display:flex;"><span>    }    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1082s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the maximum number of strictly increasing cells that can be formed in a matrix. In this problem, the matrix consists of integers, and a cell is part of an increasing sequence if it is greater than or equal to the cells in both its row and column. The task is to return the maximum number of cells in such an increasing sequence.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be solved using dynamic programming combined with a sorting mechanism. We need to keep track of the largest increasing sequence that can be formed along each row and column. Here&rsquo;s the step-by-step approach:</p>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
+<ul>
+<li>We use two arrays, <code>row</code> and <code>col</code>, to store the maximum length of increasing sequences that can end at any cell in a particular row and column, respectively.</li>
+<li>A <code>map</code> is used to group matrix elements by their values, which allows us to process the elements in decreasing order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Strategy</strong>:</p>
+<ul>
+<li>We need to process the matrix elements from largest to smallest. This helps ensure that, when processing a cell, all the cells with larger values have already been processed, which is crucial for building increasing sequences.</li>
+<li>For each matrix element, we update its corresponding row and column values. The key observation here is that the number of strictly increasing cells for a given cell is one more than the maximum of the increasing sequence lengths from the row and column of the cell.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Update</strong>:</p>
+<ul>
+<li>For each matrix element, we calculate the maximum sequence length that can be extended to this cell by using the maximum values from the row and column of that cell.</li>
+<li>After calculating the value for the cell, we update the row and column to reflect the maximum increasing sequence that can end at that cell.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The final answer will be the maximum of all the values in the <code>row</code> and <code>col</code> arrays, which represents the longest strictly increasing sequence that can be formed in any row or column.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>m <span style="color:#f92672">=</span> mat.size(), n <span style="color:#f92672">=</span> mat[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> row(m, <span style="color:#ae81ff">0</span>), col(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> tmp(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> item;
+</span></span></code></pre></div><ul>
+<li><code>m</code> and <code>n</code> store the dimensions of the matrix (<code>m</code> rows and <code>n</code> columns).</li>
+<li><code>row</code> and <code>col</code> are vectors used to track the maximum increasing sequence lengths for each row and column.</li>
+<li><code>mp</code> is a map that groups the matrix values in descending order. Each value in the matrix will be mapped to a list of coordinates (indices) where the value occurs.</li>
+<li><code>tmp</code> is a temporary matrix used to store intermediate results for the increasing sequences.</li>
+<li><code>item</code> is a set to store all unique values in the matrix (in descending order).</li>
+</ul>
+<h4 id="step-2-populate-the-map-and-set">
+  Step 2: Populate the Map and Set
+  <a class="heading-link" href="#step-2-populate-the-map-and-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#f92672">-</span>mat[i][j]].push_back({i, j});
+</span></span><span style="display:flex;"><span>        item.insert(<span style="color:#f92672">-</span>mat[i][j]);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>This nested loop goes through every cell in the matrix. For each cell, it inserts the value into the map <code>mp</code>, grouped by the negative value of the element (to sort it in descending order). It also adds the negative value into the <code>item</code> set.</li>
+</ul>
+<h4 id="step-3-process-the-matrix-elements-in-decreasing-order">
+  Step 3: Process the Matrix Elements in Decreasing Order
+  <a class="heading-link" href="#step-3-process-the-matrix-elements-in-decreasing-order">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x : item) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v: mp[x]) {
+</span></span><span style="display:flex;"><span>        tmp[v[<span style="color:#ae81ff">0</span>]][v[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> max(row[v[<span style="color:#ae81ff">0</span>]], col[v[<span style="color:#ae81ff">1</span>]]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v: mp[x]) {
+</span></span><span style="display:flex;"><span>        row[v[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> max(row[v[<span style="color:#ae81ff">0</span>]], tmp[v[<span style="color:#ae81ff">0</span>]][v[<span style="color:#ae81ff">1</span>]]);
+</span></span><span style="display:flex;"><span>        col[v[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> max(col[v[<span style="color:#ae81ff">1</span>]], tmp[v[<span style="color:#ae81ff">0</span>]][v[<span style="color:#ae81ff">1</span>]]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates over all the unique matrix values in descending order (<code>x</code> represents the matrix values).</li>
+<li>The first inner loop calculates the maximum sequence length for each cell <code>v</code> by taking the maximum of the current values in the row and column (<code>row[v[0]]</code> and <code>col[v[1]]</code>), and adding 1 to it. This value is then stored in the <code>tmp</code> matrix.</li>
+<li>The second inner loop updates the <code>row</code> and <code>col</code> arrays by using the maximum value from <code>tmp</code> for each cell.</li>
+</ul>
+<h4 id="step-4-return-the-maximum-sequence-length">
+  Step 4: Return the Maximum Sequence Length
+  <a class="heading-link" href="#step-4-return-the-maximum-sequence-length">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(<span style="color:#f92672">*</span>max_element(row.begin(), row.end()), <span style="color:#f92672">*</span>max_element(col.begin(), col.end()));
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the maximum value found in either the <code>row</code> or <code>col</code> arrays, which represents the longest strictly increasing sequence that can be formed from any row or column in the matrix.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n log(m * n))</strong>: The time complexity is dominated by the sorting operation. While iterating through the matrix elements, we sort and store them in a map. The sorting of <code>item</code> will take <code>O(m * n log(m * n))</code>, where <code>m * n</code> is the number of cells in the matrix. Each cell is processed only once, and updating the <code>row</code> and <code>col</code> arrays takes constant time for each element.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>: The space complexity is dominated by the space required to store the matrix and the temporary matrix <code>tmp</code>. We also use a map to store the elements and their indices, which can grow up to <code>m * n</code> entries.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum number of strictly increasing cells in the matrix by utilizing dynamic programming combined with a sorting mechanism. The approach processes the matrix elements in descending order, ensuring that when we update each cell, the previously processed cells have already been accounted for. The algorithm is optimal in both time and space, making it suitable for large input matrices.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1082s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +451,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2714"  class="external-link" target="_blank" rel="noopener">LeetCode #2714: Find Shortest Path with K Hops</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2716"  class="external-link" target="_blank" rel="noopener">LeetCode #2716: Minimize String Length</a></th>
       </tr>
   </thead>
   <tbody>
@@ -326,7 +493,6 @@
 
       </div>
 
-      
 
       <footer>
         

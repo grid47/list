@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -231,7 +231,261 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> net;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1246s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a list of intervals, each representing a range of days, and a total number of days, the task is to determine the number of days that are <strong>not covered</strong> by any of the intervals. Each interval represents a range of days where certain events happen. The intervals can overlap, and the goal is to calculate the number of days outside the coverage of these intervals.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to process the intervals, merge overlapping ones, and compute the number of uncovered days.</p>
+<h3 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sort the Intervals</strong>: We start by sorting the intervals by their start day. This helps in efficiently merging overlapping intervals.</p>
+</li>
+<li>
+<p><strong>Track Covered and Uncovered Days</strong>: As we process the intervals, we need to track the days that are covered by one or more intervals. If two intervals overlap, we merge them and continue to the next interval. If an interval doesn&rsquo;t overlap with the current one, we subtract the number of days covered by the previous interval from the total number of days.</p>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: After processing all intervals, we subtract the total number of covered days from the total days available (<code>days</code>).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The function <code>countDays</code> computes the number of days not covered by any of the intervals.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countDays</span>(<span style="color:#66d9ef">int</span> days, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> days; <span style="color:#75715e">// Start by assuming all days are uncovered.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> mt.size(); <span style="color:#75715e">// Number of intervals.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Sort intervals based on their start day.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sort(mt.begin(), mt.end());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pt <span style="color:#f92672">=</span> mt[<span style="color:#ae81ff">0</span>]; <span style="color:#75715e">// Track the current interval being processed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> net <span style="color:#f92672">-</span> (pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// If there&#39;s only one interval, return the uncovered days.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If the current interval overlaps with the previous, merge them.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (mt[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> pt[<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max(pt[<span style="color:#ae81ff">1</span>], mt[i][<span style="color:#ae81ff">1</span>]); <span style="color:#75715e">// Extend the end of the merged interval.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// No overlap, subtract the covered days of the previous interval.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            net <span style="color:#f92672">-=</span> pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            pt <span style="color:#f92672">=</span> mt[i]; <span style="color:#75715e">// Update to the current interval.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If it&#39;s the last interval, subtract its covered days.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> n) net <span style="color:#f92672">-=</span> pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> net; <span style="color:#75715e">// Return the total uncovered days.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h3 id="detailed-breakdown-of-the-code">
+  Detailed Breakdown of the Code:
+  <a class="heading-link" href="#detailed-breakdown-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> days;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> mt.size();
+</span></span></code></pre></div><ul>
+<li><code>net</code>: This variable tracks the total number of uncovered days, which initially equals the total number of days (<code>days</code>).</li>
+<li><code>n</code>: The number of intervals in the input vector <code>mt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Intervals</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(mt.begin(), mt.end());
+</span></span></code></pre></div><ul>
+<li>We sort the intervals in ascending order of their start day. Sorting ensures that we can easily merge overlapping intervals in the subsequent steps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Special Case (Single Interval)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> net <span style="color:#f92672">-</span> (pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>If there is only one interval, we can directly compute the number of uncovered days by subtracting the length of that interval (<code>pt[1] - pt[0] + 1</code>) from the total number of days (<code>days</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over the Intervals</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mt[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> pt[<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>        pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max(pt[<span style="color:#ae81ff">1</span>], mt[i][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        net <span style="color:#f92672">-=</span> pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        pt <span style="color:#f92672">=</span> mt[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> n) net <span style="color:#f92672">-=</span> pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Merging Overlapping Intervals</strong>: If the start of the current interval (<code>mt[i][0]</code>) is less than or equal to the end of the previous interval (<code>pt[1]</code>), it means the two intervals overlap. In this case, we extend the end of the current merged interval to cover the maximum end day between the two intervals.</p>
+</li>
+<li>
+<p><strong>Handling Non-overlapping Intervals</strong>: If the current interval does not overlap with the previous one, we subtract the length of the previous interval from the <code>net</code> (which tracks uncovered days). Then, we update the <code>pt</code> variable to the current interval, which becomes the new active interval.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Adjustment</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> n) net <span style="color:#f92672">-=</span> pt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>After processing all intervals, we check if we are at the last interval. If so, we subtract the number of days covered by this last interval from <code>net</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>net</code> value, which contains the number of uncovered days after processing all the intervals.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to better understand the code.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> days <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mt <span style="color:#f92672">=</span> {{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>}, {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>}, {<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">8</span>}};
+</span></span></code></pre></div><ul>
+<li>Total days (<code>days</code>) = 10.</li>
+<li>Intervals (<code>mt</code>) = <code>{{1, 3}, {2, 5}, {6, 8}}</code>.</li>
+</ul>
+<h4 id="processing">
+  Processing:
+  <a class="heading-link" href="#processing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sort the intervals</strong>:<br>
+After sorting, <code>mt = {{1, 3}, {2, 5}, {6, 8}}</code> remains unchanged as it is already sorted.</p>
+</li>
+<li>
+<p><strong>First Interval (<code>{1, 3}</code>)</strong>:</p>
+<ul>
+<li>We initialize <code>pt = {1, 3}</code>.</li>
+<li>Subtracting the length of this interval: <code>net = 10 - (3 - 1 + 1) = 6</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Interval (<code>{2, 5}</code>)</strong>:</p>
+<ul>
+<li>The start of the current interval (2) is within the previous interval (ends at 3), so we merge the intervals.</li>
+<li>Now, <code>pt = {1, 5}</code>.</li>
+<li>No subtraction yet because the intervals are merged.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Interval (<code>{6, 8}</code>)</strong>:</p>
+<ul>
+<li>The start of the current interval (6) does not overlap with the merged interval (<code>{1, 5}</code>), so we subtract the length of the previous merged interval:<br>
+<code>net = 6 - (5 - 1 + 1) = 1</code>.</li>
+<li>Now, <code>pt = {6, 8}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Adjustment</strong>:</p>
+<ul>
+<li>Subtracting the length of the last interval:<br>
+<code>net = 1 - (8 - 6 + 1) = 0</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>The result is <code>0</code>, which means there are no uncovered days.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n log n)</strong>: Sorting the intervals takes <strong>O(n log n)</strong> time, where <code>n</code> is the number of intervals. The iteration through the intervals after sorting takes <strong>O(n)</strong> time. Hence, the overall time complexity is dominated by the sorting step, resulting in <strong>O(n log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is <strong>O(n)</strong> due to the space used by the <code>mt</code> vector and additional variables used for storing the intervals and tracking the covered days.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the number of uncovered days by sorting the intervals, merging overlapping intervals, and subtracting the covered days from the total days. The algorithm runs in <strong>O(n log n)</strong> time, making it optimal for large inputs. The space complexity is <strong>O(n)</strong>, which is also efficient given the problem constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1246s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -243,7 +497,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3170"  class="external-link" target="_blank" rel="noopener">LeetCode #3170: Lexicographically Minimum String After Removing Stars</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3178"  class="external-link" target="_blank" rel="noopener">LeetCode #3178: Find the Child Who Has the Ball After K Seconds</a></th>
       </tr>
   </thead>
   <tbody>
@@ -285,7 +539,6 @@
 
       </div>
 
-      
 
       <footer>
         

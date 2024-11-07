@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,155 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode988s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine whether it is possible to cut a path from the top-left corner to the bottom-right corner in a grid. The grid contains cells that are either passable (1) or blocked (0). The path should be able to traverse from the top-left to the bottom-right corner by moving either down or right. The challenge is to figure out if cutting the path (removing one path or one cell) between these two corners will make it impossible to traverse.</p>
+<p>The task is to verify whether it&rsquo;s possible to cut the path by blocking one of the cells and making the path from the top-left corner <code>(0, 0)</code> to the bottom-right corner <code>(m-1, n-1)</code> unreachable.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can approach this problem with the help of <strong>depth-first search (DFS)</strong>. The algorithm focuses on verifying if there exists a path from the start <code>(0, 0)</code> to the end <code>(m-1, n-1)</code> in a grid. The approach can be broken down into the following steps:</p>
+<ol>
+<li><strong>Check Initial Path</strong>: We first check if there exists an initial path from <code>(0, 0)</code> to <code>(m-1, n-1)</code> in the given grid.</li>
+<li><strong>Mark Cell as Blocked</strong>: If there is a valid path, we try to &ldquo;cut&rdquo; it by marking the start <code>(0, 0)</code> as blocked (<code>grid[0][0] = 1</code>) and check if the path is still possible.</li>
+<li><strong>DFS Traversal</strong>: Perform a depth-first search (DFS) starting from the top-left corner <code>(0, 0)</code> to see if we can reach the bottom-right corner. If we can&rsquo;t, it indicates that cutting the path is possible.</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step to understand how it works:</p>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid, memo;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m, n;
+</span></span></code></pre></div><ul>
+<li><code>grid</code>: This 2D array stores the initial configuration of the grid, where <code>1</code> represents a passable cell and <code>0</code> represents a blocked cell.</li>
+<li><code>memo</code>: Though unused in this code, <code>memo</code> could be a space to store the results of previous recursive calls to avoid recalculating results (dynamic programming technique). In the given code, it&rsquo;s not used.</li>
+<li><code>m</code> and <code>n</code>: These variables store the number of rows and columns of the grid.</li>
+</ul>
+<h4 id="step-2-the-main-function---ispossibletocutpath">
+  Step 2: The Main Function - <code>isPossibleToCutPath</code>
+  <a class="heading-link" href="#step-2-the-main-function---ispossibletocutpath">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPossibleToCutPath</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> grid;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(isconnected(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">==</span> false) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>isconnected(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Grid Size</strong>: We first initialize the size of the grid using <code>m = grid.size()</code> and <code>n = grid[0].size()</code>.</li>
+<li><strong>Initial Check for Connectivity</strong>: The first thing we do is check if there exists a path from the start <code>(0, 0)</code> to the destination <code>(m-1, n-1)</code> using the helper function <code>isconnected</code>.
+<ul>
+<li>If there&rsquo;s no initial path (<code>isconnected(0, 0) == false</code>), we return <code>true</code> because it&rsquo;s already disconnected.</li>
+</ul>
+</li>
+<li><strong>Cutting the Path</strong>: If there is a path, we proceed by blocking the starting cell (<code>grid[0][0] = 1</code>) and recheck if there is still a path from <code>(0, 0)</code> to <code>(m-1, n-1)</code>.
+<ul>
+<li>If the path is no longer available after blocking <code>(0, 0)</code>, we return <code>true</code>, indicating that cutting the path is possible.</li>
+<li>If the path is still intact, we return <code>false</code>, indicating that cutting the path is not possible.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-the-dfs-function---isconnected">
+  Step 3: The DFS Function - <code>isconnected</code>
+  <a class="heading-link" href="#step-3-the-dfs-function---isconnected">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isconnected</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> m <span style="color:#f92672">||</span> j <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> isconnected(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j) <span style="color:#f92672">||</span> isconnected(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>isconnected</code> function is a classic depth-first search that checks if there exists a path from the current cell <code>(i, j)</code> to the destination <code>(m-1, n-1)</code>:</p>
+<ul>
+<li><strong>Base Case</strong>: If we have reached the destination <code>(m-1, n-1)</code>, we return <code>true</code> to indicate that the path exists.</li>
+<li><strong>Boundary Check</strong>: If the current cell <code>(i, j)</code> is out of bounds (<code>i &gt;= m || j &gt;= n</code>) or blocked (<code>grid[i][j] == 0</code>), we return <code>false</code> since this is an invalid or blocked cell.</li>
+<li><strong>Mark Visited</strong>: To avoid revisiting cells, we mark the current cell as blocked by setting <code>grid[i][j] = 0</code>.</li>
+<li><strong>Recursive Exploration</strong>: We attempt to move either <strong>down</strong> (<code>i + 1, j</code>) or <strong>right</strong> (<code>i, j + 1</code>) from the current cell and check if either of these moves leads to the destination.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>DFS Traversal</strong>: In the worst case, the DFS function will visit every cell in the grid once. Hence, the time complexity is proportional to the number of cells in the grid, which is (O(m \times n)), where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
+<li><strong>Total Time Complexity</strong>: The total time complexity for the <code>isPossibleToCutPath</code> function is (O(m \times n)) because we call the <code>isconnected</code> function twice (once for the initial path check and once after marking the start as blocked).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Recursive Stack</strong>: The space complexity for the recursive calls in the DFS function is (O(m + n)) due to the stack used during the recursion.</li>
+<li><strong>Grid Modification</strong>: The space used by the grid itself is (O(m \times n)), but this is not extra space, as we modify the grid in-place.</li>
+<li><strong>Total Space Complexity</strong>: The total space complexity is (O(m \times n)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution successfully checks whether it&rsquo;s possible to disconnect the path from the top-left corner <code>(0, 0)</code> to the bottom-right corner <code>(m-1, n-1)</code> by marking the starting point as blocked and performing a depth-first search. By using a depth-first search (DFS), the algorithm efficiently traverses the grid, checking for a valid path before and after blocking the start.</p>
+<p>The algorithm has a time complexity of (O(m \times n)), making it efficient enough for reasonably large grids. Additionally, the use of recursion ensures that the solution is both simple and effective, though the space complexity is proportional to the size of the grid due to recursion.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode988s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -262,7 +410,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2557"  class="external-link" target="_blank" rel="noopener">LeetCode #2557: Maximum Number of Integers to Choose From a Range II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2558"  class="external-link" target="_blank" rel="noopener">LeetCode #2558: Take Gifts From the Richest Pile</a></th>
       </tr>
   </thead>
   <tbody>
@@ -304,7 +452,6 @@
 
       </div>
 
-      
 
       <footer>
         

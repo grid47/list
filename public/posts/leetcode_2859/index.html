@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -230,7 +230,133 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1157s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the sum of elements from a given array <code>nums</code> where the index of each element has exactly <code>k</code> set bits (1s) in its binary representation. The set bits refer to the 1s in the binary form of a number. For example, the number <code>5</code> has binary representation <code>101</code>, which contains 2 set bits.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to evaluate each index in the array and check how many set bits are present in its binary representation. If the number of set bits is equal to <code>k</code>, we add the corresponding value from the <code>nums</code> array to the sum.</p>
+<p>Here’s how the solution works step by step:</p>
+<ol>
+<li>
+<p><strong>Iterate Over Array Indices</strong>: For each index in the array, check how many set bits are present in the binary representation of that index.</p>
+</li>
+<li>
+<p><strong>Count Set Bits</strong>: For each index, count the number of set bits in its binary representation. This can be achieved by continuously applying bitwise operations.</p>
+</li>
+<li>
+<p><strong>Check Condition</strong>: If the number of set bits in the index matches <code>k</code>, add the corresponding value from the <code>nums</code> array to the result sum.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After processing all indices, return the computed sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the variable <code>res</code> to zero. This will hold the sum of the elements where the index has exactly <code>k</code> set bits.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> copy <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><ul>
+<li>We begin iterating over the array <code>nums</code>. For each index <code>i</code>, we initialize <code>c</code> to 0. This variable <code>c</code> will count the number of set bits (1s) in the binary representation of <code>i</code>.</li>
+<li>We store the index <code>i</code> in the variable <code>copy</code> for manipulation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(copy) {
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">+=</span> copy <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    copy <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>while(copy)</code> loop continues as long as <code>copy</code> is non-zero (i.e., there are still bits to check).</li>
+<li>Inside the loop:
+<ul>
+<li>We use the bitwise AND operation <code>copy &amp; 1</code> to check if the least significant bit of <code>copy</code> is set (i.e., if it’s 1). If it is, we increment <code>c</code>.</li>
+<li>Then, we use the right shift operation <code>copy &gt;&gt;= 1</code> to shift the bits of <code>copy</code> one position to the right. This effectively removes the least significant bit that was just checked.</li>
+</ul>
+</li>
+</ul>
+<p>The result after the loop is that <code>c</code> will hold the number of set bits in the binary representation of the index <code>i</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(c <span style="color:#f92672">==</span> k) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the number of set bits <code>c</code> is equal to the desired value <code>k</code>, we add the value <code>nums[i]</code> to the result <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all indices in the array, we return the accumulated result stored in <code>res</code>, which is the sum of all elements in <code>nums</code> whose indices have exactly <code>k</code> set bits.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * b)</strong>: Where <code>n</code> is the number of elements in the <code>nums</code> array, and <code>b</code> is the number of bits required to represent the index <code>i</code>. In this case, <code>b</code> is the number of bits in the maximum possible index, which depends on the size of the array.
+<ul>
+<li>For each index <code>i</code>, we count the set bits in its binary representation, which takes <code>O(b)</code> time, where <code>b</code> is the number of bits in <code>i</code>.</li>
+<li>In total, we need to process all <code>n</code> elements in the array, so the overall time complexity is <code>O(n * b)</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we are using a fixed amount of extra space to store variables like <code>c</code> and <code>copy</code>, and we do not use any data structures that grow with the input size. Therefore, the space complexity is O(1).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the sum of elements in an array whose indices have exactly <code>k</code> set bits in their binary representation. The solution uses bitwise operations to count the set bits for each index, which is an efficient way to work with binary representations. The approach runs in O(n * b) time, where <code>n</code> is the number of elements in the array, and <code>b</code> is the number of bits needed to represent the indices, which is efficient for typical input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1157s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +410,6 @@
 
       </div>
 
-      
 
       <footer>
         

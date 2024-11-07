@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,102 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> avg;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode675s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the average of all elements in a sliding window of size <code>2k + 1</code> for a given array <code>nums</code>. For each index <code>i</code>, if the sliding window cannot be formed (i.e., if <code>i - k</code> is less than 0 or <code>i + k</code> is greater than or equal to the length of <code>nums</code>), the output should be <code>-1</code>. The goal is to implement an efficient solution that avoids unnecessary recomputation, particularly in situations where the size of the array and the value of <code>k</code> can be large.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem efficiently, we utilize the concept of prefix sums. The prefix sum array allows us to compute the sum of any subarray in constant time, which is essential for maintaining optimal performance while calculating averages in a sliding window. The solution involves the following key steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We first establish the size of the input array, <code>n</code>, and create two arrays: <code>psum</code> for storing the prefix sums and <code>avg</code> for the final average results.</p>
+</li>
+<li>
+<p><strong>Building the Prefix Sum Array</strong>: We populate the <code>psum</code> array such that each element at index <code>i</code> holds the sum of the elements from the start of the array up to <code>i</code>. This is accomplished through a simple loop where each element is added to the previous sum.</p>
+</li>
+<li>
+<p><strong>Calculating Averages</strong>: With the prefix sum array in place, we iterate through each index <code>i</code> of the original array. For each index:</p>
+<ul>
+<li>We check if the current index allows for a valid sliding window by ensuring <code>i - k</code> is not less than 0 and <code>i + k</code> is less than <code>n</code>.</li>
+<li>If a valid window exists, we compute the average of the elements in the window using the prefix sum array. The average is calculated by subtracting the sum of elements outside the window from the total sum provided by the prefix sums and then dividing by <code>2 * k + 1</code>.</li>
+<li>If a valid window does not exist, we simply set the average at that index to <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<p>This approach ensures that we efficiently compute the required averages without redundantly summing elements, leading to significant performance gains, especially for larger arrays.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code provided implements the outlined approach in a clear manner:</p>
+<ol>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>psum[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    psum[i] <span style="color:#f92672">=</span> psum[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i];
+</span></span></code></pre></div><p>Here, we initialize the first element of the prefix sum array and iteratively fill in the rest by adding the current element to the previous sum.</p>
+</li>
+<li>
+<p><strong>Average Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">-</span> k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">+</span> k <span style="color:#f92672">&gt;=</span> n) {
+</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#f92672">=</span> (psum[i <span style="color:#f92672">+</span> k] <span style="color:#f92672">-</span> ((i <span style="color:#f92672">-</span> k) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> psum[i <span style="color:#f92672">-</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this loop, we assess whether we can form a complete window around the index <code>i</code>. If not, we assign <code>-1</code>. If we can, we calculate the average by leveraging the prefix sum array for quick access to the necessary sums.</p>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> avg;
+</span></span></code></pre></div><p>Finally, the computed averages are returned as a vector.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The overall complexity of this algorithm is linear, O(n), where <code>n</code> is the length of the input array. This is due to the single pass needed to construct the prefix sum and another pass to compute the averages. The space complexity is also O(n) due to the storage of the prefix sum and the average arrays. This efficient approach ensures that we can handle even large datasets swiftly.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the provided solution efficiently computes the averages for a sliding window of size <code>2k + 1</code> using the prefix sum technique. By leveraging this method, the algorithm achieves optimal time complexity while maintaining clarity and maintainability in the code. This solution is particularly valuable in scenarios where quick average computations are essential, such as in real-time data processing or large-scale numerical analyses.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode675s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +379,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -243,7 +243,175 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> dp(n);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1012s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum number of operations to reduce a given integer <code>n</code> to <code>0</code>. The operations are as follows:</p>
+<ul>
+<li>If the current number is even, divide it by 2.</li>
+<li>If the current number is odd, either add 1 or subtract 1 to make it even.</li>
+</ul>
+<p>The goal is to determine the fewest number of steps required to reduce <code>n</code> to <code>0</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Approach with Memoization</strong>:</p>
+<ul>
+<li>We can solve this problem using recursion. Starting from <code>n</code>, we apply the operations and recursively reduce the value of <code>n</code>.</li>
+<li>Since we need to consider both addition and subtraction when <code>n</code> is odd, it becomes important to evaluate the minimum operations needed for both cases and select the optimal one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>When <code>n == 0</code>, the number is already reduced to <code>0</code>, so the number of operations is <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<ul>
+<li>If <code>n</code> is even, the optimal choice is to divide it by 2 because this operation reduces the number efficiently, halving the value.</li>
+<li>If <code>n</code> is odd, we need to make it even first. To do this, we have two options:
+<ul>
+<li><strong>Option 1</strong>: Add 1 to <code>n</code>, making it even and allowing the division by 2 in the next step.</li>
+<li><strong>Option 2</strong>: Subtract 1 from <code>n</code> to make it even and then divide it by 2 in the next step.</li>
+</ul>
+</li>
+<li>The recursive function will then calculate the number of operations for both choices and return the minimum of the two.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To improve the performance of the recursive solution, memoization can be used. This technique involves storing the results of subproblems (i.e., the number of operations for a given number) in a table (or a hash map) so that we do not recompute the results for the same input multiple times.</li>
+</ul>
+</li>
+<li>
+<p><strong>Minimizing Operations</strong>:</p>
+<ul>
+<li>We continue to reduce <code>n</code> until we reach <code>0</code>. The minimum number of operations is determined by recursively evaluating the operations for each even and odd case.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The function <code>dp(n)</code> takes an integer <code>n</code> and returns the minimum number of operations required to reduce <code>n</code> to <code>0</code>.</li>
+<li>The base case is when <code>n == 0</code>, in which case no operations are needed, so the function returns <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Even Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> dp(n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is even, the optimal operation is to divide <code>n</code> by 2. The bitwise operation <code>(n &amp; 1) == 0</code> checks if the number is even (since the least significant bit of an even number is <code>0</code>).</li>
+<li>The next step is to recursively call <code>dp(n &gt;&gt; 1)</code> where <code>n &gt;&gt; 1</code> shifts the bits of <code>n</code> to the right, effectively dividing it by 2.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Odd Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (((n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(n);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(n <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is odd, we have two possible operations:
+<ul>
+<li><strong>Option 1</strong>: If the number obtained by shifting <code>n</code> to the right by one bit (<code>n &gt;&gt; 1</code>) is odd, we add 1 to <code>n</code> to make it even, then recursively call <code>dp(n + 1)</code>.</li>
+<li><strong>Option 2</strong>: If the number obtained by shifting <code>n</code> to the right by one bit is even, we subtract 1 from <code>n</code> to make it even and then recursively call <code>dp(n - 1)</code>.</li>
+</ul>
+</li>
+<li>The result of both operations is incremented by 1 (for the addition or subtraction operation) and the recursive call is made.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The function returns <code>ans</code>, which holds the minimum number of operations for reducing <code>n</code> to <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function to Call <code>dp</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minOperations</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>minOperations(n)</code> is the entry point of the solution. It simply calls the recursive <code>dp</code> function and returns the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Without memoization, the time complexity is exponential, as the function recursively calls itself multiple times for the same values of <code>n</code>.</li>
+<li>The recurrence tree grows exponentially, leading to a time complexity of (O(2^n)), where <code>n</code> is the size of the number.</li>
+<li>However, with memoization (not implemented here), the complexity would reduce to (O(\log n)) as each number would be computed only once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(\log n)) due to the recursive call stack. This is because each recursive call divides <code>n</code> by 2, and the depth of the recursion tree is proportional to the logarithm of <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This recursive solution calculates the minimum number of operations required to reduce a number <code>n</code> to <code>0</code> by using bitwise operations. The approach efficiently handles both even and odd cases, ensuring that the optimal number of operations is selected for each scenario. The solution can be further optimized by adding memoization to store previously computed results, which would significantly improve the time complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1012s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +465,6 @@
 
       </div>
 
-      
 
       <footer>
         

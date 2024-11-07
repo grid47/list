@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -273,7 +273,201 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1221s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to find the most frequent prime number formed by traversing the elements of a 2D grid <code>mat</code>. A prime number is formed by traversing the grid in any of the 8 possible directions: up-right, right, down-right, down-left, left, up-left, up, and down. The direction of traversal starts from any element, and as you traverse, you form a number by concatenating the elements of the grid. After all valid prime numbers are formed, the task is to return the prime number that appears most frequently in all directions. If there is a tie, return the smallest prime number.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to consider the following approach:</p>
+<ol>
+<li>
+<p><strong>Prime Number Calculation (Sieve of Eratosthenes):</strong></p>
+<ul>
+<li>First, we need to identify prime numbers. Given the potential large size of the numbers formed by grid elements, we use the <strong>Sieve of Eratosthenes</strong> to mark all prime numbers up to 1,000,000 (since the grid values are limited to the range of integers). We only need to check for primes in the range of numbers that can be formed by up to 6 digits (as the grid elements are integers and we&rsquo;re concatenating them in multiple directions).</li>
+</ul>
+</li>
+<li>
+<p><strong>Grid Traversal:</strong></p>
+<ul>
+<li>For each element in the grid, we need to traverse in all 8 possible directions. As we traverse, we will form numbers by concatenating the digits of the grid. If a valid prime number is formed, we update its frequency in a frequency map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Map of Prime Frequency:</strong></p>
+<ul>
+<li>For each valid prime number found during the traversal, we store the frequency of its occurrence in a map (or hash map). After all grid cells have been traversed and all possible prime numbers are formed, the prime number that appears the most times in the grid is returned.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Output:</strong></p>
+<ul>
+<li>We return the prime number with the highest frequency. In case of a tie, the smallest prime number among them is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sieve-of-eratosthenes">
+  Step 1: Sieve of Eratosthenes
+  <a class="heading-link" href="#step-1-sieve-of-eratosthenes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> sieve[<span style="color:#ae81ff">1000001</span>] <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">make</span>() {
+</span></span><span style="display:flex;"><span>    sieve[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000001</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>sieve[i]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>i; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000001</span>; j <span style="color:#f92672">+=</span> i) {
+</span></span><span style="display:flex;"><span>                sieve[j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// Marking non-primes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a sieve array of size <code>1,000,001</code> (since the numbers we need to consider can go up to 6 digits).</li>
+<li>The <code>make()</code> function initializes the sieve array. If a number <code>i</code> is found to be prime (i.e., <code>sieve[i]</code> is 0), we mark all its multiples as non-prime by setting <code>sieve[j]</code> to 1.</li>
+<li>We start from <code>i = 2</code> and mark all multiples of <code>i</code> as non-prime. This way, at the end of the process, all prime numbers will have <code>sieve[i] = 0</code>.</li>
+</ul>
+<h4 id="step-2-directions-for-grid-traversal">
+  Step 2: Directions for Grid Traversal
+  <a class="heading-link" href="#step-2-directions-for-grid-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dx[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dy[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
+</span></span></code></pre></div><ul>
+<li>These arrays represent the 8 possible directions for traversal: down-right, right, up-right, up-left, left, down-left, up, and down.</li>
+<li><code>dx[i]</code> and <code>dy[i]</code> represent the change in the row and column indices respectively for the <code>i</code>th direction.</li>
+</ul>
+<h4 id="step-3-traversing-the-grid-and-forming-numbers">
+  Step 3: Traversing the Grid and Forming Numbers
+  <a class="heading-link" href="#step-3-traversing-the-grid-and-forming-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> mat[i].size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">8</span>; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> i, b <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (a <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> b <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> a <span style="color:#f92672">&lt;</span> mat.size() <span style="color:#f92672">&amp;&amp;</span> b <span style="color:#f92672">&lt;</span> mat[i].size()) {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">+=</span> mat[a][b];
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (cur <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&amp;&amp;</span> sieve[cur] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) freq[cur]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                a <span style="color:#f92672">+=</span> dx[k]; b <span style="color:#f92672">+=</span> dy[k];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This part of the code is responsible for iterating over each cell in the matrix <code>mat</code> and checking all 8 possible directions from that cell.</li>
+<li>For each direction <code>k</code>, we start at the current cell <code>(i, j)</code> and attempt to move in the direction defined by <code>dx[k]</code> and <code>dy[k]</code>. During the traversal, we concatenate the digits of the grid to form a number (<code>cur</code>).</li>
+<li>If the formed number is greater than 10 and is prime (i.e., <code>sieve[cur] == 0</code>), we increase its frequency in the <code>freq</code> map.</li>
+<li>The condition <code>cur &gt; 10</code> ensures that we only count numbers with more than one digit, preventing single-digit numbers from being included in the prime frequency count.</li>
+</ul>
+<h4 id="step-4-finding-the-most-frequent-prime">
+  Step 4: Finding the Most Frequent Prime
+  <a class="heading-link" href="#step-4-finding-the-most-frequent-prime">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : freq) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i.second <span style="color:#f92672">&gt;=</span> mx) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> i.first;
+</span></span><span style="display:flex;"><span>        mx <span style="color:#f92672">=</span> i.second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After all numbers have been processed, we need to determine the prime number with the highest frequency.</li>
+<li>We iterate over the <code>freq</code> map, which contains the prime numbers as keys and their respective counts as values.</li>
+<li>If we find a prime number with a higher frequency (<code>i.second &gt;= mx</code>), we update <code>ans</code> to this prime and set <code>mx</code> to the new maximum frequency.</li>
+<li>Finally, we return the prime number with the highest frequency.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sieve of Eratosthenes:</strong></p>
+<ul>
+<li>The sieve function runs in <code>O(n log log n)</code> where <code>n</code> is <code>1,000,000</code>. This is efficient for marking prime numbers up to <code>10^6</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Grid Traversal:</strong></p>
+<ul>
+<li>We are iterating over each cell of the matrix, and for each cell, we check all 8 directions. For each direction, we can traverse a maximum of <code>min(rows, cols)</code> steps before going out of bounds. In the worst case, this can lead to checking all cells in the grid, giving us a time complexity of <code>O(rows * cols * min(rows, cols))</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Frequency Calculation:</strong></p>
+<ul>
+<li>The frequency map <code>freq</code> contains prime numbers. Since we are only interested in numbers up to <code>10^6</code>, the size of the map will be limited. Finding the maximum frequency and determining the most frequent prime will take <code>O(k)</code> time, where <code>k</code> is the number of primes found.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall time complexity is dominated by the grid traversal and sieve generation, resulting in <code>O(n log log n + rows * cols * min(rows, cols))</code>.</p>
+<h3 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The space complexity is primarily determined by the sieve array, which takes <code>O(10^6)</code> space, and the frequency map, which stores the prime numbers formed. Thus, the space complexity is <code>O(n + rows * cols)</code> where <code>n</code> is the size of the sieve array, and <code>rows * cols</code> is the space required for storing frequencies.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the most frequent prime number formed from a 2D grid by using the Sieve of Eratosthenes for prime detection and exploring all 8 possible directions from each grid cell to form numbers. The result is the prime number that appears most frequently in the grid. The approach ensures optimal performance for large inputs, making it suitable for problems with large grid sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1221s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -327,7 +521,6 @@
 
       </div>
 
-      
 
       <footer>
         

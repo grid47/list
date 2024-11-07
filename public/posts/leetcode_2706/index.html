@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -232,7 +232,133 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> m;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1075s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires you to determine the maximum money left after buying two chocolates with the given budget. You&rsquo;re given an array of chocolate prices <code>p</code> and a total amount of money <code>m</code>. The goal is to buy exactly two chocolates from the list such that the total cost of the two chocolates does not exceed the budget <code>m</code>. You should return the maximum money left after purchasing the chocolates. If it is not possible to buy two chocolates, return the entire budget <code>m</code> as no purchase can be made.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to:</p>
+<ol>
+<li><strong>Find the two cheapest chocolates</strong>: The goal is to select two chocolates that will cost the least amount while ensuring that their total cost is within the budget.</li>
+<li><strong>Calculate the remaining money</strong>: After selecting the two cheapest chocolates, subtract the total cost from the budget to find out how much money remains.</li>
+<li><strong>Handle the edge case</strong>: If the sum of the two cheapest chocolates exceeds the budget, return the full budget as no purchase can be made.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>, l2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
+</span></span></code></pre></div><ul>
+<li><code>l1</code> represents the price of the cheapest chocolate, initialized to 200 (a value higher than any possible chocolate price in the array).</li>
+<li><code>l2</code> represents the price of the second cheapest chocolate, also initialized to 200. The reason for this initialization is to ensure that when we encounter chocolate prices, we can update these variables with the actual lowest prices.</li>
+</ul>
+<h4 id="step-2-find-the-two-cheapest-chocolates">
+  Step 2: Find the Two Cheapest Chocolates
+  <a class="heading-link" href="#step-2-find-the-two-cheapest-chocolates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> p.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(p[i] <span style="color:#f92672">&lt;</span> l1) {
+</span></span><span style="display:flex;"><span>        l2 <span style="color:#f92672">=</span> l1;
+</span></span><span style="display:flex;"><span>        l1 <span style="color:#f92672">=</span> p[i];
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(p[i] <span style="color:#f92672">&lt;</span> l2) {
+</span></span><span style="display:flex;"><span>        l2 <span style="color:#f92672">=</span> p[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>This loop iterates over all the prices in the <code>p</code> array to find the two lowest prices.</p>
+<ul>
+<li>If a price is smaller than <code>l1</code>, it means we&rsquo;ve found a new minimum price. So, we update <code>l2</code> to hold the previous smallest value (<code>l1</code>), and then set <code>l1</code> to the current price.</li>
+<li>If the price is larger than <code>l1</code> but smaller than <code>l2</code>, we update <code>l2</code> to this price, keeping <code>l1</code> intact.</li>
+</ul>
+<p>This ensures that by the end of the loop, <code>l1</code> contains the smallest price, and <code>l2</code> contains the second smallest price.</p>
+</li>
+</ul>
+<h4 id="step-3-check-the-budget-and-return-the-result">
+  Step 3: Check the Budget and Return the Result
+  <a class="heading-link" href="#step-3-check-the-budget-and-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(l1 <span style="color:#f92672">+</span> l2 <span style="color:#f92672">&lt;=</span> m) <span style="color:#66d9ef">return</span> m <span style="color:#f92672">-</span> l1 <span style="color:#f92672">-</span> l2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> m;
+</span></span></code></pre></div><ul>
+<li>After determining the two cheapest chocolates, we check if the sum of their prices (<code>l1 + l2</code>) is less than or equal to the budget <code>m</code>.
+<ul>
+<li>If the total cost of the two chocolates is within the budget, we subtract this total from the budget to determine how much money remains and return this value.</li>
+<li>If the total cost exceeds the budget, it means buying two chocolates is not possible, and we return the entire budget (<code>m</code>), indicating no purchase is made.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>p</code>. This is because we only iterate through the array once to find the two lowest prices, which takes linear time.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we only use a fixed amount of extra space to store the two lowest prices (<code>l1</code> and <code>l2</code>), irrespective of the size of the input array. No additional space is required.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum remaining money after purchasing the two cheapest chocolates from the list, ensuring that the total cost does not exceed the given budget. The approach is simple, with a linear time complexity, and operates in constant space. It handles edge cases where it is not possible to buy two chocolates by returning the full budget, ensuring correctness across all input scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1075s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +412,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,110 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode630s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the maximum difference between two elements in an array, such that the larger element comes after the smaller element. In other words, we need to determine the maximum value of <code>nums[j] - nums[i]</code>, where <code>j &gt; i</code>. If no such pair exists that meets this condition, we should return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can utilize a single-pass algorithm, which allows us to traverse the array just once while keeping track of the minimum value encountered so far. This method optimizes our approach to O(n) time complexity, where n is the number of elements in the input array. Here are the steps we’ll follow:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We will start by initializing two variables: <code>mn</code> to keep track of the minimum value encountered so far and <code>res</code> to store the maximum difference found.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>: As we iterate through the array:</p>
+<ul>
+<li>We will update the maximum difference if the current element minus the minimum value (<code>mn</code>) is greater than the previously recorded maximum difference (<code>res</code>).</li>
+<li>We will also update <code>mn</code> to be the minimum of its current value and the current element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>: After completing the iteration, we will check if <code>res</code> remains <code>0</code>, which would imply that no valid pairs were found. In that case, we return <code>-1</code>. Otherwise, we return the maximum difference found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the implementation in detail:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> maximumDifference(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> with a public method <code>maximumDifference</code> that takes a vector of integers as its parameter.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>mn</code> with the first element of the array <code>nums</code> and <code>res</code> with <code>-1</code>, indicating that we haven&rsquo;t found any valid difference yet.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+</span></span></code></pre></div><ul>
+<li>We begin a loop starting from the second element (index <code>1</code>) and continue until the end of the vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> max(res, nums[i] <span style="color:#f92672">-</span> mn);
+</span></span></code></pre></div><ul>
+<li>Here, we calculate the difference between the current element <code>nums[i]</code> and the minimum value <code>mn</code>. We update <code>res</code> with the maximum of its current value and the computed difference.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            mn <span style="color:#f92672">=</span> min(mn, nums[i]);
+</span></span></code></pre></div><ul>
+<li>We update <code>mn</code> to be the smaller of its current value and the current element. This ensures that we are always considering the smallest element encountered so far.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>The loop completes when all elements have been processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>-1</code> if <code>res</code> is still <code>0</code>, indicating that no valid pairs were found. Otherwise, we return the maximum difference calculated.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this approach is O(n) because we traverse the array only once. The space complexity is O(1) since we are using a constant amount of extra space for our variables (<code>mn</code> and <code>res</code>).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>maximumDifference</code> method provides an efficient way to find the maximum difference between two elements in an array, with the requirement that the larger element appears after the smaller one.</p>
+<p>By leveraging a single pass through the array while maintaining a record of the minimum value encountered, we are able to efficiently compute the desired result without the need for nested loops. This implementation highlights the power of using dynamic tracking of state during iteration to optimize performance.</p>
+<p>This approach is particularly beneficial in scenarios where the input size can be large, as it minimizes the time spent on calculations and maintains simplicity in code. Whether you are working on competitive programming problems or building applications that require numerical analysis, understanding and applying this technique can enhance your coding proficiency.</p>
+<p>The code is not only concise but also easy to understand, making it a valuable example for those looking to improve their algorithmic skills. This solution encapsulates important concepts in array manipulation, condition checking, and efficient algorithm design, serving as an excellent reference point for both novice and experienced programmers alike.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode630s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -270,7 +373,6 @@
 
       </div>
 
-      
 
       <footer>
         

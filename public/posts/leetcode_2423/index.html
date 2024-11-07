@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,178 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode898s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks whether we can make all characters in a string appear the same number of times by removing exactly one character. Specifically, the task is to check if it&rsquo;s possible to adjust the frequency of characters in the string to make them all equal by removing one character from the string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to check the frequencies of characters in the string. The core idea is to identify if it is possible to make all frequencies the same by removing exactly one character. Here are the main steps to achieve that:</p>
+<ol>
+<li><strong>Count Character Frequencies</strong>: We first count how many times each character appears in the string.</li>
+<li><strong>Count Frequency of Frequencies</strong>: We count how many times each frequency appears. This is crucial because if we have two different frequencies, we need to check whether one of them can be reduced by removing just one character to make all frequencies the same.</li>
+<li><strong>Check Possible Conditions</strong>: Based on the frequency counts, we check if we can modify the string by removing one character to make the frequency of all characters equal.</li>
+</ol>
+<h4 id="key-scenarios-to-check">
+  Key Scenarios to Check:
+  <a class="heading-link" href="#key-scenarios-to-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>If there is only one unique frequency, then it is always possible to make all characters have the same frequency, or if all characters appear exactly once.</li>
+<li>If there are two different frequencies:
+<ul>
+<li>One frequency can be reduced by 1 to match the other frequency.</li>
+<li>One of the frequencies can be 1, which means we can remove one character to make that frequency 0 (effectively removing the character from the string).</li>
+</ul>
+</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-count-character-frequencies">
+  Step 1: Count Character Frequencies
+  <a class="heading-link" href="#step-1-count-character-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> c: word)  mp[c]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We use an unordered map (<code>mp</code>) to store the frequency of each character in the string <code>word</code>.</li>
+<li>We iterate through the string and for each character, we increment its corresponding count in <code>mp</code>.</li>
+</ul>
+<h4 id="step-2-count-frequency-of-frequencies">
+  Step 2: Count Frequency of Frequencies
+  <a class="heading-link" href="#step-2-count-frequency-of-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> m: mp)  mp2[m.second]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>Now, we need to count how many times each frequency occurs. We use a <code>map&lt;int, int&gt;</code> (<code>mp2</code>) to store the frequency of frequencies.</li>
+<li>We iterate through the character frequencies stored in <code>mp</code>, and for each frequency <code>m.second</code>, we increment the count of that frequency in <code>mp2</code>.</li>
+</ul>
+<h4 id="step-3-check-number-of-different-frequencies">
+  Step 3: Check Number of Different Frequencies
+  <a class="heading-link" href="#step-3-check-number-of-different-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp2.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If there are more than two different frequencies, it is impossible to make the frequencies equal by removing one character. In this case, we return <code>false</code> immediately.</li>
+</ul>
+<h4 id="step-4-handle-the-case-with-one-frequency">
+  Step 4: Handle the Case with One Frequency
+  <a class="heading-link" href="#step-4-handle-the-case-with-one-frequency">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it1 <span style="color:#f92672">=</span> mp2.begin();
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it2 <span style="color:#f92672">=</span> mp2.begin();
+</span></span><span style="display:flex;"><span>it2<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp2.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> it1<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there is only one unique frequency, we have two possibilities:
+<ol>
+<li>If all characters are the same (<code>mp.size() == 1</code>), we return <code>true</code> because we don&rsquo;t need to do anything.</li>
+<li>If all characters appear once, we can remove one character and make all others have the same frequency.</li>
+</ol>
+</li>
+<li>Otherwise, if there is more than one character but all frequencies are the same, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-5-handle-the-case-with-two-frequencies">
+  Step 5: Handle the Case with Two Frequencies
+  <a class="heading-link" href="#step-5-handle-the-case-with-two-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(it1<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> it1<span style="color:#f92672">-&gt;</span>second <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(it1<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">==</span> it2<span style="color:#f92672">-&gt;</span>first<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> it2<span style="color:#f92672">-&gt;</span>second <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If there are two different frequencies, we check:
+<ol>
+<li>If one frequency is 1 and it occurs only once (<code>it1-&gt;first == 1 &amp;&amp; it1-&gt;second == 1</code>), we can remove this character completely, making the remaining frequencies equal.</li>
+<li>If the frequencies are consecutive (i.e., <code>it1-&gt;first == it2-&gt;first - 1</code>) and the higher frequency occurs only once (<code>it2-&gt;second == 1</code>), we can reduce the higher frequency by 1 to match the lower frequency.</li>
+</ol>
+</li>
+<li>If neither condition is true, we return <code>false</code> because we can&rsquo;t make all frequencies the same by removing just one character.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(N log N)</strong>: The time complexity is dominated by the need to sort the frequencies of characters. Counting the frequency of each character takes <strong>O(N)</strong>, and inserting into the frequency map (<code>mp2</code>) takes <strong>O(log N)</strong> for each element. Hence, the overall complexity is <strong>O(N log N)</strong>, where <code>N</code> is the length of the input string.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(N)</strong>: The space complexity is mainly determined by the storage of the character frequencies in <code>mp</code> and the frequency of frequencies in <code>mp2</code>, both of which require <strong>O(N)</strong> space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages two maps to count character frequencies and the frequencies of those frequencies, providing an efficient way to determine if we can make all character frequencies equal by removing exactly one character. By checking conditions on the frequency map, we can solve the problem in <strong>O(N log N)</strong> time, which is efficient enough for most typical input sizes. The approach ensures that we handle edge cases and special conditions systematically, making the solution both clear and robust.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode898s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +466,6 @@
 
       </div>
 
-      
 
       <footer>
         

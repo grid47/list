@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,123 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">/</span> mn;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1240s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the minimum length of the string required to rearrange it into an <strong>anagram</strong>. An anagram involves rearranging the characters of the string such that the result can be evenly partitioned into groups where each group contains the same characters. The goal is to find the minimum length such that the string can be split into equal-sized partitions, with each partition being a valid anagram of the others.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we need to focus on the frequency of characters in the given string and use the concept of <strong>greatest common divisor (GCD)</strong> to determine the minimal partition size that can still be rearranged into an anagram.</p>
+<p>The key idea here is:</p>
+<ol>
+<li><strong>Count Character Frequencies</strong>: First, count how often each character appears in the string.</li>
+<li><strong>Calculate GCD of Frequencies</strong>: The optimal way to partition the string into equal parts is determined by the <strong>GCD of the frequencies</strong> of all characters in the string. The reason we use the GCD is that it represents the largest possible number by which the frequencies of all characters can be evenly divided. This ensures that the string can be divided into equal parts, each being a valid anagram of the other.</li>
+<li><strong>Compute Minimum Length</strong>: Once the GCD is found, the minimum length of the rearranged string that can be split into equal partitions is the length of the string divided by the GCD.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Input Parsing</strong>:
+The input string <code>s</code> is provided, and its length <code>n</code> is calculated. This length will be used to determine how many groups the string can be split into.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Character Frequency Counting</strong>:
+A map <code>mp</code> is used to store the frequency of each character in the string. The <code>for</code> loop iterates through the string and updates the map by incrementing the count for each character <code>x</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;        
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s)
+</span></span><span style="display:flex;"><span>    mp[x]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>For example, for the input string <code>&quot;aaxxbb&quot;</code>, the map <code>mp</code> will look like this:</p>
+<pre tabindex="0"><code>mp = {&#39;a&#39;: 2, &#39;x&#39;: 2, &#39;b&#39;: 2}
+</code></pre></li>
+<li>
+<p><strong>Finding the Minimum Frequency</strong>:
+After counting the frequencies of each character, the goal is to find the greatest common divisor (GCD) of these frequencies. The first step is to initialize <code>mn</code> with the frequency of the first character, <code>mp[s[0]]</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> mp[s[<span style="color:#ae81ff">0</span>]];
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Computing the GCD of All Frequencies</strong>:
+The next step is to compute the GCD of all the frequencies in the map <code>mp</code>. We iterate over the map using a <code>for</code> loop and update the value of <code>mn</code> by computing the GCD of <code>mn</code> and the current frequency <code>it.second</code>. The GCD is computed using the built-in <code>__gcd</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp)
+</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> __gcd(mn, it.second);
+</span></span></code></pre></div><p>For the input <code>&quot;aaxxbb&quot;</code>, the frequencies are <code>2, 2, 2</code>. The GCD of <code>2, 2, 2</code> is <code>2</code>.</p>
+</li>
+<li>
+<p><strong>Calculating the Minimum Anagram Length</strong>:
+Once we have the GCD of all the frequencies, we compute the minimum length of the rearranged string that can be divided into valid anagram partitions. This is simply the total length of the string <code>n</code> divided by the GCD <code>mn</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> n <span style="color:#f92672">/</span> mn;
+</span></span></code></pre></div><p>In the example, the total length of the string is 6, and the GCD of the frequencies is 2. Therefore, the minimum length is <code>6 / 2 = 3</code>.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity is linear in terms of the length of the string, where <code>n</code> is the length of the string. This is because:
+<ul>
+<li>Counting the frequency of each character in the string takes O(n) time.</li>
+<li>Calculating the GCD of all frequencies involves iterating through the map of character frequencies. Since the number of unique characters is bounded by the alphabet size (26 for lowercase English letters), this operation is essentially constant in practice.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because the number of unique characters is fixed (26 lowercase English letters). The space used for the map <code>mp</code> will at most require space for 26 entries, which is a constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum length of the string that can be rearranged into an anagram by leveraging character frequency counts and the greatest common divisor. The solution is optimal with a time complexity of O(n), where <code>n</code> is the length of the string, and it uses a constant amount of space for storing the character frequencies. This approach is well-suited for handling strings of varying sizes and ensures that the rearranged string can be split into the smallest number of equal-length anagram groups.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1240s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -246,7 +362,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3139"  class="external-link" target="_blank" rel="noopener">LeetCode #3139: Minimum Cost to Equalize Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3146"  class="external-link" target="_blank" rel="noopener">LeetCode #3146: Permutation Difference between Two Strings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -288,7 +404,6 @@
 
       </div>
 
-      
 
       <footer>
         

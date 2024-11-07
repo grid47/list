@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -258,7 +258,144 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode815s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>cookies</code> where each element represents the number of cookies assigned to a person, and an integer <code>k</code> representing the number of people, the task is to distribute the cookies in a way that minimizes the maximum number of cookies assigned to any person. The objective is to return the minimum possible value of the maximum number of cookies that any person receives after distributing all the cookies.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a classic example of load balancing, where we need to distribute items (cookies) to groups (people) such that the load (maximum cookies) is minimized. The approach to solve this problem efficiently is using a backtracking algorithm combined with dynamic programming (DP). This solution involves recursive exploration of all possible ways to distribute the cookies and keeping track of the optimal (minimal) maximum load.</p>
+<h3 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Base Case</strong>: Once all cookies are distributed, calculate the maximum load (max of cookies distributed to any person).</li>
+<li><strong>Recursive Exploration</strong>: Distribute cookies recursively by trying to assign each cookie to each person. After distributing a cookie, move on to the next one and continue exploring the possibilities.</li>
+<li><strong>Optimal Substructure</strong>: The problem can be broken down into subproblems where each decision (distributing a cookie to a person) affects the result of subsequent decisions.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>k</code>: This stores the number of people.</li>
+<li><code>ans</code>: This variable keeps track of the minimum possible maximum cookies a person can receive. It starts with <code>INT_MAX</code> to ensure that any valid solution will be smaller.</li>
+<li><code>cook</code>: The array of cookies that need to be distributed.</li>
+<li><code>dist</code>: A vector that stores the current distribution of cookies among the <code>k</code> people.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function <code>dp(idx)</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> cook.size()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sol <span style="color:#f92672">=</span> dist[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            sol <span style="color:#f92672">=</span> max(sol, dist[i]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, sol);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sol;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        dist[i] <span style="color:#f92672">+=</span> cook[idx];
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        dist[i] <span style="color:#f92672">-=</span> cook[idx];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>dp(idx)</code> is called recursively, where <code>idx</code> represents the index of the cookie being distributed.</li>
+<li><strong>Base Case</strong>: If <code>idx == cook.size()</code>, it means all cookies have been distributed. Now, calculate the maximum load on any person and update the <code>ans</code> to the minimum of its current value and this calculated maximum.</li>
+<li><strong>Recursive Case</strong>: For each person (from 0 to <code>k-1</code>), assign the current cookie (<code>cook[idx]</code>) to that person, update the distribution (<code>dist</code>), and then recurse by calling <code>dp(idx + 1)</code>. After recursion, backtrack by undoing the change (<code>dist[i] -= cook[idx]</code>), which allows for exploring other possibilities of cookie distribution.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function <code>distributeCookies()</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">distributeCookies</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cook, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>    dist.resize(k, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>cook <span style="color:#f92672">=</span> cook;
+</span></span><span style="display:flex;"><span>    dp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>distributeCookies()</code> function is the main function that initializes the required parameters and calls the recursive <code>dp()</code> function to start the distribution from the first cookie (<code>idx = 0</code>).</li>
+<li>It sets up the <code>dist</code> vector to store the current load on each person, initially all set to zero.</li>
+<li>Finally, it returns the value of <code>ans</code>, which contains the minimum possible maximum cookies any person can receive after all cookies are distributed.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is exponential, specifically <code>O(k^n)</code>, where <code>n</code> is the number of cookies, and <code>k</code> is the number of people. This is because for each cookie (<code>n</code> cookies), we try assigning it to each of the <code>k</code> people. In the worst case, the algorithm explores all possible distributions of cookies.</li>
+<li>However, this solution benefits from pruning (through the recursive calls), which helps to minimize the search space and avoid redundant calculations.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(k)</code>, where <code>k</code> is the number of people. This is because the <code>dist</code> array has <code>k</code> elements, and it is the main data structure used in the recursive function to keep track of the current distribution of cookies.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This algorithm efficiently solves the problem of distributing cookies to minimize the maximum number of cookies assigned to any person by leveraging recursion and dynamic programming. While the time complexity is exponential due to the need to explore all possible cookie distributions, it is made efficient by carefully updating and backtracking the cookie assignments. This ensures that the solution is optimal for smaller problem sizes. For large inputs, further optimization techniques, such as memoization or dynamic programming, could be considered to reduce the computation time.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode815s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -312,7 +449,6 @@
 
       </div>
 
-      
 
       <footer>
         

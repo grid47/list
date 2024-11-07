@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,214 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1008s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the number of colored cells in a pattern of cells arranged in a square grid, where the coloring pattern follows a specific formula based on an input number <code>n</code>. The cells are added progressively, with each additional layer expanding the previous one. Specifically, for each increase in <code>n</code>, a new row and column are added, and the number of colored cells is determined by a simple arithmetic progression. The task is to determine the total number of colored cells after <code>n</code> steps.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution has two main components:</p>
+<ol>
+<li><strong>Mathematical Formula Approach</strong> (the primary method).</li>
+<li><strong>Breadth-First Search (BFS) Approach</strong> (used for validation or understanding).</li>
+</ol>
+<p>The mathematical formula approach is efficient and solves the problem directly using an arithmetic series, which calculates the total number of colored cells without explicitly simulating the process of coloring. The BFS approach is an alternative and simulates the coloring process step by step, ensuring each step of coloring is counted as a unique action.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-mathematical-formula-approach">
+  1. <strong>Mathematical Formula Approach</strong>:
+  <a class="heading-link" href="#1-mathematical-formula-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">--</span>n) {
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">+=</span> y;
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> x;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>x = 1</code> represents the initial colored cell (the center or starting point).</li>
+<li><code>y = 4</code> represents the number of additional cells added for each successive layer (the cells in the first layer surrounding the initial cell).</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<ul>
+<li>The loop runs for <code>n-1</code> times (since we already count the first colored cell).</li>
+<li>For each iteration:
+<ul>
+<li><code>x += y</code>: This adds the number of cells in the current layer (<code>y</code>) to the total number of colored cells <code>x</code>.</li>
+<li><code>y += 4</code>: The number of cells added in the next layer increases by 4. This follows the pattern where each subsequent layer adds 4 more cells than the previous one.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>After <code>n</code> iterations, the total number of colored cells is stored in <code>x</code>. This is the answer returned.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-breadth-first-search-bfs-approach-alternative-approach">
+  2. <strong>Breadth-First Search (BFS) Approach</strong> (Alternative Approach):
+  <a class="heading-link" href="#2-breadth-first-search-bfs-approach-alternative-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>q.push({<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>});
+</span></span><span style="display:flex;"><span>mp[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">--</span>n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it.first <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it.second <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (mp.count(x) <span style="color:#f92672">&amp;&amp;</span> mp[x].count(y)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            mp[x][y] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            q.push({x, y});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>A queue <code>q</code> is initialized, which will hold pairs of <code>(x, y)</code> coordinates representing the cells that are being colored.</li>
+<li>A map <code>mp</code> is used to track the visited cells. It ensures that a cell is colored only once.</li>
+<li>The <code>cnt</code> variable tracks the number of colored cells, initialized to 1 (the starting cell).</li>
+<li>The queue is initialized with the starting point <code>(0, 0)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main BFS Loop</strong>:</p>
+<ul>
+<li>The outer <code>while</code> loop runs <code>n-1</code> times, corresponding to each step of the coloring process.</li>
+<li>Inside the loop:
+<ul>
+<li><code>sz = q.size()</code>: This represents the number of cells that will be colored in this step.</li>
+<li>A second <code>while</code> loop processes each cell in the current layer:
+<ul>
+<li>For each cell, four possible directions are checked (up, down, left, and right).</li>
+<li>If a neighboring cell has already been visited (exists in <code>mp</code>), it&rsquo;s skipped to avoid re-coloring.</li>
+<li>If a neighboring cell hasn&rsquo;t been visited, it is added to the queue and marked as visited in the <code>mp</code> map.</li>
+<li>The <code>cnt</code> variable is incremented to count the newly colored cell.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The BFS approach ensures that after <code>n</code> steps, the total number of colored cells is tracked in <code>cnt</code>, which is returned as the result.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Mathematical Formula Approach</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(n)</strong> due to the loop that runs <code>n-1</code> times, where <code>n</code> is the input number. This is because we update the count of colored cells and the number of cells added for each layer in constant time.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Approach</strong>:</p>
+<ul>
+<li>The BFS approach processes each cell once. In the worst case, the queue will contain all the cells in the grid, and the program needs to check each neighboring cell for each step.</li>
+<li>Since we are using a grid-like structure, the BFS time complexity can be considered <strong>O(n)</strong>, where <code>n</code> represents the number of steps (each step corresponds to a layer of cells).</li>
+<li>The inner loops check each direction for each cell, but they operate in constant time, making the overall time complexity proportional to the number of colored cells.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Mathematical Formula Approach</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because no extra data structures are used. We are only storing a few variables for tracking the counts of cells and iterations.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Approach</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(m * m)</strong>, where <code>m</code> is the maximum size of the grid that can be formed based on the value of <code>n</code>. The space complexity is due to the storage of visited cells in the <code>mp</code> map and the queue holding the cells that are currently being processed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be efficiently solved using a mathematical formula, where the number of colored cells follows an arithmetic progression. This approach has a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, making it highly efficient.</p>
+<p>Alternatively, the BFS approach can be used to simulate the coloring process step by step. This method, while valid, has a higher space complexity due to the need for additional data structures and has a time complexity of <strong>O(n)</strong>, where <code>n</code> is the number of layers.</p>
+<p>The mathematical formula solution is preferable for large inputs due to its simplicity and efficiency. The BFS approach provides an alternative method that may be helpful for understanding the problem conceptually or when working with smaller grids.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1008s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +502,6 @@
 
       </div>
 
-      
 
       <footer>
         

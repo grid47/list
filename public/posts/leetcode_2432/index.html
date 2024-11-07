@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -219,7 +219,159 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> id;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode908s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the &ldquo;hardest worker&rdquo; among a set of workers based on their work logs. You are given <code>n</code> workers and a list of work logs. Each work log contains two values: the worker’s ID and the timestamp of when they completed a task. The task here is to find the worker who worked the most amount of time between tasks, where the time between tasks is measured by the difference in timestamps. In case of a tie, the worker with the smaller ID should be chosen. The goal is to return the ID of the hardest worker.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach can be broken down into a few clear steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:
+We start by initializing variables to track the worker ID of the hardest worker, the maximum time worked between tasks, and the previous task&rsquo;s end time.</p>
+</li>
+<li>
+<p><strong>Iterate through logs</strong>:
+For each log entry, we calculate the amount of time the worker worked between their current task and the previous task by subtracting the previous task&rsquo;s end timestamp from the current task&rsquo;s end timestamp.</p>
+</li>
+<li>
+<p><strong>Determine the hardest worker</strong>:
+During each iteration, we compare the time worked between tasks for the current worker. If the worker has worked more time than the current hardest worker, we update the hardest worker&rsquo;s ID and the maximum time worked.</p>
+</li>
+<li>
+<p><strong>Handle ties</strong>:
+If two workers worked the same amount of time, we choose the worker with the smaller ID, as specified in the problem statement.</p>
+</li>
+<li>
+<p><strong>Final result</strong>:
+After processing all the logs, the ID of the hardest worker is returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> end <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, id <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max_t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>end</code>: Tracks the end time of the previous task.</li>
+<li><code>id</code>: Tracks the ID of the hardest worker.</li>
+<li><code>max_t</code>: Tracks the maximum time worked between tasks.</li>
+</ul>
+<h4 id="step-2-iterate-through-logs">
+  Step 2: Iterate through logs
+  <a class="heading-link" href="#step-2-iterate-through-logs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>l : logs) {
+</span></span></code></pre></div><ul>
+<li>We loop through each log entry in the <code>logs</code> vector. Each log entry is a pair of values, where <code>l[0]</code> is the worker&rsquo;s ID, and <code>l[1]</code> is the timestamp of when they completed a task.</li>
+</ul>
+<h4 id="step-3-calculate-time-worked">
+  Step 3: Calculate time worked
+  <a class="heading-link" href="#step-3-calculate-time-worked">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (max_t <span style="color:#f92672">&lt;=</span> l[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> end) {
+</span></span><span style="display:flex;"><span>    id <span style="color:#f92672">=</span> max_t <span style="color:#f92672">&lt;</span> l[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> end <span style="color:#f92672">?</span> l[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">:</span> min(id, l[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    max_t <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> end;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The difference <code>l[1] - end</code> represents the time worked between the current and previous tasks.</li>
+<li>If the time worked for the current worker is greater than or equal to the <code>max_t</code> (maximum time worked so far), we update <code>max_t</code> to this new value.</li>
+<li>If the current time worked is strictly greater than <code>max_t</code>, we set the worker’s ID (<code>id</code>) to the current worker&rsquo;s ID (<code>l[0]</code>).</li>
+<li>In case of a tie in time worked (<code>max_t == l[1] - end</code>), we choose the worker with the smaller ID by using the <code>min(id, l[0])</code> expression. This ensures that if two workers worked the same amount of time, the one with the smaller ID is chosen.</li>
+</ul>
+<h4 id="step-4-update-the-end-time">
+  Step 4: Update the end time
+  <a class="heading-link" href="#step-4-update-the-end-time">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>end <span style="color:#f92672">=</span> l[<span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>We update the <code>end</code> variable to the current task&rsquo;s timestamp (<code>l[1]</code>) to use it for calculating the time worked between the next pair of tasks.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> id;
+</span></span></code></pre></div><ul>
+<li>After processing all the logs, we return the ID of the worker who worked the most time between tasks (or the one with the smallest ID in case of a tie).</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(m)</strong>, where <code>m</code> is the number of logs. This is because we iterate through each log entry exactly once and perform constant-time operations (comparison and updating variables) for each log.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> because the solution only uses a few integer variables to store the current worker ID, maximum time worked, and the end time of the previous task. No additional space proportional to the input size is used.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently identifies the hardest worker among a set of workers based on the amount of time they worked between tasks. The algorithm runs in linear time relative to the number of logs, making it scalable even for large inputs. The space complexity is constant, as the solution only requires a few auxiliary variables. Additionally, the solution handles ties by selecting the worker with the smaller ID, which is specified in the problem statement.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode908s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -273,7 +425,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -224,7 +224,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">min</span>(dp1, dp2);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1196s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine the minimum number of operations required to transform two arrays <code>A</code> and <code>B</code> into the same array using a specific set of operations. The arrays <code>A</code> and <code>B</code> are of the same size <code>n</code>, and each element in both arrays can be swapped with the corresponding element in the other array. The transformation must satisfy the following conditions:</p>
+<ol>
+<li>You can only swap elements that are greater than the last element in their respective arrays (i.e., <code>A[i]</code> must be smaller than or equal to <code>A[n-1]</code> and <code>B[i]</code> must be smaller than or equal to <code>B[n-1]</code>).</li>
+<li>You need to return the minimum number of such operations (or swaps). If it is not possible to perform the transformation, return -1.</li>
+</ol>
+<p>The goal is to determine the minimum number of swaps or determine if it is impossible to transform the two arrays to meet the given constraints.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Identify Constraints for Transformation</strong>:
+We first identify the largest and smallest elements from the two arrays, <code>A[n-1]</code> and <code>B[n-1]</code>, as the boundary for valid operations. Any element in <code>A</code> or <code>B</code> that exceeds these boundaries is not allowed to participate in a valid transformation. This ensures that we can only perform transformations where elements are within the allowed limits.</p>
+</li>
+<li>
+<p><strong>Loop Over the Arrays</strong>:</p>
+<ul>
+<li>Iterate through each pair of corresponding elements <code>(A[i], B[i])</code> for all <code>i</code> from 0 to <code>n-1</code>.</li>
+<li>For each pair, check if both elements satisfy the boundary condition. Specifically, if both <code>A[i]</code> and <code>B[i]</code> are smaller than or equal to <code>A[n-1]</code> and <code>B[n-1]</code>, the transformation can proceed.</li>
+<li>If an element exceeds the boundary (i.e., it’s larger than the maximum element of <code>A[n-1]</code> or <code>B[n-1]</code>), we return <code>-1</code> as it is not possible to transform.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Valid Swaps</strong>:</p>
+<ul>
+<li>For each pair of elements <code>(A[i], B[i])</code>, count how many swaps are needed. A swap is required if an element in <code>A</code> is larger than <code>A[n-1]</code> or an element in <code>B</code> is larger than <code>B[n-1]</code>.</li>
+<li>We keep two counters: <code>dp1</code> to count how many swaps are needed to make <code>A[i]</code> smaller or equal to <code>A[n-1]</code>, and <code>dp2</code> to count how many swaps are needed to make <code>B[i]</code> smaller or equal to <code>B[n-1]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Minimum Number of Operations</strong>:
+After iterating through all the elements, return the minimum number of operations (swaps) required to achieve the transformation, which is the lesser of <code>dp1</code> and <code>dp2</code>. If no valid transformation is possible, return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:
+The function <code>minOperations</code> takes two input vectors <code>A</code> and <code>B</code> as arguments. We begin by initializing a few variables:</p>
+<ul>
+<li><code>dp1</code>: Tracks the number of swaps required to ensure elements of <code>A</code> are valid.</li>
+<li><code>dp2</code>: Tracks the number of swaps required to ensure elements of <code>B</code> are valid.</li>
+<li><code>n</code>: The size of the input arrays <code>A</code> and <code>B</code>.</li>
+<li><code>mi</code> and <code>ma</code>: The minimum and maximum of the last elements in <code>A</code> and <code>B</code>, which will act as boundaries for valid operations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dp2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> A.size(), mi <span style="color:#f92672">=</span> min(A[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], B[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]), ma <span style="color:#f92672">=</span> max(A[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], B[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Over Each Pair of Elements</strong>:
+For each index <code>i</code>, we check the conditions for both <code>A[i]</code> and <code>B[i]</code>:</p>
+<ul>
+<li>If the maximum of <code>A[i]</code> and <code>B[i]</code> exceeds the maximum element (<code>ma</code>), return <code>-1</code>.</li>
+<li>If the minimum of <code>A[i]</code> and <code>B[i]</code> exceeds the minimum element (<code>mi</code>), return <code>-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> A[i], b <span style="color:#f92672">=</span> B[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (max(a, b) <span style="color:#f92672">&gt;</span> ma) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (min(a, b) <span style="color:#f92672">&gt;</span> mi) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Swaps for Valid Pairs</strong>:
+We now count the number of swaps needed for each valid pair <code>(A[i], B[i])</code>:</p>
+<ul>
+<li>If <code>A[i]</code> is greater than <code>A[n-1]</code>, increment <code>dp1</code> because we need to swap it.</li>
+<li>If <code>B[i]</code> is greater than <code>B[n-1]</code>, increment <code>dp2</code> because we need to swap it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">&gt;</span> A[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">||</span> b <span style="color:#f92672">&gt;</span> B[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) dp1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">&gt;</span> B[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">||</span> b <span style="color:#f92672">&gt;</span> A[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) dp2<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:
+After the loop finishes, we return the minimum of <code>dp1</code> and <code>dp2</code>, which gives the minimum number of swaps needed to transform the arrays. If no valid transformation is possible, we return <code>-1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">min</span>(dp1, dp2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Initialization</strong>: The initialization of variables takes constant time, (O(1)).</li>
+<li><strong>Main Loop</strong>: The loop iterates through all <code>n</code> elements in the arrays <code>A</code> and <code>B</code>. For each element, constant-time operations are performed (comparison, swapping count update). Hence, the time complexity is (O(n)), where <code>n</code> is the size of the input arrays.</li>
+</ul>
+<p>Therefore, the overall time complexity is:
+[
+O(n)
+]</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since we only use a few integer variables (<code>dp1</code>, <code>dp2</code>, <code>mi</code>, <code>ma</code>, etc.), and no additional data structures are used that scale with the size of the input.</li>
+</ul>
+<p>Hence, the space complexity is:
+[
+O(1)
+]</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and provides the minimum number of swaps needed to transform arrays <code>A</code> and <code>B</code> into the same array, ensuring all constraints are met. The time complexity of (O(n)) makes it suitable for large inputs, and the space complexity of (O(1)) ensures that the solution uses minimal memory.</p>
+<p>Key points to consider:</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where <code>n</code> is the number of elements in the input arrays <code>A</code> and <code>B</code>.</li>
+<li><strong>Space Complexity</strong>: (O(1)), since only a few variables are used.</li>
+</ul>
+<p>This solution is optimal for the problem and handles all edge cases, including scenarios where no valid transformations are possible.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1196s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -236,7 +388,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2935"  class="external-link" target="_blank" rel="noopener">LeetCode #2935: Maximum Strong Pair XOR II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2937"  class="external-link" target="_blank" rel="noopener">LeetCode #2937: Make Three Strings Equal</a></th>
       </tr>
   </thead>
   <tbody>
@@ -278,7 +430,6 @@
 
       </div>
 
-      
 
       <footer>
         

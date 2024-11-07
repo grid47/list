@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -264,7 +264,131 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode861s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to count the number of nodes that are reachable from a starting node, with certain restricted nodes that cannot be visited. The graph is represented as an undirected graph with <code>n</code> nodes and <code>edges</code> that connect pairs of nodes. Additionally, a list of restricted nodes is given, and these nodes are considered inaccessible in the graph traversal. Your task is to implement a function that returns the number of reachable nodes, excluding the restricted nodes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is essentially a graph traversal problem where we need to visit nodes using a Depth First Search (DFS) or Breadth First Search (BFS) while ignoring the restricted nodes. The goal is to determine how many nodes can be reached from a given starting node (in this case, node 0) under the constraint that some nodes are restricted.</p>
+<p>The key steps involved in solving this problem are:</p>
+<ol>
+<li><strong>Graph Representation</strong>: We represent the graph as an adjacency list, where each node points to a list of its neighbors.</li>
+<li><strong>Initialization</strong>: Mark the restricted nodes as visited initially, because they cannot be traversed.</li>
+<li><strong>DFS Traversal</strong>: Start from the given node (node 0 in this case) and traverse through the graph using DFS. Each time a node is visited, we increment the count of reachable nodes.</li>
+<li><strong>Return the Result</strong>: Once all reachable nodes are visited, return the count of reachable nodes.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans;  <span style="color:#75715e">// To store the count of reachable nodes
+</span></span></span></code></pre></div><p>Here, <code>ans</code> is an integer that stores the count of nodes reachable from node 0. It starts from 1 because node 0 is considered reachable by default.</p>
+</li>
+<li>
+<p><strong>Solve Function (DFS)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solve</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> gph, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vis, <span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    vis[i] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark the current node as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : gph[i]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>vis[n]) {
+</span></span><span style="display:flex;"><span>            ans<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Increment reachable node count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            vis[n] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark the neighbor node as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            solve(gph, vis, n);  <span style="color:#75715e">// Recursively visit all connected nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is a recursive function that performs the DFS traversal. The function takes the graph (<code>gph</code>), a visitation status vector (<code>vis</code>), and the current node (<code>i</code>). It marks the current node as visited and then recursively visits all its neighbors that are not visited yet. Each time a new node is visited, the reachable node count (<code>ans</code>) is incremented.</p>
+</li>
+<li>
+<p><strong>reachableNodes Function (Main Function)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">reachableNodes</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> <span style="color:#66d9ef">restricted</span>) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Start with 1 because node 0 is reachable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> gph(n);  <span style="color:#75715e">// Graph represented as an adjacency list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : edges) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">0</span>], v <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        gph[u].push_back(v);  <span style="color:#75715e">// Add edge from u to v
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        gph[v].push_back(u);  <span style="color:#75715e">// Add edge from v to u (undirected graph)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><p>The <code>reachableNodes</code> function starts by initializing the graph and marking the restricted nodes. The graph is created using an adjacency list, where each edge is added in both directions since the graph is undirected.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> vis(n, false);  <span style="color:#75715e">// Visitation status vector
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : <span style="color:#66d9ef">restricted</span>) {
+</span></span><span style="display:flex;"><span>        vis[i] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark restricted nodes as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><p>We initialize the <code>vis</code> vector to <code>false</code> for all nodes. Then, we mark the restricted nodes as visited by setting their corresponding positions in <code>vis</code> to <code>true</code>. This ensures that these nodes are ignored during the DFS traversal.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    solve(gph, vis, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Start DFS traversal from node 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the count of reachable nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>The DFS traversal starts from node 0, and the <code>solve</code> function is invoked. Finally, the function returns the value of <code>ans</code>, which contains the number of reachable nodes.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Building the Graph</strong>: Constructing the graph from the list of edges takes O(E), where <code>E</code> is the number of edges.</li>
+<li><strong>DFS Traversal</strong>: The DFS traversal visits each node and each edge exactly once. Therefore, the time complexity of the DFS is O(V + E), where <code>V</code> is the number of nodes and <code>E</code> is the number of edges.</li>
+</ul>
+<p>Thus, the overall time complexity of the <code>reachableNodes</code> function is O(V + E).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the graph representation and the visitation status vector:
+<ul>
+<li>The adjacency list <code>gph</code> requires O(V + E) space.</li>
+<li>The <code>vis</code> vector requires O(V) space.</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, the overall space complexity is O(V + E).</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently solves the problem of counting reachable nodes in an undirected graph with restricted nodes. By using DFS and maintaining a visitation status for each node, the solution ensures that restricted nodes are excluded from the traversal. The algorithm operates within the time and space limits, making it suitable for large graphs with multiple nodes and edges. The solution&rsquo;s time complexity of O(V + E) ensures scalability, while the space complexity of O(V + E) keeps the algorithm&rsquo;s memory usage manageable.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode861s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -318,7 +442,6 @@
 
       </div>
 
-      
 
       <footer>
         

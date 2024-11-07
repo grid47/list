@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -227,7 +227,219 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode802s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given a string <code>num</code> that represents a non-negative integer, and your task is to determine if the number is a &ldquo;digit count&rdquo; number. A &ldquo;digit count&rdquo; number is a number in which for each digit <code>i</code> (where <code>i</code> is the index in the string), the count of the digit <code>i</code> in the number is equal to the value of the digit at the <code>i</code>-th position.</p>
+<h3 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Input: <code>&quot;1210&quot;</code>
+Output: <code>true</code>
+Explanation:</p>
+<ul>
+<li>The number has 1 zero (<code>'0'</code>), 2 ones (<code>'1'</code>), 1 two (<code>'2'</code>), and 0 threes (<code>'3'</code>).</li>
+<li>The digit at the 0th position is 1, which correctly represents the count of zeros in the number.</li>
+<li>The digit at the 1st position is 2, which correctly represents the count of ones.</li>
+<li>The digit at the 2nd position is 1, which correctly represents the count of twos.</li>
+<li>The digit at the 3rd position is 0, which correctly represents the count of threes.</li>
+</ul>
+<h3 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Input: <code>&quot;030&quot;</code>
+Output: <code>false</code>
+Explanation:</p>
+<ul>
+<li>The number has 1 zero (<code>'0'</code>), 1 one (<code>'1'</code>), and 1 two (<code>'2'</code>).</li>
+<li>The digit at the 0th position is 0, but it should represent the count of zeros, which is 1. Hence, the number is not a digit count number.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves checking if the number satisfies the &ldquo;digit count&rdquo; condition. Here&rsquo;s how we can solve it step by step:</p>
+<ol>
+<li>
+<p><strong>Count the Digits</strong>: The first thing we need to do is count the occurrences of each digit in the string <code>num</code>. Since the digits range from 0 to 9, we can use an array <code>cnt[10]</code> to store the count of each digit. We iterate through the string and increment the respective count for each digit encountered.</p>
+</li>
+<li>
+<p><strong>Check the Condition</strong>: After counting the occurrences of digits, we need to ensure that the count of each digit matches the value of the digit at the corresponding index in the string. Specifically, for each index <code>i</code> in the string <code>num</code>, we check if the count of the digit <code>i</code> matches the value of <code>num[i] - '0'</code>. If at any point this condition is not satisfied, we immediately return <code>false</code>.</p>
+</li>
+<li>
+<p><strong>Return True if All Conditions Hold</strong>: If all conditions hold true (i.e., the count of digits at each index matches the value at that index), we return <code>true</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code into individual steps:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">digitCount</span>(string num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {};  <span style="color:#75715e">// Step 1: Initialize an array to count occurrences of digits
+</span></span></span></code></pre></div><ul>
+<li>Here, we declare an integer array <code>cnt[10]</code> initialized to zeros. This array will hold the count of each digit from 0 to 9. Each index <code>i</code> in the array will store the number of occurrences of the digit <code>i</code> in the string <code>num</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> n : num)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">++</span>cnt[n <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>];  <span style="color:#75715e">// Step 2: Count the occurrences of each digit
+</span></span></span></code></pre></div><ul>
+<li>This loop iterates over each character in the string <code>num</code>. For each character <code>n</code>, we subtract the character <code>'0'</code> from it to get the integer representation of the digit (e.g., <code>'2' - '0'</code> gives <code>2</code>).</li>
+<li>We then increment the corresponding count in the <code>cnt</code> array at index <code>n - '0'</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> num.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cnt[i] <span style="color:#f92672">!=</span> num[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>)  <span style="color:#75715e">// Step 3: Check if the digit count matches the digit at index i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>In this loop, we iterate over the string <code>num</code>. For each index <code>i</code>, we compare the count of the digit <code>i</code> (stored in <code>cnt[i]</code>) with the value of the digit at position <code>i</code> in the string (<code>num[i] - '0'</code>).</li>
+<li>If at any index, the count does not match the value of the digit, we immediately return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Step 4: If all conditions hold, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If we complete both loops without returning <code>false</code>, it means the string satisfies the &ldquo;digit count&rdquo; condition, and we return <code>true</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Counting the Digits</strong>: The first loop iterates over the entire string <code>num</code>, so its time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string.</li>
+<li><strong>Checking the Condition</strong>: The second loop also iterates over the string, comparing the count of digits at each index with the value of the digit at that index. This loop also has a time complexity of <strong>O(n)</strong>.</li>
+</ol>
+<p>Thus, the overall time complexity is:</p>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the string <code>num</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We use an array <code>cnt[10]</code> to store the count of each digit, which takes up constant space (since the array size is fixed at 10). Therefore, the space complexity is:</p>
+<ul>
+<li><strong>O(1)</strong>, as the space usage does not depend on the input size.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to understand how the solution works in practice:</p>
+<h4 id="example-1-num--1210">
+  Example 1: <code>num = &quot;1210&quot;</code>
+  <a class="heading-link" href="#example-1-num--1210">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Count the Digits</strong>:</p>
+<ul>
+<li>Initially, <code>cnt = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}</code>.</li>
+<li>After processing the string:
+<ul>
+<li><code>cnt[1]</code> is incremented 2 times.</li>
+<li><code>cnt[2]</code> is incremented 1 time.</li>
+<li><code>cnt[0]</code> is incremented 1 time.</li>
+</ul>
+</li>
+<li>The final count is <code>cnt = {1, 2, 1, 0, 0, 0, 0, 0, 0, 0}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check the Condition</strong>:</p>
+<ul>
+<li>For <code>i = 0</code>: <code>cnt[0] == 1</code> and <code>num[0] == 1</code>, so the condition is not satisfied.</li>
+<li>For <code>i = 1</code>: <code>cnt[1] == 2</code> and <code>num[1] == 2</code>, so the condition is satisfied.</li>
+<li>For <code>i = 2</code>: <code>cnt[2] == 1</code> and <code>num[2] == 1</code>, so the condition is satisfied.</li>
+<li>For <code>i = 3</code>: <code>cnt[3] == 0</code> and <code>num[3] == 0</code>, so the condition is satisfied.</li>
+<li>Since all conditions are satisfied, we return <code>true</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="example-2-num--030">
+  Example 2: <code>num = &quot;030&quot;</code>
+  <a class="heading-link" href="#example-2-num--030">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Count the Digits</strong>:</p>
+<ul>
+<li>Initially, <code>cnt = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}</code>.</li>
+<li>After processing the string:
+<ul>
+<li><code>cnt[0]</code> is incremented 2 times.</li>
+<li><code>cnt[3]</code> is incremented 1 time.</li>
+</ul>
+</li>
+<li>The final count is <code>cnt = {2, 0, 0, 1, 0, 0, 0, 0, 0, 0}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check the Condition</strong>:</p>
+<ul>
+<li>For <code>i = 0</code>: <code>cnt[0] == 2</code> and <code>num[0] == 0</code>, so the condition is not satisfied. We return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently checks if a given number (represented as a string) is a &ldquo;digit count&rdquo; number by using an array to count the occurrences of each digit and then comparing these counts with the digits at the respective positions. With a time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the string, and a constant space complexity of <strong>O(1)</strong>, this approach is both optimal and efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode802s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +493,6 @@
 
       </div>
 
-      
 
       <footer>
         

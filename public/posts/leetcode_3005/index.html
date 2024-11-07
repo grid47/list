@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -236,7 +236,154 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> net;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1218s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the frequency of elements in a list and find out how many times the most frequent element appears. Specifically, the goal is to calculate the sum of occurrences of the most frequent elements in the list. This solution identifies and calculates the total frequency of the most frequent elements and returns that value.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the approach involves:</p>
+<ol>
+<li>
+<p><strong>Frequency Calculation</strong>:
+We need to count how many times each element appears in the array. This can be done using a hashmap (unordered_map in C++) where the key is the element, and the value is the frequency of that element.</p>
+</li>
+<li>
+<p><strong>Finding the Maximum Frequency</strong>:
+As we populate the frequency map, we also track the maximum frequency observed.</p>
+</li>
+<li>
+<p><strong>Count Elements with Maximum Frequency</strong>:
+Once we know the maximum frequency, we iterate over the map to count how many elements have this maximum frequency.</p>
+</li>
+<li>
+<p><strong>Calculate the Total Frequency Contribution</strong>:
+The result is the product of the maximum frequency and the number of elements with that frequency.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-calculate-the-frequency-of-each-element">
+  Step 1: Calculate the Frequency of Each Element
+  <a class="heading-link" href="#step-1-calculate-the-frequency-of-each-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> num : nums) {
+</span></span><span style="display:flex;"><span>    frq[num]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(mx, frq[num]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>unordered_map&lt;int, int&gt; frq;</code></strong>: An unordered map <code>frq</code> is created where each element of the array <code>nums</code> is used as a key, and its frequency is stored as the value.</li>
+<li><strong><code>int mx = 0;</code></strong>: This variable <code>mx</code> stores the maximum frequency observed so far.</li>
+<li><strong>For Loop</strong>: We loop through each number in <code>nums</code>, increment its count in <code>frq</code>, and update <code>mx</code> to be the greater of <code>mx</code> or the frequency of the current number. This step ensures we keep track of the highest frequency encountered during the iteration.</li>
+</ul>
+<h4 id="step-2-count-the-elements-with-maximum-frequency">
+  Step 2: Count the Elements with Maximum Frequency
+  <a class="heading-link" href="#step-2-count-the-elements-with-maximum-frequency">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : frq) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (it.second <span style="color:#f92672">==</span> mx)
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>int cnt = 0;</code></strong>: This variable will hold the number of elements that have the maximum frequency <code>mx</code>.</li>
+<li><strong>For Loop</strong>: We iterate over the <code>frq</code> map, where <code>it.first</code> is the element and <code>it.second</code> is the frequency of that element. If an element’s frequency matches <code>mx</code>, we increment the counter <code>cnt</code>.</li>
+</ul>
+<h4 id="step-3-calculate-the-total-frequency-of-most-frequent-elements">
+  Step 3: Calculate the Total Frequency of Most Frequent Elements
+  <a class="heading-link" href="#step-3-calculate-the-total-frequency-of-most-frequent-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> mx <span style="color:#f92672">*</span> cnt;
+</span></span></code></pre></div><ul>
+<li><strong><code>int net = mx * cnt;</code></strong>: Here, we calculate the total frequency contribution of the most frequent elements by multiplying the maximum frequency (<code>mx</code>) by the number of elements (<code>cnt</code>) that have this frequency.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net;
+</span></span></code></pre></div><ul>
+<li>The value stored in <code>net</code> represents the total frequency of the most frequent elements, and this is returned as the result.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Frequency Calculation</strong>: The first loop that fills the <code>unordered_map</code> runs in <strong>O(n)</strong> time, where <code>n</code> is the number of elements in the array <code>nums</code>. This is because each element is processed once.</li>
+<li><strong>Finding the Maximum Frequency</strong>: The second loop that counts how many elements have the maximum frequency also runs in <strong>O(n)</strong> time. In the worst case, all elements have different frequencies, so we check each one.</li>
+<li><strong>Overall Time Complexity</strong>: Since both loops run sequentially, the total time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in <code>nums</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Frequency Map</strong>: The space complexity is determined by the size of the <code>unordered_map</code>. In the worst case, each element in <code>nums</code> is unique, so the map will have <code>n</code> entries. Thus, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in <code>nums</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the total frequency of the most frequent elements in the array. The algorithm leverages an unordered map to track the frequency of elements, and by maintaining a running maximum frequency, it quickly identifies and counts the most frequent elements. The time complexity is linear, <strong>O(n)</strong>, making this approach optimal for handling large input sizes. The space complexity is also <strong>O(n)</strong> due to the storage used by the frequency map. This solution is both simple and efficient, making it suitable for solving the problem in a variety of scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1218s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -248,7 +395,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3006"  class="external-link" target="_blank" rel="noopener">LeetCode #3006: Find Beautiful Indices in the Given Array I</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3026"  class="external-link" target="_blank" rel="noopener">LeetCode #3026: Maximum Good Subarray Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -290,7 +437,6 @@
 
       </div>
 
-      
 
       <footer>
         

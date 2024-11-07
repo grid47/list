@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -266,7 +266,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1195s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to identify employees who have had high access activity. Specifically, we are given a list of access times for various employees, where each entry contains an employee ID and a time they accessed a system. We need to find employees who have had at least three overlapping access times during any 60-minute window.</p>
+<p>For example, if an employee accessed the system at 09:15, 09:45, and 10:05, these access times overlap within the 60-minute window from 09:00 to 10:00. We are tasked with identifying such employees who have at least three overlapping access times in any 60-minute span.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Convert Time to Minutes</strong>: Since the access times are provided in the format <code>HHMM</code>, we need to convert these times into minutes since midnight. This simplifies the comparison process since we can work with integers representing the number of minutes passed since the start of the day.</p>
+</li>
+<li>
+<p><strong>Track Overlapping Access Times</strong>: For each employee, we need to track how many times they accessed the system at each specific minute. We can use a sweep line technique, where we increment and decrement a count at specific minutes to track the number of simultaneous accesses.</p>
+</li>
+<li>
+<p><strong>Sweep Line Technique</strong>: For each access time, we increment the count for the starting minute and decrement it 60 minutes later. This allows us to efficiently track the number of accesses at any given time, without needing to check each pair of accesses individually.</p>
+</li>
+<li>
+<p><strong>Count Overlaps</strong>: After updating the sweep line for all access times of each employee, we check if there is any 60-minute window where the total number of accesses is greater than or equal to 3. If such a window exists, the employee is considered to have high access activity.</p>
+</li>
+<li>
+<p><strong>Return Employees with High Access Activity</strong>: Finally, we return a list of employee IDs who have at least three overlapping access times in any 60-minute window.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong><code>string_to_int</code> Function</strong>:
+This helper function converts a string representing time (in the format &ldquo;HHMM&rdquo;) into an integer representing the total number of minutes since midnight. The function takes a string <code>s</code> and processes it by splitting the hours and minutes, converting them to integers, and calculating the total minutes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">string_to_int</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.length(); i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">=</span> val <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> val;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For example, for an input <code>&quot;0930&quot;</code>, the function calculates <code>9 * 60 + 30 = 570</code> minutes.</p>
+</li>
+<li>
+<p><strong>Main Function <code>findHighAccessEmployees</code></strong>:
+The function <code>findHighAccessEmployees</code> takes as input a 2D vector <code>access_times</code>, where each entry contains an employee ID and an access time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> findHighAccessEmployees(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;&amp;</span> access_times) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> times;
+</span></span></code></pre></div><p>Here, <code>times</code> is a map that associates each employee (represented by a string) with a list of access times (in minutes) that are stored in the vector.</p>
+</li>
+<li>
+<p><strong>Convert Access Times to Minutes</strong>:
+For each entry in <code>access_times</code>, we extract the employee ID and convert the access time from &ldquo;HHMM&rdquo; format to total minutes using the <code>string_to_int</code> function. This is done in the loop:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> v : access_times) {
+</span></span><span style="display:flex;"><span>    string s <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// access time string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> minutes <span style="color:#f92672">=</span> string_to_int(s.substr(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">+</span> string_to_int(s.substr(<span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    times[v[<span style="color:#ae81ff">0</span>]].push_back(minutes);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sweep Line Approach</strong>:
+For each employee, we initialize a sweep array <code>sweep</code> of size 1441 (since there are 1440 minutes in a day, and the index 1440 represents the minute after 23:59). We then update the <code>sweep</code> array to track the start and end of each access event:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sweep(<span style="color:#ae81ff">1441</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> t : time) {
+</span></span><span style="display:flex;"><span>    sweep[t]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (t <span style="color:#f92672">+</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1441</span>) 
+</span></span><span style="display:flex;"><span>        sweep[t <span style="color:#f92672">+</span> <span style="color:#ae81ff">60</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here, we increment <code>sweep[t]</code> for the start of the access and decrement <code>sweep[t + 60]</code> to mark the end of the access after 60 minutes.</p>
+</li>
+<li>
+<p><strong>Check for Overlapping Access Times</strong>:
+After updating the sweep array for all access times, we iterate through the array and check for any 60-minute period with at least three accesses. If such a period exists, we add the employee ID to the result:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1441</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">+=</span> sweep[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span>        ans.push_back(ch);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:
+After processing all employees, we return the list of employee IDs who had high access activity:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:
+The time complexity of this solution is primarily determined by the processing of the <code>access_times</code> array and the sweep line technique:</p>
+<ul>
+<li>Converting the access times for each employee to minutes takes (O(m)), where (m) is the total number of access times across all employees.</li>
+<li>The sweep line approach for each employee involves iterating through their list of access times, updating the <code>sweep</code> array, and checking for overlapping access times, which also takes (O(n)) for each employee (where (n) is the number of employees).</li>
+</ul>
+<p>Therefore, the overall time complexity is (O(m + n \times 1441)), where:</p>
+<ul>
+<li>(m) is the number of total access times across all employees.</li>
+<li>(n) is the number of employees.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity of this solution is (O(n + 1441)), where:</p>
+<ul>
+<li>(n) is the number of employees (as each employee has a list of access times).</li>
+<li>1441 represents the size of the <code>sweep</code> array (for tracking access counts across all minutes in a day).</li>
+</ul>
+<p>Thus, the space complexity is linear with respect to the number of employees and the fixed size of the sweep array.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach provides an efficient solution to the problem by utilizing a sweep line technique to track overlapping access times. The solution is optimized by converting access times into minutes and efficiently counting overlapping access events in constant time using the sweep array.</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(m + n \times 1441)), where (m) is the total number of access times and (n) is the number of employees.</li>
+<li><strong>Space Complexity</strong>: (O(n + 1441)), where (n) is the number of employees and 1441 is the size of the sweep array.</li>
+</ul>
+<p>This method works well even for large datasets, where brute force solutions would be inefficient. The solution guarantees correctness by efficiently checking for overlapping access times without explicitly comparing each pair of access times. It’s a scalable solution suitable for real-world applications where access logs need to be analyzed for suspicious or high-activity behavior.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1195s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -320,7 +476,6 @@
 
       </div>
 
-      
 
       <footer>
         

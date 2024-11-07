@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,153 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> len;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1089s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the length of the longest semi-repetitive substring in a given string <code>s</code>. A semi-repetitive substring is defined as a substring that contains at most one pair of consecutive repeating characters. This means that the substring can contain one occurrence of two consecutive characters being the same, but no more.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to find the longest possible substring such that there is at most one pair of consecutive repeating characters. To efficiently handle this, we can use the sliding window technique, where we maintain a dynamic window of characters and adjust its size based on the number of consecutive repeating characters within it.</p>
+<p>The sliding window technique allows us to maintain a substring and gradually expand or contract the window based on certain conditions, helping us to find the longest substring that satisfies the condition of having at most one pair of consecutive repeating characters.</p>
+<h3 id="step-by-step-explanation">
+  Step-by-Step Explanation
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sem(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>sem</code> is an array that tracks the frequency of each digit (0-9) within the current sliding window.</li>
+<li><code>cnt</code> is a counter that tracks the number of consecutive repeating characters in the current window.</li>
+<li><code>j</code> is the left pointer of the sliding window, which moves when we encounter more than one pair of consecutive repeating characters.</li>
+<li><code>len</code> is the variable that keeps track of the length of the longest valid semi-repetitive substring found so far.</li>
+</ul>
+<h4 id="step-2-traverse-the-string-with-the-right-pointer">
+  Step 2: Traverse the String with the Right Pointer
+  <a class="heading-link" href="#step-2-traverse-the-string-with-the-right-pointer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> s[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        sem[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>We iterate through the string using a loop starting from the second character (<code>i = 1</code>).</li>
+<li>For each character at index <code>i</code>, we compare it with the previous character (<code>s[i - 1]</code>).</li>
+<li>If the current character is equal to the previous one (<code>s[i] == s[i - 1]</code>), it means we have encountered a consecutive repeating character.</li>
+<li>We increment the <code>cnt</code> variable to keep track of how many such consecutive pairs are in the current window.</li>
+<li>Additionally, we update the <code>sem</code> array for the digit that repeats, to keep track of the frequency of each digit in the current window.</li>
+</ul>
+<h4 id="step-3-adjust-the-window-to-satisfy-the-condition">
+  Step 3: Adjust the Window to Satisfy the Condition
+  <a class="heading-link" href="#step-3-adjust-the-window-to-satisfy-the-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[j] <span style="color:#f92672">==</span> s[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>        sem[s[j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If at any point <code>cnt</code> exceeds 1, it means we have encountered more than one pair of consecutive repeating characters in the window.</li>
+<li>To correct this, we start moving the left pointer (<code>j</code>) to the right to reduce the window size, effectively removing characters from the start of the window.</li>
+<li>For each character removed from the window, if it forms a consecutive pair with the next character (<code>s[j] == s[j + 1]</code>), we decrement the <code>sem</code> count for that digit and decrease <code>cnt</code> by 1.</li>
+<li>This ensures that we always maintain a window with at most one pair of consecutive repeating characters.</li>
+</ul>
+<h4 id="step-4-update-the-maximum-length">
+  Step 4: Update the Maximum Length
+  <a class="heading-link" href="#step-4-update-the-maximum-length">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>len <span style="color:#f92672">=</span> max(len, i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>After adjusting the window to satisfy the condition, we compute the current window length as <code>i - j + 1</code> and update the <code>len</code> variable to keep track of the maximum length of valid semi-repetitive substrings found so far.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> len;
+</span></span></code></pre></div><ul>
+<li>Finally, once we have iterated through the entire string, we return the maximum length of the semi-repetitive substring found.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because the sliding window technique ensures that each character is processed at most twice: once when expanding the window with the right pointer (<code>i</code>) and once when contracting the window with the left pointer (<code>j</code>). Therefore, the algorithm runs in linear time relative to the size of the input string.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as the algorithm only uses a fixed-size array <code>sem</code> of length 10 to store the frequency of digits and a few integer variables (<code>cnt</code>, <code>j</code>, and <code>len</code>). The space required does not depend on the size of the input string, so it is constant.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem of finding the longest semi-repetitive substring in a string can be efficiently solved using the sliding window technique. The sliding window approach ensures that we examine each character only a limited number of times, making the solution optimal with a time complexity of <strong>O(n)</strong>. This approach also uses constant space, which makes it very space-efficient.</p>
+<p>The key insight in solving this problem is to track the number of consecutive repeating characters in the current window and adjust the window size to ensure that there is at most one such pair. By using this approach, we can find the longest valid semi-repetitive substring in linear time.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1089s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -289,7 +435,6 @@
 
       </div>
 
-      
 
       <footer>
         

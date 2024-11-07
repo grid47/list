@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,187 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1067s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to simulate a circular game where <code>n</code> players are involved, and each player is assigned a number from <code>1</code> to <code>n</code>. The players start at position 1, and the game proceeds by eliminating players according to a specific step size <code>k</code>. The goal is to determine which players are not eliminated in the game, returning their positions.</p>
+<p>Specifically, the rules of the game are:</p>
+<ol>
+<li>The game starts at position <code>1</code>.</li>
+<li>From the current position, move forward by <code>k</code> steps, considering the positions circularly (i.e., after reaching position <code>n</code>, wrap back to position <code>1</code>).</li>
+<li>Once a player is reached, they are eliminated and marked as &ldquo;received.&rdquo;</li>
+<li>The process continues until all the remaining players are eliminated.</li>
+</ol>
+<p>The function should return a list of the positions of the players who are not eliminated.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The game can be modeled using an array where each index represents a player, and the value at each index indicates whether the player has been eliminated (<code>1</code> if eliminated, <code>0</code> if not). The solution involves simulating the game step by step.</p>
+<p>The process can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Create an array <code>rcvd</code> of size <code>n</code> to keep track of eliminated players, initialized with <code>0</code>. We also initialize the game starting at position <code>0</code> (i.e., the first player).</p>
+</li>
+<li>
+<p><strong>Simulation</strong>: Start the game by marking the first player as eliminated (<code>rcvd[0] = 1</code>), and then simulate the game loop. The loop continues to eliminate players by moving <code>k</code> steps forward each time.</p>
+</li>
+<li>
+<p><strong>Circular Movement</strong>: Since the game is played in a circular manner, the index is computed using modulo operation to ensure that when we exceed the bounds of the array, we wrap around to the beginning.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The game continues until we revisit a player who has already been eliminated, which breaks the loop.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After the loop finishes, the remaining players (those who are not eliminated) are collected and returned as the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-tracking-array">
+  Step 1: Initialize the Tracking Array
+  <a class="heading-link" href="#step-1-initialize-the-tracking-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rcvd(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>rcvd[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>rcvd</code></strong>: An array of size <code>n</code> is created and initialized to all <code>0</code>. Each index represents a player, and the value at that index will be <code>1</code> if the player is eliminated, or <code>0</code> if the player is still in the game.</li>
+<li><strong><code>i = 0</code></strong>: The game starts with the first player (index <code>0</code>).</li>
+<li><strong><code>cnt = 1</code></strong>: This variable keeps track of how many players have been eliminated.</li>
+<li><strong><code>rcvd[0] = 1</code></strong>: The first player is eliminated immediately to start the process.</li>
+</ul>
+<h4 id="step-2-simulate-the-game">
+  Step 2: Simulate the Game
+  <a class="heading-link" href="#step-2-simulate-the-game">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(rcvd[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> (i <span style="color:#f92672">+</span> cnt <span style="color:#f92672">*</span> k) <span style="color:#f92672">%</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(rcvd[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    rcvd[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>while(rcvd[i] == 1)</code></strong>: The game continues until we revisit a player who has already been eliminated. This ensures we don&rsquo;t loop indefinitely.</li>
+<li><strong><code>i = (i + cnt * k) % n;</code></strong>: This calculates the new position <code>i</code> after moving <code>k</code> steps forward. The modulo operation ensures the circular movement, meaning after reaching <code>n</code>, we wrap back to <code>0</code>.</li>
+<li><strong><code>if(rcvd[i] == 1) break;</code></strong>: If the player at the new position <code>i</code> has already been eliminated (<code>rcvd[i] == 1</code>), we break the loop since no more players can be eliminated.</li>
+<li><strong><code>rcvd[i] = 1;</code></strong>: If the player hasn&rsquo;t been eliminated, mark them as eliminated (<code>rcvd[i] = 1</code>).</li>
+<li><strong><code>cnt++</code></strong>: Increment the count of eliminated players (<code>cnt</code>), as one more player has been eliminated.</li>
+</ul>
+<h4 id="step-3-collect-non-eliminated-players">
+  Step 3: Collect Non-Eliminated Players
+  <a class="heading-link" href="#step-3-collect-non-eliminated-players">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(rcvd[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) ans.push_back(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>ans</code></strong>: A vector to store the positions of players who were not eliminated.</li>
+<li><strong><code>for(int j = 0; j &lt; n; j++)</code></strong>: Iterate through all players.</li>
+<li><strong><code>if(rcvd[j] == 0) ans.push_back(j + 1);</code></strong>: If a player is not eliminated (<code>rcvd[j] == 0</code>), add their position (index <code>j + 1</code> because positions are 1-based) to the <code>ans</code> vector.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The function returns the vector <code>ans</code> containing the positions of all players who were not eliminated.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Initialization of <code>rcvd</code></strong>: The initialization of the array <code>rcvd</code> takes <strong>O(n)</strong> time.</p>
+</li>
+<li>
+<p><strong>Game Simulation</strong>: The while loop runs until all players are eliminated, or the loop revisits a player. In the worst case, each player can be visited multiple times, but since we eliminate one player per iteration, the loop will run at most <code>n</code> times.</p>
+<ul>
+<li>The computation inside the loop (index calculation and update of the <code>rcvd</code> array) is constant time, so the total complexity for the game simulation is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>: Collecting the non-eliminated players also takes <strong>O(n)</strong> time.</p>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: The total time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of players.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>The space complexity is <strong>O(n)</strong> because we are using an array <code>rcvd</code> of size <code>n</code> to track eliminated players, and an additional vector <code>ans</code> to store the non-eliminated players.</p>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The space complexity is <strong>O(n)</strong>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the circular game by using an array to track eliminated players and iterating through the array with the given step size <code>k</code>. The algorithm computes the positions of the players who are not eliminated and does so in linear time, making it well-suited for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1067s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

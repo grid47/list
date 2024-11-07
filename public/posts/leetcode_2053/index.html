@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -232,7 +232,110 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode665s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the k-th &ldquo;distinct&rdquo; string in an array of strings, where a string is considered distinct if it only appears once in the array. The input is a list of strings <code>arr</code> and an integer <code>k</code>, representing the position of the distinct string to return. If there are fewer than <code>k</code> distinct strings, we should return an empty string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses a two-pass approach:</p>
+<ol>
+<li><strong>Count Occurrences</strong>: In the first pass, count the occurrences of each string in <code>arr</code> using a hash map.</li>
+<li><strong>Identify the k-th Distinct String</strong>: In the second pass, iterate through <code>arr</code> again, checking for distinct strings. For each distinct string encountered, decrement <code>k</code>. When <code>k</code> reaches zero, we have found the k-th distinct string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>: The class <code>Solution</code> contains the function <code>kthDistinct</code>, which accepts a vector of strings <code>arr</code> and an integer <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string kthDistinct(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> arr, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Each String&rsquo;s Occurrence</strong>: We define a hash map <code>mp</code> to store the count of each string in <code>arr</code>. For each string <code>s</code> in <code>arr</code>, increment its count in <code>mp</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : arr)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>mp[s];
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Second Pass to Find the k-th Distinct String</strong>: After counting, we make another pass through <code>arr</code>. For each string <code>s</code>:</p>
+<ul>
+<li>If <code>mp[s]</code> equals <code>1</code>, the string is distinct.</li>
+<li>Decrement <code>k</code> for each distinct string encountered.</li>
+<li>When <code>k</code> reaches zero, we return the current string <code>s</code> as the k-th distinct string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : arr)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp[s] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">--</span>k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Empty String if k-th Distinct Not Found</strong>: If the loop completes without finding the k-th distinct string, return an empty string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Complete Code</strong>: The full code structure is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string kthDistinct(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> arr, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : arr)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">++</span>mp[s];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : arr)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (mp[s] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">--</span>k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of strings in <code>arr</code>. Both passes over <code>arr</code> are O(N), and accessing or updating the hash map is O(1) on average.</li>
+<li><strong>Space Complexity</strong>: O(N), due to the hash map <code>mp</code> storing counts for each unique string in <code>arr</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively finds the k-th distinct string by counting occurrences and filtering distinct entries. The use of a hash map ensures efficient lookups and counting, making this approach optimal for large arrays. By minimizing operations and handling both distinct string filtering and index tracking in a single pass, this method provides a clear, concise solution for finding the k-th distinct element in any given list of strings. This code structure is well-suited for quick lookups and frequency-based filtering tasks in competitive programming or real-world scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode665s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +389,6 @@
 
       </div>
 
-      
 
       <footer>
         

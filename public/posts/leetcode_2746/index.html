@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -248,7 +248,211 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans ; 
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1099s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to minimize the concatenated length of a sequence of words by optimally concatenating them. Given a list of strings, we can merge two consecutive strings into one if the last character of the first string matches the first character of the second string. The task is to find the minimum concatenated length after combining all the strings while respecting this rule.</p>
+<p>For example:</p>
+<ul>
+<li>Given the list of words <code>[&quot;ab&quot;, &quot;bc&quot;, &quot;cd&quot;]</code>, the optimal way to concatenate these words is to combine &ldquo;ab&rdquo; and &ldquo;bc&rdquo; into &ldquo;abc&rdquo;, and then &ldquo;abc&rdquo; with &ldquo;cd&rdquo; to get &ldquo;abcd&rdquo;, which has a length of 4. The answer is 4.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be viewed as a dynamic programming (DP) problem where we maintain a state to represent the minimal concatenated length for any substring of words. The approach is to use DP to store intermediate results of optimal concatenation lengths as we traverse through the list of words.</p>
+<p>Here’s the step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Recursive State Representation</strong>:</p>
+<ul>
+<li>We define the recursive state as <code>rec(level, first, last)</code>, where:
+<ul>
+<li><code>level</code>: the current index of the word we are considering in the sequence.</li>
+<li><code>first</code>: the character at the beginning of the word at <code>level</code>.</li>
+<li><code>last</code>: the character at the end of the word at <code>level</code>.</li>
+<li>This recursive function returns the minimal length of the concatenated sequence from the current level onwards.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid recalculating the result for the same state multiple times, we store the results in a 3D DP table: <code>dp[level][first][last]</code>, where:
+<ul>
+<li><code>first</code> and <code>last</code> represent the starting and ending characters of the current word.</li>
+<li>The DP table stores the minimum length for concatenating words starting from the given <code>level</code>, with the word&rsquo;s starting and ending characters being <code>first</code> and <code>last</code>, respectively.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Transition between States</strong>:</p>
+<ul>
+<li>At each level, we decide the best way to concatenate the current word to the previous ones:
+<ul>
+<li>If the first character of the current word matches the last character of the previous word, we can merge them with one less character in the concatenated string.</li>
+<li>We also explore the case where we do not merge, which results in the full length of the current word.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If we&rsquo;ve processed all the words (<code>level == n</code>), we return 0 because there are no more words to concatenate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Answer</strong>:</p>
+<ul>
+<li>The answer will be the result of the recursive function starting from the first word, with its starting and ending characters. We add the length of the first word to account for the initial length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n ; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dp[<span style="color:#ae81ff">1010</span>][<span style="color:#ae81ff">26</span>][<span style="color:#ae81ff">26</span>] ;  
+</span></span></code></pre></div><ul>
+<li><strong><code>n</code></strong>: The number of words in the input list <code>words</code>.</li>
+<li><strong><code>dp[1010][26][26]</code></strong>: A 3D DP table to store the minimal concatenated lengths. It stores the results for every combination of word index (<code>level</code>), first character (<code>first</code>), and last character (<code>last</code>). The size of the second and third dimensions is 26 because there are 26 lowercase letters in the alphabet.</li>
+</ul>
+<h4 id="2-recursive-function-rec">
+  2. <strong>Recursive Function (<code>rec</code>)</strong>
+  <a class="heading-link" href="#2-recursive-function-rec">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">rec</span>(<span style="color:#66d9ef">int</span> level , <span style="color:#66d9ef">int</span> first , <span style="color:#66d9ef">int</span> last , vector <span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> arr){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(level <span style="color:#f92672">==</span> n){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> ; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(dp[level][first][last] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[level][first][last] ; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> ;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)arr[level].size() ; 
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If <code>level == n</code>, all words have been processed, so the function returns 0.</li>
+<li><strong>Memoization Check</strong>: If the result for the current state is already computed (<code>dp[level][first][last] != -1</code>), return the cached value to avoid redundant calculations.</li>
+<li><strong>Initialization of <code>ans</code></strong>: We start with a very high value (<code>1e9</code>) to ensure we can minimize the result as we compute.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(arr[level][t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">==</span> first){
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> min(ans , t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> rec(level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> , arr[level][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> , last , arr) ) ; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Merging the current word with the previous word</strong>: If the last character of the current word matches the first character of the previous word, we can merge them. We subtract 1 from the word&rsquo;s length to account for the shared character. The recursive call moves to the next word (<code>level+1</code>), with the starting character of the current word as the new <code>first</code> and the ending character of the current word as the new <code>last</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> min(ans , t <span style="color:#f92672">+</span> rec(level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> , arr[level][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> , last , arr)) ; 
+</span></span></code></pre></div><ul>
+<li><strong>Not merging</strong>: If we don’t merge the current word, we simply add the full length of the word to the result and move to the next level.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(arr[level][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">==</span> last){
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> min(ans , t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> rec(level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> , first , arr[level][t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> , arr)) ; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Merging the current word with the previous word in the opposite direction</strong>: If the first character of the current word matches the last character of the previous word, we subtract 1 from the word&rsquo;s length to account for the shared character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> min(ans , t <span style="color:#f92672">+</span> rec(level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> , first , arr[level][t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> , arr)) ; 
+</span></span></code></pre></div><ul>
+<li><strong>Not merging again</strong>: As before, we consider the case where we don’t merge the current word.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[level][first][last] <span style="color:#f92672">=</span> ans ; 
+</span></span></code></pre></div><ul>
+<li>We store the result for the current state in the DP table before returning it.</li>
+</ul>
+<h4 id="3-final-function-minimizeconcatenatedlength">
+  3. <strong>Final Function (<code>minimizeConcatenatedLength</code>)</strong>
+  <a class="heading-link" href="#3-final-function-minimizeconcatenatedlength">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimizeConcatenatedLength</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)words.size(); 
+</span></span><span style="display:flex;"><span>    memset(dp, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(dp)); 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)words[<span style="color:#ae81ff">0</span>].size(); 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> t <span style="color:#f92672">+</span> rec(<span style="color:#ae81ff">1</span> , words[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span><span style="color:#e6db74">&#39;a&#39;</span> , words[<span style="color:#ae81ff">0</span>][t<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">-</span><span style="color:#e6db74">&#39;a&#39;</span> , words); 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: The number of words <code>n</code> is set, and the DP table is initialized to <code>-1</code> to mark that no states have been computed yet.</li>
+<li><strong>Base Case</strong>: We start with the first word, and its length is added to the result.</li>
+<li><strong>Recursion</strong>: The <code>rec</code> function is called to compute the minimum length of the concatenated string starting from the second word.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Recursive Depth</strong>: The depth of recursion is at most <code>n</code>, the number of words.</li>
+<li><strong>State Space</strong>: The state space is defined by the triplet <code>(level, first, last)</code>. The number of states is <code>n * 26 * 26</code>, where <code>n</code> is the number of words, and 26 corresponds to the number of lowercase English letters.</li>
+<li>Therefore, the time complexity is ( O(n \times 26 \times 26) = O(n \times 676) = O(n) ), where <code>n</code> is the number of words.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(n \times 26 \times 26) = O(n \times 676)), which is the space required to store the DP table. This is feasible given that <code>n</code> is typically much smaller than 1010 in practice.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes dynamic programming with memoization to efficiently minimize the concatenated length of a sequence of words. The approach ensures that each state is computed only once, leading to optimal time complexity. With a space complexity proportional to the number of states, this solution can handle typical input sizes efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1099s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -302,7 +506,6 @@
 
       </div>
 
-      
 
       <footer>
         

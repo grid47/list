@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,144 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1054s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two integer arrays <code>A</code> and <code>B</code> of length <code>n</code>, you are tasked with finding the number of common elements between the prefix of the arrays as you iterate through them. For each index <code>i</code> (from 0 to n-1), you need to determine how many elements appear in both prefixes of <code>A</code> and <code>B</code> up to index <code>i</code>.</p>
+<p>The goal is to return a list of <code>n</code> integers, where each integer represents the number of common elements between the two prefixes of <code>A</code> and <code>B</code> up to index <code>i</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can take advantage of <strong>sets</strong> and their efficient membership tests (i.e., checking whether an element is in the set). A step-by-step approach can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Key Insight</strong>:</p>
+<ul>
+<li>For each index <code>i</code>, we need to find out how many common elements exist between the prefixes of <code>A</code> and <code>B</code> from index <code>0</code> to <code>i</code>. This can be done by iterating through both arrays and tracking the elements we have seen so far.</li>
+<li>For efficient checking of common elements, we use two sets: one for elements seen from <code>A</code> and one for elements seen from <code>B</code>.</li>
+<li>Every time we encounter a new element from either array, we check if it is already present in the other array&rsquo;s set. If it is, it means it&rsquo;s a common element, and we can increment the count.</li>
+</ul>
+</li>
+<li>
+<p><strong>Detailed Steps</strong>:</p>
+<ul>
+<li>Initialize two sets: <code>a</code> and <code>b</code> to keep track of elements seen from arrays <code>A</code> and <code>B</code>, respectively.</li>
+<li>Also, maintain another set <code>c</code> to keep track of elements that are common to both arrays at each step.</li>
+<li>As we iterate over both arrays <code>A</code> and <code>B</code>, for each index <code>i</code>:
+<ul>
+<li>Check if the element <code>B[i]</code> is present in <code>a</code> (i.e., it is a common element).</li>
+<li>Similarly, check if the element <code>A[i]</code> is present in <code>b</code>.</li>
+<li>If the elements from both arrays are equal at the current index <code>i</code>, mark it as a common element directly.</li>
+<li>After updating the sets, record the size of set <code>c</code>, which represents the count of common elements up to that index.</li>
+</ul>
+</li>
+<li>The result for each index is the size of set <code>c</code>, which gives the number of common elements in the prefixes of <code>A</code> and <code>B</code> up to index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimizations</strong>:</p>
+<ul>
+<li>The use of sets ensures that both membership checks and insertions can be done in constant average time (O(1)).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break the code down line by line to understand the logic in detail.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a, b, c;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> A.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: Declare three sets: <code>a</code>, <code>b</code>, and <code>c</code>. The set <code>a</code> will hold the elements encountered so far in array <code>A</code>, <code>b</code> will hold the elements encountered in array <code>B</code>, and <code>c</code> will track common elements between the two arrays.</li>
+<li><strong>Line 2</strong>: Get the size of the arrays, which is the same for both <code>A</code> and <code>B</code>.</li>
+<li><strong>Line 3</strong>: Initialize a result vector <code>ans</code> of size <code>n</code>, filled with zeros. This will hold the number of common elements for each index <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a.count(B[i])) {
+</span></span><span style="display:flex;"><span>        c.insert(B[i]);
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(b.count(A[i])) {
+</span></span><span style="display:flex;"><span>        c.insert(A[i]);                
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(A[i] <span style="color:#f92672">==</span> B[i]) {
+</span></span><span style="display:flex;"><span>        c.insert(A[i]);                
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    a.insert(A[i]);
+</span></span><span style="display:flex;"><span>    b.insert(B[i]);
+</span></span><span style="display:flex;"><span>    ans[i] <span style="color:#f92672">=</span> c.size();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 4</strong>: Begin iterating over the arrays <code>A</code> and <code>B</code> from index <code>0</code> to <code>n-1</code>.</li>
+<li><strong>Line 5-7</strong>: Check if the current element <code>B[i]</code> from array <code>B</code> has been encountered in array <code>A</code> (i.e., it’s in set <code>a</code>). If so, add it to the common set <code>c</code>.</li>
+<li><strong>Line 8-10</strong>: Similarly, check if the current element <code>A[i]</code> from array <code>A</code> has been encountered in array <code>B</code> (i.e., it’s in set <code>b</code>). If so, add it to the common set <code>c</code>.</li>
+<li><strong>Line 11-13</strong>: If <code>A[i]</code> and <code>B[i]</code> are equal, then add the element to the common set <code>c</code>, as it is a common element at index <code>i</code>.</li>
+<li><strong>Line 14-15</strong>: Add the current elements from <code>A[i]</code> and <code>B[i]</code> to sets <code>a</code> and <code>b</code>, respectively.</li>
+<li><strong>Line 16</strong>: The size of set <code>c</code> represents the number of common elements up to the current index <code>i</code>. Store this value in the result array <code>ans[i]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li><strong>Line 17</strong>: After completing the loop, return the result array <code>ans</code>, which contains the number of common elements between the prefixes of <code>A</code> and <code>B</code> up to each index <code>i</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Iterating through the arrays <code>A</code> and <code>B</code> takes <strong>O(n)</strong> time, where <code>n</code> is the size of the arrays.</li>
+<li>For each element, the membership check (<code>count</code>) and insertion into the sets <code>a</code>, <code>b</code>, and <code>c</code> takes constant average time <strong>O(1)</strong>.</li>
+<li>Therefore, the overall time complexity of the algorithm is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the three sets (<code>a</code>, <code>b</code>, and <code>c</code>) and the result vector <code>ans</code>. Each of these structures requires space proportional to the size of the arrays.</li>
+<li>Therefore, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to compute the number of common elements between the prefixes of two arrays. By leveraging sets for quick lookups and inserts, the approach ensures that both time and space complexity remain linear, i.e., <strong>O(n)</strong>.</p>
+<p>The algorithm works by iterating through both arrays while maintaining running counts of common elements, ensuring an optimal and straightforward approach. The use of sets guarantees that we can check for commonality and track elements efficiently, making this solution both time-efficient and space-efficient for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1054s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -292,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

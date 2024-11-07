@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,205 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode970s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to maximize the sum of the largest elements in the array <code>nums</code> after performing <code>k</code> operations. Each operation allows you to take the largest element from the array, add it to the result, and replace it with a value that is one-third of its current value (rounded up). You need to repeat this process <code>k</code> times, and at the end, you should return the total sum.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to repeatedly access and modify the largest element of the array. The best way to handle this in an efficient manner is by using a max heap (priority queue). The steps can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize a Max Heap</strong>: A max heap allows us to efficiently access the largest element in constant time. In C++, a <code>priority_queue</code> provides this functionality.</p>
+</li>
+<li>
+<p><strong>Iterate for <code>k</code> Steps</strong>: For each iteration (up to <code>k</code> times), we:</p>
+<ul>
+<li>Extract the maximum element from the heap.</li>
+<li>Add this element to the running total sum.</li>
+<li>Replace the maximum element with one-third of its value (rounded up).</li>
+<li>Push the modified value back into the heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After <code>k</code> operations, return the accumulated sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initializing-the-max-heap">
+  1. Initializing the Max Heap
+  <a class="heading-link" href="#1-initializing-the-max-heap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>We declare a priority queue <code>pq</code> to represent a max heap. In a max heap, the largest element is always at the top, making it easy to access and modify.</li>
+</ul>
+<h4 id="2-push-all-elements-into-the-max-heap">
+  2. Push All Elements into the Max Heap
+  <a class="heading-link" href="#2-push-all-elements-into-the-max-heap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pq.push(nums[i]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over all elements of the input array <code>nums</code> and push each element into the max heap <code>pq</code>. This allows us to access the largest element efficiently during each operation.</li>
+</ul>
+<h4 id="3-initialize-the-running-total-ans">
+  3. Initialize the Running Total (<code>ans</code>)
+  <a class="heading-link" href="#3-initialize-the-running-total-ans">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>ans</code> to 0. This will be used to accumulate the sum of the largest elements chosen during the <code>k</code> operations.</li>
+</ul>
+<h4 id="4-perform-k-operations">
+  4. Perform <code>k</code> Operations
+  <a class="heading-link" href="#4-perform-k-operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> tmp <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> tmp;
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    pq.push(ceil(tmp <span style="color:#f92672">/</span> <span style="color:#ae81ff">3.0</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>We enter a <code>while</code> loop that runs <code>k</code> times. In each iteration:</p>
+<ol>
+<li>
+<p><strong>Access the Largest Element</strong>: We use <code>pq.top()</code> to get the largest element of the heap (i.e., the element at the top of the heap).</p>
+</li>
+<li>
+<p><strong>Add to the Total</strong>: We add the value of this largest element (<code>tmp</code>) to the total sum <code>ans</code>.</p>
+</li>
+<li>
+<p><strong>Remove the Element from the Heap</strong>: We use <code>pq.pop()</code> to remove the largest element from the heap.</p>
+</li>
+<li>
+<p><strong>Modify and Reinsert the Element</strong>: We calculate the new value of the element by dividing it by 3 and rounding up using <code>ceil(tmp / 3.0)</code>. We then push this new value back into the heap using <code>pq.push()</code>.</p>
+</li>
+<li>
+<p>This process ensures that the largest element is always selected, added to the sum, and replaced with a smaller value for the next iteration.</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. Return the Result
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After performing <code>k</code> operations, we return the accumulated sum <code>ans</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is primarily determined by the operations on the priority queue:</p>
+<ul>
+<li>
+<p><strong>Inserting into the heap</strong>: Each insertion operation takes ( O(\log n) ), where ( n ) is the number of elements in the heap.</p>
+</li>
+<li>
+<p><strong>Removing from the heap</strong>: Similarly, each <code>pop</code> operation takes ( O(\log n) ).</p>
+</li>
+<li>
+<p>Since we perform <code>k</code> operations and each operation involves both a <code>pop</code> and a <code>push</code>, the overall time complexity is:</p>
+<p>[
+O(k \cdot \log n)
+]</p>
+<p>Where:</p>
+<ul>
+<li>( k ) is the number of operations.</li>
+<li>( n ) is the number of elements in the input array <code>nums</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is determined by the space required to store the heap:</p>
+<ul>
+<li>The heap stores all the elements of the array, which takes ( O(n) ) space.</li>
+</ul>
+<p>Thus, the space complexity is:</p>
+<p>[
+O(n)
+]</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum sum achievable by performing <code>k</code> operations on the array. Using a max heap ensures that we can always access and modify the largest element in logarithmic time. The overall time complexity of ( O(k \cdot \log n) ) makes this approach suitable for large input sizes, and the space complexity of ( O(n) ) is manageable.</p>
+<p>This approach works well because:</p>
+<ul>
+<li>The max heap allows for efficient retrieval and modification of the largest element.</li>
+<li>By performing the operation <code>k</code> times, we ensure the sum is maximized by selecting the largest available elements during each step.</li>
+</ul>
+<p>The solution is optimal in both time and space, making it a robust approach to solving the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode970s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +486,6 @@
 
       </div>
 
-      
 
       <footer>
         

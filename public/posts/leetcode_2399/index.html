@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -228,7 +228,172 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode881s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine whether the characters in a string <code>s</code> satisfy certain distance constraints. Specifically, for each character <code>ch</code> in the alphabet (from &lsquo;a&rsquo; to &lsquo;z&rsquo;), we are provided a corresponding distance value in the <code>distance</code> array. The task is to check if, for every character in the string <code>s</code>, the distance between two occurrences of the same character matches the value specified in the <code>distance</code> array.</p>
+<p>In simpler terms, for each character in <code>s</code>, the difference between the indices of its first and second occurrence must be equal to the value given in the <code>distance</code> array for that character. If the string satisfies this condition for all characters that appear more than once, the function should return <code>true</code>; otherwise, it should return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key idea is to track the positions of characters as we iterate through the string and check if the distance between two occurrences of the same character matches the value specified in the <code>distance</code> array.</p>
+<ol>
+<li>
+<p><strong>Initial Thoughts</strong>:</p>
+<ul>
+<li>We are given a string <code>s</code> and an array <code>distance</code> of size 26 (for each letter of the English alphabet).</li>
+<li>The goal is to check if, for each character <code>ch</code> that appears more than once in the string, the difference between the positions of its first and second occurrence is exactly equal to the corresponding value in the <code>distance</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Approach</strong>:</p>
+<ul>
+<li>Use an array <code>pos</code> to store the position of the last occurrence of each character.</li>
+<li>As we iterate over the string, if we encounter a character that has appeared before, check if the distance between the current index and the previous occurrence matches the value in the <code>distance</code> array.</li>
+<li>If any character violates the distance condition, return <code>false</code>.</li>
+<li>If we finish iterating through the string without any violations, return <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plan</strong>:</p>
+<ul>
+<li>Initialize an array <code>pos</code> of size 26 (to track positions of characters) and set all values to 0.</li>
+<li>Iterate through the string. For each character, check if it has been seen before.</li>
+<li>If the character has been seen before, check if the distance between its first occurrence and the current occurrence matches the value in the <code>distance</code> array.</li>
+<li>Update the position of the character in the <code>pos</code> array after each iteration.</li>
+<li>Return <code>true</code> if all checks pass, otherwise <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We initialize an array <code>pos</code> to store the position of the most recent occurrence of each character in the string. The size of the array is 26, corresponding to the 26 letters of the English alphabet. Initially, we set all elements of <code>pos</code> to 0.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> pos[<span style="color:#ae81ff">26</span>] <span style="color:#f92672">=</span> {};
+</span></span></code></pre></div><h4 id="step-2-iterate-through-the-string">
+  Step 2: Iterate Through the String
+  <a class="heading-link" href="#step-2-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We loop through each character in the string <code>s</code>. The loop index <code>i</code> represents the current position in the string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i) {
+</span></span></code></pre></div><h4 id="step-3-calculate-the-index-for-the-character">
+  Step 3: Calculate the Index for the Character
+  <a class="heading-link" href="#step-3-calculate-the-index-for-the-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For each character in the string, we compute its corresponding index by subtracting the ASCII value of <code>'a'</code> from the character&rsquo;s ASCII value. This gives us a number between 0 and 25, where 0 corresponds to &lsquo;a&rsquo;, 1 corresponds to &lsquo;b&rsquo;, and so on.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span></code></pre></div><h4 id="step-4-check-the-distance-condition">
+  Step 4: Check the Distance Condition
+  <a class="heading-link" href="#step-4-check-the-distance-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>If the character has already been encountered (i.e., <code>pos[n] &gt; 0</code>), we check if the distance between the current position <code>i</code> and the last occurrence of the character (which is stored in <code>pos[n]</code>) matches the expected value in the <code>distance</code> array.</p>
+<p>If the condition is violated (i.e., the actual distance does not match the expected distance), we return <code>false</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (pos[n] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> distance[n] <span style="color:#f92672">!=</span> i <span style="color:#f92672">-</span> pos[n])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><h4 id="step-5-update-the-position-of-the-character">
+  Step 5: Update the Position of the Character
+  <a class="heading-link" href="#step-5-update-the-position-of-the-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After checking the distance condition, we update the position of the character by setting <code>pos[n]</code> to <code>i + 1</code> (since we are using 1-based indexing to indicate the position of a character). This ensures that the next occurrence of the same character can be correctly compared.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>pos[n] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once we finish iterating through the string, we return <code>true</code> if no violations were found. This indicates that all the characters in the string satisfy the distance constraints.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We iterate through the string <code>s</code> once, which takes <strong>O(n)</strong> time, where <code>n</code> is the length of the string.</li>
+<li>For each character, checking the distance condition and updating the position array takes constant time <strong>O(1)</strong>.</li>
+<li>Thus, the overall time complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use an array <code>pos</code> of size 26 to track the positions of characters, which takes <strong>O(1)</strong> space since the size of the array is fixed (26 elements).</li>
+<li>The space complexity is therefore <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by iterating through the string once and keeping track of the most recent occurrence of each character. By leveraging a simple position array and checking the distance condition, we can determine whether the string satisfies the distance constraints for all characters in <strong>O(n)</strong> time. The space complexity is constant, as we only use a fixed-size array for tracking positions.</p>
+<p>Key Takeaways:</p>
+<ul>
+<li>The problem boils down to verifying the distance condition for each character in the string.</li>
+<li>The solution utilizes a simple array to track the last occurrence of each character and ensures the conditions are met in linear time.</li>
+<li>The time and space complexity of the solution are optimal, making it suitable for large input sizes.</li>
+</ul>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode881s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -282,7 +447,6 @@
 
       </div>
 
-      
 
       <footer>
         

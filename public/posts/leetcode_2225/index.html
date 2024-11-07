@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,183 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> arr;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode763s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the winners and the losers of a series of matches in a tournament. Each match has two players: one is the winner, and the other is the loser. The task is to return two lists:</p>
+<ol>
+<li>The first list should contain players who never lost any match (i.e., they won all their matches).</li>
+<li>The second list should contain players who lost exactly one match.</li>
+</ol>
+<p>We are given a list of <code>matches</code> where each match is represented as a pair of integers <code>[winner, loser]</code>. We need to efficiently calculate which players meet the criteria of never losing and losing exactly one match.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can take the following approach:</p>
+<ol>
+<li><strong>Track All Players</strong>: We need to keep track of all players involved in the matches (both winners and losers).</li>
+<li><strong>Track Losses</strong>: For each player, track how many times they have lost. This will help us identify players who have lost exactly once and those who have never lost.</li>
+<li><strong>Organize Players into Groups</strong>: Once the losses are counted, we can classify players into two categories:
+<ul>
+<li>Players who have never lost a match.</li>
+<li>Players who have lost exactly one match.</li>
+</ul>
+</li>
+<li><strong>Return the Results</strong>: Sort both lists and return them in the required order.</li>
+</ol>
+<p>We will use an <code>unordered_set</code> to store all unique players and a <code>map</code> to count the number of losses for each player. Finally, we will iterate through the players, sorting them based on the criteria, and return the results as two lists.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-containers">
+  Step 1: Initialize Containers
+  <a class="heading-link" href="#step-1-initialize-containers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> u;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ff;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> matches.size();
+</span></span></code></pre></div><ul>
+<li><code>u</code> is an unordered set to store all unique players from the matches. This ensures we have a list of every player, whether they are a winner or a loser.</li>
+<li><code>ff</code> is a map that keeps track of the number of losses for each player. The key is the player ID, and the value is the number of losses that player has.</li>
+<li><code>n</code> stores the number of matches, which is the size of the <code>matches</code> vector.</li>
+</ul>
+<h4 id="step-2-populate-the-containers">
+  Step 2: Populate the Containers
+  <a class="heading-link" href="#step-2-populate-the-containers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    u.insert(matches[i][<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    u.insert(matches[i][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    ff[matches[i][<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates over each match in the <code>matches</code> vector.</li>
+<li><code>matches[i][0]</code> is the winner, and <code>matches[i][1]</code> is the loser of the current match.</li>
+<li>We insert both the winner and the loser into the <code>unordered_set</code> <code>u</code> to ensure all players are accounted for.</li>
+<li>We increment the count of losses for the loser in the map <code>ff</code>.</li>
+</ul>
+<h4 id="step-3-classify-players-based-on-losses">
+  Step 3: Classify Players Based on Losses
+  <a class="heading-link" href="#step-3-classify-players-based-on-losses">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> arr(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> u.begin(); it <span style="color:#f92672">!=</span> u.end(); it<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>ff.count(<span style="color:#f92672">*</span>it)) arr[<span style="color:#ae81ff">0</span>].push_back(<span style="color:#f92672">*</span>it);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(ff[<span style="color:#f92672">*</span>it] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) arr[<span style="color:#ae81ff">1</span>].push_back(<span style="color:#f92672">*</span>it);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>arr</code> is a 2D vector with two lists:
+<ul>
+<li><code>arr[0]</code> will store players who have never lost a match.</li>
+<li><code>arr[1]</code> will store players who have lost exactly one match.</li>
+</ul>
+</li>
+<li>The loop iterates through all the players in <code>u</code>.
+<ul>
+<li>If a player does not appear in the <code>ff</code> map, it means they have never lost a match, so we add them to <code>arr[0]</code>.</li>
+<li>If a player has exactly one loss (i.e., <code>ff[*it] == 1</code>), we add them to <code>arr[1]</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-sort-the-results">
+  Step 4: Sort the Results
+  <a class="heading-link" href="#step-4-sort-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(arr[<span style="color:#ae81ff">0</span>].begin(), arr[<span style="color:#ae81ff">0</span>].end());
+</span></span><span style="display:flex;"><span>sort(arr[<span style="color:#ae81ff">1</span>].begin(), arr[<span style="color:#ae81ff">1</span>].end());
+</span></span></code></pre></div><ul>
+<li>After categorizing the players, we sort both <code>arr[0]</code> and <code>arr[1]</code> in ascending order. This ensures that the players are listed in sorted order in the final result.</li>
+</ul>
+<h4 id="step-5-return-the-final-results">
+  Step 5: Return the Final Results
+  <a class="heading-link" href="#step-5-return-the-final-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> arr;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the 2D vector <code>arr</code> containing the two lists: one for players who never lost and one for players who lost exactly once.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong> for iterating over the <code>matches</code> vector and populating the unordered set <code>u</code> and map <code>ff</code>. The time complexity for inserting into an unordered set or a map is on average O(1).</li>
+<li><strong>O(m log m)</strong> for sorting both <code>arr[0]</code> and <code>arr[1]</code>, where <code>m</code> is the total number of unique players (which is at most 2n, since each match involves two players).</li>
+<li>Overall time complexity: <strong>O(n + m log m)</strong>, where <code>n</code> is the number of matches and <code>m</code> is the number of unique players involved in those matches.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong> for storing the unique players in the unordered set <code>u</code>.</li>
+<li><strong>O(m)</strong> for storing the loss count in the map <code>ff</code>.</li>
+<li><strong>O(m)</strong> for storing the two result lists in <code>arr</code>.</li>
+<li>Overall space complexity: <strong>O(m)</strong>, where <code>m</code> is the number of unique players.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using a combination of an unordered set and a map. It tracks all players and counts their losses to identify those who never lost and those who lost exactly once. The approach has an optimal time complexity of <strong>O(n + m log m)</strong>, where <code>n</code> is the number of matches and <code>m</code> is the number of unique players. The solution also ensures that the results are returned in sorted order, which is required by the problem statement.</p>
+<p>The space complexity is <strong>O(m)</strong>, which is efficient for the problem, as it only stores the necessary information about players and their losses. This solution is well-suited for handling large input sizes and provides a clear, concise method for solving the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode763s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

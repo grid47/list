@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -248,7 +248,221 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> score;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1020s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to calculate the score of selecting numbers from an array <code>nums</code> while adhering to specific constraints. The score starts at 0, and for each valid selection, you add the selected number to the score. Once a number is selected from index <code>i</code>, the indices <code>i-1</code> and <code>i+1</code> become unavailable for future selections. The objective is to maximize the total score by carefully selecting numbers from the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to select numbers in such a way that the score is maximized, and at the same time, we need to ensure that no adjacent indices are selected. This is akin to a problem where we must greedily select the smallest unselected number from the array and then mark its neighbors as unavailable.</p>
+<p>The main idea is to use a <strong>min-heap (priority queue)</strong> to efficiently select the smallest available number from the array and manage the unavailability of adjacent indices. We also use a hash map (<code>unordered_map</code>) to track the indices that have been marked as unavailable.</p>
+<h3 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-priority-queue-and-data-structures">
+  Step 1: Initialize Priority Queue and Data Structures
+  <a class="heading-link" href="#step-1-initialize-priority-queue-and-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><strong>score</strong>: This variable will hold the total score as we progress.</li>
+<li><strong>pq</strong>: A priority queue is used to select the smallest unselected number at each step. The queue stores pairs of <code>(value, index)</code> where <code>value</code> is the number from the <code>nums</code> array, and <code>index</code> is its corresponding index.</li>
+<li><strong>mp</strong>: An unordered map is used to keep track of the indices that have already been marked as unavailable. Specifically, if <code>mp[i]</code> is true, it means the number at index <code>i</code> is unavailable due to being marked as selected or due to its neighboring index being selected.</li>
+</ul>
+<h4 id="step-2-populate-the-priority-queue">
+  Step 2: Populate the Priority Queue
+  <a class="heading-link" href="#step-2-populate-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    pq.push({nums[i], i});
+</span></span></code></pre></div><ul>
+<li>Here, we iterate over the <code>nums</code> array and push each element along with its index into the priority queue. The priority queue is organized to always pop the smallest value first because we are using <code>greater&lt;vector&lt;int&gt;&gt;</code> to compare elements. The smallest number will always be at the top of the queue.</li>
+</ul>
+<h4 id="step-3-greedily-select-numbers">
+  Step 3: Greedily Select Numbers
+  <a class="heading-link" href="#step-3-greedily-select-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#ae81ff">1</span>])) pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        score <span style="color:#f92672">+=</span> pq.top()[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Pop invalid elements</strong>: The outer <code>while</code> loop ensures that we continue to pop from the priority queue until we find a valid element. The inner <code>while</code> loop checks if the index of the current element (<code>pq.top()[1]</code>) is already marked as unavailable. If it is, we pop the element and move to the next one.</p>
+</li>
+<li>
+<p><strong>Select the smallest available element</strong>: Once we find a valid element (i.e., one whose index is not in the <code>mp</code> map), we add its value to the total score. We also mark the index of the selected element (<code>pq.top()[1]</code>), and its neighbors (<code>pq.top()[1] + 1</code> and <code>pq.top()[1] - 1</code>) as unavailable by setting <code>mp[pq.top()[1]]</code>, <code>mp[pq.top()[1] + 1]</code>, and <code>mp[pq.top()[1] - 1]</code> to <code>true</code>. This ensures that these indices cannot be selected in future iterations.</p>
+</li>
+<li>
+<p><strong>Pop the selected element</strong>: After selecting the element and marking its neighbors as unavailable, we pop the element from the priority queue and proceed to the next iteration.</p>
+</li>
+</ul>
+<h4 id="step-4-return-the-final-score">
+  Step 4: Return the Final Score
+  <a class="heading-link" href="#step-4-return-the-final-score">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> score;
+</span></span></code></pre></div><ul>
+<li>Once all valid elements have been selected, and the priority queue is empty, the final score is returned as the result.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to better understand how the code works.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The priority queue <code>pq</code> is populated with the elements and their indices: <code>{{1, 0}, {3, 1}, {2, 2}, {4, 3}, {5, 4}}</code>.</li>
+<li>The <code>mp</code> map starts as empty, and <code>score = 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>First Iteration</strong>:</p>
+<ul>
+<li>The top of the priority queue is <code>{1, 0}</code> (value 1 at index 0).</li>
+<li>The index 0 is not marked as unavailable, so we add <code>1</code> to the score.</li>
+<li>We then mark index 0, and its neighbors (indices -1 and 1) as unavailable. In this case, we only mark index 1 (since index -1 is out of bounds).</li>
+<li>The score is now <code>1</code>, and <code>mp = {0: true, 1: true}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration</strong>:</p>
+<ul>
+<li>The next valid element is <code>{2, 2}</code> (value 2 at index 2).</li>
+<li>The index 2 is not marked as unavailable, so we add <code>2</code> to the score.</li>
+<li>We mark index 2 and its neighbors (indices 1 and 3) as unavailable. Index 1 is already unavailable, so only index 3 is marked as unavailable.</li>
+<li>The score is now <code>3</code>, and <code>mp = {0: true, 1: true, 2: true, 3: true}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration</strong>:</p>
+<ul>
+<li>The next valid element is <code>{4, 3}</code> (value 4 at index 3), but index 3 is already marked as unavailable, so we skip it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Iteration</strong>:</p>
+<ul>
+<li>The next valid element is <code>{3, 1}</code> (value 3 at index 1), but index 1 is already marked as unavailable, so we skip it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fifth Iteration</strong>:</p>
+<ul>
+<li>The next valid element is <code>{5, 4}</code> (value 5 at index 4).</li>
+<li>We add <code>5</code> to the score.</li>
+<li>We mark index 4 and its neighbors (indices 3 and 5) as unavailable.</li>
+<li>The score is now <code>8</code>, and <code>mp = {0: true, 1: true, 2: true, 3: true, 4: true}</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="final-score">
+  Final Score:
+  <a class="heading-link" href="#final-score">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The total score after selecting all valid numbers is <code>8</code>.</p>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">8</span>;
+</span></span></code></pre></div><h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n \log n))</p>
+<ul>
+<li>The time complexity is dominated by the sorting of the elements in the priority queue and the operations on the queue itself.</li>
+<li>The priority queue supports <code>push</code> and <code>pop</code> operations that take (O(\log n)) time. Since we perform these operations for each element in the array, the total time complexity is (O(n \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n))</p>
+<ul>
+<li>The space complexity is primarily determined by the storage of the priority queue, the map <code>mp</code>, and the <code>nums</code> array. All these structures store data for each element in the array, resulting in an overall space complexity of (O(n)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently maximizes the score by greedily selecting the smallest available element from the array and marking its adjacent indices as unavailable. The use of a priority queue ensures that the smallest element is always selected, and the map keeps track of which indices are unavailable for future selections. This approach guarantees an optimal solution in (O(n \log n)) time and uses (O(n)) space, making it efficient and scalable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1020s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -302,7 +516,6 @@
 
       </div>
 
-      
 
       <footer>
         

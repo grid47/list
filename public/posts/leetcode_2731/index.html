@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -237,7 +237,178 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1103s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a list of integers, a string representing movement directions, and a number <code>d</code> indicating how far the positions should change. Our task is to compute the total distance between all pairs of numbers after applying the changes described in the string.</p>
+<p>The string <code>s</code> consists of characters &lsquo;L&rsquo; and &lsquo;R&rsquo;, where:</p>
+<ul>
+<li>&lsquo;L&rsquo; means that the corresponding number in the <code>nums</code> array will decrease by <code>d</code>.</li>
+<li>&lsquo;R&rsquo; means that the corresponding number will increase by <code>d</code>.</li>
+</ul>
+<p>After modifying the numbers based on the string <code>s</code>, we need to calculate the total distance between all pairs of numbers in the modified list, modulo (10^9 + 7).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can break the problem into the following steps:</p>
+<ol>
+<li>
+<p><strong>Adjust the <code>nums</code> Array</strong>:</p>
+<ul>
+<li>For each element in the <code>nums</code> array, we modify it based on the corresponding character in the string <code>s</code>. If the character is &lsquo;L&rsquo;, we decrease the value by <code>d</code>; if the character is &lsquo;R&rsquo;, we increase the value by <code>d</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sort the Array</strong>:</p>
+<ul>
+<li>After applying the modifications, the next step is to sort the modified array. This will help us easily compute the distance between all pairs of elements in an ordered manner, reducing the complexity of the distance computation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute the Total Distance</strong>:</p>
+<ul>
+<li>Once the array is sorted, we can compute the sum of distances between all pairs. This can be done efficiently by observing that the total distance between pairs can be broken down as a sum of differences between each element and all elements before it in the sorted array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>:</p>
+<ul>
+<li>Since the result could be large, we need to return the answer modulo (10^9 + 7).</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-by-step-code-breakdown">
+  Step-by-Step Code Breakdown
+  <a class="heading-link" href="#step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-adjust-the-nums-array">
+  Step 1: Adjust the <code>nums</code> Array
+  <a class="heading-link" href="#step-1-adjust-the-nums-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span>) nums[i] <span style="color:#f92672">-=</span> d;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> nums[i] <span style="color:#f92672">+=</span> d;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop over the entire <code>nums</code> array.</li>
+<li>For each element, we check the corresponding character in string <code>s</code>.
+<ul>
+<li>If the character is &lsquo;L&rsquo;, we subtract <code>d</code> from the element at index <code>i</code>.</li>
+<li>If the character is &lsquo;R&rsquo;, we add <code>d</code> to the element at index <code>i</code>.</li>
+</ul>
+</li>
+<li>This modifies the <code>nums</code> array based on the given movement directions.</li>
+</ul>
+<h4 id="step-2-sort-the-nums-array">
+  Step 2: Sort the <code>nums</code> Array
+  <a class="heading-link" href="#step-2-sort-the-nums-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>After adjusting all the values in the <code>nums</code> array, we sort the array.</li>
+<li>Sorting helps in calculating the distance between all pairs efficiently. In a sorted array, for any pair of elements <code>nums[i]</code> and <code>nums[j]</code> (where <code>i &lt; j</code>), the distance between them can be calculated directly by subtracting the smaller element from the larger one.</li>
+</ul>
+<h4 id="step-3-compute-the-total-distance-between-all-pairs">
+  Step 3: Compute the Total Distance Between All Pairs
+  <a class="heading-link" href="#step-3-compute-the-total-distance-between-all-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    dist <span style="color:#f92672">+=</span> ((<span style="color:#66d9ef">long</span>)nums[i] <span style="color:#f92672">-</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (i);
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> (ans <span style="color:#f92672">+</span> dist) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We first initialize variables: <code>n</code> to the size of the array, <code>ans</code> to store the total distance, <code>dist</code> to track the intermediate distances, and <code>mod</code> to store (10^9 + 7) for the modulo operation.</li>
+<li>We then iterate over the array starting from the second element (<code>i = 1</code>).</li>
+<li>For each element <code>nums[i]</code>, we calculate the difference between <code>nums[i]</code> and <code>nums[i-1]</code>. This represents the distance between the current element and the previous element in the sorted array.</li>
+<li>We then multiply this difference by <code>i</code>, the index of the element, to account for how many times this difference will appear in the total distance sum. The reason we multiply by <code>i</code> is because for each <code>nums[i]</code>, it contributes to the distance between itself and all previous elements in the sorted array (from index <code>0</code> to <code>i-1</code>).</li>
+<li>We add this result to <code>dist</code>, which accumulates the total distance for the current index.</li>
+<li>Finally, we update <code>ans</code> with the accumulated distance modulo (10^9 + 7).</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all elements in the sorted <code>nums</code> array, we return the accumulated distance <code>ans</code>, which contains the total distance between all pairs modulo (10^9 + 7).</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Adjusting the <code>nums</code> array</strong>: This takes (O(n)) time, where <code>n</code> is the length of the <code>nums</code> array, because we iterate over all the elements once and modify them based on the corresponding character in the string <code>s</code>.</li>
+<li><strong>Sorting the <code>nums</code> array</strong>: Sorting the array takes (O(n \log n)) time, which is the most time-consuming operation in this solution.</li>
+<li><strong>Computing the total distance</strong>: After sorting, we compute the total distance in a single pass through the array, which takes (O(n)) time.</li>
+<li>Therefore, the overall time complexity is dominated by the sorting step, so the total time complexity is <strong>O(n \log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use additional space for the input <code>nums</code> and the string <code>s</code>, but no other significant space is used. The space complexity is <strong>O(n)</strong> due to the space used by the <code>nums</code> array and the intermediate variables used for computation.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the total distance between all pairs of modified integers in the array after applying the given movement directions. The sliding window approach reduces the complexity of the problem to <strong>O(n \log n)</strong> due to the sorting step, and the modulo operation ensures that we return the result within the required bounds. This approach is both time-efficient and space-efficient, making it suitable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1103s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +462,6 @@
 
       </div>
 
-      
 
       <footer>
         

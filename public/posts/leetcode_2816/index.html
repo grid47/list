@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -248,7 +248,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1135s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are tasked with doubling a given number represented by a singly linked list. Each node of the linked list contains a single digit, and the number is stored in reverse order, i.e., the head node contains the least significant digit. The goal is to return a new linked list that represents the doubled value of the original number.</p>
+<p>For example, if the input linked list represents the number <code>123</code>, the list will be:</p>
+<pre tabindex="0"><code>3 -&gt; 2 -&gt; 1
+</code></pre><p>After doubling the number, the output linked list should represent <code>246</code>:</p>
+<pre tabindex="0"><code>6 -&gt; 4 -&gt; 2
+</code></pre><h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the general approach is to perform the following steps:</p>
+<ol>
+<li>
+<p><strong>Reverse the Linked List and Compute the Number</strong>: First, we need to traverse the linked list and treat it as a number in reverse order. Starting from the head node, we extract the digits, double the number, and update each digit of the linked list.</p>
+</li>
+<li>
+<p><strong>Handle Carrying Over</strong>: Doubling the number may result in digits that exceed <code>9</code>, which will require handling the carry (just like in basic addition). We need to store the current digit modulo 10 in the node and carry over the quotient to the next iteration.</p>
+</li>
+<li>
+<p><strong>Rebuild the Linked List</strong>: Once the linked list has been updated with the doubled digits and carries, the final step is to rebuild the number by moving through the list and inserting new nodes if there&rsquo;s any leftover carry after processing all nodes.</p>
+</li>
+<li>
+<p><strong>Edge Case Handling</strong>: If the linked list is empty or contains only <code>0</code>, the result should simply be a list with the digit <code>0</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is broken into two main functions: <code>pin</code> (helper function to recursively traverse and double the number) and <code>doubleIt</code> (main function to handle the entire process). Let’s walk through these steps:</p>
+<h4 id="1-the-pin-function-recursion-to-compute-the-number-and-carry">
+  1. <strong>The <code>pin</code> Function (Recursion to Compute the Number and Carry)</strong>
+  <a class="heading-link" href="#1-the-pin-function-recursion-to-compute-the-number-and-carry">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The helper function <code>pin</code> is designed to traverse the list recursively and compute the doubled number along with any carry.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pin</span>(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> pin(head<span style="color:#f92672">-&gt;</span>next);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> val;
+</span></span><span style="display:flex;"><span>    head<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> num <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case</strong>: The function starts with checking if <code>head</code> is <code>NULL</code> (i.e., the end of the list). If it&rsquo;s <code>NULL</code>, it returns <code>0</code> because there are no more digits to process.</p>
+</li>
+<li>
+<p><strong>Recursive Call</strong>: For each node, the function recursively processes the next node (<code>pin(head-&gt;next)</code>), which gives the carry from the next node.</p>
+</li>
+<li>
+<p><strong>Doubling and Carrying</strong>: The value of the current node (<code>head-&gt;val</code>) is doubled, and the carry from the next digit (<code>val</code>) is added to it. The result (<code>num</code>) is then split into two parts:</p>
+<ul>
+<li>The new digit is stored in the current node (<code>head-&gt;val = num % 10</code>).</li>
+<li>The carry (<code>num / 10</code>) is returned to the previous node.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-the-doubleit-function-main-function-to-build-the-resulting-linked-list">
+  2. <strong>The <code>doubleIt</code> Function (Main Function to Build the Resulting Linked List)</strong>
+  <a class="heading-link" href="#2-the-doubleit-function-main-function-to-build-the-resulting-linked-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The main function <code>doubleIt</code> utilizes the helper function <code>pin</code> to first double the entire number, then handles any leftover carry.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">doubleIt</span>(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> pin(head); <span style="color:#75715e">// Step 1: Call pin to recursively process the list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) { <span style="color:#75715e">// Step 2: Handle any leftover carry
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(c); <span style="color:#75715e">// Step 3: Create new nodes for carry
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        node<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> head; <span style="color:#75715e">// Step 4: Insert the new node at the front
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        head <span style="color:#f92672">=</span> node; <span style="color:#75715e">// Step 5: Update the head of the list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> head; <span style="color:#75715e">// Step 6: Return the modified list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Step 1 (Call <code>pin</code>)</strong>: First, the function calls the <code>pin</code> function, which will update the original list by recursively processing each node and calculating the new digit and carry. The final return value of <code>pin</code> represents the carry from the most significant digit.</p>
+</li>
+<li>
+<p><strong>Step 2 (Handle Carry)</strong>: After the list has been processed, if there’s any leftover carry (<code>num &gt; 0</code>), it is added to the list. We use the modulus operation to extract the current carry digit and the division operation to reduce the carry.</p>
+</li>
+<li>
+<p><strong>Step 3 (Create New Node)</strong>: For every carry, we create a new node with the carry value as the node’s value.</p>
+</li>
+<li>
+<p><strong>Step 4 (Insert at Front)</strong>: The new node is inserted at the front of the list, so the final result will have the most significant digit at the head of the list.</p>
+</li>
+<li>
+<p><strong>Step 5 (Update Head)</strong>: The <code>head</code> pointer is updated to point to the newly created node, making it the new head of the list.</p>
+</li>
+<li>
+<p><strong>Step 6 (Return the Result)</strong>: After processing all the carries, the modified list (which now represents the doubled number) is returned.</p>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The <code>pin</code> function processes each node in the linked list exactly once. Thus, the time complexity for this function is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the list.</li>
+<li>The <code>doubleIt</code> function involves iterating through the list once to call <code>pin</code>, followed by another iteration to handle any leftover carry. Therefore, the total time complexity of the <code>doubleIt</code> function is also <strong>O(n)</strong>.</li>
+</ul>
+<p>Overall, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as the algorithm uses only a constant amount of extra space. The recursive call stack in the <code>pin</code> function takes up space proportional to the depth of the list (i.e., <strong>O(n)</strong>), but the rest of the algorithm uses a fixed amount of space. However, in practice, recursion can lead to a space complexity of <strong>O(n)</strong> in terms of stack space.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(n)</strong> due to the recursion stack.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>doubleIt</code> function is an efficient solution to doubling a number represented by a singly linked list. By recursively processing the list and handling carries during the doubling process, the algorithm updates the list in place. The function&rsquo;s time complexity is linear in terms of the number of nodes, making it optimal for large linked lists. The space complexity is also linear due to the recursion stack, but the algorithm avoids using extra data structures. This solution provides a clear, concise, and efficient way to tackle the problem of doubling a number in linked list form.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1135s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -302,7 +459,6 @@
 
       </div>
 
-      
 
       <footer>
         

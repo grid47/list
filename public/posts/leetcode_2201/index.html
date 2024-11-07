@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,188 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> k <span style="color:#f92672">-</span> cnt.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode748s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a grid representing a collection of artifacts, each defined by a rectangular area within the grid. Some of the cells in the grid have been &ldquo;dug,&rdquo; meaning the artifacts located at those positions are no longer intact. The task is to determine how many distinct artifacts remain completely undug after the excavation.</p>
+<p>Given:</p>
+<ol>
+<li><code>n</code>: the size of the grid (n x n).</li>
+<li><code>artifacts</code>: a list of rectangles, where each rectangle specifies the coordinates (x1, y1, x2, y2) representing the upper-left and bottom-right corners of an artifact in the grid.</li>
+<li><code>dig</code>: a list of coordinates of cells that have been dug.</li>
+</ol>
+<p>The goal is to find out how many artifacts remain fully intact after the excavation, meaning no part of the artifact has been dug.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach revolves around simulating the excavation and marking the artifacts that have been affected by the digging. The plan is as follows:</p>
+<ol>
+<li>
+<p><strong>Grid Representation</strong>:
+We represent the grid using a 2D array where each cell stores an identifier for the artifact it belongs to. If a cell is not part of any artifact, it is initialized to <code>-1</code>.</p>
+</li>
+<li>
+<p><strong>Marking Artifacts</strong>:
+For each artifact, we iterate through its defined area and assign a unique artifact ID to the cells within that area. This allows us to track which artifact occupies which grid cells.</p>
+</li>
+<li>
+<p><strong>Simulating the Digging Process</strong>:
+We then process the list of dug cells, marking them as “dug” (i.e., setting the corresponding grid cell to <code>-1</code>). This indicates that any artifact occupying that cell is no longer intact.</p>
+</li>
+<li>
+<p><strong>Counting Remaining Artifacts</strong>:
+After processing the digging, we scan the grid and check which artifact IDs remain. If an artifact ID appears in the grid and none of its cells have been dug, the artifact remains intact.</p>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:
+Finally, the number of intact artifacts is calculated by subtracting the number of distinct dug artifacts from the total number of artifacts.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-grid">
+  Step 1: Initialize the Grid
+  <a class="heading-link" href="#step-1-initialize-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>A 2D grid of size <code>n x n</code> is initialized. Each cell in the grid is initially set to <code>-1</code>, indicating that it does not belong to any artifact.</li>
+</ul>
+<h4 id="step-2-assign-artifact-ids-to-grid-cells">
+  Step 2: Assign Artifact IDs to Grid Cells
+  <a class="heading-link" href="#step-2-assign-artifact-ids-to-grid-cells">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: artifacts) {
+</span></span><span style="display:flex;"><span>    k<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>]; i <span style="color:#f92672">&lt;=</span> it[<span style="color:#ae81ff">2</span>]; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>]; j <span style="color:#f92672">&lt;=</span> it[<span style="color:#ae81ff">3</span>]; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            grid[i][j] <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each artifact in the <code>artifacts</code> list. For each artifact, we assign a unique artifact ID (incremented by <code>k</code> for each artifact).</li>
+<li>For the current artifact, we iterate through all the cells in the rectangle defined by its corners <code>(x1, y1)</code> and <code>(x2, y2)</code>. Each cell in the artifact&rsquo;s area is assigned the artifact&rsquo;s ID in the <code>grid</code>.</li>
+</ul>
+<h4 id="step-3-mark-the-dug-cells">
+  Step 3: Mark the Dug Cells
+  <a class="heading-link" href="#step-3-mark-the-dug-cells">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: dig)
+</span></span><span style="display:flex;"><span>    grid[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We use the <code>dig</code> list to mark the cells that have been dug. For each dug cell <code>(x, y)</code>, we set <code>grid[x][y] = -1</code>, indicating that the artifact at that position has been dug up.</li>
+</ul>
+<h4 id="step-4-count-the-remaining-artifacts">
+  Step 4: Count the Remaining Artifacts
+  <a class="heading-link" href="#step-4-count-the-remaining-artifacts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            cnt.insert(grid[i][j]);
+</span></span></code></pre></div><ul>
+<li>After marking the dug cells, we iterate through the entire grid and insert the artifact IDs that remain intact (i.e., those cells that have not been set to <code>-1</code>) into a set <code>cnt</code>. A set is used to ensure that each artifact ID is counted only once, even if multiple cells of the same artifact remain intact.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> k <span style="color:#f92672">-</span> cnt.size();
+</span></span></code></pre></div><ul>
+<li>The result is the total number of artifacts (<code>k</code>) minus the number of distinct artifacts that were affected by digging (i.e., the size of <code>cnt</code>).</li>
+<li>The difference gives the number of artifacts that remain completely undug.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2 + m)</strong>, where <code>n</code> is the grid size (n x n) and <code>m</code> is the number of artifacts.
+<ul>
+<li>The first part of the time complexity (<code>O(n^2)</code>) comes from the grid initialization and processing the artifacts, where for each artifact, we mark its corresponding cells on the grid.</li>
+<li>The second part (<code>O(m)</code>) comes from processing the dug cells, which involves checking and marking each dug cell in the grid.</li>
+<li>Finally, the step where we count the remaining artifacts also takes <code>O(n^2)</code> in the worst case, since we are iterating over all cells in the grid.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2)</strong>, since we are using a 2D grid of size <code>n x n</code> to store artifact IDs and the marked dug cells.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining how many artifacts remain undug after a series of digs. The key steps involve:</p>
+<ol>
+<li>Initializing a grid to represent the artifact areas.</li>
+<li>Iterating over the grid and marking cells as dug.</li>
+<li>Counting the number of artifacts that remain fully intact.</li>
+</ol>
+<p>The algorithm is efficient with a time complexity of <strong>O(n^2)</strong> and a space complexity of <strong>O(n^2)</strong>, which makes it scalable for moderately large grid sizes. The use of a set to track distinct artifacts ensures that we count only unique artifacts that are not affected by the dig.</p>
+<p>This solution can be applied to similar problems involving grid-based tracking, where we need to manage and update areas or regions affected by specific actions (e.g., digging, marking, etc.).</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode748s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +478,6 @@
 
       </div>
 
-      
 
       <footer>
         

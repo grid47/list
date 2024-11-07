@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -264,7 +264,193 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1112s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the maximum length of a non-decreasing subsequence that can be obtained by either:</p>
+<ol>
+<li>Taking elements from <code>nums1</code> or <code>nums2</code> directly, or</li>
+<li>By swapping elements from <code>nums1[i]</code> with <code>nums2[i]</code> for each index <code>i</code>.</li>
+</ol>
+<p>The objective is to compute the maximum length of such a subsequence, which may include swaps or no swaps at all, and return this maximum length.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses dynamic programming (DP) to solve the problem efficiently. The key idea is to maintain two DP arrays, <code>dp1</code> and <code>dp2</code>, where:</p>
+<ul>
+<li><code>dp1[i]</code> stores the length of the longest non-decreasing subsequence ending at index <code>i</code> where the last element of the subsequence comes from <code>nums1[i]</code>.</li>
+<li><code>dp2[i]</code> stores the length of the longest non-decreasing subsequence ending at index <code>i</code> where the last element of the subsequence comes from <code>nums2[i]</code>.</li>
+</ul>
+<p>At each step, we decide whether to extend the subsequence from either <code>nums1</code> or <code>nums2</code> and whether to swap the current elements to ensure the subsequence remains non-decreasing.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="function-1-boom">
+  Function 1: <code>Boom</code>
+  <a class="heading-link" href="#function-1-boom">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">Boom</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums1, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums1.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp1(n, <span style="color:#ae81ff">1</span>), dp2(n, <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>n</code></strong>: The size of the input arrays <code>nums1</code> and <code>nums2</code>.</li>
+<li><strong><code>dp1</code></strong> and <strong><code>dp2</code></strong>: Two vectors initialized to size <code>n</code>, representing the longest non-decreasing subsequences ending at each index, initialized to <code>1</code> because the minimum subsequence length for any element is <code>1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {         
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums1[i] <span style="color:#f92672">&gt;=</span> nums1[j]) {
+</span></span><span style="display:flex;"><span>                dp1[i] <span style="color:#f92672">=</span> max(dp1[i], dp1[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums1[i] <span style="color:#f92672">&gt;=</span> nums2[j]) {
+</span></span><span style="display:flex;"><span>                dp1[i] <span style="color:#f92672">=</span> max(dp1[i], dp2[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                    
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums2[i] <span style="color:#f92672">&gt;=</span> nums1[j]) {
+</span></span><span style="display:flex;"><span>                dp2[i] <span style="color:#f92672">=</span> max(dp2[i], dp1[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                    
+</span></span><span style="display:flex;"><span>            }                 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums2[i] <span style="color:#f92672">&gt;=</span> nums2[j]) {
+</span></span><span style="display:flex;"><span>                dp2[i] <span style="color:#f92672">=</span> max(dp2[i], dp2[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                                        
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, max(dp1[i], dp2[i]));          
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>
+<p>The nested loops iterate through each pair of indices <code>(i, j)</code> where <code>j &lt; i</code>.</p>
+</li>
+<li>
+<p>For each pair, we check four possible conditions:</p>
+<ol>
+<li><code>nums1[i] &gt;= nums1[j]</code>: If this condition holds, we extend the subsequence by adding <code>nums1[i]</code> to the subsequence that ends at <code>j</code> and comes from <code>nums1</code>.</li>
+<li><code>nums1[i] &gt;= nums2[j]</code>: We check if we can extend the subsequence from <code>nums2[j]</code> to <code>nums1[i]</code>.</li>
+<li><code>nums2[i] &gt;= nums1[j]</code>: We check if we can extend the subsequence from <code>nums1[j]</code> to <code>nums2[i]</code>.</li>
+<li><code>nums2[i] &gt;= nums2[j]</code>: We check if we can extend the subsequence from <code>nums2[j]</code> to <code>nums2[i]</code>.</li>
+</ol>
+</li>
+<li>
+<p>We update <code>dp1[i]</code> and <code>dp2[i]</code> to store the maximum subsequence length at index <code>i</code> using the conditions above.</p>
+</li>
+<li>
+<p>Finally, we update the answer <code>ans</code> to store the maximum of the current <code>ans</code> and the maximum value between <code>dp1[i]</code> and <code>dp2[i]</code> for each <code>i</code>.</p>
+</li>
+</ul>
+<h4 id="function-2-maxnondecreasinglength">
+  Function 2: <code>maxNonDecreasingLength</code>
+  <a class="heading-link" href="#function-2-maxnondecreasinglength">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxNonDecreasingLength</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums1, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums1.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp1(n, <span style="color:#ae81ff">1</span>), dp2(n, <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>n</code></strong>: The size of the input arrays <code>nums1</code> and <code>nums2</code>.</li>
+<li><strong><code>dp1</code></strong> and <strong><code>dp2</code></strong>: These arrays store the longest non-decreasing subsequences ending at each index with values from <code>nums1</code> and <code>nums2</code>, respectively. They are initialized to <code>1</code>, as the minimum length of a subsequence is 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {         
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums1[i] <span style="color:#f92672">&gt;=</span> nums1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp1[i] <span style="color:#f92672">=</span> max(dp1[i], dp1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums1[i] <span style="color:#f92672">&gt;=</span> nums2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp1[i] <span style="color:#f92672">=</span> max(dp1[i], dp2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                    
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums2[i] <span style="color:#f92672">&gt;=</span> nums1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp2[i] <span style="color:#f92672">=</span> max(dp2[i], dp1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                    
+</span></span><span style="display:flex;"><span>        }                 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums2[i] <span style="color:#f92672">&gt;=</span> nums2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp2[i] <span style="color:#f92672">=</span> max(dp2[i], dp2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);                                        
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, max(dp1[i], dp2[i]));          
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>
+<p>The loop starts from index <code>1</code> and checks for possible extensions of subsequences:</p>
+<ol>
+<li><strong><code>nums1[i] &gt;= nums1[i - 1]</code></strong>: If this condition is true, the subsequence can be extended using <code>nums1[i]</code>.</li>
+<li><strong><code>nums1[i] &gt;= nums2[i - 1]</code></strong>: This checks whether a valid subsequence can be formed by swapping <code>nums2[i-1]</code> and <code>nums1[i]</code>.</li>
+<li><strong><code>nums2[i] &gt;= nums1[i - 1]</code></strong>: Similarly, this checks the condition where the subsequence can be extended from <code>nums1[i-1]</code> to <code>nums2[i]</code>.</li>
+<li><strong><code>nums2[i] &gt;= nums2[i - 1]</code></strong>: This checks whether the subsequence can be extended using <code>nums2[i]</code>.</li>
+</ol>
+</li>
+<li>
+<p>After checking all conditions, <code>dp1[i]</code> and <code>dp2[i]</code> are updated to reflect the longest subsequence that ends at index <code>i</code> in either <code>nums1</code> or <code>nums2</code>.</p>
+</li>
+<li>
+<p>Finally, the maximum value of <code>dp1[i]</code> and <code>dp2[i]</code> is taken to update the result <code>ans</code>.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function returns the maximum length of the non-decreasing subsequence that can be achieved by either directly taking elements from <code>nums1</code> and <code>nums2</code> or by swapping elements as needed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n^2)), where <code>n</code> is the size of the input arrays <code>nums1</code> and <code>nums2</code>. This is because for each index <code>i</code>, we check all previous indices <code>j</code> using a nested loop, resulting in a quadratic time complexity.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(n)), where <code>n</code> is the size of the input arrays. We use two arrays <code>dp1</code> and <code>dp2</code> to store the longest subsequences ending at each index, and this requires space proportional to the size of the input arrays.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum length of a non-decreasing subsequence that can be obtained from the arrays <code>nums1</code> and <code>nums2</code>, either by directly taking elements or by swapping elements for each index. By using dynamic programming with two arrays, <code>dp1</code> and <code>dp2</code>, we can keep track of the maximum subsequences that can be formed, ensuring that the solution is both efficient and easy to understand.</p>
+<p>The time complexity of (O(n^2)) is appropriate for this problem, and the space complexity of (O(n)) ensures that the solution can handle large inputs within reasonable limits.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1112s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -318,7 +504,6 @@
 
       </div>
 
-      
 
       <footer>
         

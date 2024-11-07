@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,171 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1107s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to simulate the movement of marbles on a one-dimensional track. You are given an initial configuration of marbles, represented by an array <code>nums</code>, where each value represents a distinct position on the track that contains a marble. You are also given two arrays <code>moveFrom</code> and <code>moveTo</code>, which represent the marble positions that need to be relocated. For each pair of corresponding positions, the marble at <code>moveFrom[i]</code> is moved to <code>moveTo[i]</code>. The task is to return the final positions of the marbles sorted in increasing order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can follow the below steps:</p>
+<ol>
+<li>
+<p><strong>Track the Positions of Marbles</strong>:
+We can use a <code>map</code> (or dictionary) to keep track of the positions that have marbles. This allows efficient look-up, insertion, and deletion of marbles from their respective positions. Initially, we will mark each position in the input array <code>nums</code> as having a marble.</p>
+</li>
+<li>
+<p><strong>Simulate the Moves</strong>:
+For each move, we check if the position in <code>moveFrom</code> contains a marble (i.e., if it exists in the map and is non-zero). If it does, we remove the marble from the <code>moveFrom</code> position and place it in the <code>moveTo</code> position.</p>
+</li>
+<li>
+<p><strong>Return the Final Marble Positions</strong>:
+After processing all the moves, the positions of the marbles are stored in the map. We will extract these positions and return them sorted in increasing order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through the code line by line to understand the logic:</p>
+<ol>
+<li>
+<p><strong>Map Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><p>We initialize a <code>map</code> named <code>mp</code> where the keys represent the positions on the track, and the values represent whether there is a marble at that position (1 for marble, 0 for no marble). A map is chosen because it allows us to efficiently check, update, and remove marbles.</p>
+</li>
+<li>
+<p><strong>Mark Initial Marble Positions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> n: nums) mp[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>Here, we iterate through the <code>nums</code> array, which contains the initial positions of the marbles. For each position, we update the map <code>mp</code> to mark that the marble is present at that position.</p>
+</li>
+<li>
+<p><strong>Simulating the Movement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> moveFrom.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[moveFrom[i]] <span style="color:#f92672">&amp;&amp;</span> moveFrom[i] <span style="color:#f92672">!=</span> moveTo[i]) {
+</span></span><span style="display:flex;"><span>        mp[moveTo[i]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        mp[moveFrom[i]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each pair of <code>moveFrom[i]</code> and <code>moveTo[i]</code>, where we need to move a marble from position <code>moveFrom[i]</code> to position <code>moveTo[i]</code>.</li>
+<li>For each move, we check if a marble exists at position <code>moveFrom[i]</code> (<code>mp[moveFrom[i]]</code>). We also ensure that the source and destination are not the same (<code>moveFrom[i] != moveTo[i]</code>), as there’s no need to move a marble to the same position.</li>
+<li>If both conditions are satisfied, we:
+<ul>
+<li>Set the <code>moveTo[i]</code> position in the map to 1 (indicating a marble is now at this position).</li>
+<li>Set the <code>moveFrom[i]</code> position in the map to 0 (indicating the marble is removed from the source position).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Collect Final Marble Positions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> m: mp) <span style="color:#66d9ef">if</span>(m.second) ans.push_back(m.first);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After all moves are simulated, we create a result vector <code>ans</code> to store the final positions of the marbles.</li>
+<li>We iterate over the <code>map</code> and collect all keys (positions) where the value is 1, which represents positions where marbles are currently located.</li>
+<li>The <code>map</code> inherently stores the keys in sorted order, so we don’t need to perform any additional sorting.</li>
+<li>Finally, we return the <code>ans</code> vector containing the sorted positions of the marbles.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization of Marble Positions</strong>:</p>
+<ul>
+<li>The initialization of the map from the <code>nums</code> array takes (O(m)) time, where (m) is the size of the <code>nums</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing the Moves</strong>:</p>
+<ul>
+<li>For each move in the <code>moveFrom</code> and <code>moveTo</code> arrays, we perform constant-time operations to check and update the map (<code>mp[moveFrom[i]]</code> and <code>mp[moveTo[i]]</code>), which takes (O(1)) per move. Thus, the total time for processing all moves is (O(k)), where (k) is the number of moves.</li>
+</ul>
+</li>
+<li>
+<p><strong>Collecting the Final Positions</strong>:</p>
+<ul>
+<li>We iterate over the <code>map</code> to collect all positions with marbles. Since the map contains at most (m) unique positions, this step takes (O(m)) time.</li>
+</ul>
+<p>Therefore, the total time complexity is (O(m + k)), where:</p>
+<ul>
+<li>(m) is the number of unique positions in <code>nums</code> (or the size of the map).</li>
+<li>(k) is the number of moves.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Map Storage</strong>:</p>
+<ul>
+<li>The <code>map</code> <code>mp</code> stores the marble positions and their status. In the worst case, it will store as many entries as the number of unique positions in the input array <code>nums</code>, which is (O(m)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Vector</strong>:</p>
+<ul>
+<li>The result vector <code>ans</code> will store the final positions of the marbles, which can also be at most (O(m)).</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the space complexity is (O(m)), where (m) is the number of unique positions.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the process of relocating marbles based on the given <code>moveFrom</code> and <code>moveTo</code> arrays. By using a <code>map</code>, we can keep track of the current positions of the marbles in constant time for each move. The approach is both time and space efficient, with a time complexity of (O(m + k)), where (m) is the number of unique marble positions and (k) is the number of moves.</p>
+<p>The solution handles edge cases, such as when marbles are moved to the same position or when no moves are made, by ensuring that only valid moves are processed. The use of a <code>map</code> also ensures that the final marble positions are returned in sorted order without needing additional sorting. This solution is optimal for the given problem and should perform well even for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1107s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -289,7 +453,6 @@
 
       </div>
 
-      
 
       <footer>
         

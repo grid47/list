@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -258,7 +258,225 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode960s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the maximum &ldquo;tastiness&rdquo; of a set of <code>k</code> distinct items selected from a list of integers representing some measure of tastiness. The tastiness is defined as the minimum difference between the items in the set, and we want to maximize this minimum difference.</p>
+<p>In simpler terms, we are given an array of integers <code>nums</code> and a number <code>k</code>. We need to select <code>k</code> elements from <code>nums</code> such that the minimum difference between any two selected elements is as large as possible. The goal is to find this maximum possible minimum difference.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can apply a <strong>binary search</strong> technique to optimize the search for the largest minimum difference between selected elements. The key idea is to test different values for the minimum difference and check whether it&rsquo;s possible to select <code>k</code> elements that satisfy that difference.</p>
+<h4 id="step-by-step-explanation">
+  Step-by-Step Explanation
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We can break down the approach into two major parts:</p>
+<ol>
+<li>
+<p><strong>Binary Search for Maximum Minimum Difference</strong>:</p>
+<ul>
+<li>The idea is to maximize the minimum difference between the selected elements.</li>
+<li>The possible minimum differences can range from <code>0</code> (when all elements are the same) to <code>nums[n-1] - nums[0]</code> (the difference between the smallest and largest elements in the sorted array).</li>
+<li>We perform a binary search between these two bounds (<code>0</code> and <code>nums[n-1] - nums[0]</code>), checking for each mid-point if it is possible to select <code>k</code> elements with at least that much difference between any two selected elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Greedy Check for a Given Minimum Difference</strong>:</p>
+<ul>
+<li>For each value of <code>mid</code> (the current minimum difference being tested), we use a greedy approach to check if we can select <code>k</code> elements that satisfy this condition. We start by selecting the first element and then greedily select the next element that is at least <code>mid</code> units away from the previously selected element.</li>
+<li>If we can select <code>k</code> elements this way, it means the current <code>mid</code> value is feasible, and we can attempt to increase it. Otherwise, we try smaller values for <code>mid</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-binary-search-setup">
+  Step 1: Binary Search Setup
+  <a class="heading-link" href="#step-1-binary-search-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> nums[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> r;
+</span></span></code></pre></div><ul>
+<li><strong>Sorting</strong>: The first step is to sort the array <code>nums</code>. Sorting ensures that we can efficiently check the difference between consecutive elements. After sorting, the largest possible minimum difference will be between the smallest and largest element (<code>nums[n-1] - nums[0]</code>), so we start with <code>l = 0</code> and <code>r = nums[n - 1] - nums[0]</code> as the binary search bounds.</li>
+<li><strong>Binary Search</strong>: We initialize <code>l</code> and <code>r</code> to represent the lower and upper bounds of the search space for the minimum difference. We also initialize <code>ans</code> to hold the maximum minimum difference found during the search.</li>
+</ul>
+<h4 id="step-2-binary-search-loop">
+  Step 2: Binary Search Loop
+  <a class="heading-link" href="#step-2-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(can(nums, mid, k)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Midpoint Calculation</strong>: In each iteration of the binary search, we calculate the midpoint <code>mid</code> between <code>l</code> and <code>r</code>. This <code>mid</code> represents the minimum difference we are testing.</li>
+<li><strong>Greedy Check</strong>: We then call the <code>can</code> function to check if it&rsquo;s possible to select <code>k</code> elements such that the minimum difference between any two selected elements is at least <code>mid</code>.</li>
+<li><strong>Adjust Search Bounds</strong>:
+<ul>
+<li>If <code>can(nums, mid, k)</code> returns <code>true</code>, it means we can select <code>k</code> elements with at least <code>mid</code> difference, so we try to increase <code>mid</code> by setting <code>l = mid + 1</code>.</li>
+<li>If <code>can(nums, mid, k)</code> returns <code>false</code>, it means we cannot select <code>k</code> elements with the current <code>mid</code>, so we try smaller values by setting <code>r = mid - 1</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-greedy-function-checking-feasibility-of-a-given-difference">
+  Step 3: Greedy Function (Checking Feasibility of a Given Difference)
+  <a class="heading-link" href="#step-3-greedy-function-checking-feasibility-of-a-given-difference">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">can</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums, <span style="color:#66d9ef">int</span> mid, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> prv <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">-</span> prv <span style="color:#f92672">&gt;=</span> mid) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            prv <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;=</span> k) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Greedy Selection</strong>: This function checks if it&rsquo;s possible to select <code>k</code> elements such that the minimum difference between any two selected elements is at least <code>mid</code>.
+<ul>
+<li>We start by selecting the first element (<code>prv = nums[0]</code>).</li>
+<li>Then, for each subsequent element, we check if it satisfies the condition <code>nums[i] - prv &gt;= mid</code>. If it does, we select this element, update <code>prv</code>, and increment the count (<code>cnt</code>).</li>
+<li>If at any point <code>cnt</code> reaches <code>k</code>, we return <code>true</code>, indicating that it&rsquo;s possible to select <code>k</code> elements with at least <code>mid</code> difference.</li>
+<li>If we exhaust the list and can&rsquo;t select <code>k</code> elements, we return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-final-result">
+  Step 4: Final Result
+  <a class="heading-link" href="#step-4-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the binary search completes, the value of <code>ans</code> will hold the maximum possible minimum difference between the selected elements.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">20</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>After sorting <code>nums</code>, we get <code>[1, 3, 6, 19, 20]</code>.</li>
+<li>We perform binary search to find the maximum possible minimum difference.
+<ul>
+<li>Start with <code>l = 0</code> and <code>r = 19</code>.</li>
+<li>After performing the binary search, the maximum minimum difference is found to be <code>17</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">17</span>
+</span></span></code></pre></div><h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><ul>
+<li>After sorting <code>nums</code>, we get <code>[5, 10, 15, 20]</code>.</li>
+<li>The binary search proceeds, and the largest possible minimum difference for <code>k = 3</code> is found to be <code>5</code>.</li>
+</ul>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Sorting the array</strong>: Sorting the array <code>nums</code> takes (O(n \log n)), where <code>n</code> is the size of the array.</li>
+<li><strong>Binary Search</strong>: The binary search loop runs in (O(\log(\text{max} - \text{min}))), where <code>max</code> and <code>min</code> are the largest and smallest elements in <code>nums</code>. This is typically (O(\log(\text{max}))), where <code>max</code> is the range of values in the array.</li>
+<li><strong>Greedy Check</strong>: For each binary search step, the <code>can</code> function runs in (O(n)), as it iterates through the array once.</li>
+</ol>
+<p>Thus, the overall time complexity is (O(n \log n + n \log(\text{max}))), which simplifies to (O(n \log n)) in the worst case.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is (O(n)) due to the storage used for sorting the array and performing the binary search.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently solves the problem of selecting <code>k</code> elements with the largest possible minimum difference by combining binary search and a greedy selection strategy. The time complexity of (O(n \log n)) makes this approach scalable for large inputs, while the space complexity of (O(n)) ensures that the solution is memory-efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode960s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -312,7 +530,6 @@
 
       </div>
 
-      
 
       <footer>
         

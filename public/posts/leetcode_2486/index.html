@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,129 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> t.size()<span style="color:#f92672">-</span>j;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode942s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given two strings <code>s</code> and <code>t</code>. Your task is to determine how many characters you need to append to the end of <code>s</code> to make <code>s</code> contain all the characters of <code>t</code> in the same order (a subsequence of <code>t</code>). The characters in <code>s</code> are already in order, and we want to append the minimum number of characters from <code>t</code> to <code>s</code> to make <code>s</code> a subsequence of <code>t</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Given <code>s = &quot;abc&quot;</code> and <code>t = &quot;acdbc&quot;</code>, we can see that the characters &lsquo;a&rsquo; and &lsquo;c&rsquo; are already in the correct order in <code>s</code>, so we need to append &rsquo;d&rsquo; and &lsquo;b&rsquo; from <code>t</code> to make <code>s</code> a subsequence of <code>t</code>.</li>
+</ul>
+<p>The task is to compute how many characters need to be appended to the end of <code>s</code> for it to become a subsequence of <code>t</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The main idea behind solving this problem efficiently is by utilizing the concept of subsequence matching. A subsequence is a sequence that appears in the same relative order, but not necessarily consecutively. The goal is to traverse through both strings and check how much of <code>t</code> is already matched in <code>s</code>. Once we know how much of <code>t</code> is matched in <code>s</code>, the number of characters that need to be appended will simply be the difference between the length of <code>t</code> and the number of matched characters.</p>
+<p>The approach is as follows:</p>
+<ol>
+<li><strong>Two-pointer technique</strong>: Use two pointers, one for string <code>s</code> and another for string <code>t</code>.</li>
+<li>Traverse string <code>s</code> from left to right and try to match characters in <code>t</code>. Each time a character in <code>s</code> matches a character in <code>t</code>, move the pointer for <code>t</code> to the next character.</li>
+<li>The goal is to count how many characters from <code>t</code> can be matched in <code>s</code>. The number of characters we need to append to <code>s</code> will be the number of characters in <code>t</code> that we were unable to match.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-variable-initialization">
+  1. <strong>Variable Initialization</strong>
+  <a class="heading-link" href="#1-variable-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>Here, <code>j</code> is initialized to <code>0</code> and will be used as the pointer to traverse through the string <code>t</code>.</li>
+</ul>
+<h4 id="2-iterating-through-string-s">
+  2. <strong>Iterating Through String <code>s</code></strong>
+  <a class="heading-link" href="#2-iterating-through-string-s">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> t.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">+=</span> s[i] <span style="color:#f92672">==</span> t[j];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates through the string <code>s</code> with index <code>i</code>.</li>
+<li>The loop runs as long as <code>i</code> is less than the size of <code>s</code> and <code>j</code> is less than the size of <code>t</code>.</li>
+<li>In each iteration, the condition <code>s[i] == t[j]</code> checks if the current character in <code>s</code> matches the current character in <code>t</code>.</li>
+<li>If the characters match, <code>j</code> is incremented by 1. This means we successfully matched the <code>j</code>-th character of <code>t</code> with a character in <code>s</code>.</li>
+</ul>
+<h4 id="3-calculating-the-result">
+  3. <strong>Calculating the Result</strong>
+  <a class="heading-link" href="#3-calculating-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> t.size() <span style="color:#f92672">-</span> j;
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, <code>j</code> will represent the number of characters from <code>t</code> that have been matched with characters from <code>s</code>.</li>
+<li>The difference <code>t.size() - j</code> gives the number of characters from <code>t</code> that were not matched and need to be appended to <code>s</code>.</li>
+<li>We return this difference as the result, which is the minimum number of characters that need to be appended to <code>s</code> to make it a subsequence of <code>t</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the algorithm is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. This is because we are iterating through the string <code>s</code> exactly once, performing constant-time operations in each iteration (comparing characters and updating the pointer <code>j</code>).</p>
+<ul>
+<li>The loop runs for at most <code>min(s.size(), t.size())</code> iterations, but since we are only traversing through <code>s</code>, the complexity is determined by the length of <code>s</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>. This is because the algorithm uses only a fixed number of variables (<code>j</code> and <code>i</code>), regardless of the size of the input strings <code>s</code> and <code>t</code>. There is no additional space used for data structures that grow with the input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem using the two-pointer technique to match characters from string <code>s</code> to string <code>t</code>. The main idea is to check how much of <code>t</code> is already matched by <code>s</code>, and then calculate how many characters need to be appended to make <code>s</code> a subsequence of <code>t</code>. The time complexity of this solution is linear in terms of the length of <code>s</code>, making it highly efficient. The space complexity is constant, as no extra space is needed except for a few variables.</p>
+<p>This approach ensures that the problem is solved in the optimal time and space, which is important when dealing with large strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode942s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +401,6 @@
 
       </div>
 
-      
 
       <footer>
         

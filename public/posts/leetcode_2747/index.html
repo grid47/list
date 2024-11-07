@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -254,7 +254,212 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1100s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine the number of servers that are active for each query in a system where multiple logs and queries are given. Each log entry contains a server ID and a timestamp, indicating when a server was active. Each query specifies a timestamp, and the task is to count how many servers are active during the time window <code>[query - x, query]</code> for each query.</p>
+<p>For example, if the logs are as follows:</p>
+<pre tabindex="0"><code>logs = [[1, 2], [2, 5], [3, 8], [4, 10]]
+</code></pre><p>and we have a query at <code>6</code> with a window of <code>3</code> (<code>x = 3</code>), we want to count how many servers are active between time <code>3</code> and <code>6</code> (i.e., logs at times <code>2</code>, <code>5</code>, and <code>6</code> are relevant).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves processing the logs and answering each query efficiently by utilizing sorting, sliding windows, and hashmaps. We can break the solution into the following steps:</p>
+<ol>
+<li>
+<p><strong>Sorting the Logs and Queries</strong>:</p>
+<ul>
+<li>First, we sort the logs based on their timestamps.</li>
+<li>We also need to sort the queries so that we can answer them in increasing order of time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window for Active Servers</strong>:</p>
+<ul>
+<li>For each query, we need to track which servers are active in the window <code>[query - x, query]</code>. This is done using a sliding window technique.</li>
+<li>We maintain a set of active servers and a map of the count of active servers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Query Answering</strong>:</p>
+<ul>
+<li>For each query, we first add logs with timestamps less than or equal to the current query time.</li>
+<li>Then, we remove logs where the timestamp is outside the window <code>[query - x, query]</code>.</li>
+<li>The final result is calculated by subtracting the count of active servers from the total number of servers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using Maps and Sets</strong>:</p>
+<ul>
+<li>We use a <code>set</code> to maintain the active servers in the current window.</li>
+<li>A <code>map</code> helps keep track of the frequency of each server ID to efficiently handle removals and updates.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sorting-the-queries">
+  1. <strong>Sorting the Queries</strong>
+  <a class="heading-link" href="#1-sorting-the-queries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> qs;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queries.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    qs.push_back({queries[i], i});  <span style="color:#75715e">// Store the query value and its original index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>sort(qs.begin(), qs.end());  <span style="color:#75715e">// Sort queries based on time
+</span></span></span></code></pre></div><ul>
+<li>We store each query along with its original index in the <code>qs</code> vector.</li>
+<li>Sorting the queries allows us to process them in chronological order.</li>
+</ul>
+<h4 id="2-sorting-the-logs">
+  2. <strong>Sorting the Logs</strong>
+  <a class="heading-link" href="#2-sorting-the-logs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(logs.begin(), logs.end(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>b){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Sort logs based on their timestamps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
+</span></span></code></pre></div><ul>
+<li>We sort the logs based on the timestamp, ensuring that we process the logs in chronological order.</li>
+</ul>
+<h4 id="3-sliding-window-using-set-and-map">
+  3. <strong>Sliding Window Using Set and Map</strong>
+  <a class="heading-link" href="#3-sliding-window-using-set-and-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> s;  <span style="color:#75715e">// To store the {timestamp, server_id} pairs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> count;     <span style="color:#75715e">// To count the number of active logs for each server
+</span></span></span></code></pre></div><ul>
+<li><code>s</code> is a <code>set</code> used to store active servers as pairs of timestamps and IDs, so we can efficiently remove expired entries.</li>
+<li><code>count</code> is a <code>map</code> that keeps track of the number of active logs for each server ID.</li>
+</ul>
+<h4 id="4-processing-each-query">
+  4. <strong>Processing Each Query</strong>
+  <a class="heading-link" href="#4-processing-each-query">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>[q, index] <span style="color:#f92672">:</span> qs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add all logs where timestamp &lt;= current query
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> logs.size() <span style="color:#f92672">&amp;&amp;</span> logs[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> q) {
+</span></span><span style="display:flex;"><span>        s.insert({logs[i][<span style="color:#ae81ff">1</span>], logs[i][<span style="color:#ae81ff">0</span>]});
+</span></span><span style="display:flex;"><span>        count[logs[i][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Remove logs where timestamp is outside the current window (i.e., &lt; q - x)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>s.empty() <span style="color:#f92672">&amp;&amp;</span> s.begin()<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">&lt;</span> q <span style="color:#f92672">-</span> x) {
+</span></span><span style="display:flex;"><span>        count[s.begin()<span style="color:#f92672">-&gt;</span>second]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (count[s.begin()<span style="color:#f92672">-&gt;</span>second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) count.erase(s.begin()<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span>        s.erase(s.begin());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Store the result: the number of servers not in the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    result[index] <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> count.size();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each query <code>q</code>, we:
+<ul>
+<li>Add all logs with timestamps less than or equal to <code>q</code> to the <code>set</code> and <code>map</code>.</li>
+<li>Remove logs that are outside the valid window <code>[q - x, q]</code> by checking the timestamp of the smallest timestamp in the set.</li>
+<li>Finally, we compute the number of inactive servers as <code>n - count.size()</code> and store it in the <code>result</code> array at the corresponding index.</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-returning-the-result">
+  5. <strong>Returning the Result</strong>
+  <a class="heading-link" href="#5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> result;
+</span></span></code></pre></div><ul>
+<li>After processing all queries, the <code>result</code> vector contains the answer for each query, which is returned to the caller.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Sorting Queries</strong>: Sorting the queries takes (O(q \log q)), where (q) is the number of queries.</li>
+<li><strong>Sorting Logs</strong>: Sorting the logs takes (O(m \log m)), where (m) is the number of log entries.</li>
+<li><strong>Processing Each Query</strong>:
+<ul>
+<li>For each query, we may insert and remove elements from the <code>set</code> and <code>map</code>, which takes (O(\log m)) for each log operation.</li>
+<li>The number of operations is proportional to the number of logs, so for each query, processing takes (O(m \log m)).</li>
+</ul>
+</li>
+<li><strong>Overall Complexity</strong>:
+<ul>
+<li>The total time complexity is (O(m \log m + q \log q)), where (m) is the number of logs and (q) is the number of queries.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(m + q)) due to the storage required for the logs, queries, the <code>set</code>, and the <code>map</code> used to track active servers. Thus, the space complexity is (O(m + q)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the task of counting active servers at each query using sorting and a sliding window approach with a <code>set</code> and <code>map</code> for active server tracking. The time complexity of (O(m \log m + q \log q)) ensures that the solution can handle large inputs efficiently. This approach is ideal for scenarios where you have a large number of logs and queries and need to process them quickly.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1100s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -308,7 +513,6 @@
 
       </div>
 
-      
 
       <footer>
         

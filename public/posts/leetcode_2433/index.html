@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -221,7 +221,139 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode909s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>pref</code> of integers where <code>pref[i]</code> is the cumulative XOR (exclusive OR) of elements from <code>arr[0]</code> to <code>arr[i]</code> (inclusive), your task is to recover the original array <code>arr</code> from the given <code>pref</code> array. Specifically, we are tasked with finding the array <code>arr</code> such that:</p>
+<ul>
+<li><code>arr[0] = pref[0]</code></li>
+<li><code>arr[1] = pref[1] ^ pref[0]</code></li>
+<li><code>arr[2] = pref[2] ^ pref[1]</code></li>
+<li>&hellip;</li>
+<li><code>arr[i] = pref[i] ^ pref[i-1]</code></li>
+</ul>
+<p>The XOR operation is used to extract the values in <code>arr</code> from the cumulative <code>pref</code> array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to understand the properties of the XOR operation. XOR (exclusive OR) is a bitwise operation that has some important properties:</p>
+<ol>
+<li><strong>Identity</strong>: For any integer <code>a</code>, <code>a ^ 0 = a</code>.</li>
+<li><strong>Self-inverse</strong>: For any integer <code>a</code>, <code>a ^ a = 0</code>.</li>
+<li><strong>Commutative</strong>: The order of XOR does not matter, i.e., <code>a ^ b = b ^ a</code>.</li>
+<li><strong>Associative</strong>: XOR can be grouped in any way, i.e., <code>a ^ (b ^ c) = (a ^ b) ^ c</code>.</li>
+</ol>
+<p>The problem provides us with the cumulative XOR values in the <code>pref</code> array, and we need to deduce the individual elements of the original array <code>arr</code>. Specifically, we can use the following relationship:</p>
+<ul>
+<li><code>arr[0] = pref[0]</code></li>
+<li><code>arr[i] = pref[i] ^ pref[i-1]</code> for all <code>i &gt; 0</code>.</li>
+</ul>
+<p>This relationship works because XOR is self-inverse. For example, if we know the cumulative XOR up to index <code>i</code>, we can get the value of <code>arr[i]</code> by &ldquo;undoing&rdquo; the cumulative XOR of all previous elements using the XOR operation. The cumulative XOR value at index <code>i</code> (<code>pref[i]</code>) is the XOR of all the elements up to that index. Therefore, by XORing <code>pref[i]</code> with <code>pref[i-1]</code>, we effectively isolate the value of <code>arr[i]</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-result-array">
+  Step 1: Initialize the result array
+  <a class="heading-link" href="#step-1-initialize-the-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res(pref.size());
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>res</code> with the same size as the <code>pref</code> array. This will store the resulting array <code>arr</code> that we are going to compute.</li>
+</ul>
+<h4 id="step-2-assign-the-first-element">
+  Step 2: Assign the first element
+  <a class="heading-link" href="#step-2-assign-the-first-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> pref[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><ul>
+<li>The first element of the result array <code>arr[0]</code> is simply equal to the first element of the <code>pref</code> array, because there is no previous element to XOR with.</li>
+</ul>
+<h4 id="step-3-calculate-subsequent-elements-using-xor">
+  Step 3: Calculate subsequent elements using XOR
+  <a class="heading-link" href="#step-3-calculate-subsequent-elements-using-xor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> pref.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res[i] <span style="color:#f92672">=</span> pref[i] <span style="color:#f92672">^</span> pref[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>For each subsequent element (from index 1 onwards), we use the XOR of the current value in <code>pref</code> and the previous value in <code>pref</code> to compute the corresponding element in <code>arr</code>. This works because of the XOR properties described earlier, specifically the self-inverse property, which allows us to &ldquo;undo&rdquo; the cumulative XOR up to the previous index and isolate the current value.</li>
+</ul>
+<h4 id="step-4-return-the-result-array">
+  Step 4: Return the result array
+  <a class="heading-link" href="#step-4-return-the-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating through all elements of the <code>pref</code> array and computing the corresponding values of <code>arr</code>, we return the result array <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the size of the <code>pref</code> array. This is because we only need a single pass through the array to compute the values of <code>arr</code>, and each operation within the loop (XOR and assignment) takes constant time.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the <code>pref</code> array. This is because we use an additional array <code>res</code> of size <code>n</code> to store the result.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently recovers the original array <code>arr</code> from the cumulative XOR array <code>pref</code> by exploiting the properties of the XOR operation. The time complexity of <strong>O(n)</strong> and space complexity of <strong>O(n)</strong> make this approach suitable for large input sizes. By understanding how the XOR operation works and using its properties, we can easily reverse the cumulative XOR operation and recover the original array. The problem can be solved in linear time, making it an optimal solution for this task.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode909s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -275,7 +407,6 @@
 
       </div>
 
-      
 
       <footer>
         

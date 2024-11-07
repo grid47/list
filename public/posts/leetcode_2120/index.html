@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode702s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves simulating the movements of a robot on an ( n \times n ) grid based on a sequence of commands given in the string <code>s</code>. The robot starts at a specific position defined by the vector <code>st</code>, and the task is to determine how many valid instructions can be executed starting from that position for each command in <code>s</code>. The commands can instruct the robot to move left (&lsquo;L&rsquo;), right (&lsquo;R&rsquo;), up (&lsquo;U&rsquo;), or down (&lsquo;D&rsquo;). The robot must remain within the bounds of the grid throughout its movements.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we employ a method that utilizes two arrays to track the horizontal and vertical bounds for each command in <code>s</code>. The approach can be broken down into the following key steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We define the size of the grid ( n ) and the length of the commands ( m ).</li>
+<li>We initialize two vectors, <code>hor</code> and <code>ver</code>, to keep track of the last valid positions on the horizontal and vertical axes, respectively. The size of these vectors is determined based on the maximum potential movements in both directions.</li>
+<li>We also create a result vector <code>res</code> to store the count of valid instructions for each command.</li>
+</ul>
+</li>
+<li>
+<p><strong>Simulating Movements</strong>:</p>
+<ul>
+<li>We iterate through the commands in reverse order. For each command:
+<ul>
+<li>We update the current horizontal (<code>h</code>) and vertical (<code>v</code>) positions based on the command.</li>
+<li>We update the <code>hor</code> and <code>ver</code> arrays to reflect the latest valid positions for the current command.</li>
+<li>We calculate the number of valid movements that can still be made without going out of bounds, considering the current position and the initial starting position.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Boundary Checking</strong>:</p>
+<ul>
+<li>The calculation for valid moves takes into account the movements in both the positive and negative directions for both axes to ensure the robot remains within the grid boundaries.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step explanation of the code:</p>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> executeInstructions(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> st, string s) {
+</span></span></code></pre></div><ul>
+<li>The function <code>executeInstructions</code> takes the grid size ( n ), the starting position <code>st</code>, and the command string <code>s</code> as inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> s.size(), h <span style="color:#f92672">=</span> m <span style="color:#f92672">+</span> n, v <span style="color:#f92672">=</span> m <span style="color:#f92672">+</span> n;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> hor((h <span style="color:#f92672">+</span> m) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, m), ver((h <span style="color:#f92672">+</span> m) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, m), res(m);
+</span></span></code></pre></div><ul>
+<li>We initialize <code>m</code> to the size of the command string <code>s</code>.</li>
+<li>The variables <code>h</code> and <code>v</code> are set to an offset to allow easy indexing while considering movements.</li>
+<li><code>hor</code> and <code>ver</code> vectors are initialized to keep track of valid horizontal and vertical positions, respectively, initialized with a default value of ( m ).</li>
+<li>The <code>res</code> vector is created to store the results for each command.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reverse Iteration Over Commands</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    hor[h] <span style="color:#f92672">=</span> ver[v] <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><ul>
+<li>We iterate over the command string <code>s</code> from the last command to the first.</li>
+<li>For each command, we record the last valid position in <code>hor</code> and <code>ver</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Positions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>h <span style="color:#f92672">+=</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>v <span style="color:#f92672">+=</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;U&#39;</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;D&#39;</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We update the horizontal and vertical positions based on the command. Depending on whether the command is &lsquo;L&rsquo;, &lsquo;R&rsquo;, &lsquo;U&rsquo;, or &lsquo;D&rsquo;, we adjust <code>h</code> and <code>v</code> accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Valid Moves</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res[i] <span style="color:#f92672">=</span> min({
+</span></span><span style="display:flex;"><span>    m, hor[h <span style="color:#f92672">-</span> st[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], hor[h <span style="color:#f92672">-</span> st[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> n],
+</span></span><span style="display:flex;"><span>    ver[v <span style="color:#f92672">-</span> st[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], ver[v <span style="color:#f92672">-</span> st[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> n]
+</span></span><span style="display:flex;"><span>}) <span style="color:#f92672">-</span> i;
+</span></span></code></pre></div><ul>
+<li>For each command, we calculate the minimum of:
+<ul>
+<li>The total number of commands ( m ).</li>
+<li>The last valid horizontal positions adjusted for the starting column <code>st[1]</code>.</li>
+<li>The last valid vertical positions adjusted for the starting row <code>st[0]</code>.</li>
+</ul>
+</li>
+<li>The result is the count of valid instructions for the command.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the <code>res</code> vector containing the number of valid instructions for each command in <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(m))</p>
+<ul>
+<li>The algorithm iterates through the command string once, leading to a linear time complexity relative to the length of <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n))</p>
+<ul>
+<li>The space used for the <code>hor</code> and <code>ver</code> vectors scales with the grid size, resulting in a linear space complexity.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively simulates the robot&rsquo;s movements on a grid based on a sequence of commands while keeping track of valid positions. The use of two arrays to maintain horizontal and vertical boundaries allows for efficient calculation of valid movements for each command. With a time complexity of (O(m)) and space complexity of (O(n)), the solution is optimal for the given problem constraints, making it suitable for larger inputs while maintaining clarity and readability. The design demonstrates a thoughtful balance between performance and simplicity, ensuring that the logic can be easily understood and maintained.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode702s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +434,6 @@
 
       </div>
 
-      
 
       <footer>
         

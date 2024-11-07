@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -242,7 +242,150 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1031s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum possible number formed by selecting one element from each of two arrays, <code>nums1</code> and <code>nums2</code>. The task is to select one element from <code>nums1</code> and one element from <code>nums2</code> such that the resulting number is minimized. The number can either be formed by selecting two different numbers, or by selecting a common number if available in both arrays. If there is no common element between the two arrays, the result should be the smallest possible number formed by selecting one element from each array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The strategy is as follows:</p>
+<ol>
+<li><strong>Track the smallest elements in both arrays</strong>: The approach starts by determining the smallest element in <code>nums1</code> and <code>nums2</code>.</li>
+<li><strong>Check for common elements</strong>: If there are any common elements between <code>nums1</code> and <code>nums2</code>, we can form the smallest possible number by using one of these common elements.</li>
+<li><strong>Form the smallest number</strong>: If there are common elements, the minimum common element will form the smallest number. If no common element exists, we will form the number by choosing the smallest number from each array and combining them in a way that results in the smallest two-digit number.</li>
+<li><strong>Edge handling</strong>: The edge case where there is no common element will involve combining the smallest elements of both arrays in a way that minimizes the result.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num1 <span style="color:#f92672">=</span> nums1[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><ul>
+<li><code>num1</code> stores the smallest number found in <code>nums1</code>. Initially, it is set to the first element of <code>nums1</code>.</li>
+<li><code>cnt</code> is a set that is used to store all the elements of <code>nums1</code>. This helps in quickly checking if any element of <code>nums2</code> exists in <code>nums1</code>.</li>
+<li><code>mn</code> is initialized to 10, which is greater than any valid number in the arrays. This will be used to track the smallest common element between <code>nums1</code> and <code>nums2</code>.</li>
+</ul>
+<h4 id="2-storing-the-elements-of-nums1-in-a-set">
+  2. <strong>Storing the elements of <code>nums1</code> in a set</strong>:
+  <a class="heading-link" href="#2-storing-the-elements-of-nums1-in-a-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums1.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    cnt.insert(nums1[i]);
+</span></span><span style="display:flex;"><span>    num1 <span style="color:#f92672">=</span> min(nums1[i], num1);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over the <code>nums1</code> array and inserts each element into the set <code>cnt</code>.</li>
+<li>Additionally, <code>num1</code> is updated to track the smallest element in <code>nums1</code> as the loop progresses.</li>
+</ul>
+<h4 id="3-processing-nums2-to-find-common-elements-and-smallest-numbers">
+  3. <strong>Processing <code>nums2</code> to find common elements and smallest numbers</strong>:
+  <a class="heading-link" href="#3-processing-nums2-to-find-common-elements-and-smallest-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num2 <span style="color:#f92672">=</span> nums2[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums2.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt.count(nums2[i])) {
+</span></span><span style="display:flex;"><span>        mn <span style="color:#f92672">=</span> min(mn, nums2[i]);
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    num2 <span style="color:#f92672">=</span> min(nums2[i], num2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>num2</code> is initialized to the first element of <code>nums2</code>, which will help track the smallest element in <code>nums2</code>.</li>
+<li>The loop iterates through <code>nums2</code> and checks if any element exists in the set <code>cnt</code> (i.e., if the element exists in both <code>nums1</code> and <code>nums2</code>). If a common element is found, it is compared with the current minimum <code>mn</code>, and <code>mn</code> is updated to the smaller of the two.</li>
+<li>At the same time, <code>num2</code> is updated to track the smallest element in <code>nums2</code>.</li>
+</ul>
+<h4 id="4-return-the-result-based-on-common-elements">
+  4. <strong>Return the result based on common elements</strong>:
+  <a class="heading-link" href="#4-return-the-result-based-on-common-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mn <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">return</span> mn;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(num1 <span style="color:#f92672">&lt;</span> num2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> num1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> num2;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> num2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> num1;            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>mn</code> is less than 10, it means we found a common element in both arrays, and we return the smallest common element as the result.</li>
+<li>If no common element exists (<code>mn</code> is still 10), we form a two-digit number by combining <code>num1</code> and <code>num2</code>. The smaller number is placed in the tens place to ensure the smallest possible two-digit number is returned.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the solution is (O(n + m)), where (n) is the length of <code>nums1</code> and (m) is the length of <code>nums2</code>. This is because we:
+<ul>
+<li>Insert all elements of <code>nums1</code> into the set <code>cnt</code> in (O(n)) time.</li>
+<li>Iterate over all elements of <code>nums2</code> to check for common elements and find the smallest element in (O(m)) time.</li>
+</ul>
+</li>
+<li>The operations in the main body of the function (set insertions and lookups, comparisons, and minimum calculations) all take constant time (O(1)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) due to the set <code>cnt</code>, which stores all elements of <code>nums1</code>. The size of <code>cnt</code> is proportional to the size of <code>nums1</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the smallest possible number formed by selecting one element from <code>nums1</code> and one element from <code>nums2</code> while considering the case where both arrays may share common elements. By using a set for fast lookup and keeping track of the smallest elements in both arrays, the algorithm operates with a time complexity of (O(n + m)), making it optimal for large input sizes. This approach ensures that we handle all cases, including when there are common elements and when the arrays need to be combined to form the smallest two-digit number.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1031s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -296,7 +439,6 @@
 
       </div>
 
-      
 
       <footer>
         

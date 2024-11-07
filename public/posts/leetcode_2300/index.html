@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -240,7 +240,124 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode812s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given two arrays: <code>spells</code> and <code>potion</code>. You are also given a <code>success</code> value. The goal is to calculate the number of successful pairs of <code>(spell, potion)</code> such that the product of each spell and a potion is greater than or equal to the given <code>success</code> value. Specifically, for each spell, we want to find how many potions can pair with it such that their product meets or exceeds the <code>success</code> threshold.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key to solving this problem efficiently lies in leveraging sorting and binary search. Here’s the detailed approach:</p>
+<ol>
+<li><strong>Sorting the Potions</strong>: Sorting the <code>potion</code> array allows us to use binary search to efficiently find the first potion that meets the required threshold for a given spell.</li>
+<li><strong>Binary Search</strong>: For each spell, we calculate the minimum potion value needed to achieve the <code>success</code> threshold. Using binary search (<code>lower_bound</code>), we can quickly determine how many potions satisfy this condition.</li>
+<li><strong>Efficient Calculation</strong>: Instead of directly iterating over each potion for every spell, binary search provides a much faster way to find the smallest valid potion for each spell.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> spells.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>sort(potion.begin(), potion.end());
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the number of spells.</li>
+<li><code>ans</code> is a vector initialized to zero, which will store the result: the number of successful pairs for each spell.</li>
+<li>The <code>potion</code> array is sorted to prepare for efficient binary searching.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop - Iterate Over Spells:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We iterate through each spell in the <code>spells</code> array to calculate how many potions can pair successfully with it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating the Target Potion for Each Spell:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> tgt <span style="color:#f92672">=</span> success <span style="color:#f92672">%</span> spells[i] <span style="color:#f92672">?</span> (success <span style="color:#f92672">/</span> spells[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> (success <span style="color:#f92672">/</span> spells[i]);
+</span></span></code></pre></div><ul>
+<li>For each spell, we calculate the minimum potion value <code>tgt</code> such that the product of <code>spells[i]</code> and <code>tgt</code> is greater than or equal to the <code>success</code> threshold.</li>
+<li>If the success is not perfectly divisible by <code>spells[i]</code>, we round up the result by adding 1 to ensure that the potion’s product with the spell is at least <code>success</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Valid Potions with Binary Search:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[i] <span style="color:#f92672">=</span> potion.end() <span style="color:#f92672">-</span> lower_bound(potion.begin(), potion.end(), tgt);
+</span></span></code></pre></div><ul>
+<li>The <code>lower_bound</code> function finds the first potion in the sorted <code>potion</code> array that is greater than or equal to <code>tgt</code>. This is a crucial step because it allows us to efficiently count how many potions meet the condition.</li>
+<li>The expression <code>potion.end() - lower_bound(potion.begin(), potion.end(), tgt)</code> computes the number of potions that are valid for the current spell. This is done by finding the distance between the end of the <code>potion</code> array and the position returned by <code>lower_bound</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all spells, we return the <code>ans</code> array, which contains the number of successful pairs for each spell.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the <code>potion</code> array takes O(m log m), where <code>m</code> is the length of the <code>potion</code> array.</li>
+<li>For each spell, the binary search (<code>lower_bound</code>) on the sorted <code>potion</code> array takes O(log m). Since there are <code>n</code> spells, the overall time complexity is O(n log m + m log m).</li>
+<li>Therefore, the time complexity is O(n log m + m log m), which is efficient for large inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(m) due to the space used by the sorted <code>potion</code> array and O(n) for the result array <code>ans</code>.</li>
+<li>Therefore, the overall space complexity is O(m + n), which is acceptable for typical input sizes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of counting successful pairs of spells and potions using sorting and binary search. By sorting the <code>potion</code> array and applying binary search for each spell, the solution achieves optimal time complexity of O(n log m + m log m), which is much more efficient than brute force approaches. This method ensures that even for larger inputs, the solution remains performant.</p>
+<p>The use of binary search to find the first valid potion for each spell dramatically reduces the time complexity compared to iterating through each potion for every spell, making the algorithm both fast and scalable. The approach guarantees correctness by ensuring that all spells and potions are processed in a manner that respects the condition of achieving the success threshold.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode812s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -252,7 +369,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2301"  class="external-link" target="_blank" rel="noopener">LeetCode #2301: Match Substring After Replacement</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2302"  class="external-link" target="_blank" rel="noopener">LeetCode #2302: Count Subarrays With Score Less Than K</a></th>
       </tr>
   </thead>
   <tbody>
@@ -294,7 +411,6 @@
 
       </div>
 
-      
 
       <footer>
         

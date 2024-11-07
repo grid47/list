@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,147 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1150s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>nums</code> of integers, we are asked to find the number of subarrays in <code>nums</code> such that the sum of the subarray elements satisfies a certain condition. Specifically, the sum of the subarray elements, when taken modulo <code>mod</code>, must equal a given value <code>k</code>.</p>
+<p>The task is to efficiently compute the number of such subarrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we can use the concept of prefix sums combined with a hash map (unordered_map). The key observation is that we can use the prefix sum modulo <code>mod</code> to track how many times a particular modulo has occurred before, and this helps us determine when we have found a valid subarray.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, prefix <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>mp[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is an unordered map used to store the count of prefix sums modulo <code>mod</code>. The key is the prefix sum modulo <code>mod</code>, and the value is the count of how many times this modulo has occurred.</li>
+<li><code>ans</code> is the variable that will store the final result, which is the number of valid subarrays.</li>
+<li><code>prefix</code> keeps track of the current prefix sum modulo <code>mod</code>.</li>
+<li><code>n</code> stores the length of the input array <code>nums</code>.</li>
+<li><code>mp[0] = 1</code> is initialized to handle the case where the prefix sum modulo <code>mod</code> itself equals <code>k</code> without needing to look at previous values.</li>
+</ul>
+<h4 id="step-2-loop-through-the-array">
+  Step 2: Loop Through the Array
+  <a class="heading-link" href="#step-2-loop-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">%</span> mod <span style="color:#f92672">==</span> k) prefix<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    prefix <span style="color:#f92672">%=</span> mod;
+</span></span></code></pre></div><ul>
+<li>We iterate through each element <code>nums[i]</code> of the array.</li>
+<li>If the current element <code>nums[i]</code> modulo <code>mod</code> equals <code>k</code>, we increment the <code>prefix</code>. This increment tracks how many elements so far have met the condition (i.e., having <code>nums[i] % mod == k</code>).</li>
+<li>We then update <code>prefix</code> to keep it in the range <code>[0, mod-1]</code> by taking the modulo of the current <code>prefix</code> with <code>mod</code>.</li>
+</ul>
+<h4 id="step-3-check-for-valid-subarrays">
+  Step 3: Check for Valid Subarrays
+  <a class="heading-link" href="#step-3-check-for-valid-subarrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (mp.find((prefix <span style="color:#f92672">-</span> k <span style="color:#f92672">+</span> mod) <span style="color:#f92672">%</span> mod) <span style="color:#f92672">!=</span> mp.end())
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> mp[(prefix <span style="color:#f92672">-</span> k <span style="color:#f92672">+</span> mod) <span style="color:#f92672">%</span> mod];
+</span></span></code></pre></div><ul>
+<li>We check if there is a previously encountered prefix sum that, when added to the current <code>prefix</code>, results in a sum that is congruent to <code>k</code> modulo <code>mod</code>.</li>
+<li>Specifically, we check if <code>(prefix - k + mod) % mod</code> has appeared before in the <code>mp</code> map. If it has, the number of such occurrences is added to the answer <code>ans</code>.</li>
+<li>This step works because if a certain prefix sum modulo <code>mod</code> has appeared earlier, it means there exists a subarray (from that earlier position to the current position) whose sum modulo <code>mod</code> equals <code>k</code>.</li>
+</ul>
+<h4 id="step-4-update-the-map">
+  Step 4: Update the Map
+  <a class="heading-link" href="#step-4-update-the-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mp[prefix]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>After checking for valid subarrays, we increment the count of the current <code>prefix</code> modulo <code>mod</code> in the map <code>mp</code>. This allows us to track how many times this particular modulo has been encountered, enabling future subarray checks.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, after iterating through the entire array, we return the value of <code>ans</code>, which contains the number of subarrays that satisfy the condition.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The algorithm loops through each element of the array exactly once. Inside the loop, the operations (updating the map and checking for valid subarrays) take constant time on average. Thus, the overall time complexity is linear in the size of the input array <code>nums</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(mod)</strong>: The space complexity is determined by the size of the map <code>mp</code>, which stores counts for each possible value of <code>prefix % mod</code>. Since there are <code>mod</code> possible values for the prefix sum modulo <code>mod</code>, the space complexity is proportional to <code>mod</code>. In the worst case, this is a constant space usage, as <code>mod</code> is typically small compared to the size of the input array <code>nums</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages the power of prefix sums and hash maps to efficiently count the number of subarrays that satisfy the given condition. By maintaining a running <code>prefix</code> sum modulo <code>mod</code> and using a hash map to track how often each prefix modulo has been seen, we can efficiently compute the number of valid subarrays. The algorithm runs in linear time and uses constant space relative to the modulus, making it highly efficient for large arrays. This approach is much more optimal than a brute force solution, which would involve checking all possible subarrays directly, leading to a much higher time complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1150s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +387,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2846"  class="external-link" target="_blank" rel="noopener">LeetCode #2846: Minimum Edge Weight Equilibrium Queries in a Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2848"  class="external-link" target="_blank" rel="noopener">LeetCode #2848: Points That Intersect With Cars</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

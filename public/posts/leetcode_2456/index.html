@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode925s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a list of creators, their respective video IDs, and the number of views for each video. The goal is to identify the creators who have the highest total number of views and return the creator&rsquo;s name along with the ID of the video that has the highest views among their videos. If there are multiple videos with the same highest number of views, the video with the lexicographically smallest ID should be selected.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves two main tasks:</p>
+<ol>
+<li><strong>Summing up the Views for Each Creator</strong>: We first calculate the total views for each creator by summing the views for all of their videos.</li>
+<li><strong>Finding the Creator with the Maximum Views</strong>: Once we know the total views for each creator, we identify the creator(s) with the highest total views.</li>
+<li><strong>Sorting Videos for Creators with the Maximum Views</strong>: For the creators with the highest total views, we sort their videos based on the number of views in descending order. In case of a tie in views, we sort by the video ID in lexicographical order to choose the video with the smallest ID.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the solution code to understand it in detail:</p>
+<ol>
+<li>
+<p><strong>Define the Data Types and Comparator Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define ll long long
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cmp</span>(pair<span style="color:#f92672">&lt;</span>ll, string<span style="color:#f92672">&gt;</span> p1, pair<span style="color:#f92672">&lt;</span>ll, string<span style="color:#f92672">&gt;</span> p2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p1.first <span style="color:#f92672">==</span> p2.first) <span style="color:#66d9ef">return</span> p1.second <span style="color:#f92672">&lt;</span> p2.second;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> p1.first <span style="color:#f92672">&gt;</span> p2.first;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><code>#define ll long long</code>: This defines <code>ll</code> as a shorthand for <code>long long</code>, which is used to handle large integer values (such as total views).</li>
+<li>The <code>cmp</code> function is a static comparator used to sort pairs of views and video IDs. It sorts first by views in descending order, and if the views are the same, it sorts by video ID in lexicographical order (ascending).</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> mostPopularCreator(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> creators, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> ids, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> views) {
+</span></span></code></pre></div><ul>
+<li>The function <code>mostPopularCreator</code> takes three parameters:
+<ul>
+<li><code>creators</code>: A vector of strings representing the names of video creators.</li>
+<li><code>ids</code>: A vector of strings representing the IDs of videos.</li>
+<li><code>views</code>: A vector of integers representing the number of views for each corresponding video.</li>
+</ul>
+</li>
+<li>The function returns a vector of vectors of strings, where each inner vector contains a creator’s name followed by the ID of their most popular video (the one with the highest views).</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> n <span style="color:#f92672">=</span> creators.size(), maxi <span style="color:#f92672">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, ll<span style="color:#f92672">&gt;</span> m1;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>ll, string<span style="color:#f92672">&gt;&gt;&gt;</span> m2;
+</span></span></code></pre></div><ul>
+<li><code>ans</code>: This will store the final result, a list of creators along with their most popular video ID.</li>
+<li><code>n</code>: The size of the <code>creators</code> vector, representing the number of videos.</li>
+<li><code>maxi</code>: Initialized to <code>INT_MIN</code>, this will keep track of the maximum total views for any creator.</li>
+<li><code>m1</code>: A map that stores the total views for each creator. The key is the creator&rsquo;s name (a string), and the value is the total number of views (a long long integer).</li>
+<li><code>m2</code>: A map that stores the list of videos (as pairs of views and video IDs) for each creator. The key is the creator’s name, and the value is a vector of pairs, where each pair contains the number of views and the video ID.</li>
+</ul>
+</li>
+<li>
+<p><strong>First Loop to Process the Creators, Video IDs, and Views</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    m1[creators[i]] <span style="color:#f92672">+=</span> views[i];
+</span></span><span style="display:flex;"><span>    m2[creators[i]].push_back(make_pair(views[i], ids[i]));
+</span></span><span style="display:flex;"><span>    maxi <span style="color:#f92672">=</span> max(maxi, m1[creators[i]]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This loop iterates through each video (indexed by <code>i</code>):</p>
+<ul>
+<li>For each creator <code>creators[i]</code>, the corresponding number of views <code>views[i]</code> is added to their total views in <code>m1</code>.</li>
+<li>The video ID and views are stored as a pair <code>(views[i], ids[i])</code> in the <code>m2</code> map under the creator&rsquo;s name.</li>
+<li>The <code>maxi</code> variable is updated to track the maximum total views for any creator.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Loop to Find the Creators with Maximum Views</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>[l, r] <span style="color:#f92672">:</span> m1) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(r <span style="color:#f92672">==</span> maxi) {
+</span></span><span style="display:flex;"><span>        sort(m2[l].begin(), m2[l].end(), cmp);
+</span></span><span style="display:flex;"><span>        ans.push_back({l, m2[l].front().second});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After collecting the total views and video details:</p>
+<ul>
+<li>This loop iterates over the <code>m1</code> map (which contains total views for each creator).</li>
+<li>For each creator <code>l</code> (with total views <code>r</code>), if their total views match the maximum <code>maxi</code>, the creator is considered a candidate.</li>
+<li>The videos for that creator are sorted using the <code>cmp</code> comparator. This ensures that the videos are sorted by views in descending order and, in case of a tie, by the video ID lexicographically.</li>
+<li>After sorting, the most popular video for that creator is the first element of the sorted list. The creator&rsquo;s name and the most popular video ID are added to the result <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>After processing all creators, the function returns <code>ans</code>, which contains the list of creators and their most popular video ID.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The first loop iterates over the <code>creators</code> vector and processes each video, which takes (O(N)), where (N) is the number of videos (i.e., the size of <code>creators</code>).</li>
+<li>The second loop iterates over the <code>m1</code> map, which has at most (C) entries, where (C) is the number of unique creators. Sorting the videos for each creator in the <code>m2</code> map takes (O(V \log V)), where (V) is the number of videos for a creator.</li>
+<li>Thus, the time complexity can be expressed as:
+[
+O(N + C \cdot V \log V)
+]
+where (N) is the number of videos, (C) is the number of creators, and (V) is the average number of videos per creator.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(N + C \cdot V)) because we store the total views and video details for each creator. The space is used by the <code>m1</code> and <code>m2</code> maps and the result vector <code>ans</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>mostPopularCreator</code> function efficiently solves the problem of identifying creators with the highest total views and their most popular video. By using maps and sorting techniques, it ensures that the video with the maximum views (and smallest lexicographical ID in case of a tie) is selected for each creator with the highest total views.</p>
+<p>The time complexity of the solution is dominated by the sorting operation, which makes it efficient for typical input sizes. The space complexity is also manageable, considering the storage requirements for the video details and total views for each creator. This solution is optimal for handling large datasets with multiple creators and videos.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode925s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -309,7 +465,6 @@
 
       </div>
 
-      
 
       <footer>
         

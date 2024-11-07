@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -237,7 +237,169 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> answer;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode765s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer <code>num</code>, the task is to rearrange its digits in such a way that the result is the largest possible number that can be formed by using the same digits. The rearrangement must follow the constraint that all odd digits should retain their relative positions, and the same applies to the even digits. This means that the odd digits in the result must still be in the same places where odd digits originally appeared in the number, and similarly for even digits.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>65893</code></li>
+<li>Output: <code>96583</code>
+<ul>
+<li>Odd digits: <code>5, 9, 3</code></li>
+<li>Even digits: <code>6, 8</code></li>
+<li>Result: The odd digits are rearranged as <code>9, 5, 3</code> and the even digits as <code>8, 6</code>, while preserving their relative positions.</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem is as follows:</p>
+<ol>
+<li>
+<p><strong>Separation of Odd and Even Digits</strong>:</p>
+<ul>
+<li>First, we need to identify and separate the odd and even digits in the number.</li>
+<li>We can achieve this by converting the number to a string, which allows us to access each digit and check whether it is odd or even.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Odd and Even Digits</strong>:</p>
+<ul>
+<li>The goal is to rearrange the odd and even digits in descending order, so we use two max-heaps (priority queues) to store the odd and even digits separately.</li>
+<li>By using a max-heap, we ensure that when extracting digits from these heaps, we always get the largest available digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reconstruction of the Result</strong>:</p>
+<ul>
+<li>After sorting the digits into two heaps, we reconstruct the result by iterating through the string representation of the number.</li>
+<li>If the digit at the current position is odd, we replace it with the largest available odd digit from the heap.</li>
+<li>Similarly, if the digit is even, we replace it with the largest available even digit from the heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Answer</strong>:</p>
+<ul>
+<li>Once all digits have been replaced in this way, we return the newly constructed number.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p; <span style="color:#75715e">// Max-heap for odd digits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q; <span style="color:#75715e">// Max-heap for even digits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>string nums <span style="color:#f92672">=</span> to_string(num); <span style="color:#75715e">// Convert the integer to a string for easy digit access
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size(); <span style="color:#75715e">// Store the number of digits in the number
+</span></span></span></code></pre></div><ul>
+<li>Here, we create two priority queues (<code>p</code> and <code>q</code>) to store odd and even digits respectively. We also convert the number <code>num</code> into a string <code>nums</code> to easily access individual digits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Separation of Odd and Even Digits</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> digit <span style="color:#f92672">=</span> nums[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>; <span style="color:#75715e">// Convert char to integer digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (digit <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#75715e">// If the digit is odd, add to the odd heap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        p.push(digit);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#75715e">// If the digit is even, add to the even heap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        q.push(digit);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through each digit of <code>nums</code>. If the digit is odd, it is pushed into the max-heap <code>p</code>; if the digit is even, it is pushed into the max-heap <code>q</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reconstruction of the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> answer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Variable to store the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    answer <span style="color:#f92672">=</span> answer <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">// Shift left (multiply by 10) to prepare for the next digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> digit <span style="color:#f92672">=</span> nums[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>; <span style="color:#75715e">// Get the current digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (digit <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e">// If the digit is odd, extract the largest odd digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        answer <span style="color:#f92672">+=</span> p.top(); <span style="color:#75715e">// Add the largest odd digit to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        p.pop(); <span style="color:#75715e">// Remove the digit from the heap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">// If the digit is even, extract the largest even digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        answer <span style="color:#f92672">+=</span> q.top(); <span style="color:#75715e">// Add the largest even digit to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        q.pop(); <span style="color:#75715e">// Remove the digit from the heap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize the result variable <code>answer</code> to zero. Then, we iterate through each digit in the original string <code>nums</code>.</li>
+<li>For each digit, we shift the current <code>answer</code> to the left by multiplying it by 10 (to make room for the next digit).</li>
+<li>Depending on whether the digit is odd or even, we pop the largest available digit from the respective heap (<code>p</code> for odd digits and <code>q</code> for even digits) and add it to the <code>answer</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Answer</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> answer; <span style="color:#75715e">// Return the final reconstructed number
+</span></span></span></code></pre></div><ul>
+<li>After all digits are processed and the <code>answer</code> has been reconstructed with the largest possible digits in the correct positions, we return the <code>answer</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Converting the Number to a String</strong>: This step takes O(d), where <code>d</code> is the number of digits in the number.</li>
+<li><strong>Inserting Digits into Heaps</strong>: Inserting <code>n</code> digits into the two heaps takes O(n log n) time because each insertion operation into a heap has a logarithmic time complexity.</li>
+<li><strong>Reconstructing the Result</strong>: This step involves iterating over all the digits once, and each operation inside the loop is constant time. So, this step takes O(n).</li>
+<li>Overall, the time complexity is dominated by the heap operations, so the time complexity is O(n log n).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(n) due to the two heaps (<code>p</code> and <code>q</code>), each storing up to <code>n</code> digits in the worst case.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using priority queues (max-heaps) to handle the sorting of odd and even digits independently. The use of heaps ensures that the largest available digits are always chosen first, which guarantees that the resulting number is the largest possible one with the same digits. By keeping the relative positions of odd and even digits intact, the algorithm achieves the desired result while maintaining a time complexity of O(n log n), making it efficient for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode765s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +453,6 @@
 
       </div>
 
-      
 
       <footer>
         

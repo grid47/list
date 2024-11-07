@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -271,7 +271,190 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;allocate(size,mID);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;free(mID);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode952s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves creating a memory allocator that can allocate and free blocks of memory. The allocator works on a contiguous memory space, and the allocator can allocate a block of memory of a specified size if it&rsquo;s available. When a block of memory is freed, it should be marked as free, and the memory block should be available for future allocations.</p>
+<p>The allocator supports two main operations:</p>
+<ol>
+<li><strong>allocate(size, mID)</strong>: This operation tries to allocate a contiguous block of memory of a specified size. If successful, it should return the starting index of the allocated block. If no such block is available, it should return <code>-1</code>.</li>
+<li><strong>free(mID)</strong>: This operation frees the memory allocated for the given memory ID <code>mID</code>. It should return the number of bytes freed.</li>
+</ol>
+<p>The goal is to efficiently manage memory allocation and deallocation while supporting these operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach for solving this problem involves:</p>
+<ol>
+<li><strong>Memory Representation</strong>: We maintain an array <code>mem</code> to represent the memory, where each index holds <code>0</code> for free memory and <code>1</code> for allocated memory. This helps us efficiently track which parts of memory are available.</li>
+<li><strong>Map for Allocations</strong>: We use a map <code>mp</code> to store the allocated memory blocks for each memory ID. Each entry in the map is a vector of vectors, where each vector stores the starting index and size of an allocated block.</li>
+<li><strong>Allocate Memory</strong>: The <code>allocate</code> function tries to find a contiguous block of free memory of the required size. If found, it updates the <code>mem</code> array to mark the allocated block and stores the allocation information in the map.</li>
+<li><strong>Free Memory</strong>: The <code>free</code> function retrieves all memory blocks allocated to the given memory ID, updates the <code>mem</code> array to mark those blocks as free, and removes the corresponding entries from the map.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-constructor">
+  Step 1: Constructor
+  <a class="heading-link" href="#step-1-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Allocator(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    mem.resize(n, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Initialize a vector of size n with all elements set to 0 (representing free memory)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the memory with size <code>n</code>. The vector <code>mem</code> is of size <code>n</code>, with all elements initially set to <code>0</code> to represent free memory. This ensures that all memory slots are available for allocation when the allocator is created.</li>
+</ul>
+<h4 id="step-2-allocate-function">
+  Step 2: Allocate Function
+  <a class="heading-link" href="#step-2-allocate-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">allocate</span>(<span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> mID) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (idx <span style="color:#f92672">&lt;</span> mem.size()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> idx;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> mem.size() <span style="color:#f92672">&amp;&amp;</span> mem[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> cnt <span style="color:#f92672">&lt;</span> size) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cnt <span style="color:#f92672">==</span> size) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> idx <span style="color:#f92672">+</span> size; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>                mem[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark memory as allocated
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mp[mID].push_back({idx, size});  <span style="color:#75715e">// Store allocation details for the given mID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> idx;  <span style="color:#75715e">// Return the starting index of the allocated memory block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> mem.size() <span style="color:#f92672">&amp;&amp;</span> mem[j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) j<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Skip allocated blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        idx <span style="color:#f92672">=</span> j;  <span style="color:#75715e">// Start looking from the next free block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If no space is available, return -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Finding Space</strong>: The <code>allocate</code> function iterates over the <code>mem</code> array to find a contiguous block of free memory. It uses two pointers: <code>idx</code> (the current starting index of the free block) and <code>j</code> (the end index of the free block). The variable <code>cnt</code> counts the number of contiguous free blocks.</li>
+<li><strong>Allocating Memory</strong>: When a block of size <code>size</code> is found, the memory is marked as allocated by setting <code>mem[i]</code> to <code>1</code> for the range of indices corresponding to the block. The allocation details (starting index and size) are stored in the <code>mp</code> map, with the memory ID <code>mID</code> as the key.</li>
+<li><strong>Failure Case</strong>: If no block large enough for the allocation is found, the function returns <code>-1</code>.</li>
+</ul>
+<h4 id="step-3-free-function">
+  Step 3: Free Function
+  <a class="heading-link" href="#step-3-free-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">free</span>(<span style="color:#66d9ef">int</span> mID) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mp[mID].size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp[mID][i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>]; j <span style="color:#f92672">&lt;</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> it[<span style="color:#ae81ff">1</span>]; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            mem[j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Mark memory as free
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    mp.erase(mID);  <span style="color:#75715e">// Remove the allocation details for the given mID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> cnt;  <span style="color:#75715e">// Return the number of bytes freed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Freeing Memory</strong>: The <code>free</code> function goes through the list of memory allocations for the given <code>mID</code> and marks the corresponding memory slots in the <code>mem</code> array as free (set to <code>0</code>). The <code>mp</code> map is updated by removing the entry corresponding to <code>mID</code>.</li>
+<li><strong>Returning Freed Space</strong>: The function returns the total number of memory bytes that were freed.</li>
+</ul>
+<h4 id="step-4-managing-allocations">
+  Step 4: Managing Allocations
+  <a class="heading-link" href="#step-4-managing-allocations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The map <code>mp</code> keeps track of all memory allocations for each <code>mID</code>. The key is the memory ID, and the value is a vector of pairs, each containing the starting index and size of an allocated block. This allows us to easily retrieve and update the allocated blocks when freeing memory.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Allocate Function</strong>:</p>
+<ul>
+<li>In the worst case, we may need to traverse the entire memory array to find a free block of the required size. This gives a time complexity of (O(n)), where (n) is the size of the memory.</li>
+<li>The inner while loops involve a linear scan of the memory to find contiguous free blocks, and the memory update operations are (O(k)), where (k) is the size of the block being allocated.</li>
+</ul>
+<p>Therefore, the time complexity of the <code>allocate</code> function is (O(n)).</p>
+</li>
+<li>
+<p><strong>Free Function</strong>:</p>
+<ul>
+<li>The <code>free</code> function iterates over the list of allocations for a given memory ID and frees each block. For each allocation, we mark the corresponding memory slots as free, which takes (O(k)), where (k) is the size of the block being freed.</li>
+<li>The time complexity for the <code>free</code> function is proportional to the total size of the allocated blocks for the given <code>mID</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Memory Array</strong>: The <code>mem</code> array takes (O(n)) space, where (n) is the size of the memory.</li>
+<li><strong>Allocation Map</strong>: The <code>mp</code> map stores the allocation information for each memory ID. In the worst case, it could store allocations for each block, so it requires (O(n)) space.</li>
+</ul>
+<p>Thus, the overall space complexity is (O(n)).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this memory allocator efficiently handles allocation and deallocation of memory blocks using an array to represent the memory and a map to track allocations. It provides a simple but effective mechanism to manage memory, ensuring that the <code>allocate</code> and <code>free</code> functions perform within acceptable time and space limits.</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)) for the <code>allocate</code> function and (O(k)) for the <code>free</code> function, where (n) is the memory size and (k) is the block size.</li>
+<li><strong>Space Complexity</strong>: (O(n)), due to the memory array and the map storing allocation information.</li>
+</ul>
+<p>This approach is efficient for memory allocation problems where we need to manage contiguous memory blocks dynamically.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode952s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +466,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2503"  class="external-link" target="_blank" rel="noopener">LeetCode #2503: Maximum Number of Points From Grid Queries</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2506"  class="external-link" target="_blank" rel="noopener">LeetCode #2506: Count Pairs Of Similar Strings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -325,7 +508,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -254,7 +254,158 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode855s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the longest cycle in a directed graph, where each node has at most one outgoing edge. Given an array <code>edges</code>, each element at index <code>i</code> denotes the index of the next node connected by a directed edge from <code>i</code>. If there’s no outgoing edge from a node, it’s represented by <code>-1</code>. The goal is to identify the length of the longest cycle in the graph, if any. If no cycle exists, return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses Depth-First Search (DFS) and a visitation tracking technique to identify cycles. By traversing nodes and marking visited nodes, we keep track of each node’s traversal path using a temporary list. If we encounter a node that’s already in the current traversal path, we have identified a cycle, and we calculate its length.</p>
+<ol>
+<li>
+<p><strong>Initialization:</strong></p>
+<ul>
+<li>We initialize a result variable <code>ans</code> to store the maximum cycle length found.</li>
+<li>The <code>longestCycle</code> function initializes a visitation array <code>vis</code> with zeros, representing unvisited nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Traversal and Cycle Detection:</strong></p>
+<ul>
+<li>For each unvisited node, we start a DFS traversal to detect any cycles.</li>
+<li>During traversal, we maintain a temporary list <code>store</code> to track the current path from the starting node.</li>
+<li>If we revisit a node already in <code>store</code>, we have detected a cycle. The cycle length is calculated based on the distance between the first and last occurrences of this node in <code>store</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Longest Cycle Length:</strong></p>
+<ul>
+<li>For each cycle detected, we update <code>ans</code> with the longest cycle length.</li>
+<li>After all nodes are processed, we return <code>ans</code>, which will be <code>-1</code> if no cycle was found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialization-and-dfs-setup">
+  Step 1: Initialization and DFS Setup
+  <a class="heading-link" href="#step-1-initialization-and-dfs-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">longestCycle</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> edges.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n, <span style="color:#ae81ff">0</span>);        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(vis[i]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> store;
+</span></span><span style="display:flex;"><span>        dfs(i, vis, edges, store);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is initialized to <code>-1</code>, indicating no cycle has been found yet.</li>
+<li><code>vis</code> array is used to mark nodes that have been visited.</li>
+<li>A loop iterates over all nodes; if a node hasn’t been visited, we initiate a DFS from that node.</li>
+</ul>
+<h4 id="step-2-dfs-traversal-and-cycle-detection">
+  Step 2: DFS Traversal and Cycle Detection
+  <a class="heading-link" href="#step-2-dfs-traversal-and-cycle-detection">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> cur, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vis, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>grid, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>store) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(vis[cur]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> pt <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> store.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(store[i] <span style="color:#f92672">==</span> cur) {
+</span></span><span style="display:flex;"><span>                pt <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(pt <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, (<span style="color:#66d9ef">int</span>)store.size() <span style="color:#f92672">-</span> pt);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        vis[cur] <span style="color:#f92672">=</span> true;            
+</span></span><span style="display:flex;"><span>        store.push_back(cur);
+</span></span><span style="display:flex;"><span>        dfs(grid[cur], vis, grid, store);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function takes the current node <code>cur</code> and checks if it has been visited.</li>
+<li>If <code>cur</code> is <code>-1</code>, there’s no outgoing edge, so we return.</li>
+<li>If <code>cur</code> has already been visited in this traversal (<code>store</code>), we have detected a cycle.</li>
+<li>The length of the cycle is calculated based on the index where the cycle started in <code>store</code>.</li>
+<li>If no cycle is detected, we continue the DFS by marking <code>cur</code> as visited, adding it to <code>store</code>, and calling <code>dfs</code> on the next node in the path.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>DFS Traversal:</strong> The algorithm processes each node once, resulting in (O(n)) time complexity, where <code>n</code> is the number of nodes.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Auxiliary Space:</strong> We use an auxiliary vector <code>store</code> for each DFS call, leading to (O(n)) space complexity.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively identifies the longest cycle in a graph where each node has at most one outgoing edge. Using DFS and tracking visited nodes enables efficient cycle detection, while maintaining a list of nodes in the current path allows accurate cycle length calculation. The algorithm returns the longest cycle length or <code>-1</code> if no cycle exists. This approach is efficient for handling directed graphs with at most one outgoing edge per node.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode855s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -266,7 +417,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2361"  class="external-link" target="_blank" rel="noopener">LeetCode #2361: Minimum Costs Using the Train Line</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2363"  class="external-link" target="_blank" rel="noopener">LeetCode #2363: Merge Similar Items</a></th>
       </tr>
   </thead>
   <tbody>
@@ -308,7 +459,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -246,7 +246,176 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode711s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining the maximum runtime that can be achieved by distributing a given number of batteries (represented as an array) among <code>n</code> devices. Each battery has a certain capacity, and the goal is to maximize the runtime such that all devices can run for the same amount of time using the available batteries.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, a binary search approach is utilized to efficiently find the maximum possible runtime that can be sustained across all devices. The key steps involved in the approach are:</p>
+<ol>
+<li>
+<p><strong>Understanding Runtime</strong>: The runtime for a device can be defined as the time each device runs before the batteries deplete. The challenge is to determine the maximum time that all devices can run based on the batteries&rsquo; capacities.</p>
+</li>
+<li>
+<p><strong>Binary Search Setup</strong>: The binary search will operate over the possible runtimes:</p>
+<ul>
+<li>The lower bound (<code>l</code>) starts at 0.</li>
+<li>The upper bound (<code>r</code>) is set to the total capacity of all batteries divided by the number of devices, which gives the theoretical maximum runtime if all batteries were perfectly balanced among the devices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Feasibility Check</strong>: A helper function, <code>mx</code>, checks whether a proposed runtime (<code>mid</code>) can be sustained by all devices:</p>
+<ul>
+<li>It calculates the total capacity available if each battery can only contribute up to the proposed runtime.</li>
+<li>If the total capacity is greater than or equal to the required capacity for all devices (<code>mid * n</code>), then the proposed runtime is feasible.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Search Bounds</strong>: Based on the result from the feasibility check, the binary search either moves up (if the runtime is feasible) or down (if it is not), allowing us to home in on the maximum achievable runtime.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The result of the binary search will yield the maximum possible runtime that all devices can share.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>Defines the <code>Solution</code> class that contains the method to solve the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Feasibility Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">mx</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> bat, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mid) {
+</span></span></code></pre></div><ul>
+<li>This function checks whether it is possible for each device to run for <code>mid</code> time using the available batteries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Available Capacity</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> bat.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    net <span style="color:#f92672">+=</span> min((<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)bat[i], mid);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A loop iterates through each battery, adding the lesser of the battery&rsquo;s capacity or the proposed runtime to a total (<code>net</code>). This represents the maximum energy that can be provided for <code>mid</code> runtime.</li>
+</ul>
+</li>
+<li>
+<p><strong>Capacity Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net <span style="color:#f92672">&gt;=</span> mid <span style="color:#f92672">*</span> n;
+</span></span></code></pre></div><ul>
+<li>If the total available capacity (<code>net</code>) is at least <code>mid * n</code>, then it&rsquo;s feasible for all devices to run for <code>mid</code> time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">maxRunTime</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> bat) {
+</span></span></code></pre></div><ul>
+<li>This function calculates the maximum runtime by first determining the total capacity of all batteries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Binary Search</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> accumulate(bat.rbegin(), bat.rend(), <span style="color:#ae81ff">0L</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> sum <span style="color:#f92672">/</span> n, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The total capacity (<code>sum</code>) is computed using <code>accumulate</code>. The binary search bounds are initialized, with <code>l</code> starting at 0 and <code>r</code> as the total capacity divided by <code>n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mx(n, bat, mid)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop continues while the lower bound is less than or equal to the upper bound. The midpoint (<code>mid</code>) is calculated and checked for feasibility.</li>
+<li>If feasible, <code>ans</code> is updated with <code>mid</code>, and the search continues in the higher range. Otherwise, the search range is adjusted down.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, the maximum achievable runtime (<code>ans</code>) is returned.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This closing brace signifies the end of the <code>Solution</code> class.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(b \log m)), where (b) is the number of batteries and (m) is the total capacity of the batteries.</p>
+<ul>
+<li>The binary search runs in (O(\log m)) and each feasibility check (in <code>mx</code>) requires (O(b)) operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>The algorithm uses a constant amount of space, primarily for a few variables.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxRunTime</code> function effectively calculates the maximum runtime that can be achieved by distributing batteries among devices, ensuring that each device receives equal runtime. By leveraging binary search and a feasibility function, the solution is both efficient and elegant.</p>
+<p>This approach exemplifies how binary search can be applied to optimization problems, particularly when searching for a maximum or minimum under constraints. Mastering this technique is essential for solving similar problems in competitive programming and algorithm design.</p>
+<p>By understanding the underlying principles illustrated in this code, developers can enhance their problem-solving toolkit and approach related challenges with confidence.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode711s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -258,7 +427,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2142"  class="external-link" target="_blank" rel="noopener">LeetCode #2142: The Number of Passengers in Each Bus I</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2144"  class="external-link" target="_blank" rel="noopener">LeetCode #2144: Minimum Cost of Buying Candies With Discount</a></th>
       </tr>
   </thead>
   <tbody>
@@ -300,7 +469,6 @@
 
       </div>
 
-      
 
       <footer>
         

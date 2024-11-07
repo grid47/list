@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -237,7 +237,205 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode973s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to efficiently apply range addition queries to an <code>n x n</code> matrix. Given a set of queries, each specifying a rectangular submatrix (defined by the top-left and bottom-right corners), we are required to increment the elements in that submatrix. The task is to return the matrix after all queries have been applied.</p>
+<p>Each query is of the form:</p>
+<ul>
+<li><code>[row1, col1, row2, col2]</code>, where:
+<ul>
+<li><code>row1</code>, <code>col1</code> is the top-left corner of the submatrix.</li>
+<li><code>row2</code>, <code>col2</code> is the bottom-right corner of the submatrix.</li>
+<li>The query adds <code>1</code> to all elements in the submatrix defined by these corners.</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use the <strong>prefix sum approach</strong>. Instead of updating every element of the submatrix directly for each query, which would be inefficient, we can update a smaller range in the matrix and later accumulate the values.</p>
+<ol>
+<li>
+<p><strong>Difference Array</strong>:</p>
+<ul>
+<li>
+<p>The key idea here is to use a difference array to represent the increments. Instead of applying the increment to every element in the submatrix immediately, we only modify the boundaries of the submatrix.</p>
+</li>
+<li>
+<p>For each query <code>[row1, col1, row2, col2]</code>, we:</p>
+<ul>
+<li>Increment <code>ans[row1][col1]</code> by <code>1</code> to indicate the start of an increment at this position.</li>
+<li>Decrement <code>ans[row1][col2 + 1]</code> by <code>1</code> if <code>col2 + 1 &lt; n</code>, to cancel the increment beyond the end of the column range.</li>
+<li>Increment <code>ans[row2 + 1][col1]</code> by <code>1</code> if <code>row2 + 1 &lt; n</code>, to cancel the increment beyond the end of the row range.</li>
+<li>Decrement <code>ans[row2 + 1][col2 + 1]</code> by <code>1</code> to ensure the area beyond the bottom-right corner is unaffected by the query.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum</strong>:</p>
+<ul>
+<li>After all queries have been applied in the difference matrix, we can compute the prefix sum of rows to obtain the final matrix. This step ensures that each element reflects the correct number of additions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-matrix-ans">
+  Step 1: Initialize Matrix <code>ans</code>
+  <a class="heading-link" href="#step-1-initialize-matrix-ans">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span></code></pre></div><ul>
+<li>We start by initializing an <code>n x n</code> matrix <code>ans</code> with all elements set to <code>0</code>. This matrix will store the intermediate results of the range additions.</li>
+</ul>
+<h4 id="step-2-processing-each-query">
+  Step 2: Processing Each Query
+  <a class="heading-link" href="#step-2-processing-each-query">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> q[i][<span style="color:#ae81ff">0</span>]; j <span style="color:#f92672">&lt;=</span> q[i][<span style="color:#ae81ff">2</span>]; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        ans[j][q[i][<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(q[i][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            ans[j][q[i][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each query in <code>q</code>. Each query is a vector with the format <code>[row1, col1, row2, col2]</code>.</li>
+<li>For each query, we loop through the rows from <code>row1</code> to <code>row2</code>. Within this range, we update the first column of the range (<code>col1</code>) by incrementing it by <code>1</code>.</li>
+<li>We also perform a boundary check to ensure that we do not go out of bounds. If <code>col2 + 1</code> is within bounds, we decrement that cell to cancel the increment beyond the end of the column range.</li>
+</ul>
+<h4 id="step-3-compute-prefix-sum-for-columns">
+  Step 3: Compute Prefix Sum for Columns
+  <a class="heading-link" href="#step-3-compute-prefix-sum-for-columns">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        ans[i][j] <span style="color:#f92672">+=</span> ans[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>After processing all queries, the matrix <code>ans</code> will have partial sums. Now, we need to compute the prefix sum for each row to propagate the effects of the range additions across the columns.</li>
+<li>For each row <code>i</code>, starting from the second column <code>j = 1</code>, we update each <code>ans[i][j]</code> by adding the value of the previous column <code>ans[i][j - 1]</code>. This ensures that each element reflects the cumulative additions up to that point.</li>
+</ul>
+<h4 id="step-4-return-the-final-matrix">
+  Step 4: Return the Final Matrix
+  <a class="heading-link" href="#step-4-return-the-final-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the prefix sums are computed, the matrix <code>ans</code> contains the final values after all queries have been applied. This matrix is then returned.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Processing Queries</strong>:</p>
+<ul>
+<li>We iterate over each query in <code>q</code>, and for each query, we loop over the rows from <code>row1</code> to <code>row2</code>. For each row in the range, we perform a constant number of operations (incrementing and decrementing specific elements).</li>
+<li>In the worst case, for each query, we may have to process all <code>n</code> rows (if <code>row1 = 0</code> and <code>row2 = n-1</code>).</li>
+<li>Thus, the time complexity of processing the queries is ( O(q \cdot n) ), where <code>q</code> is the number of queries and <code>n</code> is the size of the matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Computing Prefix Sum</strong>:</p>
+<ul>
+<li>After processing all queries, we compute the prefix sum for each row. This step takes ( O(n^2) ) time, as we iterate over all the elements in the <code>n x n</code> matrix to compute the sums.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>:</p>
+<ul>
+<li>The total time complexity is ( O(q \cdot n + n^2) ), where <code>q</code> is the number of queries and <code>n</code> is the size of the matrix.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Matrix Storage</strong>:</p>
+<ul>
+<li>The matrix <code>ans</code> requires ( O(n^2) ) space, as it stores the values for each cell in the <code>n x n</code> matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Query Storage</strong>:</p>
+<ul>
+<li>The input <code>q</code> is a list of queries, and the space required to store this list is ( O(q) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>:</p>
+<ul>
+<li>The overall space complexity is ( O(n^2) ), as this is the dominant factor due to the storage of the matrix <code>ans</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of applying multiple range addition queries to an <code>n x n</code> matrix using the prefix sum technique. The use of the difference array ensures that each query is processed in a time-efficient manner, avoiding the need to iterate over the entire submatrix for each query. By leveraging the prefix sum computation, we efficiently accumulate the results and obtain the final matrix after all queries are applied. The time complexity of ( O(q \cdot n + n^2) ) and the space complexity of ( O(n^2) ) make this approach suitable for handling larger inputs within reasonable time and space limits.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode973s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +489,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -243,7 +243,126 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode625s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum number of operations needed to make all elements of an array equal. An operation is defined as removing any number of elements from the array. The goal is to minimize the number of elements that need to be removed to achieve an array with all identical elements.</p>
+<p>For instance, given an input array like <code>nums = [1, 2, 3, 4, 5]</code>, we can remove elements in such a way that we end up with a single number, which minimizes the operations needed. This problem can be approached by considering the distinct elements in the array and how closely they cluster together.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>: We start by sorting the input array. Sorting helps us identify and manage distinct values easily.</p>
+</li>
+<li>
+<p><strong>Removing Duplicates</strong>: Since the order doesn&rsquo;t matter for our final result, we can create a new array that only contains unique elements from the original sorted array.</p>
+</li>
+<li>
+<p><strong>Two-Pointer Technique</strong>: We use a two-pointer technique to traverse the unique elements:</p>
+<ul>
+<li>The first pointer (<code>i</code>) iterates through the unique elements.</li>
+<li>The second pointer (<code>j</code>) finds the farthest position where the difference between the element at the first pointer and the element at the second pointer is less than or equal to the length of the original array minus one (<code>n - 1</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Minimum Removals</strong>: For each position of the first pointer, we calculate how many elements would need to be removed to form a contiguous block of identical elements. The goal is to minimize this removal count across all possible configurations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dissect the code to understand its structure and logic:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>minOperations</code> accepts a vector of integers (<code>nums</code>) and returns an integer representing the minimum number of operations needed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minOperations</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Size Calculation</strong>: We start by obtaining the size of the input array <code>nums</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting the Array</strong>: The next step is to sort the array, which allows us to manage and compare distinct elements more easily.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Removing Duplicates</strong>: We create a new length variable <code>m</code> initialized to 1. We iterate through the sorted array and remove duplicates by only keeping unique elements in their original order.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">!=</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        nums[m<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> nums[i];
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Two-Pointer Initialization</strong>: We initialize two pointers: <code>j</code> (starting from the beginning) and <code>ans</code> (set to the size of the original array, representing the maximum number of operations needed).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ans <span style="color:#f92672">=</span> n;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through Unique Elements</strong>: We then loop through the unique elements using the first pointer (<code>i</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding the Second Pointer</strong>: Inside this loop, we use a while loop to move the second pointer (<code>j</code>) forward until the difference between the current unique element and the element at the second pointer exceeds <code>n - 1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">&amp;&amp;</span> nums[j] <span style="color:#f92672">-</span> nums[i] <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) j<span style="color:#f92672">++</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Minimum Removals</strong>: We calculate the minimum number of operations needed by subtracting the count of the contiguous elements from <code>n</code> (the total number of elements). This gives us the number of elements that would need to be removed to keep the elements in the current block.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> min(ans, n <span style="color:#f92672">-</span> (j <span style="color:#f92672">-</span> i));
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the calculated minimum operations needed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(n log n) due to the sorting step, where <code>n</code> is the size of the input array. The subsequent operations involve linear passes through the array, leading to an overall efficient solution. The space complexity is O(1) for the pointers and counters used, as we are manipulating the input array in place.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this solution provides an effective way to minimize the number of operations required to make all elements in an array equal by leveraging sorting, the two-pointer technique, and careful counting of unique elements. By transforming the input into a manageable structure and using efficient traversal methods, we can achieve the desired result with clarity and precision. This approach not only showcases the power of algorithmic thinking but also highlights the importance of optimizing operations when dealing with array data structures. Whether you&rsquo;re a student learning algorithms or a seasoned developer, the techniques demonstrated here serve as a solid foundation for tackling similar challenges in programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode625s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -255,7 +374,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2010"  class="external-link" target="_blank" rel="noopener">LeetCode #2010: The Number of Seniors and Juniors to Join the Company II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2011"  class="external-link" target="_blank" rel="noopener">LeetCode #2011: Final Value of Variable After Performing Operations</a></th>
       </tr>
   </thead>
   <tbody>
@@ -297,7 +416,6 @@
 
       </div>
 
-      
 
       <footer>
         

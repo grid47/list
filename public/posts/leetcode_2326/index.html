@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -246,7 +246,255 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode829s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to take a singly linked list with integer values and place its values in a matrix in a spiral order. The matrix is of size <code>m</code> by <code>n</code> (with <code>m</code> rows and <code>n</code> columns), and we are given the head of the singly linked list. Our task is to fill the matrix with the values from the linked list in a spiral order, starting from the top-left corner.</p>
+<p>The matrix should be filled in the following spiral pattern:</p>
+<ul>
+<li>Start at the top-left corner of the matrix.</li>
+<li>Move right, then down, left, and up, filling each cell with the next value from the linked list.</li>
+<li>Continue this pattern until all values from the linked list have been used.</li>
+<li>If there are any leftover cells in the matrix, they should remain as <code>-1</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will:</p>
+<ol>
+<li><strong>Initialize the matrix</strong>: First, create a matrix with the dimensions <code>m</code> by <code>n</code>, and initialize all its values to <code>-1</code>, indicating that they are empty.</li>
+<li><strong>Track the current position and direction</strong>: We need to iterate through the matrix in a spiral order. This involves updating the current direction at each step and ensuring we do not go out of bounds or overwrite any previously filled cells.</li>
+<li><strong>Spiral traversal</strong>: Starting from the top-left corner of the matrix, we will insert the linked list values into the matrix in the spiral order by using a direction vector. The directions for moving are: right, down, left, and up. If we hit the boundaries of the matrix or a filled cell, we change direction clockwise.</li>
+<li><strong>Linked list traversal</strong>: Traverse the linked list, inserting its values into the matrix one by one. Once we reach the end of the linked list, we stop filling the matrix.</li>
+<li><strong>Return the matrix</strong>: After filling the matrix, return it as the result.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code in detail to understand how it implements this approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> spiralMatrix(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n, ListNode<span style="color:#f92672">*</span> head) {
+</span></span></code></pre></div><ul>
+<li>The function <code>spiralMatrix</code> takes three parameters: <code>m</code>, <code>n</code>, and <code>head</code>, which represent the number of rows, columns, and the head of the linked list respectively.</li>
+<li>The function will return a 2D vector (<code>vector&lt;vector&lt;int&gt;&gt;</code>) representing the matrix with the values from the linked list inserted in a spiral order.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>We initialize the result matrix <code>res</code> with dimensions <code>m</code> by <code>n</code>, filling every cell initially with <code>-1</code> to represent empty cells.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cur_dir <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, d[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><ul>
+<li>We initialize <code>i</code> and <code>j</code> to <code>0</code>, representing the starting position at the top-left corner of the matrix.</li>
+<li><code>cur_dir</code> is initialized to <code>0</code>, which will track the current direction of traversal (right, down, left, or up).</li>
+<li><code>d</code> is an array that defines the movement directions in the spiral traversal. The directions are defined as pairs of changes to <code>i</code> and <code>j</code>: <code>{0, 1}</code> for moving right, <code>{1, 0}</code> for moving down, <code>{0, -1}</code> for moving left, and <code>{-1, 0}</code> for moving up.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (; head <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>; head <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates through the linked list, starting from the <code>head</code>. For each node in the linked list, we will insert its value into the matrix at the current position.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res[i][j] <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>val;
+</span></span></code></pre></div><ul>
+<li>We set the current matrix position <code>res[i][j]</code> to the value of the current node in the linked list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> ni <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> d[cur_dir], nj <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> d[cur_dir <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>We calculate the next position (<code>ni</code>, <code>nj</code>) based on the current direction <code>cur_dir</code>. We use <code>d[cur_dir]</code> for the change in the <code>i</code> (row) index and <code>d[cur_dir + 1]</code> for the change in the <code>j</code> (column) index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (min(ni, nj) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> ni <span style="color:#f92672">&gt;=</span> m <span style="color:#f92672">||</span> nj <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> res[ni][nj] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                cur_dir <span style="color:#f92672">=</span> (cur_dir <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>;
+</span></span></code></pre></div><ul>
+<li>We check if the next position (<code>ni</code>, <code>nj</code>) is out of bounds or if the cell is already filled (i.e., not <code>-1</code>).</li>
+<li>If either condition is true, it means we need to change direction (turn 90 degrees clockwise). We update <code>cur_dir</code> to the next direction in the cycle, using modulo 4 to ensure it stays within the range <code>[0, 3]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> d[cur_dir];
+</span></span><span style="display:flex;"><span>            j <span style="color:#f92672">+=</span> d[cur_dir <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>After checking if the next position is valid, we move to the next position in the current direction by updating <code>i</code> and <code>j</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The loop continues until all nodes in the linked list have been processed.</li>
+<li>After filling the matrix, the function returns the result matrix <code>res</code>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s consider a simple example to understand how the code works:</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>m = 3</code>, <code>n = 3</code> (matrix dimensions)</li>
+<li><code>head = 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7 -&gt; 8 -&gt; 9</code> (linked list values)</li>
+</ul>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p>Initialize a 3x3 matrix filled with <code>-1</code>:</p>
+<pre tabindex="0"><code>[-1, -1, -1]
+[-1, -1, -1]
+[-1, -1, -1]
+</code></pre></li>
+<li>
+<p>Start at the top-left corner (position <code>i = 0</code>, <code>j = 0</code>), and move right:</p>
+<ul>
+<li>Insert <code>1</code> at <code>[0][0]</code>, matrix becomes:
+<pre tabindex="0"><code>[1, -1, -1]
+[-1, -1, -1]
+[-1, -1, -1]
+</code></pre></li>
+<li>Move right to <code>[0][1]</code>, insert <code>2</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, -1]
+[-1, -1, -1]
+[-1, -1, -1]
+</code></pre></li>
+<li>Move right to <code>[0][2]</code>, insert <code>3</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[-1, -1, -1]
+[-1, -1, -1]
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Change direction to move down:</p>
+<ul>
+<li>Move down to <code>[1][2]</code>, insert <code>4</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[-1, -1, 4]
+[-1, -1, -1]
+</code></pre></li>
+<li>Move down to <code>[2][2]</code>, insert <code>5</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[-1, -1, 4]
+[-1, -1, 5]
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Change direction to move left:</p>
+<ul>
+<li>Move left to <code>[2][1]</code>, insert <code>6</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[-1, -1, 4]
+[-1, 6, 5]
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Change direction to move up:</p>
+<ul>
+<li>Move up to <code>[1][1]</code>, insert <code>7</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[-1, 7, 4]
+[-1, 6, 5]
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Change direction to move right:</p>
+<ul>
+<li>Move right to <code>[1][0]</code>, insert <code>8</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[8, 7, 4]
+[-1, 6, 5]
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Change direction to move down:</p>
+<ul>
+<li>Move down to <code>[2][0]</code>, insert <code>9</code>, matrix becomes:
+<pre tabindex="0"><code>[1, 2, 3]
+[8, 7, 4]
+[9, 6, 5]
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The final matrix after filling all values from the linked list:</p>
+<pre tabindex="0"><code>[1, 2, 3]
+[8, 7, 4]
+[9, 6, 5]
+</code></pre><h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The time complexity of the solution is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns of the matrix.</li>
+<li>Each cell in the matrix is filled once, and each node in the linked list is processed once.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The space complexity is <strong>O(m * n)</strong>, as we store the matrix of size <code>m</code> by <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently fills the matrix with values from the linked list in a spiral order. By using direction vectors and handling boundary checks, the algorithm ensures that the matrix is filled correctly and avoids overwriting cells. The overall complexity of the solution is optimal for the given problem, making it suitable for larger matrix sizes and linked lists.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode829s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -300,7 +548,6 @@
 
       </div>
 
-      
 
       <footer>
         

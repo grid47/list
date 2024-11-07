@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,204 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> score;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1007s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to maximize the score of a pair of sequences, <code>nums1</code> and <code>nums2</code>, by selecting exactly <code>k</code> elements from both arrays. The score is calculated by multiplying the sum of the selected elements from <code>nums1</code> by the corresponding element in <code>nums2</code> at the same index. The goal is to compute the maximum possible score that can be achieved by selecting exactly <code>k</code> elements from the arrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves leveraging sorting and a priority queue (min-heap) to efficiently select the <code>k</code> largest values from <code>nums1</code> while ensuring that we maintain the largest possible sum for these elements. Here&rsquo;s a step-by-step breakdown of the solution:</p>
+<ol>
+<li>
+<p><strong>Pairing and Sorting</strong>:</p>
+<ul>
+<li>We begin by pairing the elements of <code>nums1</code> and <code>nums2</code> as tuples, where each pair is <code>(nums2[i], nums1[i])</code>. This allows us to treat the values of <code>nums2</code> as weights for the corresponding elements of <code>nums1</code>.</li>
+<li>The next step is to sort these pairs in descending order based on the values of <code>nums2</code>. This sorting step ensures that we prioritize higher weights (<code>nums2[i]</code>) when making selections, which can maximize the score.</li>
+</ul>
+</li>
+<li>
+<p><strong>Priority Queue (Min-Heap)</strong>:</p>
+<ul>
+<li>We use a priority queue (min-heap) to keep track of the <code>k</code> largest values from <code>nums1</code>. The reason we use a min-heap is that it allows us to efficiently remove the smallest element whenever we exceed the <code>k</code> selections.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating through Sorted Pairs</strong>:</p>
+<ul>
+<li>For each pair <code>(n2, n1)</code>, where <code>n2</code> is from <code>nums2</code> and <code>n1</code> is from <code>nums1</code>, we push <code>n1</code> (the corresponding value from <code>nums1</code>) into the priority queue and add it to the <code>sum</code> of selected values from <code>nums1</code>.</li>
+<li>If the size of the priority queue exceeds <code>k</code>, we remove the smallest element (the root of the min-heap) and subtract it from the <code>sum</code>. This ensures that only the <code>k</code> largest elements are retained in the heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximizing the Score</strong>:</p>
+<ul>
+<li>After adding an element to the heap and updating the <code>sum</code>, we check if the size of the heap is exactly <code>k</code>. If it is, we compute the score by multiplying the current sum of selected elements from <code>nums1</code> with the value <code>n2</code> from <code>nums2</code> (which is the weight for these elements). We keep track of the maximum score observed so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>After iterating through all the pairs, the maximum score is returned as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> nums;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><p>In this part of the code, we initialize the data structures:</p>
+<ul>
+<li><code>nums</code>: a vector of pairs to store the elements of <code>nums2</code> and <code>nums1</code> as tuples.</li>
+<li><code>n</code>: an integer to store the size of the arrays.</li>
+<li><code>pq</code>: a priority queue (min-heap) to store the <code>k</code> largest values from <code>nums1</code>.</li>
+</ul>
+<h4 id="step-2-pairing-and-sorting-the-elements">
+  Step 2: Pairing and Sorting the Elements
+  <a class="heading-link" href="#step-2-pairing-and-sorting-the-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> nums2.size(); 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    nums.push_back({nums2[i], nums1[i]});
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>sort(nums.rbegin(), nums.rend());
+</span></span></code></pre></div><p>Here, we:</p>
+<ul>
+<li>Pair each element from <code>nums2</code> with its corresponding element from <code>nums1</code>.</li>
+<li>Store the pairs in <code>nums</code>, with the first element of each pair being from <code>nums2</code> and the second being from <code>nums1</code>.</li>
+<li>Sort the pairs in descending order based on the values of <code>nums2</code> (i.e., the first element of each pair).</li>
+</ul>
+<h4 id="step-3-initialize-variables-for-score-and-sum">
+  Step 3: Initialize Variables for Score and Sum
+  <a class="heading-link" href="#step-3-initialize-variables-for-score-and-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>We initialize two variables:</p>
+<ul>
+<li><code>score</code>: to keep track of the maximum score found during the iteration.</li>
+<li><code>sum</code>: to store the sum of the selected elements from <code>nums1</code> as we iterate through the pairs.</li>
+</ul>
+<h4 id="step-4-iterating-through-the-sorted-pairs-and-building-the-heap">
+  Step 4: Iterating Through the Sorted Pairs and Building the Heap
+  <a class="heading-link" href="#step-4-iterating-through-the-sorted-pairs-and-building-the-heap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> [n2, n1]<span style="color:#f92672">:</span> nums) {
+</span></span><span style="display:flex;"><span>    pq.push(n1);
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> n1;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">-=</span> pq.top();
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">==</span> k)
+</span></span><span style="display:flex;"><span>        score <span style="color:#f92672">=</span> max(score, sum <span style="color:#f92672">*</span> n2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this part, we:</p>
+<ul>
+<li>Iterate through each pair <code>(n2, n1)</code> in the sorted <code>nums</code> vector.</li>
+<li>Push <code>n1</code> (the corresponding value from <code>nums1</code>) into the priority queue and add it to the <code>sum</code>.</li>
+<li>If the size of the priority queue exceeds <code>k</code>, we remove the smallest element (the root of the min-heap) and subtract it from the <code>sum</code>. This ensures that we always retain the <code>k</code> largest elements in the priority queue.</li>
+<li>If the size of the priority queue is exactly <code>k</code>, we compute the score by multiplying the current <code>sum</code> with <code>n2</code> and update <code>score</code> to the maximum value.</li>
+</ul>
+<h4 id="step-5-returning-the-maximum-score">
+  Step 5: Returning the Maximum Score
+  <a class="heading-link" href="#step-5-returning-the-maximum-score">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> score;
+</span></span></code></pre></div><p>Finally, after iterating through all the pairs, we return the <code>score</code>, which holds the maximum possible score computed during the iteration.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting</strong>: The sorting step takes <code>O(n log n)</code> where <code>n</code> is the number of elements in <code>nums2</code> (or <code>nums1</code>).</li>
+<li><strong>Priority Queue Operations</strong>: Each insertion and removal operation on the priority queue takes <code>O(log k)</code>, and since we process each element once, the total time for priority queue operations is <code>O(n log k)</code>.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the sorting step and the priority queue operations, resulting in a total time complexity of <code>O(n log n + n log k)</code>. This is efficient for large inputs.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Storing Pairs</strong>: The space required to store the pairs in <code>nums</code> is <code>O(n)</code>.</li>
+<li><strong>Priority Queue</strong>: The space used by the priority queue is <code>O(k)</code> because it holds at most <code>k</code> elements at any time.</li>
+<li><strong>Overall Space Complexity</strong>: The overall space complexity is <code>O(n + k)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum score by:</p>
+<ul>
+<li>Pairing elements of <code>nums1</code> and <code>nums2</code> and sorting them based on the values of <code>nums2</code> to prioritize higher weights.</li>
+<li>Using a priority queue to maintain the <code>k</code> largest values from <code>nums1</code>, ensuring that we always compute the best possible sum for each possible selection of <code>k</code> elements.</li>
+<li>The algorithm runs in <code>O(n log n + n log k)</code> time, which is optimal for large inputs.</li>
+</ul>
+<p>By combining sorting and a priority queue, the solution is both time and space efficient, making it a robust approach for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1007s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -307,7 +504,6 @@
 
       </div>
 
-      
 
       <footer>
         

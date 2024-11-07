@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -256,7 +256,157 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode850s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires counting &ldquo;excellent pairs&rdquo; within a list of integers. A pair <code>(i, j)</code> is considered excellent if the bitwise OR of <code>nums[i]</code> and <code>nums[j]</code> results in a sum of <code>1</code>s in their binary representation that meets or exceeds a given threshold, <code>k</code>. The objective is to efficiently identify and count such excellent pairs.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Unique Counts of 1s in Binary</strong>:</p>
+<ul>
+<li>Use the <code>__builtin_popcount()</code> function to calculate the number of <code>1</code>s (i.e., the Hamming weight) in the binary representation of each integer.</li>
+<li>Keep track of these unique counts in a <code>set</code> to avoid duplicate values, as only unique pairs matter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Store unique Hamming weights in a sorted array to facilitate binary search operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Pair Counting</strong>:</p>
+<ul>
+<li>For each Hamming weight, calculate the minimum Hamming weight required for another element in the pair to meet or exceed <code>k</code>.</li>
+<li>Use <code>lower_bound</code> on the sorted array to efficiently locate the starting point where weights are high enough, and calculate the count of possible pairs from this position onward.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="initialization-and-setup">
+  Initialization and Setup
+  <a class="heading-link" href="#initialization-and-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt.count(nums[i])) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        arr.push_back(__builtin_popcount(nums[i]));
+</span></span><span style="display:flex;"><span>        cnt.insert(nums[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><code>cnt</code> ensures each integer in <code>nums</code> is processed once for unique Hamming weights.</li>
+<li><code>arr</code> stores the unique Hamming weights of the integers in <code>nums</code>.</li>
+</ul>
+<h4 id="sorting-the-hamming-weights">
+  Sorting the Hamming Weights
+  <a class="heading-link" href="#sorting-the-hamming-weights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(arr.begin(), arr.end());
+</span></span></code></pre></div><ul>
+<li>Sort <code>arr</code> to enable binary search for finding pairs with sums meeting or exceeding <code>k</code>.</li>
+</ul>
+<h4 id="pair-counting">
+  Pair Counting
+  <a class="heading-link" href="#pair-counting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> arr.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(arr[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;=</span> k) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (arr.size() <span style="color:#f92672">-</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        ans<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> k <span style="color:#f92672">-</span> arr[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> lower_bound(arr.begin(), arr.end(), x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> arr.end()) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> arr.end() <span style="color:#f92672">-</span> it;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> y;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(arr.back() <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;=</span> k) ans<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Double Count</strong>: For each weight, if twice the weight meets or exceeds <code>k</code>, count all potential pairs with remaining elements.</li>
+<li><strong>Binary Search Optimization</strong>: If twice the weight does not meet <code>k</code>, determine the threshold (<code>x = k - arr[i]</code>), and use <code>lower_bound</code> to count how many weights from this point onward satisfy the condition.</li>
+</ul>
+<h4 id="final-result">
+  Final Result
+  <a class="heading-link" href="#final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Return the total count of excellent pairs.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>O(n)</strong> for generating unique Hamming weights.</li>
+<li><strong>O(n log n)</strong> for sorting the weights.</li>
+<li><strong>O(m log m)</strong> for each <code>lower_bound</code> operation on an array of unique weights, where <code>m</code> is the count of unique weights in <code>arr</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(m)</strong>, for storing unique Hamming weights.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is optimized for counting excellent pairs by leveraging unique Hamming weights and binary search to minimize redundant operations. It offers an efficient and clear approach for calculating pairs based on binary representation requirements, ideal for large datasets where the threshold <code>k</code> is dynamic. The code structure, efficient use of sets, and binary search ensure optimal performance for counting excellent pairs based on Hamming weights.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode850s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -268,7 +418,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2355"  class="external-link" target="_blank" rel="noopener">LeetCode #2355: Maximum Number of Books You Can Take</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2356"  class="external-link" target="_blank" rel="noopener">LeetCode #2356: Number of Unique Subjects Taught by Each Teacher</a></th>
       </tr>
   </thead>
   <tbody>
@@ -310,7 +460,6 @@
 
       </div>
 
-      
 
       <footer>
         

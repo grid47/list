@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,155 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> score;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode978s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to sort a list of students based on their scores in a specific subject. Each student has a list of scores, and you need to sort the students by their scores in a given subject (indexed by <code>k</code>). The sorting should be done in descending order, meaning students with higher scores in the <code>k</code>-th subject should come first.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach used to solve this problem is based on the <strong>QuickSort</strong> algorithm, which is an efficient sorting algorithm. QuickSort is a divide-and-conquer algorithm that works by selecting a <strong>pivot</strong> element and partitioning the array into two subarrays: one with elements greater than the pivot and the other with elements less than the pivot. The array is then recursively sorted by applying the same process to the subarrays.</p>
+<p>In this problem, the key observation is that we need to sort based on the <code>k</code>-th score of each student, which corresponds to the <code>k</code>-th element of each student’s score list. The sorting will be done in descending order. This approach leverages the QuickSort algorithm to efficiently sort the students based on their <code>k</code>-th score.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-the-k-variable">
+  Step 1: Define the <code>k</code> variable
+  <a class="heading-link" href="#step-1-define-the-k-variable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k;
+</span></span></code></pre></div><p>The variable <code>k</code> stores the index of the score by which we want to sort the students. This is passed to the <code>sortTheStudents</code> method, which assigns it to the class member <code>k</code> for use during the sorting process.</p>
+<h4 id="step-2-partitioning-function">
+  Step 2: Partitioning function
+  <a class="heading-link" href="#step-2-partitioning-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">partition</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> score, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pivot <span style="color:#f92672">=</span> score[high];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> (low <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> low; j <span style="color:#f92672">&lt;</span> high; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (score[j][k] <span style="color:#f92672">&gt;</span> pivot[k]) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            swap(score[i], score[j]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    swap(score[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], score[high]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>partition</code> function takes the list of scores and splits it into two parts: elements that are greater than the pivot (at the <code>k</code>-th score index) and elements that are less than or equal to the pivot.</li>
+<li><strong>Pivot selection</strong>: The rightmost element (<code>score[high]</code>) is selected as the pivot. The pivot will be used to partition the array into two halves.</li>
+<li><strong>Partitioning logic</strong>:
+<ul>
+<li>The index <code>i</code> is initialized to <code>low - 1</code>. It tracks the position of the last element that is smaller than or equal to the pivot.</li>
+<li>For each element <code>score[j]</code> (from <code>low</code> to <code>high-1</code>), if the <code>k</code>-th score of <code>score[j]</code> is greater than the pivot&rsquo;s <code>k</code>-th score, the element is moved to the left side of the pivot, and <code>i</code> is incremented.</li>
+<li>Finally, the pivot is swapped with the element at <code>i + 1</code>, placing it in its correct position.</li>
+</ul>
+</li>
+</ul>
+<p>The <code>partition</code> function returns the index of the pivot, which is now in its correct sorted position.</p>
+<h4 id="step-3-quicksort-recursive-function">
+  Step 3: QuickSort recursive function
+  <a class="heading-link" href="#step-3-quicksort-recursive-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quickSort</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> score, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (low <span style="color:#f92672">&lt;</span> high) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> pi <span style="color:#f92672">=</span> partition(score, low, high);
+</span></span><span style="display:flex;"><span>        quickSort(score, low, pi <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        quickSort(score, pi <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, high);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>quickSort</code> function is the recursive part of the algorithm. It recursively partitions the list of scores and sorts the two subarrays created after partitioning.</li>
+<li>The recursion continues until the subarray has only one element or is empty (when <code>low</code> is greater than or equal to <code>high</code>).</li>
+</ul>
+<h4 id="step-4-sorting-function-sortthestudents">
+  Step 4: Sorting function <code>sortTheStudents</code>
+  <a class="heading-link" href="#step-4-sorting-function-sortthestudents">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> sortTheStudents(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> score, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>    quickSort(score, <span style="color:#ae81ff">0</span>, score.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> score;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>sortTheStudents</code> function is the main entry point for sorting the students.</li>
+<li>It receives the <code>score</code> list and the index <code>k</code>. The <code>k</code> is stored as a class member so it can be accessed in the <code>partition</code> function.</li>
+<li>The <code>quickSort</code> function is then called to sort the <code>score</code> list based on the <code>k</code>-th score in descending order.</li>
+</ul>
+<p>Finally, the sorted list of students is returned.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the QuickSort algorithm is <strong>O(n log n)</strong> on average, where <code>n</code> is the number of students in the <code>score</code> list. This is because QuickSort works by dividing the list into two sublists and sorting each sublist recursively. Each partition operation takes <strong>O(n)</strong> time, and there are <strong>O(log n)</strong> levels of recursion in the average case.</p>
+<p>However, the worst-case time complexity of QuickSort is <strong>O(n^2)</strong>, which occurs when the pivot selection is poor, such as when the pivot is always the smallest or largest element. This can be mitigated by using strategies like choosing a random pivot or using the median of three elements as the pivot.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(log n)</strong> due to the recursive call stack in QuickSort. Each recursive call creates a new stack frame, and the depth of the recursion is proportional to the logarithm of the number of elements in the list. The partition function uses <strong>O(1)</strong> extra space because it modifies the list in place without using any additional storage.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this solution, the problem of sorting students based on their <code>k</code>-th score is efficiently solved using the <strong>QuickSort</strong> algorithm. The code implements the partitioning strategy for QuickSort and recursively sorts the students by their scores. The time complexity is optimal on average, and the space complexity is minimal, making the solution both time and space efficient.</p>
+<p>This approach leverages QuickSort&rsquo;s divide-and-conquer mechanism to sort students quickly and efficiently based on their scores, and the overall performance is suitable for handling large datasets.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode978s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -313,7 +461,6 @@
 
       </div>
 
-      
 
       <footer>
         

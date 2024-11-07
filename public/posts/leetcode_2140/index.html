@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,171 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode710s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to maximize the total points obtained from a series of questions. Each question gives a certain number of points if answered, but there is a penalty: answering a question also prohibits the answering of subsequent questions for a specified number of indices. Specifically, each question has a point value and a &ldquo;skip&rdquo; value, which denotes how many subsequent questions must be skipped if that question is answered. The goal is to find the maximum number of points that can be obtained by strategically choosing which questions to answer.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a dynamic programming approach to explore the different options available at each question while maximizing the total points. The key steps involved are:</p>
+<ol>
+<li>
+<p><strong>State Representation</strong>: We represent the state of our solution using an index <code>idx</code>, which tracks the current question being considered.</p>
+</li>
+<li>
+<p><strong>Recursion with Memoization</strong>: The function <code>dp(idx)</code> recursively determines the maximum points obtainable from the current index onward. To avoid recalculating results for previously computed states, we employ memoization.</p>
+</li>
+<li>
+<p><strong>Decision Making</strong>: At each index, there are two choices:</p>
+<ul>
+<li><strong>Skip the Current Question</strong>: Simply carry forward the result of the next index.</li>
+<li><strong>Answer the Current Question</strong>: Add the points of the current question and recursively compute the maximum points obtainable from the index after skipping the required questions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>: The recursion ends when we exceed the number of questions, at which point the function returns 0, indicating no more points can be earned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>This defines the <code>Solution</code> class, encapsulating the methods to solve the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Members</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> qns;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> mem;
+</span></span></code></pre></div><ul>
+<li><code>qns</code>: A 2D vector that holds the questions, where each entry contains the points and the skip count.</li>
+<li><code>mem</code>: A vector for memoization that stores the maximum points that can be obtained starting from each index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx) {
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function takes an integer index <code>idx</code> as a parameter, which indicates the current question being processed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> qns.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If the current index exceeds the number of questions, return 0 since no points can be gained.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mem[idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx];
+</span></span></code></pre></div><ul>
+<li>Before calculating the points for the current index, check if the result has already been computed. If it has, return the cached result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skip the Current Question</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>Calculate the points if the current question is skipped by recursively calling <code>dp</code> for the next index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Answer the Current Question</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) qns[idx][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> qns[idx][<span style="color:#ae81ff">1</span>]));
+</span></span></code></pre></div><ul>
+<li>Calculate the potential points if the current question is answered. The points obtained from the current question are added to the result of <code>dp</code> from the next index, skipping the required number of questions as specified by <code>qns[idx][1]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store and Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mem[idx] <span style="color:#f92672">=</span> ans;
+</span></span></code></pre></div><ul>
+<li>Store the computed result in the <code>mem</code> vector for the current index before returning it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">mostPoints</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> questions) {
+</span></span><span style="display:flex;"><span>    qns <span style="color:#f92672">=</span> questions;
+</span></span><span style="display:flex;"><span>    mem.resize(qns.size(), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>mostPoints</code> function initializes the questions and prepares the <code>mem</code> vector for memoization. It then calls the <code>dp</code> function starting from index 0 to compute the maximum points obtainable.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This closing brace signifies the end of the <code>Solution</code> class.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n)), where (n) is the number of questions.</p>
+<ul>
+<li>Each question is processed once, and the recursive calls do not revisit the same state due to memoization.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n))</p>
+<ul>
+<li>The space complexity arises from the memoization vector <code>mem</code> and the input vector <code>qns</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>mostPoints</code> function effectively calculates the maximum points that can be earned by answering a strategic selection of questions, considering the constraints imposed by the &ldquo;skip&rdquo; values. This solution is a classic example of dynamic programming, demonstrating how to optimize decision-making through recursion and memoization.</p>
+<p>This approach can be generalized to other problems where decisions at one state affect the outcomes of future states, highlighting the power of dynamic programming in solving complex optimization problems.</p>
+<p>By mastering the concepts illustrated in this solution, programmers can enhance their skills in tackling similar algorithmic challenges, which are common in competitive programming and technical interviews. The combination of recursion, dynamic programming, and memoization forms a foundational toolkit for solving a wide range of problems efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode710s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -289,7 +453,6 @@
 
       </div>
 
-      
 
       <footer>
         

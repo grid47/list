@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,176 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1101s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the number of beautiful pairs in an array of integers. A beautiful pair is defined as a pair of numbers <code>(x, y)</code> where:</p>
+<ul>
+<li>The last digit of <code>x</code> and the first digit of <code>y</code> are coprime (i.e., the greatest common divisor (GCD) of these two digits is 1).</li>
+</ul>
+<p>We are given an array of integers <code>nums</code>, and our task is to calculate the number of such beautiful pairs in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to determine the GCD between the last digit of one number and the first digit of another number. To optimize the solution, we can utilize the following approach:</p>
+<ol>
+<li>
+<p><strong>Last and First Digits</strong>:</p>
+<ul>
+<li>For each number in the array, extract its last digit (i.e., the last digit in the number modulo 10) and its first digit (which is the leftmost non-zero digit).</li>
+</ul>
+</li>
+<li>
+<p><strong>GCD Calculation</strong>:</p>
+<ul>
+<li>We need to check whether the GCD of the last digit of one number and the first digit of another number is 1, which means these digits are coprime.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Counting</strong>:</p>
+<ul>
+<li>Instead of comparing each pair directly, we can use a counting approach where we count how many times each first digit appears across the array. This allows us to efficiently compute the number of beautiful pairs by checking the GCD between the last digit of each number and all possible first digits of other numbers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimization</strong>:</p>
+<ul>
+<li>We can avoid repeatedly calculating the GCD for each possible pair by using an array <code>cnt</code> to store how many times each digit (1 through 9) appears as the first digit in the numbers processed so far.</li>
+<li>For each number in the array, we check if the GCD of its last digit with any of the digits from 1 to 9 is 1. If so, we count how many times that digit has appeared as the first digit of previous numbers, and this gives us the number of valid pairs.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initial-setup-and-array-declaration">
+  1. <strong>Initial Setup and Array Declaration</strong>
+  <a class="heading-link" href="#1-initial-setup-and-array-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {}, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>cnt[10]</code>: An array of size 10 is used to count how many times each digit (from 0 to 9) appears as the first digit of a number processed so far. We initialize all elements to 0.</li>
+<li><code>res</code>: This variable will store the result, i.e., the total number of beautiful pairs.</li>
+</ul>
+<h4 id="2-processing-each-number">
+  2. <strong>Processing Each Number</strong>
+  <a class="heading-link" href="#2-processing-each-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>n)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (gcd(n, nums[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> cnt[n];
+</span></span></code></pre></div><ul>
+<li>We loop through each number in the array <code>nums</code>.</li>
+<li>For each number, we calculate the last digit (<code>nums[i] % 10</code>) and check its GCD with every possible first digit (from 1 to 9). If the GCD is 1, it means the two digits are coprime.</li>
+<li>For each valid coprime pair, we add the count of how many times that first digit has appeared before (stored in <code>cnt[n]</code>).</li>
+</ul>
+<h4 id="3-extract-the-first-digit-of-the-current-number">
+  3. <strong>Extract the First Digit of the Current Number</strong>
+  <a class="heading-link" href="#3-extract-the-first-digit-of-the-current-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (nums[i] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>    nums[i] <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><ul>
+<li>This loop extracts the first digit of the current number. We keep dividing the number by 10 until only the first digit remains.</li>
+</ul>
+<h4 id="4-update-the-count-of-the-first-digit">
+  4. <strong>Update the Count of the First Digit</strong>
+  <a class="heading-link" href="#4-update-the-count-of-the-first-digit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#f92672">++</span>cnt[nums[i]];
+</span></span></code></pre></div><ul>
+<li>After extracting the first digit, we increment the count of that digit in the <code>cnt</code> array. This allows us to track how many times each digit has appeared as the first digit of previous numbers.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. <strong>Return the Result</strong>
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result <code>res</code>, which contains the number of beautiful pairs in the array.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Outer Loop</strong>: The loop runs once for each number in the array, so this part takes (O(n)), where (n) is the number of elements in the <code>nums</code> array.</li>
+<li><strong>Inner Loop</strong>: For each number, we check the GCD between its last digit and each of the digits from 1 to 9. The GCD operation takes constant time, so the inner loop runs in (O(9)) time.</li>
+<li><strong>First Digit Calculation</strong>: The while loop runs for the number of digits in the number. In the worst case, the number has a constant number of digits (since we are dealing with integers), so this operation is (O(1)).</li>
+</ol>
+<p>Thus, the total time complexity is (O(n)), where (n) is the number of elements in the <code>nums</code> array.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Array <code>cnt[10]</code></strong>: The <code>cnt</code> array is of constant size (10), so the space complexity for this is (O(1)).</li>
+<li><strong>Result <code>res</code></strong>: We only need to store a single integer to hold the result, so this also takes (O(1)) space.</li>
+</ol>
+<p>Thus, the overall space complexity is (O(1)).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts the number of beautiful pairs by leveraging the properties of the GCD and using an array to track the frequency of first digits. The algorithm runs in (O(n)) time, making it suitable for large input sizes. By avoiding a brute-force comparison of every pair, the solution provides a significant optimization while still guaranteeing correctness. This approach is both time and space efficient, making it ideal for solving the problem in competitive programming and other scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1101s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -252,7 +421,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2749"  class="external-link" target="_blank" rel="noopener">LeetCode #2749: Minimum Operations to Make the Integer Zero</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2750"  class="external-link" target="_blank" rel="noopener">LeetCode #2750: Ways to Split Array Into Good Subarrays</a></th>
       </tr>
   </thead>
   <tbody>
@@ -294,7 +463,6 @@
 
       </div>
 
-      
 
       <footer>
         

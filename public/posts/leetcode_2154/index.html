@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -232,7 +232,123 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> o;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode730s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the &ldquo;final value&rdquo; of a given integer <code>o</code> after repeatedly multiplying it by 2 if it exists in the array <code>nums</code>. Given an integer <code>o</code> and a list of integers <code>nums</code>, the process continues as long as the current value of <code>o</code> exists in <code>nums</code>. The function returns the final value of <code>o</code> after it no longer exists in <code>nums</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach leverages an array <code>h</code> to store the count of elements in <code>nums</code>. Using this frequency array, we can quickly check if the current value of <code>o</code> exists in <code>nums</code> by simply checking if <code>h[o]</code> is non-zero. If it exists, we multiply <code>o</code> by 2 and continue the process. If <code>o</code> is greater than 1000 or <code>h[o]</code> is zero, the loop terminates, and the function returns <code>o</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> findFinalValue(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> o) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> h[<span style="color:#ae81ff">1001</span>]<span style="color:#f92672">=</span>{};          <span style="color:#75715e">// Step 1: Initialize an array `h` with 1001 elements set to 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i : nums)       <span style="color:#75715e">// Step 2: Populate `h` with elements from `nums`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            h[i]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(o <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> h[o]) <span style="color:#75715e">// Step 3: Repeat while `o` is within bounds and exists in `nums`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            o <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;              <span style="color:#75715e">// Step 4: Multiply `o` by 2 if it exists in `nums`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> o;                <span style="color:#75715e">// Step 5: Return the final value of `o`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Frequency Array Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> h[<span style="color:#ae81ff">1001</span>]<span style="color:#f92672">=</span>{};
+</span></span></code></pre></div><p>An array <code>h</code> of size 1001 is created with all elements initialized to 0. Each index in <code>h</code> represents an integer value from 0 to 1000, so any element in <code>nums</code> (bounded by 1000) can be easily accessed in constant time.</p>
+</li>
+<li>
+<p><strong>Populating the Frequency Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i : nums) h[i]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>For each element <code>i</code> in <code>nums</code>, we increment the corresponding index in <code>h</code>, marking its presence in the array <code>nums</code>.</p>
+</li>
+<li>
+<p><strong>Loop to Adjust the Value of <code>o</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(o <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> h[o])
+</span></span><span style="display:flex;"><span>    o <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><p>This loop continues as long as <code>o</code> is within the bounds (less than or equal to 1000) and <code>o</code> is found in <code>nums</code>. If <code>h[o]</code> is non-zero, this means <code>o</code> exists in <code>nums</code>, so we multiply <code>o</code> by 2. The loop exits when either <code>o</code> is not found in <code>nums</code> or <code>o</code> exceeds 1000.</p>
+</li>
+<li>
+<p><strong>Returning the Final Value of <code>o</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> o;
+</span></span></code></pre></div><p>After the loop finishes, <code>o</code> no longer exists in <code>nums</code> or has exceeded 1000, so we return <code>o</code>.</p>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Constructing the frequency array <code>h</code> from <code>nums</code> takes <strong>O(n)</strong> time, where <code>n</code> is the number of elements in <code>nums</code>.</li>
+<li>The while loop may potentially iterate at most <strong>log(n)</strong> times since we double <code>o</code> each time.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, which is efficient.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> as <code>h</code> is a fixed-size array (1001 elements) and does not depend on the input size <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to compute the &ldquo;final value&rdquo; by checking for each existence of <code>o</code> using constant-time lookups in the frequency array. This results in a linear time solution with minimal space usage, which makes it optimal for large arrays with elements bounded by 1000. The solution also ensures that <code>o</code> is doubled efficiently until it reaches a value not present in <code>nums</code>. This approach balances both time and space complexity, achieving high performance with simplicity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode730s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +402,6 @@
 
       </div>
 
-      
 
       <footer>
         

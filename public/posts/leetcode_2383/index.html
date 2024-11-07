@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -234,7 +234,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> hours;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode873s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the minimum number of hours required for a character to reach a certain level of energy and experience by completing a series of tasks. Specifically:</p>
+<ul>
+<li>We are given the initial energy <code>ie</code> and experience <code>ig</code> of the character.</li>
+<li>There are multiple tasks to perform, where each task has an associated energy cost and experience gain.</li>
+<li>For each task, the character needs to have more energy than the required energy of the task, and more experience than the required experience of the task. If the character does not have enough energy or experience, they will need to work on improving them.</li>
+</ul>
+<p>The objective is to calculate the <strong>minimum number of hours</strong> required to increase the character&rsquo;s energy and experience enough to complete all tasks.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break down the problem in terms of <strong>two key components</strong>:</p>
+<ol>
+<li><strong>Energy requirement</strong>: For each task, if the character’s current energy is less than the energy required for the task, they will need to increase it. The required increase will be equal to the difference between the required energy and the current energy plus one (because they need more energy than the task requires).</li>
+<li><strong>Experience requirement</strong>: Similarly, if the character’s experience is less than the experience required for the task, they will need to increase their experience. The required increase will be the difference between the required experience and the current experience plus one.</li>
+</ol>
+<p><strong>Main Idea</strong>:</p>
+<ul>
+<li>We process each task and compare the current energy and experience with the required values.</li>
+<li>If either energy or experience is insufficient, we calculate how many hours (i.e., units of increase) are needed to make them sufficient.</li>
+<li>After each task, we update the energy and experience values accordingly, ensuring that the character is always ready for the next task.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> minNumberOfHours(<span style="color:#66d9ef">int</span> ie, <span style="color:#66d9ef">int</span> ig, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> energy, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> experience) 
+</span></span></code></pre></div><p>The function <code>minNumberOfHours</code> takes the following parameters:</p>
+<ul>
+<li><code>ie</code>: The initial energy of the character.</li>
+<li><code>ig</code>: The initial experience of the character.</li>
+<li><code>energy</code>: A vector representing the energy required for each task.</li>
+<li><code>experience</code>: A vector representing the experience required for each task.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize the Total Hours</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> hours <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We start by initializing a variable <code>hours</code> to 0. This will keep track of the total number of hours the character spends improving their energy and experience.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Each Task</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> energy.size(); i<span style="color:#f92672">++</span>)
+</span></span></code></pre></div><ul>
+<li>We loop through each task, indexed by <code>i</code>, to evaluate if the character has enough energy and experience to complete the task.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Energy Requirement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (energy[i] <span style="color:#f92672">&gt;=</span> ie)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    hours <span style="color:#f92672">+=</span> energy[i] <span style="color:#f92672">-</span> ie <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    ie <span style="color:#f92672">+=</span> energy[i] <span style="color:#f92672">-</span> ie <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each task, if the energy required for the task <code>energy[i]</code> is greater than or equal to the current energy <code>ie</code>, we need to increase the character&rsquo;s energy.</li>
+<li>The number of hours needed to do this is <code>energy[i] - ie + 1</code> because the character needs at least one more energy unit than the task requires.</li>
+<li>After increasing the energy, we update the character’s current energy <code>ie</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Experience Requirement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (experience[i] <span style="color:#f92672">&gt;=</span> ig)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    hours <span style="color:#f92672">+=</span> experience[i] <span style="color:#f92672">-</span> ig <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    ig <span style="color:#f92672">+=</span> experience[i] <span style="color:#f92672">-</span> ig <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Similarly, if the experience required for the task <code>experience[i]</code> is greater than or equal to the current experience <code>ig</code>, we need to increase the character&rsquo;s experience.</li>
+<li>The number of hours needed to do this is <code>experience[i] - ig + 1</code> because the character needs at least one more experience point than the task requires.</li>
+<li>After increasing the experience, we update the character’s current experience <code>ig</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Energy and Experience After Task</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ie <span style="color:#f92672">-=</span> energy[i];
+</span></span><span style="display:flex;"><span>ig <span style="color:#f92672">+=</span> experience[i];
+</span></span></code></pre></div><ul>
+<li>After completing the task, we adjust the character’s energy and experience:
+<ul>
+<li>The energy <code>ie</code> is reduced by the energy cost <code>energy[i]</code> of the task.</li>
+<li>The experience <code>ig</code> is increased by the experience gained <code>experience[i]</code> from the task.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Total Hours</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> hours;
+</span></span></code></pre></div><ul>
+<li>Once we have processed all tasks, we return the total <code>hours</code> the character spent increasing their energy and experience.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of tasks. We are simply iterating over the <code>energy</code> and <code>experience</code> vectors once, performing constant time operations in each iteration.</li>
+<li>Since there are no nested loops, the time complexity is linear in terms of the number of tasks.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we are only using a few variables (<code>hours</code>, <code>ie</code>, <code>ig</code>) to keep track of the state, and we do not use any additional data structures that grow with the input size.</li>
+<li>The space complexity is constant, independent of the number of tasks or the size of the input vectors.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of hours required to ensure that the character’s energy and experience are sufficient to complete all tasks. By processing each task in sequence and adjusting the character’s energy and experience as needed, we ensure that the solution is both time-efficient and space-efficient. The solution runs in <strong>O(n)</strong> time, making it suitable for large inputs with many tasks.</p>
+<p>The problem is an example of how a simple greedy approach can be applied to problems involving increasing resources (like energy and experience) to meet certain thresholds. This type of problem is common in competitive programming and can often be solved with a direct simulation approach, as shown here. The solution also illustrates how efficient use of variables and conditional checks can minimize unnecessary computations, making it a clean and optimal approach to the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode873s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +445,6 @@
 
       </div>
 
-      
 
       <footer>
         

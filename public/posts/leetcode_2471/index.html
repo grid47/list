@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,171 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode933s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the minimum number of operations needed to sort the values of each level of a binary tree, where at each level, the nodes can be rearranged. In other words, the values of the nodes at each level should be sorted in ascending order using the minimum number of swap operations. Each node’s position can only be changed by swapping the nodes themselves (not the values). The goal is to return the number of operations (swaps) needed to sort the values at each level of the binary tree.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to traverse the tree level by level and count how many swap operations are required to sort the node values at each level.</p>
+<h4 id="step-by-step-approach">
+  Step-by-Step Approach:
+  <a class="heading-link" href="#step-by-step-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Breadth-First Search (BFS) Traversal</strong>: We will perform a BFS traversal to visit each level of the binary tree. BFS is ideal because it processes nodes level by level, which is exactly what we need to sort the nodes at each level.</p>
+</li>
+<li>
+<p><strong>Sorting Each Level</strong>: For each level, we need to extract the node values, and we will then determine how to sort these values using the minimum number of swaps.</p>
+</li>
+<li>
+<p><strong>Counting Swaps</strong>: The key challenge is counting the minimum number of swaps required to sort the values at each level. The number of swaps can be efficiently calculated by determining the number of cycles in the permutation of values. This can be done using the following steps:</p>
+<ul>
+<li>Map the values of the nodes to their sorted order.</li>
+<li>Use a cycle detection approach to count how many swaps are needed to sort the values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Total Swap Count</strong>: We accumulate the swap count for each level and return the total number of swaps.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code to understand its workings in detail:</p>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:
+The problem provides the definition of a binary tree node:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>TreeNode</code> has three properties: <code>val</code> (the value of the node), <code>left</code> (pointer to the left child), and <code>right</code> (pointer to the right child).</li>
+<li>There are three constructors provided for initializing the node, either with a default value or with specific values for <code>val</code>, <code>left</code>, and <code>right</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Minimum Operations Function</strong>:
+The function <code>minimumOperations</code> starts with the root of the tree and calculates the minimum number of swaps needed to sort the nodes at each level of the tree.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumOperations</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span></code></pre></div><ul>
+<li>The function takes in the root of the binary tree.</li>
+<li><code>cnt</code> is initialized to 0. This variable will store the total number of swaps needed.</li>
+<li>A queue <code>q</code> is used to facilitate BFS traversal of the tree. The root node is added to the queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Level-wise Traversal</strong>:
+The function proceeds with BFS by processing one level at a time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr, idx(sz);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        arr.push_back(it<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (it<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> NULL) q.push(it<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (it<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> NULL) q.push(it<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The while loop runs as long as there are nodes in the queue. Each iteration processes one level of the tree.</li>
+<li><code>sz</code> stores the number of nodes at the current level.</li>
+<li>Two vectors are initialized: <code>arr</code> (to store the values of the nodes at the current level) and <code>idx</code> (to store the indices of these nodes).</li>
+<li>For each node at the current level, we pop the node from the queue, add its value to <code>arr</code>, and enqueue its left and right children (if they exist).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting and Swap Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>iota(idx.begin(), idx.end(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>sort(idx.begin(), idx.end(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) { <span style="color:#66d9ef">return</span> arr[i] <span style="color:#f92672">&lt;</span> arr[j]; });
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> idx.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (; idx[i] <span style="color:#f92672">!=</span> i; cnt<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        swap(idx[i], idx[idx[i]]);
+</span></span></code></pre></div><ul>
+<li><code>iota(idx.begin(), idx.end(), 0)</code> initializes the <code>idx</code> vector with the indices of the <code>arr</code> vector (i.e., <code>[0, 1, 2, ..., sz-1]</code>).</li>
+<li>We sort the <code>idx</code> vector based on the corresponding values in <code>arr</code> so that the indices of <code>arr</code> are sorted in increasing order of values.</li>
+<li>The outer loop iterates through the <code>idx</code> array, and the inner loop counts the number of swaps needed to place each element in its correct position. The number of swaps needed to sort the values is equivalent to finding the number of cycles in the index mapping, and for each cycle, we perform <code>size - 1</code> swaps.</li>
+<li>The swaps are counted in the variable <code>cnt</code>, and we use the <code>swap</code> function to adjust the indices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><p>After processing all levels of the tree, the function returns the total number of swaps required.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the time and space complexity of the solution:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>BFS Traversal</strong>: The BFS traversal visits each node once, so the time complexity for traversing the tree is ( O(n) ), where ( n ) is the number of nodes in the tree.</li>
+<li><strong>Sorting and Swapping</strong>: For each level, we sort the array <code>arr</code> and perform the swap count calculation. Sorting takes ( O(m \log m) ), where ( m ) is the number of nodes at the current level. In the worst case, each level contains at most ( n ) nodes. So, sorting and counting swaps across all levels will take ( O(n \log n) ) time in the worst case.</li>
+</ul>
+<p>Thus, the overall time complexity is ( O(n \log n) ), where ( n ) is the number of nodes in the tree.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) due to the storage of the queue for BFS traversal and the arrays used to store the node values and indices at each level.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of counting the minimum number of swaps required to sort the values at each level of the binary tree. By performing a BFS traversal and sorting the values at each level, we are able to compute the number of swaps using a cycle detection approach. The algorithm runs in ( O(n \log n) ) time and uses ( O(n) ) space, making it suitable for large binary trees with many nodes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode933s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -265,7 +429,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2472"  class="external-link" target="_blank" rel="noopener">LeetCode #2472: Maximum Number of Non-overlapping Palindrome Substrings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2475"  class="external-link" target="_blank" rel="noopener">LeetCode #2475: Number of Unequal Triplets in Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -307,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

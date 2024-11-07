@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,148 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode857s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to count the number of &ldquo;bad pairs&rdquo; in an array of integers. A pair <code>(i, j)</code> is defined as bad if it satisfies two conditions:</p>
+<ul>
+<li><code>j &gt; i</code> (i.e., the second index <code>j</code> is greater than the first index <code>i</code>).</li>
+<li><code>j - i</code> is <strong>not</strong> equal to <code>nums[j] - nums[i]</code> (the difference between the indices should not match the difference between the values at those indices).</li>
+</ul>
+<p>In simpler terms, we need to count how many pairs of indices do not have the same difference between their indices and the difference between their corresponding values. The task requires an efficient way to calculate these bad pairs in a given list of integers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, a brute-force solution would involve checking each pair <code>(i, j)</code> for all pairs of indices in the array, which would be computationally expensive with a time complexity of <code>O(n^2)</code>. Instead, an optimized solution uses a <strong>hash map</strong> (or unordered map) to track differences between index <code>i</code> and the value <code>nums[i]</code> efficiently. By recognizing that a good pair <code>(i, j)</code> satisfies the condition <code>i - nums[i] = j - nums[j]</code>, we can reduce the problem to tracking these differences and counting how many times each difference has appeared before.</p>
+<ol>
+<li>
+<p><strong>Key Observation:</strong></p>
+<ul>
+<li>For each index <code>i</code>, the difference <code>i - nums[i]</code> can be used as a key to identify whether a pair <code>(i, j)</code> is &ldquo;good&rdquo; or &ldquo;bad.&rdquo; If <code>i - nums[i]</code> has appeared before at a previous index, it means the pair involving the current index and the previous index is a &ldquo;good pair.&rdquo;</li>
+</ul>
+</li>
+<li>
+<p><strong>Using a Hash Map:</strong></p>
+<ul>
+<li>We use a hash map to store how many times each difference <code>i - nums[i]</code> has appeared before. By doing so, we can quickly calculate how many good pairs exist for a given index <code>i</code>, and thus determine the number of bad pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Bad Pairs:</strong></p>
+<ul>
+<li>The total number of pairs <code>(i, j)</code> for which <code>j &gt; i</code> is <code>n(n-1)/2</code> where <code>n</code> is the length of the array.</li>
+<li>The number of good pairs is determined by counting how many times the difference <code>i - nums[i]</code> has appeared before. The bad pairs can be obtained by subtracting the count of good pairs from the total number of pairs.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">countBadPairs</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>We define the function <code>countBadPairs</code> which accepts a vector <code>nums</code> representing the array and an optional variable <code>cnt</code> (initialized to <code>0</code>) to store the count of bad pairs.</li>
+<li>We also initialize an unordered map <code>mp</code> that will be used to store the difference <code>i - nums[i]</code> as the key and its frequency as the value. This helps in tracking the number of times a certain difference has occurred before.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate Through the Array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">+=</span> i <span style="color:#f92672">-</span> mp[i <span style="color:#f92672">-</span> nums[i]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop runs through each element in the <code>nums</code> array by index <code>i</code>.</li>
+<li>The expression <code>i - nums[i]</code> is calculated, which is the difference between the index <code>i</code> and the value at that index <code>nums[i]</code>. This difference is used as a key in the unordered map <code>mp</code>.</li>
+<li><code>mp[i - nums[i]]</code> is the number of times this difference has occurred before. We add this number to <code>cnt</code> because these are the &ldquo;good pairs&rdquo; (i.e., the pairs that satisfy the condition <code>i - nums[i] = j - nums[j]</code>).</li>
+<li>We then increment the count of this difference in the map (<code>mp[i - nums[i]]++</code>). This ensures that we keep track of how many times this difference has occurred for future indices.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After processing all the elements in the array, the variable <code>cnt</code> contains the total number of bad pairs.</li>
+<li>We return <code>cnt</code> as the result, which represents the number of bad pairs in the array.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm iterates through the array <code>nums</code> exactly once, performing constant-time operations (such as updating the hash map and performing arithmetic) for each element.</li>
+<li>The operations for inserting and retrieving values from an unordered map (<code>mp</code>) are, on average, O(1).</li>
+<li>Therefore, the time complexity is <code>O(n)</code>, where <code>n</code> is the length of the array <code>nums</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the hash map <code>mp</code>, which stores the differences <code>i - nums[i]</code> and their frequencies. In the worst case, the number of unique differences could be equal to the length of the array <code>n</code>, leading to a space complexity of <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of bad pairs in an array by leveraging a hash map to track the frequency of differences between the index <code>i</code> and the value <code>nums[i]</code>. By counting good pairs and subtracting them from the total number of pairs, we can compute the number of bad pairs efficiently. This approach has a linear time complexity <code>O(n)</code> and is much more efficient than a brute-force solution.</p>
+<p>The space complexity is also <code>O(n)</code> due to the hash map, which stores the differences. This solution is well-suited for handling larger arrays, providing an optimal solution with respect to both time and space.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode857s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +424,6 @@
 
       </div>
 
-      
 
       <footer>
         

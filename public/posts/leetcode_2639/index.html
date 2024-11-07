@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -236,7 +236,191 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1041s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the width of each column in a given 2D grid (matrix). The width of a column is defined as the maximum length of the elements in that column when represented as strings. Negative numbers and positive numbers need to be handled correctly as they may have different lengths when converted to strings (e.g., the number <code>-45</code> is of length 3 and <code>45</code> is of length 2). We need to determine the width for each column in the grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves iterating over each column of the grid and calculating the maximum length of the elements in each column when represented as strings. To achieve this, we follow these steps:</p>
+<ol>
+<li>
+<p><strong>Iterate through Columns</strong>:</p>
+<ul>
+<li>We start by iterating over each column of the grid (the grid has <code>n</code> columns). For each column, we calculate the width by examining each element in the column.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Length of Each Element</strong>:</p>
+<ul>
+<li>For each element in the column, we convert it to its string representation and measure the number of characters in that string. The length of the string is the width of that particular element.</li>
+<li>We handle negative numbers separately as they require an additional character for the minus sign.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track Maximum Length for Each Column</strong>:</p>
+<ul>
+<li>For each column, we track the maximum length across all the elements in that column, as the width of a column is determined by the largest element in that column when represented as a string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After calculating the maximum width for each column, we return the widths as a vector.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-getint-num-function">
+  1. <code>get(int num)</code> Function
+  <a class="heading-link" href="#1-getint-num-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>get</code> function is responsible for calculating the number of characters (length) in the string representation of a given integer, including the handling of negative numbers.</p>
+<ul>
+<li>
+<p><strong>Step 1.1</strong>: If the number is <code>0</code>, the function returns <code>1</code> because the string representation of <code>0</code> has a length of <code>1</code>.</p>
+</li>
+<li>
+<p><strong>Step 1.2</strong>: If the number is negative, we initialize <code>len</code> to <code>1</code>, accounting for the minus sign. Otherwise, <code>len</code> is initialized to <code>0</code>.</p>
+</li>
+<li>
+<p><strong>Step 1.3</strong>: We then take the absolute value of the number to handle negative values and count how many digits the number has by continuously dividing the number by <code>10</code>. Each division reduces the number by a factor of <code>10</code>, and the loop continues until the number becomes <code>0</code>. For each iteration, the <code>len</code> is incremented.</p>
+</li>
+<li>
+<p><strong>Step 1.4</strong>: Finally, the function returns the length (<code>len</code>) of the number when converted to a string.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// For 0, return length 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// If negative, add 1 for the minus sign
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    num <span style="color:#f92672">=</span> abs(num);  <span style="color:#75715e">// Work with absolute value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {  <span style="color:#75715e">// Count the number of digits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        len<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Remove the last digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> len;  <span style="color:#75715e">// Return the length
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="2-findcolumnwidthvectorvectorint-grid-function">
+  2. <code>findColumnWidth(vector&lt;vector&lt;int&gt;&gt;&amp; grid)</code> Function
+  <a class="heading-link" href="#2-findcolumnwidthvectorvectorint-grid-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This function calculates the width of each column in the grid and returns a vector with the maximum width of each column.</p>
+<ul>
+<li>
+<p><strong>Step 2.1</strong>: We first get the dimensions of the grid, <code>m</code> (number of rows) and <code>n</code> (number of columns).</p>
+</li>
+<li>
+<p><strong>Step 2.2</strong>: We initialize an array <code>ans</code> of size <code>n</code> (one element for each column) to store the maximum length for each column.</p>
+</li>
+<li>
+<p><strong>Step 2.3</strong>: For each column (from <code>i = 0</code> to <code>n-1</code>), we initialize <code>len</code> to <code>0</code>. This variable tracks the maximum length of the elements in the current column.</p>
+</li>
+<li>
+<p><strong>Step 2.4</strong>: We iterate over each row <code>j</code> of the grid and calculate the length of the element <code>grid[j][i]</code> using the <code>get</code> function. We update <code>len</code> to the maximum length found so far in that column.</p>
+</li>
+<li>
+<p><strong>Step 2.5</strong>: After examining all the rows in the column, we store the maximum length for that column in the <code>ans</code> vector.</p>
+</li>
+<li>
+<p><strong>Step 2.6</strong>: Finally, we return the <code>ans</code> vector containing the maximum width for each column.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findColumnWidth(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();  <span style="color:#75715e">// Get the number of rows (m) and columns (n)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Initialize the result vector with 0s
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Iterate over each column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Iterate over each row in the current column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            len <span style="color:#f92672">=</span> max(len, get(grid[j][i]));  <span style="color:#75715e">// Get the maximum length in the current column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#f92672">=</span> len;  <span style="color:#75715e">// Store the maximum length for the column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the result vector
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>get(int num)</code> function</strong>: This function calculates the number of digits in a number. For a given number, the time complexity is (O(\log(\text{num}))) because each division by <code>10</code> reduces the number by a factor of <code>10</code>.</li>
+<li><strong>Main Loop</strong>: We iterate over all columns and rows of the grid. For each element, we call the <code>get</code> function to compute its length. Hence, the time complexity of iterating over all elements in the grid is (O(m \cdot n \cdot \log(\text{max_element}))), where <code>max_element</code> is the largest number in the grid.</li>
+</ul>
+<p>Thus, the overall time complexity is:</p>
+<p>[
+O(m \cdot n \cdot \log(\text{max_element}))
+]</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>ans</code> Vector</strong>: We store the maximum width for each column, so the space complexity is (O(n)), where <code>n</code> is the number of columns.</li>
+<li><strong>Temporary Variables</strong>: We use a few temporary variables like <code>len</code> and <code>m</code>/<code>n</code> but they do not depend on the size of the grid, so their space complexity is constant, i.e., (O(1)).</li>
+</ul>
+<p>Thus, the overall space complexity is:</p>
+<p>[
+O(n)
+]</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum width for each column in the grid by leveraging a helper function (<code>get</code>) to calculate the length of each element when represented as a string. It uses a simple double iteration through the grid: the outer loop iterates over the columns and the inner loop examines each element within the column. The time complexity is driven by the number of rows, columns, and the number of digits in the largest number in the grid. This approach ensures that the problem is solved in an efficient manner, suitable for moderately large grids.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1041s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +474,6 @@
 
       </div>
 
-      
 
       <footer>
         

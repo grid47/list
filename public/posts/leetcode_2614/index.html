@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,205 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> p;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1037s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks you to find the largest prime number from the diagonals of a square matrix <code>n</code>. The matrix is of size <code>n x n</code>, where each element is an integer. Specifically, you need to examine the two diagonals:</p>
+<ol>
+<li>The <strong>main diagonal</strong> where the elements have the same row and column index, i.e., <code>n[i][i]</code>.</li>
+<li>The <strong>anti-diagonal</strong> where the elements have row index <code>i</code> and column index <code>n-i-1</code>.</li>
+</ol>
+<p>Your goal is to find the largest prime number from these two diagonals. If no prime number exists on either diagonal, return <code>0</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Prime Check Function (isPrime)</strong>:
+We need a utility function to check if a number is prime. A prime number is a number greater than 1 that has no divisors other than 1 and itself. For efficient checking, we can use trial division up to the square root of the number, as any factor larger than the square root would have a corresponding factor smaller than the square root.</p>
+</li>
+<li>
+<p><strong>Iterate Through Diagonals</strong>:
+Once we have the prime check function, we can iterate through both diagonals (main diagonal and anti-diagonal) of the matrix and apply the prime check on each element.</p>
+</li>
+<li>
+<p><strong>Track the Largest Prime</strong>:
+As we iterate over the diagonals, we compare the prime numbers and track the largest prime number encountered. If no prime number is found, we return <code>0</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-prime-check-function-isprime">
+  Step 1: Prime Check Function (<code>isPrime</code>)
+  <a class="heading-link" href="#step-1-prime-check-function-isprime">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPrime</span>(<span style="color:#66d9ef">int</span> n){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">||</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">*</span> i <span style="color:#f92672">&lt;=</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>The <code>isPrime</code> function checks whether a given number <code>n</code> is prime.</li>
+<li><strong>Base Case</strong>: First, the function checks if <code>n</code> is less than or equal to 2 or is even. If <code>n</code> is 2, the function returns <code>true</code> since 2 is the only even prime number.</li>
+<li>For numbers greater than 2, we check if the number is divisible by any integer from <code>3</code> to <code>sqrt(n)</code>. We only check odd numbers (hence <code>i += 2</code>), as even numbers greater than 2 cannot be prime.</li>
+<li>If <code>n</code> is divisible by any number in this range, it is not prime, and we return <code>false</code>. If no divisors are found, the number is prime, and we return <code>true</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-diagonal-traversal">
+  Step 2: Diagonal Traversal
+  <a class="heading-link" href="#step-2-diagonal-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">diagonalPrime</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> max({p, isPrime(n[i][i]) <span style="color:#f92672">*</span> n[i][i], 
+</span></span><span style="display:flex;"><span>            isPrime(n[i][n.size() <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> n[i][n.size() <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]});
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>The function <code>diagonalPrime</code> is where the main logic resides.</li>
+<li>We initialize a variable <code>p</code> to track the largest prime number found. Initially, <code>p</code> is set to <code>0</code>.</li>
+<li>We loop over the matrix <code>n</code> using a single loop, where <code>i</code> represents the current row and column index.</li>
+<li>For each iteration, we check both diagonals:
+<ul>
+<li><strong>Main Diagonal</strong>: The element at position <code>[i][i]</code>.</li>
+<li><strong>Anti-Diagonal</strong>: The element at position <code>[i][n.size() - i - 1]</code>, where <code>n.size() - i - 1</code> calculates the corresponding column index for the anti-diagonal.</li>
+</ul>
+</li>
+<li>For each of these elements, we check if they are prime using the <code>isPrime</code> function. If they are prime, we multiply the prime number by <code>1</code> (since <code>isPrime</code> returns <code>true</code> or <code>false</code>, which can be treated as <code>1</code> or <code>0</code> respectively).</li>
+<li>We then compare the current prime number with the current maximum prime <code>p</code>. If it is larger, we update <code>p</code>.</li>
+<li>After looping through all rows, we return the value of <code>p</code>, which holds the largest prime number found on the diagonals. If no prime was found, <code>p</code> will remain <code>0</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>After iterating through the entire matrix and checking both diagonals, the function will return the largest prime found. If no prime numbers are found on the diagonals, the function will return <code>0</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Prime Check (<code>isPrime</code>)</strong>:</p>
+<ul>
+<li>For each element on the diagonals, we perform a primality test, which runs in (O(\sqrt{n})) time, where <code>n</code> is the value of the element being checked.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Over Diagonal Elements</strong>:</p>
+<ul>
+<li>We loop over the diagonals of the matrix, which has a size of (n). Therefore, we perform the primality check for <code>2n</code> elements in total (both diagonals).</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n \cdot \sqrt{m})), where <code>n</code> is the size of the matrix (number of rows or columns), and <code>m</code> is the maximum value in the matrix, as we perform a primality test for each diagonal element.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Input Matrix</strong>:</p>
+<ul>
+<li>The space complexity for the input matrix <code>n</code> is (O(n^2)), where <code>n</code> is the size of the matrix (number of rows and columns).</li>
+</ul>
+</li>
+<li>
+<p><strong>Auxiliary Space</strong>:</p>
+<ul>
+<li>We use a constant amount of extra space for the prime check (<code>isPrime</code>) and the <code>p</code> variable to track the largest prime. This does not require additional space beyond (O(1)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n^2)) for storing the input matrix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by:</p>
+<ol>
+<li>Iterating over both diagonals of the matrix.</li>
+<li>Using an optimized primality test to check if the elements on the diagonals are prime.</li>
+<li>Keeping track of the largest prime number found during the iteration.</li>
+<li>Returning the largest prime number, or <code>0</code> if no prime is found.</li>
+</ol>
+<p>With a time complexity of (O(n \cdot \sqrt{m})) and space complexity of (O(n^2)), the solution is efficient for most input sizes. The use of the <code>isPrime</code> function allows for a quick check of prime status, while the loop through the diagonals ensures we evaluate all relevant elements in the matrix.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1037s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -293,7 +491,6 @@
 
       </div>
 
-      
 
       <footer>
         

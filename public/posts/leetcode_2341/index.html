@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -225,7 +225,132 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> { pairs, (<span style="color:#66d9ef">int</span>)nums.size() <span style="color:#f92672">-</span> pairs <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> };
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode840s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining how many pairs of identical elements can be formed from an array of integers, and how many elements remain unpaired. The goal is to return two values:</p>
+<ol>
+<li><strong>The number of pairs</strong>: A pair is defined as two identical elements.</li>
+<li><strong>The number of leftover elements</strong>: These are the elements that cannot form a pair.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we use the following steps:</p>
+<ol>
+<li><strong>Count the Occurrences of Each Element</strong>: We need to keep track of how many times each element appears in the input array.</li>
+<li><strong>Pairing Process</strong>: As we count the occurrences of elements, we can form pairs. Specifically, for each element that appears an even number of times, we can form pairs, while the remainder will be left as unpaired elements.</li>
+<li><strong>Remaining Elements</strong>: For elements that appear an odd number of times, one element will remain unpaired after forming as many pairs as possible.</li>
+</ol>
+<p>We will use a fixed-size array <code>cnt</code> where each index represents a possible value in the range [0, 100] (since the problem statement assumes the elements of <code>nums</code> lie in this range).</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">101</span>] <span style="color:#f92672">=</span> {}, pairs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>cnt[101]</code>:</strong> This array is used to store the count of each integer in the input array. Since the elements of <code>nums</code> are guaranteed to be between 0 and 100, an array of size 101 (for indices 0 to 100) is enough to track the frequency of each number.</li>
+<li><strong><code>pairs</code>:</strong> This variable keeps track of the total number of pairs formed. Initially, it&rsquo;s set to 0.</li>
+</ul>
+<h4 id="2-counting-occurrences-and-forming-pairs">
+  2. <strong>Counting Occurrences and Forming Pairs</strong>
+  <a class="heading-link" href="#2-counting-occurrences-and-forming-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : nums)
+</span></span><span style="display:flex;"><span>    pairs <span style="color:#f92672">+=</span> <span style="color:#f92672">++</span>cnt[n] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>for (int n : nums)</code>:</strong> This loop iterates over each number <code>n</code> in the input array <code>nums</code>.</li>
+<li><strong><code>++cnt[n]</code>:</strong> We increment the count for the number <code>n</code> in the array <code>cnt</code>. This increases the count for the number <code>n</code> by 1.</li>
+<li><strong><code>% 2 == 0 ? 1 : 0</code>:</strong> After updating the count of <code>n</code>, we check if the new count is even. If it is even, it means we have successfully formed a pair (since two identical elements form a pair). If the count becomes even, we increment the <code>pairs</code> counter by 1.</li>
+<li><strong><code>pairs += ...</code>:</strong> This adds 1 to the <code>pairs</code> counter whenever a pair is formed.</li>
+</ul>
+<h4 id="3-return-the-result">
+  3. <strong>Return the Result</strong>
+  <a class="heading-link" href="#3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> { pairs, (<span style="color:#66d9ef">int</span>)nums.size() <span style="color:#f92672">-</span> pairs <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> };
+</span></span></code></pre></div><ul>
+<li><strong><code>pairs</code>:</strong> This value is the number of pairs formed, which has been counted in the previous step.</li>
+<li><strong><code>(int)nums.size() - pairs * 2</code>:</strong> The total number of leftover elements is calculated as the total number of elements in the input array (<code>nums.size()</code>) minus twice the number of pairs (<code>pairs * 2</code>). Since each pair consists of two elements, multiplying <code>pairs</code> by 2 gives the total number of elements used in pairs. The difference gives the number of leftover unpaired elements.</li>
+</ul>
+<p>The result is returned as a vector containing two elements:</p>
+<ol>
+<li>The first element is the number of pairs.</li>
+<li>The second element is the number of leftover unpaired elements.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The algorithm processes each element of the input array <code>nums</code> once. For each element, it performs a constant-time operation of updating the count and checking if a pair is formed. Therefore, the time complexity is linear in terms of the size of the input array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> The space used by the solution is constant because the size of the <code>cnt</code> array is fixed at 101, regardless of the size of the input array. The space used does not depend on the input size, so the space complexity is constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of counting pairs and leftover elements in an array. By using a counting array (<code>cnt</code>) to track the occurrences of each element, we can easily calculate the number of pairs and unpaired elements in a single pass through the input array. This approach works in linear time O(n), making it very efficient for large input sizes. The solution also uses constant space O(1), which is optimal for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode840s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +404,6 @@
 
       </div>
 
-      
 
       <footer>
         

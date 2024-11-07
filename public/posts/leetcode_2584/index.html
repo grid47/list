@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,179 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res <span style="color:#f92672">&lt;</span> (nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">?</span> res : <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1021s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a list of integers <code>nums</code>, and we need to determine if there exists a valid split point in the list where the elements before the split and after the split are &ldquo;coprime.&rdquo; Two numbers are considered coprime if their greatest common divisor (GCD) is 1. A valid split is one where every element on the left side has no common prime factor with any element on the right side.</p>
+<p>The objective is to find the smallest index <code>i</code> such that:</p>
+<ul>
+<li>The left side of the array (<code>nums[0]</code> to <code>nums[i]</code>) and the right side (<code>nums[i+1]</code> to <code>nums[n-1]</code>) have no common prime factors.</li>
+</ul>
+<p>If such a split exists, we should return the smallest index <code>i</code>, otherwise, return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves using <strong>prime factorization</strong> to check if there exists a valid split where the left and right sides of the array have no prime factors in common. We need to track the prime factors of each number in the array and maintain a mechanism to check if there is an overlap in the prime factors between the two sides of the array.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Prime Factorization</strong>:</p>
+<ul>
+<li>For each element in the array, find its prime factors. We can use a method to efficiently compute the prime factors of a number by checking divisibility for each prime number up to 1000.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Prime Factors</strong>:</p>
+<ul>
+<li>Use a map (<code>mp</code>) to store the most recent index where a prime factor has been encountered.</li>
+<li>We use a difference array (<code>line</code>) to track where prime factors start and end for each element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Partial Sum to Find Split Point</strong>:</p>
+<ul>
+<li>By accumulating the prime factors using the difference array and computing the partial sum, we determine where prime factors no longer overlap between the two sides of the array.</li>
+<li>If we find a point where the prime factors of the left side and right side are disjoint, that is a valid split, and we return the index of that split.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If a valid split is found, return the smallest index <code>i</code>. If no such split exists, return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-prime-factorization-function">
+  1. <strong>Prime Factorization Function</strong>:
+  <a class="heading-link" href="#1-prime-factorization-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> primes(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            res.push_back(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>((n<span style="color:#f92672">%</span> i) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) n <span style="color:#f92672">/=</span> i;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) res.push_back(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function takes an integer <code>n</code> and returns a list of its prime factors.</li>
+<li>It iterates through all integers starting from <code>2</code> to <code>1000</code> and checks if <code>n</code> is divisible by each number. If so, it adds that number to the result and divides <code>n</code> by the factor until it is no longer divisible.</li>
+<li>The prime factors of the number are stored in the <code>res</code> vector and returned.</li>
+</ul>
+<h4 id="2-main-function---findvalidsplit">
+  2. <strong>Main Function - <code>findValidSplit</code></strong>:
+  <a class="heading-link" href="#2-main-function---findvalidsplit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findValidSplit</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> line(<span style="color:#ae81ff">10001</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is a map used to store the last index where each prime factor appeared in the array.</li>
+<li><code>line</code> is a difference array used to track the ranges where a prime factor is present.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> f: primes(nums[i])) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp.count(f)) {
+</span></span><span style="display:flex;"><span>                mp[f] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            line[mp[f]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            line[i]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>We iterate through the array <code>nums</code> and compute the prime factors of each number using the <code>primes()</code> function.</li>
+<li>For each prime factor <code>f</code> of the current number <code>nums[i]</code>, we check if it has been encountered before. If not, we store the index <code>i</code> in the map <code>mp</code>.</li>
+<li>We update the <code>line</code> array to mark where the prime factors start and end using a difference array. Specifically, when a prime factor <code>f</code> is first encountered, we increment <code>line[mp[f]]</code>, and when the prime factor <code>f</code> is no longer relevant, we decrement <code>line[i]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    partial_sum(line.begin(), line.end(), line.begin());
+</span></span></code></pre></div><ul>
+<li>After processing all elements, we compute the <strong>partial sum</strong> of the <code>line</code> array. This gives us the cumulative number of prime factors that are active at each index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> find(line.begin(), line.end(), <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> line.begin();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res <span style="color:#f92672">&lt;</span> (nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">?</span> res : <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We search for the first occurrence of <code>0</code> in the <code>line</code> array, which represents a valid split where the left side and right side have no common prime factors.</li>
+<li>If a valid split is found, we return the index of the split. Otherwise, we return <code>-1</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>For each element in <code>nums</code>, we calculate its prime factors. The maximum number of prime factors a number can have is logarithmic with respect to the number itself, and for numbers up to 1000, this is relatively small.</li>
+<li>The total time complexity for factorization is (O(n \log \log n)), where <code>n</code> is the size of the array and each factorization is done in logarithmic time with respect to the number.</li>
+<li>Updating the <code>line</code> array and computing the partial sum is (O(n)).</li>
+<li>The total time complexity is (O(n \log \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use <code>map</code> to store the prime factor indices, which takes (O(k)), where <code>k</code> is the number of unique prime factors encountered.</li>
+<li>The <code>line</code> array takes (O(n)) space.</li>
+<li>Thus, the space complexity is (O(n + k)), where <code>k</code> is the number of unique prime factors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding a valid split point in an array based on prime factors. By utilizing prime factorization, a difference array, and partial sums, the algorithm can quickly determine whether there exists a split where the left and right sides have no common prime factors. The time complexity of (O(n \log \log n)) ensures that this approach works efficiently even for larger arrays, making it a scalable and effective solution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1021s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -309,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

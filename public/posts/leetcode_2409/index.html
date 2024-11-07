@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -237,7 +237,205 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode891s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine how many days are there in common between two date ranges in a year. Given two date intervals (for two different people), we are tasked with counting the number of overlapping days between these intervals, considering that a year has 365 days.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we convert the given date strings into day numbers of the year, where the first day of the year (January 1st) is numbered as <code>0</code>, the second day as <code>1</code>, and so on. Once we have the date intervals converted to day numbers, we can check how many days overlap between the two given date ranges.</p>
+<h4 id="steps-involved">
+  Steps Involved:
+  <a class="heading-link" href="#steps-involved">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Date Conversion to Day of Year</strong>:</p>
+<ul>
+<li>Convert each given date (in the format <code>&quot;MM-DD&quot;</code>) to the corresponding day number in the year. This is done by calculating the number of days that have passed from January 1st to the given date.</li>
+<li>To achieve this, the code first extracts the month and day from the date string. Then it calculates the cumulative days from the beginning of the year (accounting for the number of days in each month).</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Overlapping Days</strong>:</p>
+<ul>
+<li>After converting both date ranges to day numbers (using the helper function <code>td</code>), we compare each day in the year to check if it falls within both ranges. If a day is in the intersection of both ranges, it is counted as an overlapping day.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>Finally, we count how many days overlap between the two date ranges and return the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="helper-function-td---convert-date-to-day-of-year">
+  Helper Function <code>td</code> - Convert Date to Day of Year
+  <a class="heading-link" href="#helper-function-td---convert-date-to-day-of-year">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">td</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> s[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>(s[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);  <span style="color:#75715e">// Month extraction
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> s[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span>(s[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);  <span style="color:#75715e">// Day extraction
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">--</span>m;  <span style="color:#75715e">// Adjust month index for 0-based indexing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (m <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {  <span style="color:#75715e">// Accumulate days of all months before the given month
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        d <span style="color:#f92672">+=</span> md[m];  <span style="color:#75715e">// Add days of the previous month
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">--</span>m;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> d;  <span style="color:#75715e">// Return the total number of days since the beginning of the year
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Month and Day Extraction</strong>:</p>
+<ul>
+<li>The string <code>s</code> is in the format <code>&quot;MM-DD&quot;</code>, so we first extract the month (<code>m</code>) and the day (<code>d</code>).</li>
+<li>We convert the month from a 2-digit string to an integer and subtract 1 to make the month 0-based (January is month <code>0</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Cumulative Day Calculation</strong>:</p>
+<ul>
+<li>We add the number of days for all the months preceding the given month (using the <code>md</code> array that stores the number of days in each month).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Day of Year</strong>:</p>
+<ul>
+<li>The function returns the cumulative number of days from January 1st to the given date.</li>
+</ul>
+</li>
+</ul>
+<h4 id="main-function-countdaystogether---calculate-overlapping-days">
+  Main Function <code>countDaysTogether</code> - Calculate Overlapping Days
+  <a class="heading-link" href="#main-function-countdaystogether---calculate-overlapping-days">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countDaysTogether</span>(string sa1, string sa2, string sb1, string sb2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a1 <span style="color:#f92672">=</span> td(sa1), a2 <span style="color:#f92672">=</span> td(sa2), b1 <span style="color:#f92672">=</span> td(sb1), b2 <span style="color:#f92672">=</span> td(sb2);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">367</span>; <span style="color:#f92672">++</span>i) {  <span style="color:#75715e">// Iterate over all days in a year (365 days + 2 for easier boundary handling)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (a1 <span style="color:#f92672">&lt;=</span> i <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;=</span> a2 <span style="color:#f92672">&amp;&amp;</span> b1 <span style="color:#f92672">&lt;=</span> i <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;=</span> b2) {  <span style="color:#75715e">// Check if the day is within both ranges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#f92672">++</span>ans;  <span style="color:#75715e">// Increment count if the day is in both ranges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the total number of overlapping days
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Convert Dates to Day Numbers</strong>:</p>
+<ul>
+<li>The four input dates (<code>sa1</code>, <code>sa2</code>, <code>sb1</code>, <code>sb2</code>) are converted to their respective day numbers using the <code>td</code> helper function.</li>
+<li><code>a1</code> and <code>a2</code> are the start and end days of the first range (for the first person), and <code>b1</code> and <code>b2</code> are for the second range (for the second person).</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Over All Possible Days in a Year</strong>:</p>
+<ul>
+<li>The loop runs from <code>0</code> to <code>366</code>, representing the days of the year (from January 1st to December 31st, with an extra day <code>366</code> for easier boundary handling).</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Overlap</strong>:</p>
+<ul>
+<li>For each day <code>i</code> in the loop, we check if the day falls within both date ranges. Specifically, the day <code>i</code> should lie between <code>a1</code> and <code>a2</code> (inclusive) and between <code>b1</code> and <code>b2</code> (inclusive).</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Overlapping Days</strong>:</p>
+<ul>
+<li>If day <code>i</code> is in both ranges, we increment the count (<code>ans</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After checking all days, the function returns the total number of overlapping days as the result.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(1)</strong>. The operations performed include:
+<ul>
+<li>Converting four date strings into day numbers (constant time operations).</li>
+<li>Iterating over all 367 possible days and checking if each day lies within both date ranges (constant time operations).</li>
+</ul>
+</li>
+<li>Since all operations inside the loop are constant-time checks, the overall time complexity is <strong>O(1)</strong> for fixed inputs (since the number of days in a year is constant).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is also <strong>O(1)</strong> because:
+<ul>
+<li>We are using only a fixed amount of space for the <code>md</code> array (which stores the number of days in each month) and other variables (<code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>, and <code>ans</code>).</li>
+</ul>
+</li>
+</ul>
+<p>Thus, both the time and space complexities are constant, making the solution highly efficient.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently counts the number of overlapping days between two date ranges in a year. By converting the date strings into day numbers and iterating over all possible days in the year, we can easily check if a given day falls within both date ranges. This solution has constant time and space complexity, making it optimal for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode891s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +489,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -246,7 +246,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1127s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the <strong>minimum string</strong> that contains all three given strings <code>a</code>, <code>b</code>, and <code>c</code> as substrings. The minimum string is the lexicographically smallest string that contains each of the given strings as a part of it. To achieve this, the solution must find the best way to combine the three strings in order to minimize the resulting string in terms of length and lexicographical order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be solved using a string concatenation approach, where we attempt to attach the strings in all possible orders while considering the overlaps between them. The goal is to minimize the final string length by leveraging overlaps. Here’s a breakdown of how to approach the problem:</p>
+<ol>
+<li>
+<p><strong>Overlapping Strings</strong>:</p>
+<ul>
+<li>We need to efficiently combine two strings while maximizing their overlap. If one string ends in a way that the beginning of the next string matches, we can reduce the total length of the combined string by not repeating the overlapping portion.</li>
+<li>The function <code>attach</code> is used to achieve this overlap, where we try to find the longest suffix of the first string that is a prefix of the second string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lexicographical Order</strong>:</p>
+<ul>
+<li>In cases where two different combinations of strings result in the same length, we must choose the lexicographically smaller one. This is handled by the <code>mn</code> function, which compares the two strings and returns the lexicographically smaller one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Combinations of Strings</strong>:</p>
+<ul>
+<li>Since there are three strings and each pair can be attached in different orders, we need to consider all six permutations of the three strings to find the optimal combination. The solution uses the <code>solve</code> function to compute the result for each combination.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong><code>mn</code> function</strong>:
+This function compares two strings and returns the lexicographically smaller one.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">mn</span>(string a, string b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (a.size() <span style="color:#f92672">&lt;</span> b.size() <span style="color:#f92672">||</span> (a.size() <span style="color:#f92672">==</span> b.size() <span style="color:#f92672">&amp;&amp;</span> a <span style="color:#f92672">&lt;</span> b)) <span style="color:#f92672">?</span> a : b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function returns <code>a</code> if <code>a</code> is smaller than <code>b</code> either by size or lexicographically.</li>
+<li>Otherwise, it returns <code>b</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>attach</code> function</strong>:
+This function attaches string <code>b</code> to string <code>a</code> with the maximum possible overlap.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">attach</span>(string a, string b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a.find(b) <span style="color:#f92672">!=</span> string<span style="color:#f92672">::</span>npos) <span style="color:#66d9ef">return</span> a;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> a.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        string t1 <span style="color:#f92672">=</span> a.substr(i), t2 <span style="color:#f92672">=</span> b.substr(<span style="color:#ae81ff">0</span>, t1.size());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(t1 <span style="color:#f92672">==</span> t2) <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b.substr(t1.size());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>b</code> is already a substring of <code>a</code>, we simply return <code>a</code> (no need for concatenation).</li>
+<li>Otherwise, we check all possible suffixes of <code>a</code> and prefixes of <code>b</code> to find the maximum overlap.</li>
+<li>We start by extracting substrings of <code>a</code> starting from different positions and checking if the corresponding prefix of <code>b</code> matches the suffix of <code>a</code>. When we find the maximum match, we return the concatenation of <code>a</code> and the remaining part of <code>b</code> (after removing the matched portion).</li>
+<li>If no overlap is found, the function simply returns the concatenation of <code>a</code> and <code>b</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>solve</code> function</strong>:
+This function finds the smallest string that contains <code>a</code>, <code>b</code>, and <code>c</code> as substrings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">solve</span>(string a, string b, string c) {
+</span></span><span style="display:flex;"><span>    string t1 <span style="color:#f92672">=</span> attach(a, b);
+</span></span><span style="display:flex;"><span>    string t2 <span style="color:#f92672">=</span> attach(b, a);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    string ret1 <span style="color:#f92672">=</span> attach(t1, c);
+</span></span><span style="display:flex;"><span>    string ret2 <span style="color:#f92672">=</span> attach(c, t1);
+</span></span><span style="display:flex;"><span>    string ret3 <span style="color:#f92672">=</span> attach(t2, c);
+</span></span><span style="display:flex;"><span>    string ret4 <span style="color:#f92672">=</span> attach(c, t2);        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mn(mn(ret1, ret2), mn(ret3, ret4));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function computes all possible combinations of attaching the strings <code>a</code>, <code>b</code>, and <code>c</code> in different orders. It does this by first trying to attach <code>a</code> to <code>b</code> and <code>b</code> to <code>a</code> (i.e., <code>t1</code> and <code>t2</code>), and then attempting to attach <code>c</code> to the results.</li>
+<li>It then compares the four possible resulting strings and returns the lexicographically smallest one.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>minimumString</code> function</strong>:
+The main function that calls <code>solve</code> for all six permutations of the strings and returns the smallest string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">minimumString</span>(string a, string b, string c) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mn(mn(solve(a, b, c), solve(a, c, b)), solve(b, c, a));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>solve</code> function is called for all permutations of <code>a</code>, <code>b</code>, and <code>c</code>:
+<ul>
+<li><code>solve(a, b, c)</code></li>
+<li><code>solve(a, c, b)</code></li>
+<li><code>solve(b, c, a)</code></li>
+</ul>
+</li>
+<li>The results are compared using the <code>mn</code> function to find the smallest lexicographical string.</li>
+<li>The final result is returned as the minimum string that contains <code>a</code>, <code>b</code>, and <code>c</code> as substrings.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the <code>attach</code> function is <strong>O(n*m)</strong>, where <code>n</code> and <code>m</code> are the lengths of the two strings being compared. This is because we iterate through the characters of both strings to find the maximum overlap.</li>
+<li>The <code>solve</code> function involves calling the <code>attach</code> function multiple times (4 calls), so its complexity is proportional to the length of the strings involved.</li>
+<li>Since we call <code>solve</code> for all six permutations of the three strings, the overall time complexity is <strong>O(6 * (n*m))</strong>, where <code>n</code> and <code>m</code> are the maximum lengths of the strings.</li>
+<li>The complexity can be simplified to <strong>O(n * m)</strong>, where <code>n</code> and <code>m</code> are the average lengths of the strings.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the space needed to store the strings during the concatenation process. Each string and substring is stored in memory as we perform operations on them. Therefore, the space complexity is <strong>O(n + m)</strong>, where <code>n</code> and <code>m</code> are the lengths of the strings involved in the operations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively finds the minimum string that contains all three input strings as substrings. It leverages the concept of string overlap to minimize the total length of the resulting string and ensures that the final string is lexicographically the smallest among all possible combinations. With a time complexity of <strong>O(n * m)</strong>, the approach efficiently handles the problem within reasonable input sizes. By using a systematic exploration of all possible combinations and overlaps, this solution is optimal and scalable.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1127s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -258,7 +414,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2801"  class="external-link" target="_blank" rel="noopener">LeetCode #2801: Count Stepping Numbers in Range</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2806"  class="external-link" target="_blank" rel="noopener">LeetCode #2806: Account Balance After Rounded Purchase</a></th>
       </tr>
   </thead>
   <tbody>
@@ -300,7 +456,6 @@
 
       </div>
 
-      
 
       <footer>
         

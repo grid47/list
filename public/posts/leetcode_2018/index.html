@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -261,7 +261,174 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> match(trns, word) <span style="color:#f92672">||</span> match(board, word);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode652s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine whether a given word can be placed into a crossword puzzle represented by a board, adhering to certain constraints. The board is a grid of characters where empty spaces are represented by <code>' '</code> (spaces) and filled spaces by <code>'#'</code>. The word can be placed horizontally or vertically, and it must either fit entirely in the space without exceeding the boundaries or match the existing characters in the grid where it overlaps. Additionally, the placement should respect the following conditions:</p>
+<ol>
+<li>The word can replace spaces but cannot replace any filled characters.</li>
+<li>The word should fit entirely within a continuous sequence of spaces, or if it overlaps with existing letters, those letters must match the corresponding letters in the word.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow a systematic approach:</p>
+<ol>
+<li>
+<p><strong>Define Helper Functions</strong>:</p>
+<ul>
+<li>A helper function <code>same()</code> that checks whether a given word can fit into a segment of the row, either starting from the beginning of that segment or from the end.</li>
+<li>A helper function <code>match()</code> that checks all rows (both horizontally and vertically) of the grid to see if the word can fit according to the rules defined above.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transpose the Board</strong>:</p>
+<ul>
+<li>Since the word can be placed horizontally or vertically, we will create a transposed version of the board. This allows us to check for potential placements without duplicating the logic for both orientations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Each Orientation</strong>:</p>
+<ul>
+<li>Use the <code>match()</code> function on both the original and transposed board to determine if the word can be placed in any valid configuration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>If the word can be placed in either orientation, we return <code>true</code>; otherwise, we return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains all the necessary methods to solve the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">same</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>row, <span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end, string <span style="color:#f92672">&amp;</span>s) {
+</span></span></code></pre></div><ul>
+<li>The <code>same()</code> function checks if the word can fit into the given segment of the row defined by <code>start</code> and <code>end</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(end <span style="color:#f92672">-</span> start <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">!=</span> s.size()) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>We first check if the length of the segment matches the length of the word. If not, we return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> (row[start <span style="color:#f92672">+</span> i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">||</span> row[start <span style="color:#f92672">+</span> i] <span style="color:#f92672">==</span> s[i])) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>This loop checks from the start of the segment if each character matches the word&rsquo;s character or if it&rsquo;s an empty space. If we reach the end of the word, we return <code>true</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> (row[end <span style="color:#f92672">-</span> i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">||</span> row[end <span style="color:#f92672">-</span> i] <span style="color:#f92672">==</span> s[i]))
+</span></span><span style="display:flex;"><span>              i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> true;             
+</span></span><span style="display:flex;"><span>             
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If we don&rsquo;t find a match from the start, we check from the end of the segment. If either check succeeds, we can place the word in that segment.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">match</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>mtx, string <span style="color:#f92672">&amp;</span>word) {
+</span></span></code></pre></div><ul>
+<li>The <code>match()</code> function checks each row in the matrix <code>mtx</code> to see if the word can fit.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> mtx[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>row: mtx) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; ) {
+</span></span></code></pre></div><ul>
+<li>We iterate through each row and process it to find segments of continuous spaces.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> start;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> row[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span>) i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                start <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> row[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;#&#39;</span>) i<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We skip over filled cells (<code>'#'</code>) and note the start of a segment of empty cells.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(same(row, start, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, word))
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>For each segment of empty cells found, we call the <code>same()</code> function to check if the word can fit. If it can, we return <code>true</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If no suitable segment is found in the current matrix, we return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">placeWordInCrossword</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> board, string word) {
+</span></span></code></pre></div><ul>
+<li>The main function <code>placeWordInCrossword</code> is defined to handle the overall logic of the word placement.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> board.size(), n <span style="color:#f92672">=</span> board[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> trns(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>(m));
+</span></span></code></pre></div><ul>
+<li>We determine the size of the board and create a transposed matrix <code>trns</code> to check vertical placements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            trns[j][i] <span style="color:#f92672">=</span> board[i][j];
+</span></span></code></pre></div><ul>
+<li>The nested loop fills the transposed matrix with the corresponding values from the original board.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">match</span>(trns, word) <span style="color:#f92672">||</span> match(board, word);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we check both the transposed and the original board for a valid placement of the word and return the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the board. This is because we need to traverse each cell in the board for checking valid placements. The space complexity is O(m * n) for the transposed board.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this implementation effectively determines if a word can be placed in a crossword board by leveraging helper functions for clarity and efficiency. The approach of transposing the board allows us to use the same logic for both horizontal and vertical placements without duplicating code.</p>
+<p>This solution not only handles the core functionality required but also adheres to best practices by maintaining clear separation of concerns with helper methods. Such techniques are valuable in real-world applications, especially in scenarios involving grid manipulations and word placements, such as in puzzles, games, or layout designs.</p>
+<p>By encapsulating the placement logic within well-defined functions, we enhance the readability and maintainability of the code, making it easier to extend or modify in the future if needed. This is a great example of how a systematic approach can lead to elegant solutions in programming challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode652s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -315,7 +482,6 @@
 
       </div>
 
-      
 
       <footer>
         

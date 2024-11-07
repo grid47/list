@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -246,7 +246,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1062s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves calculating the sum of the maximum elements from each column in a matrix after sorting each row in descending order. Given a matrix, you need to sort each row in descending order and then find the maximum value in each column. The goal is to return the sum of these maximum values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves two main steps:</p>
+<ol>
+<li><strong>Sorting the rows</strong>: Each row in the matrix is sorted in descending order.</li>
+<li><strong>Finding the maximum of each column</strong>: After sorting, for each column, we select the maximum element and accumulate it in the result.</li>
+</ol>
+<p>The matrix is given as a 2D vector of integers, and we need to apply the sorting and the column-wise maximum selection to compute the sum.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-result-and-matrix-dimensions">
+  Step 1: Initialize Result and Matrix Dimensions
+  <a class="heading-link" href="#step-1-initialize-result-and-matrix-dimensions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> nums.size(), n <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: We initialize <code>res</code> to 0, which will hold the final result (sum of the maximum values from each column).</li>
+<li><strong>Line 2</strong>: <code>m</code> is assigned the number of rows in the matrix (<code>nums.size()</code>), and <code>n</code> is assigned the number of columns (<code>nums[0].size()</code>).</li>
+</ul>
+<h4 id="step-2-sort-each-row-in-descending-order">
+  Step 2: Sort Each Row in Descending Order
+  <a class="heading-link" href="#step-2-sort-each-row-in-descending-order">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    sort(nums[i].rbegin(), nums[i].rend());
+</span></span></code></pre></div><ul>
+<li><strong>Line 3-4</strong>: We loop through each row of the matrix (<code>i</code> from 0 to <code>m-1</code>), and for each row, we sort it in descending order. The <code>sort</code> function with <code>rbegin()</code> and <code>rend()</code> sorts the row in reverse order (descending).
+<ul>
+<li><code>nums[i].rbegin()</code> is an iterator pointing to the last element of the row (rightmost element).</li>
+<li><code>nums[i].rend()</code> is an iterator pointing just before the first element of the row.</li>
+<li>Sorting in descending order ensures that the largest element of each row is at the beginning of the row.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-find-the-maximum-in-each-column">
+  Step 3: Find the Maximum in Each Column
+  <a class="heading-link" href="#step-3-find-the-maximum-in-each-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>][i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mx <span style="color:#f92672">=</span> max(mx, nums[j][i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> mx;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 5-6</strong>: We iterate over each column (<code>i</code> from 0 to <code>n-1</code>), and for each column, we initialize <code>mx</code> to the first element of the column (<code>nums[0][i]</code>).</li>
+<li><strong>Line 7-9</strong>: We then iterate over each row (<code>j</code> from 0 to <code>m-1</code>) to find the maximum element in the current column. We update <code>mx</code> to be the maximum of its current value and the value at <code>nums[j][i]</code>, which is the element in the <code>j</code>-th row and <code>i</code>-th column.
+<ul>
+<li>By the end of this loop, <code>mx</code> will contain the maximum value in column <code>i</code>.</li>
+</ul>
+</li>
+<li><strong>Line 10</strong>: We add the value of <code>mx</code> (the maximum value in the current column) to the result <code>res</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: After iterating through all the columns, the sum of the maximum values from each column is stored in <code>res</code>, which we then return.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Sorting each row takes <strong>O(n log n)</strong>, where <code>n</code> is the number of columns in a row. Since there are <code>m</code> rows, the sorting step for all rows takes <strong>O(m * n log n)</strong>.</li>
+<li>Finding the maximum in each column involves iterating through each row, which takes <strong>O(m)</strong> for each column. Since there are <code>n</code> columns, this step takes <strong>O(m * n)</strong>.</li>
+</ol>
+<p>Thus, the total time complexity is:</p>
+<ul>
+<li><strong>O(m * n log n)</strong> for sorting the rows.</li>
+<li><strong>O(m * n)</strong> for finding the maximum in each column.</li>
+</ul>
+<p>Overall, the time complexity of the solution is dominated by the sorting step, so the total time complexity is:</p>
+<ul>
+<li><strong>O(m * n log n)</strong></li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong> additional space. The sorting operation is done in-place on the matrix, and we only use a constant amount of extra space for the result and iterators.</li>
+<li>Thus, the space complexity is <strong>O(1)</strong>, as no extra data structures are used beyond the input matrix and the result variable.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution provided efficiently solves the problem of summing the maximum values from each column in a matrix after sorting each row in descending order. It leverages sorting to arrange the elements in each row and uses a simple loop to find the maximum element in each column. The algorithm is optimized to work in <strong>O(m * n log n)</strong> time, making it efficient for large matrices with <code>m</code> rows and <code>n</code> columns. The space complexity is <strong>O(1)</strong>, as the matrix is modified in place without the need for additional data structures. This solution is optimal for most practical use cases where performance and memory usage are critical factors.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1062s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -300,7 +452,6 @@
 
       </div>
 
-      
 
       <footer>
         

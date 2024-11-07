@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,202 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">?</span> s : <span style="color:#e6db74">&#34;0&#34;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode874s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks for the largest palindromic number that can be formed from the digits of a given string <code>num</code>. A palindromic number reads the same forward and backward, and we must form the largest possible one by rearranging the digits of the input string.</p>
+<p><strong>Key Constraints</strong>:</p>
+<ul>
+<li>The string <code>num</code> can contain digits from &lsquo;0&rsquo; to &lsquo;9&rsquo;.</li>
+<li>The solution must be the largest palindrome that can be constructed from the digits of <code>num</code>.</li>
+<li>If it&rsquo;s not possible to create any palindrome, return <code>&quot;0&quot;</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To form the largest palindromic number, we need to use the following strategy:</p>
+<ol>
+<li>
+<p><strong>Character Counting</strong>:</p>
+<ul>
+<li>We first count the occurrences of each digit in the input string. This will help us understand how many times we can use each digit in the final palindrome.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Palindrome</strong>:</p>
+<ul>
+<li>A palindrome is symmetric, meaning that half of the digits must be the same as the other half.</li>
+<li>For digits that appear an even number of times, we can use half of them on the left side and the other half on the right side of the palindrome.</li>
+<li>For digits that appear an odd number of times, we can use all but one of them symmetrically. One of the odd digits (if any) can be used in the middle of the palindrome.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Special Cases</strong>:</p>
+<ul>
+<li>If no digits can be used to form a palindrome, return <code>&quot;0&quot;</code>.</li>
+<li>The palindrome should be as large as possible, so we should prioritize placing larger digits first.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize the Count Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {}, mid <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>string s;
+</span></span></code></pre></div><ul>
+<li>We initialize an array <code>cnt</code> to store the frequency of each digit from &lsquo;0&rsquo; to &lsquo;9&rsquo;. The array will have 10 elements, where <code>cnt[i]</code> will store how many times the digit <code>i</code> appears in the input string.</li>
+<li>We also initialize a variable <code>mid</code> to store the middle digit of the palindrome (if any). Initially, it is set to -1, meaning there is no middle digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count the Frequency of Each Digit</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: num) cnt[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>For each character <code>c</code> in the input string <code>num</code>, we increment the corresponding count in the <code>cnt</code> array. <code>c - '0'</code> converts the character to its corresponding integer value (e.g., &lsquo;1&rsquo; becomes 1).</li>
+</ul>
+</li>
+<li>
+<p><strong>Form the Left Half of the Palindrome</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    s.append(cnt[i]<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> (cnt[i] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>            mid <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start by iterating through the digits from 9 to 1. This ensures that we form the largest palindrome possible by using the largest digits first.</li>
+<li>For each digit <code>i</code>, we append <code>cnt[i] / 2</code> instances of the digit <code>i</code> to the string <code>s</code>. This creates the left half of the palindrome.</li>
+<li>If <code>cnt[i]</code> is odd (i.e., <code>cnt[i] &amp; 1</code>), we record the digit <code>i</code> as a candidate for the middle of the palindrome. This will only be used if no middle digit has been assigned yet (i.e., <code>mid == -1</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle the Middle Digit</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(s.size() <span style="color:#f92672">&amp;&amp;</span> cnt[<span style="color:#ae81ff">0</span>]) s.append(cnt[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>mid <span style="color:#f92672">=</span> mid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> (cnt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> mid;
+</span></span></code></pre></div><ul>
+<li>After forming the left half of the palindrome, we check if the string <code>s</code> is non-empty and if there are any &lsquo;0&rsquo;s in the input (<code>cnt[0] &gt; 0</code>). If so, we append half of the zeros to the left half of the palindrome.</li>
+<li>We update the <code>mid</code> variable to <code>0</code> if no middle digit has been assigned yet, and there is an odd count of &lsquo;0&rsquo;s.</li>
+</ul>
+</li>
+<li>
+<p><strong>Create the Full Palindrome</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mid <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) s.push_back(mid <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>s.insert(s.end(), s.rbegin() <span style="color:#f92672">+</span> (mid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>), s.rend());
+</span></span></code></pre></div><ul>
+<li>If a middle digit (<code>mid</code>) is found, we append it to the string <code>s</code>.</li>
+<li>To complete the palindrome, we append the reverse of the left half of the string <code>s</code> (excluding the middle digit if present). This ensures that the string reads the same forward and backward.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">?</span> s : <span style="color:#e6db74">&#34;0&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>Finally, we check if the string <code>s</code> is non-empty. If it is, we return the palindrome. If the string is empty (i.e., no palindrome could be formed), we return <code>&quot;0&quot;</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand how the algorithm works:</p>
+<h4 id="input-444947137">
+  Input: <code>&quot;444947137&quot;</code>
+  <a class="heading-link" href="#input-444947137">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Count the digits: <code>cnt = [0, 0, 0, 0, 3, 0, 0, 1, 1, 1]</code>.</li>
+<li>Iterate over the digits from 9 to 1:
+<ul>
+<li>For <code>i = 9</code>, <code>cnt[9] = 1</code> (odd count). We choose 9 as the middle digit: <code>mid = 9</code>.</li>
+<li>For <code>i = 8</code>, <code>cnt[8] = 1</code> (odd count). We choose 8 as part of the palindrome and append half (i.e., 1): <code>s = &quot;8&quot;</code>.</li>
+<li>For <code>i = 7</code>, <code>cnt[7] = 1</code> (odd count). We choose 7: <code>s = &quot;87&quot;</code>.</li>
+<li>For <code>i = 4</code>, <code>cnt[4] = 3</code>. We append half (i.e., 1) of 4 to <code>s</code>: <code>s = &quot;874&quot;</code>, then append 4 again (since <code>cnt[4]</code> is odd): <code>s = &quot;8744&quot;</code>.</li>
+</ul>
+</li>
+<li>Append the reverse of <code>s</code> (excluding the middle digit if present): <code>s = &quot;87449&quot;</code>.</li>
+<li>Return <code>&quot;87449&quot;</code> as the largest palindrome.</li>
+</ol>
+<h4 id="input-1111">
+  Input: <code>&quot;1111&quot;</code>
+  <a class="heading-link" href="#input-1111">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Count the digits: <code>cnt = [0, 4]</code>.</li>
+<li>For <code>i = 1</code>, <code>cnt[1] = 4</code>. We append 2 ones to <code>s</code>: <code>s = &quot;11&quot;</code>.</li>
+<li>Append the reverse of <code>s</code> (excluding the middle digit): <code>s = &quot;1111&quot;</code>.</li>
+<li>Return <code>&quot;1111&quot;</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm performs two main operations: counting the digits and constructing the palindrome.</li>
+<li>Counting the digits takes <strong>O(n)</strong> time, where <code>n</code> is the length of the input string <code>num</code>.</li>
+<li>Constructing the palindrome involves iterating over the digit counts (a constant amount of operations for each digit), so the time complexity is <strong>O(1)</strong> for the loop over digits.</li>
+<li>The total time complexity is therefore <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a fixed amount of extra space for the digit count array and a few integer variables. The space used does not depend on the size of the input string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently constructs the largest palindromic number that can be formed from the digits of a given string. It leverages character counting, prioritizes larger digits to form the largest palindrome, and handles special cases like middle digits and zeros. The solution runs in linear time, making it optimal for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode874s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +492,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,180 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1131s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to insert the greatest common divisor (GCD) of every two consecutive nodes into a singly linked list. The given linked list has nodes containing integer values. The objective is to insert a new node containing the GCD of each pair of consecutive nodes right after the first node of the pair.</p>
+<p>For example:</p>
+<ul>
+<li>Given the linked list: <code>4 -&gt; 10 -&gt; 20</code>, we insert the GCD of <code>4</code> and <code>10</code> (which is <code>2</code>), then the GCD of <code>10</code> and <code>20</code> (which is <code>10</code>), resulting in the new list: <code>4 -&gt; 2 -&gt; 10 -&gt; 10 -&gt; 20</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The main idea behind this solution is to traverse through the linked list and compute the GCD of each pair of consecutive nodes. Once the GCD is computed, a new node is created and inserted between the current node and the next node.</p>
+<ol>
+<li>
+<p><strong>Traverse the linked list</strong>:</p>
+<ul>
+<li>We need to process each consecutive pair of nodes in the linked list.</li>
+<li>For each pair, the GCD of the values of the current node and the next node is computed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Insert the new node</strong>:</p>
+<ul>
+<li>After computing the GCD of two consecutive nodes, create a new node with the GCD value.</li>
+<li>Insert this new node between the current node and the next node by adjusting the pointers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Move to the next pair</strong>:</p>
+<ul>
+<li>After inserting the new node, we move the <code>head</code> pointer two steps ahead to continue the process with the next pair.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>The list may have only one node, in which case no insertion is needed.</li>
+<li>The list may be empty, but this is handled implicitly by the function’s checks on <code>head</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>ListNode Definition</strong>:
+The <code>ListNode</code> structure represents a node in the singly linked list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ListNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#f92672">*</span>next;
+</span></span><span style="display:flex;"><span>    ListNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x, ListNode <span style="color:#f92672">*</span>next) <span style="color:#f92672">:</span> val(x), next(next) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Each node holds an integer value <code>val</code> and a pointer <code>next</code> pointing to the next node in the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:
+The <code>insertGreatestCommonDivisors</code> function is defined to insert nodes with the GCD of consecutive pairs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">insertGreatestCommonDivisors</span>(ListNode<span style="color:#f92672">*</span> head) {
+</span></span></code></pre></div><ul>
+<li>The function takes the head of the singly linked list as an argument and returns the modified head of the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize <code>res</code> Pointer</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> res <span style="color:#f92672">=</span> head;
+</span></span></code></pre></div><ul>
+<li>We keep a reference to the original head of the list in <code>res</code>, so we can return it after the list is modified.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traverse the List</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (head <span style="color:#f92672">&amp;&amp;</span> head<span style="color:#f92672">-&gt;</span>next) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates through the list while there are at least two nodes left (i.e., <code>head</code> and <code>head-&gt;next</code>).</li>
+<li>The loop continues until we reach the end of the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Create a New Node with GCD</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(__gcd(head<span style="color:#f92672">-&gt;</span>val, head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>val));
+</span></span></code></pre></div><ul>
+<li>For each pair of consecutive nodes, we compute the GCD of their values using the built-in C++ function <code>__gcd()</code>.</li>
+<li>A new node <code>node</code> is created with the value of the computed GCD.</li>
+</ul>
+</li>
+<li>
+<p><strong>Insert the New Node</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>node<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> tmp;
+</span></span></code></pre></div><ul>
+<li>We save the pointer to the next node (<code>tmp = head-&gt;next</code>).</li>
+<li>The <code>next</code> pointer of the current node (<code>head</code>) is set to point to the new node <code>node</code>.</li>
+<li>The <code>next</code> pointer of the new node <code>node</code> is set to point to the original next node (<code>tmp</code>), ensuring that the rest of the list remains connected.</li>
+</ul>
+</li>
+<li>
+<p><strong>Move to the Next Pair</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>head <span style="color:#f92672">=</span> tmp;
+</span></span></code></pre></div><ul>
+<li>After inserting the new node, we move the <code>head</code> pointer two steps forward: first to the original next node (<code>tmp</code>) and then the next iteration will handle the next pair.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Modified List</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop completes, the modified list (with the inserted GCD nodes) is returned by returning the original head (<code>res</code>).</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The main work in this solution is the traversal of the linked list and computing the GCD for each pair of consecutive nodes.</li>
+<li>The time complexity for traversing the list is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the list, as we visit each node once.</li>
+<li>The time complexity for calculating the GCD of two integers is <strong>O(log(min(a, b)))</strong>, where <code>a</code> and <code>b</code> are the values of the two nodes. Since we do this for each pair, the overall time complexity for GCD computations is <strong>O(log(V))</strong>, where <code>V</code> is the maximum value of the node values in the list.</li>
+<li>Therefore, the overall time complexity of the function is <strong>O(n log(V))</strong>, where <code>n</code> is the number of nodes and <code>V</code> is the maximum value in the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the newly created nodes. For every two nodes in the original list, one new node is inserted. Thus, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the original list (since the number of newly created nodes is proportional to the original list size).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of inserting the greatest common divisor (GCD) of consecutive nodes into a singly linked list. By iterating through the list and inserting the computed GCD between each pair of nodes, the function modifies the list as required. The time complexity of <strong>O(n log(V))</strong> and space complexity of <strong>O(n)</strong> make this approach efficient for reasonably sized lists. This solution is optimal in terms of both time and space for the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1131s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +468,6 @@
 
       </div>
 
-      
 
       <footer>
         

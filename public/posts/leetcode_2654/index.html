@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,136 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> t <span style="color:#f92672">==</span> INT_MAX<span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> t <span style="color:#f92672">+</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1052s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the minimum number of operations required to make all elements in the given integer array <code>nums</code> equal to <code>1</code>. The allowed operation is to select any two elements and replace them with their greatest common divisor (GCD). If the array already contains <code>1</code>, no operations are needed. Otherwise, we need to perform some number of GCD operations to transform the elements into <code>1</code>. The goal is to determine the minimum number of such operations, or return <code>-1</code> if it is impossible to transform all elements to <code>1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the key idea is to consider the following two observations:</p>
+<ol>
+<li>
+<p><strong>Presence of <code>1</code></strong>: If the array already contains <code>1</code>, then no operations are needed. We can directly return the number of operations as the size of the array minus the count of <code>1</code>s, because the other elements can be reduced to <code>1</code> in one operation each.</p>
+</li>
+<li>
+<p><strong>Subarrays with GCD <code>1</code></strong>: If the array does not contain <code>1</code>, we need to find a subarray whose GCD is equal to <code>1</code>, because the GCD operation can only reduce two numbers to their greatest common divisor. Once we find such a subarray, the minimum number of operations will be the length of the subarray minus one, since that is the number of operations needed to reduce the entire subarray to <code>1</code>.</p>
+</li>
+<li>
+<p><strong>GCD Properties</strong>: The GCD of multiple numbers is associative, meaning that the GCD of a range of numbers can be computed progressively. Therefore, we can explore each subarray and compute its GCD to see if we can find a valid subarray with a GCD of <code>1</code>. The smaller the length of this subarray, the fewer operations we will need.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be divided into the following steps:</p>
+<h4 id="1-count-the-occurrence-of-1-in-the-array">
+  1. <strong>Count the Occurrence of <code>1</code> in the Array</strong>
+  <a class="heading-link" href="#1-count-the-occurrence-of-1-in-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The first step is to count how many times the number <code>1</code> appears in the array. If the count is greater than <code>0</code>, we return <code>nums.size() - cnt</code> because that many elements are already <code>1</code>, and we do not need any more operations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> nums.size() <span style="color:#f92672">-</span> cnt;
+</span></span></code></pre></div><ul>
+<li>We iterate through the <code>nums</code> array and count the number of <code>1</code>s.</li>
+<li>If there is at least one <code>1</code>, the answer is simply the number of elements that are not <code>1</code>, because each non-<code>1</code> element can be replaced by <code>1</code> in one operation.</li>
+</ul>
+<h4 id="2-find-the-subarray-with-gcd-equal-to-1">
+  2. <strong>Find the Subarray with GCD Equal to <code>1</code></strong>
+  <a class="heading-link" href="#2-find-the-subarray-with-gcd-equal-to-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>If there are no <code>1</code>s in the array, we need to search for a subarray with a GCD of <code>1</code>. To do this, we use a nested loop to check every possible subarray and compute the GCD progressively.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> last <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> nums.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        last <span style="color:#f92672">=</span> __gcd(last, nums[j]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(last <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            t <span style="color:#f92672">=</span> min(t, j <span style="color:#f92672">-</span> i);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each starting index <code>i</code>, we initialize <code>last</code> as <code>nums[i]</code> and compute the GCD progressively with the next elements.</li>
+<li>If the GCD of the current subarray is <code>1</code>, we update the minimum length of such a subarray using the formula <code>t = min(t, j - i)</code>, where <code>j</code> is the end index of the subarray.</li>
+<li>The inner loop computes the GCD for each subarray, and as soon as we find a subarray with a GCD of <code>1</code>, we check if it is the shortest one so far.</li>
+</ul>
+<h4 id="3-return-the-minimum-operations">
+  3. <strong>Return the Minimum Operations</strong>
+  <a class="heading-link" href="#3-return-the-minimum-operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After finding the shortest subarray with a GCD of <code>1</code>, the minimum number of operations required is <code>t + nums.size() - 1</code>. This is because the length of the subarray with a GCD of <code>1</code> is <code>t + 1</code>, and it takes <code>t</code> operations to reduce the subarray to <code>1</code>. The remaining elements outside this subarray will require <code>nums.size() - 1 - t</code> operations to be reduced to <code>1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> t <span style="color:#f92672">==</span> INT_MAX <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> t <span style="color:#f92672">+</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If no subarray with a GCD of <code>1</code> is found (<code>t == INT_MAX</code>), it means it is impossible to reduce the array to <code>1</code>, and we return <code>-1</code>.</li>
+<li>Otherwise, we return the number of operations needed, which is the length of the subarray with the GCD of <code>1</code> minus one (<code>t</code>) plus the number of remaining elements in the array.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm iterates over all pairs of elements in the array, which requires <strong>O(n^2)</strong> time, where <code>n</code> is the length of the array.</li>
+<li>For each pair, it computes the GCD of two numbers, which takes <strong>O(log(max(nums)))</strong> time. However, since the nested loop runs at most <strong>n^2</strong> times, the overall time complexity is <strong>O(n^2 log(max(nums)))</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we only use a few integer variables (<code>cnt</code>, <code>t</code>, etc.) for storing intermediate results. The space used for the input array is not considered in the complexity analysis.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively computes the minimum number of operations needed to make all elements of the array equal to <code>1</code> using GCD operations. The approach utilizes a sliding window-like strategy to find subarrays with a GCD of <code>1</code> and keeps track of the smallest subarray length. While the algorithm has a time complexity of <strong>O(n^2 log(max(nums)))</strong>, it is an efficient way to solve the problem for moderately sized arrays. For larger arrays, optimization techniques such as more advanced GCD computation methods or dynamic programming could be considered to improve performance further.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1052s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -253,7 +382,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2655"  class="external-link" target="_blank" rel="noopener">LeetCode #2655: Find Maximal Uncovered Ranges</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2656"  class="external-link" target="_blank" rel="noopener">LeetCode #2656: Maximum Sum With Exactly K Elements </a></th>
       </tr>
   </thead>
   <tbody>
@@ -295,7 +424,6 @@
 
       </div>
 
-      
 
       <footer>
         

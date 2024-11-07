@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -245,7 +245,182 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode964s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>s</code> consisting of digits, and an integer <code>k</code>, the task is to partition the string into the minimum number of parts such that each part represents a number less than or equal to <code>k</code>. In each partition, the number formed by the digits should be valid (i.e., no leading zeros), and the goal is to minimize the number of partitions needed. If it&rsquo;s impossible to partition the string in such a way that each part is less than or equal to <code>k</code>, return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can approach it using <strong>Dynamic Programming (DP)</strong>. Here&rsquo;s the detailed breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Representation of the Problem</strong>:</p>
+<ul>
+<li>We will traverse the string <code>s</code> from left to right, at each step considering if we can form a valid partition from the current position <code>idx</code> up to some further position <code>j</code>.</li>
+<li>For each partition, we will check if the number formed by the substring is less than or equal to <code>k</code>. If yes, we will consider it as a valid partition and continue the search for the next partitions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Approach</strong>:</p>
+<ul>
+<li>The idea is to use a recursive function <code>dp(idx, k, num)</code> where <code>idx</code> represents the current index in the string, <code>k</code> is the maximum allowable value for each number, and <code>num</code> is the number formed by the substring so far.</li>
+<li>The recursion will try to extend the number by including more digits, checking if the number stays within the bounds of <code>k</code>. If not, it will start a new partition.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>We use memoization to store the results of previously computed subproblems. This will help avoid redundant calculations and speed up the process, especially for overlapping subproblems.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case and Recursive Case</strong>:</p>
+<ul>
+<li>The base case occurs when <code>idx</code> reaches the end of the string, which means we’ve found a valid partitioning, so we return <code>1</code> (indicating that one more partition is added).</li>
+<li>For each index, we try to either extend the current partition or start a new one if the number exceeds the allowed limit <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Early Exit for Invalid Numbers</strong>:</p>
+<ul>
+<li>If a digit in the string is greater than <code>k</code>, it&rsquo;s impossible to form a valid number, and we immediately return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="class-and-member-variables">
+  Class and Member Variables:
+  <a class="heading-link" href="#class-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string str;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem;
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code>, which contains a string <code>str</code> representing the input string, and <code>mem</code> which is a vector of maps used for memoization. Each map at index <code>i</code> stores the results for various numbers that can be formed starting from position <code>i</code> in the string.</li>
+</ul>
+<h4 id="recursive-dp-function">
+  Recursive DP Function:
+  <a class="heading-link" href="#recursive-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> str.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[idx].count(num)) <span style="color:#66d9ef">return</span> mem[idx][num];
+</span></span></code></pre></div><ul>
+<li>The function <code>dp</code> is called with <code>idx</code> representing the current index in the string, <code>k</code> representing the maximum allowable number, and <code>num</code> representing the current number formed by the digits processed so far.</li>
+<li>If we reach the end of the string (<code>idx == str.size()</code>), it means we&rsquo;ve successfully partitioned the string, so we return <code>1</code>.</li>
+<li>If the result for the current subproblem (starting from <code>idx</code> and forming a number <code>num</code>) is already computed, we return the stored result from the memoization map.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k, str[idx] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span></code></pre></div><ul>
+<li>We attempt to form a partition starting from the current index. The recursive call <code>dp(idx + 1, k, str[idx] - '0')</code> checks the number formed by just the current digit (this is the smallest partition we can form).</li>
+<li>We increment the answer by 1, since we are considering a new partition.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> net <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)num <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (str[idx] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(net <span style="color:#f92672">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k, net));
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>We attempt to extend the current number by adding the next digit (<code>str[idx]</code>). The value of <code>net</code> is calculated as the number formed by the current number <code>num</code> multiplied by 10 (to shift the digits left) plus the current digit (<code>str[idx] - '0'</code>).</li>
+<li>If <code>net</code> is less than or equal to <code>k</code>, we make a recursive call to <code>dp(idx + 1, k, net)</code> to continue building the current number. We update the <code>ans</code> by taking the minimum of the current <code>ans</code> and the result of the recursive call, ensuring that we are minimizing the number of partitions.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx][num] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>After exploring both options (continuing with the current number or starting a new one), we store the result for the current subproblem in <code>mem[idx][num]</code>.</li>
+</ul>
+<h4 id="main-function">
+  Main Function:
+  <a class="heading-link" href="#main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumPartition</span>(string s, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        str <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&gt;</span> k) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        mem.resize(s.size());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>, k, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The function <code>minimumPartition</code> starts by initializing the string <code>str</code> with the input string <code>s</code>.</li>
+<li>It checks if any digit in the string is greater than <code>k</code>. If such a digit exists, it’s impossible to form a valid partition, and we return <code>-1</code> immediately.</li>
+<li>We then initialize the memoization table <code>mem</code> to store the results for each position in the string.</li>
+<li>Finally, we call the <code>dp</code> function starting from index 0 with an initial <code>num</code> of 0, which represents the initial state with no digits processed yet. The result of <code>dp(0, k, 0)</code> is returned as the answer.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity is driven by the number of recursive calls and the size of the memoization table. The function <code>dp</code> explores each index <code>idx</code> and each possible value of <code>num</code> that can be formed from that position.</li>
+<li>Since the recursion is bounded by the length of the string <code>n</code> and the number of possible values for <code>num</code> is limited (because <code>num</code> can be at most <code>k</code>), the time complexity is ( O(n \times k) ), where <code>n</code> is the length of the string and <code>k</code> is the maximum allowable value for each partition.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is ( O(n \times k) ), where <code>n</code> is the length of the string and <code>k</code> is the maximum value for each partition. This space is used for storing the memoization table <code>mem</code> and recursive function calls.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses dynamic programming with memoization to minimize the number of partitions needed to break the string <code>s</code> into valid parts, each less than or equal to <code>k</code>. By recursively trying to extend the current number or start a new partition, we efficiently compute the minimum number of partitions. Memoization helps optimize the solution by storing results of overlapping subproblems, reducing redundant computations. The approach works well within the problem constraints, providing an optimal solution with a time complexity of ( O(n \times k) ).</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode964s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -299,7 +474,6 @@
 
       </div>
 
-      
 
       <footer>
         

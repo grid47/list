@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,136 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode738s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine the minimum number of steps required to make two strings <code>s</code> and <code>t</code> anagrams of each other. An anagram of a string is another string that contains the same characters, with the same frequencies, but possibly in a different order. The allowed operation to transform one string into another is to replace any character in one string with another character.</p>
+<p>Given two strings <code>s</code> and <code>t</code>, the goal is to find the minimum number of character replacements needed to make the two strings anagrams.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, the approach focuses on comparing the character counts of both strings. If the character counts of the two strings differ, then the number of steps required will be the sum of the absolute differences between their respective character counts.</p>
+<p>Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>Count the frequency of each character in both strings <code>s</code> and <code>t</code>.</li>
+<li>Compare the character frequencies of both strings. If the frequency of a character in <code>s</code> is greater than that in <code>t</code>, we need to &ldquo;remove&rdquo; the extra characters, and if the frequency is less, we need to &ldquo;add&rdquo; the missing characters.</li>
+<li>The number of operations needed will be the total number of characters that need to be added or removed to balance the two strings’ character counts.</li>
+</ol>
+<p>The algorithm works by calculating the difference in character frequencies for each of the 26 lowercase letters (assuming that the strings consist only of lowercase English letters). The sum of the absolute differences in frequencies gives the minimum number of steps required.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Signature:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> minSteps(string s, string t)
+</span></span></code></pre></div><ul>
+<li>The function <code>minSteps</code> takes two strings, <code>s</code> and <code>t</code>, and returns an integer representing the minimum number of steps needed to make <code>s</code> and <code>t</code> anagrams.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize the Frequency Vector:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tsk(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>A vector <code>tsk</code> of size 26 is initialized to zero. Each index in the vector corresponds to one of the 26 lowercase letters (<code>'a'</code> to <code>'z'</code>), where <code>tsk[0]</code> represents the count of &lsquo;a&rsquo;, <code>tsk[1]</code> represents the count of &lsquo;b&rsquo;, and so on.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Characters in String <code>s</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: s)
+</span></span><span style="display:flex;"><span>    tsk[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>Loop through each character <code>c</code> in string <code>s</code>, and increment the corresponding index in the <code>tsk</code> vector. The expression <code>c - 'a'</code> converts the character to an index in the range 0-25, corresponding to the position of the letter in the alphabet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Characters in String <code>t</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: t)
+</span></span><span style="display:flex;"><span>    tsk[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>Loop through each character <code>c</code> in string <code>t</code>, and decrement the corresponding index in the <code>tsk</code> vector. This step ensures that the <code>tsk</code> vector reflects the difference in frequencies between the characters in <code>s</code> and <code>t</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Total Steps Needed:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> a: tsk)
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> abs(a);
+</span></span></code></pre></div><ul>
+<li>Initialize a variable <code>ans</code> to 0, which will hold the final result (the minimum number of steps required).</li>
+<li>Loop through each element <code>a</code> in the <code>tsk</code> vector, which represents the difference in frequency for each letter. Add the absolute value of each difference to <code>ans</code>. The absolute value is used because we care about the number of characters that need to be added or removed, regardless of whether they appear more in <code>s</code> or <code>t</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After calculating the total number of operations required, return the value of <code>ans</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>
+<p>The time complexity of this solution is O(n + m), where <code>n</code> is the length of string <code>s</code> and <code>m</code> is the length of string <code>t</code>. This is because we need to loop through each string once to count the character frequencies. The final loop through the <code>tsk</code> vector has constant time complexity O(26), which can be considered O(1) since 26 is a fixed constant.</p>
+</li>
+<li>
+<p>Hence, the time complexity is linear in terms of the total number of characters in both strings, which makes the algorithm very efficient for large inputs.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1), since the <code>tsk</code> vector always has a fixed size of 26, regardless of the size of the input strings. Other than that, only a few integer variables (<code>ans</code>) are used, which do not depend on the size of the input.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently solves the problem of determining the minimum number of steps to convert two strings into anagrams of each other. By focusing on character frequency differences, the algorithm avoids unnecessary operations and achieves a time complexity of O(n + m), which is optimal for this problem.</p>
+<p>The solution works by maintaining a fixed-size vector to store the frequency differences of each character, making it both space-efficient and simple to implement. With its linear time complexity and constant space usage, this solution is well-suited for handling large strings, providing a fast and efficient way to calculate the minimum number of character replacements needed to make two strings anagrams.</p>
+<p>This approach also showcases how simple data structures, such as arrays or vectors, can be leveraged to solve common string manipulation problems efficiently, while also making the code easy to understand and maintain.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode738s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +412,6 @@
 
       </div>
 
-      
 
       <footer>
         

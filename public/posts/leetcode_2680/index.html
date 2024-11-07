@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -261,7 +261,182 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1064s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The given problem requires finding the maximum OR value achievable by performing the following operation on an element in an array <code>nums</code>. You can multiply any element <code>nums[i]</code> by <code>2^k</code> and perform an OR operation on it with the elements to its left and right. The goal is to compute the maximum possible OR value after performing the operation on any element in the array.</p>
+<p>The task is to maximize the value of the OR operation involving the modified element and its neighbors, considering all possible positions in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is essentially about combining the properties of the OR operation and efficiently modifying the elements in the array by multiplying them with a power of 2. The solution can be broken down into several key steps:</p>
+<ol>
+<li>
+<p><strong>Prefix OR Array</strong>: First, calculate the prefix OR of the array. The prefix OR is a way to keep track of the OR operation on all elements to the left of a given index.</p>
+</li>
+<li>
+<p><strong>Suffix OR Array</strong>: Similarly, calculate the suffix OR of the array. This is similar to the prefix OR but tracks the OR operation for all elements to the right of the given index.</p>
+</li>
+<li>
+<p><strong>Main Calculation</strong>: Iterate through each element in the array. For each element:</p>
+<ul>
+<li>Calculate the OR of the elements to its left (using the prefix OR array).</li>
+<li>Modify the current element by multiplying it by <code>2^k</code> and compute the OR with the neighbors using the suffix OR array.</li>
+<li>Calculate the maximum OR value obtained by this process.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-calculate-prefix-or-array">
+  Step 1: Calculate Prefix OR Array
+  <a class="heading-link" href="#step-1-calculate-prefix-or-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> prefixor;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) 
+</span></span><span style="display:flex;"><span>        prefixor.push_back((<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> nums[i]));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>        prefixor.push_back(((<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> prefixor.back()) <span style="color:#f92672">|</span> (<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> nums[i])));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: We initialize an empty vector <code>prefixor</code> to store the OR results for each prefix of the array.</li>
+<li><strong>Line 2-5</strong>: We iterate through the array <code>nums</code>. If it&rsquo;s the first element, simply set <code>prefixor[0]</code> to the first element. For all other elements, calculate the prefix OR up to that index by taking the OR of the previous prefix OR value and the current element in the array.</li>
+</ul>
+<h4 id="step-2-calculate-suffix-or-array">
+  Step 2: Calculate Suffix OR Array
+  <a class="heading-link" href="#step-2-calculate-suffix-or-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> suffixor;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> (nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))  
+</span></span><span style="display:flex;"><span>        suffixor.push_back((<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> nums[i]));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>        suffixor.push_back(((<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> suffixor.back()) <span style="color:#f92672">|</span> (<span style="color:#ae81ff">1LL</span> <span style="color:#f92672">*</span> nums[i])));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>reverse(suffixor.begin(), suffixor.end());
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: We initialize an empty vector <code>suffixor</code> to store the OR results for each suffix of the array.</li>
+<li><strong>Line 2-5</strong>: We iterate through the array in reverse. For each element, we calculate the suffix OR from the rightmost element to the leftmost one.</li>
+<li><strong>Line 6</strong>: After the iteration, we reverse the <code>suffixor</code> array to align it with the original order of the <code>nums</code> array.</li>
+</ul>
+<h4 id="step-3-calculate-the-maximum-or-value">
+  Step 3: Calculate the Maximum OR Value
+  <a class="heading-link" href="#step-3-calculate-the-maximum-or-value">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span> self;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        left <span style="color:#f92672">=</span> prefixor[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    self <span style="color:#f92672">=</span> (nums[i] <span style="color:#f92672">*</span> pow(<span style="color:#ae81ff">2</span>, k));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        right <span style="color:#f92672">=</span> suffixor[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, left <span style="color:#f92672">|</span> self <span style="color:#f92672">|</span> right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: Initialize a variable <code>ans</code> to store the maximum OR value.</li>
+<li><strong>Line 2-10</strong>: We iterate through the array and calculate the OR for each element:
+<ul>
+<li><strong>Left</strong>: If the current element is not the first, set <code>left</code> as the prefix OR of the element just before it.</li>
+<li><strong>Self</strong>: Multiply the current element by <code>2^k</code> to simulate the modification, and store the result in <code>self</code>.</li>
+<li><strong>Right</strong>: If the current element is not the last, set <code>right</code> as the suffix OR of the element just after it.</li>
+<li>For each element, compute the OR of <code>left</code>, <code>self</code>, and <code>right</code>, and update the maximum <code>ans</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: After iterating through all elements, return the maximum OR value stored in <code>ans</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Prefix OR Calculation</strong>: The prefix OR is calculated in <strong>O(n)</strong> time, where <code>n</code> is the size of the array.</li>
+<li><strong>Suffix OR Calculation</strong>: The suffix OR is calculated in <strong>O(n)</strong> time as well.</li>
+<li><strong>Main Loop</strong>: The main loop iterates through the array and performs constant-time operations (such as multiplications and OR operations) for each element. Thus, it takes <strong>O(n)</strong> time.</li>
+</ol>
+<p>Therefore, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we use two additional arrays (<code>prefixor</code> and <code>suffixor</code>), each of size <code>n</code>, to store the prefix and suffix OR values.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution provided is efficient for solving the problem of maximizing the OR value after modifying each element in the array. It leverages the prefix and suffix OR arrays to reduce redundant calculations, making the solution run in <strong>O(n)</strong> time, which is optimal for this problem. The space complexity is <strong>O(n)</strong> due to the extra arrays used for storing the OR values. This approach is well-suited for large arrays and is highly efficient, balancing time complexity with space usage.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1064s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -315,7 +490,6 @@
 
       </div>
 
-      
 
       <footer>
         

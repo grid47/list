@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -252,7 +252,210 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode789s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given the root of a binary tree. Each node of the tree contains an integer value. The task is to find the number of nodes whose value is equal to the average of the values of the nodes in its subtree (including itself). The average of a node&rsquo;s subtree is defined as the sum of the values of all nodes in the subtree divided by the total number of nodes in the subtree.</p>
+<p>You need to return the total count of nodes that satisfy the condition where the node&rsquo;s value is equal to the average of its subtree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a <strong>post-order traversal</strong> approach where:</p>
+<ol>
+<li>We recursively compute the sum and the count of nodes in the subtree rooted at each node.</li>
+<li>For each node, we check if the value of the node equals the average of its subtree. If it does, we increase the count of such nodes.</li>
+<li>We return both the sum and the number of nodes in the subtree for each node to facilitate calculations at its parent node.</li>
+</ol>
+<p>Here’s a more structured explanation of the approach:</p>
+<ol>
+<li><strong>Subtree Information</strong>: For each node, we need to calculate the sum of all nodes in its subtree and the total number of nodes in the subtree.</li>
+<li><strong>Check Average</strong>: After calculating the sum and count of nodes in the subtree, we compare the value of the node with the average of its subtree, which is computed as <code>sum / count</code>.</li>
+<li><strong>Recursion</strong>: We perform a post-order traversal of the tree, starting from the leaf nodes and moving upwards to the root. This ensures that when calculating the sum and count for a node, we already have the information for its left and right children.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-the-treenode-structure">
+  Step 1: Define the TreeNode structure
+  <a class="heading-link" href="#step-1-define-the-treenode-structure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>TreeNode</code> structure is defined as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This is a typical definition for a binary tree node, where <code>val</code> stores the value of the node, and <code>left</code> and <code>right</code> are pointers to its left and right child nodes, respectively.</p>
+<h4 id="step-2-initialize-global-variables">
+  Step 2: Initialize global variables
+  <a class="heading-link" href="#step-2-initialize-global-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is initialized to <code>0</code> and will keep track of the number of nodes whose value is equal to the average of their respective subtrees.</li>
+</ul>
+<h4 id="step-3-define-the-recursive-solve-function">
+  Step 3: Define the recursive <code>solve</code> function
+  <a class="heading-link" href="#step-3-define-the-recursive-solve-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> solve(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><ul>
+<li>The <code>solve</code> function takes a <code>TreeNode* root</code> as input and returns a pair of integers:
+<ul>
+<li>The first element of the pair represents the sum of node values in the subtree rooted at <code>root</code>.</li>
+<li>The second element represents the number of nodes in the subtree.</li>
+</ul>
+</li>
+<li>If <code>root</code> is <code>NULL</code> (base case), we return a pair <code>{0, 0}</code>, indicating that there are no nodes in the subtree and the sum is zero.</li>
+</ul>
+<h4 id="step-4-recursively-solve-for-the-left-and-right-subtrees">
+  Step 4: Recursively solve for the left and right subtrees
+  <a class="heading-link" href="#step-4-recursively-solve-for-the-left-and-right-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> left <span style="color:#f92672">=</span> solve(root<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l_sum <span style="color:#f92672">=</span> left.first; <span style="color:#75715e">// sum of nodes in the left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> l_cnt <span style="color:#f92672">=</span> left.second; <span style="color:#75715e">// number of nodes in the left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> right <span style="color:#f92672">=</span> solve(root<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> r_sum <span style="color:#f92672">=</span> right.first; <span style="color:#75715e">// sum of nodes in the right subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> r_cnt <span style="color:#f92672">=</span> right.second; <span style="color:#75715e">// number of nodes in the right subtree
+</span></span></span></code></pre></div><ul>
+<li>We recursively call the <code>solve</code> function for the left and right children of the current node. We store the results for the left and right subtrees, which include the sum and count of nodes.</li>
+</ul>
+<h4 id="step-5-calculate-the-sum-and-count-for-the-current-subtree">
+  Step 5: Calculate the sum and count for the current subtree
+  <a class="heading-link" href="#step-5-calculate-the-sum-and-count-for-the-current-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+</span> l_sum <span style="color:#f92672">+</span> r_sum;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> l_cnt <span style="color:#f92672">+</span> r_cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>The total sum for the subtree rooted at the current node is the sum of:
+<ul>
+<li>The value of the current node (<code>root-&gt;val</code>).</li>
+<li>The sum of the left subtree (<code>l_sum</code>).</li>
+<li>The sum of the right subtree (<code>r_sum</code>).</li>
+</ul>
+</li>
+<li>The total count for the subtree is the sum of:
+<ul>
+<li>The count of nodes in the left subtree (<code>l_cnt</code>).</li>
+<li>The count of nodes in the right subtree (<code>r_cnt</code>).</li>
+<li>1 (for the current node itself).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-6-check-if-the-nodes-value-equals-the-average-of-its-subtree">
+  Step 6: Check if the node&rsquo;s value equals the average of its subtree
+  <a class="heading-link" href="#step-6-check-if-the-nodes-value-equals-the-average-of-its-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> sum <span style="color:#f92672">/</span> cnt) ans<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We check if the value of the current node (<code>root-&gt;val</code>) is equal to the average of its subtree, which is <code>sum / cnt</code>. If they are equal, we increment the <code>ans</code> variable, indicating that we found a node whose value equals the average of its subtree.</li>
+</ul>
+<h4 id="step-7-return-the-sum-and-count-of-the-current-subtree">
+  Step 7: Return the sum and count of the current subtree
+  <a class="heading-link" href="#step-7-return-the-sum-and-count-of-the-current-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {sum, cnt};
+</span></span></code></pre></div><ul>
+<li>After processing the current node, we return the sum and count of the nodes in the subtree rooted at <code>root</code>.</li>
+</ul>
+<h4 id="step-8-invoke-the-solve-function-and-return-the-result">
+  Step 8: Invoke the <code>solve</code> function and return the result
+  <a class="heading-link" href="#step-8-invoke-the-solve-function-and-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">averageOfSubtree</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    solve(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>averageOfSubtree</code> function is the entry point for the solution. It invokes the <code>solve</code> function on the root of the binary tree and returns the value of <code>ans</code>, which is the total number of nodes whose value equals the average of their subtree.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because we visit each node exactly once during the post-order traversal, and at each node, we perform constant-time operations (sum and count calculations, comparisons, and increments).</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the binary tree. This is the space required for the recursion stack in the worst case. In the worst case, the tree is skewed (like a linked list), and the height is <code>n</code>. In the best case (balanced tree), the height is <code>log n</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the number of nodes in the binary tree whose value is equal to the average of the nodes in their subtree. By leveraging a post-order traversal, the algorithm computes the sum and count of each subtree while checking if the current node satisfies the condition. The solution has a time complexity of <strong>O(n)</strong>, making it optimal for large trees, and uses a recursion stack with space complexity <strong>O(h)</strong>. This approach is both effective and efficient for solving the problem of subtree averages in binary trees.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode789s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -306,7 +509,6 @@
 
       </div>
 
-      
 
       <footer>
         

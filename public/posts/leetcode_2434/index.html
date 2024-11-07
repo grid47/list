@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,187 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode910s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks you to design a solution that simulates a robot processing a string <code>s</code> using a stack. The robot processes the string from left to right, and at each step, it can either push the current character into the stack or pop the stack if it satisfies a specific condition. After processing the entire string, the robot must return a lexicographically smallest string that can be formed by performing the push and pop operations on the stack.</p>
+<p>Specifically, you are given a string <code>s</code>, and you need to determine the lexicographically smallest string that can be obtained by the following operations:</p>
+<ol>
+<li>The robot processes the string <code>s</code> left to right.</li>
+<li>The robot can push the current character into a stack.</li>
+<li>At any point, the robot can pop from the stack and add the character to the result string, but it can only pop a character if it is lexicographically smaller than or equal to all the remaining characters in the string that have not yet been processed.</li>
+</ol>
+<p>The goal is to return the resulting string after applying these operations optimally.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem optimally, we need to simulate the robot&rsquo;s behavior using a stack while ensuring that the resulting string is the lexicographically smallest string that can be formed.</p>
+<p>Key observations to consider:</p>
+<ul>
+<li>The robot can only pop characters from the stack when the character at the top of the stack is lexicographically smaller than or equal to the smallest remaining character in the string that has not yet been processed.</li>
+<li>To efficiently track the smallest remaining character, we maintain the frequency of each character that remains to be processed.</li>
+<li>The robot should pop from the stack only when it can guarantee that doing so does not prevent it from forming the smallest possible result.</li>
+</ul>
+<p>The approach consists of the following steps:</p>
+<ol>
+<li><strong>Frequency Calculation</strong>: We start by calculating the frequency of each character in the string, as this will help us determine the smallest remaining character.</li>
+<li><strong>Simulate Stack Operations</strong>: As we process the string from left to right, we push characters onto the stack and pop them when necessary to form the lexicographically smallest result.</li>
+<li><strong>Pop Condition</strong>: We will pop from the stack if the top character of the stack is lexicographically smaller than or equal to the smallest character that remains in the string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-frequency-array">
+  Step 1: Initialize Frequency Array
+  <a class="heading-link" href="#step-1-initialize-frequency-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: s)
+</span></span><span style="display:flex;"><span>    frq[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize an array <code>frq</code> of size 26 to store the frequency of each character in the input string <code>s</code>.</li>
+<li>We iterate through the string <code>s</code>, and for each character <code>c</code>, we increment the corresponding frequency in <code>frq</code>. The character <code>c</code> is converted to an index by subtracting <code>'a'</code> from it (since <code>'a'</code> has ASCII value 97 and we need indices 0 to 25 for the 26 letters).</li>
+</ul>
+<h4 id="step-2-initialize-stack-and-result-string">
+  Step 2: Initialize Stack and Result String
+  <a class="heading-link" href="#step-2-initialize-stack-and-result-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t;
+</span></span><span style="display:flex;"><span>string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize an empty stack <code>t</code> to simulate the robot&rsquo;s stack operations.</li>
+<li>We also initialize an empty string <code>ans</code> to store the final result after processing the string.</li>
+</ul>
+<h4 id="step-3-iterate-through-the-string-and-process-each-character">
+  Step 3: Iterate Through the String and Process Each Character
+  <a class="heading-link" href="#step-3-iterate-through-the-string-and-process-each-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c : s) {
+</span></span><span style="display:flex;"><span>    t.push(c);
+</span></span><span style="display:flex;"><span>    frq[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate through the string <code>s</code> character by character.</li>
+<li>For each character <code>c</code>, we push it onto the stack <code>t</code>.</li>
+<li>We decrement the frequency of the current character <code>c</code> because it has been processed.</li>
+</ul>
+<h4 id="step-4-check-and-pop-characters-from-the-stack">
+  Step 4: Check and Pop Characters from the Stack
+  <a class="heading-link" href="#step-4-check-and-pop-characters-from-the-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>t.empty() <span style="color:#f92672">&amp;&amp;</span> t.top() <span style="color:#f92672">&lt;=</span> low(frq)) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> t.top();
+</span></span><span style="display:flex;"><span>    t.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After pushing the character onto the stack, we enter a while loop where we check if we can pop characters from the stack.</li>
+<li>The condition for popping is that the character at the top of the stack must be lexicographically smaller than or equal to the smallest character that remains in the string (which is determined by the <code>low(frq)</code> function).</li>
+<li>If this condition is met, we pop the character from the stack and add it to the result string <code>ans</code>.</li>
+</ul>
+<h4 id="step-5-determine-the-smallest-remaining-character">
+  Step 5: Determine the Smallest Remaining Character
+  <a class="heading-link" href="#step-5-determine-the-smallest-remaining-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> <span style="color:#a6e22e">low</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>frq) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(frq[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;z&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>low</code> function determines the smallest character that remains in the string by checking the frequency array <code>frq</code>. It iterates over the array, and the first character with a non-zero frequency is the smallest remaining character.</li>
+<li>This function helps us decide when we can safely pop from the stack to ensure the result is lexicographically smallest.</li>
+</ul>
+<h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing the entire string, we return the final result string <code>ans</code> which contains the lexicographically smallest string that can be formed by the robot’s stack operations.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. This is because:</p>
+<ul>
+<li>We process each character of the string exactly once.</li>
+<li>Each character is pushed and popped from the stack at most once, and both operations take constant time.</li>
+<li>The <code>low</code> function runs in constant time <strong>O(26)</strong>, which is effectively constant since the number of characters is fixed at 26 (corresponding to the lowercase English alphabet).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> (constant space) with respect to the size of the input string, because:</p>
+<ul>
+<li>We use a fixed-size frequency array of size 26.</li>
+<li>We use a stack and a result string, both of which are dependent on the input size <code>n</code>, but the space used does not grow beyond <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the robot&rsquo;s stack operations while ensuring that the result string is lexicographically smallest. The approach utilizes a stack data structure, frequency tracking, and a greedy strategy to decide when to pop from the stack. The overall time complexity of <strong>O(n)</strong> and space complexity of <strong>O(1)</strong> (excluding the input/output) makes this solution optimal and scalable for large input sizes. The key insight is recognizing the importance of the frequency of remaining characters to make decisions about when to pop from the stack.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode910s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -304,7 +484,6 @@
 
       </div>
 
-      
 
       <footer>
         

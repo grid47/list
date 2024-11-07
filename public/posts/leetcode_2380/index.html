@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,142 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> seconds;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode871s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum number of seconds required to remove all occurrences of the string &ldquo;01&rdquo; in a given binary string <code>s</code>. The string consists of only <code>'0'</code> and <code>'1'</code> characters. In one second, you can remove one occurrence of &ldquo;01&rdquo; by swapping the <code>'0'</code> and <code>'1'</code>. The goal is to repeatedly perform this operation until no more &ldquo;01&rdquo; pairs exist in the string.</p>
+<p>For example:</p>
+<ul>
+<li>For <code>s = &quot;0110101&quot;</code>, the output would be <code>4</code>.</li>
+<li>For <code>s = &quot;111&quot;</code>, the output would be <code>0</code>, as there are no &ldquo;01&rdquo; pairs to remove.</li>
+</ul>
+<p>The challenge is to calculate the number of seconds it will take to remove all such &ldquo;01&rdquo; pairs using the fewest steps possible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use a <strong>greedy approach</strong> combined with <strong>simulation</strong>. The key observation is that each second we can swap one occurrence of the pair &ldquo;01&rdquo; to become &ldquo;10&rdquo;. By swapping, we reduce the number of &ldquo;01&rdquo; occurrences, but after each swap, a new configuration is created, which could introduce new &ldquo;01&rdquo; pairs that were not previously present.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Track Changes</strong>: We need to iterate over the string and identify all instances of the pair &ldquo;01&rdquo;. Every time such a pair is found, we swap them to create &ldquo;10&rdquo; and mark that the string has changed.</li>
+<li><strong>Repeat Until No Changes</strong>: Once a swap is made, we need to continue checking the string to see if further swaps can be performed. This process continues until no more swaps can be made.</li>
+<li><strong>Count the Seconds</strong>: Each time we find and swap a &ldquo;01&rdquo; pair, it counts as one second. We keep track of the total number of seconds taken to perform all the swaps.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> secondsToRemoveOccurrences(string s) {
+</span></span></code></pre></div><ul>
+<li>The method <code>secondsToRemoveOccurrences</code> is defined inside the <code>Solution</code> class. This method takes a string <code>s</code> as input and returns an integer representing the number of seconds required to remove all &ldquo;01&rdquo; pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> seconds <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> changed <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li><code>seconds</code> keeps track of the number of seconds (or swaps) that have been made.</li>
+<li><code>changed</code> is a flag that determines whether any swaps were made in the current iteration of the loop. Initially, it&rsquo;s set to <code>true</code> to ensure the loop runs at least once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(changed) {
+</span></span><span style="display:flex;"><span>        changed <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&amp;&amp;</span> s[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>                swap(s[i], s[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>                changed <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        seconds <span style="color:#f92672">+=</span> changed;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>while(changed)</code> loop continues as long as any swaps occur in the current iteration.</li>
+<li>Within the loop, we initialize <code>changed = false</code> to track if any swaps occur during this iteration. If no swaps are made during a full pass, the loop will terminate.</li>
+<li>The <code>for</code> loop iterates over the string (up to <code>s.size() - 1</code> to avoid accessing out-of-bounds elements). It checks for occurrences of the pair &ldquo;01&rdquo;.</li>
+<li>When a &ldquo;01&rdquo; pair is found, we perform a swap to change it to &ldquo;10&rdquo;, set <code>changed = true</code> to indicate that a swap occurred, and increment <code>i</code> by 1 to skip checking the next adjacent pair (as the swapped &ldquo;1&rdquo; will not participate in a further swap).</li>
+<li>The <code>seconds += changed;</code> statement adds 1 second to the count if any swap was made during this iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> seconds;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Once the loop ends (no more swaps are possible), the method returns the total number of seconds it took to remove all occurrences of &ldquo;01&rdquo;.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. The reason for this is that in each iteration of the <code>while</code> loop, we are making a single pass over the string (with at most one swap per iteration), and this pass can be done in linear time. The number of iterations is at most <code>n</code> because in each iteration, we can remove one &ldquo;01&rdquo; pair, reducing the string size effectively.</li>
+<li>Thus, the overall time complexity is linear with respect to the length of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity of the solution is <strong>O(1)</strong>, as we are only using a constant amount of extra space (the variables <code>seconds</code>, <code>changed</code>, and <code>i</code>). The string <code>s</code> is modified in place, so no additional space is required for storage.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses a <strong>greedy approach</strong> combined with <strong>simulation</strong> to determine the minimum number of seconds required to remove all &ldquo;01&rdquo; pairs from the binary string <code>s</code>. The idea of repeatedly scanning the string and performing swaps ensures that each operation reduces the number of &ldquo;01&rdquo; pairs in the string, and the process continues until no more swaps can be made.</p>
+<p>The algorithm is efficient with a time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the input string, which makes it suitable for large inputs. The space complexity is <strong>O(1)</strong>, making it memory efficient as well. By keeping track of changes during each iteration and counting the number of swaps, the solution efficiently solves the problem with minimal overhead.</p>
+<p>This approach is simple and intuitive, leveraging basic string operations and the sliding window technique to handle the problem efficiently. It&rsquo;s a great example of how greedy algorithms can be used in combination with simulation to solve real-world problems involving sequence manipulation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode871s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +423,6 @@
 
       </div>
 
-      
 
       <footer>
         

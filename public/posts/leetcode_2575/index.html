@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1003s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a string <code>word</code> representing a non-negative integer. We are also given an integer <code>m</code>. Our task is to determine, for each index in the string, whether the number formed by the substring of <code>word</code> from index <code>0</code> to <code>i</code> is divisible by <code>m</code>. The output should be a vector of binary values (0 or 1), where each value at index <code>i</code> is <code>1</code> if the number formed by the substring from index <code>0</code> to <code>i</code> is divisible by <code>m</code>, and <code>0</code> otherwise.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to iterate over each digit in the input string <code>word</code> and calculate the number formed by the digits from the start of the string up to the current index. We then check if this number is divisible by <code>m</code>. However, directly forming such large numbers could be inefficient and unnecessary, especially since the number of digits grows rapidly. Instead, we can calculate this number progressively without forming it explicitly using modular arithmetic.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Modular Arithmetic</strong>: Instead of forming the number as an integer, we can compute the remainder of the number modulo <code>m</code> progressively as we iterate through each digit. This prevents the number from becoming too large to handle.</p>
+</li>
+<li>
+<p><strong>Progressive Calculation of the Number</strong>:</p>
+<ul>
+<li>We start with <code>num = 0</code>, which represents the number formed by no digits initially.</li>
+<li>For each digit in the string <code>word</code>, we update <code>num</code> by multiplying it by <code>10</code> (shifting the digits to the left) and adding the value of the current digit (converted from character to integer).</li>
+<li>After updating <code>num</code>, we take the remainder of <code>num</code> modulo <code>m</code>. This ensures that we are always working with manageable numbers and avoids overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>Divisibility Check</strong>:</p>
+<ul>
+<li>For each index <code>i</code>, after calculating the number modulo <code>m</code>, we check if the result is <code>0</code>. If it is, then the number is divisible by <code>m</code> and we set <code>ans[i] = 1</code>, otherwise, we set <code>ans[i] = 0</code>.</li>
+</ul>
+</li>
+</ol>
+<p>By using modular arithmetic, we ensure that the solution is efficient and handles even very large input sizes without overflow.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> word.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: We store the size of the string <code>word</code>.</li>
+<li><code>ans</code>: A vector of size <code>n</code> is initialized to store the result. Each entry will be either <code>0</code> or <code>1</code>, indicating whether the number formed by the substring up to that index is divisible by <code>m</code>.</li>
+<li><code>num</code>: A variable to store the current number (in modular form) formed by the digits up to the current index. We initialize it to <code>0</code>.</li>
+</ul>
+<h4 id="2-iterating-through-the-string">
+  2. <strong>Iterating through the String</strong>:
+  <a class="heading-link" href="#2-iterating-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">%=</span> m;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">%</span> m <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) ans[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> ans[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>We loop through each digit of the string <code>word</code> from index <code>0</code> to <code>n-1</code>.</p>
+</li>
+<li>
+<p>For each digit at index <code>i</code>, we update the <code>num</code> variable:</p>
+<ul>
+<li>We multiply the current value of <code>num</code> by <code>10</code> to shift it left by one digit.</li>
+<li>We add the integer value of the current digit <code>(word[i] - '0')</code>.</li>
+<li>We take the result modulo <code>m</code> to keep the value of <code>num</code> within the bounds of the modulus and avoid handling large numbers.</li>
+</ul>
+</li>
+<li>
+<p>After updating <code>num</code>, we check if <code>num % m == 0</code>. If this condition is true, it means that the number formed by the substring <code>word[0..i]</code> is divisible by <code>m</code>, and we set <code>ans[i] = 1</code>. Otherwise, we set <code>ans[i] = 0</code>.</p>
+</li>
+</ul>
+<h4 id="3-return-the-result">
+  3. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After completing the loop, we return the <code>ans</code> vector, which contains the divisibility information for each index.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Iteration through the string</strong>: The loop iterates over each character of the string <code>word</code>. The time complexity of this operation is O(n), where <code>n</code> is the length of the string.</li>
+<li><strong>Modular updates</strong>: Each update involves a constant number of operations: multiplication, addition, and modulo. All of these operations take constant time O(1).</li>
+<li>Overall, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the string <code>word</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Auxiliary space</strong>: The algorithm uses a vector <code>ans</code> to store the result. The space complexity of the solution is O(n), where <code>n</code> is the size of the string <code>word</code>.</li>
+<li>The space used for the variable <code>num</code> is constant O(1), as it only stores the current number modulo <code>m</code>.</li>
+<li>Overall, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the divisibility of the number formed by each substring of the string <code>word</code>. By leveraging modular arithmetic, we avoid the need to handle large numbers directly and keep the calculations manageable. The time complexity of O(n) ensures that the solution can handle large inputs efficiently. The space complexity is also optimal at O(n), as we only need an array to store the results and a few variables for the intermediate calculations. This approach is both time-efficient and space-efficient, making it suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1003s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +441,6 @@
 
       </div>
 
-      
 
       <footer>
         

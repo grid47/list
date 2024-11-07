@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,123 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">min</span>(dp1, min(dp2, dp3));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1190s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the minimum number of increment operations required to reach a target value for each element in a given list, <code>A</code>. For each element in the list, the value needs to be incremented by a certain amount such that it reaches at least <code>k</code>. The challenge is to efficiently calculate the total number of operations using dynamic programming, ensuring the result is the minimum possible number of operations after considering all elements.</p>
+<p>Given the constraints and the number of operations needed, dynamic programming is a suitable method to minimize the overall number of operations. We aim to track the minimum number of operations needed to adjust each element of the list to the desired target value, while considering possible state transitions.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we employ a dynamic programming approach that involves keeping track of the minimum number of increment operations needed at each stage. The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming State Representation</strong>:
+We use three variables, <code>dp1</code>, <code>dp2</code>, and <code>dp3</code>, to keep track of the minimum number of operations required for the previous three elements of the list. This helps in finding the optimal solution by considering the state of each element and transitioning between these states.</p>
+</li>
+<li>
+<p><strong>Increment Calculation</strong>:
+For each element <code>a</code> in the list, we calculate the number of increments needed to reach <code>k</code> from <code>a</code>. This is done by subtracting <code>a</code> from <code>k</code>, but ensuring that the result is non-negative. If <code>a</code> is already greater than or equal to <code>k</code>, no increments are required.</p>
+</li>
+<li>
+<p><strong>State Transitions</strong>:
+As we iterate through the list, we transition the states (<code>dp1</code>, <code>dp2</code>, and <code>dp3</code>) to keep track of the optimal number of operations at each step. The transition involves choosing the minimum of the previous states, ensuring that we always consider the most optimal number of operations from the previous three elements.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>:
+After iterating through all elements, the final result is obtained by taking the minimum of the three states (<code>dp1</code>, <code>dp2</code>, and <code>dp3</code>), which represents the least number of operations required to achieve the target for all elements.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Variable Initialization</strong>:
+The solution starts by initializing four variables, <code>dp1</code>, <code>dp2</code>, <code>dp3</code>, and <code>dp</code>, which will hold the minimum number of operations required for each state:</p>
+<ul>
+<li><code>dp1</code>, <code>dp2</code>, and <code>dp3</code> represent the minimum operations for the previous three elements.</li>
+<li><code>dp</code> represents the current state, which will be calculated during each iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> dp1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dp2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dp3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dp;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through the List</strong>:
+The solution iterates over each element <code>a</code> in the input list <code>A</code>. For each element, we compute the number of operations required to increment the element to at least <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> a: A) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Increment Operations</strong>:
+Inside the loop, we calculate the number of increments required to make <code>a</code> greater than or equal to <code>k</code>. This is done by taking the maximum of <code>k - a</code> and 0, ensuring that we never subtract below zero (i.e., if <code>a</code> is already greater than or equal to <code>k</code>, no increment is needed).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp <span style="color:#f92672">=</span> min(dp1, min(dp2, dp3)) <span style="color:#f92672">+</span> max(k <span style="color:#f92672">-</span> a, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><p>Here, <code>min(dp1, min(dp2, dp3))</code> represents the optimal number of operations from the previous states, and <code>max(k - a, 0)</code> ensures we add the required increments.</p>
+</li>
+<li>
+<p><strong>State Transitions</strong>:
+After calculating the current state <code>dp</code>, we update the previous states (<code>dp1</code>, <code>dp2</code>, <code>dp3</code>) for the next iteration. The values of <code>dp1</code>, <code>dp2</code>, and <code>dp3</code> are shifted as we move through the list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp1 <span style="color:#f92672">=</span> dp2;
+</span></span><span style="display:flex;"><span>dp2 <span style="color:#f92672">=</span> dp3;
+</span></span><span style="display:flex;"><span>dp3 <span style="color:#f92672">=</span> dp;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:
+After completing the iteration, we return the minimum of the final three states (<code>dp1</code>, <code>dp2</code>, and <code>dp3</code>), which represents the least number of operations required to achieve the target for all elements.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">min</span>(dp1, min(dp2, dp3));
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:
+The time complexity of this solution is (O(n)), where <code>n</code> is the number of elements in the input list <code>A</code>. This is because the algorithm iterates through the list once, performing a constant amount of work for each element. Since the number of operations for each element is constant (calculating the minimum and maximum of a few values), the overall time complexity is linear.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is (O(1)), as the solution uses only a fixed number of variables (<code>dp1</code>, <code>dp2</code>, <code>dp3</code>, and <code>dp</code>) to store intermediate results. No additional space is required, regardless of the size of the input list.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of increment operations required to make each element in the input list at least <code>k</code>. By using dynamic programming, it tracks the optimal number of operations needed to adjust each element, ensuring that the result is obtained in linear time with constant space complexity.</p>
+<p>The use of dynamic programming allows the solution to efficiently handle the problem by minimizing redundant calculations. The state transitions ensure that we always consider the optimal solution for each element, resulting in the minimum number of operations required.</p>
+<p>Overall, the algorithm is well-suited for large inputs due to its time efficiency and space conservation, making it an excellent solution for this type of problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1190s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -235,7 +351,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2920"  class="external-link" target="_blank" rel="noopener">LeetCode #2920: Maximum Points After Collecting Coins From All Nodes</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2923"  class="external-link" target="_blank" rel="noopener">LeetCode #2923: Find Champion I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -277,7 +393,6 @@
 
       </div>
 
-      
 
       <footer>
         

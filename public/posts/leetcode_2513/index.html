@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -250,7 +250,237 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode957s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to minimize a set such that the set contains a certain number of unique numbers divisible by two given integers, <code>div1</code> and <code>div2</code>. Specifically, we are given:</p>
+<ul>
+<li><code>div1</code> and <code>div2</code>, two divisors.</li>
+<li><code>unq1</code> and <code>unq2</code>, the number of unique integers divisible by <code>div1</code> and <code>div2</code>, respectively.</li>
+</ul>
+<p>Our goal is to find the smallest integer <code>mx</code> such that:</p>
+<ul>
+<li>There are at least <code>unq1</code> integers in the range <code>[1, mx]</code> that are divisible by <code>div1</code>.</li>
+<li>There are at least <code>unq2</code> integers in the range <code>[1, mx]</code> that are divisible by <code>div2</code>.</li>
+</ul>
+<p>Additionally, there might be some overlap between the two sets of numbers divisible by <code>div1</code> and <code>div2</code>. We aim to minimize the number <code>mx</code> while ensuring these conditions are met.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can solve this problem using <strong>binary search</strong> combined with <strong>mathematical counting</strong> techniques. Here&rsquo;s how:</p>
+<ol>
+<li>
+<p><strong>Basic Counting Strategy</strong>:</p>
+<ul>
+<li>For any given <code>mx</code>, the number of integers divisible by <code>div1</code> is <code>mx // div1</code>, where <code>//</code> represents integer division.</li>
+<li>Similarly, the number of integers divisible by <code>div2</code> is <code>mx // div2</code>.</li>
+<li>The number of integers divisible by both <code>div1</code> and <code>div2</code> can be counted using the Least Common Multiple (LCM) of <code>div1</code> and <code>div2</code>. The number of integers divisible by both <code>div1</code> and <code>div2</code> in the range <code>[1, mx]</code> is <code>mx // lcm(div1, div2)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the Overlap</strong>:</p>
+<ul>
+<li>If there is overlap (i.e., a number is divisible by both <code>div1</code> and <code>div2</code>), we need to adjust the counts to avoid double-counting. The total number of valid numbers for each divisor can be calculated as:
+<ul>
+<li><code>a = mx // div1</code> (total numbers divisible by <code>div1</code>).</li>
+<li><code>b = mx // div2</code> (total numbers divisible by <code>div2</code>).</li>
+<li>The overlap is <code>aib = mx // lcm(div1, div2)</code> (numbers divisible by both).</li>
+<li>The combined set of numbers divisible by <code>div1</code> or <code>div2</code> is <code>a + b - aib</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search for Optimization</strong>:</p>
+<ul>
+<li>We use binary search to find the smallest <code>mx</code> that satisfies the constraints. For a given <code>mx</code>, we calculate how many unique numbers divisible by <code>div1</code> and <code>div2</code> can be included. If it&rsquo;s possible to satisfy the condition, we try smaller values of <code>mx</code> to minimize it.</li>
+<li>The binary search range starts with <code>l = 1</code> and <code>r = 10^17</code> (a large upper bound). We check the midpoint (<code>mid = (l + r) // 2</code>) in each iteration to decide whether we need to look for smaller or larger values.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-helper-function-ispossible">
+  Step 1: Helper Function <code>isPossible</code>
+  <a class="heading-link" href="#step-1-helper-function-ispossible">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPossible</span>(<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mx, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> div1, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> div2, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> unq1, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> unq2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a <span style="color:#f92672">=</span> mx <span style="color:#f92672">/</span> div1;  <span style="color:#75715e">// Number of numbers divisible by div1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a_ <span style="color:#f92672">=</span> mx <span style="color:#f92672">-</span> a;    <span style="color:#75715e">// Numbers not divisible by div1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> b <span style="color:#f92672">=</span> mx <span style="color:#f92672">/</span> div2;  <span style="color:#75715e">// Number of numbers divisible by div2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> b_ <span style="color:#f92672">=</span> mx <span style="color:#f92672">-</span> b;    <span style="color:#75715e">// Numbers not divisible by div2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> aib <span style="color:#f92672">=</span> mx <span style="color:#f92672">/</span> lcm(div1, div2);  <span style="color:#75715e">// Numbers divisible by both div1 and div2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> aub <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b <span style="color:#f92672">-</span> aib;  <span style="color:#75715e">// Total numbers divisible by div1 or div2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a_ib_ <span style="color:#f92672">=</span> mx <span style="color:#f92672">-</span> aub;  <span style="color:#75715e">// Numbers neither divisible by div1 nor div2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Calculate how many more numbers are needed for each set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> neededA <span style="color:#f92672">=</span> (a_ <span style="color:#f92672">-</span> a_ib_ <span style="color:#f92672">&gt;=</span> unq1) <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> unq1 <span style="color:#f92672">-</span> (a_ <span style="color:#f92672">-</span> a_ib_);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> neededB <span style="color:#f92672">=</span> (b_ <span style="color:#f92672">-</span> a_ib_ <span style="color:#f92672">&gt;=</span> unq2) <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> unq2 <span style="color:#f92672">-</span> (b_ <span style="color:#f92672">-</span> a_ib_);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Check if the total count of remaining numbers can accommodate the additional needed numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> a_ib_ <span style="color:#f92672">&gt;=</span> neededA <span style="color:#f92672">+</span> neededB;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Inputs</strong>:
+<ul>
+<li><code>mx</code>: The current midpoint value in the binary search.</li>
+<li><code>div1</code>, <code>div2</code>: The divisors.</li>
+<li><code>unq1</code>, <code>unq2</code>: The required counts of unique numbers divisible by <code>div1</code> and <code>div2</code>.</li>
+</ul>
+</li>
+<li><strong>Process</strong>:
+<ul>
+<li>First, we calculate how many numbers are divisible by <code>div1</code>, <code>div2</code>, and both using integer division.</li>
+<li>We also calculate how many numbers are not divisible by either.</li>
+<li>Then, we compute how many more numbers are needed to satisfy the unique count requirements for <code>div1</code> and <code>div2</code>.</li>
+</ul>
+</li>
+<li><strong>Return</strong>:
+<ul>
+<li>If there are enough numbers available to meet the requirements, the function returns <code>true</code>. Otherwise, it returns <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-main-function-minimizeset">
+  Step 2: Main Function <code>minimizeSet</code>
+  <a class="heading-link" href="#step-2-main-function-minimizeset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimizeSet</span>(<span style="color:#66d9ef">int</span> div1, <span style="color:#66d9ef">int</span> div2, <span style="color:#66d9ef">int</span> unq1, <span style="color:#66d9ef">int</span> unq2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) pow(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">17</span>), ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Binary search to find the smallest value of mx that satisfies the condition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Calculate the midpoint
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (isPossible(mid, div1, div2, unq1, unq2)) {  <span style="color:#75715e">// Check if it&#39;s possible to satisfy the condition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans <span style="color:#f92672">=</span> mid;  <span style="color:#75715e">// If possible, store the result and look for smaller values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Move the upper bound to search for a smaller valid mx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Otherwise, increase the lower bound to find a valid mx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the smallest valid mx
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Inputs</strong>:
+<ul>
+<li><code>div1</code>, <code>div2</code>: The divisors.</li>
+<li><code>unq1</code>, <code>unq2</code>: The required number of unique integers divisible by <code>div1</code> and <code>div2</code>.</li>
+</ul>
+</li>
+<li><strong>Process</strong>:
+<ul>
+<li>Initialize the binary search range <code>l = 1</code> and <code>r = 10^17</code>.</li>
+<li>For each midpoint <code>mid</code> in the binary search, use the <code>isPossible</code> function to check if it&rsquo;s possible to satisfy the requirements.</li>
+<li>If it is possible, move the upper bound (<code>r</code>) to search for smaller values of <code>mx</code>. Otherwise, move the lower bound (<code>l</code>) to search for larger values.</li>
+</ul>
+</li>
+<li><strong>Return</strong>:
+<ul>
+<li>The smallest <code>mx</code> that satisfies the condition.</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through an example to understand how the binary search works:</p>
+<h4 id="example-input">
+  Example Input:
+  <a class="heading-link" href="#example-input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> div1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, div2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, unq1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, unq2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><h4 id="binary-search-process">
+  Binary Search Process:
+  <a class="heading-link" href="#binary-search-process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Start with <code>l = 1</code> and <code>r = 10^17</code>.</li>
+<li>For each <code>mid</code>, check if it’s possible to meet the required numbers of unique integers divisible by <code>div1</code> and <code>div2</code>.</li>
+<li>If <code>mid</code> is valid, reduce the range by adjusting the upper bound (<code>r</code>).</li>
+<li>If <code>mid</code> is invalid, increase the range by adjusting the lower bound (<code>l</code>).</li>
+<li>Continue until the smallest valid <code>mx</code> is found.</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Binary Search</strong>: The binary search operates over a range of size (10^{17}), so the number of iterations is (O(\log(10^{17})) = O(58)).</li>
+<li><strong><code>isPossible</code> Function</strong>: Each time the <code>isPossible</code> function is called, it involves simple arithmetic and a call to <code>lcm</code>, which is (O(\log(\min(div1, div2)))). Since <code>lcm</code> is computed using the greatest common divisor (GCD), this operation is very efficient.</li>
+<li><strong>Total Time Complexity</strong>: The total time complexity is (O(\log(10^{17}) \cdot \log(\min(div1, div2)))), which is highly efficient.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) because we only use a few variables to store intermediate results.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the smallest number <code>mx</code> that satisfies the required conditions using binary search and mathematical counting techniques. By leveraging the properties of divisibility and overlap using the <code>lcm</code> function, the solution optimizes the search space, ensuring it runs in logarithmic time. This approach is both time-efficient and space-efficient for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode957s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -262,7 +492,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2514"  class="external-link" target="_blank" rel="noopener">LeetCode #2514: Count Anagrams</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2515"  class="external-link" target="_blank" rel="noopener">LeetCode #2515: Shortest Distance to Target String in a Circular Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -304,7 +534,6 @@
 
       </div>
 
-      
 
       <footer>
         

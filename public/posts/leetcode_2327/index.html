@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -232,7 +232,191 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode830s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to calculate the number of people who are aware of a secret after <code>n</code> days, where people can start sharing the secret, and others can learn it over time. The key rules are:</p>
+<ol>
+<li>A person starts sharing the secret after a delay of <code>delay</code> days.</li>
+<li>Once a person learns the secret, they can forget it after <code>forget</code> days.</li>
+</ol>
+<p>Given the constraints, we are tasked with computing how many people are aware of the secret after <code>n</code> days, using a dynamic programming approach. The result must be taken modulo (10^9 + 7).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a dynamic programming (DP) problem where we need to track the number of people who are aware of the secret at each day, taking into account the delay and forget intervals.</p>
+<p>We can approach the problem step-by-step as follows:</p>
+<ol>
+<li>
+<p><strong>Initial Setup:</strong></p>
+<ul>
+<li>The first person is aware of the secret on day 1.</li>
+<li>The secret-sharing behavior follows two main intervals:
+<ul>
+<li><strong>Delay Interval:</strong> A person can start sharing the secret after <code>delay</code> days.</li>
+<li><strong>Forget Interval:</strong> A person forgets the secret after <code>forget</code> days.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Array:</strong></p>
+<ul>
+<li>We use a dynamic programming array <code>dp[]</code> where <code>dp[i]</code> represents the number of people who learn the secret on day <code>i</code>.</li>
+<li>The total number of people aware of the secret at any point in time is the cumulative sum of values in the <code>dp[]</code> array up to that day.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transition Logic:</strong></p>
+<ul>
+<li>On each day <code>i</code>, the people who are aware of the secret are those who learned it on the previous days, but after considering the delay and forget intervals:
+<ul>
+<li>People who start sharing the secret on day <code>i</code> (i.e., <code>dp[max(i - delay, 0)]</code>).</li>
+<li>People who stop sharing the secret on day <code>i</code> (i.e., <code>dp[max(i - forget, 0)]</code>).</li>
+</ul>
+</li>
+<li>We adjust the values to account for these intervals, ensuring the number of people aware of the secret is updated correctly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Answer Calculation:</strong></p>
+<ul>
+<li>After computing the <code>dp[]</code> values, the final answer is the sum of all people who are still aware of the secret on the last <code>forget</code> days.</li>
+<li>The result must be taken modulo (10^9 + 7) to avoid overflow and meet the problem&rsquo;s constraints.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code into key steps:</p>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, share <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>dp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to store the final result, which will be the number of people aware of the secret after <code>n</code> days.</li>
+<li><code>share</code> is used to keep track of the cumulative number of people who are sharing the secret on any given day.</li>
+<li>The <code>dp</code> vector is initialized with <code>n + 2</code> elements to represent days from 1 to <code>n</code> and one extra index to handle boundary conditions. Initially, all values are set to 0.</li>
+<li><code>dp[1] = 1</code> indicates that on day 1, only the first person is aware of the secret.</li>
+<li><code>mod = 1e9 + 7</code> is the modulo used to ensure the result is within the bounds of typical integer limits.</li>
+</ul>
+<h4 id="step-2-iterate-over-each-day">
+  Step 2: Iterate Over Each Day
+  <a class="heading-link" href="#step-2-iterate-over-each-day">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> share <span style="color:#f92672">=</span> (share <span style="color:#f92672">+</span> dp[max(i <span style="color:#f92672">-</span> delay, <span style="color:#ae81ff">0</span>)] <span style="color:#f92672">-</span> dp[max(i <span style="color:#f92672">-</span> forget, <span style="color:#ae81ff">0</span>)] <span style="color:#f92672">+</span> mod) <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>We iterate from day 2 to day <code>n</code>, calculating how many people are aware of the secret on each day.</li>
+<li>For each day <code>i</code>:
+<ul>
+<li>We calculate the number of people who start sharing the secret by considering the day <code>max(i - delay, 0)</code>. This is the day people who were initially aware start sharing the secret.</li>
+<li>We calculate how many people forget the secret on day <code>i</code> by considering the day <code>max(i - forget, 0)</code>. These are the people who stop sharing the secret after <code>forget</code> days.</li>
+<li>We update the <code>dp[i]</code> array with the total number of people aware on day <code>i</code>, using the variable <code>share</code> to keep track of the ongoing cumulative count.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-calculate-the-final-result">
+  Step 3: Calculate the Final Result
+  <a class="heading-link" href="#step-3-calculate-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> forget; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> (res <span style="color:#f92672">+</span> dp[i]) <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>After calculating the number of people aware of the secret each day, we need to sum up the number of people still aware of the secret in the last <code>forget</code> days.</li>
+<li>This is done by summing <code>dp[i]</code> for <code>i</code> from <code>n + 1 - forget</code> to <code>n</code> to account for all people who are still sharing the secret at the end of the <code>n</code> days.</li>
+<li>We use modulo (10^9 + 7) to ensure the result doesn&rsquo;t overflow.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, the result <code>res</code> is returned, which represents the number of people who are aware of the secret after <code>n</code> days.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Initialization:</strong> The initialization of the <code>dp</code> array and the setting of the first element takes constant time <code>O(1)</code>.</li>
+<li><strong>Main Loop:</strong> The main loop runs for <code>n</code> iterations (from day 2 to day <code>n</code>). In each iteration, we perform constant-time operations such as accessing the <code>dp</code> array and updating the <code>share</code> value. Therefore, the time complexity for this loop is <code>O(n)</code>.</li>
+<li><strong>Final Sum Calculation:</strong> The second loop calculates the sum of people still aware of the secret on the last <code>forget</code> days. This loop runs at most <code>forget</code> iterations, which is bounded by <code>n</code>, so it is also <code>O(n)</code> in the worst case.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The <code>dp</code> array requires space to store the values for <code>n + 2</code> days, which is <strong>O(n)</strong> in terms of space complexity.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the number of people who are aware of a secret after <code>n</code> days, taking into account the delay and forget intervals. By using dynamic programming, we track the number of people who are sharing the secret on each day and adjust for people forgetting the secret. The approach runs in linear time, making it suitable for large values of <code>n</code>, and the result is calculated modulo (10^9 + 7) to prevent overflow. The solution is space-efficient, with a space complexity of <strong>O(n)</strong>.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode830s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +470,6 @@
 
       </div>
 
-      
 
       <footer>
         

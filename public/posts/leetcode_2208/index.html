@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -245,7 +245,161 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode751s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires reducing the sum of an array <code>nums</code> by halving its elements until the total sum is reduced to at least half of its original value. You are to return the number of operations (halving the largest element at each step) required to achieve this goal.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be efficiently tackled using a <strong>priority queue (max heap)</strong>, which allows us to repeatedly halve the largest element in the array. By halving the largest element in each step, we ensure that the sum decreases as quickly as possible. We will keep track of the sum and continue the process until the sum is reduced to half of its initial value.</p>
+<p>The idea is:</p>
+<ol>
+<li>Calculate the total sum of the array.</li>
+<li>Using a priority queue (max heap), repeatedly halve the largest element and update the sum.</li>
+<li>Continue halving the largest element until the sum is reduced to half.</li>
+<li>Return the number of halving operations required.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Variables:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>, less<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: Stores the size of the array <code>nums</code>.</li>
+<li><code>sum</code>: A variable to store the total sum of all elements in the array. It will be later divided by 2 to calculate the target sum.</li>
+<li><code>pq</code>: A max heap (priority queue) to store the elements in decreasing order. This will allow us to access and modify the largest element at each step.</li>
+</ul>
+</li>
+<li>
+<p><strong>Populating the Priority Queue and Calculating the Total Sum:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pq.push(nums[i]);
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Loop through the array <code>nums</code>, push each element into the priority queue, and calculate the total sum of the elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Target Sum:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sum <span style="color:#f92672">=</span> sum <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>The target sum is half of the total sum, which is the point at which we stop halving elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Halving the Largest Element:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(tmp <span style="color:#f92672">&lt;</span> sum <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> x <span style="color:#f92672">=</span> (pq.top() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    tmp <span style="color:#f92672">+=</span> x;
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    pq.push(x);
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>tmp</code>: A variable to track the reduced sum after each halving operation.</li>
+<li><code>cnt</code>: A counter to track the number of halving operations performed.</li>
+<li>Inside the <code>while</code> loop:
+<ul>
+<li>We keep halving the largest element (<code>pq.top()</code>).</li>
+<li>Add the halved value to <code>tmp</code>.</li>
+<li>After halving, replace the top element in the priority queue with its halved value to ensure the next largest element is ready for halving.</li>
+<li>Continue this process until the sum is reduced to at least half of the original value, or the priority queue is empty.</li>
+</ul>
+</li>
+<li>For each halving, increment the counter <code>cnt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Number of Operations:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After the loop completes, return the number of halving operations performed to achieve the target sum.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n log n)</strong>:
+<ul>
+<li>The time complexity is dominated by the operations on the priority queue:
+<ul>
+<li>Inserting each element into the priority queue takes O(log n), and we do this <code>n</code> times.</li>
+<li>Each halving operation involves popping and pushing an element from the priority queue, each of which takes O(log n) time.</li>
+</ul>
+</li>
+<li>Therefore, the overall time complexity is O(n log n).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>We store all <code>n</code> elements in the priority queue, so the space complexity is O(n), where <code>n</code> is the number of elements in the array.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem using a max heap to perform the halving operations on the largest elements of the array. The priority queue allows us to always access and modify the largest element in logarithmic time, making this approach both effective and efficient. By continuing the halving process until the sum is reduced to half, we ensure the minimal number of operations to reach the target sum. The time complexity of O(n log n) is optimal for problems involving repeated access and modification of the largest element in a collection, making this approach suitable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode751s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +411,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2209"  class="external-link" target="_blank" rel="noopener">LeetCode #2209: Minimum White Tiles After Covering With Carpets</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2210"  class="external-link" target="_blank" rel="noopener">LeetCode #2210: Count Hills and Valleys in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +453,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -227,7 +227,133 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode993s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to compute the &ldquo;concatenation value&rdquo; of an integer array <code>nums</code>. The concatenation value is calculated by repeatedly concatenating and summing the outermost elements until all elements are used. For each step, if there are elements at both the start and end, concatenate them (start element followed by end element) and add the resulting number to a running sum. If only one element remains in the middle, add it directly to the sum.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we use a two-pointer approach: one pointer (<code>i</code>) starts from the beginning of the array and another pointer (<code>j</code>) starts from the end. At each iteration:</p>
+<ol>
+<li>
+<p><strong>Concatenation</strong>:</p>
+<ul>
+<li>If <code>i</code> is less than <code>j</code>, concatenate the elements <code>nums[i]</code> and <code>nums[j]</code> into a single integer, where <code>nums[i]</code> is the more significant part.</li>
+<li>Calculate the concatenated value by multiplying <code>nums[i]</code> by a power of 10 large enough to shift <code>nums[i]</code> into place before adding <code>nums[j]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Middle Element</strong>:</p>
+<ul>
+<li>If <code>i</code> equals <code>j</code>, only one element remains in the middle, which is directly added to the sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Termination</strong>:</p>
+<ul>
+<li>Move <code>i</code> and <code>j</code> inward at each step (<code>i++</code> and <code>j--</code>), processing until <code>i</code> surpasses <code>j</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sz <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>res</code> is the variable to hold the final result, and <code>sz</code> stores the size of <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Two-pointer Approach</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> sz <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> j; <span style="color:#f92672">++</span>i, <span style="color:#f92672">--</span>j)
+</span></span></code></pre></div><ul>
+<li>We initialize <code>i</code> at the start and <code>j</code> at the end, iterating until <code>i</code> surpasses <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Concatenation Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> j)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> nums[i] <span style="color:#f92672">*</span> pow(<span style="color:#ae81ff">10</span>, (<span style="color:#66d9ef">int</span>)log10(nums[j]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> nums[j];
+</span></span></code></pre></div><ul>
+<li>When <code>i &lt; j</code>, concatenate <code>nums[i]</code> and <code>nums[j]</code>.</li>
+<li><code>pow(10, (int)log10(nums[j]) + 1)</code> calculates the appropriate power of 10 to shift <code>nums[i]</code> before adding <code>nums[j]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Middle Element Addition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>If <code>i</code> equals <code>j</code>, add <code>nums[i]</code> (the middle element) directly to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The accumulated <code>res</code> contains the final concatenation value for the array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Concatenation Calculation</strong>: Each loop iteration calculates the power of 10 and logarithm of <code>nums[j]</code>, which are (O(\log_{10} M)) operations where (M) is the maximum number in <code>nums</code>. This results in a total complexity of (O(n \cdot \log M)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>Constant space, (O(1)), since only a few variables are used.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the concatenation value for an array using a two-pointer approach to maximize efficiency. The logarithmic operations allow for accurate concatenation calculations, making this approach optimal for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode993s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +407,6 @@
 
       </div>
 
-      
 
       <footer>
         

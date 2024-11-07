@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,125 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode642s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we need to find the minimum possible score for the second player in a two-row grid game. Each player can choose a column, and the goal is to minimize the score for the second player, who collects points from the bottom row after the first player has selected their column. The first player selects a column, and the score for the second player is the sum of points in the bottom row minus any points from the column that the first player chooses.</p>
+<p>Given a grid of dimensions 2 x n, where each cell contains a non-negative integer representing points, the task is to calculate the minimum score for the second player after the first player has made their selection.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initial Calculations</strong>: Compute the total points in the top row. We will also maintain a running total of points collected by the second player in the bottom row.</p>
+</li>
+<li>
+<p><strong>Iterate through the Columns</strong>: For each column, simulate the first player picking that column and compute the resultant score for the second player:</p>
+<ul>
+<li>Deduct the points from the selected column in the top row from the total points.</li>
+<li>Add the points from the current column in the bottom row to a running total.</li>
+<li>Calculate the maximum score for the second player after this selection.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track the Minimum Score</strong>: Keep track of the minimum score observed after considering all possible selections by the first player.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the minimum score found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s analyze the implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> gridGame(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> with a public method <code>gridGame</code> that takes a 2D vector of integers as its parameter, representing the grid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> top <span style="color:#f92672">=</span> accumulate(grid[<span style="color:#ae81ff">0</span>].begin(), grid[<span style="color:#ae81ff">0</span>].end(), <span style="color:#ae81ff">0LL</span>);
+</span></span></code></pre></div><ul>
+<li>We calculate the total points in the top row using the <code>accumulate</code> function from the STL, initializing it with <code>0LL</code> to ensure we are working with long long integers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> bottom <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li>We initialize <code>bottom</code> to zero, which will be used to accumulate the points from the bottom row. We also retrieve the number of columns <code>n</code> in the grid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> LLONG_MAX;
+</span></span></code></pre></div><ul>
+<li>We set <code>ans</code> to the maximum possible long long value, as we are looking for the minimum score.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We start a loop that will iterate over each column in the grid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            top <span style="color:#f92672">-=</span> grid[<span style="color:#ae81ff">0</span>][i];
+</span></span></code></pre></div><ul>
+<li>For each column, we deduct the points in the top row from <code>top</code>, simulating the first player picking that column.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, max(top, bottom));
+</span></span></code></pre></div><ul>
+<li>We compute the maximum score between the updated <code>top</code> and the accumulated <code>bottom</code> points, then update <code>ans</code> to hold the minimum score observed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            bottom <span style="color:#f92672">+=</span> grid[<span style="color:#ae81ff">1</span>][i];
+</span></span></code></pre></div><ul>
+<li>We add the points from the bottom row in the current column to <code>bottom</code> for the next iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The loop concludes, and we return the minimum score <code>ans</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is O(n), where n is the number of columns in the grid, as we are iterating through the columns just once. The space complexity is O(1) since we are using a constant amount of extra space for our variables.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the <code>gridGame</code> method efficiently calculates the minimum score for the second player in the grid game by leveraging a single pass through the columns. This approach is optimal and avoids the need for nested iterations, making it suitable for larger inputs.</p>
+<p>By keeping track of the total points in the top row and maintaining a running total for the bottom row, we can quickly evaluate the potential outcomes for each column selection made by the first player. This demonstrates the power of cumulative calculations and optimal score tracking in algorithm design.</p>
+<p>This solution not only provides an effective means to solve the problem but also illustrates key concepts in dynamic programming and greedy algorithms. The implementation is straightforward and easy to follow, serving as a great learning tool for those looking to deepen their understanding of such algorithms.</p>
+<p>In real-world applications, similar approaches can be employed in various scenarios where resource allocation and optimization are key factors. Understanding how to manipulate and evaluate potential outcomes based on choices made in sequential structures is a valuable skill for any programmer or data analyst.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode642s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +402,6 @@
 
       </div>
 
-      
 
       <footer>
         

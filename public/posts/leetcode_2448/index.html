@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -259,7 +259,229 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode920s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two integer arrays <code>nums</code> and <code>cost</code>, the task is to find the minimum cost to make all elements in <code>nums</code> equal, where the cost of changing any element <code>nums[i]</code> to a value <code>x</code> is given by the formula <code>abs(nums[i] - x) * cost[i]</code>. You need to determine the value of <code>x</code> that minimizes the total cost.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to choose a value <code>x</code> and compute the total cost to transform all elements of <code>nums</code> to <code>x</code>. The cost is determined by the absolute difference between <code>nums[i]</code> and <code>x</code>, multiplied by <code>cost[i]</code>. The goal is to find the value of <code>x</code> that minimizes this total cost.</p>
+<p>To approach this problem, a <strong>binary search</strong> strategy is used to efficiently find the optimal value of <code>x</code> that minimizes the cost.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Cost Calculation</strong>:
+The cost to make all elements equal to <code>x</code> is the sum of <code>abs(nums[i] - x) * cost[i]</code> for each element <code>i</code> in the array. The key idea is that this function is unimodal, meaning it decreases to a minimum point and then increases. This makes it well-suited for binary search.</p>
+</li>
+<li>
+<p><strong>Binary Search for Minimum Cost</strong>:</p>
+<ul>
+<li>Since the cost function is unimodal, we can use binary search to efficiently find the <code>x</code> that minimizes the cost.</li>
+<li>The binary search is performed over the range of values from the minimum element to the maximum element in the <code>nums</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function for Cost Calculation</strong>:
+We define a helper function <code>fn(nums, cost, x)</code> that computes the total cost of transforming all elements of <code>nums</code> to <code>x</code>. This function iterates through the array <code>nums</code>, computes the cost for each element, and sums it up.</p>
+</li>
+<li>
+<p><strong>Binary Search Process</strong>:</p>
+<ul>
+<li>We initialize the range for <code>x</code> as the minimum and maximum values in the <code>nums</code> array.</li>
+<li>In each step of the binary search, we compute the cost for two middle values (<code>mid</code> and <code>mid + 1</code>), and select the smaller one to continue searching in the corresponding half of the range.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">fn</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost, <span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)abs(nums[i] <span style="color:#f92672">-</span> x) <span style="color:#f92672">*</span> cost[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">minCost</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: Initialize left and right bounds for binary search
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], r <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) {
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> min(x, l);  <span style="color:#75715e">// Find the minimum value in nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        r <span style="color:#f92672">=</span> max(x, r);  <span style="color:#75715e">// Find the maximum value in nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: Compute the initial cost for making all elements equal to nums[0]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> fn(nums, cost, nums[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 3: Perform binary search to minimize the cost
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mid   <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;    <span style="color:#75715e">// Compute the middle point
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y1    <span style="color:#f92672">=</span> fn(nums, cost, mid);     <span style="color:#75715e">// Cost of making all elements equal to mid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y2    <span style="color:#f92672">=</span> fn(nums, cost, mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// Cost of making all elements equal to mid + 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(y1, y2); <span style="color:#75715e">// Update the minimum cost with the smaller of y1 and y2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 4: Adjust the search bounds based on the costs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(y1 <span style="color:#f92672">&lt;</span> y2) {
+</span></span><span style="display:flex;"><span>            r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If y1 is smaller, we search the left half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If y2 is smaller or equal, we search the right half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the minimum cost found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="step-1-initialize-left-and-right-bounds-for-binary-search">
+  Step 1: Initialize left and right bounds for binary search
+  <a class="heading-link" href="#step-1-initialize-left-and-right-bounds-for-binary-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], r <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) {
+</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">=</span> min(x, l);  <span style="color:#75715e">// Find the minimum value in nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r <span style="color:#f92672">=</span> max(x, r);  <span style="color:#75715e">// Find the maximum value in nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We begin by setting the initial search range for <code>x</code> as the minimum and maximum values in the <code>nums</code> array.</li>
+<li>These values represent the potential range for <code>x</code> since we are looking for a value in the range of <code>nums</code> that minimizes the cost.</li>
+</ul>
+<h4 id="step-2-compute-the-initial-cost-for-making-all-elements-equal-to-nums0">
+  Step 2: Compute the initial cost for making all elements equal to <code>nums[0]</code>
+  <a class="heading-link" href="#step-2-compute-the-initial-cost-for-making-all-elements-equal-to-nums0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> fn(nums, cost, nums[<span style="color:#ae81ff">0</span>]);
+</span></span></code></pre></div><ul>
+<li>The function <code>fn</code> is called with <code>x = nums[0]</code> to compute the initial cost of transforming all elements of <code>nums</code> to <code>nums[0]</code>.</li>
+<li>This serves as the starting point for the binary search process.</li>
+</ul>
+<h4 id="step-3-perform-binary-search-to-minimize-the-cost">
+  Step 3: Perform binary search to minimize the cost
+  <a class="heading-link" href="#step-3-perform-binary-search-to-minimize-the-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y1 <span style="color:#f92672">=</span> fn(nums, cost, mid);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> y2 <span style="color:#f92672">=</span> fn(nums, cost, mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> min(y1, y2);
+</span></span></code></pre></div><ul>
+<li>In the binary search loop, we compute the middle point <code>mid</code> of the current range <code>[l, r]</code>. The value <code>mid</code> represents a candidate for the optimal <code>x</code>.</li>
+<li>We then compute the total cost for transforming all elements of <code>nums</code> to <code>mid</code> and <code>mid + 1</code> using the <code>fn</code> function.</li>
+<li>The minimum of these two costs is selected as the new answer <code>ans</code>.</li>
+</ul>
+<h4 id="step-4-adjust-the-search-bounds-based-on-the-costs">
+  Step 4: Adjust the search bounds based on the costs
+  <a class="heading-link" href="#step-4-adjust-the-search-bounds-based-on-the-costs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(y1 <span style="color:#f92672">&lt;</span> y2) {
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After comparing the costs, we adjust the bounds of the search:
+<ul>
+<li>If the cost for <code>mid</code> (<code>y1</code>) is smaller than the cost for <code>mid + 1</code> (<code>y2</code>), we narrow the search to the left half of the current range, setting <code>r = mid - 1</code>.</li>
+<li>Otherwise, we narrow the search to the right half, setting <code>l = mid + 1</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="final-step-return-the-minimum-cost">
+  Final Step: Return the minimum cost
+  <a class="heading-link" href="#final-step-return-the-minimum-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the binary search completes, the variable <code>ans</code> holds the minimum cost to make all elements in <code>nums</code> equal, and this value is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the algorithm is <strong>O(n log m)</strong>, where:</p>
+<ul>
+<li><code>n</code> is the size of the <code>nums</code> array (the number of elements),</li>
+<li><code>m</code> is the range between the minimum and maximum values in <code>nums</code>.</li>
+</ul>
+<ol>
+<li><strong>Binary Search</strong>: The binary search operates over the range <code>[l, r]</code>, which takes <strong>O(log m)</strong> iterations.</li>
+<li><strong>Cost Calculation</strong>: For each middle value in the binary search, the cost calculation <code>fn</code> requires iterating through all <code>n</code> elements of the <code>nums</code> array, which takes <strong>O(n)</strong> time.</li>
+</ol>
+<p>Thus, the overall time complexity is <strong>O(n log m)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> due to the input arrays <code>nums</code> and <code>cost</code>, which are required to store the values for the calculations. The auxiliary space used by the algorithm is constant, <strong>O(1)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses binary search to efficiently find the value of <code>x</code> that minimizes the cost of transforming all elements in <code>nums</code> to <code>x</code>. By leveraging the unimodal nature of the cost function, we are able to reduce the complexity of the problem and find the optimal value of <code>x</code> in <strong>O(n log m)</strong> time, where <code>n</code> is the number of elements in <code>nums</code> and <code>m</code> is the range of values in <code>nums</code>. This approach ensures that we can solve the problem efficiently for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode920s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -271,7 +493,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2449"  class="external-link" target="_blank" rel="noopener">LeetCode #2449: Minimum Number of Operations to Make Arrays Similar</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2451"  class="external-link" target="_blank" rel="noopener">LeetCode #2451: Odd String Difference</a></th>
       </tr>
   </thead>
   <tbody>
@@ -313,7 +535,6 @@
 
       </div>
 
-      
 
       <footer>
         

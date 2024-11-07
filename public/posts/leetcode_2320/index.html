@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -234,7 +234,225 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode824s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine how many ways we can place houses on a street of length <code>n</code> such that no two houses are adjacent. We are asked to return the result modulo <code>10^9 + 7</code>. The challenge is to compute the number of valid configurations efficiently, considering that <code>n</code> can be large.</p>
+<p>A <strong>house</strong> can either be placed or not placed on each unit of the street, with the restriction that no two houses can be placed next to each other.</p>
+<p>For example, if <code>n = 3</code>, the valid configurations are:</p>
+<ul>
+<li>No house: <code>[]</code></li>
+<li>One house at position 1: <code>[1, 0, 0]</code></li>
+<li>One house at position 2: <code>[0, 1, 0]</code></li>
+<li>One house at position 3: <code>[0, 0, 1]</code></li>
+<li>Two houses: <code>[1, 0, 1]</code></li>
+</ul>
+<p>Thus, the task is to count the number of ways to place the houses on the street following these rules.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use <strong>dynamic programming</strong> (DP). The idea is to break the problem down into smaller subproblems where we calculate how many ways houses can be placed for smaller lengths of the street, and then use these results to build up the solution for the full street.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>We need to keep track of whether the last position in the street is occupied by a house or not. This will help us decide whether we can place a house at the next position or not.</li>
+<li>If the last position is empty, we have two choices:
+<ul>
+<li>Place a house in the current position and move to the next position (which must be empty).</li>
+<li>Leave the current position empty and move to the next position.</li>
+</ul>
+</li>
+<li>If the last position is filled with a house, we can only leave the next position empty.</li>
+</ol>
+<h4 id="dynamic-programming-definition">
+  Dynamic Programming Definition:
+  <a class="heading-link" href="#dynamic-programming-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Let <code>dp[n][0]</code> represent the number of ways to place houses on a street of length <code>n</code> where the last position is empty.</li>
+<li>Let <code>dp[n][1]</code> represent the number of ways to place houses on a street of length <code>n</code> where the last position is filled with a house.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-dp-table">
+  Step 1: Initialize DP Table
+  <a class="heading-link" href="#step-1-initialize-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>Here, we initialize a DP table <code>dp</code> with dimensions <code>(n+1) x 2</code>. Each entry represents the number of ways to place houses on a street of length <code>i</code> (<code>i</code> from 0 to <code>n</code>), either with the last position empty (represented by <code>0</code>) or filled (represented by <code>1</code>).</li>
+<li>Initially, all values are set to <code>-1</code>, meaning they are uncomputed.</li>
+</ul>
+<h4 id="step-2-base-case-for-recursive-function">
+  Step 2: Base Case for Recursive Function
+  <a class="heading-link" href="#step-2-base-case-for-recursive-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the length of the street is 1, there is exactly 1 way to place houses (either place a house or don&rsquo;t place a house).</li>
+</ul>
+<h4 id="step-3-recursive-function-definition">
+  Step 3: Recursive Function Definition
+  <a class="heading-link" href="#step-3-recursive-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(dp[n][filled] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> dp[n][filled];
+</span></span></code></pre></div><ul>
+<li>If we&rsquo;ve already computed the result for <code>dp[n][filled]</code>, we return the stored value to avoid redundant computation.</li>
+</ul>
+<h4 id="step-4-handle-the-filled-case">
+  Step 4: Handle the Filled Case
+  <a class="heading-link" href="#step-4-handle-the-filled-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(filled) <span style="color:#66d9ef">return</span> dp[n][filled] <span style="color:#f92672">=</span> rec(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">!</span>filled);
+</span></span></code></pre></div><ul>
+<li>If the last position is filled, then the previous position must be empty, so we recursively compute the number of valid configurations for <code>n-1</code> positions with the last position empty (<code>!filled</code>).</li>
+</ul>
+<h4 id="step-5-handle-the-empty-case">
+  Step 5: Handle the Empty Case
+  <a class="heading-link" href="#step-5-handle-the-empty-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> dp[n][filled] <span style="color:#f92672">=</span> ( rec(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, filled) <span style="color:#f92672">+</span> rec(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">!</span>filled) ) <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>If the last position is empty, then we have two choices:
+<ul>
+<li>We can either place a house at the current position and recursively solve for <code>n-1</code> with the last position filled.</li>
+<li>Or we can leave the current position empty and recursively solve for <code>n-1</code> with the last position empty.</li>
+</ul>
+</li>
+<li>We compute the sum of these two cases and take the result modulo <code>10^9 + 7</code> (denoted as <code>mod</code>).</li>
+</ul>
+<h4 id="step-6-final-computation-in-counthouseplacements">
+  Step 6: Final Computation in <code>countHousePlacements</code>
+  <a class="heading-link" href="#step-6-final-computation-in-counthouseplacements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ll res <span style="color:#f92672">=</span> ( rec(n, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> rec(n, <span style="color:#ae81ff">1</span>) ) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (res <span style="color:#f92672">*</span> res) <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>The final result is the square of the sum of the two possibilities: one with the last position empty (<code>rec(n, 0)</code>) and one with the last position filled (<code>rec(n, 1)</code>).</li>
+<li>We return this result modulo <code>10^9 + 7</code>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1-n--3">
+  Example 1: <code>n = 3</code>
+  <a class="heading-link" href="#example-1-n--3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We can visualize the function calls for <code>n = 3</code>:</p>
+<ul>
+<li><code>countHousePlacements(3)</code> calls <code>rec(3, 0)</code> and <code>rec(3, 1)</code>.</li>
+<li><code>rec(3, 0)</code> computes the number of ways to place houses with the last position empty.</li>
+<li><code>rec(3, 1)</code> computes the number of ways to place houses with the last position filled.</li>
+<li>The final result is the square of the sum of these values modulo <code>10^9 + 7</code>.</li>
+</ul>
+<h4 id="example-2-n--4">
+  Example 2: <code>n = 4</code>
+  <a class="heading-link" href="#example-2-n--4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For <code>n = 4</code>, we follow a similar recursive breakdown:</p>
+<ul>
+<li><code>countHousePlacements(4)</code> calls <code>rec(4, 0)</code> and <code>rec(4, 1)</code>.</li>
+<li>Each recursive call continues breaking down the problem until the base case is reached.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The DP table has <code>n+1</code> rows and 2 columns. We compute each entry at most once, and each entry computation involves only constant-time operations. Therefore, the time complexity is O(n).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We store the DP table, which has a size of <code>(n+1) x 2</code>. Thus, the space complexity is O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses dynamic programming to efficiently count the number of ways to place houses on a street of length <code>n</code> such that no two houses are adjacent. The key insight is to recursively calculate the number of valid configurations for smaller subproblems and store the results in a DP table to avoid redundant computations.</p>
+<p>The time and space complexity of this solution is linear in terms of the size of the input, making it suitable for large values of <code>n</code>. The final result is returned modulo <code>10^9 + 7</code> to ensure that it fits within typical integer limits and avoids overflow.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode824s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +506,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -222,7 +222,172 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (ans<span style="color:#f92672">==</span>INT_MAX <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>ans);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1212s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given three strings <code>s1</code>, <code>s2</code>, and <code>s3</code>, the task is to find the minimum number of operations required to make all three strings identical. The only allowed operation is to remove characters from the end of the strings, meaning we can perform a number of deletions on each string, but no insertions or rearrangements are allowed.</p>
+<p>The goal is to determine the smallest number of deletions required such that the three strings become the same. If it is impossible to make the strings identical, the function should return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we can use the following strategy:</p>
+<ol>
+<li>
+<p><strong>Identify the Longest Common Prefix</strong>:
+The key observation is that the minimum deletions required will be based on the longest common prefix among the three strings. The longer the common prefix, the fewer deletions are needed.</p>
+</li>
+<li>
+<p><strong>Iterate Over Possible Prefixes</strong>:
+We need to check all possible common prefixes between the three strings. Starting from the first character, we compare the corresponding characters of <code>s1</code>, <code>s2</code>, and <code>s3</code>. As soon as the characters don&rsquo;t match, we stop and consider the previous matching prefix as the longest common prefix.</p>
+</li>
+<li>
+<p><strong>Calculate the Number of Deletions</strong>:
+Once we find the longest common prefix (say of length <code>i</code>), we can calculate the number of deletions required:</p>
+<ul>
+<li>We delete characters from <code>s1</code> starting from position <code>i + 1</code> to the end of the string.</li>
+<li>Similarly, we delete characters from <code>s2</code> and <code>s3</code> starting from position <code>i + 1</code> to their respective ends.
+The total deletions required is the sum of the characters that need to be deleted from each string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find the Minimum Deletions</strong>:
+To minimize the deletions, we check all prefixes of increasing length. We compute the deletions for each valid prefix and keep track of the minimum value.</p>
+</li>
+<li>
+<p><strong>Handle Edge Cases</strong>:</p>
+<ul>
+<li>If no common prefix exists (i.e., no prefix results in all three strings being the same), then it is impossible to make the strings identical, and the function should return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-variable-initialization">
+  1. <strong>Variable Initialization</strong>:
+  <a class="heading-link" href="#1-variable-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>l1</code>, <code>l2</code>, <code>l3</code>: These store the lengths of the three input strings <code>s1</code>, <code>s2</code>, and <code>s3</code>.</li>
+<li><code>len</code>: This stores the minimum length among the three strings. We can only consider prefixes up to this length.</li>
+<li><code>ans</code>: This is initialized to <code>INT_MAX</code>, which will hold the minimum number of deletions required.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l1 <span style="color:#f92672">=</span> s1.length(), l2 <span style="color:#f92672">=</span> s2.length(), l3 <span style="color:#f92672">=</span> s3.length();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> min({l1, l2, l3});
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span></code></pre></div><h4 id="2-loop-through-possible-prefixes">
+  2. <strong>Loop Through Possible Prefixes</strong>:
+  <a class="heading-link" href="#2-loop-through-possible-prefixes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The for loop starts from <code>i = 0</code> and iterates through each possible prefix length from <code>0</code> to <code>len - 1</code>. For each <code>i</code>, we check if the first <code>i + 1</code> characters of all three strings match.</p>
+<ul>
+<li>If they do, we calculate the number of deletions needed to make the strings identical by removing the characters after the first <code>i + 1</code> characters from each string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s1.substr(<span style="color:#ae81ff">0</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> s2.substr(<span style="color:#ae81ff">0</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> s2.substr(<span style="color:#ae81ff">0</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> s3.substr(<span style="color:#ae81ff">0</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> l1 <span style="color:#f92672">-</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> l2 <span style="color:#f92672">-</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> l3 <span style="color:#f92672">-</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, c);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><code>s1.substr(0, i + 1)</code>, <code>s2.substr(0, i + 1)</code>, and <code>s3.substr(0, i + 1)</code> extract the first <code>i + 1</code> characters from each string. If these substrings match for all three strings, then they share a common prefix of length <code>i + 1</code>.</p>
+</li>
+<li>
+<p>The number of deletions required for each string is calculated by subtracting the length of the common prefix (<code>i + 1</code>) from the total length of each string. The total deletions is the sum of deletions for all three strings.</p>
+</li>
+<li>
+<p>The <code>ans</code> variable is updated to track the minimum deletions required.</p>
+</li>
+</ul>
+<h4 id="3-return-the-result">
+  3. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After checking all possible prefixes, if no valid common prefix was found (i.e., <code>ans</code> remains <code>INT_MAX</code>), return <code>-1</code> to indicate it is impossible to make the strings identical. Otherwise, return the minimum number of deletions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (ans <span style="color:#f92672">==</span> INT_MAX <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ans);
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The loop iterates through all possible prefixes of length from <code>1</code> to <code>min(l1, l2, l3)</code>. In each iteration, we check if the substrings of <code>s1</code>, <code>s2</code>, and <code>s3</code> of length <code>i + 1</code> are equal. The substring comparison has a time complexity of (O(i)).</li>
+<li>The total time complexity is the sum of substring comparisons for each possible prefix, which is:
+[
+O(1 + 2 + 3 + \dots + min(l1, l2, l3)) = O(n)
+]
+where <code>n = min(l1, l2, l3)</code> is the length of the shortest string.</li>
+</ul>
+<p>Thus, the overall time complexity is (O(n)), where <code>n</code> is the length of the shortest string among <code>s1</code>, <code>s2</code>, and <code>s3</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) because we are using only a constant amount of extra space for variables such as <code>l1</code>, <code>l2</code>, <code>l3</code>, <code>ans</code>, and <code>len</code>.</li>
+<li>The space used by the substrings in the loop is temporary and does not increase the space complexity.</li>
+</ul>
+<p>Thus, the space complexity is (O(1)).</p>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum number of deletions required to make the three strings identical by finding the longest common prefix. It iterates through all possible prefixes and calculates the deletions needed for each valid prefix. The time complexity is linear in the length of the shortest string, and the space complexity is constant. This approach ensures that we minimize the number of deletions while ensuring that the three strings become identical, or it returns <code>-1</code> if no solution is possible.</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where <code>n</code> is the length of the shortest string among <code>s1</code>, <code>s2</code>, and <code>s3</code>.</li>
+<li><strong>Space Complexity</strong>: (O(1)).</li>
+</ul>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1212s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -276,7 +441,6 @@
 
       </div>
 
-      
 
       <footer>
         

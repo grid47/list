@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -245,7 +245,149 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode691s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine if a given string <code>s</code>, composed of parentheses, can be made valid by replacing some of its characters using a lock string <code>lck</code>. The string <code>lck</code> consists of characters &lsquo;0&rsquo; and &lsquo;1&rsquo;, where &lsquo;1&rsquo; indicates that the character at that position in <code>s</code> cannot be changed (it is locked) and &lsquo;0&rsquo; means it can be changed. A valid string of parentheses means that every opening bracket &lsquo;(&rsquo; has a corresponding closing bracket &lsquo;)&rsquo; and they are correctly nested.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to validate whether the parentheses in the string <code>s</code> can be balanced considering the constraints imposed by the <code>lck</code> string. The overall approach involves checking if the number of parentheses can be balanced using the characters that are not locked.</p>
+<ol>
+<li>
+<p><strong>Initial Validity Check</strong>:</p>
+<ul>
+<li>We first check if the length of <code>s</code> is even. If it&rsquo;s odd, it cannot be a valid parentheses string since each opening bracket must have a matching closing bracket.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking Parentheses Balance</strong>:</p>
+<ul>
+<li>We utilize two separate checks: one for the opening bracket &lsquo;(&rsquo; and another for the closing bracket &lsquo;)&rsquo;.</li>
+<li>During each check, we maintain counters for the number of locked brackets (<code>blk</code>) and the number of wildcards (<code>wild</code>).</li>
+<li>As we traverse through the string, we increment or decrement the locked brackets based on the characters in <code>s</code> and check against the wildcards available.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canBeValid</span>(string s, string lck) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (s.size() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> check(s, lck, <span style="color:#e6db74">&#39;(&#39;</span>) <span style="color:#f92672">&amp;&amp;</span> check(s, lck, <span style="color:#e6db74">&#39;)&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>canBeValid</code> checks if the string <code>s</code> can potentially be valid.</li>
+<li>It first checks if the length of <code>s</code> is even.</li>
+<li>It then calls the <code>check</code> function for both opening and closing parentheses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(string s, string lck, <span style="color:#66d9ef">char</span> op) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> blk <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, wild <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span></code></pre></div><ul>
+<li>The <code>check</code> function initializes counters for locked brackets (<code>blk</code>) and wildcards (<code>wild</code>).</li>
+<li>It retrieves the size of <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Setting Direction</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> st  <span style="color:#f92672">=</span>  ( op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span> ) <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span>  n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> nd  <span style="color:#f92672">=</span>  ( op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span> ) <span style="color:#f92672">?</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>  <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dir <span style="color:#f92672">=</span>  ( op <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span> ) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Depending on whether we are checking for &lsquo;(&rsquo; or &lsquo;)&rsquo;, we set the starting index (<code>st</code>), ending index (<code>nd</code>), and direction of iteration (<code>dir</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> st; (i <span style="color:#f92672">&lt;</span> n) <span style="color:#f92672">&amp;&amp;</span> (i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>); i <span style="color:#f92672">+=</span> dir) {
+</span></span></code></pre></div><ul>
+<li>A loop iterates through the string based on the defined direction.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Locked and Wildcards</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(lck[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>) blk <span style="color:#f92672">+=</span> (s[i] <span style="color:#f92672">==</span> op) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>              wild<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>If the character in <code>lck</code> is &lsquo;1&rsquo; (locked), we update the <code>blk</code> counter based on whether <code>s[i]</code> is the current operation character (op). If it&rsquo;s &lsquo;0&rsquo;, we increment the wildcard counter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validity Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(blk <span style="color:#f92672">+</span> wild <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If at any point the sum of <code>blk</code> and <code>wild</code> becomes negative, it indicates that there are more closing brackets than opening ones that can be paired, so the function returns false.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> blk <span style="color:#f92672">&lt;=</span> wild;
+</span></span></code></pre></div><ul>
+<li>Finally, we check if the number of locked opening brackets can be matched with the available wildcards.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n))</p>
+<ul>
+<li>The algorithm iterates through the string <code>s</code> twice, once for each type of parentheses, resulting in a linear time complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>The algorithm uses a constant amount of additional space for counters, independent of the size of the input.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively determines if a string of parentheses can be made valid under the constraints set by a lock string. By separating the checks for opening and closing brackets, the algorithm ensures that it correctly accounts for locked characters while efficiently validating the balance of parentheses. This approach guarantees a robust solution with optimal time complexity, making it suitable for handling larger inputs as well. The clear structure of the code, coupled with the logical flow of checks, enhances its readability and maintainability.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode691s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +399,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2117"  class="external-link" target="_blank" rel="noopener">LeetCode #2117: Abbreviating the Product of a Range</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2120"  class="external-link" target="_blank" rel="noopener">LeetCode #2120: Execution of All Suffix Instructions Staying in a Grid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +441,6 @@
 
       </div>
 
-      
 
       <footer>
         

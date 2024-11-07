@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -238,7 +238,192 @@
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> ans;         
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode953s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to count how many pairs of words in a given list of strings <code>words</code> are <strong>similar</strong>. Two words are considered similar if they contain the exact same set of distinct characters, regardless of the order in which the characters appear. For example, the words &ldquo;abc&rdquo; and &ldquo;cab&rdquo; are similar because both contain the characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;.</p>
+<p>We are required to determine the number of such similar pairs in the list of words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to utilize a technique that maps the characters in each word to a unique bitmask. This will allow us to compare words based on their set of characters rather than their actual content, reducing the complexity of the problem.</p>
+<h4 id="key-insight">
+  Key Insight:
+  <a class="heading-link" href="#key-insight">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Bitmask Representation</strong>: Each word can be represented as a bitmask, where each bit corresponds to one of the 26 lowercase English letters. If a letter is present in the word, the corresponding bit is set to 1, otherwise, it is 0.</li>
+<li><strong>Efficient Comparison</strong>: By using bitmasks, we can efficiently check if two words have the same set of characters. If two words have identical bitmasks, they have the same set of distinct characters, and we consider them similar.</li>
+</ul>
+<h3 id="detailed-breakdown-of-the-code">
+  Detailed Breakdown of the Code
+  <a class="heading-link" href="#detailed-breakdown-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initializing-variables">
+  Step 1: Initializing Variables
+  <a class="heading-link" href="#step-1-initializing-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> freq;
+</span></span></code></pre></div><ul>
+<li><code>ans</code> will hold the final count of similar pairs.</li>
+<li><code>freq</code> is an unordered map that tracks the frequency of each unique bitmask encountered in the list of words.</li>
+</ul>
+<h4 id="step-2-iterating-over-words">
+  Step 2: Iterating Over Words
+  <a class="heading-link" href="#step-2-iterating-over-words">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> word : words) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> c : word) mask <span style="color:#f92672">|=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (c<span style="color:#f92672">-</span><span style="color:#e6db74">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> freq[mask]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each word in the input list <code>words</code>, we calculate its bitmask representation.</li>
+<li><strong>Bitmask Calculation</strong>:
+<ul>
+<li>For each character <code>c</code> in the word, we compute <code>1 &lt;&lt; (c - 'a')</code> which gives a number where only the bit corresponding to the character <code>c</code> is set to 1.</li>
+<li>We then use the <code>|=</code> (bitwise OR) operator to combine the current bitmask with the newly calculated bit for character <code>c</code>.</li>
+<li>This process effectively sets the bits corresponding to each character in the word. For example, if the word is &ldquo;abc&rdquo;, its bitmask would be <code>0b111</code> (since &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo; correspond to the first three bits).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-updating-the-frequency-map">
+  Step 3: Updating the Frequency Map
+  <a class="heading-link" href="#step-3-updating-the-frequency-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">+=</span> freq[mask]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>After calculating the bitmask for the word, we increment the count of words that have this specific bitmask in the <code>freq</code> map.</li>
+<li>Each time we encounter a bitmask that we&rsquo;ve already seen before, it indicates that we have found a word that is similar to one or more previous words.</li>
+<li>The number of similar pairs for a given bitmask is incremented by <code>freq[mask]</code>, which represents how many words we&rsquo;ve seen before with the same bitmask.</li>
+</ul>
+<h4 id="step-4-returning-the-final-count">
+  Step 4: Returning the Final Count
+  <a class="heading-link" href="#step-4-returning-the-final-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After iterating through all the words and updating the frequency map, we return the total count of similar pairs stored in <code>ans</code>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the following input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> words <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;aba&#34;</span>, <span style="color:#e6db74">&#34;aab&#34;</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#34;cab&#34;</span>, <span style="color:#e6db74">&#34;bca&#34;</span>};
+</span></span></code></pre></div><ol>
+<li>
+<p>For the first word <code>&quot;aba&quot;</code>, the bitmask will be:</p>
+<ul>
+<li>&lsquo;a&rsquo; corresponds to bit 0.</li>
+<li>&lsquo;b&rsquo; corresponds to bit 1.</li>
+<li>So, the bitmask is <code>0b011</code>.</li>
+</ul>
+</li>
+<li>
+<p>For the second word <code>&quot;aab&quot;</code>, the bitmask will be the same (<code>0b011</code>), indicating that the word has the same set of distinct characters as <code>&quot;aba&quot;</code>.</p>
+</li>
+<li>
+<p>For the third word <code>&quot;abc&quot;</code>, the bitmask will be <code>0b111</code> because it contains the characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;.</p>
+</li>
+<li>
+<p>For the fourth word <code>&quot;cab&quot;</code>, the bitmask is also <code>0b111</code>, since it contains the same characters as <code>&quot;abc&quot;</code>.</p>
+</li>
+<li>
+<p>For the fifth word <code>&quot;bca&quot;</code>, the bitmask is again <code>0b111</code>.</p>
+</li>
+</ol>
+<p>As we process each word, the frequency map will look like this:</p>
+<ul>
+<li>For the bitmask <code>0b011</code>: We encounter it twice, so we add <code>1 + 1 = 2</code> to <code>ans</code>.</li>
+<li>For the bitmask <code>0b111</code>: We encounter it three times, so we add <code>2 + 3 = 5</code> to <code>ans</code>.</li>
+</ul>
+<p>Thus, the total number of similar pairs is <code>7</code>.</p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Bitmask Calculation</strong>: For each word, we iterate through its characters. The maximum length of a word is <code>O(L)</code>, where <code>L</code> is the length of the longest word in the list.</li>
+<li><strong>Map Operations</strong>: For each word, we perform constant-time operations for updating the frequency map and checking the count of the bitmask. The average time complexity for each map operation is (O(1)), so the total time complexity for processing all words is (O(N \times L)), where <code>N</code> is the number of words.</li>
+</ul>
+<p>Thus, the overall time complexity is (O(N \times L)), where:</p>
+<ul>
+<li><code>N</code> is the number of words in the list.</li>
+<li><code>L</code> is the average length of the words.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Bitmask Map</strong>: We store the frequency of bitmasks in the <code>freq</code> map. In the worst case, each unique set of characters from all words may result in a unique bitmask. The number of unique bitmasks is at most (2^{26}), but in practice, it will be much less.</li>
+<li><strong>Total Space Complexity</strong>: The space complexity of the algorithm is dominated by the storage of the frequency map, which is (O(N)), where <code>N</code> is the number of words, and each word contributes at most one entry in the map.</li>
+</ul>
+<p>Thus, the space complexity is (O(N)).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of similar pairs of words by leveraging bitmasks to represent the set of distinct characters in each word. This allows us to reduce the problem of comparing words to a simple bitmask comparison, significantly improving performance. By using a frequency map to track the occurrence of each bitmask, we can efficiently count similar pairs.</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N \times L)), where <code>N</code> is the number of words and <code>L</code> is the average length of the words.</li>
+<li><strong>Space Complexity</strong>: (O(N)), where <code>N</code> is the number of words.</li>
+</ul>
+<p>This approach is optimal for the problem and should work efficiently even for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode953s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -292,7 +477,6 @@
 
       </div>
 
-      
 
       <footer>
         

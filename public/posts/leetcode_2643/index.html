@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -227,7 +227,179 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{idx, mx};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1049s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires identifying the row in a binary matrix that contains the maximum number of <code>1</code>s. Additionally, we need to return the index of that row and the count of <code>1</code>s in that row. If there are multiple rows with the same maximum count, the row with the smallest index should be selected.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to iterate through each row of the matrix, count the number of <code>1</code>s, and keep track of the row with the maximum number of <code>1</code>s encountered so far. Since the matrix is composed of binary values (either <code>0</code> or <code>1</code>), counting the number of <code>1</code>s in a row is straightforward. After identifying the row with the maximum <code>1</code>s, we return both the row index and the number of <code>1</code>s.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code and explain each part:</p>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rowAndMaximumOnes(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mat) {
+</span></span></code></pre></div><ul>
+<li>The function <code>rowAndMaximumOnes</code> takes a 2D vector <code>mat</code> (matrix) as input, which represents the binary matrix. The goal of the function is to return a vector of two integers: the index of the row with the maximum number of <code>1</code>s and the count of <code>1</code>s in that row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Matrix Dimensions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> mat.size(), n <span style="color:#f92672">=</span> mat[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li>The matrix has <code>m</code> rows and <code>n</code> columns. The first call <code>mat.size()</code> returns the number of rows in the matrix, and <code>mat[0].size()</code> returns the number of columns. These values are stored in the variables <code>m</code> and <code>n</code>, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization of Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>mx</code> (maximum count of <code>1</code>s) to <code>0</code> and <code>idx</code> (index of the row with the maximum count) to <code>0</code>. These variables will help keep track of the maximum number of <code>1</code>s found and the index of the row that contains this maximum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop Through Each Row</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mat[i][j]) cnt<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates through each row <code>i</code> of the matrix.</li>
+<li>The variable <code>cnt</code> is initialized to <code>0</code> for each row. This variable will count the number of <code>1</code>s in the current row.</li>
+<li>The inner loop iterates through each column <code>j</code> of the row <code>i</code>. For each element <code>mat[i][j]</code>, we check if the value is <code>1</code>. If it is, we increment the counter <code>cnt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum Count and Index</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> mx) {
+</span></span><span style="display:flex;"><span>    idx <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After counting the number of <code>1</code>s in row <code>i</code>, we check if the count <code>cnt</code> is greater than the current maximum <code>mx</code>. If it is, we update <code>mx</code> to <code>cnt</code> and update <code>idx</code> to the current row index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{idx, mx};
+</span></span></code></pre></div><ul>
+<li>After processing all rows, we return a vector containing the index of the row with the maximum count of <code>1</code>s (<code>idx</code>) and the maximum count itself (<code>mx</code>). This is the final result of the function.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the matrix:</p>
+<pre tabindex="0"><code>mat = [
+  [1, 0, 1, 1],
+  [1, 1, 1, 0],
+  [0, 1, 1, 1]
+]
+</code></pre><ol>
+<li>
+<p><strong>First Row (i = 0)</strong>:</p>
+<ul>
+<li>The first row is <code>[1, 0, 1, 1]</code>, and the count of <code>1</code>s is <code>3</code>.</li>
+<li>Since <code>3 &gt; 0</code>, we update <code>mx = 3</code> and <code>idx = 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Row (i = 1)</strong>:</p>
+<ul>
+<li>The second row is <code>[1, 1, 1, 0]</code>, and the count of <code>1</code>s is <code>3</code>.</li>
+<li>Since <code>3</code> is not greater than the current <code>mx</code> (which is <code>3</code>), we do not update <code>mx</code> or <code>idx</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Row (i = 2)</strong>:</p>
+<ul>
+<li>The third row is <code>[0, 1, 1, 1]</code>, and the count of <code>1</code>s is <code>3</code>.</li>
+<li>Again, <code>3</code> is not greater than <code>mx</code>, so no update is made.</li>
+</ul>
+</li>
+</ol>
+<p>After iterating through all rows, the function will return the row index <code>0</code> and the count of <code>1</code>s <code>3</code>, since that is the first row with the maximum count.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows in the matrix and <code>n</code> is the number of columns.
+<ul>
+<li>The outer loop iterates through all <code>m</code> rows.</li>
+<li>The inner loop iterates through all <code>n</code> columns for each row.</li>
+<li>Thus, the total number of operations is proportional to the total number of elements in the matrix, which is (O(m \times n)).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> if we consider only the space used by variables within the function.
+<ul>
+<li>The space used by the input matrix <code>mat</code> is not considered in the space complexity, as it is passed by reference.</li>
+<li>The only extra space used is for the output vector, which stores two integers. Thus, the space complexity is constant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of finding the row with the maximum number of <code>1</code>s in a binary matrix. The time complexity of (O(m \times n)) is optimal for iterating through all elements of the matrix, and the space complexity is constant, as we only need a few auxiliary variables for tracking the row index and count. The solution is efficient and straightforward, providing the correct result by counting the number of <code>1</code>s in each row and updating the maximum when necessary.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1049s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +453,6 @@
 
       </div>
 
-      
 
       <footer>
         

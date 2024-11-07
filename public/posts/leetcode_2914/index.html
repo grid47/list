@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -219,7 +219,132 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1185s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given a string <code>s</code> consisting of characters, and the goal is to determine the minimum number of changes required to make the string alternate between two characters. Specifically, the string should alternate between two characters, meaning that every two consecutive characters should be equal. If the characters are different at any index, one of them needs to be changed to make them equal. The task is to find how many such changes are necessary.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We need to make changes in the string such that each pair of adjacent characters (i.e., characters at index <code>i</code> and <code>i+1</code>) should be the same. If any such pair differs, we count it as a change.</p>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Iterate Over the String in Pairs</strong>:</p>
+<ul>
+<li>Start by iterating over the string <code>s</code> with a step size of <code>2</code>, so that we examine two adjacent characters at a time.</li>
+<li>Compare the characters at each index <code>i</code> and <code>i + 1</code>.</li>
+<li>If the two characters are different (<code>s[i] != s[i+1]</code>), increment the result counter by 1, as this means a change is required to make them equal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>If the string has an odd length, the last character doesn’t have a pair to compare to, and no change is needed for it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code into parts:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minChanges</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;    <span style="color:#75715e">// Variable to store the number of changes needed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();  <span style="color:#75715e">// Length of the string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Iterate through the string, considering pairs of consecutive characters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">&amp;</span> a <span style="color:#f92672">=</span> s[i];            <span style="color:#75715e">// The character at position i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">&amp;</span> b <span style="color:#f92672">=</span> s[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];        <span style="color:#75715e">// The character at position i+1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If the two characters are different, a change is needed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">!=</span> b) result<span style="color:#f92672">++</span>;            <span style="color:#75715e">// Increment the result counter for a change
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result; <span style="color:#75715e">// Return the total number of changes required
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The variable <code>result</code> is initialized to <code>0</code>, which will hold the total number of changes required.</li>
+<li>The variable <code>n</code> holds the size of the string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over String</strong>:</p>
+<ul>
+<li>A <code>for</code> loop is used to iterate over the string with a step of <code>2</code>. The loop compares two adjacent characters at a time: <code>s[i]</code> and <code>s[i + 1]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Comparison</strong>:</p>
+<ul>
+<li>For each pair of adjacent characters, we check if they are equal (<code>a == b</code>). If they are not, we increment the result variable by 1, as this indicates a change is needed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return</strong>:</p>
+<ul>
+<li>After completing the iteration, the function returns the total count of changes required, which is stored in the <code>result</code> variable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this approach is <code>O(n)</code>, where <code>n</code> is the size of the string <code>s</code>. We iterate over the string once, comparing adjacent pairs of characters.</li>
+<li>Each operation within the loop (comparison and increment) takes constant time, so the overall complexity is linear with respect to the size of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <code>O(1)</code> because we only use a constant amount of extra space (the variables <code>result</code> and <code>n</code>), regardless of the size of the input string.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts the number of changes required to make a string alternate between characters by iterating through the string in pairs and comparing them. If a pair of characters is different, a change is counted. The approach works in linear time and constant space, making it optimal for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1185s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -273,7 +398,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -235,7 +235,160 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode722s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers <code>nums</code> and an integer <code>pivot</code>, the task is to reorder the array so that:</p>
+<ul>
+<li>All elements less than <code>pivot</code> come before elements equal to <code>pivot</code>.</li>
+<li>All elements greater than <code>pivot</code> come after elements equal to <code>pivot</code>.</li>
+<li>The relative order of the elements less than and greater than <code>pivot</code> should remain the same as in the original array.</li>
+</ul>
+<p>Return the rearranged array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired arrangement, a three-pass approach is used:</p>
+<ol>
+<li><strong>Count the number of elements less than, equal to, and greater than the <code>pivot</code>.</strong></li>
+<li><strong>Allocate and reorder elements into their correct positions based on the counts.</strong></li>
+</ol>
+<p>This method ensures that the array is traversed only a couple of times, maintaining the relative order while partitioning the elements.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization of Counters:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, same <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, high;
+</span></span></code></pre></div><ul>
+<li><code>low</code>: Counter for the number of elements less than the <code>pivot</code>.</li>
+<li><code>same</code>: Counter for the number of elements equal to the <code>pivot</code>.</li>
+<li><code>high</code>: Will be calculated to represent the starting position of elements greater than <code>pivot</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Elements:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> num: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&lt;</span> pivot) low<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(num <span style="color:#f92672">==</span> pivot) same<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>high <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> same;
+</span></span><span style="display:flex;"><span>same <span style="color:#f92672">=</span> low;
+</span></span><span style="display:flex;"><span>low <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>Iterate through <code>nums</code> to count how many elements are less than and equal to <code>pivot</code>.</li>
+<li><code>high</code> is set to <code>low + same</code>, which will represent the starting index for elements greater than <code>pivot</code>.</li>
+<li><code>same</code> is reset to <code>low</code> to represent the starting index for elements equal to <code>pivot</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reordering Elements:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res(nums.size(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> num: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&lt;</span> pivot) res[low<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(num <span style="color:#f92672">==</span> pivot) res[same<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> res[high<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Create a new vector <code>res</code> of the same size as <code>nums</code>, initialized to zero.</li>
+<li>Traverse <code>nums</code> and place elements in <code>res</code> based on their comparison with <code>pivot</code>:
+<ul>
+<li>If <code>num</code> is less than <code>pivot</code>, it goes at the current <code>low</code> index and increments <code>low</code>.</li>
+<li>If <code>num</code> is equal to <code>pivot</code>, it goes at the current <code>same</code> index and increments <code>same</code>.</li>
+<li>If <code>num</code> is greater than <code>pivot</code>, it goes at the current <code>high</code> index and increments <code>high</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Return the reordered vector <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Suppose <code>nums = [9, 12, 5, 10, 14, 3, 10]</code> and <code>pivot = 10</code>:</p>
+<ul>
+<li>
+<p><strong>First Pass (Counting)</strong>:</p>
+<ul>
+<li><code>low = 3</code> (for numbers <code>9, 5, 3</code>)</li>
+<li><code>same = 2</code> (for numbers <code>10, 10</code>)</li>
+<li><code>high = low + same = 5</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Second Pass (Reordering)</strong>:</p>
+<ul>
+<li>Place elements less than <code>pivot</code> in positions <code>0, 1, 2</code>.</li>
+<li>Place elements equal to <code>pivot</code> in positions <code>3, 4</code>.</li>
+<li>Place elements greater than <code>pivot</code> in positions <code>5, 6</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Resulting array: <code>[9, 5, 3, 10, 10, 12, 14]</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>O(n), where <code>n</code> is the number of elements in <code>nums</code>. This includes O(n) for counting and another O(n) for reordering.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>O(n), for the result vector <code>res</code> which holds the reordered elements. No additional space is used apart from basic counters and the output vector.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently partitions the input array based on a given <code>pivot</code>, maintaining the original relative order of elements. The algorithm accomplishes this in O(n) time with O(n) space, making it optimal for moderate-sized arrays. The approach is straightforward and well-suited for scenarios that require stable partitioning around a pivot. This makes it ideal for applications that involve pre-processing data for further analysis or segmentation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode722s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +400,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2162"  class="external-link" target="_blank" rel="noopener">LeetCode #2162: Minimum Cost to Set Cooking Time</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2164"  class="external-link" target="_blank" rel="noopener">LeetCode #2164: Sort Even and Odd Indices Independently</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +442,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -217,7 +217,125 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (s.find(<span style="color:#e6db74">&#39;1&#39;</span>) <span style="color:#f92672">!=</span> string<span style="color:#f92672">::</span>npos) <span style="color:#f92672">==</span> (target.find(<span style="color:#e6db74">&#39;1&#39;</span>) <span style="color:#f92672">!=</span> string<span style="color:#f92672">::</span>npos);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode980s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine whether two given binary strings <code>s</code> and <code>target</code> can be made equal. The only operation allowed is to toggle the characters in the string (i.e., flip <code>0</code> to <code>1</code> or <code>1</code> to <code>0</code>). We need to find out if it&rsquo;s possible to make the two strings equal after performing any number of toggle operations.</p>
+<p>The approach will not involve directly transforming one string to the other but rather checking the feasibility of such a transformation based on the presence of <code>1</code>s in both strings. If both strings contain at least one <code>1</code>, the transformation can be achieved; otherwise, it cannot.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem boils down to checking whether both strings <code>s</code> and <code>target</code> contain at least one <code>1</code>. If both strings contain <code>1</code>, then any transformations (toggling) can be done to make them identical. If one string contains <code>1</code> and the other doesn&rsquo;t, or if neither string contains <code>1</code>, then making the strings equal is not possible.</p>
+<p>Key observations:</p>
+<ol>
+<li>The presence of a <code>1</code> in the string is the deciding factor. If both strings contain at least one <code>1</code>, it is possible to perform the toggling operations to make the strings identical.</li>
+<li>If one string contains a <code>1</code> but the other doesn&rsquo;t, or if both strings do not contain any <code>1</code>, then the strings can never be made identical.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-find-the-position-of-1-in-the-strings">
+  Step 1: Find the position of <code>1</code> in the strings
+  <a class="heading-link" href="#step-1-find-the-position-of-1-in-the-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (s.find(<span style="color:#e6db74">&#39;1&#39;</span>) <span style="color:#f92672">!=</span> string<span style="color:#f92672">::</span>npos) <span style="color:#f92672">==</span> (target.find(<span style="color:#e6db74">&#39;1&#39;</span>) <span style="color:#f92672">!=</span> string<span style="color:#f92672">::</span>npos);
+</span></span></code></pre></div><ul>
+<li><strong><code>s.find('1') != string::npos</code></strong>: This checks whether the string <code>s</code> contains the character <code>'1'</code>. The <code>find</code> function returns the index of the first occurrence of <code>'1'</code> in the string, or <code>string::npos</code> if the character <code>'1'</code> is not found.</li>
+<li>Similarly, <strong><code>target.find('1') != string::npos</code></strong> checks for the presence of <code>'1'</code> in the string <code>target</code>.</li>
+</ul>
+<h4 id="step-2-comparison-for-both-strings">
+  Step 2: Comparison for both strings
+  <a class="heading-link" href="#step-2-comparison-for-both-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The result of the <code>find('1') != string::npos</code> expression will be <code>true</code> if the string contains a <code>'1'</code>, and <code>false</code> otherwise.</li>
+<li>The final comparison checks if both strings either contain a <code>'1'</code> or both do not contain a <code>'1'</code>. This is done by comparing the results of <code>s.find('1')</code> and <code>target.find('1')</code>:
+<ul>
+<li>If both strings contain <code>'1'</code>, both comparisons will evaluate to <code>true</code>, meaning they are equal.</li>
+<li>If neither string contains <code>'1'</code>, both comparisons will evaluate to <code>false</code>, meaning they are still equal.</li>
+<li>If one string contains <code>'1'</code> but the other does not, the comparisons will evaluate to <code>false</code>, meaning the strings are not equal and cannot be made equal.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The comparison is done using the <code>==</code> operator, which returns <code>true</code> if both strings either contain a <code>'1'</code> or both do not. If this condition is met, the function returns <code>true</code> (indicating the strings can be made equal). Otherwise, it returns <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The <code>find</code> function searches the string for the character <code>'1'</code> in a linear scan. Since both <code>s.find('1')</code> and <code>target.find('1')</code> are called, the time complexity is proportional to the length of the strings, which is <code>n</code> in the worst case. Thus, the overall time complexity is O(n), where <code>n</code> is the length of the strings.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because the solution only uses a small amount of additional space to store intermediate results (a boolean result from <code>find('1')</code>), and no additional data structures are created.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we check whether both strings <code>s</code> and <code>target</code> either both contain a <code>1</code> or neither contain a <code>1</code>. This simple observation allows us to determine if the two strings can be made equal by performing toggle operations.</p>
+<p>The approach is both efficient and simple, as it leverages the built-in string search function to determine the presence of <code>1</code>s in the strings. With a time complexity of <strong>O(n)</strong> and space complexity of <strong>O(1)</strong>, this solution is optimal for this problem.</p>
+<p>Thus, the algorithm ensures that it efficiently handles cases where strings can or cannot be made equal based on their contents, without needing to perform any actual toggle operations on the strings themselves.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode980s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -229,7 +347,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2547"  class="external-link" target="_blank" rel="noopener">LeetCode #2547: Minimum Cost to Split an Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2549"  class="external-link" target="_blank" rel="noopener">LeetCode #2549: Count Distinct Numbers on Board</a></th>
       </tr>
   </thead>
   <tbody>
@@ -271,7 +389,6 @@
 
       </div>
 
-      
 
       <footer>
         

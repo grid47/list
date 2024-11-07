@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -236,7 +236,237 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1016s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the number of &ldquo;beautiful&rdquo; subarrays in a given array <code>nums</code>. A subarray is considered &ldquo;beautiful&rdquo; if the XOR of all elements within the subarray is equal to 0. Our task is to efficiently compute the count of such subarrays in the given array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to efficiently identify subarrays whose XOR results in 0. A brute force approach, where we check the XOR of every possible subarray, would be too slow for larger arrays due to its (O(n^2)) complexity. Instead, we can leverage a more efficient approach based on the <strong>XOR property</strong> and the concept of <strong>prefix XOR</strong>.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>XOR of a Subarray</strong>: The XOR of elements in a subarray can be computed using a prefix XOR array. The XOR of elements from index <code>i</code> to <code>j</code> in the array is given by:
+[
+\text{XOR}(i, j) = \text{prefixXOR}[j] \oplus \text{prefixXOR}[i-1]
+]
+where <code>prefixXOR[i]</code> represents the XOR of all elements from the beginning of the array to index <code>i</code>.</p>
+</li>
+<li>
+<p><strong>Zero XOR</strong>: If the XOR of a subarray is 0, it means the XOR of elements between indices <code>i</code> and <code>j</code> is equal. This implies:
+[
+\text{prefixXOR}[j] = \text{prefixXOR}[i-1]
+]
+This observation allows us to track the frequency of each prefix XOR value encountered as we iterate through the array.</p>
+</li>
+</ol>
+<h4 id="algorithm">
+  Algorithm:
+  <a class="heading-link" href="#algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Step 1</strong>: Maintain a running XOR (<code>tmp</code>), which stores the XOR of all elements from the start of the array up to the current index.</li>
+<li><strong>Step 2</strong>: Use a <code>map</code> to store the frequency of each prefix XOR value encountered so far.</li>
+<li><strong>Step 3</strong>: For each element <code>nums[i]</code>, update the running XOR (<code>tmp</code>) and check if <code>tmp</code> has appeared before. If it has, it means there exists a subarray between the previous occurrence of <code>tmp</code> and the current index where the XOR of the subarray is 0.</li>
+<li><strong>Step 4</strong>: Keep a count of the number of such subarrays.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>mp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We initialize <code>cnt</code> to 0, which will store the final count of beautiful subarrays.</li>
+<li>We use a <code>map</code> <code>mp</code> to store the frequency of each prefix XOR encountered. The key is the XOR value, and the value is the count of occurrences of that XOR. Initially, we set <code>mp[0] = 1</code> because a subarray starting from index 0 with XOR 0 is considered a valid subarray.</li>
+<li><code>tmp</code> is the running XOR, initialized to 0.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-iterating-through-the-array">
+  2. <strong>Iterating Through the Array</strong>:
+  <a class="heading-link" href="#2-iterating-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    tmp <span style="color:#f92672">^=</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.count(tmp)) cnt <span style="color:#f92672">+=</span> mp[tmp];
+</span></span><span style="display:flex;"><span>    mp[tmp]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We loop through each element <code>nums[i]</code> in the array.</li>
+<li>For each element, we update <code>tmp</code> by performing an XOR with <code>nums[i]</code>. This updates <code>tmp</code> to be the XOR of all elements from the start of the array to the current element.</li>
+<li>We then check if <code>tmp</code> has appeared before in the <code>map</code>. If it has, it means there are <code>mp[tmp]</code> subarrays that have a XOR of 0. We add <code>mp[tmp]</code> to <code>cnt</code>, since each occurrence of <code>tmp</code> represents a potential subarray with XOR 0.</li>
+<li>We increment the count of <code>tmp</code> in the <code>map</code>, indicating that we have seen this XOR value again.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-returning-the-result">
+  3. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#3-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: After iterating through the entire array, <code>cnt</code> contains the total number of beautiful subarrays. We return <code>cnt</code> as the final result.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution can be analyzed as follows:</p>
+<ol>
+<li><strong>Iterating Over the Array</strong>: We iterate through the array once, which takes (O(n)), where (n) is the length of the array.</li>
+<li><strong>Updating the Map</strong>: For each element, we perform a constant-time operation to update and check the map. The operations on the map (insertion, lookup) are (O(\log m)), where (m) is the number of distinct prefix XOR values encountered. However, since there are at most (n) distinct prefix XOR values, we can approximate this operation as (O(\log n)).</li>
+<li><strong>Overall Complexity</strong>: The total time complexity is (O(n \log n)), which is efficient enough for large inputs.</li>
+</ol>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is (O(n)) due to the space required to store the map <code>mp</code>, which can hold at most (n) distinct prefix XOR values. Additionally, the space used for the <code>tmp</code> variable is constant.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Step 1</strong>: Initialize <code>cnt = 0</code>, <code>mp = {0: 1}</code>, and <code>tmp = 0</code>.</p>
+</li>
+<li>
+<p><strong>Step 2</strong>: Start iterating over <code>nums</code>.</p>
+<ul>
+<li>
+<p><strong>First iteration</strong> (i = 0):</p>
+<ul>
+<li><code>tmp ^= 4</code> → <code>tmp = 4</code></li>
+<li><code>mp.count(4)</code> is 0, so we don&rsquo;t increment <code>cnt</code>.</li>
+<li><code>mp[4] = 1</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Second iteration</strong> (i = 1):</p>
+<ul>
+<li><code>tmp ^= 2</code> → <code>tmp = 6</code></li>
+<li><code>mp.count(6)</code> is 0, so we don&rsquo;t increment <code>cnt</code>.</li>
+<li><code>mp[6] = 1</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Third iteration</strong> (i = 2):</p>
+<ul>
+<li><code>tmp ^= 2</code> → <code>tmp = 4</code></li>
+<li><code>mp.count(4)</code> is 1, so we increment <code>cnt</code> by 1 (<code>cnt = 1</code>).</li>
+<li><code>mp[4] = 2</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth iteration</strong> (i = 3):</p>
+<ul>
+<li><code>tmp ^= 6</code> → <code>tmp = 2</code></li>
+<li><code>mp.count(2)</code> is 0, so we don&rsquo;t increment <code>cnt</code>.</li>
+<li><code>mp[2] = 1</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Fifth iteration</strong> (i = 4):</p>
+<ul>
+<li><code>tmp ^= 4</code> → <code>tmp = 6</code></li>
+<li><code>mp.count(6)</code> is 1, so we increment <code>cnt</code> by 1 (<code>cnt = 2</code>).</li>
+<li><code>mp[6] = 2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 3</strong>: The final result is <code>cnt = 2</code>.</p>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of &ldquo;beautiful&rdquo; subarrays using the concept of prefix XOR and a hashmap to track the occurrences of each prefix XOR value. By leveraging the properties of XOR, we can solve the problem in (O(n \log n)) time, making it scalable for large inputs. This approach is both time-efficient and space-efficient, with a clear and concise implementation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1016s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +520,6 @@
 
       </div>
 
-      
 
       <footer>
         

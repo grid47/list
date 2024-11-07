@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,174 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, k) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// exluding none selected
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1026s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>nums</code> and a positive integer <code>k</code>, the goal is to find the number of &ldquo;beautiful subsets&rdquo; of <code>nums</code>. A subset is defined as beautiful if for every two elements <code>a</code> and <code>b</code> in the subset, the difference <code>|a - b|</code> is greater than or equal to <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem boils down to counting subsets that satisfy the condition that the absolute difference between any two elements in the subset is at least <code>k</code>. A direct approach of checking all possible subsets is inefficient, especially as the size of the input array grows. Therefore, a more efficient strategy using <strong>dynamic programming (DP)</strong> and <strong>backtracking</strong> is employed to efficiently explore all possible subsets.</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<ul>
+<li>We begin by sorting the array <code>nums</code>. Sorting ensures that as we explore subsets, we can efficiently check the condition for each number in relation to the previous ones. By sorting, we can use a recursive approach to explore subsets, ensuring that no duplicates are created.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming with Backtracking</strong>:</p>
+<ul>
+<li>A recursive function (<code>dp</code>) is defined to explore all subsets starting from index <code>0</code> and consider whether to include each element in the current subset.</li>
+<li>For each element, we decide whether to include it in the subset or not. When including an element, we check if it satisfies the condition <code>|nums[i] - nums[j]| &gt;= k</code> for all previously included elements. If the condition holds, we continue the exploration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization with Count Array</strong>:</p>
+<ul>
+<li>To avoid recomputing solutions for overlapping subproblems, a memoization technique is employed using a count array (<code>cnt</code>) that tracks the number of times a number has been included in the subset. This helps to maintain subsets that meet the required condition without recalculating them repeatedly.</li>
+<li>The count array (<code>cnt</code>) ensures that we track the number of times a number appears in the subset and ensure that the difference condition <code>|a - b| &gt;= k</code> holds by checking whether <code>cnt[nums[i] - k]</code> is greater than zero.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>The base case occurs when the recursive function reaches the end of the array. At this point, we return 1, indicating that a valid subset has been found. We also need to subtract 1 at the end to exclude the empty subset, which is counted as a valid subset by default.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt, nums;
+</span></span></code></pre></div><ul>
+<li>We define two vectors: <code>cnt</code> (a count array to track the occurrences of numbers) and <code>nums</code> (to store the input array).</li>
+</ul>
+<h4 id="2-the-recursive-dp-function">
+  2. <strong>The Recursive DP Function</strong>:
+  <a class="heading-link" href="#2-the-recursive-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> nums.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function takes two parameters: <code>idx</code>, the current index in the <code>nums</code> array, and <code>k</code>, the required difference between elements in the subset.</li>
+<li>The base case occurs when <code>idx</code> reaches the size of <code>nums</code>, indicating that we’ve considered all elements. At this point, we return 1, representing a valid subset.</li>
+</ul>
+<h4 id="3-exploring-the-current-element">
+  3. <strong>Exploring the Current Element</strong>:
+  <a class="heading-link" href="#3-exploring-the-current-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[idx] <span style="color:#f92672">-</span> k <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> (cnt[nums[idx] <span style="color:#f92672">-</span> k] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k);
+</span></span><span style="display:flex;"><span>    cnt[nums[idx]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k);
+</span></span><span style="display:flex;"><span>    cnt[nums[idx]]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the current element <code>nums[idx]</code> can form a valid subset (i.e., <code>nums[idx] - k &gt;= 0</code> and <code>cnt[nums[idx] - k] &gt; 0</code>), we continue exploring the next index with <code>dp(idx + 1, k)</code>, without including the current element in the subset.</li>
+<li>If the element cannot form a valid subset (either because it would violate the difference condition or we haven’t yet included the appropriate element), we consider two possibilities:
+<ol>
+<li>Skip the current element and proceed to the next index.</li>
+<li>Include the current element in the subset, incrementing its count in <code>cnt</code>, and then proceed to the next index. After the recursive call, we decrement the count to backtrack and explore the next possibilities.</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-return-the-result">
+  4. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the count of valid subsets that include or exclude the current element at <code>idx</code>.</li>
+</ul>
+<h4 id="5-main-function">
+  5. <strong>Main Function</strong>:
+  <a class="heading-link" href="#5-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">beautifulSubsets</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>    cnt.resize(<span style="color:#ae81ff">1001</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, k) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// excluding none selected
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We begin by sorting the input array <code>nums</code>. Sorting simplifies the process of checking the difference condition between elements.</li>
+<li>The count array <code>cnt</code> is initialized with 1001 elements (to handle all possible values of <code>nums</code>), and we set the size of <code>nums</code> to the class-level <code>nums</code> vector.</li>
+<li>We call the recursive <code>dp</code> function starting from index <code>0</code> with the difference <code>k</code>. Since the <code>dp</code> function counts the empty subset as valid, we subtract <code>1</code> to exclude it from the final result.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:
+The recursive function explores each element in the array, and for each element, we make two recursive calls (one for including the element and one for excluding it). In the worst case, this leads to an exponential time complexity of (O(2^n)), where <code>n</code> is the size of the array. However, the use of the count array (<code>cnt</code>) helps to memoize overlapping subproblems, reducing the redundant work. While the exact complexity depends on the specific values of <code>nums</code> and <code>k</code>, it remains exponential in nature due to the large number of possible subsets.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is (O(n)) for the recursive call stack and (O(1001)) for the count array <code>cnt</code> (since the possible values of <code>nums</code> are limited to 1001 distinct numbers). Thus, the overall space complexity is (O(n + 1001)), which simplifies to (O(n)) if we ignore the constant factor.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently explores all subsets of the array <code>nums</code> that satisfy the condition that the absolute difference between any two elements in the subset is at least <code>k</code>. Using dynamic programming and backtracking, the function effectively counts the number of valid subsets. The recursive approach, along with memoization using the count array <code>cnt</code>, ensures that we avoid redundant calculations, although the time complexity remains exponential. This approach is optimal for small to moderate-sized inputs but may face performance issues for very large arrays due to the inherent exponential complexity. Nonetheless, the method is effective for typical use cases in competitive programming and other algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1026s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -313,7 +480,6 @@
 
       </div>
 
-      
 
       <footer>
         

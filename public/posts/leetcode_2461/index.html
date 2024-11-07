@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,158 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode938s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given an array of integers <code>nums</code> and an integer <code>k</code>. Our task is to find the maximum sum of a subarray of length <code>k</code> in the array, where the subarray does not contain any duplicate elements. We need to return the maximum sum of such subarrays.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves using the sliding window technique combined with a hash map (or a map in C++) to keep track of the frequency of elements in the current subarray. The window is adjusted to ensure that no duplicate elements are present within the subarray. Here&rsquo;s how we can solve this efficiently:</p>
+<ol>
+<li>
+<p><strong>Sliding Window Technique</strong>:</p>
+<ul>
+<li>The sliding window helps us to explore subarrays of length <code>k</code> efficiently. Instead of recalculating the sum for every subarray from scratch, we maintain a running sum for the current window and adjust it as the window slides.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Duplicates</strong>:</p>
+<ul>
+<li>We need to ensure that the current subarray has no duplicates. This can be easily tracked using a map where the key is the number and the value is the frequency of that number in the current subarray. If any number appears more than once, the subarray is invalid, and we shrink the window until it becomes valid again.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximizing the Sum</strong>:</p>
+<ul>
+<li>As we slide the window through the array, we keep track of the maximum sum encountered while maintaining a valid subarray.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code to understand each part:</p>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">maximumSubarraySum</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><ul>
+<li>The function <code>maximumSubarraySum</code> takes a vector <code>nums</code> of integers and an integer <code>k</code> as inputs and returns a <code>long long</code> value representing the maximum sum of a subarray of length <code>k</code> with no duplicates.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size(), j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><code>sum</code>: This variable stores the running sum of the current subarray.</li>
+<li><code>ans</code>: This variable stores the maximum sum encountered so far.</li>
+<li><code>n</code>: The size of the input array <code>nums</code>.</li>
+<li><code>j</code>: This is the starting index of the sliding window.</li>
+<li><code>mp</code>: A map that tracks the frequency of elements in the current subarray.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    mp[nums[i]]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate over the array using the index <code>i</code>, which represents the current end of the sliding window.</li>
+<li>For each element <code>nums[i]</code>, we add it to the running sum <code>sum</code> and update its count in the map <code>mp</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Shrinking the Window for Invalid Subarrays</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> k <span style="color:#f92672">||</span> mp[nums[i]] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    mp[nums[j]]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">-=</span> nums[j];
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The condition <code>i - j + 1 &gt; k</code> ensures that the window size remains at most <code>k</code>. If the window size exceeds <code>k</code>, we shrink it by moving the start index <code>j</code> forward.</li>
+<li>The condition <code>mp[nums[i]] &gt; 1</code> ensures that there are no duplicate elements in the window. If a duplicate element is found (i.e., the count of <code>nums[i]</code> exceeds 1), we move <code>j</code> forward to shrink the window until it becomes valid again.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Maximum Sum</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> k) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(sum, ans);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After ensuring that the window is valid (with no duplicates and size exactly <code>k</code>), we check if the current window has exactly <code>k</code> elements.</li>
+<li>If so, we update the <code>ans</code> variable to store the maximum sum encountered so far by comparing <code>sum</code> with <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns <code>ans</code>, which holds the maximum sum of any subarray of length <code>k</code> that contains no duplicates.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the algorithm is ( O(n) ), where ( n ) is the number of elements in the input array <code>nums</code>.</li>
+<li>This is because the sliding window only moves the start index <code>j</code> and the end index <code>i</code> once over the array. The inner <code>while</code> loop ensures that the window is valid and does not cause repeated traversal of any element in the array.</li>
+<li>The map operations (insertion, deletion, and lookup) all take ( O(\log k) ) time, but since we only use a fixed amount of space for tracking frequencies (at most <code>k</code> elements), the complexity remains linear with respect to the number of elements in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(k) ), where ( k ) is the size of the sliding window. The map <code>mp</code> stores the frequency of elements in the current window, and the maximum number of distinct elements in the window is <code>k</code>. Therefore, the space complexity is proportional to <code>k</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maximumSubarraySum</code> function efficiently solves the problem of finding the maximum sum of a subarray of length <code>k</code> with no duplicates using the sliding window technique. By maintaining a running sum and using a map to track the frequencies of elements in the current window, the algorithm ensures that we can efficiently find the result in linear time.</p>
+<p>This approach is optimal for solving the problem, as it processes each element of the array at most twice (once when expanding the window and once when shrinking it), leading to a time complexity of ( O(n) ). The space complexity is ( O(k) ), as we only need to store at most <code>k</code> elements in the map. This makes the solution both time and space efficient, suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode938s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +446,6 @@
 
       </div>
 
-      
 
       <footer>
         

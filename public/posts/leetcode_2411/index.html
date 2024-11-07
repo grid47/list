@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -245,7 +245,186 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode893s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>nums</code> of size <code>n</code>, the task is to find the smallest subarray that contains all the bits of each element of the array. For each element <code>nums[i]</code>, we need to find the length of the smallest subarray that contains all the set bits of <code>nums[i]</code>. The challenge is to solve this efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the smallest subarray for each element of the array such that the subarray contains all the bits that are set in the binary representation of the number. To solve this problem efficiently, we can use bitwise operations combined with a dynamic programming approach.</p>
+<p>Here&rsquo;s the breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Bitwise Operations</strong>:</p>
+<ul>
+<li>Each integer can be represented as a sequence of bits (0s and 1s). The idea is to track the position of the most recent occurrence of each bit (from the least significant bit to the most significant bit) as we process the array from right to left.</li>
+<li>The challenge is to keep track of the smallest subarray that contains all the set bits of each number. We can do this by checking the most recent occurrences of the bits for each number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking the Last Occurrence of Each Bit</strong>:</p>
+<ul>
+<li>We maintain an array <code>last</code> of size 30, which tracks the most recent index where each bit (from the 0th to the 29th bit) was set.</li>
+<li>For each number <code>nums[i]</code>, we check the positions of all bits that are set in the number and update the <code>last</code> array accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Approach</strong>:</p>
+<ul>
+<li>The idea is to iteratively compute the smallest subarray for each index <code>i</code> by considering all the set bits in <code>nums[i]</code> and the last seen positions of those bits.</li>
+<li>For each bit in the current number, we compute the distance between the current index <code>i</code> and the last seen position of that bit. The answer for <code>nums[i]</code> will be the maximum of these distances plus one (since we want the length of the subarray).</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Answer</strong>:</p>
+<ul>
+<li>For each index <code>i</code>, the length of the smallest subarray that contains all the set bits of <code>nums[i]</code> is stored in the <code>ans</code> array. Finally, we return the <code>ans</code> array as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. Initialization
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">1</span>), last(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the size of the input array <code>nums</code>.</li>
+<li><code>ans</code> is a vector that will store the answer for each index. Initially, we assume that the smallest subarray for each element is of length 1.</li>
+<li><code>last</code> is a vector of size 30 (as we are dealing with integers with up to 30 bits) to store the last seen index for each bit.</li>
+</ul>
+<h4 id="2-loop-over-the-array-from-right-to-left">
+  2. Loop Over the Array from Right to Left
+  <a class="heading-link" href="#2-loop-over-the-array-from-right-to-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30</span>; j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We loop over the array from right to left (starting from the last index). This allows us to efficiently compute the smallest subarray that contains all the set bits for each element.</li>
+<li>For each element <code>nums[i]</code>, we need to check each of the 30 possible bits (0 through 29).</li>
+</ul>
+<h4 id="3-update-the-last-array-for-each-bit">
+  3. Update the <code>last</code> Array for Each Bit
+  <a class="heading-link" href="#3-update-the-last-array-for-each-bit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j)) {
+</span></span><span style="display:flex;"><span>    last[j] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>nums[i] &amp; (1 &lt;&lt; j)</code> checks whether the <code>j</code>-th bit of <code>nums[i]</code> is set (1). If it is set, we update the <code>last</code> array to store the current index <code>i</code> as the most recent index where this bit was set.</li>
+</ul>
+<h4 id="4-compute-the-length-of-the-smallest-subarray">
+  4. Compute the Length of the Smallest Subarray
+  <a class="heading-link" href="#4-compute-the-length-of-the-smallest-subarray">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[i] <span style="color:#f92672">=</span> max(ans[i], last[j] <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>After updating the <code>last</code> array for the current bit, we compute the length of the smallest subarray for <code>nums[i]</code>. For each bit <code>j</code>, the smallest subarray that contains this bit will have a length equal to <code>last[j] - i + 1</code> (the distance between the current index <code>i</code> and the last seen index of this bit).</li>
+<li>We take the maximum of all such distances to ensure that the subarray contains all the bits.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. Return the Result
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, the <code>ans</code> array will contain the smallest subarray lengths for each element in the input array. We return the <code>ans</code> array as the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>We loop over each element of the input array <code>nums</code>, and for each element, we check each of the 30 bits. Hence, the total time complexity is:</p>
+<p>[
+O(n \times 30) = O(n)
+]</p>
+<p>where <code>n</code> is the size of the array <code>nums</code>. Since the number of bits is constant (30), it does not affect the overall time complexity.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the two arrays:
+<ul>
+<li><code>ans</code>: This array stores the smallest subarray lengths for each element, which takes (O(n)) space.</li>
+<li><code>last</code>: This array stores the last seen index for each of the 30 bits, which takes (O(30) = O(1)) space.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the space complexity is:</p>
+<p>[
+O(n)
+]</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently computes the smallest subarray that contains all the set bits of each element in the array by leveraging bitwise operations and dynamic programming. The time complexity of (O(n)) and space complexity of (O(n)) make this approach suitable for large input sizes. By processing the array from right to left and tracking the most recent occurrences of each bit, we can ensure that the smallest subarray is computed efficiently for each element.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode893s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +436,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2412"  class="external-link" target="_blank" rel="noopener">LeetCode #2412: Minimum Money Required Before Transactions</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2413"  class="external-link" target="_blank" rel="noopener">LeetCode #2413: Smallest Even Multiple</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +478,6 @@
 
       </div>
 
-      
 
       <footer>
         

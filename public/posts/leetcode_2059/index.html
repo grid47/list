@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,131 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode657s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the minimum number of operations required to transform a given integer <code>start</code> into a target integer <code>goal</code> using a list of integers <code>nums</code>. The allowed operations include adding, subtracting, or performing a bitwise XOR with any number from the <code>nums</code> array. The solution should return the minimum number of operations required to achieve this transformation, or <code>-1</code> if it is not possible. Additionally, the results must stay within the bounds of <code>[0, 1000]</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be effectively solved using a breadth-first search (BFS) approach, which is ideal for finding the shortest path or minimum steps in unweighted scenarios. In this case, each possible transformation (addition, subtraction, XOR) can be thought of as a step in a state space. The BFS will explore all reachable states from <code>start</code>, tracking how many operations are taken to reach each state, until it finds the <code>goal</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We declare a queue <code>q</code> for BFS to keep track of the current state (value) and a set <code>seen</code> to track which states have already been visited to avoid cycles.</li>
+<li>We start by pushing the initial state <code>start</code> onto the queue and marking it as seen.</li>
+<li>An operation counter <code>op</code> is initialized to zero, representing the number of operations taken.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> seen;
+</span></span><span style="display:flex;"><span>q.push(start);
+</span></span><span style="display:flex;"><span>seen.insert(start);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> op <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>BFS Loop</strong>:</p>
+<ul>
+<li>The outer while loop continues until the queue is empty.</li>
+<li>We increase the operation counter <code>op</code> at the start of each level in the BFS, indicating that we are exploring all possible transformations for the current depth.</li>
+<li>The inner loop processes all nodes at the current level, keeping track of the number of elements in the queue (which corresponds to how many states are being explored).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    op<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Exploring Transformations</strong>:</p>
+<ul>
+<li>For each value <code>x</code> taken from the queue, we iterate through each number <code>it</code> in <code>nums</code> and perform the three operations:
+<ul>
+<li><strong>Addition</strong>: <code>x + it</code></li>
+<li><strong>Subtraction</strong>: <code>x - it</code></li>
+<li><strong>Bitwise XOR</strong>: <code>x ^ it</code></li>
+</ul>
+</li>
+<li>For each operation, we check if the result matches the <code>goal</code>. If it does, we immediately return the number of operations taken so far.</li>
+<li>We also check if the new state is valid (within <code>[0, 1000]</code>) and has not been seen before. If valid, we mark it as seen and add it to the queue for further exploration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((x <span style="color:#f92672">+</span> it) <span style="color:#f92672">==</span> goal <span style="color:#f92672">||</span> (x <span style="color:#f92672">-</span> it) <span style="color:#f92672">==</span> goal <span style="color:#f92672">||</span> (x <span style="color:#f92672">^</span> it) <span style="color:#f92672">==</span> goal)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> op;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seen.count(x <span style="color:#f92672">+</span> it) <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">+</span> it <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">+</span> it <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        seen.insert(x <span style="color:#f92672">+</span> it);                        
+</span></span><span style="display:flex;"><span>        q.push(x <span style="color:#f92672">+</span> it);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seen.count(x <span style="color:#f92672">-</span> it) <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">-</span> it <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">-</span> it <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        seen.insert(x <span style="color:#f92672">-</span> it);
+</span></span><span style="display:flex;"><span>        q.push(x <span style="color:#f92672">-</span> it);
+</span></span><span style="display:flex;"><span>    }             
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seen.count(x <span style="color:#f92672">^</span> it) <span style="color:#f92672">&amp;&amp;</span> (x <span style="color:#f92672">^</span> it) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">&amp;&amp;</span> (x <span style="color:#f92672">^</span> it) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        seen.insert(x <span style="color:#f92672">^</span> it);
+</span></span><span style="display:flex;"><span>        q.push(x <span style="color:#f92672">^</span> it);
+</span></span><span style="display:flex;"><span>    }                    
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning Result</strong>:</p>
+<ul>
+<li>If the BFS completes and the queue is exhausted without finding the <code>goal</code>, we return <code>-1</code>, indicating that it is impossible to reach the target value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N * M), where N is the number of elements in <code>nums</code> and M is the number of unique values we can reach within the bounds of <code>[0, 1000]</code>. In the worst case, each operation can lead to a new state that needs to be evaluated.</li>
+<li><strong>Space Complexity</strong>: O(M), for the queue and the set storing seen states.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implementation efficiently determines the minimum number of operations to transform <code>start</code> into <code>goal</code> using a breadth-first search approach. This method ensures that we explore all possible paths and operations systematically while avoiding cycles through the use of a <code>seen</code> set. The BFS structure naturally lends itself to tracking the minimum operations due to its level-wise exploration, making it an optimal solution for the given problem. The careful handling of state transitions and boundary checks ensures that the solution remains valid and efficient within the defined constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode657s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -263,7 +387,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2060"  class="external-link" target="_blank" rel="noopener">LeetCode #2060: Check if an Original String Exists Given Two Encoded Strings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2063"  class="external-link" target="_blank" rel="noopener">LeetCode #2063: Vowels of All Substrings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -305,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

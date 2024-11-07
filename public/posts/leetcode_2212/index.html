@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -265,7 +265,201 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bob;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode754s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine how Bob can maximize his points, given a certain amount of &ldquo;net&rdquo; resources and a list of points that Alice would have scored in each round. The goal is to allocate the resources to Bob such that he can score as many points as possible, with the constraint that Bob must have fewer resources than Alice for each round. The goal is to return an array representing the number of resources Bob uses in each round in order to achieve the maximum score.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to this problem involves a <strong>dynamic programming (DP)</strong> approach with a <strong>backtracking</strong> technique to determine the optimal allocation of resources. The process is as follows:</p>
+<ol>
+<li>
+<p><strong>Recursive DP with Backtracking:</strong></p>
+<ul>
+<li>We recursively explore the different ways Bob can allocate resources across the rounds while ensuring that he uses fewer resources than Alice in each round.</li>
+<li>At each step, we either skip the current round or allocate resources to Bob based on the available net resources, updating his score.</li>
+<li>If the conditions are met (i.e., the remaining resources are sufficient and the score increases), we update the best score and the resource allocation.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Variables:</strong></p>
+<ul>
+<li><strong><code>idx</code></strong>: Represents the current round under consideration.</li>
+<li><strong><code>rm</code></strong>: Represents the remaining resources.</li>
+<li><strong><code>pts</code></strong>: Represents the current score Bob has accumulated.</li>
+<li><strong><code>msk</code></strong>: A bitmask that stores which rounds have been selected for resource allocation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Backtracking Logic:</strong></p>
+<ul>
+<li>If we have reached the end of the rounds or there are no remaining resources, we compare the score and store the best one if it’s higher.</li>
+<li>If resources are still available for a round, we consider the possibility of allocating resources to Bob and move on to the next round.</li>
+</ul>
+</li>
+<li>
+<p><strong>Post Processing the Results:</strong></p>
+<ul>
+<li>Once the DP process is complete and we have found the optimal resource allocation for Bob, we reverse-engineer the solution based on the bitmask stored during the DP process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Construction:</strong></p>
+<ul>
+<li>The final result is constructed by iterating over the rounds and assigning the correct number of resources to Bob based on the bitmask.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Variable Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> bob, alice;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mask;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans;
+</span></span></code></pre></div><ul>
+<li><code>bob</code>: This array will store the number of resources Bob will use in each round to maximize his score.</li>
+<li><code>alice</code>: This array contains the number of resources Alice uses in each round.</li>
+<li><code>n</code>: Stores the total number of rounds.</li>
+<li><code>mask</code>: This bitmask will store which rounds Bob decides to allocate resources to.</li>
+<li><code>ans</code>: Stores the maximum score Bob can achieve.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Function:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> rm, <span style="color:#66d9ef">int</span> pts, <span style="color:#66d9ef">int</span> msk) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((rm <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">||</span> (idx <span style="color:#f92672">==</span> n)){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ans <span style="color:#f92672">&lt;</span> pts) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> pts;
+</span></span><span style="display:flex;"><span>            mask <span style="color:#f92672">=</span> msk;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }        
+</span></span><span style="display:flex;"><span>    dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, rm, pts, msk);        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(rm <span style="color:#f92672">&gt;</span> alice[idx]) {
+</span></span><span style="display:flex;"><span>        msk <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> idx);
+</span></span><span style="display:flex;"><span>        dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, rm <span style="color:#f92672">-</span> alice[idx] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, pts <span style="color:#f92672">+</span> idx, msk);            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The base case checks if there are no remaining resources or we have processed all rounds.</li>
+<li>The recursive call <code>dp(idx + 1, rm, pts, msk)</code> explores the case where Bob does not use resources for the current round.</li>
+<li>The second recursive call <code>dp(idx + 1, rm - alice[idx] - 1, pts + idx, msk)</code> explores the case where Bob uses resources for the current round, ensuring that he uses fewer resources than Alice (<code>rm &gt; alice[idx]</code>).</li>
+<li>If the new score (<code>pts + idx</code>) is greater than the current best score, the result is updated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function Logic:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> maximumBobPoints(<span style="color:#66d9ef">int</span> net, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> alice) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> alice.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>alice <span style="color:#f92672">=</span> alice;
+</span></span><span style="display:flex;"><span>    bob.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pts <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    dp(idx, net, pts, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>The main function initializes necessary variables (<code>n</code>, <code>alice</code>, <code>bob</code>, <code>idx</code>, <code>pts</code>, <code>mask</code>, <code>ans</code>).</li>
+<li>It calls the <code>dp</code> function to start the recursive process with the available resources (<code>net</code>), the initial score (<code>pts</code>), and the empty bitmask (<code>0</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((mask <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        bob[i] <span style="color:#f92672">=</span> alice[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        net <span style="color:#f92672">-=</span> bob[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(net <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) bob[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+=</span> net;
+</span></span></code></pre></div><ul>
+<li>After the recursive DP process, the bitmask <code>mask</code> indicates which rounds Bob should take resources from.</li>
+<li>For each round, if the bitmask indicates that Bob should take resources, we allocate <code>alice[i] + 1</code> resources to Bob and decrease the remaining net resources (<code>net</code>).</li>
+<li>If any resources are left after assigning to all rounds, they are allocated to the first round.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> bob;
+</span></span></code></pre></div><ul>
+<li>The final result is the <code>bob</code> array, which contains the number of resources Bob will use in each round to achieve the maximum score.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * net)</strong>:
+<ul>
+<li>The DP function explores all possible allocations of resources in each round. In the worst case, it may process each round (<code>n</code> rounds) for each possible amount of remaining resources (<code>net</code> resources). Hence, the time complexity is O(n * net).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The space complexity is primarily determined by the space required to store the <code>bob</code>, <code>alice</code>, and <code>mask</code> arrays, which are all of size <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively uses dynamic programming with backtracking to solve the problem of maximizing Bob’s score in a resource allocation scenario. By recursively exploring all possible allocations of resources, it ensures that Bob’s score is maximized while respecting the constraints. The solution efficiently handles the problem with a time complexity of O(n * net), making it feasible for moderately large inputs. The space complexity is O(n), ensuring it is memory-efficient for large datasets. This approach demonstrates a solid application of DP and bitmasking for solving optimization problems in a competitive programming context.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode754s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +471,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2213"  class="external-link" target="_blank" rel="noopener">LeetCode #2213: Longest Substring of One Repeating Character</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2215"  class="external-link" target="_blank" rel="noopener">LeetCode #2215: Find the Difference of Two Arrays</a></th>
       </tr>
   </thead>
   <tbody>
@@ -319,7 +513,6 @@
 
       </div>
 
-      
 
       <footer>
         

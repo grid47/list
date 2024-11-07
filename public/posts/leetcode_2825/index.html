@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -220,7 +220,131 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> j <span style="color:#f92672">==</span> m;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1138s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining if string <code>s2</code> can be made a subsequence of string <code>s1</code> under a specific condition: each character in <code>s1</code> can either match exactly with the corresponding character in <code>s2</code>, or it can be the &ldquo;next&rdquo; character or the &ldquo;previous&rdquo; character in a cyclic alphabet.</p>
+<ul>
+<li>The alphabet is considered cyclic, meaning after &lsquo;z&rsquo; comes &lsquo;a&rsquo;, and before &lsquo;a&rsquo; comes &lsquo;z&rsquo;.</li>
+<li>A subsequence of a string is formed by deleting some or no characters without changing the order of the remaining characters.</li>
+</ul>
+<p>In other words, we are checking if we can transform <code>s1</code> into <code>s2</code> by matching characters in a specific way while maintaining the order of characters in <code>s1</code>. Specifically, the character in <code>s1</code> can match:</p>
+<ol>
+<li>The character in <code>s2</code> directly.</li>
+<li>The next character in the alphabet (considering wrap-around from &lsquo;z&rsquo; to &lsquo;a&rsquo;).</li>
+<li>The previous character in the alphabet (considering wrap-around from &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach is to iterate through both strings <code>s1</code> and <code>s2</code> and check if we can match the characters of <code>s1</code> with the characters of <code>s2</code> by the rules described. We need to ensure that the order of characters is maintained in both strings. The process can be broken down into the following steps:</p>
+<ol>
+<li><strong>Initial Setup</strong>: We will initialize two pointers, one for each string, <code>i</code> for <code>s1</code> and <code>j</code> for <code>s2</code>.</li>
+<li><strong>Character Matching</strong>: Iterate through <code>s1</code> with pointer <code>i</code>. For each character in <code>s1</code>, check if it matches the character in <code>s2</code> pointed by <code>j</code> directly, or if it&rsquo;s one character before or after it in the alphabet.</li>
+<li><strong>Subsequence Condition</strong>: If a match is found, move the pointer <code>j</code> to the next character in <code>s2</code>. If we have processed all characters in <code>s2</code> (i.e., <code>j</code> reaches the length of <code>s2</code>), then <code>s2</code> can be formed as a subsequence of <code>s1</code>, and we return true.</li>
+<li><strong>Termination Condition</strong>: If we finish iterating through <code>s1</code> and haven&rsquo;t matched all characters of <code>s2</code>, we return false because <code>s2</code> cannot be formed as a subsequence of <code>s1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canMakeSubsequence</span>(string s1, string s2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> s1.size(), m <span style="color:#f92672">=</span> s2.size();
+</span></span></code></pre></div><ol>
+<li><strong>Initialization</strong>:
+<ul>
+<li><code>j = 0</code>: This is the pointer for string <code>s2</code>, starting from the first character.</li>
+<li><code>n = s1.size()</code>, <code>m = s2.size()</code>: These variables store the lengths of <code>s1</code> and <code>s2</code> for ease of reference.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i)
+</span></span></code></pre></div><ol start="2">
+<li><strong>Main Loop</strong>:
+<ul>
+<li>The loop iterates through the string <code>s1</code> using the index <code>i</code> from <code>0</code> to <code>n - 1</code>. At the same time, we check if we&rsquo;ve processed all of <code>s2</code> by ensuring <code>j &lt; m</code>. If <code>j</code> reaches the length of <code>s2</code>, we know that all characters of <code>s2</code> have been matched.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s1[i] <span style="color:#f92672">==</span> s2[j] <span style="color:#f92672">||</span> s1[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> s2[j] <span style="color:#f92672">||</span> s1[i] <span style="color:#f92672">-</span> <span style="color:#ae81ff">25</span> <span style="color:#f92672">==</span> s2[j])
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">++</span>j;
+</span></span></code></pre></div><ol start="3">
+<li><strong>Character Matching</strong>:
+<ul>
+<li>This condition checks whether the character at <code>s1[i]</code> can match the character at <code>s2[j]</code>. There are three possibilities:
+<ul>
+<li><code>s1[i] == s2[j]</code>: The characters match exactly.</li>
+<li><code>s1[i] + 1 == s2[j]</code>: The character in <code>s1</code> is one step before <code>s2[j]</code> in the alphabet (i.e., the next character).</li>
+<li><code>s1[i] - 25 == s2[j]</code>: The character in <code>s1</code> is one step after <code>s2[j]</code> in the alphabet (i.e., the previous character, considering cyclic behavior from &lsquo;a&rsquo; to &lsquo;z&rsquo; and vice versa).</li>
+</ul>
+</li>
+<li>If any of these conditions is true, it means a match is found, and we move to the next character in <code>s2</code> by incrementing <code>j</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> j <span style="color:#f92672">==</span> m;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="4">
+<li><strong>Final Check</strong>:
+<ul>
+<li>After the loop finishes, if <code>j == m</code>, it means all characters of <code>s2</code> have been matched in <code>s1</code> in order, so we return <code>true</code>. Otherwise, we return <code>false</code>, indicating that it is not possible to form <code>s2</code> as a subsequence of <code>s1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is O(n), where <code>n</code> is the length of string <code>s1</code>. In the worst case, we need to iterate through all characters in <code>s1</code> once. The pointer <code>j</code> for <code>s2</code> only advances when a match is found, so it can never exceed the length of <code>s2</code>. Therefore, the algorithm will run in linear time with respect to the length of <code>s1</code>, which is O(n).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1), as we are only using a few integer variables to store the pointers and the sizes of the strings. No additional data structures are used that grow with the input size.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and straightforward, leveraging a single loop to iterate over <code>s1</code> while maintaining a pointer <code>j</code> to track the progress through <code>s2</code>. The use of cyclic behavior in character comparisons allows for a flexible matching condition, which is a key feature of this solution. The algorithm runs in linear time relative to the size of <code>s1</code>, making it well-suited for handling relatively large inputs efficiently. The solution’s simplicity and clarity make it easy to understand and apply to similar problems involving subsequences and character transformations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1138s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -274,7 +398,6 @@
 
       </div>
 
-      
 
       <footer>
         

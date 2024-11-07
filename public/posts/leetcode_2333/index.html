@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -257,7 +257,201 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode837s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to minimize the sum of squared differences between two arrays, <code>nums1</code> and <code>nums2</code>, after performing at most <code>k1</code> and <code>k2</code> operations, respectively, on each of the arrays. In each operation, we can reduce the difference between the two corresponding elements of the arrays by one. The goal is to determine the minimum sum of squares of differences after these operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, the approach is as follows:</p>
+<ol>
+<li>
+<p><strong>Calculate the Initial Differences</strong>: First, we calculate the absolute differences between the corresponding elements of <code>nums1</code> and <code>nums2</code> and store them in a <code>diff</code> array.</p>
+</li>
+<li>
+<p><strong>Maximize Reduction in Differences</strong>: The main objective is to reduce the largest differences to minimize the sum of squares. We can reduce the differences iteratively, but we should always target the largest differences for reduction to maximize the impact on the final sum.</p>
+</li>
+<li>
+<p><strong>Greedy Approach</strong>: Use a greedy approach to reduce the largest differences first. To do this:</p>
+<ul>
+<li>Track the frequency of each possible difference using a frequency array (<code>bck</code>).</li>
+<li>Apply the operations on the largest available differences, reducing the largest differences as much as possible in each step.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: After applying all the operations, compute the sum of the squares of the remaining differences, as this will be the minimized sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code and understand its working:</p>
+<h4 id="step-1-calculate-initial-differences">
+  Step 1: Calculate Initial Differences
+  <a class="heading-link" href="#step-1-calculate-initial-differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> diff(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    diff[i] <span style="color:#f92672">=</span> abs(nums1[i] <span style="color:#f92672">-</span> nums2[i]);
+</span></span></code></pre></div><ul>
+<li>We initialize a <code>diff</code> array where <code>diff[i]</code> represents the absolute difference between <code>nums1[i]</code> and <code>nums2[i]</code>.</li>
+<li>This array stores the differences between corresponding elements of <code>nums1</code> and <code>nums2</code>.</li>
+</ul>
+<h4 id="step-2-determine-maximum-difference-and-initialize-frequency-array">
+  Step 2: Determine Maximum Difference and Initialize Frequency Array
+  <a class="heading-link" href="#step-2-determine-maximum-difference-and-initialize-frequency-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> m <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(diff.begin(), diff.end());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> k1 <span style="color:#f92672">+</span> k2;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> bck(m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>We find the maximum value from the <code>diff</code> array, which represents the largest difference between any two corresponding elements in <code>nums1</code> and <code>nums2</code>. This value <code>m</code> will be used to determine the size of our frequency array <code>bck</code>.</li>
+<li>We also initialize the variable <code>k</code> to represent the total number of operations allowed (sum of <code>k1</code> and <code>k2</code>).</li>
+<li>The frequency array <code>bck</code> is initialized to track the count of each difference value from <code>0</code> to <code>m</code>.</li>
+</ul>
+<h4 id="step-3-populate-the-frequency-array">
+  Step 3: Populate the Frequency Array
+  <a class="heading-link" href="#step-3-populate-the-frequency-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    bck[diff[i]]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate over the <code>diff</code> array and count the occurrences of each difference value by updating the frequency array <code>bck</code>. This helps us know how many times each particular difference appears.</li>
+</ul>
+<h4 id="step-4-apply-operations-to-reduce-the-largest-differences">
+  Step 4: Apply Operations to Reduce the Largest Differences
+  <a class="heading-link" href="#step-4-apply-operations-to-reduce-the-largest-differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> m; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (bck[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> num <span style="color:#f92672">=</span> min(bck[i], (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) k);
+</span></span><span style="display:flex;"><span>        bck[i] <span style="color:#f92672">-=</span> num;
+</span></span><span style="display:flex;"><span>        bck[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> num;
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">-=</span> num;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>Starting from the largest difference (<code>m</code>), we attempt to reduce it. For each difference <code>i</code>, if there are <code>bck[i]</code> occurrences, we try to reduce as many of them as possible by using the remaining operations (<code>k</code>).</li>
+<li>For each reduction, we decrease the frequency of the current difference and increase the frequency of the next smallest difference (<code>i - 1</code>). This simulates reducing the difference by one.</li>
+<li>After applying the operations, we decrement <code>k</code> by the number of operations used (<code>num</code>). If <code>k</code> becomes <code>0</code>, we stop further operations.</li>
+</ul>
+<h4 id="step-5-compute-the-resulting-sum-of-squares">
+  Step 5: Compute the Resulting Sum of Squares
+  <a class="heading-link" href="#step-5-compute-the-resulting-sum-of-squares">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> bck[i] <span style="color:#f92672">*</span> (i <span style="color:#f92672">*</span> i);
+</span></span></code></pre></div><ul>
+<li>After applying the operations, the <code>bck</code> array contains the frequencies of each difference value. To compute the result, we sum up the squares of each difference value, weighted by their frequencies.</li>
+<li>This gives us the minimum sum of squares after the allowed operations.</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, the computed result (<code>res</code>) is returned, which is the minimum sum of squared differences after performing all the allowed operations.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n + m)</strong>:
+<ul>
+<li>The initial computation of the <code>diff</code> array takes <code>O(n)</code> time, where <code>n</code> is the length of the input arrays.</li>
+<li>Finding the maximum difference (<code>m</code>) takes <code>O(n)</code> time.</li>
+<li>Populating the frequency array <code>bck</code> takes <code>O(n)</code> time.</li>
+<li>The loop that applies operations to reduce differences runs in <code>O(m)</code> time, as we iterate over all possible difference values from <code>m</code> down to <code>0</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the total time complexity is <strong>O(n + m)</strong>, where <code>n</code> is the size of the input arrays, and <code>m</code> is the largest difference between the elements of the arrays.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong>:
+<ul>
+<li>The space complexity is dominated by the <code>bck</code> array, which has a size of <code>m + 1</code>, where <code>m</code> is the maximum difference between any two elements in <code>nums1</code> and <code>nums2</code>. Therefore, the space complexity is <strong>O(m)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently solves the problem of minimizing the sum of squared differences between two arrays by:</p>
+<ul>
+<li>Calculating the initial differences between corresponding elements.</li>
+<li>Using a greedy strategy to apply the available operations to reduce the largest differences.</li>
+<li>Finally, calculating the sum of squares of the remaining differences to get the minimized result.</li>
+</ul>
+<p>The solution works in linear time with respect to the size of the input arrays and is optimal for handling large inputs. By using a greedy approach combined with frequency counting, we ensure that the operations are applied in the most impactful way, leading to the smallest possible sum of squares.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode837s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -269,7 +463,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2334"  class="external-link" target="_blank" rel="noopener">LeetCode #2334: Subarray With Elements Greater Than Varying Threshold</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2335"  class="external-link" target="_blank" rel="noopener">LeetCode #2335: Minimum Amount of Time to Fill Cups</a></th>
       </tr>
   </thead>
   <tbody>
@@ -311,7 +505,6 @@
 
       </div>
 
-      
 
       <footer>
         

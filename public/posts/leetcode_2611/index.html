@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -242,7 +242,197 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1036s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given two lists, <code>r1</code> and <code>r2</code>, each containing <code>n</code> integers. Each integer represents the reward associated with a task in two different reward categories:</p>
+<ul>
+<li><code>r1[i]</code> represents the reward for task <code>i</code> if you choose the first list.</li>
+<li><code>r2[i]</code> represents the reward for task <code>i</code> if you choose the second list.</li>
+</ul>
+<p>Additionally, you are given an integer <code>k</code>, which represents the number of tasks you are allowed to select from the first list (i.e., you can choose up to <code>k</code> tasks from <code>r1</code>).</p>
+<p>Your goal is to select tasks in such a way that you maximize the total reward. Specifically, you can select <code>k</code> tasks from the first list (<code>r1</code>) and the remaining tasks from the second list (<code>r2</code>). The total reward will be the sum of the rewards you get from the selected tasks in both lists.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be broken down into a few key steps:</p>
+<ol>
+<li>
+<p><strong>Calculate the Difference in Rewards</strong>:
+For each task, compute the difference between the rewards from the two lists: <code>r1[i] - r2[i]</code>. This will help determine which tasks provide a higher reward when selected from <code>r1</code> compared to when selected from <code>r2</code>.</p>
+</li>
+<li>
+<p><strong>Sort the Tasks Based on the Difference</strong>:
+Once we calculate the difference for each task, the strategy is to select the tasks with the largest differences from the first list, as these will contribute more to the total reward when selected from <code>r1</code>.</p>
+</li>
+<li>
+<p><strong>Select Tasks</strong>:</p>
+<ul>
+<li>First, select <code>k</code> tasks from the sorted list based on the largest differences. This ensures that we maximize the reward from selecting tasks from <code>r1</code>.</li>
+<li>For the remaining tasks, select them from the second list, as we have already maximized the reward from the first list tasks.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-calculate-the-difference-and-store-tasks">
+  Step 1: Calculate the Difference and Store Tasks
+  <a class="heading-link" href="#step-1-calculate-the-difference-and-store-tasks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    ans.push_back({r1[i] <span style="color:#f92672">-</span> r2[i], r1[i], r2[i]});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We first calculate the difference between the rewards of the two lists <code>r1[i] - r2[i]</code> for each task <code>i</code>.</li>
+<li>We store each task as a vector of three integers:
+<ul>
+<li>The first element <code>r1[i] - r2[i]</code> represents the difference in rewards.</li>
+<li>The second element <code>r1[i]</code> is the reward for the task from the first list.</li>
+<li>The third element <code>r2[i]</code> is the reward for the task from the second list.</li>
+</ul>
+</li>
+<li>This data structure allows us to both compare the reward differences and access the rewards for each list efficiently.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-sort-tasks-based-on-reward-differences">
+  Step 2: Sort Tasks Based on Reward Differences
+  <a class="heading-link" href="#step-2-sort-tasks-based-on-reward-differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ans.begin(), ans.end(), greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>());
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We sort the tasks based on the first element of each task&rsquo;s vector (i.e., the difference <code>r1[i] - r2[i]</code>) in descending order. This ensures that the tasks which provide the greatest benefit when selected from the first list <code>r1</code> come first in the list.</li>
+<li>The <code>greater&lt;vector&lt;int&gt;&gt;</code> comparator sorts the tasks in descending order based on the first element of each vector (the reward difference).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-select-the-best-tasks-from-r1-and-r2">
+  Step 3: Select the Best Tasks from <code>r1</code> and <code>r2</code>
+  <a class="heading-link" href="#step-3-select-the-best-tasks-from-r1-and-r2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> ans[i<span style="color:#f92672">++</span>][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n) res <span style="color:#f92672">+=</span> ans[i<span style="color:#f92672">++</span>][<span style="color:#ae81ff">2</span>];
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We initialize a variable <code>res</code> to store the total reward.</li>
+<li>The first <code>while(k--)</code> loop is used to select <code>k</code> tasks from <code>r1</code>. We add the reward from <code>r1</code> (i.e., <code>ans[i++][1]</code>) to <code>res</code> for the first <code>k</code> tasks. The loop runs for <code>k</code> iterations, and each time it selects the best task from <code>r1</code> based on the sorting.</li>
+<li>The second <code>while(i &lt; n)</code> loop handles the remaining tasks. Since we have already selected <code>k</code> tasks from <code>r1</code>, we now add the reward from <code>r2</code> (i.e., <code>ans[i++][2]</code>) for the remaining tasks.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-total-reward">
+  Step 4: Return the Total Reward
+  <a class="heading-link" href="#step-4-return-the-total-reward">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>Once we have selected the best <code>k</code> tasks from <code>r1</code> and the remaining tasks from <code>r2</code>, we return the total reward <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Building the <code>ans</code> Array</strong>: We iterate over each task and store the difference and rewards in the <code>ans</code> array. This takes (O(n)) time, where (n) is the size of the input arrays <code>r1</code> and <code>r2</code>.</p>
+</li>
+<li>
+<p><strong>Sorting the Tasks</strong>: We sort the <code>ans</code> array, which contains <code>n</code> tasks. Sorting takes (O(n \log n)) time.</p>
+</li>
+<li>
+<p><strong>Selecting Tasks</strong>: After sorting, we loop through the tasks twice: once to select <code>k</code> tasks from <code>r1</code>, and once to select the remaining tasks from <code>r2</code>. Both loops take (O(n)) time.</p>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the sorting step, which is (O(n \log n)).</p>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Space for the <code>ans</code> Array</strong>: We store <code>n</code> tasks in the <code>ans</code> array, which requires (O(n)) space.</p>
+</li>
+<li>
+<p><strong>Other Variables</strong>: The other variables used in the solution (like <code>res</code>, <code>i</code>, and <code>k</code>) require constant space (O(1)).</p>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The overall space complexity is (O(n)), due to the space required for the <code>ans</code> array.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently maximizes the total reward by selecting the best tasks from two lists. It works by calculating the difference in rewards between the two lists, sorting the tasks based on this difference, and selecting tasks from the sorted list to maximize the total reward. The algorithm runs in (O(n \log n)) time due to the sorting step, making it suitable for large inputs. The space complexity is (O(n)), which is also efficient. The solution ensures that the best <code>k</code> tasks are selected from <code>r1</code> while the remaining tasks are selected from <code>r2</code>.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1036s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -254,7 +444,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2612"  class="external-link" target="_blank" rel="noopener">LeetCode #2612: Minimum Reverse Operations</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2614"  class="external-link" target="_blank" rel="noopener">LeetCode #2614: Prime In Diagonal</a></th>
       </tr>
   </thead>
   <tbody>
@@ -296,7 +486,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -247,7 +247,183 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> arr;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1038s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given an array <code>nums</code> of size <code>n</code>, and we need to compute a new array <code>arr</code> such that for each element <code>arr[i]</code> in the array, it stores the sum of the absolute differences between <code>nums[i]</code> and each of its occurrences to the left and right in the array. The value at <code>arr[i]</code> will represent how far each occurrence of <code>nums[i]</code> is from the current index <code>i</code> in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, a brute force approach that checks each index against all other indices would be too slow, especially for large input sizes. Instead, we can leverage data structures to store cumulative information and reduce redundant computations. Specifically, we will use two passes through the array and two hash maps (<code>mp</code> and <code>cnt</code>) to compute the required distances efficiently in linear time.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>:
+We start by initializing a few variables:
+<ul>
+<li><code>mp</code>: This unordered map will store the cumulative sum of indices for each number in the array as we iterate through the array.</li>
+<li><code>cnt</code>: This unordered map will track how many times each number has been encountered so far.</li>
+<li><code>arr</code>: This vector will store the final results (i.e., the sum of absolute differences for each index in <code>nums</code>).</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> mp, cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> arr(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><p>Here, we initialize <code>mp</code> and <code>cnt</code> as empty hash maps. <code>arr</code> is initialized with all zeros, and its size is equal to the size of the input array <code>nums</code>.</p>
+<ol start="2">
+<li>
+<p><strong>First Pass - Left Side Calculation</strong>:
+In the first loop, we traverse the array from left to right. For each index <code>i</code>, we compute the sum of the absolute differences between the current element <code>nums[i]</code> and all previous occurrences of <code>nums[i]</code>.</p>
+<p>The formula for calculating the sum of the absolute differences for the current index <code>i</code> is:</p>
+<ul>
+<li><code>arr[i] = cnt[nums[i]] * i - mp[nums[i]]</code></li>
+</ul>
+<p>Here:</p>
+<ul>
+<li><code>cnt[nums[i]]</code> keeps track of how many times <code>nums[i]</code> has appeared so far (since the previous index).</li>
+<li><code>mp[nums[i]]</code> stores the cumulative sum of indices where <code>nums[i]</code> appeared before index <code>i</code>. By multiplying the count by <code>i</code> and subtracting the cumulative sum of indices, we calculate the sum of absolute differences for all the previous occurrences of <code>nums[i]</code>.</li>
+</ul>
+<p>After calculating <code>arr[i]</code>, we update the <code>mp</code> and <code>cnt</code> maps to include the current index <code>i</code>:</p>
+<ul>
+<li><code>mp[nums[i]] += i</code>: Update the cumulative sum of indices.</li>
+<li><code>cnt[nums[i]] += 1</code>: Increment the count of occurrences of <code>nums[i]</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    arr[i] <span style="color:#f92672">=</span> cnt[nums[i]] <span style="color:#f92672">*</span> i <span style="color:#f92672">-</span> mp[nums[i]];
+</span></span><span style="display:flex;"><span>    mp[nums[i]] <span style="color:#f92672">+=</span> i;
+</span></span><span style="display:flex;"><span>    cnt[nums[i]] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="3">
+<li>
+<p><strong>Second Pass - Right Side Calculation</strong>:
+After the first pass, we have computed the sum of absolute differences for each index on the left side of <code>nums[i]</code>. Now we need to compute the distances for the right side (i.e., for indices after <code>i</code>).</p>
+<p>In the second loop, we traverse the array from right to left. Similar to the first pass, we update <code>arr[i]</code> by adding the sum of absolute differences from all occurrences of <code>nums[i]</code> on the right side.</p>
+<p>The formula for the right-side distance is:</p>
+<ul>
+<li><code>arr[i] += mp[nums[i]] - cnt[nums[i]] * i</code></li>
+</ul>
+<p>Here:</p>
+<ul>
+<li><code>mp[nums[i]]</code> holds the cumulative sum of indices for <code>nums[i]</code> from the right side.</li>
+<li><code>cnt[nums[i]] * i</code> accounts for the total contribution of the right-side elements to the absolute differences.</li>
+</ul>
+<p>After updating <code>arr[i]</code>, we update the <code>mp</code> and <code>cnt</code> maps again:</p>
+<ul>
+<li><code>mp[nums[i]] += i</code>: Update the cumulative sum of indices.</li>
+<li><code>cnt[nums[i]] += 1</code>: Increment the count of occurrences of <code>nums[i]</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mp.clear(), cnt.clear();        
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    arr[i] <span style="color:#f92672">+=</span> mp[nums[i]] <span style="color:#f92672">-</span> cnt[nums[i]] <span style="color:#f92672">*</span> i;
+</span></span><span style="display:flex;"><span>    mp[nums[i]] <span style="color:#f92672">+=</span> i;
+</span></span><span style="display:flex;"><span>    cnt[nums[i]] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="4">
+<li><strong>Final Result</strong>:
+After both passes, the <code>arr</code> array will contain the sum of the absolute differences for each element <code>nums[i]</code> with respect to all other occurrences of <code>nums[i]</code> to the left and right. The function returns the array <code>arr</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> arr;
+</span></span></code></pre></div><h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>First Pass (Left-to-Right)</strong>:</p>
+<ul>
+<li>We traverse the array <code>nums</code> once, performing constant-time operations (map lookups and updates) at each index. Thus, the time complexity of the first pass is (O(n)), where <code>n</code> is the size of the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Pass (Right-to-Left)</strong>:</p>
+<ul>
+<li>Similarly, the second pass also requires traversing the array once and performing constant-time operations at each index. Thus, the time complexity of the second pass is also (O(n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>:</p>
+<ul>
+<li>Since both passes are linear, the overall time complexity is (O(n)).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Space for Maps (<code>mp</code> and <code>cnt</code>)</strong>:</p>
+<ul>
+<li>The two maps (<code>mp</code> and <code>cnt</code>) store information about the elements in the array, and in the worst case, they store data for all distinct elements. Thus, the space complexity for these maps is (O(n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space for Output Array <code>arr</code></strong>:</p>
+<ul>
+<li>We use an additional array <code>arr</code> of size <code>n</code> to store the results. This also contributes (O(n)) space.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>:</p>
+<ul>
+<li>The overall space complexity is (O(n)), as both the maps and the output array require linear space.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the sum of absolute differences between each element and all its occurrences in the array using two linear passes through the array. By utilizing hash maps to store cumulative information about each element’s index and count, we avoid the need for nested loops, resulting in an optimal (O(n)) time complexity solution. This makes the approach scalable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1038s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -301,7 +477,6 @@
 
       </div>
 
-      
 
       <footer>
         

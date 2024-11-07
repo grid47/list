@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,173 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> num1<span style="color:#f92672">+</span>num2;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1006s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires you to split the digits of a given integer <code>num</code> into two numbers such that the sum of these two numbers is minimized. The approach involves sorting the digits of the number and then distributing them in an alternating manner between the two numbers, where each number is constructed from the digits to ensure the sum is minimized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the goal is to divide the digits of the input number into two integers in such a way that their sum is minimized. The strategy is to sort the digits in ascending order and then alternate the digits between the two numbers. This ensures that the smaller digits are placed in the higher place values, which minimizes the overall sum of the two numbers. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li><strong>Extract digits</strong>: Extract all digits from the given number.</li>
+<li><strong>Sort digits</strong>: Sort the digits in ascending order to ensure the smallest digits are used in the most significant positions for the final numbers.</li>
+<li><strong>Distribute digits</strong>: Distribute the digits alternatively between two numbers, ensuring that digits are added to the numbers in a way that minimizes the sum of these two numbers.</li>
+<li><strong>Reconstruct numbers</strong>: After distributing the digits, reconstruct the two numbers.</li>
+<li><strong>Calculate the sum</strong>: The final result will be the sum of these two reconstructed numbers.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step to understand the logic:</p>
+<h4 id="1-extracting-digits">
+  1. <strong>Extracting Digits</strong>:
+  <a class="heading-link" href="#1-extracting-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, num2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(num){
+</span></span><span style="display:flex;"><span>    v.push_back(num<span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The code begins by initializing two variables <code>num1</code> and <code>num2</code> to hold the two numbers we will form.</li>
+<li>The variable <code>x</code> is used to track the place value (1, 10, 100, etc.) for the digits in the final numbers.</li>
+<li>A vector <code>v</code> is used to store the digits of the given number <code>num</code>.</li>
+<li>The <code>while</code> loop extracts the digits of <code>num</code> one by one, using the modulus operator (<code>% 10</code>) to get the least significant digit and dividing <code>num</code> by 10 to remove the digit. This continues until <code>num</code> becomes 0.</li>
+</ul>
+<h4 id="2-sorting-digits">
+  2. <strong>Sorting Digits</strong>:
+  <a class="heading-link" href="#2-sorting-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(v.begin(), v.end());
+</span></span></code></pre></div><ul>
+<li>After extracting the digits, they are stored in the vector <code>v</code>. We then sort the digits in ascending order using the <code>sort</code> function. This ensures that the smallest digits are positioned at the beginning of the vector, which is crucial for minimizing the final sum of the two numbers.</li>
+</ul>
+<h4 id="3-reconstructing-the-numbers">
+  3. <strong>Reconstructing the Numbers</strong>:
+  <a class="heading-link" href="#3-reconstructing-the-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>i: v){
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">+=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After sorting the digits, the code reconstructs the number by iterating through the sorted vector <code>v</code> and adding each digit to the variable <code>num</code>.</li>
+<li>The variable <code>num</code> is multiplied by 10 each time to shift the previously added digits to the left, and the current digit <code>i</code> is added to <code>num</code> to form the reconstructed number.</li>
+</ul>
+<h4 id="4-distributing-the-digits">
+  4. <strong>Distributing the Digits</strong>:
+  <a class="heading-link" href="#4-distributing-the-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(num){
+</span></span><span style="display:flex;"><span>    num1 <span style="color:#f92672">+=</span> x<span style="color:#f92672">*</span>(num<span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    num2 <span style="color:#f92672">+=</span> x<span style="color:#f92672">*</span>(num<span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Now that we have the sorted number, the code proceeds to distribute the digits between <code>num1</code> and <code>num2</code>. This is done by alternating the digits between the two numbers.</li>
+<li>The <code>while(num)</code> loop iterates through the digits of <code>num</code>, and in each iteration:
+<ul>
+<li>The least significant digit (<code>num % 10</code>) is added to <code>num1</code> and multiplied by <code>x</code> to maintain the correct place value.</li>
+<li>The number is divided by 10 to remove the digit just added.</li>
+<li>The next digit is added to <code>num2</code> and similarly processed.</li>
+<li>The <code>x</code> value is multiplied by 10 in each iteration to adjust the place value (1, 10, 100, etc.) for the digits.</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-return-the-final-result">
+  5. <strong>Return the Final Result</strong>:
+  <a class="heading-link" href="#5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> num1 <span style="color:#f92672">+</span> num2;
+</span></span></code></pre></div><ul>
+<li>After distributing all the digits, the function returns the sum of <code>num1</code> and <code>num2</code>, which is the final result.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Extracting digits</strong>: Extracting the digits of <code>num</code> requires iterating through the number&rsquo;s digits, which takes <code>O(d)</code>, where <code>d</code> is the number of digits in the number. Since the number has at most <code>O(log(num))</code> digits, this step takes <code>O(log(num))</code> time.</li>
+<li><strong>Sorting digits</strong>: Sorting the digits in the vector <code>v</code> takes <code>O(d log d)</code>, where <code>d</code> is the number of digits. Again, since <code>d</code> is proportional to <code>log(num)</code>, the sorting step takes <code>O(log(num) * log(log(num)))</code> time.</li>
+<li><strong>Distributing digits</strong>: The distribution of digits between <code>num1</code> and <code>num2</code> requires iterating through all the digits, which takes <code>O(d)</code> time. This step takes <code>O(log(num))</code> time.</li>
+</ol>
+<p>Thus, the total time complexity is dominated by the sorting step and is <strong>O(log(num) * log(log(num)))</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is mainly due to the vector <code>v</code> that stores the digits of <code>num</code>. The space required for <code>v</code> is proportional to the number of digits in <code>num</code>, which is <code>O(log(num))</code>.</li>
+<li>There are no other significant space requirements in the algorithm.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(log(num))</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by extracting the digits from the given number, sorting them, and distributing them between two numbers. The final result is the sum of these two numbers, which minimizes the sum due to the optimal distribution of digits. The time complexity of <strong>O(log(num) * log(log(num)))</strong> and space complexity of <strong>O(log(num))</strong> make this approach scalable and efficient for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1006s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +460,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -238,7 +238,196 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mtx[k][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1248s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are asked to compute the value of a system after <code>k</code> seconds. The system has <code>n</code> distinct states, and each second, the state of the system can evolve depending on the previous states. The challenge is to determine the state of the system after <code>k</code> seconds given the rules of evolution.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem leverages dynamic programming (DP) to iteratively compute the possible values at each second and for each state. This approach is efficient and ensures that we can solve the problem within time constraints.</p>
+<p>To explain this approach in detail:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Table (<code>mtx</code>)</strong>:
+We use a dynamic programming table, <code>mtx[i][j]</code>, where <code>i</code> represents the time step and <code>j</code> represents the state. The value stored in <code>mtx[i][j]</code> represents the value of the system at time <code>i</code> in state <code>j</code>.</p>
+</li>
+<li>
+<p><strong>Base Case Initialization</strong>:
+Initially, at time <code>0</code> (<code>i = 0</code>), the system starts in state <code>j = 0</code>, meaning all states are initialized to 1 at time <code>0</code>. This is done by initializing the first row of the matrix with <code>1</code> values.</p>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:
+For each time step <code>i</code> from <code>1</code> to <code>k</code>, and for each state <code>j</code> from <code>1</code> to <code>n-1</code>, we compute the value of <code>mtx[i][j]</code> as the sum of the value from the previous time step <code>mtx[i-1][j]</code> (the same state at the previous time) and the value from the same time step but the previous state <code>mtx[i][j-1]</code>. This is the recursive relation that allows the system to evolve over time.</p>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>:
+As the value of the system can grow large, every computed value is taken modulo <code>10^9 + 7</code> (denoted by <code>mod</code>). This ensures that the values stay within a manageable range.</p>
+</li>
+<li>
+<p><strong>Result</strong>:
+After iterating through all the time steps and states, the value at <code>mtx[k][n-1]</code> gives the final result, which is the value of the system after <code>k</code> seconds in the last state.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;  <span style="color:#75715e">// The modulus value to ensure the result remains manageable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Function to calculate the value of the system after k seconds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">valueAfterKSeconds</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Create a DP table with (k+1) rows and n columns, initialized to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&gt;</span> mtx(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Fill the DP table row by row for each second
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// The value of the system at time i, state j
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#75715e">// Is the sum of the value at the same time at the previous state and the previous time at the same state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mtx[i][j] <span style="color:#f92672">=</span> (mtx[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">+</span> mtx[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">%</span> mod;   
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Return the value at time k in the last state (n-1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> mtx[k][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="detailed-breakdown-of-each-step">
+  Detailed Breakdown of Each Step:
+  <a class="heading-link" href="#detailed-breakdown-of-each-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization of Modulo</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span></code></pre></div><p>This line initializes the modulo value to (10^9 + 7). This value is used to prevent integer overflow during calculations, as the result may grow large with each second. The modulo operation ensures that the values are always within the bounds of a standard 32-bit integer.</p>
+</li>
+<li>
+<p><strong>DP Table Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&gt;</span> mtx(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><p>Here, we create a 2D vector <code>mtx</code> to represent the DP table. The table has <code>k+1</code> rows (for each second from <code>0</code> to <code>k</code>) and <code>n</code> columns (for each state from <code>0</code> to <code>n-1</code>). All values are initialized to <code>1</code> initially, as each state starts with a value of 1 at the start.</p>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mtx[i][j] <span style="color:#f92672">=</span> (mtx[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">+</span> mtx[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This double loop iterates over each time step from <code>1</code> to <code>k</code> and each state from <code>1</code> to <code>n-1</code>. The value at <code>mtx[i][j]</code> is computed by adding the value from the previous time step at the same state (<code>mtx[i-1][j]</code>) and the value from the same time step at the previous state (<code>mtx[i][j-1]</code>). The sum is then taken modulo <code>10^9 + 7</code>.</p>
+</li>
+<li>
+<p><strong>Returning the Final Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mtx[k][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><p>After all <code>k</code> seconds have been simulated, the result of the system at time <code>k</code> in the last state (<code>n-1</code>) is returned.</p>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to understand how this code works.</p>
+<h4 id="input-1">
+  Input 1:
+  <a class="heading-link" href="#input-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>We are interested in the value of the system after 3 seconds with 5 possible states. The table <code>mtx</code> starts as:</p>
+<pre tabindex="0"><code>Initial mtx:
+[
+  [1, 1, 1, 1, 1],   // At time 0, all states are 1
+  [1, 1, 1, 1, 1],   // At time 1, still 1
+  [1, 1, 1, 1, 1],   // At time 2, still 1
+  [1, 1, 1, 1, 1]    // At time 3, still 1
+]
+</code></pre><p>Now, we proceed with the iterations:</p>
+<ul>
+<li>At <code>i = 1</code>, <code>mtx[1][j]</code> values are updated based on the values from time 0.</li>
+<li>Similarly, for <code>i = 2</code> and <code>i = 3</code>, each value is updated using the recursive relation.</li>
+</ul>
+<p>The final result is the value in <code>mtx[3][4]</code>.</p>
+<h4 id="input-2">
+  Input 2:
+  <a class="heading-link" href="#input-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>For <code>n = 3</code> and <code>k = 2</code>, the table <code>mtx</code> evolves step by step, and the result will be stored in <code>mtx[2][2]</code>.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(k * n)</strong> because we iterate over the <code>k</code> time steps and for each time step, we iterate over the <code>n</code> states.</p>
+<ul>
+<li>The outer loop runs for <code>k</code> iterations.</li>
+<li>The inner loop runs for <code>n</code> iterations.
+Thus, the total time complexity is <strong>O(k * n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(k * n)</strong> because we maintain a DP table <code>mtx</code> of size <code>(k+1) x n</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the value of the system after <code>k</code> seconds using dynamic programming. By filling a table iteratively, each state at each second is computed based on previous states and seconds, ensuring that we can solve the problem in linear time relative to the number of states and seconds. The use of modulo <code>10^9 + 7</code> ensures that the values remain manageable, and the solution works efficiently even for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1248s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -250,7 +439,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3180"  class="external-link" target="_blank" rel="noopener">LeetCode #3180: Maximum Total Reward Using Operations I</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3190"  class="external-link" target="_blank" rel="noopener">LeetCode #3190: Find Minimum Operations to Make All Elements Divisible by Three</a></th>
       </tr>
   </thead>
   <tbody>
@@ -292,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,158 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1180s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand asks us to determine the minimum number of groups needed to assign a list of integers such that every group has a valid distribution of integers. The goal is to ensure that each group is as balanced as possible based on the frequencies of the integers in the list, and we want to minimize the total number of groups required. Specifically, the frequency distribution of the integers must meet the conditions for valid assignments, and the task is to find the least number of groups needed to accomplish this.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to perform the following steps:</p>
+<ol>
+<li>
+<p><strong>Count the Frequency of Each Number</strong>: The first task is to determine how many times each number appears in the given array. This is essential because it dictates how we can group the numbers in a valid way.</p>
+</li>
+<li>
+<p><strong>Determine the Minimum Group Size</strong>: The next step is to evaluate the minimum group size (<code>g</code>) where the numbers can be split into valid groups. A valid group has to respect the condition that no number can appear more times than it is allowed in a group. We aim to minimize the group size while still being able to create valid groupings.</p>
+</li>
+<li>
+<p><strong>Optimize Group Splitting</strong>: Once we know the frequency distribution of the numbers, we attempt to split the numbers into as few groups as possible while adhering to the frequency constraints. The <code>split()</code> function will help us determine the number of groups needed for a given group size.</p>
+</li>
+<li>
+<p><strong>Iterative Search for the Optimal Group Size</strong>: Starting with a relatively large group size and iteratively decreasing it, we check if the numbers can still be grouped validly. The goal is to find the smallest group size where a valid grouping can still be made.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-frequency-count-of-each-number">
+  Step 1: Frequency Count of Each Number
+  <a class="heading-link" href="#step-1-frequency-count-of-each-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> n : nums)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>cnt[n];
+</span></span></code></pre></div><ul>
+<li>We first create an <code>unordered_map</code> called <code>cnt</code> to store the frequency of each number in the list <code>nums</code>.</li>
+<li>We iterate through the input array <code>nums</code>, incrementing the count for each number. This step essentially builds a frequency map where the keys are the unique numbers in the array, and the values are their respective frequencies.</li>
+</ul>
+<h4 id="step-2-determine-the-minimum-group-size">
+  Step 2: Determine the Minimum Group Size
+  <a class="heading-link" href="#step-2-determine-the-minimum-group-size">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> g <span style="color:#f92672">=</span> min_element(begin(cnt), end(cnt), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p1, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p2){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> p1.second <span style="color:#f92672">&lt;</span> p2.second;
+</span></span><span style="display:flex;"><span>})<span style="color:#f92672">-&gt;</span>second;
+</span></span></code></pre></div><ul>
+<li>In this step, we find the number with the minimum frequency by using the <code>min_element</code> function. We look for the element with the smallest count, and <code>g</code> is assigned that count.</li>
+<li>This value <code>g</code> is the minimum frequency among the numbers, which sets an initial threshold for the smallest valid group size.</li>
+</ul>
+<h4 id="step-3-split-numbers-into-groups">
+  Step 3: Split Numbers into Groups
+  <a class="heading-link" href="#step-3-split-numbers-into-groups">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> groups <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, g <span style="color:#f92672">=</span> g1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>[_, c] <span style="color:#f92672">:</span> cnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> group_cnt <span style="color:#f92672">=</span> c <span style="color:#f92672">/</span> g1, last_group <span style="color:#f92672">=</span> c <span style="color:#f92672">%</span> g1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (last_group <span style="color:#f92672">&amp;&amp;</span> last_group <span style="color:#f92672">+</span> group_cnt <span style="color:#f92672">&lt;</span> g)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    groups <span style="color:#f92672">+=</span> group_cnt <span style="color:#f92672">+</span> (last_group <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> groups;
+</span></span></code></pre></div><ul>
+<li>The function <code>split()</code> attempts to split the numbers into groups of size <code>g1</code>. The parameters passed to the function are the frequency map <code>cnt</code> and the group size <code>g1</code>.</li>
+<li>We calculate how many full groups (<code>group_cnt</code>) can be made for each number&rsquo;s frequency (<code>c / g1</code>), and whether there is any leftover group (<code>last_group = c % g1</code>).</li>
+<li>If there is a leftover group and the number of groups formed is insufficient to meet the criteria (i.e., the leftover group is too small to form a valid group), the function returns <code>INT_MAX</code>, indicating that the group size <code>g1</code> is not feasible.</li>
+<li>Otherwise, we update the <code>groups</code> counter to reflect the number of groups formed for the given group size <code>g1</code>.</li>
+</ul>
+<h4 id="step-4-iterative-search-for-the-optimal-group-size">
+  Step 4: Iterative Search for the Optimal Group Size
+  <a class="heading-link" href="#step-4-iterative-search-for-the-optimal-group-size">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (; split(cnt, g <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> INT_MAX; <span style="color:#f92672">--</span>g) ;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">split</span>(cnt, g <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>The loop iteratively decreases the group size <code>g</code> starting from the initial value and tries to find the smallest valid group size. If the <code>split()</code> function returns <code>INT_MAX</code>, it means the group size is not valid, so we continue decreasing the group size.</li>
+<li>The loop stops when we find the smallest group size that allows the numbers to be split into valid groups, and the result is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Counting Frequencies</strong>: The time complexity of building the frequency map <code>cnt</code> is <code>O(n)</code>, where <code>n</code> is the number of elements in the input list <code>nums</code>.</li>
+<li><strong>Finding the Minimum Group Size</strong>: The time complexity of finding the minimum frequency using <code>min_element</code> is <code>O(k)</code>, where <code>k</code> is the number of unique elements in <code>cnt</code>.</li>
+<li><strong>Splitting into Groups</strong>: The time complexity of the <code>split()</code> function depends on the number of unique elements <code>k</code> and involves iterating over the frequency map. The worst-case time complexity for splitting is <code>O(k)</code>.</li>
+<li><strong>Iterative Search for the Optimal Group Size</strong>: In the worst case, the group size can range from <code>1</code> to <code>g1</code> (the maximum frequency), which leads to a total complexity of <code>O(g1 * k)</code> for the iterative search.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the iterative search, leading to a total time complexity of <code>O(g1 * k)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is primarily determined by the space used to store the frequency map <code>cnt</code>, which has a space complexity of <code>O(k)</code>, where <code>k</code> is the number of unique elements in <code>nums</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem of determining the minimum number of groups required for valid assignments of the input numbers. By leveraging frequency counting, group size optimization, and iterative search, the algorithm minimizes the number of groups while ensuring that the groupings adhere to the constraints. The approach is both time-efficient and space-efficient, making it suitable for larger input sizes. The use of <code>unordered_map</code> and <code>min_element</code> ensures that the frequency count and the search for valid group sizes are performed optimally. This solution provides an optimal balance between accuracy and efficiency, achieving the desired result with a manageable time complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1180s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -252,7 +403,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2911"  class="external-link" target="_blank" rel="noopener">LeetCode #2911: Minimum Changes to Make K Semi-palindromes</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2913"  class="external-link" target="_blank" rel="noopener">LeetCode #2913: Subarrays Distinct Element Sum of Squares I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -294,7 +445,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,169 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode795s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the largest <strong>variance</strong> in a given string <code>s</code>. The <strong>variance</strong> between two characters in the string is defined as the difference between their counts when considering all possible substrings that contain both characters. Specifically, the task is to find the largest difference in counts of two characters, taking into account whether the characters can alternate positions and still satisfy the variance condition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves examining all pairs of characters in the input string and calculating the variance for each pair. The idea is to compute how much more frequent one character can be than the other when considering all the substrings of the input string.</p>
+<p>We use a <strong>greedy approach</strong> to efficiently track the variance. For each pair of characters, we traverse the string and compute the variance based on how the characters alternate in the string. This method makes use of the following strategies:</p>
+<ol>
+<li>Iterate through every pair of characters in the string.</li>
+<li>Track the variance for each pair using a greedy approach while traversing the string.</li>
+<li>For each valid pair, maintain the largest variance encountered.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> num(s.begin(), s.end());
+</span></span></code></pre></div><ul>
+<li><code>ans</code>: This variable stores the largest variance encountered so far.</li>
+<li><code>num</code>: An unordered set is used to store all unique characters in the string <code>s</code>. This allows us to efficiently check every possible pair of characters in <code>s</code>.</li>
+</ul>
+<h4 id="step-2-nested-loops-to-generate-character-pairs">
+  Step 2: Nested Loops to Generate Character Pairs
+  <a class="heading-link" href="#step-2-nested-loops-to-generate-character-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> a: num)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> b: num) {
+</span></span></code></pre></div><ul>
+<li>The two nested <code>for</code> loops iterate over all possible pairs of distinct characters from the set <code>num</code>. We want to compute the variance for each possible combination of two characters <code>a</code> and <code>b</code> in the string <code>s</code>.</li>
+</ul>
+<h4 id="step-3-initialize-tracking-variables">
+  Step 3: Initialize Tracking Variables
+  <a class="heading-link" href="#step-3-initialize-tracking-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> var <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, first_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, has_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>var</code>: Tracks the variance, i.e., the difference in the count of character <code>a</code> and character <code>b</code> as we scan through the string.</li>
+<li><code>first_b</code>: A flag to indicate whether we’ve encountered the first <code>b</code> character.</li>
+<li><code>has_b</code>: A flag that is set to <code>true</code> once we’ve encountered at least one occurrence of the character <code>b</code>.</li>
+</ul>
+<h4 id="step-4-traverse-the-string-to-calculate-variance">
+  Step 4: Traverse the String to Calculate Variance
+  <a class="heading-link" href="#step-4-traverse-the-string-to-calculate-variance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: s) {
+</span></span><span style="display:flex;"><span>    var <span style="color:#f92672">+=</span> c <span style="color:#f92672">==</span> a;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c <span style="color:#f92672">==</span> b) {
+</span></span><span style="display:flex;"><span>        has_b <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(first_b <span style="color:#f92672">&amp;&amp;</span> var <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            first_b <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(<span style="color:#f92672">--</span>var <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            var <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            first_b <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, has_b<span style="color:#f92672">?</span> var: <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The inner <code>for</code> loop iterates through each character <code>c</code> in the string <code>s</code>.</li>
+<li>If the character <code>c</code> is equal to <code>a</code>, we increment <code>var</code>, indicating that the count of <code>a</code> has increased.</li>
+<li>If <code>c</code> is equal to <code>b</code>, we check whether we&rsquo;ve encountered the first <code>b</code> character or not:
+<ul>
+<li>If it&rsquo;s the first <code>b</code> and the variance is non-negative, we continue tracking.</li>
+<li>If the variance becomes negative, we reset it and start tracking again after this <code>b</code>.</li>
+</ul>
+</li>
+<li>After processing each character, we update the answer <code>ans</code> with the current variance <code>var</code>, but only if <code>b</code> has been encountered at least once (<code>has_b</code> is true). Otherwise, we reset the variance to 0.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After the nested loops finish, we return the largest variance found, which is stored in the variable <code>ans</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2)</strong>: The outer loops iterate over all pairs of distinct characters in the string. Since the number of distinct characters in the string is at most 26 (assuming English lowercase letters), this results in at most 26 x 26 iterations in the worst case. For each pair, we traverse the string once, so the time complexity for processing each character pair is O(n), where <code>n</code> is the length of the string.</li>
+<li>Therefore, the overall time complexity is <strong>O(26^2 * n) = O(n)</strong>, which simplifies to <strong>O(n)</strong> because the number of unique characters is constant and relatively small.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We store the unique characters in the unordered set <code>num</code>, which requires space proportional to the number of distinct characters in the string. In the worst case, there are 26 distinct characters, so the space complexity is <strong>O(26)</strong>, or <strong>O(1)</strong> in terms of practical usage since it&rsquo;s constant.</li>
+<li>The only other space used is for storing a few integer variables (<code>var</code>, <code>first_b</code>, <code>has_b</code>, and <code>ans</code>), all of which take constant space. Therefore, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the largest variance for any two characters in a string using a <strong>greedy approach</strong> with a sliding window mechanism. The algorithm checks all pairs of characters from the set of unique characters in the string, calculating the variance for each pair by traversing the string once for each pair. This ensures that the problem is solved in linear time, with an efficient use of space.</p>
+<p>The approach works well for problems involving counting or variance between characters and demonstrates how to use <strong>greedy algorithms</strong> and <strong>two-pointer techniques</strong> in string processing. Given the constraint that there are only a limited number of unique characters (at most 26 for lowercase English letters), this solution is both time-efficient and space-efficient for large strings.</p>
+<p>In summary, this algorithm is optimal for finding the largest variance between two characters in a string while maintaining a balance between time and space complexity, making it a suitable solution for competitive programming or real-world applications requiring efficient string analysis.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode795s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +457,6 @@
 
       </div>
 
-      
 
       <footer>
         

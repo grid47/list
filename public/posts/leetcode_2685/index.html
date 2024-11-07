@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -276,7 +276,198 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1071s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the number of &ldquo;complete components&rdquo; in a graph, where a complete component is a connected component where the number of edges is exactly equal to the number of vertices minus one (i.e., the graph is a tree). A tree with <code>k</code> nodes always has <code>k-1</code> edges, so this is the key property for determining whether a component is a tree.</p>
+<p>Given an undirected graph with <code>n</code> vertices and a list of <code>edges</code> that connect pairs of vertices, the task is to count how many connected components in the graph are &ldquo;complete,&rdquo; meaning they form a tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use the <strong>Union-Find (Disjoint Set Union)</strong> data structure, which helps efficiently manage and merge connected components in the graph. We extend this data structure to track the number of edges in each component, which is critical for determining whether a component is a tree. The approach can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Union-Find Data Structure</strong>: We need to efficiently find the parent of each node and merge two nodes into the same component. The union-find data structure supports two operations:</p>
+<ul>
+<li><strong>Find</strong>: To find the representative (or parent) of a node.</li>
+<li><strong>Union</strong>: To merge two components into one if they are not already connected.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Edges</strong>: Along with the parent, we also track the number of edges in each component, which is updated during the union operations.</p>
+</li>
+<li>
+<p><strong>Checking for Complete Components</strong>: After processing all the edges and merging components, we can check if each component is complete by verifying that the number of edges is exactly equal to the number of nodes in that component minus one.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-union-find-uf-class-definition">
+  Step 1: Union-Find (UF) Class Definition
+  <a class="heading-link" href="#step-1-union-find-uf-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, edge, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>UF</code> class represents the Union-Find data structure.</li>
+<li><code>par</code> is a vector that stores the parent of each node. Initially, each node is its own parent.</li>
+<li><code>edge</code> tracks the number of edges in each component.</li>
+<li><code>rnk</code> is used for <strong>union by rank</strong>, which helps optimize the union operation by attaching the smaller tree to the root of the larger tree.</li>
+</ul>
+<h4 id="step-2-the-join-operation-union">
+  Step 2: The <code>join</code> Operation (Union)
+  <a class="heading-link" href="#step-2-the-join-operation-union">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(i);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(j);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">!=</span> q) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (rnk[p] <span style="color:#f92672">&gt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>            rnk[p] <span style="color:#f92672">+=</span> rnk[q];
+</span></span><span style="display:flex;"><span>            par[q] <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            rnk[q] <span style="color:#f92672">+=</span> rnk[p];
+</span></span><span style="display:flex;"><span>            par[p] <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> edge[p] <span style="color:#f92672">+</span> edge[q] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        edge[p] <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>        edge[q] <span style="color:#f92672">=</span> e;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    edge[q]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>join</code> method performs the union of two components <code>i</code> and <code>j</code>. If they are in different components, it merges them.</li>
+<li><strong>Union by rank</strong>: The component with the higher rank becomes the parent of the other component. This helps keep the tree shallow, improving the efficiency of future operations.</li>
+<li>We also update the edge count for the merged components. If the components were already connected, we just increment the edge count of the parent.</li>
+</ul>
+<h4 id="step-3-the-find-operation-find-the-root-of-a-component">
+  Step 3: The <code>find</code> Operation (Find the Root of a Component)
+  <a class="heading-link" href="#step-3-the-find-operation-find-the-root-of-a-component">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> par[p]) <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> par[p] <span style="color:#f92672">=</span> find(par[p]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>find</code> method uses path compression to find the representative (or root) of a component.</li>
+<li>Path compression ensures that all nodes directly point to the root, optimizing future find operations.</li>
+</ul>
+<h4 id="step-4-the-countcompletecomponents-method">
+  Step 4: The <code>countCompleteComponents</code> Method
+  <a class="heading-link" href="#step-4-the-countcompletecomponents-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countCompleteComponents</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    UF uf <span style="color:#f92672">=</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : edges) {
+</span></span><span style="display:flex;"><span>        uf.join(e[<span style="color:#ae81ff">0</span>], e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pk;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> par <span style="color:#f92672">=</span> uf.find(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (pk.count(par)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        pk.insert(par);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> uf.edge[par];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (uf.rnk[par] <span style="color:#f92672">*</span> (uf.rnk[par] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> cnt) res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>countCompleteComponents</code> method initializes the Union-Find structure with <code>n</code> vertices.</li>
+<li>For each edge in the input, the <code>join</code> method is called to connect the vertices, updating the components&rsquo; edge counts.</li>
+<li>We then check each component to see if it forms a complete tree:
+<ul>
+<li>A component is complete if the number of edges is equal to the number of vertices minus one. This condition is checked using the formula <code>rnk[par] * (rnk[par] - 1) / 2 == cnt</code>, where <code>rnk[par]</code> is the size of the component and <code>cnt</code> is the number of edges.</li>
+</ul>
+</li>
+<li>If a component satisfies this condition, it is considered a complete component, and we increment the result counter.</li>
+<li>Finally, the method returns the count of complete components.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of the Union-Find operations is nearly constant, thanks to the <strong>union by rank</strong> and <strong>path compression</strong> optimizations. The amortized time complexity for each <code>find</code> and <code>join</code> operation is <strong>O(α(n))</strong>, where α is the <strong>inverse Ackermann function</strong>, which grows very slowly.</li>
+<li>For <code>m</code> edges and <code>n</code> vertices, the overall time complexity is <strong>O(m * α(n))</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, as we store the parent (<code>par</code>), edge count (<code>edge</code>), and rank (<code>rnk</code>) arrays, each of size <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem using the Union-Find data structure, which allows us to handle the merging and checking of connected components in near constant time. By tracking both the parent and the number of edges in each component, we can easily determine whether a component is a tree (i.e., has exactly <code>n-1</code> edges). The approach is optimized with <strong>union by rank</strong> and <strong>path compression</strong>, ensuring that the solution scales well even for large graphs. The complexity of the solution is manageable and performs well within the problem&rsquo;s constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1071s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +479,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2686"  class="external-link" target="_blank" rel="noopener">LeetCode #2686: Immediate Food Delivery III</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2696"  class="external-link" target="_blank" rel="noopener">LeetCode #2696: Minimum String Length After Removing Substrings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -330,7 +521,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,195 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1034s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the length of the longest balanced substring within a binary string. A balanced substring is one where the number of <code>0</code>s is equal to the number of <code>1</code>s, and these <code>0</code>s and <code>1</code>s appear in the correct order, i.e., all <code>0</code>s come before <code>1</code>s.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a greedy approach with two counters that track the number of <code>0</code>s and <code>1</code>s in the current substring. The idea is to traverse through the string, updating the counts and checking for balanced substrings as we go. We aim to maintain a substring where the count of <code>0</code>s and <code>1</code>s is the same, and the <code>0</code>s appear before the <code>1</code>s.</p>
+<h3 id="detailed-explanation">
+  Detailed Explanation
+  <a class="heading-link" href="#detailed-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Problem Understanding</strong>:</p>
+<ul>
+<li>A &ldquo;balanced&rdquo; substring is defined as having equal numbers of <code>0</code>s and <code>1</code>s.</li>
+<li>For example, in the string <code>&quot;0011&quot;</code>, the substring <code>&quot;00&quot;</code> and <code>&quot;11&quot;</code> together form a balanced substring.</li>
+<li>However, a string like <code>&quot;0101&quot;</code> isn&rsquo;t considered balanced because the <code>1</code>s are not consecutive to the <code>0</code>s.</li>
+</ul>
+</li>
+<li>
+<p><strong>Core Idea</strong>:</p>
+<ul>
+<li>We iterate over the string while keeping track of two variables:
+<ul>
+<li><code>cnt[0]</code>: This tracks the number of consecutive <code>0</code>s.</li>
+<li><code>cnt[1]</code>: This tracks the number of consecutive <code>1</code>s.</li>
+</ul>
+</li>
+<li>Whenever we encounter a <code>0</code>, we check if there are any unmatched <code>1</code>s. If there are, we reset the counts since a balanced substring can no longer be formed starting from the current position.</li>
+<li>If we encounter a <code>1</code>, we compare the counts of <code>1</code>s and <code>0</code>s. If there are fewer <code>1</code>s than <code>0</code>s, we increment the count of <code>1</code>s.</li>
+<li>Each time the counts of <code>0</code>s and <code>1</code>s become equal, we update the answer (<code>ans</code>) to keep track of the maximum balanced length found.</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps Involved</strong>:</p>
+<ul>
+<li>Initialize <code>cnt[0]</code> and <code>cnt[1]</code> to track the counts of <code>0</code>s and <code>1</code>s, respectively.</li>
+<li>Traverse the string from left to right:
+<ul>
+<li>If the current character is <code>0</code>, reset the counts if any <code>1</code>s were encountered before.</li>
+<li>If the current character is <code>1</code>, check the current counts of <code>0</code>s and <code>1</code>s. If the number of <code>1</code>s is less than the number of <code>0</code>s, increment the count for <code>1</code>. Otherwise, reset the counts and start afresh.</li>
+</ul>
+</li>
+<li>After processing each character, calculate the length of the balanced substring as <code>cnt[1] * 2</code> (since both <code>0</code>s and <code>1</code>s are counted), and update the answer accordingly.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initial-setup">
+  1. <strong>Initial Setup</strong>:
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> zr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {};
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>:
+<ul>
+<li><code>zr</code> is a placeholder that could be used for debugging, though it is not used in the current logic.</li>
+<li><code>ans</code> stores the length of the longest balanced substring found so far.</li>
+<li><code>cnt[2]</code> is an array with two elements to count the number of <code>0</code>s and <code>1</code>s. <code>cnt[0]</code> tracks <code>0</code>s, and <code>cnt[1]</code> tracks <code>1</code>s.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-loop-through-the-string">
+  2. <strong>Loop Through the String</strong>:
+  <a class="heading-link" href="#2-loop-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt[<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            cnt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cnt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                    
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        cnt[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> cnt[<span style="color:#ae81ff">0</span>]) cnt[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            cnt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            cnt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(cnt[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, ans);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>:
+<ul>
+<li>We iterate over the string <code>s</code> to process each character.</li>
+<li>If the current character is <code>0</code>:
+<ul>
+<li>We check if there are any unmatched <code>1</code>s (i.e., <code>cnt[1] &gt; 0</code>). If so, reset both counters as the substring can no longer be balanced starting from the current position.</li>
+<li>Increment the count of <code>0</code>s (<code>cnt[0]</code>).</li>
+</ul>
+</li>
+<li>If the current character is <code>1</code>:
+<ul>
+<li>If there are fewer <code>1</code>s than <code>0</code>s, increment the count of <code>1</code>s (<code>cnt[1]</code>).</li>
+<li>If the count of <code>1</code>s is greater than or equal to the count of <code>0</code>s, reset the counters because the substring can&rsquo;t be balanced further.</li>
+</ul>
+</li>
+<li>After processing each character, calculate the current balanced substring length (<code>cnt[1] * 2</code>) and update the <code>ans</code> variable with the maximum found so far.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-return-the-final-result">
+  3. <strong>Return the Final Result</strong>:
+  <a class="heading-link" href="#3-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: After iterating through the string, the variable <code>ans</code> holds the length of the longest balanced substring found. This value is returned as the result.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Loop through the string</strong>: We iterate over each character in the string exactly once. Thus, the time complexity is (O(n)), where (n) is the length of the string.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity of the solution is (O(n)), where (n) is the length of the input string.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Auxiliary Space</strong>: We only use a fixed amount of extra space for the array <code>cnt</code> and the variables <code>zr</code> and <code>ans</code>, so the space complexity is (O(1)).</li>
+</ul>
+<h4 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This solution uses a greedy approach to efficiently find the longest balanced substring in a binary string. The approach processes each character once and updates the balance count of <code>0</code>s and <code>1</code>s as it goes. By using two counters (<code>cnt[0]</code> for <code>0</code>s and <code>cnt[1]</code> for <code>1</code>s), the solution ensures that the substring remains balanced, and the longest balanced substring is tracked and updated. The overall time complexity of (O(n)) makes this approach efficient even for larger strings, and the space complexity of (O(1)) ensures minimal memory usage.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1034s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

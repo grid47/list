@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -225,7 +225,236 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> idx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1247s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the position of a child after <code>k</code> steps in a line of <code>n</code> children arranged from left to right. The child begins at position <code>0</code> (the first child) and moves according to a pattern. If the child is at either end of the line, the movement direction is reversed. The problem requires us to compute the final position of the child after <code>k</code> steps.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can solve this problem by simulating the movement of the child based on the given rules. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Direction Control</strong>: We keep track of the direction the child is moving. Initially, the child moves forward (right). If the child is at either end of the line (i.e., position <code>0</code> or <code>n-1</code>), the direction is reversed. This is handled by the <code>up</code> variable, which toggles between <code>true</code> and <code>false</code>.</p>
+</li>
+<li>
+<p><strong>Tracking the Child&rsquo;s Position</strong>: The child starts at position <code>0</code> (the first child). As we simulate the steps, we adjust the child&rsquo;s position either by incrementing or decrementing the index (<code>idx</code>) based on the current direction.</p>
+</li>
+<li>
+<p><strong>Simulating the Steps</strong>: We iterate <code>k</code> times, each time adjusting the child&rsquo;s position based on the current direction. If the child reaches either end of the line, the direction is reversed.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After simulating <code>k</code> steps, the variable <code>idx</code> holds the final position of the child.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numberOfChild(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> up <span style="color:#f92672">=</span> false, idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initial direction (false for left, true for right), start at position 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Iterate through the k steps.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// If the child is at the edge, reverse direction.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> idx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) up <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>up;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Move the child based on the current direction.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (up) idx<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move right if direction is true.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span>    idx<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Move left if direction is false.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Return the final position of the child.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> idx;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Let’s break down each part of the code:</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> up <span style="color:#f92672">=</span> false, idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>up</code>: This boolean variable controls the direction of movement. Initially, it is set to <code>false</code>, which means the child will start moving left (decreasing the index).</li>
+<li><code>idx</code>: This variable tracks the child&rsquo;s current position. Initially, the child starts at position <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through <code>k</code> Steps</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>This loop runs <code>k</code> times, simulating each step the child takes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Direction Reversal Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> idx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) up <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>up;
+</span></span></code></pre></div><ul>
+<li>If the child is at the leftmost position (<code>idx == 0</code>) or the rightmost position (<code>idx == n - 1</code>), the direction is reversed. The <code>up</code> variable is toggled to change the direction of movement. If it was <code>true</code> (moving right), it becomes <code>false</code> (moving left), and vice versa.</li>
+</ul>
+</li>
+<li>
+<p><strong>Moving the Child</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (up) idx<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move right if direction is true.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">else</span>    idx<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Move left if direction is false.
+</span></span></span></code></pre></div><ul>
+<li>If the direction is <code>true</code> (moving right), we increment <code>idx</code> to move the child to the right.</li>
+<li>If the direction is <code>false</code> (moving left), we decrement <code>idx</code> to move the child to the left.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Final Position</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> idx;
+</span></span></code></pre></div><ul>
+<li>After all <code>k</code> steps, the final position of the child is returned, which is stored in the <code>idx</code> variable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through an example to see how this code works.</p>
+<h4 id="input-1">
+  Input 1:
+  <a class="heading-link" href="#input-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>
+</span></span></code></pre></div><ul>
+<li>The child starts at position <code>0</code> and moves as follows:
+<ol>
+<li>Move right (position 1).</li>
+<li>Move right (position 2).</li>
+<li>Move right (position 3).</li>
+<li>Move right (position 4).</li>
+<li>Move left (position 3).</li>
+<li>Move left (position 2).</li>
+<li>Move left (position 1).</li>
+</ol>
+</li>
+<li>The final position after <code>7</code> steps is <code>1</code>.</li>
+</ul>
+<h4 id="input-2">
+  Input 2:
+  <a class="heading-link" href="#input-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><ul>
+<li>The child starts at position <code>0</code> and moves as follows:
+<ol>
+<li>Move right (position 1).</li>
+<li>Move right (position 2).</li>
+<li>Move right (position 3).</li>
+<li>Move right (position 4).</li>
+<li>Move left (position 3).</li>
+<li>Move left (position 2).</li>
+<li>Move left (position 1).</li>
+<li>Move left (position 0).</li>
+<li>Move right (position 1).</li>
+<li>Move right (position 2).</li>
+</ol>
+</li>
+<li>The final position after <code>10</code> steps is <code>2</code>.</li>
+</ul>
+<h4 id="input-3">
+  Input 3:
+  <a class="heading-link" href="#input-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>, k <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+</span></span></code></pre></div><ul>
+<li>The child starts at position <code>0</code> and moves as follows:
+<ol>
+<li>Move right (position 1).</li>
+<li>Move right (position 2).</li>
+<li>Move right (position 3).</li>
+<li>Move right (position 4).</li>
+<li>Move right (position 5).</li>
+<li>Move left (position 4).</li>
+<li>Move left (position 3).</li>
+<li>Move left (position 2).</li>
+<li>Move left (position 1).</li>
+<li>Move left (position 0).</li>
+<li>Move right (position 1).</li>
+<li>Move right (position 2).</li>
+</ol>
+</li>
+<li>The final position after <code>12</code> steps is <code>2</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k)</strong>: The loop runs <code>k</code> times, and in each iteration, the child either moves left or right and checks the boundary conditions (which are constant time operations). Therefore, the time complexity is <strong>O(k)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We are only using a constant amount of extra space (<code>up</code>, <code>idx</code>), so the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the final position of the child after <code>k</code> steps. By keeping track of the direction of movement and handling boundary conditions (when the child reaches the edges), we can simulate the movement in linear time. The time complexity of <strong>O(k)</strong> ensures that this approach will perform well even for large inputs. The constant space complexity makes the solution efficient in terms of memory usage as well.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1247s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +508,6 @@
 
       </div>
 
-      
 
       <footer>
         

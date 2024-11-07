@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,166 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode979s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks whether it is possible to transform the pair of integers <code>(x, y)</code> into <code>(1, 1)</code> using the following operations:</p>
+<ol>
+<li>If <code>x</code> is even, divide <code>x</code> by 2.</li>
+<li>If <code>y</code> is even, divide <code>y</code> by 2.</li>
+<li>If <code>x &gt; y</code>, subtract <code>y</code> from <code>x</code>.</li>
+<li>If <code>x &lt; y</code>, subtract <code>x</code> from <code>y</code>.</li>
+</ol>
+<p>You need to determine whether it&rsquo;s possible to apply these operations repeatedly until you reach <code>(1, 1)</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be approached recursively. The key insight is that, at each step, we are reducing either <code>x</code> or <code>y</code> by halving or subtracting. We continue performing these operations until we either reach <code>(1, 1)</code> or determine that it&rsquo;s impossible to do so.</p>
+<ol>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If <code>x == 1</code> and <code>y == 1</code>, we return <code>true</code>, as this means we&rsquo;ve reached the target.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<ul>
+<li>If <code>y</code> is even, divide <code>y</code> by 2 and call the function recursively with the updated values of <code>x</code> and <code>y</code>.</li>
+<li>If <code>x</code> is even, divide <code>x</code> by 2 and call the function recursively with the updated values of <code>x</code> and <code>y</code>.</li>
+<li>If <code>x &gt; y</code>, subtract <code>y</code> from <code>x</code> and call the function recursively with the updated values.</li>
+<li>If <code>x &lt; y</code>, subtract <code>x</code> from <code>y</code> and call the function recursively with the updated values.</li>
+<li>If no condition applies, return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<p>This approach ensures that we reduce the numbers by halving or subtracting, moving toward the goal of reaching <code>(1, 1)</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-base-case">
+  Step 1: Base Case
+  <a class="heading-link" href="#step-1-base-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><p>The first line checks if both <code>x</code> and <code>y</code> are <code>1</code>, in which case we return <code>true</code> because we have reached the destination <code>(1, 1)</code>.</p>
+<h4 id="step-2-recursive-cases">
+  Step 2: Recursive Cases
+  <a class="heading-link" href="#step-2-recursive-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<h5 id="case-1-if-y-is-even">
+  Case 1: If <code>y</code> is even
+  <a class="heading-link" href="#case-1-if-y-is-even">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(y <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> isReachable(x, y <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><p>Here, if <code>y</code> is even, we can divide <code>y</code> by 2 and call the function recursively with the updated <code>y</code>. This reduces the value of <code>y</code> while keeping <code>x</code> unchanged.</p>
+<h5 id="case-2-if-x-is-even">
+  Case 2: If <code>x</code> is even
+  <a class="heading-link" href="#case-2-if-x-is-even">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> isReachable(x <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>, y);
+</span></span></code></pre></div><p>If <code>x</code> is even, we divide <code>x</code> by 2 and call the function recursively with the updated <code>x</code>. This reduces the value of <code>x</code> while keeping <code>y</code> unchanged.</p>
+<h5 id="case-3-if-x--y">
+  Case 3: If <code>x &gt; y</code>
+  <a class="heading-link" href="#case-3-if-x--y">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&gt;</span> y) <span style="color:#66d9ef">return</span> isReachable(x <span style="color:#f92672">-</span> y, y);
+</span></span></code></pre></div><p>If <code>x</code> is greater than <code>y</code>, we subtract <code>y</code> from <code>x</code> and call the function recursively with the new values of <code>x</code> and <code>y</code>. This brings <code>x</code> closer to <code>y</code>.</p>
+<h5 id="case-4-if-x--y">
+  Case 4: If <code>x &lt; y</code>
+  <a class="heading-link" href="#case-4-if-x--y">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> y) <span style="color:#66d9ef">return</span> isReachable(x, y <span style="color:#f92672">-</span> x);
+</span></span></code></pre></div><p>If <code>x</code> is less than <code>y</code>, we subtract <code>x</code> from <code>y</code> and call the function recursively with the updated values of <code>x</code> and <code>y</code>. This brings <code>y</code> closer to <code>x</code>.</p>
+<h4 id="step-3-if-no-conditions-apply">
+  Step 3: If No Conditions Apply
+  <a class="heading-link" href="#step-3-if-no-conditions-apply">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>If none of the above conditions are met, we return <code>false</code>, indicating that it&rsquo;s impossible to reach <code>(1, 1)</code> from <code>(x, y)</code> using the given operations.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution depends on the number of recursive calls, which is determined by how much we reduce <code>x</code> and <code>y</code> in each step.</p>
+<ul>
+<li><strong>Dividing by 2</strong>: Every time we divide either <code>x</code> or <code>y</code> by 2, we are halving one of the numbers. In the worst case, this will take <code>O(log max(x, y))</code> steps because dividing by 2 reduces the value exponentially.</li>
+<li><strong>Subtracting values</strong>: If we subtract one number from the other (i.e., when <code>x &gt; y</code> or <code>x &lt; y</code>), the number of recursive calls depends on how much the difference between <code>x</code> and <code>y</code> reduces. In the worst case, the difference will reduce linearly.</li>
+</ul>
+<p>In general, the time complexity of this recursive approach can be approximated as <code>O(log max(x, y))</code> for the halving cases. However, when subtraction occurs, the time complexity can be worse in cases where the difference between <code>x</code> and <code>y</code> is large. In the worst case, the complexity may approach <code>O(x + y)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is dominated by the recursion depth. In the worst case, the depth of recursion is proportional to the logarithm of the larger number, so the space complexity is <code>O(log max(x, y))</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently checks whether it&rsquo;s possible to reach <code>(1, 1)</code> from <code>(x, y)</code> by performing a series of operations, including halving and subtracting. By recursively reducing the values of <code>x</code> and <code>y</code>, the function quickly narrows down the problem. The algorithm is efficient in terms of both time and space, with a time complexity of approximately <code>O(log max(x, y))</code> and a space complexity of <code>O(log max(x, y))</code>.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode979s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +436,6 @@
 
       </div>
 
-      
 
       <footer>
         

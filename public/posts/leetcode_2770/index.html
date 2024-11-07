@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -243,7 +243,161 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1111s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the maximum number of jumps you can make in a list of integers, <code>nums</code>, starting from the first element and following certain jump constraints. Specifically, for each jump from index <code>i</code> to <code>j</code>, the absolute difference between <code>nums[i]</code> and <code>nums[j]</code> must not exceed a given <code>target</code>. You need to return the maximum number of jumps possible or <code>-1</code> if no jumps can be made.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to this problem can be broken down using dynamic programming (DP). The key idea is to maintain a <code>dp</code> array that tracks the maximum number of jumps starting from each index of the array. We&rsquo;ll attempt to jump from each index <code>i</code> to all subsequent indices <code>j</code> where the difference <code>|nums[i] - nums[j]|</code> is less than or equal to <code>target</code>. We compute the maximum number of jumps recursively, storing the results to avoid redundant computations.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code to understand how the solution works.</p>
+<h4 id="class-definition-and-member-variables">
+  Class Definition and Member Variables
+  <a class="heading-link" href="#class-definition-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> target, n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> memo, nums;
+</span></span></code></pre></div><ol>
+<li><strong>target</strong>: This variable holds the maximum allowed difference between consecutive elements for a valid jump.</li>
+<li><strong>n</strong>: The number of elements in the <code>nums</code> array.</li>
+<li><strong>memo</strong>: This vector will store the results of subproblems, i.e., the maximum number of jumps starting from each index. Initially, it is filled with <code>INT_MIN</code> to represent uncomputed states.</li>
+<li><strong>nums</strong>: This vector holds the input list of integers.</li>
+</ol>
+<h4 id="dynamic-programming-helper-function">
+  Dynamic Programming Helper Function
+  <a class="heading-link" href="#dynamic-programming-helper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx] <span style="color:#f92672">!=</span> INT_MIN) <span style="color:#66d9ef">return</span> memo[idx];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(abs(nums[i] <span style="color:#f92672">-</span> nums[idx]) <span style="color:#f92672">&lt;=</span> target) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, dp(i) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Base Case</strong>: If <code>idx == n - 1</code>, we return <code>0</code>, meaning we’ve reached the last index, so no more jumps can be made.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: Before performing any calculations, we check if the result for the current index <code>idx</code> has already been computed by checking if <code>memo[idx]</code> is not equal to <code>INT_MIN</code>. If it has been computed, we simply return that result, avoiding redundant calculations.</p>
+</li>
+<li>
+<p><strong>Recursion</strong>: We loop through all indices <code>i</code> from <code>idx + 1</code> to <code>n - 1</code>, and for each index, check if the absolute difference between <code>nums[i]</code> and <code>nums[idx]</code> is less than or equal to <code>target</code>. If the difference is valid, we recursively compute the maximum jumps from index <code>i</code>, and update the result for <code>idx</code> as <code>max(ans, dp(i) + 1)</code>. The <code>+1</code> represents the jump we just made from <code>idx</code> to <code>i</code>.</p>
+</li>
+<li>
+<p><strong>Memoization Update</strong>: After computing the result for <code>idx</code>, we store it in the <code>memo</code> vector so that it can be reused later.</p>
+</li>
+</ol>
+<h4 id="main-function">
+  Main Function
+  <a class="heading-link" href="#main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximumJumps</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>target <span style="color:#f92672">=</span> target;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>    memo.resize(n, INT_MIN);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>: We initialize the size of the <code>nums</code> array (<code>n</code>), the <code>target</code> value, and the <code>nums</code> array. Then, we resize the <code>memo</code> array to the size of <code>nums</code> and fill it with <code>INT_MIN</code> to indicate uncalculated states.</p>
+</li>
+<li>
+<p><strong>Computing the Result</strong>: We call the <code>dp</code> function starting from index <code>0</code> to compute the maximum number of jumps possible from the first index.</p>
+</li>
+<li>
+<p><strong>Final Decision</strong>: If the result is <code>&lt;= 0</code>, it means no valid jumps are possible, and we return <code>-1</code>. Otherwise, we return the computed result, which represents the maximum number of valid jumps.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is (O(n^2)), where <code>n</code> is the size of the <code>nums</code> array. Here&rsquo;s why:</p>
+<ol>
+<li>For each index <code>idx</code>, we loop through all subsequent indices <code>i</code> to check if a valid jump can be made. This results in a loop within another loop, leading to (O(n^2)) comparisons in the worst case.</li>
+<li>The memoization reduces redundant recalculations by storing intermediate results, but the overall time complexity remains (O(n^2)) due to the nested loop structure.</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is (O(n)), where <code>n</code> is the size of the <code>nums</code> array. The space is used for:</p>
+<ol>
+<li>The <code>memo</code> array, which stores the maximum number of jumps from each index.</li>
+<li>The function call stack for the recursion.</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum number of valid jumps that can be made, starting from the first index of the <code>nums</code> array and adhering to the jump constraint defined by the <code>target</code>. By utilizing dynamic programming with memoization, we avoid redundant calculations and make the solution scalable for larger inputs.</p>
+<p>The solution works by recursively calculating the maximum number of jumps for each index while storing intermediate results in the <code>memo</code> array. The time complexity of (O(n^2)) makes this approach efficient enough for reasonable input sizes.</p>
+<p>In summary, this approach is a well-optimized dynamic programming solution that uses memoization to avoid recalculating the same subproblems. It provides a clear and efficient method to solve the problem of finding the maximum number of valid jumps in an array.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1111s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +451,6 @@
 
       </div>
 
-      
 
       <footer>
         

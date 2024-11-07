@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,167 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> LLONG_MIN<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1222s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers <code>nums</code>, the problem asks to find the maximum subarray sum such that for any subarray in the solution, the absolute difference between any two consecutive elements in the subarray is at least <code>k</code>. The function should return the maximum sum of the subarray that satisfies this condition, or <code>0</code> if no valid subarray exists.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, the following approach can be utilized:</p>
+<ol>
+<li>
+<p><strong>Prefix Sum</strong>:
+We will use a prefix sum array (<code>pre[]</code>) to track cumulative sums of elements in <code>nums</code> up to each index. This allows quick computation of subarray sums in constant time.</p>
+</li>
+<li>
+<p><strong>Hash Map (Map)</strong>:
+A hash map (<code>mp</code>) will store the most recent index of each number. This helps track the positions of previous elements that are within the required difference of <code>k</code> from the current element.</p>
+</li>
+<li>
+<p><strong>Iterative Calculation</strong>:
+For each element <code>nums[i]</code>, we calculate the sum of subarrays ending at <code>i</code> and check if it satisfies the condition based on the difference <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Max Subarray Sum Calculation</strong>:
+By keeping track of the prefix sums and utilizing the map to access previous sums efficiently, we can calculate the maximum valid subarray sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> LLONG_MIN;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> pre;
+</span></span><span style="display:flex;"><span>pre.push_back(<span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>long long ans = LLONG_MIN;</code></strong>: This variable <code>ans</code> stores the maximum subarray sum found. Initially set to the smallest possible value (<code>LLONG_MIN</code>).</li>
+<li><strong><code>int n = nums.size();</code></strong>: <code>n</code> stores the size of the input array <code>nums</code>.</li>
+<li><strong><code>map&lt;int, int&gt; mp;</code></strong>: A map <code>mp</code> is used to store the most recent index of each element in <code>nums</code>.</li>
+<li><strong><code>vector&lt;long long&gt; pre; pre.push_back(0);</code></strong>: A vector <code>pre</code> is used to store the prefix sums, with an initial value of <code>0</code> to represent the sum before the first element.</li>
+</ul>
+<h4 id="step-2-build-prefix-sum-array-and-update-maximum-subarray-sum">
+  Step 2: Build Prefix Sum Array and Update Maximum Subarray Sum
+  <a class="heading-link" href="#step-2-build-prefix-sum-array-and-update-maximum-subarray-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pre.push_back(pre.back() <span style="color:#f92672">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(nums[i] <span style="color:#f92672">-</span> k)) ans <span style="color:#f92672">=</span> max(ans, pre[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pre[mp[nums[i] <span style="color:#f92672">-</span> k]]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(nums[i] <span style="color:#f92672">+</span> k)) ans <span style="color:#f92672">=</span> max(ans, pre[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> pre[mp[nums[i] <span style="color:#f92672">+</span> k]]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp.find(nums[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> mp.end() <span style="color:#f92672">||</span> pre[i] <span style="color:#f92672">-</span> pre[it<span style="color:#f92672">-&gt;</span>second] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) mp[nums[i]] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Prefix Sum Calculation</strong>:
+<ul>
+<li><code>pre.push_back(pre.back() + nums[i]);</code> updates the prefix sum for the current element by adding it to the previous sum. This allows quick access to the sum of any subarray from the start to the current element.</li>
+</ul>
+</li>
+<li><strong>Check for Valid Subarray (Absolute Difference Check)</strong>:
+<ul>
+<li><code>if(mp.count(nums[i] - k)) ans = max(ans, pre[i + 1] - pre[mp[nums[i] - k]]);</code> checks if there exists a previous element such that the absolute difference between the current element <code>nums[i]</code> and the previous element is exactly <code>k</code>. If it does, we compute the sum of the subarray from that previous index to the current index and update <code>ans</code>.</li>
+<li>Similarly, <code>if(mp.count(nums[i] + k)) ans = max(ans, pre[i + 1] - pre[mp[nums[i] + k]]);</code> does the same for the difference of <code>-k</code>.</li>
+</ul>
+</li>
+<li><strong>Update Map</strong>:
+<ul>
+<li><code>auto it = mp.find(nums[i]);</code> searches for the current element in the map to determine if it has been encountered before.</li>
+<li><code>if(it == mp.end() || pre[i] - pre[it-&gt;second] &lt;= 0)</code> ensures that if the current element has not been encountered or the subarray sum from the previous index is non-positive, the current element is added to the map with its index.</li>
+<li><code>mp[nums[i]] = i;</code> updates the map to store the index of the current element.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> LLONG_MIN<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> ans;
+</span></span></code></pre></div><ul>
+<li>After iterating through all elements, if no valid subarray sum was found, <code>ans</code> will still be <code>LLONG_MIN</code>, so we return <code>0</code>. Otherwise, we return the computed maximum subarray sum.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Prefix Sum Calculation</strong>: The loop iterates over all elements of the array <code>nums</code>, so the time complexity for calculating the prefix sums is <strong>O(n)</strong>.</li>
+<li><strong>Map Operations</strong>: Each map operation (insertion, search) takes <strong>O(log n)</strong> time because an <code>unordered_map</code> in C++ is implemented as a balanced binary search tree.
+<ul>
+<li>For each element, we check and update the map up to two times (once for <code>nums[i] - k</code> and once for <code>nums[i] + k</code>), which results in a time complexity of <strong>O(log n)</strong> per element.</li>
+</ul>
+</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity is <strong>O(n log n)</strong> due to the iteration through the elements and map operations.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Prefix Sum Array</strong>: The prefix sum array stores one value for each element, so its space complexity is <strong>O(n)</strong>.</li>
+<li><strong>Map</strong>: The map stores an entry for each distinct element in <code>nums</code>. In the worst case, where all elements are unique, the space complexity for the map is <strong>O(n)</strong>.</li>
+<li><strong>Overall Space Complexity</strong>: The total space complexity is <strong>O(n)</strong>, accounting for the prefix sum array and the map.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently computes the maximum sum of valid subarrays where the absolute difference between consecutive elements is at least <code>k</code>. By utilizing a prefix sum array and a map to track element indices, the solution achieves <strong>O(n log n)</strong> time complexity, which is optimal for large input sizes. The space complexity is <strong>O(n)</strong>, making it suitable for scenarios where memory usage is also a concern. This approach ensures that we can handle large arrays effectively, providing both correctness and efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1222s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +407,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3027"  class="external-link" target="_blank" rel="noopener">LeetCode #3027: Find the Number of Ways to Place People II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3042"  class="external-link" target="_blank" rel="noopener">LeetCode #3042: Count Prefix and Suffix Pairs I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +449,6 @@
 
       </div>
 
-      
 
       <footer>
         

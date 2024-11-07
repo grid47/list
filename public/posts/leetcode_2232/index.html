@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -263,7 +263,167 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ret;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode766s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires you to minimize the result of an arithmetic expression of the form <code>&quot;A+B&quot;</code>, where <code>A</code> and <code>B</code> are non-negative integers. You can insert parentheses around one of the subexpressions to minimize the overall result.</p>
+<p>The goal is to minimize the result by placing parentheses at an appropriate location in the expression. Your task is to return the modified expression as a string.</p>
+<h3 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>For input expression <code>&quot;12+34&quot;</code>, the minimum result occurs when you place the parentheses around <code>&quot;12+34&quot;</code>. The resulting expression is <code>&quot;12+(34)&quot;</code>, which evaluates to <code>12 + 34 = 46</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the main idea is to iterate over all possible positions for placing parentheses. We want to test different ways of splitting the expression into two parts: one before the addition (<code>+</code>) and one after. For each split, we will compute the result of the expression and track the smallest result.</p>
+<p>Here&rsquo;s the step-by-step approach:</p>
+<ol>
+<li>
+<p><strong>Parse the Expression</strong>:</p>
+<ul>
+<li>First, we separate the left and right parts of the equation using the <code>+</code> sign.</li>
+<li>We need to separate the digits of both parts of the expression so we can compute the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Try All Possible Parentheses Placements</strong>:</p>
+<ul>
+<li>Iterate over all possible positions of the parentheses, trying each combination.</li>
+<li>For each position, calculate the result after evaluating the expression with the parentheses.</li>
+<li>Track the minimum result, keeping track of the corresponding placement of the parentheses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute the Result</strong>:</p>
+<ul>
+<li>For each potential parentheses placement, evaluate the result and keep track of the smallest result. If a better placement is found, update the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Modified Expression</strong>:</p>
+<ul>
+<li>After determining the optimal position for the parentheses, we reconstruct the string by adding the parentheses and returning the modified expression.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string minimizeResult(string exp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;        
+</span></span></code></pre></div><ul>
+<li>The <code>minimizeResult</code> function starts by declaring variables to store the left and right parts of the expression, as well as intermediate values used during the calculation. <code>pos</code> is used to store the position of the <code>+</code> symbol, and <code>x</code>, <code>y</code>, <code>p</code>, <code>q</code> are used to store the digits of the two parts of the expression.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> exp.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(exp[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) pos <span style="color:#f92672">=</span> i;  <span style="color:#75715e">// Find the position of the plus sign
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(pos <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                y <span style="color:#f92672">=</span> y <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> exp[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;  <span style="color:#75715e">// Collect digits for the left part of the expression
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (exp[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;+&#39;</span>){
+</span></span><span style="display:flex;"><span>                q <span style="color:#f92672">=</span> q <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> exp[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;  <span style="color:#75715e">// Collect digits for the right part of the expression
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>We iterate over the expression to identify the position of the <code>+</code> symbol. While iterating, we separate the digits before and after the <code>+</code> sign, using the variables <code>y</code> and <code>q</code> to accumulate the left and right parts of the expression, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> q;  <span style="color:#75715e">// Store the original value of q for later use.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};  <span style="color:#75715e">// Initialize a result array to store the best parentheses placement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;  <span style="color:#75715e">// Initialize the answer to the maximum possible integer value
+</span></span></span></code></pre></div><ul>
+<li>We store the current value of <code>q</code> (right part) to <code>tmp</code> to reset it later. <code>res</code> will store the optimal indices for placing the parentheses, and <code>ans</code> will store the smallest result found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pos; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> exp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Collect digits before the plus sign
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            y <span style="color:#f92672">=</span> y <span style="color:#f92672">%</span> (<span style="color:#66d9ef">int</span>)pow(<span style="color:#ae81ff">10</span>, pos <span style="color:#f92672">-</span> i);  <span style="color:#75715e">// Extract the digits for evaluation
+</span></span></span></code></pre></div><ul>
+<li>We begin iterating over the digits before the <code>+</code> symbol to test different positions for the parentheses. <code>x</code> is used to accumulate the digits before <code>i</code>, and <code>y</code> is modified to focus on the digits after <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> pos <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> exp.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                p <span style="color:#f92672">=</span> p <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (exp[j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);  <span style="color:#75715e">// Collect digits after the plus sign
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                q <span style="color:#f92672">=</span> q <span style="color:#f92672">%</span> (<span style="color:#66d9ef">int</span>)pow(<span style="color:#ae81ff">10</span>, exp.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> j);  <span style="color:#75715e">// Extract the digits for evaluation
+</span></span></span></code></pre></div><ul>
+<li>Inside the loop for <code>i</code>, we iterate over the digits after the <code>+</code> symbol, storing them in <code>p</code> and adjusting <code>q</code> as we explore different parentheses placements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>((x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> x) <span style="color:#f92672">*</span> (y <span style="color:#f92672">+</span> p) <span style="color:#f92672">*</span> (q <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> q) <span style="color:#f92672">&lt;</span> ans) {
+</span></span><span style="display:flex;"><span>                    ans <span style="color:#f92672">=</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> x) <span style="color:#f92672">*</span> (y <span style="color:#f92672">+</span> p) <span style="color:#f92672">*</span> (q <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> q);  <span style="color:#75715e">// Calculate the result and check if it’s the smallest
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    res <span style="color:#f92672">=</span> {i, j};  <span style="color:#75715e">// Update the best parentheses placement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Reset p for the next iteration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            q <span style="color:#f92672">=</span> tmp;  <span style="color:#75715e">// Reset q to its original value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li>We calculate the result for each possible placement of parentheses. The result is calculated by multiplying <code>x</code>, <code>(y + p)</code>, and <code>q</code>. If the calculated result is smaller than the current <code>ans</code>, we update <code>ans</code> and store the current positions of the parentheses in <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string ret <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;  <span style="color:#75715e">// Initialize the result string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> res[<span style="color:#ae81ff">0</span>]) ret <span style="color:#f92672">+=</span> exp[i<span style="color:#f92672">++</span>];  <span style="color:#75715e">// Add the digits before the first parentheses position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ret <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;(&#39;</span>;  <span style="color:#75715e">// Add the opening parenthesis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> res[<span style="color:#ae81ff">1</span>]) ret <span style="color:#f92672">+=</span> exp[i<span style="color:#f92672">++</span>];  <span style="color:#75715e">// Add the digits inside the parentheses
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ret <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;)&#39;</span>;  <span style="color:#75715e">// Add the closing parenthesis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> exp.size()) ret <span style="color:#f92672">+=</span> exp[i<span style="color:#f92672">++</span>];  <span style="color:#75715e">// Add the remaining digits after the parentheses
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ret;  <span style="color:#75715e">// Return the final modified expression
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>We reconstruct the expression by adding the parentheses around the optimal split identified earlier. The digits before the first parentheses are added first, followed by the digits inside the parentheses, and finally, the remaining digits after the parentheses.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the length of the input string <code>exp</code>. The nested loops iterate over all possible pairs of parentheses placements, making the time complexity quadratic in the size of the input string.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(n), where <code>n</code> is the length of the input string. We use a few additional variables to store intermediate results, and the space used by these variables does not exceed the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently handles the problem of minimizing the result by trying all possible placements of parentheses around the addition operator. It iterates over the expression and computes the result for each possible configuration, ensuring that we find the optimal one. The solution is both straightforward and efficient for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode766s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -317,7 +477,6 @@
 
       </div>
 
-      
 
       <footer>
         

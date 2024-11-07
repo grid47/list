@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,167 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode776s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to count the number of lattice points (points with integer coordinates) that lie inside or on the boundary of a set of circles. Each circle is defined by its center <code>(x, y)</code> and its radius <code>r</code>. You are given a list of circles, and for each circle, you need to count how many lattice points lie within the circle.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the key steps involve iterating over each circle and checking the grid points (lattice points) that fall within or on the boundary of the circle. The circle&rsquo;s equation is:
+[
+(x - x_0)^2 + (y - y_0)^2 \leq r^2
+]
+Where:</p>
+<ul>
+<li>((x_0, y_0)) is the center of the circle.</li>
+<li>(r) is the radius of the circle.</li>
+<li>The inequality ensures that a point is inside or on the boundary of the circle.</li>
+</ul>
+<p>The goal is to determine how many distinct lattice points satisfy this condition for any of the circles.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initializing-a-set-for-distinct-points">
+  Step 1: Initializing a Set for Distinct Points
+  <a class="heading-link" href="#step-1-initializing-a-set-for-distinct-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span></code></pre></div><ul>
+<li>We use a set to store the lattice points. The reason we use a set is that it automatically handles duplicates. If a lattice point lies inside multiple circles, the set ensures that the point is counted only once.</li>
+</ul>
+<h4 id="step-2-iterating-over-each-circle">
+  Step 2: Iterating Over Each Circle
+  <a class="heading-link" href="#step-2-iterating-over-each-circle">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: cir) {
+</span></span></code></pre></div><ul>
+<li>We iterate over each circle in the input <code>cir</code>, where each circle is represented by an array of three integers: <code>[x, y, r]</code>, where:
+<ul>
+<li><code>x</code> is the x-coordinate of the circle&rsquo;s center.</li>
+<li><code>y</code> is the y-coordinate of the circle&rsquo;s center.</li>
+<li><code>r</code> is the radius of the circle.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-checking-points-within-the-circle">
+  Step 3: Checking Points Within the Circle
+  <a class="heading-link" href="#step-3-checking-points-within-the-circle">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">2</span>]; i <span style="color:#f92672">&lt;=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> it[<span style="color:#ae81ff">2</span>]; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">2</span>]; j <span style="color:#f92672">&lt;=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> it[<span style="color:#ae81ff">2</span>]; j<span style="color:#f92672">++</span>)                
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((i <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">*</span> (i <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">+</span> (j <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (j <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&lt;=</span> (it[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">*</span> it[<span style="color:#ae81ff">2</span>]))
+</span></span><span style="display:flex;"><span>        cnt.insert(i <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">+</span> j);
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Nested Loops for x and y</strong>: The two nested <code>for</code> loops iterate over the possible integer values of <code>i</code> and <code>j</code> that could lie within the bounding box of the circle.</p>
+<ul>
+<li>For the x-coordinate, <code>i</code> ranges from <code>it[0] - it[2]</code> to <code>it[0] + it[2]</code>, which covers all integer values within the horizontal span of the circle.</li>
+<li>Similarly, for the y-coordinate, <code>j</code> ranges from <code>it[1] - it[2]</code> to <code>it[1] + it[2]</code>, covering all integer values within the vertical span of the circle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check if the Point is Inside the Circle</strong>:</p>
+<ul>
+<li>The condition:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((i <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">*</span> (i <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">+</span> (j <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (j <span style="color:#f92672">-</span> it[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&lt;=</span> (it[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">*</span> it[<span style="color:#ae81ff">2</span>]))
+</span></span></code></pre></div><p>checks if the point <code>(i, j)</code> lies within or on the circle. The equation calculates the square of the distance from the point <code>(i, j)</code> to the circle&rsquo;s center <code>(it[0], it[1])</code>. If this distance is less than or equal to the square of the radius <code>r^2</code>, the point is inside the circle.</p>
+</li>
+<li>
+<p><strong>Store Points in the Set</strong>:</p>
+<ul>
+<li>If the point lies within the circle, it is inserted into the set using:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt.insert(i <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">+</span> j);
+</span></span></code></pre></div><ul>
+<li>We use <code>i * 1000 + j</code> to store each point as a unique integer key in the set. The multiplication by <code>1000</code> ensures that the x-coordinate and y-coordinate are combined into a unique value. Since x and y values are typically integers, this ensures that the combination of <code>(i, j)</code> is unique in the set.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-count-of-distinct-points">
+  Step 4: Return the Count of Distinct Points
+  <a class="heading-link" href="#step-4-return-the-count-of-distinct-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt.size();
+</span></span></code></pre></div><ul>
+<li>Finally, the size of the set <code>cnt</code> is returned, which represents the total number of distinct lattice points that lie inside or on the boundary of the circles.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Iterating Over Circles</strong>: There are <code>m</code> circles, where <code>m</code> is the size of the <code>cir</code> array.</li>
+<li><strong>Checking Lattice Points for Each Circle</strong>: For each circle, we iterate over all integer points in its bounding box. The bounding box of a circle with radius <code>r</code> contains roughly a square of size <code>(2r+1) x (2r+1)</code> grid points. Thus, for each circle, we perform ( O((2r+1)^2) ) operations, where <code>r</code> is the radius of the circle.</li>
+<li>Therefore, the overall time complexity is ( O(m \times (2r+1)^2) ), where <code>m</code> is the number of circles and <code>r</code> is the average radius of the circles.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Set for Distinct Points</strong>: The space complexity is dominated by the size of the set <code>cnt</code>, which stores the distinct lattice points. In the worst case, the number of distinct lattice points could be proportional to the total number of points inside all circles. Therefore, the space complexity is ( O(n) ), where <code>n</code> is the total number of distinct lattice points.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts the number of distinct lattice points within or on the boundary of multiple circles using a set for storing unique points. By iterating over all potential grid points within the bounding box of each circle and checking if the points satisfy the circle&rsquo;s equation, the algorithm ensures accurate counting while leveraging the properties of a set to handle duplicates. The approach is clear, leveraging geometric properties to solve the problem in a manageable time complexity, given the constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode776s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +455,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -281,7 +281,172 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1081s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the minimum cost to change a given binary string to a string with alternating 0s and 1s. The string should have an alternating pattern of &ldquo;010101&hellip;&rdquo; or &ldquo;101010&hellip;&rdquo;, and we need to compute how much it would cost to convert the given string into one of these patterns. The cost is measured as the total number of changes required. The goal is to determine the minimum number of changes necessary to convert the string into a valid alternating pattern.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The main challenge here is to calculate the minimum cost efficiently by finding an alternating pattern for the given string. There are two possible alternating patterns:</p>
+<ol>
+<li>&ldquo;010101&hellip;&rdquo; (starts with &lsquo;0&rsquo;)</li>
+<li>&ldquo;101010&hellip;&rdquo; (starts with &lsquo;1&rsquo;)</li>
+</ol>
+<p>To solve this problem, we can approach it by splitting the string into two halves and checking each half against the two alternating patterns. Specifically:</p>
+<ul>
+<li>If the string length is odd, we focus on the middle element to decide which pattern to use.</li>
+<li>We then check each half of the string, comparing it to the corresponding half of each alternating pattern.</li>
+<li>The idea is to count how many changes are required for each half to match the two alternating patterns and then return the minimum cost.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-handle-special-case-where-the-string-has-length-1">
+  Step 1: Handle special case where the string has length 1
+  <a class="heading-link" href="#step-1-handle-special-case-where-the-string-has-length-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If the string has only one character, there is no need for any changes, so the cost is <code>0</code>.</li>
+</ul>
+<h4 id="step-2-initialize-variables">
+  Step 2: Initialize variables
+  <a class="heading-link" href="#step-2-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> k <span style="color:#f92672">=</span> s[n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i, j;
+</span></span></code></pre></div><ul>
+<li><code>res</code> stores the total cost for converting the string into an alternating pattern.</li>
+<li><code>k</code> represents the middle character of the string. This will help determine which pattern to choose.</li>
+<li><code>i</code> and <code>j</code> are pointers used to traverse the string from the middle outward, with <code>i</code> starting from the middle moving right and <code>j</code> starting from the middle moving left.</li>
+</ul>
+<h4 id="step-3-determine-starting-points-for-pointers-based-on-string-length-even-or-odd">
+  Step 3: Determine starting points for pointers based on string length (even or odd)
+  <a class="heading-link" href="#step-3-determine-starting-points-for-pointers-based-on-string-length-even-or-odd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> n<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, j <span style="color:#f92672">=</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the string length <code>n</code> is odd, the pointers are set so that they start one step away from the middle.</li>
+<li>If the string length <code>n</code> is even, the pointers start exactly at the middle and its left neighbor.</li>
+</ul>
+<h4 id="step-4-traverse-the-string-from-the-middle-and-compare-it-with-the-alternating-patterns">
+  Step 4: Traverse the string from the middle and compare it with the alternating patterns
+  <a class="heading-link" href="#step-4-traverse-the-string-from-the-middle-and-compare-it-with-the-alternating-patterns">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> ltog <span style="color:#f92672">=</span> true, rtog <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> k <span style="color:#f92672">&amp;&amp;</span> rtog <span style="color:#f92672">||</span> s[i] <span style="color:#f92672">!=</span> k <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>rtog) {
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        rtog <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>rtog;
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> n <span style="color:#f92672">-</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((s[j] <span style="color:#f92672">==</span> k <span style="color:#f92672">&amp;&amp;</span> ltog) <span style="color:#f92672">||</span> (s[j] <span style="color:#f92672">!=</span> k <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>ltog)) {
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        ltog <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>ltog;
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use two flags, <code>ltog</code> and <code>rtog</code>, to track whether we are currently comparing the left half of the string (<code>ltog</code>) or the right half (<code>rtog</code>) against the alternating patterns.</li>
+<li>As we traverse the string from the middle towards both ends:
+<ul>
+<li>If the current character <code>s[i]</code> matches the corresponding alternating pattern for the right half (i.e., <code>k</code> for the starting character), we do nothing.</li>
+<li>If it doesn&rsquo;t match, we flip the direction (i.e., change <code>rtog</code> or <code>ltog</code>) and add to the result the number of changes needed to flip the section.</li>
+</ul>
+</li>
+<li>This process effectively counts how many changes are required to match the alternating patterns on both the left and right sides of the string.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the variable <code>res</code> contains the total number of changes required to convert the string into an alternating binary string with the minimum cost. The function then returns this result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The solution only requires a single pass over the string, where <code>n</code> is the length of the string. Each character is processed once, and the traversal happens from the center of the string outward.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we only use a few integer variables (<code>res</code>, <code>k</code>, <code>i</code>, <code>j</code>, <code>ltog</code>, <code>rtog</code>) and do not require any additional data structures that grow with the size of the input string. The algorithm operates in-place.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum cost to transform a binary string into one of the two possible alternating patterns &ldquo;010101&hellip;&rdquo; or &ldquo;101010&hellip;&rdquo;. By leveraging the middle element to guide the transformation and using two pointers to traverse the string, we minimize the number of changes required. The solution operates in linear time and constant space, making it scalable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1081s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -335,7 +500,6 @@
 
       </div>
 
-      
 
       <footer>
         

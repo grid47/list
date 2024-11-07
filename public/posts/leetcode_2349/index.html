@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -254,7 +254,180 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;change(index,number);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;find(number);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode845s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves implementing a container system that supports two main operations:</p>
+<ol>
+<li><strong>Change Operation</strong>: Change the number stored at a given index.</li>
+<li><strong>Find Operation</strong>: Find the smallest index that stores a specific number.</li>
+</ol>
+<p>We need to design a data structure that allows these operations to be performed efficiently. Each container holds a number at an index, and we are tasked with supporting the following operations:</p>
+<ul>
+<li><strong>change(int idx, int num)</strong>: This operation changes the number at index <code>idx</code> to <code>num</code>. If a number already exists at <code>idx</code>, the previous number should be removed.</li>
+<li><strong>find(int num)</strong>: This operation finds the smallest index that stores the number <code>num</code>. If there is no index storing <code>num</code>, it should return <code>-1</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a combination of two data structures:</p>
+<ol>
+<li><strong>Map of Sets (<code>mp</code>)</strong>: This will map each number to a set of indices where that number is stored. The use of a set ensures that we have efficient lookups, insertions, and deletions of indices.</li>
+<li><strong>Map of Integers (<code>in</code>)</strong>: This will store the current number at each index. This ensures we know which number is currently stored at each index for performing the <code>change</code> operation.</li>
+</ol>
+<p>The idea is that:</p>
+<ul>
+<li>For the <code>change(idx, num)</code> operation, we first check if the number at the given index has changed. If it has, we remove the old number from the set and insert the new number at that index.</li>
+<li>For the <code>find(num)</code> operation, we can directly access the set of indices associated with the number <code>num</code> and return the smallest index.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-data-structure-initialization">
+  1. <strong>Data Structure Initialization</strong>
+  <a class="heading-link" href="#1-data-structure-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> in;
+</span></span></code></pre></div><ul>
+<li><code>mp</code>: This map associates each number with a set of indices that store that number. This ensures that for any given number, we can quickly access the indices where that number is stored. A set is used because we are interested in the smallest index, and sets are naturally ordered.</li>
+<li><code>in</code>: This map stores the number at each index. It allows us to easily find the current number at a specific index, which is necessary for the <code>change</code> operation.</li>
+</ul>
+<h4 id="2-constructor">
+  2. <strong>Constructor</strong>
+  <a class="heading-link" href="#2-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NumberContainers() {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The constructor is empty because there is no specific initialization needed apart from initializing the maps <code>mp</code> and <code>in</code>, which happens automatically.</li>
+</ul>
+<h4 id="3-change-operation">
+  3. <strong>Change Operation</strong>
+  <a class="heading-link" href="#3-change-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(in.count(idx)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> in[idx];
+</span></span><span style="display:flex;"><span>        mp[x].erase(idx);
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    in[idx] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>    mp[num].insert(idx);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Step 1</strong>: We first check if the index <code>idx</code> already has a number stored in it by using <code>in.count(idx)</code>. If it does, we remove the index from the set of indices associated with the old number (<code>x</code>), which is stored in <code>in[idx]</code>. This ensures that we are removing the old number from the set before updating.</li>
+<li><strong>Step 2</strong>: We then update the number at index <code>idx</code> in the <code>in</code> map to the new number <code>num</code>.</li>
+<li><strong>Step 3</strong>: After updating the number at index <code>idx</code>, we insert the index <code>idx</code> into the set corresponding to the new number in <code>mp[num]</code>. This ensures that the new number is associated with the correct index.</li>
+</ul>
+<h4 id="4-find-operation">
+  4. <strong>Find Operation</strong>
+  <a class="heading-link" href="#4-find-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(num) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>mp[num].empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span>begin(mp[num]);
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Step 1</strong>: We first check if the number <code>num</code> exists in the map <code>mp</code> and whether the associated set is non-empty. This ensures that there is at least one index storing the number <code>num</code>.</li>
+<li><strong>Step 2</strong>: If the set for <code>num</code> is non-empty, we return the smallest index in the set by using <code>*begin(mp[num])</code>. This takes advantage of the fact that sets are ordered, and <code>begin()</code> gives us the smallest element.</li>
+<li><strong>Step 3</strong>: If the number <code>num</code> is not found in the map <code>mp</code> or if the set is empty, we return <code>-1</code> to indicate that no index stores that number.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Change Operation (<code>change(idx, num)</code>)</strong>:</p>
+<ul>
+<li>Inserting and erasing elements in a set takes <code>O(log N)</code> time, where <code>N</code> is the number of elements in the set.</li>
+<li>The <code>in[idx] = num</code> operation is a simple <code>O(1)</code> operation.</li>
+<li>Overall, the time complexity for <code>change</code> is <code>O(log N)</code> where <code>N</code> is the number of indices associated with a number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find Operation (<code>find(num)</code>)</strong>:</p>
+<ul>
+<li>Finding an element in the map <code>mp</code> takes <code>O(log M)</code> where <code>M</code> is the number of unique numbers in <code>mp</code>.</li>
+<li>Accessing the smallest element in the set takes <code>O(1)</code> time due to the ordering property of sets.</li>
+<li>The overall time complexity for <code>find</code> is <code>O(log M)</code>, where <code>M</code> is the number of unique numbers in the container.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(N + M)</strong>:
+<ul>
+<li><code>N</code> is the number of indices (which can be as large as the number of elements in <code>in</code>), and <code>M</code> is the number of unique numbers (which can be as large as the number of unique numbers in <code>mp</code>).</li>
+<li>The <code>in</code> map stores <code>N</code> elements, and the <code>mp</code> map stores up to <code>M</code> sets. Hence, the space complexity is <code>O(N + M)</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the <code>change</code> and <code>find</code> operations using a combination of maps and sets. The <code>change</code> operation ensures that the number at each index is updated properly, while the <code>find</code> operation quickly finds the smallest index storing a specific number. The use of maps and sets allows these operations to be performed efficiently, even for large inputs.</p>
+<p>The time complexity of both operations is logarithmic in terms of the number of elements, ensuring that the solution can handle a wide range of inputs efficiently. This approach is highly optimized for scenarios where frequent updates and queries are required, making it suitable for real-time systems or interactive applications where performance is critical.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode845s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -266,7 +439,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2350"  class="external-link" target="_blank" rel="noopener">LeetCode #2350: Shortest Impossible Sequence of Rolls</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2351"  class="external-link" target="_blank" rel="noopener">LeetCode #2351: First Letter to Appear Twice</a></th>
       </tr>
   </thead>
   <tbody>
@@ -308,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

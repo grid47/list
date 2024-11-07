@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -231,7 +231,146 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1136s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires finding the minimum absolute difference between two elements in the array <code>nums</code> such that the two elements are at least <code>x</code> indices apart. More formally, we are to return the minimum value of <code>|nums[i] - nums[j]|</code> for all pairs <code>(i, j)</code> where <code>|i - j| &gt;= x</code>.</p>
+<p>For example, given the array <code>nums = [1, 3, 6, 19, 20]</code> and <code>x = 2</code>, the function should find the minimum absolute difference between two numbers in <code>nums</code> where the difference in their indices is at least <code>x</code>. In this case, the smallest absolute difference is <code>1</code> (between <code>19</code> and <code>20</code>).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a variant of the classical &ldquo;minimum absolute difference&rdquo; problem, but with an added constraint that the indices of the two numbers must differ by at least <code>x</code>. A brute force solution would involve checking all possible pairs of elements with the given constraint, but that would lead to a time complexity of O(n^2), which is inefficient for large input sizes.</p>
+<p>A more efficient approach utilizes a <strong>sorted data structure</strong> (like a <code>set</code> in C++) to maintain a dynamically changing list of elements while iterating through the array. This allows us to quickly find the closest numbers to the current number as we move through the list, reducing the time complexity of the solution to O(n log n).</p>
+<p>The plan is to:</p>
+<ol>
+<li>Use a <code>set</code> to store the elements that are at least <code>x</code> indices apart.</li>
+<li>For each element in the array, use binary search (<code>upper_bound</code>) to quickly find the closest elements in the <code>set</code>.</li>
+<li>Track the minimum absolute difference found.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minAbsoluteDifference</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s; <span style="color:#75715e">// Set to store the numbers that are at least x indices apart
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> INT_MAX; <span style="color:#75715e">// Initialize the result to the maximum possible value
+</span></span></span></code></pre></div><ol>
+<li><strong>Initialization</strong>:
+<ul>
+<li><code>set&lt;int&gt; s</code>: This <code>set</code> will store the elements of the array that are at least <code>x</code> indices apart. The <code>set</code> allows efficient binary search-like operations (<code>upper_bound</code>).</li>
+<li><code>int res = INT_MAX</code>: The variable <code>res</code> will hold the minimum absolute difference found. We initialize it to the largest possible value to ensure that any valid difference will be smaller.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> x; i <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">&amp;&amp;</span> res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        s.insert(nums[i <span style="color:#f92672">-</span> x]); <span style="color:#75715e">// Insert the element nums[i - x] into the set
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>Iteration</strong>:
+<ul>
+<li>The <code>for</code> loop starts at <code>i = x</code> because the first valid pair of indices should have a difference of at least <code>x</code>.</li>
+<li>In each iteration, the element at <code>nums[i - x]</code> is inserted into the set <code>s</code>. This ensures that we maintain the constraint that the elements in the set are at least <code>x</code> indices apart from the current element.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> s.upper_bound(nums[i]); <span style="color:#75715e">// Find the first element in the set that is greater than nums[i]
+</span></span></span></code></pre></div><ol start="3">
+<li><strong>Finding Closest Greater Element</strong>:
+<ul>
+<li>The <code>upper_bound(nums[i])</code> function returns an iterator pointing to the first element in the set that is greater than <code>nums[i]</code>. This allows us to efficiently search for the closest element that is larger than the current element <code>nums[i]</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> begin(s))
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> min(res, nums[i] <span style="color:#f92672">-</span> <span style="color:#f92672">*</span>prev(it)); <span style="color:#75715e">// Check the previous element for the closest smaller value
+</span></span></span></code></pre></div><ol start="4">
+<li><strong>Finding Closest Smaller Element</strong>:
+<ul>
+<li>If <code>it != begin(s)</code>, this means there is a valid element before <code>it</code> in the set. We calculate the absolute difference <code>nums[i] - *prev(it)</code> (the difference between the current number and the largest number smaller than it in the set).</li>
+<li>We update <code>res</code> to the minimum of its current value and this difference.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> end(s))
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> min(res, <span style="color:#f92672">*</span>it <span style="color:#f92672">-</span> nums[i]); <span style="color:#75715e">// Check the current element for the closest larger value
+</span></span></span></code></pre></div><ol start="5">
+<li><strong>Finding Closest Larger Element</strong>:
+<ul>
+<li>If <code>it != end(s)</code>, there is a valid element after <code>it</code> in the set. We calculate the absolute difference <code>*it - nums[i]</code> (the difference between the closest larger number and the current number).</li>
+<li>We again update <code>res</code> to the minimum of its current value and this difference.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res; <span style="color:#75715e">// Return the minimum absolute difference found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ol start="6">
+<li><strong>Return the Result</strong>:
+<ul>
+<li>After iterating through the array, the value of <code>res</code> will be the minimum absolute difference found that satisfies the condition <code>|i - j| &gt;= x</code>. We return this value.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the loop is O(n), where <code>n</code> is the size of the input array <code>nums</code>. In each iteration, we perform two operations:
+<ul>
+<li><strong>Insert operation</strong> (<code>s.insert(nums[i - x])</code>): Insertion into a <code>set</code> takes O(log n) time due to the balanced tree structure used in the underlying implementation.</li>
+<li><strong>Binary search</strong> (<code>s.upper_bound(nums[i])</code>): The <code>upper_bound</code> function takes O(log n) time.</li>
+</ul>
+</li>
+<li>Therefore, for each iteration, the total time complexity is O(log n). Since the loop runs <code>n</code> times, the overall time complexity is <strong>O(n log n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we are storing up to <code>n</code> elements in the <code>set</code>. The size of the <code>set</code> grows with the input size <code>n</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently finds the minimum absolute difference between any two elements in an array such that their indices differ by at least <code>x</code>. By leveraging the properties of a <code>set</code> for binary search operations, the algorithm reduces the time complexity to <strong>O(n log n)</strong>, making it suitable for large input sizes. This approach avoids the inefficiencies of brute-force solutions, providing a clear and optimized solution to the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1136s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -243,7 +382,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2818"  class="external-link" target="_blank" rel="noopener">LeetCode #2818: Apply Operations to Maximize Score</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2824"  class="external-link" target="_blank" rel="noopener">LeetCode #2824: Count Pairs Whose Sum is Less than Target</a></th>
       </tr>
   </thead>
   <tbody>
@@ -285,7 +424,6 @@
 
       </div>
 
-      
 
       <footer>
         

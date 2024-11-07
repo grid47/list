@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -228,7 +228,176 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mask;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode834s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the maximum XOR result of any two numbers from a given list of integers <code>nums</code>. The XOR operation is a bitwise operation that returns <code>1</code> when the bits of two numbers at a particular position are different, and <code>0</code> when they are the same. In this problem, we need to return the highest possible result of XORing any two numbers from the list.</p>
+<p>To solve this problem, we aim to find an efficient approach that avoids checking every pair of numbers and instead utilizes the properties of XOR and binary representations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The idea behind solving this problem optimally involves understanding how the XOR operation works at the binary level and how to exploit it for efficiency. XOR is a bitwise operation, meaning it compares individual bits of the operands. The goal is to maximize the result by finding pairs of numbers that differ at higher bit positions.</p>
+<p><strong>Key observations:</strong></p>
+<ol>
+<li>
+<p><strong>XOR Properties:</strong></p>
+<ul>
+<li>XOR of two bits results in <code>1</code> if the bits are different, and <code>0</code> if the bits are the same.</li>
+<li>For maximizing the XOR result, we should look for numbers that differ at the most significant bit (MSB), because this gives the highest contribution to the XOR result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Masking Strategy:</strong></p>
+<ul>
+<li>The basic idea is to use a bitmask to consider all bits of the numbers one by one, starting from the most significant bit (MSB) to the least significant bit (LSB).</li>
+<li>A &ldquo;mask&rdquo; is used to focus on the current bits being considered, and we keep updating it as we iterate over the list of numbers.</li>
+<li>After constructing the mask by considering all the bits, the XOR result will be the mask itself since it reflects the positions where the numbers differ at each bit.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-mask">
+  Step 1: Initialize Mask
+  <a class="heading-link" href="#step-1-initialize-mask">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We start by initializing the <code>mask</code> to zero. This variable will be used to accumulate the result as we process each number in the list.</li>
+</ul>
+<h4 id="step-2-loop-through-the-numbers">
+  Step 2: Loop Through the Numbers
+  <a class="heading-link" href="#step-2-loop-through-the-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it : nums) {
+</span></span><span style="display:flex;"><span>    mask <span style="color:#f92672">|=</span> it;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each number in the <code>nums</code> array.</li>
+<li>The operation <code>mask |= it</code> is a bitwise OR operation, which sets each bit in <code>mask</code> to <code>1</code> if the corresponding bit in the current number <code>it</code> is <code>1</code>. This effectively accumulates all the bits set to <code>1</code> across all numbers in the list.</li>
+<li>After this loop, the <code>mask</code> will hold a value where each bit is set to <code>1</code> if at least one number in the list has a <code>1</code> at that position.</li>
+</ul>
+<h4 id="step-3-return-the-mask-as-the-result">
+  Step 3: Return the Mask as the Result
+  <a class="heading-link" href="#step-3-return-the-mask-as-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mask;
+</span></span></code></pre></div><ul>
+<li>Finally, the <code>mask</code> is returned as the result. Since it reflects the positions where the numbers differ at each bit, it represents the maximum XOR value that can be obtained from any two numbers in the list.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to understand the process step by step:</p>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Input: <code>nums = [3, 10, 5, 25, 2, 8]</code></li>
+<li>Initial <code>mask = 0</code>.</li>
+</ul>
+<ol>
+<li>After processing <code>3</code>: <code>mask |= 3</code> → <code>mask = 3</code> (binary: <code>00000011</code>).</li>
+<li>After processing <code>10</code>: <code>mask |= 10</code> → <code>mask = 11</code> (binary: <code>00001011</code>).</li>
+<li>After processing <code>5</code>: <code>mask |= 5</code> → <code>mask = 15</code> (binary: <code>00001111</code>).</li>
+<li>After processing <code>25</code>: <code>mask |= 25</code> → <code>mask = 31</code> (binary: <code>00011111</code>).</li>
+<li>After processing <code>2</code>: <code>mask |= 2</code> → <code>mask = 31</code> (binary: <code>00011111</code>).</li>
+<li>After processing <code>8</code>: <code>mask |= 8</code> → <code>mask = 31</code> (binary: <code>00011111</code>).</li>
+</ol>
+<p>At the end of the loop, the <code>mask</code> is <code>31</code> (binary <code>00011111</code>), which is the maximum XOR value that can be obtained by XORing any two numbers in the array.</p>
+<h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Input: <code>nums = [1, 2, 4, 8]</code></li>
+<li>Process similarly, and the result will be <code>15</code> (binary <code>1111</code>), which is the maximum XOR possible from these numbers.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Loop through the numbers</strong>: The loop iterates through all numbers in the input array <code>nums</code>, which has <code>n</code> elements. The bitwise OR operation for each number is an <code>O(1)</code> operation.</li>
+<li>Thus, the time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the input list.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We only use a few extra variables (like <code>mask</code>) and do not require any additional data structures that grow with the size of the input.</li>
+<li>Therefore, the space complexity is <strong>O(1)</strong>, constant space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum XOR value of any two numbers from the list using a bitmasking approach. By iterating over the list and accumulating the bits set to <code>1</code> across all numbers, we obtain the desired result in linear time. This is an optimal approach for solving the problem, as it avoids the need for nested loops or complex operations on pairs of numbers.</p>
+<p>The solution works because of the properties of XOR, which is a bitwise operation. By considering the bits of all numbers, the algorithm ensures that the final result is the maximum possible XOR that can be obtained from any pair. The time complexity of <strong>O(n)</strong> and space complexity of <strong>O(1)</strong> make this solution both time and space efficient, suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode834s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -240,7 +409,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2318"  class="external-link" target="_blank" rel="noopener">LeetCode #2318: Number of Distinct Roll Sequences</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2319"  class="external-link" target="_blank" rel="noopener">LeetCode #2319: Check if Matrix Is X-Matrix</a></th>
       </tr>
   </thead>
   <tbody>
@@ -282,7 +451,6 @@
 
       </div>
 
-      
 
       <footer>
         

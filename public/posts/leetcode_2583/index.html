@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pq.top();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1032s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the <code>k</code>-th largest sum of node values at any level in a binary tree. The levels of the tree are defined by the depth of the nodes, where the root is at level 0, its children are at level 1, and so on. The goal is to calculate the sum of node values at each level and return the <code>k</code>-th largest sum. If there are fewer than <code>k</code> levels, the function should return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to perform a level-order traversal of the tree to calculate the sum of nodes at each level. For this, we can use a <strong>breadth-first search (BFS)</strong> algorithm, which is well-suited for exploring a tree level by level.</p>
+<p>Once we have the sum for each level, we need to track the largest sums in order to find the <code>k</code>-th largest. A <strong>priority queue (min-heap)</strong> is a good choice for this task because it allows us to efficiently keep track of the largest sums by maintaining a heap of size <code>k</code>. The smallest element in the heap will always be the <code>k</code>-th largest sum, as the heap is structured in a way that the smallest element is at the top. We will push each level&rsquo;s sum into the heap and, if the heap exceeds size <code>k</code>, remove the smallest element.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Level-order Traversal</strong>: Using BFS, we will traverse the binary tree level by level, calculating the sum of nodes at each level.</li>
+<li><strong>Maintain Top k Sums</strong>: Use a priority queue to track the top <code>k</code> sums.</li>
+<li><strong>Return the k-th Largest Sum</strong>: After traversing all levels, if we have fewer than <code>k</code> sums, return <code>-1</code>. Otherwise, return the smallest element in the heap, which represents the <code>k</code>-th largest sum.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-priority-queue-setup">
+  1. <strong>Priority Queue Setup</strong>:
+  <a class="heading-link" href="#1-priority-queue-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><p>Here, we create a min-heap (<code>priority_queue</code>) to store the sums of node values at each level. The <code>greater&lt;long long&gt;</code> comparator ensures that the smallest sum is at the top of the heap, which allows us to efficiently track the <code>k</code>-th largest sum by maintaining a heap of size <code>k</code>.</p>
+<h4 id="2-initial-check-for-empty-tree">
+  2. <strong>Initial Check for Empty Tree</strong>:
+  <a class="heading-link" href="#2-initial-check-for-empty-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>If the tree is empty (i.e., <code>root</code> is <code>nullptr</code>), we immediately return <code>0</code> since there are no levels to calculate sums for.</p>
+<h4 id="3-queue-initialization-for-level-order-traversal">
+  3. <strong>Queue Initialization for Level-order Traversal</strong>:
+  <a class="heading-link" href="#3-queue-initialization-for-level-order-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push(root);
+</span></span></code></pre></div><p>We initialize a queue (<code>q</code>) to store the nodes of the tree as we traverse it level by level. We begin by pushing the root node into the queue.</p>
+<h4 id="4-bfs-traversal">
+  4. <strong>BFS Traversal</strong>:
+  <a class="heading-link" href="#4-bfs-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> it<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it<span style="color:#f92672">-&gt;</span>left) q.push(it<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it<span style="color:#f92672">-&gt;</span>right) q.push(it<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    pq.push(sum);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">&gt;</span> k) pq.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This loop represents the BFS traversal:</p>
+<ul>
+<li>We first get the size of the current level (<code>sz = q.size()</code>), which tells us how many nodes are at this level.</li>
+<li>For each node at the current level, we:
+<ul>
+<li>Add its value to <code>sum</code>.</li>
+<li>Remove the node from the queue and add its left and right children (if any) to the queue for the next level.</li>
+</ul>
+</li>
+<li>After calculating the sum for the current level, we push it into the priority queue (<code>pq.push(sum)</code>).</li>
+<li>If the size of the priority queue exceeds <code>k</code>, we remove the smallest element (<code>pq.pop()</code>). This ensures that the heap always contains the <code>k</code> largest sums.</li>
+</ul>
+<h4 id="5-final-check">
+  5. <strong>Final Check</strong>:
+  <a class="heading-link" href="#5-final-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">&lt;</span> k) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> pq.top();
+</span></span></code></pre></div><p>After all levels have been processed:</p>
+<ul>
+<li>If the priority queue contains fewer than <code>k</code> sums (meaning there are fewer than <code>k</code> levels), we return <code>-1</code>.</li>
+<li>Otherwise, the smallest element in the heap (<code>pq.top()</code>) represents the <code>k</code>-th largest sum, which we return.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is dominated by the level-order traversal of the tree. Each node is processed once, so the traversal takes (O(n)), where <code>n</code> is the number of nodes in the tree.</li>
+<li>For each level, we insert the sum into the priority queue. Inserting an element into a priority queue takes (O(\log k)) time. Since there are at most <code>n</code> levels, the total time complexity for heap operations is (O(n \log k)).</li>
+<li>Overall, the time complexity is (O(n \log k)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) for the queue used in the level-order traversal, as in the worst case (a fully balanced tree), the queue can hold up to <code>n/2</code> nodes at the last level.</li>
+<li>Additionally, the priority queue can hold up to <code>k</code> sums, so the space complexity for the heap is (O(k)).</li>
+<li>Therefore, the total space complexity is (O(n + k)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the <code>k</code>-th largest sum of nodes at any level in a binary tree. By utilizing BFS for level-order traversal and a priority queue to maintain the top <code>k</code> largest sums, we achieve a time complexity of (O(n \log k)), which is optimal for this problem. The algorithm handles both balanced and unbalanced trees efficiently and ensures that we correctly return the <code>k</code>-th largest sum or <code>-1</code> if there are fewer than <code>k</code> levels.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1032s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -309,7 +465,6 @@
 
       </div>
 
-      
 
       <footer>
         

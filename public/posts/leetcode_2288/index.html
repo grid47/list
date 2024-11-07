@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -235,7 +235,225 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode805s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to process a sentence where certain words are prices, and apply a discount to them. A price is denoted by a string that starts with a dollar sign (<code>$</code>) followed by digits, and the goal is to apply a discount to the prices while maintaining the format. Non-price words should remain unchanged.</p>
+<p>For instance, given the sentence <code>&quot;I bought a $200 shirt and a $300 pair of shoes&quot;</code>, and a discount of 20%, the expected output should be: <code>&quot;I bought a $160 shirt and a $240 pair of shoes&quot;</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow these steps:</p>
+<ol>
+<li>
+<p><strong>Identify Price Words</strong>: A price word starts with the dollar sign <code>$</code> and is followed by one or more digits. These are the words that need to be discounted.</p>
+</li>
+<li>
+<p><strong>Apply Discount</strong>: For each price word, we need to:</p>
+<ul>
+<li>Extract the numeric part (the digits after the dollar sign).</li>
+<li>Apply the discount to the extracted number.</li>
+<li>Reformat the result to ensure it is in the correct price format, with two decimal places.</li>
+</ul>
+</li>
+<li>
+<p><strong>Keep Other Words Intact</strong>: If the word does not represent a price (i.e., it doesn&rsquo;t start with a dollar sign or is not followed by digits), we should leave it unchanged.</p>
+</li>
+<li>
+<p><strong>Return the Sentence</strong>: Once all words have been processed, we need to return the modified sentence where the prices have been discounted accordingly.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is the detailed breakdown of the provided code:</p>
+<h4 id="step-1-function-definition">
+  Step 1: Function Definition
+  <a class="heading-link" href="#step-1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The function <code>discountPrices</code> takes two arguments:</p>
+<ul>
+<li><strong><code>sentence</code></strong>: A string representing the sentence where some words may represent prices.</li>
+<li><strong><code>discount</code></strong>: An integer representing the discount percentage to apply to the price words.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">discountPrices</span>(string sentence, <span style="color:#66d9ef">int</span> discount) {
+</span></span></code></pre></div><h4 id="step-2-helper-function-doit">
+  Step 2: Helper Function <code>doit</code>
+  <a class="heading-link" href="#step-2-helper-function-doit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>doit</code> function is used to process each individual word from the sentence. It checks if the word is a price and applies the discount accordingly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> doit <span style="color:#f92672">=</span> [<span style="color:#f92672">&amp;</span>](string word) {
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Check if the word starts with a dollar sign</strong>: We first check if the word starts with a <code>$</code> character and if its length is greater than 1 (to ensure it&rsquo;s a valid price).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> word.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> word[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;$&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> word;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Extract the Numeric Value</strong>: If the word is valid (i.e., it starts with a <code>$</code>), we attempt to extract the number from the word. We iterate through the characters after the dollar sign to confirm that they are digits. If any character is not a digit, we return the original word, indicating it was not a valid price.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isdigit(word[i])) <span style="color:#66d9ef">return</span> word;
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> num <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Apply Discount</strong>: Once we have the number, we calculate the discounted value. We first convert the discount percentage into a decimal value by dividing <code>(100 - discount)</code> by 100.00. Then, we multiply the original price by this factor to get the discounted price.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stringstream ss2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> discountPercentage <span style="color:#f92672">=</span> (<span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> discount) <span style="color:#f92672">/</span> <span style="color:#ae81ff">100.00</span>;
+</span></span><span style="display:flex;"><span>ss2 <span style="color:#f92672">&lt;&lt;</span> fixed <span style="color:#f92672">&lt;&lt;</span> setprecision(<span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> (discountPercentage <span style="color:#f92672">*</span> num);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Discounted Price</strong>: Finally, we format the discounted price as a string with two decimal places and prepend a dollar sign. This ensures the price format is correct.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;$&#34;</span> <span style="color:#f92672">+</span> ss2.str();
+</span></span></code></pre></div></li>
+</ol>
+<h4 id="step-3-processing-the-entire-sentence">
+  Step 3: Processing the Entire Sentence
+  <a class="heading-link" href="#step-3-processing-the-entire-sentence">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The main function processes the sentence word by word using a <code>stringstream</code>. We initialize an empty string <code>res</code> to store the final result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res, word;
+</span></span><span style="display:flex;"><span>stringstream <span style="color:#a6e22e">ss</span>(sentence);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (ss <span style="color:#f92672">&gt;&gt;</span> word) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> doit(word) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>stringstream</code> splits the sentence into individual words.</li>
+<li>Each word is passed to the <code>doit</code> function, which either applies the discount or leaves the word unchanged.</li>
+<li>The result is concatenated to the <code>res</code> string, along with a space after each word.</li>
+</ul>
+<h4 id="step-4-remove-the-last-space">
+  Step 4: Remove the Last Space
+  <a class="heading-link" href="#step-4-remove-the-last-space">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the loop, we remove the extra space at the end of the sentence. This is done by calling <code>pop_back()</code> on the <code>res</code> string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res.pop_back();
+</span></span></code></pre></div><h4 id="step-5-return-the-final-result">
+  Step 5: Return the Final Result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, the modified sentence is returned.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><strong>Example 1</strong>:
+Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string sentence <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;I bought a $200 shirt and a $300 pair of shoes&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> discount <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+</span></span></code></pre></div><ol>
+<li>The sentence is split into words: <code>&quot;I&quot;</code>, <code>&quot;bought&quot;</code>, <code>&quot;a&quot;</code>, <code>&quot;$200&quot;</code>, <code>&quot;shirt&quot;</code>, <code>&quot;and&quot;</code>, <code>&quot;a&quot;</code>, <code>&quot;$300&quot;</code>, <code>&quot;pair&quot;</code>, <code>&quot;of&quot;</code>, <code>&quot;shoes&quot;</code>.</li>
+<li>The <code>doit</code> function is applied to the price words:
+<ul>
+<li><code>&quot;$200&quot;</code>: The function extracts <code>200</code>, applies a 20% discount to get <code>160.00</code>, and returns <code>&quot;$160.00&quot;</code>.</li>
+<li><code>&quot;$300&quot;</code>: The function extracts <code>300</code>, applies a 20% discount to get <code>240.00</code>, and returns <code>&quot;$240.00&quot;</code>.</li>
+</ul>
+</li>
+<li>The other words (<code>&quot;I&quot;</code>, <code>&quot;bought&quot;</code>, <code>&quot;a&quot;</code>, <code>&quot;shirt&quot;</code>, <code>&quot;and&quot;</code>, <code>&quot;a&quot;</code>, <code>&quot;pair&quot;</code>, <code>&quot;of&quot;</code>, <code>&quot;shoes&quot;</code>) are left unchanged.</li>
+<li>The final result is: <code>&quot;I bought a $160.00 shirt and a $240.00 pair of shoes&quot;</code>.</li>
+</ol>
+<p><strong>Example 2</strong>:
+Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string sentence <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;The price is $99 for this item&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> discount <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><ol>
+<li>The sentence is split into words: <code>&quot;The&quot;</code>, <code>&quot;price&quot;</code>, <code>&quot;is&quot;</code>, <code>&quot;$99&quot;</code>, <code>&quot;for&quot;</code>, <code>&quot;this&quot;</code>, <code>&quot;item&quot;</code>.</li>
+<li>The <code>doit</code> function is applied to the price word:
+<ul>
+<li><code>&quot;$99&quot;</code>: The function extracts <code>99</code>, applies a 10% discount to get <code>89.10</code>, and returns <code>&quot;$89.10&quot;</code>.</li>
+</ul>
+</li>
+<li>The other words (<code>&quot;The&quot;</code>, <code>&quot;price&quot;</code>, <code>&quot;is&quot;</code>, <code>&quot;for&quot;</code>, <code>&quot;this&quot;</code>, <code>&quot;item&quot;</code>) are left unchanged.</li>
+<li>The final result is: <code>&quot;The price is $89.10 for this item&quot;</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Splitting the sentence</strong>: The <code>stringstream</code> splits the sentence into words. This operation takes <code>O(n)</code>, where <code>n</code> is the length of the sentence.</li>
+<li><strong>Processing each word</strong>: For each word, we check if it starts with <code>$</code> and extract the numeric part. This takes <code>O(m)</code> for each word, where <code>m</code> is the length of the word.
+<ul>
+<li>Overall, processing all words takes <code>O(w * m)</code>, where <code>w</code> is the number of words, and <code>m</code> is the average length of each word.</li>
+</ul>
+</li>
+<li><strong>Final complexity</strong>: The overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the sentence.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Auxiliary space</strong>: The space used is proportional to the number of words and the sentence length. The space complexity is <strong>O(w + n)</strong>, where <code>w</code> is the number of words and <code>n</code> is the length of the sentence.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently processes the sentence and applies discounts to the price words while maintaining the format. By splitting the sentence into words, checking for price words, and applying the discount only where necessary, the algorithm handles the task with a time complexity of <strong>O(n)</strong>. This makes it suitable for longer sentences while ensuring correctness by formatting the discounted prices to two decimal places.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode805s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +465,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2289"  class="external-link" target="_blank" rel="noopener">LeetCode #2289: Steps to Make Array Non-decreasing</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2293"  class="external-link" target="_blank" rel="noopener">LeetCode #2293: Min Max Game</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +507,6 @@
 
       </div>
 
-      
 
       <footer>
         

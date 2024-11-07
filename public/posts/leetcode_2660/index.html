@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,138 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1056s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves simulating a bowling game between two players, <code>p1</code> and <code>p2</code>, who each roll a series of frames. Each player gets a score for each roll, but if a player rolls a strike (a score of 10), the subsequent rolls are worth double. The task is to determine the winner of the game based on the rules mentioned and return <code>1</code> if player <code>p1</code> wins, <code>2</code> if player <code>p2</code> wins, or <code>0</code> if it is a tie.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this bowling game, the primary challenge is calculating the scores based on special rules for strikes. A strike, represented by a score of 10, influences the score of the subsequent roll(s). If the previous roll or the two preceding rolls were strikes, the current roll is worth double.</p>
+<p>To solve the problem:</p>
+<ol>
+<li>We iterate through both players&rsquo; scores, calculating their total score while taking into account the rule for strikes.</li>
+<li>We keep track of two scores: <code>sc1</code> for player 1 and <code>sc2</code> for player 2.</li>
+<li>For each roll, we check the conditions for a strike and adjust the score accordingly.</li>
+<li>After processing all frames, we compare the scores of both players and return the winner.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">isWinner</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> p1, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> p2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sc1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sc2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> p1.size();
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-3</strong>: We define the function <code>isWinner</code>, which takes two vectors <code>p1</code> and <code>p2</code>, representing the scores of player 1 and player 2, respectively.</li>
+<li><strong>Line 2</strong>: Two variables <code>sc1</code> and <code>sc2</code> are initialized to 0 to keep track of the total scores for player 1 and player 2.</li>
+<li><strong>Line 3</strong>: We determine the number of frames <code>n</code> based on the size of the vector <code>p1</code>, assuming both players have the same number of frames.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> (p1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">||</span> p1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>)) {
+</span></span><span style="display:flex;"><span>            sc1 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> p1[i];
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> p1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>){
+</span></span><span style="display:flex;"><span>            sc1 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> p1[i];                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> sc1 <span style="color:#f92672">+=</span> p1[i];
+</span></span></code></pre></div><ul>
+<li><strong>Line 4-9</strong>: This loop iterates over each frame for player 1. We check the conditions for a strike:
+<ul>
+<li><strong>Condition 1</strong>: If the previous roll or the two preceding rolls were strikes (i.e., <code>p1[i - 1] == 10 || p1[i - 2] == 10</code>), the current roll is worth double.</li>
+<li><strong>Condition 2</strong>: If only the immediate previous roll was a strike (i.e., <code>p1[i - 1] == 10</code>), the current roll is worth double.</li>
+<li><strong>Else</strong>: If no strike condition applies, the current roll is simply added to <code>sc1</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> (p2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">||</span> p2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>)) {
+</span></span><span style="display:flex;"><span>            sc2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> p2[i];
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> p2[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>){
+</span></span><span style="display:flex;"><span>            sc2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> p2[i];                
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> sc2 <span style="color:#f92672">+=</span> p2[i];            
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Line 10-15</strong>: Similarly, we perform the same checks for player 2:
+<ul>
+<li><strong>Condition 1</strong>: If the previous roll or the two preceding rolls were strikes, the current roll is worth double for player 2.</li>
+<li><strong>Condition 2</strong>: If only the immediate previous roll was a strike, the current roll is worth double for player 2.</li>
+<li><strong>Else</strong>: If no strike condition applies, the current roll is added to <code>sc2</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(sc1 <span style="color:#f92672">&gt;</span> sc2) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(sc2 <span style="color:#f92672">&gt;</span> sc1) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 16-18</strong>: After iterating over all frames for both players, we compare the final scores <code>sc1</code> and <code>sc2</code>.
+<ul>
+<li>If <code>sc1</code> (player 1&rsquo;s score) is greater than <code>sc2</code> (player 2&rsquo;s score), we return <code>1</code> to indicate player 1 wins.</li>
+<li>If <code>sc2</code> is greater than <code>sc1</code>, we return <code>2</code> to indicate player 2 wins.</li>
+<li>If both scores are equal, we return <code>0</code> to indicate a tie.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The solution loops through both player scores in a single <code>for</code> loop. The time complexity of iterating through the scores is <strong>O(n)</strong>, where <code>n</code> is the number of frames (or the number of elements in <code>p1</code> and <code>p2</code>).</li>
+<li>Since the loop only contains constant time operations (comparisons and additions), the overall time complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because the solution uses a constant amount of extra space to store temporary variables (<code>sc1</code>, <code>sc2</code>, and <code>n</code>), regardless of the size of the input vectors.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the winner of the bowling game by simulating the score calculation process, factoring in the bonus points awarded for strikes. It iterates over the frames, checks the strike conditions, and calculates the total scores for each player. The solution has a time complexity of <strong>O(n)</strong> and space complexity of <strong>O(1)</strong>, making it suitable for large inputs. The implementation is simple, clear, and easy to understand, providing an optimal way to determine the winner in a bowling game with strike rules.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1056s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +418,6 @@
 
       </div>
 
-      
 
       <footer>
         

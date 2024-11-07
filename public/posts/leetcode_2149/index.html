@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,131 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode718s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves rearranging the elements of an array such that positive and negative integers are placed alternately. The rearranged array must maintain the relative order of the positive and negative numbers, meaning that within their respective categories, the order of numbers should be preserved. The key challenge here is to ensure that no two positive or negative numbers appear consecutively. If this is not possible, we return an array where positive and negative integers are still rearranged, but the ordering constraint may not hold.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a two-pointer approach that helps us place positive and negative integers alternately. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Create a Result Array</strong>: Start by creating a new array <code>ans</code> of the same size as the input array, initialized to zeros. This will be used to store the rearranged elements.</p>
+</li>
+<li>
+<p><strong>Initialize Two Indices</strong>: We use two indices, <code>idxpos</code> and <code>idxneg</code>. The index <code>idxpos</code> will be used to place the positive integers starting from the first position (0, 2, 4, etc.), and the index <code>idxneg</code> will be used to place the negative integers starting from position 1 (1, 3, 5, etc.).</p>
+</li>
+<li>
+<p><strong>Iterate through the Input Array</strong>: We loop through the original array <code>nums</code>. For each element:</p>
+<ul>
+<li>If the element is positive, place it in the <code>ans</code> array at the index <code>idxpos</code> and increment <code>idxpos</code> by 2 (to skip to the next available position for positive integers).</li>
+<li>If the element is negative, place it in the <code>ans</code> array at the index <code>idxneg</code> and increment <code>idxneg</code> by 2 (to skip to the next available position for negative integers).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result Array</strong>: After iterating through all the elements, return the rearranged array <code>ans</code>.</p>
+</li>
+</ol>
+<p>This approach ensures that positive and negative integers are alternated while preserving their relative order. The two-pointer technique allows for a single pass through the input array, making the solution efficient in terms of both time and space.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The following is a detailed explanation of how the code works step-by-step:</p>
+<ol>
+<li>
+<p><strong>Initialize the Result Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(nums.size(), <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><p>Here, we create an array <code>ans</code> with the same size as <code>nums</code> and initialize all elements to 0. This array will store the final rearranged elements.</p>
+</li>
+<li>
+<p><strong>Set Initial Indices for Positive and Negative Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> idxpos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, idxneg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>We initialize two indices: <code>idxpos</code> starts at 0 (the first position for positive numbers), and <code>idxneg</code> starts at 1 (the first position for negative numbers).</p>
+</li>
+<li>
+<p><strong>Iterate Through the Input Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> num: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        ans[idxpos] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>        idxpos <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        ans[idxneg] <span style="color:#f92672">=</span> num;
+</span></span><span style="display:flex;"><span>        idxneg <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This loop iterates through each number in the input array <code>nums</code>. For each number:</p>
+<ul>
+<li>If the number is positive (<code>num &gt; 0</code>), it is placed in the <code>ans</code> array at the <code>idxpos</code> position. Then, <code>idxpos</code> is incremented by 2 to move to the next available position for positive numbers.</li>
+<li>If the number is negative (<code>num &lt; 0</code>), it is placed in the <code>ans</code> array at the <code>idxneg</code> position. Then, <code>idxneg</code> is incremented by 2 to move to the next available position for negative numbers.</li>
+</ul>
+<p>The condition <code>num &lt; 0</code> and <code>num &gt; 0</code> ensures that we only place positive and negative integers in their respective slots.</p>
+</li>
+<li>
+<p><strong>Return the Result Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>Finally, after processing all the numbers in the input array, the <code>ans</code> array is returned, which now contains the positive and negative numbers alternately arranged.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>. This is because we iterate through the array only once to rearrange the elements, and the operations inside the loop (checking if a number is positive or negative and placing it in the result array) are constant time operations.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is also <strong>O(n)</strong>, as we create a new array <code>ans</code> of the same size as the input array to store the rearranged elements. Additionally, no extra data structures or space beyond this are required.</p>
+<p>This solution is optimal in terms of both time and space for this problem.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided solution is an efficient way to rearrange an array such that positive and negative integers alternate while maintaining their relative order. By using the two-pointer approach, we can solve the problem in linear time and space, making it well-suited for larger input sizes. This method guarantees that we adhere to the problem constraints while keeping the implementation simple and easy to understand. The code is both effective and efficient, making it a great choice for solving similar array rearrangement problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode718s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +411,6 @@
 
       </div>
 
-      
 
       <footer>
         

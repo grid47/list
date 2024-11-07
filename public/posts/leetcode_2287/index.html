@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -233,7 +233,219 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn ; 
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode804s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine how many times you can rearrange the characters of a given string <code>s</code> to form the string <code>target</code>. In other words, you need to find the maximum number of times the string <code>target</code> can be created by using characters from string <code>s</code>. Each character in <code>s</code> can only be used once per rearrangement.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be efficiently solved by counting the frequencies of characters in both the string <code>s</code> and the target string. Once we know how many times each character appears in both strings, we can determine how many times we can create the target string by using characters from <code>s</code>. The key steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Count the Frequencies of Characters in <code>target</code></strong>:</p>
+<ul>
+<li>For each character in <code>target</code>, we need to know how many times it appears. This helps us understand the minimum number of times we need that character to form one complete copy of <code>target</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count the Frequencies of Characters in <code>s</code></strong>:</p>
+<ul>
+<li>For each character in <code>s</code>, we count how many times it appears. This will tell us how many copies of the characters are available in <code>s</code> for rearranging.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine How Many Complete Rearrangements of <code>target</code> Can Be Formed</strong>:</p>
+<ul>
+<li>For each character in <code>target</code>, we check how many times it appears in <code>s</code>. The number of complete rearrangements of <code>target</code> is determined by the limiting character — i.e., the character in <code>target</code> for which there are the fewest available copies in <code>s</code> compared to the number required for one complete rearrangement of <code>target</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The result is the minimum number of times the characters of <code>target</code> can be rearranged to form a complete <code>target</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code implementation follows the steps mentioned in the approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> targetFreq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> a : target) {
+</span></span><span style="display:flex;"><span>    targetFreq[a]<span style="color:#f92672">++</span>; <span style="color:#75715e">// Count frequency of each character in the target string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>targetFreq</code></strong>: This is an unordered map (hash map) that stores the frequency of each character in the <code>target</code> string.</li>
+<li>We iterate over each character in <code>target</code>, and for each character, we increase its frequency count in the <code>targetFreq</code> map. This helps us know how many of each character is required to form one occurrence of the <code>target</code> string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sentFreq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> a : s) {
+</span></span><span style="display:flex;"><span>    sentFreq[a]<span style="color:#f92672">++</span>; <span style="color:#75715e">// Count frequency of each character in the input string `s`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>sentFreq</code></strong>: This is another unordered map that stores the frequency of each character in the string <code>s</code>.</li>
+<li>We iterate over each character in <code>s</code> and update the frequency count in <code>sentFreq</code>. This map will give us an idea of how many copies of each character we have in <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> a : targetFreq) {
+</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> min(mn, sentFreq[a.first] <span style="color:#f92672">/</span> a.second); <span style="color:#75715e">// Determine the minimum number of complete target strings that can be formed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>mn</code></strong>: This variable is initialized to <code>INT_MAX</code> (the largest possible integer value). It keeps track of the minimum number of complete rearrangements of <code>target</code> that can be formed using characters from <code>s</code>.</li>
+<li>For each character in <code>targetFreq</code>, we calculate how many times the character from <code>target</code> can be used based on its frequency in <code>s</code>. Specifically, we take the quotient of <code>sentFreq[a.first] / a.second</code> for each character <code>a.first</code> in <code>targetFreq</code> and <code>a.second</code> (the number of times it appears in <code>target</code>).
+<ul>
+<li>This represents how many times we can use the current character from <code>s</code> to form the target string.</li>
+<li>We take the minimum of these quotients because the overall number of times we can form <code>target</code> depends on the most limiting character (i.e., the one that is available the least).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mn; <span style="color:#75715e">// Return the result: the maximum number of times the target can be formed
+</span></span></span></code></pre></div><ul>
+<li>Finally, after processing all characters in <code>target</code>, we return <code>mn</code>, which holds the maximum number of complete rearrangements of <code>target</code> that can be made using characters from <code>s</code>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s go through a step-by-step walkthrough of how the solution works using an example.</p>
+<p><strong>Example 1</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;iloveleetcode&#34;</span>;
+</span></span><span style="display:flex;"><span>string target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;love&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Count the characters in <code>target</code></strong>:</p>
+<ul>
+<li><code>targetFreq</code> will look like: <code>{'l': 1, 'o': 1, 'v': 1, 'e': 1}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Count the characters in <code>s</code></strong>:</p>
+<ul>
+<li><code>sentFreq</code> will look like: <code>{'i': 1, 'l': 1, 'o': 2, 'v': 1, 'e': 3, 't': 2, 'c': 1, 'd': 1}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Determine how many complete target strings can be formed</strong>:</p>
+<ul>
+<li>For <code>'l'</code>: We need 1, but we have 1, so we can use it 1 time.</li>
+<li>For <code>'o'</code>: We need 1, but we have 2, so we can use it 2 times.</li>
+<li>For <code>'v'</code>: We need 1, but we have 1, so we can use it 1 time.</li>
+<li>For <code>'e'</code>: We need 1, but we have 3, so we can use it 3 times.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the minimum value</strong>:</p>
+<ul>
+<li>The minimum number of complete rearrangements is <code>min(1, 2, 1, 3)</code> which equals 1.</li>
+</ul>
+</li>
+</ol>
+<p>So, the result is <code>1</code> — we can form one complete rearrangement of <code>&quot;love&quot;</code> from the characters in <code>&quot;iloveleetcode&quot;</code>.</p>
+<p><strong>Example 2</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcabc&#34;</span>;
+</span></span><span style="display:flex;"><span>string target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Count the characters in <code>target</code></strong>:</p>
+<ul>
+<li><code>targetFreq</code>: <code>{'a': 1, 'b': 1, 'c': 1}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Count the characters in <code>s</code></strong>:</p>
+<ul>
+<li><code>sentFreq</code>: <code>{'a': 2, 'b': 2, 'c': 2}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Determine how many complete target strings can be formed</strong>:</p>
+<ul>
+<li>For <code>'a'</code>: We need 1, and we have 2, so we can use it 2 times.</li>
+<li>For <code>'b'</code>: We need 1, and we have 2, so we can use it 2 times.</li>
+<li>For <code>'c'</code>: We need 1, and we have 2, so we can use it 2 times.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the minimum value</strong>:</p>
+<ul>
+<li>The minimum number of complete rearrangements is <code>min(2, 2, 2)</code> which equals 2.</li>
+</ul>
+</li>
+</ol>
+<p>So, the result is <code>2</code> — we can form two complete rearrangements of <code>&quot;abc&quot;</code> from the characters in <code>&quot;abcabc&quot;</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Building the frequency map for <code>target</code></strong>: Iterating through the <code>target</code> string takes <code>O(m)</code>, where <code>m</code> is the length of <code>target</code>.</li>
+<li><strong>Building the frequency map for <code>s</code></strong>: Iterating through the <code>s</code> string takes <code>O(n)</code>, where <code>n</code> is the length of <code>s</code>.</li>
+<li><strong>Calculating the minimum number of rearrangements</strong>: We iterate over the keys of <code>targetFreq</code>, which will have at most 26 entries (since there are only 26 letters in the alphabet). Hence, this step takes <code>O(1)</code> time, since the maximum number of unique characters is constant.</li>
+<li><strong>Overall time complexity</strong>: The time complexity is <strong>O(n + m)</strong>, where <code>n</code> is the length of <code>s</code> and <code>m</code> is the length of <code>target</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Storing frequency maps</strong>: We use two unordered maps, <code>targetFreq</code> and <code>sentFreq</code>, each of size at most 26 (since we are only dealing with lowercase English letters). The space complexity is <strong>O(1)</strong> due to the constant size of the alphabet.</p>
+</li>
+<li>
+<p><strong>Overall space complexity</strong>: The space complexity is <strong>O(1)</strong>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of times the <code>target</code> string can be rearranged using characters from string <code>s</code> by leveraging frequency counting and finding the limiting character. The algorithm runs in linear time with respect to the sizes of <code>s</code> and <code>target</code>, making it efficient even for larger inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode804s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +499,6 @@
 
       </div>
 
-      
 
       <footer>
         

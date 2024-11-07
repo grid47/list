@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,212 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1058s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to add the minimum number of characters to a given string <code>word</code> such that the string alternates between the letters <code>'a'</code>, <code>'b'</code>, and <code>'c'</code> in that order (i.e., <code>'a' -&gt; 'b' -&gt; 'c' -&gt; 'a' -&gt; 'b' ...</code>). The string may contain any of the letters <code>'a'</code>, <code>'b'</code>, and <code>'c'</code>, and we are allowed to add extra characters to make the sequence follow the repeating pattern of &lsquo;abc&rsquo;. The task is to determine the minimum number of characters that must be added to <code>word</code> to make it match this pattern.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initialize the state</strong>:</p>
+<ul>
+<li>We will start by keeping track of the current expected character (either <code>'a'</code>, <code>'b'</code>, or <code>'c'</code>) as we process each character in <code>word</code>.</li>
+<li>We maintain a counter <code>res</code> that counts how many characters need to be added to achieve the desired pattern.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the string</strong>:</p>
+<ul>
+<li>We will loop through each character in <code>word</code>, and for each character:
+<ul>
+<li>Check if it matches the expected character.</li>
+<li>If it does match, we update the expected character (since the next character in the pattern should follow the repeating sequence &lsquo;abc&rsquo;).</li>
+<li>If it doesn&rsquo;t match the expected character, we add characters until we match the expected character and update the counter.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Handling</strong>:</p>
+<ul>
+<li>If the last character in the string <code>word</code> is <code>'a'</code> or <code>'b'</code>, we need to account for additional characters that should come after it to complete the repeating pattern.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final result</strong>:</p>
+<ul>
+<li>The result will be the total number of characters we added to the string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step-by-step:</p>
+<ol>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> exp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> word.size();
+</span></span></code></pre></div><ul>
+<li><code>exp</code> keeps track of the expected character in the pattern (<code>0</code> for <code>'a'</code>, <code>1</code> for <code>'b'</code>, and <code>2</code> for <code>'c'</code>).</li>
+<li><code>res</code> is the variable that counts the number of characters we need to add to make the string match the pattern.</li>
+<li><code>n</code> is the size of the input string <code>word</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop to Process Each Character</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(exp <span style="color:#f92672">==</span> (word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        exp <span style="color:#f92672">=</span> (exp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(exp <span style="color:#f92672">!=</span> (word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        exp <span style="color:#f92672">=</span> (exp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    exp <span style="color:#f92672">=</span> (exp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each character in the string <code>word</code>.</li>
+<li>The condition <code>if(exp == (word[i] - 'a'))</code> checks if the current character matches the expected character:
+<ul>
+<li>If it matches, we move on to the next expected character in the cycle (<code>'a' -&gt; 'b' -&gt; 'c' -&gt; 'a'</code>).</li>
+</ul>
+</li>
+<li>If it doesn&rsquo;t match, the <code>while(exp != (word[i] - 'a'))</code> loop adds the required characters to match the expected character. After adding each character, the expected character is updated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Edge Cases (Final Character)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(word[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;a&#39;</span>) res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(word[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;b&#39;</span>) res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all characters in <code>word</code>, we check the last character of the string:
+<ul>
+<li>If the last character is <code>'a'</code>, we need two additional characters (<code>'b'</code> and <code>'c'</code>) to complete the repeating sequence.</li>
+<li>If the last character is <code>'b'</code>, we need one additional character (<code>'c'</code>) to complete the pattern.</li>
+</ul>
+</li>
+<li>The final value of <code>res</code> is returned, which represents the total number of characters added.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Let’s consider the input <code>word = &quot;ab&quot;</code>:</p>
+<ol>
+<li>Initially, <code>exp = 0</code> (expecting <code>'a'</code>) and <code>res = 0</code>.</li>
+<li>We start with the first character <code>'a'</code>:
+<ul>
+<li>Since <code>exp = 0</code> (expecting <code>'a'</code>), it matches, so we move to the next expected character, <code>'b'</code> (<code>exp = 1</code>).</li>
+</ul>
+</li>
+<li>The second character is <code>'b'</code>:
+<ul>
+<li>Since <code>exp = 1</code> (expecting <code>'b'</code>), it matches, so we move to the next expected character, <code>'c'</code> (<code>exp = 2</code>).</li>
+</ul>
+</li>
+<li>Now, the string ends, and the last character is <code>'b'</code>. We need to add 1 character (<code>'c'</code>) to complete the sequence.</li>
+<li>The final result is <code>res = 1</code>.</li>
+</ol>
+<h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Let’s consider the input <code>word = &quot;abc&quot;</code>:</p>
+<ol>
+<li>Initially, <code>exp = 0</code> (expecting <code>'a'</code>) and <code>res = 0</code>.</li>
+<li>The first character is <code>'a'</code>:
+<ul>
+<li>Since <code>exp = 0</code> (expecting <code>'a'</code>), it matches, so we move to the next expected character, <code>'b'</code> (<code>exp = 1</code>).</li>
+</ul>
+</li>
+<li>The second character is <code>'b'</code>:
+<ul>
+<li>Since <code>exp = 1</code> (expecting <code>'b'</code>), it matches, so we move to the next expected character, <code>'c'</code> (<code>exp = 2</code>).</li>
+</ul>
+</li>
+<li>The third character is <code>'c'</code>:
+<ul>
+<li>Since <code>exp = 2</code> (expecting <code>'c'</code>), it matches, so we move back to the next expected character, <code>'a'</code> (<code>exp = 0</code>).</li>
+</ul>
+</li>
+<li>Now, the string ends, and no extra characters are needed.</li>
+<li>The final result is <code>res = 0</code>.</li>
+</ol>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>word</code>.</p>
+<ul>
+<li>The solution involves a single pass through the string, with constant-time operations for each character (checking conditions and updating the expected character). Therefore, the overall time complexity is linear in terms of the size of the input string.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(1)</strong>, as we are only using a few integer variables (<code>exp</code>, <code>res</code>, <code>n</code>), and no additional data structures proportional to the input size are used.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently solves the problem by iterating over the string <code>word</code> and counting how many characters need to be added to match the expected repeating pattern <code>'abc'</code>. By maintaining the expected character in the cycle and using a counter to track how many characters are added, the algorithm ensures that we add the minimum number of characters to achieve the desired pattern. The approach is optimal with a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, making it suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1058s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -296,7 +501,6 @@
 
       </div>
 
-      
 
       <footer>
         

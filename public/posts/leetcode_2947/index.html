@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -246,7 +246,167 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1200s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find all &ldquo;beautiful&rdquo; substrings within a given string <code>s</code> of lowercase English letters, where a substring is considered beautiful if it contains an equal number of vowels and consonants and the product of the number of vowels and consonants is divisible by a given integer <code>k</code>. We need to count how many such substrings exist in the string <code>s</code>.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to explore each substring of the string <code>s</code> and check if it satisfies the given conditions:</p>
+<ol>
+<li>The number of vowels equals the number of consonants.</li>
+<li>The product of the number of vowels and consonants is divisible by <code>k</code>.</li>
+</ol>
+<p>The approach consists of iterating through all possible substrings, counting vowels and consonants, and checking the two conditions mentioned above.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Vowels and Consonants Counting</strong>: We can quickly check whether a character is a vowel using a set of vowels (<code>'a', 'e', 'i', 'o', 'u'</code>), and anything that is not a vowel will be treated as a consonant.</li>
+<li><strong>Efficient Checking</strong>: Instead of checking every possible substring in a brute-force manner, we can keep a running tally of the number of vowels and consonants as we iterate through the string.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization-of-vowels-set">
+  1. <strong>Initialization of Vowels Set</strong>:
+  <a class="heading-link" href="#1-initialization-of-vowels-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>unordered_set</code> <code>st</code> is initialized with the vowels <code>'a', 'e', 'i', 'o', 'u'</code>. This set will help quickly check if a character is a vowel or not by using the <code>find</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> st{<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;i&#39;</span>, <span style="color:#e6db74">&#39;o&#39;</span>, <span style="color:#e6db74">&#39;u&#39;</span>};
+</span></span></code></pre></div><p>We also define the helper function <code>isVowel</code>, which checks if a character is in the set <code>st</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isVowel</span>(<span style="color:#66d9ef">char</span> c) { <span style="color:#66d9ef">return</span> st.find(c) <span style="color:#f92672">!=</span> st.end(); }
+</span></span></code></pre></div><p>This function returns <code>true</code> if <code>c</code> is a vowel and <code>false</code> otherwise.</p>
+<h4 id="2-outer-loop-for-starting-index-of-substrings">
+  2. <strong>Outer Loop for Starting Index of Substrings</strong>:
+  <a class="heading-link" href="#2-outer-loop-for-starting-index-of-substrings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by iterating over all possible starting points of the substrings, from index <code>0</code> to <code>s.size() - 1</code>. For each starting index <code>i</code>, we will count the number of vowels and consonants as we expand the substring.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i){
+</span></span></code></pre></div><h4 id="3-inner-loop-for-expanding-the-substring">
+  3. <strong>Inner Loop for Expanding the Substring</strong>:
+  <a class="heading-link" href="#3-inner-loop-for-expanding-the-substring">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For each starting index <code>i</code>, we use a second loop to explore substrings that start at <code>i</code> and end at index <code>j</code> (where <code>j</code> ranges from <code>i</code> to <code>s.size() - 1</code>). For each such substring, we will update the counts of vowels and consonants.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> vow <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, con <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>j) {
+</span></span><span style="display:flex;"><span>    (isVowel(s[j])) <span style="color:#f92672">?</span> vow<span style="color:#f92672">++</span> <span style="color:#f92672">:</span> con<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>Here, <code>vow</code> and <code>con</code> track the number of vowels and consonants, respectively. If the character <code>s[j]</code> is a vowel (determined by <code>isVowel</code>), we increment the vowel counter <code>vow</code>, otherwise, we increment the consonant counter <code>con</code>.</p>
+<h4 id="4-check-the-conditions">
+  4. <strong>Check the Conditions</strong>:
+  <a class="heading-link" href="#4-check-the-conditions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After updating the counts of vowels and consonants for the current substring, we check the two conditions:</p>
+<ol>
+<li>The number of vowels equals the number of consonants.</li>
+<li>The product of the number of vowels and consonants is divisible by <code>k</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(vow <span style="color:#f92672">==</span> con <span style="color:#f92672">&amp;&amp;</span> (vow <span style="color:#f92672">*</span> con) <span style="color:#f92672">%</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) ans<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>If both conditions are satisfied, we increment the result counter <code>ans</code>.</p>
+<h4 id="5-return-the-result">
+  5. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once both loops have iterated through all possible substrings, we return the total count of &ldquo;beautiful&rdquo; substrings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The solution involves two nested loops. The outer loop iterates over all possible starting points of the substrings, and the inner loop iterates over all possible ending points of the substrings for each starting point.</li>
+<li>The total number of substrings in the string <code>s</code> is roughly <code>n * (n + 1) / 2</code>, where <code>n</code> is the length of the string.</li>
+<li>For each substring, checking if the number of vowels equals the number of consonants and if their product is divisible by <code>k</code> is constant time, <code>O(1)</code>.</li>
+<li>Therefore, the overall time complexity is <code>O(n^2)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the space required for the unordered set <code>st</code> that holds the vowels, which is <code>O(1)</code> since it always contains a fixed number of vowels (five).</li>
+<li>There are no other significant space requirements, so the space complexity is <code>O(1)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently counts the number of &ldquo;beautiful&rdquo; substrings in the given string by iterating over all possible substrings and checking if they meet the two conditions: the number of vowels equals the number of consonants, and their product is divisible by <code>k</code>.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Vowel and Consonant Counting</strong>: The problem leverages the ability to efficiently count vowels and consonants using a helper function and an unordered set.</li>
+<li><strong>Efficient Checking</strong>: By iterating over all possible substrings and checking the conditions in constant time, the solution avoids the need for more complex optimizations.</li>
+<li><strong>Time Complexity</strong>: The time complexity of <code>O(n^2)</code> is manageable for strings of moderate length but could become inefficient for very large strings. However, the solution works well within typical problem constraints.</li>
+</ul>
+<p>This solution provides a simple and effective way to solve the problem while maintaining clarity and correctness.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1200s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -300,7 +460,6 @@
 
       </div>
 
-      
 
       <footer>
         

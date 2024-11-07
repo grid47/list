@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,200 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1104s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the total number of subarrays in an integer array <code>nums</code> such that:</p>
+<ol>
+<li>The subarray contains no more than 3 distinct elements.</li>
+<li>The difference between the maximum and minimum elements of the subarray is no greater than 2.</li>
+</ol>
+<p>We are to return the count of all such valid subarrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a sliding window approach combined with a hash map (or a frequency map) to efficiently track the elements inside the window.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sliding Window</strong>: We maintain a sliding window where we can expand the right end of the window (<code>j</code>) and contract the left end (<code>i</code>) to ensure the subarray satisfies the given conditions.</p>
+</li>
+<li>
+<p><strong>Valid Subarray Conditions</strong>:</p>
+<ul>
+<li>The subarray must contain at most 3 distinct integers.</li>
+<li>The absolute difference between the maximum and minimum values in the subarray should not exceed 2.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Expansion</strong>:</p>
+<ul>
+<li>We increment the right pointer (<code>j</code>) and include <code>nums[j]</code> in the window, updating its frequency in the map.</li>
+<li>If the window becomes invalid (i.e., it contains more than 3 distinct elements or the difference between the maximum and minimum elements exceeds 2), we move the left pointer (<code>i</code>) to the right, removing elements from the window until the window becomes valid again.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count of Valid Subarrays</strong>:</p>
+<ul>
+<li>For every valid window, all subarrays ending at <code>j</code> and starting from any index <code>i</code> to <code>j</code> are valid. The number of such subarrays is <code>j - i + 1</code>, and we add this to our result.</li>
+</ul>
+</li>
+</ol>
+<h4 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><code>res</code> will store the result, i.e., the total count of valid subarrays.</li>
+<li><code>i</code> and <code>j</code> are pointers representing the left and right ends of the sliding window.</li>
+<li><code>n</code> stores the size of the input array <code>nums</code>.</li>
+<li><code>mp</code> is a frequency map to keep track of the elements in the current window.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>    mp[nums[j]]<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Add the current element to the frequency map
+</span></span></span></code></pre></div><ul>
+<li>We start iterating with the right pointer <code>j</code> from 0 to <code>n-1</code>.</li>
+<li>For each element <code>nums[j]</code>, we increment its count in the map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Window Validation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (mp.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">||</span> abs(mp.begin()<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">-</span> mp.rbegin()<span style="color:#f92672">-&gt;</span>first) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>    mp[nums[i]]<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Reduce the frequency of nums[i]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (mp[nums[i]] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        mp.erase(nums[i]);  <span style="color:#75715e">// If the frequency becomes 0, remove the element from the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    i<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move the left pointer to the right to shrink the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If the window becomes invalid, we move the left pointer <code>i</code> to the right, reducing the frequency of the element <code>nums[i]</code> in the map.</li>
+<li>If the frequency of <code>nums[i]</code> becomes 0, we remove it from the map.</li>
+<li>We continue adjusting <code>i</code> until the window becomes valid again (i.e., it contains at most 3 distinct elements, and the difference between the maximum and minimum values in the window is no greater than 2).</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Valid Subarrays</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> temp <span style="color:#f92672">=</span> j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> res <span style="color:#f92672">+</span> temp;  <span style="color:#75715e">// Add the number of valid subarrays to the result
+</span></span></span></code></pre></div><ul>
+<li>For every valid window, the number of valid subarrays is equal to the length of the current window, which is <code>j - i + 1</code>.</li>
+<li>We add this value to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Increment the Right Pointer</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>j<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move the right pointer to expand the window
+</span></span></span></code></pre></div><ul>
+<li>We then increment the right pointer <code>j</code> to expand the window and continue the process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop ends, the result <code>res</code> will contain the total count of all valid subarrays, and we return this value.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sliding Window Expansion and Contraction</strong>:</p>
+<ul>
+<li>The main loop iterates through each element once with the right pointer <code>j</code>, and for each <code>j</code>, we may increment the left pointer <code>i</code> multiple times. However, each element is added and removed from the map at most once.</li>
+<li>Therefore, the total time complexity of the sliding window approach is ( O(n) ), where <code>n</code> is the length of the input array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Operations on the Map</strong>:</p>
+<ul>
+<li>Inserting and removing elements from the map takes ( O(\log k) ), where <code>k</code> is the number of distinct elements in the map. Since the map size is constrained by the number of distinct elements (which is at most 3 in the window), the operations on the map take ( O(\log 3) = O(1) ).</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall time complexity is ( O(n) ).</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Map Storage</strong>:</p>
+<ul>
+<li>The map <code>mp</code> stores at most 3 distinct elements at any point in time (due to the constraint on the number of distinct elements in the window), so the space complexity for the map is ( O(3) = O(1) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Variable</strong>:</p>
+<ul>
+<li>The result variable <code>res</code> stores the total number of valid subarrays, which requires ( O(1) ) space.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall space complexity is ( O(1) ).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses an efficient sliding window approach to count the number of valid subarrays that meet the given conditions. By maintaining a frequency map of the elements in the current window and adjusting the window dynamically, the algorithm ensures that we count all valid subarrays in linear time, with a space complexity of constant space. This makes the solution highly efficient and suitable for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1104s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -263,7 +456,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2763"  class="external-link" target="_blank" rel="noopener">LeetCode #2763: Sum of Imbalance Numbers of All Subarrays</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2765"  class="external-link" target="_blank" rel="noopener">LeetCode #2765: Longest Alternating Subarray</a></th>
       </tr>
   </thead>
   <tbody>
@@ -305,7 +498,6 @@
 
       </div>
 
-      
 
       <footer>
         

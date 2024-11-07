@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -242,7 +242,150 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt.size();        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode915s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to count the number of distinct integers in an array <code>nums</code> where each number can be reversed, and both the original number and its reversed version are considered. Essentially, the task is to find out how many distinct numbers there are in the set formed by taking each number in the array and its reverse.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>[123, 321, 212]</code></li>
+<li>Output: <code>2</code></li>
+</ul>
+<p>In this example, the distinct numbers are <code>123</code> and <code>212</code>. The reverse of <code>123</code> is <code>321</code>, which is already in the array, so the total distinct numbers are <code>123</code> and <code>212</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach for solving this problem can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Reverse Numbers</strong>: For each number in the array, calculate its reverse. The reversed number is also considered as a valid distinct number.</p>
+</li>
+<li>
+<p><strong>Track Distinct Values</strong>: Use a data structure like a set to keep track of distinct values. Since sets automatically handle duplicates, adding both the original number and its reverse will ensure that only distinct values are counted.</p>
+</li>
+<li>
+<p><strong>Final Count</strong>: After processing all the numbers and their reverses, the size of the set will give the number of distinct integers.</p>
+</li>
+</ol>
+<p>This approach is straightforward and relies on the properties of sets to manage duplicates automatically.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-reverse-function-implementation">
+  Step 1: Reverse Function Implementation
+  <a class="heading-link" href="#step-1-reverse-function-implementation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First, we define a helper function <code>rev</code> that reverses a given integer. This function iterates through the digits of the number and constructs the reversed number by repeatedly taking the last digit and appending it to the result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">rev</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> res <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Get the last digit and append it to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Remove the last digit from num
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the reversed number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><code>res = res * 10 + num % 10</code>: This line takes the last digit of <code>num</code> (<code>num % 10</code>) and adds it to the current <code>res</code>, shifting the previous digits left by one position (multiplying by 10).</li>
+<li><code>num /= 10</code>: This removes the last digit from <code>num</code>, so the loop continues until all digits are processed.</li>
+</ul>
+<h4 id="step-2-counting-distinct-integers">
+  Step 2: Counting Distinct Integers
+  <a class="heading-link" href="#step-2-counting-distinct-integers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>In the main function <code>countDistinctIntegers</code>, we initialize a set <code>cnt</code> to store the distinct values. The set automatically handles duplicates, so any number or its reverse will only be stored once.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countDistinctIntegers</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;  <span style="color:#75715e">// Set to store distinct numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();  <span style="color:#75715e">// Get the size of the input array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt.insert(nums[i]);  <span style="color:#75715e">// Insert the original number into the set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cnt.insert(rev(nums[i]));  <span style="color:#75715e">// Insert the reversed number into the set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt.size();  <span style="color:#75715e">// Return the number of distinct elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Insert Original Number</strong>: <code>cnt.insert(nums[i]);</code> adds the original number to the set.</li>
+<li><strong>Insert Reversed Number</strong>: <code>cnt.insert(rev(nums[i]));</code> adds the reversed version of the number to the set.</li>
+</ul>
+<p>The set <code>cnt</code> ensures that only unique numbers (whether original or reversed) are stored. After processing all the numbers in the array, the size of the set <code>cnt.size()</code> gives the total count of distinct integers.</p>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, the size of the set <code>cnt</code> is returned as the result, which gives the number of distinct integers formed by considering both the original numbers and their reversals.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt.size();
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n * m)</strong>, where <code>n</code> is the size of the input array <code>nums</code> and <code>m</code> is the average number of digits in the numbers in the array. This is because:</p>
+<ul>
+<li>For each number in the array, we perform the reversal operation, which takes time proportional to the number of digits in that number (<code>O(m)</code>).</li>
+<li>The insert operation on the set is <strong>O(1)</strong> on average, but since we are doing this for two numbers (the original and the reversed), it still remains efficient.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n * m)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is <strong>O(n)</strong>, as the set <code>cnt</code> stores the distinct values. In the worst case, if all numbers and their reversals are distinct, the set will store <code>2n</code> distinct values. However, the space complexity depends on the number of distinct integers, so it is at most <strong>O(n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of distinct integers in an array, considering both the original numbers and their reversed versions. The approach uses a set to automatically manage duplicates and ensure that only unique values are counted. The time complexity of <strong>O(n * m)</strong>, where <code>m</code> is the number of digits in the largest number in the array, ensures that the solution performs well even for larger inputs. The space complexity of <strong>O(n)</strong> makes the solution space-efficient, as it only stores the distinct integers.</p>
+<p>This solution is optimal for this problem and leverages the power of sets in C++ to handle the distinct counting efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode915s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -296,7 +439,6 @@
 
       </div>
 
-      
 
       <footer>
         

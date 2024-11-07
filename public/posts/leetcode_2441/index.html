@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,135 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode913s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given an integer array <code>nums</code> containing both positive and negative integers. Your task is to find the largest integer <code>k</code> such that both <code>k</code> and <code>-k</code> exist in the array. If no such integer exists, return <code>-1</code>. The output should be the largest <code>k</code> such that both <code>k</code> and <code>-k</code> are present in the array.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>[3, 2, -2, 5, -3]</code></li>
+<li>Output: <code>3</code></li>
+</ul>
+<p>Here, both <code>3</code> and <code>-3</code> exist in the array, and the largest such integer is <code>3</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key to solving this problem efficiently is to use an auxiliary array to track the presence of both positive and negative values. The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Track the Presence of Elements</strong>: Use an auxiliary array <code>arr</code> of size <code>2001</code> (for handling values from <code>-1000</code> to <code>1000</code>) to keep track of the occurrence of each element. By adding <code>1000</code> to the elements, we can store both positive and negative numbers as indices.</p>
+</li>
+<li>
+<p><strong>Check for the Presence of Opposite Numbers</strong>: For each number <code>n</code> in the array, check whether its opposite <code>-n</code> has already been encountered. If so, update the result to be the maximum of the current result and the absolute value of <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Update the Result</strong>: If both <code>n</code> and <code>-n</code> are found in the array, store the maximum of <code>res</code> and the absolute value of <code>n</code>. This ensures that we keep track of the largest number whose opposite is also present in the array.</p>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>: Once all elements are processed, return the largest number <code>k</code> such that both <code>k</code> and <code>-k</code> are present. If no such number is found, return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-auxiliary-array-and-result-variable">
+  Step 1: Initialize the Auxiliary Array and Result Variable
+  <a class="heading-link" href="#step-1-initialize-the-auxiliary-array-and-result-variable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We initialize an array <code>arr</code> of size 2001 to track the presence of both positive and negative numbers. Additionally, we initialize <code>res</code> to <code>-1</code> to represent that no valid number has been found yet.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> arr[<span style="color:#ae81ff">2001</span>] <span style="color:#f92672">=</span> {}, res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>arr</code> array is sized <code>2001</code> to account for the range of possible values from <code>-1000</code> to <code>1000</code>.</li>
+<li>The index <code>arr[i + 1000]</code> will represent the number <code>i</code> in the array.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate Through the Array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We iterate over each element <code>n</code> in the input array <code>nums</code>. For each number, we first check if its opposite <code>-n</code> has already been encountered. If it has, we update <code>res</code> to the maximum of its current value and the absolute value of <code>n</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (arr[<span style="color:#f92672">-</span>n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span>])
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> max(res, abs(n));
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>arr[n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>arr[-n + 1000]</code> checks if the opposite of <code>n</code> has been encountered. If it has, the value at that index is non-zero, indicating the presence of <code>-n</code>.</li>
+<li><code>res = max(res, abs(n))</code> updates the result to the maximum of the current result and the absolute value of <code>n</code>.</li>
+<li><code>++arr[n + 1000]</code> increments the count for <code>n</code>. This ensures that the opposite number <code>-n</code> can be checked in subsequent iterations.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After iterating through all elements in <code>nums</code>, the variable <code>res</code> will hold the largest number <code>k</code> such that both <code>k</code> and <code>-k</code> are present in the array. If no such number exists, <code>res</code> will remain <code>-1</code>, and we return it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the size of the array <code>nums</code>. This is because we iterate through the array once, and each iteration involves constant-time operations (checking the presence of <code>-n</code> and updating the result).</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, or constant space, since we are using a fixed-size auxiliary array <code>arr</code> of size <code>2001</code>, which does not depend on the input size. The array size is constant regardless of the input.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by utilizing an auxiliary array to track the presence of both positive and negative values in the array. By iterating over the array only once and using the auxiliary array to check for the existence of opposites, we can determine the largest integer <code>k</code> such that both <code>k</code> and <code>-k</code> are present.</p>
+<p>The time complexity of <strong>O(n)</strong> ensures that the solution will work efficiently even for large inputs, and the space complexity of <strong>O(1)</strong> makes the solution space-efficient. This approach leverages constant-time lookups and updates to efficiently track the elements and their opposites, making it an optimal solution for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode913s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +414,6 @@
 
       </div>
 
-      
 
       <footer>
         

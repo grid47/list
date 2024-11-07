@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -265,7 +265,178 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode935s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to implement a function <code>closestNodes</code> that, given a binary search tree (BST) and a list of queries, returns the closest nodes to the given queries in the BST. For each query, we need to find two things:</p>
+<ol>
+<li>The largest node in the tree that is smaller than or equal to the query value.</li>
+<li>The smallest node in the tree that is greater than or equal to the query value.</li>
+</ol>
+<p>If there is no such node (either smaller or larger), we should return <code>-1</code> for that respective query.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem requires efficient traversal of a binary search tree (BST) to answer each query in the most optimized way. A naive approach would involve searching the BST for each query, but that would be inefficient for large trees. Instead, we can exploit the properties of BSTs to perform a faster lookup.</p>
+<h4 id="optimized-plan">
+  Optimized Plan:
+  <a class="heading-link" href="#optimized-plan">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>In-order Traversal of the BST</strong>:
+The key observation is that if we perform an <strong>in-order traversal</strong> on a BST, the values are sorted in ascending order. This sorted array will allow us to efficiently find the closest nodes to each query using binary search techniques.</p>
+</li>
+<li>
+<p><strong>Binary Search for Query Answers</strong>:
+Once we have the values of the nodes in a sorted list (from the in-order traversal), we can use <strong>binary search</strong> (specifically <code>lower_bound</code>) to find the closest node greater than or equal to the query value. Additionally, we can check the element just before this to find the closest node smaller than or equal to the query value.</p>
+</li>
+<li>
+<p><strong>Efficient Query Answering</strong>:
+After obtaining the sorted list of node values from the BST, we can answer each query in logarithmic time using binary search. This makes the solution much faster than a brute-force approach.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let’s break down the code to understand how it works:</p>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:
+The problem provides the definition of a binary tree node:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>TreeNode</code> has three properties: <code>val</code> (the value of the node), <code>left</code> (pointer to the left child), and <code>right</code> (pointer to the right child).</li>
+<li>There are three constructors provided for initializing the node, either with a default value or with specific values for <code>val</code>, <code>left</code>, and <code>right</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>In-order Traversal</strong>:
+The <code>traverse</code> function performs an in-order traversal of the tree to collect all the node values in sorted order:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">traverse</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>        traverse(root<span style="color:#f92672">-&gt;</span>left);  <span style="color:#75715e">// Traverse left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(v.empty() <span style="color:#f92672">||</span> v.back() <span style="color:#f92672">&lt;</span> root<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>            v.push_back(root<span style="color:#f92672">-&gt;</span>val);  <span style="color:#75715e">// Add the node value to the list if it&#39;s greater than the last one
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        traverse(root<span style="color:#f92672">-&gt;</span>right);  <span style="color:#75715e">// Traverse right subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function recursively traverses the tree in in-order (left, root, right).</li>
+<li>Each node&rsquo;s value is added to the vector <code>v</code>, but only if it is greater than the last added value. This ensures that we are collecting the values in strictly increasing order (since a BST&rsquo;s in-order traversal gives values in ascending order).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Queries</strong>:
+The main function <code>closestNodes</code> processes the list of queries and uses the sorted vector <code>v</code> to find the closest nodes for each query:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> closestNodes(TreeNode<span style="color:#f92672">*</span> root, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>    traverse(root);  <span style="color:#75715e">// Perform in-order traversal to get sorted values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res;  <span style="color:#75715e">// Initialize result vector to store answers for queries
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> q: queries) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> lower_bound(begin(v), end(v), q);  <span style="color:#75715e">// Find the lower bound of the query in the sorted list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> end(v) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">==</span> q)  <span style="color:#75715e">// If the query value is found exactly in the list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            res.push_back({q, q});
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            res.push_back({it <span style="color:#f92672">==</span> begin(v) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">*</span>prev(it), it <span style="color:#f92672">==</span> end(v) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">*</span>it});
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// For each query:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// - If exact match, both closest values are the query itself
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// - Otherwise, find the largest smaller value and the smallest larger value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the result for all queries
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>traverse(root)</code></strong>: The function first calls <code>traverse</code> to fill the vector <code>v</code> with the sorted values from the BST.</li>
+<li><strong>Processing each query</strong>: For each query in the <code>queries</code> vector:
+<ul>
+<li>We use <code>lower_bound(begin(v), end(v), q)</code> to find the position in the sorted list where <code>q</code> would be inserted to maintain order. This gives us the smallest element that is greater than or equal to <code>q</code>.</li>
+<li>If the element at the iterator <code>it</code> matches the query (<code>*it == q</code>), both closest nodes are the query itself.</li>
+<li>Otherwise, we return two values:
+<ul>
+<li>The largest number smaller than <code>q</code>, which is found using <code>prev(it)</code> (if <code>it</code> is not at the beginning of the vector).</li>
+<li>The smallest number greater than <code>q</code>, which is found at <code>it</code> (if <code>it</code> is not at the end of the vector).</li>
+</ul>
+</li>
+<li>If no such smaller or larger element exists, we return <code>-1</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:
+The function returns the list of results for all queries:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the time and space complexity of this solution:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>In-order Traversal</strong>: The in-order traversal of the tree takes (O(n)), where (n) is the number of nodes in the tree, as each node is visited exactly once.</li>
+<li><strong>Binary Search for Queries</strong>: For each query, we perform a <code>lower_bound</code> search on the sorted list <code>v</code>, which takes (O(\log n)) time using binary search. If there are (m) queries, the total time for all queries is (O(m \log n)).</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity is (O(n + m \log n)), where (n) is the number of nodes in the tree and (m) is the number of queries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li><strong>Sorted List <code>v</code></strong>: The space complexity for storing the sorted list of node values is (O(n)), where (n) is the number of nodes in the tree.</li>
+<li><strong>Result List</strong>: The result list stores the answers for each query, and its size is (O(m)), where (m) is the number of queries.</li>
+<li><strong>Overall Space Complexity</strong>: The total space complexity is (O(n + m)), where (n) is the number of nodes in the tree and (m) is the number of queries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the closest nodes for each query in a binary search tree. By performing an in-order traversal to get the sorted list of node values and using binary search to answer each query, we achieve a time complexity of (O(n + m \log n)), which is optimal for large input sizes. The space complexity is (O(n + m)), which is also efficient. This approach is well-suited for handling large BSTs and query lists in competitive programming and real-world applications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode935s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -319,7 +490,6 @@
 
       </div>
 
-      
 
       <footer>
         

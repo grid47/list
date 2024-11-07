@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -247,7 +247,153 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt.size() ;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode975s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers <code>nums</code>, the task is to find the number of distinct prime factors that appear in at least one element of the array. Each integer in the array can have multiple prime factors, but we are only interested in the distinct prime factors across all elements of the array. The goal is to return the total number of unique prime factors that appear across all the numbers in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find all the prime factors for each number in the array and count the distinct ones. To solve this, we need to:</p>
+<ol>
+<li><strong>Prime Factorization:</strong> Decompose each number into its prime factors.</li>
+<li><strong>Tracking Distinct Primes:</strong> As we find prime factors, we should store them in a set to automatically handle duplicates.</li>
+<li><strong>Efficient Factorization:</strong> Use an efficient algorithm to factorize each number by checking divisibility starting from the smallest primes (2 and then odd numbers).</li>
+<li><strong>Final Count:</strong> After processing all numbers, the size of the set will give us the count of distinct prime factors.</li>
+</ol>
+<p>The solution involves two main steps:</p>
+<ol>
+<li>For each number in the <code>nums</code> array, perform prime factorization and add the prime factors to a set.</li>
+<li>Finally, return the size of the set, which contains only distinct prime factors.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="class-definition">
+  Class Definition:
+  <a class="heading-link" href="#class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Here, we define a class <code>Solution</code> that will hold a set <code>cnt</code> which will store distinct prime factors. The <code>set</code> is ideal because it automatically handles duplicate entries and stores only unique values.</li>
+</ul>
+<h4 id="prime-factorization-function">
+  Prime Factorization Function:
+  <a class="heading-link" href="#prime-factorization-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fact</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            cnt.insert(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>            num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>The <code>fact</code> function is responsible for finding the prime factors of a number.</li>
+<li><strong>Dividing by 2</strong>: We first check if <code>num</code> is divisible by 2 (the smallest prime). While it is divisible by 2, we insert 2 into the set <code>cnt</code> and divide <code>num</code> by 2.</li>
+<li>This loop will ensure that we eliminate all factors of 2 from <code>num</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;=</span> num; i<span style="color:#f92672">+=</span><span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>                cnt.insert(i);
+</span></span><span style="display:flex;"><span>                num <span style="color:#f92672">/=</span> i;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>After removing factors of 2, we continue with the odd numbers starting from 3.</li>
+<li><strong>Dividing by odd numbers</strong>: The loop checks all odd numbers from 3 upwards. For each number <code>i</code>, we check if <code>num</code> is divisible by <code>i</code>. If it is, we insert <code>i</code> into the set <code>cnt</code> and divide <code>num</code> by <code>i</code> until it is no longer divisible.</li>
+<li>This ensures we capture all prime factors. The loop stops once <code>i</code> exceeds <code>num</code>, at which point <code>num</code> itself must be a prime number if it is greater than 2.</li>
+</ul>
+<h4 id="main-function-to-count-distinct-prime-factors">
+  Main Function to Count Distinct Prime Factors:
+  <a class="heading-link" href="#main-function-to-count-distinct-prime-factors">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">distinctPrimeFactors</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            fact(nums[i]);
+</span></span></code></pre></div><ul>
+<li>The function <code>distinctPrimeFactors</code> takes a vector <code>nums</code> as input. We first determine the size of the vector <code>n</code>.</li>
+<li>Then, we iterate over each element in the <code>nums</code> array and call the <code>fact</code> function to find its prime factors. For each element, <code>fact</code> adds the prime factors to the <code>cnt</code> set.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt.size();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the size of the set <code>cnt</code>, which represents the total number of distinct prime factors across all numbers in the array. Since a set automatically handles duplicates, it ensures that only unique prime factors are counted.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The prime factorization process for each number involves dividing the number by all integers starting from 2 and moving upwards. The complexity of finding the prime factors of a number is approximately ( O(\sqrt{num}) ), where <code>num</code> is the value of the number being factored.</li>
+<li>For each number <code>nums[i]</code> in the array, we perform a factorization that takes ( O(\sqrt{nums[i]}) ).</li>
+<li>If <code>n</code> is the number of elements in the array <code>nums</code>, and <code>max_num</code> is the largest number in the array, the overall time complexity is ( O(n \times \sqrt{max_num}) ), where <code>max_num</code> is the largest number in the array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is ( O(k) ), where <code>k</code> is the number of distinct prime factors across all numbers in the array. This is because we are storing the distinct prime factors in a <code>set</code>. The set will have a size proportional to the number of distinct prime factors.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the number of distinct prime factors across all elements of the array. By using prime factorization and a set to store unique primes, we ensure that the solution handles duplicate factors and efficiently counts distinct primes. The solution is optimal for a wide range of input sizes, with a time complexity of ( O(n \times \sqrt{max_num}) ) and a space complexity of ( O(k) ), where <code>n</code> is the number of elements and <code>k</code> is the number of distinct prime factors. The use of a set guarantees that duplicate prime factors are not counted, ensuring the correctness of the result.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode975s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -301,7 +447,6 @@
 
       </div>
 
-      
 
       <footer>
         

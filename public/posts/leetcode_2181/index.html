@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head<span style="color:#f92672">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode734s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to merge consecutive nodes in a singly linked list that are separated by a node with value <code>0</code>. Specifically, given a singly linked list where:</p>
+<ul>
+<li>Each node contains an integer value.</li>
+<li>The values in the list are separated by <code>0</code>, which signifies the end of a block of nodes that need to be summed together.</li>
+</ul>
+<p>The task is to remove the zeros and merge consecutive nodes by calculating their sum. After summing, the result should be stored in the node immediately following the <code>0</code> node.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to:</p>
+<ol>
+<li>Traverse the list while looking for blocks of nodes that are between two consecutive <code>0</code> nodes.</li>
+<li>Sum the values of nodes in each block and replace the node with the first value of the block with the calculated sum.</li>
+<li>Once we reach a node with a value of <code>0</code>, we recursively repeat the process for the remaining nodes in the list, removing the <code>0</code> separator in the process.</li>
+</ol>
+<p>By using recursion, we can simplify the merging of nodes in each block and handle the traversal through the linked list efficiently. This method allows for a clean solution without requiring multiple loops or complex logic.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> mergeNodes(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Base case: If there is no node after the head (empty or only one element in the list)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>head<span style="color:#f92672">-&gt;</span>next) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span></code></pre></div><ul>
+<li>We start by checking if the <code>head-&gt;next</code> is <code>nullptr</code>, indicating that there are no further nodes after the <code>head</code>. In this case, we return <code>nullptr</code>, signaling the end of the list. This check acts as a base case for the recursion.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ListNode<span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a pointer <code>ptr</code> to <code>head-&gt;next</code>, which represents the first node after the initial zero node. We also initialize <code>sum</code> to 0, which will hold the sum of the values between consecutive zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(ptr<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) sum <span style="color:#f92672">+=</span> ptr<span style="color:#f92672">-&gt;</span>val, ptr <span style="color:#f92672">=</span> ptr<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>Here, we use a <code>while</code> loop to traverse the list starting from <code>ptr</code>. The loop continues until we encounter a node with a value of <code>0</code>. During the traversal, we keep adding the values of the nodes to <code>sum</code>. This accumulates the values between the zeros, essentially summing the block of numbers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> sum;
+</span></span></code></pre></div><ul>
+<li>Once we&rsquo;ve summed all the values between the zeros, we assign the accumulated <code>sum</code> to <code>head-&gt;next-&gt;val</code>. This replaces the first node of the block with the calculated sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> mergeNodes(ptr);
+</span></span></code></pre></div><ul>
+<li>Now that we&rsquo;ve merged the first block of nodes, we recursively call <code>mergeNodes(ptr)</code>, passing the pointer <code>ptr</code> (which now points to the node with value <code>0</code> after the sum block). This recursive call will handle the next block of nodes that appear after the first zero.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>head-&gt;next</code> which now points to the newly modified list with merged sums. This will be the new head of the list.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand how the solution works.</p>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Input: <code>head = [0, 1, 2, 3, 0, 4, 5, 6, 0]</code></p>
+<p><strong>Step-by-Step Execution:</strong></p>
+<ul>
+<li>Initially, <code>head = [0, 1, 2, 3, 0, 4, 5, 6, 0]</code>.</li>
+<li>First block (between <code>0</code> and <code>0</code>):
+<ul>
+<li>Sum: <code>1 + 2 + 3 = 6</code>.</li>
+<li>Replace the first node with value <code>6</code>.</li>
+<li>New list: <code>head = [0, 6, 0, 4, 5, 6, 0]</code>.</li>
+</ul>
+</li>
+<li>Second block (between <code>0</code> and <code>0</code>):
+<ul>
+<li>Sum: <code>4 + 5 + 6 = 15</code>.</li>
+<li>Replace the first node with value <code>15</code>.</li>
+<li>New list: <code>head = [0, 6, 15, 0]</code>.</li>
+</ul>
+</li>
+</ul>
+<p>At the end, the resulting list will be <code>head = [6, 15]</code>, with all zeros removed and blocks summed.</p>
+<h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Input: <code>head = [0, 3, 5, 0]</code></p>
+<p><strong>Step-by-Step Execution:</strong></p>
+<ul>
+<li>First block (between <code>0</code> and <code>0</code>):
+<ul>
+<li>Sum: <code>3 + 5 = 8</code>.</li>
+<li>Replace the first node with value <code>8</code>.</li>
+<li>New list: <code>head = [0, 8, 0]</code>.</li>
+</ul>
+</li>
+</ul>
+<p>The final result will be <code>head = [8]</code>.</p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list. In the worst case, the algorithm must traverse all the nodes of the linked list once, visiting each node to accumulate the sum and merge the blocks.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong> due to the recursive calls, where each recursive call adds a new frame to the call stack. In the worst case, if the list contains no zeros and we have to process the entire list recursively, this could lead to a recursion depth equal to the number of nodes in the list.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses recursion to merge blocks of nodes in the singly linked list that are separated by zeros. By traversing the list and summing the values between consecutive zeros, we replace the first zero node in each block with the calculated sum, effectively reducing the problem size at each step. The solution is efficient, with a time complexity of <strong>O(n)</strong>, and handles various edge cases, such as empty lists or lists with no zeros, seamlessly. This recursive approach makes the problem both intuitive and elegant to solve, ensuring that the list is merged correctly as specified in the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode734s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +442,6 @@
 
       </div>
 
-      
 
       <footer>
         

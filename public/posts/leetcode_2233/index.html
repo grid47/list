@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,169 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode767s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a list of integers <code>nums</code> and an integer <code>k</code>, you are tasked with maximizing the product of the elements in <code>nums</code> after performing exactly <code>k</code> operations. In each operation, you can increment any of the elements of the list by <code>1</code>. You need to return the result of this maximum product modulo <code>10^9 + 7</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>nums = [1, 2, 3], k = 3</code></li>
+<li>Output: <code>27</code></li>
+</ul>
+<p>The problem is to maximize the product of the list after applying exactly <code>k</code> operations, and the result should be taken modulo <code>10^9 + 7</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to focus on the following points:</p>
+<ol>
+<li>
+<p><strong>Understanding the Operation</strong>:</p>
+<ul>
+<li>In each operation, we can increment an element of the list <code>nums</code>. The goal is to maximize the product of the array after <code>k</code> such operations.</li>
+<li>To achieve the maximum product, we should always increment the smallest element in the list because it will provide the greatest increase in the product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimal Strategy</strong>:</p>
+<ul>
+<li>Since we want to maximize the product, the best approach is to always increment the smallest number in the array. This will ensure that we distribute the increments in the most optimal way.</li>
+<li>A priority queue (min-heap) is ideal for this task because it allows us to efficiently retrieve and modify the smallest element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>:</p>
+<ul>
+<li>Since the result could be very large, we are asked to return the result modulo <code>10^9 + 7</code> to avoid overflow and ensure the result fits within the required limits.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> maximumProduct(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Create a min-heap from the given array.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li><strong>Min-Heap Initialization</strong>:
+<ul>
+<li>We use a priority queue to efficiently access the smallest element in the list.</li>
+<li>The priority queue is initialized with the elements from the input array <code>nums</code> sorted in ascending order (since by default, the <code>priority_queue</code> in C++ is a max-heap, we specify <code>greater&lt;int&gt;</code> to make it behave like a min-heap).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Increment the smallest element k times.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> mini <span style="color:#f92672">=</span> pq.top();  <span style="color:#75715e">// Get the smallest element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();  <span style="color:#75715e">// Remove it from the heap.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.push(mini <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Increment the element and push it back to the heap.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Performing Operations</strong>:
+<ul>
+<li>We execute <code>k</code> operations, where in each operation:
+<ul>
+<li>We extract the smallest element (<code>pq.top()</code>).</li>
+<li>We increment this smallest element by 1.</li>
+<li>We push the incremented value back into the min-heap.</li>
+</ul>
+</li>
+<li>This ensures that after all operations, the product of the array is maximized by distributing the increments optimally.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Calculate the product of the elements in the heap.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;  <span style="color:#75715e">// Initialize the answer and modulus.
+</span></span></span></code></pre></div><ul>
+<li><strong>Modulo Setup</strong>:
+<ul>
+<li>The result will be large, so we define <code>mod = 1e9 + 7</code> to handle the modulo operation at each step.</li>
+<li>We also define <code>ans = 1</code> to store the cumulative product of the elements in the heap.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Multiply the remaining elements in the heap to get the maximum product.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> ((ans <span style="color:#f92672">%</span> mod) <span style="color:#f92672">*</span> (pq.top() <span style="color:#f92672">%</span> mod)) <span style="color:#f92672">%</span> mod;  <span style="color:#75715e">// Multiply the current element with the result.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();  <span style="color:#75715e">// Remove the element from the heap.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Product Calculation</strong>:
+<ul>
+<li>We iterate through the min-heap, multiplying each element with the current <code>ans</code> and taking modulo <code>mod</code> at each step to prevent overflow and ensure that the result fits within the required bounds.</li>
+<li>After multiplying, we remove the element from the heap.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the final result.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Return the Result</strong>:
+<ul>
+<li>Finally, after processing all elements, we return the result stored in <code>ans</code>, which is the maximum product modulo <code>10^9 + 7</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Building the Min-Heap</strong>: Building a heap from <code>n</code> elements takes O(n log n), where <code>n</code> is the size of the input array <code>nums</code>.</li>
+<li><strong>Processing the Operations</strong>: Each of the <code>k</code> operations requires extracting the smallest element (O(log n)) and pushing the incremented value back into the heap (O(log n)). This gives a time complexity of O(k log n) for the <code>k</code> operations.</li>
+<li><strong>Calculating the Final Product</strong>: After the operations, we iterate over all elements in the heap to compute the product, which takes O(n) time.</li>
+<li>Overall, the total time complexity is <strong>O(n log n + k log n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a min-heap to store the elements, which requires O(n) space. Thus, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively maximizes the product by always incrementing the smallest number in the list, ensuring the result is optimal. Using a priority queue (min-heap) makes it easy to efficiently retrieve and update the smallest element. The time and space complexity are manageable, making this approach suitable for large inputs. Additionally, the modulo operation ensures that the result is within the required range, preventing overflow issues.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode767s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -248,7 +410,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2234"  class="external-link" target="_blank" rel="noopener">LeetCode #2234: Maximum Total Beauty of the Gardens</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2235"  class="external-link" target="_blank" rel="noopener">LeetCode #2235: Add Two Integers</a></th>
       </tr>
   </thead>
   <tbody>
@@ -290,7 +452,6 @@
 
       </div>
 
-      
 
       <footer>
         

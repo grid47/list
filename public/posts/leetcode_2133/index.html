@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -229,7 +229,150 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode705s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine if a given square matrix (2D vector) of size ( n \times n ) is valid according to specific rules. Each row and each column in the matrix must contain all integers from ( 1 ) to ( n ) exactly once. The function needs to check this condition and return <code>true</code> if the matrix is valid and <code>false</code> otherwise.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will utilize a bitset to efficiently track the presence of numbers in each row and column of the matrix. A bitset allows us to maintain a compact representation of the boolean state (presence or absence) of integers, which is particularly useful for this problem where we need to check if each number appears exactly once in each row and each column.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the provided code:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>This defines the <code>Solution</code> class, which contains the method to solve the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">checkValid</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mtx) {
+</span></span></code></pre></div><ul>
+<li>The <code>checkValid</code> function is defined as a public member of the <code>Solution</code> class. It takes a reference to a 2D vector of integers (<code>mtx</code>) as input and returns a boolean value indicating whether the matrix is valid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Matrix Size</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> mtx.size();
+</span></span></code></pre></div><ul>
+<li>The variable <code>n</code> is initialized to the size of the matrix, which indicates the number of rows (and columns, since it is a square matrix).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Rows</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>This loop iterates through each row of the matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Bitsets</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>bitset<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">101</span><span style="color:#f92672">&gt;</span> row, col;
+</span></span></code></pre></div><ul>
+<li>For each row, two bitsets are initialized: <code>row</code> and <code>col</code>. The size of <code>101</code> is chosen to accommodate values from ( 1 ) to ( n ) (where ( n ) can be at most ( 100 ) based on typical constraints).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Columns</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span></code></pre></div><ul>
+<li>This nested loop iterates through each column in the current row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track Presence of Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>row[mtx[i][j]] <span style="color:#f92672">=</span> col[mtx[j][i]] <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li>For the current element <code>mtx[i][j]</code>, the corresponding bit in the <code>row</code> bitset is set to <code>true</code>, indicating that the number is present in the row.</li>
+<li>Similarly, the corresponding element in the column (i.e., <code>mtx[j][i]</code>) is tracked using the <code>col</code> bitset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Validity</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (min(row.count(), col.count()) <span style="color:#f92672">&lt;</span> n)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>After filling in the bitsets for the current row and column, we check the minimum count of set bits in both bitsets. If either the row or column has fewer than <code>n</code> unique numbers (i.e., fewer than <code>n</code> bits set to <code>true</code>), the function returns <code>false</code> immediately, indicating that the matrix is invalid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return True</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If all rows and columns are valid (i.e., each contains all numbers from ( 1 ) to ( n ) exactly once), the function returns <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This closing brace signifies the end of the <code>Solution</code> class.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: ( O(n^2) )</p>
+<ul>
+<li>The function iterates through each element of the ( n \times n ) matrix once. The two nested loops result in a time complexity of ( O(n^2) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: ( O(n) )</p>
+<ul>
+<li>The space used for the bitsets is ( O(n) ) since each bitset can represent integers up to ( n ). The overall space used is negligible compared to the matrix size, making it efficient.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>checkValid</code> function efficiently verifies whether a given square matrix adheres to the required conditions by utilizing bitsets for tracking the presence of numbers in each row and column. This approach is both time-efficient and space-efficient, allowing for quick checks on the validity of the matrix.</p>
+<p>By iterating through the matrix and utilizing the properties of bitsets, the solution is able to determine the validity of the matrix in a straightforward manner. This implementation showcases effective use of data structures in C++, demonstrating a clear understanding of how to manipulate and check data constraints.</p>
+<p>The clarity of the code, combined with its systematic approach to validating the matrix, makes this solution a great example of effective algorithm design in competitive programming and technical interviews. The method is robust, easily understandable, and adheres to the typical constraints expected in such problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode705s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +426,6 @@
 
       </div>
 
-      
 
       <footer>
         

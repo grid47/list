@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -249,7 +249,161 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode856s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task here is to merge two lists of items, each represented by a 2D vector where each element is a pair of integers: the item ID and its weight. The objective is to combine items from both lists that have the same ID by summing up their weights. The result should be a single list of items sorted by their ID, with each item appearing only once and showing the combined weight.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages a <code>map</code> data structure to efficiently store and update item weights by their IDs, ensuring that each item appears only once in the final list. Here&rsquo;s the approach broken down into steps:</p>
+<ol>
+<li>
+<p><strong>Map Initialization with Items from the First List:</strong>
+First, we loop through the items in <code>items1</code> and store each item in a map (<code>m</code>) where the key is the item ID, and the value is the item weight. This allows us to initialize the map with all items from the first list.</p>
+</li>
+<li>
+<p><strong>Merging Weights for Items in the Second List:</strong>
+Next, we iterate over <code>items2</code>. For each item in this list, we check if its ID already exists in the map:</p>
+<ul>
+<li>If it does, we add the item&rsquo;s weight from <code>items2</code> to the weight already present in the map for that ID, effectively merging the weights.</li>
+<li>If it doesn’t exist, we add a new entry to the map with the item&rsquo;s ID and weight.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result Vector:</strong>
+After processing both lists, the map contains each unique item ID with its total weight. We then iterate over the map and add each entry as a vector (ID and weight) to a result vector <code>ans</code>. Since <code>map</code> in C++ is naturally sorted by key, the items in <code>ans</code> will be in ascending order of IDs, as required.</p>
+</li>
+<li>
+<p><strong>Returning the Result:</strong>
+Finally, the result vector <code>ans</code> is returned, containing the merged items with combined weights.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initializing-the-map-with-items-from-the-first-list">
+  Step 1: Initializing the Map with Items from the First List
+  <a class="heading-link" href="#step-1-initializing-the-map-with-items-from-the-first-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> items1.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    m[items1[i][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> items1[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this section, we initialize an empty map <code>m</code>. We then iterate over <code>items1</code>, and for each item, we insert it into the map with its ID as the key and its weight as the value. After this loop, <code>m</code> contains all items from <code>items1</code>, with each ID mapped to its corresponding weight.</p>
+<h4 id="step-2-merging-weights-for-items-in-the-second-list">
+  Step 2: Merging Weights for Items in the Second List
+  <a class="heading-link" href="#step-2-merging-weights-for-items-in-the-second-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> items2.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (m.find(items2[i][<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">!=</span> m.end()) {
+</span></span><span style="display:flex;"><span>        m[items2[i][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">+=</span> items2[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        m[items2[i][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> items2[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We now process <code>items2</code>. For each item in <code>items2</code>, we check if its ID is already present in the map <code>m</code>:</p>
+<ul>
+<li>If it is (<code>m.find(items2[i][0]) != m.end()</code>), we add the item’s weight from <code>items2</code> to the current weight stored in <code>m</code> for that ID.</li>
+<li>If it is not, we add a new entry to <code>m</code> with the item’s ID and weight from <code>items2</code>.</li>
+</ul>
+<p>After this loop, <code>m</code> contains all unique IDs from both lists, with weights appropriately merged.</p>
+<h4 id="step-3-building-the-result-vector">
+  Step 3: Building the Result Vector
+  <a class="heading-link" href="#step-3-building-the-result-vector">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : m) {
+</span></span><span style="display:flex;"><span>    ans.push_back({it.first, it.second});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here, we create an empty vector <code>ans</code> to store the result. We iterate over the map <code>m</code>, where each element is a pair (item ID and combined weight). For each pair, we add a vector of two elements (the ID and weight) to <code>ans</code>. Since <code>map</code> maintains elements in sorted order by key, <code>ans</code> will also be sorted by ID.</p>
+<h4 id="step-4-returning-the-result">
+  Step 4: Returning the Result
+  <a class="heading-link" href="#step-4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>The result vector <code>ans</code> is now complete, containing each unique item ID along with its merged weight in ascending order of IDs. We return <code>ans</code> as the output of the function.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Inserting Items in the Map:</strong> For both <code>items1</code> and <code>items2</code>, we perform insertions and updates in the map <code>m</code>, which takes <code>O(log k)</code> time per operation (where <code>k</code> is the number of unique IDs) due to the balanced tree structure of the map. Since we process each item exactly once, this results in a total time complexity of <code>O((n + m) * log k)</code>, where <code>n</code> and <code>m</code> are the sizes of <code>items1</code> and <code>items2</code>, respectively.</p>
+</li>
+<li>
+<p><strong>Building the Result Vector:</strong> We iterate over all entries in the map to build the result vector, which takes <code>O(k)</code> time, where <code>k</code> is the number of unique item IDs.</p>
+</li>
+</ul>
+<p>Therefore, the total time complexity is <code>O((n + m) * log k)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Map Storage:</strong> We store up to <code>k</code> unique item IDs in the map, so the space complexity for the map is <code>O(k)</code>.</li>
+<li><strong>Result Vector:</strong> We also store the merged items in the result vector <code>ans</code>, which has a space complexity of <code>O(k)</code>.</li>
+</ul>
+<p>Thus, the overall space complexity is <code>O(k)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code efficiently merges two lists of items with weights using a map, which allows us to keep track of the items by their IDs and sum up weights for items with the same ID. By leveraging the sorted nature of maps in C++, the solution automatically arranges items by ascending order of IDs. This makes the solution both efficient and straightforward, with an overall time complexity of <code>O((n + m) * log k)</code> and a space complexity of <code>O(k)</code>. The solution is suitable for handling large lists with potentially overlapping items, providing an optimized way to combine item weights based on IDs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode856s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -303,7 +457,6 @@
 
       </div>
 
-      
 
       <footer>
         

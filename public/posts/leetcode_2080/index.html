@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -245,7 +245,121 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * RangeFreqQuery* obj = new RangeFreqQuery(arr);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;query(left,right,value);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode671s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves creating a data structure that allows for efficient range frequency queries. Given an array, we want to be able to quickly determine how many times a specific value appears within a specified range of indices. This functionality is particularly useful in applications where queries over static data need to be performed frequently, such as in statistical analysis or database queries.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will implement a class called <code>RangeFreqQuery</code> that uses a hash map (specifically, a <code>std::map</code> in C++) to store the indices of each value in the array. By storing the indices, we can later use binary search to efficiently count occurrences of a value within any specified range.</p>
+<ol>
+<li>
+<p><strong>Data Structure</strong>: Use a <code>std::map&lt;int, vector&lt;int&gt;&gt;</code> to store each unique value from the input array as a key, and a vector of indices where that value appears as the corresponding value.</p>
+</li>
+<li>
+<p><strong>Constructor</strong>: The constructor initializes the <code>RangeFreqQuery</code> object. It iterates over the input array and populates the map with the indices of each value.</p>
+</li>
+<li>
+<p><strong>Query Method</strong>: The <code>query</code> method takes three parameters: the left index, the right index, and the target value. It calculates the number of occurrences of the target value between the given indices using binary search (<code>upper_bound</code> and <code>lower_bound</code>).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RangeFreqQuery</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;  <span style="color:#75715e">// Map to hold the indices of each value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    RangeFreqQuery(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr) {
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Class Definition</strong>: The class <code>RangeFreqQuery</code> is defined with a public member, a map called <code>mp</code>, which maps integers to vectors of integers.</p>
+</li>
+<li>
+<p><strong>Constructor</strong>: The constructor accepts a vector of integers <code>arr</code>, which represents the initial array.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> arr.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            mp[arr[i]].push_back(i);  <span style="color:#75715e">// Store indices of each value in the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="3">
+<li><strong>Index Storage</strong>: As we iterate through the array, for each element <code>arr[i]</code>, we push the index <code>i</code> into the vector associated with the key <code>arr[i]</code>. This builds the map such that we can later quickly retrieve all indices for any value.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">query</span>(<span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, <span style="color:#66d9ef">int</span> value) {
+</span></span></code></pre></div><ol start="4">
+<li><strong>Query Method</strong>: The <code>query</code> method is defined to handle the frequency count between the specified range.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">upper_bound</span>(mp[value].begin(), mp[value].end(), right) <span style="color:#f92672">-</span>             
+</span></span><span style="display:flex;"><span>            lower_bound(mp[value].begin(), mp[value].end(), left);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="5">
+<li><strong>Binary Search for Counting</strong>:
+<ul>
+<li><code>upper_bound(mp[value].begin(), mp[value].end(), right)</code>: This function finds the first position in the vector of indices where the value exceeds <code>right</code>. This gives us the count of indices less than or equal to <code>right</code>.</li>
+<li><code>lower_bound(mp[value].begin(), mp[value].end(), left)</code>: This function finds the first position in the vector where the index is not less than <code>left</code>, effectively providing the count of indices before <code>left</code>.</li>
+<li>The difference between these two results gives the number of occurrences of <code>value</code> in the range <code>[left, right]</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Constructor</strong>: (O(n \log n)) where (n) is the number of elements in the input array, due to the operations involved in inserting into the map.</li>
+<li><strong>Query</strong>: (O(\log m)) where (m) is the number of indices stored for the queried value, due to the binary search operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n)) for storing the indices of each unique element, where (n) is the total number of elements in the input array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>RangeFreqQuery</code> class provides an efficient solution for handling frequency queries over a static array. By utilizing a map to store indices and employing binary search for query operations, we achieve a balance between space and time efficiency.</p>
+<p>This implementation is particularly beneficial in scenarios where numerous frequency queries need to be executed on a dataset, such as in statistical computations or data analysis applications. The ability to perform range queries in logarithmic time allows for rapid responses even in larger datasets, making it a versatile tool for developers dealing with dynamic data environments.</p>
+<p>This technique of indexing values to their positions is a common strategy in many computational problems, demonstrating a powerful approach to optimizing search and retrieval operations. Understanding and implementing such data structures can significantly enhance performance in software applications that require quick access to frequently queried data.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode671s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -257,7 +371,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2081"  class="external-link" target="_blank" rel="noopener">LeetCode #2081: Sum of k-Mirror Numbers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2086"  class="external-link" target="_blank" rel="noopener">LeetCode #2086: Minimum Number of Food Buckets to Feed the Hamsters</a></th>
       </tr>
   </thead>
   <tbody>
@@ -299,7 +413,6 @@
 
       </div>
 
-      
 
       <footer>
         

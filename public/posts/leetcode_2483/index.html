@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,202 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ind;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode951s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <p>The provided code is a solution to a problem where we are asked to determine the best time to close a shop, such that the total number of customers left outside the shop (in the &ldquo;N&rdquo; state) is minimized, given a string representing customer states during each hour of operation.</p>
+<p>Let’s break down the problem, approach, and the code step-by-step to understand how the solution works and how to derive its time and space complexities. This breakdown will be useful for any programmer aiming to optimize or understand such algorithms in a more structured manner.</p>
+<h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>a</code> consisting of characters &lsquo;Y&rsquo; and &lsquo;N&rsquo;, where each character represents the state of a customer at an hour of the day:</p>
+<ul>
+<li>&lsquo;Y&rsquo; means the customer has already entered the shop.</li>
+<li>&lsquo;N&rsquo; means the customer has not yet entered the shop.</li>
+</ul>
+<p>The goal is to determine the best hour to close the shop such that the total number of customers left outside (those in the &lsquo;N&rsquo; state) is minimized. The shop can be closed at any hour, and we need to calculate how many customers would remain outside for each possible closing time.</p>
+<p>The solution must:</p>
+<ul>
+<li>Account for how many customers are inside (<code>'Y'</code>).</li>
+<li>Account for how many customers are outside (<code>'N'</code>).</li>
+<li>Find the optimal closing time that minimizes the total number of customers left outside.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can utilize the following strategy:</p>
+<ol>
+<li>
+<p><strong>Count customers outside (&lsquo;N&rsquo;) before closing time</strong>: As we scan the string from left to right, we need to keep track of how many customers are still in the &lsquo;N&rsquo; state. This will help us determine the number of customers left outside at any given closing time.</p>
+</li>
+<li>
+<p><strong>Count customers inside (&lsquo;Y&rsquo;) after closing time</strong>: As we scan the string from right to left, we need to keep track of how many customers have entered the shop (the &lsquo;Y&rsquo; state) after a given closing hour.</p>
+</li>
+<li>
+<p><strong>Combine the counts</strong>: For each possible closing time, calculate the total number of customers left outside (those who are &lsquo;N&rsquo; before the closing time and those who are &lsquo;Y&rsquo; after the closing time).</p>
+</li>
+<li>
+<p><strong>Minimize the total</strong>: The objective is to minimize the sum of customers left outside. Hence, we need to find the closing time that results in the minimum sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the solution code in more detail:</p>
+<h4 id="1-initialization-and-variable-setup">
+  1. <strong>Initialization and Variable Setup</strong>
+  <a class="heading-link" href="#1-initialization-and-variable-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> a.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> y, n;
+</span></span><span style="display:flex;"><span>y.push_back(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>n.push_back(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>s</code> stores the size of the input string <code>a</code>, which represents the state of the customers at each hour.</li>
+<li>Two vectors <code>y</code> and <code>n</code> are initialized to store the cumulative counts of customers who have entered (<code>'Y'</code>) and the cumulative counts of customers who have not entered (<code>'N'</code>).</li>
+<li>The vector <code>y</code> keeps track of the count of &lsquo;Y&rsquo; customers from right to left, and <code>n</code> tracks the count of &lsquo;N&rsquo; customers from left to right.</li>
+</ul>
+<h4 id="2-count-the-n-customers-from-left-to-right">
+  2. <strong>Count the &lsquo;N&rsquo; Customers from Left to Right</strong>
+  <a class="heading-link" href="#2-count-the-n-customers-from-left-to-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;N&#39;</span>) cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    n.push_back(cnt);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over the string <code>a</code> from left to right.</li>
+<li>Each time we encounter an &lsquo;N&rsquo;, we increment the <code>cnt</code> (counter for &lsquo;N&rsquo; customers).</li>
+<li>The cumulative count of &lsquo;N&rsquo; customers is stored in the <code>n</code> vector, so <code>n[i]</code> represents the number of &lsquo;N&rsquo; customers up to and including hour <code>i</code>.</li>
+</ul>
+<h4 id="3-count-the-y-customers-from-right-to-left">
+  3. <strong>Count the &lsquo;Y&rsquo; Customers from Right to Left</strong>
+  <a class="heading-link" href="#3-count-the-y-customers-from-right-to-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> s <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Y&#39;</span>) cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    y.push_back(cnt);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After counting the &lsquo;N&rsquo; customers, we reset the counter <code>cnt</code> to 0 and begin iterating over the string from right to left.</li>
+<li>For each &lsquo;Y&rsquo; encountered, we increment the <code>cnt</code> (counter for &lsquo;Y&rsquo; customers).</li>
+<li>The cumulative count of &lsquo;Y&rsquo; customers is stored in the <code>y</code> vector, so <code>y[i]</code> represents the number of &lsquo;Y&rsquo; customers from hour <code>i</code> onward.</li>
+</ul>
+<h4 id="4-reverse-the-y-vector">
+  4. <strong>Reverse the &lsquo;Y&rsquo; Vector</strong>
+  <a class="heading-link" href="#4-reverse-the-y-vector">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>reverse (y.begin(), y.end());
+</span></span></code></pre></div><ul>
+<li>After the loop, the <code>y</code> vector contains the counts of &lsquo;Y&rsquo; customers from right to left. To use it effectively in subsequent calculations, we reverse the vector so that it represents the count of &lsquo;Y&rsquo; customers from left to right.</li>
+</ul>
+<h4 id="5-calculate-the-best-closing-time">
+  5. <strong>Calculate the Best Closing Time</strong>
+  <a class="heading-link" href="#5-calculate-the-best-closing-time">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX, ind <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> n[i] <span style="color:#f92672">+</span> y[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(h <span style="color:#f92672">&lt;</span> ans) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> h;
+</span></span><span style="display:flex;"><span>        ind <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ind;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>ans</code> to store the minimum number of customers left outside, and <code>ind</code> to store the index of the optimal closing time.</li>
+<li>We iterate through each possible closing time (from hour 0 to hour <code>s</code>), where <code>i</code> represents the closing time index.</li>
+<li>For each closing time <code>i</code>, the total number of customers left outside is the sum of:
+<ul>
+<li><code>n[i]</code>: the number of &lsquo;N&rsquo; customers before hour <code>i</code>.</li>
+<li><code>y[i]</code>: the number of &lsquo;Y&rsquo; customers from hour <code>i</code> onward.</li>
+</ul>
+</li>
+<li>If the sum <code>h</code> is less than the current <code>ans</code>, we update <code>ans</code> and set <code>ind</code> to the current closing time <code>i</code>.</li>
+<li>Finally, we return <code>ind</code>, which is the optimal closing time.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(s)</strong>, where <code>s</code> is the length of the string <code>a</code>. This is because:
+<ul>
+<li>We scan through the string once to count &lsquo;N&rsquo; customers and once more to count &lsquo;Y&rsquo; customers.</li>
+<li>The final loop over the closing times also runs <code>s + 1</code> times, which is still <strong>O(s)</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(s)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(s)</strong> because we use two vectors <code>y</code> and <code>n</code>, each of size <code>s + 1</code>, to store the cumulative counts.</li>
+</ul>
+<p>Thus, the overall space complexity is <strong>O(s)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The given solution efficiently calculates the optimal closing time for the shop by utilizing two vectors to store the cumulative counts of &lsquo;N&rsquo; and &lsquo;Y&rsquo; customers. The code&rsquo;s time and space complexities are both linear, making it a scalable solution for large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode951s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +489,6 @@
 
       </div>
 
-      
 
       <footer>
         

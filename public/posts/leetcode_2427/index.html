@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -224,7 +224,237 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode905s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the number of common factors (or divisors) between two integers <code>a</code> and <code>b</code>. A common factor is a number that divides both <code>a</code> and <code>b</code> without leaving a remainder. Your task is to return the total number of such common divisors between the two given integers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to find the divisors of both numbers and count the ones that are common between the two. However, we can optimize the process by leveraging the <strong>greatest common divisor (GCD)</strong> of the two numbers.</p>
+<h4 id="key-insights">
+  Key Insights
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Divisors of a Number</strong>:</p>
+<ul>
+<li>The divisors of a number <code>n</code> are the integers <code>x</code> such that <code>n % x == 0</code>.</li>
+<li>Divisors come in pairs. For example, if <code>x</code> divides <code>n</code>, then <code>n / x</code> also divides <code>n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Common Divisors</strong>:</p>
+<ul>
+<li>The common divisors of two numbers <code>a</code> and <code>b</code> are the divisors of their GCD. This is because any divisor of the GCD is guaranteed to be a divisor of both <code>a</code> and <code>b</code>.</li>
+<li>Thus, instead of iterating through all numbers from 1 to <code>min(a, b)</code>, we only need to consider the divisors of <code>gcd(a, b)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Counting</strong>:</p>
+<ul>
+<li>Once we have the GCD of the two numbers, the problem reduces to counting the divisors of the GCD.</li>
+<li>This can be done by checking for each integer from <code>1</code> to <code>sqrt(gcd(a, b))</code>. For each such number <code>n</code>, both <code>n</code> and <code>gcd(a, b) / n</code> (if distinct) are divisors.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through the code provided in the solution.</p>
+<h4 id="step-1-calculate-the-gcd-of-a-and-b">
+  Step 1: Calculate the GCD of <code>a</code> and <code>b</code>
+  <a class="heading-link" href="#step-1-calculate-the-gcd-of-a-and-b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> hi <span style="color:#f92672">=</span> gcd(a, b);
+</span></span></code></pre></div><ul>
+<li>The function <code>gcd(a, b)</code> is used to calculate the greatest common divisor of the integers <code>a</code> and <code>b</code>. The result, stored in <code>hi</code>, is the largest integer that divides both <code>a</code> and <code>b</code>.</li>
+<li>By focusing on the divisors of <code>hi</code>, we guarantee that we&rsquo;re only counting the common divisors of <code>a</code> and <code>b</code>.</li>
+</ul>
+<h4 id="step-2-initialize-the-result">
+  Step 2: Initialize the Result
+  <a class="heading-link" href="#step-2-initialize-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the result variable <code>res</code> to <code>1</code>. This is because <code>1</code> is always a common divisor of any two numbers. Therefore, we begin the count with one.</li>
+</ul>
+<h4 id="step-3-loop-through-possible-divisors">
+  Step 3: Loop Through Possible Divisors
+  <a class="heading-link" href="#step-3-loop-through-possible-divisors">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; n <span style="color:#f92672">&lt;=</span> hi; <span style="color:#f92672">++</span>n)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> a <span style="color:#f92672">%</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> b <span style="color:#f92672">%</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We loop through all integers from <code>2</code> to <code>hi</code> (the GCD of <code>a</code> and <code>b</code>).</li>
+<li>For each integer <code>n</code>, we check if both <code>a</code> and <code>b</code> are divisible by <code>n</code> (i.e., <code>a % n == 0 &amp;&amp; b % n == 0</code>). If this is true, then <code>n</code> is a common divisor of both <code>a</code> and <code>b</code>.</li>
+<li>We increment the result <code>res</code> for each common divisor found.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop, the result <code>res</code> contains the count of common divisors between <code>a</code> and <code>b</code>, including <code>1</code> which was initially added.</li>
+<li>Finally, we return the value of <code>res</code> as the output.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution depends on two main operations:</p>
+<ol>
+<li>
+<p><strong>GCD Calculation</strong>:</p>
+<ul>
+<li>The <code>gcd(a, b)</code> function computes the greatest common divisor of <code>a</code> and <code>b</code> using the <strong>Euclidean algorithm</strong>. The time complexity of this operation is <strong>O(log(min(a, b)))</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Divisors</strong>:</p>
+<ul>
+<li>To find the divisors of the GCD, we iterate through all integers from <code>2</code> to <code>sqrt(gcd(a, b))</code>. The number of iterations is proportional to <strong>O(sqrt(hi))</strong>, where <code>hi</code> is the GCD of <code>a</code> and <code>b</code>.</li>
+</ul>
+</li>
+</ol>
+<p>Therefore, the total time complexity is:</p>
+<p>[
+O(\log(\min(a, b))) + O(\sqrt{\text{gcd}(a, b)})
+]</p>
+<p>In the worst case, the time complexity is <strong>O(sqrt(gcd(a, b)))</strong>, since the GCD calculation is logarithmic and the divisor-counting step is more significant.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> because the algorithm uses a constant amount of extra space (apart from the input variables). We are not using any additional data structures that grow with the size of the input.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s go through a small example to better understand how the algorithm works.</p>
+<h4 id="example-1-a--12-b--18">
+  Example 1: <code>a = 12</code>, <code>b = 18</code>
+  <a class="heading-link" href="#example-1-a--12-b--18">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Calculate GCD</strong>:</p>
+<ul>
+<li>The GCD of <code>12</code> and <code>18</code> is <code>6</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Divisors of 6</strong>:</p>
+<ul>
+<li>The divisors of <code>6</code> are <code>1</code>, <code>2</code>, <code>3</code>, and <code>6</code>.</li>
+<li>We check each number from <code>2</code> to <code>6</code>:
+<ul>
+<li><code>2</code> divides both <code>12</code> and <code>18</code>, so it&rsquo;s a common divisor.</li>
+<li><code>3</code> divides both <code>12</code> and <code>18</code>, so it&rsquo;s a common divisor.</li>
+<li><code>6</code> divides both <code>12</code> and <code>18</code>, so it&rsquo;s a common divisor.</li>
+</ul>
+</li>
+<li>The total number of common divisors is <code>4</code> (including <code>1</code>).</li>
+</ul>
+</li>
+</ol>
+<h4 id="example-2-a--15-b--25">
+  Example 2: <code>a = 15</code>, <code>b = 25</code>
+  <a class="heading-link" href="#example-2-a--15-b--25">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Calculate GCD</strong>:</p>
+<ul>
+<li>The GCD of <code>15</code> and <code>25</code> is <code>5</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Divisors of 5</strong>:</p>
+<ul>
+<li>The divisors of <code>5</code> are <code>1</code> and <code>5</code>.</li>
+<li>We check each number from <code>2</code> to <code>5</code>:
+<ul>
+<li><code>5</code> divides both <code>15</code> and <code>25</code>, so it&rsquo;s a common divisor.</li>
+</ul>
+</li>
+<li>The total number of common divisors is <code>2</code> (including <code>1</code>).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the number of common divisors between two integers using the GCD. By focusing on the divisors of the GCD, we avoid unnecessary checks and reduce the problem to a more manageable size. The algorithm is optimal with respect to both time and space, and it performs well even for large values of <code>a</code> and <code>b</code>. This method provides a clear and concise way to solve the problem while leveraging the properties of divisors and the GCD.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode905s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -278,7 +508,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -245,7 +245,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode694s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the distances for each element in an array, where the distance for an element at index <code>i</code> is defined as the sum of the absolute differences between the element and all other elements with the same value in the array. Given an integer array <code>arr</code>, the task is to return a vector of long long integers representing the computed distances for each element in the original array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can break down the process into several steps:</p>
+<ol>
+<li>
+<p><strong>Grouping Indices</strong>: First, we will group the indices of identical values in the array. This will help us to easily access the positions of each value and compute distances based on these positions.</p>
+</li>
+<li>
+<p><strong>Prefix and Suffix Sums</strong>: We will utilize two separate arrays to compute the cumulative distances. The <code>pre</code> array will store the sum of distances from the left side of each index, while the <code>suf</code> array will store distances from the right side.</p>
+</li>
+<li>
+<p><strong>Distance Calculation</strong>: By iterating through the grouped indices, we can calculate the total distance for each index in the <code>pre</code> and <code>suf</code> arrays. The final distance for each element will be the sum of its corresponding values in <code>pre</code> and <code>suf</code>.</p>
+</li>
+<li>
+<p><strong>Final Output</strong>: Finally, we will compile the results into a single output array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the code implementation:</p>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> getDistances(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr) {
+</span></span></code></pre></div><ul>
+<li>This function, <code>getDistances</code>, takes an integer vector <code>arr</code> as input and returns a vector of long long integers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ll;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>We define <code>ll</code> as a type alias for <code>long long</code> to simplify type declarations.</li>
+<li><code>n</code> holds the size of the input array.</li>
+<li>An unordered map <code>mp</code> is created to store indices of identical elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Grouping Indices</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mp[arr[i]].push_back(i);
+</span></span></code></pre></div><ul>
+<li>We loop through the array and populate the <code>mp</code> map. Each key corresponds to an element from <code>arr</code>, and its value is a vector containing all indices where that element appears.</li>
+</ul>
+</li>
+<li>
+<p><strong>Distance Arrays Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> pre(n, <span style="color:#ae81ff">0</span>), suf(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>Two vectors, <code>pre</code> and <code>suf</code>, are initialized with zero values. These will hold the cumulative distance sums from the left and right sides.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Prefix Distances</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> val : mp) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec <span style="color:#f92672">=</span> val.second;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> vec.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        pre[vec[i]] <span style="color:#f92672">=</span> pre[vec[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> (ll)(vec[i] <span style="color:#f92672">-</span> vec[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each entry in the map. For each group of indices, we calculate the prefix distances.</li>
+<li>For each index, the distance is accumulated based on the distance to the previous index multiplied by its position in the group.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Suffix Distances</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> val : mp) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec <span style="color:#f92672">=</span> val.second;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> vec.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>        suf[vec[i]] <span style="color:#f92672">=</span> suf[vec[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+</span> ll(vec.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> i) <span style="color:#f92672">*</span> (ll)(vec[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> vec[i]);     
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Similar to prefix calculations, we now calculate the suffix distances.</li>
+<li>We iterate backwards through the indices to calculate cumulative distances to subsequent indices in the group.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Distance Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    ans[i] <span style="color:#f92672">=</span> (pre[i] <span style="color:#f92672">+</span> suf[i]);
+</span></span></code></pre></div><ul>
+<li>We initialize the result vector <code>ans</code> and compute the total distance for each index by summing the values from <code>pre</code> and <code>suf</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the resulting vector containing the distances for each element in the original array.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n))</p>
+<ul>
+<li>The algorithm primarily consists of linear scans through the array to group indices and calculate distances, resulting in an overall time complexity of (O(n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n))</p>
+<ul>
+<li>The space complexity is driven by the additional storage for the <code>mp</code>, <code>pre</code>, <code>suf</code>, and <code>ans</code> vectors, all of which could potentially store up to (n) elements.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>getDistances</code> function effectively calculates the required distances for each element in the array using a combination of prefix and suffix sums. This approach ensures that we efficiently compute the distances without the need for a quadratic time complexity solution. By leveraging the properties of grouping and cumulative calculations, we achieve an optimal solution suitable for larger input sizes. The code is not only efficient but also structured in a way that maintains readability and clarity, making it easier for future developers to understand and modify if necessary.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode694s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -299,7 +454,6 @@
 
       </div>
 
-      
 
       <footer>
         

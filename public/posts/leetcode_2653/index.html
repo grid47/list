@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -252,7 +252,165 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1050s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the beauty of all subarrays of size <code>k</code> in a given array <code>nums</code>. For each subarray, the beauty is defined as the <code>x</code>-th smallest number in the subarray, where <code>x</code> is a given integer. However, there is an interesting twist: negative numbers in the array need to be treated in a way that offsets them into a positive index range. We need to compute the beauty of all subarrays of size <code>k</code> and return the result as a list of integers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to efficiently compute the <code>x</code>-th smallest number in each sliding window (subarray) of size <code>k</code> within the input array <code>nums</code>. Here are the key steps involved:</p>
+<ol>
+<li>
+<p><strong>Sliding Window</strong>: Since we need to compute the beauty for every contiguous subarray of size <code>k</code>, we use a sliding window technique. This means we slide over the array, adding and removing elements as the window moves to the next position.</p>
+</li>
+<li>
+<p><strong>Efficiently Track Frequency</strong>: Instead of sorting the subarray at each step, we can use a frequency array (<code>cnt</code>) to track how many times each number appears in the current window. This allows us to efficiently compute the <code>x</code>-th smallest number by checking the cumulative frequency of numbers.</p>
+</li>
+<li>
+<p><strong>Mapping Negative Numbers</strong>: The array can contain negative values, but the index in the frequency array needs to be positive. Therefore, we map each number to a positive index by adding 50 to it (<code>nums[i] + 50</code>). This ensures that all values, including negative ones, are mapped to non-negative indices.</p>
+</li>
+<li>
+<p><strong>Efficient Query</strong>: Once we have the frequency array updated, we need to find the <code>x</code>-th smallest number, which can be done by accumulating the frequency counts and checking when the cumulative count reaches <code>x</code>. This approach eliminates the need for sorting each subarray.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be broken down into several key parts:</p>
+<h4 id="1-helper-function-noint-x">
+  1. <strong>Helper Function: <code>no(int x)</code></strong>
+  <a class="heading-link" href="#1-helper-function-noint-x">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This function computes the <code>x</code>-th smallest number in the current sliding window by iterating over the frequency array <code>cnt</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">no</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">50</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> cnt[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(sum <span style="color:#f92672">&gt;=</span> x)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>sum</code> accumulates the counts of numbers as we traverse the <code>cnt</code> array.</li>
+<li>The loop iterates over possible indices (which represent numbers from <code>-50</code> to <code>50</code>).</li>
+<li>When the cumulative count reaches or exceeds <code>x</code>, it returns the corresponding number by adjusting the index (i.e., subtracting 50 to account for the offset).</li>
+<li>If no such number is found (although this shouldn&rsquo;t occur), it returns <code>0</code>.</li>
+</ul>
+<h4 id="2-main-function-getsubarraybeautyvectorint-nums-int-k-int-x">
+  2. <strong>Main Function: <code>getSubarrayBeauty(vector&lt;int&gt;&amp; nums, int k, int x)</code></strong>
+  <a class="heading-link" href="#2-main-function-getsubarraybeautyvectorint-nums-int-k-int-x">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This function computes the beauty for each subarray of size <code>k</code> and returns the results as a vector.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> getSubarrayBeauty(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    cnt.resize(<span style="color:#ae81ff">101</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Initialize the first window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt[nums[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span>]<span style="color:#f92672">++</span>;            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ans.push_back(no(x));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Slide the window over the array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> k; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cnt[nums[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span>]<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Add the new element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cnt[nums[i <span style="color:#f92672">-</span> k] <span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span>]<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Remove the element that goes out of the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        ans.push_back(no(x));  <span style="color:#75715e">// Find the x-th smallest number for the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Step 1: Initialize Frequency Array</strong><br>
+The first step is to initialize the frequency array (<code>cnt</code>) of size <code>101</code> to store counts for the numbers from <code>-50</code> to <code>50</code> (after shifting by <code>50</code> to ensure non-negative indices). We populate the first window of size <code>k</code> by iterating through the first <code>k</code> elements of <code>nums</code>.</p>
+</li>
+<li>
+<p><strong>Step 2: Push Initial Beauty Value</strong><br>
+After processing the first <code>k</code> elements, we compute the beauty of the first subarray by calling the <code>no(x)</code> function. This adds the result to the <code>ans</code> vector.</p>
+</li>
+<li>
+<p><strong>Step 3: Slide the Window</strong><br>
+The next part of the function handles the sliding window. We start from the <code>k</code>-th element and slide the window to the right:</p>
+<ul>
+<li>Add the new element (<code>nums[i]</code>) to the frequency array.</li>
+<li>Remove the element that is no longer in the window (<code>nums[i - k]</code>).</li>
+<li>After updating the frequency array, compute the beauty of the new window and add it to the result vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 4: Return Results</strong><br>
+Once the sliding window has processed all elements, the function returns the list of beauties for all subarrays of size <code>k</code>.</p>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>O(n)</strong>: We iterate over all elements of the array <code>nums</code>. For each element, we perform constant-time operations such as updating the frequency array and calling the <code>no(x)</code> function.</li>
+<li>The <code>no(x)</code> function has a time complexity of <strong>O(101)</strong>, which is constant since <code>101</code> is a fixed size (for the range <code>-50</code> to <code>50</code>).</li>
+<li>Therefore, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li><strong>O(101)</strong>: The frequency array <code>cnt</code> has a fixed size of <code>101</code>, and the output array <code>ans</code> has a size of <code>n - k + 1</code> (which is also proportional to <code>n</code>).</li>
+<li>Thus, the space complexity is <strong>O(n)</strong> due to the space required for the result array.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses the sliding window technique combined with a frequency array to efficiently compute the beauty of subarrays. By avoiding sorting and utilizing the frequency of elements, the algorithm performs well with a time complexity of <strong>O(n)</strong>, making it scalable for large input sizes. The approach is both time-efficient and space-efficient, with the primary focus on maintaining and updating the frequency of elements in the current window. This makes the solution optimal for the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1050s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -306,7 +464,6 @@
 
       </div>
 
-      
 
       <footer>
         

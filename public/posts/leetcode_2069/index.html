@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -263,7 +263,139 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_2 = obj-&gt;getPos();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * string param_3 = obj-&gt;getDir();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode662s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task involves creating a <code>Robot</code> class that simulates the movement of a robot within a rectangular grid defined by its width and height. The robot starts at the top-left corner of the grid, facing east, and is capable of moving in four directions: east, north, west, and south. The challenge is to allow the robot to step a specified number of times, wrapping around when it reaches the edges of the grid, and to retrieve its current position and direction after the steps have been taken.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>: When creating an instance of the <code>Robot</code>, we need to initialize its position, direction, and the perimeter of the grid. The position is set to the top-left corner (0, 0), and the direction is initially set to east (0).</p>
+</li>
+<li>
+<p><strong>Movement Logic</strong>: The robot can move a specified number of steps. When the robot reaches the boundaries of the grid, it changes direction (turns) instead of moving outside the grid. The robot&rsquo;s movement can be handled using a predefined array that represents the changes in coordinates for each direction.</p>
+</li>
+<li>
+<p><strong>Wrapping Movement</strong>: If the robot is instructed to move more steps than the perimeter of the grid, the effective number of steps is calculated using modulo operation to wrap around correctly.</p>
+</li>
+<li>
+<p><strong>Position and Direction Retrieval</strong>: After executing the movement, we need methods to retrieve the robot&rsquo;s current position and direction.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Robot</code> class is defined with private attributes for width (<code>w</code>), height (<code>h</code>), current x-coordinate (<code>i</code>), current y-coordinate (<code>j</code>), current direction (<code>dir</code>), and the perimeter of the grid (<code>per</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Robot</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> w, h, i, j, dir, per;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Constructor</strong>: The constructor initializes the width and height of the grid and sets the initial position to <code>(0, 0)</code> and direction to east (<code>0</code>). The perimeter is calculated using the formula (2 \times (\text{width} + \text{height} - 2)) to determine how many total steps can be taken before returning to the starting point.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Robot(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height) {
+</span></span><span style="display:flex;"><span>    w <span style="color:#f92672">=</span> width;
+</span></span><span style="display:flex;"><span>    h <span style="color:#f92672">=</span> height;
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    dir <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    per <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (w <span style="color:#f92672">+</span> h <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Step Function</strong>: The <code>step</code> function takes the number of steps to move. It first checks if the number of steps exceeds the perimeter; if so, it reduces the step count using the modulo operator. A movement array (<code>mo</code>) defines the direction vectors for east, north, west, and south.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">step</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">&gt;</span> per) {
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">%=</span> per;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dir <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) dir <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mo[<span style="color:#ae81ff">4</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>}, {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}, {<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>}, {<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>}};
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Movement Loop</strong>: The function contains a loop that executes the movement commands. If moving in the current direction would result in going out of bounds, the direction is changed clockwise. If not, the position is updated and the step count is decremented.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> mo[dir][<span style="color:#ae81ff">0</span>], y <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> mo[dir][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&gt;=</span> w <span style="color:#f92672">||</span> y <span style="color:#f92672">&gt;=</span> h <span style="color:#f92672">||</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        dir <span style="color:#f92672">=</span> (dir <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>        j <span style="color:#f92672">=</span> y;
+</span></span><span style="display:flex;"><span>        num<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Getting Position</strong>: The <code>getPos</code> method returns the current position of the robot as a vector containing the x and y coordinates.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> getPos() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {i, j};
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Getting Direction</strong>: The <code>getDir</code> method returns the current direction as a string based on the value of <code>dir</code>. Each case corresponds to a specific direction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">getDir</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(dir) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;East&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;North&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;West&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;South&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity for the <code>step</code> function is O(n) in the worst case, where n is the number of steps requested. In most cases, the effective steps are reduced by the perimeter calculation, making it efficient for larger inputs.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1) since we only use a fixed amount of space for variables and do not utilize any data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This <code>Robot</code> class implementation provides a clear and efficient way to model the movement of a robot within a bounded grid. The combination of directional logic and boundary checking ensures that the robot operates within the defined constraints, allowing for realistic movement simulation. The ability to easily retrieve the robot&rsquo;s position and direction enhances the utility of the class for potential applications in robotics and simulation scenarios.</p>
+<p>Overall, the design is intuitive, making it easy to extend or modify if additional features are required, such as different movement strategies or additional grid dimensions. The implementation serves as an excellent demonstration of how to apply object-oriented programming principles to solve practical problems in a structured manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode662s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -317,7 +449,6 @@
 
       </div>
 
-      
 
       <footer>
         

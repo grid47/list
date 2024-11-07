@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -227,7 +227,154 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> c;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1139s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining the minimum number of operations required to convert a given array <code>A</code> into an array of only 1s, 2s, and 3s. In each operation, you can replace any element of the array with either 1, 2, or 3. The goal is to minimize the number of replacements.</p>
+<ul>
+<li>The given array <code>A</code> consists of integers, and we are allowed to replace elements with values <code>1</code>, <code>2</code>, or <code>3</code>.</li>
+<li>We need to calculate the minimum number of changes needed to ensure that the entire array consists only of <code>1</code>s, <code>2</code>s, and <code>3</code>s.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be approached using dynamic programming, where we track the minimum number of operations needed to transform the array step by step. The solution takes into account the following observations:</p>
+<ul>
+<li>
+<p><strong>State Variables</strong>: We define three variables, <code>a</code>, <code>b</code>, and <code>c</code>, to represent the minimum number of operations required to transform the array into:</p>
+<ul>
+<li><code>a</code>: An array consisting entirely of <code>1</code>s.</li>
+<li><code>b</code>: An array consisting entirely of <code>1</code>s and <code>2</code>s.</li>
+<li><code>c</code>: An array consisting entirely of <code>1</code>s, <code>2</code>s, and <code>3</code>s.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transition Logic</strong>:</p>
+<ul>
+<li>The variable <code>a</code> counts how many times a value in <code>A</code> is not equal to 1, and the number of operations increases as we move through the array.</li>
+<li>The variable <code>b</code> ensures that we can have the array consisting of <code>1</code>s and <code>2</code>s. If the value in the array is not <code>2</code>, we increment the operations.</li>
+<li>Similarly, the variable <code>c</code> ensures the array consists of <code>1</code>s, <code>2</code>s, and <code>3</code>s, where we increment the operations when the value is not <code>3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Transition</strong>: As we traverse the array, at each step:</p>
+<ul>
+<li>We calculate the minimum operations needed to replace any element that is not <code>1</code>, <code>2</code>, or <code>3</code>, by using <code>min()</code> functions to propagate the optimal solution.</li>
+</ul>
+</li>
+</ul>
+<p>By the end of the traversal, the variable <code>c</code> will hold the minimum number of operations required to transform the entire array into an array of only <code>1</code>s, <code>2</code>s, and <code>3</code>s.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumOperations</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> A) {
+</span></span></code></pre></div><ol>
+<li><strong>Function Declaration</strong>: The function <code>minimumOperations</code> takes a vector of integers <code>A</code> as input, representing the given array.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ol start="2">
+<li><strong>Initialization</strong>:
+<ul>
+<li><code>a</code>, <code>b</code>, and <code>c</code> are initialized to 0. These will track the minimum operations needed to transform the array to various forms as described earlier (i.e., <code>1</code>s, <code>1</code>s and <code>2</code>s, <code>1</code>s, <code>2</code>s, and <code>3</code>s).</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x: A) {
+</span></span></code></pre></div><ol start="3">
+<li><strong>Iterating Over Array <code>A</code></strong>: A loop is used to iterate over each element <code>x</code> of the array <code>A</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        a <span style="color:#f92672">+=</span> x <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ol start="4">
+<li><strong>Updating <code>a</code></strong>:
+<ul>
+<li><code>a</code> is incremented whenever the current element <code>x</code> is not equal to 1. This operation tracks the minimum operations required to convert the array to an array of <code>1</code>s.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        b <span style="color:#f92672">=</span> min(a, b <span style="color:#f92672">+</span> (x <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>));
+</span></span></code></pre></div><ol start="5">
+<li><strong>Updating <code>b</code></strong>:
+<ul>
+<li><code>b</code> is updated to the minimum of <code>a</code> and <code>b + (x != 2)</code>. This means that if the current element <code>x</code> is not equal to 2, the number of operations needed to transform the array into <code>1</code>s and <code>2</code>s is incremented. The <code>min()</code> ensures we choose the fewer operations between keeping <code>b</code> as is or adding one more operation to transform <code>x</code> into <code>2</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> min(b, c <span style="color:#f92672">+</span> (x <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>));
+</span></span></code></pre></div><ol start="6">
+<li><strong>Updating <code>c</code></strong>:
+<ul>
+<li>Similarly, <code>c</code> is updated to the minimum of <code>b</code> and <code>c + (x != 3)</code>. If the current element <code>x</code> is not equal to 3, we increment the operation count for transforming the array into <code>1</code>s, <code>2</code>s, and <code>3</code>s.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="7">
+<li><strong>Loop Completion</strong>: The loop completes after iterating through all elements in the array.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> c;
+</span></span></code></pre></div><ol start="8">
+<li><strong>Return Result</strong>:
+<ul>
+<li>The final result is the value of <code>c</code>, which represents the minimum number of operations needed to convert the entire array into an array consisting of only <code>1</code>s, <code>2</code>s, and <code>3</code>s.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>A</code>. The algorithm iterates through the array once, making a constant-time check for each element and updating the variables <code>a</code>, <code>b</code>, and <code>c</code>. Therefore, the overall time complexity is linear in terms of the size of the input array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as the algorithm uses only a constant amount of extra space (three variables: <code>a</code>, <code>b</code>, and <code>c</code>) to store the intermediate results. The solution does not use any additional data structures whose size depends on the input, making it space-efficient.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is solved efficiently using dynamic programming principles. By keeping track of three variables (<code>a</code>, <code>b</code>, and <code>c</code>), the solution dynamically adjusts the minimum operations required as we traverse the array. The approach ensures that the solution is both time-efficient (with a linear time complexity) and space-efficient (constant space complexity).</p>
+<p>The solution essentially transforms the problem into a series of optimal subproblems that progressively build up the result, making it a perfect candidate for dynamic programming. The <code>min()</code> function is a key tool in ensuring that we always take the optimal number of operations at each step. This method is both simple and effective for transforming arrays with constraints on allowable values.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1139s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -239,7 +386,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2827"  class="external-link" target="_blank" rel="noopener">LeetCode #2827: Number of Beautiful Integers in the Range</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2828"  class="external-link" target="_blank" rel="noopener">LeetCode #2828: Check if a String Is an Acronym of Words</a></th>
       </tr>
   </thead>
   <tbody>
@@ -281,7 +428,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,154 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1215s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the largest possible perimeter of a triangle that can be formed using three sides from an array of integers <code>nums</code>. A valid triangle is formed when the sum of any two sides is greater than the third side, i.e., for three sides <code>a</code>, <code>b</code>, and <code>c</code>, the following conditions must hold:</p>
+<ul>
+<li><code>a + b &gt; c</code></li>
+<li><code>a + c &gt; b</code></li>
+<li><code>b + c &gt; a</code></li>
+</ul>
+<p>The goal is to return the largest perimeter of a valid triangle, or return <code>-1</code> if it is not possible to form any valid triangle using the integers in the array.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Understanding the Triangle Inequality Theorem</strong>:
+The key insight to solve this problem is based on the <strong>triangle inequality theorem</strong>. For three numbers to form a triangle, the sum of any two sides must be strictly greater than the third side. If we sort the array in non-decreasing order, the largest possible perimeter will be formed by the last three numbers in the sorted array that satisfy this condition.</p>
+</li>
+<li>
+<p><strong>Sorting the Array</strong>:
+Sorting the array allows us to easily check the largest possible sides that can form a triangle. By sorting the array, the largest element is at the end, and we can simply check if the sum of the two smaller numbers is greater than the largest one.</p>
+</li>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:
+We can utilize a prefix sum array to efficiently calculate the sum of the first <code>i</code> elements. This helps in quickly checking whether the sum of the two smaller sides (from a sorted array) is greater than the third side.</p>
+</li>
+<li>
+<p><strong>Iterate to Find the Largest Valid Triangle</strong>:
+After sorting the array, we can start from the third largest element and check if the sum of the first two elements of the potential triangle (the two smaller sides) is greater than the third. If this condition holds true, the perimeter of the triangle is the sum of these three sides. If no valid triangle can be formed, return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sorting-the-array">
+  Step 1: Sorting the array
+  <a class="heading-link" href="#step-1-sorting-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>The first step is to sort the array in non-decreasing order. This allows us to easily check the largest possible triplet of numbers that could form a valid triangle.</li>
+</ul>
+<h4 id="step-2-calculate-prefix-sum">
+  Step 2: Calculate prefix sum
+  <a class="heading-link" href="#step-2-calculate-prefix-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> sum(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>sum[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) sum[i] <span style="color:#f92672">=</span> sum[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>We create a <code>sum</code> array where each element at index <code>i</code> contains the sum of all elements in the <code>nums</code> array up to that index. This helps quickly compute the sum of any subset of elements.</li>
+</ul>
+<h4 id="step-3-check-for-valid-triangles-from-the-largest-possible-sides">
+  Step 3: Check for valid triangles from the largest possible sides
+  <a class="heading-link" href="#step-3-check-for-valid-triangles-from-the-largest-possible-sides">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> sum[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum[i];
+</span></span></code></pre></div><ul>
+<li>We iterate from the end of the array to the third element, checking if the largest side <code>nums[i]</code> is less than the sum of the other two sides <code>sum[i - 1]</code>. If this condition is true, it means that <code>nums[i-2]</code>, <code>nums[i-1]</code>, and <code>nums[i]</code> can form a valid triangle, and we return the perimeter of this triangle, which is simply the sum of these three sides.</li>
+</ul>
+<h4 id="step-4-return--1-if-no-valid-triangle-is-found">
+  Step 4: Return <code>-1</code> if no valid triangle is found
+  <a class="heading-link" href="#step-4-return--1-if-no-valid-triangle-is-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If we finish checking all possible triplets and none of them form a valid triangle, we return <code>-1</code> to indicate that no valid triangle can be formed from the given sides.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting</strong>: Sorting the array takes <code>O(n log n)</code>, where <code>n</code> is the size of the <code>nums</code> array.</li>
+<li><strong>Prefix sum calculation</strong>: Calculating the prefix sum array takes <code>O(n)</code>.</li>
+<li><strong>Checking for valid triangles</strong>: The loop where we check for valid triangles runs in <code>O(n)</code>.</li>
+<li>Overall, the time complexity is dominated by the sorting step, so the total time complexity is <strong>O(n log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for the prefix sum array</strong>: We use an extra array <code>sum</code> of size <code>n</code>, so the space complexity is <strong>O(n)</strong>.</li>
+<li>Other than this, the space complexity is constant, i.e., <strong>O(1)</strong> for the variables used in the algorithm.</li>
+<li>Overall, the space complexity is <strong>O(n)</strong> due to the space used for the <code>sum</code> array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently solves the problem by leveraging sorting and prefix sum techniques. By sorting the array and using the triangle inequality theorem, the solution is able to quickly check the largest possible valid triangle and return its perimeter. The solution has a time complexity of <strong>O(n log n)</strong>, which is optimal for this type of problem, and the space complexity is linear due to the additional storage used for the prefix sum array. This solution is both efficient and easy to understand, making it suitable for solving the problem with large input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1215s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -246,7 +393,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2972"  class="external-link" target="_blank" rel="noopener">LeetCode #2972: Count the Number of Incremovable Subarrays II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3005"  class="external-link" target="_blank" rel="noopener">LeetCode #3005: Count Elements With Maximum Frequency</a></th>
       </tr>
   </thead>
   <tbody>
@@ -288,7 +435,6 @@
 
       </div>
 
-      
 
       <footer>
         

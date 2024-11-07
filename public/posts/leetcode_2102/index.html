@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -275,7 +275,151 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;add(name,score);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * string param_2 = obj-&gt;get();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode683s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we need to create a &ldquo;Search and Order Ranking Tracker&rdquo; (SORTracker) that dynamically maintains a list of locations sorted by their scores and names. Specifically, each location has a <code>name</code> (string) and a <code>score</code> (integer). Higher scores have higher rankings. If two locations have the same score, they are sorted alphabetically by name in ascending order.</p>
+<p>The SORTracker class should support two operations:</p>
+<ol>
+<li><strong>add(name, score)</strong>: Add a location with the given <code>name</code> and <code>score</code>.</li>
+<li><strong>get()</strong>: Return the name of the location with the highest rank that hasn’t been retrieved yet.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages two priority queues with custom comparators to maintain a dynamic list of locations sorted by rank. The approach ensures that locations are efficiently added and the highest rank is quickly retrieved.</p>
+<p>We use two priority queues:</p>
+<ol>
+<li><strong><code>mx</code> queue</strong>: Maintains locations that may become the top-ranked location in subsequent <code>get()</code> calls.</li>
+<li><strong><code>mn</code> queue</strong>: Stores the current top-ranked locations, from which we retrieve the result for each <code>get()</code> call.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Define Comparators</strong>:<br>
+The custom comparators <code>CmpMx</code> and <code>CmpMn</code> are used to prioritize the locations based on rank.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CmpMn</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(a.first <span style="color:#f92672">!=</span> b.first) <span style="color:#66d9ef">return</span> a.first <span style="color:#f92672">&gt;</span> b.first;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a.second <span style="color:#f92672">&lt;</span> b.second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CmpMx</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(a.first <span style="color:#f92672">!=</span> b.first) <span style="color:#66d9ef">return</span> a.first <span style="color:#f92672">&lt;</span> b.first;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a.second <span style="color:#f92672">&gt;</span> b.second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>CmpMn</code> prioritizes higher scores and, in case of a tie, lexicographically smaller names. It reverses the comparison result to ensure the smallest element remains at the top, aligning with the <code>get()</code> retrieval order.</li>
+<li><code>CmpMx</code> keeps the <code>mx</code> queue in order to push locations with the highest scores that haven’t yet been retrieved.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize SORTracker</strong>:<br>
+The class initializes <code>mx</code> and <code>mn</code> priority queues and an integer <code>i</code> to track the number of <code>get()</code> calls.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SORTracker</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;</span>, CmpMx<span style="color:#f92672">&gt;</span> mx;
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;</span>, CmpMn<span style="color:#f92672">&gt;</span> mn;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p><strong><code>add()</code> Method</strong>:<br>
+The <code>add</code> function inserts the new location into the <code>mx</code> queue. This maintains the set of locations eligible to be retrieved in future <code>get()</code> calls.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(string name, <span style="color:#66d9ef">int</span> score) {
+</span></span><span style="display:flex;"><span>    mx.push({score, name});
+</span></span><span style="display:flex;"><span>    mn.push(mx.top());
+</span></span><span style="display:flex;"><span>    mx.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mn.size() <span style="color:#f92672">&gt;</span> i) {
+</span></span><span style="display:flex;"><span>        mx.push(mn.top());
+</span></span><span style="display:flex;"><span>        mn.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After adding to <code>mx</code>, the top element of <code>mx</code> is moved to <code>mn</code> to keep the smallest elements in <code>mn</code>.</li>
+<li>If the size of <code>mn</code> exceeds <code>i</code>, the extra element is moved back to <code>mx</code>, maintaining only the current top <code>i</code> locations in <code>mn</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>get()</code> Method</strong>:<br>
+The <code>get</code> method retrieves the name of the top-ranked location.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">get</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(mn.size() <span style="color:#f92672">&lt;</span> i) {
+</span></span><span style="display:flex;"><span>        mn.push(mx.top());
+</span></span><span style="display:flex;"><span>        mx.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mn.top().second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>get()</code> first checks if <code>mn</code> has fewer elements than the number of calls <code>i</code>. If so, it pulls elements from <code>mx</code> to ensure <code>mn</code> maintains the top <code>i</code> locations.</li>
+<li>After retrieving the name of the top-ranked location, it increments <code>i</code> to mark the next highest-ranked location.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><code>add(name, score)</code>: (O(\log(i))), where <code>i</code> is the size of the priority queue <code>mn</code>. The insertion and rebalancing steps involve only logarithmic operations.</li>
+<li><code>get()</code>: (O(\log(i))), where <code>i</code> is the size of <code>mn</code> and <code>mx</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>(O(n)), where <code>n</code> is the total number of locations added, as both <code>mx</code> and <code>mn</code> queues store elements in memory.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>SORTracker</code> class demonstrates how to manage dynamically ordered data structures using two priority queues to retrieve top-ranked items efficiently. This approach ensures that new locations are appropriately prioritized in constant time, making the solution both time-efficient and memory-conscious. The use of custom comparators and careful handling of elements between <code>mx</code> and <code>mn</code> queues allows us to provide an optimal solution for dynamic rank retrieval. This implementation is well-suited for scenarios where frequent <code>get()</code> calls need to access the highest rank in an ordered list, as required by many real-world ranking applications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode683s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +431,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2103"  class="external-link" target="_blank" rel="noopener">LeetCode #2103: Rings and Rods</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2104"  class="external-link" target="_blank" rel="noopener">LeetCode #2104: Sum of Subarray Ranges</a></th>
       </tr>
   </thead>
   <tbody>
@@ -329,7 +473,6 @@
 
       </div>
 
-      
 
       <footer>
         

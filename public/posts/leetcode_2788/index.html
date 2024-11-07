@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,146 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1120s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to split a list of words by a specified separator character. Each word in the list is a string, and the goal is to split each word into substrings wherever the separator appears. The solution should return a new list of strings, where each string is a segment of a word split by the separator.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are tasked with splitting each word in the input list based on a separator character <code>sep</code>. For each word, we traverse through each character, checking if it matches the separator. If it does, we push the substring formed so far to the result list. If we reach the end of a word, the last substring (which does not end with a separator) is added to the result. This way, we ensure that every segment of the word separated by the given separator is correctly placed in the result list.</p>
+<p>Here is the step-by-step breakdown of how the algorithm works:</p>
+<ol>
+<li><strong>Input Iteration:</strong> Iterate through each word in the input list <code>words</code>.</li>
+<li><strong>Character Iteration:</strong> For each word, iterate through its characters one by one.</li>
+<li><strong>Separator Detection:</strong> If a separator is encountered, the current accumulated substring is added to the result list.</li>
+<li><strong>Segment Completion:</strong> After encountering a separator or reaching the end of the word, finalize the current substring and push it to the result list.</li>
+<li><strong>Return Result:</strong> After processing all words, return the list of all the segments (substrings) formed by splitting each word by the separator.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> splitWordsBySeparator(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words, <span style="color:#66d9ef">char</span> sep) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans; <span style="color:#75715e">// Vector to store the final answer (substrings)
+</span></span></span></code></pre></div><ul>
+<li>The function <code>splitWordsBySeparator</code> takes in a list of words (<code>vector&lt;string&gt; words</code>) and a separator character (<code>char sep</code>).</li>
+<li>A vector <code>ans</code> is initialized to store the substrings after splitting each word by the separator.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> words.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        string cur <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;  <span style="color:#75715e">// Initialize an empty string to hold the current substring
+</span></span></span></code></pre></div><ul>
+<li>We start by iterating over each word in the list <code>words</code>. For each word, we initialize an empty string <code>cur</code>, which will be used to build each substring between separators.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> words[i].size(); j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>Inside the loop for each word, we start iterating through each character of the word.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(words[i][j] <span style="color:#f92672">==</span> sep) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span>)  <span style="color:#75715e">// If separator is found and cur is not empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    ans.push_back(cur); <span style="color:#75715e">// Add current substring to the answer list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                cur <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;  <span style="color:#75715e">// Reset the current substring to start a new one
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span></code></pre></div><ul>
+<li>If the current character is equal to the separator (<code>words[i][j] == sep</code>), we check if the current substring <code>cur</code> is non-empty.</li>
+<li>If it is non-empty, we add it to the result list <code>ans</code>.</li>
+<li>After adding the substring, we reset <code>cur</code> to an empty string to start collecting the next segment.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(j <span style="color:#f92672">==</span> words[i].size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">+=</span> words[i][j];  <span style="color:#75715e">// Add the last character to the current substring
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                ans.push_back(cur);   <span style="color:#75715e">// Add the last substring to the answer list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                cur <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;  <span style="color:#75715e">// Reset the current substring
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span></code></pre></div><ul>
+<li>If the current character is not the separator, we check if it&rsquo;s the last character in the word (<code>j == words[i].size() - 1</code>).</li>
+<li>If it is the last character, we add it to <code>cur</code> and then push the final <code>cur</code> substring to the result list <code>ans</code>.</li>
+<li>Afterward, <code>cur</code> is reset to an empty string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">+=</span> words[i][j]; <span style="color:#75715e">// If not separator and not last character, keep building current substring
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li>If the character is not a separator and it&rsquo;s not the last character, we continue adding the current character to <code>cur</code> to build the current substring.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the final list of substrings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>After processing all the words in the input list <code>words</code>, we return the result list <code>ans</code>, which contains all the substrings split by the separator.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>The time complexity is <strong>O(n * m)</strong>, where:</p>
+<ul>
+<li><code>n</code> is the number of words in the input list <code>words</code>.</li>
+<li><code>m</code> is the average length of the words in <code>words</code>.</li>
+</ul>
+<p>This is because we are iterating through each character of every word in the input list once, checking each character and performing operations like adding substrings to the result list.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(k)</strong>, where <code>k</code> is the total number of substrings formed after splitting all the words.
+<ul>
+<li>We store all the resulting substrings in the <code>ans</code> vector, which requires space proportional to the number of substrings.</li>
+<li>Additionally, we store the <code>cur</code> string at each step, but it is used to build substrings incrementally, so the space overhead is mainly from the final result list <code>ans</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently splits each word in the input list by a specified separator character and returns the substrings. The algorithm works by iterating through each word and checking each character. It dynamically builds substrings and adds them to the result whenever a separator is encountered or at the end of the word. The time complexity of <strong>O(n * m)</strong> ensures that this approach works efficiently for relatively large inputs, while the space complexity is dominated by the number of substrings formed.</p>
+<p>This solution is simple and direct, making it suitable for handling cases where splitting words by a separator is required, and it ensures that all edge cases (such as empty words or multiple consecutive separators) are handled appropriately.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1120s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

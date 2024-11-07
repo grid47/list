@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -268,7 +268,151 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans.size() <span style="color:#f92672">==</span> chg.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">?</span> ans: vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode621s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the original array from a modified array called <code>chg</code>. In this modified array, each element is either an element from the original array or double the value of an element from the original array. The goal is to determine if it’s possible to reconstruct the original array such that for every element <code>x</code> in the original array, <code>2 * x</code> exists in the modified array. If it&rsquo;s possible, we need to return the original array; otherwise, we return an empty array.</p>
+<p>For example, if <code>chg = [1, 2, 2, 4]</code>, we can reconstruct the original array as <code>[1, 2]</code> because for every <code>x</code> (in this case, <code>1</code> and <code>2</code>), <code>2 * x</code> (<code>2</code> and <code>4</code>) are present in <code>chg</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Check the Length</strong>: If the size of the modified array <code>chg</code> is odd, we cannot form pairs, so we immediately return an empty array.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>: Sort the modified array to ensure we can easily access the smallest elements first, which helps in pairing them with their double values.</p>
+</li>
+<li>
+<p><strong>Frequency Counting</strong>: Use a map (or hash table) to count occurrences of each element in the sorted array.</p>
+</li>
+<li>
+<p><strong>Building the Original Array</strong>: Iterate through the sorted <code>chg</code> array and attempt to construct the original array:</p>
+<ul>
+<li>If the current element is zero and it appears at least twice, we can add it to the original array.</li>
+<li>For any other element, if both the element and its double exist in the frequency map, we add the element to the original array and decrease their counts accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation</strong>: After attempting to construct the original array, if its size is equal to half the size of the <code>chg</code> array, we return it. Otherwise, we return an empty array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dissect the code and understand its components:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class named <code>Solution</code> to encapsulate our method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>findOriginalArray</code> accepts a vector of integers (<code>chg</code>) and will return the original array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findOriginalArray(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> chg) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Odd Length Check</strong>: We first check if the size of <code>chg</code> is odd. If it is, we return an empty vector because we cannot form pairs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(chg.size() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{};
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting</strong>: We sort the <code>chg</code> array to ensure we can process elements from the smallest to the largest.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(chg.begin(), chg.end());
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Frequency Map</strong>: We create a map <code>mp</code> to count occurrences of each element in <code>chg</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> chg.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mp[chg[i]]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Result Vector Initialization</strong>: We initialize an empty vector <code>ans</code> to store the elements of the original array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through <code>chg</code></strong>: We use a while loop to process the elements until we either construct half the size of <code>chg</code> or exhaust the elements.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>((ans.size() <span style="color:#f92672">&lt;</span> chg.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> chg.size()) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling Zeros</strong>: If the current element is zero and its count in the map is at least two, we can add it to the original array and decrease its count by two.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(chg[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[chg[i]] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        mp[chg[i]] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        ans.push_back(chg[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking for Pairs</strong>: For non-zero elements, we check if both the current element and its double exist in the frequency map. If they do, we add the element to the original array and decrement their counts.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((mp.count(chg[i]) <span style="color:#f92672">&amp;&amp;</span> mp.count(chg[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>))) {
+</span></span><span style="display:flex;"><span>    ans.push_back(chg[i]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[chg[i]] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        mp.erase(chg[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        mp[chg[i]]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[chg[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        mp.erase(chg[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        mp[chg[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>]<span style="color:#f92672">--</span>;                
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Incrementing the Index</strong>: After processing, we increment the index to move to the next element.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>i<span style="color:#f92672">++</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Final Validation</strong>: After the loop, we check if the size of <code>ans</code> equals half of the size of <code>chg</code>. If it does, we return <code>ans</code>; otherwise, we return an empty vector.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans.size() <span style="color:#f92672">==</span> chg.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">?</span> ans : vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{};
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(n log n) due to the sorting step, where <code>n</code> is the size of the input array <code>chg</code>. The subsequent operations involving the map are linear in relation to the size of the array. The space complexity is O(n) for storing the frequency counts in the map.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the code provides an efficient and systematic approach to reconstructing the original array from a modified version that includes both original and doubled values. By leveraging sorting and a frequency count, we can determine valid pairs without excessive comparisons. This approach ensures that we effectively explore potential pairs while maintaining clarity and efficiency. The solution elegantly handles edge cases, such as the presence of zeros, and utilizes clear logic to validate the construction of the original array. Overall, this implementation is a solid example of how to approach array manipulation problems in algorithm design, demonstrating both effectiveness and clarity in reasoning.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode621s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -322,7 +466,6 @@
 
       </div>
 
-      
 
       <footer>
         

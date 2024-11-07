@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,132 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode866s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the largest local value in a 3x3 subgrid for each position in a given 2D grid <code>g</code>. For each cell <code>(i, j)</code> in the grid (excluding the borders), we need to consider the 3x3 subgrid centered at that cell, and return the maximum value within that subgrid.</p>
+<p>The grid is an <code>n x n</code> matrix, and we need to compute the maximum of all 3x3 subgrids (excluding borders) and store these values in a new matrix. The size of the resulting matrix will be <code>(n-2) x (n-2)</code> since the borders are excluded from the local subgrids.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be efficiently solved by iterating through each possible center of the 3x3 subgrid, and finding the maximum value within that subgrid. The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Iterate through all possible centers</strong>: The center of the 3x3 subgrid should be a position <code>(i, j)</code> where <code>1 &lt;= i &lt;= n-2</code> and <code>1 &lt;= j &lt;= n-2</code>. This ensures that the 3x3 subgrid has complete coverage without going out of bounds.</p>
+</li>
+<li>
+<p><strong>Check the 3x3 subgrid for each center</strong>: For each valid position <code>(i, j)</code>, we examine all the elements of the 3x3 subgrid, which spans from <code>g[i-1][j-1]</code> to <code>g[i+1][j+1]</code>, and find the maximum element within this subgrid.</p>
+</li>
+<li>
+<p><strong>Store the result</strong>: For each center <code>(i, j)</code>, store the maximum value found in the corresponding position of the result matrix <code>res</code>.</p>
+</li>
+<li>
+<p><strong>Return the result matrix</strong>: Once the iteration is complete, the matrix <code>res</code> will contain the largest local values for each 3x3 subgrid.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> largestLocal(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> g) {
+</span></span></code></pre></div><p>The <code>Solution</code> class contains the method <code>largestLocal</code>, which takes a 2D matrix <code>g</code> as input and returns the resulting 2D matrix with the largest values of each 3x3 subgrid.</p>
+</li>
+<li>
+<p><strong>Initialize the Result Matrix</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> g.size();  <span style="color:#75715e">// Get the size of the input grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>));  <span style="color:#75715e">// Initialize the result matrix
+</span></span></span></code></pre></div><p>First, we retrieve the size <code>n</code> of the input matrix <code>g</code>. Then, we initialize the result matrix <code>res</code>, which will store the largest values from each 3x3 subgrid. The size of <code>res</code> is <code>(n-2) x (n-2)</code> because we exclude the borders of the grid.</p>
+</li>
+<li>
+<p><strong>Nested Loops to Traverse the Grid</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; <span style="color:#f92672">++</span>j) {
+</span></span></code></pre></div><p>The outer two loops iterate through each possible top-left corner of a 3x3 subgrid. We loop through the rows and columns of the grid, ensuring that the current position <code>(i, j)</code> can be the top-left corner of a valid 3x3 subgrid.</p>
+</li>
+<li>
+<p><strong>Find Maximum in the 3x3 Subgrid</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> ii <span style="color:#f92672">=</span> i; ii <span style="color:#f92672">&lt;</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>ii) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> jj <span style="color:#f92672">=</span> j; jj <span style="color:#f92672">&lt;</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>; <span style="color:#f92672">++</span>jj) {
+</span></span><span style="display:flex;"><span>                    res[i][j] <span style="color:#f92672">=</span> max(res[i][j], g[ii][jj]);  <span style="color:#75715e">// Update the result with the maximum value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><p>The innermost loops iterate through each element of the 3x3 subgrid centered at <code>(i, j)</code>. The range of <code>ii</code> is from <code>i</code> to <code>i+2</code>, and the range of <code>jj</code> is from <code>j</code> to <code>j+2</code>, ensuring we cover all 9 elements in the 3x3 grid. During each iteration, we update the <code>res[i][j]</code> with the maximum value found so far in this subgrid.</p>
+</li>
+<li>
+<p><strong>Return the Result Matrix</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the result matrix containing the largest values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>After all the 3x3 subgrids have been processed, the result matrix <code>res</code> is returned, which contains the maximum values from each of the local 3x3 grids.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm uses four nested loops:
+<ul>
+<li>The outer two loops iterate over the rows and columns of the grid, with each loop running <code>O(n-2)</code> times (i.e., <code>O(n)</code> where <code>n</code> is the grid size).</li>
+<li>The two inner loops iterate over the 3x3 subgrid, running <code>O(9)</code> times.</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, the time complexity of the solution is <strong>O(n^2)</strong>, where <code>n</code> is the size of the grid. The two outer loops contribute <code>O(n^2)</code> operations, and the inner loops contribute a constant factor of 9 for each 3x3 subgrid.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the space used for the result matrix <code>res</code>, which has dimensions <code>(n-2) x (n-2)</code>. Hence, the space complexity is <strong>O(n^2)</strong> for storing the result matrix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of finding the largest value in each 3x3 subgrid by iterating through the grid and checking each subgrid in constant time. The use of nested loops allows us to check all possible subgrids and calculate the maximum value efficiently. The overall time complexity of <strong>O(n^2)</strong> makes this solution suitable for reasonably sized grids. The space complexity is also <strong>O(n^2)</strong> due to the result matrix.</p>
+<p>In summary, this approach provides an efficient and straightforward solution to finding the largest values in local 3x3 grids for a given input matrix. It works optimally for grids of various sizes and ensures that we can process large matrices in a reasonable amount of time.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode866s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +402,6 @@
 
       </div>
 
-      
 
       <footer>
         

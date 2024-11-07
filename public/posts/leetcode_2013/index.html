@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,130 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;add(point);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;count(point);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode629s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to design a data structure that efficiently detects the number of squares that can be formed using a set of points in a 2D plane. A square is defined by its four corners, and we are interested in identifying the number of squares that can be formed given a specific point in the plane.</p>
+<p>The operations supported by our data structure are:</p>
+<ol>
+<li><strong>Adding a Point</strong>: We can add points to our data structure.</li>
+<li><strong>Counting Squares</strong>: Given a point, we need to count how many squares can be formed using that point as one of the corners.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve efficient operations, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Data Storage</strong>: We maintain a 2D array <code>cnt</code> to count occurrences of points in the plane, where <code>cnt[x][y]</code> represents the number of times the point <code>(x, y)</code> has been added. Additionally, we maintain a vector <code>pts</code> to store the points that have been added.</p>
+</li>
+<li>
+<p><strong>Adding a Point</strong>: When we add a point <code>(x, y)</code>, we increment <code>cnt[x][y]</code> and store the point in the <code>pts</code> vector.</p>
+</li>
+<li>
+<p><strong>Counting Squares</strong>: To count the number of squares for a given point <code>(x1, y1)</code>:</p>
+<ul>
+<li>Iterate through all previously added points <code>(x3, y3)</code>.</li>
+<li>For each point, check if it can form a square with the point <code>(x1, y1)</code>.</li>
+<li>The conditions for forming a square are that the x-coordinates should differ by the same amount as the y-coordinates.</li>
+<li>If the conditions are met, calculate the number of squares that can be formed using the counts from the <code>cnt</code> array and add it to the answer.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s take a closer look at the implementation of this approach:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class <code>DetectSquares</code> to encapsulate our methods and data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetectSquares</span> {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Data Members</strong>: We declare a 2D array <code>cnt</code> of size 1001x1001 to hold counts of points. We also create a vector <code>pts</code> to store the coordinates of the added points.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">1001</span>][<span style="color:#ae81ff">1001</span>] <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pts;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Constructor</strong>: The constructor initializes the data structure. In this case, we don’t need any special initialization beyond what is provided by default.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>DetectSquares() {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Add Method</strong>: The <code>add</code> method takes a vector <code>point</code>, increments the count for that point in the <code>cnt</code> array, and adds the point to the <code>pts</code> vector.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> point) {
+</span></span><span style="display:flex;"><span>    cnt[point[<span style="color:#ae81ff">0</span>]][point[<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    pts.emplace_back(point[<span style="color:#ae81ff">0</span>], point[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Method</strong>: The <code>count</code> method takes a vector <code>point</code> as input and calculates the number of squares that can be formed using that point as one of the corners.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">count</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> point) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x1 <span style="color:#f92672">=</span> point[<span style="color:#ae81ff">0</span>], y1 <span style="color:#f92672">=</span> point[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We then loop through each point <code>(x3, y3)</code> in the <code>pts</code> vector:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [x3, y3] <span style="color:#f92672">:</span> pts) {
+</span></span></code></pre></div><ul>
+<li>We check if <code>(x3, y3)</code> can potentially form a square with <code>(x1, y1)</code>. The conditions for a valid square are checked using the absolute differences:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(abs(x3 <span style="color:#f92672">-</span> x1) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> abs(x1 <span style="color:#f92672">-</span> x3) <span style="color:#f92672">!=</span> abs(y1 <span style="color:#f92672">-</span> y3))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span></code></pre></div><ul>
+<li>If the conditions are satisfied, we calculate the number of squares that can be formed using the counts stored in the <code>cnt</code> array:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> cnt[x1][y3] <span style="color:#f92672">*</span> cnt[x3][y1];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity for adding a point is O(1), as it involves simple increments and push operations. However, the time complexity for counting squares can be O(n) in the worst case, where <code>n</code> is the number of points added, since we may need to iterate through all points. The space complexity is O(1) for the counts array and O(n) for the vector that stores the points.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>DetectSquares</code> class provides an efficient way to manage and query a set of points in a 2D space for square detection. This solution effectively combines a straightforward data storage approach with logical conditions to identify valid squares.</p>
+<p>This implementation is particularly useful in scenarios where we frequently need to add points and count the number of squares, as it allows for quick updates and queries.</p>
+<p>The use of a 2D array for point counts ensures that we can quickly access the number of occurrences of specific points, while the vector of points enables us to iterate through potential square corners efficiently.</p>
+<p>This code serves as an excellent reference for anyone interested in geometric problems, data structures, or algorithm design, showcasing how to leverage arrays and vectors in a meaningful way to solve complex queries effectively. Whether you&rsquo;re a novice or an experienced developer, understanding this implementation can deepen your appreciation of geometric algorithms and their applications in real-world scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode629s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -263,7 +386,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2014"  class="external-link" target="_blank" rel="noopener">LeetCode #2014: Longest Subsequence Repeated k Times</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2016"  class="external-link" target="_blank" rel="noopener">LeetCode #2016: Maximum Difference Between Increasing Elements</a></th>
       </tr>
   </thead>
   <tbody>
@@ -305,7 +428,6 @@
 
       </div>
 
-      
 
       <footer>
         

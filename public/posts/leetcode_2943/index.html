@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,188 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x<span style="color:#f92672">*</span>x;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1233s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a grid with vertical and horizontal bars, the task is to find the maximum area of a square hole that can be formed. A hole is formed by selecting horizontal and vertical bars such that the distance between consecutive bars on both axes is at least 1 unit. The goal is to maximize the area of the square formed by these distances.</p>
+<p>Specifically, we are given:</p>
+<ul>
+<li><code>n</code>: the number of horizontal bars.</li>
+<li><code>m</code>: the number of vertical bars.</li>
+<li><code>hBars</code>: an array representing the positions of the horizontal bars.</li>
+<li><code>vBars</code>: an array representing the positions of the vertical bars.</li>
+</ul>
+<p>You need to calculate the largest square area that can be formed within the grid defined by these bars. The square’s sides should lie between two consecutive bars on both the horizontal and vertical axes.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to focus on the following key observations:</p>
+<ol>
+<li>
+<p><strong>Consecutive Bars</strong>: The size of the square formed between two consecutive bars is determined by the minimum distance between any two bars (both horizontally and vertically). If the horizontal bars are too close together, the maximum square&rsquo;s side length will be limited by them, and similarly for vertical bars.</p>
+</li>
+<li>
+<p><strong>Sort and Calculate Gaps</strong>: By sorting the arrays of horizontal (<code>hBars</code>) and vertical (<code>vBars</code>) bars, we can easily compute the maximum distance between consecutive bars. The distance between two consecutive bars is simply the difference between their positions.</p>
+</li>
+<li>
+<p><strong>Maximize Square&rsquo;s Side</strong>: The largest square hole will be constrained by the maximum gap between consecutive horizontal bars and the maximum gap between consecutive vertical bars. The side length of the square is limited by the smaller of these two values, since both the width and height of the square need to fit within the available gaps.</p>
+</li>
+<li>
+<p><strong>Result</strong>: Once we determine the maximum possible side length of the square, we can compute the area of the square, which is simply the square of the side length.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sorting-the-bars">
+  1. <strong>Sorting the Bars</strong>:
+  <a class="heading-link" href="#1-sorting-the-bars">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First, we sort both <code>hBars</code> (horizontal bars) and <code>vBars</code> (vertical bars) to ensure that we can calculate the distances between consecutive bars easily.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(hBars.begin(), hBars.end());
+</span></span><span style="display:flex;"><span>sort(vBars.begin(), vBars.end());
+</span></span></code></pre></div><h4 id="2-copying-sorted-bars-into-separate-vectors">
+  2. <strong>Copying Sorted Bars into Separate Vectors</strong>:
+  <a class="heading-link" href="#2-copying-sorted-bars-into-separate-vectors">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We copy the sorted bars into separate vectors <code>h</code> and <code>v</code>. While this step isn&rsquo;t strictly necessary (since we could work with the sorted input directly), it is done here for clarity.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> h;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i:hBars)
+</span></span><span style="display:flex;"><span>    h.push_back(i);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> i:vBars)
+</span></span><span style="display:flex;"><span>    v.push_back(i);
+</span></span></code></pre></div><h4 id="3-calculating-maximum-horizontal-gap">
+  3. <strong>Calculating Maximum Horizontal Gap</strong>:
+  <a class="heading-link" href="#3-calculating-maximum-horizontal-gap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We now calculate the largest gap between consecutive horizontal bars. We initialize <code>mh</code> (maximum horizontal gap) to 1 because the smallest possible gap is at least 1 (as bars are placed at distinct positions).</p>
+<p>Then, we iterate over the sorted horizontal bars and calculate the gap between each pair of consecutive bars. If the gap between two consecutive bars is 1, we increase the count <code>c</code>. Otherwise, we reset <code>c</code> to 1.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mh <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> h.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (h[i] <span style="color:#f92672">==</span> h[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        c<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    mh <span style="color:#f92672">=</span> max(mh, c);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="4-calculating-maximum-vertical-gap">
+  4. <strong>Calculating Maximum Vertical Gap</strong>:
+  <a class="heading-link" href="#4-calculating-maximum-vertical-gap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Similarly, we calculate the largest gap between consecutive vertical bars using the same logic as for the horizontal bars. We initialize <code>mv</code> (maximum vertical gap) to 1 and iterate through the sorted vertical bars.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mv <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> v.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (v[i] <span style="color:#f92672">==</span> v[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        c<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    mv <span style="color:#f92672">=</span> max(mv, c);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="5-calculating-the-maximum-square-area">
+  5. <strong>Calculating the Maximum Square Area</strong>:
+  <a class="heading-link" href="#5-calculating-the-maximum-square-area">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After finding the maximum consecutive gaps horizontally (<code>mh</code>) and vertically (<code>mv</code>), we calculate the side length of the largest square that can be formed. The side length of the square is the minimum of <code>mh + 1</code> and <code>mv + 1</code> because the square&rsquo;s side length is constrained by the smaller of these two values.</p>
+<p>Finally, we return the area of the square, which is the square of the side length.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> min(mh <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, mv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> x;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Sorting the horizontal bars takes (O(n \log n)), where <code>n</code> is the number of horizontal bars.</li>
+<li>Sorting the vertical bars takes (O(m \log m)), where <code>m</code> is the number of vertical bars.</li>
+<li>Calculating the maximum gap between consecutive horizontal bars takes (O(n)), and similarly, calculating the maximum gap between vertical bars takes (O(m)).</li>
+</ul>
+<p>Thus, the overall time complexity is dominated by the sorting step and is:
+[
+O(n \log n + m \log m)
+]</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use additional space for the <code>h</code> and <code>v</code> vectors to store the sorted bars. Therefore, the space complexity is (O(n + m)), where <code>n</code> and <code>m</code> are the number of horizontal and vertical bars, respectively.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the maximum area of a square that can be formed between the horizontal and vertical bars. The key idea is to find the maximum gap between consecutive bars in both dimensions, and the side length of the square is limited by the smaller of these two gaps. This solution leverages sorting and linear scanning to achieve the result in optimal time.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The largest square&rsquo;s side length is determined by the maximum gap between consecutive bars in both horizontal and vertical directions.</li>
+<li>The time complexity is (O(n \log n + m \log m)), where <code>n</code> and <code>m</code> are the sizes of the input arrays.</li>
+<li>The space complexity is (O(n + m)), as we store the sorted bars in separate vectors.</li>
+</ul>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1233s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -299,7 +480,6 @@
 
       </div>
 
-      
 
       <footer>
         

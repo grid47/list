@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -228,7 +228,160 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// different 0 1        
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1068s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires us to determine if a valid array exists based on the given list of integers, <code>nums</code>. The array must follow certain conditions that depend on whether the XOR operation applied on certain parts of the array satisfies specific conditions.</p>
+<p>To be precise:</p>
+<ul>
+<li>An array is considered valid if applying the XOR operation on the entire array leads to certain predictable results, given the conditions outlined in the problem.</li>
+<li>The problem is reduced to determining if the XOR of elements in the array meets specific conditions.</li>
+</ul>
+<p>The function should return <code>true</code> if such a valid array can exist; otherwise, it should return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To approach the problem, we need to understand how XOR works. The XOR operation has these important properties:</p>
+<ul>
+<li><strong><code>a ^ a = 0</code></strong>: XORing a number with itself results in zero.</li>
+<li><strong><code>a ^ 0 = a</code></strong>: XORing a number with zero results in the number itself.</li>
+<li><strong>Commutativity and Associativity</strong>: XOR is both commutative and associative, meaning the order of operations doesn’t matter.</li>
+</ul>
+<p>For the problem at hand, we need to evaluate whether applying XOR to the array’s elements can result in a valid condition.</p>
+<p>The solution will:</p>
+<ol>
+<li>Initialize two variables, <code>fst</code> and <code>scd</code>, to track the XOR results of the elements as we go through the array.</li>
+<li>Apply XOR across all the elements of the <code>nums</code> array.</li>
+<li>After processing the entire array, check the final XOR results against the given conditions.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-xor-variables">
+  Step 1: Initialize the XOR Variables
+  <a class="heading-link" href="#step-1-initialize-the-xor-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fst <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, scd <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>fst</code></strong>: This variable will hold the cumulative XOR result as we traverse through the array.</li>
+<li><strong><code>scd</code></strong>: This is another variable to track the XOR result based on an alternative approach.</li>
+</ul>
+<p>Both are initialized to different values to keep track of separate results during the process.</p>
+<h4 id="step-2-xor-all-array-elements">
+  Step 2: XOR all Array Elements
+  <a class="heading-link" href="#step-2-xor-all-array-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    fst <span style="color:#f92672">^=</span> nums[i];
+</span></span><span style="display:flex;"><span>    scd <span style="color:#f92672">^=</span> nums[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each element of the array <code>nums</code>.</li>
+<li>For each element, we apply XOR between <code>fst</code> and the current element <code>nums[i]</code>. Similarly, we apply XOR between <code>scd</code> and the current element.</li>
+<li>This operation effectively accumulates the XOR results as we process each number in the array.</li>
+</ul>
+<h4 id="step-3-check-the-conditions-for-validity">
+  Step 3: Check the Conditions for Validity
+  <a class="heading-link" href="#step-3-check-the-conditions-for-validity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (fst <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> scd <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li><strong><code>fst == 0</code></strong>: If the result of XORing all elements (<code>fst</code>) equals zero, it satisfies one of the conditions that the array is valid.</li>
+<li><strong><code>scd == 1</code></strong>: If the result of XORing all elements (<code>scd</code>) equals one, it satisfies another valid condition.</li>
+</ul>
+<p>If either of these conditions is met, the function immediately returns <code>true</code>, meaning that a valid array configuration exists.</p>
+<h4 id="step-4-return-false-if-conditions-are-not-met">
+  Step 4: Return False if Conditions Are Not Met
+  <a class="heading-link" href="#step-4-return-false-if-conditions-are-not-met">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If neither of the conditions (<code>fst == 0</code> or <code>scd == 1</code>) is satisfied, the function returns <code>false</code>, meaning that a valid configuration is not possible.</li>
+</ul>
+<h4 id="explanation-of-the-logical-flow">
+  Explanation of the Logical Flow
+  <a class="heading-link" href="#explanation-of-the-logical-flow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The core idea of this solution is that XORing all the elements in the array should satisfy either the condition where the result is <code>0</code> or the result is <code>1</code>. The array will be valid if one of these conditions hold after performing the XOR operations across all the elements.</p>
+<p>This implementation performs an efficient check using XOR in linear time, making it an optimal solution for the problem.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(n)</code></strong>: The main computational step is the loop that iterates through the array <code>nums</code>. In this loop, we apply the XOR operation on each element, which takes constant time for each element.</li>
+<li>Therefore, the time complexity of the function is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(1)</code></strong>: We only use a constant amount of extra space for the variables <code>fst</code>, <code>scd</code>, and the loop index. No additional data structures are used.</li>
+<li>Thus, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by leveraging the properties of the XOR operation. By accumulating the XOR results as we iterate through the array, we can check the necessary conditions in a single pass. The time complexity is linear, and the space complexity is constant, making this solution both time and space efficient. The solution ensures that the array configuration is valid based on the XOR results, which leads to an optimal and easy-to-understand approach to the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1068s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -282,7 +435,6 @@
 
       </div>
 
-      
 
       <footer>
         

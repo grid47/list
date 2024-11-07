@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -252,7 +252,172 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode842s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a list of numbers in the form of strings (<code>nums</code>), and several queries (<code>q</code>). Each query consists of two integers:</p>
+<ol>
+<li>The <strong>k-th smallest</strong> trimmed number&rsquo;s index in the result after trimming the last <code>k</code> digits of the numbers.</li>
+<li>A <strong>trim length</strong> <code>k</code> that determines how many digits from the end of the string should be retained.</li>
+</ol>
+<p>The goal is to determine the index of the <code>k</code>-th smallest number from the list after trimming each number according to the query and sorting the trimmed numbers lexicographically.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, the approach involves the following key steps:</p>
+<ol>
+<li><strong>Trimming the Numbers</strong>: For each query, we need to trim each number by keeping only the last <code>k</code> digits.</li>
+<li><strong>Sorting the Trimmed Numbers</strong>: Once we have trimmed the numbers, we sort them lexicographically.</li>
+<li><strong>Selecting the k-th Smallest</strong>: After sorting, we select the index of the <code>k</code>-th smallest trimmed number.</li>
+<li><strong>Returning the Result</strong>: The answer for each query is the index of the <code>k</code>-th smallest trimmed number.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-defining-the-result-vector">
+  1. <strong>Defining the Result Vector</strong>
+  <a class="heading-link" href="#1-defining-the-result-vector">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li>The <code>res</code> vector is used to store the results for each query. For each query, we will store the index of the <code>k</code>-th smallest trimmed number.</li>
+</ul>
+<h4 id="2-iterating-through-queries">
+  2. <strong>Iterating Through Queries</strong>
+  <a class="heading-link" href="#2-iterating-through-queries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>v : q) {
+</span></span></code></pre></div><ul>
+<li>The <code>for</code> loop iterates over each query <code>v</code> in the list <code>q</code>.</li>
+<li>Each query <code>v</code> is a vector of two integers: <code>v[0]</code> (the <code>k</code>-th smallest number to find) and <code>v[1]</code> (the number of digits to trim).</li>
+</ul>
+<h4 id="3-preparing-the-trimmed-numbers">
+  3. <strong>Preparing the Trimmed Numbers</strong>
+  <a class="heading-link" href="#3-preparing-the-trimmed-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> fk;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    fk.push_back({nums[i].substr(nums[i].size() <span style="color:#f92672">-</span> v[<span style="color:#ae81ff">1</span>]), i});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>vector&lt;pair&lt;string, int&gt;&gt; fk;</code></strong>: A vector <code>fk</code> of pairs is created to store each number&rsquo;s trimmed version along with its original index.</li>
+<li><strong><code>nums[i].substr(nums[i].size() - v[1])</code></strong>: For each number <code>nums[i]</code>, the <code>substr</code> function is used to extract the last <code>v[1]</code> digits. This gives us the &ldquo;trimmed&rdquo; version of the number.</li>
+<li><strong><code>i</code></strong>: We store the index <code>i</code> of the number along with the trimmed string to preserve the original index after sorting.</li>
+</ul>
+<h4 id="4-sorting-the-trimmed-numbers">
+  4. <strong>Sorting the Trimmed Numbers</strong>
+  <a class="heading-link" href="#4-sorting-the-trimmed-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(fk.begin(), fk.end());
+</span></span></code></pre></div><ul>
+<li>The vector <code>fk</code> is sorted in lexicographical order based on the trimmed numbers (the first part of each pair). The sorting is done in ascending order, so the smallest trimmed numbers come first.</li>
+</ul>
+<h4 id="5-selecting-the-k-th-smallest-trimmed-number">
+  5. <strong>Selecting the k-th Smallest Trimmed Number</strong>
+  <a class="heading-link" href="#5-selecting-the-k-th-smallest-trimmed-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res.push_back(fk[v[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].second);
+</span></span></code></pre></div><ul>
+<li>After sorting, the <code>v[0] - 1</code>-th element (i.e., the <code>k</code>-th smallest trimmed number) is selected from the sorted vector <code>fk</code>. We then push the index (<code>second</code> part of the pair) of this trimmed number into the <code>res</code> vector.</li>
+</ul>
+<h4 id="6-returning-the-result">
+  6. <strong>Returning the Result</strong>
+  <a class="heading-link" href="#6-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once all queries have been processed, the <code>res</code> vector containing the indices of the k-th smallest trimmed numbers for each query is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting Step</strong>: For each query, we are sorting the list of <code>nums</code> based on their trimmed versions. Sorting <code>n</code> elements takes <strong>O(n log n)</strong> time, where <code>n</code> is the size of the <code>nums</code> array.</li>
+<li><strong>Trimming Step</strong>: For each number, we are performing the <code>substr</code> operation, which takes <strong>O(m)</strong> time where <code>m</code> is the length of each number (assuming all numbers have the same length).</li>
+<li>Therefore, for each query, the total time complexity is <strong>O(n log n + n * m)</strong>, where:
+<ul>
+<li><code>n</code> is the number of numbers in <code>nums</code>.</li>
+<li><code>m</code> is the maximum length of the numbers in <code>nums</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Since the query count <code>q</code> is processed independently, the overall time complexity for all queries is:</p>
+<ul>
+<li><strong>O(q * (n log n + n * m))</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is <strong>O(n)</strong> because we store the <code>n</code> trimmed numbers along with their indices in the vector <code>fk</code> for each query.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently handles each query by trimming the numbers, sorting them, and selecting the k-th smallest value. By using a combination of vector and map data structures, we ensure that the solution is both time and space efficient, even for large inputs. With a time complexity of <strong>O(q * (n log n + n * m))</strong>, the approach handles multiple queries efficiently, making it suitable for a variety of problem sizes. The solution is robust and correctly handles edge cases, returning the correct index of the k-th smallest trimmed number for each query.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode842s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -264,7 +429,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2344"  class="external-link" target="_blank" rel="noopener">LeetCode #2344: Minimum Deletions to Make Array Divisible</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2347"  class="external-link" target="_blank" rel="noopener">LeetCode #2347: Best Poker Hand</a></th>
       </tr>
   </thead>
   <tbody>
@@ -306,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

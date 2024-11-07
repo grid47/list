@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -256,7 +256,145 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode660s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to distribute a certain quantity of items among a specified number of people such that the maximum quantity any single person receives is minimized. Given an array representing the quantities of items available and an integer representing the number of people, the challenge is to find the smallest possible maximum quantity that can be assigned to any individual.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be effectively solved using a binary search strategy combined with a greedy method. The idea is to determine the minimum possible maximum quantity that can be distributed to any person while ensuring that the total number of individuals receiving items does not exceed the specified limit.</p>
+<ol>
+<li>
+<p><strong>Binary Search Setup</strong>:</p>
+<ul>
+<li>The binary search will operate between 1 (the minimum possible quantity any person can receive) and the maximum value in the <code>qnty</code> array (the highest quantity of items available).</li>
+<li>The goal is to find the minimum value of <code>mid</code> (the maximum quantity assigned to a person) such that it is feasible to distribute the items under this constraint.</li>
+</ul>
+</li>
+<li>
+<p><strong>Feasibility Check</strong>:</p>
+<ul>
+<li>For each value of <code>mid</code>, we need to check if it is possible to distribute the items without exceeding the maximum quantity assigned to any person.</li>
+<li>This is done by iterating through the <code>qnty</code> array and calculating how many people are needed to handle the current quantity based on the <code>mid</code> value. If a quantity exceeds <code>mid</code>, we determine how many additional people are required to distribute the leftover items.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjusting Search Bounds</strong>:</p>
+<ul>
+<li>If distributing the items with the current <code>mid</code> is possible (i.e., the total number of people required does not exceed <code>n</code>), we update the answer and search for potentially smaller values by adjusting the upper bound.</li>
+<li>If it is not possible, we increase the lower bound to search for larger maximum quantities.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Helper Function <code>isPossible</code></strong>:</p>
+<ul>
+<li>This function checks if it is feasible to distribute the quantities such that no person receives more than <code>mid</code> items.</li>
+<li>It iterates through each quantity in <code>qnty</code> and calculates how many people are needed based on the <code>mid</code> value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPossible</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> qnty, <span style="color:#66d9ef">int</span> mid, <span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(qnty[i] <span style="color:#f92672">&lt;=</span> mid) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> qnty[i];
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;</span> mid) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            num <span style="color:#f92672">-=</span> mid;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (cnt <span style="color:#f92672">&lt;=</span> n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function <code>minimizedMaximum</code></strong>:</p>
+<ul>
+<li>Initializes variables to determine the search range. The initial answer is set to the maximum value in the <code>qnty</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimizedMaximum</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> qnty) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> qnty.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(qnty.begin(), qnty.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> ans <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Loop</strong>:</p>
+<ul>
+<li>The loop continues until the lower bound exceeds the upper bound. The midpoint is calculated, and the feasibility function is called to determine if the current <code>mid</code> can work.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(isPossible(qnty, mid, m, n)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After completing the binary search, the minimized maximum quantity is returned.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: O(m log(max)), where <code>m</code> is the number of quantities in the <code>qnty</code> array, and <code>max</code> is the maximum quantity. The binary search runs in logarithmic time relative to the maximum quantity, and for each midpoint, the feasibility check iterates through the list.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(1). The solution uses a constant amount of additional space, regardless of the input size, as it only utilizes a few integer variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively balances efficiency and clarity by leveraging binary search alongside a greedy approach to determine the minimum maximum quantity of items that can be distributed among a specified number of people. The approach allows for an optimal solution without the need for exhaustive searching or complex data structures. As a result, this method is well-suited for competitive programming and practical applications where quick and reliable results are necessary. The implementation is straightforward, making it easy to understand and adapt for similar problems in distribution and resource allocation contexts.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode660s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -268,7 +406,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2065"  class="external-link" target="_blank" rel="noopener">LeetCode #2065: Maximum Path Quality of a Graph</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2068"  class="external-link" target="_blank" rel="noopener">LeetCode #2068: Check Whether Two Strings are Almost Equivalent</a></th>
       </tr>
   </thead>
   <tbody>
@@ -310,7 +448,6 @@
 
       </div>
 
-      
 
       <footer>
         

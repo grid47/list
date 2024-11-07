@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -268,7 +268,183 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> mod) <span style="color:#f92672">%</span> mod;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1001s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the number of square-free subsets of a given list of integers <code>nums</code>. A <strong>square-free subset</strong> is one where no element is divisible by any perfect square greater than <code>1</code> (i.e., no element has a square of a prime factor in its prime factorization).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Prime Factorization &amp; Square-Free Concept</strong>:</p>
+<ul>
+<li>A <strong>square-free number</strong> is a number whose prime factorization contains no prime raised to a power greater than or equal to 2. For example, <code>6</code> is square-free because its prime factorization is <code>2 * 3</code>, but <code>12</code> is not because <code>12 = 2^2 * 3</code>.</li>
+<li>To check if a number is square-free, we need to verify if any of its prime factors appear more than once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming with Bitmasking</strong>:</p>
+<ul>
+<li>The idea is to use dynamic programming (DP) to count subsets that satisfy the square-free condition. We use bitmasking to represent subsets of prime factors efficiently.</li>
+<li>Since we are only concerned with the primes <code>2, 3, 5, 7, 11, 13, 17, 19, 23, 29</code> (a fixed set of primes), we represent any number&rsquo;s prime factorization as a bitmask of size 10.</li>
+<li>Each bit of the mask represents whether a specific prime divides the number. For instance, if a number is divisible by <code>2</code> and <code>3</code>, its corresponding mask will have the first and second bits set.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid recomputing results for the same state multiple times, we use memoization. The state is represented by the current index in the array (<code>idx</code>) and the bitmask (<code>mask</code>) representing which primes have been included so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The recursive function <code>dp(idx, mask)</code> explores all subsets starting from index <code>idx</code> and keeps track of the primes that are already part of the subset using the bitmask <code>mask</code>.</li>
+<li>If the current number’s prime factors conflict with the current <code>mask</code> (i.e., it shares any common prime factor), it is excluded from the subset. Otherwise, we explore both possibilities: including or excluding the current number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>When the recursion reaches the end of the array (<code>idx == n</code>), return <code>1</code> to indicate that we&rsquo;ve found a valid subset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modular Arithmetic</strong>:</p>
+<ul>
+<li>Since the result could be large, all calculations are done modulo <code>10^9 + 7</code> to prevent overflow and keep the numbers manageable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Prime Initialization and Mask Computation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>prime <span style="color:#f92672">=</span> {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">29</span>};
+</span></span></code></pre></div><ul>
+<li>We initialize a list of the first 10 primes to handle the prime factorization of numbers up to a certain limit. These primes are used to build the bitmask for each number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function to Get the Bitmask</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getMask</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> prime.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">%</span> prime[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            num <span style="color:#f92672">/=</span> prime[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            mask <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mask;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function calculates the bitmask representation of a number. For each prime, we divide <code>num</code> by the prime until it&rsquo;s no longer divisible.</li>
+<li>If any prime appears more than once in the factorization, the number is not square-free, and the function returns <code>-1</code>.</li>
+<li>Otherwise, it sets the corresponding bit in the mask to <code>1</code> if that prime divides the number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> mask) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx][mask] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][mask];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, mask);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> nmask <span style="color:#f92672">=</span> getMask(nums[idx]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((nmask <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> ((nmask <span style="color:#f92672">&amp;</span> mask) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> (ans <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, nmask <span style="color:#f92672">|</span> mask)) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx][mask] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>dp(idx, mask)</code> is the recursive function that counts the number of square-free subsets.</li>
+<li>We first check if the result for the current state is already computed using the <code>memo</code> table.</li>
+<li>If not, we compute it:
+<ul>
+<li>First, we count the subsets that exclude the current number: <code>dp(idx + 1, mask)</code>.</li>
+<li>Then, we calculate the mask of the current number using <code>getMask(nums[idx])</code>. If the number is square-free (i.e., <code>nmask != -1</code>), and its prime factors do not conflict with the primes already in the subset (<code>(nmask &amp; mask) == 0</code>), we add the number to the subset.</li>
+</ul>
+</li>
+<li>Finally, the result is stored in the <code>memo</code> table to avoid redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">squareFreeSubsets</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span> memo);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> mod) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>squareFreeSubsets(nums)</code> initializes the DP process by calling <code>dp(0, 0)</code>, starting with index <code>0</code> and an empty bitmask (<code>0</code>).</li>
+<li>The final result is returned after subtracting <code>1</code> to exclude the empty subset, ensuring the result is always positive by using modulo arithmetic.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The dynamic programming approach explores each possible subset using a bitmask. The number of possible masks is (2^{10} = 1024), as there are 10 primes. The number of states is (n \times 1024), where <code>n</code> is the size of <code>nums</code>.</li>
+<li>Thus, the time complexity is (O(n \times 1024)), which simplifies to (O(n)), where <code>n</code> is the size of the input array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the <code>memo</code> table, which has a size of (n \times 1024), leading to a space complexity of (O(n \times 1024)), or (O(n)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of square-free subsets of the given list of integers by using dynamic programming with bitmasking. The use of memoization ensures that overlapping subproblems are avoided, significantly improving performance. By leveraging modular arithmetic, the solution ensures that the results remain manageable even for large inputs. This approach is both time-efficient and space-efficient for the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1001s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -280,7 +456,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2573"  class="external-link" target="_blank" rel="noopener">LeetCode #2573: Find the String with LCP</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2574"  class="external-link" target="_blank" rel="noopener">LeetCode #2574: Left and Right Sum Differences</a></th>
       </tr>
   </thead>
   <tbody>
@@ -322,7 +498,6 @@
 
       </div>
 
-      
 
       <footer>
         

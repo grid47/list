@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,126 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n.substr(<span style="color:#ae81ff">0</span>, last_d) <span style="color:#f92672">+</span> n.substr(last_d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode796s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to remove one occurrence of a specified digit from a given string <code>n</code> representing a number, in such a way that the resulting number is the largest possible. The string <code>n</code> is made up of digits (from &lsquo;0&rsquo; to &lsquo;9&rsquo;), and we need to remove one digit so that the remaining string represents the largest possible value. The challenge is to identify which occurrence of the digit to remove, ensuring that the result is maximized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem is to strategically decide which digit to remove in order to maximize the number. The key observation is that we want to maximize the value of the remaining number after one digit is removed. To do this:</p>
+<ol>
+<li><strong>Remove the first occurrence of the digit when the next digit is greater than it</strong>: This ensures that the resulting number after the removal is the largest possible value by keeping the higher digits intact.</li>
+<li><strong>If no such occurrence is found</strong>: We need to remove the last occurrence of the digit to avoid reducing the size of the number unnecessarily.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-iterate-through-the-string">
+  Step 1: Iterate Through the String
+  <a class="heading-link" href="#step-1-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n[i] <span style="color:#f92672">==</span> digit <span style="color:#f92672">&amp;&amp;</span> n[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> digit)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n.substr(<span style="color:#ae81ff">0</span>, i) <span style="color:#f92672">+</span> n.substr(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>The goal is to check each character in the string <code>n</code> and see if it matches the specified <code>digit</code>.</li>
+<li>We look ahead to the next character in the string (<code>n[i + 1]</code>), and if this character is greater than the current character (<code>n[i]</code>), it indicates that removing <code>n[i]</code> will result in a larger number because the next character is higher.</li>
+<li>If this condition is met, we remove the digit by concatenating the substring before the current digit (<code>n.substr(0, i)</code>) with the substring after the current digit (<code>n.substr(i + 1)</code>).</li>
+<li>This approach ensures that we always maximize the value of the number by removing the digit where possible.</li>
+</ul>
+<h4 id="step-2-handle-the-case-where-no-digit-is-removed-for-maximization">
+  Step 2: Handle the Case Where No Digit Is Removed for Maximization
+  <a class="heading-link" href="#step-2-handle-the-case-where-no-digit-is-removed-for-maximization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> last_d <span style="color:#f92672">=</span> n.rfind(digit);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> n.substr(<span style="color:#ae81ff">0</span>, last_d) <span style="color:#f92672">+</span> n.substr(last_d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>If no such condition (where the next digit is larger) is found during the loop, the next best option is to remove the <strong>last occurrence</strong> of the specified <code>digit</code>.</li>
+<li>We use <code>rfind</code> to find the last occurrence of <code>digit</code> in the string. The function <code>rfind</code> returns the index of the last occurrence of the specified character or <code>string::npos</code> if the character is not found.</li>
+<li>Once we know the position of the last occurrence, we can remove the digit by concatenating the substring before and after this position (<code>n.substr(0, last_d)</code> and <code>n.substr(last_d + 1)</code>).</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The result is the string after removing the specified digit. Depending on the situation, the digit is removed either from a position where the next digit is larger, or from the last occurrence of the digit.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Loop Iteration</strong>: The first loop iterates over the string <code>n</code> once, which has a time complexity of (O(n)), where <code>n</code> is the length of the string.</li>
+<li><strong>String Operations</strong>: The <code>substr()</code> method, used to create new substrings, runs in linear time with respect to the size of the substring being created. Therefore, both <code>n.substr(0, i)</code> and <code>n.substr(i + 1)</code> take (O(n)) time, where <code>n</code> is the length of the string.</li>
+<li><strong>Last Digit Search</strong>: The <code>rfind()</code> method also takes (O(n)) time in the worst case.</li>
+</ol>
+<p>Thus, the overall time complexity is (O(n)), where <code>n</code> is the length of the input string <code>n</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Space for Substrings</strong>: The space complexity primarily comes from creating new substrings. The space required for the substrings generated by <code>substr()</code> depends on the length of the substrings being created. In the worst case, we need additional space proportional to the length of the string for the result.</li>
+<li><strong>Overall Space Complexity</strong>: Therefore, the overall space complexity is (O(n)), where <code>n</code> is the length of the string <code>n</code>.</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently removes a digit from the string <code>n</code> to maximize the resulting number. The approach works by iterating through the string, looking for an optimal position to remove a digit (where the next digit is greater), or, if such a position isn&rsquo;t found, removing the last occurrence of the specified digit. The time and space complexity of this solution are both (O(n)), making it optimal for large strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode796s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +398,6 @@
 
       </div>
 
-      
 
       <footer>
         

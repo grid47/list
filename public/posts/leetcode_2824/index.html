@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,136 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1137s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>nums</code> of integers, the task is to count how many pairs of indices <code>(i, j)</code> exist such that <code>i &lt; j</code> and the sum of the elements at these indices, i.e., <code>nums[i] + nums[j]</code>, is strictly less than a given target value. Specifically, the goal is to return the total number of such pairs in the array where the sum of the pair is less than the target.</p>
+<p>For example, consider the array <code>nums = [1, 2, 3, 4]</code> and <code>target = 5</code>. The valid pairs where the sum of the elements is less than 5 are:</p>
+<ul>
+<li><code>nums[0] + nums[1] = 1 + 2 = 3</code> (valid)</li>
+<li><code>nums[0] + nums[2] = 1 + 3 = 4</code> (valid)</li>
+<li><code>nums[1] + nums[2] = 2 + 3 = 5</code> (not valid, because it&rsquo;s equal to the target)</li>
+<li><code>nums[0] + nums[3] = 1 + 4 = 5</code> (not valid)</li>
+<li><code>nums[1] + nums[3] = 2 + 4 = 6</code> (not valid)</li>
+<li><code>nums[2] + nums[3] = 3 + 4 = 7</code> (not valid)</li>
+</ul>
+<p>In this case, there are two valid pairs: <code>(1, 2)</code> and <code>(1, 3)</code>, so the function should return <code>2</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to check all possible pairs of elements in the array and count how many of them satisfy the condition that their sum is less than the target. The array contains <code>n</code> elements, and for each element, we want to compare it with every other element that comes after it to see if their sum is less than the target.</p>
+<p>A <strong>brute force approach</strong> is suitable here:</p>
+<ol>
+<li>We iterate through the array with two nested loops: the outer loop will go through each element of the array, and the inner loop will compare the current element with every other element that comes after it.</li>
+<li>If the sum of the pair is less than the target, we increment the count.</li>
+<li>The result is the count of such valid pairs.</li>
+</ol>
+<p>While this method has a time complexity of O(n²), it’s simple and works well for small input sizes.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countPairs</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Variable to store the number of valid pairs
+</span></span></span></code></pre></div><ol>
+<li><strong>Initialization</strong>:
+<ul>
+<li><code>int ans = 0;</code>: This variable will store the count of valid pairs where the sum of the two elements is less than the given target. We initialize it to zero since no pairs have been found yet.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i){ 
+</span></span></code></pre></div><ol start="2">
+<li><strong>Outer Loop</strong>:
+<ul>
+<li>The outer loop starts with the variable <code>i</code>, which iterates through each index of the <code>nums</code> array. It starts from <code>i = 0</code> and goes up to <code>nums.size() - 1</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>j){ 
+</span></span></code></pre></div><ol start="3">
+<li><strong>Inner Loop</strong>:
+<ul>
+<li>The inner loop runs from <code>i + 1</code> to <code>nums.size() - 1</code>, meaning it will only consider elements that come after the element at index <code>i</code>. This ensures that we are always checking pairs <code>(i, j)</code> where <code>i &lt; j</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">+</span> nums[j] <span style="color:#f92672">&lt;</span> target) ans<span style="color:#f92672">++</span>; 
+</span></span></code></pre></div><ol start="4">
+<li><strong>Condition Check</strong>:
+<ul>
+<li>The <code>if</code> statement checks if the sum of <code>nums[i]</code> and <code>nums[j]</code> is less than the given target. If the condition is true, we increment the <code>ans</code> variable, which keeps track of the number of valid pairs.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans; 
+</span></span></code></pre></div><ol start="5">
+<li><strong>Return the Result</strong>:
+<ul>
+<li>After all iterations of the loops are completed, the variable <code>ans</code> contains the total number of valid pairs where the sum of the pair is less than the target. The function then returns <code>ans</code> as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>
+<p>The time complexity of the algorithm is O(n²), where <code>n</code> is the size of the <code>nums</code> array. This is because we are using two nested loops to compare each pair of elements in the array. The outer loop runs <code>n</code> times, and for each iteration of the outer loop, the inner loop runs <code>n-1</code>, <code>n-2</code>, &hellip;, <code>1</code> times. Therefore, the total number of comparisons is proportional to the square of the number of elements, resulting in a time complexity of O(n²).</p>
+</li>
+<li>
+<p>For example, if <code>nums</code> has 5 elements, the outer loop will run 5 times, and for each iteration of the outer loop, the inner loop will run 4, 3, 2, 1 times respectively, leading to 10 total comparisons, which is O(5²) = O(n²).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1) because we only use a constant amount of extra space. We are not using any additional data structures that grow with the size of the input, except for the <code>ans</code> variable to store the result. The input array <code>nums</code> is passed by reference, so no additional space is used for storing it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides a straightforward way to count the number of valid pairs whose sum is less than a given target. The brute force approach is easy to implement and understand but has a time complexity of O(n²). For small to medium input sizes, this approach will work efficiently. However, for large input sizes, this approach might become inefficient due to the quadratic time complexity. If optimization is required, one could explore more advanced algorithms or data structures to reduce the time complexity, such as using sorting or binary search.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1137s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +415,6 @@
 
       </div>
 
-      
 
       <footer>
         

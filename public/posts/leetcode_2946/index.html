@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,132 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1199s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine if each row in a given matrix is similar to the others based on a circular shift operation. A row is considered similar to another if it can be transformed into the other by rotating it <code>k</code> positions to the right.</p>
+<p>Given a matrix <code>mat</code> and an integer <code>k</code>, you need to check if all rows in the matrix can be made similar to each other by shifting each row by <code>k</code> positions.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key observation in solving this problem is recognizing that the similarity condition relies on a circular shift of the elements in each row. When we shift a row to the right by <code>k</code> positions, the element at index <code>i</code> in the original row moves to index <code>(i + k) % n</code> in the shifted row, where <code>n</code> is the length of the row.</p>
+<p>For each row, we will check whether it is similar to itself when shifted by <code>k</code> positions. Specifically, for each element in the row, we check if it matches the element at the corresponding shifted index. If this condition holds for all elements in all rows, we return <code>true</code>. Otherwise, we return <code>false</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-loop-through-each-row">
+  1. <strong>Loop Through Each Row</strong>:
+  <a class="heading-link" href="#1-loop-through-each-row">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by iterating over each row in the matrix. The matrix <code>mat</code> consists of rows, and for each row, we check if it satisfies the similarity condition by shifting the elements by <code>k</code> positions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> l : mat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> l.size();  <span style="color:#75715e">// Get the number of elements in the current row
+</span></span></span></code></pre></div><p>The variable <code>l</code> represents the current row. <code>n</code> is the length of the row, which we will use to determine the shifted indices.</p>
+<h4 id="2-check-for-similarity-by-shifting">
+  2. <strong>Check for Similarity by Shifting</strong>:
+  <a class="heading-link" href="#2-check-for-similarity-by-shifting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For each row, we iterate over each element at index <code>i</code> and compare it with the element at the shifted position <code>(i + k) % n</code>. The <code>% n</code> ensures that the shifting operation wraps around circularly. If any element does not match its corresponding shifted element, the row is not similar, and we immediately return <code>false</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (l[i] <span style="color:#f92672">!=</span> l[(i <span style="color:#f92672">+</span> k) <span style="color:#f92672">%</span> n]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If elements do not match, the row is not similar
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="3-return-true-if-all-rows-are-similar">
+  3. <strong>Return True if All Rows are Similar</strong>:
+  <a class="heading-link" href="#3-return-true-if-all-rows-are-similar">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After checking all elements in all rows, if no discrepancies were found, we return <code>true</code>, indicating that all rows are similar based on the circular shift.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// All rows are similar by shifting by k positions
+</span></span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We iterate through each row and each element within the row.</li>
+<li>For each row, checking if the elements match their circularly shifted positions takes <code>O(n)</code> time, where <code>n</code> is the length of the row.</li>
+<li>The number of rows in the matrix is <code>m</code>. Therefore, the overall time complexity is:
+[
+O(m \cdot n)
+]
+where <code>m</code> is the number of rows, and <code>n</code> is the number of columns in each row.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(1)</code> because we only use a few additional variables to perform the computation and do not require any additional data structures that scale with input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether all rows in the matrix are similar by performing circular shifts. The use of modulus (<code>%</code>) to handle the circular nature of the shift ensures correctness while keeping the code simple. Given the problem&rsquo;s constraints, the solution&rsquo;s time complexity of <code>O(m * n)</code> is optimal, where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Circular Shift</strong>: The core idea is recognizing that a circular shift can be handled with the modulus operation, which allows elements to wrap around.</li>
+<li><strong>Efficient Comparison</strong>: By checking each row individually and stopping early if a mismatch is found, we avoid unnecessary computations.</li>
+<li><strong>Optimal Complexity</strong>: The solution runs in linear time relative to the number of elements in the matrix, making it efficient for large inputs.</li>
+</ul>
+<p>In summary, the algorithm efficiently checks for similarity between rows in the matrix by comparing elements with their circularly shifted counterparts, making it a good fit for this type of problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1199s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +413,6 @@
 
       </div>
 
-      
 
       <footer>
         

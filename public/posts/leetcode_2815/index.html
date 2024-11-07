@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,146 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1134s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given an array of integers <code>nums</code>, and you are tasked with finding the maximum sum of any two numbers from the array where both numbers share the same <strong>maximum digit</strong>. A &ldquo;maximum digit&rdquo; is the largest digit present in a number. For example, in the number <code>483</code>, the maximum digit is <code>8</code>. You need to return the maximum sum of two such numbers with the same maximum digit, or <code>-1</code> if no such pair exists.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can follow a series of steps:</p>
+<ol>
+<li>
+<p><strong>Extract Maximum Digits</strong>: For each number in the list, we first determine its maximum digit.</p>
+</li>
+<li>
+<p><strong>Grouping by Maximum Digit</strong>: We then group the numbers by their maximum digit. For example, all numbers whose maximum digit is <code>9</code> are grouped together, and so on for other digits.</p>
+</li>
+<li>
+<p><strong>Finding Maximum Pair</strong>: For each group (corresponding to a particular maximum digit), we check if the group contains at least two numbers. If so, we calculate the sum of the two largest numbers in that group and keep track of the maximum such sum across all groups.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: If we find at least one valid pair, we return the maximum sum. If no such pair exists, we return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initializing the Grouping Data Structure</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ids(<span style="color:#ae81ff">10</span>);
+</span></span></code></pre></div><ul>
+<li>We use a vector of vectors <code>ids</code> to store numbers grouped by their maximum digit. There are 10 groups (one for each digit from 0 to 9), as the maximum digit of any number can only be in the range 0-9.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Each Number</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> f <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        f <span style="color:#f92672">=</span> max(f, x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ids[f].push_back(val);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each number <code>x</code> in the input array <code>nums</code>.</li>
+<li>We start by assuming the last digit of <code>x</code> is the maximum digit (<code>f = x % 10</code>).</li>
+<li>We then iterate over the digits of the number by repeatedly dividing it by 10, updating <code>f</code> to hold the largest digit encountered.</li>
+<li>Once we find the maximum digit <code>f</code> for the number, we add it to the corresponding group in <code>ids[f]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding the Two Largest Numbers for Each Group</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> ids.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    sort(ids[i].begin(), ids[i].end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> ids[i].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(ids[i].size() <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, ids[i][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> ids[i][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After grouping the numbers, we initialize <code>ans</code> to <code>-1</code>, which will be used to store the maximum sum of two numbers that share the same maximum digit.</li>
+<li>For each group <code>ids[i]</code>, we first sort the numbers in ascending order to easily find the two largest numbers.</li>
+<li>If the group contains at least two numbers, we compute the sum of the two largest numbers (<code>ids[i][n - 1]</code> and <code>ids[i][n - 2]</code>), and update <code>ans</code> to be the maximum of the current <code>ans</code> and this new sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, after processing all groups, we return <code>ans</code>, which contains the maximum sum of two numbers with the same maximum digit. If no such pair exists, <code>ans</code> will remain <code>-1</code>, which is the correct output.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The main operations in the code are:
+<ul>
+<li>Looping through each number in <code>nums</code> to determine its maximum digit, which takes <code>O(d)</code> time for each number, where <code>d</code> is the number of digits in the number. Since <code>d</code> is typically small (up to 10 for large numbers), this is approximately <strong>O(n)</strong> where <code>n</code> is the number of elements in <code>nums</code>.</li>
+<li>Sorting the numbers within each group. The worst-case scenario occurs when all numbers have the same maximum digit, in which case we sort the entire list. Sorting each group takes <strong>O(m log m)</strong>, where <code>m</code> is the number of elements in the group. In the worst case, the total time complexity for sorting across all groups is <strong>O(n log n)</strong>, where <code>n</code> is the total number of elements in the array.</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, the total time complexity of the solution is <strong>O(n log n)</strong>, where <code>n</code> is the number of elements in <code>nums</code>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a vector <code>ids</code> of size 10 to store the numbers grouped by their maximum digit, which takes <strong>O(n)</strong> space.</li>
+<li>The sorting operations within each group do not require additional space beyond the input data.</li>
+<li>Thus, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in <code>nums</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently solves the problem by utilizing a grouping strategy based on the maximum digit of each number. It first calculates the maximum digit for each number, groups the numbers by their maximum digit, and then sorts each group to find the two largest numbers to maximize their sum.</p>
+<p>With a time complexity of <strong>O(n log n)</strong>, the solution is efficient enough for typical input sizes. The space complexity of <strong>O(n)</strong> is also optimal for this problem, as it only requires space to store the grouped numbers.</p>
+<p>This solution provides a straightforward and clear approach to solving the problem of finding the maximum sum of two numbers sharing the same maximum digit, ensuring both correctness and efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1134s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +430,6 @@
 
       </div>
 
-      
 
       <footer>
         

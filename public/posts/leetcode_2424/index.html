@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -259,7 +259,144 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;upload(video);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;longest();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode900s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires simulating the process of uploading videos in sequential order and determining the length of the longest continuous sequence of uploaded videos starting from the first one. Specifically, the goal is to efficiently track the longest prefix of uploaded videos in sequential order from <code>1</code> to <code>n</code> after multiple upload operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can take advantage of the sequential nature of the video uploads. The problem essentially boils down to keeping track of the first missing video from the sequence starting from <code>1</code>. Once a video is uploaded, we check whether it completes or extends the longest sequence of videos starting from the first video.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Each upload either extends the current longest sequence of uploaded videos or doesn&rsquo;t change it.</li>
+<li>The longest sequence of consecutive uploaded videos can be tracked using an index <code>i</code> that keeps track of the next expected video.</li>
+<li>If <code>i</code> is the next video that is missing, uploading videos up to <code>i-1</code> will complete the sequence.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-class-definition-and-initialization">
+  Step 1: Class Definition and Initialization
+  <a class="heading-link" href="#step-1-class-definition-and-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LUPrefix</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> arr;
+</span></span><span style="display:flex;"><span>    LUPrefix(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        arr.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Create an array to track uploaded videos
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Initialize the next expected video to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The class <code>LUPrefix</code> is defined to manage the video upload system.</li>
+<li><code>i</code> is an integer that tracks the next expected video. It starts from 1 because we expect video 1 to be uploaded first.</li>
+<li><code>arr</code> is a boolean vector where each element represents whether a particular video has been uploaded or not. The size of this vector is <code>n + 1</code> to accommodate for 1-based indexing (i.e., <code>arr[1]</code> represents video 1, <code>arr[2]</code> represents video 2, etc.).</li>
+</ul>
+<h4 id="step-2-the-upload-function">
+  Step 2: The <code>upload</code> Function
+  <a class="heading-link" href="#step-2-the-upload-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">upload</span>(<span style="color:#66d9ef">int</span> vid) {
+</span></span><span style="display:flex;"><span>    arr[vid] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark the video as uploaded
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> arr.size() <span style="color:#f92672">&amp;&amp;</span> arr[i]) i<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Update the next expected video
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>upload</code> function takes an integer <code>vid</code>, which represents the ID of the uploaded video.</li>
+<li>It marks the corresponding video in the <code>arr</code> array as uploaded by setting <code>arr[vid] = true</code>.</li>
+<li>The <code>while</code> loop then checks if the next expected video (<code>i</code>) has been uploaded. If so, it increments <code>i</code> to look for the next video that needs to be uploaded. This loop ensures that <code>i</code> always points to the next missing video in the sequence.</li>
+</ul>
+<h4 id="step-3-the-longest-function">
+  Step 3: The <code>longest</code> Function
+  <a class="heading-link" href="#step-3-the-longest-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">longest</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Return the length of the longest prefix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>longest</code> function simply returns <code>i - 1</code>, which represents the length of the longest continuous sequence of uploaded videos starting from 1.</li>
+<li>This works because the value of <code>i</code> represents the next missing video, so <code>i - 1</code> gives us the length of the longest continuous sequence.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(1)</code> per <code>upload</code> operation</strong>: The <code>upload</code> operation is efficient, as it only requires marking a video as uploaded in the array (<code>arr[vid] = true</code>) and incrementing the index <code>i</code> as necessary. The while loop only runs until the next missing video is found, but in the worst case, it increments <code>i</code> a constant number of times (since it only progresses when a new video is uploaded sequentially).</li>
+<li><strong><code>O(1)</code> per <code>longest</code> operation</strong>: The <code>longest</code> function simply returns the value of <code>i - 1</code>, which is a constant time operation.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(n)</code></strong>: The space complexity is determined by the size of the array <code>arr</code>, which is <code>n + 1</code> to track the status of all videos from 1 to <code>n</code>. Therefore, the space complexity is linear in terms of the number of videos <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently tracks the longest sequence of uploaded videos using an array and a simple index. The key insight is recognizing that we don&rsquo;t need to check the entire sequence of videos each time we upload one. Instead, we maintain a pointer (<code>i</code>) to track the next expected video and update it when new videos are uploaded sequentially.</p>
+<p>This approach allows both the <code>upload</code> and <code>longest</code> operations to be performed in constant time, making it highly efficient even for large input sizes. The space complexity is also optimal, as we only need to store the upload status for each video.</p>
+<p>The solution is ideal for scenarios where videos are uploaded in a sequence, and we need to efficiently track the longest contiguous sequence of uploaded videos.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode900s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -313,7 +450,6 @@
 
       </div>
 
-      
 
       <footer>
         

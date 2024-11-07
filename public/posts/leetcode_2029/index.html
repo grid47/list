@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -236,7 +236,112 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(m[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> m[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">||</span> m[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode639s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem revolves around a two-player game involving a pile of stones. Players take turns removing stones from the pile, and the game rules specify that players can remove stones with specific properties. The objective is to determine whether the first player has a winning strategy given an array of stone values. Each stone value can be categorized based on its modulo 3 value, which influences the game&rsquo;s outcome.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To determine if the first player can always win, we can break down the game using the properties of the stones based on their modulo values. The key steps in our approach include:</p>
+<ol>
+<li>
+<p><strong>Counting Stones by Remainder</strong>: We will categorize stones into three groups based on their values when divided by 3:</p>
+<ul>
+<li>Stones with a remainder of 0 (i.e., <code>value % 3 == 0</code>)</li>
+<li>Stones with a remainder of 1 (i.e., <code>value % 3 == 1</code>)</li>
+<li>Stones with a remainder of 2 (i.e., <code>value % 3 == 2</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Analyzing Game Conditions</strong>: The winning conditions depend on the counts of these stones. The first player&rsquo;s strategy will rely on how many stones are present in each category:</p>
+<ul>
+<li>If there are no stones with a remainder of 1 or 2, the first player can only take stones with a remainder of 0. In this case, if there is more than one stone, the second player will always win.</li>
+<li>If there are stones with either remainder, we analyze their counts to determine if the first player can manipulate the game toward their advantage.</li>
+</ul>
+</li>
+<li>
+<p><strong>Establishing Winning Conditions</strong>: The game&rsquo;s outcome is determined by the following conditions:</p>
+<ul>
+<li>If one type of remainder (either 1 or 2) has zero stones, the first player can only win if they can ensure that there are more than two stones of the other type and an odd count of stones with a remainder of 0.</li>
+<li>If both types of remainders are present, the first player wins if the absolute difference in counts of the stones with remainders of 1 and 2 is greater than 2 or if the count of stones with remainder 0 is even.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let&rsquo;s delve into the provided code to understand its functionality:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> stoneGameIX(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> stones) {
+</span></span></code></pre></div><ul>
+<li>Here, we define the <code>Solution</code> class and the method <code>stoneGameIX</code>, which accepts a vector of integers representing the stones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> a: stones)
+</span></span><span style="display:flex;"><span>            m[a <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>m</code> of size 3 to count the stones based on their modulo 3 values. The loop iterates through the <code>stones</code> vector and increments the appropriate index of <code>m</code> based on the modulo result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(min(m[<span style="color:#ae81ff">2</span>], m[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> max(m[<span style="color:#ae81ff">1</span>], m[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> m[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>This condition checks if there are no stones of one of the remainders (either 1 or 2). If so, it checks if there are more than two stones of the other type and if the count of stones with remainder 0 is odd. If both conditions are true, the first player can win.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(m[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> m[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">||</span> m[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If both types of stones are present, the method checks whether the absolute difference between the counts of stones with remainders 1 and 2 is greater than 2 or if the count of stones with remainder 0 is even. If either condition holds, the first player has a winning strategy.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is O(n), where n is the number of stones. This is because we need to iterate through the <code>stones</code> array once to populate the counts.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1) since we only use a fixed-size array of size 3 to store the counts of the stones based on their remainders.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>stoneGameIX</code> method effectively determines if the first player has a winning strategy based on the modulo classification of the stones. By leveraging simple counting and logical conditions, we can derive the outcome of the game efficiently. The implementation is straightforward, relying on basic properties of numbers, which makes it not only effective but also easy to understand. This solution illustrates how game theory can be applied to seemingly simple problems, providing insights into strategic decision-making based on available resources.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode639s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -248,7 +353,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2030"  class="external-link" target="_blank" rel="noopener">LeetCode #2030: Smallest K-Length Subsequence With Occurrences of a Letter</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2033"  class="external-link" target="_blank" rel="noopener">LeetCode #2033: Minimum Operations to Make a Uni-Value Grid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -290,7 +395,6 @@
 
       </div>
 
-      
 
       <footer>
         

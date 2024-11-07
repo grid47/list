@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -237,7 +237,187 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {n1, n2};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode965s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the closest pair of prime numbers in a given range <code>[left, right]</code> where the difference between the primes is at least 2 but as small as possible. If no such pair exists, the function should return <code>[-1, -1]</code>. The given range is inclusive of both <code>left</code> and <code>right</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the algorithm can be divided into the following steps:</p>
+<ol>
+<li>
+<p><strong>Sieve of Eratosthenes</strong>:
+We will first use the <strong>Sieve of Eratosthenes</strong> to generate all prime numbers up to <code>1,000,000</code>. This sieve will help us identify all the primes efficiently.</p>
+</li>
+<li>
+<p><strong>Prime Number Collection</strong>:
+After marking all the primes using the sieve, we store the prime numbers in a vector for quick access.</p>
+</li>
+<li>
+<p><strong>Finding the Closest Primes</strong>:
+The algorithm then proceeds to find the closest primes in the given range <code>[left, right]</code>. We do this by:</p>
+<ul>
+<li>Searching for the smallest prime number that is greater than or equal to <code>left</code>.</li>
+<li>Then, checking the next prime to see if it is less than or equal to <code>right</code>.</li>
+<li>Keeping track of the smallest difference between consecutive primes in the range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Case Handling</strong>:
+If there are no two primes found within the given range that satisfy the condition (i.e., the difference is at least 2), we return <code>[-1, -1]</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="class-definition-and-member-variables">
+  Class Definition and Member Variables:
+  <a class="heading-link" href="#class-definition-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> seive[<span style="color:#ae81ff">1000001</span>] <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> {<span style="color:#ae81ff">2</span>};
+</span></span></code></pre></div><ul>
+<li>The <code>seive</code> array is used to mark non-prime numbers. It is initialized with <code>false</code> to represent all numbers as prime initially.</li>
+<li>The <code>p</code> vector stores the prime numbers. The prime <code>2</code> is added initially because <code>2</code> is the smallest prime number.</li>
+</ul>
+<h4 id="sieve-of-eratosthenes">
+  Sieve of Eratosthenes:
+  <a class="heading-link" href="#sieve-of-eratosthenes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000001</span>; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seive[i]) {
+</span></span><span style="display:flex;"><span>            p.push_back(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> j <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) i <span style="color:#f92672">*</span> i; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000001</span>; j <span style="color:#f92672">+=</span> i) {
+</span></span><span style="display:flex;"><span>                seive[j] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The loop iterates through all numbers starting from <code>3</code> up to <code>1,000,000</code>. It only checks odd numbers (<code>i += 2</code>), since even numbers greater than <code>2</code> are not prime.</li>
+<li>For each number <code>i</code> that is still marked as prime (i.e., <code>seive[i] == false</code>), it adds <code>i</code> to the list of primes <code>p</code>.</li>
+<li>The inner loop marks all multiples of <code>i</code> as non-prime (i.e., it marks all <code>j = i * i, i * i + i, ...</code> as <code>true</code> in the <code>seive</code> array).</li>
+</ul>
+<h4 id="finding-the-closest-primes">
+  Finding the Closest Primes:
+  <a class="heading-link" href="#finding-the-closest-primes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, n2 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, i <span style="color:#f92672">=</span> lower_bound(p.begin(), p.end(), left) <span style="color:#f92672">-</span> p.begin();
+</span></span></code></pre></div><ul>
+<li><code>n1</code> and <code>n2</code> are initialized to <code>-1</code>, representing the closest primes found so far.</li>
+<li>The variable <code>i</code> is initialized to the index of the first prime number in the <code>p</code> vector that is greater than or equal to <code>left</code>. This is done using the <code>lower_bound</code> function, which efficiently finds the index of the first element that is not less than <code>left</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(; i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> p.size() <span style="color:#f92672">&amp;&amp;</span> p[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> right; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n1 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> n2 <span style="color:#f92672">-</span> n1 <span style="color:#f92672">&gt;</span> p[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> p[i]) {
+</span></span><span style="display:flex;"><span>            n1 <span style="color:#f92672">=</span> p[i];
+</span></span><span style="display:flex;"><span>            n2 <span style="color:#f92672">=</span> p[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(n2 <span style="color:#f92672">-</span> n1 <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The loop iterates through the prime numbers in the <code>p</code> vector starting from index <code>i</code> and checks for consecutive primes <code>p[i]</code> and <code>p[i + 1]</code>.</li>
+<li>If the difference between the two primes is smaller than the previous closest pair, it updates <code>n1</code> and <code>n2</code> to store the current closest primes.</li>
+<li>If the difference between the primes is less than <code>3</code>, the loop breaks, as we are only interested in pairs of primes with a difference of at least 2.</li>
+</ul>
+<h4 id="return-the-result">
+  Return the Result:
+  <a class="heading-link" href="#return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {n1, n2};
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After the loop, the closest pair of primes <code>n1</code> and <code>n2</code> is returned. If no such pair was found, <code>n1</code> and <code>n2</code> will remain <code>-1</code>, and the function will return <code>[-1, -1]</code>.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sieve of Eratosthenes</strong>:</p>
+<ul>
+<li>The sieve runs in ( O(n \log(\log(n))) ) time, where <code>n = 1,000,000</code>. This is because the sieve algorithm involves iterating over all numbers up to <code>n</code>, and for each prime <code>i</code>, it marks all of its multiples as non-prime.</li>
+<li>The sieve is efficient and works in nearly linear time with respect to the size of the range, making it feasible for <code>n = 1,000,000</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prime Search Using Binary Search</strong>:</p>
+<ul>
+<li>After generating the list of primes, we use <code>lower_bound</code> to find the first prime greater than or equal to <code>left</code>. The <code>lower_bound</code> operation runs in ( O(\log(p)) ), where <code>p</code> is the number of primes found up to <code>1,000,000</code>. Since there are approximately <code>78,498</code> primes up to <code>1,000,000</code>, this operation runs in logarithmic time with respect to the number of primes.</li>
+<li>The subsequent loop also runs in ( O(p) ), where <code>p</code> is the number of primes in the range <code>[left, right]</code>. This loop checks each pair of consecutive primes in the range, making it linear in terms of the number of primes between <code>left</code> and <code>right</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>:</p>
+<ul>
+<li>The total time complexity is dominated by the sieve, which is ( O(n \log(\log(n))) ), and the prime search using binary search, which is ( O(p) ), where <code>n = 1,000,000</code> and <code>p</code> is the number of primes between <code>left</code> and <code>right</code>. Thus, the overall complexity is ( O(n \log(\log(n))) ), which is efficient for the input limits.</li>
+</ul>
+</li>
+</ol>
+<h3 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The space complexity is primarily determined by the space used to store the sieve array and the list of primes.</li>
+<li>The sieve array takes ( O(n) ) space, where <code>n = 1,000,000</code>.</li>
+<li>The list of primes <code>p</code> takes ( O(p) ) space, where <code>p</code> is the number of primes up to <code>1,000,000</code>. This is approximately <code>78,498</code>.</li>
+<li>Therefore, the total space complexity is ( O(n) ), which is ( O(1,000,000) ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the closest pair of primes in a given range <code>[left, right]</code> using the <strong>Sieve of Eratosthenes</strong> to precompute the primes up to <code>1,000,000</code>. The solution uses a combination of binary search (<code>lower_bound</code>) and linear iteration through primes to find the closest pair of primes within the range. The approach is optimal with respect to both time and space complexity, handling the constraints effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode965s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -249,7 +429,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2524"  class="external-link" target="_blank" rel="noopener">LeetCode #2524: Maximum Frequency Score of a Subarray</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2525"  class="external-link" target="_blank" rel="noopener">LeetCode #2525: Categorize Box According to Criteria</a></th>
       </tr>
   </thead>
   <tbody>
@@ -291,7 +471,6 @@
 
       </div>
 
-      
 
       <footer>
         

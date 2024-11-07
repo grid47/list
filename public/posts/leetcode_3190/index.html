@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -218,7 +218,197 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1251s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves finding the minimum number of operations needed to make each element in a given array divisible by 3. The operations allowed involve changing any number by adding or subtracting 1. Each number can be changed as many times as needed, and the goal is to achieve a state where every number in the array is divisible by 3.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to reduce each number to its closest multiple of 3 using the fewest possible operations. Since the numbers are divisible by 3, we need to look at how far each number is from the nearest multiple of 3.</p>
+<ul>
+<li>For any number <code>n</code>, when divided by 3, we get a remainder <code>r = n % 3</code>.</li>
+<li>Based on the value of the remainder, we determine the minimum number of operations required to make the number divisible by 3.
+<ul>
+<li>If <code>r == 0</code>, the number is already divisible by 3, and no operation is needed.</li>
+<li>If <code>r == 1</code>, we can subtract 1 to make it divisible by 3 or add 2 to make it divisible by 3.</li>
+<li>If <code>r == 2</code>, we can subtract 2 to make it divisible by 3 or add 1 to make it divisible by 3.</li>
+</ul>
+</li>
+</ul>
+<p>In both the cases where <code>r == 1</code> or <code>r == 2</code>, the minimum number of operations to make the number divisible by 3 is the minimum of adding or subtracting the required number.</p>
+<p>Thus, the task reduces to iterating over each number in the array and summing the minimum operations required for each.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minimumOperations(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Initialize a variable to keep track of the total operations needed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) { <span style="color:#75715e">// Loop through each element in the array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// Calculate the minimum operations needed for each number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans <span style="color:#f92672">+=</span> min(<span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> (nums[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>), nums[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>); 
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans; <span style="color:#75715e">// Return the total number of operations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-breakdown-of-the-code">
+  Step-by-Step Breakdown of the Code:
+  <a class="heading-link" href="#step-by-step-breakdown-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:
+The function <code>minimumOperations</code> takes a reference to a vector of integers <code>nums</code> as input and returns an integer, which is the minimum number of operations needed to make each element in the array divisible by 3.</p>
+</li>
+<li>
+<p><strong>Initializing the Result Variable</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>The variable <code>ans</code> is initialized to 0, and it will be used to accumulate the total number of operations required.</p>
+</li>
+<li>
+<p><strong>Iterating Over the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span></code></pre></div><p>The loop iterates over each element of the input vector <code>nums</code>.</p>
+</li>
+<li>
+<p><strong>Calculating Operations for Each Number</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">+=</span> min(<span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> (nums[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>), nums[i] <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>);
+</span></span></code></pre></div><p>Inside the loop, for each number <code>nums[i]</code>, we calculate the remainder when the number is divided by 3 (<code>nums[i] % 3</code>). Based on the remainder:</p>
+<ul>
+<li>If the remainder is 1, the number can either be increased by 2 (to reach the next multiple of 3) or decreased by 1 (to reach the previous multiple of 3). The <code>min</code> function helps choose the optimal approach by selecting the smaller number of operations.</li>
+<li>If the remainder is 2, the number can either be increased by 1 (to reach the next multiple of 3) or decreased by 2 (to reach the previous multiple of 3). Similarly, the <code>min</code> function selects the optimal number of operations.</li>
+</ul>
+<p>The result of the <code>min</code> operation is added to <code>ans</code> for each element in the array.</p>
+</li>
+<li>
+<p><strong>Returning the Final Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>After iterating over all the elements, the function returns the total number of operations required to make all elements divisible by 3.</p>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand how this algorithm works.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>};
+</span></span></code></pre></div><ul>
+<li>
+<p>For the first element, <code>nums[0] = 2</code>:</p>
+<ul>
+<li>The remainder when 2 is divided by 3 is <code>2 % 3 = 2</code>.</li>
+<li>To make 2 divisible by 3, we can subtract 2 (making it 0) or add 1 (making it 3). The minimum number of operations is 1.</li>
+</ul>
+</li>
+<li>
+<p>For the second element, <code>nums[1] = 5</code>:</p>
+<ul>
+<li>The remainder when 5 is divided by 3 is <code>5 % 3 = 2</code>.</li>
+<li>To make 5 divisible by 3, we can subtract 2 (making it 3) or add 1 (making it 6). The minimum number of operations is 1.</li>
+</ul>
+</li>
+<li>
+<p>For the third element, <code>nums[2] = 8</code>:</p>
+<ul>
+<li>The remainder when 8 is divided by 3 is <code>8 % 3 = 2</code>.</li>
+<li>To make 8 divisible by 3, we can subtract 2 (making it 6) or add 1 (making it 9). The minimum number of operations is 1.</li>
+</ul>
+</li>
+</ul>
+<h4 id="calculation">
+  Calculation:
+  <a class="heading-link" href="#calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The total number of operations is <code>1 + 1 + 1 = 3</code>.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The function iterates over each element of the array exactly once, performing constant-time operations for each element.</li>
+<li>Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we are using only a constant amount of extra space, regardless of the input size. The space used by the input array is not counted towards the space complexity.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum number of operations required to make each element of the array divisible by 3 by leveraging the properties of the modulo operation. By iterating through the array once and using a simple formula to compute the number of operations, the solution runs in linear time and requires constant space. This makes the solution both time-efficient and space-efficient, suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1251s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -230,7 +420,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3191"  class="external-link" target="_blank" rel="noopener">LeetCode #3191: Minimum Operations to Make Binary Array Elements Equal to One I</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a></th>
       </tr>
   </thead>
   <tbody>
@@ -272,7 +462,6 @@
 
       </div>
 
-      
 
       <footer>
         

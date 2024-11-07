@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,139 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode678s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to delete the middle node of a singly linked list and return the modified list. The middle node is defined as the node at the middle position of the list. If the list has an even number of nodes, the second of the two middle nodes should be removed. For instance, given a linked list with the values <code>[1, 2, 3, 4, 5]</code>, the middle node <code>3</code> should be removed, resulting in the modified list <code>[1, 2, 4, 5]</code>. If the list has only one node, the function should return <code>nullptr</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a two-pointer technique, commonly referred to as the &ldquo;tortoise and hare&rdquo; approach. The steps involved in this approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Edge Case Handling</strong>: First, we check if the list has only one node. If it does, we return <code>nullptr</code> since removing the middle node from a single-node list leaves nothing.</p>
+</li>
+<li>
+<p><strong>Two Pointers Initialization</strong>: We initialize two pointers, <code>slow</code> and <code>fast</code>. The <code>slow</code> pointer will traverse the list one node at a time, while the <code>fast</code> pointer will traverse two nodes at a time. This allows us to determine when the <code>fast</code> pointer reaches the end of the list, which indicates that the <code>slow</code> pointer is at or just before the middle node.</p>
+</li>
+<li>
+<p><strong>Traverse the List</strong>: We move both pointers forward in a loop until the <code>fast</code> pointer reaches the end of the list. By doing this, the <code>slow</code> pointer will end up pointing to the node just before the middle node.</p>
+</li>
+<li>
+<p><strong>Delete the Middle Node</strong>: Once we identify the node just before the middle node (using the <code>slow</code> pointer), we can update its <code>next</code> pointer to skip over the middle node, effectively removing it from the list.</p>
+</li>
+<li>
+<p><strong>Return the Modified List</strong>: Finally, we return the head of the modified list.</p>
+</li>
+</ol>
+<p>This method is efficient and runs in linear time, O(n), while using constant space, O(1), since we do not require any additional data structures to hold the nodes.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s examine the provided code to understand how it implements the approach:</p>
+<ol>
+<li>
+<p><strong>ListNode Structure Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ListNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#f92672">*</span>next;
+</span></span><span style="display:flex;"><span>    ListNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x, ListNode <span style="color:#f92672">*</span>next) <span style="color:#f92672">:</span> val(x), next(next) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This structure defines a node in a singly linked list, containing an integer value <code>val</code> and a pointer <code>next</code> to the next node in the list. The constructors allow for creating nodes with different initializations.</p>
+</li>
+<li>
+<p><strong>Delete Middle Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> deleteMiddle(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>head<span style="color:#f92672">-&gt;</span>next) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#f92672">*</span> slw <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>fst <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(fst <span style="color:#f92672">&amp;&amp;</span> fst<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>            fst <span style="color:#f92672">=</span> fst<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            slw <span style="color:#f92672">=</span> slw<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        slw<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> slw<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Edge Case Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>head<span style="color:#f92672">-&gt;</span>next) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span></code></pre></div><p>Here, we check if the list has only one node by evaluating whether <code>head-&gt;next</code> is <code>nullptr</code>. If this condition is true, we return <code>nullptr</code>, indicating that the list will be empty after the middle node is deleted.</p>
+</li>
+<li>
+<p><strong>Two Pointers Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> slw <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>fst <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><p>The <code>slow</code> pointer (<code>slw</code>) is initialized to point to the head of the list, while the <code>fast</code> pointer (<code>fst</code>) starts at the node after the next one. This setup prepares us to traverse the list.</p>
+</li>
+<li>
+<p><strong>Traverse the List</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(fst <span style="color:#f92672">&amp;&amp;</span> fst<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>    fst <span style="color:#f92672">=</span> fst<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    slw <span style="color:#f92672">=</span> slw<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this while loop, we continue moving both pointers until the <code>fast</code> pointer reaches the end of the list (when <code>fst</code> or <code>fst-&gt;next</code> is <code>nullptr</code>). For every iteration:</p>
+<ul>
+<li>The <code>fast</code> pointer moves two steps forward (<code>fst = fst-&gt;next-&gt;next</code>).</li>
+<li>The <code>slow</code> pointer moves one step forward (<code>slw = slw-&gt;next</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete the Middle Node</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>slw<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> slw<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><p>Once the loop completes, the <code>slow</code> pointer will be positioned just before the middle node. We update the <code>next</code> pointer of the <code>slow</code> node to skip over the middle node, effectively deleting it from the linked list.</p>
+</li>
+<li>
+<p><strong>Return the Modified List</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> head;
+</span></span></code></pre></div><p>Finally, we return the head of the modified linked list, which now has the middle node removed.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is O(n), where <code>n</code> is the number of nodes in the linked list. This complexity arises from the need to traverse the list to find the middle node. The space complexity is O(1) because we only use a constant amount of additional space for the pointers and do not require any extra data structures to store the nodes.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the solution effectively removes the middle node from a singly linked list using a two-pointer technique, achieving an optimal time complexity of O(n) and a space complexity of O(1). This method is efficient and straightforward, making it suitable for handling linked list manipulation problems in competitive programming and technical interviews. Understanding this approach and its implementation helps in mastering linked list operations and contributes to a solid foundation in data structure manipulation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode678s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -287,7 +419,6 @@
 
       </div>
 
-      
 
       <footer>
         

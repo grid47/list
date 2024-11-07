@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -241,7 +241,142 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode992s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two integer arrays <code>b1</code> and <code>b2</code>, representing two bags of integers, the task is to equalize the arrays by swapping elements. Each swap should reduce the difference in frequency of a particular integer across the two bags. The cost of a swap is defined by the minimum of either the element being swapped or double the smallest element in the bags. The objective is to minimize this swap cost. If it&rsquo;s impossible to equalize the bags, return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves counting the difference in frequency of each integer in the two arrays and calculating the minimal cost to equalize the bags.</p>
+<ol>
+<li>
+<p><strong>Frequency Count and Difference Calculation</strong>:</p>
+<ul>
+<li>First, count the frequency of each integer in <code>b1</code> and <code>b2</code>. Using a <code>map</code>, the count is incremented for elements in <code>b1</code> and decremented for elements in <code>b2</code>. The resulting map, <code>c1</code>, reflects the net frequency difference for each element across the two arrays.</li>
+<li>If the difference for any integer is odd, it’s impossible to equalize the bags with swaps, and the function returns -1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Gathering Necessary Swaps</strong>:</p>
+<ul>
+<li>For elements with an even difference in frequency, we determine how many swaps are needed by dividing the difference by 2. This step ensures that swaps are minimized to equalize each element across both bags.</li>
+<li>These necessary swaps are stored in the <code>swaps</code> vector for further cost calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Minimum Cost</strong>:</p>
+<ul>
+<li>To minimize swap costs, the smallest element across both bags (<code>mn</code>) is found.</li>
+<li>Then, using the <code>swaps</code> vector, the minimum cost for half the swaps is calculated by considering either the element’s value or twice the smallest element (to minimize the swap cost).</li>
+<li>The costs are summed to produce the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize the Frequency Map</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> c1;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: b1) c1[x]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: b2) c1[x]<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: This block increments each element in <code>b1</code> and decrements each element in <code>b2</code>, storing the net frequency difference for each element in <code>c1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine if Equalization is Possible</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [k1, v1]<span style="color:#f92672">:</span> c1) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(v1 <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> abs(v1) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        swaps.push_back(k1);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: We iterate over each element’s frequency difference. If any difference is odd (<code>v1 % 2</code>), it&rsquo;s impossible to equalize the bags with swaps, so the function returns -1. For valid elements, half the absolute difference is pushed into <code>swaps</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Identify the Smallest Element</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> c1.begin()<span style="color:#f92672">-&gt;</span>first;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: The smallest key in <code>c1</code> is stored in <code>mn</code>. This smallest element will be used to calculate the minimum swap cost, as swapping with it may minimize the cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Minimum Swap Cost</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> swaps.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> min(swaps[i], mn <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: For half of the swaps in the <code>swaps</code> vector, we calculate the minimum cost for each swap as either the element value itself or twice the smallest element (<code>mn * 2</code>). This strategy ensures the overall swap cost is minimized.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>: The cumulative minimum cost for all required swaps is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Counting Frequencies</strong>: (O(n)), where (n) is the number of elements in each bag.</li>
+<li><strong>Sorting and Swapping Cost Calculation</strong>: (O(n \log n)) due to sorting and the accumulation process.</li>
+</ul>
+<p>Overall, the time complexity is approximately (O(n \log n)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The map <code>c1</code> and the <code>swaps</code> vector each use (O(n)) space, resulting in an overall space complexity of (O(n)).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines if it&rsquo;s possible to equalize two bags by swapping elements, and it minimizes the swap cost using frequency counting and sorting techniques. The map structure ensures quick lookups for frequency differences, while the choice between element values and twice the smallest element guarantees a minimal cost for each swap. The approach is optimal for scenarios where minimizing swap costs is critical.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode992s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +430,6 @@
 
       </div>
 
-      
 
       <footer>
         

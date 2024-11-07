@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -247,7 +247,191 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * DataStream* obj = new DataStream(value, k);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_1 = obj-&gt;consec(num);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode967s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to design a class <code>DataStream</code> that is able to process a stream of integers. Specifically, the class must allow for checking if there are <code>k</code> consecutive occurrences of a given value <code>val</code> in the stream.</p>
+<p>The problem boils down to:</p>
+<ol>
+<li><strong>Initialization</strong>: You are given an integer <code>val</code> (the value that we want to check for consecutive occurrences) and an integer <code>k</code> (the number of consecutive occurrences of <code>val</code> that must be seen in the stream).</li>
+<li><strong>Stream Processing</strong>: As the stream of integers is processed, for each integer <code>num</code>, you need to check if there have been <code>k</code> consecutive occurrences of <code>val</code> in the stream up to that point.</li>
+</ol>
+<p>The class should support the following:</p>
+<ul>
+<li><strong>Initialization</strong>: A constructor that takes the value <code>val</code> and the threshold <code>k</code> for consecutive occurrences.</li>
+<li><strong>Stream Processing</strong>: A method <code>consec(int num)</code> that returns <code>true</code> if the current number <code>num</code> continues the streak of <code>k</code> consecutive occurrences of <code>val</code>, and <code>false</code> otherwise.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to maintain a count of how many consecutive occurrences of the value <code>val</code> we have encountered. The process can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We define a constructor that takes the target value <code>val</code> and the threshold <code>k</code>.</li>
+<li>The constructor initializes two variables:
+<ul>
+<li><code>val</code> stores the target value that we are tracking.</li>
+<li><code>k</code> stores the number of consecutive occurrences of <code>val</code> that we need to detect.</li>
+<li><code>cnt</code> is initialized to 0 and keeps track of the current count of consecutive occurrences of <code>val</code> in the stream.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Stream</strong>:</p>
+<ul>
+<li>The method <code>consec(int num)</code> is invoked each time a new number from the stream is processed.</li>
+<li>Inside <code>consec</code>, we first check if the current number <code>num</code> is equal to <code>val</code>:
+<ul>
+<li>If it is, we increment the <code>cnt</code> variable, ensuring that <code>cnt</code> does not exceed the value <code>k</code>. This is done using <code>min(k, cnt + 1)</code>.</li>
+<li>If the current number <code>num</code> is not equal to <code>val</code>, we reset <code>cnt</code> to 0 because the streak is broken.</li>
+</ul>
+</li>
+<li>After updating <code>cnt</code>, we check if it equals <code>k</code>. If it does, this means we have encountered <code>k</code> consecutive occurrences of <code>val</code>, so we return <code>true</code>. Otherwise, we return <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Case Handling</strong>:</p>
+<ul>
+<li>If the current number <code>num</code> is not equal to <code>val</code>, the consecutive streak is reset, and <code>cnt</code> is set back to 0.</li>
+<li>If the stream continues and the count reaches <code>k</code>, <code>true</code> is returned to indicate that we have detected <code>k</code> consecutive occurrences of <code>val</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-class-definition-and-constructor">
+  1. Class Definition and Constructor
+  <a class="heading-link" href="#1-class-definition-and-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataStream</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val, k, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    DataStream(<span style="color:#66d9ef">int</span> value, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>DataStream</code> class is defined with three member variables:
+<ul>
+<li><code>val</code>: Stores the target value that we want to track for consecutive occurrences.</li>
+<li><code>k</code>: Stores the threshold for consecutive occurrences of <code>val</code>.</li>
+<li><code>cnt</code>: Keeps track of the current streak of consecutive occurrences of <code>val</code>. It is initialized to 0.</li>
+</ul>
+</li>
+</ul>
+<p>The constructor initializes <code>val</code> and <code>k</code> with the provided values and sets <code>cnt</code> to 0.</p>
+<h4 id="2-consecutive-occurrence-check-method">
+  2. Consecutive Occurrence Check Method
+  <a class="heading-link" href="#2-consecutive-occurrence-check-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">consec</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(val <span style="color:#f92672">==</span> num) cnt <span style="color:#f92672">=</span> min(k, cnt<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> k <span style="color:#f92672">==</span> cnt;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The method <code>consec</code> is designed to process a new number <code>num</code> from the stream:
+<ul>
+<li><strong>Check if the number matches <code>val</code></strong>:
+<ul>
+<li>If <code>num</code> equals <code>val</code>, we increment <code>cnt</code> by 1, ensuring that <code>cnt</code> does not exceed <code>k</code> using <code>min(k, cnt + 1)</code>.</li>
+<li>If <code>num</code> is not equal to <code>val</code>, we reset <code>cnt</code> to 0 because the consecutive streak is broken.</li>
+</ul>
+</li>
+<li><strong>Return the result</strong>: After updating <code>cnt</code>, we check if <code>cnt</code> equals <code>k</code>. If it does, it means we have seen <code>k</code> consecutive occurrences of <code>val</code>, so we return <code>true</code>. Otherwise, we return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-object-instantiation-and-method-usage">
+  3. Object Instantiation and Method Usage
+  <a class="heading-link" href="#3-object-instantiation-and-method-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Your DataStream object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * DataStream* obj = new DataStream(value, k);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_1 = obj-&gt;consec(num);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>DataStream</code> is instantiated with a target value <code>val</code> and a threshold <code>k</code>.</li>
+<li>The method <code>consec(num)</code> is called on the <code>DataStream</code> object, passing the current number <code>num</code> from the stream to check if it results in <code>k</code> consecutive occurrences of <code>val</code>.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Constructor Complexity</strong>: The constructor simply initializes three variables and takes constant time, i.e., ( O(1) ).</p>
+</li>
+<li>
+<p><strong><code>consec</code> Method Complexity</strong>: Each call to <code>consec</code> involves checking if the number <code>num</code> is equal to <code>val</code>, incrementing a counter, and performing a comparison, all of which are constant-time operations. Therefore, the time complexity of <code>consec(num)</code> is ( O(1) ).</p>
+</li>
+<li>
+<p><strong>Overall Complexity</strong>: The overall time complexity of each operation is ( O(1) ), as both the constructor and method <code>consec</code> execute in constant time.</p>
+</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The class uses a few integer variables (<code>val</code>, <code>k</code>, and <code>cnt</code>), all of which occupy constant space. Therefore, the space complexity of the <code>DataStream</code> class is ( O(1) ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to track consecutive occurrences of a given value in a data stream. By using a counter (<code>cnt</code>) to track the streak of consecutive values and resetting it whenever the streak is broken, the solution offers constant-time complexity for each stream processing step. The space complexity is also constant, making this a highly efficient approach for handling large streams of data. This class is ideal for scenarios where we need to track consecutive occurrences of a specific value in a stream in real-time.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode967s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -301,7 +485,6 @@
 
       </div>
 
-      
 
       <footer>
         

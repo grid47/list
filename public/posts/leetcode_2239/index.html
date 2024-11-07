@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -213,7 +213,172 @@
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode770s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the number in a given array <code>nums</code> that is closest to zero. If there are multiple numbers with the same absolute value, the larger number should be selected. The task is to write a function that returns this closest number.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves the following steps:</p>
+<ol>
+<li>
+<p><strong>Absolute Value Comparison</strong>:</p>
+<ul>
+<li>We need to find the number whose absolute value is the smallest. If two numbers have the same absolute value, we need to choose the larger number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using <code>min_element</code></strong>:</p>
+<ul>
+<li>The <code>std::min_element</code> function can be used to find the minimum element in a collection, but in this case, we need to define a custom comparison function to account for the absolute value of the elements and handle the tie-breaking condition (when two numbers have the same absolute value).</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom Comparison Logic</strong>:</p>
+<ul>
+<li>The custom comparison function will compare the absolute values of two numbers, <code>a</code> and <code>b</code>. If the absolute value of <code>a</code> is smaller than that of <code>b</code>, <code>a</code> will be considered &ldquo;less&rdquo;. If the absolute values are equal, we compare the numbers themselves to choose the larger one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>The input can include both positive and negative numbers. If the input array contains numbers like <code>-5</code> and <code>5</code>, the algorithm will return <code>5</code> because it is the larger number with the same absolute value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>After applying the custom comparison function, the <code>min_element</code> will return an iterator to the closest number (with tie-breaking logic handled), and we can dereference it to get the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> findClosestNumber(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">min_element</span>(begin(nums), end(nums), [](<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> abs(a) <span style="color:#f92672">&lt;</span> abs(b) <span style="color:#f92672">||</span> (abs(a) <span style="color:#f92672">==</span> abs(b) <span style="color:#f92672">&amp;&amp;</span> a <span style="color:#f92672">&gt;</span> b);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="1-function-declaration">
+  1. <strong>Function Declaration</strong>:
+  <a class="heading-link" href="#1-function-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findClosestNumber</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span></code></pre></div><ul>
+<li>We declare a public function <code>findClosestNumber</code> inside the <code>Solution</code> class. The function takes a reference to a vector of integers (<code>vector&lt;int&gt;&amp; nums</code>) as its argument.</li>
+<li>The return type of the function is <code>int</code>, as we need to return the closest number from the array.</li>
+</ul>
+<h4 id="2-using-min_element">
+  2. <strong>Using <code>min_element</code></strong>:
+  <a class="heading-link" href="#2-using-min_element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">min_element</span>(begin(nums), end(nums), [](<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span></code></pre></div><ul>
+<li>The function uses <code>min_element</code>, which is part of the C++ Standard Library. <code>min_element</code> finds the smallest element in a range of values, specified by iterators.</li>
+<li><code>begin(nums)</code> and <code>end(nums)</code> are used to define the range of the array <code>nums</code>. This will search for the smallest element in the entire array.</li>
+<li>A <strong>lambda function</strong> is passed as the third argument to <code>min_element</code>. The lambda function defines the custom comparison logic used to find the closest number.</li>
+</ul>
+<h4 id="3-lambda-function">
+  3. <strong>Lambda Function</strong>:
+  <a class="heading-link" href="#3-lambda-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(a) <span style="color:#f92672">&lt;</span> abs(b) <span style="color:#f92672">||</span> (abs(a) <span style="color:#f92672">==</span> abs(b) <span style="color:#f92672">&amp;&amp;</span> a <span style="color:#f92672">&gt;</span> b);
+</span></span></code></pre></div><ul>
+<li>The lambda function takes two integers, <code>a</code> and <code>b</code>, as its parameters.</li>
+<li><strong>First condition (<code>abs(a) &lt; abs(b)</code>)</strong>: The function compares the absolute values of <code>a</code> and <code>b</code>. If the absolute value of <code>a</code> is smaller than that of <code>b</code>, then <code>a</code> is considered smaller and will be selected.</li>
+<li><strong>Second condition (<code>abs(a) == abs(b) &amp;&amp; a &gt; b</code>)</strong>: If the absolute values of <code>a</code> and <code>b</code> are equal, the function compares <code>a</code> and <code>b</code> directly. If <code>a</code> is greater than <code>b</code>, <code>a</code> will be selected. This ensures that if two numbers have the same absolute value, the larger one is chosen.</li>
+</ul>
+<h4 id="4-dereferencing-the-result">
+  4. <strong>Dereferencing the Result</strong>:
+  <a class="heading-link" href="#4-dereferencing-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>});
+</span></span></code></pre></div><ul>
+<li>The lambda function ends here, and <code>min_element</code> returns an iterator to the element that meets the condition. The dereference operator (<code>*</code>) is used to get the value of the element pointed to by the iterator.</li>
+<li>This value is then returned as the result of the function.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity of this solution is linear, i.e., O(n), where <code>n</code> is the number of elements in the input vector <code>nums</code>.</li>
+<li>This is because the <code>min_element</code> function iterates over all the elements of the array to find the minimum value, and the comparison function (which involves checking the absolute value and then comparing the numbers) takes constant time for each pair of elements.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant, i.e., O(1), as we do not use any additional data structures whose size grows with the input. We only use a few variables to store the comparison results, but the space used does not depend on the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the closest number to zero in a given array, with tie-breaking logic to return the larger number when two elements have the same absolute value. By using the <code>min_element</code> function with a custom comparison lambda, the solution is both concise and clear.</p>
+<p>The time complexity of <strong>O(n)</strong> ensures that the solution will perform efficiently even for large input arrays, and the constant space complexity <strong>O(1)</strong> makes the solution optimal in terms of memory usage.</p>
+<p>This approach is a great example of how to leverage the power of lambda functions and standard library algorithms in C++ to solve problems in a clean and efficient manner. The ability to define custom comparison logic with lambda expressions is a powerful feature of C++ and allows for flexible and reusable code.</p>
+<p>In summary, this solution is optimal for finding the closest number to zero in an array, handling edge cases (such as negative and positive numbers with the same absolute value) and ensuring that the code is efficient both in terms of time and space.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode770s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -267,7 +432,6 @@
 
       </div>
 
-      
 
       <footer>
         

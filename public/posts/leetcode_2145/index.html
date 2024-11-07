@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -234,7 +234,148 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode713s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the number of possible arrays that can be constructed given the difference array <code>diff</code>, along with specified lower and upper bounds. Each element in <code>diff</code> represents the difference between consecutive elements in the original array, and the goal is to find how many valid starting points exist within the given bounds.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Difference Array</strong>: The <code>diff</code> array represents the differences between consecutive elements of an unknown array. By integrating these differences, we can derive the bounds of the unknown array.</p>
+</li>
+<li>
+<p><strong>Calculating Minimum and Maximum Values</strong>: By iterating through the <code>diff</code> array, we can calculate the cumulative sum of differences. This will help us find the maximum and minimum possible values in the unknown array.</p>
+</li>
+<li>
+<p><strong>Determining the Valid Range</strong>: Based on the calculated maximum and minimum values, we can then determine the valid range of the starting point of the unknown array. This is done by checking if the range defined by the lower and upper bounds can accommodate the range created by the differences.</p>
+</li>
+<li>
+<p><strong>Counting Valid Starting Points</strong>: Finally, if the range is valid, we compute the number of valid starting points that would satisfy both the lower and upper bounds of the unknown array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> is defined, which contains the method to solve the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Number of Arrays Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numberOfArrays</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> diff, <span style="color:#66d9ef">long</span> lower, <span style="color:#66d9ef">long</span> upper) {
+</span></span></code></pre></div><ul>
+<li>This function takes three parameters: the <code>diff</code> array, and two long integers representing the <code>lower</code> and <code>upper</code> bounds for the starting point of the original array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> mn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>Three long integers are initialized: <code>mn</code> and <code>mx</code> to track the minimum and maximum sums, respectively, and <code>x</code> to hold the cumulative sum of the differences.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Cumulative Sums</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k : diff) {
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">+=</span> k;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(mx, x);
+</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> min(mn, x);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A loop iterates through each element <code>k</code> in the <code>diff</code> array. The cumulative sum <code>x</code> is updated, and the maximum (<code>mx</code>) and minimum (<code>mn</code>) cumulative sums are tracked.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determining the Range</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> mx <span style="color:#f92672">-</span> mn;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (upper <span style="color:#f92672">-</span> lower <span style="color:#f92672">&lt;</span> sum)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The difference between <code>mx</code> and <code>mn</code> is calculated and stored in <code>sum</code>. If the difference between <code>upper</code> and <code>lower</code> is less than <code>sum</code>, it implies that it is impossible to form any valid array, so the function returns 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Valid Starting Points</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">int</span>)(upper <span style="color:#f92672">-</span> lower) <span style="color:#f92672">-</span> sum <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the range is valid, the number of valid starting points is calculated as the difference between <code>upper</code> and <code>lower</code>, adjusted for the calculated <code>sum</code>, and returned as an integer.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This closing brace signifies the end of the <code>Solution</code> class.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in the <code>diff</code> array.</p>
+<ul>
+<li>The algorithm iterates through the <code>diff</code> array once to compute the cumulative sums, which is linear in time complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>The algorithm uses a constant amount of additional space for variables, regardless of the size of the input.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numberOfArrays</code> function effectively calculates the number of valid arrays that can be formed based on the provided difference array and specified bounds.</p>
+<p>The approach relies on cumulative sum calculations to derive the minimum and maximum possible values, followed by a straightforward check to determine the validity of potential starting points. This solution is both efficient and easy to understand, making it an excellent example of how to work with difference arrays and constraints in algorithm design.</p>
+<p>Understanding this method not only helps in solving similar problems involving differences and boundaries but also reinforces concepts related to cumulative sums and range queries in array manipulation. Mastery of these techniques is invaluable in competitive programming and algorithmic challenges, enhancing your problem-solving skills significantly.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode713s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +429,6 @@
 
       </div>
 
-      
 
       <footer>
         

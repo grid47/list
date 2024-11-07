@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -278,7 +278,210 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">*</span> neg;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1077s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks you to find the maximum product of a subset of an array <code>nums</code> where the subset contains at least one number. The subset can include both positive and negative numbers, and it can also include zeros. You need to return the maximum strength, which is defined as the product of the selected subset.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to carefully consider the impact of positive numbers, negative numbers, and zero on the product of the subset. Here is a breakdown of the key observations:</p>
+<ol>
+<li>
+<p><strong>Handling Positive Numbers</strong>:</p>
+<ul>
+<li>Positive numbers will always increase the product, so we should always include all positive numbers in the product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Negative Numbers</strong>:</p>
+<ul>
+<li>Negative numbers, when taken in even quantities, will result in a positive product. However, if there is an odd count of negative numbers, the product will be negative. Therefore, we need to either exclude the smallest negative number (if we have an odd number of them) or include all negative numbers (if we have an even number of them).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Zeros</strong>:</p>
+<ul>
+<li>Zeros do not affect the product (i.e., multiplying by zero results in zero), but they can be useful when there are only negative numbers in the array and we cannot form a positive product. In such cases, including a zero might allow us to get a non-negative product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Strategy</strong>:</p>
+<ul>
+<li>Multiply all positive numbers.</li>
+<li>For negative numbers, if their count is odd, exclude the smallest (least negative) one to make the product positive.</li>
+<li>If the count of negative numbers is even, include all of them.</li>
+<li>If there are zero values, we can use one zero if necessary to avoid a negative product when there are no positive numbers.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initializing-variables">
+  1. Initializing Variables
+  <a class="heading-link" href="#1-initializing-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> zero <span style="color:#f92672">=</span> false, allneg <span style="color:#f92672">=</span> true, allzero <span style="color:#f92672">=</span> true, pos <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ncnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, pcnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, neg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mxn <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><strong><code>zero</code></strong>: Tracks whether there&rsquo;s a zero in the array.</li>
+<li><strong><code>allneg</code></strong>: Tracks whether all the numbers are negative (used later to check if there are any positive numbers).</li>
+<li><strong><code>allzero</code></strong>: Tracks whether the array consists only of zeros.</li>
+<li><strong><code>pos</code></strong>: Indicates whether there are any positive numbers in the array.</li>
+<li><strong><code>ncnt</code></strong>: The count of negative numbers.</li>
+<li><strong><code>pcnt</code></strong>: The count of positive numbers.</li>
+<li><strong><code>ans</code></strong>: The variable that will store the final result, initialized to <code>1</code> because we&rsquo;re multiplying numbers.</li>
+<li><strong><code>neg</code></strong>: The product of negative numbers, initialized to <code>1</code>.</li>
+<li><strong><code>mxn</code></strong>: Tracks the maximum negative number (the least negative) to handle cases where we need to exclude it.</li>
+<li><strong><code>n</code></strong>: The size of the input array.</li>
+</ul>
+<h4 id="2-loop-through-the-array">
+  2. Loop through the Array
+  <a class="heading-link" href="#2-loop-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        pcnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        pos <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        allzero <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        allneg <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(nums[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        zero <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        ncnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        allzero <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        mxn <span style="color:#f92672">=</span> max(mxn, nums[i]);
+</span></span><span style="display:flex;"><span>        neg <span style="color:#f92672">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over the entire array and performs the following:
+<ul>
+<li>If the number is positive (<code>nums[i] &gt; 0</code>), it increments the <code>pcnt</code> counter, sets the <code>pos</code> flag to true, and includes this number in the product (<code>ans</code>).</li>
+<li>If the number is zero (<code>nums[i] == 0</code>), it sets the <code>zero</code> flag to true.</li>
+<li>If the number is negative (<code>nums[i] &lt; 0</code>), it increments the <code>ncnt</code> counter, updates <code>mxn</code> with the least negative number, and multiplies <code>neg</code> by this number.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-all-zeros-case">
+  3. All Zeros Case
+  <a class="heading-link" href="#3-all-zeros-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(allzero) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If all numbers in the array are zero, the result is <code>0</code> because no non-zero product can be formed.</li>
+</ul>
+<h4 id="4-handling-negative-numbers">
+  4. Handling Negative Numbers
+  <a class="heading-link" href="#4-handling-negative-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(ncnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> (ncnt <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pcnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> ncnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> zero <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> neg; 
+</span></span><span style="display:flex;"><span>    neg <span style="color:#f92672">=</span> neg <span style="color:#f92672">/</span> mxn;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there are negative numbers and their count is odd (<code>ncnt % 2</code>), we must exclude the smallest negative number (i.e., the least negative) to make the product positive.</li>
+<li>If there are no positive numbers and only one negative number, then we return <code>0</code> if there&rsquo;s a zero in the array. Otherwise, the result is just the negative number itself (<code>neg</code>).</li>
+<li>Otherwise, we divide <code>neg</code> by the least negative number (<code>mxn</code>), effectively removing it from the product to make the product positive.</li>
+</ul>
+<h4 id="5-handling-no-positive-numbers">
+  5. Handling No Positive Numbers
+  <a class="heading-link" href="#5-handling-no-positive-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(pcnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> neg;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there are no positive numbers (<code>pcnt == 0</code>), the result is simply the product of negative numbers (<code>neg</code>).</li>
+</ul>
+<h4 id="6-final-calculation">
+  6. Final Calculation
+  <a class="heading-link" href="#6-final-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans <span style="color:#f92672">*</span> neg;
+</span></span></code></pre></div><ul>
+<li>If there are positive numbers, we return the product of positive numbers (<code>ans</code>) multiplied by the product of negative numbers (<code>neg</code>).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the size of the input array. We loop through the array once, performing constant time operations for each element, resulting in a linear time complexity.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we only use a constant amount of extra space for the variables, regardless of the size of the input array.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum product of a subset of the input array by considering the effects of positive and negative numbers on the product. It handles the cases for negative numbers, positive numbers, and zeros by carefully excluding or including elements to maximize the product. The time complexity is linear, making it efficient for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1077s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -332,7 +535,6 @@
 
       </div>
 
-      
 
       <footer>
         

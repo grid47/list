@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -234,7 +234,197 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode987s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to maximize the number of non-overlapping intervals of positions in the array <code>pos</code>, where the difference between any two positions in the same interval does not exceed a given integer <code>k</code>. The goal is to find the maximum number of positions that can be grouped into intervals, ensuring that each group has a difference between the smallest and largest number less than or equal to <code>k</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>pos = [1, 2, 3, 4, 5]</code>, <code>k = 2</code></li>
+<li>Output: The maximum number of non-overlapping intervals that can be formed is <code>4</code>, because the intervals could be <code>[1, 2, 3]</code> and <code>[4, 5]</code>, both satisfying the condition.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be solved using a <strong>dynamic programming</strong> approach combined with a <strong>sliding window technique</strong> to efficiently manage the positions and check the possible intervals.</p>
+<h4 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We are given an array <code>pos</code> that represents the positions in the sequence. The goal is to partition these positions into the maximum number of subarrays (or intervals) where the difference between the smallest and largest element in each subarray does not exceed <code>k</code>.</li>
+<li>We will use a dynamic programming array <code>dp</code> to store the maximum number of positions we can select up to index <code>i</code> (inclusive).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window (Two Pointers)</strong>:</p>
+<ul>
+<li>We maintain two pointers (<code>i</code> and <code>j</code>) to represent the current interval under consideration.</li>
+<li>The pointer <code>i</code> iterates through the positions, and <code>j</code> is used to find the valid starting position of the current interval such that the difference between the positions at <code>i</code> and <code>j</code> does not exceed <code>k</code>.</li>
+<li>As <code>i</code> moves, we adjust <code>j</code> so that the interval formed by <code>pos[j]</code> to <code>pos[i]</code> is valid (i.e., <code>pos[i] - pos[j] &lt;= k</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Update</strong>:</p>
+<ul>
+<li>For each <code>i</code>, we calculate <code>dp[i + 1]</code>, which represents the maximum number of positions we can select up to index <code>i</code>:
+<ul>
+<li>Either we don&rsquo;t select <code>pos[i]</code> and carry over the value from <code>dp[i]</code>, or we select <code>pos[i]</code>, and the size of the current interval is <code>i - j + 1</code> where <code>j</code> is the starting point of the current interval.</li>
+<li>Update <code>dp[i + 1]</code> as the maximum of these two options.</li>
+</ul>
+</li>
+<li>Additionally, we calculate the result (<code>res</code>) by checking the value of <code>dp[i + 1] + dp[j]</code>, which represents the total number of positions that can be selected when combining the interval from <code>j</code> to <code>i</code> and the maximum number of positions selected before <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The final result is stored in <code>res</code>, which represents the maximum number of positions that can be selected under the given constraints.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break the code into manageable parts to understand each segment:</p>
+<h4 id="step-1-function-and-variable-initialization">
+  Step 1: Function and Variable Initialization
+  <a class="heading-link" href="#step-1-function-and-variable-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> pos.size(), res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>n</code> is the size of the <code>pos</code> array.</li>
+<li><code>res</code> will store the final result, i.e., the maximum number of positions that can be selected.</li>
+<li><code>dp</code> is a dynamic programming array, where <code>dp[i]</code> stores the maximum number of positions that can be selected from positions <code>0</code> to <code>i</code>.</li>
+</ul>
+<h4 id="step-2-sliding-window-with-two-pointers">
+  Step 2: Sliding Window with Two Pointers
+  <a class="heading-link" href="#step-2-sliding-window-with-two-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(pos[j] <span style="color:#f92672">&lt;</span> pos[i] <span style="color:#f92672">-</span> k) j<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li><code>j</code> is a pointer used to represent the start of the current valid interval.</li>
+<li>The inner <code>while</code> loop ensures that the difference between <code>pos[i]</code> and <code>pos[j]</code> does not exceed <code>k</code>. We increment <code>j</code> until the condition <code>pos[i] - pos[j] &lt;= k</code> is satisfied.</li>
+</ul>
+<h4 id="step-3-dynamic-programming-update">
+  Step 3: Dynamic Programming Update
+  <a class="heading-link" href="#step-3-dynamic-programming-update">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max(dp[i], i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>We update <code>dp[i + 1]</code> by either:
+<ul>
+<li>Not including <code>pos[i]</code> and taking the value from <code>dp[i]</code>.</li>
+<li>Including <code>pos[i]</code>, and the size of the current valid interval is <code>i - j + 1</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-calculate-the-result">
+  Step 4: Calculate the Result
+  <a class="heading-link" href="#step-4-calculate-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> max(res, i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp[j]);
+</span></span></code></pre></div><ul>
+<li>For each position <code>i</code>, we calculate the number of positions that can be selected if we combine the current interval <code>[j, i]</code> with the maximum number of positions selected before <code>j</code>. We update <code>res</code> with the maximum value of this combination.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating through all positions, <code>res</code> will contain the maximum number of positions that can be selected.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sliding Window</strong>: The outer loop runs <code>n</code> times, and for each iteration of the outer loop, the inner <code>while</code> loop also runs at most <code>n</code> times in total (since each position is processed at most once). Hence, the overall time complexity is ( O(n) ).</li>
+<li><strong>Dynamic Programming Update</strong>: The <code>dp</code> array is updated in constant time for each iteration, so this part contributes ( O(n) ) time complexity.</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity is ( O(n) ), where <code>n</code> is the number of elements in <code>pos</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Dynamic Programming Array</strong>: The <code>dp</code> array stores values for each position in the array, contributing ( O(n) ) space complexity.</li>
+<li><strong>Other Variables</strong>: The other variables (<code>j</code>, <code>res</code>, etc.) use constant space ( O(1) ).</li>
+<li><strong>Overall Space Complexity</strong>: The total space complexity is ( O(n) ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a <strong>greedy approach</strong> combined with <strong>dynamic programming</strong> and a <strong>sliding window technique</strong> to efficiently solve the problem. The sliding window technique ensures that we can find the maximum valid intervals without rechecking all previous intervals for each position, while the dynamic programming array tracks the best possible result up to each position.</p>
+<p>The time complexity of ( O(n) ) ensures that the solution can handle large inputs efficiently, making it suitable for real-world applications. The space complexity of ( O(n) ) is manageable, and the algorithm ensures that we compute the result in an optimal manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode987s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +478,6 @@
 
       </div>
 
-      
 
       <footer>
         

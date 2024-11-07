@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -271,7 +271,198 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1076s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks you to find the minimum number of extra characters that need to be added to a given string <code>s</code> such that the resulting string contains only words from a dictionary <code>dictionary</code>. Each word in the dictionary can be used multiple times to form substrings of <code>s</code>. If some characters cannot be grouped into valid words from the dictionary, those characters are considered &ldquo;extra&rdquo; characters.</p>
+<p>You are required to return the minimum number of extra characters that would remain after forming valid words from the dictionary.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use a <strong>dynamic programming</strong> approach. The idea is to use a recursive function to check all possible ways to form valid words from the dictionary and count the number of leftover (or extra) characters.</p>
+<h4 id="dynamic-programming-steps">
+  Dynamic Programming Steps
+  <a class="heading-link" href="#dynamic-programming-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Define State</strong>:
+We define a state <code>dp(idx)</code> which represents the minimum number of extra characters needed to form valid words from the substring starting at index <code>idx</code>.</p>
+</li>
+<li>
+<p><strong>Recursive Relation</strong>:</p>
+<ul>
+<li>For each starting index <code>idx</code>, we try all possible substrings starting from <code>idx</code>.</li>
+<li>If the substring is found in the dictionary, we proceed without adding extra characters (i.e., move to the next substring).</li>
+<li>If the substring is not in the dictionary, we count it as an extra character and recursively find the minimum extra characters from the next index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>When <code>idx</code> reaches the end of the string, it means we&rsquo;ve processed all characters, and no more extra characters are left to be added. So, return <code>0</code> as the base case.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:
+To avoid recomputing the results for the same substring repeatedly, we use memoization by storing the result for each index <code>idx</code> in the <code>memo</code> array.</p>
+</li>
+<li>
+<p><strong>Iterative Process</strong>:
+We use a loop to check all possible substrings starting from the current index <code>idx</code> and recursively calculate the minimum number of extra characters needed.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>:
+The final result will be stored in <code>dp(0)</code>, which represents the minimum number of extra characters for the entire string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-member-variables">
+  1. Member Variables
+  <a class="heading-link" href="#1-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> dic;
+</span></span><span style="display:flex;"><span>string str;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span></code></pre></div><ul>
+<li><code>dic</code>: A set to store the dictionary words for quick lookup. This allows constant time check for whether a substring is in the dictionary.</li>
+<li><code>str</code>: The input string <code>s</code>.</li>
+<li><code>memo</code>: A memoization table to store the minimum extra characters required for each index in the string.</li>
+<li><code>n</code>: The length of the input string <code>s</code>.</li>
+</ul>
+<h4 id="2-dpint-idx-function">
+  2. <code>dp(int idx)</code> Function
+  <a class="heading-link" href="#2-dpint-idx-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        string s <span style="color:#f92672">=</span> str.substr(idx, len);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(dic.count(s)) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, dp(idx <span style="color:#f92672">+</span> len));
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, len <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> len));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        len<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If <code>idx == n</code>, return <code>0</code> because we&rsquo;ve reached the end of the string, meaning no more extra characters need to be added.</li>
+<li><strong>Memoization</strong>: If <code>memo[idx]</code> is not <code>-1</code>, it means we&rsquo;ve already computed the result for this index, so we return the stored value.</li>
+<li><strong>Recursive Search</strong>: We initialize the <code>ans</code> as a very large number (<code>INT_MAX</code>) to keep track of the minimum extra characters. We then iterate through all possible substrings starting from <code>idx</code>:
+<ul>
+<li>For each possible substring, check if it exists in the dictionary:
+<ul>
+<li>If it exists, recursively calculate the result for the next substring (i.e., move to <code>idx + len</code>).</li>
+<li>If it doesn&rsquo;t exist in the dictionary, count the substring as extra characters (i.e., add <code>len</code> to the result).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Memoization Update</strong>: Finally, store the result for the current index <code>idx</code> in the <code>memo</code> table.</li>
+</ul>
+<h4 id="3-minextracharstring-s-vectorstring-dictionary-function">
+  3. <code>minExtraChar(string s, vector&lt;string&gt;&amp; dictionary)</code> Function
+  <a class="heading-link" href="#3-minextracharstring-s-vectorstring-dictionary-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minExtraChar</span>(string s, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> dictionary) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>    str <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>    memo.resize(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: dictionary) {
+</span></span><span style="display:flex;"><span>        dic.insert(x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>:
+<ul>
+<li>Set <code>n</code> to the size of the string <code>s</code> and initialize <code>str</code> to the input string.</li>
+<li>Resize the <code>memo</code> array to the size of the string and initialize all elements to <code>-1</code> to indicate that no subproblem has been solved yet.</li>
+</ul>
+</li>
+<li><strong>Dictionary Setup</strong>: Insert all dictionary words into the <code>dic</code> set for fast lookup.</li>
+<li><strong>Final Calculation</strong>: Call the <code>dp(0)</code> function to calculate the minimum extra characters from the start of the string.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n^2)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because, in the worst case, for each index <code>idx</code>, we check all possible substrings starting from <code>idx</code>, and there are at most <code>n</code> such substrings. Hence, the overall complexity is quadratic.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> for the <code>memo</code> array, which stores the result for each index of the string. The set <code>dic</code> also uses space proportional to the number of words in the dictionary, but this is typically much smaller than <code>n</code> and does not affect the overall space complexity significantly.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages dynamic programming with memoization to efficiently solve the problem of finding the minimum number of extra characters in the string <code>s</code> by trying to form valid words from the dictionary. The time complexity is quadratic, which is reasonable for moderate-sized input strings, and the space complexity is linear in terms of the length of the input string. The solution handles all cases efficiently by recursively trying all substrings and memoizing the results to avoid redundant calculations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1076s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -325,7 +516,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -274,7 +274,206 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp[root];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode745s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires constructing a binary tree based on a set of relationships provided in a 2D vector <code>desc</code>. Each element of the vector <code>desc</code> represents a relationship between a parent and a child node. The task is to reconstruct the binary tree from these relationships and return the root node of the tree.</p>
+<p>Each vector in <code>desc</code> contains three integers:</p>
+<ol>
+<li>The first integer represents the parent node.</li>
+<li>The second integer represents the child node.</li>
+<li>The third integer indicates whether the child node is the left or right child of the parent. If the third integer is 1, the child is the left child; otherwise, it is the right child.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To construct the binary tree from the given descriptions in <code>desc</code>, the following approach is used:</p>
+<ol>
+<li>
+<p><strong>Identify the Root</strong>:</p>
+<ul>
+<li>The first step is to identify the root node of the tree. The root is the only node that does not appear as a child in any of the relationships. Thus, by iterating over the <code>desc</code> list and keeping track of which nodes are children, we can find the root.</li>
+</ul>
+</li>
+<li>
+<p><strong>Create Nodes</strong>:</p>
+<ul>
+<li>After identifying the root, we need to create all the nodes of the binary tree. We use a <code>map</code> to store the nodes by their values, allowing us to easily access or create a node whenever required.</li>
+</ul>
+</li>
+<li>
+<p><strong>Build Relationships</strong>:</p>
+<ul>
+<li>Once all the nodes are created, we can proceed to build the relationships between the nodes as described in <code>desc</code>. For each parent-child pair, we assign the left or right child based on the third value in the vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Root</strong>:</p>
+<ul>
+<li>After constructing the binary tree, the root node is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-identify-the-root-node">
+  Step 1: Identify the Root Node
+  <a class="heading-link" href="#step-1-identify-the-root-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v : desc) {
+</span></span><span style="display:flex;"><span>    s.insert(v[<span style="color:#ae81ff">0</span>]);  <span style="color:#75715e">// Insert parent node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    s.insert(v[<span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">// Insert child node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>A set <code>s</code> is used to keep track of all nodes that are either parents or children. This set will help us identify the root node later, as the root is the only node that does not appear as a child.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v : desc) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s.find(v[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">!=</span> s.end()) {
+</span></span><span style="display:flex;"><span>        s.erase(v[<span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">// Remove child nodes from the set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each entry in <code>desc</code>. If the child node is already in the set <code>s</code>, we remove it, because a node that is a child cannot be the root.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> root <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>s.begin();  <span style="color:#75715e">// The remaining element in the set is the root
+</span></span></span></code></pre></div><ul>
+<li>The remaining element in the set <code>s</code> is the root node, as it has never been marked as a child.</li>
+</ul>
+<h4 id="step-2-create-the-binary-tree-nodes">
+  Step 2: Create the Binary Tree Nodes
+  <a class="heading-link" href="#step-2-create-the-binary-tree-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, TreeNode<span style="color:#f92672">*&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v : desc) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.find(v[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">==</span> mp.end()) {
+</span></span><span style="display:flex;"><span>        mp[v[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(v[<span style="color:#ae81ff">0</span>]);  <span style="color:#75715e">// Create the parent node if not already created
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.find(v[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">==</span> mp.end()) {
+</span></span><span style="display:flex;"><span>        mp[v[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(v[<span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">// Create the child node if not already created
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A <code>map&lt;int, TreeNode*&gt;</code> called <code>mp</code> is used to store nodes. For each pair of parent-child nodes in <code>desc</code>, we check if the parent and child nodes have already been created. If not, we create new nodes for them.</li>
+</ul>
+<h4 id="step-3-build-the-parent-child-relationships">
+  Step 3: Build the Parent-Child Relationships
+  <a class="heading-link" href="#step-3-build-the-parent-child-relationships">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v : desc) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> parent <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> child <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (left) {
+</span></span><span style="display:flex;"><span>        mp[parent]<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> mp[child];  <span style="color:#75715e">// Set the left child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        mp[parent]<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> mp[child];  <span style="color:#75715e">// Set the right child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each parent-child relationship, we use the <code>left</code> value to determine whether to set the child as the left or right child of the parent. This is done by checking if <code>left</code> is <code>1</code> or <code>0</code>. If <code>left</code> is <code>1</code>, the child is set as the left child; otherwise, the child is set as the right child.</li>
+</ul>
+<h4 id="step-4-return-the-root-node">
+  Step 4: Return the Root Node
+  <a class="heading-link" href="#step-4-return-the-root-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mp[root];
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the root node from the <code>map</code>. Since we already identified the root earlier, it is now available in <code>mp[root]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree (i.e., the number of elements in <code>desc</code>). This is because:
+<ul>
+<li>We iterate through <code>desc</code> three times:
+<ul>
+<li>First to identify the root node.</li>
+<li>Second to create nodes.</li>
+<li>Third to build the parent-child relationships.</li>
+</ul>
+</li>
+<li>Each of these operations is linear with respect to the number of nodes.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This space is used to store:
+<ul>
+<li>The set <code>s</code>, which contains at most <code>n</code> nodes.</li>
+<li>The map <code>mp</code>, which also stores <code>n</code> nodes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution constructs a binary tree based on a list of parent-child relationships described by the <code>desc</code> array. By efficiently identifying the root node, creating nodes, and building relationships, the solution provides a clean and optimized approach for tree reconstruction.</p>
+<p>The algorithm uses a <code>set</code> to identify the root and a <code>map</code> to manage the nodes and their relationships, ensuring that the tree is reconstructed in linear time. This makes the solution efficient and scalable for large inputs, with a time complexity of O(n) and space complexity of O(n).</p>
+<p>This code provides a well-structured and easy-to-understand approach for solving the problem of building a binary tree from a set of node relationships. It can be easily extended or modified to accommodate other variations of tree construction problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode745s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -328,7 +527,6 @@
 
       </div>
 
-      
 
       <footer>
         

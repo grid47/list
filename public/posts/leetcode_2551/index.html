@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,172 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ma <span style="color:#f92672">-</span> mi;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode984s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given an array <code>weights</code> where each element represents the weight of a marble in a specific position. You need to find the maximum possible difference between the sum of weights in two partitions of marbles when you are allowed to select <code>k-1</code> positions (or cuts) between marbles to form two groups. The goal is to compute the difference between the maximum and minimum sums that can be achieved by selecting different positions to cut the array into two partitions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can break the problem down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Cut Points</strong>:</p>
+<ul>
+<li>When we select <code>k-1</code> positions to cut the array, it essentially means that we split the array into <code>k</code> groups.</li>
+<li>The &ldquo;cut points&rdquo; correspond to the positions between adjacent marbles where the array is split.</li>
+<li>For each cut, the sum of the weights of the two adjacent marbles at the cut will contribute to the resulting partition sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Forming New Values Based on Cuts</strong>:</p>
+<ul>
+<li>For each adjacent pair of marbles at positions <code>i</code> and <code>i-1</code>, we can compute a sum of <code>weights[i] + weights[i-1]</code> which will be a key contributor to the final sums once the array is partitioned.</li>
+<li>These sums represent the potential weights of the partitions created by cuts at each adjacent position.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximizing and Minimizing the Sums</strong>:</p>
+<ul>
+<li>To maximize the sum of the <code>k</code> groups, we should take the largest <code>k-1</code> values from the list of sums of adjacent pairs.</li>
+<li>To minimize the sum, we take the smallest <code>k-1</code> values.</li>
+<li>By sorting the list of sums, we can efficiently select the smallest and largest <code>k-1</code> sums and compute the difference between them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The difference between the maximum and minimum sums will be the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code and explain how it works:</p>
+<h4 id="step-1-compute-the-sums-of-adjacent-weights">
+  Step 1: Compute the Sums of Adjacent Weights
+  <a class="heading-link" href="#step-1-compute-the-sums-of-adjacent-weights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> diff;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> weights.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    diff.push_back(weights[i] <span style="color:#f92672">+</span> weights[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div><ul>
+<li>We initialize an empty vector <code>diff</code> which will hold the sums of adjacent marbles.</li>
+<li>We iterate through the <code>weights</code> array and for each pair of adjacent marbles, we compute the sum <code>weights[i] + weights[i - 1]</code> and store it in the <code>diff</code> vector.</li>
+<li>This step essentially transforms the problem into finding the largest and smallest sums formed by pairs of adjacent marbles.</li>
+</ul>
+<h4 id="step-2-sorting-the-sums">
+  Step 2: Sorting the Sums
+  <a class="heading-link" href="#step-2-sorting-the-sums">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(diff.begin(), diff.end());
+</span></span></code></pre></div><ul>
+<li>The <code>diff</code> array is then sorted in non-decreasing order.</li>
+<li>Sorting allows us to easily select the smallest <code>k-1</code> values (for minimizing the sum) and the largest <code>k-1</code> values (for maximizing the sum).</li>
+</ul>
+<h4 id="step-3-calculating-the-maximum-and-minimum-possible-sums">
+  Step 3: Calculating the Maximum and Minimum Possible Sums
+  <a class="heading-link" href="#step-3-calculating-the-maximum-and-minimum-possible-sums">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ma <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> k <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> diff.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mi <span style="color:#f92672">+=</span> diff[i];
+</span></span><span style="display:flex;"><span>    ma <span style="color:#f92672">+=</span> diff[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize two variables <code>ma</code> and <code>mi</code> to store the maximum and minimum possible sums.</li>
+<li>We iterate over the sorted <code>diff</code> vector and, for the first <code>k-1</code> elements, add them to <code>mi</code> to minimize the sum.</li>
+<li>For the largest <code>k-1</code> elements (those at the end of the <code>diff</code> array), we add them to <code>ma</code> to maximize the sum.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ma <span style="color:#f92672">-</span> mi;
+</span></span></code></pre></div><ul>
+<li>The final result is the difference between the maximum sum (<code>ma</code>) and the minimum sum (<code>mi</code>).</li>
+<li>This difference gives the maximum possible difference between the sums of the two groups formed by the <code>k-1</code> cuts.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Sorting the <code>diff</code> array takes ( O(n \log n) ), where <code>n</code> is the number of marbles.</li>
+<li>The rest of the operations (filling the <code>diff</code> array and computing the sums) are linear, i.e., ( O(n) ).</li>
+<li>Therefore, the overall time complexity is ( O(n \log n) ), which is the dominant factor due to the sorting step.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is ( O(n) ) because we are storing the sums of adjacent marbles in the <code>diff</code> array, which has a size of ( n-1 ) (where <code>n</code> is the size of the <code>weights</code> array).</li>
+<li>The other variables used (such as <code>ma</code>, <code>mi</code>, etc.) take constant space ( O(1) ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum possible difference between the sum of the weights in two partitions of marbles formed by <code>k-1</code> cuts. The key idea is to compute the sums of adjacent marbles, sort them, and then select the smallest and largest <code>k-1</code> sums to minimize and maximize the partition sums, respectively.</p>
+<p>By sorting the sums and selecting the relevant values, the problem can be solved in ( O(n \log n) ) time, making it efficient for larger inputs. The use of sorting allows us to easily extract the necessary values to maximize and minimize the sums, which would be more difficult to achieve with a brute force approach.</p>
+<p>This solution is optimal and works well for scenarios where the number of marbles (<code>n</code>) can be large, providing both time efficiency and simplicity in its approach.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode984s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -253,7 +418,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2552"  class="external-link" target="_blank" rel="noopener">LeetCode #2552: Count Increasing Quadruplets</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2553"  class="external-link" target="_blank" rel="noopener">LeetCode #2553: Separate the Digits in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -295,7 +460,6 @@
 
       </div>
 
-      
 
       <footer>
         

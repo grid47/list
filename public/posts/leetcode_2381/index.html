@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -247,7 +247,171 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode872s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to perform a series of shifts on a given string <code>s</code> where each shift operation consists of changing a range of characters within the string by a specific amount. Each shift operation is defined by a triplet <code>[start, end, direction]</code>:</p>
+<ul>
+<li><code>start</code>: The starting index of the substring to be shifted.</li>
+<li><code>end</code>: The ending index of the substring to be shifted.</li>
+<li><code>direction</code>: A value of <code>1</code> means shifting the characters forward by one position in the alphabet, and a value of <code>-1</code> means shifting the characters backward by one position.</li>
+</ul>
+<p>The goal is to apply all these shift operations to the string <code>s</code> and return the final string after all the shifts are applied.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be efficiently solved using the <strong>difference array</strong> technique combined with <strong>prefix sum</strong>. The basic idea is to record the net effect of each shift operation over the string in a separate array and then apply the cumulative shifts using prefix sums.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Difference Array (Net Effect)</strong>: For each shift operation, instead of updating all characters in the given range <code>[start, end]</code>, we can just record the effect of the operation at the boundaries of the range. By doing this, we avoid multiple redundant updates and make the solution more efficient.</li>
+<li><strong>Prefix Sum</strong>: After recording the changes in the difference array, we can use the <strong>partial sum</strong> (prefix sum) to accumulate the shifts across the string.</li>
+<li><strong>Modulo 26 Arithmetic</strong>: Since there are 26 letters in the English alphabet, we must ensure that the shifts wrap around after 26 characters, i.e., after <code>z</code> comes <code>a</code> again. This requires us to use modulo arithmetic.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">shiftingLetters</span>(string s, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> sh) {
+</span></span></code></pre></div><p>The function <code>shiftingLetters</code> takes two inputs:</p>
+<ul>
+<li><code>s</code>: A string containing lowercase English letters.</li>
+<li><code>sh</code>: A vector of shift operations, where each element is a triplet <code>[start, end, direction]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.length();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> net(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>n</code>: The length of the string <code>s</code>.</li>
+<li><code>net</code>: A vector of size <code>n</code>, initialized with zeros. This array will record the net effect of all shift operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Applying Shift Operations (Difference Array Technique)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>x: sh) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> x[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Direction of shift: 1 for forward, -1 for backward
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    net[x[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">+=</span> k;             <span style="color:#75715e">// Add shift at the start index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>        net[x[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> k;     <span style="color:#75715e">// Subtract shift after the end index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each shift operation in <code>sh</code>. For each operation, we determine the direction of the shift (<code>1</code> for forward, <code>-1</code> for backward) and apply the change to the <code>net</code> array:
+<ul>
+<li>For the start index <code>x[0]</code>, we add the direction (<code>+1</code> or <code>-1</code>).</li>
+<li>For the index <code>x[1] + 1</code>, we subtract the direction to cancel out the effect after the end of the range.</li>
+</ul>
+</li>
+<li>This creates a &ldquo;difference array,&rdquo; where the effect of each operation is recorded at the boundaries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>partial_sum(net.begin(), net.end(), net.begin());
+</span></span></code></pre></div><ul>
+<li>We calculate the <strong>partial sum</strong> of the <code>net</code> array, which effectively accumulates all the shifts into a cumulative effect. After this, each element in <code>net</code> contains the total shift applied to the corresponding index of the string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Applying the Shifts to the String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">&amp;</span>c : s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> ((c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">+</span> net[i]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>;   <span style="color:#75715e">// Calculate new character after shift
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    res <span style="color:#f92672">=</span> (res <span style="color:#f92672">+</span> <span style="color:#ae81ff">26</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>;                  <span style="color:#75715e">// Ensure result is positive
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> res;                          <span style="color:#75715e">// Convert back to character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each character in the string <code>s</code>.</li>
+<li>For each character, we calculate the new character after applying the accumulated shift:
+<ul>
+<li><code>c - 'a'</code> converts the character to its index (0 for &lsquo;a&rsquo;, 1 for &lsquo;b&rsquo;, &hellip;, 25 for &lsquo;z&rsquo;).</li>
+<li>Adding the cumulative shift (<code>net[i]</code>) adjusts the index.</li>
+<li>Modulo 26 ensures the result wraps around correctly within the alphabet (e.g., after &lsquo;z&rsquo;, it should go back to &lsquo;a&rsquo;).</li>
+<li>We also apply <code>(res + 26) % 26</code> to ensure that the result remains positive, handling cases where the shift might result in a negative index.</li>
+<li>Finally, we convert the result back to a character by adding <code>'a'</code> to the index and updating the character in <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+</span></span></code></pre></div><ul>
+<li>After applying all shifts to the string, we return the modified string <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>O(m + n)</strong>, where <code>m</code> is the number of shift operations (<code>sh.size()</code>) and <code>n</code> is the length of the string <code>s</code>.</li>
+<li>The loop over the shift operations takes <strong>O(m)</strong> time because we process each operation in constant time.</li>
+<li>The prefix sum calculation takes <strong>O(n)</strong> time, and applying the shifts to the string also takes <strong>O(n)</strong> time.</li>
+<li>Therefore, the overall time complexity is <strong>O(m + n)</strong>, which is efficient for large inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the <code>net</code> array, which stores the cumulative shifts for each index in the string <code>s</code>.</li>
+<li>No additional significant space is used besides the input and output, making the space complexity linear in terms of the length of the string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of applying multiple shift operations to a string by using the <strong>difference array technique</strong> and <strong>prefix sum</strong>. The difference array allows us to record the effect of each shift operation at the boundaries, and the prefix sum allows us to efficiently accumulate all the shifts in a single pass. This reduces the need to repeatedly iterate over the string for each operation, making the solution optimal with a time complexity of <strong>O(m + n)</strong>, where <code>m</code> is the number of operations and <code>n</code> is the length of the string.</p>
+<p>The use of <strong>modulo 26 arithmetic</strong> ensures that the shifts are applied correctly within the bounds of the English alphabet, handling both forward and backward shifts. This makes the solution both correct and efficient for large inputs.</p>
+<p>In summary, the combination of the difference array technique with prefix sums provides an elegant and efficient way to apply range updates, and this solution is a great example of how advanced array manipulation can solve string transformation problems in an optimal manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode872s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -259,7 +423,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2382"  class="external-link" target="_blank" rel="noopener">LeetCode #2382: Maximum Segment Sum After Removals</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2383"  class="external-link" target="_blank" rel="noopener">LeetCode #2383: Minimum Hours of Training to Win a Competition</a></th>
       </tr>
   </thead>
   <tbody>
@@ -301,7 +465,6 @@
 
       </div>
 
-      
 
       <footer>
         

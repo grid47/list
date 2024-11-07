@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -254,7 +254,150 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;changeRating(food,newRating);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * string param_2 = obj-&gt;highestRated(cuisine);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode849s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to design a system for tracking food ratings based on cuisine type. Given lists of food items, their respective cuisines, and initial ratings, we need to support two main operations:</p>
+<ol>
+<li><strong><code>changeRating</code></strong>: Change the rating of a specific food item and update its position based on the new rating.</li>
+<li><strong><code>highestRated</code></strong>: Retrieve the highest-rated food item for a specified cuisine.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses hash maps (<code>unordered_map</code>) and an ordered set (<code>set</code>) to efficiently store and retrieve the ratings for foods by cuisine. The main design involves:</p>
+<ul>
+<li><strong>Mapping cuisines to foods</strong> with ratings using a set, which keeps food items sorted by their ratings.</li>
+<li><strong>Tracking food-cuisine relationships</strong> and <strong>food-rating values</strong> separately with hash maps, enabling efficient updating of ratings.</li>
+<li>Ensuring that food items with equal ratings are sorted lexicographically to satisfy the requirements.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="class-definition-and-member-variables">
+  Class Definition and Member Variables
+  <a class="heading-link" href="#class-definition-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;&gt;</span> cus_itm;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, string<span style="color:#f92672">&gt;</span> fd_cus;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> fd_rat;
+</span></span></code></pre></div><ul>
+<li><code>cus_itm</code>: Maps each cuisine to a set of foods, sorted by rating in descending order. Each entry in the set is a pair <code>(-rating, food_name)</code> to ensure high ratings appear first.</li>
+<li><code>fd_cus</code>: Maps each food item to its cuisine, allowing quick access to a food’s cuisine.</li>
+<li><code>fd_rat</code>: Maps each food item to its rating, enabling quick lookups and updates.</li>
+</ul>
+<h4 id="constructor">
+  Constructor
+  <a class="heading-link" href="#constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FoodRatings(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> fd, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> cus, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> rat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> fd.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cus_itm[cus[i]].insert(pair(<span style="color:#f92672">-</span>rat[i], fd[i]));
+</span></span><span style="display:flex;"><span>        fd_cus[fd[i]] <span style="color:#f92672">=</span> cus[i];
+</span></span><span style="display:flex;"><span>        fd_rat[fd[i]] <span style="color:#f92672">=</span> rat[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Initializes the <code>FoodRatings</code> object by populating the maps.</li>
+<li>For each food item, the constructor:
+<ul>
+<li>Inserts <code>(-rating, food)</code> into the <code>cus_itm</code> set for the correct cuisine.</li>
+<li>Updates <code>fd_cus</code> and <code>fd_rat</code> with the food’s cuisine and rating.</li>
+</ul>
+</li>
+</ul>
+<h4 id="changerating-method">
+  <code>changeRating</code> Method
+  <a class="heading-link" href="#changerating-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">changeRating</span>(string fd, <span style="color:#66d9ef">int</span> rat) {
+</span></span><span style="display:flex;"><span>    string cus <span style="color:#f92672">=</span> fd_cus[fd];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> fd_rat[fd];
+</span></span><span style="display:flex;"><span>    cus_itm[cus].erase({<span style="color:#f92672">-</span>r, fd});
+</span></span><span style="display:flex;"><span>    cus_itm[cus].insert({<span style="color:#f92672">-</span>rat, fd});
+</span></span><span style="display:flex;"><span>    fd_rat[fd] <span style="color:#f92672">=</span> rat;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Retrieves the current cuisine and rating for the specified food.</li>
+<li>Removes the food with the old rating from <code>cus_itm[cus]</code>, inserts it with the new rating, and updates <code>fd_rat[fd]</code>.</li>
+</ul>
+<h4 id="highestrated-method">
+  <code>highestRated</code> Method
+  <a class="heading-link" href="#highestrated-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">highestRated</span>(string cus) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> begin(cus_itm[cus])<span style="color:#f92672">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Retrieves and returns the food with the highest rating for the specified cuisine by accessing the first element in <code>cus_itm[cus]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Constructor</strong>: <strong>O(n log n)</strong>, where <code>n</code> is the number of food items. Each insertion into <code>cus_itm</code> (a set) is <strong>O(log n)</strong>.</li>
+<li><strong>changeRating</strong>: <strong>O(log m)</strong>, where <code>m</code> is the number of foods within a cuisine, due to insertion and deletion in the set.</li>
+<li><strong>highestRated</strong>: <strong>O(1)</strong>, as accessing the highest-rated food item is <strong>O(1)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the number of foods, for storing the data in the hash maps and sets.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>FoodRatings</code> class provides an efficient way to manage and retrieve food ratings by cuisine. By leveraging hash maps for quick lookups and an ordered set to keep foods sorted by rating, this solution achieves efficient insertion, updating, and retrieval of the highest-rated foods. This approach is suitable for real-time updates, making it ideal for applications that require frequent rating adjustments.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode849s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -308,7 +451,6 @@
 
       </div>
 
-      
 
       <footer>
         

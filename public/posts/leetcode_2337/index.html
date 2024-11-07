@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -239,7 +239,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode839s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine whether it is possible to transform one string <code>start</code> into another string <code>target</code> by moving characters that are either &lsquo;L&rsquo; or &lsquo;R&rsquo; through a series of swaps, with the constraint that the underscores (&rsquo;_&rsquo;) in both strings remain in the same positions. In other words, characters can only move to non-underscore positions, and the relative order of the &lsquo;L&rsquo; and &lsquo;R&rsquo; characters must be maintained.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to ensure two key conditions:</p>
+<ol>
+<li><strong>Matching Characters:</strong> The characters in the <code>start</code> string must match the characters in the <code>target</code> string. This means that for every &lsquo;L&rsquo; and &lsquo;R&rsquo; in <code>start</code>, there must be a corresponding &lsquo;L&rsquo; or &lsquo;R&rsquo; in <code>target</code>.</li>
+<li><strong>Valid Movement:</strong> The movement of characters must obey certain rules:
+<ul>
+<li>An &lsquo;L&rsquo; character cannot move to a position with a higher index in the <code>target</code> string.</li>
+<li>An &lsquo;R&rsquo; character cannot move to a position with a lower index in the <code>target</code> string.</li>
+<li>The relative positions of the &lsquo;L&rsquo; and &lsquo;R&rsquo; characters must be respected: &lsquo;L&rsquo; can only move left and &lsquo;R&rsquo; can only move right.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialize-queues-to-track-characters">
+  1. <strong>Initialize Queues to Track Characters</strong>
+  <a class="heading-link" href="#1-initialize-queues-to-track-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ss, ts;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> start.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (start[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span>) ss.push({start[i], i});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> target.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (target[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;_&#39;</span>) ts.push({target[i], i});
+</span></span></code></pre></div><ul>
+<li><strong><code>ss</code> and <code>ts</code> Queues:</strong> Two queues are used to store pairs of characters and their respective indices. The pair consists of the character (&lsquo;L&rsquo; or &lsquo;R&rsquo;) and the index of that character in the respective strings (<code>start</code> and <code>target</code>). We only push the non-underscore characters (<code>'L'</code> and <code>'R'</code>) into the queues.</li>
+<li><strong>Why Use Queues?</strong> We use a queue because we need to process the characters in the same order as they appear in the strings, which allows us to compare and validate the movement of each character in sequence.</li>
+</ul>
+<h4 id="2-check-the-size-of-both-queues">
+  2. <strong>Check the Size of Both Queues</strong>
+  <a class="heading-link" href="#2-check-the-size-of-both-queues">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (ss.size() <span style="color:#f92672">!=</span> ts.size()) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li><strong>Size Check:</strong> If the number of non-underscore characters in <code>start</code> and <code>target</code> do not match, it is impossible to transform one string into the other, so we return <code>false</code> immediately.</li>
+</ul>
+<h4 id="3-compare-characters-and-their-movements">
+  3. <strong>Compare Characters and Their Movements</strong>
+  <a class="heading-link" href="#3-compare-characters-and-their-movements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>ss.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> s <span style="color:#f92672">=</span> ss.front();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t <span style="color:#f92672">=</span> ts.front();
+</span></span><span style="display:flex;"><span>    ss.pop();
+</span></span><span style="display:flex;"><span>    ts.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s.first <span style="color:#f92672">!=</span> t.first) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s.first <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">&amp;&amp;</span> t.second <span style="color:#f92672">&gt;</span> s.second)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (t.first <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span> <span style="color:#f92672">&amp;&amp;</span> t.second <span style="color:#f92672">&lt;</span> s.second)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Compare Characters:</strong> We now compare the characters and their positions in both strings:
+<ul>
+<li><strong>First Comparison (<code>s.first != t.first</code>)</strong>: If the characters at the front of both queues do not match, it means that the <code>start</code> string has a different character than the <code>target</code> string at the corresponding position, so we return <code>false</code>.</li>
+<li><strong>Movement Validity for &lsquo;L&rsquo; Characters:</strong> If the character is &lsquo;L&rsquo;, its target position must be <strong>less than or equal</strong> to its current position in the <code>start</code> string (<code>t.second &gt; s.second</code> would be invalid).</li>
+<li><strong>Movement Validity for &lsquo;R&rsquo; Characters:</strong> If the character is &lsquo;R&rsquo;, its target position must be <strong>greater than or equal</strong> to its current position in the <code>start</code> string (<code>t.second &lt; s.second</code> would be invalid).</li>
+</ul>
+</li>
+</ul>
+<p>These two conditions ensure that the movement of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters follows the allowed direction.</p>
+<h4 id="4-return-true-if-all-conditions-are-satisfied">
+  4. <strong>Return True if All Conditions are Satisfied</strong>
+  <a class="heading-link" href="#4-return-true-if-all-conditions-are-satisfied">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If all characters match and the movement conditions are valid for all &lsquo;L&rsquo; and &lsquo;R&rsquo; characters, we return <code>true</code>, indicating that it is possible to transform <code>start</code> into <code>target</code> by moving the characters.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> We iterate over both <code>start</code> and <code>target</code> strings once, and each operation within the loop (inserting into the queue, comparing the front elements, etc.) is O(1). Therefore, the overall time complexity is O(n), where n is the length of the strings.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> We store the non-underscore characters and their indices in two queues, each of size at most <code>n</code>. Therefore, the space complexity is O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively checks if it&rsquo;s possible to transform the <code>start</code> string into the <code>target</code> string by following the movement rules for &lsquo;L&rsquo; and &lsquo;R&rsquo; characters. The approach involves using two queues to track the characters and their positions and then verifying that:</p>
+<ul>
+<li>The characters match between the two strings.</li>
+<li>The movement of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters is valid according to the problem&rsquo;s constraints.</li>
+</ul>
+<p>By maintaining a linear time complexity of O(n) and an auxiliary space complexity of O(n), this solution is efficient and scales well with the input size. The use of queues allows us to efficiently process the characters and ensure that the transformation is valid.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode839s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -251,7 +406,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2338"  class="external-link" target="_blank" rel="noopener">LeetCode #2338: Count the Number of Ideal Arrays</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2341"  class="external-link" target="_blank" rel="noopener">LeetCode #2341: Maximum Number of Pairs in Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -293,7 +448,6 @@
 
       </div>
 
-      
 
       <footer>
         

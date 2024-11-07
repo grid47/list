@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -240,7 +240,115 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> nums.size() <span style="color:#f92672">-</span> (ev[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> od[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">?</span> ev[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> od[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">:</span> max(ev[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span> od[<span style="color:#ae81ff">2</span>], ev[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> od[<span style="color:#ae81ff">1</span>]));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode728s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the minimum number of operations needed to make an array <code>nums</code> such that no two adjacent elements are the same. An operation is defined as changing an element in the array to a different value. The goal is to minimize these changes while ensuring that adjacent elements have different values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem includes the following key steps:</p>
+<ol>
+<li><strong>Divide and conquer</strong>:
+<ul>
+<li>Separate the even-indexed and odd-indexed elements of the array into two groups.</li>
+</ul>
+</li>
+<li><strong>Find top frequencies</strong>:
+<ul>
+<li>Use the <code>top2Freq</code> function to determine the two most frequent numbers and their counts for both even-indexed and odd-indexed elements.</li>
+</ul>
+</li>
+<li><strong>Calculate minimal operations</strong>:
+<ul>
+<li>If the most frequent elements in the even and odd groups are different, the optimal solution is to keep these elements, minimizing changes.</li>
+<li>If the most frequent elements in both groups are the same, consider swapping the second-most frequent number in one of the groups to avoid adjacent duplicates and maximize the number of unchanged elements.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Helper Function <code>top2Freq</code></strong>:</p>
+<ul>
+<li>The function takes the <code>nums</code> array and a <code>start</code> index (0 for even, 1 for odd).</li>
+<li>It iterates through <code>nums</code> starting from <code>start</code>, incrementing by 2 to gather frequencies of either even or odd indexed elements.</li>
+<li>A frequency array <code>cnt</code> is used to count occurrences of each number up to <code>100,000</code>.</li>
+<li>The function returns an array containing:
+<ul>
+<li>The most frequent number (<code>first</code>).</li>
+<li>The count of the most frequent number.</li>
+<li>The count of the second most frequent number (<code>second</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function <code>minimumOperations</code></strong>:</p>
+<ul>
+<li>Calls <code>top2Freq</code> for both even and odd indexed positions to obtain their most and second most frequent numbers.</li>
+<li>Checks if the most frequent numbers from even and odd positions (<code>ev[0]</code> and <code>od[0]</code>) are different:
+<ul>
+<li>If different, the number of operations needed is the total length of <code>nums</code> minus the sum of their counts (<code>ev[1] + od[1]</code>).</li>
+<li>If the same, it calculates the best possible combination by considering using the second-most frequent number from either group (<code>max(ev[1] + od[2], ev[2] + od[1])</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Value</strong>:</p>
+<ul>
+<li>Returns the minimum number of operations needed to make the array valid by subtracting the highest achievable sum of unchanged elements from <code>nums.size()</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of <code>nums</code>. The <code>top2Freq</code> function runs in O(n) as it scans half of <code>nums</code> in each call. The main function calls <code>top2Freq</code> twice, keeping the time complexity linear.</li>
+<li><strong>Space Complexity</strong>: O(1) for auxiliary space, apart from the constant-sized array <code>cnt</code> used for counting frequencies. The space used by this array is independent of <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is an optimal approach for determining the minimum number of operations to make an array such that no two adjacent elements are the same. By breaking down the array into even and odd indexed elements and calculating their most and second-most frequent values, the solution efficiently evaluates the best strategy for minimizing operations. This method leverages frequency counting and careful selection logic to ensure an optimal result, with clear and maintainable code logic.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode728s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +402,6 @@
 
       </div>
 
-      
 
       <footer>
         

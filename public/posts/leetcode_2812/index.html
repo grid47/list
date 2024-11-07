@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,162 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pq.top()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1133s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given a square grid <code>g</code> of size <code>n x n</code> where each cell can either be:</p>
+<ul>
+<li><code>0</code>, representing an empty cell, or</li>
+<li><code>1</code>, representing a cell containing an obstacle.</li>
+</ul>
+<p>The task is to compute the <strong>maximum safeness factor</strong> for the top-left to bottom-right path, which is defined as the minimum number of steps needed to traverse from the top-left corner to the bottom-right corner. The grid represents a map, where obstacles reduce the available path options. You are asked to find the path that maximizes the safeness factor (the minimum distance to an obstacle) while traveling along the grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be broken down into two primary phases:</p>
+<ol>
+<li>
+<p><strong>Flood Fill (BFS)</strong>: In the first phase, we will calculate the <strong>minimum distance to the nearest obstacle</strong> for every empty cell in the grid. This is accomplished using a multi-source breadth-first search (BFS), where all obstacle cells are treated as the starting points, and we propagate distances from these points to every adjacent empty cell.</p>
+</li>
+<li>
+<p><strong>Dijkstra-like Algorithm for Safeness Factor</strong>: After calculating the distances in the previous phase, we will employ a modified Dijkstra algorithm. Here, we treat each cell as a node and aim to find the safest path from the top-left corner to the bottom-right corner. The goal is to maximize the safeness factor along the path, which corresponds to the minimum distance to an obstacle encountered along that path.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dir[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}, n <span style="color:#f92672">=</span> g.size();
+</span></span></code></pre></div><ul>
+<li>A <code>queue</code> is initialized to perform a BFS for the first phase. We will store the coordinates of cells and their corresponding distances to the nearest obstacle.</li>
+<li>The <code>dir</code> array represents the four possible movement directions: down, right, up, and left (clockwise).</li>
+<li><code>n</code> stores the size of the grid (<code>n x n</code>), where <code>n</code> is the number of rows or columns.</li>
+</ul>
+</li>
+<li>
+<p><strong>Multi-source BFS to Calculate Minimum Distances</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (g[i][j])
+</span></span><span style="display:flex;"><span>            q.push({i, j});
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates through all the cells in the grid. If a cell contains an obstacle (<code>g[i][j] == 1</code>), we add it to the queue as a starting point for the BFS.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> [i, j] <span style="color:#f92672">=</span> q.front(); q.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; d <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; <span style="color:#f92672">++</span>d) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> dir[d], y <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> dir[d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (min(x, y) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> max(x, y) <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> g[x][y] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            g[x][y] <span style="color:#f92672">=</span> g[i][j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            q.push({x, y});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We perform BFS, where for each obstacle cell, we propagate the distance to its neighboring empty cells. The grid <code>g</code> is updated in-place to store the minimum distance to the nearest obstacle for each empty cell.</li>
+<li>For each neighboring cell, we ensure it is within bounds and has not already been visited (indicated by <code>g[x][y] == 0</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Dijkstra-like Algorithm to Find Safeness Factor</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>pq.push({g[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>});
+</span></span></code></pre></div><ul>
+<li>We initialize a max-priority queue (<code>pq</code>) to process cells based on their safeness factor (minimum distance to an obstacle). The priority queue stores tuples of the form <code>(safeness factor, x, y)</code> where <code>safeness factor</code> represents the minimum distance to an obstacle along the path to that cell.</li>
+<li>We push the starting cell (top-left corner) into the queue with its calculated safeness factor (<code>g[0][0]</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Process Cells to Maximize Safeness Factor</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> pq.top()[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> [sf, i, j] <span style="color:#f92672">=</span> pq.top(); pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; d <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; <span style="color:#f92672">++</span>d) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> dir[d], y <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> dir[d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (min(x, y) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> max(x, y) <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> g[x][y] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            pq.push({min(sf, g[x][y]), x, y});
+</span></span><span style="display:flex;"><span>            g[x][y] <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We process the cells in the priority queue, starting from the top-left corner. The goal is to maximize the minimum safeness factor along the path.</li>
+<li>For each current cell, we examine its neighbors, updating their safeness factor by considering the minimum distance between the current cell’s safeness factor and the neighboring cell’s distance to the nearest obstacle.</li>
+<li>Once a neighboring cell is processed, we mark it as visited by multiplying its value by <code>-1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> pq.top()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>After the loop completes, the safeness factor for the bottom-right corner is stored in <code>pq.top()[0]</code>. Since we have tracked the safeness factor during the traversal, we return the final value, subtracting <code>1</code> as the last step ensures the correct output format.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Phase 1 (BFS)</strong>: The BFS processes each cell once, and each operation involves examining up to 4 neighboring cells. Hence, the time complexity of this phase is <strong>O(n^2)</strong>, where <code>n</code> is the size of the grid.</li>
+<li><strong>Phase 2 (Dijkstra-like Algorithm)</strong>: The priority queue processes each cell, and for each cell, we examine its 4 neighbors. Each insertion and extraction from the priority queue takes <strong>O(log n)</strong> time, but since we process each cell only once, the overall time complexity is <strong>O(n^2 log n)</strong>.</li>
+</ul>
+<p>Therefore, the overall time complexity of the algorithm is <strong>O(n^2 log n)</strong>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the data structures used. The queue and priority queue store up to <code>n^2</code> elements, so the space complexity is <strong>O(n^2)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem by using two key strategies:</p>
+<ul>
+<li>A <strong>multi-source BFS</strong> to compute the minimum distance to the nearest obstacle for every cell.</li>
+<li>A <strong>Dijkstra-like algorithm</strong> to find the path that maximizes the safeness factor from the top-left to the bottom-right corner.</li>
+</ul>
+<p>The algorithm is efficient and handles large grids well, with a time complexity of <strong>O(n^2 log n)</strong>, which is suitable for typical input sizes. The approach ensures that we maximize the safeness factor while navigating through the grid, effectively solving the problem within the given constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1133s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -271,7 +426,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2813"  class="external-link" target="_blank" rel="noopener">LeetCode #2813: Maximum Elegance of a K-Length Subsequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2815"  class="external-link" target="_blank" rel="noopener">LeetCode #2815: Max Pair Sum in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -313,7 +468,6 @@
 
       </div>
 
-      
 
       <footer>
         

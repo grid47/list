@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,212 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode791s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine whether there exists a valid path in a grid composed of parentheses (<code>'('</code> and <code>')'</code>) from the top-left corner to the bottom-right corner. The grid is such that:</p>
+<ul>
+<li>You can only move <strong>down</strong> or <strong>right</strong>.</li>
+<li>You must maintain a valid balance of open and closed parentheses along the way: At any point, the number of closed parentheses should not exceed the number of open parentheses.</li>
+</ul>
+<p>A path is valid if:</p>
+<ol>
+<li>You start at the top-left corner (0,0) and reach the bottom-right corner (m-1, n-1).</li>
+<li>As you traverse, the parentheses should always remain balanced. This means, at any point, the number of closed parentheses (<code>)</code>) cannot exceed the number of open parentheses (<code>(</code>).</li>
+<li>You must move only <strong>down</strong> or <strong>right</strong>.</li>
+</ol>
+<p>The goal is to determine if such a valid path exists, and return <code>true</code> if it does, and <code>false</code> otherwise.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we use <strong>Depth-First Search (DFS)</strong> combined with <strong>Memoization</strong> (Dynamic Programming). Here&rsquo;s the breakdown of how the solution is structured:</p>
+<h4 id="depth-first-search-dfs">
+  Depth-First Search (DFS)
+  <a class="heading-link" href="#depth-first-search-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>State Representation</strong>:
+We define a recursive function <code>dfs(i, j, cnt)</code> where:</p>
+<ul>
+<li><code>i</code> and <code>j</code> represent the current position in the grid.</li>
+<li><code>cnt</code> represents the &ldquo;balance&rdquo; of parentheses at that position, i.e., the difference between the number of open and closed parentheses encountered so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If <code>cnt &lt; 0</code>, it means that the number of closed parentheses has exceeded the number of open parentheses, so the current path is invalid. We return <code>false</code>.</li>
+<li>If we reach the bottom-right corner (m-1, n-1), we check if the balance <code>cnt</code> is zero (i.e., the number of open parentheses is balanced with the number of closed parentheses).</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Exploration</strong>:</p>
+<ul>
+<li>From each cell <code>(i, j)</code>, we explore moving <strong>down</strong> (<code>i+1, j</code>) or <strong>right</strong> (<code>i, j+1</code>).</li>
+<li>For each move, we adjust the balance of parentheses (<code>cnt</code>). If the current cell contains an opening parenthesis <code>'('</code>, we increment <code>cnt</code>, and if it contains a closing parenthesis <code>')'</code>, we decrement <code>cnt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:
+To avoid redundant computations, we use a memoization table <code>mem[i][j][cnt + 220]</code> to store the results of previously visited states. The <code>cnt</code> value is adjusted by adding <code>220</code> to avoid negative indices (since <code>cnt</code> can be negative when encountering closing parentheses before enough opening ones).</p>
+</li>
+</ol>
+<h4 id="memoization-table">
+  Memoization Table:
+  <a class="heading-link" href="#memoization-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The table <code>mem</code> is a 3D vector that stores results for each position <code>(i, j)</code> with a given balance <code>cnt</code>. The dimensions of the table are <code>m x n x (m + n + 1 + 220)</code>:
+<ul>
+<li><code>m x n</code> represents each position in the grid.</li>
+<li><code>m + n + 1 + 220</code> ensures that the balance <code>cnt</code> can range from a negative value (when too many closing parentheses are encountered) up to a positive value.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-by-step-explanation">
+  Step-by-Step Explanation:
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Initialization</strong>: The grid is provided, and the size <code>m x n</code> is determined.</li>
+<li><strong>DFS Call</strong>: We start the DFS from the top-left corner <code>(0, 0)</code> with a balance of <code>0</code>.</li>
+<li><strong>Recursion</strong>: We explore all possible valid moves (down and right) and keep track of the balance of parentheses using DFS.</li>
+<li><strong>Memoization</strong>: If a state has already been explored with the same balance at a particular position, we use the cached result to avoid redundant calculations.</li>
+<li><strong>Return Value</strong>: If a valid path is found, the result is <code>true</code>, otherwise <code>false</code>.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-variable-initialization">
+  Step 1: Variable Initialization
+  <a class="heading-link" href="#step-1-variable-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m, n;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> grid;
+</span></span></code></pre></div><ul>
+<li><code>m</code> and <code>n</code> represent the number of rows and columns in the grid.</li>
+<li><code>mem</code> is a 3D vector used for memoization, storing whether a path with a specific balance (<code>cnt</code>) exists at each cell <code>(i, j)</code>.</li>
+<li><code>grid</code> stores the input grid of parentheses.</li>
+</ul>
+<h4 id="step-2-dfs-function">
+  Step 2: DFS Function
+  <a class="heading-link" href="#step-2-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> cnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;)&#39;</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// Invalid path if parentheses are unbalanced.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>((i <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> (j <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">return</span> (cnt <span style="color:#f92672">+</span> ans) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Reached bottom-right corner.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mem[i][j][cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">220</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][j][cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">220</span>]; <span style="color:#75715e">// Use memoization.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> m)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(dfs(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, cnt <span style="color:#f92672">+</span> ans)) <span style="color:#66d9ef">return</span> true; <span style="color:#75715e">// Move down.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n)        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(dfs(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, cnt <span style="color:#f92672">+</span> ans)) <span style="color:#66d9ef">return</span> true; <span style="color:#75715e">// Move right.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mem[i][j][cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">220</span>] <span style="color:#f92672">=</span> false; <span style="color:#75715e">// No valid path found from this state.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Conditions</strong>: The function first checks whether the current path is invalid (if <code>cnt &lt; 0</code> or if it doesn&rsquo;t balance at the bottom-right corner).</li>
+<li><strong>Memoization</strong>: Before making recursive calls, it checks if the current state <code>(i, j, cnt)</code> has been computed before.</li>
+<li><strong>Recursive Exploration</strong>: The function attempts to move either down or right. It adjusts the balance <code>cnt</code> depending on whether the current cell contains an opening or closing parenthesis.</li>
+</ul>
+<h4 id="step-3-entry-point-hasvalidpath">
+  Step 3: Entry Point (hasValidPath)
+  <a class="heading-link" href="#step-3-entry-point-hasvalidpath">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">hasValidPath</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>    mem.resize(m, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">220</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))); <span style="color:#75715e">// Initialize memoization table.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> grid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dfs(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// Start DFS from top-left with initial balance 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The function initializes the grid size <code>m</code> and <code>n</code>.</li>
+<li>The memoization table <code>mem</code> is resized and initialized to <code>-1</code> (indicating unvisited states).</li>
+<li>The DFS is invoked to explore all possible paths from the top-left corner with a starting balance of <code>0</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is <strong>O(m * n * (m + n))</strong>. This is because the DFS explores each state <code>(i, j, cnt)</code> once, and each state can have a balance from <code>-220</code> to <code>220</code>. Therefore, the total number of states is proportional to the number of cells <code>m * n</code> multiplied by the possible range of balances <code>(m + n + 1 + 220)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(m * n * (m + n))</strong> due to the memoization table <code>mem</code> and the space used by the recursive DFS stack.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively uses a combination of <strong>DFS</strong> and <strong>memoization</strong> to efficiently check whether there exists a valid path in the grid that maintains the balance of parentheses. The use of memoization ensures that each state is computed only once, making the solution scalable even for large grids. The complexity of the solution is manageable due to the limited number of possible states and moves.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode791s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -262,7 +467,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2268"  class="external-link" target="_blank" rel="noopener">LeetCode #2268: Minimum Number of Keypresses</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2269"  class="external-link" target="_blank" rel="noopener">LeetCode #2269: Find the K-Beauty of a Number</a></th>
       </tr>
   </thead>
   <tbody>
@@ -304,7 +509,6 @@
 
       </div>
 
-      
 
       <footer>
         

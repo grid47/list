@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,198 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1045s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task requires finding the length of the shortest cycle in an undirected graph. A cycle is a path where the start and end vertices are the same, and it must have at least three vertices. Given a graph represented by <code>n</code> vertices and a list of edges, the goal is to determine the shortest cycle&rsquo;s length. If no cycle exists, the function should return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use <strong>Depth-First Search (DFS)</strong>. The key idea is to traverse the graph starting from each vertex and detect cycles as we go. We track the visited vertices and their distances during traversal, and if we encounter a previously visited vertex that is not the parent of the current vertex, we have found a cycle. We then calculate the cycle&rsquo;s length and update the minimum cycle length.</p>
+<h3 id="detailed-explanation">
+  Detailed Explanation
+  <a class="heading-link" href="#detailed-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>The graph is represented as an adjacency list, where <code>grid[i]</code> contains all vertices connected to vertex <code>i</code>. This allows us to easily access the neighbors of any vertex during traversal.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Traversal</strong>:</p>
+<ul>
+<li>We use a <strong>DFS</strong> to explore all vertices starting from each vertex. During the DFS, we maintain a <code>vis</code> array where <code>vis[i]</code> stores the distance of vertex <code>i</code> from the starting vertex. If we encounter a vertex that was already visited, we check if it forms a cycle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cycle Detection</strong>:</p>
+<ul>
+<li>If a vertex <code>x</code> has been visited and is not the parent of the current vertex, it indicates a cycle. The length of the cycle is calculated as <code>abs(vis[x] - vis[i]) + 1</code>, where <code>i</code> is the current vertex. The absolute difference between <code>vis[x]</code> and <code>vis[i]</code> gives the number of vertices between <code>x</code> and <code>i</code> in the cycle, and adding <code>1</code> accounts for the vertex <code>i</code> itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking the Shortest Cycle</strong>:</p>
+<ul>
+<li>During the DFS traversal, the minimum cycle length is updated whenever a cycle is detected. After the DFS from all vertices is complete, the answer will contain the length of the shortest cycle found. If no cycle was found, the answer will remain as <code>INT_MAX</code>, and we return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-graph-construction">
+  1. <strong>Graph Construction</strong>:
+  <a class="heading-link" href="#1-graph-construction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>grid.resize(n);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) {
+</span></span><span style="display:flex;"><span>    grid[e[<span style="color:#ae81ff">0</span>]].push_back(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    grid[e[<span style="color:#ae81ff">1</span>]].push_back(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: We initialize an adjacency list <code>grid</code> to represent the graph. Each edge <code>e</code> connects two vertices, <code>e[0]</code> and <code>e[1]</code>. For each edge, we add <code>e[1]</code> to the adjacency list of <code>e[0]</code> and vice versa (since the graph is undirected).</li>
+<li><strong>Time Complexity</strong>: This step takes (O(m)), where (m) is the number of edges.</li>
+</ul>
+<h4 id="2-dfs-for-cycle-detection">
+  2. <strong>DFS for Cycle Detection</strong>:
+  <a class="heading-link" href="#2-dfs-for-cycle-detection">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n, INT_MAX);
+</span></span><span style="display:flex;"><span>    dfs(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, i, <span style="color:#ae81ff">0</span>, vis);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: For each vertex <code>i</code>, we start a DFS traversal. The <code>vis</code> array is initialized to <code>INT_MAX</code> for all vertices, indicating they are unvisited. The <code>dfs</code> function is called with the current vertex as <code>i</code> and its parent as <code>-1</code> (since the starting vertex has no parent).</li>
+<li><strong>Time Complexity</strong>: This step involves running DFS from each vertex, which is (O(n)) for each call. So, the total complexity of this loop is (O(n^2)).</li>
+</ul>
+<h4 id="3-dfs-function">
+  3. <strong>DFS Function</strong>:
+  <a class="heading-link" href="#3-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> par, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> run, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> vis) {
+</span></span><span style="display:flex;"><span>    vis[i] <span style="color:#f92672">=</span> run;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: grid[i]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> par) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(vis[x] <span style="color:#f92672">!=</span> INT_MAX) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, abs(vis[x] <span style="color:#f92672">-</span> vis[i]) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            dfs(i, x, run <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vis);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Purpose</strong>: This function performs a DFS traversal starting from vertex <code>i</code>. The parameter <code>par</code> is the parent vertex to avoid revisiting it. The parameter <code>run</code> keeps track of the current distance from the starting vertex.</p>
+<ul>
+<li>
+<p>We mark <code>vis[i]</code> with the current distance <code>run</code> to indicate that vertex <code>i</code> has been visited at this distance.</p>
+</li>
+<li>
+<p>We then iterate over all the neighbors <code>x</code> of the current vertex <code>i</code>. If the neighbor is the parent vertex (i.e., <code>x == par</code>), we skip it, as we don&rsquo;t want to revisit the parent during the traversal.</p>
+</li>
+<li>
+<p>If a neighbor <code>x</code> has already been visited (i.e., <code>vis[x] != INT_MAX</code>), it indicates that a cycle has been detected. We calculate the length of the cycle as <code>abs(vis[x] - vis[i]) + 1</code> and update <code>ans</code> to store the minimum cycle length found so far.</p>
+</li>
+<li>
+<p>If the neighbor <code>x</code> has not been visited, we continue the DFS by recursively calling <code>dfs</code> with <code>x</code> as the current vertex and <code>i</code> as its parent, and the distance <code>run + 1</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Complexity</strong>: Each DFS call visits every vertex and edge at most once, so the time complexity of each DFS is (O(n + m)), where (n) is the number of vertices and (m) is the number of edges.</p>
+</li>
+</ul>
+<h4 id="4-returning-the-result">
+  4. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> INT_MAX <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ans;
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: After running DFS for all vertices, the variable <code>ans</code> will either contain the length of the shortest cycle or <code>INT_MAX</code> if no cycle was found. We return <code>-1</code> if no cycle was found; otherwise, we return the shortest cycle length.</li>
+<li><strong>Time Complexity</strong>: This step is (O(1)).</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Graph Construction</strong>: Building the adjacency list takes (O(m)), where (m) is the number of edges.</li>
+<li><strong>DFS Traversal</strong>: The DFS is called once for each vertex. Each DFS call visits each edge and vertex once, so the time complexity of DFS is (O(n + m)). Since we call DFS for each vertex, the total time complexity for DFS calls is (O(n(n + m))).</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is (O(n(n + m))), where (n) is the number of vertices and (m) is the number of edges.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Adjacency List</strong>: The adjacency list takes (O(n + m)) space to store the graph.</li>
+<li><strong>Visited Array</strong>: The <code>vis</code> array takes (O(n)) space for each DFS call.</li>
+<li><strong>Overall Space Complexity</strong>: The overall space complexity is (O(n + m)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses <strong>Depth-First Search (DFS)</strong> to efficiently find the shortest cycle in an undirected graph. By exploring the graph starting from each vertex and keeping track of visited vertices and their distances, we can detect cycles and compute their lengths. The algorithm efficiently computes the shortest cycle by considering all vertices and cycles in the graph. The time complexity is (O(n(n + m))), making it suitable for relatively large graphs. If no cycle is found, the function returns <code>-1</code>.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1045s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -296,7 +487,6 @@
 
       </div>
 
-      
 
       <footer>
         

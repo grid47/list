@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,192 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode826s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the maximum sum of a spliced array, where you are given two arrays <code>nums1</code> and <code>nums2</code>, and you can splice (or swap) parts of <code>nums1</code> with <code>nums2</code> to maximize the resulting sum. The splice operation allows you to choose a subarray of one array and replace the corresponding subarray in the other array. The goal is to maximize the sum of the array after performing the splice operation.</p>
+<p>The key challenge here is to efficiently calculate the maximum possible sum after swapping parts of the two arrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to think about how we can replace subarrays from one array with subarrays from the other array, while maximizing the resulting sum. The approach can be broken down into three main steps:</p>
+<ol>
+<li>
+<p><strong>Initial Sum Calculation:</strong>
+We start by calculating the total sum of both arrays <code>nums1</code> and <code>nums2</code>. These sums provide us with the baseline for comparison.</p>
+</li>
+<li>
+<p><strong>Calculate the Maximum Benefit from Splicing:</strong>
+The main insight is that the best way to maximize the sum is to consider the difference between elements of <code>nums1</code> and <code>nums2</code> at each index. Specifically:</p>
+<ul>
+<li>If an element from <code>nums2</code> is larger than the corresponding element in <code>nums1</code>, then replacing that element in <code>nums1</code> with the element from <code>nums2</code> will increase the sum.</li>
+<li>Conversely, if an element from <code>nums1</code> is larger than the corresponding element in <code>nums2</code>, then replacing the element in <code>nums2</code> with the element from <code>nums1</code> will increase the sum.</li>
+</ul>
+<p>To achieve this, we compute two values:</p>
+<ul>
+<li>The first value (<code>fst</code>) represents the difference when swapping from <code>nums2</code> to <code>nums1</code>.</li>
+<li>The second value (<code>scd</code>) represents the difference when swapping from <code>nums1</code> to <code>nums2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimize the Sum Using Maximum Subarrays:</strong>
+After calculating the differences at each index, we apply a technique called the <strong>Kadane’s Algorithm</strong> to find the maximum subarray sum for both <code>fst</code> and <code>scd</code>. This allows us to efficiently find the maximum possible gain by swapping subarrays.</p>
+</li>
+<li>
+<p><strong>Return the Maximum Possible Sum:</strong>
+The final result is the maximum of the original sums (<code>sum1</code> and <code>sum2</code>) and the potential gains from swapping the subarrays (<code>mx1</code> and <code>mx2</code>).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code for better understanding:</p>
+<h4 id="step-1-calculate-initial-sums-of-both-arrays">
+  Step 1: Calculate Initial Sums of Both Arrays
+  <a class="heading-link" href="#step-1-calculate-initial-sums-of-both-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, sum2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums1) sum1 <span style="color:#f92672">+=</span> x;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums2) sum2 <span style="color:#f92672">+=</span> x;
+</span></span></code></pre></div><ul>
+<li>First, we compute the total sums of both <code>nums1</code> and <code>nums2</code> by iterating through each array and summing up their elements.</li>
+<li><code>sum1</code> is the sum of elements in <code>nums1</code> and <code>sum2</code> is the sum of elements in <code>nums2</code>.</li>
+</ul>
+<h4 id="step-2-initialize-variables-for-tracking-maximum-gains">
+  Step 2: Initialize Variables for Tracking Maximum Gains
+  <a class="heading-link" href="#step-2-initialize-variables-for-tracking-maximum-gains">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(sum1, sum2);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fst <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, scd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the result <code>ans</code> as the maximum of the initial sums (<code>sum1</code> and <code>sum2</code>).</li>
+<li>We also initialize the variables <code>fst</code> and <code>scd</code> to keep track of the running sums for the differences between <code>nums2[i] - nums1[i]</code> and <code>nums1[i] - nums2[i]</code> respectively.</li>
+<li><code>mx1</code> and <code>mx2</code> will store the maximum values for <code>fst</code> and <code>scd</code> (i.e., the maximum possible subarray sums of the differences).</li>
+</ul>
+<h4 id="step-3-iterate-through-the-arrays-and-compute-differences">
+  Step 3: Iterate Through the Arrays and Compute Differences
+  <a class="heading-link" href="#step-3-iterate-through-the-arrays-and-compute-differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    fst <span style="color:#f92672">+=</span> (nums2[i] <span style="color:#f92672">-</span> nums1[i]);
+</span></span><span style="display:flex;"><span>    scd <span style="color:#f92672">+=</span> (nums1[i] <span style="color:#f92672">-</span> nums2[i]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mx1 <span style="color:#f92672">=</span> max(mx1, fst);
+</span></span><span style="display:flex;"><span>    mx2 <span style="color:#f92672">=</span> max(mx2, scd);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(fst <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) fst <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(scd <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) scd <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>For each index <code>i</code> in the arrays, we compute the differences between the corresponding elements of <code>nums2</code> and <code>nums1</code>:</p>
+<ul>
+<li><code>fst</code> accumulates the difference <code>nums2[i] - nums1[i]</code> (i.e., the gain from replacing an element of <code>nums1</code> with the corresponding element from <code>nums2</code>).</li>
+<li><code>scd</code> accumulates the difference <code>nums1[i] - nums2[i]</code> (i.e., the gain from replacing an element of <code>nums2</code> with the corresponding element from <code>nums1</code>).</li>
+</ul>
+</li>
+<li>
+<p>We update <code>mx1</code> and <code>mx2</code> with the maximum of the running sums <code>fst</code> and <code>scd</code> to track the best possible subarray gain.</p>
+</li>
+<li>
+<p>If <code>fst</code> or <code>scd</code> goes negative, we reset them to 0 because the gain would be detrimental, so it’s better to start a new subarray from the current index.</p>
+</li>
+</ul>
+<h4 id="step-4-compute-the-maximum-possible-sum">
+  Step 4: Compute the Maximum Possible Sum
+  <a class="heading-link" href="#step-4-compute-the-maximum-possible-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, sum1 <span style="color:#f92672">+</span> mx1);
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, sum2 <span style="color:#f92672">+</span> mx2);
+</span></span></code></pre></div><ul>
+<li>After completing the iteration, we update <code>ans</code> by adding the maximum subarray gains <code>mx1</code> and <code>mx2</code> to the corresponding sums <code>sum1</code> and <code>sum2</code>.</li>
+<li>The result is the maximum of these possible configurations.</li>
+</ul>
+<h4 id="step-5-return-the-final-result">
+  Step 5: Return the Final Result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result, which is the maximum possible sum after performing the optimal splice operation.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The algorithm performs a single iteration over the arrays <code>nums1</code> and <code>nums2</code>, calculating the initial sums and the subarray maximums. Each operation inside the loop takes constant time, so the overall time complexity is linear, i.e., <strong>O(n)</strong>, where <code>n</code> is the length of the arrays.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> The algorithm uses only a constant amount of extra space (for the variables <code>sum1</code>, <code>sum2</code>, <code>fst</code>, <code>scd</code>, <code>mx1</code>, <code>mx2</code>, and <code>ans</code>), so the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum possible sum of the spliced array using a greedy approach combined with Kadane’s Algorithm to find the maximum possible gain from swapping subarrays. By iterating through the arrays once and calculating the sum differences, the algorithm achieves a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, making it optimal for large inputs.</p>
+<p>This approach is ideal for problems involving maximizing the sum of arrays through selective replacement of elements, and it leverages dynamic programming principles through greedy optimization for maximum efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode826s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -254,7 +439,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2322"  class="external-link" target="_blank" rel="noopener">LeetCode #2322: Minimum Score After Removals on a Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2325"  class="external-link" target="_blank" rel="noopener">LeetCode #2325: Decode the Message</a></th>
       </tr>
   </thead>
   <tbody>
@@ -296,7 +481,6 @@
 
       </div>
 
-      
 
       <footer>
         

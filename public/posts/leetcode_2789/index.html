@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -231,7 +231,139 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1122s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the maximum possible value that can be obtained from an array, given the operation where adjacent elements of the array can be merged if the current element is greater than or equal to the previous element. When two adjacent elements are merged, the first element of the pair is updated by adding the value of the second element. The task is to compute the maximum possible value that can be obtained after applying this operation optimally.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to find the maximum possible value in the array after applying the merge operation optimally. The algorithm needs to efficiently compute this value by traversing the array and merging adjacent elements wherever it is valid (i.e., when the current element is greater than or equal to the previous element).</p>
+<p>To solve this problem, we can take the following approach:</p>
+<ol>
+<li>
+<p><strong>Initialization:</strong></p>
+<ul>
+<li>We need to initialize an array <code>nums</code> that holds the same values as the input array <code>in</code>, so that we can modify it during the merging process without affecting the original input.</li>
+<li>A variable <code>res</code> will keep track of the maximum value encountered during the process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traverse the Array from Right to Left:</strong></p>
+<ul>
+<li>We start from the last element of the array and iterate backward. This ensures that we are processing possible merges from the end of the array to the beginning.</li>
+<li>While iterating, we check if the current element is greater than or equal to the previous element. If it is, we merge the two elements by adding the current element&rsquo;s value to the previous element.</li>
+<li>After merging, we update the array accordingly and continue checking the remaining elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maximize the Result:</strong></p>
+<ul>
+<li>During each iteration, we keep track of the maximum value encountered so far by comparing the current element (<code>nums[i]</code>) with the previously stored maximum (<code>res</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Maximum Value:</strong></p>
+<ul>
+<li>After completing the traversal and merging operations, the <code>res</code> variable will hold the maximum possible value that can be obtained.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">maxArrayValue</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> in) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> in.size();  <span style="color:#75715e">// Get the size of the input array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> nums(n, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Create a new array to store the elements of the input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Copy elements from the input array to nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>        nums[i] <span style="color:#f92672">=</span> in[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> nums[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Initialize the result with the last element of the array
+</span></span></span></code></pre></div><ul>
+<li>The code starts by calculating the size of the input array (<code>n</code>) and creating a <code>nums</code> array to store the elements. We initialize <code>res</code> with the last element of the array since it will serve as the starting point for our maximum value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#75715e">// Traverse the array from right to left
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> max(res, (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)nums[i]);  <span style="color:#75715e">// Keep track of the maximum value encountered so far
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If the current element is greater than or equal to the previous element, merge them
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&gt;=</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> nums[i];  <span style="color:#75715e">// Merge nums[i] into nums[i - 1]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The core logic of the solution is contained in this loop. We iterate backward through the <code>nums</code> array, checking for valid merges. If <code>nums[i]</code> is greater than or equal to <code>nums[i - 1]</code>, we merge the two elements by adding <code>nums[i]</code> to <code>nums[i - 1]</code>.</li>
+<li>We also update the <code>res</code> variable on each iteration to ensure it holds the maximum value encountered.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the maximum value found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>Finally, after completing the backward traversal and possible merges, we return the maximum value stored in <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the size of the input array. This is because the algorithm iterates through the array exactly once (from the last element to the first), performing constant-time operations inside the loop.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array. This is because we create an auxiliary array <code>nums</code> to store the elements of the input array. The space used by this array is proportional to the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to solve the problem of finding the maximum possible value in the array after applying the merge operation. By iterating backward through the array and merging elements wherever applicable, the algorithm ensures that the array is processed in an optimal manner. The time complexity of <strong>O(n)</strong> ensures that this approach will work efficiently even for large input sizes. The space complexity of <strong>O(n)</strong> is manageable and required to store the intermediate results during the merging process.</p>
+<p>This approach effectively solves the problem while maintaining a clear and efficient implementation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1122s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -285,7 +417,6 @@
 
       </div>
 
-      
 
       <footer>
         

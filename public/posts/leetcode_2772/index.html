@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,125 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cur <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1113s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to check whether it is possible to transform an array <code>A</code> into an array where all elements are zero using the following operation multiple times:</p>
+<ol>
+<li>For any index <code>i</code>, you can subtract a value <code>x</code> (which is positive) from <code>A[i]</code>.</li>
+<li>For each operation at index <code>i</code>, you need to ensure that the value subtracted from index <code>i</code> also affects the next <code>k</code> elements of the array, i.e., each subsequent element from <code>i</code> to <code>i + k - 1</code> gets the value <code>x</code> subtracted from it.</li>
+</ol>
+<p>The task is to determine if, by applying such operations, we can make all elements of the array <code>A</code> zero.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves iterating over the array and maintaining a cumulative &ldquo;current sum&rdquo; (<code>cur</code>) that represents the ongoing effect of the operations. The key challenge is to ensure that at each step:</p>
+<ol>
+<li>The current element can be transformed to zero by subtracting the cumulative value (<code>cur</code>).</li>
+<li>If it&rsquo;s possible, the cumulative effect of the transformation must be tracked for the next <code>k</code> elements, so we know how much more is subtracted from each subsequent element.</li>
+</ol>
+<p>To do this efficiently, we use a sliding window technique where the effect of the previous operations is stored and updated as we move through the array. This allows us to perform the operation in a linear scan without repeatedly modifying the entire array.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="function-checkarray">
+  Function: <code>checkArray</code>
+  <a class="heading-link" href="#function-checkarray">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">checkArray</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> A, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> A.size();
+</span></span></code></pre></div><ul>
+<li><strong><code>cur</code></strong>: Keeps track of the cumulative effect of all the previous operations. It starts as 0, meaning no operations have been applied yet.</li>
+<li><strong><code>n</code></strong>: The length of the array <code>A</code>. This helps with iterating through the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (cur <span style="color:#f92672">&gt;</span> A[i])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li><strong>Main loop</strong>: The loop iterates over each element of the array <code>A</code>. At each step, we check if the current value of <code>cur</code> exceeds <code>A[i]</code>. If <code>cur</code> is greater than <code>A[i]</code>, it means the cumulative effect from previous operations has already made the value too small to make it zero, and thus it&rsquo;s impossible to proceed further. In this case, the function returns <code>false</code> immediately.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        A[i] <span style="color:#f92672">-=</span> cur;
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">+=</span> A[i];
+</span></span></code></pre></div><ul>
+<li><strong>Transform the current element</strong>: Subtract the cumulative effect <code>cur</code> from the current element <code>A[i]</code>. This represents applying the operation at index <code>i</code>. The new value of <code>A[i]</code> is the result after subtracting <code>cur</code>.</li>
+<li><strong>Update <code>cur</code></strong>: Add the newly transformed value of <code>A[i]</code> to <code>cur</code>. This reflects that starting from index <code>i + 1</code>, the next elements will have this new value subtracted from them (i.e., the effect of the operation propagates).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;=</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">-=</span> A[i <span style="color:#f92672">-</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li><strong>Sliding window</strong>: For indices <code>i</code> greater than or equal to <code>k - 1</code>, we subtract the value of <code>A[i - k + 1]</code> from <code>cur</code>. This is because the effect of the operation will no longer affect the element at index <code>i - k + 1</code> (the element that was initially within the window of length <code>k</code>). By subtracting this value from <code>cur</code>, we ensure the correct adjustment of the cumulative effect for the remaining elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cur <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Return condition</strong>: After processing all elements of the array, if <code>cur</code> equals 0, it means we were able to make all elements zero using valid operations, and the function returns <code>true</code>. If <code>cur</code> is not zero, it indicates there are still some leftover effects that couldn&rsquo;t be neutralized, so the function returns <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The algorithm processes each element of the array exactly once in a single loop, performing constant-time operations at each step. Therefore, the time complexity is linear, i.e., <strong>O(n)</strong>, where <code>n</code> is the size of the array <code>A</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses a constant amount of extra space. The variables <code>cur</code> and <code>n</code> take constant space, and no additional data structures are required beyond the input array <code>A</code>. Therefore, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether it is possible to transform an array into a zero array using a sliding window technique. By keeping track of the cumulative effects of the transformations (the variable <code>cur</code>), we avoid the need to repeatedly update the entire array, which would be computationally expensive. The time complexity of <strong>O(n)</strong> ensures that this approach is scalable even for larger arrays, and the space complexity of <strong>O(1)</strong> guarantees minimal memory usage.</p>
+<p>By using this approach, we can solve the problem optimally, making it suitable for large inputs while maintaining simplicity and clarity in the code. The sliding window mechanism allows us to efficiently manage the cumulative effects of operations, ensuring that we can determine whether the transformation is possible without unnecessary recalculations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1113s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -237,7 +355,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2773"  class="external-link" target="_blank" rel="noopener">LeetCode #2773: Height of Special Binary Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2778"  class="external-link" target="_blank" rel="noopener">LeetCode #2778: Sum of Squares of Special Elements </a></th>
       </tr>
   </thead>
   <tbody>
@@ -279,7 +397,6 @@
 
       </div>
 
-      
 
       <footer>
         

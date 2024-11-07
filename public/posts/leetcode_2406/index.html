@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -256,7 +256,197 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode889s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the <strong>minimum number of meeting rooms</strong> required to schedule a series of meetings, where each meeting has a start and end time. The objective is to find the smallest number of rooms needed to accommodate all meetings such that no two meetings overlap in the same room.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution follows the <strong>greedy algorithm</strong> approach combined with a <strong>priority queue (min-heap)</strong> to track and manage the meetings efficiently. The key idea is to keep track of the ongoing meetings and when one meeting ends, reuse that room for the next meeting that starts.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sorting by Start Time</strong>: We first sort the meetings by their start times. This allows us to process the meetings in the order they appear, ensuring that we can efficiently manage their room assignments.</p>
+</li>
+<li>
+<p><strong>Min-Heap for Room Management</strong>: We use a priority queue (min-heap) to track the earliest available room (i.e., the meeting that finishes the earliest). By keeping the room that gets free the soonest at the top, we can always reuse it for the next meeting that starts after the previous one ends.</p>
+</li>
+<li>
+<p><strong>Greedy Allocation</strong>: For each meeting, we check if it can fit into an existing room (by comparing its start time with the earliest available room&rsquo;s end time). If it fits, we assign it to that room; otherwise, we need a new room.</p>
+</li>
+<li>
+<p><strong>Optimal Solution</strong>: By processing meetings one by one and managing room allocations greedily, we ensure that the number of rooms used is minimized.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sorting-the-meetings">
+  Step 1: Sorting the Meetings
+  <a class="heading-link" href="#step-1-sorting-the-meetings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(list.begin(), list.end());
+</span></span></code></pre></div><ul>
+<li>First, we sort the meetings in ascending order by their start time. Sorting is necessary because it allows us to process the meetings in the order they appear and efficiently manage room assignments.</li>
+<li>The sorting step ensures that we always consider the earliest starting meeting first, which is crucial for the greedy approach.</li>
+</ul>
+<h4 id="step-2-initializing-variables">
+  Step 2: Initializing Variables
+  <a class="heading-link" href="#step-2-initializing-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li><strong><code>res</code></strong>: This variable keeps track of the maximum number of rooms used at any point in time. We initialize it to <code>1</code> because we are guaranteed to need at least one room.</li>
+<li><strong><code>cnt</code></strong>: This variable tracks the current number of rooms being used.</li>
+<li><strong><code>pq</code></strong>: This priority queue (min-heap) is used to store the end times of the ongoing meetings. It helps us efficiently find the room that gets free the earliest.</li>
+</ul>
+<h4 id="step-3-processing-the-first-meeting">
+  Step 3: Processing the First Meeting
+  <a class="heading-link" href="#step-3-processing-the-first-meeting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> list.size();
+</span></span><span style="display:flex;"><span>pq.push(list[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div><ul>
+<li>We start by pushing the end time of the first meeting (<code>list[0][1]</code>) into the priority queue.</li>
+<li>This initializes the room allocation process by assuming that the first meeting occupies the first room.</li>
+</ul>
+<h4 id="step-4-handling-subsequent-meetings">
+  Step 4: Handling Subsequent Meetings
+  <a class="heading-link" href="#step-4-handling-subsequent-meetings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next <span style="color:#f92672">=</span> list[i][<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> next <span style="color:#f92672">&gt;</span> pq.top()) {
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    pq.push(list[i][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, cnt);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>If there&rsquo;s only one meeting</strong>: We immediately return <code>1</code> because only one room is needed.</p>
+</li>
+<li>
+<p><strong>For each subsequent meeting</strong>:</p>
+<ul>
+<li>We first check if the next meeting can be assigned to an existing room. To do this, we compare its start time (<code>next = list[i][0]</code>) with the earliest finishing meeting (the top of the priority queue).</li>
+<li>If the current meeting starts after the earliest meeting ends (i.e., <code>next &gt; pq.top()</code>), we pop the earliest meeting from the priority queue (indicating that its room is now available) and decrement the count of rooms in use (<code>cnt--</code>).</li>
+<li>Regardless of whether a room was reused, we add the current meeting&rsquo;s end time to the priority queue, indicating that a room is now occupied by this meeting.</li>
+<li>We increment the number of rooms used (<code>cnt++</code>) and update the maximum number of rooms used (<code>res</code>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-5-returning-the-result">
+  Step 5: Returning the Result
+  <a class="heading-link" href="#step-5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all meetings, we return <code>res</code>, which holds the maximum number of rooms needed at any point in time.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting</strong>: The sorting step takes <strong>O(n log n)</strong>, where <code>n</code> is the number of meetings.</li>
+<li><strong>Priority Queue Operations</strong>: Each meeting is pushed and popped from the priority queue once. Each heap operation (push and pop) takes <strong>O(log n)</strong>. Since there are <code>n</code> meetings, the total complexity for heap operations is <strong>O(n log n)</strong>.</li>
+<li>Overall, the time complexity of the solution is dominated by the sorting and heap operations, which gives an overall time complexity of <strong>O(n log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We store the end times of the ongoing meetings in the priority queue. In the worst case, the priority queue will hold <code>n</code> meeting end times, so the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the minimum number of rooms required to accommodate all meetings by leveraging a greedy approach combined with a priority queue (min-heap). The solution processes the meetings in sorted order, reuses rooms when possible, and tracks the maximum number of rooms used.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Greedy Strategy</strong>: We always reuse rooms as soon as they become available to minimize the number of rooms used.</li>
+<li><strong>Priority Queue</strong>: A priority queue helps us efficiently manage room availability by always keeping track of the earliest finishing meeting.</li>
+<li><strong>Time Complexity</strong>: The solution runs in <strong>O(n log n)</strong>, making it efficient for large input sizes.</li>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, as we store meeting end times in the priority queue.</li>
+</ul>
+<p>This approach is optimal for solving the problem of meeting room allocation and can be applied to various scheduling problems where resource management is required.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode889s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -310,7 +500,6 @@
 
       </div>
 
-      
 
       <footer>
         

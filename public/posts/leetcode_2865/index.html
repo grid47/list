@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,235 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1161s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to calculate the maximum sum of heights of a subsequence of a given array, where the sum of heights is defined as the sum of the elements in the subsequence considering the minimum value of each subsequence at any point. More specifically, the task is to iterate through all elements of the array, treat each as the &ldquo;peak,&rdquo; and compute the maximum possible sum of the heights, considering both elements to the left and right of the peak. Each element contributes its height and the minimum height for each side of the peak is used for summing the heights.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to iterate over each element of the array, treating it as the &ldquo;peak&rdquo; of a subsequence. For each peak, we calculate the sum of the heights by adding the minimum values to the left and right of the peak. The goal is to find the maximum sum of heights across all such peaks.</p>
+<p>Here is a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li>We will use two nested loops to explore each possible peak.</li>
+<li>We will calculate the sum for each peak and keep track of the maximum sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Left and Right Calculation</strong>:</p>
+<ul>
+<li>For each element, we will first calculate the sum of the heights for the elements to its left (if any) and to its right (if any).</li>
+<li>The sum of heights is calculated by adding the minimum of the previous element (to the left) or the current element.</li>
+<li>Similarly, we do this for the right side, considering the minimum of the current element and the next one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>We need to handle edge cases such as arrays with a single element or arrays where the height sequence is already in increasing or decreasing order.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-constants-and-initialize-variables">
+  Step 1: Define Constants and Initialize Variables
+  <a class="heading-link" href="#step-1-define-constants-and-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define ll long long
+</span></span></span></code></pre></div><ul>
+<li>Here we define <code>ll</code> as an alias for <code>long long</code> to make the code cleaner and more readable.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> a.size();
+</span></span><span style="display:flex;"><span>ll <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the size of the input array <code>a</code>.</li>
+<li><code>ans</code> is initialized to <code>0</code>, which will store the maximum sum of heights as we process each possible peak in the array.</li>
+</ul>
+<h4 id="step-2-iterate-over-each-element-as-the-peak">
+  Step 2: Iterate Over Each Element as the Peak
+  <a class="heading-link" href="#step-2-iterate-over-each-element-as-the-peak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    ll <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> a[i]; <span style="color:#75715e">// The peak element itself
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> prev <span style="color:#f92672">=</span> a[i];   <span style="color:#75715e">// The previous minimum height
+</span></span></span></code></pre></div><ul>
+<li>We start iterating through each element of the array with <code>i</code> acting as the index of the peak.</li>
+<li><code>sum</code> is initialized to the value of the current element <code>a[i]</code>, representing the initial height sum starting from the peak.</li>
+<li><code>prev</code> holds the previous minimum height encountered while traversing the array.</li>
+</ul>
+<h4 id="step-3-calculate-sum-for-the-left-side-of-the-peak">
+  Step 3: Calculate Sum for the Left Side of the Peak
+  <a class="heading-link" href="#step-3-calculate-sum-for-the-left-side-of-the-peak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> min(a[j], prev); <span style="color:#75715e">// The minimum height between current element and previous minimum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sum <span style="color:#f92672">+=</span> prev;             <span style="color:#75715e">// Add the minimum value to the total sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>This loop moves leftward from the peak (<code>i</code>) to the beginning of the array (<code>0</code>), calculating the minimum height (<code>prev</code>) at each step and adding it to <code>sum</code>.</li>
+<li>The <code>min(a[j], prev)</code> ensures that we always consider the minimum height while traversing from left to right.</li>
+</ul>
+<h4 id="step-4-calculate-sum-for-the-right-side-of-the-peak">
+  Step 4: Calculate Sum for the Right Side of the Peak
+  <a class="heading-link" href="#step-4-calculate-sum-for-the-right-side-of-the-peak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>prev <span style="color:#f92672">=</span> a[i]; <span style="color:#75715e">// Reset the previous height to the peak element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> min(a[j], prev); <span style="color:#75715e">// The minimum height between current element and previous minimum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sum <span style="color:#f92672">+=</span> prev;             <span style="color:#75715e">// Add the minimum value to the total sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>After processing the left side, we reset the <code>prev</code> variable to the peak (<code>a[i]</code>).</li>
+<li>Then, we move rightward from the peak to the end of the array, again calculating the minimum height at each step and adding it to <code>sum</code>.</li>
+</ul>
+<h4 id="step-5-update-the-maximum-sum">
+  Step 5: Update the Maximum Sum
+  <a class="heading-link" href="#step-5-update-the-maximum-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(sum <span style="color:#f92672">&gt;</span> ans) ans <span style="color:#f92672">=</span> sum; <span style="color:#75715e">// Keep track of the maximum sum
+</span></span></span></code></pre></div><ul>
+<li>After calculating the sum of heights for the current peak, we check if it is larger than the previously recorded maximum sum (<code>ans</code>). If so, we update <code>ans</code> to this new maximum.</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans; <span style="color:#75715e">// Return the maximum sum found
+</span></span></span></code></pre></div><ul>
+<li>After iterating through all possible peaks, we return the maximum sum of heights.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s go through an example to better understand how this solution works.</p>
+<p><strong>Example 1</strong>:
+Input: <code>a = [1, 3, 2, 4]</code></p>
+<ul>
+<li>
+<p>We treat <code>a[0] = 1</code> as the peak:</p>
+<ul>
+<li>Left side: No elements to the left, so sum = <code>1</code>.</li>
+<li>Right side: The minimum value on the right side is <code>2</code>, so sum = <code>1 + 2 + 2 = 5</code>.</li>
+<li>The maximum sum so far is 5.</li>
+</ul>
+</li>
+<li>
+<p>We treat <code>a[1] = 3</code> as the peak:</p>
+<ul>
+<li>Left side: The minimum value on the left side is <code>1</code>, so sum = <code>3 + 1 + 1 = 5</code>.</li>
+<li>Right side: The minimum value on the right side is <code>2</code>, so sum = <code>3 + 1 + 2 + 2 = 8</code>.</li>
+<li>The maximum sum so far is 8.</li>
+</ul>
+</li>
+<li>
+<p>We treat <code>a[2] = 2</code> as the peak:</p>
+<ul>
+<li>Left side: The minimum value on the left side is <code>1</code>, so sum = <code>2 + 1 + 1 = 4</code>.</li>
+<li>Right side: The minimum value on the right side is <code>2</code>, so sum = <code>2 + 1 + 2 = 5</code>.</li>
+<li>The maximum sum so far remains 8.</li>
+</ul>
+</li>
+<li>
+<p>We treat <code>a[3] = 4</code> as the peak:</p>
+<ul>
+<li>Left side: The minimum value on the left side is <code>2</code>, so sum = <code>4 + 2 + 2 = 8</code>.</li>
+<li>Right side: No elements to the right, so sum = <code>8</code>.</li>
+<li>The maximum sum remains 8.</li>
+</ul>
+</li>
+</ul>
+<p>Final answer: <code>8</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The outer loop runs <code>n</code> times, where <code>n</code> is the size of the array.</li>
+<li>For each iteration of the outer loop, two inner loops are used to process the left and right sides of the current peak. Each of these inner loops runs at most <code>n</code> times in total across all peaks.</li>
+<li>Therefore, the overall time complexity is <strong>O(n^2)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we are only using a constant amount of extra space, regardless of the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution iterates over each element in the array, treating each one as a peak and calculating the sum of the heights by considering both the left and right sides. It keeps track of the maximum sum encountered during the iterations. The time complexity is quadratic, making this solution suitable for small to moderate input sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1161s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -297,7 +525,6 @@
 
       </div>
 
-      
 
       <footer>
         

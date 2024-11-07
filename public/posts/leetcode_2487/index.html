@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,147 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> head<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">?</span> head<span style="color:#f92672">-&gt;</span>next: head;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode943s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves removing nodes from a singly linked list such that for any node, if its value is less than the value of the node that comes after it, it should be removed. This task is often referred to as eliminating nodes that are &ldquo;less than&rdquo; the next node in the list, ensuring that the resulting linked list remains in non-decreasing order.</p>
+<p>Given a singly linked list where each node has a value and a pointer to the next node, the goal is to remove nodes such that the remaining nodes form a list where the value of each node is greater than or equal to the node that follows it.</p>
+<p>For example, consider the list:</p>
+<p><code>1 -&gt; 3 -&gt; 2 -&gt; 5 -&gt; 4 -&gt; NULL</code></p>
+<p>After removing the nodes that are less than the next node, the list should become:</p>
+<p><code>3 -&gt; 5 -&gt; NULL</code></p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Recursive Traversal</strong>: Since the problem involves checking consecutive nodes in a list, it is well-suited for a recursive approach. We will recursively process the list from the end to the beginning.</p>
+</li>
+<li>
+<p><strong>Reverse Order Processing</strong>: In a recursive approach, we first reach the end of the list (base case), and then process the nodes while &ldquo;unwinding&rdquo; the recursive stack. This reverse order allows us to compare each node with its next node, making it easier to determine if the current node needs to be removed based on the value of the next node.</p>
+</li>
+<li>
+<p><strong>Node Removal Condition</strong>: As we traverse, we check if the current node&rsquo;s value is less than the value of the next node. If it is, the current node is removed. If it isn’t, we keep the current node in the list.</p>
+</li>
+<li>
+<p><strong>Returning the Head</strong>: The base case is when the list is empty (<code>head == NULL</code>), in which case we simply return <code>NULL</code>. For each recursive call, we decide whether to keep or remove the current node, and finally return the updated head of the list.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-base-case-handling">
+  1. <strong>Base Case Handling</strong>
+  <a class="heading-link" href="#1-base-case-handling">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (head <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li>This is the base case of the recursion. If the <code>head</code> of the list is <code>NULL</code>, it means we have reached the end of the list. In this case, we return <code>NULL</code>, signaling the end of the modified list.</li>
+</ul>
+<h4 id="2-recursive-call">
+  2. <strong>Recursive Call</strong>
+  <a class="heading-link" href="#2-recursive-call">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> removeNodes(head<span style="color:#f92672">-&gt;</span>next);
+</span></span></code></pre></div><ul>
+<li>This line recursively calls <code>removeNodes</code> on the next node in the list. It keeps calling the function until the end of the list is reached (base case). As the recursion unwinds, it starts comparing nodes and deciding whether to keep or remove them.</li>
+</ul>
+<h4 id="3-node-removal-decision">
+  3. <strong>Node Removal Decision</strong>
+  <a class="heading-link" href="#3-node-removal-decision">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> head<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">?</span> head<span style="color:#f92672">-&gt;</span>next : head;
+</span></span></code></pre></div><ul>
+<li>Once the recursive call is made and the next node is processed, we compare the current node (<code>head</code>) with the next node (<code>head-&gt;next</code>).</li>
+<li>The condition <code>head-&gt;next != NULL &amp;&amp; head-&gt;val &lt; head-&gt;next-&gt;val</code> checks if the current node’s value is smaller than the next node’s value.
+<ul>
+<li>If the condition is true, it means the current node should be removed. We return <code>head-&gt;next</code>, effectively removing the current node.</li>
+<li>If the condition is false, the current node is kept in the list, and we return <code>head</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-function-return">
+  4. <strong>Function Return</strong>
+  <a class="heading-link" href="#4-function-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>At the end of the recursion, the head of the modified list is returned. This head will either be the same as the initial head or will have changed based on the removal of certain nodes.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list. This is because the function makes one pass through the entire list, and each node is processed once. Specifically:</p>
+<ul>
+<li>Each recursive call processes a single node.</li>
+<li>The list is traversed once to modify the nodes.</li>
+</ul>
+<p>Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the list.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> due to the recursive call stack. In the worst case, the recursion depth can go as deep as the number of nodes in the linked list. Thus, the space complexity is proportional to the number of nodes.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using a recursive approach to traverse the list in reverse order. By using recursion, we process each node starting from the end of the list, making it easy to decide whether to remove a node based on the value of the node that follows it.</p>
+<p>The algorithm operates with linear time complexity <strong>O(n)</strong> and space complexity <strong>O(n)</strong> due to the recursive stack. This approach ensures that nodes which violate the condition (having a value smaller than the next node) are removed, and the resulting list maintains a non-decreasing order.</p>
+<p>The solution is both simple and effective for problems that require processing linked lists in a sequential manner, especially when recursion provides a natural way to traverse the list.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode943s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -250,7 +390,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2488"  class="external-link" target="_blank" rel="noopener">LeetCode #2488: Count Subarrays With Median K</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2490"  class="external-link" target="_blank" rel="noopener">LeetCode #2490: Circular Sentence</a></th>
       </tr>
   </thead>
   <tbody>
@@ -292,7 +432,6 @@
 
       </div>
 
-      
 
       <footer>
         

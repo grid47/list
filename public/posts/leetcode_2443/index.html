@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -231,7 +231,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode916s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine if a given number <code>num</code> can be represented as the sum of some integer <code>i</code> and its reversed version. Specifically, for a given integer <code>num</code>, we need to check whether there exists an integer <code>i</code> such that:</p>
+<p>[ i + \text{rev}(i) = \text{num} ]</p>
+<p>Where <code>rev(i)</code> represents the reverse of the integer <code>i</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>num = 443</code></li>
+<li>Output: <code>true</code></li>
+</ul>
+<p>Explanation: The number <code>i = 440</code> and its reverse <code>rev(440) = 44</code>, and indeed:</p>
+<p>[ 440 + 44 = 443 ]</p>
+<p>Thus, the function should return <code>true</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow a brute-force approach by checking each integer <code>i</code> from <code>0</code> to <code>num</code>. For each <code>i</code>, we compute its reverse using the helper function <code>rev(i)</code> and check if the sum of <code>i</code> and <code>rev(i)</code> equals <code>num</code>. If we find such a pair, we return <code>true</code>, otherwise, we return <code>false</code>.</p>
+<p>The algorithm proceeds with the following steps:</p>
+<ol>
+<li><strong>Reverse the Numbers</strong>: For each number <code>i</code>, reverse its digits and check if the sum of <code>i</code> and <code>rev(i)</code> equals <code>num</code>.</li>
+<li><strong>Brute-Force Search</strong>: Iterate through all values of <code>i</code> starting from <code>0</code> to <code>num</code>. For each number, calculate <code>rev(i)</code> and check if the sum equals <code>num</code>.</li>
+<li><strong>Return the Result</strong>: If any such pair is found, return <code>true</code>, otherwise return <code>false</code>.</li>
+</ol>
+<p>This approach guarantees that we explore all possible integer values that could sum up with their reversed form to give the number <code>num</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-helper-function-rev">
+  Step 1: Helper Function <code>rev</code>
+  <a class="heading-link" href="#step-1-helper-function-rev">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The first part of the code is the helper function <code>rev(int num)</code> that calculates the reverse of the integer <code>num</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">rev</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(num) {
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> tmp <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Extract the last digit and add it to tmp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        num <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Remove the last digit from num
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tmp;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>tmp = tmp * 10 + num % 10</code>: This operation extracts the last digit of <code>num</code> (i.e., <code>num % 10</code>) and appends it to the reversed number <code>tmp</code>. Initially, <code>tmp</code> is <code>0</code>, and each subsequent operation shifts <code>tmp</code> one place to the left (multiplying by 10) and adds the last digit of <code>num</code>.</li>
+<li><code>num /= 10</code>: This operation removes the last digit from <code>num</code>, so that we can process the next digit.</li>
+</ul>
+<p>For example, if <code>num = 123</code>, the function will reverse it to <code>321</code>.</p>
+<h4 id="step-2-main-function-sumofnumberandreverse">
+  Step 2: Main Function <code>sumOfNumberAndReverse</code>
+  <a class="heading-link" href="#step-2-main-function-sumofnumberandreverse">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Now, let&rsquo;s look at the main function <code>sumOfNumberAndReverse(int num)</code> which performs the check for all possible values of <code>i</code> from <code>0</code> to <code>num</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">sumOfNumberAndReverse</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> num; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((i <span style="color:#f92672">+</span> rev(i)) <span style="color:#f92672">==</span> num) {  <span style="color:#75715e">// Check if i + rev(i) equals num
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// Return false if no such pair is found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>For Loop</strong>: The loop iterates over all integers from <code>0</code> to <code>num</code>. For each integer <code>i</code>, the reversed version of <code>i</code> is calculated using the helper function <code>rev(i)</code>.</li>
+<li><strong>Condition Check</strong>: If the sum of <code>i</code> and its reverse <code>rev(i)</code> equals <code>num</code>, the function returns <code>true</code>.</li>
+<li><strong>Return <code>false</code></strong>: If the loop finishes without finding any such pair, the function returns <code>false</code>.</li>
+</ul>
+<p>For example, for <code>num = 443</code>, the loop will check:</p>
+<ul>
+<li>For <code>i = 0</code>, <code>rev(0) = 0</code>, <code>0 + 0 = 0</code>.</li>
+<li>For <code>i = 1</code>, <code>rev(1) = 1</code>, <code>1 + 1 = 2</code>.</li>
+<li>&hellip;</li>
+<li>For <code>i = 440</code>, <code>rev(440) = 44</code>, <code>440 + 44 = 443</code>. The function returns <code>true</code> here.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the loop completes, if no such pair is found, the function returns <code>false</code>. This ensures that we return the correct result based on whether or not a valid pair was found.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n * m)</strong>, where <code>n</code> is the value of the input number <code>num</code> and <code>m</code> is the average number of digits in the numbers from <code>0</code> to <code>num</code>.</p>
+<ol>
+<li><strong>Loop Iterations</strong>: We loop through all integers <code>i</code> from <code>0</code> to <code>num</code>, which gives <code>num</code> iterations.</li>
+<li><strong>Reversing the Number</strong>: For each iteration, we reverse the number <code>i</code>. The reverse operation takes time proportional to the number of digits in <code>i</code>. The number of digits in <code>i</code> is proportional to <code>log(i)</code> (i.e., <strong>O(m)</strong>, where <code>m</code> is the number of digits in <code>i</code>).</li>
+</ol>
+<p>Thus, the total time complexity is <strong>O(n * m)</strong>, where <code>n</code> is the input number and <code>m</code> is the average number of digits in the numbers from <code>0</code> to <code>num</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is <strong>O(1)</strong>. We are only using a few variables to store intermediate results (like <code>tmp</code> for the reversed number and <code>i</code> for the loop), so no additional space is needed apart from the input.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach provides a simple and direct solution to check if a number <code>num</code> can be expressed as the sum of an integer <code>i</code> and its reverse. The solution uses a brute-force approach, iterating over all possible values of <code>i</code> from <code>0</code> to <code>num</code> and checking if their sum with the reverse of <code>i</code> equals <code>num</code>.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n * m)</strong>, where <code>n</code> is the input number and <code>m</code> is the average number of digits in the numbers.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong>, as we use constant extra space.</li>
+</ul>
+<p>This solution works efficiently for smaller numbers but may not be optimal for larger inputs, where more sophisticated approaches may be required. However, it guarantees correctness by checking all possible numbers and their reversals systematically.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode916s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -243,7 +395,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2444"  class="external-link" target="_blank" rel="noopener">LeetCode #2444: Count Subarrays With Fixed Bounds</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2446"  class="external-link" target="_blank" rel="noopener">LeetCode #2446: Determine if Two Events Have Conflict</a></th>
       </tr>
   </thead>
   <tbody>
@@ -285,7 +437,6 @@
 
       </div>
 
-      
 
       <footer>
         

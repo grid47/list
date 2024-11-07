@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -225,7 +225,116 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode670s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves determining the total time required to buy items from a queue, given specific purchasing behavior and constraints. In this scenario, a customer will buy items in the queue sequentially, with the target item represented by the index <code>k</code>. Each item has a specified quantity, and the goal is to compute the time it takes for the customer to buy their target item considering the quantities of the other items in the queue.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we take the following steps:</p>
+<ol>
+<li>
+<p><strong>Understanding Input</strong>: We receive a vector of integers (<code>nums</code>), where each integer represents the quantity of items in the queue, and an integer <code>k</code>, which indicates the index of the item we are particularly interested in.</p>
+</li>
+<li>
+<p><strong>Identifying the Target Item</strong>: The key item is identified as <code>nums[k]</code>, which signifies the quantity of the item at the k-th index that the customer wishes to purchase.</p>
+</li>
+<li>
+<p><strong>Calculating the Time</strong>: The customer buys items from the front of the queue and moves toward the back. We need to sum the time spent purchasing each item until reaching the k-th item. However, we have to account for the fact that the customer will not buy the target item (<code>nums[k]</code>) until all preceding items have been fully purchased.</p>
+</li>
+<li>
+<p><strong>Iterating through the Queue</strong>: We loop through each item in the queue:</p>
+<ul>
+<li>If the current item&rsquo;s index is greater than <code>k</code>, the effective quantity to consider for the time calculation is limited by the target item (<code>key</code>). This is because the customer can only purchase up to that amount from the target item before moving on.</li>
+<li>For items before the k-th item, the full quantity of those items is added to the total time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, we return the total time calculated.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>: The function <code>timeRequiredToBuy</code> takes a vector <code>nums</code> and an integer <code>k</code> as arguments.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">timeRequiredToBuy</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: We initialize the total time (<code>res</code>) to 0 and store the quantity of the target item (<code>key</code>) for easy access.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, key <span style="color:#f92672">=</span> nums[k];
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop Through Items</strong>: We loop through each index <code>i</code> in the <code>nums</code> vector to calculate the total time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Time Calculation</strong>:</p>
+<ul>
+<li>If the current index <code>i</code> is greater than <code>k</code>, we can only purchase up to the remaining amount of the target item.</li>
+<li>Otherwise, we add the full amount of the current item to the total time.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> min(key <span style="color:#f92672">-</span> (i <span style="color:#f92672">&gt;</span> k), nums[i]);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: After the loop completes, we return the total time calculated.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this approach is (O(n)), where (n) is the number of items in the queue (<code>nums.size()</code>). This is because we only traverse the list of items once, performing constant-time operations within the loop.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are only using a fixed amount of additional space for the integer variables, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>timeRequiredToBuy</code> function efficiently calculates the time required for a customer to buy items in a queue based on their purchasing strategy. By iterating through the items and leveraging the target item&rsquo;s quantity, the function provides a quick and effective means of solving the problem.</p>
+<p>This solution is particularly useful in scenarios involving queues where items are purchased sequentially, such as checkout lines in stores or ticket counters. The algorithm&rsquo;s linear complexity ensures that it can handle larger inputs efficiently without significant performance degradation.</p>
+<p>In summary, this implementation offers a straightforward yet powerful solution to the problem, providing insights into the mechanics of queue operations and customer behavior. Future enhancements might include adapting the solution for varying purchase rules or scenarios where items can be purchased out of order, adding further complexity and real-world applicability to the model.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode670s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -237,7 +346,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2074"  class="external-link" target="_blank" rel="noopener">LeetCode #2074: Reverse Nodes in Even Length Groups</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2075"  class="external-link" target="_blank" rel="noopener">LeetCode #2075: Decode the Slanted Ciphertext</a></th>
       </tr>
   </thead>
   <tbody>
@@ -279,7 +388,6 @@
 
       </div>
 
-      
 
       <footer>
         

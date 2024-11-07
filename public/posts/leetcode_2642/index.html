@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -275,7 +275,199 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;addEdge(edge);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;shortestPath(node1,node2);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1059s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires implementing a graph with nodes and weighted edges, and a method to find the shortest path between two nodes using Dijkstra&rsquo;s algorithm. The graph is initialized with a set of edges, and additional edges can be added dynamically. The task is to implement methods to:</p>
+<ol>
+<li>Compute the shortest path between two nodes.</li>
+<li>Add an edge to the graph after its initialization.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use <strong>Dijkstra&rsquo;s algorithm</strong> for finding the shortest path between two nodes in a weighted graph. Dijkstra’s algorithm works by exploring nodes in increasing order of distance from the source node. It is well-suited for graphs with non-negative edge weights. Here’s how we approach the problem:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>The graph is represented using an adjacency list. Each node has a list of pairs representing its neighboring nodes and the weight of the edge connecting them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dijkstra&rsquo;s Algorithm</strong>:</p>
+<ul>
+<li>We maintain a distance array that stores the shortest known distance to each node from the source node.</li>
+<li>A priority queue (min-heap) is used to efficiently fetch the next node with the smallest distance.</li>
+<li>At each step, we extract the node with the smallest distance, update the distances for its neighbors, and push them back into the priority queue if their distances are updated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Queries</strong>:</p>
+<ul>
+<li>For each query to find the shortest path between two nodes, we use Dijkstra’s algorithm to compute the shortest path and return the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adding New Edges</strong>:</p>
+<ul>
+<li>We provide a method to add an edge between two nodes after the graph has been initialized. This updates the adjacency list and ensures that new edges are considered in subsequent shortest path queries.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-graph-initialization">
+  1. <strong>Graph Initialization</strong>
+  <a class="heading-link" href="#1-graph-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The <code>Graph</code> class is initialized with the number of nodes <code>n</code> and a list of edges. Each edge is represented as a triplet <code>[u, v, w]</code> where <code>u</code> is the starting node, <code>v</code> is the destination node, and <code>w</code> is the weight of the edge.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Graph(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    grid.resize(n);  <span style="color:#75715e">// Initialize an adjacency list for each node.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : edges) {
+</span></span><span style="display:flex;"><span>        grid[e[<span style="color:#ae81ff">0</span>]].push_back({e[<span style="color:#ae81ff">1</span>], e[<span style="color:#ae81ff">2</span>]});  <span style="color:#75715e">// Add the edge to the adjacency list.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="2-add-edge-method">
+  2. <strong>Add Edge Method</strong>
+  <a class="heading-link" href="#2-add-edge-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The <code>addEdge</code> method allows adding new edges to the graph after initialization. Each edge is represented as a vector <code>[u, v, w]</code>, and it adds an edge from node <code>u</code> to node <code>v</code> with weight <code>w</code> to the adjacency list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addEdge</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> e) {
+</span></span><span style="display:flex;"><span>    grid[e[<span style="color:#ae81ff">0</span>]].push_back({e[<span style="color:#ae81ff">1</span>], e[<span style="color:#ae81ff">2</span>]});  <span style="color:#75715e">// Add the new edge to the graph.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="3-dijkstras-algorithm">
+  3. <strong>Dijkstra&rsquo;s Algorithm</strong>
+  <a class="heading-link" href="#3-dijkstras-algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>diji</code> function implements Dijkstra’s algorithm to compute the shortest path between two nodes, <code>n1</code> and <code>n2</code>.</p>
+<ul>
+<li><strong>Initialize the Distance Array</strong>: We initialize a <code>dis</code> array where <code>dis[i]</code> holds the shortest distance from the source node to node <code>i</code>. Initially, all distances are set to infinity (<code>INT_MAX</code>), except for the source node which is set to 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dis(n, INT_MAX);  <span style="color:#75715e">// Distance array initialized to infinity.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>pq.push({<span style="color:#ae81ff">0</span>, n1});  <span style="color:#75715e">// Push the source node into the priority queue with distance 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>dis[n1] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Distance to the source node is 0.
+</span></span></span></code></pre></div><ul>
+<li><strong>Processing the Queue</strong>: In a while loop, we extract the node with the smallest distance (using a priority queue) and check its neighbors. For each neighbor, we calculate the distance from the source node and if it is smaller than the known distance, we update the distance and push the neighbor into the priority queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();  <span style="color:#75715e">// Get the node with the smallest distance.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> node <span style="color:#f92672">=</span> it.second;  <span style="color:#75715e">// Current node.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> x : grid[node]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> x.first;  <span style="color:#75715e">// Neighbor node.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> x.second;  <span style="color:#75715e">// Weight of the edge.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (dis[node] <span style="color:#f92672">+</span> w <span style="color:#f92672">&lt;</span> dis[nxt]) {  <span style="color:#75715e">// If a shorter path is found.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            dis[nxt] <span style="color:#f92672">=</span> dis[node] <span style="color:#f92672">+</span> w;
+</span></span><span style="display:flex;"><span>            pq.push({dis[nxt], nxt});  <span style="color:#75715e">// Push the updated neighbor into the priority queue.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>: After the algorithm completes, if the distance to the destination node (<code>n2</code>) is still infinity, we return -1, indicating no path exists. Otherwise, we return the shortest distance to <code>n2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (dis[n2] <span style="color:#f92672">==</span> INT_MAX) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// No path exists.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">return</span> dis[n2];  <span style="color:#75715e">// Return the shortest path distance.
+</span></span></span></code></pre></div><h4 id="4-shortest-path-method">
+  4. <strong>Shortest Path Method</strong>
+  <a class="heading-link" href="#4-shortest-path-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>shortestPath</code> method simply calls the <code>diji</code> method to get the shortest path between two nodes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">shortestPath</span>(<span style="color:#66d9ef">int</span> node1, <span style="color:#66d9ef">int</span> node2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> diji(node1, node2);  <span style="color:#75715e">// Use Dijkstra&#39;s algorithm to find the shortest path.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Graph Initialization</strong>: The graph is initialized with <code>n</code> nodes and <code>m</code> edges. The time complexity for initializing the graph is (O(m)), where <code>m</code> is the number of edges.</li>
+<li><strong>Dijkstra’s Algorithm</strong>: The time complexity of Dijkstra’s algorithm is (O((n + m) \log n)), where:
+<ul>
+<li>(n) is the number of nodes.</li>
+<li>(m) is the number of edges.</li>
+<li>The (\log n) factor comes from the priority queue operations.</li>
+</ul>
+</li>
+<li><strong>Adding an Edge</strong>: The time complexity of adding an edge is (O(1)), as it just involves appending an edge to the adjacency list.</li>
+</ul>
+<p>Thus, for a single query, the time complexity is (O((n + m) \log n)), and for multiple queries, the complexity will depend on the number of queries.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Graph Representation</strong>: The adjacency list uses (O(m)) space, where <code>m</code> is the number of edges.</li>
+<li><strong>Distance Array</strong>: The distance array (<code>dis</code>) uses (O(n)) space, where <code>n</code> is the number of nodes.</li>
+<li><strong>Priority Queue</strong>: The priority queue can store up to (O(n)) elements at any given time.</li>
+</ul>
+<p>Thus, the overall space complexity is (O(n + m)), where <code>n</code> is the number of nodes and <code>m</code> is the number of edges.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation of the <code>Graph</code> class effectively handles the creation and modification of the graph using an adjacency list. Dijkstra’s algorithm is employed to compute the shortest path between any two nodes efficiently. The addition of new edges is straightforward and ensures that the graph can be dynamically updated. The solution is efficient with respect to both time and space, making it suitable for large graphs with multiple shortest path queries.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1059s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -329,7 +521,6 @@
 
       </div>
 
-      
 
       <footer>
         

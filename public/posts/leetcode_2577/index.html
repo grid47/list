@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -266,7 +266,194 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1005s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given a grid of size <code>m x n</code> where each cell contains a value representing the time required for an elevator to move through that cell. Starting from the top-left corner of the grid <code>(0, 0)</code>, you need to reach the bottom-right corner <code>(m-1, n-1)</code> in the minimum amount of time possible. You can move in four directions: up, down, left, and right, but you are limited by the time constraints in each cell. The elevator moves only during certain times (odd or even), and you must ensure that the elevator arrives at each cell at a time when it is functional.</p>
+<p>The challenge is to find the shortest time needed to reach the bottom-right corner or determine if it&rsquo;s impossible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is essentially about finding the shortest path in a weighted graph, where the weight of each cell depends on the time at which the elevator reaches it. The optimal approach to solve this problem is using <strong>Dijkstra&rsquo;s algorithm</strong>, which is well-suited for finding the shortest path in graphs with non-negative weights. We need to modify the algorithm slightly to account for the time constraints that depend on whether the elevator can be used at a specific time (i.e., whether the current time is odd or even).</p>
+<p>Here’s a breakdown of how to approach the problem:</p>
+<ol>
+<li><strong>Priority Queue</strong>: We use a priority queue (min-heap) to always process the cell with the smallest time first.</li>
+<li><strong>Time Adjustment</strong>: For each cell, we compute the next valid time at which the elevator can move, depending on whether the time is odd or even, and push that into the queue.</li>
+<li><strong>Grid Boundaries</strong>: We ensure that we don’t go outside the grid and that we don’t revisit already visited cells.</li>
+<li><strong>Edge Conditions</strong>: If the elevator cannot move from the starting position <code>(0, 0)</code> due to the time constraints, we return <code>-1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialize-variables">
+  1. <strong>Initialize Variables</strong>:
+  <a class="heading-link" href="#1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>m <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (grid[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> grid[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#75715e">// concept of two and fro does not work at (0,0);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>vis.resize(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(n, false));
+</span></span></code></pre></div><ul>
+<li>The grid&rsquo;s dimensions <code>m</code> and <code>n</code> are assigned.</li>
+<li>We check if it&rsquo;s impossible to move from the start <code>(0,0)</code> due to the time constraints in adjacent cells. If both the right and bottom cells are not accessible, return <code>-1</code>.</li>
+<li>A 2D vector <code>vis</code> is created to keep track of whether a cell has already been visited.</li>
+</ul>
+<h4 id="2-priority-queue-for-dijkstras-algorithm">
+  2. <strong>Priority Queue for Dijkstra&rsquo;s Algorithm</strong>:
+  <a class="heading-link" href="#2-priority-queue-for-dijkstras-algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>pq.push({grid[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>});
+</span></span></code></pre></div><ul>
+<li>A priority queue <code>pq</code> is initialized where each element is a vector of three integers: <code>{time, row, column}</code>.</li>
+<li>The start cell <code>(0,0)</code> is pushed into the priority queue with the initial time set to the value of the grid at that position.</li>
+</ul>
+<h4 id="3-direction-array">
+  3. <strong>Direction Array</strong>:
+  <a class="heading-link" href="#3-direction-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><ul>
+<li>The <code>dir</code> array is used to represent the four possible directions for movement: right, down, left, and up.</li>
+</ul>
+<h4 id="4-processing-the-priority-queue">
+  4. <strong>Processing the Priority Queue</strong>:
+  <a class="heading-link" href="#4-processing-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>], i <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>], j <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> (m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">return</span> t;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (vis[i][j]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li>We start by processing the cell with the smallest time (<code>t</code>) from the priority queue.</li>
+<li>If we reach the bottom-right corner <code>(m-1, n-1)</code>, we return the current time <code>t</code>, which is the minimum time needed to reach the destination.</li>
+<li>If the cell has already been visited, we skip processing it.</li>
+</ul>
+<h4 id="5-explore-neighboring-cells">
+  5. <strong>Explore Neighboring Cells</strong>:
+  <a class="heading-link" href="#5-explore-neighboring-cells">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> dir[k], q <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> dir[k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> q <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> p <span style="color:#f92672">&gt;=</span> m <span style="color:#f92672">||</span> q <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> vis[p][q])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> ((grid[p][q] <span style="color:#f92672">-</span> t) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    pq.push({max(w <span style="color:#f92672">+</span> grid[p][q], t <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), p, q});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each neighboring cell <code>(p, q)</code>, we check if it is within the bounds of the grid and if it has not been visited.</li>
+<li>We calculate the next valid time <code>w</code> when the elevator can be used, based on the condition <code>((grid[p][q] - t) % 2 == 0)</code>, which ensures that the elevator can move only when the time is appropriate (even or odd).</li>
+<li>We then push the next valid time for the neighboring cell into the priority queue. The time for that cell is calculated as <code>max(w + grid[p][q], t + 1)</code>.</li>
+</ul>
+<h4 id="6-return--1-if-no-path-is-found">
+  6. <strong>Return <code>-1</code> if No Path is Found</strong>:
+  <a class="heading-link" href="#6-return--1-if-no-path-is-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the priority queue is exhausted and the bottom-right corner has not been reached, we return <code>-1</code> indicating that it is impossible to reach the destination under the given conditions.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Priority Queue Operations</strong>:</p>
+<ul>
+<li>Each element is pushed into and popped from the priority queue at most once. Each operation on the priority queue (push and pop) takes <code>O(log(k))</code>, where <code>k</code> is the number of elements in the queue.</li>
+<li>In the worst case, we process every cell in the grid, so the total time complexity for priority queue operations is <code>O(m * n * log(m * n))</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Grid Traversal</strong>:</p>
+<ul>
+<li>For each cell, we check up to four neighboring cells. This results in an <code>O(4)</code> factor for each cell, which is constant and doesn&rsquo;t affect the overall complexity.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall time complexity is <strong>O(m * n * log(m * n))</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the space required for the priority queue and the visited array:
+<ul>
+<li>The priority queue holds at most <code>m * n</code> elements, so the space complexity for the queue is <strong>O(m * n)</strong>.</li>
+<li>The visited array <code>vis</code> is of size <code>m * n</code>, so it also contributes <strong>O(m * n)</strong> space.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the overall space complexity is <strong>O(m * n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by applying Dijkstra&rsquo;s algorithm to find the minimum time required to reach the destination while adhering to time constraints. The use of a priority queue ensures that we always process the cell with the smallest time first, which is key to finding the shortest path. With a time complexity of <strong>O(m * n * log(m * n))</strong> and space complexity of <strong>O(m * n)</strong>, this approach is efficient and scalable for large grid sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1005s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -320,7 +507,6 @@
 
       </div>
 
-      
 
       <footer>
         

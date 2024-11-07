@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,218 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1278s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine the minimum number of chairs needed in a room where people enter and exit at specific times, represented by a string <code>s</code>. Each character in the string represents an event: &lsquo;E&rsquo; for entering the room and &lsquo;X&rsquo; for exiting. The goal is to find out how many chairs are needed to accommodate the maximum number of people in the room at any given time.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the approach revolves around simulating the entry and exit of people based on the sequence of events. The core idea is to track the number of people currently in the room, and at each step, update this number when a person enters or exits. By tracking the maximum number of people in the room at any given time, we can determine the minimum number of chairs required.</p>
+<p>The sequence of events (<code>s</code>) tells us when people enter (&lsquo;E&rsquo;) and when they exit (&lsquo;X&rsquo;). We will maintain a count of how many people are in the room at each point. The maximum count during the simulation will indicate the peak number of people present in the room simultaneously, and this is the answer we are looking for.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We initialize two variables:
+<ul>
+<li><code>mx</code>: This variable will store the maximum number of people in the room at any point.</li>
+<li><code>cnt</code>: This variable tracks the current number of people in the room as we process the events in the string <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Over the String</strong>:</p>
+<ul>
+<li>We loop through each character of the string <code>s</code> using a <code>for</code> loop.</li>
+<li>For each character:
+<ul>
+<li>If the character is <code>'E'</code>, a person enters the room, so we increment the <code>cnt</code> variable by 1.</li>
+<li>If the character is <code>'X'</code>, a person exits the room, so we decrement the <code>cnt</code> variable by 1.</li>
+</ul>
+</li>
+<li>After updating <code>cnt</code>, we check whether it is greater than <code>mx</code>. If so, we update <code>mx</code> to be the new value of <code>cnt</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> x: s) {
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">+=</span> (x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;E&#39;</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Increment for &#39;E&#39;, Decrement for &#39;X&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    mx <span style="color:#f92672">=</span> max(mx, cnt);  <span style="color:#75715e">// Update mx with the maximum number of people at any point
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all the events in the string, <code>mx</code> will hold the maximum number of people that were in the room at any time, which corresponds to the minimum number of chairs required. We then return the value of <code>mx</code> as the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example of how this function works:</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;EEXEXEEX&#34;</span>;
+</span></span></code></pre></div><h4 id="process">
+  Process:
+  <a class="heading-link" href="#process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>mx = 0</code>, <code>cnt = 0</code> (no one in the room initially).</li>
+</ul>
+</li>
+<li>
+<p><strong>First Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(0, 1)</code> → <code>mx = 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>Another person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(1, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(2, 1)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(2, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fifth Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(2, 1)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sixth Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(2, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Seventh Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>Another person enters the room, so <code>cnt = 3</code>.</li>
+<li>We update <code>mx = max(2, 3)</code> → <code>mx = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Eighth Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(3, 2)</code> → <code>mx = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+</li>
+</ol>
+<ul>
+<li>After processing all events, the maximum number of people in the room at any time was <code>3</code>. Therefore, the minimum number of chairs required is <code>3</code>.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because we only need to iterate through the string once to process each event (either an entry or an exit). Each event takes constant time, so the total time complexity is linear with respect to the length of the string.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is <strong>O(1)</strong> because we only use a few variables (<code>mx</code>, <code>cnt</code>), regardless of the size of the input string <code>s</code>. We do not need any additional data structures that depend on the input size, so the space usage is constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of chairs needed by simulating the entry and exit of people in a room. It tracks the number of people in the room at any given time and finds the maximum number, which corresponds to the minimum number of chairs required. The algorithm runs in linear time, making it efficient and scalable for large input sizes. The space complexity is constant, which makes this solution optimal in terms of space usage as well.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1278s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -275,7 +486,6 @@
 
       </div>
 
-      
 
       <footer>
         

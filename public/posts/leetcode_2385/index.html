@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -279,7 +279,204 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode876s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine how long it takes for an entire binary tree to be infected, starting from a specific node. The tree nodes represent individuals, and once an individual is infected, it can spread the infection to its neighboring individuals (nodes). We are given a binary tree where each node has a value, and the infection spreads from a starting node to its neighboring nodes in the tree.</p>
+<p>You are tasked with returning the amount of time (in terms of number of rounds or steps) it takes for the infection to spread to the entire tree. The infection spreads through the tree such that at each step, all neighboring nodes of infected nodes become infected.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can transform the binary tree into an <strong>undirected graph</strong> and use a <strong>Breadth-First Search (BFS)</strong> traversal to model the infection spreading process. Here&rsquo;s the step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Transform the Tree to a Graph</strong>:</p>
+<ul>
+<li>A binary tree is inherently a tree structure, but to efficiently traverse and simulate the infection spreading process, we will first represent the tree as an undirected graph. Each node in the binary tree will be connected to its neighbors (both its left and right children) in this graph.</li>
+<li>We&rsquo;ll create an adjacency list to store the tree in graph form. This will allow easy access to a node&rsquo;s neighbors during BFS traversal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
+<ul>
+<li>Starting from the given node, we use BFS to simulate the infection spreading. At each level of BFS, the infection spreads to all the neighboring nodes that have not been infected already.</li>
+<li>We maintain a queue that tracks the nodes to be processed. As we process each node, we add its unvisited neighbors to the queue for the next round.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track the Number of Rounds</strong>:</p>
+<ul>
+<li>As we perform the BFS, we keep track of how many rounds it takes for the infection to reach all nodes in the tree. The result will be the number of rounds minus one (because we start counting from the initial infection).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>TreeNode</code> struct represents a node in the binary tree, with <code>val</code> as its value, and <code>left</code> and <code>right</code> pointers representing the left and right children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Solution Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> amountOfTime(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> start) {
+</span></span><span style="display:flex;"><span>        graph(root);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(start);
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> seen;
+</span></span><span style="display:flex;"><span>        seen[start] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> timer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(; q.size(); timer<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(n<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> node <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i: mp[node]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seen[i]) {
+</span></span><span style="display:flex;"><span>                        seen[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                        q.push(i);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> timer<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>graph(root)</strong>: This function is used to convert the binary tree into an undirected graph.</li>
+<li><strong>amountOfTime(root, start)</strong>: This function is the main BFS loop that simulates the infection process and calculates the number of rounds it takes for the infection to spread throughout the tree.</li>
+</ul>
+<p>The key variables in the method are:</p>
+<ul>
+<li><code>q</code>: The queue stores the nodes that need to be processed during each round of infection.</li>
+<li><code>seen</code>: This map tracks whether a node has already been infected or visited.</li>
+<li><code>timer</code>: This variable tracks how many rounds it takes for the infection to spread to all nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Graph Construction</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">graph</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push({root, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [node, parent] <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(parent <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                mp[parent].push_back(node<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>                mp[node<span style="color:#f92672">-&gt;</span>val].push_back(parent);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>left) q.push({node<span style="color:#f92672">-&gt;</span>left, node<span style="color:#f92672">-&gt;</span>val});
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>right) q.push({node<span style="color:#f92672">-&gt;</span>right, node<span style="color:#f92672">-&gt;</span>val});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>graph(root)</strong> converts the binary tree into an adjacency list representation of an undirected graph.</li>
+<li>It uses a <strong>queue</strong> to perform a level-order traversal of the tree, where each node is processed along with its parent node.</li>
+<li>For each node, it adds an edge between the node and its parent to the adjacency list. If the node has left or right children, they are added to the queue for further processing.</li>
+<li>The result is an adjacency list (<code>mp</code>) where each key is a node value, and the corresponding value is a vector of neighboring node values.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(start);
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> seen;
+</span></span><span style="display:flex;"><span>        seen[start] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> timer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(; q.size(); timer<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(n<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> node <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i: mp[node]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>seen[i]) {
+</span></span><span style="display:flex;"><span>                        seen[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                        q.push(i);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>The BFS starts with the <code>start</code> node, marking it as visited (<code>seen[start] = true</code>).</li>
+<li>At each level (round), the algorithm processes all nodes in the queue. For each node, it checks all its neighbors in the graph. If a neighbor has not been visited, it is added to the queue for processing in the next round.</li>
+<li>The variable <code>timer</code> increments after processing each round, and once all nodes are processed, the function returns <code>timer - 1</code>, which gives the number of rounds it took for the infection to spread completely.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructing the graph takes <strong>O(n)</strong> time, where <code>n</code> is the number of nodes in the binary tree.</li>
+<li>BFS traversal also takes <strong>O(n)</strong> time, as each node is processed exactly once, and we check all its neighbors (which, in the worst case, is constant since each node has at most two neighbors).</li>
+</ul>
+<p>Thus, the total time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The adjacency list (<code>mp</code>) requires <strong>O(n)</strong> space to store the graph representation.</li>
+<li>The <code>seen</code> map and the queue used in BFS also require <strong>O(n)</strong> space.</li>
+</ul>
+<p>Therefore, the space complexity is <strong>O(n)</strong>.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is efficiently solved using the <strong>Breadth-First Search (BFS)</strong> algorithm. By first converting the binary tree into an undirected graph and using BFS to simulate the infection process, we can calculate the number of rounds it takes for the infection to spread to the entire tree. The solution has optimal time and space complexity of <strong>O(n)</strong>, making it suitable for large trees. The BFS approach is well-suited to simulate this type of process, where the infection spreads level by level through the tree&rsquo;s nodes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode876s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -291,7 +488,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2386"  class="external-link" target="_blank" rel="noopener">LeetCode #2386: Find the K-Sum of an Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2389"  class="external-link" target="_blank" rel="noopener">LeetCode #2389: Longest Subsequence With Limited Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -333,7 +530,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -263,7 +263,200 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1220s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two arrays <code>arr1</code> and <code>arr2</code>, we are tasked with finding the length of the longest common prefix of the numbers when their digits are compared position by position. The prefix should be based on matching digits from the most significant digit to the least significant digit, and the goal is to determine the longest common prefix across all the elements of both arrays.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The core idea of the problem is to break down the numbers into their individual digits and compare the corresponding digits at each position. To achieve this efficiently, we can exploit the structure of the numbers by breaking them down from the highest place value (millions, thousands, etc.) to the lowest. By using a map to store intermediate results, we can check how long the common prefix is for each corresponding position in <code>arr2</code>.</p>
+<p>Here&rsquo;s a step-by-step approach to solve the problem:</p>
+<ol>
+<li>
+<p><strong>Preprocess the Numbers in <code>arr1</code>:</strong></p>
+<ul>
+<li>We create a mapping of each possible prefix of the numbers in <code>arr1</code> to the length of that prefix.</li>
+<li>For example, if <code>arr1</code> contains the number 12345, we would check the prefixes 1, 12, 123, 1234, and 12345, and store the length of each valid prefix in a map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Common Prefixes with <code>arr2</code>:</strong></p>
+<ul>
+<li>For each number in <code>arr2</code>, we check the possible prefixes from the highest place value down to the lowest, using the map built from <code>arr1</code>.</li>
+<li>For every valid prefix of a number in <code>arr2</code>, we check if it exists in the map from <code>arr1</code>. If it does, we keep track of the maximum length of any common prefix found.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Maximum Length of the Common Prefix:</strong></p>
+<ul>
+<li>After comparing all numbers in <code>arr2</code> with the prefixes in <code>arr1</code>, the answer will be the maximum length of any common prefix.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown:
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-the-size-function">
+  Step 1: Define the <code>size</code> Function
+  <a class="heading-link" href="#step-1-define-the-size-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        sz<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sz;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function calculates the number of digits in a given number <code>x</code>. The while loop divides <code>x</code> by 10 until it becomes 0, incrementing the <code>sz</code> counter to count the digits.</li>
+</ul>
+<h4 id="step-2-define-the-longestcommonprefix-function">
+  Step 2: Define the <code>longestCommonPrefix</code> Function
+  <a class="heading-link" href="#step-2-define-the-longestcommonprefix-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">longestCommonPrefix</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr1, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr2) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> arr[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">10000000</span>, <span style="color:#ae81ff">1000000</span>, <span style="color:#ae81ff">100000</span>, <span style="color:#ae81ff">10000</span>, <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1</span>};
+</span></span></code></pre></div><ul>
+<li>A map <code>mp</code> is created to store the digits of the numbers from <code>arr1</code> and their corresponding prefix lengths.</li>
+<li>The array <code>arr</code> contains place values from the largest (10 million) to the smallest (1), representing the positional powers of 10.</li>
+</ul>
+<h4 id="step-3-process-numbers-in-arr1">
+  Step 3: Process Numbers in <code>arr1</code>
+  <a class="heading-link" href="#step-3-process-numbers-in-arr1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: arr1) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">8</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">/</span> arr[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            sz<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            mp[p <span style="color:#f92672">/</span> arr[i]] <span style="color:#f92672">=</span> sz;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each number <code>x</code> in <code>arr1</code>, we begin by setting <code>p</code> to <code>x</code> and initializing <code>sz</code> to 0.</li>
+<li>We then iterate over each element in the <code>arr</code> array (the place values).</li>
+<li>For each place value, we check if <code>p</code> divided by the place value is greater than 0, which indicates that the number has a non-zero digit in that position.</li>
+<li>If the condition is met, we increment the prefix length (<code>sz</code>) and store the current prefix (<code>p / arr[i]</code>) and its length (<code>sz</code>) in the map <code>mp</code>.</li>
+</ul>
+<h4 id="step-4-process-numbers-in-arr2-and-find-common-prefix-lengths">
+  Step 4: Process Numbers in <code>arr2</code> and Find Common Prefix Lengths
+  <a class="heading-link" href="#step-4-process-numbers-in-arr2-and-find-common-prefix-lengths">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: arr2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">8</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">/</span> arr[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(p <span style="color:#f92672">/</span> arr[i]))
+</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, mp[p <span style="color:#f92672">/</span> arr[i]]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>mx</code> to 0, which will hold the maximum common prefix length.</li>
+<li>For each number <code>x</code> in <code>arr2</code>, we again iterate over the place values in <code>arr</code>.</li>
+<li>For each place value, we check if <code>p / arr[i] &gt; 0</code>, indicating a valid prefix, and whether the prefix exists in the map <code>mp</code> (which was populated from <code>arr1</code>).</li>
+<li>If both conditions are true, we update <code>mx</code> with the length of the current common prefix, ensuring that <code>mx</code> holds the maximum prefix length encountered.</li>
+</ul>
+<h4 id="step-5-return-the-maximum-common-prefix-length">
+  Step 5: Return the Maximum Common Prefix Length
+  <a class="heading-link" href="#step-5-return-the-maximum-common-prefix-length">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+</span></span></code></pre></div><ul>
+<li>After processing all numbers in <code>arr2</code>, the function returns the maximum common prefix length stored in <code>mx</code>.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Processing <code>arr1</code>:</strong></p>
+<ul>
+<li>For each number <code>x</code> in <code>arr1</code>, we perform a loop over the 8 place values (from 10 million to 1). This gives a time complexity of <code>O(n * 8)</code> where <code>n</code> is the number of elements in <code>arr1</code>. Since 8 is a constant, this simplifies to <code>O(n)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing <code>arr2</code>:</strong></p>
+<ul>
+<li>Similarly, for each number <code>x</code> in <code>arr2</code>, we perform a loop over the 8 place values (from 10 million to 1). This gives a time complexity of <code>O(m * 8)</code> where <code>m</code> is the number of elements in <code>arr2</code>. Again, simplifying this, we get <code>O(m)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity:</strong></p>
+<ul>
+<li>The overall time complexity is <code>O(n + m)</code> where <code>n</code> is the size of <code>arr1</code> and <code>m</code> is the size of <code>arr2</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>We are using a map <code>mp</code> to store the prefixes of the numbers in <code>arr1</code>. In the worst case, the map can store up to 8 entries for each number in <code>arr1</code>, leading to a space complexity of <code>O(n * 8)</code>, which simplifies to <code>O(n)</code> where <code>n</code> is the size of <code>arr1</code>.</li>
+<li>The overall space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach provides an efficient way to calculate the longest common prefix between two arrays of integers by breaking down the numbers into their individual prefixes. By leveraging the map to store prefixes of numbers in <code>arr1</code>, we can quickly check for matching prefixes while processing <code>arr2</code>. The solution has a linear time complexity relative to the size of the input arrays, making it suitable for large datasets.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1220s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -317,7 +510,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -289,7 +289,264 @@
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1097s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum cost to paint all the walls, given certain constraints. The task is to choose walls to paint in such a way that the cost is minimized while also managing the time each paint job takes. The goal is to choose a subset of walls such that the total cost is minimized, and the walls are painted within the time constraints. If two walls have the same cost-to-time ratio, we must prioritize the wall that takes more time, as it may influence subsequent operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages dynamic programming (DP) with memoization and priority queues to efficiently determine the minimum cost for painting the walls under given time constraints. The problem is divided into two parts: the first part uses a priority queue to prioritize the walls based on the cost-to-time ratio, and the second part uses a dynamic programming approach to explore the optimal set of walls to paint.</p>
+<p>The approach consists of the following key steps:</p>
+<ol>
+<li>
+<p><strong>Priority Queue for Optimization</strong>:</p>
+<ul>
+<li>We use a custom comparator class <code>cmp</code> to implement a priority queue (<code>pq</code>) that orders the walls by their cost-to-time ratio. In case of ties (walls with the same cost-to-time ratio), we prioritize the wall that takes more time. This ensures that we give preference to walls with a higher time requirement, which may help with the time constraints during later steps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming (DP) with Memoization</strong>:</p>
+<ul>
+<li>The core of the solution uses dynamic programming to recursively compute the minimum cost required to paint the walls while adhering to the constraints on time. A memoization table is used to store intermediate results and avoid redundant calculations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-comparator-class-for-priority-queue">
+  1. <strong>Comparator Class for Priority Queue</strong>
+  <a class="heading-link" href="#1-comparator-class-for-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">cmp</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> b[<span style="color:#ae81ff">0</span>]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>]; <span style="color:#75715e">// longer time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> b[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Comparator for Priority Queue</strong>:
+<ul>
+<li>The class <code>cmp</code> defines how two elements (representing walls) should be compared in the priority queue. Each element is a <code>vector&lt;float&gt;</code> containing three values: the cost-to-time ratio, the time it takes to paint, and the actual cost.</li>
+<li>The primary comparison is based on the cost-to-time ratio (<code>a[0]</code> vs. <code>b[0]</code>), and if two walls have the same ratio, the one with the greater time (<code>a[1]</code> vs. <code>b[1]</code>) is given preference. This ensures that we always process the walls with the best ratio and the longer time when there&rsquo;s a tie.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-priority-queue-for-processing-walls">
+  2. <strong>Priority Queue for Processing Walls</strong>
+  <a class="heading-link" href="#2-priority-queue-for-processing-walls">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;&gt;</span>, cmp<span style="color:#f92672">&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> cost.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pq.push({(<span style="color:#66d9ef">float</span>)cost[i] <span style="color:#f92672">/</span> time[i], (<span style="color:#66d9ef">float</span>)time[i], (<span style="color:#66d9ef">float</span>)cost[i]});
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> cur <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> (<span style="color:#66d9ef">int</span>)cur[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    n<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">-=</span> (<span style="color:#66d9ef">int</span>)cur[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Priority Queue Initialization</strong>:</p>
+<ul>
+<li>We iterate over each wall, calculating the cost-to-time ratio (<code>cost[i] / time[i]</code>) and pushing the values into the priority queue along with the time and actual cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing the Walls</strong>:</p>
+<ul>
+<li>After populating the priority queue, we start processing the walls. We pop the wall with the best cost-to-time ratio (and if needed, prioritize based on the time).</li>
+<li>The cost of the selected wall is added to the result <code>res</code>.</li>
+<li>We decrement the total remaining time (<code>n</code>) based on the time taken by the selected wall.</li>
+<li>The process repeats until all walls are processed.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-dynamic-programming-with-memoization">
+  3. <strong>Dynamic Programming with Memoization</strong>
+  <a class="heading-link" href="#3-dynamic-programming-with-memoization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cost;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> time;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> rm) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(rm <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[i][rm] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][rm];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, rm);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, rm <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> time[i]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, ret <span style="color:#f92672">==</span> INT_MAX<span style="color:#f92672">?</span> ret: ret <span style="color:#f92672">+</span> cost[i]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[i][rm] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Dynamic Programming Helper Function (<code>dp</code>)</strong>:</p>
+<ul>
+<li>The <code>dp</code> function is designed to compute the minimum cost recursively, using memoization to avoid recalculating subproblems.</li>
+<li>The arguments <code>i</code> and <code>rm</code> represent the current wall index and the remaining time, respectively. The function computes the optimal cost of painting the walls starting from the <code>i</code>-th wall and with <code>rm</code> remaining time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If the remaining time (<code>rm</code>) is zero or negative, the cost is zero because we can&rsquo;t paint any more walls.</li>
+<li>If we reach the end of the array (<code>i == n</code>), we return <code>INT_MAX</code> to signify that no valid solution exists beyond this point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>Before calculating the result, we check if the subproblem has already been solved and cached in the <code>mem</code> table. If it is, we return the cached result to avoid recomputation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Calls</strong>:</p>
+<ul>
+<li>The recursive function tries two possibilities: skipping the current wall and calculating the cost of the next walls (<code>dp(i + 1, rm)</code>), or painting the current wall and subtracting its time from the remaining time (<code>dp(i + 1, rm - 1 - time[i])</code>).</li>
+<li>The minimum of these two values is taken to ensure the optimal solution.</li>
+<li>If painting the wall is possible (i.e., it doesn&rsquo;t exceed the remaining time), we add its cost to the total cost.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-main-function-to-solve-the-problem">
+  4. <strong>Main Function to Solve the Problem</strong>
+  <a class="heading-link" href="#4-main-function-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">paintWalls</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> time) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> cost.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>cost <span style="color:#f92672">=</span> cost;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>time <span style="color:#f92672">=</span> time;
+</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>:
+<ul>
+<li>The <code>paintWalls</code> function initializes the class variables and starts the dynamic programming solution by calling the <code>dp</code> function with the initial index and the total number of walls (<code>n</code>) as the remaining time.</li>
+<li>The result of the <code>dp</code> function is the minimum cost required to paint the walls under the time constraints.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Priority Queue Processing</strong>:</p>
+<ul>
+<li>Building the priority queue involves inserting <code>n</code> elements, which takes (O(n \log n)) time. Processing the elements in the priority queue also takes (O(n \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming</strong>:</p>
+<ul>
+<li>The recursive <code>dp</code> function explores all possible subsets of walls, with a state space of size (O(n \times n)) due to the two parameters <code>i</code> (current wall) and <code>rm</code> (remaining time). The time complexity of solving each subproblem is constant, so the overall complexity is (O(n^2)).</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the total time complexity is (O(n \log n + n^2)), where (n) is the number of walls.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>The <code>mem</code> table stores results for all subproblems and has a size of (O(n^2)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Priority Queue</strong>:</p>
+<ul>
+<li>The priority queue stores (O(n)) elements, each consisting of three floats.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the total space complexity is (O(n^2)).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution combines a priority queue and dynamic programming with memoization to efficiently compute the minimum cost to paint the walls while adhering to the given constraints on time. The priority queue ensures that we prioritize the most efficient walls, while dynamic programming ensures that we find the optimal set of walls to paint. This approach significantly reduces the complexity compared to brute-force methods.</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n \log n + n^2))</li>
+<li><strong>Space Complexity</strong>: (O(n^2))</li>
+</ul>
+<p>This solution is optimal for the given problem and provides an efficient method to compute the desired result.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1097s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -301,7 +558,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2743"  class="external-link" target="_blank" rel="noopener">LeetCode #2743: Count Substrings Without Repeating Character</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2744"  class="external-link" target="_blank" rel="noopener">LeetCode #2744: Find Maximum Number of String Pairs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -343,7 +600,6 @@
 
       </div>
 
-      
 
       <footer>
         

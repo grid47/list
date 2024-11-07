@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -235,7 +235,255 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode907s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to minimize the XOR of two numbers <code>num1</code> and <code>num2</code> while changing the bits of <code>num1</code> such that the number of <code>1</code> bits in the result is equal to the number of <code>1</code> bits in <code>num2</code>. This task requires an optimal approach to achieve the minimum possible value of the XOR by manipulating the bits of <code>num1</code> and <code>num2</code> strategically.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to take advantage of the properties of the XOR operation and bit manipulation. XOR is a binary operation that outputs <code>1</code> if the bits are different and <code>0</code> if they are the same. The goal is to minimize this difference by adjusting the bits of <code>num1</code> while ensuring the number of <code>1</code> bits in the result matches that of <code>num2</code>.</p>
+<h3 id="key-steps">
+  Key Steps
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The steps to minimize the XOR are as follows:</p>
+<ol>
+<li>
+<p><strong>Count the <code>1</code> bits in <code>num2</code>:</strong>
+The first step is to determine how many <code>1</code> bits are in <code>num2</code>. This can be done using the <code>__builtin_popcount()</code> function, which counts the number of <code>1</code> bits in an integer. We will need to match this number of <code>1</code> bits in the resulting number.</p>
+</li>
+<li>
+<p><strong>Set <code>1</code> bits in <code>num1</code>:</strong>
+We then go through the bits of <code>num1</code> from the most significant bit (MSB) to the least significant bit (LSB). For each <code>1</code> bit in <code>num1</code>, we try to keep it in the result as long as there are still <code>1</code> bits required (i.e., the number of <code>1</code> bits left to place in the result is greater than 0).</p>
+</li>
+<li>
+<p><strong>Set <code>0</code> bits where necessary:</strong>
+Once we have placed all the <code>1</code> bits from <code>num1</code>, if there are still <code>1</code> bits remaining to be placed, we set the lowest unset bits in the result until the required number of <code>1</code> bits is reached.</p>
+</li>
+<li>
+<p><strong>Return the result:</strong>
+After all the bits are adjusted, we return the modified number, which now has the same number of <code>1</code> bits as <code>num2</code>, and we have minimized the XOR value.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-count-the-1-bits-in-num2">
+  Step 1: Count the <code>1</code> bits in <code>num2</code>
+  <a class="heading-link" href="#step-1-count-the-1-bits-in-num2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> __builtin_popcount(num2);
+</span></span></code></pre></div><ul>
+<li>We use the <code>__builtin_popcount()</code> function to count the number of <code>1</code> bits in <code>num2</code> and store this value in <code>n</code>. This tells us how many <code>1</code> bits we need in the final result.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-bits-of-num1">
+  Step 2: Iterate over the bits of <code>num1</code>
+  <a class="heading-link" href="#step-2-iterate-over-the-bits-of-num1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(((num1 <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>            n<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to <code>0</code>. This will hold the result.</li>
+<li>We start iterating over the bits of <code>num1</code> from the most significant bit (bit 30) to the least significant bit (bit 0). We do this because we want to prioritize setting the most significant bits first, which helps in minimizing the XOR value.</li>
+<li>For each bit <code>i</code> of <code>num1</code>, we check if the bit is <code>1</code> using <code>((num1 &gt;&gt; i) &amp; 1) == 1</code>. If the bit is <code>1</code>, we check if there are still <code>1</code> bits left to place (i.e., <code>n &gt; 0</code>). If so, we set this bit in <code>res</code> by performing <code>res |= (1 &lt;&lt; i)</code>, and we decrement <code>n</code>.</li>
+<li>If <code>n</code> reaches <code>0</code> (i.e., we have placed all the <code>1</code> bits required), we return <code>res</code>.</li>
+</ul>
+<h4 id="step-3-set-remaining-1-bits-in-res">
+  Step 3: Set remaining <code>1</code> bits in <code>res</code>
+  <a class="heading-link" href="#step-3-set-remaining-1-bits-in-res">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(((res <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>        n<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is still greater than <code>0</code> after iterating through all the bits of <code>num1</code>, we need to place the remaining <code>1</code> bits in the result. We do this by iterating from the least significant bit (bit 0) upwards and setting the bits of <code>res</code> to <code>1</code> where they are currently <code>0</code>.</li>
+<li>We check if the bit <code>i</code> is <code>0</code> in <code>res</code> using <code>((res &gt;&gt; i) &amp; 1) == 0</code>. If it is <code>0</code>, we set it to <code>1</code> using <code>res |= (1 &lt;&lt; i)</code> and decrement <code>n</code>.</li>
+<li>We continue this process until all the <code>1</code> bits required are placed in <code>res</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result <code>res</code>, which now contains the minimal XOR value with the same number of <code>1</code> bits as <code>num2</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The function iterates over the bits of <code>num1</code> and <code>res</code>, both of which are integers and have at most 32 bits (assuming a 32-bit integer). The total number of iterations is thus constant, specifically <code>O(32)</code>.</li>
+<li>The operations inside the loop (bit shifting, bitwise AND, OR, and comparison) are all constant time operations.</li>
+<li>Therefore, the overall time complexity of the solution is:
+[
+O(1)
+]
+This is because the number of bits is fixed, and the algorithm processes each bit in constant time.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm uses a constant amount of extra space, only requiring a few integer variables (<code>n</code>, <code>res</code>, and <code>i</code>).</li>
+<li>Therefore, the space complexity is:
+[
+O(1)
+]</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to see how the algorithm works.</p>
+<h4 id="example-1-num1--3-num2--5">
+  Example 1: <code>num1 = 3</code>, <code>num2 = 5</code>
+  <a class="heading-link" href="#example-1-num1--3-num2--5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Count the <code>1</code> bits in <code>num2</code>:</strong></p>
+<ul>
+<li><code>num2 = 5</code> has two <code>1</code> bits, so <code>n = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate over <code>num1</code>:</strong></p>
+<ul>
+<li><code>num1 = 3</code> has two <code>1</code> bits in positions 1 and 0.</li>
+<li>Start with <code>res = 0</code>.</li>
+<li>For <code>i = 1</code> (bit 1 of <code>num1</code>), the bit is <code>1</code> and <code>n &gt; 0</code>, so we set the bit in <code>res</code>: <code>res |= (1 &lt;&lt; 1)</code> gives <code>res = 2</code>. Decrement <code>n</code> to 1.</li>
+<li>For <code>i = 0</code> (bit 0 of <code>num1</code>), the bit is <code>1</code> and <code>n &gt; 0</code>, so we set the bit in <code>res</code>: <code>res |= (1 &lt;&lt; 0)</code> gives <code>res = 3</code>. Decrement <code>n</code> to 0.</li>
+<li>Since <code>n == 0</code>, return <code>res = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result:</strong></p>
+<ul>
+<li>The result is <code>3</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="example-2-num1--6-num2--7">
+  Example 2: <code>num1 = 6</code>, <code>num2 = 7</code>
+  <a class="heading-link" href="#example-2-num1--6-num2--7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Count the <code>1</code> bits in <code>num2</code>:</strong></p>
+<ul>
+<li><code>num2 = 7</code> has three <code>1</code> bits, so <code>n = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate over <code>num1</code>:</strong></p>
+<ul>
+<li><code>num1 = 6</code> has two <code>1</code> bits at positions 2 and 1.</li>
+<li>Start with <code>res = 0</code>.</li>
+<li>For <code>i = 2</code> (bit 2 of <code>num1</code>), the bit is <code>1</code> and <code>n &gt; 0</code>, so we set the bit in <code>res</code>: <code>res |= (1 &lt;&lt; 2)</code> gives <code>res = 4</code>. Decrement <code>n</code> to 2.</li>
+<li>For <code>i = 1</code> (bit 1 of <code>num1</code>), the bit is <code>1</code> and <code>n &gt; 0</code>, so we set the bit in <code>res</code>: <code>res |= (1 &lt;&lt; 1)</code> gives <code>res = 6</code>. Decrement <code>n</code> to 1.</li>
+<li>For <code>i = 0</code> (bit 0 of <code>num1</code>), the bit is <code>0</code>. We move to the next step to place the remaining <code>1</code> bits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Place remaining <code>1</code> bits:</strong></p>
+<ul>
+<li><code>n = 1</code>, and we need to place one <code>1</code> bit. For <code>i = 0</code>, <code>res = 6</code> (bit 0 is <code>0</code>), so we set it: <code>res |= (1 &lt;&lt; 0)</code> gives <code>res = 7</code>. Decrement <code>n</code> to 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result:</strong></p>
+<ul>
+<li>The result is <code>7</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses bitwise operations and a greedy approach to efficiently minimize the XOR of two numbers while ensuring that the result has the same number of <code>1</code> bits as <code>num2</code>. The time and space complexity of the solution are both constant, making it an optimal solution for this problem. The algorithm is both efficient and easy to understand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode907s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +495,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2430"  class="external-link" target="_blank" rel="noopener">LeetCode #2430: Maximum Deletions on a String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2432"  class="external-link" target="_blank" rel="noopener">LeetCode #2432: The Employee That Worked on the Longest Task</a></th>
       </tr>
   </thead>
   <tbody>
@@ -289,7 +537,6 @@
 
       </div>
 
-      
 
       <footer>
         

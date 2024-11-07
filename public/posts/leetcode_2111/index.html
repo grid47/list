@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -226,7 +226,127 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">-</span> longest;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode690s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the minimum number of operations required to make an array k-increasing. An array is k-increasing if for every k-th index subsequence (i.e., starting from index <code>i</code> and taking every k-th element), the subsequence is non-decreasing. The allowed operation is to remove an element from the array. Your task is to return the minimum number of elements that must be removed to achieve this condition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the concept of finding the Longest Increasing Subsequence (LIS) in the context of subsequences formed by every k-th element. The idea is to iterate over each possible starting index from <code>0</code> to <code>k-1</code> and for each index, create a subsequence using every k-th element. By calculating the length of the LIS for each of these subsequences, we can derive how many elements need to be removed to make each subsequence non-decreasing. The total number of elements removed will be the difference between the total number of elements and the total length of the LIS across all k-subsequences.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size(), longest <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code> is initialized to store the size of the input array <code>arr</code>.</li>
+<li><code>longest</code> is initialized to keep track of the total length of the longest non-decreasing subsequences we find.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over k Subsequences</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>A loop runs from <code>0</code> to <code>k-1</code>, where each iteration processes a different k-th subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding the Longest Increasing Subsequence (LIS)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> lis;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> n; j <span style="color:#f92672">+=</span> k) {
+</span></span></code></pre></div><ul>
+<li>An empty vector <code>lis</code> is declared to store the elements of the current subsequence.</li>
+<li>A nested loop starts with <code>j</code> initialized to <code>i</code> and increments by <code>k</code> in each iteration to grab every k-th element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the LIS</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(lis.empty() <span style="color:#f92672">||</span> lis.back() <span style="color:#f92672">&lt;=</span> arr[j])
+</span></span><span style="display:flex;"><span>    lis.push_back(arr[j]);
+</span></span></code></pre></div><ul>
+<li>If the <code>lis</code> vector is empty or if the last element in <code>lis</code> is less than or equal to the current element <code>arr[j]</code>, the current element is appended to <code>lis</code>. This indicates that we can extend our increasing sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the LIS Using Binary Search</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">upper_bound</span>(lis.begin(), lis.end(), arr[j]) <span style="color:#f92672">=</span> arr[j];
+</span></span></code></pre></div><ul>
+<li>If the current element does not extend the sequence, the code uses <code>upper_bound</code> to find the first element in <code>lis</code> that is greater than <code>arr[j]</code> and replaces it with <code>arr[j]</code>. This effectively maintains the smallest possible elements in <code>lis</code>, which helps in future extensions of the subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accumulate the Length of the LIS</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>longest <span style="color:#f92672">+=</span> lis.size();
+</span></span></code></pre></div><ul>
+<li>After processing all elements for the current k-th subsequence, the size of <code>lis</code> is added to <code>longest</code>, indicating the total length of the longest non-decreasing subsequences found so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> n <span style="color:#f92672">-</span> longest;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the difference between the total number of elements in <code>arr</code> and <code>longest</code>, which represents the minimum number of removals required to make the array k-increasing.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n \log n))</p>
+<ul>
+<li>The outer loop runs <code>k</code> times, and the inner loop processes each element in <code>arr</code>. The use of <code>upper_bound</code> (which takes (O(\log n)) time) within the inner loop contributes to the overall complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n))</p>
+<ul>
+<li>The space complexity is primarily due to the <code>lis</code> vector used for each k-th subsequence. The maximum size of <code>lis</code> can be (O(n)) in the worst case.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the minimum number of removals required to transform an array into a k-increasing sequence using the concept of Longest Increasing Subsequences. By segmenting the array into k-th subsequences and utilizing binary search for updates, the solution achieves optimal time complexity while maintaining clarity and conciseness. This approach ensures that all edge cases are handled effectively, making it a robust solution for the given problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode690s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -238,7 +358,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2112"  class="external-link" target="_blank" rel="noopener">LeetCode #2112: The Airport With the Most Traffic</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2116"  class="external-link" target="_blank" rel="noopener">LeetCode #2116: Check if a Parentheses String Can Be Valid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -280,7 +400,6 @@
 
       </div>
 
-      
 
       <footer>
         

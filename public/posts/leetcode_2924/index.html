@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -217,7 +217,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> count <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1192s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the &ldquo;champion&rdquo; in a directed graph, where each node represents a player, and directed edges represent the outcomes of games between players. The champion is defined as a player who has not lost to any other player, meaning there are no incoming edges to that player from any other player. If there is more than one player with no incoming edges or if no such player exists, return <code>-1</code>.</p>
+<p>This problem is essentially about identifying a node (player) in a directed graph with zero incoming edges. If there is exactly one such node, it is the champion; otherwise, the graph does not have a unique champion.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow these steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Input:</strong>
+The input consists of:</p>
+<ul>
+<li><code>n</code>: The number of players (nodes in the graph).</li>
+<li><code>edges</code>: A list of directed edges, where each edge <code>[u, v]</code> indicates that player <code>u</code> won against player <code>v</code> (there is a directed edge from <code>u</code> to <code>v</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Champion Criteria:</strong>
+The champion should be a player who has:</p>
+<ul>
+<li>Zero incoming edges, i.e., no other player has won against the champion.</li>
+<li>If there is more than one such player or if no player satisfies this condition, the result should be <code>-1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Graph Representation and In-degree Calculation:</strong>
+We can calculate the number of incoming edges (in-degree) for each player. The player with zero in-degree is a candidate for the champion, but we must ensure there is exactly one player with this property.</p>
+</li>
+<li>
+<p><strong>Algorithm Steps:</strong></p>
+<ul>
+<li>Initialize an array <code>indegree</code> of size <code>n</code> to keep track of the number of incoming edges for each player.</li>
+<li>Iterate over the list of edges and update the in-degree of the destination player for each edge.</li>
+<li>After calculating the in-degree for all players, check how many players have zero in-degree. If exactly one player has zero in-degree, that player is the champion.</li>
+<li>If more than one player has zero in-degree, return <code>-1</code>, as there cannot be a unique champion.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition:</strong>
+The function <code>findChampion</code> takes two arguments:</p>
+<ul>
+<li><code>n</code>: The number of players (nodes).</li>
+<li><code>edges</code>: A 2D vector representing the directed edges between players.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findChampion</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Variables:</strong></p>
+<ul>
+<li><code>ans</code>: Initially set to <code>-1</code> to represent that no champion is found by default.</li>
+<li><code>count</code>: A counter to track how many players have zero in-degree.</li>
+<li><code>indegree</code>: A vector of size <code>n</code> initialized to <code>0</code>, which will store the number of incoming edges for each player.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> indegree(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate In-Degree for Each Player:</strong>
+The algorithm iterates over the list of edges, and for each edge <code>[u, v]</code>, it increments the in-degree of player <code>v</code>. This is because player <code>v</code> loses to player <code>u</code>, meaning there is a directed edge from <code>u</code> to <code>v</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) indegree[e[<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>After this loop, the <code>indegree</code> vector contains the number of incoming edges for each player.</p>
+</li>
+<li>
+<p><strong>Identify Players with Zero In-Degree:</strong>
+The algorithm then iterates through the <code>indegree</code> vector to find players with zero in-degree. If a player has zero in-degree, it means that player has not lost to anyone else and is a candidate for being the champion. The <code>count</code> variable keeps track of how many players have zero in-degree, and <code>ans</code> stores the index of the last player with zero in-degree.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(indegree[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { count<span style="color:#f92672">++</span>; ans <span style="color:#f92672">=</span> i; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Champion or -1:</strong>
+After checking all players:</p>
+<ul>
+<li>If more than one player has zero in-degree (<code>count &gt; 1</code>), return <code>-1</code>, indicating that there is no unique champion.</li>
+<li>Otherwise, return <code>ans</code>, the index of the player with zero in-degree, which is the champion.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> count <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ans;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity:</strong>
+The time complexity of this solution is (O(n + m)), where:</p>
+<ul>
+<li>
+<p><code>n</code> is the number of players (nodes).</p>
+</li>
+<li>
+<p><code>m</code> is the number of edges (games).</p>
+</li>
+<li>
+<p>The first loop iterates through all the edges, which takes (O(m)) time to update the in-degree of the destination players.</p>
+</li>
+<li>
+<p>The second loop iterates through all the players (nodes), which takes (O(n)) time to check the in-degree of each player.</p>
+</li>
+</ul>
+<p>Therefore, the overall time complexity is (O(n + m)), which is efficient for this problem.</p>
+</li>
+<li>
+<p><strong>Space Complexity:</strong>
+The space complexity is (O(n)), where <code>n</code> is the number of players. The algorithm uses an additional array <code>indegree</code> of size <code>n</code> to store the in-degree values. No other significant space is used, so the space complexity is linear in terms of the number of players.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently identifies the champion in a directed graph representing players and their game outcomes. The key idea is to track the number of incoming edges (in-degree) for each player. The player with zero incoming edges, if unique, is the champion. The algorithm ensures that the result is obtained in linear time with respect to the number of players and edges, making it suitable for large inputs.</p>
+<p>The approach guarantees correctness by:</p>
+<ul>
+<li>Using the in-degree property to identify candidates for the champion.</li>
+<li>Ensuring there is exactly one player with zero in-degree to confirm the uniqueness of the champion.</li>
+</ul>
+<p>The time complexity of (O(n + m)) ensures that the solution is efficient even for large graphs, and the space complexity of (O(n)) makes it scalable. This makes the solution an optimal choice for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1192s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -229,7 +386,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2925"  class="external-link" target="_blank" rel="noopener">LeetCode #2925: Maximum Score After Applying Operations on a Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2928"  class="external-link" target="_blank" rel="noopener">LeetCode #2928: Distribute Candies Among Children I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -271,7 +428,6 @@
 
       </div>
 
-      
 
       <footer>
         

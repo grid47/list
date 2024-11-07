@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,133 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1151s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the number of unique points covered by a set of intervals. Each interval is given as a pair of integers <code>[start, end]</code> where each point between <code>start</code> and <code>end</code> is included in the interval. The task is to count how many distinct points are covered by at least one of the intervals.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a simple technique involving an array that tracks whether a point is covered by an interval. For every interval, we can mark all the points that the interval covers. After processing all intervals, we can count how many unique points have been covered.</p>
+<p>The key idea is to use a frequency array (<code>v</code>) where each index represents a point, and the value at that index indicates how many times that point is covered by intervals. Once we know which points are covered, we can simply count how many unique points are covered by at least one interval.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-frequency-array">
+  Step 1: Initialize the Frequency Array
+  <a class="heading-link" href="#step-1-initialize-the-frequency-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v(<span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>v</code> of size 102 with all elements set to 0. This array will track how many intervals cover each point.</li>
+<li>We use a size of 102 because the interval endpoints are between 1 and 100, and we need to accommodate for the fact that the index in <code>v</code> represents one less than the actual point (due to the 0-based indexing in the vector). The array is large enough to handle all points from 1 to 100.</li>
+</ul>
+<h4 id="step-2-process-each-interval">
+  Step 2: Process Each Interval
+  <a class="heading-link" href="#step-2-process-each-interval">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> n : nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n[<span style="color:#ae81ff">0</span>]; i <span style="color:#f92672">&lt;=</span> n[<span style="color:#ae81ff">1</span>]; <span style="color:#f92672">++</span>i) v[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates over each interval in the input vector <code>nums</code>. Each interval is represented by a pair <code>[start, end]</code> in the array <code>nums</code>.</li>
+<li>The inner loop iterates through each integer point between <code>start</code> and <code>end</code> (inclusive) in the current interval. For each point <code>i</code>, we increment the corresponding index in the vector <code>v</code>. Specifically, we increment <code>v[i-1]</code>, because the point <code>i</code> corresponds to index <code>i-1</code> in the vector <code>v</code> (due to the 0-based indexing of <code>v</code>).</li>
+</ul>
+<p>This step marks all the points covered by each interval by incrementing the values in the array <code>v</code>.</p>
+<h4 id="step-3-count-the-covered-points">
+  Step 3: Count the Covered Points
+  <a class="heading-link" href="#step-3-count-the-covered-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : v) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (e) ans<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After processing all the intervals, the array <code>v</code> contains the number of intervals covering each point. The value at index <code>i-1</code> in the array <code>v</code> represents how many intervals cover the point <code>i</code>.</li>
+<li>The loop goes through each element <code>e</code> in <code>v</code>, and if <code>e</code> is non-zero (indicating that the corresponding point is covered by at least one interval), we increment the variable <code>ans</code>. This step counts how many unique points are covered by at least one interval.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, the variable <code>ans</code> holds the total count of unique points covered by at least one interval, and we return this value.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * m)</strong>: The outer loop runs for each interval in <code>nums</code>, which has <code>n</code> elements. For each interval, we iterate through its range from <code>start</code> to <code>end</code>. In the worst case, an interval can cover up to 100 points. Therefore, if we assume that the total number of points across all intervals is <code>m</code>, the overall time complexity is <code>O(n * m)</code>, where <code>n</code> is the number of intervals and <code>m</code> is the maximum number of points covered by any single interval. However, since the number of distinct points is at most 100, this operation is bounded by a constant.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because the array <code>v</code> always has a fixed size of 102, regardless of the size of the input. The size of the input does not affect the space usage.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using a frequency array to track the points covered by intervals. The approach ensures that we count all unique points covered by at least one interval without needing to store the exact points themselves. By incrementing values in the array for each point covered by an interval and then counting how many non-zero values are in the array, we can quickly compute the result.</p>
+<p>The solution runs efficiently even with the maximum number of intervals and covers all edge cases, including when no points are covered or when all points are covered. This method also leverages simple array manipulation and avoids the need for more complex data structures, making it easy to implement and understand.</p>
+<p>This approach is highly efficient, with linear time complexity relative to the number of intervals and constant space complexity, making it suitable for large datasets.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1151s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +409,6 @@
 
       </div>
 
-      
 
       <footer>
         

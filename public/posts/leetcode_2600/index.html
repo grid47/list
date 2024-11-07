@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,153 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1028s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given three integers, <code>one</code>, <code>zero</code>, and <code>neg</code>, and an integer <code>k</code>, the task is to calculate the maximum possible sum of selecting <code>k</code> items from a list of <code>one</code> positive ones, <code>zero</code> zeroes, and <code>neg</code> negative ones. The goal is to select <code>k</code> items in such a way that their sum is as large as possible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the key observation is to prioritize selecting the positive ones first, as they contribute the most to the sum. After that, we can consider the zeroes, which do not affect the sum at all. Finally, if there are still remaining selections to be made, we must choose the negative ones, which will reduce the sum.</p>
+<p>The strategy for solving this problem involves:</p>
+<ol>
+<li>
+<p><strong>Prioritize Positive Numbers</strong>: Since we want to maximize the sum, we select the positive ones first. The maximum number of positive ones we can select is the minimum of <code>one</code> and <code>k</code>, because we can only pick up to <code>k</code> items in total.</p>
+</li>
+<li>
+<p><strong>Zero Contribution</strong>: After selecting the positive ones, if we still have remaining selections (i.e., if <code>k</code> is still greater than zero), we pick zeroes next. Zeroes do not affect the sum, so selecting them does not change the total sum.</p>
+</li>
+<li>
+<p><strong>Negative Numbers</strong>: After selecting all positive ones and zeroes, if there are still remaining selections to be made, we must pick negative numbers. Since negative numbers decrease the sum, we select as many as needed to fill the remaining quota, adjusting the sum accordingly by subtracting the appropriate number of negative values.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition">
+  1. <strong>Function Definition</strong>:
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">kItemsWithMaximumSum</span>(<span style="color:#66d9ef">int</span> one, <span style="color:#66d9ef">int</span> zero, <span style="color:#66d9ef">int</span> neg, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The function <code>kItemsWithMaximumSum</code> takes four parameters: <code>one</code>, <code>zero</code>, <code>neg</code>, and <code>k</code>.
+<ul>
+<li><code>one</code>: The number of positive ones.</li>
+<li><code>zero</code>: The number of zeroes.</li>
+<li><code>neg</code>: The number of negative ones.</li>
+<li><code>k</code>: The number of items to select from these categories to maximize the sum.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-select-positive-numbers">
+  2. <strong>Select Positive Numbers</strong>:
+  <a class="heading-link" href="#2-select-positive-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sum <span style="color:#f92672">+=</span> min(one, k);
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">-=</span> min(one, k);
+</span></span></code></pre></div><ul>
+<li>First, we select as many positive ones as possible. The number of positive ones we can select is the minimum between <code>one</code> (the number of positive ones available) and <code>k</code> (the number of items we still need to select).</li>
+<li>We then subtract the number of positive ones selected from <code>k</code> to keep track of how many items are left to choose from.</li>
+</ul>
+<h4 id="3-select-zeroes">
+  3. <strong>Select Zeroes</strong>:
+  <a class="heading-link" href="#3-select-zeroes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">-=</span> min(zero, k);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Next, we select zeroes. Since zeroes do not affect the sum, we select as many as possible, but we are limited by the number of zeroes available and the remaining value of <code>k</code>.</li>
+<li>We subtract the number of zeroes selected from <code>k</code> to keep track of how many items are left to select.</li>
+</ul>
+<h4 id="4-select-negative-numbers">
+  4. <strong>Select Negative Numbers</strong>:
+  <a class="heading-link" href="#4-select-negative-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">-=</span> min(neg, k);
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">-=</span> min(neg, k);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Finally, if there are still items left to select, we must select negative ones. The maximum number of negative ones we can select is the minimum between <code>neg</code> (the number of negative ones available) and the remaining value of <code>k</code>.</li>
+<li>Since negative ones decrease the sum, we subtract the selected number of negative ones from the <code>sum</code>.</li>
+</ul>
+<h4 id="5-return-the-final-result">
+  5. <strong>Return the Final Result</strong>:
+  <a class="heading-link" href="#5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After selecting the positive ones, zeroes, and negative ones, we return the total sum. This sum represents the maximum sum possible by selecting <code>k</code> items from the given categories.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:
+The solution makes a constant number of operations for each step (selecting positive ones, zeroes, and negative ones). Each of these operations takes constant time, i.e., (O(1)). Therefore, the overall time complexity is (O(1)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The solution uses only a few integer variables (<code>sum</code>, <code>k</code>, and temporary variables for the calculations), so the space complexity is (O(1)) as well.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is solved efficiently by strategically selecting the items that contribute the most to the sum. By focusing on selecting positive ones first, zeroes second (which do not affect the sum), and negative ones last (which reduce the sum), we can calculate the maximum sum in constant time. The solution runs in constant time and space, making it optimal for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1028s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -280,7 +426,6 @@
 
       </div>
 
-      
 
       <footer>
         

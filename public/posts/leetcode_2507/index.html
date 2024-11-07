@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,190 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode954s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the <strong>smallest value</strong> that can be obtained from repeatedly replacing a number <code>n</code> with the sum of its prime factors. Specifically, we are asked to:</p>
+<ol>
+<li>Find the sum of the prime factors of <code>n</code>.</li>
+<li>Replace <code>n</code> with this sum.</li>
+<li>Repeat the process until the sum of the prime factors equals <code>n</code>. At this point, the process stops, and we return the value of <code>n</code>.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to understand two main operations:</p>
+<ol>
+<li>
+<p><strong>Prime Factorization</strong>: We need to find the prime factors of a number <code>n</code>. The prime factorization of a number is a way of expressing <code>n</code> as a product of prime numbers. For example, the prime factorization of 12 is ( 2^2 \times 3 ), so the prime factors are 2 and 3.</p>
+</li>
+<li>
+<p><strong>Iterative Process</strong>: We are asked to repeatedly replace <code>n</code> with the sum of its prime factors. This process is repeated until the sum of prime factors of <code>n</code> equals <code>n</code>.</p>
+</li>
+</ol>
+<p>The key insight is that the sum of the prime factors can decrease significantly when we replace <code>n</code> with this sum, and we stop once the sum of the prime factors equals <code>n</code>.</p>
+<h4 id="step-by-step-explanation-of-the-code">
+  Step-by-Step Explanation of the Code
+  <a class="heading-link" href="#step-by-step-explanation-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Let&rsquo;s break the code down and understand each part:</p>
+<h3 id="step-1-helper-function-to-get-the-sum-of-prime-factors">
+  Step 1: Helper Function to Get the Sum of Prime Factors
+  <a class="heading-link" href="#step-1-helper-function-to-get-the-sum-of-prime-factors">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getFactSum</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> div <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">%</span> div <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> div;
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">/=</span> div;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> div<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: This function computes the sum of prime factors of a given number <code>n</code>.</li>
+<li><strong>Implementation Details</strong>:
+<ul>
+<li>We initialize <code>div = 2</code> because 2 is the smallest prime number.</li>
+<li>The <code>while (n &gt; 1)</code> loop continues as long as <code>n</code> is greater than 1. During each iteration, we check if <code>div</code> divides <code>n</code> evenly (<code>n % div == 0</code>).
+<ul>
+<li>If <code>div</code> divides <code>n</code>, we add <code>div</code> to the <code>sum</code> and then divide <code>n</code> by <code>div</code> (this removes the factor <code>div</code> from <code>n</code>).</li>
+<li>If <code>div</code> does not divide <code>n</code>, we increment <code>div</code> to check the next possible factor.</li>
+</ul>
+</li>
+<li>The function continues until <code>n</code> becomes 1, and at this point, all prime factors of <code>n</code> have been processed. The function then returns the sum of these prime factors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-2-main-function-to-find-the-smallest-value">
+  Step 2: Main Function to Find the Smallest Value
+  <a class="heading-link" href="#step-2-main-function-to-find-the-smallest-value">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">smallestValue</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> getFactSum(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(sum <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> sum;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: This is the main function that solves the problem. It repeatedly replaces <code>n</code> with the sum of its prime factors until the sum of the prime factors equals <code>n</code>.</li>
+<li><strong>Implementation Details</strong>:
+<ul>
+<li>We start by using a <code>while(1)</code> loop, which runs indefinitely until we break out of the loop.</li>
+<li>In each iteration, we calculate the sum of prime factors of <code>n</code> using the helper function <code>getFactSum(n)</code>.</li>
+<li>If the sum of prime factors (<code>sum</code>) is equal to <code>n</code>, we break out of the loop since the condition is satisfied.</li>
+<li>If the sum is not equal to <code>n</code>, we replace <code>n</code> with <code>sum</code> and continue to the next iteration.</li>
+<li>Finally, once the loop terminates (when <code>sum == n</code>), we return the value of <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through an example to see how the solution works in practice:</p>
+<p>Consider the input <code>n = 12</code>.</p>
+<ol>
+<li>
+<p><strong>First Iteration</strong>:</p>
+<ul>
+<li><code>getFactSum(12)</code> computes the sum of prime factors of 12.</li>
+<li>The prime factorization of 12 is ( 2^2 \times 3 ). So, the prime factors are 2 and 3.</li>
+<li>The sum of the prime factors is ( 2 + 2 + 3 = 7 ).</li>
+<li>Since 7 is not equal to 12, we replace <code>n</code> with 7.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration</strong>:</p>
+<ul>
+<li>Now, <code>n = 7</code>.</li>
+<li><code>getFactSum(7)</code> computes the sum of prime factors of 7.</li>
+<li>Since 7 is a prime number, its prime factorization is just 7 itself.</li>
+<li>The sum of the prime factors is 7, which is equal to <code>n</code>.</li>
+<li>Since the sum equals <code>n</code>, we break out of the loop and return <code>n</code>, which is 7.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, for the input <code>12</code>, the smallest value is <code>7</code>.</p>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Prime Factorization</strong>: The function <code>getFactSum</code> performs a trial division to find the prime factors of <code>n</code>. In the worst case, we need to check all numbers up to <code>sqrt(n)</code> to find the factors. This takes ( O(\sqrt{n}) ) time.</li>
+<li><strong>Iterative Process</strong>: The process of replacing <code>n</code> with the sum of its prime factors continues until the sum of prime factors becomes equal to <code>n</code>. The number of iterations is dependent on the value of <code>n</code> and the sum of its prime factors. In the worst case, the number of iterations could be logarithmic in nature (in terms of the sum of prime factors), but in general, the process converges quickly.</li>
+</ul>
+<p>Thus, the overall time complexity can be approximated as ( O(\sqrt{n} \cdot k) ), where <code>k</code> is the number of iterations required to reach the smallest value. Since the process converges quickly, <code>k</code> is typically small.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is ( O(1) ), as we are only using a few integer variables for computation, and the space used does not grow with the size of <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem by iteratively computing the sum of the prime factors of <code>n</code> and replacing <code>n</code> with this sum until it converges to a stable value. By using trial division for prime factorization and leveraging the iterative nature of the problem, the solution provides a clear and optimal approach to solving this problem.</p>
+<ul>
+<li><strong>Time Complexity</strong>: ( O(\sqrt{n} \cdot k) ), where <code>k</code> is the number of iterations.</li>
+<li><strong>Space Complexity</strong>: ( O(1) ).</li>
+</ul>
+<p>This approach efficiently handles the problem within the given constraints and provides a clear path to the solution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode954s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -251,7 +434,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2508"  class="external-link" target="_blank" rel="noopener">LeetCode #2508: Add Edges to Make Degrees of All Nodes Even</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2511"  class="external-link" target="_blank" rel="noopener">LeetCode #2511: Maximum Enemy Forts That Can Be Captured</a></th>
       </tr>
   </thead>
   <tbody>
@@ -293,7 +476,6 @@
 
       </div>
 
-      
 
       <footer>
         

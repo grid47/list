@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -220,7 +220,143 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1090s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to transform a given string into its lexicographically smallest form by modifying the string according to certain rules. Specifically, the transformation involves changing the string&rsquo;s characters such that:</p>
+<ul>
+<li>If the string consists entirely of the character &lsquo;a&rsquo;, the last character should be changed to &lsquo;z&rsquo;.</li>
+<li>For other cases, the transformation involves decreasing the characters in the string that are not &lsquo;a&rsquo; by 1, while the &lsquo;a&rsquo; characters remain unchanged.</li>
+</ul>
+<p>The goal is to return the modified string after applying the transformation rules as described above.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task involves modifying the string such that we can achieve the lexicographically smallest form by decreasing non-&lsquo;a&rsquo; characters until we encounter an &lsquo;a&rsquo;. Here’s a breakdown of the approach to solve this problem:</p>
+<ol>
+<li>
+<p><strong>Step 1: Identifying Leading &lsquo;a&rsquo; Characters</strong>:</p>
+<ul>
+<li>First, traverse through the string and find the first non-&lsquo;a&rsquo; character. The &lsquo;a&rsquo; characters are the smallest lexicographically, so we don’t want to change them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 2: Handle the Case of All &lsquo;a&rsquo; Characters</strong>:</p>
+<ul>
+<li>If the string consists entirely of &lsquo;a&rsquo; characters, the entire string is already in its smallest form. Therefore, the only modification we would make is to change the last character from &lsquo;a&rsquo; to &lsquo;z&rsquo;. This is the edge case where the string doesn’t require further transformations, but we still apply the rule that modifies the last character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 3: Decrease Non-&lsquo;a&rsquo; Characters</strong>:</p>
+<ul>
+<li>Once the first non-&lsquo;a&rsquo; character is found, we start decrementing the characters by 1 until we encounter an &lsquo;a&rsquo;. This guarantees that we are transforming the string in a way that results in the lexicographically smallest string. Each non-&lsquo;a&rsquo; character is decreased by 1, and the process continues until we process all the characters in the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 4: Return the Result</strong>:</p>
+<ul>
+<li>After the string has been modified, return the string.</li>
+</ul>
+</li>
+</ol>
+<p>This approach ensures that the string is transformed in a manner that is optimal and results in the lexicographically smallest string possible based on the given rules.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code and explain it step by step:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The variable <code>i</code> is initialized to zero and will be used to traverse through the string from left to right.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;a&#39;</span>) i<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>This loop checks for consecutive &lsquo;a&rsquo; characters starting from the beginning of the string. The loop continues until a character other than &lsquo;a&rsquo; is found, or the end of the string is reached. The variable <code>i</code> will then point to the first non-&lsquo;a&rsquo; character, or the end of the string if the entire string is composed of &lsquo;a&rsquo; characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> s.size()) { s[s.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;z&#39;</span>; <span style="color:#66d9ef">return</span> s; }
+</span></span></code></pre></div><ul>
+<li>This condition handles the edge case where the string consists entirely of &lsquo;a&rsquo; characters. If <code>i</code> reaches the end of the string, it means the entire string is made of &lsquo;a&rsquo;s. In this case, we change the last character of the string to &lsquo;z&rsquo; (as per the rules) and return the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;a&#39;</span>) { s[i]<span style="color:#f92672">--</span>; i<span style="color:#f92672">++</span>; }
+</span></span></code></pre></div><ul>
+<li>This loop is responsible for decrementing the characters in the string that are not &lsquo;a&rsquo;. It starts from the first non-&lsquo;a&rsquo; character (found in the earlier loop) and continues to decrement each character by 1 until it encounters an &lsquo;a&rsquo;. The loop proceeds through the string character by character, ensuring the lexicographically smallest transformation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+</span></span></code></pre></div><ul>
+<li>After all transformations are complete, the modified string is returned as the result.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the algorithm can be analyzed by considering the operations performed on the string:</p>
+<ol>
+<li>
+<p><strong>First Loop (Identifying Leading &lsquo;a&rsquo; Characters)</strong>:</p>
+<ul>
+<li>The first loop goes through the string to find the first non-&lsquo;a&rsquo; character. In the worst case, this loop will examine every character in the string, leading to a time complexity of (O(n)), where (n) is the length of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Loop (Decreasing Non-&lsquo;a&rsquo; Characters)</strong>:</p>
+<ul>
+<li>The second loop decreases the non-&lsquo;a&rsquo; characters until it encounters an &lsquo;a&rsquo;. In the worst case, this loop will also traverse the entire string, leading to a time complexity of (O(n)).</li>
+</ul>
+</li>
+</ol>
+<p>Therefore, the overall time complexity of the algorithm is (O(n)), where (n) is the length of the input string.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is determined by the amount of additional memory used by the algorithm. The algorithm does not use any extra data structures that grow with the size of the input string. The only additional variables used are a few integer variables (<code>i</code>), and the string <code>s</code> is modified in place.</p>
+<p>Therefore, the space complexity is (O(1)), meaning the algorithm uses constant space.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and handles the problem in linear time, making it suitable for large input sizes. By focusing on modifying the string in a single pass, the algorithm achieves the lexicographically smallest string by decrementing non-&lsquo;a&rsquo; characters until the first &lsquo;a&rsquo; is encountered. The edge case of a string consisting entirely of &lsquo;a&rsquo; characters is handled separately by changing the last character to &lsquo;z&rsquo;. This approach is both simple and effective, ensuring that the solution is optimal for any valid input string.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1090s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -274,7 +410,6 @@
 
       </div>
 
-      
 
       <footer>
         

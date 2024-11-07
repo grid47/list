@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -234,7 +234,143 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode753s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to calculate the number of collisions that happen in a traffic scenario where cars are moving in different directions. The cars can either move to the left (&lsquo;L&rsquo;), to the right (&lsquo;R&rsquo;), or stay still (&lsquo;S&rsquo;). A collision occurs when two cars are facing towards each other, meaning one car is moving left (&lsquo;L&rsquo;) and the other is moving right (&lsquo;R&rsquo;). We are to count how many collisions happen as cars move towards each other.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be efficiently implemented by:</p>
+<ol>
+<li>Scanning from both ends of the string to skip over cars that are not involved in collisions.</li>
+<li>Identifying the region in the string where collisions are possible, i.e., between cars moving in opposite directions.</li>
+<li>Counting the number of collisions based on the positions of these cars.</li>
+</ol>
+<p>To solve this, we:</p>
+<ul>
+<li>First skip any cars moving to the left at the beginning (<code>L</code> characters).</li>
+<li>Then skip any cars moving to the right at the end (<code>R</code> characters).</li>
+<li>The remaining cars in between are the ones that may collide. For these, we check if they are either moving left (&lsquo;L&rsquo;) or right (&lsquo;R&rsquo;) and count them as collisions.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Pointers:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> dir.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> dir.size();
+</span></span></code></pre></div><ul>
+<li><code>l</code> and <code>r</code> are pointers that will be used to scan from the left and right ends of the string, respectively.</li>
+<li><code>n</code> stores the size of the string <code>dir</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skipping Cars Moving Left at the Beginning:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> dir[l] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span>)
+</span></span><span style="display:flex;"><span>    l<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We increment <code>l</code> while the character at position <code>l</code> is &lsquo;L&rsquo;. This is because cars moving left at the start won&rsquo;t collide with any other cars, as they are already moving in the opposite direction.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skipping Cars Moving Right at the End:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(r <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> dir[r] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span>)
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>We decrement <code>r</code> while the character at position <code>r</code> is &lsquo;R&rsquo;. These cars are also not involved in collisions as they are already moving away from the center of the traffic.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Collisions:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> l; i <span style="color:#f92672">&lt;=</span> r; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(dir[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;S&#39;</span>)
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate from <code>l</code> to <code>r</code>, which marks the region where collisions can occur.</li>
+<li>For each car in this region, if it is either &lsquo;L&rsquo; or &lsquo;R&rsquo; (not &lsquo;S&rsquo;), it indicates a collision with another car.</li>
+<li>Each such car contributes to the collision count, and we increment <code>cnt</code> accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Collision Count:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Finally, after counting the collisions, we return the result stored in <code>cnt</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The solution involves a linear scan of the string <code>dir</code>. First, we increment <code>l</code> and decrement <code>r</code> to find the valid collision region. Then, we iterate over the remaining cars to count the collisions. Since each operation (increment, decrement, and iteration) takes constant time, the overall time complexity is O(n), where <code>n</code> is the size of the string <code>dir</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The space complexity is O(1) as we are only using a few variables (<code>l</code>, <code>r</code>, <code>cnt</code>) to track the positions and the result. We do not use any additional space that scales with the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and simple, providing an optimal way to count collisions in a traffic scenario. The two-pointer technique, combined with direct counting, ensures that the solution runs in linear time O(n), making it well-suited for large inputs. The space complexity is constant (O(1)), which ensures that the solution is memory-efficient. By focusing on the portion of the array where collisions can occur and skipping irrelevant elements, this approach is both time-efficient and space-efficient, making it ideal for solving problems of this nature.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode753s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +424,6 @@
 
       </div>
 
-      
 
       <footer>
         

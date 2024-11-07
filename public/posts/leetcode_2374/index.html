@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -229,7 +229,128 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> idx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode867s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given an array <code>edges</code> of size <code>n</code>, where <code>edges[i]</code> represents a directed edge from node <code>i</code> to node <code>edges[i]</code>. Our task is to find the node with the largest sum of indices of nodes that point to it. If multiple nodes have the same sum, we return the node with the smallest index.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a hashmap (or in this case, a <code>map</code> from the C++ Standard Library) to keep track of the sum of indices of the nodes pointing to each node. The general approach is as follows:</p>
+<ol>
+<li><strong>Initialize a Map</strong>: We will use a <code>map&lt;int, long long&gt;</code> to store the sum of indices for each node. The key will be the destination node, and the value will be the sum of indices of the nodes that point to it.</li>
+<li><strong>Iterate through the Array</strong>: We will loop through the array <code>edges</code> and for each node <code>i</code>, we will add <code>i</code> to the sum of the destination node <code>edges[i]</code>. This will keep track of the sum of indices of the nodes pointing to each destination node.</li>
+<li><strong>Track the Maximum Sum</strong>: As we iterate through the <code>edges</code> array, we keep track of the node with the maximum sum of indices. If we encounter a new sum that is larger than the previous maximum, we update the result. If the sum is equal to the current maximum, we select the node with the smaller index.</li>
+<li><strong>Return the Result</strong>: After processing all the nodes, we return the node that has the largest sum of indices pointing to it. If there are ties (multiple nodes with the same sum), we return the node with the smallest index.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> edgeScore(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> edges) {
+</span></span></code></pre></div><p>The class <code>Solution</code> contains the method <code>edgeScore</code>, which takes the array <code>edges</code> as an argument and returns the node with the largest score.</p>
+</li>
+<li>
+<p><strong>Initialize the Map and Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> mp;  <span style="color:#75715e">// A map to store the sum of indices for each node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> edges.size();     <span style="color:#75715e">// Get the size of the edges array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, idx <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;    <span style="color:#75715e">// Variables to keep track of the maximum score and corresponding node
+</span></span></span></code></pre></div><ul>
+<li><code>mp</code> is a map where the key is the destination node, and the value is the sum of indices of the nodes pointing to it.</li>
+<li><code>n</code> is the size of the <code>edges</code> array.</li>
+<li><code>mx</code> is used to store the maximum sum found so far, and <code>idx</code> stores the node corresponding to this maximum sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the <code>edges</code> Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[edges[i]] <span style="color:#f92672">+=</span> i;  <span style="color:#75715e">// Add the index &#39;i&#39; to the destination node &#39;edges[i]&#39;
+</span></span></span></code></pre></div><ul>
+<li>The loop iterates through the array <code>edges</code> where <code>i</code> represents the index of the node.</li>
+<li>For each node <code>i</code>, we update the sum of indices for the destination node <code>edges[i]</code> by adding <code>i</code> to it: <code>mp[edges[i]] += i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check and Update the Maximum Score</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp[edges[i]] <span style="color:#f92672">&gt;</span> mx) {
+</span></span><span style="display:flex;"><span>            idx <span style="color:#f92672">=</span> edges[i];  <span style="color:#75715e">// If a new maximum score is found, update the node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mx <span style="color:#f92672">=</span> mp[edges[i]];  <span style="color:#75715e">// Update the maximum score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(mp[edges[i]] <span style="color:#f92672">==</span> mx) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(edges[i] <span style="color:#f92672">&lt;</span> idx)  <span style="color:#75715e">// If there is a tie, select the node with the smaller index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                idx <span style="color:#f92672">=</span> edges[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>After updating the sum of indices for <code>edges[i]</code>, we check if the new sum is greater than the current maximum score <code>mx</code>. If so, we update both the maximum score and the corresponding node (<code>idx</code>).</li>
+<li>If the new sum is equal to the current maximum score, we compare the indices of the nodes. In case of a tie, we select the node with the smaller index to ensure the smallest node is returned in case of equal scores.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> idx;  <span style="color:#75715e">// Return the node with the largest sum of indices pointing to it
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>After the loop finishes, the node with the largest score is stored in <code>idx</code>. We return this node as the result.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the <code>edges</code> array. This is because we are iterating through the array <code>edges</code> once and performing constant-time operations (map insertions and comparisons) inside the loop. The <code>map</code> operations (insertion and update) are logarithmic with respect to the number of unique nodes, but since there are at most <code>n</code> unique nodes, the overall time complexity remains <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the <code>edges</code> array. This is because we are using a map to store the sum of indices for each unique destination node. In the worst case, there can be up to <code>n</code> unique destination nodes, leading to a space usage of <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The given solution provides an efficient way to determine the node with the largest sum of indices in a directed graph represented by the <code>edges</code> array. By using a map to keep track of the sum of indices for each destination node, and using a straightforward comparison strategy to find the node with the largest sum (or the smallest index in case of ties), the solution works efficiently with a time complexity of <strong>O(n)</strong>.</p>
+<p>This approach is well-suited for problems involving graphs or arrays where we need to aggregate values based on certain conditions (in this case, the sum of indices). The space complexity of <strong>O(n)</strong> is manageable, and the solution is scalable for larger input sizes. The careful handling of ties ensures that we return the correct node even in edge cases.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode867s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -283,7 +404,6 @@
 
       </div>
 
-      
 
       <footer>
         

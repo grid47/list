@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -267,7 +267,140 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_3 = obj-&gt;maximum();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_4 = obj-&gt;minimum();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode643s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task involves creating a <code>StockPrice</code> class that keeps track of stock prices over time, allowing us to:</p>
+<ol>
+<li>Update the stock price at a specific timestamp.</li>
+<li>Retrieve the most recent price.</li>
+<li>Retrieve the maximum price recorded.</li>
+<li>Retrieve the minimum price recorded.</li>
+</ol>
+<p>Each update can replace an existing price if there’s already one recorded for a given timestamp.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We use three main data structures:</p>
+<ol>
+<li>A <strong>map</strong> (<code>mp</code>) to store the price associated with each timestamp.</li>
+<li>A <strong>set</strong> (<code>strm</code>) to keep timestamps in order, which helps us retrieve the most recent price.</li>
+<li>Another <strong>set</strong> (<code>ord</code>) to keep prices sorted, allowing efficient retrieval of the maximum and minimum prices.</li>
+</ol>
+<p>This approach ensures that:</p>
+<ul>
+<li><code>current()</code> retrieves the latest timestamp&rsquo;s price from <code>strm</code>.</li>
+<li><code>maximum()</code> and <code>minimum()</code> fetch the highest and lowest prices directly from <code>ord</code>.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StockPrice</span> {
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> strm, ord;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    StockPrice() { }
+</span></span></code></pre></div><ul>
+<li>We declare a <code>StockPrice</code> class and initialize three data structures:
+<ul>
+<li><code>strm</code>: A set of pairs representing <code>(timestamp, price)</code> for chronological ordering.</li>
+<li><code>ord</code>: A set of pairs representing <code>(price, timestamp)</code> for direct access to min/max prices.</li>
+<li><code>mp</code>: A map for associating each <code>timestamp</code> with its <code>price</code>, making it easy to check and update existing records.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(<span style="color:#66d9ef">int</span> ts, <span style="color:#66d9ef">int</span> pc) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(ts)) {
+</span></span><span style="display:flex;"><span>            strm.erase(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(ts, mp[ts]));
+</span></span><span style="display:flex;"><span>            ord.erase(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(mp[ts], ts));
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><code>update</code> takes <code>ts</code> (timestamp) and <code>pc</code> (price). If there’s already a price at <code>ts</code>, we:
+<ul>
+<li>Erase the old timestamp-price pair from <code>strm</code>.</li>
+<li>Erase the old price-timestamp pair from <code>ord</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        mp[ts] <span style="color:#f92672">=</span> pc;
+</span></span><span style="display:flex;"><span>        strm.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(ts, pc));
+</span></span><span style="display:flex;"><span>        ord.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(pc, ts));
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>We update <code>mp</code> with the new price for <code>ts</code>, then insert the new <code>(timestamp, price)</code> into <code>strm</code> and the <code>(price, timestamp)</code> pair into <code>ord</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">current</span>() {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> rbegin(strm)<span style="color:#f92672">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><code>current()</code> retrieves the latest price by accessing the last element of <code>strm</code>, which holds the highest timestamp (most recent).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximum</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> rbegin(ord)<span style="color:#f92672">-&gt;</span>first;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimum</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> begin(ord)<span style="color:#f92672">-&gt;</span>first;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>maximum()</code> returns the largest price from <code>ord</code> by accessing its last element.</li>
+<li><code>minimum()</code> returns the smallest price from <code>ord</code> by accessing its first element.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>update()</strong>: O(log n) for insertions and deletions in <code>set</code> and <code>map</code>.</li>
+<li><strong>current(), maximum(), minimum()</strong>: O(1) for retrieving the respective elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of timestamps, due to storage in <code>map</code> and <code>set</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>StockPrice</code> class offers an efficient way to manage and retrieve stock prices across timestamps. Using sorted data structures (<code>set</code> and <code>map</code>), we achieve fast operations to update, retrieve current, max, and min prices. This structure minimizes retrieval time, making it effective for real-time applications where updates and queries are frequent.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode643s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +412,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2035"  class="external-link" target="_blank" rel="noopener">LeetCode #2035: Partition Array Into Two Arrays to Minimize Sum Difference</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2037"  class="external-link" target="_blank" rel="noopener">LeetCode #2037: Minimum Number of Moves to Seat Everyone</a></th>
       </tr>
   </thead>
   <tbody>
@@ -321,7 +454,6 @@
 
       </div>
 
-      
 
       <footer>
         

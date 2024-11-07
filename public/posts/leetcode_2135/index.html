@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -255,7 +255,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode707s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to count how many words from a given list (<code>end</code>) can be transformed into words from another list (<code>start</code>) by changing exactly one character in each word. This transformation is limited to the 26 lowercase letters of the English alphabet.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use a bitmasking technique, which allows us to represent each word as an integer where each bit corresponds to the presence or absence of a character from &lsquo;a&rsquo; to &lsquo;z&rsquo;. By utilizing this representation, we can quickly check if a word can be transformed into another by changing a single character. The overall idea is to:</p>
+<ol>
+<li>Convert each word in the <code>start</code> list into a bitmask and store these masks in a set.</li>
+<li>For each word in the <code>end</code> list, create a bitmask and check if we can create a valid transformation by changing one character. This is done by iterating through each character in the word and toggling it, checking if the resulting mask exists in the set of start masks.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>This defines the <code>Solution</code> class, which contains the method for counting the valid word transformations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">wordCount</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> start, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> end) {
+</span></span></code></pre></div><ul>
+<li>The <code>wordCount</code> function is defined as a public member of the <code>Solution</code> class. It takes two vectors of strings: <code>start</code> and <code>end</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Set Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> bit;
+</span></span></code></pre></div><ul>
+<li>A <code>set</code> of integers named <code>bit</code> is declared to store the bitmask representations of words from the <code>start</code> list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bitmasking Start Words</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: start) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: it)
+</span></span><span style="display:flex;"><span>        mask <span style="color:#f92672">|=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    bit.insert(mask);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each word in the <code>start</code> vector.</li>
+<li>For each word, a <code>mask</code> variable is initialized to zero. The inner loop goes through each character <code>x</code> of the word and uses bitwise operations to set the corresponding bit in <code>mask</code> to <code>1</code>. The expression <code>1 &lt;&lt; (x - 'a')</code> shifts <code>1</code> to the position corresponding to the character <code>x</code>.</li>
+<li>After constructing the bitmask for a word, it is inserted into the <code>bit</code> set.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>A counter <code>cnt</code> is initialized to zero to keep track of how many valid transformations are found.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bitmasking End Words</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: end) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: it)
+</span></span><span style="display:flex;"><span>        mask <span style="color:#f92672">|=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>);
+</span></span></code></pre></div><ul>
+<li>This loop processes each word in the <code>end</code> vector in a similar manner. A bitmask is created for each word in <code>end</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transformation Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(((mask <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> (mask <span style="color:#f92672">^</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(bit.count(tmp)) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each character in the current <code>end</code> word&rsquo;s mask, the algorithm checks if that character is present (<code>((mask &gt;&gt; i) &amp; 1) == 0</code>).</li>
+<li>If the character is present, it creates a new temporary mask <code>tmp</code> by toggling that character using the XOR operation: <code>(mask ^ (1 &lt;&lt; i))</code>. This effectively changes the bit corresponding to that character.</li>
+<li>The algorithm then checks if <code>tmp</code> exists in the <code>bit</code> set using <code>bit.count(tmp)</code>. If it does, it indicates that a transformation is possible, and the counter <code>cnt</code> is incremented. The loop is exited early using <code>break</code> to prevent counting multiple transformations for the same word.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the count of valid transformations found.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This closing brace signifies the end of the <code>Solution</code> class.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: ( O(n \cdot m) )</p>
+<ul>
+<li>Here, ( n ) is the number of words in the <code>end</code> list and ( m ) is the average length of the words. Each word in both lists requires iterating through its characters and checking for transformations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: ( O(n) )</p>
+<ul>
+<li>The space complexity arises from storing the bitmasks of the <code>start</code> words in the <code>set</code>, which could contain up to ( n ) unique masks.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>wordCount</code> function efficiently counts how many words from the <code>end</code> list can be formed by changing exactly one character in the words from the <code>start</code> list. By leveraging bitmasking, the solution achieves a compact representation of characters, allowing for quick transformations and lookups. This approach not only simplifies the problem but also enhances performance, making it suitable for larger datasets.</p>
+<p>This code serves as a good example of using bitwise operations and sets in C++ to solve problems related to character manipulation and word transformations. The use of bitmasks significantly reduces the complexity of checking for character presence, resulting in a clean and efficient solution.</p>
+<p>For those interested in algorithm design and competitive programming, understanding this approach can provide valuable insights into optimizing similar problems involving string manipulation and character comparisons. The clarity and efficiency of this solution make it an excellent choice for technical interviews and coding challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode707s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -267,7 +424,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2136"  class="external-link" target="_blank" rel="noopener">LeetCode #2136: Earliest Possible Day of Full Bloom</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2138"  class="external-link" target="_blank" rel="noopener">LeetCode #2138: Divide a String Into Groups of Size k</a></th>
       </tr>
   </thead>
   <tbody>
@@ -309,7 +466,6 @@
 
       </div>
 
-      
 
       <footer>
         

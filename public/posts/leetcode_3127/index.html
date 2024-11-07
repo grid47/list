@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,182 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1235s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine if it is possible to make a square in a given grid by checking the 2x2 sub-grids. A square is made of &lsquo;W&rsquo; (white) and &lsquo;B&rsquo; (black) cells, and the objective is to see if any 2x2 sub-grid satisfies one of the following conditions:</p>
+<ol>
+<li>Three white cells and one black cell.</li>
+<li>Three black cells and one white cell.</li>
+<li>All four cells are white.</li>
+<li>All four cells are black.</li>
+</ol>
+<p>If any of the 2x2 sub-grids satisfies one of these conditions, we should return <code>true</code>, indicating it is possible to make such a square. If no such sub-grid exists, return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem involves checking every possible 2x2 sub-grid in the given grid to see if it satisfies the conditions. The solution follows a straightforward approach:</p>
+<ol>
+<li><strong>Iterate Through All 2x2 Sub-grids</strong>: We loop through all possible positions where a 2x2 sub-grid can be formed in the grid.</li>
+<li><strong>Count White and Black Cells in Each Sub-grid</strong>: For each 2x2 sub-grid, we count the number of white (<code>'W'</code>) and black (<code>'B'</code>) cells.</li>
+<li><strong>Check Validity of the Sub-grid</strong>: We check if the number of white and black cells in the sub-grid matches any of the conditions mentioned in the problem statement:
+<ul>
+<li>Exactly three white cells and one black cell.</li>
+<li>Exactly three black cells and one white cell.</li>
+<li>Four white cells.</li>
+<li>Four black cells.</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: If we find a valid 2x2 sub-grid, we return <code>true</code>. If no such sub-grid exists after checking all possibilities, return <code>false</code>.</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-grid-size">
+  Step 1: Initialize the Grid Size
+  <a class="heading-link" href="#step-1-initialize-the-grid-size">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><code>m</code>: The number of rows in the grid.</li>
+<li><code>n</code>: The number of columns in the grid.</li>
+<li>We use <code>m</code> and <code>n</code> to determine the boundaries for iterating over all possible 2x2 sub-grids.</li>
+</ul>
+<h4 id="step-2-iterate-over-possible-2x2-sub-grids">
+  Step 2: Iterate Over Possible 2x2 Sub-Grids
+  <a class="heading-link" href="#step-2-iterate-over-possible-2x2-sub-grids">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We iterate over each possible position for the top-left corner of a 2x2 sub-grid.</li>
+<li>The loop conditions <code>i + 1 &lt; m</code> and <code>j + 1 &lt; n</code> ensure that we don&rsquo;t exceed the grid&rsquo;s bounds when considering 2x2 sub-grids.</li>
+</ul>
+<h4 id="step-3-count-the-white-and-black-cells-in-the-sub-grid">
+  Step 3: Count the White and Black Cells in the Sub-grid
+  <a class="heading-link" href="#step-3-count-the-white-and-black-cells-in-the-sub-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> white <span style="color:#f92672">=</span> (grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;W&#39;</span>) <span style="color:#f92672">+</span> (grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;W&#39;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>            (grid[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;W&#39;</span>) <span style="color:#f92672">+</span> (grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;W&#39;</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> black <span style="color:#f92672">=</span> (grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#f92672">+</span> (grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>            (grid[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>) <span style="color:#f92672">+</span> (grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span>);
+</span></span></code></pre></div><ul>
+<li><code>white</code>: The count of white (<code>'W'</code>) cells in the current 2x2 sub-grid.</li>
+<li><code>black</code>: The count of black (<code>'B'</code>) cells in the current 2x2 sub-grid.</li>
+<li>For each sub-grid, we check the four cells: <code>(i, j)</code>, <code>(i+1, j)</code>, <code>(i, j+1)</code>, and <code>(i+1, j+1)</code> and increment the <code>white</code> or <code>black</code> counter based on whether the cell contains a <code>'W'</code> or <code>'B'</code>.</li>
+</ul>
+<h4 id="step-4-check-the-validity-of-the-2x2-sub-grid">
+  Step 4: Check the Validity of the 2x2 Sub-grid
+  <a class="heading-link" href="#step-4-check-the-validity-of-the-2x2-sub-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>((white <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;&amp;</span> black <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">||</span> (white <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> black <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">||</span> white <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">||</span> black <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>We check if the sub-grid satisfies any of the valid conditions:
+<ul>
+<li>Three white cells and one black cell (<code>white == 3 &amp;&amp; black == 1</code>).</li>
+<li>Three black cells and one white cell (<code>white == 1 &amp;&amp; black == 3</code>).</li>
+<li>Four white cells (<code>white == 4</code>).</li>
+<li>Four black cells (<code>black == 4</code>).</li>
+</ul>
+</li>
+<li>If any of these conditions is met, we immediately return <code>true</code>, indicating that it is possible to form a valid square.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If no valid 2x2 sub-grid is found after iterating over all possible positions, we return <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>:
+<ul>
+<li>We iterate over all possible 2x2 sub-grids in the grid. The number of sub-grids is proportional to <code>(m - 1) * (n - 1)</code>, which simplifies to O(m * n) for large grids.</li>
+<li>For each sub-grid, checking the validity requires a constant number of operations (a few comparisons), so the total time complexity is O(m * n).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The solution uses only a constant amount of extra space, aside from the input grid. We do not use any additional data structures that grow with the size of the input.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently checks whether a valid 2x2 sub-grid can be formed in the given grid by iterating over all possible 2x2 sub-grids and counting the number of white and black cells in each sub-grid. By checking the specified conditions for valid squares, the algorithm ensures that the solution is optimal and works in linear time relative to the size of the grid. The space complexity is minimal, making this solution both time-efficient and space-efficient.</p>
+<p>The use of simple counting and conditional checks within a nested loop allows the solution to work for grids of any reasonable size, making it suitable for competitive programming and real-world applications where grid-based problems are common.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1235s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -292,7 +467,6 @@
 
       </div>
 
-      
 
       <footer>
         

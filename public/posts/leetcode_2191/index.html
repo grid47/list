@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,143 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode755s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given an array of integers <code>nums</code> and a mapping of digits represented by the array <code>mapping</code>. The task is to sort the <code>nums</code> array based on the transformed values of each number according to the provided digit mapping. The digit mapping works by replacing each digit in a number with the corresponding value from the <code>mapping</code> array. After transforming all the numbers, sort them in ascending order and return the sorted list.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, the solution transforms each number in <code>nums</code> based on the digit mapping and then sorts these transformed values. We can achieve this by following these steps:</p>
+<ol>
+<li><strong>Transform each number</strong>: For each number in <code>nums</code>, convert it to a string to easily access its individual digits. Replace each digit with its corresponding value from the <code>mapping</code> array.</li>
+<li><strong>Sort by transformed values</strong>: The transformed number is then compared for sorting. To maintain the original indices after sorting, we store each transformed number alongside its original index.</li>
+<li><strong>Return the sorted array</strong>: After sorting the transformed numbers, use the stored indices to place the original numbers in the sorted order.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Temporary Storage for Transformation Results:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> tmp;
+</span></span></code></pre></div><ul>
+<li>A vector of pairs <code>tmp</code> is used to store the transformed number and its original index in <code>nums</code>. Each pair is of the form <code>(transformed_value, original_index)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Each Number in <code>nums</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>    string str <span style="color:#f92672">=</span> to_string(num);
+</span></span><span style="display:flex;"><span>    string formed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>We loop through the <code>nums</code> array. For each number <code>num</code>, it is converted to a string <code>str</code> so that we can access each digit individually.</li>
+<li>We initialize an empty string <code>formed</code> to construct the transformed number as we process each digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transform Each Digit According to <code>mapping</code>:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> str.size(); j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    formed <span style="color:#f92672">+=</span> to_string(mapping[str[j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>]);
+</span></span></code></pre></div><ul>
+<li>Each digit of the string <code>str</code> is processed. The character <code>str[j]</code> represents a digit, and <code>str[j] - '0'</code> converts this character to its integer value. Using this value as an index, we retrieve the corresponding transformed digit from <code>mapping</code> and append it to the <code>formed</code> string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Convert the Transformed String Back to an Integer:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> stoi(formed);
+</span></span><span style="display:flex;"><span>tmp.push_back({ val, i });
+</span></span></code></pre></div><ul>
+<li>After the transformation, the <code>formed</code> string represents the transformed number. We convert this back to an integer using <code>stoi()</code> and store the result in the pair <code>(val, i)</code>, where <code>val</code> is the transformed number and <code>i</code> is the original index of <code>nums[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sort the Temporary Vector:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(tmp.begin(), tmp.end());
+</span></span></code></pre></div><ul>
+<li>The vector <code>tmp</code> is sorted based on the transformed values. Since each element in <code>tmp</code> is a pair, the default sorting behavior will sort by the first element of each pair (i.e., the transformed number).</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the Final Sorted Array:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    ans.push_back(nums[tmp[i].second]);
+</span></span></code></pre></div><ul>
+<li>After sorting, we extract the original numbers in the sorted order by using the stored indices. The <code>tmp[i].second</code> gives the original index, and <code>nums[tmp[i].second]</code> retrieves the corresponding number from <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Sorted Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The <code>ans</code> vector now contains the numbers from <code>nums</code>, sorted based on their transformed values according to the <code>mapping</code>. This is returned as the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is O(n * m * log n), where:
+<ul>
+<li><code>n</code> is the size of the input array <code>nums</code>.</li>
+<li><code>m</code> is the maximum number of digits in any number in <code>nums</code> (since we process each digit of the number during transformation).</li>
+<li>Sorting the <code>tmp</code> array of size <code>n</code> takes O(n log n) time. The transformation of each number takes O(m) time, where <code>m</code> is the number of digits in the number (since we loop over each digit). Therefore, the overall time complexity is O(n * m * log n).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(n * m), where <code>n</code> is the size of the input array <code>nums</code> and <code>m</code> is the maximum number of digits in any number in <code>nums</code>. This space is required to store the <code>tmp</code> vector and the <code>formed</code> string.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently sorts the array <code>nums</code> based on a transformed version of each number, where the transformation is governed by the provided <code>mapping</code>. The approach is both simple and effective, using string manipulation and sorting with custom keys. The solution’s time complexity is dominated by the sorting step and is manageable for most practical input sizes. The space complexity is also reasonable, primarily used for storing the transformed values and their corresponding indices. This approach is optimal for the problem and can be easily extended or adapted to similar problems involving transformations and sorting.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode755s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +430,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -236,7 +236,127 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode681s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code calculates the sum of the ranges for all possible subarrays of an input array <code>nums</code>. In a subarray, the range is defined as the difference between the maximum and minimum values in that subarray. The task is to calculate this range for every possible subarray and sum them up to get the final result.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach here involves a nested loop strategy. For each element in the array, the algorithm identifies all subarrays starting at that element. It tracks the minimum and maximum values within each subarray as it iterates and calculates the range. By summing these ranges, it accumulates the total range for all subarrays in the variable <code>res</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>res</code>: Stores the cumulative sum of all subarray ranges.</li>
+<li><code>n</code>: Stores the size of the input array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Outer Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates over each starting position <code>i</code> of potential subarrays in <code>nums</code>. This allows us to calculate the range for all subarrays beginning with <code>nums[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize <code>mini</code> and <code>maxi</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mini <span style="color:#f92672">=</span> nums[i], maxi <span style="color:#f92672">=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li><code>mini</code>: Tracks the minimum value within the current subarray.</li>
+<li><code>maxi</code>: Tracks the maximum value within the current subarray.</li>
+<li>Both <code>mini</code> and <code>maxi</code> start with the first element of the subarray, <code>nums[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inner Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>The inner loop extends the current subarray by one element each time, starting from <code>i + 1</code> up to <code>n-1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update <code>mini</code> and <code>maxi</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[j] <span style="color:#f92672">&lt;</span> mini) mini <span style="color:#f92672">=</span> nums[j];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[j] <span style="color:#f92672">&gt;</span> maxi) maxi <span style="color:#f92672">=</span> nums[j];
+</span></span></code></pre></div><ul>
+<li>As each new element is added to the subarray, <code>mini</code> and <code>maxi</code> are updated if the new element is smaller or larger, respectively. This helps keep track of the minimum and maximum values in the current subarray range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Range and Update Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> maxi <span style="color:#f92672">-</span> mini;
+</span></span></code></pre></div><ul>
+<li>The difference between <code>maxi</code> and <code>mini</code> gives the range of the current subarray. This range is added to the cumulative result, <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once all possible subarrays have been processed, <code>res</code> contains the sum of ranges for every subarray in <code>nums</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n^2))</p>
+<ul>
+<li>The outer loop runs <code>n</code> times, and for each <code>i</code>, the inner loop can run up to <code>n - i - 1</code> times, resulting in an overall quadratic time complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>Only a few extra variables (<code>mini</code>, <code>maxi</code>, and <code>res</code>) are used, so the space complexity is constant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the sum of subarray ranges using a nested loop structure, ideal for cases where input arrays are small to moderately sized. The algorithm’s nested structure ensures that every possible subarray is considered, and the approach of updating minimum and maximum values on each inner loop iteration provides an effective way to compute ranges dynamically. This code is straightforward, leveraging a brute-force approach that provides accurate results for the sum of all subarray ranges without requiring additional data structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode681s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +410,6 @@
 
       </div>
 
-      
 
       <footer>
         

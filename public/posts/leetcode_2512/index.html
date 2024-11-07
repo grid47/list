@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              8-minute read
             </span>
           </div>
 
@@ -273,7 +273,290 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode956s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given:</p>
+<ul>
+<li>Two lists of words, <code>pos</code> and <code>neg</code>. Words in the <code>pos</code> list are associated with positive points, and words in the <code>neg</code> list are associated with negative points.</li>
+<li>A list of student reports, where each report contains a list of words. Each word in the report contributes to the score of the student. If the word is in the <code>pos</code> list, it adds 3 points; if the word is in the <code>neg</code> list, it subtracts 1 point.</li>
+<li>Each student has a unique ID provided in the <code>id</code> list corresponding to each report.</li>
+</ul>
+<p>We need to return the top <code>k</code> students based on their total score from the reports. If two students have the same score, the student with the smaller ID comes first.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We will use the following steps to solve the problem:</p>
+<ol>
+<li>
+<p><strong>Initialize data structures</strong>:</p>
+<ul>
+<li>We will use two sets, <code>p</code> and <code>n</code>, to store the positive and negative words for quick lookup. The set provides constant time complexity for checking if a word belongs to the positive or negative list.</li>
+<li>A priority queue will help us maintain the students&rsquo; scores in descending order. If two students have the same score, the student with the smaller ID will be prioritized. This can be efficiently handled using a custom comparator.</li>
+</ul>
+</li>
+<li>
+<p><strong>Score calculation</strong>:</p>
+<ul>
+<li>For each report, we will compute the total score by checking each word in the report. If the word is in the positive list (<code>pos</code>), we add 3 points; if it’s in the negative list (<code>neg</code>), we subtract 1 point.</li>
+<li>The result of each student&rsquo;s score, along with their ID, will be stored in a priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning top <code>k</code> students</strong>:</p>
+<ul>
+<li>After processing all reports and storing the scores in the priority queue, we will pop the top <code>k</code> students from the queue.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-the-custom-comparator-class-cmp">
+  Step 1: Define the custom comparator class <code>cmp</code>
+  <a class="heading-link" href="#step-1-define-the-custom-comparator-class-cmp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">cmp</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> b[<span style="color:#ae81ff">0</span>]) <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> b[<span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// If scores are the same, prioritize smaller ID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// Otherwise, prioritize higher score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The comparator is used to ensure that the priority queue is ordered based on the score (<code>a[0]</code>). If two scores are equal, the student with the smaller ID (<code>a[1]</code>) is prioritized.</li>
+</ul>
+<h4 id="step-2-define-the-main-function-topstudents">
+  Step 2: Define the main function <code>topStudents</code>
+  <a class="heading-link" href="#step-2-define-the-main-function-topstudents">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> topStudents(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> pos, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> neg, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> report, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> id, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> p, n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: pos) {
+</span></span><span style="display:flex;"><span>            p.insert(it);  <span style="color:#75715e">// Insert positive words into the set &#39;p&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: neg) {
+</span></span><span style="display:flex;"><span>            n.insert(it);  <span style="color:#75715e">// Insert negative words into the set &#39;n&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li>First, two sets <code>p</code> and <code>n</code> are initialized to store positive and negative words. We use sets for efficient word look-up.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, cmp<span style="color:#f92672">&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>A priority queue (<code>pq</code>) is initialized. The queue will store pairs of score and student ID. The <code>cmp</code> class is used to ensure proper sorting in the queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> report.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sz; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            string s <span style="color:#f92672">=</span> report[i];  <span style="color:#75715e">// Fetch the current student&#39;s report
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> prv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> s.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(s[j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">||</span> j <span style="color:#f92672">==</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                    string str <span style="color:#f92672">=</span> s.substr(prv, (j <span style="color:#f92672">==</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> s.size()<span style="color:#f92672">:</span> j) <span style="color:#f92672">-</span> prv);
+</span></span><span style="display:flex;"><span>                    prv <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(p.count(str)) sum <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span>;  <span style="color:#75715e">// Add 3 points if word is in &#39;pos&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span>(n.count(str)) sum <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Subtract 1 point if word is in &#39;neg&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            pq.push({sum, id[i]});  <span style="color:#75715e">// Push the score and student ID into the priority queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li>For each report in the <code>report</code> list:
+<ul>
+<li>We split the report into words by scanning through each character.</li>
+<li>For each word, we check if it’s in the positive list <code>p</code> or the negative list <code>n</code>.</li>
+<li>We calculate the score by adding 3 for positive words and subtracting 1 for negative words.</li>
+<li>The total score along with the student ID is pushed into the priority queue.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-extract-top-k-students">
+  Step 3: Extract top <code>k</code> students
+  <a class="heading-link" href="#step-3-extract-top-k-students">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            ans.push_back(pq.top()[<span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">// Push the student ID of the top element into &#39;ans&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();  <span style="color:#75715e">// Remove the top element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the list of top &#39;k&#39; student IDs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After all reports are processed and the priority queue contains the students sorted by their scores (and IDs in case of ties), we pop the top <code>k</code> students from the queue.</li>
+<li>The student IDs of the top <code>k</code> students are collected into the <code>ans</code> vector and returned as the result.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to understand how the algorithm works.</p>
+<h4 id="example-input">
+  Example Input:
+  <a class="heading-link" href="#example-input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> pos <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;math&#34;</span>, <span style="color:#e6db74">&#34;science&#34;</span>, <span style="color:#e6db74">&#34;english&#34;</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> neg <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;history&#34;</span>, <span style="color:#e6db74">&#34;geography&#34;</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> report <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;math science history&#34;</span>, <span style="color:#e6db74">&#34;science english geography&#34;</span>, <span style="color:#e6db74">&#34;math english history&#34;</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> id <span style="color:#f92672">=</span> {<span style="color:#ae81ff">101</span>, <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">103</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><h4 id="step-by-step-execution">
+  Step-by-step Execution:
+  <a class="heading-link" href="#step-by-step-execution">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialize sets</strong>:</p>
+<ul>
+<li><code>p = {&quot;math&quot;, &quot;science&quot;, &quot;english&quot;}</code></li>
+<li><code>n = {&quot;history&quot;, &quot;geography&quot;}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Process reports</strong>:</p>
+<ul>
+<li>
+<p><strong>Report 1</strong>: &ldquo;math science history&rdquo;</p>
+<ul>
+<li><code>sum = 0</code></li>
+<li>Add points for &ldquo;math&rdquo; and &ldquo;science&rdquo; from <code>p</code>, subtract for &ldquo;history&rdquo; from <code>n</code>.</li>
+<li>Final score = <code>3 + 3 - 1 = 5</code></li>
+<li>Push <code>(5, 101)</code> into the priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Report 2</strong>: &ldquo;science english geography&rdquo;</p>
+<ul>
+<li><code>sum = 0</code></li>
+<li>Add points for &ldquo;science&rdquo; and &ldquo;english&rdquo; from <code>p</code>, subtract for &ldquo;geography&rdquo; from <code>n</code>.</li>
+<li>Final score = <code>3 + 3 - 1 = 5</code></li>
+<li>Push <code>(5, 102)</code> into the priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Report 3</strong>: &ldquo;math english history&rdquo;</p>
+<ul>
+<li><code>sum = 0</code></li>
+<li>Add points for &ldquo;math&rdquo; and &ldquo;english&rdquo; from <code>p</code>, subtract for &ldquo;history&rdquo; from <code>n</code>.</li>
+<li>Final score = <code>3 + 3 - 1 = 5</code></li>
+<li>Push <code>(5, 103)</code> into the priority queue.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Priority Queue</strong> after processing all reports:</p>
+<ul>
+<li><code>(5, 101)</code></li>
+<li><code>(5, 102)</code></li>
+<li><code>(5, 103)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Extract top <code>k = 2</code> students</strong>:</p>
+<ul>
+<li>The first two students in the priority queue will be selected based on their ID order:
+<ul>
+<li><code>101</code>, <code>102</code> are selected (in order of IDs).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>{<span style="color:#ae81ff">101</span>, <span style="color:#ae81ff">102</span>}
+</span></span></code></pre></div><h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Set Construction</strong>: Constructing the sets <code>p</code> and <code>n</code> takes (O(m)), where (m) is the total number of words in the <code>pos</code> and <code>neg</code> lists.</li>
+<li><strong>Report Processing</strong>: For each report, we process each word, which takes (O(w)) time, where (w) is the number of words in the report. Thus, processing all reports takes (O(s \cdot w)), where (s) is the number of students (size of <code>report</code>).</li>
+<li><strong>Priority Queue Operations</strong>: We perform (O(s \log s)) operations for pushing all students into the priority queue and then (O(k \log s)) operations for extracting the top <code>k</code> students.</li>
+<li><strong>Total Time Complexity</strong>: (O(s \cdot w + s \log s)), where <code>s</code> is the number of students and <code>w</code> is the average number of words in a report.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sets for Words</strong>: The space complexity for the sets <code>p</code> and <code>n</code> is (O(m)), where (m) is the total number of words in the <code>pos</code> and <code>neg</code> lists.</li>
+<li><strong>Priority Queue</strong>: The priority queue stores up to <code>s</code> students, so its space complexity is (O(s)).</li>
+<li><strong>Total Space Complexity</strong>: (O(m + s)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the top <code>k</code> students based on their scores, using sets for quick lookup and a priority queue for sorting students by score and ID. This approach is optimal in both time and space for handling large inputs, with a clear and maintainable implementation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode956s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -327,7 +610,6 @@
 
       </div>
 
-      
 
       <footer>
         

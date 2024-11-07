@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -226,7 +226,132 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1224s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine whether it is possible to split an array into subarrays, with the condition that no number in the array appears more than twice. If a number appears more than twice, it&rsquo;s not possible to split the array according to the given rule. The task is to return a boolean value, <code>true</code> if it is possible to split the array and <code>false</code> otherwise.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can leverage a <strong>map (hashmap)</strong> to keep track of the frequency of each element in the input array. The basic idea is to iterate through the array, and for each element, check if it appears more than twice. If any element appears more than twice, we immediately return <code>false</code>. If we reach the end of the array without encountering any element that appears more than twice, then we can return <code>true</code>.</p>
+<p>The problem can be solved in a single pass through the array, making the solution efficient. The key operation involves checking the frequency of each element, and if any element exceeds the allowed frequency (which is two), we terminate the process early.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-declare-a-map-to-track-frequencies">
+  Step 1: Declare a Map to Track Frequencies
+  <a class="heading-link" href="#step-1-declare-a-map-to-track-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>We define a <code>map</code> called <code>mp</code> where the keys are the elements from the <code>nums</code> array, and the values are their corresponding frequencies. The map will help us count how many times each number appears in the array.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-array">
+  Step 2: Iterate Over the Array
+  <a class="heading-link" href="#step-2-iterate-over-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) {
+</span></span><span style="display:flex;"><span>    mp[x]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[x] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each element <code>x</code> in the <code>nums</code> array.</li>
+<li>For each element <code>x</code>, we increment its count in the <code>map</code> (<code>mp[x]++</code>).</li>
+<li>After incrementing the count, we check if the frequency of <code>x</code> has exceeded 2. If it has, we immediately return <code>false</code>. This means that the number <code>x</code> has appeared more than twice, which violates the problem&rsquo;s constraints. Thus, splitting the array into valid subarrays is not possible.</li>
+</ul>
+<h4 id="step-3-return-true-if-no-element-appears-more-than-twice">
+  Step 3: Return True If No Element Appears More Than Twice
+  <a class="heading-link" href="#step-3-return-true-if-no-element-appears-more-than-twice">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we reach the end of the loop without finding any element that appears more than twice, it means that all elements in the array appear at most twice. Hence, it is possible to split the array, and we return <code>true</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of elements in the <code>nums</code> array.
+<ul>
+<li>We only need to iterate over the array once. For each element, the operations of updating the map and checking the frequency are constant time operations (amortized constant time due to the properties of the map).</li>
+<li>Therefore, the total time complexity is proportional to the size of the array.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of unique elements in the <code>nums</code> array.
+<ul>
+<li>The space complexity is determined by the number of unique elements in the map. In the worst case, where all elements are distinct, the space complexity will be proportional to <code>n</code>.</li>
+<li>This is because we store each unique element and its frequency in the map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem by using a map to track the frequency of each element in the array. By doing so, we can quickly detect if any element appears more than twice, which would prevent us from splitting the array into valid subarrays.</p>
+<ul>
+<li>The time complexity is linear, O(n), which is optimal for problems involving checking conditions across all elements of the array.</li>
+<li>The space complexity is O(n), which is manageable given the constraints, as we only store the frequency of each unique element.</li>
+</ul>
+<p>The approach is efficient and handles edge cases (such as arrays with repeated elements or arrays with only one element) effectively. This method ensures that we solve the problem in a single pass through the array, making it suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1224s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -238,7 +363,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3047"  class="external-link" target="_blank" rel="noopener">LeetCode #3047: Find the Largest Area of Square Inside Two Rectangles</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3081"  class="external-link" target="_blank" rel="noopener">LeetCode #3081: Replace Question Marks in String to Minimize Its Value</a></th>
       </tr>
   </thead>
   <tbody>
@@ -280,7 +405,6 @@
 
       </div>
 
-      
 
       <footer>
         

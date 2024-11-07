@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,180 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(ans, <span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1164s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the longest subarray of equal elements in a given array <code>nums</code> such that you can modify the subarray with at most <code>k</code> operations. In each operation, you can change any element in the subarray to any other integer in the array. The goal is to return the length of the longest subarray of equal elements after at most <code>k</code> operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a sliding window approach with the help of a grid to efficiently track the positions of the elements. The solution is as follows:</p>
+<ol>
+<li>
+<p><strong>Grid Construction</strong>:
+We first construct a grid (a list of lists) where each element in the grid corresponds to the indices in the array where a particular number appears. This allows us to track the positions of each number in the array easily.</p>
+</li>
+<li>
+<p><strong>Sliding Window Approach</strong>:
+For each unique number in the array (tracked in the grid), we use a sliding window to determine the longest contiguous subarray where all elements are equal to that number, allowing for at most <code>k</code> modifications. The sliding window maintains the number of elements that can be modified to make all the numbers in the window equal to the current number.</p>
+</li>
+<li>
+<p><strong>Operations Count (rm)</strong>:
+The variable <code>rm</code> tracks the number of elements that need to be modified to make all elements in the current window equal to the chosen number. If <code>rm</code> exceeds <code>k</code>, the window is adjusted by moving the left pointer forward to shrink the window.</p>
+</li>
+<li>
+<p><strong>Update Maximum Length</strong>:
+For each number in the grid, we calculate the longest subarray where all elements can be made equal with at most <code>k</code> operations. We maintain the maximum length found across all numbers.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition-and-initializations">
+  1. Function Definition and Initializations
+  <a class="heading-link" href="#1-function-definition-and-initializations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">longestEqualSubarray</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The function <code>longestEqualSubarray</code> takes two arguments: the array <code>nums</code> and the integer <code>k</code>, which is the maximum number of operations allowed.</li>
+<li><code>n</code> is the size of the array <code>nums</code>.</li>
+<li><code>grid</code> is a 2D vector, where each index <code>e</code> holds the positions of number <code>e</code> in the array <code>nums</code>. This helps to quickly access the indices of each number.</li>
+<li><code>ans</code> stores the result, which is the length of the longest equal subarray found.</li>
+</ul>
+<h4 id="2-building-the-grid">
+  2. Building the Grid
+  <a class="heading-link" href="#2-building-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    grid[nums[i]].push_back(i);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>In this loop, we traverse through the array <code>nums</code>, and for each number <code>nums[i]</code>, we store its index in the corresponding position in the <code>grid</code> array.</li>
+</ul>
+<h4 id="3-sliding-window-for-each-number">
+  3. Sliding Window for Each Number
+  <a class="heading-link" href="#3-sliding-window-for-each-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; e <span style="color:#f92672">&lt;=</span> n; e<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(grid[e].size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, rm <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We now iterate through each possible number <code>e</code> (from <code>1</code> to <code>n</code>).</li>
+<li>If the number <code>e</code> is not present in the array (<code>grid[e].size() == 0</code>), we skip it.</li>
+<li><code>left</code> and <code>right</code> are the pointers representing the sliding window.</li>
+<li><code>rm</code> (remaining modifications) keeps track of how many modifications are needed to make all elements in the window equal to <code>e</code>.</li>
+</ul>
+<h4 id="4-sliding-window-logic">
+  4. Sliding Window Logic
+  <a class="heading-link" href="#4-sliding-window-logic">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> grid[e].size() <span style="color:#f92672">&amp;&amp;</span> right <span style="color:#f92672">&lt;</span> grid[e].size()) {
+</span></span><span style="display:flex;"><span>    rm <span style="color:#f92672">+=</span> (grid[e][right] <span style="color:#f92672">-</span> grid[e][right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (rm <span style="color:#f92672">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left));
+</span></span><span style="display:flex;"><span>        right<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        right<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        left<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(left <span style="color:#f92672">&lt;</span> grid[e].size())
+</span></span><span style="display:flex;"><span>        rm <span style="color:#f92672">-=</span> (grid[e][left] <span style="color:#f92672">-</span> grid[e][left <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Inside this while loop, we manage the sliding window:
+<ul>
+<li>First, calculate how many elements need to be modified to make all the numbers in the window equal to <code>e</code>. This is done by subtracting the distance between two consecutive indices of <code>e</code>.</li>
+<li>If <code>rm &lt;= k</code>, the window is valid, and we update the maximum length of the subarray (<code>ans</code>).</li>
+<li>If <code>rm &gt; k</code>, we move the left pointer forward to reduce the size of the window, and adjust <code>rm</code> accordingly.</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-final-result">
+  5. Final Result
+  <a class="heading-link" href="#5-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(ans, <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>After processing all possible numbers and their corresponding sliding windows, we return the maximum length of the equal subarray found.</li>
+<li>The result is the maximum of <code>ans</code> and <code>1</code> since a subarray with a single element is always valid.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>O(n)</strong> for building the <code>grid</code>, where <code>n</code> is the size of the array <code>nums</code>.</li>
+<li>For each number <code>e</code>, the sliding window process takes <strong>O(m)</strong>, where <code>m</code> is the number of occurrences of <code>e</code> in the array.</li>
+<li>Since we iterate over all the numbers and their occurrences, the time complexity for the sliding window part is <strong>O(n)</strong> in total.</li>
+<li>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is primarily determined by the <code>grid</code>, which stores the indices of each number in <code>nums</code>. In the worst case, the space complexity is <strong>O(n)</strong> because there are <code>n</code> numbers, and each number can appear at most <code>n</code> times.</li>
+<li>Thus, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses a combination of <strong>sliding window</strong> and <strong>grid-based indexing</strong> to find the longest subarray where all elements can be made equal with at most <code>k</code> modifications. The solution efficiently processes the array in linear time <strong>O(n)</strong> and is optimal for handling large input sizes. The space complexity is also <strong>O(n)</strong>, making it space-efficient. This approach provides an effective and scalable way to solve the problem of finding the longest equal subarray with bounded modifications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1164s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -267,7 +440,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2832"  class="external-link" target="_blank" rel="noopener">LeetCode #2832: Maximal Range That Each Element Is Maximum in It</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2833"  class="external-link" target="_blank" rel="noopener">LeetCode #2833: Furthest Point From Origin</a></th>
       </tr>
   </thead>
   <tbody>
@@ -309,7 +482,6 @@
 
       </div>
 
-      
 
       <footer>
         

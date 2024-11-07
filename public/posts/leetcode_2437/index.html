@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -231,7 +231,184 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode912s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to determine how many valid times can be formed from a given string <code>time</code>, which represents a 24-hour time format <code>&quot;HH:MM&quot;</code>. In this format, the hours are represented by <code>HH</code> and the minutes by <code>MM</code>. The input string may contain the character <code>'?'</code> in place of some digits, and our task is to calculate how many possible valid times can be formed by replacing all occurrences of <code>'?'</code> with digits such that the resulting time is a valid 24-hour time.</p>
+<p>A valid 24-hour time is structured as:</p>
+<ul>
+<li><code>HH</code> must be between 00 and 23 (inclusive).</li>
+<li><code>MM</code> must be between 00 and 59 (inclusive).</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>Input: <code>&quot;1?:4?&quot;</code></li>
+<li>Output: <code>20</code>
+<ul>
+<li>Explanation: The possible valid times are <code>10:40</code>, <code>10:41</code>, &hellip;, <code>10:49</code>, <code>11:40</code>, <code>11:41</code>, &hellip;, <code>11:49</code>, &hellip;, <code>19:40</code>, <code>19:41</code>, &hellip;, <code>19:49</code>. There are 20 possible valid times.</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We need to analyze each part of the time string (<code>HH</code> and <code>MM</code>) and count how many valid values can be assigned to each <code>'?'</code>. Here&rsquo;s the plan:</p>
+<ol>
+<li>
+<p><strong>Minutes (<code>MM</code>)</strong>:</p>
+<ul>
+<li>The minutes range from <code>00</code> to <code>59</code>, so if the character in the minutes place (<code>time[4]</code> or <code>time[5]</code>) is <code>'?'</code>, we must account for all possible digits that can replace the <code>'?'</code>.</li>
+<li>For example, if <code>time[4] == '?'</code>, the tens digit can be any value from 0 to 5, resulting in 6 possible values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hours (<code>HH</code>)</strong>:</p>
+<ul>
+<li>The hours are more complex because they can only be between <code>00</code> and <code>23</code>. Thus, depending on the digits in <code>time[0]</code> and <code>time[1]</code>, the possible values for <code>'?'</code> in these positions will differ.</li>
+<li>If both <code>time[0]</code> and <code>time[1]</code> are <code>'?'</code>, we can form any number between <code>00</code> and <code>23</code>, resulting in 24 possibilities.</li>
+<li>If <code>time[0] == '?'</code>, the value of <code>time[1]</code> determines the range of valid values for the hour. For example:
+<ul>
+<li>If <code>time[1]</code> is between <code>'0'</code> and <code>'3'</code>, <code>time[0]</code> can be <code>0</code>, <code>1</code>, or <code>2</code> (3 options).</li>
+<li>If <code>time[1]</code> is between <code>'4'</code> and <code>'9'</code>, <code>time[0]</code> can only be <code>1</code> or <code>2</code> (2 options).</li>
+</ul>
+</li>
+<li>If <code>time[1] == '?'</code>, the value of <code>time[0]</code> will influence how many valid values are possible for <code>time[1]</code>.
+<ul>
+<li>If <code>time[0] == '2'</code>, <code>time[1]</code> can only be from <code>0</code> to <code>3</code>, which gives 4 possibilities.</li>
+<li>If <code>time[0]</code> is less than <code>2</code>, <code>time[1]</code> can range from <code>0</code> to <code>9</code>, which gives 10 possibilities.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Combining the Possibilities</strong>:</p>
+<ul>
+<li>Once we compute the number of possibilities for the hours and minutes, we multiply them to get the total number of valid times.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-result">
+  Step 1: Initialize the Result
+  <a class="heading-link" href="#step-1-initialize-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by initializing the result variable <code>ans</code> to 1, as we will multiply it by the number of possibilities for each part of the time string.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h4 id="step-2-handle-the-minutes-mm">
+  Step 2: Handle the Minutes (<code>MM</code>)
+  <a class="heading-link" href="#step-2-handle-the-minutes-mm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First, we check if <code>time[4]</code> (the tens place of the minutes) is a <code>'?'</code>. If it is, we multiply <code>ans</code> by 10, since any digit from <code>0</code> to <code>9</code> can be placed in this position.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span>) ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><p>Next, we check if <code>time[3]</code> (the ones place of the minutes) is a <code>'?'</code>. If it is, we multiply <code>ans</code> by 6, since the valid digits for the ones place are <code>0-5</code> for the minutes range <code>00-59</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span>) ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">6</span>;
+</span></span></code></pre></div><h4 id="step-3-handle-the-hours-hh">
+  Step 3: Handle the Hours (<code>HH</code>)
+  <a class="heading-link" href="#step-3-handle-the-hours-hh">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Now, we move on to handle the hours part of the time (<code>time[0]</code> and <code>time[1]</code>):</p>
+<ul>
+<li>If both <code>time[0]</code> and <code>time[1]</code> are <code>'?'</code>, we multiply <code>ans</code> by 24, as any hour from <code>00</code> to <code>23</code> is valid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span> <span style="color:#f92672">&amp;&amp;</span> time[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span>) ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span>;
+</span></span></code></pre></div><ul>
+<li>If only <code>time[1]</code> is <code>'?'</code>, we handle it based on the value of <code>time[0]</code>. If <code>time[0] == '2'</code>, then <code>time[1]</code> can be <code>0-3</code> (4 options), otherwise, <code>time[1]</code> can be <code>0-9</code> (10 options).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span>){ 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;2&#39;</span>) ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If only <code>time[0]</code> is <code>'?'</code>, we handle it based on the value of <code>time[1]</code>. If <code>time[1]</code> is less than <code>'4'</code>, then <code>time[0]</code> can be <code>0</code>, <code>1</code>, or <code>2</code> (3 options). Otherwise, <code>time[0]</code> can only be <code>1</code> or <code>2</code> (2 options).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;?&#39;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(time[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> <span style="color:#e6db74">&#39;4&#39;</span>) ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> ans <span style="color:#f92672">=</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, we return the total number of valid times by returning the value of <code>ans</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(1)</strong> because the solution only involves checking a fixed number of positions in the string (<code>time[0]</code>, <code>time[1]</code>, <code>time[3]</code>, <code>time[4]</code>), and the operations are constant-time.</p>
+<ul>
+<li>There are no loops or recursive calls in this solution.</li>
+<li>The operations inside the function are all constant-time checks and multiplications.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(1)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> as well, since the solution only uses a constant amount of space for the <code>ans</code> variable and performs all operations in place without requiring additional memory allocation.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem requires calculating the number of valid times that can be formed by replacing the <code>'?'</code> characters in a time string in the format <code>&quot;HH:MM&quot;</code>. By systematically checking the possible valid digits for each position in the time string and considering the constraints of valid hours and minutes, we can efficiently compute the result in constant time. The solution operates with <strong>O(1)</strong> time and space complexity, making it highly efficient for any valid input.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode912s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -285,7 +462,6 @@
 
       </div>
 
-      
 
       <footer>
         

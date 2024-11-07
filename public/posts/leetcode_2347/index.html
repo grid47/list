@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,176 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">?</span><span style="color:#e6db74">&#34;High Card&#34;</span><span style="color:#f92672">:</span>ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode843s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a hand of five playing cards, represented by two arrays: <code>ranks</code> and <code>suits</code>. Each element in <code>ranks</code> corresponds to the rank of a card (e.g., 2, 3, 4, &hellip;, 10, J, Q, K, A), and each element in <code>suits</code> corresponds to the suit of the card (e.g., &lsquo;H&rsquo; for hearts, &lsquo;D&rsquo; for diamonds, &lsquo;C&rsquo; for clubs, &lsquo;S&rsquo; for spades). The task is to determine the best hand possible based on the rules of poker. The possible hands are:</p>
+<ul>
+<li><strong>&ldquo;Flush&rdquo;</strong>: All five cards have the same suit.</li>
+<li><strong>&ldquo;Three of a Kind&rdquo;</strong>: At least three cards have the same rank.</li>
+<li><strong>&ldquo;Pair&rdquo;</strong>: At least two cards have the same rank.</li>
+<li><strong>&ldquo;High Card&rdquo;</strong>: If none of the above hands are present, the hand is a &ldquo;High Card&rdquo;.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution works by evaluating the given hand of cards and checking for the highest-ranking poker hand it can form. The strategy is straightforward:</p>
+<ol>
+<li><strong>Count the Frequency of Ranks</strong>: We first count how many times each rank appears in the <code>ranks</code> array.</li>
+<li><strong>Count the Frequency of Suits</strong>: Similarly, we count how many times each suit appears in the <code>suits</code> array.</li>
+<li><strong>Check for Flush</strong>: If any suit appears exactly five times, the hand is a &ldquo;Flush&rdquo;.</li>
+<li><strong>Check for Three of a Kind</strong>: If any rank appears at least three times, the hand is &ldquo;Three of a Kind&rdquo;.</li>
+<li><strong>Check for Pair</strong>: If any rank appears exactly twice, the hand is a &ldquo;Pair&rdquo;.</li>
+<li><strong>Default to High Card</strong>: If none of the above conditions are satisfied, the hand is a &ldquo;High Card&rdquo;.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialize-maps-to-track-ranks-and-suits">
+  1. <strong>Initialize Maps to Track Ranks and Suits</strong>
+  <a class="heading-link" href="#1-initialize-maps-to-track-ranks-and-suits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m1;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m2;
+</span></span></code></pre></div><ul>
+<li>We use <code>unordered_map</code> to store the frequency of each rank and each suit. The map <code>m1</code> will store the count of each rank, and the map <code>m2</code> will store the count of each suit.</li>
+</ul>
+<h4 id="2-populate-frequency-maps">
+  2. <strong>Populate Frequency Maps</strong>
+  <a class="heading-link" href="#2-populate-frequency-maps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : ranks) m1[i]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : suits) m2[i]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We loop through the <code>ranks</code> array and update the frequency map <code>m1</code>. Each rank&rsquo;s count is incremented by one every time it appears in the hand.</li>
+<li>Similarly, we loop through the <code>suits</code> array and update the frequency map <code>m2</code>, incrementing the count of each suit.</li>
+</ul>
+<h4 id="3-check-for-flush">
+  3. <strong>Check for Flush</strong>
+  <a class="heading-link" href="#3-check-for-flush">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : m2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i.second <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Flush&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The first condition we check is for a &ldquo;Flush&rdquo;. A &ldquo;Flush&rdquo; occurs if all five cards have the same suit. We check the <code>m2</code> map to see if any suit appears exactly five times. If this condition is met, we immediately return &ldquo;Flush&rdquo;.</li>
+</ul>
+<h4 id="4-check-for-three-of-a-kind">
+  4. <strong>Check for Three of a Kind</strong>
+  <a class="heading-link" href="#4-check-for-three-of-a-kind">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : m1) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i.second <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">3</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Three of a Kind&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If no &ldquo;Flush&rdquo; is found, we then check for &ldquo;Three of a Kind&rdquo;. This occurs if at least three cards have the same rank. We check the <code>m1</code> map for any rank that appears three or more times. If such a rank exists, we immediately return &ldquo;Three of a Kind&rdquo;.</li>
+</ul>
+<h4 id="5-check-for-pair">
+  5. <strong>Check for Pair</strong>
+  <a class="heading-link" href="#5-check-for-pair">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (i.second <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Pair&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If neither a &ldquo;Flush&rdquo; nor &ldquo;Three of a Kind&rdquo; is found, we check for a &ldquo;Pair&rdquo;. A &ldquo;Pair&rdquo; occurs if exactly two cards have the same rank. We look for any rank that appears exactly twice in the <code>m1</code> map. If such a rank is found, we update the variable <code>ans</code> to &ldquo;Pair&rdquo;.</li>
+</ul>
+<h4 id="6-return-the-result">
+  6. <strong>Return the Result</strong>
+  <a class="heading-link" href="#6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;High Card&#34;</span> <span style="color:#f92672">:</span> ans;
+</span></span></code></pre></div><ul>
+<li>If no &ldquo;Flush&rdquo;, &ldquo;Three of a Kind&rdquo;, or &ldquo;Pair&rdquo; is found, we return &ldquo;High Card&rdquo; by default. If a &ldquo;Pair&rdquo; was found during the previous check, we return &ldquo;Pair&rdquo;.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We loop through the <code>ranks</code> and <code>suits</code> arrays once each, where <code>n</code> is the number of cards (which is fixed at 5). The time complexity is constant in this case, since we only have five cards.
+<ul>
+<li><strong>O(n) for ranks</strong>: We iterate through the <code>ranks</code> array to count the occurrences of each rank.</li>
+<li><strong>O(n) for suits</strong>: We iterate through the <code>suits</code> array to count the occurrences of each suit.</li>
+<li>Sorting the maps is not necessary because we don&rsquo;t need to check for specific ranks or suits in any particular order.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we only store the counts of ranks (maximum 13 possible values for ranks) and suits (maximum 4 possible suits). Thus, we use a constant amount of extra space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the best hand from a hand of cards by using frequency counting with hash maps (<code>unordered_map</code>). The approach is optimal for this problem since it handles small input sizes (a fixed number of 5 cards) in constant time. By checking for the highest-ranking poker hands (Flush, Three of a Kind, Pair, and High Card), the solution provides a clear and concise method for evaluating a poker hand. The space and time complexities are minimal, making this solution suitable for real-time applications where quick hand evaluations are needed.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode843s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -292,7 +461,6 @@
 
       </div>
 
-      
 
       <footer>
         

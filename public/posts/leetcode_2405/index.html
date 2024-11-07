@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,208 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode888s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to divide the given string <code>s</code> into the minimum number of substrings such that no character is repeated in any substring. In other words, we want to partition the string into parts where each part contains only unique characters. The task is to return the minimum number of such partitions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem efficiently involves utilizing a <strong>bitmasking</strong> technique, which allows us to track the characters we&rsquo;ve seen in the current partition in an efficient manner.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Bitmasking</strong>: Each character of the string can be mapped to a unique bit in an integer (for example, &lsquo;a&rsquo; maps to the least significant bit, &lsquo;b&rsquo; to the second least significant bit, and so on). Using this bitmask representation, we can efficiently check if a character has been seen before in the current partition and add it if it&rsquo;s not already present.</p>
+</li>
+<li>
+<p><strong>Greedy Partitioning</strong>: We can process the string character by character and partition the string as we go. Every time we encounter a character that has already been seen in the current partition, we increment the partition count and start a new partition.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: Bitmasking operations like checking a bit and setting a bit are constant time operations, which makes this approach efficient. The overall time complexity is linear with respect to the size of the string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-helper-functions-to-manage-bitmask">
+  Step 1: Helper Functions to Manage Bitmask
+  <a class="heading-link" href="#step-1-helper-functions-to-manage-bitmask">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The solution makes use of two helper functions: <code>checkBit</code> and <code>setBit</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">checkBit</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>flag, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> flag <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> n);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBit</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>flag, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>n) {
+</span></span><span style="display:flex;"><span>    flag <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>checkBit(int &amp;flag, int &amp;n)</code></strong>:</p>
+<ul>
+<li>This function checks if the <code>n</code>-th bit in the <code>flag</code> is set to <code>1</code>. If the bit is set, it indicates that the character corresponding to this bit has already been seen in the current partition.</li>
+<li>It uses the bitwise AND operation <code>&amp;</code> to check if the bit is set: <code>flag &amp; (1 &lt;&lt; n)</code>. This operation shifts <code>1</code> to the <code>n</code>-th position and performs the AND operation with <code>flag</code>. If the result is non-zero, the bit is set, and we return <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>setBit(int &amp;flag, int &amp;n)</code></strong>:</p>
+<ul>
+<li>This function sets the <code>n</code>-th bit in the <code>flag</code> to <code>1</code>. It uses the bitwise OR operation <code>|= (1 &lt;&lt; n)</code> to set the <code>n</code>-th bit.</li>
+<li>The bitwise OR operation ensures that the corresponding bit in <code>flag</code> is set to <code>1</code> without affecting other bits.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-main-logic-in-partitionstring">
+  Step 2: Main Logic in <code>partitionString</code>
+  <a class="heading-link" href="#step-2-main-logic-in-partitionstring">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">partitionString</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> c: s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (checkBit(flag, n)) {
+</span></span><span style="display:flex;"><span>            flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            ans<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        setBit(flag, n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>int flag = 0, ans = 1;</code></strong>:</p>
+<ul>
+<li>The <code>flag</code> variable is used to track which characters have been seen in the current partition. It is initially set to <code>0</code>, meaning no characters have been seen.</li>
+<li>The <code>ans</code> variable tracks the number of partitions. It starts at <code>1</code> because we always have at least one partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>for (auto c: s)</code></strong>:</p>
+<ul>
+<li>This loop iterates over every character <code>c</code> in the string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>int n = c - 'a';</code></strong>:</p>
+<ul>
+<li>We convert the character <code>c</code> to an integer <code>n</code> representing its position in the alphabet. For example, for the character &lsquo;a&rsquo;, <code>n</code> will be <code>0</code>, for &lsquo;b&rsquo; it will be <code>1</code>, and so on.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>if (checkBit(flag, n)) {</code></strong>:</p>
+<ul>
+<li>This checks if the character corresponding to <code>n</code> has already been seen in the current partition. If it has, it means we need to start a new partition.</li>
+<li>We reset <code>flag</code> to <code>0</code>, which means the new partition doesn&rsquo;t contain any previously encountered characters.</li>
+<li>We increment the partition count <code>ans</code> to reflect the start of a new partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>setBit(flag, n);</code></strong>:</p>
+<ul>
+<li>After checking if the character has already been seen in the current partition, we set the corresponding bit for the character <code>n</code> in <code>flag</code>. This marks the character as seen in the current partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>return ans;</code></strong>:</p>
+<ul>
+<li>Finally, after processing all characters in the string, we return the value of <code>ans</code>, which represents the minimum number of partitions.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The loop processes each character in the string <code>s</code> exactly once. Each operation inside the loop (checking and setting bits) is constant time due to the efficient bitwise operations. Therefore, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The space complexity is constant because we only use a fixed amount of space regardless of the input size. Specifically, the <code>flag</code> variable uses a fixed amount of space (a 32-bit integer), and there is no need for extra space that grows with the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to partition a string into the minimum number of substrings where each substring contains unique characters. By leveraging <strong>bitmasking</strong> for constant-time checks and updates, the solution achieves optimal time complexity of <strong>O(n)</strong>.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Bitmasking</strong> is a powerful technique to track character occurrences efficiently.</li>
+<li>The solution works by greedily partitioning the string whenever a repeated character is found.</li>
+<li>The overall time complexity is linear with respect to the size of the string, making the solution scalable for large inputs.</li>
+</ul>
+<p>This approach ensures that we solve the problem efficiently while using minimal space, making it ideal for competitive programming or real-world applications where performance is crucial.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode888s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -292,7 +493,6 @@
 
       </div>
 
-      
 
       <footer>
         

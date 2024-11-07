@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,179 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> maxi;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1147s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given an array of integers <code>nums</code>, and we need to find the maximum sum of any subarray of size <code>k</code> such that the subarray contains at least <code>size</code> distinct elements. The goal is to identify the subarray with the highest sum that meets this condition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem involves finding the maximum sum of a subarray of fixed size <code>k</code>, with the additional constraint that the subarray must contain at least <code>size</code> distinct elements. To solve this problem efficiently, we can use the <strong>sliding window technique</strong> in combination with a <strong>hash map</strong> to keep track of the frequency of elements within the window. Here&rsquo;s how we can break down the approach:</p>
+<ol>
+<li>
+<p><strong>Sliding Window</strong>: The idea is to maintain a sliding window of size <code>k</code> that moves across the array, updating the sum of the window and the count of distinct elements as we go. The window starts at the first element and expands to the right until it reaches size <code>k</code>. If the window exceeds size <code>k</code>, we shrink it from the left.</p>
+</li>
+<li>
+<p><strong>Hash Map for Frequency Count</strong>: A hash map is used to store the frequency of each element in the current window. This helps us quickly track how many distinct elements are present in the window. As the window expands and contracts, we update the hash map by adding or removing elements.</p>
+</li>
+<li>
+<p><strong>Check for Valid Window</strong>: Once the window reaches size <code>k</code>, we check if the number of distinct elements in the window is greater than or equal to <code>size</code>. If so, we update the maximum sum encountered.</p>
+</li>
+<li>
+<p><strong>Efficiency Considerations</strong>: Since the sliding window moves one step at a time, and we only perform constant-time operations for each element (updating the sum and the hash map), the time complexity of this approach is linear, O(n), where <code>n</code> is the length of the input array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m; <span style="color:#75715e">// Hash map to store the frequency of elements in the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// To store the sum of the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> maxi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// To store the maximum sum encountered
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Two pointers to define the sliding window
+</span></span></span></code></pre></div><ul>
+<li>We use an unordered map <code>m</code> to track the frequency of elements in the current window.</li>
+<li><code>sum</code> holds the sum of the elements in the current window.</li>
+<li><code>maxi</code> keeps track of the maximum sum of subarrays that have at least <code>size</code> distinct elements.</li>
+<li><code>i</code> and <code>j</code> are the pointers that define the boundaries of the sliding window.</li>
+</ul>
+<h4 id="step-2-expand-the-window">
+  Step 2: Expand the Window
+  <a class="heading-link" href="#step-2-expand-the-window">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> nums.size()) {
+</span></span><span style="display:flex;"><span>    m[nums[j]]<span style="color:#f92672">++</span>; <span style="color:#75715e">// Add the element at position j to the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sum <span style="color:#f92672">+=</span> nums[j]; <span style="color:#75715e">// Add the element to the current sum
+</span></span></span></code></pre></div><ul>
+<li>We expand the window by moving the <code>j</code> pointer to the right. Each time we add a new element to the window, we update the frequency map and the sum of the window.</li>
+</ul>
+<h4 id="step-3-shrink-the-window-if-it-exceeds-size-k">
+  Step 3: Shrink the Window if It Exceeds Size <code>k</code>
+  <a class="heading-link" href="#step-3-shrink-the-window-if-it-exceeds-size-k">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>    m[nums[i]]<span style="color:#f92672">--</span>; <span style="color:#75715e">// Remove the element at position i from the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sum <span style="color:#f92672">-=</span> nums[i]; <span style="color:#75715e">// Subtract the element from the current sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(m[nums[i]] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        m.erase(nums[i]); <span style="color:#75715e">// If the frequency becomes zero, remove the element from the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>; <span style="color:#75715e">// Move the left pointer to shrink the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If the window size exceeds <code>k</code>, we shrink the window by moving the <code>i</code> pointer to the right.</li>
+<li>We update the sum and frequency map by removing the element at index <code>i</code> from the window.</li>
+<li>If the frequency of an element becomes zero after removal, we delete it from the map.</li>
+</ul>
+<h4 id="step-4-check-for-valid-subarray-and-update-maximum-sum">
+  Step 4: Check for Valid Subarray and Update Maximum Sum
+  <a class="heading-link" href="#step-4-check-for-valid-subarray-and-update-maximum-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(m.size() <span style="color:#f92672">&gt;=</span> size) { <span style="color:#75715e">// Check if the number of distinct elements is at least &#39;size&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        maxi <span style="color:#f92672">=</span> max(sum, maxi); <span style="color:#75715e">// Update the maximum sum if the current window is valid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>When the window size is exactly <code>k</code>, we check if the number of distinct elements in the window is at least <code>size</code>. If the condition is satisfied, we update <code>maxi</code> with the maximum sum encountered so far.</li>
+</ul>
+<h4 id="step-5-move-the-right-pointer">
+  Step 5: Move the Right Pointer
+  <a class="heading-link" href="#step-5-move-the-right-pointer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>j<span style="color:#f92672">++</span>; <span style="color:#75715e">// Move the right pointer to expand the window
+</span></span></span></code></pre></div><ul>
+<li>After processing the current window, we move the right pointer <code>j</code> to expand the window further.</li>
+</ul>
+<h4 id="step-6-return-the-maximum-sum">
+  Step 6: Return the Maximum Sum
+  <a class="heading-link" href="#step-6-return-the-maximum-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> maxi; <span style="color:#75715e">// Return the maximum sum of subarrays with at least &#39;size&#39; distinct elements
+</span></span></span></code></pre></div><ul>
+<li>After processing all possible subarrays, we return the maximum sum found that meets the condition of having at least <code>size</code> distinct elements.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The algorithm iterates through the array once with the sliding window technique. Each element is processed once when added to the window and potentially once when removed from the window. The operations on the hash map (insertion, deletion, and lookup) are O(1) on average. Therefore, the overall time complexity is O(n), where <code>n</code> is the length of the input array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is O(n) due to the use of the hash map, which may store up to <code>n</code> distinct elements in the worst case. The space used for the sum and <code>maxi</code> variables is constant, O(1).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the maximum sum of a subarray of size <code>k</code> with at least <code>size</code> distinct elements using the sliding window technique and a hash map. By maintaining a sliding window of fixed size <code>k</code> and dynamically adjusting the frequency of elements within the window, we ensure that the algorithm runs in linear time, making it well-suited for large input arrays. This approach ensures that the problem is solved optimally both in terms of time and space complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1147s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -271,7 +443,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2842"  class="external-link" target="_blank" rel="noopener">LeetCode #2842: Count K-Subsequences of a String With Maximum Beauty</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2843"  class="external-link" target="_blank" rel="noopener">LeetCode #2843:   Count Symmetric Integers</a></th>
       </tr>
   </thead>
   <tbody>
@@ -313,7 +485,6 @@
 
       </div>
 
-      
 
       <footer>
         

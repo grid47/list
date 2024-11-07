@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -236,7 +236,244 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode799s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given two lists: <code>cap</code> and <code>rock</code>. <code>cap[i]</code> represents the capacity of the <code>i</code>-th bag, and <code>rock[i]</code> represents the number of rocks already present in that <code>i</code>-th bag. We are also given an integer <code>cnt</code> that denotes the number of additional rocks we can place into the bags.</p>
+<p>Our task is to find the maximum number of bags that can be completely filled using the available <code>cnt</code> rocks. We need to determine the maximum number of bags we can fill by utilizing the rocks, with the condition that the number of rocks we place in a bag should not exceed the capacity of the bag.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key idea behind solving this problem is to first determine the number of available spaces in each bag, which is the difference between the bag&rsquo;s capacity and the number of rocks already in it. After calculating the available space in each bag, we want to prioritize filling the bags that require fewer rocks to be filled.</p>
+<p>We can achieve this by sorting the bags based on the available space and trying to fill the bags starting from the one that requires the least amount of rocks. By doing so, we can maximize the number of bags filled with the available rocks.</p>
+<p>The steps for solving this problem are as follows:</p>
+<ol>
+<li>
+<p><strong>Calculate the space left in each bag</strong>: For each bag, calculate the difference between its capacity and the number of rocks already in it. This will give us the space available in each bag for more rocks.</p>
+</li>
+<li>
+<p><strong>Use a priority queue (min-heap)</strong>: A priority queue can help efficiently retrieve the bags with the least space required. By using a min-heap, we can always pop the smallest available space, ensuring that we fill the bags with fewer requirements first.</p>
+</li>
+<li>
+<p><strong>Fill the bags</strong>: While there are still rocks left (<code>cnt &gt; 0</code>), we continue filling the bags in the order of the available space, as long as the number of rocks we have is enough to fill the current bag.</p>
+</li>
+<li>
+<p><strong>Return the result</strong>: Once we have exhausted the available rocks or filled all possible bags, we return the number of bags filled.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through the code step by step to understand how the solution is implemented.</p>
+<h4 id="step-1-initialize-the-priority-queue">
+  Step 1: Initialize the Priority Queue
+  <a class="heading-link" href="#step-1-initialize-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>We use a <strong>priority queue</strong> (min-heap) to efficiently manage the available spaces in the bags. In C++, the default behavior of <code>priority_queue</code> is a max-heap. To make it a min-heap (which allows us to access the smallest element first), we use <code>greater&lt;int&gt;</code> as the comparison function.</li>
+</ul>
+<h4 id="step-2-populate-the-priority-queue-with-available-spaces">
+  Step 2: Populate the Priority Queue with Available Spaces
+  <a class="heading-link" href="#step-2-populate-the-priority-queue-with-available-spaces">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    pq.push(cap[i] <span style="color:#f92672">-</span> rock[i]);
+</span></span></code></pre></div><ul>
+<li>We iterate through all the bags (<code>i</code> from <code>0</code> to <code>n-1</code>).</li>
+<li>For each bag, we calculate the available space as <code>cap[i] - rock[i]</code>, which is the number of rocks that can still be added to the bag.</li>
+<li>We push this available space into the priority queue <code>pq</code>. The priority queue will store the available spaces in increasing order, with the smallest available space at the top.</li>
+</ul>
+<h4 id="step-3-fill-the-bags">
+  Step 3: Fill the Bags
+  <a class="heading-link" href="#step-3-fill-the-bags">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> cnt <span style="color:#f92672">&gt;=</span> pq.top()) {
+</span></span><span style="display:flex;"><span>    res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">-=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>res</code> to track the number of bags we can fill.</li>
+<li>In the <code>while</code> loop, we check whether there are still bags with available space (<code>pq.empty()</code>), and whether we have enough rocks to fill the smallest bag (<code>cnt &gt;= pq.top()</code>).</li>
+<li>If both conditions are true, we:
+<ul>
+<li>Increment <code>res</code> to indicate that we are filling one more bag.</li>
+<li>Decrease the number of available rocks (<code>cnt -= pq.top()</code>).</li>
+<li>Remove the current bag from the priority queue (<code>pq.pop()</code>).</li>
+</ul>
+</li>
+<li>This loop continues until we run out of bags or we no longer have enough rocks to fill the next smallest bag.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, we return the value of <code>res</code>, which represents the maximum number of bags that can be filled.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Filling the priority queue</strong>: In the first loop, we iterate over all the bags to calculate the available space and push it into the priority queue. This takes <strong>O(n log n)</strong> time, where <code>n</code> is the number of bags, because each insertion into the priority queue takes <strong>O(log n)</strong> time.</p>
+</li>
+<li>
+<p><strong>Popping from the priority queue</strong>: In the second loop, we pop elements from the priority queue while we still have rocks and can fill bags. In the worst case, we will pop all the bags from the priority queue, which also takes <strong>O(n log n)</strong> time.</p>
+</li>
+</ol>
+<p>Thus, the total time complexity is:</p>
+<ul>
+<li><strong>O(n log n)</strong> due to both the insertion and popping operations on the priority queue.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the size of the priority queue, which stores the available spaces for each bag. Therefore, the space complexity is:</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of bags.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through an example to understand how the solution works.</p>
+<h4 id="example-1">
+  Example 1
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cap <span style="color:#f92672">=</span> {<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rock <span style="color:#f92672">=</span> {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
+</span></span></code></pre></div><ol>
+<li>
+<p>First, we calculate the available space in each bag:</p>
+<ul>
+<li>Bag 1: <code>cap[0] - rock[0] = 5 - 2 = 3</code></li>
+<li>Bag 2: <code>cap[1] - rock[1] = 7 - 5 = 2</code></li>
+<li>Bag 3: <code>cap[2] - rock[2] = 3 - 1 = 2</code></li>
+</ul>
+</li>
+<li>
+<p>We then push these available spaces into the priority queue: <code>pq = [2, 2, 3]</code>.</p>
+</li>
+<li>
+<p>We start filling the bags:</p>
+<ul>
+<li>First, we fill the bag with 2 available spaces. We have enough rocks (<code>cnt = 6</code>), so we fill the bag, reducing <code>cnt</code> to 4.</li>
+<li>Next, we fill another bag with 2 available spaces. We have enough rocks (<code>cnt = 4</code>), so we fill the bag, reducing <code>cnt</code> to 2.</li>
+<li>Finally, we fill the bag with 3 available spaces. We have enough rocks (<code>cnt = 2</code>), so we cannot fill this bag, and the process stops here.</li>
+</ul>
+</li>
+<li>
+<p>The result is <code>res = 2</code> because we were able to fill two bags.</p>
+</li>
+</ol>
+<h4 id="example-2">
+  Example 2
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cap <span style="color:#f92672">=</span> {<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rock <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+</span></span></code></pre></div><ol>
+<li>
+<p>We calculate the available space:</p>
+<ul>
+<li>Bag 1: <code>cap[0] - rock[0] = 10 - 1 = 9</code></li>
+<li>Bag 2: <code>cap[1] - rock[1] = 20 - 2 = 18</code></li>
+<li>Bag 3: <code>cap[2] - rock[2] = 30 - 3 = 27</code></li>
+</ul>
+</li>
+<li>
+<p>We push these available spaces into the priority queue: <code>pq = [9, 18, 27]</code>.</p>
+</li>
+<li>
+<p>We fill the bags:</p>
+<ul>
+<li>We fill the first bag with 9 available spaces (<code>cnt = 50</code>), reducing <code>cnt</code> to 41.</li>
+<li>We fill the second bag with 18 available spaces (<code>cnt = 41</code>), reducing <code>cnt</code> to 23.</li>
+<li>We fill the third bag with 27 available spaces (<code>cnt = 23</code>), reducing <code>cnt</code> to -4.</li>
+</ul>
+</li>
+<li>
+<p>The result is <code>res = 3</code> because we successfully filled all three bags.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the maximum number of bags that can be filled using the available rocks by leveraging a priority queue (min-heap). This ensures that we always prioritize filling the bags with the least amount of required rocks. The solution has a time complexity of <strong>O(n log n)</strong>, making it scalable for larger input sizes. The space complexity is <strong>O(n)</strong> due to the priority queue used to store the available spaces of the bags. This solution is both efficient and easy to understand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode799s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -290,7 +527,6 @@
 
       </div>
 
-      
 
       <footer>
         

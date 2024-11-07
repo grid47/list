@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,195 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1106s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer <code>n</code>, the task is to find all pairs of prime numbers <code>(p1, p2)</code> such that <code>p1 + p2 = n</code>, where <code>p1</code> and <code>p2</code> are prime numbers. The function should return a list of these prime pairs in any order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use the <strong>Sieve of Eratosthenes</strong> method to find all prime numbers up to <code>n</code>. Then, we will iterate through the numbers and for each prime number <code>p1</code>, check if <code>n - p1</code> is also prime. If both <code>p1</code> and <code>n - p1</code> are prime numbers, we add the pair to the result list.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Generate all primes up to <code>n</code></strong>:</p>
+<ul>
+<li>Use the Sieve of Eratosthenes to mark all numbers up to <code>n</code> as prime or non-prime. This is done by iterating over numbers and marking their multiples as non-prime.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find prime pairs</strong>:</p>
+<ul>
+<li>After generating all prime numbers up to <code>n</code>, iterate through the numbers from 1 to <code>n / 2</code>. For each number <code>i</code>, check if both <code>i</code> and <code>n - i</code> are prime. If so, add the pair <code>(i, n - i)</code> to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the result</strong>:</p>
+<ul>
+<li>Return the list of prime pairs that sum to <code>n</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sieve-of-eratosthenes-initialization">
+  1. <strong>Sieve of Eratosthenes Initialization</strong>
+  <a class="heading-link" href="#1-sieve-of-eratosthenes-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> net(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, true);
+</span></span><span style="display:flex;"><span>net[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> false;
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>net</code> of size <code>n + 1</code> initialized to <code>true</code>. This array will represent whether a number is prime (<code>true</code>) or not (<code>false</code>).</li>
+<li>We initialize <code>net[1]</code> as <code>false</code> since <code>1</code> is not a prime number.</li>
+</ul>
+<h4 id="2-marking-non-primes-using-sieve">
+  2. <strong>Marking Non-Primes Using Sieve</strong>
+  <a class="heading-link" href="#2-marking-non-primes-using-sieve">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; j <span style="color:#f92672">*</span> i <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        net[j <span style="color:#f92672">*</span> i] <span style="color:#f92672">=</span> false;
+</span></span></code></pre></div><ul>
+<li>The outer loop starts from <code>i = 2</code> and runs up to <code>n / 2</code>. The reason we only go up to <code>n / 2</code> is because the larger multiples of <code>i</code> are already covered by smaller prime numbers.</li>
+<li>The inner loop marks all multiples of <code>i</code> as non-prime (<code>net[j * i] = false</code>). This is the core of the Sieve of Eratosthenes algorithm, which eliminates non-prime numbers by marking their multiples.</li>
+</ul>
+<h4 id="3-create-the-result-vector">
+  3. <strong>Create the Result Vector</strong>
+  <a class="heading-link" href="#3-create-the-result-vector">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li>A map <code>mp</code> is initialized but not used in this code. It seems unnecessary for this particular solution.</li>
+<li><code>res</code> is the result vector, which will store all the prime pairs.</li>
+</ul>
+<h4 id="4-iterate-through-the-numbers-and-check-for-pairs">
+  4. <strong>Iterate Through the Numbers and Check for Pairs</strong>
+  <a class="heading-link" href="#4-iterate-through-the-numbers-and-check-for-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(net[i] <span style="color:#f92672">&amp;&amp;</span> net[n <span style="color:#f92672">-</span> i]) 
+</span></span><span style="display:flex;"><span>        res.push_back({i, n <span style="color:#f92672">-</span> i});
+</span></span></code></pre></div><ul>
+<li>We loop through numbers <code>i</code> from 1 to <code>n / 2</code>. The reason for stopping at <code>n / 2</code> is that we only need to check pairs where <code>p1 &lt;= p2</code>. This ensures we avoid duplicate pairs like <code>(p1, p2)</code> and <code>(p2, p1)</code>.</li>
+<li>For each <code>i</code>, we check if both <code>i</code> and <code>n - i</code> are prime numbers (<code>net[i] &amp;&amp; net[n - i]</code>).</li>
+<li>If both numbers are prime, we add the pair <code>{i, n - i}</code> to the result vector <code>res</code>.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. <strong>Return the Result</strong>
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, we return the list of prime pairs that sum up to <code>n</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sieve of Eratosthenes</strong>:</p>
+<ul>
+<li>The time complexity of the Sieve of Eratosthenes is ( O(n \log \log n) ). This is because we are marking multiples of each prime number starting from 2 up to <code>n / 2</code>, and the complexity of the sieve is dominated by the number of multiples marked for each prime number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Prime Pairs</strong>:</p>
+<ul>
+<li>After calculating the sieve, we loop through all numbers from <code>1</code> to <code>n / 2</code>. For each number <code>i</code>, we check if both <code>i</code> and <code>n - i</code> are prime. This check takes constant time ( O(1) ) for each iteration. Therefore, this part has a time complexity of ( O(n) ).</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall time complexity is ( O(n \log \log n) ) due to the sieve.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sieve Array</strong>:</p>
+<ul>
+<li>We use a vector <code>net</code> of size ( n + 1 ) to store whether each number from <code>1</code> to <code>n</code> is prime. The space complexity for this array is ( O(n) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Vector</strong>:</p>
+<ul>
+<li>The result vector <code>res</code> will store pairs of prime numbers, and in the worst case, it will store approximately ( n / 2 ) pairs. Thus, the space complexity for the result vector is ( O(n) ).</li>
+</ul>
+</li>
+</ol>
+<p>Overall, the space complexity is ( O(n) ), as the largest space usage comes from the sieve array and the result vector.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently finds all pairs of prime numbers that sum to a given number <code>n</code>. By using the Sieve of Eratosthenes to identify primes up to <code>n</code>, and then checking for prime pairs, this solution works in ( O(n \log \log n) ) time and ( O(n) ) space. The algorithm is well-suited for solving this problem even with relatively large values of <code>n</code>, and it guarantees that all prime pairs are found without duplication.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1106s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -295,7 +483,6 @@
 
       </div>
 
-      
 
       <footer>
         

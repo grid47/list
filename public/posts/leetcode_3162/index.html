@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,185 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1243s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the <strong>sum of the absolute differences</strong> between the positions of identical characters in two strings, <code>s</code> and <code>t</code>. Specifically, for each character in string <code>s</code>, we need to check every character in string <code>t</code> and, if they match, calculate the absolute difference in their indices. The total sum of these absolute differences is the desired output.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to:</p>
+<ol>
+<li><strong>Iterate Over Both Strings</strong>: For each character in the first string <code>s</code>, we need to compare it with every character in the second string <code>t</code> to see if they match.</li>
+<li><strong>Calculate Absolute Difference</strong>: When we find a match, we calculate the absolute difference between the indices of the matching characters in the two strings.</li>
+<li><strong>Accumulate the Result</strong>: Sum all the calculated absolute differences for every match found.</li>
+</ol>
+<p>The goal is to output this accumulated sum, which represents the total &ldquo;permutation difference&rdquo; between the two strings.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code, breaking it down step by step:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We begin by initializing a variable <code>sum</code> to zero. This variable will hold the sum of absolute differences between matching indices.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Outer Loop (Iterating over string <code>s</code>)</strong>:</p>
+<ul>
+<li>We use a loop to iterate over each character in the string <code>s</code>. The loop runs from <code>i = 0</code> to <code>i &lt; s.length()</code>. The variable <code>i</code> represents the index of the current character in string <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.length(); i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Inner Loop (Iterating over string <code>t</code>)</strong>:</p>
+<ul>
+<li>For every character <code>s[i]</code> in string <code>s</code>, we use another loop to iterate over each character in string <code>t</code>. This second loop runs from <code>j = 0</code> to <code>j &lt; t.length()</code>. The variable <code>j</code> represents the index of the current character in string <code>t</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> t.length(); j<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Matching Characters</strong>:</p>
+<ul>
+<li>Inside the inner loop, we check if the characters at the current indices <code>i</code> and <code>j</code> from <code>s</code> and <code>t</code> respectively are equal:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> t[j]) {
+</span></span></code></pre></div><ul>
+<li>If they are equal, it means we have found a match. We then calculate the <strong>absolute difference</strong> between the indices <code>i</code> and <code>j</code>. This is done using the <code>abs</code> function, which returns the absolute value of the difference between <code>i</code> and <code>j</code>. This represents the &ldquo;distance&rdquo; between the two matching characters in the two strings.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sum <span style="color:#f92672">+=</span> abs(i <span style="color:#f92672">-</span> j);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>Once all the characters in both strings have been processed, the <code>sum</code> variable will hold the total sum of absolute differences between matching character positions.</li>
+<li>The function then returns this sum as the final result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand the code&rsquo;s behavior:</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>;
+</span></span><span style="display:flex;"><span>string t <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cba&#34;</span>;
+</span></span></code></pre></div><h4 id="process">
+  Process:
+  <a class="heading-link" href="#process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p>The outer loop starts by considering the first character of <code>s</code>, which is <code>'a'</code>. We then compare it with every character in <code>t</code>:</p>
+<ul>
+<li><code>s[0] == t[0]</code> → <code>'a' == 'c'</code> (not a match)</li>
+<li><code>s[0] == t[1]</code> → <code>'a' == 'b'</code> (not a match)</li>
+<li><code>s[0] == t[2]</code> → <code>'a' == 'a'</code> (match found at indices 0 and 2, absolute difference <code>abs(0 - 2) = 2</code>)</li>
+</ul>
+<p>The sum is now <code>2</code>.</p>
+</li>
+<li>
+<p>The outer loop moves to the second character of <code>s</code>, which is <code>'b'</code>, and compares it with every character in <code>t</code>:</p>
+<ul>
+<li><code>s[1] == t[0]</code> → <code>'b' == 'c'</code> (not a match)</li>
+<li><code>s[1] == t[1]</code> → <code>'b' == 'b'</code> (match found at indices 1 and 1, absolute difference <code>abs(1 - 1) = 0</code>)</li>
+</ul>
+<p>The sum remains <code>2</code> (no change).</p>
+</li>
+<li>
+<p>Finally, the outer loop moves to the third character of <code>s</code>, which is <code>'c'</code>, and compares it with every character in <code>t</code>:</p>
+<ul>
+<li><code>s[2] == t[0]</code> → <code>'c' == 'c'</code> (match found at indices 2 and 0, absolute difference <code>abs(2 - 0) = 2</code>)</li>
+</ul>
+<p>The sum is now <code>4</code>.</p>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the loops finish, the sum is <code>4</code>, which is returned as the final result.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>: The time complexity of the solution is <strong>O(m * n)</strong>, where <code>m</code> is the length of string <code>s</code> and <code>n</code> is the length of string <code>t</code>. This is because we iterate over every character in string <code>s</code> (outer loop), and for each character in <code>s</code>, we iterate over every character in string <code>t</code> (inner loop). Hence, we perform <code>m * n</code> comparisons in the worst case.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is <strong>O(1)</strong> because we are only using a constant amount of extra space (the <code>sum</code> variable and the loop counters <code>i</code> and <code>j</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to compute the sum of absolute differences in positions of matching characters between two strings. The approach is simple yet effective, leveraging two nested loops to compare every character in <code>s</code> with every character in <code>t</code>. The solution has a linear time complexity proportional to the product of the lengths of the two strings, and it uses constant space. This makes the solution suitable for moderate-sized strings where computational efficiency is important.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1243s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +455,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,145 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode934s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the number of unequal triplets in an array. A triplet <code>(i, j, k)</code> is considered unequal if the elements at those indices are distinct, i.e., <code>nums[i]</code>, <code>nums[j]</code>, and <code>nums[k]</code> are all different. We need to count how many such triplets exist where <code>0 &lt;= i &lt; j &lt; k &lt; nums.size()</code>.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we need to count the number of distinct triplets in the array where each triplet contains unique elements. A brute-force approach would involve checking all possible triplets, but this would have a time complexity of (O(n^3)), which would be inefficient for large arrays. Instead, we can leverage a more optimized approach using hashing and precomputations.</p>
+<p>The key observation is that we don&rsquo;t need to explicitly check each triplet. Instead, we can focus on counting how many elements are smaller and larger than a given number, then compute the number of valid triplets using this information.</p>
+<h4 id="optimized-plan">
+  Optimized Plan:
+  <a class="heading-link" href="#optimized-plan">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Count Frequencies</strong>: First, we need to determine how often each number appears in the array. This will allow us to compute the number of smaller and larger numbers for each distinct element in the array.</p>
+</li>
+<li>
+<p><strong>Calculate Triplet Counts</strong>: Once we have the frequency of each element, we can calculate how many numbers are smaller and larger than each element. For each distinct element <code>n</code>, we can count how many triplets can be formed where <code>n</code> is the middle element by counting how many numbers smaller than <code>n</code> exist (let&rsquo;s call this <code>left</code>), how many numbers greater than <code>n</code> exist (<code>right</code>), and then multiplying these two counts by the frequency of <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Efficient Calculation Using Two Pointers</strong>: The key idea is to update the counts progressively as we iterate through the array, adjusting the <code>left</code> and <code>right</code> values dynamically as we process each distinct element.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let’s break down the code to understand how it works:</p>
+<ol>
+<li>
+<p><strong>Frequency Count</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : nums)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">++</span>m[n];
+</span></span></code></pre></div><ul>
+<li>Here, we create an unordered map <code>m</code> to store the frequency of each number in the array <code>nums</code>.</li>
+<li>We loop through the array and increment the count of each number in <code>m</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>res</code> is initialized to 0, and it will store the final result — the count of unequal triplets.</li>
+<li><code>left</code> is initialized to 0, and it will track the number of elements less than the current element as we iterate over the array.</li>
+<li><code>right</code> is initialized to <code>nums.size()</code> (the total number of elements in the array), and it will track the number of elements greater than the current element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over Frequency Map</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> [n, cnt] <span style="color:#f92672">:</span> m) {
+</span></span><span style="display:flex;"><span>    right <span style="color:#f92672">-=</span> cnt;
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> left <span style="color:#f92672">*</span> cnt <span style="color:#f92672">*</span> right;
+</span></span><span style="display:flex;"><span>    left <span style="color:#f92672">+=</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each distinct number <code>n</code> in the map <code>m</code>, where <code>cnt</code> is the frequency of that number in the array.</li>
+<li>The <code>right -= cnt</code> line reduces the <code>right</code> count by <code>cnt</code> because we are processing the current element <code>n</code>, and the elements greater than <code>n</code> are no longer part of the remaining elements.</li>
+<li><code>res += left * cnt * right</code> calculates the number of triplets where <code>n</code> is the middle element. We multiply:
+<ul>
+<li><code>left</code>: the number of elements smaller than <code>n</code>,</li>
+<li><code>cnt</code>: the number of occurrences of <code>n</code> itself,</li>
+<li><code>right</code>: the number of elements greater than <code>n</code>.</li>
+</ul>
+</li>
+<li>After processing the current element <code>n</code>, we increment <code>left</code> by <code>cnt</code> because now <code>n</code> becomes part of the left side for future elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating over all distinct elements in the array, the variable <code>res</code> will contain the total number of unequal triplets. We return <code>res</code> as the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the time and space complexity of this approach:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Building Frequency Map</strong>: The loop that constructs the frequency map takes (O(n)) time, where (n) is the number of elements in the array <code>nums</code>.</li>
+<li><strong>Calculating Triplets</strong>: The loop that iterates over the frequency map runs for each distinct element in the array. In the worst case, the number of distinct elements is (n), so this loop also takes (O(n)) time.</li>
+<li>Thus, the overall time complexity of the algorithm is (O(n)), where (n) is the number of elements in the input array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li><strong>Frequency Map</strong>: The space complexity for the frequency map is (O(m)), where (m) is the number of distinct elements in the array. In the worst case, (m = n), so the space complexity is (O(n)).</li>
+<li>Thus, the overall space complexity is (O(n)), where (n) is the number of elements in the array <code>nums</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the number of unequal triplets in the given array by leveraging frequency counting and dynamic counting of smaller and larger elements. This approach avoids the need for a brute-force solution, resulting in a time complexity of (O(n)), which is optimal for this problem. The space complexity is also (O(n)), which is required for storing the frequency map of the elements.</p>
+<p>By processing the array in a single pass and using the frequency map to track the number of smaller and larger elements dynamically, the solution ensures that we can count the triplets efficiently, even for large arrays. This approach is ideal for solving the problem when the input size is large, as it scales linearly with the number of elements in the array.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode934s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -284,7 +422,6 @@
 
       </div>
 
-      
 
       <footer>
         

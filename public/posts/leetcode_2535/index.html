@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -220,7 +220,165 @@
 </span></span><span style="display:flex;"><span>        accumulate(begin(n), end(n), <span style="color:#ae81ff">0</span>, [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> s, <span style="color:#66d9ef">int</span> v){ <span style="color:#66d9ef">return</span> s <span style="color:#f92672">+</span> dsum(v); }));
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode972s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the absolute difference between the sum of elements in an array and the sum of the sum of digits of each element in the array. Specifically, given an array of integers, we need to compute:</p>
+<ol>
+<li><strong>The sum of the array elements</strong>.</li>
+<li><strong>The sum of the digits of each element</strong> (for each number, we sum its digits and then sum those results across all the numbers).</li>
+<li><strong>The absolute difference</strong> between the two sums.</li>
+</ol>
+<p>The task is to compute this difference and return it.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to break it into two main parts:</p>
+<ol>
+<li>
+<p><strong>Sum of elements</strong>: The sum of elements in the given array is straightforward to calculate using the <code>accumulate</code> function in C++.</p>
+</li>
+<li>
+<p><strong>Sum of digits of elements</strong>: For each number in the array, we need to calculate the sum of its digits. This can be done using a recursive approach.</p>
+</li>
+</ol>
+<p>Once both sums are computed, we can simply return the absolute difference between the two sums.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-recursive-function-to-compute-sum-of-digits">
+  1. <strong>Recursive Function to Compute Sum of Digits</strong>
+  <a class="heading-link" href="#1-recursive-function-to-compute-sum-of-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dsum</span>(<span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> v <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> v <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> dsum(v <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function, <code>dsum</code>, computes the sum of the digits of a number recursively.</li>
+<li>The base case is when the number <code>v</code> is 0. If <code>v</code> is 0, the function returns 0, as the sum of digits of 0 is 0.</li>
+<li>In the recursive case, the function computes the last digit of the number using <code>v % 10</code> and adds it to the result of recursively calling <code>dsum(v / 10)</code>. This effectively breaks down the number by removing the last digit at each recursive step.</li>
+<li>For example, for <code>v = 123</code>, the function will compute <code>1 + 2 + 3 = 6</code>.</li>
+</ul>
+<h4 id="2-calculating-the-absolute-difference">
+  2. <strong>Calculating the Absolute Difference</strong>
+  <a class="heading-link" href="#2-calculating-the-absolute-difference">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">differenceOfSum</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> abs(accumulate(begin(n), end(n), <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-</span> 
+</span></span><span style="display:flex;"><span>               accumulate(begin(n), end(n), <span style="color:#ae81ff">0</span>, [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> s, <span style="color:#66d9ef">int</span> v){ <span style="color:#66d9ef">return</span> s <span style="color:#f92672">+</span> dsum(v); }));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The function <code>differenceOfSum</code> calculates the absolute difference between the sum of the elements in the array and the sum of the digits of those elements.</p>
+</li>
+<li>
+<p><strong>Sum of elements</strong>: <code>accumulate(begin(n), end(n), 0)</code> calculates the sum of all the elements in the array <code>n</code>. The <code>accumulate</code> function is used here, which is a standard C++ algorithm to sum the elements of a range (from <code>begin(n)</code> to <code>end(n)</code>), starting from an initial sum of 0.</p>
+</li>
+<li>
+<p><strong>Sum of digits of elements</strong>: <code>accumulate(begin(n), end(n), 0, [&amp;](int s, int v){ return s + dsum(v); })</code> calculates the sum of the sum of digits of each element in the array <code>n</code>. Here:</p>
+<ul>
+<li>The <code>accumulate</code> function is again used, but this time with a custom lambda function. The lambda function computes the sum of digits of each number <code>v</code> by calling <code>dsum(v)</code>.</li>
+<li>The lambda accumulates the sum of digits for each element in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Absolute Difference</strong>: Finally, the absolute difference between the sum of the elements and the sum of the sum of digits is calculated using <code>abs()</code>. This function ensures that the result is always a non-negative value, as we are interested in the magnitude of the difference, regardless of which sum is larger.</p>
+</li>
+</ul>
+<h4 id="3-final-return">
+  3. <strong>Final Return</strong>
+  <a class="heading-link" href="#3-final-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The function returns the absolute difference between the two sums, as required by the problem statement.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Sum of Elements</strong>: The first <code>accumulate</code> function, which computes the sum of the elements, iterates through the entire array once. The time complexity for this step is ( O(n) ), where ( n ) is the number of elements in the array.</p>
+</li>
+<li>
+<p><strong>Sum of Digits</strong>: The second <code>accumulate</code> function involves iterating over the array and, for each element, calculating the sum of its digits using the recursive <code>dsum</code> function.</p>
+<ul>
+<li>The time complexity of <code>dsum(v)</code> depends on the number of digits in the number <code>v</code>. If <code>v</code> has ( d ) digits, then the time complexity of <code>dsum(v)</code> is ( O(d) ).</li>
+<li>For each element, the <code>dsum</code> function is called, and if we assume the maximum number of digits in any number is ( D ), the overall time complexity for computing the sum of digits is ( O(n \cdot D) ), where ( n ) is the number of elements in the array and ( D ) is the number of digits in the largest number in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: The total time complexity is ( O(n \cdot D) ), where ( n ) is the size of the array and ( D ) is the maximum number of digits in any element of the array.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Auxiliary Space for Sum of Digits</strong>: The <code>dsum</code> function uses recursion. The maximum depth of the recursion depends on the number of digits in the largest number. Thus, the space complexity for recursion is ( O(D) ), where ( D ) is the number of digits in the largest number in the array.</p>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The overall space complexity is ( O(D) ), as the space required for recursion dominates.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the absolute difference between the sum of the elements in the array and the sum of the sum of digits of each element. By utilizing the <code>accumulate</code> function and a recursive approach to calculate the sum of digits, the code is both clean and efficient. The primary time complexity arises from iterating through the elements of the array and calculating the sum of digits, which makes it suitable for arrays with relatively small numbers. However, for larger numbers with many digits, the solution still remains feasible due to its recursive nature.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode972s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -274,7 +432,6 @@
 
       </div>
 
-      
 
       <footer>
         

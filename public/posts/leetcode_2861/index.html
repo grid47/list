@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,158 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1159s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are tasked with determining the maximum number of alloys that can be produced given certain constraints. The production of alloys requires specific compositions of ingredients, each with a limited stock, and each ingredient has a certain cost. Given a budget, the goal is to figure out how many alloys we can create without exceeding the budget.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key idea is to perform a <strong>binary search</strong> on the maximum number of alloys we can produce (<code>mid</code>) and verify if it is feasible to produce that many alloys within the given budget. For each number of alloys (<code>mid</code>), we check whether the total cost of acquiring the missing ingredients exceeds the available budget.</p>
+<p>We will break down the solution into two main parts:</p>
+<ol>
+<li><strong>Feasibility Check</strong>: A function (<code>func</code>) that checks if we can produce <code>mid</code> alloys within the budget.</li>
+<li><strong>Binary Search</strong>: A binary search over the number of alloys to determine the maximum number we can produce.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> ll <span style="color:#f92672">=</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>;
+</span></span></code></pre></div><ul>
+<li>First, we define <code>ll</code> as a shorthand for <code>long long</code>, which helps with handling large numbers efficiently, as the values involved (such as the number of alloys or costs) could exceed the typical integer range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">func</span>(ll mid, <span style="color:#66d9ef">int</span> budget, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> composition, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> stock, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ll minCost <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> composition.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ll currCost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> composition[i].size(); <span style="color:#f92672">++</span>j)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            ll curr <span style="color:#f92672">=</span> mid <span style="color:#f92672">*</span> composition[i][j];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (stock[j] <span style="color:#f92672">&gt;=</span> curr)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                ll extra <span style="color:#f92672">=</span> (curr <span style="color:#f92672">-</span> stock[j]) <span style="color:#f92672">*</span> cost[j];
+</span></span><span style="display:flex;"><span>                currCost <span style="color:#f92672">+=</span> extra;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        minCost <span style="color:#f92672">=</span> min(currCost, minCost);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (minCost <span style="color:#f92672">&lt;=</span> budget);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>func</code> function takes in several parameters: <code>mid</code> (the number of alloys we are trying to produce), <code>budget</code> (the available budget), <code>composition</code> (the required amounts of ingredients for each alloy), <code>stock</code> (the current stock of ingredients), and <code>cost</code> (the cost per unit of each ingredient).</li>
+<li>Inside the function:
+<ul>
+<li>We initialize <code>minCost</code> to <code>INT_MAX</code>, which will store the minimum cost required to produce <code>mid</code> alloys.</li>
+<li>For each alloy (represented by the <code>composition[i]</code> vector), we calculate how much of each ingredient is needed and how much more we need to buy (if the stock is insufficient).</li>
+<li>If we need more of an ingredient than we have, we calculate the extra cost and add it to <code>currCost</code>.</li>
+<li>After processing all ingredients for the current alloy type, we update <code>minCost</code> to the minimum of the current <code>currCost</code> and the previous <code>minCost</code>.</li>
+</ul>
+</li>
+<li>Finally, we return <code>true</code> if the total <code>minCost</code> is within the available <code>budget</code>, and <code>false</code> otherwise.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxNumberOfAlloys</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> budget, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> composition, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> stock, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost) {
+</span></span><span style="display:flex;"><span>    ll low <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, high <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span>, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (low <span style="color:#f92672">&lt;=</span> high)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ll mid <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> (high <span style="color:#f92672">-</span> low) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (func(mid, budget, composition, stock, cost))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>maxNumberOfAlloys</code> function uses binary search to find the maximum number of alloys (<code>mid</code>) that can be produced within the budget.
+<ul>
+<li>We initialize <code>low</code> to 0 and <code>high</code> to <code>1e9</code> (a large number representing the upper bound for the possible number of alloys).</li>
+<li>In the <code>while</code> loop, we perform binary search. We calculate the middle value <code>mid</code> between <code>low</code> and <code>high</code>.</li>
+<li>We call <code>func(mid, budget, composition, stock, cost)</code> to check if it&rsquo;s feasible to produce <code>mid</code> alloys within the given budget.</li>
+<li>If it is feasible, we update <code>ans</code> to <code>mid</code> and adjust the <code>low</code> bound to <code>mid + 1</code>, to search for a potentially larger valid value of <code>mid</code>.</li>
+<li>If it&rsquo;s not feasible, we adjust the <code>high</code> bound to <code>mid - 1</code> to search for a smaller valid value of <code>mid</code>.</li>
+</ul>
+</li>
+<li>Finally, we return <code>ans</code>, which will store the maximum number of alloys that can be produced within the budget.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Binary Search</strong>: The binary search runs over a range from <code>0</code> to <code>1e9</code>, meaning it will take approximately <code>O(log(1e9))</code> iterations, or about 30 iterations.</li>
+<li><strong>Feasibility Check (func)</strong>: For each call to <code>func</code>, we iterate over the <code>composition</code> matrix and the <code>stock</code> and <code>cost</code> arrays, which takes <code>O(n * k)</code> time, where <code>n</code> is the number of alloys and <code>k</code> is the number of ingredients.</li>
+</ol>
+<p>Thus, the overall time complexity of the solution is:</p>
+<p>[
+O(\log(1e9) \times n \times k) = O(n \times k \times \log(1e9))
+]</p>
+<p>Given that <code>n</code> and <code>k</code> are typically much smaller than <code>1e9</code>, the binary search efficiently narrows down the search space.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the input data structures: <code>composition</code>, <code>stock</code>, and <code>cost</code>, each of which takes <code>O(n * k)</code> space.</li>
+<li>The space used by variables such as <code>minCost</code>, <code>currCost</code>, and <code>mid</code> is constant (<code>O(1)</code>).</li>
+</ul>
+<p>Thus, the space complexity is:</p>
+<p>[
+O(n \times k)
+]</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining the maximum number of alloys that can be produced within a given budget. By using binary search, we minimize the number of checks required, making the solution scalable even for large input sizes. The feasibility function checks whether the budget can support the production of a given number of alloys by calculating the total cost of acquiring missing ingredients. The time complexity of <strong>O(n * k * log(1e9))</strong> ensures that the solution is efficient for the problem constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1159s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -262,7 +413,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2862"  class="external-link" target="_blank" rel="noopener">LeetCode #2862: Maximum Element-Sum of a Complete Subset of Indices</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2864"  class="external-link" target="_blank" rel="noopener">LeetCode #2864: Maximum Odd Binary Number</a></th>
       </tr>
   </thead>
   <tbody>
@@ -304,7 +455,6 @@
 
       </div>
 
-      
 
       <footer>
         

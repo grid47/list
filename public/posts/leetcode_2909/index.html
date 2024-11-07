@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,137 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1182s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <p>The problem at hand requires finding the smallest possible sum of three numbers from the given array <code>nums</code>, where the conditions for selecting these numbers are that they must form a strictly increasing subsequence. Specifically, we need to find three elements in the array such that the first number is smaller than the second, and the second is smaller than the third. The goal is to minimize the sum of these three numbers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key idea in solving this problem is to break it down into manageable steps while maintaining the smallest possible values for the subsequence. We can achieve this through dynamic comparisons and optimizations as we iterate through the array. The approach makes use of two arrays:</p>
+<ul>
+<li><strong><code>smallestRight</code></strong>: This array helps to track the smallest number encountered to the right of each element in the input array.</li>
+<li><strong><code>smallestLeft</code></strong>: This variable keeps track of the smallest number encountered to the left of the current element.</li>
+</ul>
+<p>The solution then proceeds by iterating over the array while keeping track of the smallest possible values that can form a strictly increasing subsequence of three numbers.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-smallestright-array">
+  Step 1: Initialize <code>smallestRight</code> Array
+  <a class="heading-link" href="#step-1-initialize-smallestright-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> smallestRight(nums.size(), nums.back());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>){
+</span></span><span style="display:flex;"><span>    smallestRight[i] <span style="color:#f92672">=</span> min(smallestRight[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], nums[i]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Objective</strong>: The <code>smallestRight</code> array stores, for each element in the array, the smallest number to the right of that element.</li>
+<li>The last element of the array (<code>nums.back()</code>) is trivially the smallest on its own, so it is initialized as such.</li>
+<li>Starting from the second last element and moving towards the first, we update each element of <code>smallestRight</code> by taking the minimum of the current element in <code>nums</code> and the corresponding value in the <code>smallestRight</code> array.</li>
+</ul>
+<p>For example, if <code>nums = [5, 2, 9, 7, 1]</code>, after filling <code>smallestRight</code>, it will look like <code>[1, 1, 1, 1, 1]</code>.</p>
+<h4 id="step-2-track-the-smallestleft-and-compute-the-result">
+  Step 2: Track the <code>smallestLeft</code> and Compute the Result
+  <a class="heading-link" href="#step-2-track-the-smallestleft-and-compute-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> smallestLeft <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(smallestLeft <span style="color:#f92672">&lt;</span> nums[i] <span style="color:#f92672">&amp;&amp;</span> smallestRight[i] <span style="color:#f92672">&lt;</span> nums[i]){ 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ans <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) ans <span style="color:#f92672">=</span>  nums[i] <span style="color:#f92672">+</span> smallestRight[i] <span style="color:#f92672">+</span> smallestLeft;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> ans <span style="color:#f92672">=</span> min(ans, nums[i] <span style="color:#f92672">+</span> smallestRight[i] <span style="color:#f92672">+</span> smallestLeft); 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    smallestLeft <span style="color:#f92672">=</span> min(smallestLeft, nums[i]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Objective</strong>: As we move through the array from left to right, we maintain the smallest number on the left (<code>smallestLeft</code>). For each element, we check if it can form an increasing subsequence with the values in <code>smallestLeft</code> (to the left of it) and <code>smallestRight</code> (to the right of it).</li>
+<li>If the current element can form a valid subsequence (<code>smallestLeft &lt; nums[i]</code> and <code>smallestRight[i] &lt; nums[i]</code>), we compute the sum of the three numbers (<code>nums[i]</code>, <code>smallestRight[i]</code>, and <code>smallestLeft</code>).</li>
+<li>The result (<code>ans</code>) is updated to the minimum sum found so far.</li>
+<li>After checking the current element, we update <code>smallestLeft</code> to be the minimum of the current element and <code>smallestLeft</code>, ensuring that it always holds the smallest value encountered from the left side up to the current index.</li>
+</ul>
+<p>For example, given <code>nums = [5, 2, 9, 7, 1]</code>, during the iteration:</p>
+<ul>
+<li>We calculate possible subsequences like <code>5 + 1 + 2</code>, and update the answer to track the minimum sum.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After iterating over all elements and checking possible subsequences, the smallest sum is stored in <code>ans</code>, which is then returned.</li>
+<li>If no valid subsequence was found, <code>ans</code> would remain <code>-1</code>, indicating no solution.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(n)</code></strong>: We iterate through the array twice:
+<ul>
+<li>The first pass to compute the <code>smallestRight</code> array takes <code>O(n)</code>, where <code>n</code> is the length of the array.</li>
+<li>The second pass to compute the minimum sum and update <code>smallestLeft</code> also takes <code>O(n)</code>.</li>
+</ul>
+</li>
+<li>Hence, the overall time complexity is linear, i.e., <code>O(n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(n)</code></strong>: We use two extra arrays (<code>smallestRight</code> and <code>nums</code>) to store information, both of which take linear space.</li>
+<li>Therefore, the space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using dynamic tracking of the smallest elements to the left and right of each element in the array. By iterating through the array once, we can compute the smallest possible sum of a valid subsequence of three elements that form a strictly increasing order. The solution has a linear time complexity, which ensures that it can handle larger input sizes efficiently. By using simple comparisons and updates, the approach achieves an optimal result while maintaining clarity and simplicity in implementation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1182s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -277,7 +407,6 @@
 
       </div>
 
-      
 
       <footer>
         

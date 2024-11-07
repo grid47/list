@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,176 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1087s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to check if a given integer <code>n</code> is a &ldquo;fascinating number&rdquo;. A fascinating number is defined as follows:</p>
+<ul>
+<li>The number <code>n</code> must form a concatenated sequence when multiplied by 2 and 3.</li>
+<li>Specifically, if we concatenate the number <code>n</code>, <code>2 * n</code>, and <code>3 * n</code> as strings, the sequence should consist of the digits from 1 to 9 exactly once, in any order. Importantly, no digit should be repeated, and no digit should be zero.</li>
+</ul>
+<p>The task is to return <code>true</code> if the number is fascinating, and <code>false</code> otherwise.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves these key steps:</p>
+<ol>
+<li>
+<p><strong>Concatenate the Numbers</strong>: First, we generate three values:</p>
+<ul>
+<li><code>n</code>: the given number.</li>
+<li><code>2 * n</code>: double of <code>n</code>.</li>
+<li><code>3 * n</code>: triple of <code>n</code>.
+These values are then concatenated into a single string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Fascinating Properties</strong>: The concatenated string must:</p>
+<ul>
+<li>Contain only the digits from 1 to 9.</li>
+<li>Contain each of these digits exactly once.</li>
+<li>Not contain any zeros or repeating digits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Implementation Details</strong>:</p>
+<ul>
+<li>Convert the numbers into strings to easily manipulate their digits.</li>
+<li>Use a boolean array <code>yes</code> of size 10 to track which digits have already been encountered, ensuring there are no duplicates.</li>
+<li>As we loop through the concatenated string, we check if a zero is encountered or if any digit is repeated. If either condition is true, return <code>false</code>.</li>
+<li>If no issues are found, check if all digits from 1 to 9 are present. If so, return <code>true</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-multiply-n-by-2-and-3">
+  Step 1: Multiply <code>n</code> by 2 and 3
+  <a class="heading-link" href="#step-1-multiply-n-by-2-and-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> n;
+</span></span></code></pre></div><ul>
+<li>These two lines compute the values <code>2 * n</code> and <code>3 * n</code>, which are needed for forming the concatenated sequence. The number <code>n</code> is the base value, and we calculate its double (<code>n1</code>) and triple (<code>n2</code>).</li>
+</ul>
+<h4 id="step-2-create-the-concatenated-string">
+  Step 2: Create the Concatenated String
+  <a class="heading-link" href="#step-2-create-the-concatenated-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> to_string(n) <span style="color:#f92672">+</span> to_string(n1) <span style="color:#f92672">+</span> to_string(n2);
+</span></span></code></pre></div><ul>
+<li>We concatenate the string representations of <code>n</code>, <code>2 * n</code> (<code>n1</code>), and <code>3 * n</code> (<code>n2</code>). The <code>to_string()</code> function is used to convert each of these numbers into their string representations, and the <code>+</code> operator concatenates them into one string <code>s</code>. The string <code>s</code> now contains the digits of <code>n</code>, <code>n1</code>, and <code>n2</code> in that order.</li>
+</ul>
+<h4 id="step-3-create-a-boolean-array-to-track-digits">
+  Step 3: Create a Boolean Array to Track Digits
+  <a class="heading-link" href="#step-3-create-a-boolean-array-to-track-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> yes(<span style="color:#ae81ff">10</span>, false);
+</span></span></code></pre></div><ul>
+<li>We create a boolean array <code>yes</code> of size 10 (for digits 0 through 9), initially set to <code>false</code>. This array will help us track whether each digit has been seen in the concatenated string <code>s</code>. If a digit is encountered, we mark it as <code>true</code>.</li>
+</ul>
+<h4 id="step-4-loop-through-the-string-and-check-digits">
+  Step 4: Loop Through the String and Check Digits
+  <a class="heading-link" href="#step-4-loop-through-the-string-and-check-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(yes[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>]) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    yes[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each character of the string <code>s</code>.</li>
+<li>First, we check if the character is <code>'0'</code>. If it is, we immediately return <code>false</code> because <code>0</code> is not allowed in a fascinating number.</li>
+<li>Next, we check if the current digit has already been seen using the <code>yes</code> array. If the digit has been encountered before, we return <code>false</code> because duplicates are not allowed.</li>
+<li>If the digit has not been seen before, we mark it as <code>true</code> in the <code>yes</code> array to ensure that we don&rsquo;t encounter it again in the future.</li>
+</ul>
+<h4 id="step-5-return-true-if-all-conditions-are-met">
+  Step 5: Return True if All Conditions are Met
+  <a class="heading-link" href="#step-5-return-true-if-all-conditions-are-met">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we have successfully looped through all the digits and there were no zeros or duplicates, we return <code>true</code>, indicating that the number <code>n</code> is fascinating.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(k)</strong>, where <code>k</code> is the total number of digits in the concatenated string <code>s</code>. Since <code>s</code> is formed by concatenating <code>n</code>, <code>2 * n</code>, and <code>3 * n</code>, the number of digits is proportional to the length of <code>n</code>. Specifically:</p>
+<ul>
+<li>If <code>n</code> has <code>d</code> digits, then <code>n1</code> and <code>n2</code> will also have roughly <code>d</code> digits.</li>
+<li>Therefore, the total number of digits in <code>s</code> is approximately <code>3 * d</code>.</li>
+</ul>
+<p>Since we loop through each digit of <code>s</code> once and perform constant-time operations within the loop (checking and updating the boolean array), the overall time complexity is <strong>O(d)</strong>, where <code>d</code> is the number of digits in the input number <code>n</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as the only extra space used is for the boolean array <code>yes</code> of size 10. This space is constant, regardless of the size of <code>n</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if a number is fascinating by leveraging string manipulation and a boolean array to track the occurrence of digits. The approach runs in linear time relative to the number of digits in the input number, and it uses constant space for the digit tracking array. This makes it both time and space efficient, suitable for large input numbers within reasonable limits.</p>
+<p>The key insight in solving this problem is recognizing the need to form a concatenated string and checking for digit uniqueness and absence of zeros, which ensures the number is fascinating.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1087s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -279,7 +448,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -251,7 +251,148 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">100001</span><span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode672s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the minimum number of &ldquo;buckets&rdquo; needed to cover all occurrences of &lsquo;H&rsquo; (which represents hungry hamsters) in a given string <code>ham</code>. The string can contain &lsquo;H&rsquo;, &lsquo;.&rsquo; (which represents empty spaces), and &lsquo;C&rsquo; (which represents occupied spaces). The challenge is to cover each &lsquo;H&rsquo; with a bucket while adhering to specific rules: a bucket can be placed directly next to an &lsquo;H&rsquo; or can span over an empty space (&rsquo;.&rsquo;). If an &lsquo;H&rsquo; is adjacent to another &lsquo;H&rsquo; and is covered by a single bucket, it will not require additional buckets.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a dynamic programming approach with memoization to keep track of the minimum number of buckets needed at each index of the string. The idea is to recursively evaluate the string from each position and consider different options for placing buckets.</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>: We define a helper function <code>dp(idx, ham)</code> that computes the minimum number of buckets needed starting from index <code>idx</code>. We use a memoization array to store previously computed results for each index to avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: If <code>idx</code> exceeds the length of the string, we return 0 since no more buckets are needed.</p>
+</li>
+<li>
+<p><strong>Recursive Cases</strong>:</p>
+<ul>
+<li>If the character at <code>idx</code> is &lsquo;H&rsquo;, we check:
+<ul>
+<li>If the next character is &lsquo;.&rsquo;, we consider placing a bucket to cover <code>H</code> and potentially the next empty space (moving <code>idx</code> forward by 3).</li>
+<li>If the previous character is &lsquo;.&rsquo;, we consider placing a bucket before the current &lsquo;H&rsquo; (moving <code>idx</code> forward by 1).</li>
+</ul>
+</li>
+<li>If the character at <code>idx</code> is not &lsquo;H&rsquo;, we move to the next character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Decision</strong>: The function returns the minimum number of buckets needed to cover all &lsquo;H&rsquo;s in the string, and if it&rsquo;s impossible to cover all &lsquo;H&rsquo;s, we return -1.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> memo;  <span style="color:#75715e">// Memoization array to store results for each index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, string <span style="color:#f92672">&amp;</span>ham) {
+</span></span></code></pre></div><ol>
+<li><strong>Class and Method Definition</strong>: The class <code>Solution</code> contains a public member <code>memo</code>, which is a vector used for memoization. The method <code>dp(int idx, string &amp;ham)</code> is defined to recursively compute the minimum buckets needed.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> ham.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Base case: No more buckets needed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx];  <span style="color:#75715e">// Return cached result if available
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>Base Case Handling</strong>: The function first checks if <code>idx</code> is beyond the bounds of the string. If so, it returns 0 since no further buckets are needed. If a result for the current index is already computed, it returns that result to save time.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">100001</span>;  <span style="color:#75715e">// Initialize to a large value (effectively infinity)
+</span></span></span></code></pre></div><ol start="3">
+<li><strong>Initialization</strong>: A variable <code>ans</code> is initialized to a large value to ensure any valid result will be smaller.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ham[idx] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;H&#39;</span>) {
+</span></span></code></pre></div><ol start="4">
+<li><strong>Handling &lsquo;H&rsquo;</strong>: If the current character is &lsquo;H&rsquo;, we explore the possibilities for placing a bucket.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> ham.size() <span style="color:#f92672">&amp;&amp;</span> ham[idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>, ham));  <span style="color:#75715e">// Place a bucket covering H and the next &#39;.&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> (ham[idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>)) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ham));  <span style="color:#75715e">// Place a bucket before H
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ham);  <span style="color:#75715e">// Move to the next character if not &#39;H&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ol start="5">
+<li>
+<p><strong>Bucket Placement Logic</strong>: Two scenarios are evaluated:</p>
+<ul>
+<li>If an empty space follows the &lsquo;H&rsquo;, a bucket is placed, and the recursion continues from two indices forward (skipping the covered &lsquo;H&rsquo; and &lsquo;.&rsquo;).</li>
+<li>If an empty space precedes the &lsquo;H&rsquo;, a bucket is placed before it, and the recursion continues from the next character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Decision</strong>: The function returns the result for the current index, storing it in the memoization array.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumBuckets</span>(string ham) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> ham.size();
+</span></span><span style="display:flex;"><span>        memo.resize(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Initialize memoization array with -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>, ham);  <span style="color:#75715e">// Start recursion from index 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">100001</span><span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> ans;  <span style="color:#75715e">// Return -1 if no solution found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="7">
+<li><strong>Wrapper Function</strong>: The <code>minimumBuckets</code> function initializes the memoization array and starts the recursion from index 0. It returns the minimum number of buckets or -1 if covering all &lsquo;H&rsquo;s is impossible.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n)), where (n) is the length of the string <code>ham</code>. Each index is processed once due to memoization.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(n)) for the memoization array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the minimum number of buckets required to cover all &lsquo;H&rsquo;s in the string using dynamic programming and memoization. The recursive approach combined with strategic checks for placing buckets ensures that we consider all possible placements while avoiding unnecessary recalculations.</p>
+<p>This algorithm can be particularly useful in scenarios where such coverage problems arise, such as in resource allocation or optimization tasks. Understanding and implementing memoization techniques like this one can significantly improve the efficiency of solutions for similar dynamic programming challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode672s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -305,7 +446,6 @@
 
       </div>
 
-      
 
       <footer>
         

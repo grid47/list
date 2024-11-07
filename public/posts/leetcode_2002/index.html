@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -269,7 +269,144 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, s1, s2);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode619s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The challenge is to divide a given string into two non-empty substrings such that both substrings are palindromic, and we want to maximize the product of their lengths. A palindromic string reads the same forwards and backwards, like &ldquo;radar&rdquo; or &ldquo;level.&rdquo; The task is to explore all possible ways to split the string and check for the maximal product of the lengths of two valid palindromic substrings.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can use a recursive depth-first search (DFS) approach combined with backtracking. The process involves:</p>
+<ol>
+<li>
+<p><strong>Recursive Functionality</strong>: We will define a recursive function <code>dp</code> that takes the current index of the string being processed and two substrings (<code>s1</code> and <code>s2</code>), which will hold the characters chosen for each partition.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: When we reach the end of the string (i.e., <code>idx == n</code>), we check if both <code>s1</code> and <code>s2</code> are palindromic using a helper function. If both substrings are palindromic, we calculate their lengths and return their product. If not, we return 0.</p>
+</li>
+<li>
+<p><strong>Recursive Exploration</strong>: For each character at the current index, we have three options:</p>
+<ul>
+<li>Add the character to <code>s1</code>.</li>
+<li>Add the character to <code>s2</code>.</li>
+<li>Skip the character entirely.</li>
+</ul>
+<p>We will recursively call <code>dp</code> for each of these scenarios, keeping track of the maximum product obtained.</p>
+</li>
+<li>
+<p><strong>Utilizing Backtracking</strong>: By adding and removing characters from <code>s1</code> and <code>s2</code>, we ensure we explore all possible partitions of the string.</p>
+</li>
+</ol>
+<p>This method ensures we systematically explore all potential combinations while also checking for the palindromic property efficiently.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dissect the code to understand how this approach is implemented:</p>
+<ol>
+<li>
+<p><strong>Class and Member Variables</strong>: We define a class named <code>Solution</code> which contains member variables for the length of the string (<code>n</code>) and the string itself (<code>p</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    string p;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Palindrome Check Function</strong>: The function <code>pal</code> checks if a given string is palindromic. It uses two pointers, one starting at the beginning and the other at the end, and moves towards the center, comparing characters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">pal</span>(string <span style="color:#f92672">&amp;</span>s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">!=</span> s[j]) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>; j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Function</strong>: The main recursive function <code>dp</code> is defined to explore the string. It takes the current index (<code>idx</code>), and the two substrings (<code>s1</code> and <code>s2</code>) as parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, string <span style="color:#f92672">&amp;</span>s1, string <span style="color:#f92672">&amp;</span>s2) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case</strong>: If we have processed all characters, we check if both <code>s1</code> and <code>s2</code> are palindromic. If they are, we return the product of their lengths.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pal(s1) <span style="color:#f92672">&amp;&amp;</span> pal(s2)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s1.size() <span style="color:#f92672">*</span> s2.size();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Exploring Substring Choices</strong>: We explore the three possibilities for the current character:</p>
+<ul>
+<li>Add the character to <code>s1</code> and recursively call <code>dp</code>.</li>
+<li>After returning from the first call, we remove the character from <code>s1</code> and add it to <code>s2</code>, then recursively call <code>dp</code>.</li>
+<li>Finally, we call <code>dp</code> again without adding the character to either substring, allowing us to skip it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s1.push_back(p[idx]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, s1, s2);
+</span></span><span style="display:flex;"><span>s1.pop_back();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s2.push_back(p[idx]);
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, s1, s2));
+</span></span><span style="display:flex;"><span>s2.pop_back();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, s1, s2));
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: The function returns the maximum product of palindromic substring lengths found.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Driver Function</strong>: The <code>maxProduct</code> function initializes the member variable <code>p</code> with the input string and calls the recursive <code>dp</code> function starting with index 0 and empty substrings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxProduct</span>(string s) {
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>    string s1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, s1, s2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(3^n) in the worst case due to the three recursive calls made for each character in the string. This exponential complexity arises because for each character, we have three choices (add to <code>s1</code>, add to <code>s2</code>, or skip), leading to a significant number of possible combinations. The space complexity is O(n) for the recursion stack, as we could go as deep as the length of the string in our recursive calls.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the provided code effectively finds the maximum product of the lengths of two palindromic substrings derived from the input string. Through a systematic exploration of all potential partitions and a diligent check for the palindromic property, the solution highlights a clever use of recursion and backtracking. While the exponential time complexity may pose challenges for very long strings, this method ensures that every possible combination is considered, making it a robust approach to the problem at hand. Overall, this code serves as a prime example of how to leverage recursive techniques to solve complex string manipulation challenges efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode619s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +418,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2003"  class="external-link" target="_blank" rel="noopener">LeetCode #2003: Smallest Missing Genetic Value in Each Subtree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2006"  class="external-link" target="_blank" rel="noopener">LeetCode #2006: Count Number of Pairs With Absolute Difference K</a></th>
       </tr>
   </thead>
   <tbody>
@@ -323,7 +460,6 @@
 
       </div>
 
-      
 
       <footer>
         

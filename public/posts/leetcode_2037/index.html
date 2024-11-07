@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
 
@@ -232,7 +232,85 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode644s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two lists, <code>seats</code> and <code>students</code>, each representing the positions of seats and students respectively, our goal is to calculate the minimum total number of moves required to seat each student. Each student can only move directly to a seat and the aim is to minimize the sum of the moves for all students.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the minimum movement:</p>
+<ol>
+<li><strong>Sort both lists</strong> - Sorting ensures that we can pair each student with a seat in a way that minimizes the travel distance, as the closest match in positions is likely between sorted lists.</li>
+<li><strong>Calculate moves</strong> - After sorting, the ith student can be paired with the ith seat. Calculating the absolute difference between each student and seat position and summing these differences gives the minimum moves required.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minMovesToSeat(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> seats, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> students) {
+</span></span><span style="display:flex;"><span>        sort(seats.begin(), seats.end());
+</span></span><span style="display:flex;"><span>        sort(students.begin(), students.end());
+</span></span></code></pre></div><ul>
+<li>We first sort <code>seats</code> and <code>students</code>. This minimizes the movement for each pair, as a student positioned close to a seat in sorted order will require fewer moves than an unoptimized pairing.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> seats.size(); i<span style="color:#f92672">++</span>) res <span style="color:#f92672">+=</span> abs(seats[i] <span style="color:#f92672">-</span> students[i]);
+</span></span></code></pre></div><ul>
+<li>Initialize <code>res</code> to accumulate the total moves required. We loop through each pair (student, seat) and calculate <code>abs(seats[i] - students[i])</code>, which represents the movement required for that student. Summing these differences gives the minimum total moves.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>res</code>, which contains the total minimum moves.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n log n), where <code>n</code> is the number of seats (or students). Sorting both <code>seats</code> and <code>students</code> takes O(n log n), and the for-loop takes O(n).</li>
+<li><strong>Space Complexity</strong>: O(1), as the sorting is done in place and no additional data structures are used aside from a few integer variables.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently minimizes the movements needed by pairing students and seats in sorted order. Sorting both lists allows for optimal pairing, minimizing the movement for each student-seat match. This approach provides an elegant and straightforward solution to the problem with minimal computational overhead, making it suitable for larger inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode644s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -286,7 +364,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -251,7 +251,165 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1029s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to determine if it is possible to perform a series of operations on an array <code>nums</code> such that after applying a sequence of operations, the resulting array is strictly increasing. In each operation, you are allowed to subtract a prime number from an element of the array. The goal is to check whether it&rsquo;s possible to apply the operation to each element such that the array becomes strictly increasing, with no element being greater than or equal to the next one after the operation.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to ensure that for each element in the array, we can find a prime number (from a pre-defined list of primes) that can be subtracted from the current element such that the result still maintains the condition of the array being strictly increasing. This will involve the following steps:</p>
+<ol>
+<li>
+<p><strong>Prime List</strong>: We are given a list of prime numbers. These primes will be the only candidates for subtraction from each element of the array.</p>
+</li>
+<li>
+<p><strong>Traversal of the Array</strong>: We start from the second-to-last element and move towards the first element. For each element:</p>
+<ul>
+<li>We check whether it is greater than or equal to the next element. If so, we need to subtract a prime from it.</li>
+<li>The prime subtracted must make the current element strictly less than the next element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using Lower Bound</strong>: To find a suitable prime number to subtract, we calculate the difference between the current element and the next element. Then, we use binary search (<code>lower_bound</code>) to find the smallest prime that is greater than this difference.</p>
+</li>
+<li>
+<p><strong>Checking Validity</strong>: After subtracting the prime, we ensure that the current element becomes smaller than the next element. If at any point, the conditions are violated, we return <code>false</code>. If we can process all elements without violating the condition, we return <code>true</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-prime-list-initialization">
+  1. <strong>Prime List Initialization</strong>:
+  <a class="heading-link" href="#1-prime-list-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr <span style="color:#f92672">=</span> { <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">19</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">37</span>, <span style="color:#ae81ff">41</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">47</span>, <span style="color:#ae81ff">53</span>, <span style="color:#ae81ff">59</span>, <span style="color:#ae81ff">61</span>, <span style="color:#ae81ff">67</span>, <span style="color:#ae81ff">71</span>, ... };
+</span></span></code></pre></div><ul>
+<li>We initialize a list of prime numbers <code>arr</code> that can be used for subtraction. This list contains all primes up to 1000. These primes will be used to determine which prime number to subtract from an element in the <code>nums</code> array.</li>
+</ul>
+<h4 id="2-looping-through-the-array">
+  2. <strong>Looping Through the Array</strong>:
+  <a class="heading-link" href="#2-looping-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, tmp <span style="color:#f92672">=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>The array <code>nums</code> is processed from the second-to-last element to the first element (reverse order). This is done because we need to ensure each element is less than the next one. We compare <code>nums[i]</code> with <code>nums[i+1]</code> and adjust <code>nums[i]</code> accordingly.</li>
+</ul>
+<h4 id="3-checking-if-current-element-is-greater-than-or-equal-to-next-element">
+  3. <strong>Checking if Current Element is Greater Than or Equal to Next Element</strong>:
+  <a class="heading-link" href="#3-checking-if-current-element-is-greater-than-or-equal-to-next-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;=</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> diff <span style="color:#f92672">=</span> nums[i] <span style="color:#f92672">-</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>For each element <code>nums[i]</code>, we check if it is greater than or equal to the next element <code>nums[i+1]</code>. If so, we calculate the difference <code>diff</code> between <code>nums[i]</code> and <code>nums[i+1]</code> and add <code>1</code> to it. This value represents the minimum difference needed to ensure <code>nums[i]</code> becomes strictly less than <code>nums[i+1]</code>.</li>
+</ul>
+<h4 id="4-binary-search-for-a-suitable-prime">
+  4. <strong>Binary Search for a Suitable Prime</strong>:
+  <a class="heading-link" href="#4-binary-search-for-a-suitable-prime">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> lower_bound(arr.begin(), arr.end(), diff);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> arr.end() <span style="color:#f92672">||</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&gt;=</span> nums[i]) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>nums[i] <span style="color:#f92672">-=</span> <span style="color:#f92672">*</span>it;
+</span></span></code></pre></div><ul>
+<li>We then use <code>lower_bound</code> to find the smallest prime in the list <code>arr</code> that is greater than or equal to the difference <code>diff</code>. This prime will be subtracted from <code>nums[i]</code>.</li>
+<li>If no suitable prime is found (i.e., the iterator <code>it</code> reaches the end of the list), or if the prime found is greater than or equal to <code>nums[i]</code>, we return <code>false</code>, because it would violate the condition that the array remains strictly increasing.</li>
+<li>If a suitable prime is found, we subtract it from <code>nums[i]</code>.</li>
+</ul>
+<h4 id="5-final-check-for-validity">
+  5. <strong>Final Check for Validity</strong>:
+  <a class="heading-link" href="#5-final-check-for-validity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;=</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>After the subtraction, we check if <code>nums[i]</code> is still greater than or equal to <code>nums[i + 1]</code>. If so, we return <code>false</code>, as the array is not strictly increasing.</li>
+</ul>
+<h4 id="6-return-true-if-all-elements-are-processed">
+  6. <strong>Return True if All Elements are Processed</strong>:
+  <a class="heading-link" href="#6-return-true-if-all-elements-are-processed">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If the loop completes successfully without returning <code>false</code>, it means the array can be transformed into a strictly increasing array by subtracting the appropriate primes. Therefore, we return <code>true</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The main time complexity comes from the binary search (<code>lower_bound</code>) for each element in the array. The binary search takes (O(\log p)), where <code>p</code> is the number of primes in the list (<code>arr</code>), which is 168 primes.</li>
+<li>The loop runs through the array from <code>n-2</code> to <code>0</code>, so it iterates <code>n-1</code> times.</li>
+<li>Therefore, the total time complexity is (O(n \cdot \log p)), where <code>n</code> is the number of elements in <code>nums</code> and <code>p</code> is the number of primes in the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the storage of the prime list <code>arr</code>, which has a constant size of 168 primes. Therefore, the space complexity is (O(p)), where <code>p</code> is the number of primes in the list.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether it is possible to transform the <code>nums</code> array into a strictly increasing sequence by subtracting primes. The algorithm leverages binary search on a predefined list of primes to find the appropriate prime to subtract at each step, ensuring that the array is modified correctly. The solution has a time complexity of (O(n \cdot \log p)), which is efficient given the constraints, and a constant space complexity due to the fixed size of the prime list.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1029s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -305,7 +463,6 @@
 
       </div>
 
-      
 
       <footer>
         

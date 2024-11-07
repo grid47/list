@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -291,7 +291,218 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode930s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the most profitable path in a tree graph where each node has an associated profit (or loss). You are given a tree represented by an undirected graph, and you need to compute the path that maximizes the total profit, taking into account that one of the participants, Bob, will affect the profit on his path.</p>
+<h3 id="problem-understanding">
+  Problem Understanding:
+  <a class="heading-link" href="#problem-understanding">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>You are given a tree with <code>n</code> nodes where each node has an associated profit (or loss).</li>
+<li>Bob starts from a particular node and moves to the root node (node 0). During this journey, he affects the profit at each node he visits:
+<ul>
+<li>If Bob visits a node at an even distance from the root, the profit is halved.</li>
+<li>If Bob visits a node at an odd distance, the profit becomes 0.</li>
+</ul>
+</li>
+<li>You need to compute the path that maximizes the total profit, considering the modifications caused by Bob’s journey.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will use a depth-first search (DFS) approach. The general idea is to perform DFS from the root node, keeping track of:</p>
+<ul>
+<li>The parent node for each node.</li>
+<li>The distance from the root for each node.</li>
+<li>The updated profit at each node after accounting for Bob’s journey.</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li><strong>DFS Traversal</strong>: Start by performing DFS from the root to compute the parent and distance for each node.</li>
+<li><strong>Bob’s Influence</strong>: Modify the profit values for each node according to Bob&rsquo;s path. For nodes Bob visits:
+<ul>
+<li>At even distances, divide the profit by 2.</li>
+<li>At odd distances, set the profit to 0.</li>
+</ul>
+</li>
+<li><strong>Profit Calculation</strong>: Once the profits have been adjusted, perform a second DFS to calculate the total profit of the most profitable path, taking into account the modified profits.</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> adj;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, dis;
+</span></span></code></pre></div><ul>
+<li><code>adj</code>: Adjacency list to store the tree structure (edges between nodes).</li>
+<li><code>par</code>: A vector that stores the parent of each node. It will be used during DFS to backtrack and compute Bob’s influence.</li>
+<li><code>dis</code>: A vector to store the distance from the root node (node 0) for each node.</li>
+</ul>
+<h4 id="2-dfs-function-to-compute-parent-and-distance">
+  2. <strong>DFS Function to Compute Parent and Distance</strong>:
+  <a class="heading-link" href="#2-dfs-function-to-compute-parent-and-distance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> u, <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    dis[u] <span style="color:#f92672">=</span> d;
+</span></span><span style="display:flex;"><span>    par[u] <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> v : adj[u]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (v <span style="color:#f92672">==</span> p) <span style="color:#66d9ef">continue</span>; <span style="color:#75715e">// Skip the parent node to avoid cycle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dfs(v, u, d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function performs a DFS traversal starting from node <code>u</code>. It computes:
+<ul>
+<li><code>dis[u]</code>: The distance of node <code>u</code> from the root.</li>
+<li><code>par[u]</code>: The parent of node <code>u</code>.</li>
+<li>The function iterates through all adjacent nodes (<code>v</code>) and recursively explores them.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-dfs-function-to-calculate-the-maximum-profitable-path">
+  3. <strong>DFS Function to Calculate the Maximum Profitable Path</strong>:
+  <a class="heading-link" href="#3-dfs-function-to-calculate-the-maximum-profitable-path">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs2</span>(<span style="color:#66d9ef">int</span> u, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> amount, <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> amount[u]; <span style="color:#75715e">// Start with the profit of the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> mxc <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>INT_MAX; <span style="color:#75715e">// Initialize a variable to track the maximum subpath profit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> v : adj[u]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(v <span style="color:#f92672">!=</span> p) { <span style="color:#75715e">// Avoid traversing back to the parent
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mxc <span style="color:#f92672">=</span> max(mxc, dfs2(v, amount, u)); <span style="color:#75715e">// Calculate the maximum profit from each child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mxc <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>INT_MAX) <span style="color:#66d9ef">return</span> ret; <span style="color:#75715e">// If no child was found, return the current node&#39;s profit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> ret <span style="color:#f92672">+</span> mxc; <span style="color:#75715e">// Otherwise, return the current profit plus the max subpath profit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>This function calculates the maximum profit that can be achieved starting from node <code>u</code>. It recursively explores all child nodes and returns the profit of the most profitable path in the subtree rooted at <code>u</code>.</li>
+</ul>
+<h4 id="4-main-function-to-find-the-most-profitable-path">
+  4. <strong>Main Function to Find the Most Profitable Path</strong>:
+  <a class="heading-link" href="#4-main-function-to-find-the-most-profitable-path">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">mostProfitablePath</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, <span style="color:#66d9ef">int</span> bob, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> amount) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> amount.size();
+</span></span><span style="display:flex;"><span>    adj.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>()); <span style="color:#75715e">// Resize the adjacency list to accommodate all nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>e : edges) {
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#ae81ff">0</span>]].push_back(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#ae81ff">1</span>]].push_back(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    par.resize(n); <span style="color:#75715e">// Resize the parent array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    dis.resize(n); <span style="color:#75715e">// Resize the distance array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    dfs(<span style="color:#ae81ff">0</span>); <span style="color:#75715e">// Perform DFS from the root node (node 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> bob; <span style="color:#75715e">// Start from Bob&#39;s initial position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> bob_dis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Bob&#39;s current distance from the root
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update the path from Bob to the root (node 0) based on his journey
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(cur <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(dis[cur] <span style="color:#f92672">&gt;</span> bob_dis) {
+</span></span><span style="display:flex;"><span>            amount[cur] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Set profit to 0 for odd distances from the root
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(dis[cur] <span style="color:#f92672">==</span> bob_dis) {
+</span></span><span style="display:flex;"><span>            amount[cur] <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>; <span style="color:#75715e">// Halve the profit for even distances from the root
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">=</span> par[cur]; <span style="color:#75715e">// Move Bob to the parent node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        bob_dis<span style="color:#f92672">++</span>; <span style="color:#75715e">// Increment Bob&#39;s distance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Finally, compute and return the maximum profitable path starting from the root
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> dfs2(<span style="color:#ae81ff">0</span>, amount);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Graph Construction</strong>: First, we construct the adjacency list <code>adj</code> for the tree from the input edges.</li>
+<li><strong>DFS Initialization</strong>: We perform a DFS traversal starting from the root node (node 0) to populate the <code>par</code> and <code>dis</code> arrays, which store the parent and distance for each node, respectively.</li>
+<li><strong>Bob’s Path Modification</strong>: We update the profits of the nodes that Bob visits:
+<ul>
+<li>If Bob visits a node at an odd distance from the root, the profit is set to 0.</li>
+<li>If Bob visits a node at an even distance from the root, the profit is halved.</li>
+</ul>
+</li>
+<li><strong>Max Profit Calculation</strong>: After modifying the profits, we perform another DFS (<code>dfs2</code>) to compute the maximum profit path starting from the root.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructing the adjacency list takes (O(E)), where (E) is the number of edges (which is (n - 1) for a tree with (n) nodes).</li>
+<li>The first DFS (<code>dfs</code>) runs in (O(n)), since each node is visited once.</li>
+<li>The second DFS (<code>dfs2</code>) also runs in (O(n)).</li>
+<li>Therefore, the overall time complexity is (O(n)), where (n) is the number of nodes in the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The adjacency list <code>adj</code> requires (O(n)) space.</li>
+<li>The <code>par</code> and <code>dis</code> arrays also require (O(n)) space each.</li>
+<li>Therefore, the space complexity is (O(n)).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem using DFS with memoization to compute the most profitable path in the tree, accounting for the influence of Bob&rsquo;s journey. By performing two DFS traversals—one for calculating distances and parent-child relationships and another for calculating the maximum profit—the solution is both time-efficient and space-efficient, with a time complexity of (O(n)). The solution can handle large inputs with up to (10^5) nodes in a tree.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode930s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -303,7 +514,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2468"  class="external-link" target="_blank" rel="noopener">LeetCode #2468: Split Message Based on Limit</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2469"  class="external-link" target="_blank" rel="noopener">LeetCode #2469: Convert the Temperature</a></th>
       </tr>
   </thead>
   <tbody>
@@ -345,7 +556,6 @@
 
       </div>
 
-      
 
       <footer>
         

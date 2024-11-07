@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -229,7 +229,145 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode698s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine whether a spacecraft can destroy all incoming asteroids based on its initial mass. Each asteroid has a specific mass, and if the spacecraft&rsquo;s mass is greater than or equal to the mass of an asteroid, it can destroy that asteroid and increase its own mass by the mass of the destroyed asteroid. The spacecraft starts with a certain initial mass, and the goal is to decide if it can successfully destroy all asteroids without failing.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use the following approach:</p>
+<ol>
+<li><strong>Sort the Asteroids</strong>: Begin by sorting the asteroids in ascending order of their mass. This allows us to handle the smaller asteroids first, maximizing the chance of the spacecraft surviving against larger ones later on.</li>
+<li><strong>Iterate Through Asteroids</strong>: For each asteroid, check if the spacecraft&rsquo;s current mass is sufficient to destroy the asteroid. If it is, we will add the asteroid&rsquo;s mass to the spacecraft&rsquo;s mass; if not, the spacecraft cannot destroy the asteroid, and we will return false.</li>
+<li><strong>Return Success</strong>: If we manage to iterate through all asteroids without failing to destroy any, we return true.</li>
+</ol>
+<p>This greedy approach ensures that we always deal with the smallest threat first, allowing the spacecraft to grow its mass as quickly as possible.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the implementation:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined, which contains the method to determine whether the spacecraft can destroy all asteroids.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">asteroidsDestroyed</span>(<span style="color:#66d9ef">int</span> mass, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> ast) {
+</span></span></code></pre></div><ul>
+<li>The public member function <code>asteroidsDestroyed</code> is declared, which takes an integer <code>mass</code> (the initial mass of the spacecraft) and a vector of integers <code>ast</code> (the masses of the asteroids) as arguments. It returns a boolean indicating whether all asteroids can be destroyed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Asteroids</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ast.begin(), ast.end());
+</span></span></code></pre></div><ul>
+<li>We sort the <code>ast</code> vector in ascending order using the standard <code>sort</code> function from the STL (Standard Template Library). This allows us to efficiently process the smallest asteroids first.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> ast.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> mss <span style="color:#f92672">=</span> mass;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>n</code> to the size of the asteroids vector and create a variable <code>mss</code> of type <code>long long</code> to store the spacecraft&rsquo;s mass. Using <code>long long</code> prevents overflow when adding asteroid masses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Asteroids</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mss <span style="color:#f92672">&gt;=</span> ast[i])
+</span></span><span style="display:flex;"><span>        mss <span style="color:#f92672">+=</span> ast[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start a loop to iterate over each asteroid.</li>
+<li>For each asteroid, we check if the spacecraft&rsquo;s current mass <code>mss</code> is greater than or equal to the mass of the asteroid <code>ast[i]</code>.
+<ul>
+<li>If <code>true</code>, we add the asteroid&rsquo;s mass to the spacecraft&rsquo;s mass (i.e., <code>mss += ast[i]</code>).</li>
+<li>If <code>false</code>, we return <code>false</code> immediately since the spacecraft cannot destroy this asteroid.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the loop completes without returning <code>false</code>, it means the spacecraft successfully destroyed all asteroids. We return <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>End of Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This curly brace marks the end of the <code>Solution</code> class definition.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n \log n))</p>
+<ul>
+<li>The time complexity is dominated by the sorting step, which is (O(n \log n)), where (n) is the number of asteroids.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>The space complexity is (O(1)) since we are using a constant amount of extra space for variables, regardless of the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>asteroidsDestroyed</code> function effectively determines whether a spacecraft can destroy all incoming asteroids based on its initial mass. By employing a greedy approach that processes smaller asteroids first, the function maximizes the spacecraft&rsquo;s chances of survival against larger asteroids.</p>
+<p>This solution is optimal for the problem and efficiently handles various input scenarios, ensuring that the spacecraft either accumulates enough mass to destroy all asteroids or fails gracefully by returning false at the first instance of inability to destroy an asteroid.</p>
+<p>The straightforward logic of sorting and iterating over the asteroids allows for a clear understanding of the underlying mechanics of the problem, making the implementation both effective and easy to comprehend. Overall, this solution exemplifies the utility of greedy algorithms in optimizing outcomes based on given constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode698s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -241,7 +379,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2127"  class="external-link" target="_blank" rel="noopener">LeetCode #2127: Maximum Employees to Be Invited to a Meeting</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2129"  class="external-link" target="_blank" rel="noopener">LeetCode #2129: Capitalize the Title</a></th>
       </tr>
   </thead>
   <tbody>
@@ -283,7 +421,6 @@
 
       </div>
 
-      
 
       <footer>
         

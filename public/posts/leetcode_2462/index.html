@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -270,7 +270,210 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cost;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode926s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given an array <code>costs</code> of integers representing the cost of hiring workers, an integer <code>k</code> representing the number of workers to hire, and an integer <code>cand</code> representing the number of candidates. The task is to hire <code>k</code> workers at the minimum total cost. The workers available for hiring are the first <code>cand</code> candidates from the start and the last <code>cand</code> candidates from the end of the <code>costs</code> array.</p>
+<p>We need to efficiently select <code>k</code> workers such that their total cost is minimized.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem boils down to selecting <code>k</code> workers from the <code>cand</code> number of candidates at the beginning and end of the array. Since we need to minimize the total cost, we can use a <strong>min-heap</strong> (priority queue) to always select the worker with the lowest cost. The idea is to maintain a window of candidates on the left and right and select workers from those windows in order to minimize the hiring cost. Here&rsquo;s how we approach the solution:</p>
+<ol>
+<li>
+<p><strong>Two Candidate Pools</strong>:</p>
+<ul>
+<li>The workers we can select are either from the first <code>cand</code> workers or from the last <code>cand</code> workers.</li>
+<li>If there are more than <code>cand</code> workers, the solution needs to balance between selecting from the left and right ends while minimizing the total cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use of a Min-Heap (Priority Queue)</strong>:</p>
+<ul>
+<li>A <strong>min-heap</strong> will allow us to always pick the worker with the lowest cost in constant time, while adding and removing elements in logarithmic time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Maintaining the Left and Right Windows</strong>:</p>
+<ul>
+<li>First, the heap will be initialized with workers from both ends (<code>[0, cand-1]</code> and <code>[n-cand, n-1]</code>).</li>
+<li>We need to consider workers between these two windows and add them to the heap as we process the workers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cost Calculation</strong>:</p>
+<ul>
+<li>At each step, the worker with the lowest cost is selected from the heap, and the cost is added to the total cost.</li>
+<li>After selecting a worker, we expand the window by moving inward (if possible) and add the next potential worker to the heap.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">totalCost</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> costs, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> cand) {
+</span></span></code></pre></div><p>The function <code>totalCost</code> accepts:</p>
+<ul>
+<li><code>costs</code>: The array representing the cost of hiring each worker.</li>
+<li><code>k</code>: The number of workers to hire.</li>
+<li><code>cand</code>: The number of candidates to choose from at both ends of the array.</li>
+</ul>
+<p>It returns a <code>long long</code> value representing the minimum total cost to hire <code>k</code> workers.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> costs.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> cand <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> cand; <span style="color:#75715e">// inclusive
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li><code>cost</code>: Stores the accumulated cost of the hired workers.</li>
+<li><code>n</code>: The number of workers available.</li>
+<li><code>l</code> and <code>r</code>: Variables represent the current window for the left and right candidate pools.</li>
+<li><code>pq</code>: A priority queue (min-heap) that stores pairs of <code>{cost, index}</code> to allow easy retrieval of the lowest cost worker.</li>
+</ul>
+</li>
+<li>
+<p><strong>When <code>l &gt;= r</code> (All Candidates are from One Side)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(l <span style="color:#f92672">&gt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        pq.push({costs[i], i});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        cost <span style="color:#f92672">+=</span> pq.top()[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cost;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there is no overlap between the left and right candidate pools (i.e., all candidates come from one side), we simply add all workers to the priority queue and select the <code>k</code> workers with the lowest cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initializing the Min-Heap with Left and Right Pools</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> l) {
+</span></span><span style="display:flex;"><span>    pq.push({costs[i], i});
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&gt;=</span> r) {
+</span></span><span style="display:flex;"><span>    pq.push({costs[i], i});
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This part of the code initializes the priority queue with workers from both ends:
+<ul>
+<li>The first loop adds workers from the left side (first <code>cand</code> workers).</li>
+<li>The second loop adds workers from the right side (last <code>cand</code> workers).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Selecting Workers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    cost <span style="color:#f92672">+=</span> it[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><ul>
+<li>We now enter the main loop where we select <code>k</code> workers:
+<ul>
+<li>We always select the worker with the lowest cost from the top of the priority queue.</li>
+<li>The cost of that worker is added to the total <code>cost</code>, and the worker is removed from the heap.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Expanding the Candidate Windows</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> l <span style="color:#f92672">&amp;&amp;</span> l <span style="color:#f92672">&lt;</span> r <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    l<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    pq.push({costs[l], l});
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;=</span> r <span style="color:#f92672">&amp;&amp;</span> l <span style="color:#f92672">&lt;</span> r <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    pq.push({costs[r], r});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After selecting a worker, we check if we can expand the candidate window:
+<ul>
+<li>If the selected worker is from the left side and we haven&rsquo;t exhausted the left window, we increment <code>l</code> to add the next worker from the left.</li>
+<li>If the selected worker is from the right side and we haven&rsquo;t exhausted the right window, we decrement <code>r</code> to add the next worker from the right.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Total Cost</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cost;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After selecting <code>k</code> workers, the function returns the total accumulated cost.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Building the priority queue initially takes ( O(n \log n) ) since each worker is pushed into the heap.</li>
+<li>In the main loop, each operation (insertion and removal) on the heap takes ( O(\log n) ), and since we perform this operation <code>k</code> times, the total time complexity for selecting the workers is ( O(k \log n) ).</li>
+<li>Thus, the overall time complexity is ( O(n \log n + k \log n) ), which simplifies to ( O(n \log n) ) since ( k \leq n ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the priority queue, which can store up to <code>n</code> workers at any point in time.</li>
+<li>Therefore, the space complexity is ( O(n) ).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>totalCost</code> function efficiently selects the <code>k</code> workers with the minimum total cost by utilizing a priority queue to always select the worker with the lowest cost from the available candidate pools. By managing two candidate pools (left and right), the algorithm ensures that workers are selected in the optimal manner, while maintaining the constraint on the number of workers to hire. The solution has a time complexity of ( O(n \log n) ), making it suitable for large input sizes, and the space complexity is ( O(n) ), which is optimal for this problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode926s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -282,7 +485,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2463"  class="external-link" target="_blank" rel="noopener">LeetCode #2463: Minimum Total Distance Traveled</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2465"  class="external-link" target="_blank" rel="noopener">LeetCode #2465: Number of Distinct Averages</a></th>
       </tr>
   </thead>
   <tbody>
@@ -324,7 +527,6 @@
 
       </div>
 
-      
 
       <footer>
         

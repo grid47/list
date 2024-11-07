@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -276,7 +276,199 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_6 = obj-&gt;count();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * string param_7 = obj-&gt;toString();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode725s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to design and implement a <code>Bitset</code> class that supports a series of operations on a binary set of a fixed size. Each element in the <code>Bitset</code> can either be a &lsquo;0&rsquo; or &lsquo;1&rsquo;. The class should provide methods to fix specific bits, unfix them, flip all bits, check if all or any bits are set, count the number of set bits, and return the string representation of the bitset.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>Bitset</code> class uses two main string representations to manage bit states:</p>
+<ol>
+<li><strong><code>s</code></strong>: The actual string representing the current state of the bits.</li>
+<li><strong><code>flipp</code></strong>: An auxiliary string that represents the flipped version of <code>s</code>.</li>
+</ol>
+<h3 id="implementation-details">
+  Implementation Details
+  <a class="heading-link" href="#implementation-details">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Constructor <code>Bitset(int size)</code></strong>:</p>
+<ul>
+<li>Initializes <code>s</code> as a string of &lsquo;0&rsquo;s representing the bitset.</li>
+<li>Initializes <code>flipp</code> as a string of &lsquo;1&rsquo;s, which is the complement of <code>s</code>.</li>
+<li>Initializes <code>ones</code> to track the number of bits currently set to &lsquo;1&rsquo;.</li>
+<li>Stores <code>size</code> as the total number of bits in the bitset.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void fix(int idx)</code></strong>:</p>
+<ul>
+<li>Sets the bit at index <code>idx</code> to &lsquo;1&rsquo;.</li>
+<li>Increments <code>ones</code> only if the bit at <code>idx</code> was originally &lsquo;0&rsquo;.</li>
+<li>Updates <code>flipp</code> by setting the bit at <code>idx</code> to &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void unfix(int idx)</code></strong>:</p>
+<ul>
+<li>Sets the bit at index <code>idx</code> to &lsquo;0&rsquo;.</li>
+<li>Decrements <code>ones</code> only if the bit at <code>idx</code> was originally &lsquo;1&rsquo;.</li>
+<li>Updates <code>flipp</code> by setting the bit at <code>idx</code> to &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void flip()</code></strong>:</p>
+<ul>
+<li>Swaps <code>s</code> with <code>flipp</code> to invert the bitset.</li>
+<li>Updates the count of <code>ones</code> to <code>size - ones</code>, as all &lsquo;1&rsquo;s become &lsquo;0&rsquo;s and vice versa.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>bool all()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if all bits are set to &lsquo;1&rsquo;, i.e., <code>ones == size</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>bool one()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if at least one bit is set to &lsquo;1&rsquo;, i.e., <code>ones &gt; 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>int count()</code></strong>:</p>
+<ul>
+<li>Returns the number of bits currently set to &lsquo;1&rsquo;, tracked by <code>ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>string toString()</code></strong>:</p>
+<ul>
+<li>Returns the string representation <code>s</code> of the current state of the bitset.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>s</code> is initialized to a string of &lsquo;0&rsquo;s (e.g., &ldquo;000&hellip;0&rdquo;).</li>
+<li><code>flipp</code> is initialized to a string of &lsquo;1&rsquo;s (e.g., &ldquo;111&hellip;1&rdquo;).</li>
+<li><code>ones</code> is initialized to <code>0</code>, indicating no &lsquo;1&rsquo;s at the start.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>fix(int idx)</code></strong>:</p>
+<ul>
+<li>Checks if <code>s[idx]</code> is &lsquo;0&rsquo; to ensure <code>ones</code> is only incremented when a change occurs.</li>
+<li>Changes <code>s[idx]</code> to &lsquo;1&rsquo; and <code>flipp[idx]</code> to &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>unfix(int idx)</code></strong>:</p>
+<ul>
+<li>Checks if <code>s[idx]</code> is &lsquo;1&rsquo; to ensure <code>ones</code> is only decremented when a change occurs.</li>
+<li>Changes <code>s[idx]</code> to &lsquo;0&rsquo; and <code>flipp[idx]</code> to &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>flip()</code></strong>:</p>
+<ul>
+<li>Swaps <code>s</code> and <code>flipp</code> using the <code>swap()</code> function.</li>
+<li>Updates <code>ones</code> to <code>size - ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>all()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if <code>ones == size</code>, indicating all bits are &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>one()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if <code>ones &gt; 0</code>, indicating at least one bit is &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>count()</code></strong>:</p>
+<ul>
+<li>Directly returns the value of <code>ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>toString()</code></strong>:</p>
+<ul>
+<li>Returns the current bitset representation <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructor <code>Bitset(int size)</code>: O(n), where <code>n</code> is the size of the bitset.</li>
+<li><code>fix(int idx)</code>, <code>unfix(int idx)</code>: O(1), as only a single bit is updated.</li>
+<li><code>flip()</code>: O(1), due to swapping and basic arithmetic.</li>
+<li><code>all()</code>, <code>one()</code>, <code>count()</code>, <code>toString()</code>: O(1).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>O(n), where <code>n</code> is the size of the bitset, used by the <code>s</code> and <code>flipp</code> strings.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>Bitset</code> class provides a clear and efficient way to manage and manipulate bits. It includes methods to set, reset, flip, count, and check the state of the bits, all in O(1) time. This design is optimal for scenarios requiring frequent bit manipulations with minimal overhead, making it suitable for applications in simulations, binary operations, and problem-solving environments where bit-level control is necessary.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode725s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -288,7 +480,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2167"  class="external-link" target="_blank" rel="noopener">LeetCode #2167: Minimum Time to Remove All Cars Containing Illegal Goods</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2169"  class="external-link" target="_blank" rel="noopener">LeetCode #2169: Count Operations to Obtain Zero</a></th>
       </tr>
   </thead>
   <tbody>
@@ -330,7 +522,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -231,7 +231,176 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1238s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to check if a given word is <strong>valid</strong> based on a series of conditions:</p>
+<ol>
+<li>The word must contain at least one lowercase letter.</li>
+<li>The word must contain at least one uppercase letter.</li>
+<li>The word must contain at least one vowel and at least one consonant.</li>
+<li>The word must have at least three distinct characters.</li>
+<li>The word can contain letters and digits but should not contain any special characters.</li>
+</ol>
+<p>We need to implement a function <code>isValid</code> that takes a string <code>word</code> and returns a boolean indicating whether the word satisfies all the above conditions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can iterate through each character of the word and keep track of the following:</p>
+<ul>
+<li>Whether the word contains a lowercase letter (<code>lower</code>).</li>
+<li>Whether the word contains an uppercase letter (<code>upper</code>).</li>
+<li>Whether the word contains a vowel (<code>vowel</code>).</li>
+<li>Whether the word contains a consonant (<code>conso</code>).</li>
+<li>A set to ensure the word contains at least three distinct characters (<code>st</code>).</li>
+</ul>
+<p>The conditions can be checked during the iteration as follows:</p>
+<ul>
+<li>For lowercase letters, set the <code>lower</code> flag to <code>true</code>.</li>
+<li>For uppercase letters, set the <code>upper</code> flag to <code>true</code>.</li>
+<li>For vowels (both uppercase and lowercase), set the <code>vowel</code> flag to <code>true</code>.</li>
+<li>For consonants (letters that are not vowels), set the <code>conso</code> flag to <code>true</code>.</li>
+<li>For any other character (digits and special characters), ignore the character or immediately return <code>false</code> if the character is invalid.</li>
+</ul>
+<p>After processing all characters, we check the following conditions:</p>
+<ol>
+<li>Both <code>vowel</code> and <code>conso</code> should be <code>true</code> (the word must contain both a vowel and a consonant).</li>
+<li>The size of the set <code>st</code> must be at least <code>3</code> (the word must have at least three distinct characters).</li>
+<li>Both <code>lower</code> and <code>upper</code> should be <code>true</code> (the word must contain both lowercase and uppercase letters).</li>
+</ol>
+<p>If all these conditions are met, return <code>true</code>, otherwise return <code>false</code>.</p>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> st;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> upper <span style="color:#f92672">=</span> false, lower <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> vowel <span style="color:#f92672">=</span> false, conso <span style="color:#f92672">=</span> false, number <span style="color:#f92672">=</span> false;
+</span></span></code></pre></div><p>Here, we initialize:</p>
+<ul>
+<li><code>st</code> as a set to track distinct characters.</li>
+<li><code>upper</code> and <code>lower</code> as booleans to track the presence of uppercase and lowercase letters, respectively.</li>
+<li><code>vowel</code> and <code>conso</code> as booleans to track the presence of vowels and consonants, respectively.</li>
+<li><code>number</code> is unused and could be removed, as we only need to check for vowels, consonants, and distinct characters.</li>
+</ul>
+<h4 id="step-2-iterate-through-each-character-in-the-word">
+  Step 2: Iterate Through Each Character in the Word
+  <a class="heading-link" href="#step-2-iterate-through-each-character-in-the-word">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x : word) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>) lower <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;Z&#39;</span>) upper <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    st.insert(x);
+</span></span></code></pre></div><ul>
+<li>We loop through each character <code>x</code> in the word.</li>
+<li>If <code>x</code> is a lowercase letter, set <code>lower = true</code>.</li>
+<li>If <code>x</code> is an uppercase letter, set <code>upper = true</code>.</li>
+<li>Add <code>x</code> to the set <code>st</code> to track distinct characters.</li>
+</ul>
+<h4 id="step-3-check-for-vowels-consonants-and-invalid-characters">
+  Step 3: Check for Vowels, Consonants, and Invalid Characters
+  <a class="heading-link" href="#step-3-check-for-vowels-consonants-and-invalid-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;E&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;I&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;O&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;U&#39;</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>   x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;e&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;i&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;o&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;u&#39;</span>)
+</span></span><span style="display:flex;"><span>    vowel <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>((x <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span>) <span style="color:#f92672">||</span> (x <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;Z&#39;</span>))
+</span></span><span style="display:flex;"><span>    conso  <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(isdigit(x)) {}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If <code>x</code> is a vowel (either uppercase or lowercase), set <code>vowel = true</code>.</li>
+<li>If <code>x</code> is a consonant (any letter that is not a vowel), set <code>conso = true</code>.</li>
+<li>If <code>x</code> is a digit, we do nothing (we can ignore digits as they are allowed).</li>
+<li>If <code>x</code> is neither a letter nor a digit (i.e., it&rsquo;s a special character), we immediately return <code>false</code> because the word contains an invalid character.</li>
+</ul>
+<h4 id="step-4-check-final-conditions">
+  Step 4: Check Final Conditions
+  <a class="heading-link" href="#step-4-check-final-conditions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> vowel <span style="color:#f92672">&amp;&amp;</span> conso <span style="color:#f92672">&amp;&amp;</span> st.size() <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><p>After the loop:</p>
+<ul>
+<li>We check if the word contains both a vowel and a consonant (<code>vowel &amp;&amp; conso</code>).</li>
+<li>We check if the word contains at least three distinct characters by checking the size of the set <code>st</code> (<code>st.size() &gt;= 3</code>).</li>
+</ul>
+<p>If both conditions are met, the function returns <code>true</code>, indicating that the word is valid. Otherwise, it returns <code>false</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the string <code>word</code>. We iterate through each character in the word once, performing constant-time operations (set insertions, comparisons, etc.) for each character.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k)</strong>, where <code>k</code> is the number of distinct characters in the word (in the worst case, <code>k</code> could be <code>n</code>, the length of the word). The space complexity comes from the set <code>st</code> that stores distinct characters.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently checks if a given word satisfies all the required conditions for being &ldquo;valid&rdquo;. By iterating through the word once and using boolean flags to track whether the word contains the necessary components (uppercase, lowercase, vowels, consonants), the algorithm ensures that we make the necessary checks with minimal computational overhead. The use of a set helps track distinct characters, and the logic is designed to immediately exit early if an invalid character is found. This solution is simple, clear, and has linear time complexity, making it suitable for handling reasonably large input strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1238s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -285,7 +454,6 @@
 
       </div>
 
-      
 
       <footer>
         

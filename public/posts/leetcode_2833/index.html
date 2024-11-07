@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -236,7 +236,166 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(l,r);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1142s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to calculate the furthest possible distance from the origin after a sequence of moves represented by a string <code>moves</code>. The string consists of characters <code>'L'</code>, <code>'R'</code>, and <code>'_'</code> where:</p>
+<ul>
+<li><code>'L'</code> means moving left by 1 step.</li>
+<li><code>'R'</code> means moving right by 1 step.</li>
+<li><code>'_'</code> means staying in place (no movement).</li>
+</ul>
+<p>The goal is to determine the maximum distance that can be achieved from the origin after following all the moves.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we need to consider the following:</p>
+<ol>
+<li>The total number of movements to the left (<code>L</code>) and to the right (<code>R</code>).</li>
+<li>The <code>'_'</code> moves can either add to the left or the right movements, so we need to handle them optimally.</li>
+</ol>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>The result depends on the number of moves to the left and right. The further left or right you can move, the larger the distance from the origin.</li>
+<li>For every <code>'L'</code> move, we decrease the left counter (<code>l</code>), and for every <code>'R'</code> move, we increase the right counter (<code>r</code>).</li>
+<li>The underscore (<code>'_'</code>) can contribute to either the left or the right movement. To maximize the distance, we count how many underscores exist and distribute them optimally by choosing to increase the movement in the direction that is furthest from the origin.</li>
+<li>Finally, after processing the string, the answer will be the maximum of the absolute distances of left and right movements from the origin.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialize-variables">
+  1. Initialize Variables
+  <a class="heading-link" href="#1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> moves.length();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code> is the length of the <code>moves</code> string, which tells us the total number of moves.</li>
+<li><code>l</code> and <code>r</code> are the counters for the left and right movements, respectively. These counters will keep track of how far we&rsquo;ve moved in each direction.</li>
+</ul>
+<h4 id="2-loop-through-the-moves-string">
+  2. Loop Through the <code>moves</code> String
+  <a class="heading-link" href="#2-loop-through-the-moves-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(moves[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">||</span> moves[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;_&#39;</span>) {
+</span></span><span style="display:flex;"><span>        l<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        l<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(moves[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span> <span style="color:#f92672">||</span> moves[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;_&#39;</span>) {
+</span></span><span style="display:flex;"><span>        r<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        r<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each character in the <code>moves</code> string:
+<ul>
+<li>If the character is <code>'L'</code> or <code>'_'</code>, it indicates a movement to the left, so we decrease <code>l</code>.</li>
+<li>If the character is <code>'R'</code> or <code>'_'</code>, it indicates a movement to the right, so we increase <code>r</code>.</li>
+<li>If the character is neither <code>'L'</code> nor <code>'R'</code> (i.e., it is <code>_</code>), we count it towards both the left (<code>l</code>) and right (<code>r</code>) movements, essentially moving in both directions optimally.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-handle-negative-distances">
+  3. Handle Negative Distances
+  <a class="heading-link" href="#3-handle-negative-distances">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(l <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) l <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(r <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) r <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>After processing the moves, if either <code>l</code> or <code>r</code> is negative, we convert them to positive values since the distance from the origin should always be a non-negative value.</li>
+</ul>
+<h4 id="4-return-the-maximum-distance">
+  4. Return the Maximum Distance
+  <a class="heading-link" href="#4-return-the-maximum-distance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(l, r);
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum of the two distances (<code>l</code> and <code>r</code>). This is the furthest distance from the origin after all moves have been made, as we want the longest possible distance either to the left or the right.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the <code>moves</code> string. This is because we only loop through the string once to process all the moves.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, as we only use a constant amount of extra space to store the variables <code>l</code>, <code>r</code>, and <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum distance from the origin after following the movement instructions given in the string <code>moves</code>. The key observation is that <code>'_'</code> can be counted as either a left or right movement, and thus, we can maximize the distance by adjusting the counts for <code>l</code> and <code>r</code>. The solution runs in linear time <strong>O(n)</strong> and uses constant space <strong>O(1)</strong>, making it optimal for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1142s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -248,7 +407,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2834"  class="external-link" target="_blank" rel="noopener">LeetCode #2834: Find the Minimum Possible Sum of a Beautiful Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2839"  class="external-link" target="_blank" rel="noopener">LeetCode #2839: Check if Strings Can be Made Equal With Operations I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -290,7 +449,6 @@
 
       </div>
 
-      
 
       <footer>
         

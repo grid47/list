@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -252,7 +252,193 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1044s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to modify an array <code>arr</code> such that elements at every <code>k</code>-th position are equal by performing a series of operations. The operation is to make all elements in each cycle of <code>k</code>-th positions equal by minimizing the total cost. The cost is defined as the sum of absolute differences between the elements in the cycle and the median element of that cycle.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can break the task into the following steps:</p>
+<ol>
+<li>
+<p><strong>Grouping Elements Based on Indices Modulo k</strong>:
+The first observation is that the elements that need to be made equal are grouped by their indices modulo <code>k</code>. This means that we can treat the array as having <code>k</code> separate groups. The elements in the group with indices <code>i, i+k, i+2k, ...</code> form a cycle and should be adjusted to the same value.</p>
+</li>
+<li>
+<p><strong>Finding the Minimum Cost to Equalize a Group</strong>:
+To minimize the cost of equalizing a group, we should convert all elements in the group to the median of the group. The reason for this is that the median minimizes the sum of absolute differences. This is a well-known property of the median in statistics. So, for each cycle, we find the median and compute the cost to convert every element to the median.</p>
+</li>
+<li>
+<p><strong>Computing the Result</strong>:
+For each cycle, we compute the total cost of making all elements equal to the median and sum up these costs to get the final result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-helper-function-to-compute-the-cost-for-a-group">
+  1. <strong>Helper Function to Compute the Cost for a Group</strong>:
+  <a class="heading-link" href="#1-helper-function-to-compute-the-cost-for-a-group">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">solve</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> hit <span style="color:#f92672">=</span> nums[nums.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>];  <span style="color:#75715e">// The median of the sorted group
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> abs(hit <span style="color:#f92672">-</span> nums[i]);  <span style="color:#75715e">// Sum of absolute differences
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: This function computes the total cost of making all elements in a given group equal to the median of the group.</li>
+<li><strong>Steps</strong>:
+<ul>
+<li>First, we sort the array of elements. This allows us to easily find the median element, which is the middle element in a sorted array.</li>
+<li>We then calculate the sum of absolute differences between each element and the median.</li>
+<li>Finally, we return the total cost.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-main-function-to-solve-the-problem">
+  2. <strong>Main Function to Solve the Problem</strong>:
+  <a class="heading-link" href="#2-main-function-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">makeSubKSumEqual</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;  <span style="color:#75715e">// Set to track visited elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Final result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Grouping elements based on their indices modulo k
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>cnt.count(j)) {
+</span></span><span style="display:flex;"><span>            cnt.insert(j);  <span style="color:#75715e">// Mark this element as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            nums.push_back(arr[j]);  <span style="color:#75715e">// Add the element to the current group
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            j <span style="color:#f92672">=</span> (j <span style="color:#f92672">+</span> k) <span style="color:#f92672">%</span> n;  <span style="color:#75715e">// Move to the next index in the cycle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Calculate the cost for this group
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> solve(nums);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose</strong>: This function calculates the minimum cost required to make all elements at each <code>k</code>-th position equal.</li>
+<li><strong>Steps</strong>:
+<ul>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>n</code> is the size of the array <code>arr</code>.</li>
+<li><code>cnt</code> is a set used to keep track of the elements we&rsquo;ve already processed to avoid redundant work.</li>
+<li><code>res</code> is the variable that accumulates the total cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Array</strong>:</p>
+<ul>
+<li>For each index <code>i</code> in the array, we form a cycle of indices by repeatedly adding <code>k</code> to <code>i</code> and taking the modulo <code>n</code> to wrap around the array. This forms the cycle of indices that need to be equalized.</li>
+<li><code>nums</code> is a vector that stores the elements in the current cycle.</li>
+<li>We use a <code>while</code> loop to keep adding elements to <code>nums</code> until we&rsquo;ve visited all elements in the current cycle, and mark the indices as visited by adding them to the <code>cnt</code> set.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Cost for Each Group</strong>:</p>
+<ul>
+<li>Once a cycle is formed, we call the <code>solve</code> function to compute the cost of making all elements in this group equal to the median.</li>
+<li>We accumulate this cost in <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>: After processing all cycles, we return the accumulated cost <code>res</code>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Sorting</strong>: Sorting the elements in each group takes (O(m \log m)), where (m) is the size of the group. Since there are at most (k) different groups, the total sorting cost for all groups is (O(n \log n)), where (n) is the size of the array.</p>
+</li>
+<li>
+<p><strong>Cycle Construction and Cost Calculation</strong>: For each element in the array, we process it exactly once. Constructing the cycles and calculating the cost for each group both take linear time relative to the size of the array. Hence, this step takes (O(n)).</p>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the sorting step, which is (O(n \log n)).</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Auxiliary Space</strong>: The space used by the <code>cnt</code> set and the <code>nums</code> vector is proportional to the number of elements in the array, so the space complexity is (O(n)).</p>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The overall space complexity is (O(n)), as we only need space for storing the elements of the current cycle and tracking the visited elements.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum cost required to make elements at each <code>k</code>-th index equal by grouping elements based on their indices modulo <code>k</code> and minimizing the cost within each group. The algorithm leverages sorting and Kadane&rsquo;s-like logic for calculating the cost in each cycle. The overall time complexity is (O(n \log n)), which makes it feasible for large inputs. This approach is optimal in terms of both time and space, providing a solution to the problem in a systematic and efficient manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1044s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -306,7 +492,6 @@
 
       </div>
 
-      
 
       <footer>
         

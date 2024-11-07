@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -273,7 +273,139 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode646s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine when a network will become &ldquo;idle.&rdquo; Given a network represented by nodes and edges, where one node (the master server) sends data to other nodes, we want to calculate the time it will take for all data exchanges to stop, based on the response pattern of each node. Specifically, each node has a patience level, which dictates how often it re-sends a message if it hasn’t received a reply. The goal is to find the earliest time when the network is completely idle, meaning all data exchanges have ceased.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this, we break down the problem into several key steps. Here’s a high-level overview of the approach:</p>
+<ol>
+<li><strong>Graph Representation</strong>: Represent the network as a graph, where each node is a computer, and edges represent bidirectional communication links. We use an adjacency list to model this graph.</li>
+<li><strong>Shortest Distance Calculation</strong>: Since the master server (node 0) needs to send data to all other nodes, we calculate the shortest distance from the master server to each node. We perform a Breadth-First Search (BFS) starting from the master server to find the shortest path to each node.</li>
+<li><strong>Calculate Message Return Times</strong>: Using the distances computed in the previous step, we determine the time it takes for messages to travel to each node and back to the master server. For each node, the round-trip time is <code>2 * distance</code>.</li>
+<li><strong>Calculate Idle Time</strong>: For each node, we check if its patience is greater than or equal to the round-trip time. If it is, the node will only send one message and wait for the reply. If not, it will keep re-sending messages according to its patience level until the first message reaches the node. Using these rules, we calculate the exact time the network will become idle.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through each part of the code in detail.</p>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>: We define a class named <code>Solution</code> containing our main method <code>networkBecomesIdle</code>. This method takes two parameters: <code>edges</code>, which represents the network connections, and <code>patience</code>, which contains the patience levels of each node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> networkBecomesIdle(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> patience) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Variables</strong>: We initialize <code>n</code> as the number of nodes and <code>grid</code> as an adjacency list to represent the graph.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> patience.size();        
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(n);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Build the Graph</strong>: Using the <code>edges</code> list, we construct the adjacency list for the graph.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) {
+</span></span><span style="display:flex;"><span>    grid[e[<span style="color:#ae81ff">0</span>]].push_back(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    grid[e[<span style="color:#ae81ff">1</span>]].push_back(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Distance and Visited Arrays</strong>: We set up an array <code>sd</code> to store the shortest distance from the master server to each node, initializing each entry to <code>INT_MAX</code> except for the master server (distance 0). We also initialize <code>vis</code>, an array to track visited nodes, and a queue <code>q</code> for BFS.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sd(n, INT_MAX); <span style="color:#75715e">// shortest distance to master;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sd[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>q.push(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>vis[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>: Using BFS, we calculate the shortest distance from the master server to each node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    t<span style="color:#f92672">++</span>;            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> node <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: grid[node]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(vis[it]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            vis[it] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>            sd[it] <span style="color:#f92672">=</span> t;
+</span></span><span style="display:flex;"><span>            q.push(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Idle Time for Each Node</strong>: We iterate over each node and calculate the time the network becomes idle based on the node’s patience level and the round-trip time. For each node:</p>
+<ul>
+<li>If the patience level is greater than or equal to the round-trip time, we add this time to <code>mx</code>.</li>
+<li>Otherwise, we calculate the last time the node sends a message before receiving a response, adjusting the maximum idle time (<code>mx</code>) accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> sd[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pat <span style="color:#f92672">=</span> patience[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pat <span style="color:#f92672">&gt;=</span> dist) {
+</span></span><span style="display:flex;"><span>        mx <span style="color:#f92672">=</span> max(mx, dist);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> dist <span style="color:#f92672">%</span> pat <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> pat : dist <span style="color:#f92672">%</span> pat;
+</span></span><span style="display:flex;"><span>        mx <span style="color:#f92672">=</span> max(mx, dist <span style="color:#f92672">-</span> mod <span style="color:#f92672">+</span> dist);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Final Idle Time</strong>: After looping through all nodes, we return <code>mx + 1</code>, accounting for the final message sent by the master server.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity is (O(n + m)), where (n) is the number of nodes and (m) is the number of edges. BFS ensures that we visit each node and edge once.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(n + m)) for the adjacency list and other auxiliary arrays.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this solution efficiently calculates when a network becomes idle after all data exchanges cease. By using BFS to compute shortest distances and iterating over nodes to apply the patience rules, we achieve an optimal and clean solution. This approach balances careful timing and efficient graph traversal to meet the problem’s requirements. Thus, the method not only provides an accurate solution but also scales well with larger inputs, making it a powerful approach to network-related timing issues in graph-based problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode646s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -285,7 +417,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2040"  class="external-link" target="_blank" rel="noopener">LeetCode #2040: Kth Smallest Product of Two Sorted Arrays</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2043"  class="external-link" target="_blank" rel="noopener">LeetCode #2043: Simple Bank System</a></th>
       </tr>
   </thead>
   <tbody>
@@ -327,7 +459,6 @@
 
       </div>
 
-      
 
       <footer>
         

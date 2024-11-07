@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> additions;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1204s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement:
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks for the minimum number of additional coins that need to be added in order to form a target value using a given set of coins. You are given an array of coins, and a target sum. The goal is to find the smallest number of coins to add such that it is possible to represent every value from 1 to the target sum using the coins.</p>
+<h3 id="approach">
+  Approach:
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to iterate through the list of available coins and simulate the process of creating a sequence of reachable sums starting from 0. If we can reach a sum using the given coins, we continue building. If we cannot, we add the smallest value that would allow us to progress towards reaching the target.</p>
+<p>Here is the approach step by step:</p>
+<ol>
+<li>
+<p><strong>Sort the Coins</strong>: First, we sort the coins in ascending order. This helps us to efficiently start building up from the smallest coin. Sorting ensures that we always try to use the smallest coin first when possible, which minimizes the number of added coins.</p>
+</li>
+<li>
+<p><strong>Initialize Variables</strong>: We start with the assumption that the maximum sum we can currently form is 0. We also initialize a counter <code>additions</code> to track how many new coins we add to reach the target.</p>
+</li>
+<li>
+<p><strong>Loop Until Target is Reached</strong>: While the current sum (starting from 0) is less than the target, we check if we can use any of the available coins to form the next sum.</p>
+<ul>
+<li>
+<p>If the next coin in the sorted list is less than or equal to <code>current_max + 1</code>, then we can use that coin to extend the maximum sum we can create. We update the <code>current_max</code> and move to the next coin.</p>
+</li>
+<li>
+<p>If the next coin cannot be used (i.e., it is greater than <code>current_max + 1</code>), it means we need to add a new coin with value <code>current_max + 1</code> to continue building sums. This is the key to solving the problem: by adding the smallest missing coin (the one with value <code>current_max + 1</code>), we ensure that we can form the next sequence of sums, thereby progressing towards the target.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Once the <code>current_max</code> is greater than or equal to the target, we return the <code>additions</code> counter, which keeps track of how many additional coins we needed to add.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown:
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sorting-the-coins">
+  1. <strong>Sorting the Coins</strong>:
+  <a class="heading-link" href="#1-sorting-the-coins">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We begin by sorting the coins in ascending order. Sorting helps us consider smaller coins first and ensure that we maximize the use of the available coins before adding new ones.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(coins.begin(), coins.end());
+</span></span></code></pre></div><h4 id="2-initial-variables">
+  2. <strong>Initial Variables</strong>:
+  <a class="heading-link" href="#2-initial-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>current_max</code> represents the largest value we can currently reach using the coins.</li>
+<li><code>additions</code> counts how many additional coins we need to add.</li>
+<li><code>index</code> is used to traverse through the list of available coins.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> current_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> additions <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><h4 id="3-main-loop">
+  3. <strong>Main Loop</strong>:
+  <a class="heading-link" href="#3-main-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>while</code> loop runs until <code>current_max</code> reaches or exceeds the target value. During each iteration, we either use an existing coin or add a new coin to progress towards the target.</p>
+<ul>
+<li><strong>Using an Existing Coin</strong>:
+If the current coin (<code>coins[index]</code>) is less than or equal to <code>current_max + 1</code>, we can use it to extend the reachable sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> coins.size() <span style="color:#f92672">&amp;&amp;</span> coins[index] <span style="color:#f92672">&lt;=</span> current_max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    current_max <span style="color:#f92672">+=</span> coins[index];
+</span></span><span style="display:flex;"><span>    index<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Adding a New Coin</strong>:
+If the next coin is greater than <code>current_max + 1</code>, it means we need to add a coin of value <code>current_max + 1</code>. We increment the <code>additions</code> counter and update the <code>current_max</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    current_max <span style="color:#f92672">+=</span> current_max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    additions<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="4-return-the-result">
+  4. <strong>Return the Result</strong>:
+  <a class="heading-link" href="#4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the loop finishes, we return the total number of additions made to reach the target sum.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> additions;
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity:
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Sorting the coins</strong>: Sorting the coins takes <strong>O(n log n)</strong>, where <code>n</code> is the number of coins.</p>
+</li>
+<li>
+<p><strong>Iterating through the coins</strong>: The <code>while</code> loop iterates until we reach the target sum. In the worst case, this could involve processing all <code>n</code> coins and adding new coins as needed. However, each coin can only be used once or added once. Therefore, the total number of iterations is proportional to the target value or the number of coins, whichever is greater.</p>
+<p>Thus, the time complexity is dominated by the sorting step, resulting in <strong>O(n log n)</strong>.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> for additional space usage, excluding the input and output. We use a few variables to keep track of the state, but we don&rsquo;t use any extra space proportional to the size of the input. Hence, the space complexity is constant, <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem by sorting the coins and greedily using the smallest available coin to reach higher sums. The method minimizes the number of new coins added by always trying to use the smallest missing coin. This approach ensures we can form all sums up to the target with the fewest additions, achieving the desired result in <strong>O(n log n)</strong> time complexity due to sorting. The space complexity is minimal, making this solution both time-efficient and space-efficient.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1204s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -249,7 +406,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2953"  class="external-link" target="_blank" rel="noopener">LeetCode #2953: Count Complete Substrings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2956"  class="external-link" target="_blank" rel="noopener">LeetCode #2956: Find Common Elements Between Two Arrays</a></th>
       </tr>
   </thead>
   <tbody>
@@ -291,7 +448,6 @@
 
       </div>
 
-      
 
       <footer>
         

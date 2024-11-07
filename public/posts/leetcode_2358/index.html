@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -247,7 +247,199 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (tmp_people <span style="color:#f92672">&gt;</span> cur_people <span style="color:#f92672">&amp;&amp;</span> tmp_grade <span style="color:#f92672">&gt;</span> cur_grade)<span style="color:#f92672">?</span> total <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> total;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode852s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum number of groups that can be formed from a list of grades such that each subsequent group has:</p>
+<ol>
+<li>More members than the previous group.</li>
+<li>A higher sum of grades than the previous group.</li>
+</ol>
+<p>Given an array of integers representing grades, the task is to partition this list into groups following these rules and return the maximum number of valid groups.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a greedy approach, sorting the grades and then iteratively forming groups. By starting with a small group and building up, the solution maintains the two required properties (increasing number of people and increasing sum of grades). Here’s a detailed breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Sorting the Grades:</strong></p>
+<ul>
+<li>First, we sort the <code>nums</code> array in ascending order. This makes it easier to form groups with increasing grades, as we can simply add elements from left to right to maintain the order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Current and Temporary Groups:</strong></p>
+<ul>
+<li>We initialize two sets of variables:
+<ul>
+<li><code>cur_people</code> and <code>cur_grade</code>: Track the number of people and sum of grades in the last completed group.</li>
+<li><code>tmp_people</code> and <code>tmp_grade</code>: Track the number of people and sum of grades in the current group being formed.</li>
+</ul>
+</li>
+<li>These variables help ensure that each new group being formed (<code>tmp_people</code> and <code>tmp_grade</code>) has more people and a higher grade sum than the previous group.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building Groups:</strong></p>
+<ul>
+<li>As we iterate through <code>nums</code>, we add each grade to the current group (<code>tmp_people</code> and <code>tmp_grade</code>).</li>
+<li>Once <code>tmp_people</code> is greater than <code>cur_people</code> and <code>tmp_grade</code> is greater than <code>cur_grade</code>, we complete the current group.</li>
+<li>At this point, we:
+<ul>
+<li>Increment the group count (<code>total</code>).</li>
+<li>Set <code>cur_people</code> and <code>cur_grade</code> to <code>tmp_people</code> and <code>tmp_grade</code>, marking the new group as completed.</li>
+<li>Reset <code>tmp_people</code> and <code>tmp_grade</code> to start forming the next group.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check:</strong></p>
+<ul>
+<li>After completing the loop, we check if the last group in progress (<code>tmp_people</code> and <code>tmp_grade</code>) can be counted as a valid group. If <code>tmp_people</code> and <code>tmp_grade</code> both exceed <code>cur_people</code> and <code>cur_grade</code>, we increment the group count by 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result:</strong></p>
+<ul>
+<li>Finally, we return <code>total</code>, the maximum number of valid groups that can be formed.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-sort-the-array">
+  Step 1: Sort the Array
+  <a class="heading-link" href="#step-1-sort-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>Sorting the grades array ensures that we can easily build groups with an increasing order of grades by iterating from left to right.</li>
+</ul>
+<h4 id="step-2-initialize-variables">
+  Step 2: Initialize Variables
+  <a class="heading-link" href="#step-2-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cur_people <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cur_grade <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> tmp_people <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> tmp_grade <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> total <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li>We initialize <code>cur_people</code> and <code>cur_grade</code> with the first grade’s values since the first group will start with this value.</li>
+<li><code>tmp_people</code> and <code>tmp_grade</code> are set to 0, as these will hold values for the next group being formed.</li>
+<li><code>total</code> is set to 1, as we start with at least one group (the first grade).</li>
+</ul>
+<h4 id="step-3-iterate-over-the-array-to-form-groups">
+  Step 3: Iterate Over the Array to Form Groups
+  <a class="heading-link" href="#step-3-iterate-over-the-array-to-form-groups">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(tmp_people <span style="color:#f92672">&lt;=</span> cur_people <span style="color:#f92672">||</span> tmp_grade <span style="color:#f92672">&lt;=</span> cur_grade) {
+</span></span><span style="display:flex;"><span>        tmp_grade <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        tmp_people <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        total <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        cur_people <span style="color:#f92672">=</span> tmp_people;
+</span></span><span style="display:flex;"><span>        cur_grade <span style="color:#f92672">=</span> tmp_grade;
+</span></span><span style="display:flex;"><span>        tmp_people <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        tmp_grade <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Inside the Loop:</strong>
+<ul>
+<li>For each grade, if <code>tmp_people</code> is less than or equal to <code>cur_people</code> or <code>tmp_grade</code> is less than or equal to <code>cur_grade</code>, we add the grade to the current group by incrementing <code>tmp_people</code> and <code>tmp_grade</code>.</li>
+<li>If both conditions are met, we finalize the group, increment the total group count (<code>total</code>), and reset <code>cur_people</code> and <code>cur_grade</code> to <code>tmp_people</code> and <code>tmp_grade</code> for the next group.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-final-check-for-the-last-group">
+  Step 4: Final Check for the Last Group
+  <a class="heading-link" href="#step-4-final-check-for-the-last-group">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (tmp_people <span style="color:#f92672">&gt;</span> cur_people <span style="color:#f92672">&amp;&amp;</span> tmp_grade <span style="color:#f92672">&gt;</span> cur_grade) <span style="color:#f92672">?</span> total <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> total;
+</span></span></code></pre></div><ul>
+<li>After the loop, we check if the last group (<code>tmp_people</code> and <code>tmp_grade</code>) satisfies the conditions for a valid group.</li>
+<li>If it does, we increment <code>total</code> by 1; otherwise, <code>total</code> remains the same.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting:</strong> Sorting the array takes (O(n \log n)), where (n) is the length of <code>nums</code>.</li>
+<li><strong>Looping through the array:</strong> We loop through <code>nums</code> once to form groups, which is (O(n)).</li>
+<li>Thus, the overall time complexity is (O(n \log n)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) for additional variables, as we only use a few integers to track the group properties.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively uses a greedy approach to form the maximum number of valid groups from a sorted list of grades. By maintaining cumulative sums and people counts for each group and ensuring each new group is larger in both size and sum, the solution achieves the required goal in optimal time. Sorting the grades helps ensure that we can efficiently build up groups without needing complex comparisons, resulting in a simple yet efficient algorithm to solve the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode852s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -301,7 +493,6 @@
 
       </div>
 
-      
 
       <footer>
         

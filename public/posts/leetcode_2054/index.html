@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -285,7 +285,184 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode653s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given a set of events, where each event has a start time, end time, and value. Our task is to select up to two non-overlapping events that maximize the total value obtained by attending them. Each event is represented as <code>[startTime, endTime, value]</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages two approaches to maximize the value of attending up to two events:</p>
+<ol>
+<li><strong>Dynamic Programming with Binary Search</strong>: For more complex cases, this approach recursively computes the best possible value by either including or excluding the current event. A binary search helps find the next non-overlapping event.</li>
+<li><strong>Optimized Iterative Approach with a Map</strong>: This approach iterates backward through sorted events, updating the maximum values of events stored in a map to find the highest non-overlapping values efficiently.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution consists of two functions, <code>ma</code> and <code>maxTwoEvents</code>, each offering different strategies for maximizing the event values.</p>
+<h4 id="ma-function-dynamic-programming-with-binary-search-approach">
+  <code>ma</code> Function (Dynamic Programming with Binary Search Approach)
+  <a class="heading-link" href="#ma-function-dynamic-programming-with-binary-search-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Class Variables Setup</strong>: The class has member variables <code>eve</code>, <code>memo</code>, and <code>n</code>:</p>
+<ul>
+<li><code>eve</code>: Stores the list of events, sorted by start time.</li>
+<li><code>memo</code>: A 3D vector for memoization, caching results to avoid redundant calculations.</li>
+<li><code>n</code>: Represents the number of events.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> eve;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive DP with Binary Search</strong> (<code>dp</code> function): This function calculates the maximum value for attending up to two non-overlapping events:</p>
+<ul>
+<li><strong>Base Case</strong>: If there are no more events or if <code>k</code> (remaining events to select) is zero, return 0.</li>
+<li><strong>Memoization</strong>: If the result has been computed for the current state, return it from <code>memo</code>.</li>
+<li><strong>Binary Search</strong>: Using binary search, find the next non-overlapping event. The loop narrows down to the earliest event starting after the current one ends.</li>
+<li><strong>Recursive Call</strong>: The <code>dp</code> function calls itself for both the scenario where the event is skipped and where it is included.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx][k].count(end)) <span style="color:#66d9ef">return</span> memo[idx][k][end];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end, k);  <span style="color:#75715e">// Skip the event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, res <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(eve[mid][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> eve[idx][<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>            r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, eve[idx][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> dp(res, eve[idx][<span style="color:#ae81ff">1</span>], k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)); <span style="color:#75715e">// Include the event
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx][k][end] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function <code>ma</code></strong>: This function sets up <code>eve</code> with sorted events and calls <code>dp</code> with the initial parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ma</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> events) {
+</span></span><span style="display:flex;"><span>    sort(events.begin(), events.end());
+</span></span><span style="display:flex;"><span>    eve <span style="color:#f92672">=</span> events;
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> eve.size();
+</span></span><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(<span style="color:#ae81ff">3</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>);        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h4 id="maxtwoevents-function-optimized-iterative-approach">
+  <code>maxTwoEvents</code> Function (Optimized Iterative Approach)
+  <a class="heading-link" href="#maxtwoevents-function-optimized-iterative-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>maxTwoEvents</code> function uses a backward traversal and a map to optimize finding the maximum value of two non-overlapping events.</p>
+<ol>
+<li>
+<p><strong>Sort Events</strong>: Events are sorted by their start times, allowing us to traverse from the last event to the first.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(events.begin(), events.end());
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Backward Traversal with Map</strong>:</p>
+<ul>
+<li><strong>Map Setup</strong>: <code>mp</code> is a map that holds the maximum values for events that start after each event’s end time.</li>
+<li><strong>Loop through Events</strong>: For each event:
+<ul>
+<li>Use <code>upper_bound</code> to find the earliest starting event after the current event’s end time.</li>
+<li>Update the result with the maximum of the current result or the sum of the current event’s value and the subsequent non-overlapping event&rsquo;s value.</li>
+</ul>
+</li>
+<li>The backward traversal ensures that each event only checks subsequent non-overlapping events, making this process efficient.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> events.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(size<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp.upper_bound(events[size][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(mx, events[size][<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    mp[events[size][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> mp.end()) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, mx);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, events[size][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> it<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: The function returns the maximum possible value for attending up to two non-overlapping events.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li><code>ma</code>: O(N log N) due to sorting and binary search, plus O(N) for DP recursion.</li>
+<li><code>maxTwoEvents</code>: O(N log N) for sorting, with each map operation being O(log N).</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li><code>ma</code>: O(N) for memoization and recursion stack.</li>
+<li><code>maxTwoEvents</code>: O(N) for the map storing event values.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides two efficient methods for maximizing the value of attending up to two non-overlapping events. The first approach uses dynamic programming with memoization, while the second approach uses a map to store the maximum values of future events during a backward traversal. Both approaches optimize time and space to handle large inputs effectively, providing a robust solution to complex event selection problems. This solution is versatile and adaptable to a range of scheduling and value maximization scenarios.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode653s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -339,7 +516,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,171 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode794s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given an array <code>t</code> of tiles represented by intervals, where each tile is a segment of white tiles in a linear space. The problem asks us to determine the maximum number of white tiles that can be covered by a segment of length <code>len</code>. The tiles may overlap, and we need to find the maximum number of white tiles that can be covered when sliding a window of length <code>len</code> across the tiles.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach uses a <strong>sliding window technique</strong> with two pointers to efficiently find the maximum number of tiles that can be covered by the window of length <code>len</code>. The core idea is to:</p>
+<ol>
+<li>Sort the intervals of tiles by their starting position.</li>
+<li>Use two pointers (<code>i</code> and <code>j</code>) to maintain a sliding window of intervals.</li>
+<li>Calculate how much of the current tile is covered by the window.</li>
+<li>Move the window across the tiles and keep track of the maximum coverage.</li>
+</ol>
+<p>The solution leverages greedy principles to maximize the number of white tiles covered at each step. Let&rsquo;s walk through the details.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> t.size(), res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cover <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, partial <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: The number of tiles (intervals) in the input array <code>t</code>.</li>
+<li><code>res</code>: This will store the result, which is the maximum number of white tiles that can be covered by the window of length <code>len</code>.</li>
+<li><code>cover</code>: This variable tracks the total number of white tiles covered by the window so far.</li>
+<li><code>j</code>: This pointer tracks the left boundary of the window.</li>
+<li><code>partial</code>: This stores the partial coverage of the current tile when the window doesn&rsquo;t fully cover it.</li>
+</ul>
+<h4 id="step-2-sort-the-tiles-by-start-position">
+  Step 2: Sort the Tiles by Start Position
+  <a class="heading-link" href="#step-2-sort-the-tiles-by-start-position">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(t.begin(), t.end());
+</span></span></code></pre></div><ul>
+<li>Sorting the tiles by their start positions ensures that we can efficiently process them in order. This allows us to slide the window across the tiles in increasing order of their start positions.</li>
+</ul>
+<h4 id="step-3-sliding-window-to-calculate-maximum-coverage">
+  Step 3: Sliding Window to Calculate Maximum Coverage
+  <a class="heading-link" href="#step-3-sliding-window-to-calculate-maximum-coverage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> res <span style="color:#f92672">&lt;</span> len ; ) {
+</span></span></code></pre></div><ul>
+<li>We use a <code>for</code> loop where <code>i</code> is the right pointer of the sliding window. The loop continues until all tiles are processed or until we find a window that covers <code>len</code> white tiles (because the answer can&rsquo;t be larger than <code>len</code>).</li>
+</ul>
+<h4 id="step-4-check-if-the-window-fully-covers-the-current-tile">
+  Step 4: Check if the Window Fully Covers the Current Tile
+  <a class="heading-link" href="#step-4-check-if-the-window-fully-covers-the-current-tile">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(t[j][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> len <span style="color:#f92672">&gt;</span> t[i][<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>    cover <span style="color:#f92672">+=</span> t[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> t[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, cover);
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the window, starting from <code>t[j][0]</code>, can fully cover the current tile <code>t[i]</code> (i.e., <code>t[j][0] + len &gt; t[i][1]</code>), we add the full length of the current tile to <code>cover</code> and update the result <code>res</code> to the maximum of <code>res</code> and <code>cover</code>. Then, we move the right pointer <code>i</code> to the next tile.</li>
+</ul>
+<h4 id="step-5-handle-partially-covered-tiles">
+  Step 5: Handle Partially Covered Tiles
+  <a class="heading-link" href="#step-5-handle-partially-covered-tiles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    partial <span style="color:#f92672">=</span> max(<span style="color:#ae81ff">0</span>, t[j][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> len <span style="color:#f92672">-</span> t[i][<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, cover <span style="color:#f92672">+</span> partial);
+</span></span><span style="display:flex;"><span>    cover <span style="color:#f92672">-=</span> (t[j][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> t[j][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the current tile cannot be fully covered by the window, we calculate how much of the current tile can be partially covered, which is given by <code>t[j][0] + len - t[i][0]</code>.</li>
+<li>We then update the result <code>res</code> to the maximum of <code>res</code> and the sum of <code>cover</code> (the coverage so far) and the <code>partial</code> coverage.</li>
+<li>After processing, we move the left pointer <code>j</code> to the next tile and subtract the current tile&rsquo;s length from <code>cover</code> to ensure the window shifts correctly.</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, the result <code>res</code> contains the maximum number of white tiles covered by a window of length <code>len</code>. This value is returned as the solution.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Sorting</strong> the tiles takes <code>O(n log n)</code> where <code>n</code> is the number of tiles (intervals).</li>
+<li>The sliding window operation takes <strong>O(n)</strong> because each pointer (<code>i</code> and <code>j</code>) traverses the array at most once.</li>
+<li>Therefore, the overall time complexity is dominated by the sorting step, resulting in <strong>O(n log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong> for storing the tiles array <code>t</code>, where each tile is represented as a pair of integers (start and end positions).</li>
+<li>Additional space complexity comes from variables like <code>cover</code>, <code>partial</code>, and <code>res</code>, which are constant and do not scale with the input size.</li>
+<li>Therefore, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution provides an efficient way to calculate the maximum number of white tiles that can be covered by a window of length <code>len</code>. By using a <strong>sliding window technique</strong> with two pointers, the algorithm ensures that the problem is solved in <strong>O(n log n)</strong> time, which is optimal for scenarios involving overlapping intervals. Sorting the intervals by their starting positions allows us to process them efficiently, while the sliding window technique ensures we don&rsquo;t need to repeatedly re-evaluate the sum of covered tiles.</p>
+<p>This approach works well for scenarios where we need to find coverage over a range of intervals, and it can be applied to various other problems involving range queries or sliding windows. The combination of sorting and the sliding window technique makes this solution both intuitive and efficient for large datasets, providing a scalable solution for problems involving overlapping intervals or segments.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode794s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -304,7 +468,6 @@
 
       </div>
 
-      
 
       <footer>
         

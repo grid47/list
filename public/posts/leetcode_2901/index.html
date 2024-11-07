@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -255,7 +255,197 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dist;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1175s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the longest subsequence of words from a given list where each word is part of a unique group and differs from the previous word by exactly one character (i.e., Hamming Distance = 1). Given the constraints, the solution should efficiently compute and return this longest subsequence of words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, the algorithm employs dynamic programming (DP) to store subsequences as it iterates through each word in the list. Here’s the approach in detail:</p>
+<ol>
+<li>
+<p><strong>Initialize DP Table</strong>:</p>
+<ul>
+<li>We set up a DP table (<code>dp</code>) where each entry <code>dp[i]</code> will hold the longest subsequence ending at the <code>i</code>-th word.</li>
+<li>Initially, each <code>dp[i]</code> entry contains only the index <code>i</code>, indicating each word as a subsequence of itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Words</strong>:</p>
+<ul>
+<li>We iterate over each word <code>i</code> from <code>1</code> to <code>n - 1</code> (where <code>n</code> is the total number of words) and check every previous word <code>j</code> (from <code>0</code> to <code>i - 1</code>).</li>
+<li>The goal here is to check if the word at index <code>i</code> can extend the subsequence ending at <code>j</code> by meeting the following conditions:
+<ul>
+<li><strong>Different Groups</strong>: The two words should belong to different groups (checked using the <code>groups</code> array).</li>
+<li><strong>Equal Lengths</strong>: The words should have the same length to compare each character.</li>
+<li><strong>Hamming Distance of 1</strong>: The words must differ by exactly one character.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Update DP and Track Longest Subsequence</strong>:</p>
+<ul>
+<li>If the above conditions are satisfied, we check if the subsequence ending at <code>j</code> can be extended to form a longer subsequence ending at <code>i</code>.</li>
+<li>If yes, we update <code>dp[i]</code> by copying the subsequence from <code>dp[j]</code> and appending <code>i</code> to it.</li>
+<li>We also update <code>longest_length</code> to track the maximum length of subsequences encountered so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Retrieve Result</strong>:</p>
+<ul>
+<li>Finally, we look for the subsequence in <code>dp</code> that has the length equal to <code>longest_length</code>.</li>
+<li>We gather the words corresponding to the indices in this subsequence and return them as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-dp-table">
+  Step 1: Initialize DP Table
+  <a class="heading-link" href="#step-1-initialize-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(n);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) dp[i].push_back(i);
+</span></span></code></pre></div><ul>
+<li>Here, we initialize <code>dp</code>, a vector of vectors, where each <code>dp[i]</code> is initialized to hold the index <code>i</code>, representing that each word is initially considered as a single-element subsequence.</li>
+</ul>
+<h4 id="step-2-iterate-through-words-and-build-subsequences">
+  Step 2: Iterate Through Words and Build Subsequences
+  <a class="heading-link" href="#step-2-iterate-through-words-and-build-subsequences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> longest_length <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (groups[i] <span style="color:#f92672">==</span> groups[j]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (words[i].size() <span style="color:#f92672">!=</span> words[j].size()) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (getHammingDistance(words[i], words[j]) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span></code></pre></div><ul>
+<li>For each word <code>i</code>, we look at each previous word <code>j</code>.</li>
+<li>We skip <code>j</code> if <code>groups[i]</code> equals <code>groups[j]</code> (same group), or if the word lengths don’t match, or if the Hamming Distance is not exactly <code>1</code>.</li>
+</ul>
+<h4 id="step-3-update-dp-array-if-conditions-are-met">
+  Step 3: Update DP Array if Conditions are Met
+  <a class="heading-link" href="#step-3-update-dp-array-if-conditions-are-met">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((dp[j].size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&gt;</span> dp[i].size()) {
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> dp[j];
+</span></span><span style="display:flex;"><span>    dp[i].push_back(i);
+</span></span><span style="display:flex;"><span>    longest_length <span style="color:#f92672">=</span> max(longest_length, <span style="color:#66d9ef">int</span>(dp[i].size()));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If extending the subsequence ending at <code>j</code> creates a longer subsequence ending at <code>i</code>, we update <code>dp[i]</code> and record the <code>longest_length</code>.</li>
+</ul>
+<h4 id="step-4-retrieve-and-return-result">
+  Step 4: Retrieve and Return Result
+  <a class="heading-link" href="#step-4-retrieve-and-return-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> result;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (dp[i].size() <span style="color:#f92672">==</span> longest_length) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> x : dp[i]) result.push_back(words[x]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> result;
+</span></span></code></pre></div><ul>
+<li>After iterating, we check each entry in <code>dp</code> to find a subsequence that matches <code>longest_length</code>.</li>
+<li>We then collect the words in this subsequence and return them.</li>
+</ul>
+<h4 id="helper-function-compute-hamming-distance">
+  Helper Function: Compute Hamming Distance
+  <a class="heading-link" href="#helper-function-compute-hamming-distance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHammingDistance</span>(<span style="color:#66d9ef">const</span> string<span style="color:#f92672">&amp;</span> s, <span style="color:#66d9ef">const</span> string<span style="color:#f92672">&amp;</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> dist <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">!=</span> t[i]) dist<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dist;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This helper function calculates the Hamming Distance between two strings by comparing each character.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Main Iteration</strong>: The nested loop that compares each pair of words has a time complexity of <code>O(n^2)</code>.</li>
+<li><strong>Hamming Distance Calculation</strong>: Each call to <code>getHammingDistance</code> takes <code>O(L)</code>, where <code>L</code> is the length of each word. Given <code>n</code> words, the worst case is <code>O(n^2 * L)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>DP Array</strong>: The <code>dp</code> array uses <code>O(n^2)</code> space, where each <code>dp[i]</code> stores the longest subsequence of word indices ending at <code>i</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient approach to finding the longest subsequence of words with a Hamming Distance of 1 and different group affiliations. The DP technique optimizes the subsequence formation by checking only necessary conditions and updating the longest subsequence dynamically. This allows the algorithm to perform efficiently, even with larger inputs, while ensuring that the constraints of unique groups and minimal character differences are met.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1175s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -267,7 +457,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2902"  class="external-link" target="_blank" rel="noopener">LeetCode #2902: Count of Sub-Multisets With Bounded Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2903"  class="external-link" target="_blank" rel="noopener">LeetCode #2903: Find Indices With Index and Value Difference I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -309,7 +499,6 @@
 
       </div>
 
-      
 
       <footer>
         

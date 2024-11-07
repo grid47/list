@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,189 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode736s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to count the number of valid pairs <code>(i, j)</code> from an array <code>nums</code> where the following condition holds:</p>
+<p>[
+\text{gcd}(nums[i], k) \times \text{gcd}(nums[j], k) \text{ is divisible by } k
+]</p>
+<p>Where:</p>
+<ul>
+<li><code>gcd(a, b)</code> is the greatest common divisor of <code>a</code> and <code>b</code>.</li>
+<li><code>nums[i]</code> and <code>nums[j]</code> are the elements of the array <code>nums</code>, and <code>i &lt; j</code>.</li>
+<li><code>k</code> is a given integer.</li>
+</ul>
+<p>The objective is to efficiently count all such pairs while respecting the constraints of the problem.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To approach this problem efficiently, we need to break it down step by step:</p>
+<ol>
+<li>
+<p><strong>Understanding the Condition</strong>:
+The condition to check for each pair <code>(i, j)</code> is that the product of the greatest common divisors (<code>gcd(nums[i], k)</code> and <code>gcd(nums[j], k)</code>) must be divisible by <code>k</code>. This means we need to check whether the greatest common divisors of each element in the array <code>nums</code> with <code>k</code> satisfy a divisibility condition.</p>
+</li>
+<li>
+<p><strong>Key Insight</strong>:
+Rather than checking every possible pair <code>(i, j)</code> explicitly, we can reduce the problem to counting pairs using a hashmap. Specifically:</p>
+<ul>
+<li>For each number <code>num</code> in the array, compute <code>gcd(num, k)</code>.</li>
+<li>For each number <code>num</code>, check how many previously encountered values of <code>gcd(nums[i], k)</code> satisfy the condition <code>(gcd(nums[i], k) * gcd(nums[j], k)) % k == 0</code>.</li>
+<li>This allows us to efficiently count pairs without needing to check all combinations explicitly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps</strong>:</p>
+<ul>
+<li>We maintain a hashmap <code>gm</code> where the key is the <code>gcd(num, k)</code> and the value is the count of occurrences of that <code>gcd</code> in the previous numbers.</li>
+<li>For each number in <code>nums</code>, compute its <code>gcd</code> with <code>k</code> and check how many previous <code>gcd</code> values from the hashmap satisfy the condition.</li>
+<li>Update the hashmap with the current <code>gcd</code> for future iterations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">countPairs</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> 0;  <span style="color:#75715e">// To store the result (number of valid pairs)</span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Integer, Integer<span style="color:#f92672">&gt;</span> gm <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();  <span style="color:#75715e">// Hashmap to store gcd values and their counts</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Iterate through each number in the nums array</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> num: nums) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Step 1: Compute gcd of current number and k</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> gcd <span style="color:#f92672">=</span> findGCD(num, k);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Step 2: Check all previously encountered gcd values</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> node: gm.<span style="color:#a6e22e">keySet</span>()) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// If the product of gcd(num, k) and the previous gcd is divisible by k</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>((<span style="color:#66d9ef">long</span>) gcd <span style="color:#f92672">*</span> node <span style="color:#f92672">%</span> k <span style="color:#f92672">==</span> 0) 
+</span></span><span style="display:flex;"><span>                    res <span style="color:#f92672">+=</span> gm.<span style="color:#a6e22e">get</span>(node);  <span style="color:#75715e">// Increment result by the count of valid pairs</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Step 3: Update the hashmap with the current gcd</span>
+</span></span><span style="display:flex;"><span>            gm.<span style="color:#a6e22e">put</span>(gcd, gm.<span style="color:#a6e22e">getOrDefault</span>(gcd, 0) <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Return the total count of valid pairs</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Helper function to calculate the gcd of two numbers</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findGCD</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&lt;</span> y) <span style="color:#66d9ef">return</span> findGCD(y, x);  <span style="color:#75715e">// Ensure x &gt;= y for the gcd calculation</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Base case: if y is 0, return x (gcd)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> y <span style="color:#f92672">==</span> 0 <span style="color:#f92672">?</span> x : findGCD(y, x <span style="color:#f92672">%</span> y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="explanation-of-each-part-of-the-code">
+  Explanation of Each Part of the Code
+  <a class="heading-link" href="#explanation-of-each-part-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>long res = 0;</code> — This variable stores the result, i.e., the total number of valid pairs.</li>
+<li><code>HashMap&lt;Integer, Integer&gt; gm = new HashMap&lt;&gt;();</code> — This hashmap is used to store the frequency of each <code>gcd(num, k)</code> encountered during the iteration through the array <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Array</strong>:</p>
+<ul>
+<li><code>for (int num : nums)</code> — We loop through each element <code>num</code> in the <code>nums</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating GCD</strong>:</p>
+<ul>
+<li><code>int gcd = findGCD(num, k);</code> — For each number <code>num</code>, we compute the <code>gcd(num, k)</code> using the <code>findGCD</code> function.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Valid Pairs</strong>:</p>
+<ul>
+<li><code>for (int node : gm.keySet())</code> — For each previously encountered <code>gcd</code> value stored in <code>gm</code>, we check if multiplying the current <code>gcd(num, k)</code> with this previous <code>gcd</code> results in a value divisible by <code>k</code>.</li>
+<li><code>if ((long) gcd * node % k == 0)</code> — This checks if the product of the current <code>gcd</code> and the previous <code>gcd</code> is divisible by <code>k</code>. If true, it means that the pair is valid, so we increment the result by the frequency of that previous <code>gcd</code> value (<code>gm.get(node)</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the HashMap</strong>:</p>
+<ul>
+<li><code>gm.put(gcd, gm.getOrDefault(gcd, 0) + 1);</code> — We update the hashmap <code>gm</code> with the current <code>gcd</code>. If this <code>gcd</code> has been encountered before, its count is incremented; otherwise, it&rsquo;s added with a count of 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>After iterating through the entire array, we return the final count of valid pairs stored in <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution can be analyzed as follows:</p>
+<ul>
+<li><strong>GCD Calculation</strong>: The <code>findGCD</code> function uses the Euclidean algorithm to compute the GCD, which has a time complexity of <strong>O(log k)</strong>.</li>
+<li><strong>Iterating Over the Array</strong>: We iterate through all <code>n</code> elements of the <code>nums</code> array.</li>
+<li><strong>HashMap Operations</strong>: For each element, we perform operations on the hashmap, which involves iterating over the keys of the hashmap. In the worst case, the hashmap could contain at most <code>O(n)</code> keys (if all <code>gcd(num, k)</code> values are distinct). Therefore, iterating over the keys will take <strong>O(n)</strong> in the worst case.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n log k)</strong>, where <code>n</code> is the length of the input array <code>nums</code> and <code>k</code> is the value for which we are calculating the <code>gcd</code>.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>. This is due to the storage required for the hashmap, which can store up to <code>O(n)</code> distinct GCD values.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to count valid pairs by utilizing the properties of the GCD and leveraging a hashmap to store previously encountered GCD values. By avoiding the direct comparison of every possible pair, the solution achieves a time complexity of <strong>O(n log k)</strong>, which is much more efficient than a brute force approach. The use of the GCD and the modularity condition makes it possible to solve the problem efficiently even for larger inputs. This approach ensures that we can handle large arrays while maintaining performance and correctness.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode736s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -256,7 +438,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2184"  class="external-link" target="_blank" rel="noopener">LeetCode #2184: Number of Ways to Build Sturdy Brick Wall</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2185"  class="external-link" target="_blank" rel="noopener">LeetCode #2185: Counting Words With a Given Prefix</a></th>
       </tr>
   </thead>
   <tbody>
@@ -298,7 +480,6 @@
 
       </div>
 
-      
 
       <footer>
         

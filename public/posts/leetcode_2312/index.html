@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -262,7 +262,175 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">        */</span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode835s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves selling a piece of wood of dimensions <code>m</code> x <code>n</code>, where the piece can be divided into smaller rectangular pieces. Each smaller piece of wood has a price associated with it, and our task is to maximize the total revenue by cutting the original piece into smaller pieces. The goal is to find the maximum revenue obtainable by cutting the wood into smaller pieces or selling it as is, given the prices for various dimensions.</p>
+<p>The input consists of:</p>
+<ol>
+<li>Two integers <code>m</code> and <code>n</code>, representing the dimensions of the wood.</li>
+<li>A 2D array <code>prices</code> where each element contains three integers: the first integer is the length of the piece, the second is the width, and the third is the price for that piece.</li>
+</ol>
+<p>We need to return the maximum revenue that can be obtained by cutting the wood and selling the pieces.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use <strong>dynamic programming (DP)</strong> to break down the problem into smaller subproblems. We can calculate the maximum revenue for any piece of wood of dimensions <code>m</code> x <code>n</code> by considering:</p>
+<ol>
+<li>The revenue obtained by selling the piece without any cuts.</li>
+<li>The revenue obtained by making a cut along the length (i.e., divide <code>m</code> into two parts) or along the width (i.e., divide <code>n</code> into two parts), and then recursively calculating the revenue for the resulting pieces.</li>
+</ol>
+<p>The key idea is to memoize the results for subproblems to avoid redundant calculations. We use a <code>dp</code> array to store the maximum revenue for each dimension of the wood.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v, h;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> p;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&gt;</span> mem, mp;
+</span></span></code></pre></div><ul>
+<li><strong><code>v</code> and <code>h</code></strong>: These vectors are meant to store the possible lengths and widths of the pieces from the input prices. However, in the final implementation, they are not used, as the <code>prices</code> array is directly used to populate the <code>mp</code> matrix.</li>
+<li><strong><code>p</code></strong>: This stores the input price information, where each element contains a length, width, and price.</li>
+<li><strong><code>mem</code></strong>: This 2D vector is used to store the maximum revenue for each subproblem. It is initialized with <code>-1</code>, indicating that a value has not been calculated for that subproblem yet.</li>
+<li><strong><code>mp</code></strong>: This 2D vector is used to store the price for each specific dimension of the wood.</li>
+</ul>
+<h4 id="step-2-filling-the-price-matrix">
+  Step 2: Filling the Price Matrix
+  <a class="heading-link" href="#step-2-filling-the-price-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> p.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[p[i][<span style="color:#ae81ff">0</span>]][p[i][<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> p[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Here, the <code>mp</code> matrix is populated with the prices from the input <code>prices</code> array. The <code>mp[i][j]</code> will hold the price for a piece of wood of size <code>i</code> x <code>j</code>.</li>
+</ul>
+<h4 id="step-3-dynamic-programming-recursive-function">
+  Step 3: Dynamic Programming Recursive Function
+  <a class="heading-link" href="#step-3-dynamic-programming-recursive-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(m <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mem[m][n] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[m][n];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> mp[m][n];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, dp(m <span style="color:#f92672">-</span> i, n) <span style="color:#f92672">+</span> dp(i, n));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, dp(m, n <span style="color:#f92672">-</span> i) <span style="color:#f92672">+</span> dp(m, i));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mem[m][n] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function computes the maximum revenue for a piece of wood of size <code>m</code> x <code>n</code> by considering all possible cuts along both dimensions (length and width).</li>
+<li>If <code>m</code> or <code>n</code> is <code>0</code>, the value is <code>0</code> because no revenue can be obtained from a piece with zero dimensions.</li>
+<li>If the value for <code>mem[m][n]</code> has already been computed (i.e., it is not <code>-1</code>), it is returned directly to avoid redundant calculations.</li>
+<li>The <code>ans</code> variable starts with the price of the whole piece, <code>mp[m][n]</code>, and is then updated by considering cuts along the length and width.</li>
+<li>The function recursively calculates the maximum revenue for the remaining pieces after the cuts, and the result is stored in <code>mem[m][n]</code>.</li>
+</ul>
+<h4 id="step-4-function-to-calculate-maximum-revenue">
+  Step 4: Function to Calculate Maximum Revenue
+  <a class="heading-link" href="#step-4-function-to-calculate-maximum-revenue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">sellingWood</span>(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> prices) {
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> prices;
+</span></span><span style="display:flex;"><span>    mem.resize(m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    mp.resize(m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> p.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[p[i][<span style="color:#ae81ff">0</span>]][p[i][<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> p[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(m, n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>sellingWood</code> function sets up the <code>prices</code> array and initializes the <code>mem</code> and <code>mp</code> matrices.</li>
+<li>The <code>dp(m, n)</code> function is called to compute the maximum revenue for the piece of wood of size <code>m</code> x <code>n</code>.</li>
+<li>The final result is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is driven by the recursive nature of the <code>dp</code> function, which is memoized to avoid recomputing the same values multiple times.</p>
+<ul>
+<li>The DP function computes values for each pair of dimensions <code>(m, n)</code> up to the size <code>m</code> x <code>n</code>, resulting in a time complexity of <code>O(m * n)</code>.</li>
+<li>Each call to the <code>dp</code> function involves checking at most <code>m / 2</code> and <code>n / 2</code> possible cuts, so the work done for each state is proportional to <code>m</code> and <code>n</code>.</li>
+<li>Thus, the overall time complexity is <code>O(m * n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the space used to store the <code>mem</code> and <code>mp</code> matrices, both of which are of size <code>(m+1) x (n+1)</code>.</li>
+<li>Therefore, the space complexity is <code>O(m * n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The given solution efficiently solves the problem of maximizing the revenue from cutting and selling a piece of wood. By leveraging dynamic programming, we avoid redundant calculations by memoizing the results of subproblems. The solution handles the problem in <code>O(m * n)</code> time complexity, making it scalable even for larger inputs. This approach ensures that we consider all possible ways to cut the wood while keeping track of the maximum possible revenue, resulting in an optimal solution. The space complexity of <code>O(m * n)</code> is manageable given the constraints, and the implementation is clean and effective.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode835s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -274,7 +442,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2313"  class="external-link" target="_blank" rel="noopener">LeetCode #2313: Minimum Flips in Binary Tree to Get Result</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2315"  class="external-link" target="_blank" rel="noopener">LeetCode #2315: Count Asterisks</a></th>
       </tr>
   </thead>
   <tbody>
@@ -316,7 +484,6 @@
 
       </div>
 
-      
 
       <footer>
         

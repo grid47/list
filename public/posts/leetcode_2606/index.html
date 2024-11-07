@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -244,7 +244,168 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gmax;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1033s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are tasked with finding the maximum possible cost of a substring in a given string <code>s</code>. The cost of each character in <code>s</code> is determined by a list of values given in the array <code>vals</code> corresponding to a set of characters in the string <code>chars</code>. For the characters in <code>chars</code>, we use the provided values in <code>vals</code>, and for characters that are not in <code>chars</code>, we assign a default value based on their alphabetical position. The goal is to calculate the maximum cost of a substring of <code>s</code>, where the cost of the substring is defined as the sum of the values of its characters.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs the following approach:</p>
+<ol>
+<li>
+<p><strong>Mapping character values</strong>: First, create a map that stores the value for each character in <code>chars</code>. If a character in <code>s</code> is not in <code>chars</code>, its value is assigned based on its position in the alphabet.</p>
+</li>
+<li>
+<p><strong>Kadane’s Algorithm for Maximum Subarray Sum</strong>: Once the values for each character in <code>s</code> are determined, the problem reduces to finding the maximum sum of any contiguous subarray of these values. This is a classic problem solved using Kadane’s algorithm, which keeps track of the running sum and updates the maximum sum encountered.</p>
+</li>
+<li>
+<p><strong>Iterating through the string</strong>: For each character in <code>s</code>, its corresponding value (from the map) is added to the running sum (<code>lmax</code>). If this value decreases the sum (i.e., if the sum becomes negative), we reset the running sum to the value of the current character. The global maximum (<code>gmax</code>) is updated accordingly to track the highest sum seen so far.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-map-the-values-for-characters">
+  1. <strong>Map the values for characters</strong>:
+  <a class="heading-link" href="#1-map-the-values-for-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> chars.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[chars[i]] <span style="color:#f92672">=</span> vals[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Here, we create a map <code>mp</code> where each character in the <code>chars</code> string is mapped to its corresponding value from <code>vals</code>.</li>
+<li>This allows us to easily look up the value for each character in the string <code>s</code>.</li>
+</ul>
+<h4 id="2-assign-default-values-to-missing-characters">
+  2. <strong>Assign default values to missing characters</strong>:
+  <a class="heading-link" href="#2-assign-default-values-to-missing-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(x)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    mp[x] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop checks for characters in the alphabet that are not present in the <code>chars</code> string.</li>
+<li>For those characters, we assign a default value, which is their alphabetical position. For example, &lsquo;a&rsquo; gets a value of 1, &lsquo;b&rsquo; gets a value of 2, and so on.</li>
+</ul>
+<h4 id="3-initialize-variables-for-kadanes-algorithm">
+  3. <strong>Initialize variables for Kadane&rsquo;s algorithm</strong>:
+  <a class="heading-link" href="#3-initialize-variables-for-kadanes-algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, gmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>lmax</code> keeps track of the current running sum of the substring. It is initialized to 0 because we start with no elements selected.</li>
+<li><code>gmax</code> stores the global maximum sum encountered during the iteration through the string <code>s</code>.</li>
+</ul>
+<h4 id="4-iterate-through-the-string-to-compute-the-maximum-sum">
+  4. <strong>Iterate through the string to compute the maximum sum</strong>:
+  <a class="heading-link" href="#4-iterate-through-the-string-to-compute-the-maximum-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[s[i]] <span style="color:#f92672">&lt;</span> lmax <span style="color:#f92672">+</span> mp[s[i]]) {
+</span></span><span style="display:flex;"><span>        lmax <span style="color:#f92672">=</span> lmax <span style="color:#f92672">+</span> mp[s[i]];
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> lmax <span style="color:#f92672">=</span> mp[s[i]];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    gmax <span style="color:#f92672">=</span> max(gmax, lmax);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each character in the string <code>s</code> and uses the previously created map <code>mp</code> to get the corresponding value of the character.</li>
+<li>If adding the current character’s value to the running sum (<code>lmax</code>) results in a higher value than just using the current character’s value alone, the running sum is updated to include the current character’s value.</li>
+<li>If adding the character’s value results in a smaller sum (i.e., the running sum would be negative), the running sum is reset to the value of the current character.</li>
+<li>At each step, <code>gmax</code> is updated to keep track of the highest sum encountered.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. <strong>Return the result</strong>:
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> gmax;
+</span></span></code></pre></div><ul>
+<li>After iterating through the string, the function returns <code>gmax</code>, which contains the maximum sum of the substring.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Mapping the character values</strong>: Creating the map from <code>chars</code> to <code>vals</code> takes (O(c)), where (c) is the size of <code>chars</code>.</li>
+<li><strong>Assigning default values</strong>: The loop that assigns default values to characters takes (O(26)), which is constant and can be ignored.</li>
+<li><strong>Kadane’s algorithm</strong>: The iteration over the string <code>s</code> takes (O(n)), where (n) is the length of <code>s</code>.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is (O(n + c)), where (n) is the length of <code>s</code> and (c) is the length of <code>chars</code>. Since (c) is typically much smaller than (n), we can approximate the time complexity as (O(n)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Map storage</strong>: The map <code>mp</code> stores up to 26 characters (one for each letter of the alphabet), so it uses (O(26)) space, which is constant.</li>
+<li><strong>Other variables</strong>: The other variables (<code>lmax</code>, <code>gmax</code>) take constant space.</li>
+<li><strong>Overall Space Complexity</strong>: The space complexity is (O(1)), as the map size is bounded by the number of letters in the alphabet (26).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum cost of any substring of <code>s</code> by first mapping the values of the characters and then applying Kadane’s algorithm to find the maximum sum subarray. The algorithm operates in linear time with respect to the size of the string, making it optimal for large inputs. The approach is both time and space efficient, using a map to store character values and applying a standard algorithm for maximum subarray sum to solve the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1033s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -298,7 +459,6 @@
 
       </div>
 
-      
 
       <footer>
         

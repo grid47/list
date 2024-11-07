@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -238,7 +238,123 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mxx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode719s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the index positions at which the maximum score can be obtained when splitting an array <code>nums</code> into two non-overlapping subarrays. The score at an index <code>i</code> is defined as the sum of the number of zeros in the left subarray (<code>nums[0]</code> to <code>nums[i-1]</code>) and the number of ones in the right subarray (<code>nums[i]</code> to <code>nums[n-1]</code>). The output should be a list of all such indices where the score is maximized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a combination of prefix and suffix counting to efficiently find the optimal split points. The key idea is to traverse the array while maintaining counts of zeros on the left and ones on the right, computing the score at each split index.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initial Count of Total Ones:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ones <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) ones<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>The total number of <code>1</code>s in the array is counted and stored in the variable <code>ones</code>. This helps calculate the number of <code>1</code>s in the right subarray as we iterate through the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization of Maximum Score and Result Vector:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> ones;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mxx;
+</span></span><span style="display:flex;"><span>mxx.push_back(<span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>mx</code> is initialized to the score at index <code>0</code>, which only considers all <code>1</code>s in the right subarray.</li>
+<li><code>mxx</code> is initialized to store the index <code>0</code> as the starting maximum score position.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traverse Array to Calculate Scores at Each Split Index:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> zeros <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> prv, cur <span style="color:#f92672">=</span> mx;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    zeros <span style="color:#f92672">+=</span> ((nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    ones  <span style="color:#f92672">-=</span> ((nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    prv <span style="color:#f92672">=</span> mx;
+</span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">=</span> zeros <span style="color:#f92672">+</span> ones;
+</span></span><span style="display:flex;"><span>    mx  <span style="color:#f92672">=</span> max(mx, cur);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mx <span style="color:#f92672">==</span> cur <span style="color:#f92672">&amp;&amp;</span> cur <span style="color:#f92672">==</span> prv) mxx.push_back(i);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (mx <span style="color:#f92672">&gt;</span> prv) {
+</span></span><span style="display:flex;"><span>        mxx.clear();
+</span></span><span style="display:flex;"><span>        mxx.push_back(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>As we iterate through the array from <code>1</code> to <code>n</code>, we update <code>zeros</code> (count of zeros on the left) and decrement <code>ones</code> (count of ones on the right).</li>
+<li>The score at each index <code>i</code> is calculated as <code>cur = zeros + ones</code>.</li>
+<li>If the current score <code>cur</code> equals <code>mx</code>, it implies that the score is maintained, so we add the index <code>i</code> to <code>mxx</code>.</li>
+<li>If <code>cur</code> becomes greater than <code>mx</code>, a new maximum score is found, so <code>mxx</code> is cleared, and <code>i</code> is added as the new split point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result Vector:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mxx;
+</span></span></code></pre></div><ul>
+<li>The function returns the vector <code>mxx</code> containing all indices where the maximum score is achieved.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>The solution runs in O(n) time, where <code>n</code> is the size of <code>nums</code>. The traversal of <code>nums</code> for counting ones and the single pass for finding the maximum score ensure linear time complexity.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>The space complexity is O(1) for auxiliary variables, while the result vector <code>mxx</code> could potentially store up to <code>n + 1</code> indices, making it O(n) in the worst case.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code provides an efficient approach to solve the problem of finding split indices with the maximum score. The use of prefix and suffix counters ensures the computation is done in a single traversal, leading to an O(n) solution. The logic is simple yet powerful, making it ideal for arrays with up to 10^5 elements. The algorithm&rsquo;s design balances clarity and performance, offering a robust solution for real-world data scenarios where large input sizes are common.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode719s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -250,7 +366,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2156"  class="external-link" target="_blank" rel="noopener">LeetCode #2156: Find Substring With Given Hash Value</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2160"  class="external-link" target="_blank" rel="noopener">LeetCode #2160: Minimum Sum of Four Digit Number After Splitting Digits</a></th>
       </tr>
   </thead>
   <tbody>
@@ -292,7 +408,6 @@
 
       </div>
 
-      
 
       <footer>
         

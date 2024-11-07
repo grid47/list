@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -284,7 +284,163 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;deposit(banknotesCount);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_2 = obj-&gt;withdraw(amount);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode772s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves implementing an ATM system where the ATM has a limited supply of five types of currency notes: 20, 50, 100, 200, and 500. Users can deposit a given number of each type of note into the ATM and withdraw an exact amount of money. The goal is to create an ATM object that can:</p>
+<ol>
+<li><strong>Deposit</strong> a list of currency notes into the ATM.</li>
+<li><strong>Withdraw</strong> a specific amount of money, ensuring that the money dispensed matches the requested amount. The ATM should dispense the smallest possible number of notes, and if it’s not possible to fulfill the withdrawal request, it should return an error signal.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves simulating a basic ATM transaction system. The ATM has an internal record of the available currency notes, and the operations include:</p>
+<ul>
+<li><strong>Depositing notes</strong>: This involves simply increasing the number of available notes of each type.</li>
+<li><strong>Withdrawing money</strong>: The withdrawal process aims to minimize the number of notes dispensed by starting with the largest denomination (500) and working down to the smallest (20). The amount requested is broken down into the largest possible number of notes, while ensuring that the ATM has enough notes to fulfill the request.</li>
+</ul>
+<p>The key challenges include:</p>
+<ol>
+<li>Ensuring that the ATM does not dispense more notes than it has available.</li>
+<li>Returning <code>-1</code> if it is impossible to dispense the requested amount using the available notes.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>ATM Class Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ATM</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> note;
+</span></span><span style="display:flex;"><span>    ATM() {
+</span></span><span style="display:flex;"><span>        note.resize(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>ATM</code> class has a member variable <code>note</code>, which is a vector of 5 integers, initialized to 0. Each index of this vector corresponds to a denomination: <code>note[0]</code> for 20, <code>note[1]</code> for 50, <code>note[2]</code> for 100, <code>note[3]</code> for 200, and <code>note[4]</code> for 500.</li>
+<li>The <code>ATM()</code> constructor initializes the <code>note</code> vector with zeros, signifying that initially, there are no notes in the ATM.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deposit Method:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deposit</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        note[i] <span style="color:#f92672">+=</span> cnt[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>deposit</code> method takes a <code>vector&lt;int&gt; cnt</code> as an argument. This vector contains the number of each denomination of notes being deposited into the ATM.</li>
+<li>For each denomination, the method increments the corresponding entry in the <code>note</code> vector by the number of notes being deposited.</li>
+</ul>
+</li>
+<li>
+<p><strong>Withdraw Method:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> withdraw(<span style="color:#66d9ef">int</span> amnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt500 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt200 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt100 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt50 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt20 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> taken <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>withdraw</code> method takes an integer <code>amnt</code> as input, representing the amount to be withdrawn.</li>
+<li>We initialize counters for each denomination (<code>cnt500</code>, <code>cnt200</code>, <code>cnt100</code>, <code>cnt50</code>, and <code>cnt20</code>), which track how many notes of each denomination will be dispensed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dispensing Notes:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(amnt <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">500</span>) {
+</span></span><span style="display:flex;"><span>    cnt500 <span style="color:#f92672">=</span> amnt <span style="color:#f92672">/</span> <span style="color:#ae81ff">500</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt500 <span style="color:#f92672">&gt;</span> note[<span style="color:#ae81ff">4</span>]) {
+</span></span><span style="display:flex;"><span>        cnt500 <span style="color:#f92672">=</span> note[<span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    amnt <span style="color:#f92672">-=</span> (cnt500 <span style="color:#f92672">*</span> <span style="color:#ae81ff">500</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>First, the method checks if the requested amount (<code>amnt</code>) is greater than or equal to 500. If so, it calculates how many 500 denomination notes can be dispensed.</li>
+<li>The method checks whether the ATM has enough 500 denomination notes by comparing <code>cnt500</code> with <code>note[4]</code>, the available number of 500 notes. If there are fewer available notes than needed, the method adjusts <code>cnt500</code> accordingly.</li>
+<li>The amount to be withdrawn is then reduced by the value of the notes dispensed (<code>cnt500 * 500</code>).</li>
+<li>The same logic applies for other denominations (200, 100, 50, and 20). For each denomination, we calculate how many notes can be dispensed, check if there are enough notes in the ATM, and reduce the amount accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Error Handling:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(amnt <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
+</span></span></code></pre></div><ul>
+<li>If after trying to dispense notes of all denominations, the requested amount (<code>amnt</code>) is still not zero, it means that the withdrawal request cannot be fulfilled using the available notes. In this case, the method returns <code>-1</code> as a signal of failure.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating ATM Notes:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>note[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">-=</span> cnt500;
+</span></span><span style="display:flex;"><span>note[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">-=</span> cnt200;
+</span></span><span style="display:flex;"><span>note[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">-=</span> cnt100;
+</span></span><span style="display:flex;"><span>note[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-=</span> cnt50;
+</span></span><span style="display:flex;"><span>note[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-=</span> cnt20;
+</span></span></code></pre></div><ul>
+<li>If the withdrawal is successful, the ATM&rsquo;s internal note record is updated by subtracting the dispensed notes from the corresponding entries in the <code>note</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{cnt20, cnt50, cnt100, cnt200, cnt500};
+</span></span></code></pre></div><ul>
+<li>The method returns a vector containing the number of each denomination dispensed in the order: [20, 50, 100, 200, 500].</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity:</strong></p>
+<ul>
+<li>The time complexity of both the <code>deposit</code> and <code>withdraw</code> operations is <strong>O(1)</strong>. The <code>deposit</code> method simply iterates over the 5 denominations to update the note counts, while the <code>withdraw</code> method makes a constant number of comparisons and arithmetic operations for each denomination.</li>
+<li>Overall, the time complexity for each operation is constant, O(1), due to the fixed number of denominations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity:</strong></p>
+<ul>
+<li>The space complexity of the solution is also <strong>O(1)</strong>. The ATM only uses a fixed-size vector (<code>note</code>) to store the count of each denomination and a few integer variables for temporary calculations. Since the space usage does not grow with the size of the input, the space complexity remains constant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This ATM system efficiently handles both deposit and withdrawal operations. The key feature of this implementation is that it attempts to minimize the number of notes dispensed by prioritizing larger denominations first. The solution also includes error handling to ensure that withdrawals can only proceed if the requested amount can be fully dispensed with the available notes. With constant time complexity for both operations, this solution is highly optimized for performance. The simplicity of the design, combined with its efficient handling of edge cases (like insufficient notes or impossible withdrawals), makes it a robust choice for implementing ATM functionality.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode772s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -296,7 +452,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2242"  class="external-link" target="_blank" rel="noopener">LeetCode #2242: Maximum Score of a Node Sequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2243"  class="external-link" target="_blank" rel="noopener">LeetCode #2243: Calculate Digit Sum of a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -338,7 +494,6 @@
 
       </div>
 
-      
 
       <footer>
         

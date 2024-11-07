@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,7 +249,187 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode986s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum number of integers starting from 1 that can be included in a subset, given a set of integers that are banned, and a maximum sum limit (<code>mxS</code>). The goal is to maximize the count of integers from 1 to <code>n</code> (inclusive), such that no integer in the subset is banned, and the sum of the integers in the subset does not exceed the given limit <code>mxS</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>ban = [1, 2, 4]</code>, <code>n = 7</code>, <code>mxS = 10</code></li>
+<li>Output: The maximum number of integers from 1 to <code>7</code> that can be included without exceeding the sum <code>mxS</code> is <code>3</code>. The subset could be <code>[3, 5, 6]</code> (sum = 3 + 5 + 6 = 10).</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can approach it step by step:</p>
+<ol>
+<li>
+<p><strong>Mark Banned Elements</strong>: The first task is to mark all the banned elements. This can be done using a hash set (or unordered map) where the banned elements are stored. This allows for constant time checking if an integer is banned.</p>
+</li>
+<li>
+<p><strong>Greedy Approach</strong>: We will use a greedy strategy to maximize the number of integers we can select. Starting from the smallest integer (1), we will include it in the subset as long as:</p>
+<ul>
+<li>The integer is not banned.</li>
+<li>The sum of the selected integers does not exceed <code>mxS</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Numbers</strong>: We will iterate over all numbers from 1 to <code>n</code>. For each number, check if it&rsquo;s banned. If it&rsquo;s not banned and its inclusion doesn&rsquo;t exceed the maximum sum (<code>mxS</code>), include it in the subset. If including the current number causes the sum to exceed <code>mxS</code>, stop the process.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The result will be the count of the numbers that can be included in the subset without exceeding <code>mxS</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code into its individual components:</p>
+<h4 id="step-1-define-the-function-and-variables">
+  Step 1: Define the Function and Variables
+  <a class="heading-link" href="#step-1-define-the-function-and-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>
+<p>The function <code>maxCount</code> takes three parameters: <code>ban</code>, <code>n</code>, and <code>mxS</code>.</p>
+<ul>
+<li><code>ban</code>: A vector of integers representing the banned numbers.</li>
+<li><code>n</code>: The upper limit for the numbers we can consider (1 to <code>n</code>).</li>
+<li><code>mxS</code>: The maximum sum we are allowed to include.</li>
+</ul>
+</li>
+<li>
+<p>We also define <code>mp</code>, an unordered map, to store the banned numbers for quick lookups. The key is the number, and the value is a boolean indicating whether the number is banned.</p>
+</li>
+</ul>
+<h4 id="step-2-mark-banned-elements">
+  Step 2: Mark Banned Elements
+  <a class="heading-link" href="#step-2-mark-banned-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: ban)
+</span></span><span style="display:flex;"><span>    mp[x] <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li>This loop marks all the elements in the <code>ban</code> array as banned by adding them to the unordered map <code>mp</code>. Each banned number is stored with a value <code>true</code>.</li>
+</ul>
+<h4 id="step-3-initialize-count-and-iterate-over-numbers">
+  Step 3: Initialize Count and Iterate Over Numbers
+  <a class="heading-link" href="#step-3-initialize-count-and-iterate-over-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp.count(i) <span style="color:#f92672">&amp;&amp;</span> mxS <span style="color:#f92672">&gt;=</span> i) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        mxS <span style="color:#f92672">-=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mxS <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>cnt</code> to 0, which will hold the count of numbers we can select.</li>
+<li>We loop over each number <code>i</code> from 1 to <code>n</code> (inclusive).
+<ul>
+<li>If <code>i</code> is not in the <code>mp</code> map (i.e., not banned) and if adding <code>i</code> to the current subset will not exceed the sum <code>mxS</code>, we include it in the subset:
+<ul>
+<li>Increment <code>cnt</code> to account for the selected number.</li>
+<li>Subtract <code>i</code> from <code>mxS</code> to update the remaining sum.</li>
+</ul>
+</li>
+<li>If at any point, <code>mxS</code> becomes negative, it means including any more numbers would exceed the sum limit, so we break out of the loop.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the value of <code>cnt</code> represents the maximum number of integers that can be selected without exceeding the sum <code>mxS</code>. We return this value.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Marking Banned Elements</strong>: The time complexity for marking the banned elements is ( O(b) ), where <code>b</code> is the number of banned elements.</li>
+<li><strong>Iterating Through Numbers from 1 to <code>n</code></strong>: The loop iterates from 1 to <code>n</code>, checking each number to see if it&rsquo;s banned and if it can be included in the subset. This results in a time complexity of ( O(n) ).</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity of the function is ( O(b + n) ), where <code>b</code> is the number of banned numbers and <code>n</code> is the total number of integers we consider.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for the <code>mp</code> Map</strong>: We use an unordered map <code>mp</code> to store the banned numbers. In the worst case, if all numbers from 1 to <code>n</code> are banned, the space complexity of the map is ( O(b) ), where <code>b</code> is the number of banned numbers.</li>
+<li><strong>Space for Variables</strong>: The space used by the other variables (like <code>cnt</code> and the loop counters) is constant, ( O(1) ).</li>
+<li><strong>Overall Space Complexity</strong>: The overall space complexity is ( O(b) ), where <code>b</code> is the number of banned numbers.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem using a greedy strategy. The steps are straightforward:</p>
+<ol>
+<li>Mark the banned numbers.</li>
+<li>Iterate through all numbers from 1 to <code>n</code>, trying to include as many as possible without exceeding the sum <code>mxS</code>.</li>
+<li>The greedy approach ensures we always select the smallest available numbers first, maximizing the number of integers that can be included.</li>
+</ol>
+<p>The time complexity is linear in terms of the size of the input (<code>O(n)</code>), and the space complexity is also linear in terms of the number of banned numbers (<code>O(b)</code>).</p>
+<p>This solution is optimal for the problem and ensures that we can handle large inputs effectively within the given constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode986s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -303,7 +483,6 @@
 
       </div>
 
-      
 
       <footer>
         

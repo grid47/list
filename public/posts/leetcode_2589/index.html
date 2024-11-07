@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -247,7 +247,271 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1017s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to find the minimum time required to complete a given set of tasks, each with a specified start time, end time, and duration (the number of time units needed to complete the task). The goal is to minimize the total time taken to finish all the tasks while ensuring no overlap between the tasks. If there are time units within a task&rsquo;s time window that are already occupied, those time units are skipped and the task continues with the remaining duration.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key challenge in this problem is to minimize the total time while considering the constraints that some time slots might already be occupied by other tasks. The problem can be viewed as an optimization problem where we aim to efficiently allocate available time slots to each task&rsquo;s duration within the given start and end times. The solution must be efficient enough to handle the constraints on task sizes.</p>
+<h4 id="step-by-step-approach">
+  Step-by-Step Approach
+  <a class="heading-link" href="#step-by-step-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>To achieve this, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Sort the Tasks by Their End Times</strong>:
+Since tasks that finish earlier can be processed first, sorting the tasks based on their end times allows us to allocate time slots optimally.</p>
+</li>
+<li>
+<p><strong>Track Occupied Time Slots</strong>:
+We need to maintain an array that marks which time slots are already occupied. This can be efficiently done using a <code>vector&lt;bool&gt;</code> where each element corresponds to a time unit, and <code>true</code> indicates that the time slot is occupied.</p>
+</li>
+<li>
+<p><strong>Allocate Time Slots for Each Task</strong>:
+For each task, we attempt to allocate the required number of time units within its time window (from its start to its end). If the time slot is already occupied, we skip it and continue searching for an available slot.</p>
+</li>
+<li>
+<p><strong>Counting the Total Time</strong>:
+Once all tasks are processed, the total time will be the number of unique time units that are marked as occupied (i.e., <code>true</code>).</p>
+</li>
+</ol>
+<h4 id="algorithm">
+  Algorithm:
+  <a class="heading-link" href="#algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sort the Tasks</strong>:
+Sort the tasks by their end time (<code>a[1]</code>) to process them in the order that allows us to allocate time more effectively.</p>
+</li>
+<li>
+<p><strong>Track Time Slot Usage</strong>:
+Use a boolean vector <code>line</code> where each index represents a specific time unit. We keep track of occupied time units using this vector.</p>
+</li>
+<li>
+<p><strong>Allocate Time for Each Task</strong>:
+For each task, calculate how many units of time are already occupied within its time window. Subtract this from the task’s total duration. Then, start from the end of the task&rsquo;s time window and attempt to allocate the remaining time units to the available slots.</p>
+</li>
+<li>
+<p><strong>Count Total Time Used</strong>:
+After processing all tasks, count how many time units are marked as occupied (i.e., <code>true</code> in the <code>line</code> array).</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-sorting-the-tasks">
+  1. <strong>Sorting the Tasks</strong>:
+  <a class="heading-link" href="#1-sorting-the-tasks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(tasks.begin(), tasks.end(), [<span style="color:#f92672">&amp;</span>](vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) { <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>]; });
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>We sort the <code>tasks</code> array by the end time of each task (<code>a[1]</code> and <code>b[1]</code> represent the end times of tasks <code>a</code> and <code>b</code>). Sorting by end times allows us to process tasks in the order that minimizes overlapping and optimizes time slot allocation.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-initializing-the-tracking-variables">
+  2. <strong>Initializing the Tracking Variables</strong>:
+  <a class="heading-link" href="#2-initializing-the-tracking-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> tasks.size(), res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> line(<span style="color:#ae81ff">2001</span>, false);
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li><code>n</code> stores the number of tasks.</li>
+<li><code>res</code> will store the final result, i.e., the total number of time units occupied.</li>
+<li><code>line</code> is a vector of size 2001, where each element corresponds to a time unit (from time 0 to time 2000). We initialize all values to <code>false</code> to indicate that initially no time slots are occupied.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-processing-each-task">
+  3. <strong>Processing Each Task</strong>:
+  <a class="heading-link" href="#3-processing-each-task">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> st <span style="color:#f92672">=</span> tasks[i][<span style="color:#ae81ff">0</span>], ed <span style="color:#f92672">=</span> tasks[i][<span style="color:#ae81ff">1</span>], cnt <span style="color:#f92672">=</span> tasks[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">-=</span> count(line.begin() <span style="color:#f92672">+</span> st, line.begin() <span style="color:#f92672">+</span> ed <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, true);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ed; cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">-=</span> <span style="color:#f92672">!</span>line[i];
+</span></span><span style="display:flex;"><span>        line[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>For each task, we first extract its start time (<code>st</code>), end time (<code>ed</code>), and required time units (<code>cnt</code>).</li>
+<li>We calculate how many time units within the task&rsquo;s time window are already occupied by counting the <code>true</code> values in the <code>line</code> array between the start time (<code>st</code>) and the end time (<code>ed</code>).</li>
+<li>After subtracting the occupied slots from the required duration (<code>cnt</code>), we attempt to allocate the remaining duration by iterating backwards from the end time (<code>ed</code>) and marking available slots as occupied (<code>true</code>). We keep track of how many slots are allocated (<code>cnt</code>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-counting-total-time-used">
+  4. <strong>Counting Total Time Used</strong>:
+  <a class="heading-link" href="#4-counting-total-time-used">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">count</span>(line.begin(), line.end(), true);
+</span></span></code></pre></div><ul>
+<li><strong>Explanation</strong>:
+<ul>
+<li>After processing all tasks, we count the total number of <code>true</code> values in the <code>line</code> array, which represents the number of time units that have been occupied. This is returned as the result.</li>
+</ul>
+</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sorting the Tasks</strong>:
+Sorting the tasks by their end times takes (O(n \log n)), where <code>n</code> is the number of tasks.</p>
+</li>
+<li>
+<p><strong>Processing Each Task</strong>:
+For each task, we perform a count operation to check the occupied time slots and a loop to mark available slots. In the worst case, this operation takes (O(T)), where <code>T</code> is the maximum time window size. The time complexity for processing all tasks is therefore (O(n \cdot T)), where <code>n</code> is the number of tasks and <code>T</code> is the time window size.</p>
+</li>
+<li>
+<p><strong>Overall Complexity</strong>:
+The overall time complexity is (O(n \log n + n \cdot T)), where <code>n</code> is the number of tasks and <code>T</code> is the size of the time window (2001 in this case).</p>
+</li>
+</ol>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is (O(T)) due to the <code>line</code> array, which has a size of 2001 to track the occupied time slots. We also use constant space for other variables such as <code>res</code>, <code>st</code>, <code>ed</code>, and <code>cnt</code>. Hence, the space complexity is (O(T)).</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> tasks <span style="color:#f92672">=</span> {{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>}, {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>}, {<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">1</span>}};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Step 1</strong>: Sort tasks by their end times:</p>
+<ul>
+<li>The sorted tasks will be: <code>{{1, 5, 3}, {2, 6, 2}, {7, 9, 1}}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 2</strong>: Initialize variables:</p>
+<ul>
+<li><code>line = [false, false, ..., false]</code> (2001 elements).</li>
+<li><code>res = 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 3</strong>: Process each task:</p>
+<ul>
+<li><strong>First task</strong> (start: 1, end: 5, duration: 3):
+<ul>
+<li>Count the occupied slots between 1 and 5 (none are occupied).</li>
+<li>Allocate 3 time units within this range (mark 3 slots as occupied).</li>
+</ul>
+</li>
+<li><strong>Second task</strong> (start: 2, end: 6, duration: 2):
+<ul>
+<li>Count the occupied slots between 2 and 6 (1 slot is occupied).</li>
+<li>Allocate 1 additional time unit, mark another slot as occupied.</li>
+</ul>
+</li>
+<li><strong>Third task</strong> (start: 7, end: 9, duration: 1):
+<ul>
+<li>Count the occupied slots between 7 and 9 (none are occupied).</li>
+<li>Allocate 1 time unit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 4</strong>: Count the total number of occupied slots:</p>
+<ul>
+<li>The total number of <code>true</code> values in <code>line</code> is 5.</li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently computes the minimum time required to complete all tasks while avoiding overlaps by sorting the tasks and optimally allocating available time slots. The approach ensures that each task is processed in an optimal order, leading to the best possible result. With a time complexity of (O(n \log n + n \cdot T)) and a space complexity of (O(T)), this solution is efficient enough for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1017s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -259,7 +523,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2590"  class="external-link" target="_blank" rel="noopener">LeetCode #2590: Design a Todo List</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2591"  class="external-link" target="_blank" rel="noopener">LeetCode #2591: Distribute Money to Maximum Children</a></th>
       </tr>
   </thead>
   <tbody>
@@ -301,7 +565,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
 
@@ -255,7 +255,197 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1095s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given a binary matrix, where each element is either 0 or 1. The goal is to find a subset of rows in the matrix such that the bitwise AND of all the rows in the subset is 0. Specifically, we need to return the indices of the rows in the matrix that form this subset. If no such subset exists, we return an empty list.</p>
+<p>The challenge is to find an efficient way to check for these subsets and return the row indices that satisfy the condition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the idea is to use a bitwise encoding of each row, which simplifies the checking of conditions using bitwise operations. This approach ensures that we can efficiently find pairs of rows whose AND is zero, reducing the overall complexity compared to brute force methods. Here&rsquo;s how the solution works step by step:</p>
+<ol>
+<li>
+<p><strong>Binary Encoding of Rows</strong>: Each row in the matrix is treated as a binary number. We convert each row into a unique integer by setting bits based on the positions where the row has a 1. This allows us to efficiently perform bitwise operations to check if two rows are compatible (i.e., their AND is zero).</p>
+</li>
+<li>
+<p><strong>Track First Occurrences</strong>: We need to store the first index where a row with a particular bit pattern occurs. By storing these first occurrences, we can quickly check if any row can combine with another row to satisfy the condition.</p>
+</li>
+<li>
+<p><strong>Finding a Valid Subset</strong>: Once we have encoded the rows and stored the first occurrence of each row&rsquo;s bit pattern, we can:</p>
+<ul>
+<li>First check if the all-zero row (represented by a 0 in the bitwise encoding) exists. If so, this row is trivially a valid subset by itself.</li>
+<li>Then check pairs of rows. If the bitwise AND of two rows is 0, these rows can form a valid subset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Search</strong>: By using bitwise operations, we reduce the complexity of checking each pair of rows. If any two rows have a bitwise AND equal to 0, they can be part of the solution. We loop through all possible pairs and return the first valid subset we find.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-encoding-the-rows">
+  Step 1: Encoding the Rows
+  <a class="heading-link" href="#step-1-encoding-the-rows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> uint <span style="color:#a6e22e">Encode</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> row) {
+</span></span><span style="display:flex;"><span>  uint x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> row.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (row[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">|=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Encode Function</strong>: This function takes a row from the binary matrix and encodes it as an integer. For each element in the row, if the element is 1, we set the corresponding bit in the integer <code>x</code>. This integer now represents the row in binary format, making it easy to apply bitwise operations later.</p>
+</li>
+<li>
+<p><strong>Bitwise Operation</strong>: We use the bitwise OR (<code>|</code>) to set specific bits in <code>x</code>. For each 1 in the row at position <code>i</code>, the corresponding bit is set in <code>x</code> using the expression <code>x |= 1 &lt;&lt; i</code>.</p>
+</li>
+</ul>
+<h4 id="step-2-storing-first-occurrences-of-encoded-rows">
+  Step 2: Storing First Occurrences of Encoded Rows
+  <a class="heading-link" href="#step-2-storing-first-occurrences-of-encoded-rows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> N <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> first_index(N, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> grid.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>; <span style="color:#f92672">--</span>i) {
+</span></span><span style="display:flex;"><span>  first_index[Encode(grid[i])] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Array Initialization</strong>: We create an array <code>first_index</code> of size <code>N</code>, where <code>N</code> is <code>2^m</code> (<code>m</code> being the number of columns in the matrix). This array stores the index of the first occurrence of each possible encoded row pattern. Initially, all values are set to <code>-1</code>, indicating that no row has been found for that pattern.</p>
+</li>
+<li>
+<p><strong>Loop Through Rows</strong>: We iterate through the matrix in reverse order (<code>i</code> goes from <code>grid.size() - 1</code> to <code>0</code>) and encode each row using the <code>Encode</code> function. For each encoded row, we store its index in the <code>first_index</code> array. This ensures that for each bit pattern, we only store the first row that appears with that pattern.</p>
+</li>
+</ul>
+<h4 id="step-3-checking-for-a-valid-subset">
+  Step 3: Checking for a Valid Subset
+  <a class="heading-link" href="#step-3-checking-for-a-valid-subset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (first_index[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {first_index[<span style="color:#ae81ff">0</span>]};
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Check for All-Zero Row</strong>: If the encoded value <code>0</code> (representing a row with all zeros) exists in the <code>first_index</code> array, we immediately return the index of that row as the result. This row is trivially a valid subset since it doesn&rsquo;t conflict with any other row (its AND with any other row is 0).</li>
+</ul>
+<h4 id="step-4-checking-pairs-of-rows">
+  Step 4: Checking Pairs of Rows
+  <a class="heading-link" href="#step-4-checking-pairs-of-rows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; a <span style="color:#f92672">&lt;</span> N; <span style="color:#f92672">++</span>a) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (first_index[a] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; b <span style="color:#f92672">&lt;</span> N; <span style="color:#f92672">++</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (first_index[b] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((a <span style="color:#f92672">&amp;</span> b) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> ra <span style="color:#f92672">=</span> first_index[a];
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> rb <span style="color:#f92672">=</span> first_index[b];
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> {min(ra, rb), max(ra, rb)};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Outer Loop</strong>: The outer loop iterates over all possible encoded values <code>a</code> (from 1 to <code>N-1</code>). If <code>a</code> has a corresponding row (i.e., <code>first_index[a] != -1</code>), we proceed to check pairs of rows.</p>
+</li>
+<li>
+<p><strong>Inner Loop</strong>: For each value <code>a</code>, we iterate over all possible values <code>b</code> greater than <code>a</code>. If <code>b</code> also has a corresponding row (<code>first_index[b] != -1</code>), we check if the bitwise AND of <code>a</code> and <code>b</code> is 0. The condition <code>(a &amp; b) == 0</code> ensures that the two rows do not have any overlapping 1s, which is a necessary condition for the rows to form a valid subset.</p>
+</li>
+<li>
+<p><strong>Return Valid Pair</strong>: If we find such a pair of rows, we return the indices of these rows in the order <code>min(ra, rb)</code> and <code>max(ra, rb)</code>.</p>
+</li>
+</ul>
+<h4 id="step-5-return-empty-list-if-no-valid-subset">
+  Step 5: Return Empty List if No Valid Subset
+  <a class="heading-link" href="#step-5-return-empty-list-if-no-valid-subset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {};
+</span></span></code></pre></div><ul>
+<li>If no valid subset is found after checking all possible pairs, we return an empty list.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Encoding</strong>: The <code>Encode</code> function processes each row in the matrix in linear time with respect to the number of columns, i.e., (O(m)), where (m) is the number of columns.</li>
+<li><strong>Storing First Occurrences</strong>: We loop through all rows and store the first occurrences of their encoded values, which takes (O(n \times m)) time, where (n) is the number of rows and (m) is the number of columns.</li>
+<li><strong>Finding Valid Pairs</strong>: The inner part of the algorithm involves checking pairs of encoded rows, which takes (O(N^2)), where (N = 2^m). In the worst case, this could be very expensive, but for small (m), this is feasible.</li>
+</ul>
+<p>Thus, the total time complexity is approximately (O(n \times m + N^2)), where (N = 2^m).</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use an array <code>first_index</code> of size (2^m) to store the first occurrences of each possible encoded row, which takes (O(2^m)) space.</li>
+<li>The space complexity is dominated by the storage of these encoded row patterns, so the total space complexity is (O(2^m)).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages bitwise operations to efficiently encode each row of the binary matrix and check for pairs of rows whose bitwise AND is 0. This approach reduces the problem complexity compared to brute force methods and ensures that we can find the required subset of rows efficiently. By storing first occurrences of each encoded row, the solution quickly identifies valid pairs and returns the result in optimal time for smaller matrices.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1095s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -309,7 +499,6 @@
 
       </div>
 
-      
 
       <footer>
         

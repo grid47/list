@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -267,11 +267,148 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode684s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum number of refills needed for two people, Alice and Bob, to water plants in a garden. Alice starts from the left side and Bob from the right. Each plant requires a specific amount of water to be watered. Alice and Bob have separate water capacities (<code>capA</code> and <code>capB</code>), and they refill only when they run out of water for a plant. We need to determine the total number of refills needed for both Alice and Bob to water every plant in the garden.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a two-pointer technique. Alice begins watering plants from the left (index <code>i = 0</code>), while Bob starts from the right (index <code>j = n - 1</code>). For each plant:</p>
+<ol>
+<li>
+<p><strong>Determine if Alice or Bob Needs a Refill</strong>: If the water capacity each has is enough to water the current plant, they proceed without a refill; otherwise, they refill and reset their respective capacities.</p>
+</li>
+<li>
+<p><strong>Move Pointers Inward</strong>: After each plant is watered, Alice moves one plant to the right (increment <code>i</code>), and Bob moves one plant to the left (decrement <code>j</code>). If Alice and Bob reach the same plant, the one with more remaining water will water it. If they have the same amount, Alice waters it.</p>
+</li>
+<li>
+<p><strong>Count Refills</strong>: Each time either Alice or Bob refills, the refill counter (<code>cnt</code>) increments by 1.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> plant.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> alice <span style="color:#f92672">=</span> capA, bob <span style="color:#f92672">=</span> capB;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: Number of plants.</li>
+<li><code>i</code> and <code>j</code>: Pointers for Alice and Bob, starting from the beginning and end, respectively.</li>
+<li><code>cnt</code>: Counter for the number of refills.</li>
+<li><code>alice</code> and <code>bob</code>: Current capacities for Alice and Bob.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> j) {
+</span></span></code></pre></div><ul>
+<li>Loop continues as long as Alice (<code>i</code>) and Bob (<code>j</code>) have plants to water.</li>
+<li>The <code>if</code> statement inside handles cases where <code>i &lt; j</code> (when Alice and Bob have separate plants to water), and an <code>else</code> block addresses the case where they meet at the same plant.</li>
+</ul>
+</li>
+<li>
+<p><strong>Alice and Bob Water Plants</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(alice <span style="color:#f92672">&gt;=</span> plant[i]) { alice <span style="color:#f92672">-=</span> plant[i]; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> { cnt<span style="color:#f92672">++</span>; alice <span style="color:#f92672">=</span> capA <span style="color:#f92672">-</span> plant[i]; }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(bob <span style="color:#f92672">&gt;=</span> plant[j]) { bob <span style="color:#f92672">-=</span> plant[j]; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> { cnt<span style="color:#f92672">++</span>; bob <span style="color:#f92672">=</span> capB <span style="color:#f92672">-</span> plant[j]; }
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If Alice or Bob’s remaining water is enough to water the plant, they proceed. If not, they refill, increase <code>cnt</code>, and continue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle Meeting Point</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(alice <span style="color:#f92672">&gt;=</span> bob) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(alice <span style="color:#f92672">&gt;=</span> plant[i]) { alice <span style="color:#f92672">-=</span> plant[i]; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> { cnt<span style="color:#f92672">++</span>; alice <span style="color:#f92672">=</span> capA <span style="color:#f92672">-</span> plant[i]; }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(bob <span style="color:#f92672">&gt;=</span> plant[i]) { bob <span style="color:#f92672">-=</span> plant[i]; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> { cnt<span style="color:#f92672">++</span>; bob <span style="color:#f92672">=</span> capB <span style="color:#f92672">-</span> plant[i]; }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>, j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>When Alice and Bob meet at the same plant, the one with the larger remaining water capacity will water it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Total Refills</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Once all plants are watered, the function returns the total number of refills.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n))</p>
+<ul>
+<li>The algorithm iterates through each plant at most once, with two pointers moving inward. Thus, it operates in linear time relative to the number of plants, <code>n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1))</p>
+<ul>
+<li>The algorithm uses a constant amount of additional space, only storing a few variables like <code>cnt</code>, <code>alice</code>, and <code>bob</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively manages Alice and Bob’s capacities while traversing from opposite ends of the plant array, ensuring they only refill when necessary. By tracking the number of refills each needs and controlling who waters the plant when they meet, the algorithm ensures an optimal solution. The two-pointer approach is efficient, with linear time complexity, and minimizes unnecessary refills for a well-optimized, clear solution. This makes the code highly effective for large arrays, ensuring minimum refills and avoiding extra calculations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode684s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2106"  class="external-link" target="_blank" rel="noopener">LeetCode #2106: Maximum Fruits Harvested After at Most K Steps</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2108"  class="external-link" target="_blank" rel="noopener">LeetCode #2108: Find First Palindromic String in the Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -313,7 +450,6 @@
 
       </div>
 
-      
 
       <footer>
         

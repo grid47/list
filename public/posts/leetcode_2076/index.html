@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -282,7 +282,201 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode669s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves managing friend requests between users represented by indices in a system. Each user can send friend requests, and we need to determine whether a friend request is valid based on existing friend relationships and certain conditions. Specifically, a friend request from user A to user B is valid if:</p>
+<ol>
+<li>A and B are not already friends.</li>
+<li>A and B do not share a mutual friend relationship that violates the rules.</li>
+</ol>
+<p>The goal is to implement a solution that efficiently checks the validity of these requests while maintaining the current friend relationships using a union-find (disjoint-set) data structure.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we utilize the union-find data structure, which efficiently supports union and find operations to manage the connected components of users (friends). The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Create a union-find structure to manage the friend relationships among users.</p>
+</li>
+<li>
+<p><strong>Processing Existing Friend Relationships</strong>: Use the union-find structure to register existing friendships. This involves merging the sets of friends based on the given list of existing relationships.</p>
+</li>
+<li>
+<p><strong>Handling Friend Requests</strong>:</p>
+<ul>
+<li>For each friend request, check if users A and B are already connected (i.e., friends).</li>
+<li>If not connected, check if A and B share any mutual friends. If they do, the request is invalid.</li>
+<li>If valid, merge A and B in the union-find structure to indicate that they are now friends.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output Results</strong>: Collect results for each friend request and return them as a list of boolean values indicating the validity of each request.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="union-find-class">
+  Union-Find Class
+  <a class="heading-link" href="#union-find-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>UF</code> class is defined to manage the union-find operations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dads;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        dads.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            dads[i] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Print Function</strong>: A utility function to print the parent array for debugging purposes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> dads.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> dads[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>    cout<span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Union Function</strong>: The <code>join</code> function connects two users by merging their sets if they are not already connected.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> q) {
+</span></span><span style="display:flex;"><span>        dads[p] <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Find Function</strong>: The <code>find</code> function retrieves the root representative of a user and applies path compression for efficiency.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dads[x] <span style="color:#f92672">==</span> x <span style="color:#f92672">?</span> x : (dads[x] <span style="color:#f92672">=</span> find(dads[x]));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Pairs Function</strong>: This function checks if two users are in the same connected component.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">pairs</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> find(x) <span style="color:#f92672">==</span> find(y);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h4 id="solution-class">
+  Solution Class
+  <a class="heading-link" href="#solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Solution</code> class encapsulates the main logic for handling friend requests.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> friendRequests(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> rxns, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> reqs) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of Union-Find Structure</strong>: Create a union-find instance for the users.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>UF req <span style="color:#f92672">=</span> UF(n);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Processing Friend Requests</strong>: Initialize a results vector to store the validity of each request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> ans(reqs.size(), false);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Over Requests</strong>: For each friend request, determine its validity based on current connections.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> reqs.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> node <span style="color:#f92672">=</span> reqs[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> valid <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>req.pairs(node[<span style="color:#ae81ff">0</span>], node[<span style="color:#ae81ff">1</span>])) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> req.find(node[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> req.find(node[<span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check Mutual Friendships</strong>: If A and B are not connected, check for mutual friends that would invalidate the request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> e : rxns) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> req.find(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> req.find(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((x <span style="color:#f92672">==</span> p <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">==</span> q) <span style="color:#f92672">||</span> (y <span style="color:#f92672">==</span> p <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">==</span> q)) {
+</span></span><span style="display:flex;"><span>        valid <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Results</strong>: Store the validity of the current request and, if valid, merge the two users in the union-find structure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[i] <span style="color:#f92672">=</span> valid;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(valid) req.join(node[<span style="color:#ae81ff">0</span>], node[<span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Results</strong>: Finally, return the results vector indicating the validity of each request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The union-find operations (find and union) are nearly constant time due to path compression and union by rank, leading to an amortized time complexity of (O(\alpha(n))), where (\alpha) is the inverse Ackermann function.</li>
+<li>Processing friend requests and checking for mutual friends incurs a complexity of (O(m \cdot k)), where (m) is the number of requests and (k) is the average number of existing friendships. Thus, the overall complexity is (O(m \cdot k)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage used by the union-find data structure to maintain the parent links for (n) users.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively uses the union-find data structure to manage the relationships among users while processing friend requests. By checking the current friendship status and validating mutual friendships, the approach ensures that all requests adhere to the specified conditions.</p>
+<p>This implementation can handle a variety of scenarios in social network applications where friend requests must be managed with respect to existing relationships. Its efficiency makes it suitable for larger datasets, ensuring that operations remain swift and responsive.</p>
+<p>The modularity of the union-find structure allows for potential extensions or modifications in future applications, such as implementing features for blocking or removing friends. This solution serves as a robust example of using data structures to manage complex relationships in a computationally efficient manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode669s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -294,7 +488,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2077"  class="external-link" target="_blank" rel="noopener">LeetCode #2077: Paths in Maze That Lead to Same Room</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2079"  class="external-link" target="_blank" rel="noopener">LeetCode #2079: Watering Plants</a></th>
       </tr>
   </thead>
   <tbody>
@@ -336,7 +530,6 @@
 
       </div>
 
-      
 
       <footer>
         

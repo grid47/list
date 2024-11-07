@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -246,7 +246,181 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode778s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires counting the number of rectangles that can cover each of a set of given points on a 2D grid. Given a list of rectangles and a list of points, you need to determine how many of the rectangles can cover each point. Each rectangle is represented by its bottom-left corner <code>(x1, y1)</code> and top-right corner <code>(x2, y2)</code>, where <code>x1 &lt; x2</code> and <code>y1 &lt; y2</code>. A rectangle can cover a point if the point lies within the rectangle, i.e., its x-coordinate lies between <code>x1</code> and <code>x2</code>, and its y-coordinate lies between <code>y1</code> and <code>y2</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can break it down into a series of steps:</p>
+<ol>
+<li>
+<p><strong>Sort the Rectangles by Y-Coordinate</strong>: Rectangles are sorted by their <code>y2</code> value. This is because when processing each point, we want to only consider rectangles that extend up to the y-coordinate of that point and above.</p>
+</li>
+<li>
+<p><strong>Use a Grid to Track Rectangle Coverage</strong>: The grid will store the x-coordinates of rectangles that have a certain y2-coordinate. This allows quick access to the x-coordinates of rectangles for a given y range.</p>
+</li>
+<li>
+<p><strong>Binary Search for Efficient Counting</strong>: To count how many rectangles cover a point, we use binary search on the x-coordinates of rectangles in the grid. This enables us to quickly determine how many rectangles have a left edge (x1) to the left of the point&rsquo;s x-coordinate.</p>
+</li>
+<li>
+<p><strong>Accumulate Rectangle Counts</strong>: For each point, traverse the grid from its y-coordinate upwards to find all rectangles that can cover the point. For each rectangle that may cover the point, count how many rectangles’ x-coordinates are valid by performing a binary search.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-and-sort-rectangles">
+  Step 1: Initialize and Sort Rectangles
+  <a class="heading-link" href="#step-1-initialize-and-sort-rectangles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> pts.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>sort(rec.begin(), rec.end());
+</span></span></code></pre></div><ul>
+<li>The first step is to initialize the result vector <code>res</code> to store the answer for each point. The vector is initialized to zeros, as initially no rectangles have been considered for any point.</li>
+<li>The rectangles <code>rec</code> are sorted by their y-coordinate to make it easier to process them in increasing order of y-values.</li>
+</ul>
+<h4 id="step-2-prepare-the-grid-for-efficient-counting">
+  Step 2: Prepare the Grid for Efficient Counting
+  <a class="heading-link" href="#step-2-prepare-the-grid-for-efficient-counting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(<span style="color:#ae81ff">101</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: rec) {
+</span></span><span style="display:flex;"><span>    grid[it[<span style="color:#ae81ff">1</span>]].push_back(it[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The grid <code>grid</code> is a 2D vector of size 101, where each entry corresponds to a specific y-coordinate. We store the x-coordinate values of the rectangles in the grid, grouped by their y-coordinates.</li>
+<li>The loop iterates over each rectangle in <code>rec</code> and places its x1-coordinate into the grid at the index corresponding to the rectangle&rsquo;s y2-coordinate (<code>it[1]</code>).</li>
+</ul>
+<h4 id="step-3-process-each-point">
+  Step 3: Process Each Point
+  <a class="heading-link" href="#step-3-process-each-point">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> pts[j][<span style="color:#ae81ff">1</span>]; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        res[j] <span style="color:#f92672">+=</span> (grid[i].end() <span style="color:#f92672">-</span> lower_bound(grid[i].begin(), grid[i].end(), pts[j][<span style="color:#ae81ff">0</span>]));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We process each point in <code>pts</code>. For each point <code>pts[j]</code>, we check all rectangles that could cover it by iterating over the y-coordinates in the grid from <code>pts[j][1]</code> to 100.</li>
+<li>For each y-coordinate <code>i</code>, we count how many rectangles can cover the point <code>(pts[j][0], pts[j][1])</code> by looking for rectangles whose x1-coordinate is less than or equal to <code>pts[j][0]</code>.
+<ul>
+<li>We do this using binary search with <code>lower_bound</code>. The <code>lower_bound</code> function finds the first position in the sorted list of x-coordinates where <code>pts[j][0]</code> could be inserted while maintaining the sorted order.</li>
+<li>The difference between <code>grid[i].end()</code> and <code>lower_bound(grid[i].begin(), grid[i].end(), pts[j][0])</code> gives the number of rectangles that cover the point.</li>
+</ul>
+</li>
+<li>We accumulate this count in <code>res[j]</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once all points have been processed, the <code>res</code> vector contains the number of rectangles that can cover each point, which is returned as the final result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Sorting Rectangles</strong>: Sorting the rectangles takes ( O(m \log m) ), where ( m ) is the number of rectangles.</p>
+</li>
+<li>
+<p><strong>Filling the Grid</strong>: For each rectangle, inserting its x-coordinate into the grid is an ( O(1) ) operation, and since there are ( m ) rectangles, this step takes ( O(m) ).</p>
+</li>
+<li>
+<p><strong>Processing Points</strong>: For each point, we check all the y-values from <code>pts[j][1]</code> to 100. In the worst case, this involves checking all y-values from 0 to 100. For each y-value, we perform a binary search on the sorted x-coordinates of the rectangles, which takes ( O(\log k) ), where ( k ) is the maximum number of rectangles for any given y-coordinate.</p>
+<ul>
+<li>Therefore, the total time complexity for processing all points is ( O(n \times 100 \times \log k) ), where ( n ) is the number of points and ( k ) is the average number of rectangles for each y-coordinate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: The overall time complexity of the solution is ( O(m \log m + n \times 100 \times \log k) ), where:</p>
+<ul>
+<li>( m ) is the number of rectangles,</li>
+<li>( n ) is the number of points, and</li>
+<li>( k ) is the average number of rectangles for each y-coordinate.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Grid Storage</strong>: The grid stores the x-coordinates of rectangles for each y-coordinate, and the maximum number of y-coordinates is 101. In the worst case, each rectangle has a unique y-coordinate and stores its x-coordinate in the grid. Thus, the space complexity for the grid is ( O(m) ).</p>
+</li>
+<li>
+<p><strong>Result Vector</strong>: The result vector <code>res</code> stores the answer for each point and has a size of ( n ), so its space complexity is ( O(n) ).</p>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The space complexity is ( O(m + n) ).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts how many rectangles can cover each point by leveraging sorting, grid-based storage, and binary search. The sorting of rectangles ensures that we can quickly access relevant rectangles for each point, while the grid structure allows efficient access to x-coordinates for each y-coordinate. Binary search speeds up the process of counting valid rectangles for each point. The overall time complexity is manageable given the problem constraints, and the solution provides an optimal balance between time and space efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode778s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -300,7 +474,6 @@
 
       </div>
 
-      
 
       <footer>
         

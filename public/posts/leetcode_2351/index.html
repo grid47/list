@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -231,7 +231,223 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;a&#39;</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode847s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the first character in a given string <code>s</code> that repeats. If no character repeats, the function should return <code>'a'</code>. The string <code>s</code> consists only of lowercase English letters.</p>
+<p>We need to identify the first character in the string that occurs more than once and return that character. If all characters are unique (no repetition), return the character <code>'a'</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to efficiently identify the first repeating character in the string. A brute-force solution would involve comparing each character with all the other characters, but that would take too much time, especially for larger strings.</p>
+<p>Instead, we can use a more efficient approach by leveraging an auxiliary data structure (an array or hash map) to track the occurrence of characters as we traverse the string. This way, we can check for repetition in constant time for each character, significantly improving the efficiency of the solution.</p>
+<h3 id="optimized-approach-using-an-array">
+  Optimized Approach Using an Array
+  <a class="heading-link" href="#optimized-approach-using-an-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Character Tracking</strong>:<br>
+Since the string contains only lowercase English letters (from <code>'a'</code> to <code>'z'</code>), we can use a fixed-size array of length 26 to store the count of each character. Each index of the array corresponds to a character (where <code>'a'</code> maps to index 0, <code>'b'</code> maps to index 1, and so on).</p>
+</li>
+<li>
+<p><strong>Traversing the String</strong>:<br>
+We iterate through the string character by character. For each character, we calculate its corresponding index in the array using the expression <code>c - 'a'</code>, where <code>c</code> is the current character. If the value at the corresponding index in the array is greater than 0, it means that the character has been encountered before, so we immediately return that character as it is the first repeated one.</p>
+</li>
+<li>
+<p><strong>Returning <code>'a'</code></strong>:<br>
+If the loop completes without finding any repeated character, it means no character in the string repeats. In this case, the function should return <code>'a'</code>.</p>
+</li>
+</ol>
+<p>This approach ensures that we are able to solve the problem efficiently in linear time, O(n), where <code>n</code> is the length of the string. The space complexity is O(1), as the array size is fixed (26 elements).</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-array-initialization">
+  1. <strong>Array Initialization</strong>
+  <a class="heading-link" href="#1-array-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v(<span style="color:#ae81ff">26</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>v</code> of size 26, which will be used to track the frequency of each character. Each index of the vector corresponds to a specific letter in the alphabet, where:
+<ul>
+<li><code>v[0]</code> corresponds to the count of <code>'a'</code>,</li>
+<li><code>v[1]</code> corresponds to the count of <code>'b'</code>,</li>
+<li>&hellip;</li>
+<li><code>v[25]</code> corresponds to the count of <code>'z'</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-iterating-through-the-string">
+  2. <strong>Iterating Through the String</strong>
+  <a class="heading-link" href="#2-iterating-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c : s) {
+</span></span><span style="display:flex;"><span>    v[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (v[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> c;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each character <code>c</code> in the input string <code>s</code>.</li>
+<li>For each character <code>c</code>, we compute its corresponding index in the array <code>v</code> by subtracting the ASCII value of <code>'a'</code> from <code>c</code> (i.e., <code>c - 'a'</code>). This gives us a value between 0 and 25, which corresponds to the character&rsquo;s position in the alphabet.</li>
+<li>We increment the count at the corresponding index in the array <code>v</code>. If the count at that index becomes greater than 1, it means the character <code>c</code> has been encountered before, and we immediately return that character as the first repeated character.</li>
+</ul>
+<h4 id="3-returning-a-if-no-repetition-is-found">
+  3. <strong>Returning <code>'a'</code> if No Repetition is Found</strong>
+  <a class="heading-link" href="#3-returning-a-if-no-repetition-is-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>If no character is repeated by the time the loop finishes, we return <code>'a'</code> as the default result.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. This is because we iterate through the string exactly once, and for each character, we perform constant-time operations (array indexing and updating counts).</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity of this solution is <strong>O(1)</strong>, as the size of the auxiliary array <code>v</code> is fixed at 26, regardless of the size of the input string. The space usage does not scale with the size of the input string.</p>
+<h3 id="edge-cases-handled">
+  Edge Cases Handled
+  <a class="heading-link" href="#edge-cases-handled">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>String with No Repeated Characters</strong>:<br>
+If the string has no repeated characters, the function will return <code>'a'</code> as specified in the problem statement.</p>
+</li>
+<li>
+<p><strong>String with Only One Character</strong>:<br>
+If the string consists of a single character (e.g., <code>&quot;a&quot;</code>), there will be no repetition, and the function will return <code>'a'</code>.</p>
+</li>
+<li>
+<p><strong>String with Multiple Repetitions</strong>:<br>
+If the string contains multiple repeated characters, the function will return the first character that repeats.</p>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to understand the flow of the solution:</p>
+<h4 id="input-1-abca">
+  Input 1: <code>&quot;abca&quot;</code>
+  <a class="heading-link" href="#input-1-abca">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Initially, <code>v = [0, 0, 0, ..., 0]</code> (all values are 0).</li>
+<li>The first character is <code>'a'</code>:
+<ul>
+<li><code>v[0]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>The second character is <code>'b'</code>:
+<ul>
+<li><code>v[1]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>The third character is <code>'c'</code>:
+<ul>
+<li><code>v[2]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>The fourth character is <code>'a'</code>:
+<ul>
+<li><code>v[0]</code> is incremented to 2.</li>
+<li>Since <code>v[0] &gt; 1</code>, we immediately return <code>'a'</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="input-2-abc">
+  Input 2: <code>&quot;abc&quot;</code>
+  <a class="heading-link" href="#input-2-abc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Initially, <code>v = [0, 0, 0, ..., 0]</code>.</li>
+<li>The first character is <code>'a'</code>:
+<ul>
+<li><code>v[0]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>The second character is <code>'b'</code>:
+<ul>
+<li><code>v[1]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>The third character is <code>'c'</code>:
+<ul>
+<li><code>v[2]</code> is incremented to 1.</li>
+</ul>
+</li>
+<li>No character repeats, so we return <code>'a'</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the first repeated character in a string by using a fixed-size array to track the occurrence of each character. It runs in linear time, O(n), and uses constant space, O(1), which makes it highly efficient even for large strings.</p>
+<p>By iterating through the string once and leveraging an array to track character frequencies, we ensure that the solution is optimal both in terms of time complexity and space complexity. The solution also gracefully handles edge cases where no characters repeat or where the string contains only one character.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode847s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -285,7 +501,6 @@
 
       </div>
 
-      
 
       <footer>
         

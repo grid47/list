@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,130 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1152s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks whether it is possible to reach a target point <code>(fx, fy)</code> from a starting point <code>(sx, sy)</code> in exactly <code>t</code> units of time. Movement is allowed along both the x-axis and y-axis simultaneously, meaning you can move diagonally as well as in straight lines. The task is to determine if you can reach the destination in the given time <code>t</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to calculate the number of steps required to reach the destination from the starting point. The key idea is to use the concept of Manhattan distance for this problem.</p>
+<p>Manhattan distance between two points <code>(sx, sy)</code> and <code>(fx, fy)</code> is the sum of the absolute differences of their x and y coordinates:
+[
+\text{distance} = |fx - sx| + |fy - sy|
+]</p>
+<p>Since we are allowed to move diagonally, we can reduce this distance by moving in both the x and y directions at the same time. However, after moving diagonally for as long as possible, we will need to cover any remaining horizontal or vertical distance.</p>
+<p>We need to ensure that the time <code>t</code> is sufficient to cover the entire distance but also not too large such that the exact time <code>t</code> is exhausted but we cannot reach the destination in exactly <code>t</code> time.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-calculate-the-minimum-moves-required">
+  Step 1: Calculate the Minimum Moves Required
+  <a class="heading-link" href="#step-1-calculate-the-minimum-moves-required">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> min(abs(fy <span style="color:#f92672">-</span> sy), abs(fx <span style="color:#f92672">-</span> sx));
+</span></span></code></pre></div><ul>
+<li>The variable <code>mn</code> calculates the minimum of the horizontal distance (<code>abs(fx - sx)</code>) and the vertical distance (<code>abs(fy - sy)</code>). This represents the maximum number of diagonal steps we can take, as we can reduce both the x and y distances simultaneously by 1 unit with each diagonal move. We move diagonally until one of the coordinates (either x or y) is exhausted.</li>
+</ul>
+<h4 id="step-2-calculate-the-remaining-distance">
+  Step 2: Calculate the Remaining Distance
+  <a class="heading-link" href="#step-2-calculate-the-remaining-distance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> asdf <span style="color:#f92672">=</span> (abs(fy <span style="color:#f92672">-</span> sy) <span style="color:#f92672">-</span> mn) <span style="color:#f92672">+</span> (abs(fx <span style="color:#f92672">-</span> sx) <span style="color:#f92672">-</span> mn) <span style="color:#f92672">+</span> mn;
+</span></span></code></pre></div><ul>
+<li>After moving diagonally, we calculate how much distance remains for both the x and y directions. The expression <code>(abs(fy - sy) - mn)</code> computes the remaining vertical distance, and <code>(abs(fx - sx) - mn)</code> computes the remaining horizontal distance. The total distance <code>asdf</code> is the sum of these remaining distances along with the diagonal distance (<code>mn</code>).</li>
+</ul>
+<h4 id="step-3-special-case-when-already-at-destination">
+  Step 3: Special Case When Already at Destination
+  <a class="heading-link" href="#step-3-special-case-when-already-at-destination">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (abs(fy <span style="color:#f92672">-</span> sy) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> abs(fx <span style="color:#f92672">-</span> sx) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> t <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>This line checks if the starting point is the same as the destination, meaning <code>(sx, sy)</code> equals <code>(fx, fy)</code>. If we are already at the destination and the time <code>t</code> is exactly 1, it would be impossible to stay at the destination for 1 unit of time (since the problem specifies reaching the destination, not staying there), so it returns <code>false</code>.</li>
+</ul>
+<h4 id="step-4-check-if-reaching-the-target-is-possible-in-time-t">
+  Step 4: Check if Reaching the Target is Possible in Time <code>t</code>
+  <a class="heading-link" href="#step-4-check-if-reaching-the-target-is-possible-in-time-t">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> asdf <span style="color:#f92672">&lt;=</span> t;
+</span></span></code></pre></div><ul>
+<li>Finally, the code checks if the total calculated distance <code>asdf</code> is less than or equal to the given time <code>t</code>. If it is, it means we can reach the destination in the given time. If <code>asdf</code> is greater than <code>t</code>, it would be impossible to reach the target in exactly <code>t</code> units of time, and the function returns <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm involves only a few constant-time operations, such as calculating absolute differences, the minimum of two values, and a few condition checks. Hence, the time complexity is constant, O(1), regardless of the size of the input.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because the algorithm uses a fixed amount of space for storing variables such as <code>mn</code> and <code>asdf</code>. No additional data structures or dynamic memory allocation are used.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is both time and space efficient, achieving constant time complexity (O(1)) and constant space complexity (O(1)). The approach leverages simple geometry (Manhattan distance and diagonal movement) to determine whether it&rsquo;s possible to reach the target in the given time. By calculating the minimal number of diagonal moves and considering the remaining horizontal and vertical movements, the code ensures that the result is computed efficiently.</p>
+<p>The special case when the starting point and the destination are the same is also correctly handled. This solution avoids unnecessary calculations and provides an accurate answer with minimal computational effort.</p>
+<p>The simplicity and efficiency of the approach make it a solid solution for solving this problem in a wide range of scenarios where a time-efficient algorithm is necessary.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1152s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -270,7 +393,6 @@
 
       </div>
 
-      
 
       <footer>
         

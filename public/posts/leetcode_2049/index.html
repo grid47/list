@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -257,7 +257,127 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> size[src] <span style="color:#f92672">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode651s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a tree represented as an integer array <code>parents</code> where <code>parents[i]</code> is the parent node of node <code>i</code>, the goal is to find the number of nodes that achieve the highest possible &ldquo;score.&rdquo; The &ldquo;score&rdquo; of a node is calculated by multiplying the sizes of the subtrees of its children and the remaining nodes outside its subtree (if any). The task is to return the count of nodes that reach the maximum score.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution builds a graph from the <code>parents</code> array, where each node <code>i</code> points to its children. Using a recursive helper function, it computes the subtree size for each node and calculates each node&rsquo;s score. After determining the score for each node, it counts how many nodes achieve the maximum score.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class and Method Definition</strong>: We define the class <code>Solution</code> and the main method <code>countHighestScoreNodes</code>, which takes the <code>parents</code> array as input and returns the count of nodes with the highest score.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countHighestScoreNodes(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> parents) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Tree Structure Setup</strong>: We initialize <code>n</code> as the size of <code>parents</code> and create an adjacency list <code>g</code> to represent the tree. We then iterate over <code>parents</code> to build the tree structure, where each index <code>i</code> points to its children.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> parents.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> g(n);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    g[parents[i]].push_back(i);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Subtree Size Calculation</strong>: We create a vector <code>size</code> to store the size of each node&rsquo;s subtree. Then, using a recursive helper function, <code>helper</code>, we calculate and store the subtree size for each node starting from the root (node <code>0</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> size(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>helper(<span style="color:#ae81ff">0</span>, g, size);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Counters for Maximum Score and Count</strong>: We initialize <code>cnt</code> to count nodes with the maximum score and <code>maxi</code> to store the maximum score found so far.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, maxi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Scores for Each Node</strong>: We iterate over each node and compute its score. The score <code>pro</code> starts with a base value of 1. The following operations are performed to compute the score for each node <code>i</code>:</p>
+<ul>
+<li>Multiply <code>pro</code> by the size of each child subtree.</li>
+<li>If there are nodes outside the subtree rooted at <code>i</code>, include their count as an additional factor in <code>pro</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> pro <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    pro <span style="color:#f92672">=</span> max(pro, (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) n <span style="color:#f92672">-</span> size[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> node : g[i]) {
+</span></span><span style="display:flex;"><span>        pro <span style="color:#f92672">=</span> pro <span style="color:#f92672">*</span> size[node];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Maximum Score and Count</strong>: After calculating the score for node <code>i</code>, we compare it with <code>maxi</code>:</p>
+<ul>
+<li>If the current score <code>pro</code> is greater than <code>maxi</code>, update <code>maxi</code> and reset <code>cnt</code> to <code>1</code>.</li>
+<li>If the score <code>pro</code> equals <code>maxi</code>, increment <code>cnt</code> by <code>1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (pro <span style="color:#f92672">&gt;</span> maxi) {
+</span></span><span style="display:flex;"><span>        maxi <span style="color:#f92672">=</span> pro;
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(pro <span style="color:#f92672">==</span> maxi) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Count of Nodes with Maximum Score</strong>: After iterating through all nodes, <code>cnt</code> holds the number of nodes with the maximum score, which we return as the result.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Helper Function to Compute Subtree Size</strong>: The <code>helper</code> function recursively computes the size of each subtree by traversing the tree. For each node, it sums up the sizes of its children and returns the total size.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">helper</span>(<span style="color:#66d9ef">int</span> src, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>gph, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>size) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> g: gph[src])
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> helper(g, gph, size);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> size[src] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes. We perform a DFS traversal to calculate subtree sizes and then iterate through each node to compute scores.</li>
+<li><strong>Space Complexity</strong>: O(N), for the adjacency list <code>g</code>, the <code>size</code> array, and the recursion stack in the DFS.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient approach to finding nodes with the maximum score in a tree structure. By calculating subtree sizes and iteratively computing scores, the solution accurately determines the node counts with the highest score. The use of a helper function for subtree size calculation simplifies the logic and ensures the code is both time-efficient and space-efficient for large inputs. This approach is well-suited for scenarios involving complex tree computations, enabling scalable tree traversal and score calculation across various data sizes.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode651s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -269,7 +389,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2050"  class="external-link" target="_blank" rel="noopener">LeetCode #2050: Parallel Courses III</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2053"  class="external-link" target="_blank" rel="noopener">LeetCode #2053: Kth Distinct String in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -311,7 +431,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -222,7 +222,196 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mess;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode828s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to decode a message using a given key. The key consists of a set of unique letters (including possible repetitions), and the task is to map each unique character in the key to the alphabet in the order of appearance. Then, using this key, we decode the message by replacing the characters in the message with the corresponding characters from the key.</p>
+<p><strong>Objective:</strong></p>
+<ul>
+<li>We need to create a function that decodes a message where each character in the message corresponds to a letter in the key.</li>
+<li>The message uses a simple cipher where each letter is replaced by the corresponding letter from the alphabet.</li>
+</ul>
+<p>The decoded message will be returned.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we need to utilize the following steps:</p>
+<ol>
+<li>
+<p><strong>Mapping the Letters:</strong>
+We start by iterating over the key string and create a mapping for each unique letter in the key to the corresponding letter of the alphabet. For example, if the first unique character in the key is <code>'a'</code>, it will be mapped to <code>'a'</code>, the next unique letter will be mapped to <code>'b'</code>, and so on.</p>
+</li>
+<li>
+<p><strong>Decoding the Message:</strong>
+Once the mapping is established, we iterate over the message string and replace each character in the message using the map created in step 1. If the character is a space or any non-alphabetic character, it will remain unchanged.</p>
+</li>
+<li>
+<p><strong>Return the Decoded Message:</strong>
+After replacing all the characters, the message is decoded, and we return the decoded message.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through the code step by step to understand the logic:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string decodeMessage(string key, string mess) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> m[<span style="color:#ae81ff">128</span>] <span style="color:#f92672">=</span> {}, cur <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>m</code> array is used to store the mapping between characters. It is initialized with <code>0</code> for each index corresponding to ASCII values. The <code>cur</code> variable is initialized to <code>'a'</code> to keep track of the next available character in the alphabet for mapping.</li>
+<li>The <code>key</code> is the input string containing the key, and <code>mess</code> is the input string containing the message to be decoded.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> k : key)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (isalpha(k) <span style="color:#f92672">&amp;&amp;</span> m[k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                m[k] <span style="color:#f92672">=</span> cur<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>Here, we iterate through each character in the <code>key</code> string.
+<ul>
+<li>If the character <code>k</code> is an alphabetic character (checked using <code>isalpha(k)</code>), and if it hasn’t been mapped already (checked using <code>m[k] == 0</code>), we assign the next available character in the alphabet to <code>m[k]</code>.</li>
+<li><code>m[k] = cur++</code> assigns the current available character to <code>m[k]</code> and then increments <code>cur</code> to point to the next letter in the alphabet.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mess.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>            mess[i] <span style="color:#f92672">=</span> m[mess[i]] <span style="color:#f92672">?:</span> mess[i];
+</span></span></code></pre></div><ul>
+<li>In this loop, we go through the <code>mess</code> string.
+<ul>
+<li>For each character <code>mess[i]</code>, we replace it with its corresponding character from the mapping <code>m[mess[i]]</code>. If the character is not a valid alphabetic character, the <code>?:</code> operator ensures that the original character is retained.</li>
+<li>The <code>?:</code> operator is a shorthand for a ternary operation, which checks if <code>m[mess[i]]</code> is a valid mapped character (i.e., not zero). If it is, the mapped character is used; otherwise, the original character remains unchanged.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mess;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After decoding all characters in <code>mess</code>, we return the decoded message.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand the code.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>key = &quot;the quick brown fox jumps over the lazy dog&quot;</code></li>
+<li><code>mess = &quot;vkbs bs t suepuv&quot;</code></li>
+</ul>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Create the Mapping:</strong></p>
+<ul>
+<li>Start with an empty map <code>m[128] = {}</code> and <code>cur = 'a'</code>.</li>
+<li>Iterate through the key:
+<ul>
+<li><code>'t'</code> is mapped to <code>'a'</code>.</li>
+<li><code>'h'</code> is mapped to <code>'b'</code>.</li>
+<li><code>'e'</code> is mapped to <code>'c'</code>.</li>
+<li><code>' '</code> (space) is ignored.</li>
+<li><code>'q'</code> is mapped to <code>'d'</code>, and so on.</li>
+</ul>
+</li>
+</ul>
+<p>The resulting mapping will look like this:</p>
+<pre tabindex="0"><code>t -&gt; a, h -&gt; b, e -&gt; c, q -&gt; d, u -&gt; e, i -&gt; f, c -&gt; g, k -&gt; h, b -&gt; i, r -&gt; j, o -&gt; k, w -&gt; l,
+n -&gt; m, f -&gt; n, x -&gt; o, p -&gt; p, s -&gt; q, v -&gt; r, j -&gt; s, m -&gt; t, z -&gt; u, l -&gt; v, y -&gt; w, d -&gt; x, g -&gt; y
+</code></pre></li>
+<li>
+<p><strong>Decode the Message:</strong>
+Now, we decode each character in the <code>mess</code> string:</p>
+<ul>
+<li><code>'v'</code> maps to <code>'r'</code>.</li>
+<li><code>'k'</code> maps to <code>'h'</code>.</li>
+<li><code>'b'</code> maps to <code>'i'</code>, and so on.</li>
+</ul>
+<p>The decoded message will be <code>&quot;this is a secret&quot;</code>.</p>
+</li>
+</ol>
+<h4 id="final-output">
+  Final Output:
+  <a class="heading-link" href="#final-output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<pre tabindex="0"><code>&#34;this is a secret&#34;
+</code></pre><h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the time complexity:</p>
+<ul>
+<li><strong>Mapping Creation:</strong> Iterating over the <code>key</code> takes <strong>O(K)</strong> time, where <code>K</code> is the length of the <code>key</code> string.</li>
+<li><strong>Message Decoding:</strong> Iterating over the <code>mess</code> string takes <strong>O(M)</strong> time, where <code>M</code> is the length of the <code>mess</code> string.</li>
+<li>The overall time complexity is therefore <strong>O(K + M)</strong>, where <code>K</code> is the length of the <code>key</code> and <code>M</code> is the length of the <code>mess</code>.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>We use a <code>char</code> array <code>m[128]</code> to store the character mappings, which takes <strong>O(1)</strong> space as it is fixed at 128 elements.</li>
+<li>The space complexity of the solution is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently decodes the given message using a character mapping based on the provided key. By iterating through the key and message only once each, the algorithm achieves a linear time complexity, making it suitable for long strings. The use of a fixed-size array for storing mappings ensures minimal space usage.</p>
+<p>This solution is optimal in both time and space, leveraging the simplicity of mapping and the flexibility of the ternary operator to handle edge cases like spaces or already-decoded characters.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode828s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -276,7 +465,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,157 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode868s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we are given a string <code>ptn</code> that consists of the characters <code>'I'</code> (representing &ldquo;increase&rdquo;) and <code>'D'</code> (representing &ldquo;decrease&rdquo;). Our goal is to return the smallest number that can be formed by the digits from <code>1</code> to <code>n + 1</code> (where <code>n</code> is the length of <code>ptn</code>), such that the sequence of digits satisfies the given pattern of increasing and decreasing orders.</p>
+<p>For example:</p>
+<ul>
+<li>If <code>ptn = &quot;IDID&quot;</code>, the output should be <code>&quot;13254&quot;</code>.</li>
+<li>If <code>ptn = &quot;III&quot;</code>, the output should be <code>&quot;1234&quot;</code>.</li>
+</ul>
+<p>The approach is to treat the problem as a stack-based problem where we push digits into a stack when the pattern indicates a decrease (<code>'D'</code>) and pop digits from the stack when the pattern indicates an increase (<code>'I'</code>).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key observation is that we can use a stack to handle the &ldquo;decreasing&rdquo; segments of the pattern efficiently. Here’s how we can break down the approach:</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li>The sequence of digits we need to form ranges from <code>1</code> to <code>n + 1</code>, where <code>n</code> is the length of the given pattern string <code>ptn</code>.</li>
+<li>We will iterate through the pattern string and for each index, either push the current digit into the stack or pop it to form the correct number sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Stack Logic</strong>:</p>
+<ul>
+<li>When the pattern character is <code>'I'</code> (increase), we know that the current digit should be smaller than the next digit. Therefore, we need to pop the digits from the stack to get the correct order for this increasing segment.</li>
+<li>When the pattern character is <code>'D'</code> (decrease), we push the current digit into the stack because the current digit is larger than the next digit, and we’ll deal with it later when the sequence needs to increase.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Edge Cases</strong>:</p>
+<ul>
+<li>After processing all characters in the pattern, there may still be numbers left in the stack. These should be popped and added to the result to complete the number sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>After going through the pattern and handling all increase and decrease operations, the result is a string representing the smallest number satisfying the given pattern.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string smallestNumber(string ptn) {
+</span></span></code></pre></div><p>The class <code>Solution</code> contains the method <code>smallestNumber</code> which takes the string <code>ptn</code> as input and returns the smallest number that satisfies the pattern.</p>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res, stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> ptn.size();
+</span></span></code></pre></div><ul>
+<li><code>res</code> will store the final result, which is the smallest number.</li>
+<li><code>stk</code> is a string that simulates a stack. It will be used to temporarily store digits during the processing of decreasing sequences in the pattern.</li>
+<li><code>n</code> is the length of the pattern string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        stk.push_back(i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;1&#39;</span>);
+</span></span></code></pre></div><ul>
+<li>The loop iterates from <code>i = 0</code> to <code>i = n</code>. We iterate one extra time to handle the last digit. For each iteration, we push the current number (<code>i + 1</code>) into the stack (<code>stk</code>).</li>
+<li>The number <code>i + '1'</code> is added to the stack because the digits we are using range from <code>1</code> to <code>n + 1</code>. The expression <code>i + '1'</code> converts the integer <code>i + 1</code> to its corresponding character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the <code>'I'</code> Pattern</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> ptn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;I&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>                res.push_back(stk.back());
+</span></span><span style="display:flex;"><span>                stk.pop_back();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>If the current character in the pattern is <code>'I'</code> (increase), or if we are at the end of the pattern (<code>i == n</code>), we pop all the elements from the stack and append them to the result string <code>res</code>.</li>
+<li>This ensures that when we encounter an increase, we have the digits in increasing order in the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After processing all the digits and handling the pattern, the result string <code>res</code> is returned, containing the smallest number that satisfies the given pattern.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm processes each character of the pattern string exactly once, and for each character, we either push or pop from the stack. Both pushing and popping operations on the stack are constant time operations.</li>
+<li>Therefore, the time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the pattern string. Since we only iterate through the pattern string once and the stack operations are done in constant time, the overall time complexity is linear.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a stack (implemented as a string <code>stk</code>) to temporarily store digits. The size of this stack is at most <code>n + 1</code>, as we push digits from <code>1</code> to <code>n + 1</code>.</li>
+<li>Therefore, the space complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the pattern string. The space is required to store the digits temporarily and to hold the result string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently solves the problem by utilizing a stack to handle the decrease (<code>'D'</code>) segments of the pattern and ensuring that digits are popped in the correct order when the pattern requires an increase (<code>'I'</code>). The algorithm processes the pattern string in linear time and uses constant space for each operation, making it both time and space efficient.</p>
+<p>This approach works efficiently even for larger input sizes due to its <strong>O(n)</strong> time complexity. The logic behind using a stack to manage the ordering of digits based on the increase/decrease pattern is simple and elegant, ensuring that we always form the smallest possible number satisfying the given pattern. The implementation is concise, and the solution handles edge cases like consecutive increasing or decreasing patterns correctly.</p>
+<p>This method provides a fast and scalable solution to this problem, making it an excellent choice for solving such pattern-based number formation problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode868s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -249,7 +399,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2376"  class="external-link" target="_blank" rel="noopener">LeetCode #2376: Count Special Integers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2379"  class="external-link" target="_blank" rel="noopener">LeetCode #2379: Minimum Recolors to Get K Consecutive Black Blocks</a></th>
       </tr>
   </thead>
   <tbody>
@@ -291,7 +441,6 @@
 
       </div>
 
-      
 
       <footer>
         

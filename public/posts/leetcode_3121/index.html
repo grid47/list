@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,193 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1257s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine how many characters in a given string appear both in uppercase and lowercase forms. These characters are termed &ldquo;special characters&rdquo;. For example, if a string contains both &lsquo;a&rsquo; and &lsquo;A&rsquo;, &lsquo;a&rsquo; is a special character. We need to count how many such &ldquo;special characters&rdquo; exist in the string.</p>
+<p>Given the string <code>word</code>, the function should return the count of characters that appear both in their lowercase and uppercase forms.</p>
+<p>For example:</p>
+<ul>
+<li>For the string <code>&quot;aAabB&quot;</code>, the answer is <code>2</code> because <code>'a'</code> and <code>'b'</code> both appear in both lowercase and uppercase forms.</li>
+<li>For the string <code>&quot;abc&quot;</code>, the answer is <code>0</code> because no characters appear in both forms.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach is to use an array (or vector) to track whether a character has appeared in its lowercase or uppercase form. Here&rsquo;s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Character Tracking</strong>: For each character in the string, we track whether its lowercase version or uppercase version has been encountered:</p>
+<ul>
+<li>When we encounter an uppercase letter, we check if its lowercase version has been seen. If both the uppercase and lowercase versions have been seen, we mark the character as &ldquo;special&rdquo;.</li>
+<li>Similarly, when we encounter a lowercase letter, we check if its uppercase counterpart has already been seen.</li>
+</ul>
+</li>
+<li>
+<p><strong>Marking and Checking</strong>: We use a <code>vector</code> of size 26 (corresponding to the 26 letters in the English alphabet) to track the state of each character:</p>
+<ul>
+<li><code>1</code> indicates that the lowercase version of the character has been encountered.</li>
+<li><code>2</code> indicates that both the lowercase and uppercase versions have been encountered, making it a &ldquo;special character&rdquo;.</li>
+<li><code>-1</code> indicates that the character cannot be part of a special character pair.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Special Characters</strong>: After processing the string, we count how many characters are marked as <code>2</code>, which indicates that both the uppercase and lowercase versions of that character exist in the string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-a-vector-to-track-character-states">
+  Step 1: Initialize a Vector to Track Character States
+  <a class="heading-link" href="#step-1-initialize-a-vector-to-track-character-states">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ch(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>ch</code> of size 26, with all elements set to 0. This vector will track the state of each letter in the alphabet. Each element corresponds to a letter, with the index <code>0</code> representing &lsquo;a&rsquo;, <code>1</code> representing &lsquo;b&rsquo;, and so on up to <code>25</code> for &lsquo;z&rsquo;.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-string-to-update-character-states">
+  Step 2: Iterate Over the String to Update Character States
+  <a class="heading-link" href="#step-2-iterate-over-the-string-to-update-character-states">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: word) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(isupper(x)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>            ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;                
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>            ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        } 
+</span></span><span style="display:flex;"><span>        ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through each character <code>x</code> in the string <code>word</code>.</li>
+<li><strong>Handling Uppercase Letters</strong>:
+<ul>
+<li>If the character is uppercase (checked using <code>isupper(x)</code>), we check the corresponding index in the <code>ch</code> array.</li>
+<li>If its lowercase counterpart has already been encountered (i.e., <code>ch[x - 'A'] == 1</code>), we mark it as a special character by setting <code>ch[x - 'A'] = 2</code>.</li>
+<li>If the uppercase version appears before its lowercase counterpart or if the character is not yet valid, we mark it as invalid (<code>ch[x - 'A'] = -1</code>).</li>
+</ul>
+</li>
+<li><strong>Handling Lowercase Letters</strong>:
+<ul>
+<li>If the character is lowercase, we perform similar checks:
+<ul>
+<li>If the uppercase counterpart has already been encountered (i.e., <code>ch[x - 'a'] == 2</code>), we mark it as invalid (<code>ch[x - 'a'] = -1</code>).</li>
+<li>If it is the first appearance of the lowercase version, we mark it as seen (<code>ch[x - 'a'] = 1</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-count-special-characters">
+  Step 3: Count Special Characters
+  <a class="heading-link" href="#step-3-count-special-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(ch[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After processing the entire string, we iterate through the <code>ch</code> array to count how many characters have been marked with <code>2</code>, indicating that both their lowercase and uppercase versions were found.</li>
+<li>The variable <code>cnt</code> is incremented each time a special character is encountered.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the count of special characters, stored in <code>cnt</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>word</code>.
+<ul>
+<li>We iterate through each character in the string once and perform constant-time operations (array lookups, assignments, and condition checks) for each character. Therefore, the time complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, as the space used by the <code>ch</code> vector is constant (it always has 26 elements). The space complexity does not depend on the size of the input string but on the fixed size of the alphabet (26 characters).</li>
+<li>The space complexity is <strong>O(1)</strong> because the additional space required does not grow with the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of special characters in a string, where a special character is defined as a character that appears both in its lowercase and uppercase forms. The algorithm runs in linear time relative to the size of the input string, making it highly efficient.</p>
+<p>The use of a vector of fixed size (26) to track character states ensures that the solution is space-efficient, requiring constant space regardless of the input string length. This solution is optimal for this problem and works well within the constraints typically found in such problems.</p>
+<p>By leveraging simple state tracking and condition checking for each character, the solution provides an intuitive and effective approach to solving the problem of counting special characters.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1257s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -299,7 +485,6 @@
 
       </div>
 
-      
 
       <footer>
         

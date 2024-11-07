@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,149 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1057s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the first index in a given array <code>arr</code> such that all elements in the corresponding row or column of a matrix <code>mat</code> are present in the array <code>arr</code>. More specifically, the task is to determine the first element in <code>arr</code> that, when processed, causes one of the rows or one of the columns in <code>mat</code> to be completely covered with elements from <code>arr</code>. If no such index exists, return <code>-1</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach can be broken down into several key steps:</p>
+<ol>
+<li><strong>Mapping the Matrix</strong>: We start by creating a map that associates each value in the matrix <code>mat</code> with its corresponding position (row, column).</li>
+<li><strong>Tracking the Row and Column Counts</strong>: We use two hash maps <code>r</code> and <code>c</code> to keep track of how many times each row and column has been &ldquo;covered&rdquo; by the elements seen so far in <code>arr</code>.</li>
+<li><strong>Simulating the Process</strong>: We then iterate over the array <code>arr</code> and for each element:
+<ul>
+<li>Find the corresponding position in the matrix.</li>
+<li>Update the counts for the row and column where that element is located.</li>
+<li>If any row or column becomes fully covered, we immediately return the current index.</li>
+</ul>
+</li>
+<li><strong>Returning the Result</strong>: If we finish processing all elements of <code>arr</code> without finding a fully covered row or column, we return <code>-1</code>.</li>
+</ol>
+<p>This approach ensures that we process each element of <code>arr</code> only once, making the solution efficient.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">firstCompleteIndex</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> r, c, mtx;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> mat.size(), n <span style="color:#f92672">=</span> mat[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-3</strong>: We define the function <code>firstCompleteIndex</code> which takes the array <code>arr</code> and matrix <code>mat</code> as inputs.</li>
+<li><strong>Line 2</strong>: Three unordered maps are initialized:
+<ul>
+<li><code>r</code>: Tracks how many elements of each row are present in <code>arr</code>.</li>
+<li><code>c</code>: Tracks how many elements of each column are present in <code>arr</code>.</li>
+<li><code>mtx</code>: Maps each matrix element to its position in the matrix (using a long integer where the first part represents the row and the second part represents the column).</li>
+</ul>
+</li>
+<li><strong>Line 3</strong>: We extract the number of rows (<code>m</code>) and columns (<code>n</code>) from the matrix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            mtx[mat[i][j]] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span>) i <span style="color:#f92672">*</span> <span style="color:#ae81ff">100000</span> <span style="color:#f92672">+</span> j;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Line 4-6</strong>: In this nested loop, we iterate over each element of the matrix <code>mat</code> and populate the map <code>mtx</code>. The key is the matrix element, and the value is a long integer that encodes both its row and column by multiplying the row index by 100000 and adding the column index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> arr.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> k <span style="color:#f92672">=</span> mtx[arr[i]];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> x <span style="color:#f92672">=</span> k <span style="color:#f92672">/</span> <span style="color:#ae81ff">100000</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> y <span style="color:#f92672">=</span> k <span style="color:#f92672">%</span> <span style="color:#ae81ff">100000</span>;
+</span></span><span style="display:flex;"><span>        r[x]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Line 7-9</strong>: We start processing the elements of <code>arr</code>. For each element:
+<ul>
+<li><code>k = mtx[arr[i]]</code>: We retrieve the position of the current element in the matrix from the map <code>mtx</code>.</li>
+<li><code>x = k / 100000</code>: This extracts the row index of the matrix element.</li>
+<li><code>y = k % 100000</code>: This extracts the column index of the matrix element.</li>
+<li><code>r[x]++</code>: We increment the count of how many elements in row <code>x</code> have been seen so far.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(r[x] <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> i;
+</span></span></code></pre></div><ul>
+<li><strong>Line 10</strong>: If the count of elements in row <code>x</code> has reached the total number of columns <code>n</code>, this means that the entire row has been covered, and we immediately return the current index <code>i</code> from <code>arr</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c[y]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(c[y] <span style="color:#f92672">==</span> m) <span style="color:#66d9ef">return</span> i;
+</span></span></code></pre></div><ul>
+<li><strong>Line 11-12</strong>: We perform the same check for columns:
+<ul>
+<li><code>c[y]++</code>: We increment the count of how many elements in column <code>y</code> have been seen so far.</li>
+<li><code>if(c[y] == m) return i;</code>: If the count of elements in column <code>y</code> has reached the total number of rows <code>m</code>, the entire column has been covered, and we return the current index <code>i</code> from <code>arr</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 13-14</strong>: If no row or column becomes fully covered after processing all elements in <code>arr</code>, we return <code>-1</code> to indicate that no such index exists.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Constructing the <code>mtx</code> map takes <strong>O(m * n)</strong> time, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the matrix.</li>
+<li>Processing the array <code>arr</code> takes <strong>O(k)</strong> time, where <code>k</code> is the size of the array. For each element, we perform constant-time operations (lookup in the map and updates to the row and column counts).</li>
+<li>Therefore, the overall time complexity is <strong>O(m * n + k)</strong>, where <code>m * n</code> is the time spent building the <code>mtx</code> map and <code>k</code> is the time spent processing <code>arr</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the space used for the map <code>mtx</code>, which stores at most <code>m * n</code> entries, each mapping a matrix element to its position. Therefore, the space complexity is <strong>O(m * n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently tracks how many elements from each row and column of the matrix are covered by the elements of <code>arr</code>. By using hash maps to keep track of row and column counts, we can quickly determine whether any row or column becomes fully covered as we process the elements in <code>arr</code>. The solution has a time complexity of <strong>O(m * n + k)</strong> and space complexity of <strong>O(m * n)</strong>, making it efficient for large matrices and arrays. The use of long integers to encode matrix positions in a single map is an innovative way to handle matrix lookups and avoids the need for complex nested structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1057s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -251,7 +393,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2662"  class="external-link" target="_blank" rel="noopener">LeetCode #2662: Minimum Cost of a Path With Special Roads</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2670"  class="external-link" target="_blank" rel="noopener">LeetCode #2670: Find the Distinct Difference Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -293,7 +435,6 @@
 
       </div>
 
-      
 
       <footer>
         

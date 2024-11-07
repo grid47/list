@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -224,7 +224,218 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1256s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to compress a given string <code>word</code> by reducing sequences of the same character into a substring that consists of the character followed by the number of its consecutive occurrences. The maximum number of consecutive characters to be represented is 9. If a character appears more than 9 times consecutively, it will still be compressed into a maximum of 9 occurrences followed by the character.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>&quot;aaabbbccccc&quot;</code></li>
+<li>Output: <code>&quot;3a3b5c&quot;</code></li>
+</ul>
+<p>The goal of the algorithm is to implement an efficient solution that produces this compressed version of the input string <code>word</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the following approach:</p>
+<ol>
+<li><strong>Iterate through the String</strong>: We start by iterating through the string <code>word</code> to check for consecutive occurrences of each character.</li>
+<li><strong>Count Consecutive Characters</strong>: As we go through the string, we maintain a count of consecutive occurrences of each character. Every time the character changes, we append the count and the character to the result string.</li>
+<li><strong>Handle Edge Cases</strong>: For sequences of characters that appear more than 9 times, the count should be capped at 9 as per the problem statement.</li>
+<li><strong>Return the Result</strong>: After iterating through the entire string, we return the resultant compressed string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code step by step:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>i</code>: The index that keeps track of our current position in the string <code>word</code>.</li>
+<li><code>n</code>: The size of the input string <code>word</code>.</li>
+<li><code>cur</code>: A variable that stores the current character we are processing.</li>
+<li><code>res</code>: The result string that will contain the compressed version of the input string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> word.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> cur;
+</span></span><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Over the String</strong>:</p>
+<ul>
+<li>The main logic of the function revolves around iterating through the string to count consecutive occurrences of characters.</li>
+<li>We use a <code>while</code> loop, which continues until <code>i</code> reaches the end of the string (i.e., <code>i &lt; n</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> n) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Consecutive Characters</strong>:</p>
+<ul>
+<li>For each character in the string, we initialize <code>cnt</code> to 0, which will store the count of consecutive occurrences of the current character <code>cur</code>.</li>
+<li>We then use another <code>while</code> loop to increment the count of <code>cnt</code> while the current character <code>cur</code> is equal to the next character and <code>cnt</code> is less than 9. This ensures that we do not exceed 9 consecutive occurrences for any character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>cur <span style="color:#f92672">=</span> word[i];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> cnt <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">9</span> <span style="color:#f92672">&amp;&amp;</span> cur <span style="color:#f92672">==</span> word[i])
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>Here, the inner loop continues as long as:</p>
+<ul>
+<li>We haven&rsquo;t reached the end of the string (<code>i &lt; n</code>).</li>
+<li>The character at the current index is the same as the character <code>cur</code>.</li>
+<li>The count <code>cnt</code> is less than 9 (to prevent counting more than 9 occurrences).</li>
+</ul>
+</li>
+<li>
+<p><strong>Update the Result</strong>:</p>
+<ul>
+<li>Once the inner loop finishes (i.e., we’ve counted the consecutive occurrences of <code>cur</code>), we add the count and the character to the result string <code>res</code>.</li>
+<li>We use the <code>to_string(cnt)</code> function to convert the count (an integer) into a string and concatenate it with the character <code>cur</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> to_string(cnt) <span style="color:#f92672">+</span> cur;
+</span></span></code></pre></div><p>The result string <code>res</code> gradually builds up with each character and its corresponding count of consecutive occurrences.</p>
+</li>
+<li>
+<p><strong>Return the Compressed String</strong>:</p>
+<ul>
+<li>After the main loop has processed all characters in the string, we return the <code>res</code> string, which contains the compressed version of the input string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to see how the function works:</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string word <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;aaabbbccccc&#34;</span>;
+</span></span></code></pre></div><h4 id="process">
+  Process:
+  <a class="heading-link" href="#process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li><code>i = 0</code>, <code>n = 11</code> (since the string has 11 characters), and <code>res = &quot;&quot;</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>First Iteration (<code>i = 0</code>)</strong>:</p>
+<ul>
+<li>The first character is <code>'a'</code>.</li>
+<li>We start counting the occurrences of <code>'a'</code>. The count becomes <code>3</code> (<code>aaa</code>).</li>
+<li>We add <code>&quot;3a&quot;</code> to the result string, so <code>res = &quot;3a&quot;</code>.</li>
+<li><code>i</code> is now updated to <code>3</code> (since we&rsquo;ve processed 3 characters).</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration (<code>i = 3</code>)</strong>:</p>
+<ul>
+<li>The next character is <code>'b'</code>.</li>
+<li>We start counting the occurrences of <code>'b'</code>. The count becomes <code>3</code> (<code>bbb</code>).</li>
+<li>We add <code>&quot;3b&quot;</code> to the result string, so <code>res = &quot;3a3b&quot;</code>.</li>
+<li><code>i</code> is now updated to <code>6</code> (since we&rsquo;ve processed 3 characters).</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration (<code>i = 6</code>)</strong>:</p>
+<ul>
+<li>The next character is <code>'c'</code>.</li>
+<li>We start counting the occurrences of <code>'c'</code>. The count becomes <code>5</code> (<code>ccccc</code>).</li>
+<li>We add <code>&quot;5c&quot;</code> to the result string, so <code>res = &quot;3a3b5c&quot;</code>.</li>
+<li><code>i</code> is now updated to <code>11</code>, and the loop terminates.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The function returns <code>&quot;3a3b5c&quot;</code>, which is the compressed version of the input string.</li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#e6db74">&#34;3a3b5c&#34;</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>word</code>. This is because we only iterate over the string once. Each character is processed in the main <code>while</code> loop, and the inner loop counts consecutive characters. Each character is visited only once, and the string is processed in linear time.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is <strong>O(n)</strong> because the result string <code>res</code> will, in the worst case, store a compressed version of the input string. The size of <code>res</code> depends on the number of characters in the input string, but it will never be larger than the original string.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently compresses the input string <code>word</code> by counting consecutive occurrences of each character and appending the count followed by the character to the result string. It uses a linear time complexity approach, making it suitable for processing large strings. The function handles edge cases, such as characters occurring more than 9 times consecutively, and ensures that the result remains within the specified constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1256s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -236,7 +447,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3164"  class="external-link" target="_blank" rel="noopener">LeetCode #3164: Find the Number of Good Pairs II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_3168"  class="external-link" target="_blank" rel="noopener">LeetCode #3168: Minimum Number of Chairs in a Waiting Room</a></th>
       </tr>
   </thead>
   <tbody>
@@ -278,7 +489,6 @@
 
       </div>
 
-      
 
       <footer>
         

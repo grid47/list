@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -272,7 +272,158 @@
 </span></span><span style="display:flex;"><span>            dfs(gph, vstd, c, j);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode682s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, you are given a list of bombs, where each bomb is defined by three properties: <code>[x, y, r]</code>. Here, <code>(x, y)</code> represents the coordinates of the bomb on a 2D plane, and <code>r</code> is its blast radius. If one bomb&rsquo;s blast radius overlaps with another bomb&rsquo;s location, the second bomb can be detonated, potentially leading to a chain reaction of detonations. The task is to determine the maximum number of bombs that can be detonated in a single chain reaction if we start with an optimally chosen bomb.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution models the problem as a graph traversal, where each bomb represents a node in a graph, and an edge exists from bomb <code>i</code> to bomb <code>j</code> if bomb <code>j</code> is within the blast radius of bomb <code>i</code>. This allows us to represent the potential chain reactions as paths in the graph.</p>
+<p>The approach is divided into three key steps:</p>
+<ol>
+<li>
+<p><strong>Build the Graph</strong>:</p>
+<ul>
+<li>For each bomb <code>i</code>, we calculate its blast range in relation to each other bomb <code>j</code>. If the Euclidean distance between <code>i</code> and <code>j</code> is within the radius of <code>i</code>, then <code>j</code> can be detonated if <code>i</code> is detonated.</li>
+<li>We use the squared distance formula to avoid calculating square roots, which simplifies the comparison: <code>x^2 + y^2 &lt;= r^2</code>.</li>
+<li>For each bomb that falls within the blast range, we add an edge in the graph <code>gph</code>, represented as an adjacency list, indicating a possible detonation chain from <code>i</code> to <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Run Depth-First Search (DFS) to Count the Chain of Detonations</strong>:</p>
+<ul>
+<li>After constructing the graph, we perform a DFS from each bomb to determine the maximum number of bombs that can be detonated in a single chain reaction starting from that bomb.</li>
+<li>For each bomb <code>i</code>, we maintain a counter <code>c</code> for the number of detonations and a <code>visited</code> vector to avoid revisiting any bomb within the same DFS call.</li>
+<li>We explore all neighbors in the graph using DFS to count how many bombs can be detonated starting from bomb <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track the Maximum Detonations Across All Starting Points</strong>:</p>
+<ul>
+<li>For each starting bomb, we update a global maximum with the count of detonated bombs.</li>
+<li>Finally, we return the highest number of detonations found across all possible starting points.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a step-by-step breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Define the Graph and Bomb Properties</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> bombs.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> gph(n);
+</span></span></code></pre></div><ul>
+<li><code>n</code> represents the number of bombs, and <code>gph</code> is an adjacency list of size <code>n</code> to store each bomb&rsquo;s blast reach.</li>
+</ul>
+</li>
+<li>
+<p><strong>Build the Graph</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    ll x1 <span style="color:#f92672">=</span> bombs[i][<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    ll y1 <span style="color:#f92672">=</span> bombs[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    ll r1 <span style="color:#f92672">=</span> bombs[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j) {
+</span></span><span style="display:flex;"><span>            ll x2 <span style="color:#f92672">=</span> abs(x1 <span style="color:#f92672">-</span> bombs[j][<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>            ll y2 <span style="color:#f92672">=</span> abs(y1 <span style="color:#f92672">-</span> bombs[j][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(x2 <span style="color:#f92672">*</span> x2 <span style="color:#f92672">+</span> y2 <span style="color:#f92672">*</span> y2 <span style="color:#f92672">&lt;=</span> r1 <span style="color:#f92672">*</span> r1) {
+</span></span><span style="display:flex;"><span>                gph[i].push_back(j);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each bomb <code>i</code> and calculate whether each other bomb <code>j</code> lies within <code>i</code>&rsquo;s blast radius.</li>
+<li>If <code>j</code> falls within <code>i</code>&rsquo;s radius, we add an edge from <code>i</code> to <code>j</code> in <code>gph</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS to Count Detonations</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> vistd(n, false);
+</span></span><span style="display:flex;"><span>    dfs(gph, vistd, c, i);
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, c);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is initialized to track the maximum chain of detonations.</li>
+<li>For each bomb <code>i</code>, we initialize a counter <code>c</code> and a <code>visited</code> vector to track bombs that have already detonated in the current chain reaction.</li>
+<li>We run DFS on each bomb and update <code>ans</code> with the maximum count of detonations.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Helper Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>gph, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vstd, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>c, <span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(vstd[i]) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    vstd[i] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    c<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j: gph[i])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vstd[j])
+</span></span><span style="display:flex;"><span>            dfs(gph, vstd, c, j);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function performs DFS to traverse all reachable bombs starting from <code>i</code>.</li>
+<li>If a bomb has already detonated (visited), we return. Otherwise, we mark it as visited and increment <code>c</code>.</li>
+<li>For each neighboring bomb <code>j</code>, we recursively perform DFS if <code>j</code> hasn’t already been detonated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li><code>ans</code> holds the maximum number of bombs detonated in a single chain reaction. We return <code>ans</code> as the final answer.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity is approximately (O(n^2)) due to the nested loops used when building the graph, where <code>n</code> is the number of bombs. Each bomb is checked against every other bomb to determine if it falls within the blast range.</li>
+<li><strong>Space Complexity</strong>: The space complexity is (O(n^2)) as we store the graph in an adjacency list, which could have up to (n^2) edges if every bomb can detonate every other bomb.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution models the problem as a graph traversal where each bomb has edges to other bombs within its blast range. By simulating chain reactions using DFS, we efficiently calculate the maximum number of bombs that can be detonated. This approach highlights the use of graph theory and traversal algorithms in solving complex chain-reaction problems, where graph edges represent potential actions (in this case, detonations) based on spatial constraints. This method ensures we explore the optimal starting point to maximize the detonation count efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode682s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -326,7 +477,6 @@
 
       </div>
 
-      
 
       <footer>
         

@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -242,7 +242,139 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode636s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to find the maximum length of a substring within a given string, <code>key</code>, which consists of characters &lsquo;T&rsquo; and &lsquo;F&rsquo;. The substring can contain at most <code>k</code> &lsquo;F&rsquo; characters, and any number of &lsquo;T&rsquo; characters. Essentially, we want to determine the longest segment of the string where we can replace at most <code>k</code> &lsquo;F&rsquo; characters with &lsquo;T&rsquo;, while maintaining the sequence of characters.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can employ a sliding window (or two-pointer) technique. This method allows us to efficiently explore the string while keeping track of the counts of &lsquo;T&rsquo; and &lsquo;F&rsquo;. Here&rsquo;s the step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We start by initializing variables to keep track of the maximum length of the substring (<code>ans</code>), the frequency of &lsquo;F&rsquo; and &lsquo;T&rsquo; characters within the current window (<code>fcnt</code> and <code>tcnt</code>), and the indices for the start (<code>fidx</code> and <code>tidx</code>) of the window.</p>
+</li>
+<li>
+<p><strong>Iterate Over the String</strong>: We loop through each character in the string using a single pointer (<code>i</code>). For each character, we update the counts of &lsquo;F&rsquo; and &lsquo;T&rsquo;.</p>
+</li>
+<li>
+<p><strong>Adjust Window for &lsquo;F&rsquo; Count</strong>: If the count of &lsquo;F&rsquo; characters exceeds <code>k</code>, we increment the starting index of the window (<code>tidx</code>) until the count of &lsquo;F&rsquo; is at most <code>k</code>. This adjustment ensures that we only consider valid substrings.</p>
+</li>
+<li>
+<p><strong>Calculate Maximum Length</strong>: After adjusting the window, we calculate the length of the valid substring (where we can have at most <code>k</code> &lsquo;F&rsquo; characters) and update <code>ans</code> if this new length is greater than the previous maximum.</p>
+</li>
+<li>
+<p><strong>Adjust Window for &lsquo;T&rsquo; Count</strong>: Similarly, we perform another check for &lsquo;T&rsquo; characters, adjusting the starting index of the window (<code>fidx</code>) when the count of &lsquo;T&rsquo; exceeds <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, we return the maximum length found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class encapsulates the method for solving the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxConsecutiveAnswers</span>(string key, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><ul>
+<li>We define a public method <code>maxConsecutiveAnswers</code> that takes a string <code>key</code> and an integer <code>k</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> fidx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, tidx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, fcnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, tcnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>ans</code> to track the maximum length of valid substrings, <code>fidx</code> and <code>tidx</code> as the starting indices for the window, and <code>fcnt</code> and <code>tcnt</code> to count occurrences of &lsquo;F&rsquo; and &lsquo;T&rsquo;, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> key.size(); i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We start a loop that iterates through each character in the string <code>key</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(key[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;F&#39;</span>) fcnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> tcnt<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>For each character, we increment the corresponding counter (<code>fcnt</code> for &lsquo;F&rsquo; and <code>tcnt</code> for &lsquo;T&rsquo;) based on whether the character is &lsquo;F&rsquo; or &lsquo;T&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(fcnt <span style="color:#f92672">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(key[tidx] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;F&#39;</span>) fcnt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>                tidx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>If the count of &lsquo;F&rsquo; exceeds <code>k</code>, we adjust the starting index <code>tidx</code> to reduce the count of &lsquo;F&rsquo; back to <code>k</code> by moving the left boundary of the window to the right.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, i <span style="color:#f92672">-</span> tidx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>After adjusting for &lsquo;F&rsquo;, we calculate the length of the current valid substring and update <code>ans</code> if this length is greater than the previous maximum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(tcnt <span style="color:#f92672">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(key[fidx] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;T&#39;</span>) tcnt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>                fidx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>Next, we check the count of &lsquo;T&rsquo;. If it exceeds <code>k</code>, we increment the starting index <code>fidx</code> to adjust the window accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, i <span style="color:#f92672">-</span> fidx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);            
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>We again calculate the current valid substring&rsquo;s length and update <code>ans</code> if needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum length found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is O(n), where <code>n</code> is the length of the string <code>key</code>. This is because each character is processed a constant number of times (once while expanding the window and potentially once while contracting it).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1), as we are only using a fixed number of variables to store counts and indices, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>maxConsecutiveAnswers</code> method efficiently finds the longest substring that can contain at most <code>k</code> &lsquo;F&rsquo; characters by utilizing a sliding window technique. This approach minimizes unnecessary computations by adjusting the window dynamically, ensuring we always have a valid substring. The use of two pointers (or indices) allows us to handle varying conditions in the string without resorting to nested loops, thus achieving optimal performance. This solution effectively demonstrates how to leverage simple counting mechanisms to solve a problem involving substring manipulation within linear time complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode636s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -254,7 +386,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2025"  class="external-link" target="_blank" rel="noopener">LeetCode #2025: Maximum Number of Ways to Partition an Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2027"  class="external-link" target="_blank" rel="noopener">LeetCode #2027: Minimum Moves to Convert String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -296,7 +428,6 @@
 
       </div>
 
-      
 
       <footer>
         

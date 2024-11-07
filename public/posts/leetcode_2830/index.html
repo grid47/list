@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -269,7 +269,198 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1144s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given a list of <code>n</code> projects, where each project is represented by an array of three integers:</p>
+<ul>
+<li>The start time <code>start[i]</code> of the project.</li>
+<li>The end time <code>end[i]</code> of the project.</li>
+<li>The profit <code>profit[i]</code> associated with the project.</li>
+</ul>
+<p>Our goal is to maximize the total profit by selecting a set of non-overlapping projects. A project can be selected if its start time is after the end time of a previously selected project.</p>
+<p>The task is to implement a function <code>maximizeTheProfit(x, nums)</code> that maximizes the total profit by choosing the non-overlapping projects optimally.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use <strong>dynamic programming (DP)</strong> combined with <strong>binary search</strong>. Here’s a step-by-step explanation of the approach:</p>
+<ol>
+<li>
+<p><strong>Sort Projects by End Time</strong>:
+The key observation is that we can process projects in the order of their end times. This way, we always know that if we pick a project, we’ve already considered all potential previous projects that could have been included.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming</strong>:
+We maintain an array <code>mem</code> where <code>mem[i]</code> stores the maximum profit we can get starting from project <code>i</code> to the end. This is a typical DP approach where the state is defined by the index <code>i</code> and the decision is whether to include project <code>i</code> or not.</p>
+</li>
+<li>
+<p><strong>Binary Search for Next Non-Conflicting Project</strong>:
+For each project <code>i</code>, after deciding whether to include it or not, we need to find the next project that does not conflict with the current project (i.e., it starts after the current project’s end time). We use binary search to find the first project whose start time is greater than the end time of project <code>i</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-class-definition-and-member-variables">
+  1. Class Definition and Member Variables
+  <a class="heading-link" href="#1-class-definition-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mem;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> nums;
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> contains the variables:
+<ul>
+<li><code>n</code>: The number of projects.</li>
+<li><code>mem</code>: A vector to store the maximum profit we can achieve starting from each project.</li>
+<li><code>nums</code>: A 2D vector where each sub-vector represents a project in the form <code>[start_time, end_time, profit]</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-binary-search-bs-function">
+  2. Binary Search (<code>bs</code> Function)
+  <a class="heading-link" href="#2-binary-search-bs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">bs</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums[mid][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> x) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>                r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The function <code>bs(x)</code> performs a <strong>binary search</strong> to find the first project that starts after the project with end time <code>x</code>.</li>
+<li>The binary search checks if the project’s start time is greater than <code>x</code>. If it is, it narrows the search range and continues until it finds the first such project.</li>
+</ul>
+<h4 id="3-dynamic-programming-dp-function">
+  3. Dynamic Programming (<code>dp</code> Function)
+  <a class="heading-link" href="#3-dynamic-programming-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> bs(nums[idx][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, dp(nxt) <span style="color:#f92672">+</span> nums[idx][<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>dp(idx)</code> function is a recursive function that calculates the maximum profit starting from project <code>idx</code>.
+<ul>
+<li>If <code>idx</code> is out of bounds (<code>idx &gt;= n</code>), return <code>0</code> because there are no more projects to consider.</li>
+<li>If <code>mem[idx]</code> has already been computed (i.e., <code>mem[idx] != -1</code>), we return the stored result to avoid redundant calculations.</li>
+<li>We first calculate the result by skipping the current project <code>idx</code> by calling <code>dp(idx + 1)</code>.</li>
+<li>We then find the next valid project that doesn’t overlap with project <code>idx</code> using <code>bs(nums[idx][1])</code>. This finds the project that starts after the current project&rsquo;s end time.</li>
+<li>We calculate the result by either skipping or including the current project. If we include it, we add its profit (<code>nums[idx][2]</code>) and call <code>dp(nxt)</code> for the next valid project.</li>
+<li>The result is stored in <code>mem[idx]</code> to avoid recomputation.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-main-function-maximizetheprofit">
+  4. Main Function (<code>maximizeTheProfit</code>)
+  <a class="heading-link" href="#4-main-function-maximizetheprofit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maximizeTheProfit</span>(<span style="color:#66d9ef">int</span> x, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        mem.resize(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>maximizeTheProfit</code> function:
+<ul>
+<li>Initializes <code>n</code> to the number of projects.</li>
+<li>Resizes the <code>mem</code> vector to store results for each project, initializing all values to <code>-1</code>.</li>
+<li>Sorts the projects by their start times to facilitate the dynamic programming approach.</li>
+<li>Assigns the input projects to <code>nums</code>.</li>
+<li>Calls <code>dp(0)</code> to compute the maximum profit starting from the first project.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the projects takes <strong>O(n log n)</strong>.</li>
+<li>For each project, we perform a binary search, which takes <strong>O(log n)</strong>.</li>
+<li>The recursive DP function is called at most once for each project, and since each project involves a constant number of operations (a binary search and comparisons), the overall time complexity is <strong>O(n log n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use an array <code>mem</code> of size <code>n</code> to store intermediate results, resulting in a space complexity of <strong>O(n)</strong>.</li>
+<li>The binary search function requires constant space for its variables, and the sorting process uses <strong>O(n)</strong> additional space.</li>
+<li>Thus, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach leverages dynamic programming with binary search to efficiently solve the problem of selecting non-overlapping projects with the maximum profit. The time complexity of <strong>O(n log n)</strong> ensures that the solution can handle a large number of projects efficiently, while the space complexity of <strong>O(n)</strong> ensures minimal memory usage. This makes the approach highly efficient and scalable, suitable for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1144s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -323,7 +514,6 @@
 
       </div>
 
-      
 
       <footer>
         

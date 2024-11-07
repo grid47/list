@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -227,7 +227,205 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">accumulate</span>(begin(g), end(g), <span style="color:#ae81ff">0LL</span>);
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode990s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to simulate the process of repeatedly selecting the largest gift, performing an operation on it, and then reinserting it back into the collection. Specifically, we are given an array of integers representing gift values, and an integer <code>k</code> representing the number of operations we can perform. In each operation, we:</p>
+<ol>
+<li>Select the largest gift.</li>
+<li>Replace it with its square root value (taking the integer square root).</li>
+<li>Reinsert it back into the collection.</li>
+</ol>
+<p>After performing <code>k</code> operations, we need to return the sum of the values of all the remaining gifts.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a <strong>max heap</strong> (priority queue). A heap allows us to efficiently retrieve the largest element, perform the required operation, and then restore the heap property by reinserting the modified element. Here&rsquo;s the step-by-step approach to solving the problem:</p>
+<ol>
+<li>
+<p><strong>Use a Max Heap</strong>:</p>
+<ul>
+<li>A max heap will help us efficiently extract the largest gift value in each operation. Since C++&rsquo;s <code>priority_queue</code> provides a min-heap by default, we&rsquo;ll negate the values to simulate a max-heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Perform Operations</strong>:</p>
+<ul>
+<li>For each of the <code>k</code> operations, we will:
+<ol>
+<li>Extract the largest value (the gift with the highest value).</li>
+<li>Replace it with its integer square root.</li>
+<li>Push the modified value back into the heap.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After completing the <code>k</code> operations, we will compute the sum of all the remaining gifts.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step to understand its functionality:</p>
+<h4 id="step-1-initializing-the-max-heap">
+  Step 1: Initializing the Max Heap
+  <a class="heading-link" href="#step-1-initializing-the-max-heap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>make_heap(g.begin(), g.end());
+</span></span></code></pre></div><ul>
+<li>This function initializes a <strong>max heap</strong> from the vector <code>g</code>. The <code>make_heap</code> function rearranges the elements of <code>g</code> in such a way that the largest element is at the root of the heap.</li>
+<li>The time complexity of <code>make_heap</code> is (O(n)), where <code>n</code> is the number of elements in the vector.</li>
+</ul>
+<h4 id="step-2-performing-the-k-operations">
+  Step 2: Performing the <code>k</code> Operations
+  <a class="heading-link" href="#step-2-performing-the-k-operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    pop_heap(begin(g), end(g)); 
+</span></span><span style="display:flex;"><span>    g.back() <span style="color:#f92672">=</span> sqrt(g.back());
+</span></span><span style="display:flex;"><span>    push_heap(begin(g), end(g));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Loop</strong>: The <code>while(k--)</code> loop runs <code>k</code> times, performing the operation for each round.</li>
+<li><strong>Extracting the Largest Element</strong>:
+<ul>
+<li><code>pop_heap(begin(g), end(g))</code>: This function removes the largest element from the heap and places it at the end of the vector <code>g</code>. After this operation, the heap property is violated, but the largest element is now at the back of the vector.</li>
+</ul>
+</li>
+<li><strong>Modifying the Largest Element</strong>:
+<ul>
+<li><code>g.back() = sqrt(g.back())</code>: The largest element, which is now at the back of the vector, is replaced with its integer square root. This is done using the <code>sqrt</code> function, and we assign the result back to the last element of the vector.</li>
+</ul>
+</li>
+<li><strong>Restoring the Heap Property</strong>:
+<ul>
+<li><code>push_heap(begin(g), end(g))</code>: This function restores the heap property by re-inserting the modified element back into the heap at the correct position. This ensures that the heap remains valid after the change.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-calculating-the-sum">
+  Step 3: Calculating the Sum
+  <a class="heading-link" href="#step-3-calculating-the-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">accumulate</span>(begin(g), end(g), <span style="color:#ae81ff">0LL</span>);
+</span></span></code></pre></div><ul>
+<li><strong>Summing the Gifts</strong>:
+<ul>
+<li><code>accumulate(begin(g), end(g), 0LL)</code> computes the sum of all the elements in the vector <code>g</code> after the <code>k</code> operations. The <code>accumulate</code> function is part of the <code>&lt;numeric&gt;</code> header and is used to compute the sum of a range of elements.</li>
+<li>The third argument, <code>0LL</code>, ensures that the sum is computed as a long long integer, which is useful if the sum could exceed the range of standard integers.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Building the Heap</strong>:</p>
+<ul>
+<li>The <code>make_heap</code> operation takes (O(n)) time, where <code>n</code> is the number of elements in the vector <code>g</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Looping <code>k</code> Times</strong>:</p>
+<ul>
+<li>In each iteration of the loop (which runs <code>k</code> times), we perform:
+<ul>
+<li><strong><code>pop_heap</code></strong>: This operation takes (O(\log n)) time, where <code>n</code> is the number of elements in the heap.</li>
+<li><strong>Modifying the Largest Element</strong>: Taking the square root of the largest element takes constant time, i.e., (O(1)).</li>
+<li><strong><code>push_heap</code></strong>: This operation also takes (O(\log n)) time.</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, each iteration of the loop takes (O(\log n)) time, and since the loop runs <code>k</code> times, the total time complexity for the loop is (O(k \log n)).</p>
+</li>
+<li>
+<p><strong>Summing the Gifts</strong>:</p>
+<ul>
+<li>The <code>accumulate</code> function runs in (O(n)) time because it has to sum all the elements in the vector <code>g</code>.</li>
+</ul>
+<p>Overall, the time complexity is:
+[
+O(n + k \log n)
+]
+where <code>n</code> is the size of the vector and <code>k</code> is the number of operations.</p>
+</li>
+</ol>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Heap Storage</strong>: The space required for the heap is (O(n)), where <code>n</code> is the number of elements in the vector <code>g</code>.</li>
+<li><strong>Auxiliary Space</strong>: We use a few integer variables and the space for the input vector <code>g</code>, but no additional significant space is required.</li>
+</ul>
+<p>Therefore, the space complexity is:
+[
+O(n)
+]
+where <code>n</code> is the number of gifts.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>pickGifts</code> function effectively solves the problem by simulating the process of performing <code>k</code> operations on the gifts, using a <strong>max heap</strong> to efficiently find and modify the largest gift in each operation. By leveraging heap operations (<code>pop_heap</code> and <code>push_heap</code>), the solution achieves an optimal time complexity of (O(k \log n)) for the main operations, where <code>n</code> is the number of elements in the input vector and <code>k</code> is the number of operations to perform.</p>
+<p>This approach ensures that the solution is both time-efficient and easy to implement, given the problem&rsquo;s constraints. The use of a heap allows us to maintain an optimal performance in terms of both time and space, making the solution suitable for a large number of gifts and operations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode990s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +479,6 @@
 
       </div>
 
-      
 
       <footer>
         

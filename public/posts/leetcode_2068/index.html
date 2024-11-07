@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -227,7 +227,102 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode661s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to determine whether two given strings, <code>s</code> and <code>t</code>, can be considered &ldquo;almost equivalent.&rdquo; Specifically, two strings are defined as almost equivalent if the absolute difference in the frequency of any character between the two strings does not exceed three. This means that for each character from &lsquo;a&rsquo; to &lsquo;z&rsquo;, the difference between the counts of that character in <code>s</code> and <code>t</code> should be at most 3.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Character Count Calculation</strong>: We will maintain a frequency count of characters for both strings. This involves iterating through each character in the strings and updating a count array that records the frequency of each character.</p>
+</li>
+<li>
+<p><strong>Difference Evaluation</strong>: Once we have the character frequencies, we will check the differences in frequency for each character. If the difference for any character exceeds 3, the strings are not almost equivalent. Otherwise, they are considered almost equivalent.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, based on the evaluation of differences, we will return <code>true</code> if the strings are almost equivalent and <code>false</code> otherwise.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Character Count Array Initialization</strong>: We declare an integer array <code>cnt</code> of size 26 (for each letter of the English alphabet) and initialize it to zero. This array will help us keep track of the frequency differences between the two strings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">26</span>] <span style="color:#f92672">=</span> {};
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Characters from String <code>s</code></strong>: We iterate through each character in the string <code>s</code>. For each character, we calculate its corresponding index (based on its ASCII value) and increment the count at that index. This step effectively counts how many times each character appears in <code>s</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c : s) cnt[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Characters from String <code>t</code></strong>: We perform a similar iteration for string <code>t</code>, but instead of incrementing the count, we decrement it. This will allow us to evaluate the frequency differences directly within the same count array.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c : t) cnt[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Evaluate Frequency Differences</strong>: After processing both strings, we loop through the count array to check the absolute values of the counts. If any count exceeds 3, we immediately return <code>false</code>, indicating that the strings are not almost equivalent.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (abs(cnt[i]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: If we complete the loop without finding any differences greater than 3, we return <code>true</code>, indicating that the strings are almost equivalent.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: O(n + m), where <code>n</code> is the length of string <code>s</code> and <code>m</code> is the length of string <code>t</code>. The algorithm iterates through both strings once to calculate character counts and then once more through the count array, resulting in a linear time complexity relative to the size of the input.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(1). The space complexity is constant because we use a fixed-size array of size 26, regardless of the input size. This means that the space requirement does not grow with the input size, making the solution efficient in terms of memory usage.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution provided efficiently determines whether two strings are almost equivalent by leveraging a simple character frequency counting approach combined with a constant space evaluation of differences. This method is effective and straightforward, ensuring clarity and maintainability. The time complexity remains optimal for the problem, and the space usage is minimal, making it a robust solution for scenarios where such string comparison tasks are needed.</p>
+<p>Overall, this implementation serves as an excellent example of how to handle string manipulation problems in competitive programming and software development, offering both performance and ease of understanding for future adaptations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode661s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -281,7 +376,6 @@
 
       </div>
 
-      
 
       <footer>
         

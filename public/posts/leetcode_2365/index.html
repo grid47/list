@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,192 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> days;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode858s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks to schedule tasks in such a way that no task can be executed again within <code>space</code> days of its last occurrence. The tasks are represented by integers in the array <code>tasks</code>, and we are given an integer <code>space</code> which represents the number of days we need to wait before a task can be executed again. The goal is to determine the minimum number of days required to complete all tasks, considering the constraints on task repetition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution follows a greedy approach with the help of a <strong>map</strong> (or dictionary) to track the last execution day of each task. Here’s the step-by-step breakdown:</p>
+<ol>
+<li>
+<p><strong>Key Observation:</strong></p>
+<ul>
+<li>A task can only be scheduled again after <code>space</code> days have passed since its last execution. If we attempt to schedule a task too soon (before the <code>space</code> period has passed), we need to jump forward in time (i.e., set the day counter to a value that reflects the gap).</li>
+</ul>
+</li>
+<li>
+<p><strong>Greedy Strategy:</strong></p>
+<ul>
+<li>We iterate over the tasks one by one. For each task, we check if it has been executed before (using the <code>map</code>).</li>
+<li>If it has been executed before, we check if the time elapsed since the last execution of this task exceeds the <code>space</code> constraint. If it does, we can execute the task; otherwise, we must &ldquo;skip&rdquo; days to meet the constraint.</li>
+<li>If the task hasn’t been executed before, we can execute it immediately and update its last execution day.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking the Last Execution:</strong></p>
+<ul>
+<li>We use a map <code>mp</code> to track the last day a particular task was executed. This allows us to determine whether we can execute the task on the current day or need to wait until a later day.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting the Total Days:</strong></p>
+<ul>
+<li>We increment the <code>days</code> counter as we schedule each task, ensuring that we account for waiting periods whenever necessary.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initializing-variables">
+  Step 1: Initializing Variables
+  <a class="heading-link" href="#step-1-initializing-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">taskSchedulerII</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> tasks, <span style="color:#66d9ef">int</span> space) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> mp;  <span style="color:#75715e">// Map to track last execution day of each task
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> n <span style="color:#f92672">=</span> tasks.size(), days <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// n: number of tasks, days: total days
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The function starts by initializing the map <code>mp</code> to store the last execution day of each task.</li>
+<li><code>n</code> stores the number of tasks, and <code>days</code> keeps track of the total number of days used to complete all tasks.</li>
+<li><code>i</code> is used as the index to iterate through the list of tasks.</li>
+</ul>
+<h4 id="step-2-loop-through-tasks">
+  Step 2: Loop Through Tasks
+  <a class="heading-link" href="#step-2-loop-through-tasks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> n) {
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop runs until all tasks are scheduled (<code>i &lt; n</code>).</li>
+</ul>
+<h4 id="step-3-check-if-task-has-been-executed-before">
+  Step 3: Check If Task Has Been Executed Before
+  <a class="heading-link" href="#step-3-check-if-task-has-been-executed-before">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (mp.count(tasks[i])) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (days <span style="color:#f92672">-</span> mp[tasks[i]] <span style="color:#f92672">&gt;</span> space) {
+</span></span><span style="display:flex;"><span>        mp[tasks[i]] <span style="color:#f92672">=</span> days;  <span style="color:#75715e">// Update last execution day of the task
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        days<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Increment day count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        i<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move to the next task
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        days <span style="color:#f92672">=</span> mp[tasks[i]] <span style="color:#f92672">+</span> space <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Skip to the next available day
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each task <code>tasks[i]</code>, we first check if it has been executed previously by checking if it exists in the map (<code>mp.count(tasks[i])</code>).</li>
+<li>If the task has been executed before, we check whether enough days have passed since its last execution. If the gap between <code>days</code> and the last execution day is greater than <code>space</code>, we can execute the task. We then:
+<ul>
+<li>Update the task’s last execution day to the current <code>days</code>.</li>
+<li>Increment <code>days</code> and move to the next task (<code>i++</code>).</li>
+</ul>
+</li>
+<li>If not enough time has passed since the last execution, we set the current <code>days</code> to the next available day, which is <code>mp[tasks[i]] + space + 1</code>.</li>
+</ul>
+<h4 id="step-4-schedule-the-task-if-its-new">
+  Step 4: Schedule the Task if It’s New
+  <a class="heading-link" href="#step-4-schedule-the-task-if-its-new">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    mp[tasks[i]] <span style="color:#f92672">=</span> days;  <span style="color:#75715e">// Task has never been executed before
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    days<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Increment day count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    i<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move to the next task
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If the task hasn’t been executed before, we can schedule it immediately:
+<ul>
+<li>We record the current day as the last execution day of the task (<code>mp[tasks[i]] = days</code>).</li>
+<li>We increment <code>days</code> and move to the next task.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-5-return-the-total-days">
+  Step 5: Return the Total Days
+  <a class="heading-link" href="#step-5-return-the-total-days">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> days;
+</span></span></code></pre></div><ul>
+<li>After all tasks have been scheduled, the function returns the total number of days (<code>days</code>), which accounts for both task execution and any waiting periods due to the <code>space</code> constraint.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm iterates through the list of tasks once, so the time complexity of the loop is <code>O(n)</code>, where <code>n</code> is the number of tasks.</li>
+<li>For each task, we perform constant-time operations (checking the map, updating values, and incrementing counters).</li>
+<li>Thus, the overall time complexity is <code>O(n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the map <code>mp</code>, which stores the last execution day of each task. In the worst case, every task could be unique, leading to a space complexity of <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently schedules tasks while respecting the <code>space</code> constraint using a greedy approach with a map to track the last execution day of each task. The algorithm runs in linear time (<code>O(n)</code>), making it well-suited for large input sizes. By updating the <code>days</code> counter and checking if tasks can be scheduled based on the <code>space</code> constraint, the solution ensures that all tasks are completed in the minimum number of days possible, while also handling any necessary waiting periods between repeated tasks. The approach is both time-efficient and space-efficient, making it ideal for real-world applications involving task scheduling with constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode858s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -298,7 +483,6 @@
 
       </div>
 
-      
 
       <footer>
         

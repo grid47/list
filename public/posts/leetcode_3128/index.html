@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -270,7 +270,179 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1236s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem asks us to find the number of right-angled triangles that can be formed using cells in a 2D grid. The grid consists of <code>1</code>s and <code>0</code>s, where <code>1</code> represents a valid cell, and <code>0</code> represents an empty cell. A right-angled triangle can be formed when three points lie in a right-angled relationship in the grid. Specifically, the triangle&rsquo;s right angle must align with the grid axes, either horizontally or vertically.</p>
+<p>The goal is to determine how many such right-angled triangles can be formed based on the given grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can break down the task into several sub-problems:</p>
+<ol>
+<li>
+<p><strong>Precompute Horizontal and Vertical Sums</strong>: First, we compute two auxiliary grids:</p>
+<ul>
+<li><code>hr[i][j]</code>: The cumulative sum of <code>1</code>s from the leftmost column to column <code>j</code> in row <code>i</code>. This tells us how many <code>1</code>s there are to the left of a given cell in a particular row.</li>
+<li><code>vr[i][j]</code>: The cumulative sum of <code>1</code>s from the topmost row to row <code>i</code> in column <code>j</code>. This tells us how many <code>1</code>s there are above a given cell in a particular column.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Right-Angled Triangles</strong>: Once we have the horizontal and vertical sums, we can calculate the number of triangles that can be formed with each cell <code>(i, j)</code> as the right-angle vertex. The formula for calculating the number of triangles at a point <code>(i, j)</code> is:
+[
+\text{Triangles at }(i, j) = (\text{number of 1s in row i to the right of } j) \times (\text{number of 1s in column j below } i)
+]
+This formula accounts for the potential triangles that could be formed by using the current cell as the right-angle corner of the triangle.</p>
+</li>
+<li>
+<p><strong>Accumulate the Results</strong>: We then accumulate the number of triangles for each valid cell <code>(i, j)</code> where there is a <code>1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">
+  Code Breakdown
+  <a class="heading-link" href="#code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-and-precompute-horizontal-and-vertical-sums">
+  Step 1: Initialize and Precompute Horizontal and Vertical Sums
+  <a class="heading-link" href="#step-1-initialize-and-precompute-horizontal-and-vertical-sums">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> hr <span style="color:#f92672">=</span> grid;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vr <span style="color:#f92672">=</span> grid;
+</span></span></code></pre></div><ul>
+<li>Here, <code>hr</code> and <code>vr</code> are copies of the original grid <code>grid</code>. We will use these grids to store the cumulative counts of <code>1</code>s in the rows and columns, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        hr[i][j] <span style="color:#f92672">+=</span> hr[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop precomputes the cumulative sum of <code>1</code>s in each row.</li>
+<li>For each row <code>i</code>, starting from column <code>1</code>, we accumulate the values of <code>grid[i][j]</code> into <code>hr[i][j]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        vr[i][j] <span style="color:#f92672">+=</span> vr[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop precomputes the cumulative sum of <code>1</code>s in each column.</li>
+<li>For each column <code>j</code>, starting from row <code>1</code>, we accumulate the values of <code>grid[i][j]</code> into <code>vr[i][j]</code>.</li>
+</ul>
+<h4 id="step-2-calculate-the-number-of-right-angled-triangles">
+  Step 2: Calculate the Number of Right-Angled Triangles
+  <a class="heading-link" href="#step-2-calculate-the-number-of-right-angled-triangles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, net;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>cnt</code> to accumulate the total number of right-angled triangles.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(grid[i][j]) {
+</span></span><span style="display:flex;"><span>        net <span style="color:#f92672">=</span> (hr[i][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> ((vr[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">-</span> vr[i][j]) <span style="color:#f92672">+</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> vr[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j]<span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">+=</span> net;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through every cell <code>(i, j)</code> in the grid.</li>
+<li>If <code>grid[i][j] == 1</code>, we calculate the number of possible right-angled triangles with <code>(i, j)</code> as the right angle using the precomputed <code>hr</code> and <code>vr</code> arrays.</li>
+<li>The formula used for <code>net</code> computes the number of possible triangles:
+<ul>
+<li><code>hr[i][n - 1] - 1</code> gives the number of <code>1</code>s to the right of column <code>j</code> in row <code>i</code> (since we need to exclude the current cell).</li>
+<li><code>(vr[m - 1][j] - vr[i][j]) + (i &gt; 0? vr[i - 1][j]: 0)</code> gives the number of <code>1</code>s below cell <code>(i, j)</code> in column <code>j</code>. If <code>i &gt; 0</code>, we add the number of <code>1</code>s above cell <code>(i, j)</code> to account for all <code>1</code>s in the same column.</li>
+</ul>
+</li>
+<li>We add the result to <code>cnt</code>.</li>
+</ul>
+<h4 id="step-3-return-the-final-result">
+  Step 3: Return the Final Result
+  <a class="heading-link" href="#step-3-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After iterating through the entire grid and counting the triangles for every valid <code>(i, j)</code>, we return the total count <code>cnt</code> as the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>:
+<ul>
+<li>We iterate over the entire grid to compute the cumulative horizontal and vertical sums in two separate loops, each with a time complexity of O(m * n).</li>
+<li>We also iterate over the entire grid again to calculate the number of triangles, which is another O(m * n) operation.</li>
+<li>Therefore, the overall time complexity is O(m * n).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>:
+<ul>
+<li>We use additional <code>m * n</code> space to store the <code>hr</code> and <code>vr</code> grids, which are used to calculate the number of triangles.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the number of right-angled triangles that can be formed in the given grid by leveraging precomputation techniques. The use of cumulative sums (<code>hr</code> and <code>vr</code>) ensures that we can quickly calculate the number of possible triangles at each cell. The overall time complexity of O(m * n) ensures that the solution works efficiently even for larger grids.</p>
+<p>The approach is both time-efficient and space-efficient, making it suitable for use in competitive programming and real-world scenarios where similar grid-based problems arise. By handling the precomputation and applying the triangle-counting formula efficiently, the solution provides a robust and optimized way to solve the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1236s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -324,7 +496,6 @@
 
       </div>
 
-      
 
       <footer>
         

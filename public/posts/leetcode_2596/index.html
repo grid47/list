@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,171 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1025s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given an <code>n x n</code> grid where each cell contains a unique number between <code>0</code> and <code>n^2 - 1</code>. Your task is to check if the grid can be traversed in a valid sequence following the movement pattern of a knight in chess.</p>
+<p>A knight moves in an &ldquo;L&rdquo; shape: it can either move two squares in one direction and one square in the perpendicular direction, or vice versa. For a grid to be valid, the numbers must follow this pattern: starting from <code>0</code> at the top-left corner, each successive number must appear at a valid knight move from the previous number. Specifically, for any number <code>i</code>, the knight must move from position <code>i</code> to position <code>i+1</code> in the grid. The task is to determine whether such a valid sequence exists for the entire grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Grid Setup</strong>: We are given an <code>n x n</code> grid where each cell contains a unique number from <code>0</code> to <code>n^2 - 1</code>. The key insight is that the knight’s moves must be checked starting from <code>0</code> (which must be located at the top-left corner) and then for each subsequent number, we need to check whether it is reachable via a valid knight move from the previous number.</p>
+</li>
+<li>
+<p><strong>Mapping the Grid</strong>: To facilitate quick lookup of the positions of each number in the grid, we store the coordinates of each number in a map. This allows us to easily find the position of any number <code>i</code> and its subsequent number <code>i+1</code> during the traversal.</p>
+</li>
+<li>
+<p><strong>Knight&rsquo;s Move Validation</strong>: The movement of a knight follows specific patterns:</p>
+<ul>
+<li>It can move two squares in one direction and one square in the perpendicular direction, or vice versa. This means we need to check whether the position of <code>i+1</code> is either:
+<ul>
+<li>Two steps in one direction and one step in the perpendicular direction.</li>
+<li>Or one step in one direction and two steps in the perpendicular direction.</li>
+</ul>
+</li>
+</ul>
+<p>The move condition can be mathematically described as:</p>
+<ul>
+<li><code>(abs(x - p) == 1 &amp;&amp; abs(y - q) == 2) || (abs(x - p) == 2 &amp;&amp; abs(y - q) == 1)</code>
+Here, <code>(x, y)</code> represents the current position of the number, and <code>(p, q)</code> is the position of the previous number. If the condition holds for each number <code>i</code>, then the grid is valid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traversal</strong>: Starting from <code>0</code> at the top-left corner, we check each number from <code>1</code> to <code>n^2 - 1</code> to ensure that it can be reached from the previous number through a valid knight&rsquo;s move. If at any point a valid move is not found, we return <code>false</code>. If all numbers satisfy the knight’s move condition, the grid is valid, and we return <code>true</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-mapping-the-grid-positions">
+  1. <strong>Mapping the Grid Positions</strong>:
+  <a class="heading-link" href="#1-mapping-the-grid-positions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[grid[i][j]] <span style="color:#f92672">=</span> {i, j};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a <code>map</code> where the key is the number in the grid, and the value is a pair representing the row and column of that number.</li>
+<li>The <code>grid.size()</code> gives us the dimension <code>n</code> of the <code>n x n</code> grid.</li>
+<li>We iterate through the grid, filling the map with the positions of each number.</li>
+</ul>
+<h4 id="2-initial-validation-for-position-of-0">
+  2. <strong>Initial Validation for Position of 0</strong>:
+  <a class="heading-link" href="#2-initial-validation-for-position-of-0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> make_pair(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>The number <code>0</code> must be located at the top-left corner of the grid, i.e., at position <code>(0, 0)</code>. If this is not the case, we immediately return <code>false</code>.</li>
+</ul>
+<h4 id="3-checking-the-validity-of-knights-moves">
+  3. <strong>Checking the Validity of Knight&rsquo;s Moves</strong>:
+  <a class="heading-link" href="#3-checking-the-validity-of-knights-moves">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">*</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it.first;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> it.second;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((abs(x <span style="color:#f92672">-</span> p) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> abs(y <span style="color:#f92672">-</span> q) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>       (abs(x <span style="color:#f92672">-</span> p) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> abs(y <span style="color:#f92672">-</span> q) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>        p <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>        q <span style="color:#f92672">=</span> y;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>p = 0</code> and <code>q = 0</code> to track the current position of the knight.</li>
+<li>We iterate through the numbers <code>1</code> to <code>n^2 - 1</code>. For each number, we look up its position <code>(x, y)</code> in the <code>map</code>.</li>
+<li>We then check if the move from the previous position <code>(p, q)</code> to the current position <code>(x, y)</code> satisfies the knight’s move condition using the formula mentioned earlier.
+<ul>
+<li>If the condition holds, we update <code>p</code> and <code>q</code> to the current position <code>(x, y)</code>.</li>
+<li>If the condition does not hold, we return <code>false</code>, as this means the grid is not valid.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-final-return">
+  4. <strong>Final Return</strong>:
+  <a class="heading-link" href="#4-final-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we successfully check all the numbers and all moves are valid, we return <code>true</code>, indicating that the grid is valid.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Mapping the Grid</strong>: We loop through each cell of the <code>n x n</code> grid, which takes (O(n^2)).</li>
+<li><strong>Checking Validity of Moves</strong>: We loop through the numbers from <code>1</code> to <code>n^2 - 1</code>, and for each number, we check if it can be reached from the previous one. This check involves a constant-time lookup in the map and some constant-time arithmetic, so this part takes (O(n^2)) as well.</li>
+<li>Thus, the total time complexity is (O(n^2)), where <code>n</code> is the grid size.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The map <code>mp</code> stores <code>n^2</code> key-value pairs, so the space complexity is (O(n^2)).</li>
+<li>The rest of the space used by variables is constant, so the overall space complexity is (O(n^2)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if the numbers in the <code>n x n</code> grid follow a valid knight&rsquo;s move sequence. By using a map to store the positions of each number, we can quickly verify whether each number can be reached from the previous one using valid knight moves. The algorithm runs in (O(n^2)) time, which is optimal for a grid of size <code>n x n</code>, and uses (O(n^2)) space to store the positions. This approach is both time-efficient and space-efficient for solving the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1025s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -304,7 +468,6 @@
 
       </div>
 
-      
 
       <footer>
         

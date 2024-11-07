@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,138 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode814s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a grid of integers <code>grid</code> representing the cost of moving from each cell and a <code>moveCost</code> matrix, where each entry <code>moveCost[i][j]</code> represents the cost to move from cell <code>i</code> to cell <code>j</code> in the next row, the task is to find the minimum cost to travel from the top row (row 0) to the bottom row (row <code>m-1</code>). You can only move down from any cell to one of the cells in the row directly below it. You are required to minimize the total cost of the path, where the total cost is defined as the sum of the cost of moving between consecutive cells and the cost of moving to the next row according to the <code>moveCost</code> matrix.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we use dynamic programming (DP) to calculate the minimum path cost from the top row to the bottom row of the grid. The idea is to recursively calculate the minimum cost for each cell, taking into account the movement cost from one cell to the next and minimizing the overall path cost.</p>
+<ol>
+<li><strong>Dynamic Programming (DP)</strong>: We define <code>dp(x, y)</code> as the minimum cost to reach the cell <code>(x, y)</code> starting from row 0. We compute <code>dp(x, y)</code> recursively by considering all possible moves to the next row and adding the associated costs.</li>
+<li><strong>Memoization</strong>: To avoid redundant calculations and improve efficiency, we store the results of subproblems in a memoization table <code>memo</code>. If <code>memo[x][y]</code> has already been computed, we return its value instead of recomputing it.</li>
+<li><strong>Iterating Through Possible Moves</strong>: For each cell <code>(x, y)</code>, we explore all possible moves to the next row by iterating over all cells in row <code>x + 1</code>, calculating the cost, and selecting the minimum one.</li>
+<li><strong>Base Case</strong>: The base case for our recursion is when we reach the last row (row <code>m - 1</code>). At that point, we simply return the value of <code>grid[x][y]</code>, as there are no further rows to move down to.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition and Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m, n;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid, cost, memo;
+</span></span></code></pre></div><ul>
+<li><code>m</code> and <code>n</code> represent the number of rows and columns of the grid.</li>
+<li><code>grid</code> is the input grid containing the cost of each cell.</li>
+<li><code>cost</code> is the move cost matrix, where <code>cost[i][j]</code> represents the cost to move from cell <code>i</code> to cell <code>j</code> in the next row.</li>
+<li><code>memo</code> is a memoization table to store the minimum cost for each cell. It helps avoid recalculating the same subproblems.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> grid[x][y];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[x][y] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[x][y];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, dp(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i) <span style="color:#f92672">+</span> grid[x][y] <span style="color:#f92672">+</span> cost[grid[x][y]][i]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[x][y] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If we are at the last row (<code>x == m - 1</code>), we return the value of the cell <code>grid[x][y]</code> because no further rows exist to move to.</li>
+<li><strong>Memoization Check</strong>: If <code>memo[x][y]</code> is not <code>-1</code>, it means this subproblem has already been computed, so we return the stored result.</li>
+<li><strong>Recursive Case</strong>: For each cell <code>(x, y)</code>, we try moving to every possible cell in the next row (<code>x + 1</code>) and compute the minimum cost by considering the grid cost and the move cost. The recursive call <code>dp(x + 1, i)</code> computes the cost of moving to row <code>x + 1</code>, column <code>i</code>.</li>
+<li><strong>Updating Memo Table</strong>: Once we find the minimum cost for the cell <code>(x, y)</code>, we store it in <code>memo[x][y]</code> to avoid redundant calculations in future calls.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minPathCost</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> moveCost) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> grid;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>cost <span style="color:#f92672">=</span> moveCost;
+</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    memo.resize(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, dp(<span style="color:#ae81ff">0</span>, i));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Input Assignment</strong>: We assign the input <code>grid</code> and <code>moveCost</code> to the respective member variables.</li>
+<li><strong>Grid Size</strong>: We store the number of rows <code>m</code> and columns <code>n</code> based on the dimensions of the <code>grid</code>.</li>
+<li><strong>Memo Initialization</strong>: We initialize the <code>memo</code> table to be of size <code>m x n</code>, with all values set to <code>-1</code> (indicating that no cell has been computed yet).</li>
+<li><strong>Final Calculation</strong>: We iterate over the first row (<code>row 0</code>) and, for each column <code>i</code>, we compute the minimum cost by calling <code>dp(0, i)</code> and updating the answer with the smallest result.</li>
+<li><strong>Return Result</strong>: The final result is the minimum cost to traverse from the top row to the bottom row.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The function <code>dp(x, y)</code> is called once for each cell in the grid, and for each cell, we iterate over all <code>n</code> possible moves to the next row. Therefore, the time complexity is O(m * n * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
+<li>Since we use memoization, each subproblem is solved only once, so the overall time complexity is bounded by O(m * n * n).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We maintain a memoization table of size <code>m x n</code> to store the minimum costs, which requires O(m * n) space.</li>
+<li>The call stack for recursion also contributes to space usage, but this is bounded by O(m), as the recursion depth is limited to the number of rows in the grid.</li>
+<li>Therefore, the overall space complexity is O(m * n).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum path cost using dynamic programming with memoization. By breaking the problem down into subproblems, we minimize the amount of redundant computation. The algorithm ensures optimal performance by leveraging the memoization technique, which significantly reduces the time complexity compared to a brute force approach.</p>
+<p>With a time complexity of O(m * n * n), this solution works well for reasonably sized grids and provides a scalable method for finding the minimum path cost. The use of recursive dynamic programming, combined with memoization, ensures that the problem is solved in an efficient manner without recalculating the same subproblems multiple times.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode814s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -304,7 +435,6 @@
 
       </div>
 
-      
 
       <footer>
         

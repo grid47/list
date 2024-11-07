@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,205 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode729s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given an array <code>beans</code>, where each element represents the number of beans in a respective pile. The goal is to determine the minimum number of beans you need to remove such that the number of beans in all piles is equal. However, the removal should ensure that the remaining piles all have the same number of beans, and the number of beans removed should be minimized.</p>
+<p>You need to return the minimum number of beans to remove to achieve this.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Compute the Total Sum of Beans</strong>:</p>
+<ul>
+<li>First, calculate the total number of beans in all piles. This helps in determining how many beans would be removed from each pile.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sort the Array</strong>:</p>
+<ul>
+<li>To simplify the process of calculating the beans to remove, sort the array. This allows you to efficiently compute the number of beans left after removing piles.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through Sorted Array</strong>:</p>
+<ul>
+<li>After sorting the array, the number of beans left in each pile (after removal) will be based on the size of the piles that remain. For each pile, compute the number of beans you would remove and keep track of the minimum result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculation of Beans to Remove</strong>:</p>
+<ul>
+<li>For each index in the sorted array, compute how many beans would be removed if all piles except for the current pile (and those smaller than it) were kept. This is done by subtracting the number of beans in the current pile from the total sum and adjusting it according to the number of piles that remain.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The result will be the minimum number of beans that can be removed to make the piles equal in size.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Compute the Total Sum of Beans</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> accumulate(begin(beans), end(beans), <span style="color:#ae81ff">0L</span>);
+</span></span></code></pre></div><ul>
+<li><code>accumulate</code> is a standard function from <code>&lt;numeric&gt;</code> that computes the sum of all elements in the <code>beans</code> array. The <code>0L</code> ensures that the sum is computed as a <code>long long</code> type to prevent overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sort the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(beans.begin(), beans.end());
+</span></span></code></pre></div><ul>
+<li>Sorting the array simplifies the logic of figuring out how to minimize the beans to be removed. Sorting ensures that we can easily calculate how many beans remain in the piles that are left behind.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate and Calculate the Minimum Removal</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> LLONG_MAX;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> min(res, sum <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>) (n <span style="color:#f92672">-</span> i) <span style="color:#f92672">*</span> beans[i]);
+</span></span></code></pre></div><ul>
+<li>The variable <code>res</code> is initialized to <code>LLONG_MAX</code> (the largest possible value for a <code>long long</code>), which will store the minimum number of beans to be removed.</li>
+<li>The loop iterates through each pile, and for each iteration, the number of beans removed is computed as the total sum minus the number of beans left in the remaining piles (<code>(n - i) * beans[i]</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating through all possible scenarios, the smallest value in <code>res</code> will be returned, representing the minimum number of beans that need to be removed to make the remaining piles equal.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example with the array <code>beans = [4, 3, 2, 5]</code>:</p>
+<ul>
+<li>
+<p><strong>Step 1: Calculate the Total Sum of Beans</strong>:</p>
+<ul>
+<li>Sum = <code>4 + 3 + 2 + 5 = 14</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 2: Sort the Array</strong>:</p>
+<ul>
+<li>Sorted array = <code>[2, 3, 4, 5]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 3: Iterate and Compute the Minimum Removal</strong>:</p>
+<ul>
+<li>
+<p>For each index <code>i</code> in the sorted array, calculate how many beans would remain if the piles from index <code>i</code> to the end are kept, and then determine how many beans need to be removed.</p>
+</li>
+<li>
+<p><strong>Iteration 1 (i = 0)</strong>: Remove piles smaller than or equal to <code>beans[0] = 2</code>.</p>
+<ul>
+<li>Remaining beans: <code>(4 - 0) * 2 = 8</code>.</li>
+<li>Beans to remove: <code>14 - 8 = 6</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iteration 2 (i = 1)</strong>: Remove piles smaller than or equal to <code>beans[1] = 3</code>.</p>
+<ul>
+<li>Remaining beans: <code>(4 - 1) * 3 = 9</code>.</li>
+<li>Beans to remove: <code>14 - 9 = 5</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iteration 3 (i = 2)</strong>: Remove piles smaller than or equal to <code>beans[2] = 4</code>.</p>
+<ul>
+<li>Remaining beans: <code>(4 - 2) * 4 = 8</code>.</li>
+<li>Beans to remove: <code>14 - 8 = 6</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iteration 4 (i = 3)</strong>: Remove piles smaller than or equal to <code>beans[3] = 5</code>.</p>
+<ul>
+<li>Remaining beans: <code>(4 - 3) * 5 = 5</code>.</li>
+<li>Beans to remove: <code>14 - 5 = 9</code>.</li>
+</ul>
+</li>
+<li>
+<p>The minimum beans to remove is <code>5</code> (from iteration 2).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 4: Return the Result</strong>:</p>
+<ul>
+<li>The result is <code>5</code>, meaning 5 beans should be removed to make the remaining piles equal.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>O(n log n) due to the sorting step, where <code>n</code> is the number of piles. The iteration through the sorted array takes O(n), and the sorting dominates the overall complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>O(1) as the algorithm only uses a few additional variables for the calculations and does not require extra space proportional to the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently solves the problem by utilizing a combination of sorting and selection strategies to minimize the number of beans removed. The time complexity of O(n log n) ensures that the solution works well even for larger arrays. By breaking the problem into logical steps—sorting, calculating sums, and iterating for the minimum—this approach provides a clear, effective solution for the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode729s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -250,7 +448,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2172"  class="external-link" target="_blank" rel="noopener">LeetCode #2172: Maximum AND Sum of Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_2176"  class="external-link" target="_blank" rel="noopener">LeetCode #2176: Count Equal and Divisible Pairs in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -292,7 +490,6 @@
 
       </div>
 
-      
 
       <footer>
         
