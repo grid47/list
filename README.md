@@ -174,16 +174,16 @@
 | 172 | Medium | Factorial Trailing Zeroes |
 | 173 | Medium | Binary Search Tree Iterator |
 | 174 | Hard | Dungeon Game |
-| 175 | Easy | [Combine Two Tables](https://grid47.xyz/posts/leetcode_175/) |
-| 176 | Medium | [Second Highest Salary](https://grid47.xyz/posts/leetcode_176/) |
+| 175 | Easy | Combine Two Tables |
+| 176 | Medium | Second Highest Salary |
 | 177 | Medium | Nth Highest Salary |
 | 178 | Medium | Rank Scores |
 | 179 | Medium | Largest Number |
 | 180 | Medium | Consecutive Numbers |
 | 181 | Easy | Employees Earning More Than Their Managers |
-| 182 | Easy | [Duplicate Emails](https://grid47.xyz/posts/leetcode_182/) |
-| 183 | Easy | [Customers Who Never Order](https://grid47.xyz/posts/leetcode_183/) |
-| 184 | Medium | [Department Highest Salary](https://grid47.xyz/posts/leetcode_184/) |
+| 182 | Easy | Duplicate Emails |
+| 183 | Easy | Customers Who Never Order |
+| 184 | Medium | Department Highest Salary |
 | 185 | Hard | Department Top Three Salaries |
 | 186 | Medium | Reverse Words in a String II |
 | 187 | Medium | Repeated DNA Sequences |
@@ -196,7 +196,7 @@
 | 194 | Medium | Transpose File |
 | 195 | Easy | [Tenth Line](https://grid47.xyz/posts/leetcode_195/) |
 | 196 | Easy | [Delete Duplicate Emails](https://grid47.xyz/posts/leetcode_196/) |
-| 197 | Easy | [Rising Temperature](https://grid47.xyz/posts/leetcode_197/) |
+| 197 | Easy | Rising Temperature |
 | 198 | Medium | [House Robber](https://grid47.xyz/posts/leetcode_198/) |
 | 199 | Medium | [Binary Tree Right Side View](https://grid47.xyz/posts/leetcode_199/) |
 | 200 | Medium | [Number of Islands](https://grid47.xyz/posts/leetcode_200/) |
@@ -576,14 +576,14 @@
 | 574 | Medium | Winning Candidate |
 | 575 | Easy | Distribute Candies |
 | 576 | Medium | [Out of Boundary Paths](https://grid47.xyz/posts/leetcode_576/) |
-| 577 | Easy | [Employee Bonus](https://grid47.xyz/posts/leetcode_577/) |
+| 577 | Easy | Employee Bonus |
 | 578 | Medium | Get Highest Answer Rate Question |
 | 579 | Hard | Find Cumulative Salary of an Employee |
 | 580 | Medium | Count Student Number in Departments |
 | 581 | Medium | [Shortest Unsorted Continuous Subarray](https://grid47.xyz/posts/leetcode_581/) |
 | 582 | Medium | Kill Process |
 | 583 | Medium | [Delete Operation for Two Strings](https://grid47.xyz/posts/leetcode_583/) |
-| 584 | Easy | [Find Customer Referee](https://grid47.xyz/posts/leetcode_584/) |
+| 584 | Easy | Find Customer Referee |
 | 585 | Medium | Investments in 2016 |
 | 586 | Easy | Customer Placing the Largest Number of Orders |
 | 587 | Hard | Erect the Fence |
@@ -594,8 +594,8 @@
 | 592 | Medium | [Fraction Addition and Subtraction](https://grid47.xyz/posts/leetcode_592/) |
 | 593 | Medium | [Valid Square](https://grid47.xyz/posts/leetcode_593/) |
 | 594 | Easy | Longest Harmonious Subsequence |
-| 595 | Easy | [Big Countries](https://grid47.xyz/posts/leetcode_595/) |
-| 596 | Easy | [Classes More Than 5 Students](https://grid47.xyz/posts/leetcode_596/) |
+| 595 | Easy | Big Countries |
+| 596 | Easy | Classes More Than 5 Students |
 | 597 | Easy | Friend Requests I: Overall Acceptance Rate |
 | 598 | Easy | Range Addition II |
 | 599 | Easy | Minimum Index Sum of Two Lists |
@@ -606,10 +606,10 @@
 | 604 | Easy | Design Compressed String Iterator |
 | 605 | Easy | Can Place Flowers |
 | 606 | Medium | [Construct String from Binary Tree](https://grid47.xyz/posts/leetcode_606/) |
-| 607 | Easy | [Sales Person](https://grid47.xyz/posts/leetcode_607/) |
+| 607 | Easy | Sales Person |
 | 608 | Medium | Tree Node |
 | 609 | Medium | [Find Duplicate File in System](https://grid47.xyz/posts/leetcode_609/) |
-| 610 | Easy | [Triangle Judgement](https://grid47.xyz/posts/leetcode_610/) |
+| 610 | Easy | Triangle Judgement |
 | 611 | Medium | [Valid Triangle Number](https://grid47.xyz/posts/leetcode_611/) |
 | 612 | Medium | Shortest Distance in a Plane |
 | 613 | Easy | Shortest Distance in a Line |
@@ -618,8 +618,8 @@
 | 616 | Medium | Add Bold Tag in String |
 | 617 | Easy | [Merge Two Binary Trees](https://grid47.xyz/posts/leetcode_617/) |
 | 618 | Hard | Students Report By Geography |
-| 619 | Easy | [Biggest Single Number](https://grid47.xyz/posts/leetcode_619/) |
-| 620 | Easy | [Not Boring Movies](https://grid47.xyz/posts/leetcode_620/) |
+| 619 | Easy | Biggest Single Number |
+| 620 | Easy | Not Boring Movies |
 | 621 | Medium | [Task Scheduler](https://grid47.xyz/posts/leetcode_621/) |
 | 622 | Medium | [Design Circular Queue](https://grid47.xyz/posts/leetcode_622/) |
 | 623 | Medium | [Add One Row to Tree](https://grid47.xyz/posts/leetcode_623/) |
@@ -1067,14 +1067,14 @@
 | 1065 | Easy | Index Pairs of a String |
 | 1066 | Medium | Campus Bikes II |
 | 1067 | Hard | Digit Count in Range |
-| 1068 | Easy | [Product Sales Analysis I](https://grid47.xyz/posts/leetcode_1068/) |
+| 1068 | Easy | Product Sales Analysis I |
 | 1069 | Easy | Product Sales Analysis II |
 | 1070 | Medium | Product Sales Analysis III |
 | 1071 | Easy | Greatest Common Divisor of Strings |
 | 1072 | Medium | [Flip Columns For Maximum Number of Equal Rows](https://grid47.xyz/posts/leetcode_1072/) |
 | 1073 | Medium | [Adding Two Negabinary Numbers](https://grid47.xyz/posts/leetcode_1073/) |
 | 1074 | Hard | [Number of Submatrices That Sum to Target](https://grid47.xyz/posts/leetcode_1074/) |
-| 1075 | Easy | [Project Employees I](https://grid47.xyz/posts/leetcode_1075/) |
+| 1075 | Easy | Project Employees I |
 | 1076 | Easy | Project Employees II |
 | 1077 | Medium | Project Employees III |
 | 1078 | Easy | Occurrences After Bigram |
@@ -1083,7 +1083,7 @@
 | 1081 | Medium | [Smallest Subsequence of Distinct Characters](https://grid47.xyz/posts/leetcode_1081/) |
 | 1082 | Easy | Sales Analysis I |
 | 1083 | Easy | Sales Analysis II |
-| 1084 | Easy | [Sales Analysis III](https://grid47.xyz/posts/leetcode_1084/) |
+| 1084 | Easy | Sales Analysis III |
 | 1085 | Easy | Sum of Digits in the Minimum Number |
 | 1086 | Easy | High Five |
 | 1087 | Medium | Brace Expansion |
@@ -1140,14 +1140,14 @@
 | 1138 | Medium | [Alphabet Board Path](https://grid47.xyz/posts/leetcode_1138/) |
 | 1139 | Medium | [Largest 1-Bordered Square](https://grid47.xyz/posts/leetcode_1139/) |
 | 1140 | Medium | [Stone Game II](https://grid47.xyz/posts/leetcode_1140/) |
-| 1141 | Easy | [User Activity for the Past 30 Days I](https://grid47.xyz/posts/leetcode_1141/) |
+| 1141 | Easy | User Activity for the Past 30 Days I |
 | 1142 | Easy | User Activity for the Past 30 Days II |
 | 1143 | Medium | [Longest Common Subsequence](https://grid47.xyz/posts/leetcode_1143/) |
 | 1144 | Medium | [Decrease Elements To Make Array Zigzag](https://grid47.xyz/posts/leetcode_1144/) |
 | 1145 | Medium | [Binary Tree Coloring Game](https://grid47.xyz/posts/leetcode_1145/) |
 | 1146 | Medium | [Snapshot Array](https://grid47.xyz/posts/leetcode_1146/) |
 | 1147 | Hard | Longest Chunked Palindrome Decomposition |
-| 1148 | Easy | [Article Views I](https://grid47.xyz/posts/leetcode_1148/) |
+| 1148 | Easy | Article Views I |
 | 1149 | Medium | Article Views II |
 | 1150 | Easy | Check If a Number Is Majority Element in a Sorted Array |
 | 1151 | Medium | Minimum Swaps to Group All 1's Together |
@@ -1178,7 +1178,7 @@
 | 1176 | Easy | Diet Plan Performance |
 | 1177 | Medium | [Can Make Palindrome from Substring](https://grid47.xyz/posts/leetcode_1177/) |
 | 1178 | Hard | Number of Valid Words for Each Puzzle |
-| 1179 | Easy | [Reformat Department Table](https://grid47.xyz/posts/leetcode_1179/) |
+| 1179 | Easy | Reformat Department Table |
 | 1180 | Easy | Count Substrings with Only One Distinct Letter |
 | 1181 | Medium | Before and After Puzzle |
 | 1182 | Medium | Shortest Distance to Target Color |
@@ -1210,7 +1210,7 @@
 | 1208 | Medium | [Get Equal Substrings Within Budget](https://grid47.xyz/posts/leetcode_1208/) |
 | 1209 | Medium | [Remove All Adjacent Duplicates in String II](https://grid47.xyz/posts/leetcode_1209/) |
 | 1210 | Hard | Minimum Moves to Reach Target with Rotations |
-| 1211 | Easy | [Queries Quality and Percentage](https://grid47.xyz/posts/leetcode_1211/) |
+| 1211 | Easy | Queries Quality and Percentage |
 | 1212 | Medium | Team Scores in Football Tournament |
 | 1213 | Easy | Intersection of Three Sorted Arrays |
 | 1214 | Medium | Two Sum BSTs |
@@ -1250,7 +1250,7 @@
 | 1248 | Medium | [Count Number of Nice Subarrays](https://grid47.xyz/posts/leetcode_1248/) |
 | 1249 | Medium | [Minimum Remove to Make Valid Parentheses](https://grid47.xyz/posts/leetcode_1249/) |
 | 1250 | Hard | [Check If It Is a Good Array](https://grid47.xyz/posts/leetcode_1250/) |
-| 1251 | Easy | [Average Selling Price](https://grid47.xyz/posts/leetcode_1251/) |
+| 1251 | Easy | Average Selling Price |
 | 1252 | Easy | Cells with Odd Values in a Matrix |
 | 1253 | Medium | [Reconstruct a 2-Row Binary Matrix](https://grid47.xyz/posts/leetcode_1253/) |
 | 1254 | Medium | [Number of Closed Islands](https://grid47.xyz/posts/leetcode_1254/) |
@@ -1279,7 +1279,7 @@
 | 1277 | Medium | [Count Square Submatrices with All Ones](https://grid47.xyz/posts/leetcode_1277/) |
 | 1278 | Hard | Palindrome Partitioning III |
 | 1279 | Easy | Traffic Light Controlled Intersection |
-| 1280 | Easy | [Students and Examinations](https://grid47.xyz/posts/leetcode_1280/) |
+| 1280 | Easy | Students and Examinations |
 | 1281 | Easy | Subtract the Product and Sum of Digits of an Integer |
 | 1282 | Medium | [Group the People Given the Group Size They Belong To](https://grid47.xyz/posts/leetcode_1282/) |
 | 1283 | Medium | [Find the Smallest Divisor Given a Threshold](https://grid47.xyz/posts/leetcode_1283/) |
@@ -1326,7 +1326,7 @@
 | 1324 | Medium | Print Words Vertically |
 | 1325 | Medium | [Delete Leaves With a Given Value](https://grid47.xyz/posts/leetcode_1325/) |
 | 1326 | Hard | [Minimum Number of Taps to Open to Water a Garden](https://grid47.xyz/posts/leetcode_1326/) |
-| 1327 | Easy | [List the Products Ordered in a Period](https://grid47.xyz/posts/leetcode_1327/) |
+| 1327 | Easy | List the Products Ordered in a Period |
 | 1328 | Medium | [Break a Palindrome](https://grid47.xyz/posts/leetcode_1328/) |
 | 1329 | Medium | [Sort the Matrix Diagonally](https://grid47.xyz/posts/leetcode_1329/) |
 | 1330 | Hard | [Reverse Subarray To Maximize Array Value](https://grid47.xyz/posts/leetcode_1330/) |
@@ -1377,7 +1377,7 @@
 | 1375 | Medium | Number of Times Binary String Is Prefix-Aligned |
 | 1376 | Medium | [Time Needed to Inform All Employees](https://grid47.xyz/posts/leetcode_1376/) |
 | 1377 | Hard | Frog Position After T Seconds |
-| 1378 | Easy | [Replace Employee ID With The Unique Identifier](https://grid47.xyz/posts/leetcode_1378/) |
+| 1378 | Easy | Replace Employee ID With The Unique Identifier |
 | 1379 | Easy | [Find a Corresponding Node of a Binary Tree in a Clone of That Tree](https://grid47.xyz/posts/leetcode_1379/) |
 | 1380 | Easy | [Lucky Numbers in a Matrix](https://grid47.xyz/posts/leetcode_1380/) |
 | 1381 | Medium | [Design a Stack With Increment Operation](https://grid47.xyz/posts/leetcode_1381/) |
@@ -1406,7 +1406,7 @@
 | 1404 | Medium | [Number of Steps to Reduce a Number in Binary Representation to One](https://grid47.xyz/posts/leetcode_1404/) |
 | 1405 | Medium | [Longest Happy String](https://grid47.xyz/posts/leetcode_1405/) |
 | 1406 | Hard | [Stone Game III](https://grid47.xyz/posts/leetcode_1406/) |
-| 1407 | Easy | [Top Travellers](https://grid47.xyz/posts/leetcode_1407/) |
+| 1407 | Easy | Top Travellers |
 | 1408 | Easy | String Matching in an Array |
 | 1409 | Medium | [Queries on a Permutation With Key](https://grid47.xyz/posts/leetcode_1409/) |
 | 1410 | Medium | [HTML Entity Parser](https://grid47.xyz/posts/leetcode_1410/) |
@@ -1516,7 +1516,7 @@
 | 1514 | Medium | [Path with Maximum Probability](https://grid47.xyz/posts/leetcode_1514/) |
 | 1515 | Hard | Best Position for a Service Centre |
 | 1516 | Hard | Move Sub-Tree of N-Ary Tree |
-| 1517 | Easy | [Find Users With Valid E-Mails](https://grid47.xyz/posts/leetcode_1517/) |
+| 1517 | Easy | Find Users With Valid E-Mails |
 | 1518 | Easy | Water Bottles |
 | 1519 | Medium | [Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode_1519/) |
 | 1520 | Hard | Maximum Number of Non-Overlapping Substrings |
@@ -1526,7 +1526,7 @@
 | 1524 | Medium | [Number of Sub-arrays With Odd Sum](https://grid47.xyz/posts/leetcode_1524/) |
 | 1525 | Medium | [Number of Good Ways to Split a String](https://grid47.xyz/posts/leetcode_1525/) |
 | 1526 | Hard | Minimum Number of Increments on Subarrays to Form a Target Array |
-| 1527 | Easy | [Patients With a Condition](https://grid47.xyz/posts/leetcode_1527/) |
+| 1527 | Easy | Patients With a Condition |
 | 1528 | Easy | Shuffle String |
 | 1529 | Medium | [Minimum Suffix Flips](https://grid47.xyz/posts/leetcode_1529/) |
 | 1530 | Medium | [Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode_1530/) |
@@ -1586,7 +1586,7 @@
 | 1584 | Medium | [Min Cost to Connect All Points](https://grid47.xyz/posts/leetcode_1584/) |
 | 1585 | Hard | Check If String Is Transformable With Substring Sort Operations |
 | 1586 | Medium | Binary Search Tree Iterator II |
-| 1587 | Easy | [Bank Account Summary II](https://grid47.xyz/posts/leetcode_1587/) |
+| 1587 | Easy | Bank Account Summary II |
 | 1588 | Easy | Sum of All Odd Length Subarrays |
 | 1589 | Medium | [Maximum Sum Obtained of Any Permutation](https://grid47.xyz/posts/leetcode_1589/) |
 | 1590 | Medium | [Make Sum Divisible by P](https://grid47.xyz/posts/leetcode_1590/) |
@@ -1632,7 +1632,7 @@
 | 1630 | Medium | [Arithmetic Subarrays](https://grid47.xyz/posts/leetcode_1630/) |
 | 1631 | Medium | [Path With Minimum Effort](https://grid47.xyz/posts/leetcode_1631/) |
 | 1632 | Hard | Rank Transform of a Matrix |
-| 1633 | Easy | [Percentage of Users Attended a Contest](https://grid47.xyz/posts/leetcode_1633/) |
+| 1633 | Easy | Percentage of Users Attended a Contest |
 | 1634 | Medium | Add Two Polynomials Represented as Linked Lists |
 | 1635 | Hard | Hopper Company Queries I |
 | 1636 | Easy | Sort Array by Increasing Frequency |
@@ -1660,13 +1660,13 @@
 | 1658 | Medium | [Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode_1658/) |
 | 1659 | Hard | Maximize Grid Happiness |
 | 1660 | Medium | Correct a Binary Tree |
-| 1661 | Easy | [Average Time of Process per Machine](https://grid47.xyz/posts/leetcode_1661/) |
+| 1661 | Easy | Average Time of Process per Machine |
 | 1662 | Easy | [Check If Two String Arrays are Equivalent](https://grid47.xyz/posts/leetcode_1662/) |
 | 1663 | Medium | [Smallest String With A Given Numeric Value](https://grid47.xyz/posts/leetcode_1663/) |
 | 1664 | Medium | [Ways to Make a Fair Array](https://grid47.xyz/posts/leetcode_1664/) |
 | 1665 | Hard | Minimum Initial Energy to Finish Tasks |
 | 1666 | Medium | Change the Root of a Binary Tree |
-| 1667 | Easy | [Fix Names in a Table](https://grid47.xyz/posts/leetcode_1667/) |
+| 1667 | Easy | Fix Names in a Table |
 | 1668 | Easy | [Maximum Repeating Substring](https://grid47.xyz/posts/leetcode_1668/) |
 | 1669 | Medium | [Merge In Between Linked Lists](https://grid47.xyz/posts/leetcode_1669/) |
 | 1670 | Medium | [Design Front Middle Back Queue](https://grid47.xyz/posts/leetcode_1670/) |
@@ -1682,7 +1682,7 @@
 | 1680 | Medium | [Concatenation of Consecutive Binary Numbers](https://grid47.xyz/posts/leetcode_1680/) |
 | 1681 | Hard | Minimum Incompatibility |
 | 1682 | Medium | Longest Palindromic Subsequence II |
-| 1683 | Easy | [Invalid Tweets](https://grid47.xyz/posts/leetcode_1683/) |
+| 1683 | Easy | Invalid Tweets |
 | 1684 | Easy | [Count the Number of Consistent Strings](https://grid47.xyz/posts/leetcode_1684/) |
 | 1685 | Medium | [Sum of Absolute Differences in a Sorted Array](https://grid47.xyz/posts/leetcode_1685/) |
 | 1686 | Medium | [Stone Game VI](https://grid47.xyz/posts/leetcode_1686/) |
@@ -1692,7 +1692,7 @@
 | 1690 | Medium | [Stone Game VII](https://grid47.xyz/posts/leetcode_1690/) |
 | 1691 | Hard | Maximum Height by Stacking Cuboids  |
 | 1692 | Hard | Count Ways to Distribute Candies |
-| 1693 | Easy | [Daily Leads and Partners](https://grid47.xyz/posts/leetcode_1693/) |
+| 1693 | Easy | Daily Leads and Partners |
 | 1694 | Easy | [Reformat Phone Number](https://grid47.xyz/posts/leetcode_1694/) |
 | 1695 | Medium | [Maximum Erasure Value](https://grid47.xyz/posts/leetcode_1695/) |
 | 1696 | Medium | [Jump Game VI](https://grid47.xyz/posts/leetcode_1696/) |
@@ -1728,9 +1728,9 @@
 | 1726 | Medium | [Tuple with Same Product](https://grid47.xyz/posts/leetcode_1726/) |
 | 1727 | Medium | [Largest Submatrix With Rearrangements](https://grid47.xyz/posts/leetcode_1727/) |
 | 1728 | Hard | Cat and Mouse II |
-| 1729 | Easy | [Find Followers Count](https://grid47.xyz/posts/leetcode_1729/) |
+| 1729 | Easy | Find Followers Count |
 | 1730 | Medium | Shortest Path to Get Food |
-| 1731 | Easy | [The Number of Employees Which Report to Each Employee](https://grid47.xyz/posts/leetcode_1731/) |
+| 1731 | Easy | The Number of Employees Which Report to Each Employee |
 | 1732 | Easy | [Find the Highest Altitude](https://grid47.xyz/posts/leetcode_1732/) |
 | 1733 | Medium | [Minimum Number of People to Teach](https://grid47.xyz/posts/leetcode_1733/) |
 | 1734 | Medium | [Decode XORed Permutation](https://grid47.xyz/posts/leetcode_1734/) |
@@ -1740,7 +1740,7 @@
 | 1738 | Medium | [Find Kth Largest XOR Coordinate Value](https://grid47.xyz/posts/leetcode_1738/) |
 | 1739 | Hard | Building Boxes |
 | 1740 | Medium | Find Distance in a Binary Tree |
-| 1741 | Easy | [Find Total Time Spent by Each Employee](https://grid47.xyz/posts/leetcode_1741/) |
+| 1741 | Easy | Find Total Time Spent by Each Employee |
 | 1742 | Easy | [Maximum Number of Balls in a Box](https://grid47.xyz/posts/leetcode_1742/) |
 | 1743 | Medium | [Restore the Array From Adjacent Pairs](https://grid47.xyz/posts/leetcode_1743/) |
 | 1744 | Medium | [Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode_1744/) |
@@ -1756,7 +1756,7 @@
 | 1754 | Medium | [Largest Merge Of Two Strings](https://grid47.xyz/posts/leetcode_1754/) |
 | 1755 | Hard | Closest Subsequence Sum |
 | 1756 | Medium | Design Most Recently Used Queue |
-| 1757 | Easy | [Recyclable and Low Fat Products](https://grid47.xyz/posts/leetcode_1757/) |
+| 1757 | Easy | Recyclable and Low Fat Products |
 | 1758 | Easy | [Minimum Changes To Make Alternating Binary String](https://grid47.xyz/posts/leetcode_1758/) |
 | 1759 | Medium | [Count Number of Homogenous Substrings](https://grid47.xyz/posts/leetcode_1759/) |
 | 1760 | Medium | [Minimum Limit of Balls in a Bag](https://grid47.xyz/posts/leetcode_1760/) |
@@ -1788,13 +1788,13 @@
 | 1786 | Medium | [Number of Restricted Paths From First to Last Node](https://grid47.xyz/posts/leetcode_1786/) |
 | 1787 | Hard | Make the XOR of All Segments Equal to Zero |
 | 1788 | Hard | Maximize the Beauty of the Garden |
-| 1789 | Easy | [Primary Department for Each Employee](https://grid47.xyz/posts/leetcode_1789/) |
+| 1789 | Easy | Primary Department for Each Employee |
 | 1790 | Easy | [Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode_1790/) |
 | 1791 | Easy | [Find Center of Star Graph](https://grid47.xyz/posts/leetcode_1791/) |
 | 1792 | Medium | [Maximum Average Pass Ratio](https://grid47.xyz/posts/leetcode_1792/) |
 | 1793 | Hard | [Maximum Score of a Good Subarray](https://grid47.xyz/posts/leetcode_1793/) |
 | 1794 | Medium | Count Pairs of Equal Substrings With Minimum Difference |
-| 1795 | Easy | [Rearrange Products Table](https://grid47.xyz/posts/leetcode_1795/) |
+| 1795 | Easy | Rearrange Products Table |
 | 1796 | Easy | [Second Largest Digit in a String](https://grid47.xyz/posts/leetcode_1796/) |
 | 1797 | Medium | [Design Authentication Manager](https://grid47.xyz/posts/leetcode_1797/) |
 | 1798 | Medium | [Maximum Number of Consecutive Values You Can Make](https://grid47.xyz/posts/leetcode_1798/) |
@@ -1872,7 +1872,7 @@
 | 1870 | Medium | [Minimum Speed to Arrive on Time](https://grid47.xyz/posts/leetcode_1870/) |
 | 1871 | Medium | [Jump Game VII](https://grid47.xyz/posts/leetcode_1871/) |
 | 1872 | Hard | Stone Game VIII |
-| 1873 | Easy | [Calculate Special Bonus](https://grid47.xyz/posts/leetcode_1873/) |
+| 1873 | Easy | Calculate Special Bonus |
 | 1874 | Medium | Minimize Product Sum of Two Arrays |
 | 1875 | Medium | Group Employees of the Same Salary |
 | 1876 | Easy | [Substrings of Size Three with Distinct Characters](https://grid47.xyz/posts/leetcode_1876/) |
@@ -1964,7 +1964,7 @@
 | 1962 | Medium | [Remove Stones to Minimize the Total](https://grid47.xyz/posts/leetcode_1962/) |
 | 1963 | Medium | [Minimum Number of Swaps to Make the String Balanced](https://grid47.xyz/posts/leetcode_1963/) |
 | 1964 | Hard | [Find the Longest Valid Obstacle Course at Each Position](https://grid47.xyz/posts/leetcode_1964/) |
-| 1965 | Easy | [Employees With Missing Information](https://grid47.xyz/posts/leetcode_1965/) |
+| 1965 | Easy | Employees With Missing Information |
 | 1966 | Medium | Binary Searchable Numbers in an Unsorted Array |
 | 1967 | Easy | Number of Strings That Appear as Substrings in Word |
 | 1968 | Medium | [Array With Elements Not Equal to Average of Neighbors](https://grid47.xyz/posts/leetcode_1968/) |
@@ -1977,7 +1977,7 @@
 | 1975 | Medium | [Maximum Matrix Sum](https://grid47.xyz/posts/leetcode_1975/) |
 | 1976 | Medium | [Number of Ways to Arrive at Destination](https://grid47.xyz/posts/leetcode_1976/) |
 | 1977 | Hard | Number of Ways to Separate Numbers |
-| 1978 | Easy | [Employees Whose Manager Left the Company](https://grid47.xyz/posts/leetcode_1978/) |
+| 1978 | Easy | Employees Whose Manager Left the Company |
 | 1979 | Easy | [Find Greatest Common Divisor of Array](https://grid47.xyz/posts/leetcode_1979/) |
 | 1980 | Medium | [Find Unique Binary String](https://grid47.xyz/posts/leetcode_1980/) |
 | 1981 | Medium | [Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode_1981/) |
@@ -2355,7 +2355,7 @@
 | 2353 | Medium | [Design a Food Rating System](https://grid47.xyz/posts/leetcode_2353/) |
 | 2354 | Hard | [Number of Excellent Pairs](https://grid47.xyz/posts/leetcode_2354/) |
 | 2355 | Hard | Maximum Number of Books You Can Take |
-| 2356 | Easy | [Number of Unique Subjects Taught by Each Teacher](https://grid47.xyz/posts/leetcode_2356/) |
+| 2356 | Easy | Number of Unique Subjects Taught by Each Teacher |
 | 2357 | Easy | [Make Array Zero by Subtracting Equal Amounts](https://grid47.xyz/posts/leetcode_2357/) |
 | 2358 | Medium | [Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode_2358/) |
 | 2359 | Medium | [Find Closest Node to Given Two Nodes](https://grid47.xyz/posts/leetcode_2359/) |
