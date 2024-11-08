@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2952: Minimum Number of Coins to be Added"
 date = "2024-11-01"
 lastmod = "2024-11-06"

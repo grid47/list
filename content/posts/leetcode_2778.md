@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2778: Sum of Squares of Special Elements "
 date = "2024-11-01"
 lastmod = "2024-11-06"

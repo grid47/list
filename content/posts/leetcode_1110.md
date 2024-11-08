@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1110: Delete Nodes And Return Forest"
 date = "2024-11-01"
 lastmod = "2024-11-06"

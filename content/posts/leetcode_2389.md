@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2389: Longest Subsequence With Limited Sum"
 date = "2024-11-01"
 lastmod = "2024-11-06"

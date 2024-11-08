@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2283: Check if Number Has Equal Digit Count and Digit Value"
 date = "2024-11-01"
 lastmod = "2024-11-06"

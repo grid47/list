@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2160: Minimum Sum of Four Digit Number After Splitting Digits"
 date = "2024-11-01"
 lastmod = "2024-11-06"

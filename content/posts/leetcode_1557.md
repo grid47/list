@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1557: Minimum Number of Vertices to Reach All Nodes"
 date = "2024-11-01"
 lastmod = "2024-11-06"

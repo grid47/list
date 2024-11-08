@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2529: Maximum Count of Positive Integer and Negative Integer"
 date = "2024-11-01"
 lastmod = "2024-11-06"

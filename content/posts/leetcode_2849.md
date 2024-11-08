@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2849: Determine if a Cell Is Reachable at a Given Time"
 date = "2024-11-01"
 lastmod = "2024-11-06"

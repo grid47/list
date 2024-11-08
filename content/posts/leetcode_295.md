@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 295: Find Median from Data Stream"
 date = "2024-11-01"
 lastmod = "2024-11-06"

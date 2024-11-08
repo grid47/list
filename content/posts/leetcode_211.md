@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 211: Design Add and Search Words Data Structure"
 date = "2024-11-01"
 lastmod = "2024-11-06"

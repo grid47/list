@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2682: Find the Losers of the Circular Game"
 date = "2024-11-01"
 lastmod = "2024-11-06"

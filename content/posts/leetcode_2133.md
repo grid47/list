@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2133: Check if Every Row and Column Contains All Numbers"
 date = "2024-11-01"
 lastmod = "2024-11-06"

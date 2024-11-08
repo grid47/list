@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 429: N-ary Tree Level Order Traversal"
 date = "2024-11-01"
 lastmod = "2024-11-06"

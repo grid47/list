@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2828: Check if a String Is an Acronym of Words"
 date = "2024-11-01"
 lastmod = "2024-11-06"

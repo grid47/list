@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1688: Count of Matches in Tournament"
 date = "2024-11-01"
 lastmod = "2024-11-06"

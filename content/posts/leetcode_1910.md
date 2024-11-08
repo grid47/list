@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1910: Remove All Occurrences of a Substring"
 date = "2024-11-01"
 lastmod = "2024-11-06"

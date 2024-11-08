@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1415: The k-th Lexicographical String of All Happy Strings of Length n"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2859: Sum of Values at Indices With K Set Bits"
 date = "2024-11-01"
 lastmod = "2024-11-06"

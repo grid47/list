@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1493: Longest Subarray of 1's After Deleting One Element"
 date = "2024-11-01"
 lastmod = "2024-11-06"

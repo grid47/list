@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2023: Number of Pairs of Strings With Concatenation Equal to Target"
 date = "2024-11-01"
 lastmod = "2024-11-06"

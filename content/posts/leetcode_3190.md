@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 3190: Find Minimum Operations to Make All Elements Divisible by Three"
 date = "2024-11-01"
 lastmod = "2024-11-06"

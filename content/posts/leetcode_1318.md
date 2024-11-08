@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1318: Minimum Flips to Make a OR b Equal to c"
 date = "2024-11-01"
 lastmod = "2024-11-06"

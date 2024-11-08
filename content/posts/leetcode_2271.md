@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2271: Maximum White Tiles Covered by a Carpet"
 date = "2024-11-01"
 lastmod = "2024-11-06"

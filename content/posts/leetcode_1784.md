@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1784: Check if Binary String Has at Most One Segment of Ones"
 date = "2024-11-01"
 lastmod = "2024-11-06"

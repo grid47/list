@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 3178: Find the Child Who Has the Ball After K Seconds"
 date = "2024-11-01"
 lastmod = "2024-11-06"

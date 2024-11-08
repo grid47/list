@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2470: Number of Subarrays With LCM Equal to K"
 date = "2024-11-01"
 lastmod = "2024-11-06"

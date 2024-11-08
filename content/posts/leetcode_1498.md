@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
 date = "2024-11-01"
 lastmod = "2024-11-06"

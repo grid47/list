@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2516: Take K of Each Character From Left and Right"
 date = "2024-11-01"
 lastmod = "2024-11-06"

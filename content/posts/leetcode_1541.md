@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1541: Minimum Insertions to Balance a Parentheses String"
 date = "2024-11-01"
 lastmod = "2024-11-06"

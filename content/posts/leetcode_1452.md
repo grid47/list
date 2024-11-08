@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1452: People Whose List of Favorite Companies Is Not a Subset of Another List"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2506: Count Pairs Of Similar Strings"
 date = "2024-11-01"
 lastmod = "2024-11-06"

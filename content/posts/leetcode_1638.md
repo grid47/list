@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1638: Count Substrings That Differ by One Character"
 date = "2024-11-01"
 lastmod = "2024-11-06"

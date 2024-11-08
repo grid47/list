@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons"
 date = "2024-11-01"
 lastmod = "2024-11-06"

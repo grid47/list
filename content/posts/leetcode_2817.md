@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2817: Minimum Absolute Difference Between Elements With Constraint"
 date = "2024-11-01"
 lastmod = "2024-11-06"

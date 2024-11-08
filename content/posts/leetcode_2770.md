@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2770: Maximum Number of Jumps to Reach the Last Index"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

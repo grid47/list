@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 996: Number of Squareful Arrays"
 date = "2024-11-01"
 lastmod = "2024-11-06"

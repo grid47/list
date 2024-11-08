@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2903: Find Indices With Index and Value Difference I"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2183: Count Array Pairs Divisible by K"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2148: Count Elements With Strictly Smaller and Greater Elements "
 date = "2024-11-01"
 lastmod = "2024-11-06"

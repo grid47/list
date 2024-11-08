@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1503: Last Moment Before All Ants Fall Out of a Plank"
 date = "2024-11-01"
 lastmod = "2024-11-06"

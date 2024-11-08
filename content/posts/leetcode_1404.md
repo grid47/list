@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1404: Number of Steps to Reduce a Number in Binary Representation to One"
 date = "2024-11-01"
 lastmod = "2024-11-06"

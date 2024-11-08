@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2762: Continuous Subarrays"
 date = "2024-11-01"
 lastmod = "2024-11-06"

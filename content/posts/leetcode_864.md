@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
 date = "2024-11-01"
 lastmod = "2024-11-06"

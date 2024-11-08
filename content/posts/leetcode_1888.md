@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1888: Minimum Number of Flips to Make the Binary String Alternating"
 date = "2024-11-01"
 lastmod = "2024-11-06"

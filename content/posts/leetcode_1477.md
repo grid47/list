@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1477: Find Two Non-overlapping Sub-arrays Each With Target Sum"
 date = "2024-11-01"
 lastmod = "2024-11-06"

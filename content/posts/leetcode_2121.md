@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2121: Intervals Between Identical Elements"
 date = "2024-11-01"
 lastmod = "2024-11-06"

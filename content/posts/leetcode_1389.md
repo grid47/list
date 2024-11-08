@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1389: Create Target Array in the Given Order"
 date = "2024-11-01"
 lastmod = "2024-11-06"

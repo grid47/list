@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2577: Minimum Time to Visit a Cell In a Grid"
 date = "2024-11-01"
 lastmod = "2024-11-06"

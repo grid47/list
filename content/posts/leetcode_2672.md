@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2672: Number of Adjacent Elements With the Same Color"
 date = "2024-11-01"
 lastmod = "2024-11-06"

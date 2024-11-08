@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1482: Minimum Number of Days to Make m Bouquets"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1790: Check if One String Swap Can Make Strings Equal"
 date = "2024-11-01"
 lastmod = "2024-11-06"

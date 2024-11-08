@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1844: Replace All Digits with Characters"
 date = "2024-11-01"
 lastmod = "2024-11-06"

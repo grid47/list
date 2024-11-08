@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1326: Minimum Number of Taps to Open to Water a Garden"
 date = "2024-11-01"
 lastmod = "2024-11-06"

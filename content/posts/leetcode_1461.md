@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1461: Check If a String Contains All Binary Codes of Size K"
 date = "2024-11-01"
 lastmod = "2024-11-06"

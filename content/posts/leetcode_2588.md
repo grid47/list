@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2588: Count the Number of Beautiful Subarrays"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 969: Pancake Sorting"
 date = "2024-11-01"
 lastmod = "2024-11-06"

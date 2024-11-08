@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1957: Delete Characters to Make Fancy String"
 date = "2024-11-01"
 lastmod = "2024-11-06"

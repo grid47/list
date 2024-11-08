@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2760: Longest Even Odd Subarray With Threshold"
 date = "2024-11-01"
 lastmod = "2024-11-06"

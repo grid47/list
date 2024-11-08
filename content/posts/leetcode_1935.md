@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1935: Maximum Number of Words You Can Type"
 date = "2024-11-01"
 lastmod = "2024-11-06"

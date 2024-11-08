@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2769: Find the Maximum Achievable Number"
 date = "2024-11-01"
 lastmod = "2024-11-06"

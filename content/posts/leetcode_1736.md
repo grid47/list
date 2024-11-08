@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1736: Latest Time by Replacing Hidden Digits"
 date = "2024-11-01"
 lastmod = "2024-11-06"

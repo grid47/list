@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1253: Reconstruct a 2-Row Binary Matrix"
 date = "2024-11-01"
 lastmod = "2024-11-06"

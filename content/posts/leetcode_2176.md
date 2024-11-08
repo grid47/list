@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2176: Count Equal and Divisible Pairs in an Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

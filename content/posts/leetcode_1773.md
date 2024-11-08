@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1773: Count Items Matching a Rule"
 date = "2024-11-01"
 lastmod = "2024-11-06"

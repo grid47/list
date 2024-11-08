@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1509: Minimum Difference Between Largest and Smallest Value in Three Moves"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2918: Minimum Equal Sum of Two Arrays After Replacing Zeros"
 date = "2024-11-01"
 lastmod = "2024-11-06"

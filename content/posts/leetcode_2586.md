@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2586: Count the Number of Vowel Strings in Range"
 date = "2024-11-01"
 lastmod = "2024-11-06"

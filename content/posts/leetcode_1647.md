@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1647: Minimum Deletions to Make Character Frequencies Unique"
 date = "2024-11-01"
 lastmod = "2024-11-06"

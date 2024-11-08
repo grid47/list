@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2807: Insert Greatest Common Divisors in Linked List"
 date = "2024-11-01"
 lastmod = "2024-11-06"

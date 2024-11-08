@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 380: Insert Delete GetRandom O(1)"
 date = "2024-11-01"
 lastmod = "2024-11-06"

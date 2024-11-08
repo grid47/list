@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2009: Minimum Number of Operations to Make Array Continuous"
 date = "2024-11-01"
 lastmod = "2024-11-06"

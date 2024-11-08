@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps"
 date = "2024-11-01"
 lastmod = "2024-11-06"

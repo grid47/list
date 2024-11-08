@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2486: Append Characters to String to Make Subsequence"
 date = "2024-11-01"
 lastmod = "2024-11-06"

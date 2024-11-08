@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2192: All Ancestors of a Node in a Directed Acyclic Graph"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2857: Count Pairs of Points With Distance k"
 date = "2024-11-01"
 lastmod = "2024-11-06"

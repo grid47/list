@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2186: Minimum Number of Steps to Make Two Strings Anagram II"
 date = "2024-11-01"
 lastmod = "2024-11-06"

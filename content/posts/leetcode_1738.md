@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1738: Find Kth Largest XOR Coordinate Value"
 date = "2024-11-01"
 lastmod = "2024-11-06"

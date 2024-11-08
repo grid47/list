@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 992: Subarrays with K Different Integers"
 date = "2024-11-01"
 lastmod = "2024-11-06"

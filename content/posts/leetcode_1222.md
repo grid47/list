@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1222: Queens That Can Attack the King"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1962: Remove Stones to Minimize the Total"
 date = "2024-11-01"
 lastmod = "2024-11-06"

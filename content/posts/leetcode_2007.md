@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2007: Find Original Array From Doubled Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

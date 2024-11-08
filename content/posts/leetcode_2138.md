@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2138: Divide a String Into Groups of Size k"
 date = "2024-11-01"
 lastmod = "2024-11-06"

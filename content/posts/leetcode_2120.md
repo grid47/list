@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2120: Execution of All Suffix Instructions Staying in a Grid"
 date = "2024-11-01"
 lastmod = "2024-11-06"

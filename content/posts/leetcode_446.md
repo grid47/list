@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 446: Arithmetic Slices II - Subsequence"
 date = "2024-11-01"
 lastmod = "2024-11-06"

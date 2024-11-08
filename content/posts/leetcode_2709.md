@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2709: Greatest Common Divisor Traversal"
 date = "2024-11-01"
 lastmod = "2024-11-06"

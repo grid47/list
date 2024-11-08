@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 714: Best Time to Buy and Sell Stock with Transaction Fee"
 date = "2024-11-01"
 lastmod = "2024-11-06"

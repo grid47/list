@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 835: Image Overlap"
 date = "2024-11-01"
 lastmod = "2024-11-06"

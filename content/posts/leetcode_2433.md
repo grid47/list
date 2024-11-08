@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2433: Find The Original Array of Prefix Xor"
 date = "2024-11-01"
 lastmod = "2024-11-06"

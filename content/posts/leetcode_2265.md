@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2265: Count Nodes Equal to Average of Subtree"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1941: Check if All Characters Have Equal Number of Occurrences"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2086: Minimum Number of Food Buckets to Feed the Hamsters"
 date = "2024-11-01"
 lastmod = "2024-11-06"

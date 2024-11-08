@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1409: Queries on a Permutation With Key"
 date = "2024-11-01"
 lastmod = "2024-11-06"

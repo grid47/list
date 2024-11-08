@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2432: The Employee That Worked on the Longest Task"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2022: Convert 1D Array Into 2D Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

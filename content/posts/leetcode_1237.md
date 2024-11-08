@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1237: Find Positive Integer Solution for a Given Equation"
 date = "2024-11-01"
 lastmod = "2024-11-06"

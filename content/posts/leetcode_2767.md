@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2767: Partition String Into Minimum Beautiful Substrings"
 date = "2024-11-01"
 lastmod = "2024-11-06"

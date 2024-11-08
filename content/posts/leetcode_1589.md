@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1589: Maximum Sum Obtained of Any Permutation"
 date = "2024-11-01"
 lastmod = "2024-11-06"

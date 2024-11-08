@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1769: Minimum Number of Operations to Move All Balls to Each Box"
 date = "2024-11-01"
 lastmod = "2024-11-06"

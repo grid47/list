@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations"
 date = "2024-11-01"
 lastmod = "2024-11-06"

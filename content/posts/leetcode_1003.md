@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1003: Check If Word Is Valid After Substitutions"
 date = "2024-11-01"
 lastmod = "2024-11-06"

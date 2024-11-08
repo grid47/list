@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1593: Split a String Into the Max Number of Unique Substrings"
 date = "2024-11-01"
 lastmod = "2024-11-06"

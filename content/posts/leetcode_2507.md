@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2507: Smallest Value After Replacing With Sum of Prime Factors"
 date = "2024-11-01"
 lastmod = "2024-11-06"

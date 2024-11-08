@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 719: Find K-th Smallest Pair Distance"
 date = "2024-11-01"
 lastmod = "2024-11-06"

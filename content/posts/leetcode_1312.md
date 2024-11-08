@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1312: Minimum Insertion Steps to Make a String Palindrome"
 date = "2024-11-01"
 lastmod = "2024-11-06"

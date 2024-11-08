@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1770: Maximum Score from Performing Multiplication Operations"
 date = "2024-11-01"
 lastmod = "2024-11-06"

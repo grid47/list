@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1552: Magnetic Force Between Two Balls"
 date = "2024-11-01"
 lastmod = "2024-11-06"

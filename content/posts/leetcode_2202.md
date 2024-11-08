@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2202: Maximize the Topmost Element After K Moves"
 date = "2024-11-01"
 lastmod = "2024-11-06"

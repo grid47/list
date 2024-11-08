@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2515: Shortest Distance to Target String in a Circular Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

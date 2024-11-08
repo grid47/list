@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 703: Kth Largest Element in a Stream"
 date = "2024-11-01"
 lastmod = "2024-11-06"

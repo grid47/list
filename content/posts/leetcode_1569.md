@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1569: Number of Ways to Reorder Array to Get Same BST"
 date = "2024-11-01"
 lastmod = "2024-11-06"

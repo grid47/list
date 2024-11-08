@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1849: Splitting a String Into Descending Consecutive Values"
 date = "2024-11-01"
 lastmod = "2024-11-06"

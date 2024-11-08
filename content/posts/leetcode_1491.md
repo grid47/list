@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1491: Average Salary Excluding the Minimum and Maximum Salary"
 date = "2024-11-01"
 lastmod = "2024-11-06"

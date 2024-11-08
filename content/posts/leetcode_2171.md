@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2171: Removing Minimum Number of Magic Beans"
 date = "2024-11-01"
 lastmod = "2024-11-06"

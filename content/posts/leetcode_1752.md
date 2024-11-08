@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2130: Maximum Twin Sum of a Linked List"
 date = "2024-11-01"
 lastmod = "2024-11-06"

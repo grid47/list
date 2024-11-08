@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2099: Find Subsequence of Length K With the Largest Sum"
 date = "2024-11-01"
 lastmod = "2024-11-06"

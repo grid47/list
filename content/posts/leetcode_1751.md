@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1751: Maximum Number of Events That Can Be Attended II"
 date = "2024-11-01"
 lastmod = "2024-11-06"

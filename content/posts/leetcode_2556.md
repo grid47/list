@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2556: Disconnect Path in a Binary Matrix by at Most One Flip"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
 date = "2024-11-01"
 lastmod = "2024-11-06"

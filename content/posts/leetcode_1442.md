@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR"
 date = "2024-11-01"
 lastmod = "2024-11-06"

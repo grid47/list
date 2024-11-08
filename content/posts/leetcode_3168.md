@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 3168: Minimum Number of Chairs in a Waiting Room"
 date = "2024-11-01"
 lastmod = "2024-11-06"

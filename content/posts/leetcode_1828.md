@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1828: Queries on Number of Points Inside a Circle"
 date = "2024-11-01"
 lastmod = "2024-11-06"

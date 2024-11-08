@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2772: Apply Operations to Make All Array Elements Equal to Zero"
 date = "2024-11-01"
 lastmod = "2024-11-06"

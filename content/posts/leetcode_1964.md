@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1964: Find the Longest Valid Obstacle Course at Each Position"
 date = "2024-11-01"
 lastmod = "2024-11-06"

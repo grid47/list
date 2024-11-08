@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1697: Checking Existence of Edge Length Limited Paths"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2673: Make Costs of Paths Equal in a Binary Tree"
 date = "2024-11-01"
 lastmod = "2024-11-06"

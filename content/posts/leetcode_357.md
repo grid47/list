@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 357: Count Numbers with Unique Digits"
 date = "2024-11-01"
 lastmod = "2024-11-06"

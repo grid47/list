@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number"
 date = "2024-11-01"
 lastmod = "2024-11-06"

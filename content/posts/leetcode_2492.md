@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2492: Minimum Score of a Path Between Two Cities"
 date = "2024-11-01"
 lastmod = "2024-11-06"

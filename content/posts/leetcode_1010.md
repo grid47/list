@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1010: Pairs of Songs With Total Durations Divisible by 60"
 date = "2024-11-01"
 lastmod = "2024-11-06"

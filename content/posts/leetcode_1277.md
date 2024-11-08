@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1277: Count Square Submatrices with All Ones"
 date = "2024-11-01"
 lastmod = "2024-11-06"

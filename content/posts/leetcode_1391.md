@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1391: Check if There is a Valid Path in a Grid"
 date = "2024-11-01"
 lastmod = "2024-11-06"

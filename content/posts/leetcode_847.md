@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 847: Shortest Path Visiting All Nodes"
 date = "2024-11-01"
 lastmod = "2024-11-06"

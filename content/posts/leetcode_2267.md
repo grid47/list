@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2267:  Check if There Is a Valid Parentheses String Path"
 date = "2024-11-01"
 lastmod = "2024-11-06"

@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2915: Length of the Longest Subsequence That Sums to Target"
 date = "2024-11-01"
 lastmod = "2024-11-06"

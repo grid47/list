@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1855: Maximum Distance Between a Pair of Values"
 date = "2024-11-01"
 lastmod = "2024-11-06"

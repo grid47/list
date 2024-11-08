@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2477: Minimum Fuel Cost to Report to the Capital"
 date = "2024-11-01"
 lastmod = "2024-11-06"

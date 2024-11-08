@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2654: Minimum Number of Operations to Make All Array Elements Equal to 1"
 date = "2024-11-01"
 lastmod = "2024-11-06"

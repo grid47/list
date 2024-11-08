@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 34: Find First and Last Position of Element in Sorted Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

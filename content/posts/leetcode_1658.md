@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
 date = "2024-11-01"
 lastmod = "2024-11-06"

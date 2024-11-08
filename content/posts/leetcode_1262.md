@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 1262: Greatest Sum Divisible by Three"
 date = "2024-11-01"
 lastmod = "2024-11-06"

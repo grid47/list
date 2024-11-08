@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2535: Difference Between Element Sum and Digit Sum of an Array"
 date = "2024-11-01"
 lastmod = "2024-11-06"

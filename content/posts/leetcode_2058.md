@@ -1,6 +1,6 @@
 
 +++
-authors = ["Crafted by Me"]
+authors = ["grid47"]
 title = "Leetcode 2058: Find the Minimum and Maximum Number of Nodes Between Critical Points"
 date = "2024-11-01"
 lastmod = "2024-11-06"
