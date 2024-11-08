@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -272,7 +272,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of bus routes and two bus stops: a source and a target. Each bus route is represented as an array of bus stops it serves. Your task is to find the minimum number of buses required to travel from the source to the target. If it is not possible to reach the target, return -1.</p>
+<p>Given a series of bus routes, each represented as a list of bus stops, we need to find the minimum number of buses required to travel from a specified starting bus stop (<code>source</code>) to a destination bus stop (<code>target</code>). Each bus route operates as a circular route, meaning that if a bus route covers stops <code>[A, B, C]</code>, it continuously loops through these stops. We need an efficient way to determine the shortest path using the fewest bus transfers from the source to the target stop.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -280,49 +280,140 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be approached using a graph traversal technique (Breadth-First Search, BFS) because we can consider each bus route as a node and each bus stop as an edge connecting those nodes.</p>
+<p>To solve this problem, we treat each bus as a node and establish connections (edges) between buses that share any common stops. This problem then reduces to a graph traversal problem where nodes represent buses, and edges between nodes represent direct transfer opportunities between buses. A breadth-first search (BFS) is ideal here because it efficiently finds the shortest path in an unweighted graph.</p>
+<p>Here’s the step-by-step approach:</p>
 <ol>
 <li>
-<p><strong>Graph Representation</strong>:</p>
+<p><strong>Mapping Bus Stops to Routes</strong>:</p>
 <ul>
-<li>Use an unordered map (<code>mp</code>) to keep track of which bus routes serve each bus stop.</li>
-<li>Use an adjacency list (<code>bus</code>) to represent the connections between bus routes.</li>
+<li>For each stop in a bus route, store the bus route index in a hashmap. This helps quickly identify which buses visit a given stop, creating a route map.</li>
 </ul>
 </li>
 <li>
-<p><strong>Building the Graph</strong>:</p>
+<p><strong>Building the Bus Graph</strong>:</p>
 <ul>
-<li>Iterate through each route and populate the map so that each bus stop points to the routes that can be taken from that stop.</li>
-<li>Populate the adjacency list to show which routes are connected to each other.</li>
+<li>For each bus route, identify other routes that share any stops. These routes are directly connected, allowing passengers to transfer between them without changing bus stops.</li>
 </ul>
 </li>
 <li>
-<p><strong>BFS Initialization</strong>:</p>
+<p><strong>Initializing BFS</strong>:</p>
 <ul>
-<li>If the source and target are the same, return 0 (no buses needed).</li>
-<li>Initialize a queue for BFS and a set to keep track of visited bus routes.</li>
+<li>If the source and target are the same, return <code>0</code> as no buses are needed.</li>
+<li>Otherwise, initialize a BFS starting with the buses that pass through the source stop. Track visited buses to avoid revisiting nodes and cycles.</li>
 </ul>
 </li>
 <li>
-<p><strong>BFS Traversal</strong>:</p>
+<p><strong>Perform BFS to Find Minimum Transfers</strong>:</p>
 <ul>
-<li>For each level of BFS (each bus transfer), push all the bus routes accessible from the currently visited routes into the queue.</li>
-<li>Check if any of these routes lead to the target bus stop. If so, return the current count of buses taken.</li>
-<li>If the queue is exhausted without reaching the target, return -1.</li>
+<li>Process each bus route level by level. For each bus, check if it reaches the target stop. If so, return the current number of transfers.</li>
+<li>If not, enqueue all directly connected buses that haven’t been visited, representing a transfer to those routes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If BFS completes without reaching the target stop, return <code>-1</code> as the target stop is unreachable.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>numBusesToDestination</code> function constructs the necessary data structures and performs BFS.</li>
-<li>The graph is built to show connections between bus routes.</li>
-<li>The BFS process explores each level of routes, counting the number of transfers (buses).</li>
+<h4 id="step-1-initialize-variables-and-create-mapping">
+  Step 1: Initialize Variables and Create Mapping
+  <a class="heading-link" href="#step-1-initialize-variables-and-create-mapping">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> routes.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> bus(n);
+</span></span></code></pre></div><ul>
+<li><code>mp</code> maps each stop to the set of buses that pass through it.</li>
+<li><code>bus</code> is a graph where each index represents a bus and stores connections to other buses that share stops.</li>
+</ul>
+<h4 id="step-2-populate-bus-connections">
+  Step 2: Populate Bus Connections
+  <a class="heading-link" href="#step-2-populate-bus-connections">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: routes[i]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp[x].count(i)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp[x]) {
+</span></span><span style="display:flex;"><span>                bus[i].push_back(it);
+</span></span><span style="display:flex;"><span>                bus[it].push_back(i);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        mp[x].insert(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each stop in each bus route, check if it’s already been processed for that bus. If not, add mutual connections in <code>bus</code> between any buses that share this stop.</li>
+<li>Update <code>mp</code> to mark that this bus route serves this stop.</li>
+</ul>
+<h4 id="step-3-check-for-trivial-case-and-start-bfs">
+  Step 3: Check for Trivial Case and Start BFS
+  <a class="heading-link" href="#step-3-check-for-trivial-case-and-start-bfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(source <span style="color:#f92672">==</span> target) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> it: mp[source]) {
+</span></span><span style="display:flex;"><span>    q.push(it);
+</span></span><span style="display:flex;"><span>    vis.insert(it);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the <code>source</code> and <code>target</code> stops are the same, return <code>0</code>.</li>
+<li>Initialize BFS by pushing all buses that pass through the <code>source</code> stop to the queue and mark them as visited.</li>
+</ul>
+<h4 id="step-4-perform-bfs-to-find-minimum-bus-transfers">
+  Step 4: Perform BFS to Find Minimum Bus Transfers
+  <a class="heading-link" href="#step-4-perform-bfs-to-find-minimum-bus-transfers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp[target].count(x)) <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: bus[x]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(vis.count(it)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            vis.insert(it);
+</span></span><span style="display:flex;"><span>            q.push(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Each level of BFS represents a transfer to another bus.</li>
+<li>For each bus in the current level, check if it reaches <code>target</code> (indicating a valid route), then return <code>cnt</code>.</li>
+<li>Enqueue unvisited, directly connected buses, marking them visited to prevent cycles.</li>
+</ul>
+<h4 id="step-5-return-result-if-target-is-unreachable">
+  Step 5: Return Result if Target is Unreachable
+  <a class="heading-link" href="#step-5-return-result-if-target-is-unreachable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the BFS completes without finding the <code>target</code>, return <code>-1</code>, meaning the destination is unreachable.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -331,11 +422,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(B + S), where B is the number of bus routes and S is the number of bus stops. Each bus route and stop is processed once.</li>
-<li><strong>Space Complexity</strong>: O(B + S) for storing the graph representation and the queue.</li>
+<li>Constructing <code>mp</code> and <code>bus</code> is <strong>O(N * M)</strong>, where <code>N</code> is the number of bus routes and <code>M</code> is the average number of stops per route.</li>
+<li>BFS traverses each bus and its connections at most once, making it <strong>O(N)</strong> in the worst case.</li>
 </ul>
-<p>This approach effectively finds the minimum number of buses needed to travel from the source to the target while handling edge cases where the target may not be reachable.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(N + M)</strong> for storing the graph <code>bus</code> and the mapping <code>mp</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution optimally solves the problem by modeling it as a graph traversal with nodes as buses and edges as direct connections between buses sharing stops. Using BFS allows for an efficient search for the minimum number of transfers needed to reach the target, while the hashmap ensures quick lookup of bus connections. This approach is ideal for large datasets with potentially complex networks of routes, ensuring quick and accurate results.</p>
  
 </div>
   

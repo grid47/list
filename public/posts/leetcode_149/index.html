@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode285s1hbhb">
+<h2 id="hahahugoshortcode283s1hbhb">
   
 
   
@@ -256,7 +256,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of points where each point is represented by its coordinates ((x, y)), determine the maximum number of points that can lie on the same straight line.</p>
+<p>The problem is to find the maximum number of points that lie on the same straight line in a 2D plane. Given a list of points, where each point is represented by a pair of integers <code>[x, y]</code>, we need to determine the maximum number of points that lie on the same line. The key challenge is to efficiently calculate the line passing through any two points and count how many points lie on that line.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,65 +264,116 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can follow these steps:</p>
 <ol>
 <li>
-<p><strong>Handling Edge Cases</strong>:</p>
-<ul>
-<li>If the number of points is less than or equal to 2, return the number of points since any two points can form a line.</li>
-</ul>
-</li>
-<li>
-<p><strong>Using Slope Calculation</strong>:</p>
-<ul>
-<li>For each point, calculate the slope of the line formed with every other point.</li>
-<li>Use a map to keep track of the frequency of each slope.</li>
-</ul>
-</li>
-<li>
-<p><strong>Slope Calculation</strong>:</p>
-<ul>
-<li>If the x-coordinates of two points are the same, the slope is considered vertical (set as <code>DBL_MAX</code>).</li>
-<li>Otherwise, calculate the slope using the formula:
+<p><strong>Understanding the Line Equation:</strong>
+The general form of the equation of a line passing through two points <code>(x1, y1)</code> and <code>(x2, y2)</code> can be expressed in terms of its slope <code>m</code>, where:
 [
-\text{slope} = \frac{y_2 - y_1}{x_2 - x_1}
-]</li>
-<li>Count how many times each slope appears for the current point.</li>
+m = \frac{y2 - y1}{x2 - x1}
+]
+If the slope is the same for multiple pairs of points, these points lie on the same straight line. In this case, our task is to calculate the slope between every pair of points and count how many times each slope occurs.</p>
+</li>
+<li>
+<p><strong>Handling Special Cases:</strong></p>
+<ul>
+<li>Vertical lines: For vertical lines where <code>x1 == x2</code>, the slope is undefined or infinite. This can be handled using a special constant like <code>DBL_MAX</code> (a predefined constant representing the largest possible double).</li>
+<li>Duplicate points: If there are duplicate points, they should be considered as part of the same line, so we need to handle them separately by counting them explicitly.</li>
 </ul>
 </li>
 <li>
-<p><strong>Finding Maximum Points</strong>:</p>
+<p><strong>Using a Map for Counting Slopes:</strong></p>
 <ul>
-<li>Update the maximum count of points on a line whenever a slope&rsquo;s frequency exceeds the current maximum.</li>
+<li>We use a map to store how many points have the same slope relative to a fixed point <code>p1</code>. This map is keyed by the slope, and the value is the count of points with that slope.</li>
+<li>For each point <code>p1</code>, we compute the slope for every other point <code>p2</code> and update the map. After calculating the slopes for all other points with respect to <code>p1</code>, we determine the maximum number of points that share the same slope with <code>p1</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Optimizing the Search:</strong></p>
 <ul>
-<li>The result is the maximum count of points on a line plus one (to include the starting point).</li>
+<li>The solution involves iterating over each point and computing the slopes with every other point, ensuring that we consider every possible line. The maximum number of points on the same line is then determined by finding the maximum count of slopes for each point <code>p1</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-handle-edge-cases-for-small-input">
+  Step 1: Handle Edge Cases for Small Input
+  <a class="heading-link" href="#step-1-handle-edge-cases-for-small-input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(pts.size() <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> pts.size();
+</span></span></code></pre></div><p>In this step, we immediately handle the edge case where there are fewer than or exactly two points. If there are two or fewer points, they always lie on a single line, so we can return the number of points directly.</p>
+<h4 id="step-2-initialize-maximum-count">
+  Step 2: Initialize Maximum Count
+  <a class="heading-link" href="#step-2-initialize-maximum-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>We initialize a variable <code>mx</code> to track the maximum number of points on the same line as we iterate through the points.</p>
+<h4 id="step-3-iterate-over-each-point">
+  Step 3: Iterate Over Each Point
+  <a class="heading-link" href="#step-3-iterate-over-each-point">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> p1: pts) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ma;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> p2: pts) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p1 <span style="color:#f92672">==</span> p2) <span style="color:#66d9ef">continue</span>;
+</span></span></code></pre></div><p>We loop through each point <code>p1</code> in the list. For each point <code>p1</code>, we initialize an empty map <code>ma</code> which will be used to count the occurrences of different slopes. We then iterate over each point <code>p2</code> and compute the slope between <code>p1</code> and <code>p2</code>.</p>
+<p>We skip comparing a point to itself (<code>if(p1 == p2) continue;</code>) because the slope of a point with itself is undefined.</p>
+<h4 id="step-4-calculate-the-slope">
+  Step 4: Calculate the Slope
+  <a class="heading-link" href="#step-4-calculate-the-slope">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> slope <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(p1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> p2[<span style="color:#ae81ff">0</span>]) slope <span style="color:#f92672">=</span> DBL_MAX;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    slope <span style="color:#f92672">=</span> (<span style="color:#66d9ef">double</span>) (p2[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> p1[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">/</span> (p2[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> p1[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>To calculate the slope between two points <code>(x1, y1)</code> and <code>(x2, y2)</code>:</p>
 <ul>
-<li><strong>Line 1-3</strong>: Define the <code>maxPoints</code> function and check for edge cases.</li>
-<li><strong>Line 5</strong>: Initialize a variable <code>mx</code> to keep track of the maximum points on the same line.</li>
-<li><strong>Line 7-8</strong>: Iterate through each point (p1) as the reference point.</li>
-<li><strong>Line 9</strong>: Create a map <code>ma</code> to count occurrences of slopes for the current point.</li>
-<li><strong>Line 10-16</strong>: Nested loop to calculate the slope between (p1) and every other point (p2):
-<ul>
-<li>Skip if (p1) and (p2) are the same.</li>
-<li>Calculate the slope and update its count in the map.</li>
-<li>Update <code>mx</code> if the current slope count exceeds the previous maximum.</li>
+<li>If <code>p1[0] == p2[0]</code>, the points are vertically aligned, so we assign the slope to <code>DBL_MAX</code> to represent an infinite slope.</li>
+<li>Otherwise, we calculate the slope using the formula:<br>
+[
+\text{slope} = \frac{y2 - y1}{x2 - x1}
+]
+This ensures we handle both vertical and non-vertical lines correctly.</li>
 </ul>
-</li>
-<li><strong>Line 17</strong>: Return <code>mx + 1</code> to include the reference point.</li>
-</ul>
+<h4 id="step-5-update-the-map-with-the-slope-count">
+  Step 5: Update the Map with the Slope Count
+  <a class="heading-link" href="#step-5-update-the-map-with-the-slope-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ma[slope]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(ma[slope] <span style="color:#f92672">&gt;</span> mx)
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> ma[slope];
+</span></span></code></pre></div><p>We increment the count of the slope in the map <code>ma</code>. If the count of the current slope exceeds the current <code>mx</code>, we update <code>mx</code> with the new maximum count.</p>
+<h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>Since the map counts how many points have the same slope with respect to <code>p1</code>, <code>mx</code> represents the maximum number of points that share the same slope with <code>p1</code>. However, we need to add 1 to <code>mx</code> because <code>p1</code> itself is part of the line, and we need to include it in the count. Therefore, the final result is <code>mx + 1</code>.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -330,15 +381,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N^2)), where (N) is the number of points, due to the nested iteration to calculate slopes.</li>
-<li><strong>Space Complexity</strong>: (O(N)) for the map storing slopes for each reference point.</li>
+<li>The algorithm involves iterating over each point <code>p1</code> and, for each point <code>p1</code>, iterating over every other point <code>p2</code> to compute the slope. This results in a time complexity of <code>O(n^2)</code>, where <code>n</code> is the number of points.</li>
+<li>For each pair of points <code>(p1, p2)</code>, calculating the slope takes constant time, so the total time complexity is <code>O(n^2)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(n)</code> because we use a map to store the slope counts for each point <code>p1</code>. The map has at most <code>n</code> entries (in the worst case, if all slopes are unique), and the space required for storing the map is proportional to <code>n</code>.</li>
+<li>Additionally, we use some constant space for tracking variables such as <code>mx</code> and <code>slope</code>.</li>
+</ul>
+<p>Thus, the overall space complexity is <code>O(n)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the maximum number of points that lie on the same straight line in a 2D plane. By calculating the slope between every pair of points and using a map to track the occurrences of each slope, the algorithm ensures that we find the maximum number of points on the same line. The time complexity of <code>O(n^2)</code> makes this solution feasible for inputs of moderate size, and the space complexity of <code>O(n)</code> ensures that the solution is space-efficient. The approach is robust enough to handle vertical lines and duplicate points, making it a comprehensive solution to the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode285s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode283s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

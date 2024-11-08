@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -269,7 +269,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an undirected tree with <code>n</code> nodes labeled from <code>0</code> to <code>n-1</code>, and a list of edges that connect the nodes, find all the minimum height trees (MHTs). A minimum height tree is defined as a tree that has the minimum possible height when rooted at any of its nodes.</p>
+<p>The problem asks us to find all the <strong>Minimum Height Trees (MHTs)</strong> in a given undirected graph, represented by <code>n</code> nodes and a set of <code>edges</code>. A Minimum Height Tree is a tree that has the minimum height, where the height of a tree is defined as the longest path from the root node to any leaf node.</p>
+<p>In this problem:</p>
+<ul>
+<li>The tree has <code>n</code> nodes numbered from <code>0</code> to <code>n-1</code>.</li>
+<li>The graph is connected, and every edge connects two distinct nodes.</li>
+<li>You are tasked with returning a list of <strong>root nodes</strong> of all Minimum Height Trees.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -277,62 +283,118 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a breadth-first search (BFS) strategy to find the centers of the tree, which are the nodes that form the minimum height trees. The key steps are as follows:</p>
+<h4 id="key-insights">
+  <strong>Key Insights</strong>
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Edge Cases</strong>:</p>
-<ul>
-<li>If there is only one node (<code>n == 1</code>), return <code>[0]</code> since the single node itself is the only MHT.</li>
-</ul>
+<p><strong>Tree Characteristics</strong>: In a tree, there is a unique path between any two nodes. The height of the tree depends on the distance from the root node to the farthest leaf node. To minimize the height, we should aim to find the &ldquo;center&rdquo; of the tree, which balances the longest paths to the leaves. A <strong>center</strong> of a tree is typically one or two nodes that, when chosen as roots, minimize the height of the tree.</p>
 </li>
 <li>
-<p><strong>Graph Representation</strong>:</p>
-<ul>
-<li>Create an adjacency list <code>adj</code> to represent the tree.</li>
-<li>Maintain a <code>degree</code> array to track the number of edges connected to each node.</li>
-</ul>
+<p><strong>Layered Removal of Leaves</strong>: One effective approach to finding the center(s) of a tree is to use a method that gradually removes leaves (nodes with only one edge). After removing all leaves, the remaining nodes are the center(s) of the tree, and the height of the tree will be minimized with those nodes as the root.</p>
 </li>
 <li>
-<p><strong>Build the Graph</strong>:</p>
-<ul>
-<li>For each edge in <code>edges</code>, update the adjacency list and the degree of both connected nodes.</li>
-</ul>
-</li>
-<li>
-<p><strong>Initialize the Queue</strong>:</p>
-<ul>
-<li>Push all leaf nodes (nodes with degree <code>1</code>) into a queue. These nodes are potential candidates for MHTs.</li>
-</ul>
-</li>
-<li>
-<p><strong>BFS to Find MHTs</strong>:</p>
-<ul>
-<li>Perform BFS to gradually remove leaf nodes:
-<ul>
-<li>While the queue is not empty, clear the result vector and process all current leaf nodes.</li>
-<li>For each leaf node, decrement the degree of its neighbors. If any neighbor&rsquo;s degree becomes <code>1</code>, it becomes a new leaf and is added to the queue.</li>
-</ul>
-</li>
-<li>The remaining nodes in the result vector at the end of this process are the roots of the MHTs.</li>
-</ul>
+<p><strong>BFS for Layered Removal</strong>: By using a breadth-first search (BFS) approach, we can efficiently eliminate the leaves layer by layer until we are left with the center nodes. This approach works because the nodes that remain after removing leaves are the ones closest to the &ldquo;core&rdquo; of the tree, which are the centers.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="steps-to-solve-the-problem">
+  <strong>Steps to Solve the Problem</strong>:
+  <a class="heading-link" href="#steps-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Build the Adjacency List</strong>: First, build an adjacency list to represent the graph from the given <code>edges</code>. This adjacency list will help us track the neighbors of each node.</p>
+</li>
+<li>
+<p><strong>Track Node Degrees</strong>: Use an array <code>degree</code> to keep track of the degree (i.e., number of neighbors) of each node. Initially, the degree of each node is the number of edges connected to that node.</p>
+</li>
+<li>
+<p><strong>Identify Initial Leaves</strong>: Any node with degree 1 is a leaf node. Push all such nodes into a queue.</p>
+</li>
+<li>
+<p><strong>Remove Leaves Layer by Layer</strong>: Begin removing leaves from the tree layer by layer using a BFS-style traversal. For each leaf node, decrease the degree of its neighbors. If any neighbor&rsquo;s degree becomes 1 (indicating it is now a leaf), add it to the queue. Repeat this process until there are 1 or 2 nodes left.</p>
+</li>
+<li>
+<p><strong>Return the Centers</strong>: The remaining nodes in the queue are the centers of the tree. These nodes will form the roots of the Minimum Height Trees.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: An integer <code>n</code> for the number of nodes, and a vector of edges connecting the nodes.</li>
-<li><strong>Output</strong>: A vector of integers representing the labels of nodes that form the minimum height trees.</li>
-</ul>
 <ol>
-<li>Initialize the adjacency list and degree array based on the edges provided.</li>
-<li>Use a queue to start processing leaf nodes and iteratively find the centers of the tree.</li>
-<li>Return the result containing the labels of the minimum height tree nodes.</li>
+<li><strong>Edge Case for Single Node</strong>:</li>
 </ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> {<span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><ul>
+<li>If there is only one node in the tree, it is trivially the root of the tree and the only possible Minimum Height Tree.</li>
+</ul>
+<ol start="2">
+<li><strong>Building the Adjacency List</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> adj(n);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> degree(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) {
+</span></span><span style="display:flex;"><span>    adj[e[<span style="color:#ae81ff">0</span>]].push_back(e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    adj[e[<span style="color:#ae81ff">1</span>]].push_back(e[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>    degree[e[<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    degree[e[<span style="color:#ae81ff">1</span>]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We first initialize an adjacency list <code>adj</code> to represent the graph and an array <code>degree</code> to store the degree of each node.</li>
+<li>For each edge in the <code>edges</code> array, we update the adjacency list and the degree of the nodes that the edge connects.</li>
+</ul>
+<ol start="3">
+<li><strong>Initializing the Queue with Leaves</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(degree[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        q.push(i);
+</span></span></code></pre></div><ul>
+<li>We identify the leaf nodes by checking which nodes have a degree of 1. These nodes are pushed into the queue <code>q</code> for processing.</li>
+</ul>
+<ol start="4">
+<li><strong>Layered Removal of Leaves</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    res.clear();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        res.push_back(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> nbr: adj[tmp]) {
+</span></span><span style="display:flex;"><span>            degree[nbr]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(degree[nbr] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                q.push(nbr);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We process the nodes in the queue layer by layer. At each step, we remove a leaf node (from the front of the queue), and for each of its neighbors, we reduce its degree by 1.</li>
+<li>If any neighbor&rsquo;s degree becomes 1 (indicating it is now a leaf), it is added to the queue for the next round of processing.</li>
+<li>The <code>res</code> vector stores the current set of leaf nodes being removed.</li>
+</ul>
+<ol start="5">
+<li><strong>Return the Centers</strong>:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once all leaves have been removed, the remaining nodes in the <code>res</code> vector represent the centers of the tree. These nodes will minimize the height of the tree when used as the root.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -340,10 +402,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This is because:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes. Each edge and node is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the adjacency list and degree storage.</li>
+<li>We process each node once when building the adjacency list and calculating the degrees.</li>
+<li>Each node is also processed once during the BFS traversal when removing leaves.</li>
 </ul>
+<p>Thus, the overall complexity is linear in terms of the number of nodes.</p>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> because we are using:</p>
+<ul>
+<li>An adjacency list of size <code>n</code> to store the graph.</li>
+<li>A <code>degree</code> array of size <code>n</code> to track the degree of each node.</li>
+<li>A queue to store the leaf nodes, which at most contains <code>n</code> nodes at any point in time.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the <strong>Minimum Height Trees (MHTs)</strong> by gradually peeling away the leaf nodes of the tree until the center nodes are found. Using BFS for the layered removal of leaves ensures that we find the centers in an optimal way, with a time complexity of <strong>O(n)</strong>. The solution is well-suited for large graphs, as it processes each node and edge only a limited number of times.</p>
+<p>Key Takeaways:</p>
+<ol>
+<li><strong>Layered BFS</strong>: The core idea behind this solution is to remove leaves layer by layer until we are left with the center(s) of the tree.</li>
+<li><strong>Efficient Search</strong>: This approach guarantees that we find the centers of the tree with a time complexity of <strong>O(n)</strong>, making it scalable for large trees.</li>
+<li><strong>Tree Properties</strong>: The solution exploits the properties of trees, specifically the fact that the center of a tree minimizes its height, to provide an optimal result.</li>
+</ol>
  
 </div>
   

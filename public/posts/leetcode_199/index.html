@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode574s1hbhb">
+<h2 id="hahahugoshortcode571s1hbhb">
   
 
   
@@ -265,7 +265,38 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the root of a binary tree, return the values of the nodes you can see ordered from top to bottom when looking at the tree from the right side.</p>
+<p>The problem is to return the &ldquo;right side view&rdquo; of a binary tree. The right side view is the set of nodes that are visible when the tree is viewed from the right side. Specifically, for each level in the binary tree, we need to return the rightmost node at that level.</p>
+<p><strong>Problem Input:</strong></p>
+<ul>
+<li>A binary tree with the structure:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>The input is the root of the binary tree.</li>
+</ul>
+<p><strong>Problem Output:</strong></p>
+<ul>
+<li>A vector of integers representing the rightmost node at each level of the tree.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, null, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+</span></span></code></pre></div>The tree looks like:
+<pre tabindex="0"><code>        1
+       / \
+      2   3
+     /     / \
+    4     5   6
+</code></pre></li>
+<li><strong>Output:</strong> <code>[1, 3, 6]</code><br>
+Explanation: The visible nodes from the right side are 1 (from the first level), 3 (from the second level), and 6 (from the third level).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -273,50 +304,128 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be solved by using a breadth-first search (BFS) to traverse the tree level by level. BFS allows us to examine each level from left to right and keep track of the rightmost node at each level. We will store the nodes of each level and select the last node from that level as it is the rightmost node.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Breadth-First Search (BFS)</strong>:</p>
+<p><strong>Initialize a Queue:</strong> We will use a queue (FIFO data structure) to facilitate level-order traversal. The queue will store nodes from the binary tree, and we will process them level by level.</p>
+</li>
+<li>
+<p><strong>Process Each Level:</strong></p>
 <ul>
-<li>Use a queue to perform level-order traversal of the tree.</li>
-<li>For each level, record the last node&rsquo;s value, which represents the rightmost node at that level.</li>
+<li>At each level, we will record the rightmost node. This can be done by observing that the rightmost node in a level is always the last node to be processed for that level.</li>
+<li>For each node, we will enqueue its left and right children (if they exist) for processing in the next level.</li>
 </ul>
 </li>
 <li>
-<p><strong>Level Traversal</strong>:</p>
-<ul>
-<li>Initialize a queue and push the root node.</li>
-<li>While the queue is not empty, process all nodes at the current level:
-<ul>
-<li>Record the values of the nodes at this level.</li>
-<li>Enqueue the left and right children of the nodes.</li>
-</ul>
+<p><strong>Add the Rightmost Node to Result:</strong> For each level, after processing all nodes, we add the last node (rightmost) to our result list.</p>
 </li>
-<li>After processing each level, add the last value of that level to the result.</li>
-</ul>
+<li>
+<p><strong>Return the Result List:</strong> After processing all levels, we return the list of rightmost nodes.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initial-setup">
+  Step 1: Initial Setup
+  <a class="heading-link" href="#step-1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rightSideView(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The <code>rightSideView</code> function is defined, which takes the root of a binary tree as input.</li>
+<li>If the root is <code>nullptr</code>, meaning the tree is empty, we return an empty vector.</li>
+</ul>
+<h4 id="step-2-initialize-the-queue-for-bfs">
+  Step 2: Initialize the Queue for BFS
+  <a class="heading-link" href="#step-2-initialize-the-queue-for-bfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    list<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push_back(root);
+</span></span></code></pre></div><ul>
+<li>We initialize a queue (<code>q</code>) using a doubly linked list (<code>std::list&lt;TreeNode*&gt;</code>) to store the nodes of the tree at each level.</li>
+<li>We begin the BFS by pushing the root node to the queue.</li>
+</ul>
+<h4 id="step-3-process-each-level">
+  Step 3: Process Each Level
+  <a class="heading-link" href="#step-3-process-each-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span></code></pre></div><ul>
+<li>We enter a <code>while</code> loop that continues until the queue is empty. This means we are processing levels one by one.</li>
+<li>At the start of each iteration, we create a temporary vector <code>res</code> to store the nodes of the current level.</li>
+<li><code>sz</code> stores the number of nodes at the current level, which is simply the size of the queue.</li>
+</ul>
+<h4 id="step-4-process-all-nodes-at-the-current-level">
+  Step 4: Process All Nodes at the Current Level
+  <a class="heading-link" href="#step-4-process-all-nodes-at-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop_front();
+</span></span><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>left) q.push_back(tmp<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>right) q.push_back(tmp<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>The inner <code>while</code> loop processes each node in the current level:
 <ul>
-<li><strong>Line 1</strong>: Define the structure for a binary tree node.</li>
-<li><strong>Line 2</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 3</strong>: Define the <code>rightSideView</code> function, which takes the root of the binary tree as input.</li>
-<li><strong>Line 4</strong>: Initialize a vector <code>ans</code> to store the result.</li>
-<li><strong>Line 5</strong>: Check if the root is null; if so, return an empty result.</li>
-<li><strong>Line 6</strong>: Initialize a list (acting as a queue) and push the root node.</li>
-<li><strong>Lines 7-12</strong>: While there are nodes in the queue:
-<ul>
-<li>Create a vector <code>res</code> to hold the values of the current level&rsquo;s nodes.</li>
-<li>Process each node at the current level, adding its value and its children to the queue.</li>
+<li>We pop the front node from the queue.</li>
+<li>We store the value of the node in <code>res</code>.</li>
+<li>If the node has a left child, we push it into the queue for processing in the next level.</li>
+<li>Similarly, if the node has a right child, we enqueue it as well.</li>
 </ul>
 </li>
-<li><strong>Line 13</strong>: After processing the level, push the last node&rsquo;s value to <code>ans</code>.</li>
-<li><strong>Line 14</strong>: Return the result vector <code>ans</code>.</li>
+</ul>
+<h4 id="step-5-add-the-rightmost-node-of-the-current-level">
+  Step 5: Add the Rightmost Node of the Current Level
+  <a class="heading-link" href="#step-5-add-the-rightmost-node-of-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(res.back());
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>After processing all the nodes at the current level, the last node (<code>res.back()</code>) is the rightmost node for that level. We add it to the result vector <code>ans</code>.</li>
+</ul>
+<h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After all levels are processed, we return the <code>ans</code> vector, which contains the rightmost nodes at each level.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -325,15 +434,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, since each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(w)), where (w) is the maximum width of the tree, which is the maximum number of nodes at any level of the tree stored in the queue.</li>
+<li><strong>O(n):</strong> The algorithm processes each node exactly once during the BFS traversal. For each node, we perform constant-time operations (pushing children into the queue, popping from the queue, and adding values to the result list). Therefore, the time complexity is linear in terms of the number of nodes, which is <code>O(n)</code>, where <code>n</code> is the number of nodes in the binary tree.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The space complexity is determined by the maximum size of the queue at any point. In the worst case, the queue can hold all the nodes at the last level of the tree, which can be up to <code>n/2</code> nodes. Thus, the space complexity is also <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses a breadth-first search (BFS) to traverse the binary tree level by level. By processing each level and storing the rightmost node, the algorithm efficiently generates the right side view of the tree.</p>
+<ul>
+<li>The BFS approach ensures that we visit every node once, making the time complexity <code>O(n)</code>, which is optimal for this problem.</li>
+<li>The space complexity is also <code>O(n)</code> due to the queue used for level-order traversal.</li>
+</ul>
+<p>This approach is simple, clear, and efficient, ensuring that the rightmost nodes of each level are captured and returned in a systematic manner. It provides a reliable solution to problems related to tree traversal and viewing tree structures from different perspectives.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode574s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode571s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

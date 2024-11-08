@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> currNum;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1293s1hbhb">
+<h2 id="hahahugoshortcode1292s1hbhb">
   
 
   
@@ -247,7 +247,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integers <code>n</code> and <code>k</code>, return the k-th smallest integer in the range from 1 to n in lexicographical order.</p>
+<p>The problem asks to find the <code>k</code>-th smallest number in the lexicographical order of numbers from <code>1</code> to <code>n</code>. Lexicographical order is akin to dictionary order, and the task is to determine which number appears at the <code>k</code>-th position in this order.</p>
+<p>For example, given <code>n = 13</code> and <code>k = 5</code>, the lexicographical order of numbers from 1 to 13 would be:
+<code>1, 10, 11, 12, 13</code>, so the 5th number is <code>13</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,66 +257,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can take advantage of lexicographical properties and avoid generating all numbers up to <code>n</code>. Instead, we can &ldquo;walk&rdquo; through the lexicographical order using a tree-like structure and count how many numbers lie between two given numbers. This approach is faster than directly sorting all numbers.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Understanding Lexicographical Order</strong>:</p>
+<p><strong>Lexicographical Order as a Tree</strong>:</p>
 <ul>
-<li>Lexicographical order is similar to dictionary order. For example, &ldquo;10&rdquo; comes before &ldquo;2&rdquo;.</li>
+<li>Numbers can be thought of as nodes in a tree where the root is <code>1</code>, and each number branches out to form its next possible children (e.g., <code>1</code> branches out to <code>10</code>, <code>11</code>, <code>12</code>, etc., as the first digits of the numbers increase).</li>
+<li>This tree-like structure allows us to navigate efficiently through the lexicographical order without generating every number.</li>
 </ul>
 </li>
 <li>
-<p><strong>Counting the Numbers</strong>:</p>
+<p><strong>Counting Numbers in a Range</strong>:</p>
 <ul>
-<li>Define a helper function <code>getGap</code> that calculates the number of integers between a range <code>[a, b)</code> that are less than or equal to <code>n</code>.</li>
-<li>The function keeps multiplying <code>a</code> and <code>b</code> by 10 to check how many complete sets of numbers can be formed (like <code>1</code>, <code>10</code>, <code>100</code>, etc.).</li>
+<li>Given two numbers <code>a</code> and <code>b</code>, the number of numbers in the lexicographical range <code>[a, b)</code> can be calculated by repeatedly multiplying <code>a</code> and <code>b</code> by 10 until <code>a</code> exceeds <code>n</code>. This helps us to count how many numbers start with the prefix <code>a</code> without directly constructing them.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterative Search</strong>:</p>
+<p><strong>Optimal Strategy</strong>:</p>
 <ul>
-<li>Start with the current number as <code>1</code> and iterate to find the k-th number:
-<ul>
-<li>Calculate the gap between <code>currNum</code> and <code>currNum + 1</code>.</li>
-<li>If <code>i + gap</code> is less than or equal to <code>k</code>, increment <code>i</code> by <code>gap</code> and move to the next prefix (<code>currNum</code>).</li>
-<li>If not, increment <code>i</code> and move to the next level by multiplying <code>currNum</code> by <code>10</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After <code>k</code> iterations, <code>currNum</code> will be the k-th smallest number in lexicographical order.</li>
+<li>Start at <code>1</code>, and for each iteration, calculate how many numbers start with the current prefix (e.g., starting with <code>1</code>, how many numbers are lexicographically smaller than <code>10</code>?).</li>
+<li>Depending on how many numbers are in the current range, either move to the next number by increasing the prefix (e.g., from <code>1</code> to <code>2</code>) or move deeper into the tree by multiplying the current prefix by <code>10</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Lambda Function</strong>:</p>
+<h4 id="step-1-lambda-function-to-count-numbers-in-a-range">
+  Step 1: Lambda Function to Count Numbers in a Range
+  <a class="heading-link" href="#step-1-lambda-function-to-count-numbers-in-a-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The function <code>getGap</code> is a helper function that computes how many numbers lie in the lexicographical range <code>[a, b)</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> getGap <span style="color:#f92672">=</span> [<span style="color:#f92672">&amp;</span>n](<span style="color:#66d9ef">long</span> a, <span style="color:#66d9ef">long</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> gap <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (a <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>        gap <span style="color:#f92672">+=</span> min(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, b) <span style="color:#f92672">-</span> a;  <span style="color:#75715e">// Count numbers in the range [a, b)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        a <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Move to the next range (e.g., from 1 to 10, 11, ...)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        b <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Same for b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> gap;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The function uses a loop to multiply <code>a</code> and <code>b</code> by 10 at each step, effectively moving through lexicographically increasing ranges.</li>
+<li>The condition <code>a &lt;= n</code> ensures we stop when <code>a</code> exceeds <code>n</code>.</li>
+</ul>
+<h4 id="step-2-main-loop-to-find-the-k-th-number">
+  Step 2: Main Loop to Find the k-th Number
+  <a class="heading-link" href="#step-2-main-loop-to-find-the-k-th-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> currNum <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Start with the number 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> k;) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> gap <span style="color:#f92672">=</span> getGap(currNum, currNum <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> currNum <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> gap <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;  <span style="color:#75715e">// For debugging purposes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> gap <span style="color:#f92672">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">+=</span> gap;  <span style="color:#75715e">// Skip over all numbers in the current range
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">++</span>currNum;  <span style="color:#75715e">// Move to the next number in the sequence (1 -&gt; 2 -&gt; 3, etc.)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">++</span>i;
+</span></span><span style="display:flex;"><span>        currNum <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Move deeper into the tree, e.g., from 1 to 10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The variable <code>currNum</code> is initially set to <code>1</code>.</li>
+<li>The loop iterates while <code>i</code> (the position of the current number) is less than <code>k</code>. In each iteration:
 <ul>
-<li><code>getGap</code> computes the number of integers starting with <code>a</code> and less than or equal to <code>n</code> using the concept of prefixes.</li>
+<li>The <code>getGap</code> function calculates how many numbers are in the range <code>[currNum, currNum + 1)</code>, which gives us the size of the current &ldquo;branch&rdquo; in the tree.</li>
+<li>If the current range contains enough numbers to skip past <code>k</code>, we move to the next prefix by incrementing <code>currNum</code>. Otherwise, we move deeper into the tree by multiplying <code>currNum</code> by <code>10</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Main Loop</strong>:</p>
-<ul>
-<li>The loop continues until <code>k</code> numbers are counted, adjusting <code>currNum</code> based on the calculated gaps.</li>
 </ul>
-</li>
-<li>
-<p><strong>Output</strong>:</p>
-<ul>
-<li>After the loop, the function returns the value of <code>currNum</code>, which represents the k-th smallest number in lexicographical order.</li>
-</ul>
-</li>
-</ol>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the loop completes, <code>currNum</code> will hold the <code>k</code>-th smallest number in lexicographical order, which is returned.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -322,15 +358,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(log n), as each step reduces the range by a factor of 10.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional space is used apart from a few variables.</li>
+<li><strong>Time for <code>getGap</code> function</strong>: The function <code>getGap</code> takes <code>O(log n)</code> time because at each step it multiplies <code>a</code> and <code>b</code> by <code>10</code>, and the number of steps required to reach <code>n</code> is logarithmic in the size of <code>n</code>.</li>
+<li><strong>Time for the main loop</strong>: The loop iterates <code>k</code> times. In each iteration, the <code>getGap</code> function is called once, and this takes <code>O(log n)</code> time. Therefore, the time complexity of the main loop is <code>O(k * log n)</code>.</li>
+<li><strong>Overall Time Complexity</strong>: Since the maximum possible value for <code>k</code> is <code>n</code>, the overall time complexity is <code>O(n * log n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is constant, <code>O(1)</code>, since we are only using a few extra variables to store the current number and perform calculations.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the <code>k</code>-th smallest number in lexicographical order from <code>1</code> to <code>n</code> without needing to generate all numbers up to <code>n</code>. By leveraging the structure of lexicographical order and efficiently counting the number of numbers in ranges, we can solve the problem in logarithmic time per iteration, leading to an overall time complexity of <code>O(k * log n)</code>. This makes the algorithm well-suited for large values of <code>n</code> and <code>k</code>.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1293s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1292s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

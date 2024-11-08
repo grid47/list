@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -228,7 +228,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1552s1hbhb">
+<h2 id="hahahugoshortcode1553s1hbhb">
   
 
   
@@ -240,7 +240,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with implementing a cashier system where customers can pay using bills of $5, $10, and $20. You start with no cash in the register, and your goal is to determine if you can provide the correct change for each transaction. If you cannot provide change for a bill, return <code>false</code>; otherwise, return <code>true</code> after processing all transactions.</p>
+<p>The problem at hand is a simulation of a lemonade stand where customers pay with $5, $10, or $20 bills. The objective is to determine whether the cashier can provide the correct change for every customer, based on the bills they give.</p>
+<p>The cashier starts with no money, and each time a customer pays, the cashier must provide change:</p>
+<ul>
+<li>If the customer pays with a $5 bill, no change is required.</li>
+<li>If the customer pays with a $10 bill, the cashier must provide $5 as change.</li>
+<li>If the customer pays with a $20 bill, the cashier must provide $15 as change. This can be done with either one $10 bill and one $5 bill, or three $5 bills.</li>
+</ul>
+<p>We need to determine if it is possible to provide correct change for every customer in line. If at any point the cashier cannot give the correct change, the function should return <code>false</code>. Otherwise, it should return <code>true</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -248,43 +255,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key to solving this problem efficiently is to simulate the process step by step, keeping track of how many $5 and $10 bills the cashier has available for giving change. We can use the following steps to solve the problem:</p>
 <ol>
 <li>
-<p><strong>Initialization</strong>: Keep track of the number of $5 and $10 bills in the register.</p>
-</li>
-<li>
-<p><strong>Processing Each Bill</strong>:</p>
+<p><strong>Tracking Cash on Hand</strong>: The cashier&rsquo;s ability to give correct change depends on the number of $5 and $10 bills available. We will track these counts using two variables, <code>five</code> and <code>ten</code>, where:</p>
 <ul>
-<li>If the bill is $5, increment the count of $5 bills.</li>
-<li>If the bill is $10, check if you have a $5 bill to give as change:
-<ul>
-<li>If you have one, decrement the count of $5 bills and increment the count of $10 bills.</li>
-<li>If not, return <code>false</code> since you cannot provide change.</li>
-</ul>
-</li>
-<li>If the bill is $20, you have two options for change:
-<ul>
-<li>Preferably, give one $10 bill and one $5 bill if you have them.</li>
-<li>If that is not possible, check if you have at least three $5 bills to give as change.</li>
-<li>If neither option is available, return <code>false</code>.</li>
-</ul>
-</li>
+<li><code>five</code> keeps track of the number of $5 bills.</li>
+<li><code>ten</code> keeps track of the number of $10 bills.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Return</strong>: If you can provide change for all transactions, return <code>true</code>.</p>
+<p><strong>Process Each Customer</strong>: We will process each bill in the input list one by one:</p>
+<ul>
+<li>If the customer pays with a $5 bill, the cashier does not need to give any change, so we just increase the count of $5 bills.</li>
+<li>If the customer pays with a $10 bill, the cashier needs to give $5 as change. If there is at least one $5 bill available, the cashier can give the change by reducing the count of $5 bills and increasing the count of $10 bills.</li>
+<li>If the customer pays with a $20 bill, the cashier needs to give $15 as change. The preferred way to give $15 is with one $10 bill and one $5 bill, as it preserves more $5 bills for future transactions. If this is not possible, the cashier can give the change with three $5 bills.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases</strong>: We need to ensure that the cashier never runs out of the required bills to give the correct change. If at any point, the cashier cannot provide the required change, we should return <code>false</code>.</p>
+</li>
+<li>
+<p><strong>End of Process</strong>: If we successfully process all the customers without running into an issue with giving change, we return <code>true</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Iterate through each bill in the <code>bills</code> array, updating counts of $5 and $10 as necessary based on the rules defined above.</li>
-<li>Utilize simple conditional checks to manage the flow of money in the register.</li>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> five <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ten <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We start by initializing two variables, <code>five</code> and <code>ten</code>, to keep track of the number of $5 and $10 bills the cashier has.</li>
+</ul>
+<h4 id="step-2-process-each-bill">
+  Step 2: Process Each Bill
+  <a class="heading-link" href="#step-2-process-each-bill">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x : bills) {
+</span></span></code></pre></div><ul>
+<li>We iterate over each bill in the <code>bills</code> array. Each customer pays with a $5, $10, or $20 bill, and we need to handle the change accordingly.</li>
+</ul>
+<h4 id="step-3-handle-5-bill">
+  Step 3: Handle $5 Bill
+  <a class="heading-link" href="#step-3-handle-5-bill">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>) five<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>If the customer pays with a $5 bill, no change is needed. We simply increment the count of $5 bills by 1.</li>
+</ul>
+<h4 id="step-4-handle-10-bill">
+  Step 4: Handle $10 Bill
+  <a class="heading-link" href="#step-4-handle-10-bill">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (five <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) five<span style="color:#f92672">--</span>, ten<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the customer pays with a $10 bill, the cashier needs to give $5 as change. If the cashier has at least one $5 bill, we decrement the count of $5 bills by 1 and increment the count of $10 bills by 1.</li>
+<li>If the cashier doesn&rsquo;t have any $5 bills to give as change, we return <code>false</code> immediately, indicating that it&rsquo;s impossible to provide the correct change.</li>
+</ul>
+<h4 id="step-5-handle-20-bill">
+  Step 5: Handle $20 Bill
+  <a class="heading-link" href="#step-5-handle-20-bill">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (five <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> ten <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) five<span style="color:#f92672">--</span>, ten<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (five <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) five <span style="color:#f92672">-=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the customer pays with a $20 bill, the cashier needs to provide $15 as change. The preferred method is to give one $10 bill and one $5 bill as change. If the cashier has both, we decrement the counts of $5 and $10 bills.</li>
+<li>If the cashier doesn&rsquo;t have both, we try to give the change using three $5 bills. If the cashier has at least three $5 bills, we decrement the count of $5 bills by 3.</li>
+<li>If neither of these options is possible, the cashier cannot provide the correct change, so we return <code>false</code>.</li>
+</ul>
+<h4 id="step-6-return-true">
+  Step 6: Return True
+  <a class="heading-link" href="#step-6-return-true">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we have processed all customers without running into any issues providing change, we return <code>true</code>, indicating that the cashier was able to give the correct change to every customer.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -293,15 +369,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of bills, since each bill is processed exactly once.</li>
-<li><strong>Space Complexity</strong>: O(1), as only a fixed number of variables are used to keep track of the counts.</li>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of customers in the <code>bills</code> array. We iterate through the array once and perform constant-time operations for each bill, so the time complexity is linear in the size of the input.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a fixed amount of extra space (the variables <code>five</code> and <code>ten</code>) regardless of the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the process of giving change at a lemonade stand. By tracking the number of $5 and $10 bills the cashier has, we can determine whether the cashier is able to provide the correct change for every customer in the line. The algorithm runs in <strong>O(n)</strong> time, making it suitable for large inputs, and it uses <strong>O(1)</strong> space, which ensures space efficiency.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1552s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1553s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

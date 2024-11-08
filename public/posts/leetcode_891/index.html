@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return the sum of the widths of all subsequences of the array. The width of a subsequence is defined as the difference between the maximum and minimum elements of that subsequence.</p>
+<p>The problem requires calculating the sum of the <strong>widths of all subsequences</strong> of a given array <code>nums</code>. The <strong>width of a subsequence</strong> is defined as the difference between the maximum and minimum values of that subsequence. Given an array of integers, we are to compute this sum efficiently and return the result modulo <code>1e9 + 7</code> (a large prime modulus to prevent overflow).</p>
+<p>A subsequence of an array is any sequence that can be derived by deleting some or no elements from the array without changing the order of the remaining elements.</p>
+<p>The task is to calculate the sum of the widths of all subsequences modulo <code>1e9 + 7</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,56 +254,102 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To compute the sum of subsequence widths efficiently:</p>
+<p>We need an efficient approach to compute the sum of the subsequence widths. A brute force solution, where we generate every subsequence and calculate its width, would be too slow, especially for large arrays. Instead, we can observe a mathematical property that allows us to compute the result much more efficiently.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Sorting</strong>: Sort the array to easily identify the minimum and maximum values of subsequences.</li>
-<li><strong>Contribution Calculation</strong>:
+<li>
+<p><strong>Sorted Array Property</strong>: The width of any subsequence is simply the difference between the maximum and minimum values of the subsequence. If the array is sorted in ascending order, the smallest elements contribute to the minimum values, and the largest elements contribute to the maximum values.</p>
+</li>
+<li>
+<p><strong>Contributions to Width</strong>:</p>
 <ul>
-<li>Each element in the sorted array contributes to several subsequences as both a minimum and a maximum.</li>
-<li>For an element at index <code>i</code> in a sorted array of size <code>n</code>:
-<ul>
-<li>It contributes as the minimum in all subsequences formed with elements to its right (indices (i+1) to (n-1)).</li>
-<li>It contributes as the maximum in all subsequences formed with elements to its left (indices (0) to (i-1)).</li>
+<li>For each element in the sorted array, it can be part of several subsequences. The key observation is that an element <code>nums[i]</code> contributes as the maximum element in some subsequences and as the minimum element in others.</li>
+<li>The number of subsequences where an element <code>nums[i]</code> is the minimum or maximum can be determined based on its position in the sorted array. For a given element, its contributions are based on how many subsequences it appears in as a maximum and as a minimum.</li>
 </ul>
 </li>
+<li>
+<p><strong>Efficient Calculation Using Powers of 2</strong>:</p>
+<ul>
+<li>For each element <code>nums[i]</code>, the number of subsequences in which it appears as the minimum or maximum can be represented using powers of 2. Specifically:
+<ul>
+<li>The element <code>nums[i]</code> can appear in <code>2^i</code> subsequences as a minimum (since it can be combined with any subset of the previous <code>i</code> elements).</li>
+<li>Similarly, <code>nums[i]</code> can appear in <code>2^(n - 1 - i)</code> subsequences as a maximum (since it can be combined with any subset of the elements after it).</li>
 </ul>
 </li>
-<li><strong>Combinatorial Counting</strong>:
-<ul>
-<li>The number of ways an element can be the minimum is (2^{(n-i-1)}) (choices for elements on the right).</li>
-<li>The number of ways an element can be the maximum is (2^{i}) (choices for elements on the left).</li>
-<li>The total contribution of the element at index <code>i</code> is calculated as:
-[
-\text{contribution} = \text{nums}[i] \times 2^{(n-i-1)} - \text{nums}[n-1-i] \times 2^{i}
-]</li>
 </ul>
 </li>
 </ol>
-<h3 id="steps">
-  Steps
-  <a class="heading-link" href="#steps">
+<h4 id="efficient-formula">
+  Efficient Formula:
+  <a class="heading-link" href="#efficient-formula">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>For each element <code>nums[i]</code>, its contribution to the total sum can be broken down into two parts:
+<ul>
+<li>As a minimum: It contributes <code>nums[i] * 2^i</code>.</li>
+<li>As a maximum: It contributes <code>nums[n - 1 - i] * 2^(n - 1 - i)</code>.</li>
+</ul>
+</li>
+<li>The total sum of widths can be computed by summing the contributions of all elements in the sorted array.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>Sort the <code>nums</code> array.</li>
-<li>Initialize a result variable and a variable to calculate powers of 2.</li>
-<li>Loop through the sorted array, calculating contributions for each element as described above.</li>
-<li>Return the result, ensuring to take modulo (10^9 + 7) to avoid overflow.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>The <code>sumSubseqWidths</code> function first sorts the input array.</li>
-<li>It then calculates the contribution of each element as both minimum and maximum across all possible subsequences.</li>
-<li>Finally, it returns the sum of these contributions modulo (10^9 + 7).</li>
+<li>
+<p><strong>Modular Arithmetic Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ll;
+</span></span><span style="display:flex;"><span>ll mod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span></code></pre></div><ul>
+<li>We define <code>ll</code> as a type alias for <code>long long</code> to handle large numbers. The result is required modulo <code>1e9 + 7</code>, so we store this value in <code>mod</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Sorting the Input Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>We first sort the array <code>nums</code> in ascending order. This is important because we want to efficiently calculate the contributions of each element as the minimum and maximum of subsequences.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating through the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ll res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>ll c <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Initializing the power of 2 for subsequences
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>, c <span style="color:#f92672">=</span> (c <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">%</span> mod)
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to store the final result. The variable <code>c</code> is used to store powers of 2 modulo <code>mod</code>, starting from <code>2^0 = 1</code> for the first element.</li>
+<li>The loop iterates over each element of the sorted array, computing the contributions to the total sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> ((ll) nums[i] <span style="color:#f92672">*</span> c <span style="color:#f92672">-</span> (ll) nums[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> i] <span style="color:#f92672">*</span> c <span style="color:#f92672">+</span> res) <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>For each element <code>nums[i]</code>, we calculate its contribution as the minimum (<code>nums[i] * c</code>) and as the maximum (<code>nums[n - 1 - i] * c</code>), and update the result.</li>
+<li>The terms are added and subtracted in modulo <code>mod</code> to prevent overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Final Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">int</span>) res;
+</span></span></code></pre></div><ul>
+<li>The result <code>res</code> is cast to an integer and returned.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,10 +357,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n \log n)), due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: (O(1)), not considering the input/output storage.</li>
+<li><strong>Sorting the Array</strong>: The time complexity of sorting the array is <strong>O(N log N)</strong>, where <code>N</code> is the number of elements in the array.</li>
+<li><strong>Iterating through the Array</strong>: The iteration through the array is linear, i.e., <strong>O(N)</strong>.</li>
+<li>Thus, the total time complexity is <strong>O(N log N)</strong> due to the sorting step.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(N)</strong> because the algorithm uses the input array <code>nums</code> and a few auxiliary variables (like <code>res</code> and <code>c</code>), which all take constant extra space. The space complexity is dominated by the input array, which is passed by reference.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the sum of the widths of all subsequences of a given array <code>nums</code>. By leveraging the properties of sorted arrays and the contributions of each element as a minimum and maximum in subsequences, we can compute the result in <strong>O(N log N)</strong> time complexity, which is optimal for this problem. The use of powers of 2 allows for an efficient way to count the number of subsequences an element contributes to, ensuring that we can calculate the total sum of widths without generating all subsequences explicitly.</p>
+<p>By implementing this approach, we avoid the inefficiencies of brute force methods and ensure that the solution can handle large input sizes efficiently. The modulo operation ensures that the result stays within the limits of integer overflow, providing a robust solution for this problem.</p>
  
 </div>
   

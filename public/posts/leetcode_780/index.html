@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -236,7 +236,7 @@
 </span></span><span style="display:flex;"><span>                (sy <span style="color:#f92672">==</span> ty <span style="color:#f92672">&amp;&amp;</span> sx <span style="color:#f92672">&lt;=</span> tx <span style="color:#f92672">&amp;&amp;</span> (tx <span style="color:#f92672">-</span> sx) <span style="color:#f92672">%</span> sy <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1486s1hbhb">
+<h2 id="hahahugoshortcode1482s1hbhb">
   
 
   
@@ -248,15 +248,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two points <code>(sx, sy)</code> and <code>(tx, ty)</code>, you can transform the starting point into the target point by performing a series of operations:</p>
+<p>The problem asks whether it is possible to reach the target point <code>(tx, ty)</code> from the starting point <code>(sx, sy)</code> by applying the following two operations:</p>
 <ol>
-<li>You can add the coordinates together:
-<ul>
-<li>From <code>(a, b)</code>, you can move to <code>(a + b, b)</code> or <code>(a, a + b)</code>.</li>
-</ul>
-</li>
+<li>Starting at <code>(sx, sy)</code>, move to <code>(sx + sy, sy)</code>.</li>
+<li>Or, move to <code>(sx, sx + sy)</code>.</li>
 </ol>
-<p>The task is to determine if you can reach <code>(tx, ty)</code> from <code>(sx, sy)</code> using these operations.</p>
+<p>Both operations are allowed repeatedly until the target is reached or the conditions are violated.</p>
+<p>The goal is to determine if it is possible to reach <code>(tx, ty)</code> starting from <code>(sx, sy)</code> using the described operations.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,63 +262,153 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be approached using two distinct methods:</p>
 <ol>
 <li>
-<p><strong>Mathematical Reduction</strong>:</p>
-<ul>
-<li>The goal is to find a way to reduce the problem instead of simulating each step.</li>
-<li>By continually applying the modulo operation, you can deduce if it&rsquo;s possible to reach the target without generating all intermediate points.</li>
-</ul>
+<p><strong>Memoized Recursive Approach (First Approach)</strong>: In this method, we use recursion to explore the possible ways of reaching from the start point <code>(sx, sy)</code> to the target <code>(tx, ty)</code> by applying the operations. To optimize this approach and avoid redundant calculations, we use memoization to store intermediate results.</p>
 </li>
 <li>
-<p><strong>Base Conditions</strong>:</p>
-<ul>
-<li>When both coordinates of the starting point are less than those of the target point, you compare which coordinate is larger and adjust the larger coordinate using the modulo operation.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>Once the loop exits, you check:
-<ul>
-<li>If the x-coordinates match, ensure the y-coordinate can be reached with the given steps.</li>
-<li>If the y-coordinates match, ensure the x-coordinate can be reached with the given steps.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Greedy Iterative Approach (Second Approach)</strong>: The second approach is an iterative solution that utilizes the mathematical properties of the moves <code>(sx + sy, sy)</code> and <code>(sx, sx + sy)</code> to directly work from the target <code>(tx, ty)</code> towards the start point <code>(sx, sy)</code> by reducing the values in a greedy manner. This approach iteratively checks the conditions and reduces <code>tx</code> and <code>ty</code> until it either matches the target or fails to reach the desired point.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="memoized-recursive-approach">
+  Memoized Recursive Approach
+  <a class="heading-link" href="#memoized-recursive-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The first method uses recursion with memoization to solve the problem. Here&rsquo;s the breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><strong>Memoization</strong>: An unordered map <code>mp</code> is used to store already computed results for pairs of <code>(sx, sy)</code> to avoid redundant calculations. The key for <code>mp</code> is the starting x-coordinate <code>sx</code>, and the value is another map that holds results for corresponding <code>sy</code> values.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">pts</span>(<span style="color:#66d9ef">int</span> sx, <span style="color:#66d9ef">int</span> sy, <span style="color:#66d9ef">int</span> tx, <span style="color:#66d9ef">int</span> ty) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sx <span style="color:#f92672">==</span> tx <span style="color:#f92672">&amp;&amp;</span> sy <span style="color:#f92672">==</span> ty) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Base case
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (sx <span style="color:#f92672">&gt;</span> tx <span style="color:#f92672">||</span> sy <span style="color:#f92672">&gt;</span> ty) <span style="color:#66d9ef">return</span> false;   <span style="color:#75715e">// Bound check
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.count(sx) <span style="color:#f92672">&amp;&amp;</span> mp[sx].count(sy)) <span style="color:#66d9ef">return</span> mp[sx][sy];  <span style="color:#75715e">// Check memoized values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> ans <span style="color:#f92672">=</span> pts(sx <span style="color:#f92672">+</span> sy, sy, tx, ty);  <span style="color:#75715e">// First possible operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (ans) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> pts(sx, sx <span style="color:#f92672">+</span> sy, tx, ty);  <span style="color:#75715e">// Second possible operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> mp[sx][sy] <span style="color:#f92672">=</span> ans;  <span style="color:#75715e">// Memoize and return result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case</strong>: If the starting point <code>(sx, sy)</code> matches the target <code>(tx, ty)</code>, return <code>true</code> as the target is reached.</p>
+</li>
+<li>
+<p><strong>Boundary Check</strong>: If <code>sx &gt; tx</code> or <code>sy &gt; ty</code>, return <code>false</code>, as it is impossible to reach the target with negative or oversized values.</p>
+</li>
+<li>
+<p><strong>Memoization Check</strong>: If the pair <code>(sx, sy)</code> has been computed before, return the stored result.</p>
+</li>
+<li>
+<p><strong>Recursive Calls</strong>: The function explores two possible operations recursively:</p>
+<ol>
+<li>Move to <code>(sx + sy, sy)</code>.</li>
+<li>Move to <code>(sx, sx + sy)</code>.</li>
+</ol>
+</li>
+<li>
+<p><strong>Return and Memoize</strong>: The result of these recursive calls is memoized for future reference to avoid redundant calculations.</p>
+</li>
+</ul>
+<h4 id="iterative-greedy-approach">
+  Iterative Greedy Approach
+  <a class="heading-link" href="#iterative-greedy-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The second part of the solution uses a more efficient <strong>greedy iterative approach</strong> to solve the problem:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">reachingPoints</span>(<span style="color:#66d9ef">int</span> sx, <span style="color:#66d9ef">int</span> sy, <span style="color:#66d9ef">int</span> tx, <span style="color:#66d9ef">int</span> ty) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (sx <span style="color:#f92672">&lt;</span> tx <span style="color:#f92672">&amp;&amp;</span> sy <span style="color:#f92672">&lt;</span> ty) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (tx <span style="color:#f92672">&lt;</span> ty) {
+</span></span><span style="display:flex;"><span>            ty <span style="color:#f92672">%=</span> tx;  <span style="color:#75715e">// Reduce ty to smaller values by modulo operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            tx <span style="color:#f92672">%=</span> ty;  <span style="color:#75715e">// Reduce tx similarly
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (sx <span style="color:#f92672">==</span> tx <span style="color:#f92672">&amp;&amp;</span> sy <span style="color:#f92672">&lt;=</span> ty <span style="color:#f92672">&amp;&amp;</span> (ty <span style="color:#f92672">-</span> sy) <span style="color:#f92672">%</span> sx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>           (sy <span style="color:#f92672">==</span> ty <span style="color:#f92672">&amp;&amp;</span> sx <span style="color:#f92672">&lt;=</span> tx <span style="color:#f92672">&amp;&amp;</span> (tx <span style="color:#f92672">-</span> sx) <span style="color:#f92672">%</span> sy <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>While Loop</strong>: The loop continues until either <code>sx == tx</code> or <code>sy == ty</code>. The logic inside the loop ensures that <code>tx</code> and <code>ty</code> are reduced by applying the modulo operation.</p>
+</li>
+<li>
+<p><strong>Modulo Operations</strong>: Depending on whether <code>tx</code> is greater than <code>ty</code> or vice versa, we perform a modulo operation to reduce the larger value. The modulo operation helps break down the problem by simplifying the values.</p>
+</li>
+<li>
+<p><strong>Return Statement</strong>: After breaking out of the loop, the function checks if the target point <code>(tx, ty)</code> is reachable:</p>
 <ul>
-<li><strong>Methods</strong>:
-<ul>
-<li><code>bool pts(int sx, int sy, int tx, int ty)</code>: This recursive helper function checks if you can reach <code>(tx, ty)</code> from <code>(sx, sy)</code> using the defined operations. It&rsquo;s memoized for optimization.</li>
-<li><code>bool reachingPoints(int sx, int sy, int tx, int ty)</code>: This is the main function implementing the mathematical reduction approach.</li>
+<li>If <code>sx == tx</code>, ensure <code>sy &lt;= ty</code> and that the difference between <code>ty</code> and <code>sy</code> is divisible by <code>sx</code>.</li>
+<li>If <code>sy == ty</code>, ensure <code>sx &lt;= tx</code> and that the difference between <code>tx</code> and <code>sx</code> is divisible by <code>sy</code>.</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(log(max(tx, ty))) due to the reduction in each step using the modulo operation.</li>
-<li><strong>Space Complexity</strong>: O(1) for the iterative approach; O(m) for the memoization, where <code>m</code> is the number of unique states stored in <code>mp</code>.</li>
+<li>
+<p><strong>Recursive Method</strong>: The recursive approach has a time complexity of <strong>O(n^2)</strong> in the worst case due to the two recursive calls for each possible move and memoization checks.</p>
+</li>
+<li>
+<p><strong>Greedy Iterative Method</strong>: The iterative method involves reducing <code>tx</code> and <code>ty</code> through modulo operations, and the time complexity depends on the number of times we can apply the modulo operation. In the worst case, it is proportional to the logarithm of the values, so the time complexity is <strong>O(log(max(tx, ty)))</strong>.</p>
+</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Recursive Method</strong>: The space complexity is <strong>O(n^2)</strong> due to the use of recursion and memoization storing the results.</p>
+</li>
+<li>
+<p><strong>Greedy Iterative Method</strong>: The space complexity is <strong>O(1)</strong> as no extra space is used other than a few integer variables for tracking <code>sx</code>, <code>sy</code>, <code>tx</code>, and <code>ty</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently handles the problem of checking whether it&rsquo;s possible to reach a target point <code>(tx, ty)</code> from a starting point <code>(sx, sy)</code> by applying two possible moves. The recursive approach with memoization ensures that redundant calculations are avoided, while the greedy iterative approach provides an efficient, space-optimal solution.</p>
+<p>Both methods are effective for solving this problem, with the greedy iterative approach offering a more optimal time complexity, especially for large inputs. The recursive method, while slightly less efficient, provides a clear and intuitive solution for smaller inputs or when recursion is preferred.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1486s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1482s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

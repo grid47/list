@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -258,7 +258,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, your goal is to find the length of the longest wiggle subsequence. A sequence is called a wiggle sequence if the differences between successive numbers strictly alternate between positive and negative.</p>
+<p>The problem at hand asks us to determine the length of the longest &ldquo;wiggle subsequence&rdquo; in an integer array. A &ldquo;wiggle&rdquo; sequence is a sequence where the differences between consecutive numbers strictly alternate between positive and negative. The goal is to find the length of the longest subsequence of numbers from the given list that forms a wiggle sequence.</p>
+<p>For example:</p>
+<ul>
+<li>In the sequence <code>[1, 7, 4, 9, 2, 5]</code>, the longest wiggle subsequence is <code>[1, 7, 4, 9, 2, 5]</code> because the differences between consecutive elements alternate in sign (increases and decreases).</li>
+<li>In the sequence <code>[1, 2, 3, 4, 5]</code>, the longest wiggle subsequence is <code>[1, 2]</code> or <code>[1, 5]</code>, as there is no alternating pattern between all elements.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,48 +271,111 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<p>To solve this problem efficiently, we use dynamic programming (DP) with two states to keep track of the maximum lengths of wiggle subsequences that end in an upward or downward movement.</p>
+<h4 id="key-observations">
+  Key Observations
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
 <li>
-<p><strong>Dynamic Programming</strong>:</p>
+<p>We can represent the problem using two arrays (or states):</p>
 <ul>
-<li>Use two arrays, <code>up</code> and <code>down</code>, to store the length of the longest wiggle subsequence ending with an upward and downward wiggle at each index, respectively.</li>
-</ul>
-</li>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Set <code>up[0]</code> and <code>down[0]</code> to 1, as the minimum length of a wiggle sequence that includes at least the first number is 1.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
-<ul>
-<li>For each number from the second to the last:
-<ul>
-<li>If the current number is less than the previous one, it forms a downward wiggle, so update <code>down[i]</code> to <code>up[i - 1] + 1</code> and keep <code>up[i]</code> as <code>up[i - 1]</code>.</li>
-<li>If the current number is greater than the previous one, it forms an upward wiggle, so update <code>up[i]</code> to <code>down[i - 1] + 1</code> and keep <code>down[i]</code> as <code>down[i - 1]</code>.</li>
-<li>If the current number is equal to the previous one, both <code>up[i]</code> and <code>down[i]</code> should be equal to their previous values.</li>
-</ul>
-</li>
+<li><code>up[i]</code>: The length of the longest wiggle subsequence ending at index <code>i</code> where the last movement is an upward movement (i.e., <code>nums[i] &gt; nums[i-1]</code>).</li>
+<li><code>down[i]</code>: The length of the longest wiggle subsequence ending at index <code>i</code> where the last movement is a downward movement (i.e., <code>nums[i] &lt; nums[i-1]</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The result will be the maximum of the last elements of both <code>up</code> and <code>down</code> arrays, which gives the length of the longest wiggle subsequence.</li>
-</ul>
+<p>If we encounter an element that is greater than the previous one (<code>nums[i] &gt; nums[i-1]</code>), we update <code>up[i]</code> to be <code>down[i-1] + 1</code>, indicating that the subsequence can continue with an upward movement. Meanwhile, <code>down[i]</code> remains the same as <code>down[i-1]</code> because the downward movement does not continue.</p>
 </li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<li>
+<p>If we encounter an element that is smaller than the previous one (<code>nums[i] &lt; nums[i-1]</code>), we update <code>down[i]</code> to be <code>up[i-1] + 1</code>, indicating that the subsequence can continue with a downward movement. Meanwhile, <code>up[i]</code> remains the same as <code>up[i-1]</code>.</p>
+</li>
+<li>
+<p>If the current element is equal to the previous element (<code>nums[i] == nums[i-1]</code>), both <code>up[i]</code> and <code>down[i]</code> are updated to be the same as the previous values <code>up[i-1]</code> and <code>down[i-1]</code> respectively, as there is no movement in either direction.</p>
+</li>
+<li>
+<p>At the end of the loop, the result will be the maximum of <code>up[n-1]</code> and <code>down[n-1]</code>, where <code>n</code> is the length of the array.</p>
+</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-check-for-empty-array">
+  Step 1: Check for Empty Array
+  <a class="heading-link" href="#step-1-check-for-empty-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If the input array <code>nums</code> is empty, there are no elements to form a subsequence, so the function immediately returns <code>0</code>.</li>
+</ul>
+<h4 id="step-2-initialize-the-dp-arrays">
+  Step 2: Initialize the DP Arrays
+  <a class="heading-link" href="#step-2-initialize-the-dp-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> up(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> down(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>up[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>down[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We define two vectors, <code>up</code> and <code>down</code>, both initialized to zeros. These vectors will hold the length of the longest wiggle subsequence that ends at each index with an upward or downward movement respectively.</li>
+<li>Both <code>up[0]</code> and <code>down[0]</code> are set to <code>1</code> because any single element is considered a valid subsequence of length 1, and it can start with either an upward or downward movement.</li>
+</ul>
+<h4 id="step-3-loop-through-the-array">
+  Step 3: Loop Through the Array
+  <a class="heading-link" href="#step-3-loop-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>        down[i] <span style="color:#f92672">=</span> up[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        up[i] <span style="color:#f92672">=</span> up[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(nums[i] <span style="color:#f92672">&gt;</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>        up[i] <span style="color:#f92672">=</span> down[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        down[i] <span style="color:#f92672">=</span> down[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        down[i] <span style="color:#f92672">=</span> down[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        up[i] <span style="color:#f92672">=</span> up[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates over the array starting from the second element (<code>i = 1</code>).</li>
+<li>For each element <code>nums[i]</code>, we compare it with the previous element <code>nums[i-1]</code>:
 <ul>
-<li>The <code>wiggleMaxLength</code> function initializes the <code>up</code> and <code>down</code> arrays and iterates through the <code>nums</code> array to update the lengths based on the relationships between adjacent elements.</li>
-<li>Finally, it returns the maximum of the lengths stored in the <code>up</code> and <code>down</code> arrays.</li>
+<li>If <code>nums[i]</code> is smaller than <code>nums[i-1]</code>, we update <code>down[i]</code> to be the longest subsequence with a downward movement (<code>up[i-1] + 1</code>), and the <code>up[i]</code> value remains the same as the previous value (<code>up[i-1]</code>).</li>
+<li>If <code>nums[i]</code> is greater than <code>nums[i-1]</code>, we update <code>up[i]</code> to be the longest subsequence with an upward movement (<code>down[i-1] + 1</code>), and the <code>down[i]</code> value remains the same as the previous value (<code>down[i-1]</code>).</li>
+<li>If <code>nums[i]</code> is equal to <code>nums[i-1]</code>, neither the <code>up[i]</code> nor the <code>down[i]</code> values change, as there is no wiggle in the sequence.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-maximum-wiggle-subsequence-length">
+  Step 4: Return the Maximum Wiggle Subsequence Length
+  <a class="heading-link" href="#step-4-return-the-maximum-wiggle-subsequence-length">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(down[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], up[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the longest wiggle subsequence can either end with an upward or downward movement. Therefore, the final result is the maximum of <code>up[n-1]</code> and <code>down[n-1]</code>, which represents the longest wiggle subsequence in the entire array.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -316,10 +384,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ) where ( n ) is the length of the <code>nums</code> array, since we traverse the array once.</li>
-<li><strong>Space Complexity</strong>: ( O(n) ) for the <code>up</code> and <code>down</code> arrays to keep track of the lengths.</li>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>. This is because we only need a single pass through the array to compute the values of <code>up</code> and <code>down</code> arrays.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>. This is due to the storage of two vectors (<code>up</code> and <code>down</code>) of size <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively solves the problem using dynamic programming, where the <code>up</code> and <code>down</code> arrays track the longest subsequences with alternating upward and downward movements. By iterating through the array once and updating the arrays in each step, we can efficiently compute the length of the longest wiggle subsequence in <strong>O(n)</strong> time with <strong>O(n)</strong> space complexity. This solution is optimal and scalable for large inputs, and it demonstrates a clear application of dynamic programming to handle alternating sequences.</p>
  
 </div>
   

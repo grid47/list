@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1567s1hbhb">
+<h2 id="hahahugoshortcode1568s1hbhb">
   
 
   
@@ -254,7 +254,20 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In the game of stones, there are two players who take turns removing stones from either end of a row of piles. Each pile has a certain number of stones. The objective is to maximize the number of stones a player can collect. Given an array <code>piles</code>, representing the number of stones in each pile, determine if the first player can win.</p>
+<p>The problem &ldquo;Stone Game&rdquo; is a two-player game where players take turns removing stones from piles. Given an array representing the number of stones in each pile, the goal is to determine whether the first player can always win, assuming both players play optimally.</p>
+<p>The players take turns removing stones from either the leftmost or the rightmost pile. The winner is determined by the total number of stones they collect. The task is to determine if the first player (starting first) can always win given the array of piles.</p>
+<h3 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: <code>[5, 3, 4, 5]</code></li>
+<li><strong>Output</strong>: <code>true</code> (The first player can always win.)</li>
+</ul>
+<p>In this example, the optimal play would be for the first player to select the pile with 5 stones on the left, leaving the opponent with piles <code>[3, 4, 5]</code>. The first player can then choose the next pile with 5 stones to guarantee a win.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,71 +275,152 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We can solve this problem using <strong>dynamic programming</strong> to keep track of the optimal score difference between the two players at any given state. Here&rsquo;s how we approach it:</p>
+<p>To solve this problem, we use a <strong>dynamic programming</strong> approach with <strong>memoization</strong> to avoid redundant computations. We will define a function <code>dp(i, j)</code> that computes the maximum difference in score the current player can achieve over the opponent, when considering piles from index <code>i</code> to <code>j</code> (both inclusive). The optimal strategy for the player is to maximize their score while minimizing the opponent&rsquo;s score.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Two Choices</strong>: At any step, the player can pick either the leftmost pile (<code>piles[i]</code>) or the rightmost pile (<code>piles[j]</code>).</li>
+<li><strong>Recursion</strong>: The recurrence is based on the fact that the current player’s score is the maximum of:
+<ul>
+<li>Choosing the leftmost pile and then minimizing the opponent’s score from the remaining piles, or</li>
+<li>Choosing the rightmost pile and then minimizing the opponent’s score from the remaining piles.</li>
+</ul>
+</li>
+<li><strong>Memoization</strong>: We use memoization to store the results of previously computed subproblems (ranges <code>[i, j]</code>) to speed up the solution.</li>
+</ol>
+<h4 id="plan">
+  Plan:
+  <a class="heading-link" href="#plan">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Use recursion to compute the optimal score difference.</li>
+<li>Memoize the results to avoid recomputation.</li>
+<li>Return <code>true</code> if the first player&rsquo;s score difference is greater than or equal to zero (i.e., they can win).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// The dp function computes the maximum score difference.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Base case: when there&#39;s only one pile left.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> j) <span style="color:#66d9ef">return</span> p[i];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Check if the result has been memoized.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (memo.count(i) <span style="color:#f92672">&amp;&amp;</span> memo[i].count(j)) <span style="color:#66d9ef">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Recursive step: Player chooses between picking the i-th or j-th pile.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> memo[i][j] <span style="color:#f92672">=</span> max(p[i] <span style="color:#f92672">-</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j), p[j] <span style="color:#f92672">-</span> dp(i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">stoneGame</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> piles) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>p <span style="color:#f92672">=</span> piles;  <span style="color:#75715e">// Store the piles array.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        n <span style="color:#f92672">=</span> piles.size();  <span style="color:#75715e">// Get the size of the piles array.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Check if the first player can win.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="detailed-breakdown">
+  Detailed Breakdown:
+  <a class="heading-link" href="#detailed-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming Function</strong>:</p>
+<p><strong>Class and Variables</strong>:</p>
 <ul>
-<li>We define a recursive function <code>dp(i, j)</code> that calculates the maximum score difference the current player can achieve over the opponent when considering piles from index <code>i</code> to <code>j</code>.</li>
-<li>If <code>i</code> equals <code>j</code>, it means only one pile is left, and the current player can take all stones from that pile, returning <code>p[i]</code>.</li>
+<li>We define the class <code>Solution</code> with a public method <code>stoneGame</code> that solves the problem.</li>
+<li>We declare a vector <code>p</code> to store the piles and an integer <code>n</code> to store the number of piles.</li>
+<li>We use a <code>map&lt;int, map&lt;int, int&gt;&gt;</code> called <code>memo</code> to store the results of subproblems. The first <code>int</code> represents the start index of the subproblem, and the second <code>int</code> represents the end index of the subproblem.</li>
 </ul>
 </li>
 <li>
-<p><strong>Memoization</strong>:</p>
+<p><strong>dp Function</strong>:</p>
 <ul>
-<li>To optimize the recursive calls, we use a memoization table <code>memo</code> to store already computed results for specific <code>(i, j)</code> pairs, avoiding redundant calculations.</li>
+<li>The <code>dp(int i, int j)</code> function computes the maximum score difference (first player’s score minus the opponent’s score) for the subarray of piles from index <code>i</code> to index <code>j</code>.</li>
+<li><strong>Base Case</strong>: When <code>i == j</code>, the subarray contains only one pile, and the current player can only take that pile, returning the value of <code>p[i]</code>.</li>
+<li><strong>Memoization Check</strong>: Before computing the result, we check if the result for the subarray <code>[i, j]</code> has already been computed and stored in the <code>memo</code> map. If it exists, we return the cached result to avoid recomputation.</li>
+<li><strong>Recursive Step</strong>: The recursive step tries both options:
+<ul>
+<li>Pick the pile at index <code>i</code> and subtract the result of the opponent&rsquo;s move from the range <code>[i+1, j]</code>.</li>
+<li>Pick the pile at index <code>j</code> and subtract the result of the opponent&rsquo;s move from the range <code>[i, j-1]</code>.</li>
+<li>The optimal choice is the one that maximizes the current player&rsquo;s score while minimizing the opponent&rsquo;s score.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Score Calculation</strong>:</p>
+<p><strong>stoneGame Function</strong>:</p>
 <ul>
-<li>At each recursive call, the current player can choose either:
-<ul>
-<li>The pile at the left end (<code>p[i]</code>) and then the opponent will play from <code>(i + 1, j)</code>.</li>
-<li>The pile at the right end (<code>p[j]</code>) and then the opponent will play from <code>(i, j - 1)</code>.</li>
-</ul>
-</li>
-<li>The result for the current state will be the maximum of these two choices:
-[
-\text{result} = \max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1))
-]</li>
-</ul>
-</li>
-<li>
-<p><strong>Winning Condition</strong>:</p>
-<ul>
-<li>The first player wins if the score difference calculated by <code>dp(0, n - 1)</code> is non-negative.</li>
+<li>The <code>stoneGame</code> function is the entry point. It initializes the <code>p</code> vector with the given piles and calls the <code>dp</code> function on the full range of piles <code>[0, n-1]</code>.</li>
+<li>The result of <code>dp(0, n - 1)</code> will be greater than or equal to 0 if the first player can win. If the score difference is non-negative, the first player wins, and we return <code>true</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>The function initializes <code>p</code> with the input piles and sets <code>n</code> as the size of the piles.</li>
-<li>It calls the <code>dp</code> function starting from the full range of piles (0 to n-1).</li>
-<li>The result of the first player&rsquo;s potential winning is based on whether the computed score difference is greater than or equal to zero.</li>
+<li>The time complexity of the solution is <strong>O(n^2)</strong>, where <code>n</code> is the number of piles. This is because for each pair of indices <code>(i, j)</code>, we are computing the result once, and there are <code>O(n^2)</code> such pairs.</li>
+<li>Memoization ensures that we compute the result for each pair only once, avoiding redundant calculations.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n^2)</strong> due to the memoization map, which stores the results of all subproblems <code>(i, j)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution effectively solves the problem using dynamic programming and memoization to avoid redundant calculations. By recursively calculating the optimal score difference for each subarray, we can determine if the first player can always win. The memoization map ensures that each subproblem is computed only once, improving efficiency.</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n^2) ), since there are ( O(n^2) ) possible states to calculate due to the nested loops over indices.</li>
-<li><strong>Space Complexity</strong>: ( O(n^2) ), for the memoization table storing results for pairs of indices.</li>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the number of piles.</li>
+<li><strong>Space Complexity</strong>: O(n^2) for storing the results of subproblems.</li>
 </ul>
+<p>This approach guarantees an optimal solution while minimizing the number of redundant computations.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1567s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1568s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

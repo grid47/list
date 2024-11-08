@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1209s1hbhb">
+<h2 id="hahahugoshortcode1207s1hbhb">
   
 
   
@@ -270,7 +270,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, remove duplicate letters so that every letter appears once and only once. The result must be the smallest lexicographical order of letters that can be obtained from the original string.</p>
+<p>The problem asks us to remove duplicate letters from a given string <code>s</code> such that:</p>
+<ol>
+<li>Every letter appears only once in the result string.</li>
+<li>The result string must be the smallest in lexicographical order.</li>
+</ol>
+<p>This means that for any two duplicate letters, the earlier occurrence should be removed if a lexicographically smaller option can still be placed in the result string while ensuring the sequence is valid.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,55 +283,165 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a greedy algorithm with a stack to build the result while ensuring the letters are in the smallest lexicographical order. The main steps are:</p>
+<p>To solve this problem efficiently, we can take advantage of a <strong>greedy algorithm</strong> combined with a <strong>stack</strong>. Here&rsquo;s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Frequency and Last Index Arrays</strong>:</p>
+<p><strong>Character Frequency Count</strong>: We need to know how many times each character appears in the string so that we can ensure that we don’t discard a character which we might need later.</p>
+</li>
+<li>
+<p><strong>Lexicographical Order</strong>: While traversing the string, we will try to build the result string in lexicographical order. This requires removing characters from the stack if we encounter a smaller character that can still be placed later.</p>
+</li>
+<li>
+<p><strong>Stack for Result Construction</strong>: A stack will help us maintain the result string while respecting the lexicographical order, and ensuring each character appears only once.</p>
+</li>
+<li>
+<p><strong>Two Helper Arrays</strong>:</p>
 <ul>
-<li>Use an array <code>frq</code> to count the frequency of each character in the string.</li>
-<li>Use an array <code>lidx</code> to store the last index of each character.</li>
+<li><code>frq[26]</code>: Tracks the frequency of each character in the string.</li>
+<li><code>lidx[26]</code>: Tracks the last index at which each character appears in the string.</li>
 </ul>
 </li>
 <li>
-<p><strong>Processing the String</strong>:</p>
-<ul>
-<li>Iterate through the string:
-<ul>
-<li>For each character, check if it has been seen before (using a <code>seen</code> array).</li>
-<li>If it has not been seen, compare it with the top of the stack:
-<ul>
-<li>While the stack is not empty and the top character is greater than the current character (ensuring a smaller lexicographical order), and the top character appears later in the string (using the last index), pop it from the stack.</li>
-<li>Mark the popped character as not seen.</li>
-</ul>
-</li>
-<li>Push the current character onto the stack and mark it as seen.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Constructing the Result</strong>:</p>
-<ul>
-<li>Once the entire string has been processed, pop all characters from the stack to form the result.</li>
-<li>Reverse the result string since characters were added in reverse order.</li>
-</ul>
+<p><strong>Visited Set</strong>: A boolean array <code>seen[26]</code> to track if a character is already present in the stack (result).</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A string <code>s</code>.</li>
-<li><strong>Output</strong>: A string representing the smallest lexicographical order of letters with no duplicates.</li>
+<h4 id="step-1-frequency-and-last-index-calculation">
+  Step 1: Frequency and Last Index Calculation
+  <a class="heading-link" href="#step-1-frequency-and-last-index-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>), lidx(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> x <span style="color:#f92672">=</span> s[i];
+</span></span><span style="display:flex;"><span>    frq[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    lidx[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>frq</code> Array</strong>: This array stores how many times each character (from &lsquo;a&rsquo; to &lsquo;z&rsquo;) appears in the string. We increment the frequency count of the character each time it appears.</p>
+</li>
+<li>
+<p><strong><code>lidx</code> Array</strong>: This array keeps track of the last index where each character is located. This helps us decide whether it’s safe to remove a character from the stack while maintaining the possibility of encountering it later.</p>
+</li>
 </ul>
+<h4 id="step-2-initialize-seen-array-and-stack">
+  Step 2: Initialize Seen Array and Stack
+  <a class="heading-link" href="#step-2-initialize-seen-array-and-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> seen(<span style="color:#ae81ff">26</span>, false);
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> st;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>seen</code> Array</strong>: A boolean array to track whether a character is already present in the stack. If a character is already in the result, we skip adding it again.</p>
+</li>
+<li>
+<p><strong><code>st</code> Stack</strong>: The stack will store characters of the final result in a way that respects the lexicographical order and ensures no duplicates.</p>
+</li>
+</ul>
+<h4 id="step-3-process-each-character-in-the-string">
+  Step 3: Process Each Character in the String
+  <a class="heading-link" href="#step-3-process-each-character-in-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(seen[cur]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(st.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> st.top() <span style="color:#f92672">&gt;</span> s[i] <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> lidx[st.top() <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]) {
+</span></span><span style="display:flex;"><span>        seen[st.top() <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        st.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    st.push(s[i]);
+</span></span><span style="display:flex;"><span>    seen[cur] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Loop Through the String</strong>: We iterate through each character of the string.</p>
+</li>
+<li>
+<p><strong>Skip Seen Characters</strong>: If a character has already been added to the stack (i.e., it’s part of the result string), we skip processing it by continuing to the next character.</p>
+</li>
+<li>
+<p><strong>Removing Larger Characters</strong>: For each character, we check if it’s smaller than the character currently on top of the stack (<code>st.top()</code>) and if the top character appears later in the string (<code>i &lt; lidx[st.top() - 'a']</code>). If both conditions are true, we can safely remove the top character from the stack because:</p>
+<ul>
+<li>The current character is lexicographically smaller.</li>
+<li>The character we remove will appear again later in the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Push Current Character to Stack</strong>: After the above checks, we push the current character into the stack and mark it as &ldquo;seen&rdquo;.</p>
+</li>
+</ul>
+<h4 id="step-4-build-the-final-result-string">
+  Step 4: Build the Final Result String
+  <a class="heading-link" href="#step-4-build-the-final-result-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(st.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> st.top();
+</span></span><span style="display:flex;"><span>    st.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>reverse(ans.begin(), ans.end());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Construct the Result</strong>: Once all characters have been processed, the stack contains the result but in reverse order.</p>
+</li>
+<li>
+<p><strong>Reverse the Stack</strong>: We reverse the stack content to get the final result in the correct order.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The final string is returned.</p>
+</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the input <code>s = &quot;bcabc&quot;</code>. The steps would be:</p>
 <ol>
-<li>Count the frequency of each character and store their last indices.</li>
-<li>Use a stack to construct the result while ensuring the smallest order.</li>
-<li>Return the reversed result string.</li>
+<li>
+<p><strong>Initial Frequency Count</strong>:</p>
+<ul>
+<li><code>frq = [0, 1, 2, 1, 0, ..., 0]</code> (b appears twice, c appears once, a appears once).</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing <code>s = &quot;bcabc&quot;</code></strong>:</p>
+<ul>
+<li>Process &lsquo;b&rsquo;: Not seen, push &lsquo;b&rsquo; to the stack.</li>
+<li>Process &lsquo;c&rsquo;: Not seen, push &lsquo;c&rsquo; to the stack.</li>
+<li>Process &lsquo;a&rsquo;: Not seen, remove &lsquo;c&rsquo; from the stack (because it will appear again), then push &lsquo;a&rsquo; to the stack.</li>
+<li>Process &lsquo;b&rsquo;: &lsquo;b&rsquo; is already in the stack, skip.</li>
+<li>Process &lsquo;c&rsquo;: &lsquo;c&rsquo; is now safely pushed to the stack.</li>
+</ul>
+<p>The stack at the end will contain <code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code>.</p>
+</li>
+<li>
+<p><strong>Final String</strong>: The stack content is <code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code>, so after reversing it, the final result is <code>&quot;abc&quot;</code>.</p>
+</li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -335,15 +450,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the string. Each character is processed a limited number of times.</li>
-<li><strong>Space Complexity</strong>: (O(1)) for the frequency, last index, and seen arrays since they are fixed size (26 for lowercase letters), and (O(n)) for the stack in the worst case.</li>
+<li>We only traverse the string once to compute the frequency and last index of each character.</li>
+<li>We process each character once when pushing and popping from the stack.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> because:</p>
+<ul>
+<li>We use extra space for the <code>frq</code>, <code>lidx</code>, and <code>seen</code> arrays of size 26 (constant space).</li>
+<li>The stack stores the characters of the result, which in the worst case can store all <code>n</code> characters of the input string.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach ensures that we remove duplicate letters while maintaining the smallest lexicographical order in an efficient manner. By leveraging a stack and keeping track of character frequencies and last occurrences, we can solve this problem in linear time. The greedy strategy of removing characters that can appear later allows us to build the correct result string while respecting both the uniqueness and order of characters.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Greedy Approach</strong>: We optimize the lexicographical order by always considering removing larger characters when possible.</li>
+<li><strong>Stack Usage</strong>: The stack efficiently helps in constructing the final result while adhering to the order constraints.</li>
+<li><strong>Optimal Time Complexity</strong>: The algorithm runs in <strong>O(n)</strong> time, making it suitable for large input sizes.</li>
+</ol>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1209s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1207s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -233,7 +233,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">:</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1439s1hbhb">
+<h2 id="hahahugoshortcode1438s1hbhb">
   
 
   
@@ -245,7 +245,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string representing an absolute path for a file, simplify it. The path may contain <code>.</code> (current directory), <code>..</code> (parent directory), and multiple slashes. Return the simplified canonical path.</p>
+<p>The problem is to simplify an absolute file path, given as a string, to its canonical form. For example, given a path like <code>/a/./b/../../c/</code>, the canonical path should be <code>/c</code>. The path simplification should remove redundant components such as:</p>
+<ul>
+<li>Single dots (<code>.</code>) which represent the current directory.</li>
+<li>Double dots (<code>..</code>) which represent moving up to the parent directory.</li>
+<li>Extra slashes (<code>/</code>) which should be treated as a single separator.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -253,34 +258,97 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution uses a <strong>stack-based approach</strong> to process each component in the path. Here’s how it works:</p>
 <ol>
-<li><strong>Tokenization</strong>: Split the input string <code>path</code> by the &lsquo;/&rsquo; delimiter to extract individual components (directories).</li>
-<li><strong>Stack Usage</strong>: Utilize a stack to manage the directories:
+<li>
+<p><strong>Initialize Set for Skipping Components</strong>:</p>
 <ul>
-<li><strong>Push Valid Directories</strong>: Push directory names onto the stack if they are not empty, <code>.</code> (current directory), or <code>..</code> (parent directory). If encountering <code>..</code>, pop the last directory from the stack if it exists.</li>
+<li>We define a set <code>dot</code> containing values <code>{&quot;..&quot;, &quot;.&quot;, &quot;&quot;}</code> to identify parts of the path that should be ignored or handled specifically.</li>
+<li>The empty string (<code>&quot;&quot;</code>) handles cases of consecutive slashes in the path, and <code>&quot;.&quot;</code> represents the current directory, which can be ignored.</li>
 </ul>
 </li>
-<li><strong>Reconstruction</strong>: After processing all components, reconstruct the simplified path by concatenating elements from the stack.</li>
-<li><strong>Final Adjustment</strong>: Return the simplified path, ensuring it returns &ldquo;/&rdquo; if the result is empty.</li>
+<li>
+<p><strong>Tokenize the Path</strong>:</p>
+<ul>
+<li>A <code>stringstream</code> is used to split the <code>path</code> string by each <code>/</code> delimiter. Each extracted component is then stored in <code>tmp</code> to examine if it’s a directory or a special token (<code>..</code>, <code>.</code>, or empty).</li>
+</ul>
+</li>
+<li>
+<p><strong>Process Each Component Using a Stack</strong>:</p>
+<ul>
+<li>For each component <code>tmp</code>:
+<ul>
+<li>If <code>tmp</code> is <code>&quot;..&quot;</code>, we move up one directory by popping the top element from the stack (unless the stack is empty).</li>
+<li>If <code>tmp</code> is not in the <code>dot</code> set (i.e., it’s a valid directory name), we push it onto the stack.</li>
+</ul>
+</li>
+<li>By the end of this loop, the stack contains the sequence of directories that make up the simplified path.</li>
+</ul>
+</li>
+<li>
+<p><strong>Construct the Result</strong>:</p>
+<ul>
+<li>We pop each element from the stack and prepend it to <code>res</code> with a <code>/</code> to reconstruct the simplified path in canonical form.</li>
+<li>If the <code>res</code> string is empty after processing, we return <code>/</code> as the root directory.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: A set <code>dot</code> is created to define characters that should be ignored. A string stream <code>ss</code> is initialized with the <code>path</code>.</li>
-<li><strong>Processing</strong>: A loop reads components from <code>ss</code>:
-<ul>
-<li>If the component is <code>..</code>, pop from the stack if not empty.</li>
-<li>If it&rsquo;s valid (not in <code>dot</code>), push it onto the stack.</li>
+<h4 id="step-1-initialize-the-set-stream-and-stack">
+  Step 1: Initialize the Set, Stream, and Stack
+  <a class="heading-link" href="#step-1-initialize-the-set-stream-and-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> dot <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;..&#34;</span>, <span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>};
+</span></span><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, tmp;
+</span></span><span style="display:flex;"><span>stringstream <span style="color:#a6e22e">ss</span>(path);
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> stk;
+</span></span></code></pre></div><ul>
+<li>We create a set <code>dot</code> to handle cases where the component is <code>&quot;..&quot;</code>, <code>&quot;.&quot;</code>, or an empty string.</li>
+<li><code>res</code> will eventually store the canonical path.</li>
+<li><code>tmp</code> holds each component of the path as we process it.</li>
+<li><code>stack&lt;string&gt; stk</code> is used to manage directories in the path as we build the simplified form.</li>
 </ul>
-</li>
-<li><strong>Building Result</strong>: After processing, the stack is used to build the resulting path by prepending each component.</li>
-<li><strong>Output</strong>: If the result is empty, return &ldquo;/&rdquo;, otherwise return the constructed path.</li>
-</ol>
+<h4 id="step-2-process-the-path-using-stringstream-and-stack">
+  Step 2: Process the Path Using <code>stringstream</code> and Stack
+  <a class="heading-link" href="#step-2-process-the-path-using-stringstream-and-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(getline(ss, tmp, <span style="color:#e6db74">&#39;/&#39;</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(tmp <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;..&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty()) stk.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (<span style="color:#f92672">!</span>dot.count(tmp)) stk.push(tmp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each part of <code>path</code> by splitting it on <code>/</code>.</li>
+<li>If the component <code>tmp</code> is <code>&quot;..&quot;</code> and the stack isn’t empty, we pop the top element from the stack (i.e., we move up one directory).</li>
+<li>If <code>tmp</code> isn’t in the <code>dot</code> set (meaning it’s a valid directory), we push it onto the stack.</li>
+</ul>
+<h4 id="step-3-construct-the-result-from-the-stack">
+  Step 3: Construct the Result from the Stack
+  <a class="heading-link" href="#step-3-construct-the-result-from-the-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> stk.top() <span style="color:#f92672">+</span> res;
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">:</span> res;
+</span></span></code></pre></div><ul>
+<li>We build the result path from the stack by adding each directory to <code>res</code>, ensuring each is prefixed by <code>/</code>.</li>
+<li>If <code>res</code> is empty after processing, we return <code>/</code>, indicating the root directory.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -288,14 +356,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity:</strong> ( O(N) ), where ( N ) is the length of the input path, as each character is processed once.</li>
-<li><strong>Space Complexity:</strong> ( O(N) ), in the worst case, for the stack to store the directory components.</li>
-</ul> 
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is <code>O(n)</code>, where <code>n</code> is the length of the input <code>path</code>. This is because each component is processed once, and stack operations (push and pop) are <code>O(1)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is also <code>O(n)</code>, primarily for storing the stack that may hold all directories in the worst case.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and optimal for simplifying absolute file paths. By using a stack, we efficiently manage directory traversal, ensuring that each <code>..</code> correctly backtracks, and each valid directory is correctly added to the canonical path. This stack-based approach is ideal for problems involving hierarchical paths, making it a practical solution for file system path simplification.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1439s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1438s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -267,13 +267,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>stones</code> where <code>stones[i]</code> represents the weight of the i-th stone. You can merge stones into piles according to the following rules:</p>
-<ol>
-<li>A merge can only happen between two adjacent stones.</li>
-<li>To merge stones, the number of stones must be equal to <code>k</code> after the merge, which creates one new pile.</li>
-<li>The cost of merging stones is the total weight of the stones being merged.</li>
-</ol>
-<p>The objective is to return the minimum cost to merge all the stones into one pile, or return <code>-1</code> if it is not possible.</p>
+<p>The problem requires you to find the minimum cost to merge all the stones into one pile under certain conditions. Specifically, you are given a sequence of stones, and at each step, you can merge exactly <strong>k</strong> consecutive piles of stones into one pile. The cost of merging two piles is the total number of stones in those two piles. The goal is to determine the minimum cost to merge all the piles into one pile. If it&rsquo;s not possible to merge all the stones according to the rules, return <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -281,62 +275,126 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Prefix Sum Array</strong>:</p>
+<p>To solve this problem, we can use <strong>Dynamic Programming (DP)</strong> with memoization. The problem can be broken down into subproblems where:</p>
 <ul>
-<li>Create a prefix sum array <code>prefix</code> to quickly calculate the sum of any subarray of stones.</li>
+<li>We need to calculate the minimum cost to merge stones from position <code>i</code> to position <code>j</code> (inclusive) into exactly <code>m</code> piles, and</li>
+<li>We need to repeatedly merge subarrays of stones, making sure that at each step, exactly <code>k</code> stones are merged together.</li>
 </ul>
-</li>
-<li>
-<p><strong>Dynamic Programming</strong>:</p>
-<ul>
-<li>Use a 3D memoization array <code>memo[i][j][m]</code> to store the minimum cost of merging the stones from index <code>i</code> to <code>j</code> with <code>m</code> piles.</li>
-<li>The function <code>dp(i, j, m)</code> is defined to return the minimum cost to merge the stones between indices <code>i</code> and <code>j</code> into <code>m</code> piles.</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Cases</strong>:</p>
-<ul>
-<li>If the current segment size minus <code>m</code> is not divisible by <code>k - 1</code>, return <code>INT_MAX</code> (impossible state).</li>
-<li>If only one stone remains (<code>i == j</code>):
-<ul>
-<li>If <code>m</code> is <code>1</code>, the cost is <code>0</code> since no merges are needed.</li>
-<li>If <code>m</code> is greater than <code>1</code>, return <code>INT_MAX</code> (impossible to merge).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Case</strong>:</p>
-<ul>
-<li>Iterate through possible merge points and calculate the minimum cost by splitting the range into two parts:
-<ul>
-<li>The first part is merged into one pile.</li>
-<li>The second part can then be processed with <code>m - 1</code> piles.</li>
-</ul>
-</li>
-<li>Store the result in <code>memo</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Calculation</strong>:</p>
-<ul>
-<li>If the result of merging all stones into one pile is <code>&gt;= INT_MAX</code>, return <code>-1</code>; otherwise, return the calculated minimum cost.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Prefix Sum Array</strong>: To efficiently calculate the sum of any subarray of stones, we can maintain a prefix sum array. This allows us to quickly compute the sum of stones between any two indices <code>i</code> and <code>j</code> in constant time.</p>
+</li>
+<li>
+<p><strong>Recursive Substructure</strong>: To merge stones from index <code>i</code> to <code>j</code> into exactly <code>m</code> piles, we divide the problem into two subproblems:</p>
 <ul>
-<li>The function initializes the prefix sum array and the memoization array.</li>
-<li>The <code>dp</code> function is called with the entire range of stones and <code>1</code> pile.</li>
-<li>The final answer is derived from the memoization table.</li>
+<li>First, merge stones from <code>i</code> to some index <code>p</code>.</li>
+<li>Then, merge stones from <code>p + 1</code> to <code>j</code>.</li>
+</ul>
+<p>This division ensures that each subproblem considers merging <code>k</code> consecutive piles and accumulates the cost properly.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid recalculating overlapping subproblems, we use a 3D memoization table, where <code>memo[i][j][m]</code> stores the minimum cost to merge stones from <code>i</code> to <code>j</code> into exactly <code>m</code> piles.</p>
+</li>
+<li>
+<p><strong>Recursive Decision Making</strong>: The recursion works by calculating the minimum cost to merge a segment of stones and considering all valid ways to divide the segment into smaller segments that can be merged into the required number of piles.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> prefix;  <span style="color:#75715e">// Stores the prefix sum of stones
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> k;               <span style="color:#75715e">// The number of piles that must be merged at each step
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> memo[<span style="color:#ae81ff">101</span>][<span style="color:#ae81ff">101</span>][<span style="color:#ae81ff">31</span>];  <span style="color:#75715e">// Memoization table to store the results of subproblems
+</span></span></span></code></pre></div><ul>
+<li><strong>Prefix Array</strong>: This array stores the cumulative sum of the stones. <code>prefix[i]</code> stores the total number of stones from the beginning up to index <code>i-1</code>. It helps to calculate the sum of stones between any two indices efficiently.</li>
+<li><strong>Memoization Table</strong>: The <code>memo</code> table is a 3D array where:
+<ul>
+<li><code>memo[i][j][m]</code> stores the minimum cost to merge the stones from index <code>i</code> to index <code>j</code> into exactly <code>m</code> piles.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> m) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> m) <span style="color:#f92672">%</span> (k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))  <span style="color:#75715e">// If the difference between the subarray length and m is not divisible by k-1, return INT_MAX
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> j) {  <span style="color:#75715e">// Base case: if we are looking at a single pile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(m <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {  <span style="color:#75715e">// If we need to form exactly one pile, no cost is required
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {  <span style="color:#75715e">// If we need to form more than one pile, it&#39;s impossible
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> INT_MAX;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If we are looking at a subarray from <code>i</code> to <code>j</code> with exactly <code>m</code> piles:
+<ul>
+<li>If <code>m == 1</code> and we only have one pile, no cost is incurred.</li>
+<li>If <code>m &gt; 1</code>, it&rsquo;s impossible to merge them into more than one pile without violating the <code>k</code>-pile merge rule, so we return <code>INT_MAX</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[i][j][m] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[i][j][m];  <span style="color:#75715e">// If the subproblem has been solved before, return the stored result
+</span></span></span></code></pre></div><ul>
+<li><strong>Memoization Check</strong>: If the value for the current subproblem has been computed previously, we return the stored result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(m <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)  <span style="color:#75715e">// If we want exactly one pile, merge the entire subarray into one pile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> dp(i, j, k) <span style="color:#f92672">+</span> prefix[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> prefix[i];
+</span></span></code></pre></div><ul>
+<li><strong>Merge into One Pile</strong>: If we are tasked with merging the subarray <code>i</code> to <code>j</code> into exactly one pile:
+<ul>
+<li>We recursively merge the entire subarray into <code>k</code> piles (a larger number of piles) and add the cost of merging them.</li>
+<li>The <code>prefix[j + 1] - prefix[i]</code> computes the cost (sum of stones in this range).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> i; p <span style="color:#f92672">&lt;</span> j; p <span style="color:#f92672">+=</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {  <span style="color:#75715e">// Try different positions to split the problem into smaller subproblems
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans <span style="color:#f92672">=</span> min(ans, dp(i, p, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> dp(p <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));  <span style="color:#75715e">// Merge subarrays and accumulate the cost
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[i][j][m] <span style="color:#f92672">=</span> ans;  <span style="color:#75715e">// Store and return the result of the current subproblem
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Recursive Case</strong>: The loop iterates over different possible split points <code>p</code> and recursively calculates the cost to merge the subarray into <code>m</code> piles. For each split point:
+<ul>
+<li>We recursively merge the left part into <code>1</code> pile.</li>
+<li>We recursively merge the right part into <code>m-1</code> piles.</li>
+</ul>
+</li>
+<li>The result is the minimum cost from all possible split points.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">mergeStones</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> stones, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> stones.size();
+</span></span><span style="display:flex;"><span>        prefix.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            prefix[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> prefix[i] <span style="color:#f92672">+</span> stones[i];  <span style="color:#75715e">// Calculate the prefix sum of the stones
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));  <span style="color:#75715e">// Initialize memoization table with -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Call the dp function to get the minimum cost to merge all stones into one pile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">&gt;=</span> INT_MAX <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ans;  <span style="color:#75715e">// If no valid solution, return -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>:
+<ul>
+<li>Initializes the <code>k</code> value and calculates the prefix sum array.</li>
+<li>Initializes the memoization table to <code>-1</code> to signify that no subproblem has been solved initially.</li>
+<li>Calls the <code>dp</code> function to find the minimum cost to merge all stones into one pile.</li>
+<li>If the result is <code>INT_MAX</code>, it means it&rsquo;s impossible to merge the stones into one pile, and <code>-1</code> is returned.</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -346,9 +404,25 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2 * m), where <code>n</code> is the number of stones and <code>m</code> is the number of piles.</li>
-<li><strong>Space Complexity</strong>: O(n^2 * m) for the memoization table and prefix sums.</li>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(n^3)</strong>, where <code>n</code> is the number of stones. This is because:</p>
+<ul>
+<li>We have a 3D DP table with dimensions <code>n x n x k</code>.</li>
+<li>For each subproblem, we check all possible ways to divide the range into smaller subarrays, which takes <code>O(k)</code> time.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n^2 * k)</strong> due to the storage needed for the DP memoization table, where <code>n</code> is the number of stones and <code>k</code> is the maximum number of piles.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem using dynamic programming and memoization. By breaking down the problem into smaller subproblems and leveraging the prefix sum array for efficient range sum calculations, the solution finds the minimum cost of merging stones. The time complexity of <strong>O(n^3)</strong> and space complexity of <strong>O(n^2 * k)</strong> make this solution feasible for moderately large inputs, handling the complexity of merging stones under the given constraints.</p>
  
 </div>
   

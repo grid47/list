@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              8-minute read
             </span>
           </div>
 
@@ -323,7 +323,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ch<span style="color:#f92672">?</span> mx: n <span style="color:#f92672">*</span> n;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1522s1hbhb">
+<h2 id="hahahugoshortcode1523s1hbhb">
   
 
   
@@ -335,7 +335,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the size of the largest island in a grid after potentially converting one water cell (0) into land (1). An island is defined as a group of adjacent land cells (1).</p>
+<p>In this problem, we are given a 2D grid where each cell can either be land (<code>1</code>) or water (<code>0</code>). We are tasked with determining the size of the largest possible island that can be formed by flipping at most one water cell to land. An island is defined as a group of connected land cells, where connectivity is considered in all four directions (up, down, left, right).</p>
+<p>The goal is to return the maximum size of the island that can be achieved by flipping at most one water cell. If no such island can be created, we should return the size of the largest existing island.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -343,24 +344,160 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be approached using <strong>Union-Find</strong> (also known as Disjoint Set Union, DSU) to efficiently group the land cells into separate islands. The solution also involves the following key steps:</p>
 <ol>
-<li><strong>Union-Find Structure</strong>: Implement a Union-Find (Disjoint Set Union, DSU) structure to efficiently manage connected components (islands).</li>
-<li><strong>DFS for Island Formation</strong>: Use Depth-First Search (DFS) to explore and merge all connected land cells into islands while marking visited cells.</li>
-<li><strong>Calculate Potential Island Sizes</strong>: For each water cell, calculate the size of the island that would be formed by converting that cell to land, summing the sizes of all distinct neighboring islands.</li>
-<li><strong>Determine Maximum Size</strong>: Track the maximum possible size of an island after converting a single water cell.</li>
+<li>
+<p><strong>Identifying Initial Islands</strong>: Initially, we need to find the connected components of the grid, which represent the islands. This can be done using depth-first search (DFS) or breadth-first search (BFS), but here we use DFS in combination with the Union-Find data structure to keep track of the connected components.</p>
+</li>
+<li>
+<p><strong>Flipping Water Cells</strong>: For each water cell (<code>0</code>), we evaluate whether flipping it to land will connect any of the neighboring land cells, potentially forming a larger island. If flipping a water cell connects two or more separate islands, we can calculate the new size of the island formed.</p>
+</li>
+<li>
+<p><strong>Union-Find Data Structure</strong>: This is used to group cells into connected components (islands) and merge them as necessary when neighboring land cells are found. The <code>union</code> operation is used to connect two cells, and the <code>find</code> operation helps determine which island a particular cell belongs to. Additionally, the size of each island is tracked to calculate the possible size of the new island after flipping a water cell.</p>
+</li>
+<li>
+<p><strong>Maximizing the Island Size</strong>: We then iterate over each water cell and check the potential size of the new island that would result from flipping that cell. Finally, we return the maximum size found.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>uf</code> class represents the Union-Find structure with methods for union and find operations, along with size retrieval.</li>
-<li>The <code>dfs</code> function recursively marks land cells as visited and unites them in the Union-Find structure.</li>
-<li>The <code>largestIsland</code> function initializes the Union-Find structure, performs DFS to discover all islands, and then iterates through each water cell to calculate the potential size of an island that can be formed by changing that cell.</li>
+<h4 id="union-find-class-uf">
+  Union-Find Class (<code>uf</code>)
+  <a class="heading-link" href="#union-find-class-uf">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This class is responsible for maintaining the Union-Find data structure, which supports the operations of <strong>find</strong> and <strong>union</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">uf</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, sz;
+</span></span><span style="display:flex;"><span>    uf(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n);
+</span></span><span style="display:flex;"><span>        sz.resize(n, <span style="color:#ae81ff">1</span>);        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> q) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(sz[p] <span style="color:#f92672">&lt;</span> sz[q]) {
+</span></span><span style="display:flex;"><span>                par[p] <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>                sz[q] <span style="color:#f92672">+=</span> sz[p];
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                par[q] <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>                sz[p] <span style="color:#f92672">+=</span> sz[q];                
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> par[x]) <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> par[x] <span style="color:#f92672">=</span> find(par[x]);        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sz[y];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>par</strong>: A vector to store the parent of each node.</li>
+<li><strong>sz</strong>: A vector to store the size of the island each node belongs to.</li>
+<li><strong>join(x, y)</strong>: Merges the islands containing <code>x</code> and <code>y</code> if they are not already in the same island.</li>
+<li><strong>find(x)</strong>: Finds the root of the island that <code>x</code> belongs to, using path compression to optimize future queries.</li>
+<li><strong>size(x)</strong>: Returns the size of the island that <code>x</code> belongs to.</li>
 </ul>
+<h4 id="depth-first-search-dfs">
+  Depth-First Search (<code>dfs</code>)
+  <a class="heading-link" href="#depth-first-search-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This recursive function is used to explore all connected land cells starting from a given cell, marking them as visited and performing the union operation to group them into an island:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> p, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> vis) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">&gt;=</span> grid.size() <span style="color:#f92672">||</span> j <span style="color:#f92672">&gt;=</span> grid[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">||</span> grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> vis[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    UF<span style="color:#f92672">-&gt;</span>join(j <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> grid.size(), p);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, p, vis);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, p, vis);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j, p, vis);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, p, vis);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function uses DFS to explore all connected land cells (<code>1</code>) starting from a cell <code>(i, j)</code> in the grid.</li>
+<li>The visited cells are marked to avoid re-processing.</li>
+<li>Each time we explore a land cell, we call the <code>union</code> function to group it into an island.</li>
+</ul>
+<h4 id="main-solution-largestisland">
+  Main Solution (<code>largestIsland</code>)
+  <a class="heading-link" href="#main-solution-largestisland">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The core logic of the solution, which calculates the largest island after flipping at most one water cell, is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">largestIsland</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>    UF <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> uf(n <span style="color:#f92672">*</span> n);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vis(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> vis[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            dfs(grid, i, j, i <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j, vis);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ch <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            ch <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> grid[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                tmp <span style="color:#f92672">+=</span> UF<span style="color:#f92672">-&gt;</span>size((i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j);
+</span></span><span style="display:flex;"><span>                par.insert(UF<span style="color:#f92672">-&gt;</span>find((i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> grid[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> UF<span style="color:#f92672">-&gt;</span>find(i <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>par.count(x)) {
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> UF<span style="color:#f92672">-&gt;</span>size(i <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                    par.insert(x);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> grid[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> UF<span style="color:#f92672">-&gt;</span>find((i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>par.count(x)) {
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> UF<span style="color:#f92672">-&gt;</span>size((i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j);
+</span></span><span style="display:flex;"><span>                    par.insert(x);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;&amp;</span> grid[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> UF<span style="color:#f92672">-&gt;</span>find((i) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>par.count(x)) {
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> UF<span style="color:#f92672">-&gt;</span>size((i) <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                    par.insert(x);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> tmp);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ch <span style="color:#f92672">?</span> mx : n <span style="color:#f92672">*</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li><strong>DFS for Initial Islands</strong>: The function first performs DFS for all land cells (<code>1</code>) to group them into connected components (islands).</li>
+<li><strong>Checking Water Cells</strong>: After identifying all existing islands, the algorithm checks each water cell (<code>0</code>) to see if flipping it would merge neighboring islands into a larger one.</li>
+<li><strong>Maximizing the Island Size</strong>: The size of each potential island formed by flipping a water cell is computed, and the largest such island is returned.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -369,13 +506,35 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2) for processing the grid and performing DFS, where N is the grid dimension.</li>
-<li><strong>Space Complexity</strong>: O(N^2) for the Union-Find structure and visited tracking.</li>
-</ul> 
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the <code>jobs</code> array takes (O(N \log N)), where (N) is the number of jobs.</li>
+<li>Sorting the <code>worker</code> array takes (O(M \log M)), where (M) is the number of workers.</li>
+<li>The DFS process takes (O(N \cdot M)) as each cell is visited once.</li>
+<li>Therefore, the overall time complexity is (O(N \cdot M)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(N \cdot M)) for storing the <code>UF</code> data structure and the visited cells.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the largest island that can be formed by flipping at most one water cell using Union-Find (Disjoint Set Union). The approach is time-efficient, handling large grids effectively with a time complexity of (O(N \cdot M)). This problem showcases the power of Union-Find in dynamic connectivity problems, and it ensures that the solution is optimal by considering the effects of flipping water cells.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1522s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1523s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

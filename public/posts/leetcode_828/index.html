@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1523s1hbhb">
+<h2 id="hahahugoshortcode1524s1hbhb">
   
 
   
@@ -251,7 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to calculate the number of unique substrings in a given string where each character contributes to a unique letter count.</p>
+<p>In this problem, you are given a string <code>s</code> consisting of uppercase English letters. You need to calculate the total sum of the number of unique letters in all substrings of <code>s</code>. A <strong>unique letter</strong> in a substring is defined as a letter that appears exactly once within that substring. Your task is to efficiently compute the sum of unique letters across all possible substrings of the string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,42 +259,197 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to focus on calculating the contribution of each character in <code>s</code> to the total sum. Rather than brute-forcing through all possible substrings (which would be computationally expensive), we can use a <strong>dynamic programming</strong> approach with efficient tracking of the positions of characters in the string.</p>
+<p>Here&rsquo;s the general strategy for solving this problem:</p>
 <ol>
-<li><strong>Index Tracking</strong>: Maintain a list to track the last two occurrences of each character (A-Z) in the string. This helps in calculating contributions for each character effectively.</li>
-<li><strong>Contribution Calculation</strong>: For each character, calculate its contribution to the result based on its current position and its last two recorded positions:
+<li>
+<p><strong>Tracking Character Positions</strong>: For each character in the string, we want to track the positions where that character appears. Specifically, we need to know the most recent position where the character appeared, as well as the second most recent appearance. This allows us to compute the contribution of the character to the substrings that it affects.</p>
+</li>
+<li>
+<p><strong>Calculating Contributions</strong>: For each character in the string, we calculate how many substrings it contributes to in which the character appears exactly once. By updating the contribution based on its most recent appearances, we can efficiently compute the result for the entire string.</p>
+</li>
+<li>
+<p><strong>Final Sum Calculation</strong>: After processing all characters, the total sum is computed by adding the contributions of all characters to the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-tracking-structure">
+  Step 1: Initialize Tracking Structure
+  <a class="heading-link" href="#step-1-initialize-tracking-structure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We initialize a 2D array <code>idx</code> to keep track of the positions of each character (<code>A</code> to <code>Z</code>). This array has 26 rows (one for each character) and two columns: one for the second most recent position and one for the most recent position. Initially, both columns are set to <code>-1</code>, representing the fact that the characters have not yet appeared.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> idx(<span style="color:#ae81ff">26</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><h4 id="step-2-iterate-through-each-character-in-the-string">
+  Step 2: Iterate Through Each Character in the String
+  <a class="heading-link" href="#step-2-iterate-through-each-character-in-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We iterate over the string and for each character <code>s[i]</code>, we calculate the contribution of that character to the unique substrings. The variable <code>c</code> represents the index of the character (with &lsquo;A&rsquo; mapped to index 0, &lsquo;B&rsquo; to 1, &hellip;, &lsquo;Z&rsquo; to 25).</p>
+<p>For each character <code>s[i]</code>, the contribution to the substrings is calculated as follows:</p>
 <ul>
-<li>The contribution is derived from the distance between the current index, the previous occurrence, and the occurrence before that.</li>
+<li><code>(i - idx[c][1])</code> represents the number of substrings that start before the most recent occurrence of the character and end at position <code>i</code>.</li>
+<li><code>(idx[c][1] - idx[c][0])</code> represents the number of substrings that start after the second most recent occurrence of the character and end just before the most recent occurrence.</li>
+</ul>
+<p>We update the positions of the character <code>s[i]</code> accordingly:</p>
+<ul>
+<li><code>idx[c][0]</code> becomes the previous position <code>idx[c][1]</code>, and</li>
+<li><code>idx[c][1]</code> becomes the current position <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;A&#39;</span>;
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> (i <span style="color:#f92672">-</span> idx[c][<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (idx[c][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> idx[c][<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>idx[c][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> idx[c][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>idx[c][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><h4 id="step-3-handle-remaining-contributions">
+  Step 3: Handle Remaining Contributions
+  <a class="heading-link" href="#step-3-handle-remaining-contributions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the loop finishes, we need to handle the remaining substrings that include each character at the end of the string. For each character <code>i</code>, we calculate its contribution to all substrings that start from its last occurrence and end at the end of the string. This is done by updating the result with the contribution from the remaining segments.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> (n <span style="color:#f92672">-</span> idx[i][<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (idx[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> idx[i][<span style="color:#ae81ff">0</span>]);
+</span></span></code></pre></div><h4 id="final-step-return-the-result">
+  Final Step: Return the Result
+  <a class="heading-link" href="#final-step-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, the computed result, <code>res</code>, which contains the sum of the unique letters for all substrings, is returned.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this approach is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. This is because:</p>
+<ul>
+<li>We iterate through the string once, and for each character, we perform constant-time operations to update the positions and calculate the contributions.</li>
+<li>We also iterate over the 26 possible characters (from &lsquo;A&rsquo; to &lsquo;Z&rsquo;) once at the end to handle the final contributions, which takes constant time.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, which is optimal for this problem.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as the space required to store the position indices (<code>idx</code>) is fixed at 26 rows and 2 columns (for each character in the alphabet), regardless of the size of the input string. This results in constant space usage for the tracking array.</p>
+<p>The only other space used is for the result variable <code>res</code>, which takes constant space.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to understand how the algorithm works.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ABC&#34;</span>;
+</span></span></code></pre></div><h4 id="step-1-initialize">
+  Step 1: Initialize
+  <a class="heading-link" href="#step-1-initialize">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>idx</code> is a 26x2 array initialized to <code>-1</code>.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-string">
+  Step 2: Iterate Over the String
+  <a class="heading-link" href="#step-2-iterate-over-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p>For <code>s[0] = 'A'</code>:</p>
+<ul>
+<li><code>c = 0</code> (since &lsquo;A&rsquo; is at index 0).</li>
+<li>There is no previous occurrence of &lsquo;A&rsquo;, so no contribution from this character.</li>
+<li>Update <code>idx[0]</code> to <code>[ -1, 0 ]</code> (the second most recent index is -1, and the most recent is 0).</li>
 </ul>
 </li>
-<li><strong>Final Contribution</strong>: After processing all characters, calculate the contribution for each character for the remaining part of the string (from its last occurrence to the end).</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<li>
+<p>For <code>s[1] = 'B'</code>:</p>
 <ul>
-<li>The <code>idx</code> array keeps track of the last two positions of each character.</li>
-<li>The loop iterates through the string, updating the contribution based on the distances derived from the indices.</li>
-<li>A second loop ensures that any characters still present in the string after their last recorded position contribute to the result.</li>
+<li><code>c = 1</code> (since &lsquo;B&rsquo; is at index 1).</li>
+<li>There is no previous occurrence of &lsquo;B&rsquo;, so no contribution from this character.</li>
+<li>Update <code>idx[1]</code> to <code>[ -1, 1 ]</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p>For <code>s[2] = 'C'</code>:</p>
+<ul>
+<li><code>c = 2</code> (since &lsquo;C&rsquo; is at index 2).</li>
+<li>There is no previous occurrence of &lsquo;C&rsquo;, so no contribution from this character.</li>
+<li>Update <code>idx[2]</code> to <code>[ -1, 2 ]</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="step-3-handle-remaining-contributions-1">
+  Step 3: Handle Remaining Contributions
+  <a class="heading-link" href="#step-3-handle-remaining-contributions-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>After the loop, for each character in <code>idx</code>, we calculate its contribution to the substrings formed by the remaining characters.</li>
+<li>In this case, we compute contributions for &lsquo;A&rsquo;, &lsquo;B&rsquo;, and &lsquo;C&rsquo; at the end.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><p>The final value of <code>res</code> will be the sum of the unique letters in all substrings of &ldquo;ABC&rdquo;.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(N) where N is the length of the string, as we make a single pass to compute contributions.</li>
-<li><strong>Space Complexity</strong>: O(1) for the fixed-size array storing indices (constant space since it only holds data for 26 letters).</li>
-</ul> 
+<p>This solution efficiently calculates the total number of unique letters in all substrings of the string using dynamic programming and careful tracking of character positions. The approach runs in linear time <strong>O(n)</strong>, making it optimal for large strings. By leveraging the power of indexing and maintaining a rolling count of substrings, this solution avoids the computational complexity of brute-force methods, providing an elegant and efficient solution to the problem.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1523s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1524s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

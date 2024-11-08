@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> key;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode529s1hbhb">
+<h2 id="hahahugoshortcode528s1hbhb">
   
 
   
@@ -233,7 +233,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 32-bit unsigned integer <code>n</code>, return the number of &lsquo;1&rsquo; bits it has (also known as the Hamming weight).</p>
+<p>The problem at hand is to find the <strong>Hamming weight</strong> (also known as the <strong>population count</strong> or <strong>bit count</strong>) of a 32-bit unsigned integer <code>n</code>. The Hamming weight refers to the number of <code>1</code> bits (also called &ldquo;set bits&rdquo;) in the binary representation of a number.</p>
+<p>For example:</p>
+<ul>
+<li>For the number <code>11</code> in binary (<code>1011</code>), the Hamming weight is <code>3</code> since there are three <code>1</code> bits.</li>
+<li>For the number <code>128</code> in binary (<code>10000000</code>), the Hamming weight is <code>1</code>.</li>
+</ul>
+<p>Given an integer <code>n</code>, our task is to efficiently count how many <code>1</code> bits it has.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -241,39 +247,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Bit Manipulation</strong>:</p>
+<p>To solve this problem, we need to efficiently count the number of set bits in the binary representation of an unsigned integer. We can leverage an optimized bit manipulation technique known as the <strong>Brian Kernighan&rsquo;s Algorithm</strong>, which reduces the number of operations required to count the <code>1</code> bits.</p>
+<p><strong>Key Observations:</strong></p>
 <ul>
-<li>The approach utilizes a property of binary numbers where subtracting 1 from a number flips all the bits after the rightmost &lsquo;1&rsquo; bit, including that &lsquo;1&rsquo; bit itself. This allows for counting &lsquo;1&rsquo; bits efficiently.</li>
+<li>Each time we encounter a <code>1</code> bit in the binary representation, we can reduce the number of bits by flipping the lowest <code>1</code> bit to <code>0</code> using the operation <code>n = n &amp; (n - 1)</code>. This operation ensures that we remove the least significant <code>1</code> bit of <code>n</code> in every iteration.</li>
+<li>The number of iterations required to clear all the <code>1</code> bits is equivalent to the number of <code>1</code> bits in the binary representation of <code>n</code> (i.e., the Hamming weight).</li>
 </ul>
-</li>
-<li>
-<p><strong>Loop until n is zero</strong>:</p>
-<ul>
-<li>Use a loop to continuously apply the bitwise AND operation between <code>n</code> and <code>n - 1</code> until <code>n</code> becomes zero. Each iteration effectively removes the rightmost &lsquo;1&rsquo; bit from <code>n</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Using this approach, we avoid iterating through all 32 bits of the integer directly, which can be inefficient. Instead, the number of iterations depends on the number of set bits, making it more efficient than iterating through all the bits regardless of their values.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-a-counter">
+  Step 1: Initialize a Counter
+  <a class="heading-link" href="#step-1-initialize-a-counter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> key <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>We start by initializing a counter variable <code>key</code> to <code>0</code>. This variable will be used to keep track of the number of <code>1</code> bits encountered during the iteration process.</p>
+<h4 id="step-2-while-loop-to-process-each-bit">
+  Step 2: While Loop to Process Each Bit
+  <a class="heading-link" href="#step-2-while-loop-to-process-each-bit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(n) {
+</span></span></code></pre></div><p>We use a <code>while</code> loop that runs as long as <code>n</code> is not <code>0</code>. Since <code>n</code> is a 32-bit unsigned integer, this loop will continue until all bits are processed (i.e., until <code>n</code> becomes <code>0</code>).</p>
+<h4 id="step-3-clear-the-lowest-set-bit">
+  Step 3: Clear the Lowest Set Bit
+  <a class="heading-link" href="#step-3-clear-the-lowest-set-bit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> n <span style="color:#f92672">&amp;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><p>In this crucial step, we use the bitwise AND operation <code>n = n &amp; (n - 1)</code> to clear the least significant <code>1</code> bit in <code>n</code>. This operation works as follows:</p>
 <ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the <code>hammingWeight</code> function, which takes an unsigned 32-bit integer <code>n</code>.</li>
-<li><strong>Line 3</strong>: Initialize a counter <code>key</code> to track the number of &lsquo;1&rsquo; bits.</li>
-<li><strong>Lines 4-6</strong>: Use a while loop to count the &lsquo;1&rsquo; bits:
-<ul>
-<li><code>n = n &amp; (n - 1);</code> — This operation clears the least significant &lsquo;1&rsquo; bit in <code>n</code>.</li>
-<li><code>key++;</code> — Increment the counter for each &lsquo;1&rsquo; bit found.</li>
+<li>The expression <code>n - 1</code> subtracts <code>1</code> from <code>n</code>.</li>
+<li>The result of <code>n &amp; (n - 1)</code> clears the least significant <code>1</code> bit of <code>n</code> while keeping all other bits unchanged.</li>
 </ul>
-</li>
-<li><strong>Line 7</strong>: Return the count of &lsquo;1&rsquo; bits (<code>key</code>).</li>
-</ul>
+<p>For example, if <code>n = 11010</code> (in binary), <code>n - 1 = 11001</code>, and <code>n &amp; (n - 1)</code> results in <code>11000</code>. This operation reduces the number of <code>1</code> bits in <code>n</code> by one in every iteration.</p>
+<h4 id="step-4-increment-the-counter">
+  Step 4: Increment the Counter
+  <a class="heading-link" href="#step-4-increment-the-counter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>key<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>After clearing the least significant <code>1</code> bit, we increment the <code>key</code> counter. Each time we perform the operation <code>n = n &amp; (n - 1)</code>, we have found one <code>1</code> bit in <code>n</code>, so we increase the counter by <code>1</code>.</p>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> key;
+</span></span></code></pre></div><p>Once all the <code>1</code> bits have been processed and <code>n</code> becomes <code>0</code>, the loop terminates, and we return the value of <code>key</code>, which now holds the total number of <code>1</code> bits in the binary representation of the input integer <code>n</code>.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -281,15 +318,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(k)), where (k) is the number of &lsquo;1&rsquo; bits in <code>n</code>. In the worst case, this can be (O(1)) for a 32-bit integer (up to 32 iterations).</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the operations are performed in-place without requiring additional space.</li>
+<li>The time complexity of this algorithm is <strong>O(k)</strong>, where <code>k</code> is the number of set bits (i.e., <code>1</code> bits) in the binary representation of <code>n</code>. This is because each iteration of the loop removes one <code>1</code> bit from <code>n</code>. In the worst case, <code>n</code> may have up to 32 <code>1</code> bits (in the case of the number <code>11111111111111111111111111111111</code> in binary), which would require 32 iterations.</li>
+<li>Therefore, the time complexity is proportional to the number of set bits, and the maximum number of iterations is limited to <code>32</code> (since <code>n</code> is a 32-bit integer). In practice, this is much faster than iterating through all 32 bits.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as the algorithm uses only a fixed amount of extra space to store the counter (<code>key</code>), regardless of the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the <strong>Hamming weight</strong> of a 32-bit unsigned integer using <strong>Brian Kernighan&rsquo;s Algorithm</strong>. This approach is highly optimized and ensures that the number of iterations is minimized by only focusing on the set bits (<code>1</code> bits). The algorithm runs in time proportional to the number of <code>1</code> bits in the input, making it significantly faster than a straightforward bitwise iteration approach.</p>
+<p>With a time complexity of <strong>O(k)</strong> (where <code>k</code> is the number of set bits) and space complexity of <strong>O(1)</strong>, this solution is both time-efficient and space-efficient. It works efficiently even for large numbers, as the number of iterations depends on the number of set bits rather than the total number of bits in the integer. This makes it a suitable choice for counting the number of set bits in a 32-bit unsigned integer.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode529s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode528s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ones;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode211s1hbhb">
+<h2 id="hahahugoshortcode208s1hbhb">
   
 
   
@@ -235,7 +235,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> where every element appears three times except for one, find the single element that appears only once.</p>
+<p>The problem at hand is to find the <strong>single number</strong> in an array where every element appears exactly <strong>three times</strong>, except for one element which appears only once. The goal is to identify this unique number using an efficient algorithm with a minimal space complexity.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -243,37 +243,71 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Bit Manipulation</strong>:
+<p>To solve this problem, we use bitwise manipulation with two variables, <code>ones</code> and <code>twos</code>, which help keep track of the bits that appear in the numbers. By leveraging the properties of bitwise operations, we can isolate the number that appears only once, even when every other number appears three times.</p>
+<p>The key insight here is to track the numbers that appear <strong>once</strong> and <strong>twice</strong> during the traversal of the array. The algorithm works by updating these two variables as follows:</p>
 <ul>
-<li>Use two integers, <code>ones</code> and <code>twos</code>, to track the count of bits appearing once and twice.</li>
-<li>For each number in the array, update these two integers using bitwise operations:
-<ul>
-<li><strong>ones</strong>: Represents bits that have appeared once.</li>
-<li><strong>twos</strong>: Represents bits that have appeared twice.</li>
+<li><code>ones</code> will store the bits that have appeared once.</li>
+<li><code>twos</code> will store the bits that have appeared twice.</li>
 </ul>
-</li>
-<li>The goal is to ensure that when a bit appears three times, it is removed from both <code>ones</code> and <code>twos</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm ensures that any bit that appears exactly <strong>three times</strong> is reset, allowing us to isolate the single number that appears only once.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 5</strong>: Initialize <code>n</code> to the size of the <code>nums</code> array.</li>
-<li><strong>Line 7</strong>: Initialize <code>ones</code> and <code>twos</code> to 0.</li>
-<li><strong>Line 8</strong>: Iterate through each number in the <code>nums</code> array.
-<ul>
-<li><strong>Line 9</strong>: Update <code>ones</code> to hold the XOR of <code>ones</code> and the current number, while ensuring bits counted in <code>twos</code> are excluded.</li>
-<li><strong>Line 10</strong>: Update <code>twos</code> similarly to hold the XOR of <code>twos</code> and the current number, while excluding bits counted in <code>ones</code>.</li>
+<h4 id="step-1-initialize-the-ones-and-twos-variables">
+  Step 1: Initialize the <code>ones</code> and <code>twos</code> variables
+  <a class="heading-link" href="#step-1-initialize-the-ones-and-twos-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ones <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, twos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>Here, <code>ones</code> and <code>twos</code> are initialized to zero. These variables will hold the bitwise representation of the numbers that appear once and twice, respectively. As we iterate over the array, these variables will be updated based on the bitwise operations.</p>
+<h4 id="step-2-iterate-over-the-array-and-update-ones-and-twos">
+  Step 2: Iterate over the array and update <code>ones</code> and <code>twos</code>
+  <a class="heading-link" href="#step-2-iterate-over-the-array-and-update-ones-and-twos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    ones <span style="color:#f92672">=</span> (ones <span style="color:#f92672">^</span> nums[i]) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>twos;
+</span></span><span style="display:flex;"><span>    twos <span style="color:#f92672">=</span> (twos <span style="color:#f92672">^</span> nums[i]) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>ones; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this loop, we iterate through each element <code>nums[i]</code> in the array. The bitwise operations inside the loop ensure that we correctly track the bits that appear once and twice.</p>
+<ol>
+<li>
+<p><strong>Update <code>ones</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ones <span style="color:#f92672">=</span> (ones <span style="color:#f92672">^</span> nums[i]) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>twos;
+</span></span></code></pre></div><ul>
+<li><code>ones ^ nums[i]</code> toggles the bits of <code>ones</code> with the bits of <code>nums[i]</code>. If the bit of <code>nums[i]</code> is already present in <code>ones</code>, it will be flipped, indicating that the bit has appeared an odd number of times.</li>
+<li>The <code>&amp; ~twos</code> part ensures that the bits that have appeared twice are excluded from <code>ones</code>. This prevents a bit from appearing in <code>ones</code> when it has appeared exactly twice.</li>
 </ul>
 </li>
-<li><strong>Line 11</strong>: Return the value in <code>ones</code>, which will be the single number.</li>
+<li>
+<p><strong>Update <code>twos</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>twos <span style="color:#f92672">=</span> (twos <span style="color:#f92672">^</span> nums[i]) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>ones;
+</span></span></code></pre></div><ul>
+<li><code>twos ^ nums[i]</code> toggles the bits of <code>twos</code> with <code>nums[i]</code>. This keeps track of the bits that have appeared twice.</li>
+<li>The <code>&amp; ~ones</code> part ensures that the bits that have already appeared once are excluded from <code>twos</code>. This ensures that a bit appears in <code>twos</code> only if it has appeared twice, and not more.</li>
+</ul>
+</li>
+</ol>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ones;
+</span></span></code></pre></div><p>After processing all the numbers in the array, the variable <code>ones</code> will hold the number that appears only once. This is because, during the entire iteration:</p>
+<ul>
+<li>Any bits that appeared exactly three times will be reset (both <code>ones</code> and <code>twos</code> will cancel them out).</li>
+<li>The number that appeared only once will remain in <code>ones</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -282,14 +316,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of elements in the <code>nums</code> array, as we need to iterate through the array once.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as we are using a constant amount of space regardless of the input size.</li>
-</ul> 
+<li><strong>O(n)</strong>: The algorithm iterates over the array exactly once, where <code>n</code> is the number of elements in the <code>nums</code> array. Each iteration involves constant-time operations (bitwise operations), so the total time complexity is O(n).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses only two integer variables (<code>ones</code> and <code>twos</code>) to track the bitwise state. These variables use constant space, making the space complexity O(1). No additional data structures are required, which ensures the algorithm is space-efficient.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is optimal for finding the unique number in an array where every other number appears three times. By using bitwise operations to track the numbers that have appeared once and twice, the algorithm ensures that we can isolate the unique number in <strong>O(n)</strong> time with <strong>O(1)</strong> space complexity. This makes the solution highly efficient and suitable for large datasets.</p>
+<p>To summarize:</p>
+<ul>
+<li><strong>Time Complexity</strong>: The solution runs in linear time, O(n), where <code>n</code> is the number of elements in the input array.</li>
+<li><strong>Space Complexity</strong>: The algorithm uses constant space, O(1), which is optimal for this problem.</li>
+<li><strong>Bitwise Operations</strong>: By cleverly using bitwise XOR and AND operations, we can efficiently track bits that appear once and twice, allowing us to isolate the unique number.</li>
+</ul>
+<p>This approach is a powerful example of how bitwise operations can be used to solve problems that require tracking occurrences of elements or manipulating individual bits. It is an excellent technique to know, especially for interview preparation, as it demonstrates both problem-solving skills and understanding of low-level bit manipulation.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode211s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode208s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> added;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1226s1hbhb">
+<h2 id="hahahugoshortcode1225s1hbhb">
   
 
   
@@ -238,7 +238,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a sorted array <code>nums</code> of positive integers and an integer <code>n</code>. Your goal is to find the minimum number of patches (additional integers) needed so that you can form every integer from <code>1</code> to <code>n</code> using the elements of <code>nums</code> and the patches.</p>
+<p>The problem asks to find the <strong>minimum number of patches</strong> needed to make all integers from 1 to <code>n</code> possible sums of some elements from a given sorted array <code>nums</code>. The patches are numbers that can be added to the array, and the goal is to determine the fewest patches needed to cover all the integers from 1 to <code>n</code>.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>nums</code>: A sorted array of positive integers.</li>
+<li><code>n</code>: A positive integer representing the upper limit of the range of numbers (from 1 to <code>n</code>).</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The minimum number of patches needed to cover all integers from 1 to <code>n</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,40 +267,66 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The approach involves maintaining a variable <code>miss</code> which represents the smallest integer that cannot be formed using the existing numbers in the array and the patches added so far. The steps are as follows:</p>
+<p>To solve this problem efficiently, we use a greedy algorithm. The key observation is that we need to maintain a variable <code>miss</code> which represents the smallest integer we cannot yet form with the numbers we&rsquo;ve encountered. Initially, this is <code>1</code> because we want to start forming sums from 1.</p>
+<p>The idea is to greedily select the smallest number in the array that is less than or equal to <code>miss</code>. If we can use this number to cover <code>miss</code>, we update <code>miss</code> by adding this number to it. If we cannot use the current number in <code>nums</code> to cover <code>miss</code>, we add a patch equal to <code>miss</code> and update <code>miss</code> to the next value it can potentially form. This continues until <code>miss</code> exceeds <code>n</code>.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Start with <code>miss = 1</code>, which indicates the smallest number that cannot currently be formed.</li>
-<li>Set <code>added</code> to count the number of patches added, and <code>i</code> to track the index of the current element in <code>nums</code>.</li>
-</ul>
+<p><strong>Greedy Selection</strong>: At each step, if the current number <code>nums[i]</code> can be used to form the current <code>miss</code>, we add it to <code>miss</code>. If not, we &ldquo;patch&rdquo; by adding <code>miss</code> itself as a new number, and then continue to the next step.</p>
 </li>
 <li>
-<p><strong>While Loop</strong>:</p>
-<ul>
-<li>Continue looping while <code>miss</code> is less than or equal to <code>n</code>.</li>
-<li>If the current number <code>nums[i]</code> is less than or equal to <code>miss</code>, it means that we can use this number to form new sums, so we add it to <code>miss</code>.</li>
-<li>If the current number cannot be used (i.e., <code>nums[i] &gt; miss</code>), we need to add a patch. Doubling <code>miss</code> allows us to cover all integers up to the newly formed <code>miss</code>. Increment the <code>added</code> counter.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Once the loop completes, return the total number of patches added.</li>
-</ul>
+<p><strong>Stopping Condition</strong>: We stop when <code>miss</code> exceeds <code>n</code>, because at that point, all integers from 1 to <code>n</code> can be formed using the numbers in <code>nums</code> and the added patches.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s break down the code into understandable sections:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> miss <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> added <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>:
 <ul>
-<li><strong>Input</strong>: A vector of integers <code>nums</code> and an integer <code>n</code>.</li>
-<li><strong>Output</strong>: An integer representing the minimum number of patches required.</li>
+<li><code>miss</code>: This variable represents the smallest integer that we cannot yet form. Initially, it is set to <code>1</code> because we start by trying to form the number 1.</li>
+<li><code>added</code>: This counts the number of patches we have added to the array.</li>
+<li><code>i</code>: This is the index variable used to iterate over the <code>nums</code> array.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(miss <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&lt;=</span> miss) {
+</span></span><span style="display:flex;"><span>        miss <span style="color:#f92672">+=</span> nums[i<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        miss <span style="color:#f92672">+=</span> miss;
+</span></span><span style="display:flex;"><span>        added<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Main Loop</strong>:
+<ul>
+<li>This loop runs as long as <code>miss &lt;= n</code>. Once <code>miss</code> exceeds <code>n</code>, we stop since all numbers from 1 to <code>n</code> can be represented.</li>
+<li><strong>Greedy Choice</strong>: If the current number <code>nums[i]</code> is less than or equal to <code>miss</code>, we add it to <code>miss</code> and move to the next number in the <code>nums</code> array (<code>i++</code>).</li>
+<li><strong>Adding Patches</strong>: If <code>nums[i]</code> cannot be used to cover <code>miss</code> (i.e., <code>nums[i] &gt; miss</code>), we add a patch with value <code>miss</code>. This effectively doubles <code>miss</code> since we just added the smallest missing number. We then increment the <code>added</code> counter to keep track of the number of patches we&rsquo;ve added.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> added;
+</span></span></code></pre></div><ul>
+<li><strong>Return the Result</strong>:
+<ul>
+<li>After the loop terminates (when <code>miss &gt; n</code>), we return <code>added</code>, which represents the minimum number of patches required to cover all integers from 1 to <code>n</code>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -288,15 +335,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(m)), where (m) is the number of elements in <code>nums</code> since each element is processed at most once.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as we are using a constant amount of space.</li>
+<li><strong>O(n)</strong>: The algorithm iterates over the array <code>nums</code> once, and the number of patches added is proportional to the logarithm of <code>n</code>. In the worst case, the loop runs in linear time relative to <code>n</code>, since each patch potentially doubles <code>miss</code>. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the upper limit of the range of numbers we need to cover.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we only use a few extra variables (<code>miss</code>, <code>added</code>, <code>i</code>) for the calculation, and no additional data structures are used other than the input array <code>nums</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of patches needed to cover the range from 1 to <code>n</code> using a greedy approach. The algorithm ensures that at each step, the smallest missing integer is either covered by an existing number in the array or a new patch is added. This results in an optimal solution that runs in <strong>O(n)</strong> time complexity with <strong>O(1)</strong> space complexity.</p>
+<p>The approach is simple yet effective, and its greedy nature ensures that it performs well even for large values of <code>n</code>. The key insight behind this solution is understanding how to manage the smallest missing integer (<code>miss</code>) and how patches can quickly fill the gap when numbers in the array are insufficient to cover all numbers from 1 to <code>n</code>.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1226s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1225s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,90 +241,173 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1428s1hbhb">
+<h2 id="hahahugoshortcode1426s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer array <code>nums</code> and an integer <code>k</code>. Your task is to find the starting indices of up to three non-overlapping subarrays of size <code>k</code> such that the sum of these subarrays is maximized. The output should be the starting indices of these subarrays.</p>
+<p>The problem asks us to find the indices of three non-overlapping subarrays in an integer array <code>nums</code>, each of size <code>k</code>, such that the sum of the elements in these subarrays is maximized. The goal is to return the indices of the three subarrays.</p>
+<p>In simpler terms, we need to select three subarrays of size <code>k</code> such that their total sum is maximized, and these subarrays should not overlap. The problem can be efficiently solved using a <strong>dynamic programming (DP)</strong> approach.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs a dynamic programming approach to keep track of the maximum sum of up to three non-overlapping subarrays of size <code>k</code>. The key steps in the solution are:</p>
+<p>The solution is based on the idea of <strong>Dynamic Programming</strong> (DP) with a series of transitions to track the maximum possible sum and the corresponding subarrays at each stage.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Prefix Sum Calculation</strong>:</p>
+<li><strong>Prefix Sum</strong>: The prefix sum array allows us to compute the sum of any subarray efficiently. For an array <code>nums</code>, the prefix sum at position <code>i</code> gives the sum of all elements from <code>0</code> to <code>i</code>. This allows quick computation of the sum of any subarray in constant time.</li>
+<li><strong>Dynamic Programming (DP)</strong>: We use DP to keep track of the maximum sum for selecting <code>i</code> subarrays by a specific position. The DP state includes:
 <ul>
-<li>Compute a prefix sum array where <code>sum[i]</code> holds the sum of the first <code>i</code> elements. This allows us to efficiently compute the sum of any subarray of size <code>k</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Dynamic Programming Table Setup</strong>:</p>
-<ul>
-<li>Create a 2D vector <code>dp</code> where <code>dp[i][j]</code> stores a pair consisting of:
-<ul>
-<li>The maximum sum of <code>i</code> subarrays found using the first <code>j</code> elements.</li>
-<li>A vector containing the starting indices of these subarrays.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Filling the DP Table</strong>:</p>
-<ul>
-<li>Iterate through the number of subarrays from <code>1</code> to <code>3</code> (the maximum allowed).</li>
-<li>For each count of subarrays, loop backward through the possible starting positions.</li>
-<li>Calculate the total sum by considering the maximum sum of the previous subarray configuration plus the current subarray sum, updating the maximum when necessary.</li>
-<li>Keep track of the indices of the chosen subarrays for reconstruction.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Reverse the indices in the final output to present them in the correct order.</li>
+<li>The maximum sum for a certain number of subarrays.</li>
+<li>The indices of the selected subarrays.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The goal is to break down the problem into smaller subproblems by iterating over potential subarray positions and optimizing the choices based on previously computed results.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-prefix-sum-calculation">
+  1. <strong>Prefix Sum Calculation</strong>:
+  <a class="heading-link" href="#1-prefix-sum-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sum <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) sum.push_back(sum.back() <span style="color:#f92672">+</span> nums[i]);
+</span></span></code></pre></div><ul>
+<li>The <code>sum</code> array is a prefix sum array where <code>sum[i]</code> contains the sum of elements in <code>nums</code> from the start up to <code>i-1</code>. This allows us to calculate the sum of any subarray <code>nums[i...j]</code> as <code>sum[j + 1] - sum[i]</code>.</li>
+</ul>
+<h4 id="2-dp-table-initialization">
+  2. <strong>DP Table Initialization</strong>:
+  <a class="heading-link" href="#2-dp-table-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> dp(<span style="color:#ae81ff">4</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span>(n));
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> table stores information for solving the problem for different numbers of subarrays (1, 2, or 3) at different positions in the array. Each entry <code>dp[i][j]</code> holds:
 <ul>
-<li>The <code>maxSumOfThreeSubarrays</code> function first computes the prefix sum.</li>
-<li>It initializes the DP table and fills it based on the maximum sum conditions.</li>
-<li>The final indices of the three subarrays are reversed for correct output order.</li>
+<li>The maximum sum for selecting <code>i</code> subarrays up to index <code>j</code>.</li>
+<li>A vector of indices of the selected subarrays.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-filling-the-dp-table">
+  3. <strong>Filling the DP Table</strong>:
+  <a class="heading-link" href="#3-filling-the-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> groupLeft <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> i <span style="color:#f92672">*</span> k; j <span style="color:#f92672">&gt;=</span> groupLeft <span style="color:#f92672">*</span> k; j<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> rest <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> k <span style="color:#f92672">&gt;=</span> n<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">+</span> k].first;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> amnt <span style="color:#f92672">=</span> rest <span style="color:#f92672">+</span> sum[j <span style="color:#f92672">+</span> k] <span style="color:#f92672">-</span> sum[j];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(amnt <span style="color:#f92672">&gt;=</span> mx) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) dp[i][j].second <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">+</span> k].second;
+</span></span><span style="display:flex;"><span>            dp[i][j].second.push_back(j);
+</span></span><span style="display:flex;"><span>            dp[i][j].first <span style="color:#f92672">=</span> amnt;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> amnt;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> dp[i][j] <span style="color:#f92672">=</span> dp[i][j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Outer Loop</strong>: The loop <code>for(int i = 1; i &lt; 4; i++)</code> iterates over the number of subarrays to select (1, 2, or 3).</li>
+<li><strong>Inner Loop</strong>: The inner loop <code>for(int j = n - i * k; j &gt;= groupLeft * k; j--)</code> iterates over possible positions to end a subarray of size <code>k</code>.</li>
+<li>The variable <code>rest</code> stores the maximum sum for the previous group of subarrays (i.e., the subarrays selected before the current one). If there’s no valid previous group, it’s set to 0.</li>
+<li>The variable <code>amnt</code> is the current sum being considered, which is the sum of the current subarray plus the sum of the previously selected subarrays.</li>
+<li>If the current sum (<code>amnt</code>) is greater than the previous maximum (<code>mx</code>), we update the DP table with the new maximum and store the current subarray index.</li>
+<li><strong>Subarray Indices</strong>: The vector <code>dp[i][j].second</code> stores the indices of the subarrays selected up to the current position <code>j</code>.</li>
+</ul>
+<h4 id="4-reversing-the-result">
+  4. <strong>Reversing the Result</strong>:
+  <a class="heading-link" href="#4-reversing-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>reverse(dp[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>].second.begin(), dp[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>].second.end());
+</span></span></code></pre></div><ul>
+<li>After filling the DP table, the indices of the three subarrays are stored in reverse order (because the inner loop considers subarrays in reverse order). Therefore, we reverse the order to return the correct indices in ascending order.</li>
+</ul>
+<h4 id="5-returning-the-result">
+  5. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>].second;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the indices of the three subarrays with the maximum sum. The indices are stored in <code>dp[3][0].second</code>.</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the input array <code>nums</code>. This accounts for the single pass to compute the prefix sums and the subsequent passes to fill the DP table.</li>
-<li><strong>Space Complexity</strong>: O(N) for the DP table, as it stores results for each configuration of the subarrays.</li>
+<li>The time complexity of this solution is <strong>O(n * 3)</strong>, or simply <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+<li>The outer loop runs 3 times (since we are selecting 3 subarrays), and the inner loop runs up to <code>n</code>. Therefore, the overall time complexity is linear with respect to the size of the array, making this solution efficient.</li>
 </ul>
-<p>This dynamic programming approach efficiently finds the optimal indices for the three non-overlapping subarrays that yield the maximum sum.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the storage required for the <code>sum</code> array and the <code>dp</code> table. The <code>dp</code> table has dimensions <code>(4, n)</code> where <code>4</code> corresponds to selecting 1, 2, or 3 subarrays, and <code>n</code> corresponds to the possible positions in the array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the indices of three non-overlapping subarrays with the maximum sum using a dynamic programming approach. By leveraging prefix sums and memoizing the results of subproblems, the algorithm is able to compute the maximum sum in <strong>O(n)</strong> time, which is optimal for this problem. The DP table stores intermediate results, ensuring that we avoid redundant computations and can efficiently build up the solution. The solution also ensures that the subarrays are selected in the correct order, and it returns the indices of the subarrays that contribute to the maximum sum.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1428s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1426s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

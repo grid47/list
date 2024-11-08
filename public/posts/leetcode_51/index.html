@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -260,7 +260,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1332s1hbhb">
+<h2 id="hahahugoshortcode1329s1hbhb">
   
 
   
@@ -272,7 +272,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a function to solve the N-Queens puzzle. The objective is to place ( N ) queens on an ( N \times N ) chessboard such that no two queens threaten each other. This means that no two queens can be placed in the same row, column, or diagonal.</p>
+<p>The N-Queens problem is a classic problem in computer science and is often used to test the ability of algorithms to solve constraint satisfaction problems. The problem asks to place <code>n</code> queens on a <code>n x n</code> chessboard such that no two queens threaten each other. A queen can attack another queen if they are placed on the same row, column, or diagonal. The task is to find all possible solutions where the queens are placed such that none of them can attack each other.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -280,64 +280,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution to the N-Queens problem involves a backtracking approach. The idea behind backtracking is to try placing queens one by one in each row and for each column. After placing a queen, we check if it is safe to place the next queen. If we reach a point where no queen can be placed in a row, we backtrack by removing the last queen placed and trying another position. This continues until we find all valid configurations where all queens are placed safely.</p>
+<p>Here are the key steps in the approach:</p>
 <ol>
 <li>
-<p><strong>Backtracking</strong>:</p>
-<ul>
-<li>Use backtracking to explore all potential placements of queens on the board.</li>
-<li>Start placing queens row by row.</li>
-</ul>
+<p><strong>Recursive Backtracking:</strong>
+The algorithm uses recursive backtracking to explore each potential configuration of queens. It places a queen in a position and then recursively tries to place a queen in the next row, repeating this process until all rows are filled or until a configuration is invalid.</p>
 </li>
 <li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If all ( N ) queens are placed (i.e., the current row index equals ( n )), add the current board configuration to the result.</li>
-</ul>
+<p><strong>Check for Safety:</strong>
+A helper function <code>canPlace</code> is used to check whether it is safe to place a queen in a given cell. The function checks the column and both diagonals to ensure no other queen can attack the new position.</p>
 </li>
 <li>
-<p><strong>Placement Check</strong>:</p>
-<ul>
-<li>For each position in the current row, check if placing a queen there is valid using the <code>canPlace</code> function.</li>
-<li>If valid, place the queen and move to the next row recursively.</li>
-<li>Backtrack by removing the queen after exploring the possibilities.</li>
-</ul>
+<p><strong>Storing Valid Solutions:</strong>
+Once a valid configuration is found (i.e., all queens are placed without conflicts), it is added to the list of solutions. The function continues searching for other possible configurations.</p>
 </li>
 <li>
-<p><strong>Checking Valid Placement</strong>:</p>
-<ul>
-<li>Ensure no queen is placed in the same column, and check both diagonals for conflicts.</li>
-</ul>
+<p><strong>Backtracking:</strong>
+If a queen cannot be placed in a particular position in a row (because of conflicts with other queens), the algorithm backtracks by removing the last queen placed and tries the next possible position.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Function <code>solveNQueens</code></strong>:
-<ul>
-<li>Initializes the board and starts the backtracking process.</li>
+<h4 id="step-1-solve-n-queens-function">
+  Step 1: Solve N-Queens Function
+  <a class="heading-link" href="#step-1-solve-n-queens-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> solveNQueens(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> ans;  <span style="color:#75715e">// Stores the final solutions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    string <span style="color:#a6e22e">str</span>(n, <span style="color:#e6db74">&#39;.&#39;</span>);  <span style="color:#75715e">// String representing one row of the board
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> tmp(n, str);  <span style="color:#75715e">// Vector of strings representing the board
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> n;  <span style="color:#75715e">// Initialize the board size
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    bt(<span style="color:#ae81ff">0</span>, ans, tmp);  <span style="color:#75715e">// Start the backtracking process from the first row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the list of solutions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>solveNQueens</code> is the main entry point. It initializes the board with empty cells (represented by <code>'.'</code>) and an empty list to store the solutions (<code>ans</code>).</li>
+<li><code>bt(0, ans, tmp)</code> starts the backtracking process from the first row (row 0).</li>
+<li>The function returns <code>ans</code>, which contains all the possible valid configurations of queens.</li>
 </ul>
-</li>
-<li><strong>Function <code>bt</code> (Backtracking)</strong>:
-<ul>
-<li>Iterates over each column in the current row, checking for valid placements.</li>
+<h4 id="step-2-backtracking-function">
+  Step 2: Backtracking Function
+  <a class="heading-link" href="#step-2-backtracking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bt</span>(<span style="color:#66d9ef">int</span> i, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ans, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>tmp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> n) {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);  <span style="color:#75715e">// If all queens are placed, add the current board to the answer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(canPlace(tmp, i, j)) {  <span style="color:#75715e">// Check if placing a queen in row i, column j is valid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            tmp[i][j] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Q&#39;</span>;  <span style="color:#75715e">// Place the queen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            bt(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ans, tmp);  <span style="color:#75715e">// Move to the next row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            tmp[i][j] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.&#39;</span>;  <span style="color:#75715e">// Backtrack and remove the queen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function tries placing a queen in all possible columns of the current row <code>i</code>.</li>
+<li>If the placement is valid (checked by <code>canPlace</code>), it places a queen at position <code>(i, j)</code>, and then recursively moves to the next row (<code>i + 1</code>).</li>
+<li>If a solution is found (i.e., <code>i == n</code>), the current configuration (<code>tmp</code>) is added to the list of solutions (<code>ans</code>).</li>
+<li>After trying all valid placements in the current row, the function backtracks by removing the queen (<code>tmp[i][j] = '.'</code>).</li>
 </ul>
-</li>
-<li><strong>Function <code>canPlace</code></strong>:
-<ul>
-<li>Checks if a queen can be placed at position ((i, j)) by checking:
-<ul>
-<li>The column for existing queens.</li>
-<li>The upper-left diagonal for conflicts.</li>
-<li>The upper-right diagonal for conflicts.</li>
-</ul>
-</li>
-</ul>
-</li>
+<h4 id="step-3-safety-check-function">
+  Step 3: Safety Check Function
+  <a class="heading-link" href="#step-3-safety-check-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canPlace</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>tmp, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> i; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp[k][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Q&#39;</span>)  <span style="color:#75715e">// Check the column for a queen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp[x][y] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Q&#39;</span>)  <span style="color:#75715e">// Check the top-left diagonal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        x<span style="color:#f92672">--</span>, y<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp[x][y] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Q&#39;</span>)  <span style="color:#75715e">// Check the top-right diagonal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        x<span style="color:#f92672">--</span>, y<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If no queen can attack, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>canPlace</code> function checks if it is safe to place a queen at position <code>(i, j)</code>.</li>
+<li>First, it checks if there is any queen in the same column (<code>tmp[k][j] == 'Q'</code>).</li>
+<li>Then, it checks both diagonals (top-left and top-right) to ensure there are no queens that can attack the current position.</li>
+<li>If no queen can attack the position, the function returns <code>true</code>, indicating it is safe to place a queen.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -346,15 +394,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: The worst-case scenario is ( O(N!) ), as we may need to explore all permutations of queen placements.</li>
-<li><strong>Space Complexity</strong>: ( O(N) ) for the recursion stack and board representation.</li>
+<li>The time complexity of the N-Queens problem depends on the size of the board, <code>n</code>. The algorithm uses backtracking, which explores all possible placements of queens.</li>
+<li>In the worst case, there are <code>n!</code> possible ways to place <code>n</code> queens (since each queen must be placed in a unique row and column). Therefore, the time complexity is <code>O(n!)</code> in the worst case.</li>
+<li>However, the pruning done by the <code>canPlace</code> function reduces the number of configurations explored, making the algorithm faster in practice than brute-force enumeration.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(n^2)</code> because the board is represented as a 2D array of size <code>n x n</code>, where each element is a string representing a row of the board.</li>
+<li>The space used by the call stack for recursion is also proportional to <code>O(n)</code> due to the depth of the recursion (one call per row).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The N-Queens problem is a well-known combinatorial problem that can be efficiently solved using backtracking. In this solution, the algorithm recursively places queens on the board, ensuring no two queens threaten each other by checking the column and diagonals. The backtracking approach efficiently finds all valid configurations, and the pruning mechanism ensures that unnecessary configurations are not explored, leading to a solution that is both time-efficient and space-efficient.</p>
+<p>By using recursion and backtracking, the algorithm explores all possible solutions to the problem and provides an elegant way to solve this classic problem. The time complexity of <code>O(n!)</code> makes it feasible for relatively small values of <code>n</code>, and the space complexity of <code>O(n^2)</code> is optimal for storing the board configuration. This solution is widely used for solving constraint satisfaction problems in many real-world applications.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1332s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1329s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

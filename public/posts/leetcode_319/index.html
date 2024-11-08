@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -228,13 +228,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You have <code>n</code> bulbs, initially turned off. A person toggles the state of the bulbs (turning them on if they are off and vice versa) in the following manner:</p>
-<ul>
-<li>On the first round, they toggle every bulb.</li>
-<li>On the second round, they toggle every second bulb.</li>
-<li>On the third round, they toggle every third bulb, and so on until the <code>n</code>-th round.</li>
-</ul>
-<p>The goal is to determine how many bulbs are on after <code>n</code> rounds.</p>
+<p>The problem asks us to determine how many bulbs are on after <code>n</code> rounds of flipping bulbs. Initially, all bulbs are off. In each round, a certain set of bulbs are flipped. Specifically, for each round <code>i</code> (where <code>i</code> starts from 1), every <code>i</code>-th bulb is flipped. After completing all the rounds, we need to find how many bulbs are left in the &ldquo;on&rdquo; state.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -242,31 +236,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The key observation is that a bulb ends up being toggled (switched) for each of its divisors. For example:</p>
-<ul>
-<li>Bulb 12 is toggled on rounds 1, 2, 3, 4, 6, and 12.</li>
-</ul>
-<p>A bulb will remain on if it is toggled an odd number of times. This occurs only for bulbs that are perfect squares because perfect squares have an odd number of divisors (one of the divisors is repeated).</p>
-<p>For instance:</p>
-<ul>
-<li>(1 = 1^2) has 1 divisor.</li>
-<li>(4 = 2^2) has 3 divisors (1, 2, 4).</li>
-<li>(9 = 3^2) has 3 divisors (1, 3, 9).</li>
-</ul>
-<p>Thus, the number of bulbs that remain on corresponds to the number of perfect squares less than or equal to <code>n</code>. This is equal to the largest integer (k) such that (k^2 \leq n), which is the integer part of the square root of <code>n</code>.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The key observation in solving this problem is recognizing the pattern of bulb flipping based on the number of divisors of the bulb&rsquo;s index. Here&rsquo;s how we can approach it:</p>
+<ol>
+<li><strong>Initial Setup</strong>: Initially, all bulbs are off.</li>
+<li><strong>Flipping Rule</strong>: In round <code>i</code>, we flip every <code>i</code>-th bulb. This means that in round 1, every bulb is flipped (since every number is divisible by 1), in round 2, every second bulb is flipped, and so on.</li>
+<li><strong>Bulb Flipping Pattern</strong>: A bulb is flipped each time its index is divisible by the round number. This means that bulb <code>k</code> will be flipped for every divisor of <code>k</code>. For example, bulb 6 will be flipped in rounds 1, 2, 3, and 6 (because 1, 2, 3, and 6 are divisors of 6).</li>
+<li><strong>Final State of Bulb</strong>: A bulb will be in the &ldquo;on&rdquo; state if it has been flipped an odd number of times, and in the &ldquo;off&rdquo; state if it has been flipped an even number of times. The only way a bulb is flipped an odd number of times is if the bulb&rsquo;s index is a perfect square. This is because perfect squares have an odd number of divisors. For example, 9 has divisors 1, 3, and 9, which is an odd count.</li>
+<li><strong>Result</strong>: The number of bulbs that remain on corresponds to the number of perfect squares less than or equal to <code>n</code>. This is equivalent to the integer part of the square root of <code>n</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> bulbSwitch(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sqrt</span>(n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Function Signature</strong>:</p>
 <ul>
-<li><strong>Input</strong>: An integer <code>n</code> representing the number of bulbs.</li>
-<li><strong>Output</strong>: An integer representing the number of bulbs that are on after all rounds.</li>
+<li>The function <code>bulbSwitch</code> takes an integer <code>n</code> as input, representing the number of bulbs.</li>
+<li>It returns an integer, which is the number of bulbs that remain &ldquo;on&rdquo; after <code>n</code> rounds.</li>
 </ul>
-<ol>
-<li>Return the integer part of the square root of <code>n</code>.</li>
+</li>
+<li>
+<p><strong>Use of <code>sqrt</code></strong>:</p>
+<ul>
+<li>The core idea behind the solution is that the number of bulbs that remain &ldquo;on&rdquo; is the number of perfect squares less than or equal to <code>n</code>.</li>
+<li>The function <code>sqrt(n)</code> computes the square root of <code>n</code> and returns the largest integer that is less than or equal to <code>sqrt(n)</code>. This integer represents the number of perfect squares less than or equal to <code>n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Why Perfect Squares</strong>:</p>
+<ul>
+<li>As mentioned earlier, only bulbs at perfect square indices will remain &ldquo;on&rdquo;. This is because perfect squares are the only numbers with an odd number of divisors.</li>
+<li>For example:
+<ul>
+<li><code>1</code> is flipped once (perfect square).</li>
+<li><code>4</code> is flipped three times (perfect square).</li>
+<li><code>9</code> is flipped five times (perfect square).</li>
+<li>So, for any number <code>n</code>, the number of bulbs that are &ldquo;on&rdquo; corresponds to the count of perfect squares up to <code>n</code>, which is simply <code>floor(sqrt(n))</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>The function computes the square root of <code>n</code>, which is a constant-time operation (<code>O(1)</code> complexity).</li>
+<li>This provides an optimal solution for the problem, as it avoids simulating all the rounds of bulb flipping, reducing the time complexity to <code>O(1)</code>.</li>
+</ul>
+</li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -275,10 +301,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(1)) because calculating the square root is a constant-time operation.</li>
-<li><strong>Space Complexity</strong>: (O(1)) since no additional data structures are used.</li>
+<li><strong>O(1)</strong>: The solution involves only the computation of the square root of <code>n</code>, which is a constant-time operation. No loops or complex operations are involved.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The solution uses only a constant amount of space to store the input <code>n</code> and the result, which is an integer.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is highly efficient and leverages the mathematical property of perfect squares to solve the problem in constant time and space. The key insight is recognizing that the bulbs that remain &ldquo;on&rdquo; are those at indices that are perfect squares. By calculating the square root of <code>n</code>, we can quickly determine how many bulbs will remain &ldquo;on&rdquo;.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Mathematical Insight</strong>: Only perfect squares will remain &ldquo;on&rdquo;, and the number of perfect squares less than or equal to <code>n</code> is the integer part of <code>sqrt(n)</code>.</li>
+<li><strong>Optimal Solution</strong>: The solution runs in constant time and uses constant space, making it optimal for large values of <code>n</code>.</li>
+<li><strong>Efficiency</strong>: This approach avoids the need for simulating each round, making it both time and space efficient.</li>
+</ol>
+<p>By understanding the problem in terms of divisors and perfect squares, we can solve the problem in an elegant and efficient manner, providing a quick and scalable solution.</p>
  
 </div>
   

@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -222,7 +222,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> nxt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode828s1hbhb">
+<h2 id="hahahugoshortcode829s1hbhb">
   
 
   
@@ -234,7 +234,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a non-tail node in a singly linked list, delete the node from the list. You are only given access to that node, not the head of the list.</p>
+<p>In this problem, you are given a <strong>singly linked list</strong>, and your task is to delete a node <strong>from the linked list</strong>, given only access to that specific node. Typically, a node in a singly linked list can be deleted by altering the previous node’s <code>next</code> pointer to skip the node to be deleted. However, in this scenario, you are not given access to the previous node. You are only given access to the node that needs to be deleted, and your task is to delete this node.</p>
+<p>A <strong>ListNode</strong> is defined with the following structure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ListNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> next;
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Here, each node in the list has a <code>val</code> (integer value) and a <code>next</code> pointer that points to the next node in the list. The task requires you to delete the node at the given position without having access to the head of the list or the previous node.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -242,28 +249,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Since we do not have access to the previous node and cannot directly change the pointers leading to <code>node</code>, we instead:</p>
+<p>The typical method of deleting a node in a singly linked list involves altering the <code>next</code> pointer of the previous node. However, since we do not have access to the previous node in this problem, we need to adopt a different approach to solve the problem.</p>
+<p>Here’s a concise overview of the approach:</p>
 <ol>
-<li>Copy the value from the next node (<code>node-&gt;next</code>) into <code>node</code>.</li>
-<li>Update <code>node-&gt;next</code> to point to the next-next node (skipping the original next node).</li>
-<li>Delete the copied next node to free memory.</li>
+<li>
+<p><strong>Node Copying</strong>:</p>
+<ul>
+<li>The key observation in this problem is that we don&rsquo;t need to physically delete the node we are given; instead, we can copy the value from the next node into the current node and then delete the next node.</li>
+<li>Essentially, instead of deleting the node directly, we overwrite the current node&rsquo;s value with the value of the next node. This effectively removes the current node, because we are replacing it with its successor.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Next Pointer</strong>:</p>
+<ul>
+<li>After copying the value of the next node into the current node, we adjust the <code>next</code> pointer of the current node to skip the next node.</li>
+<li>This ensures that the current node is now pointing to the node after the next, effectively &ldquo;removing&rdquo; the next node from the linked list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete the Next Node</strong>:</p>
+<ul>
+<li>Finally, we delete the next node. Since we have already copied its value into the current node, the next node is now redundant and can be safely deleted.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach works because you are essentially transforming the node to be deleted into its next node, and then deleting the next node, which is now redundant.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A non-tail node in a linked list.</li>
-<li><strong>Output</strong>: None (modifies the linked list in-place to remove the specified node).</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> deleteNode(ListNode<span style="color:#f92672">*</span> node) {
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> contains the method <code>deleteNode</code>, which takes a pointer to the node that needs to be deleted (<code>ListNode* node</code>).</li>
 </ul>
-<ol>
-<li>Store <code>node-&gt;next</code> in a temporary pointer <code>nxt</code>.</li>
-<li>Copy <code>*nxt</code> (value and next pointer) into <code>*node</code>.</li>
-<li>Delete <code>nxt</code> to free the memory.</li>
-</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> nxt <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>The variable <code>nxt</code> is a pointer that stores the reference to the next node (<code>node-&gt;next</code>). We will use this pointer to access and manipulate the next node.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#f92672">*</span>node <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>nxt;
+</span></span></code></pre></div><ul>
+<li>The expression <code>*node = *nxt</code> copies the contents of the next node (<code>nxt</code>) into the current node (<code>node</code>).</li>
+<li>This effectively replaces the current node’s value with the value of the next node.</li>
+<li>Additionally, the <code>next</code> pointer of the current node is updated to point to the node after <code>nxt</code>, because <code>nxt-&gt;next</code> is assigned to <code>node-&gt;next</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> nxt;
+</span></span></code></pre></div><ul>
+<li>After copying the next node&rsquo;s value into the current node, we delete the next node (<code>nxt</code>). Since the current node has now taken the place of the next node, deleting the next node has no adverse effects on the integrity of the list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The method ends here. The current node has now been deleted (by copying the next node&rsquo;s value and removing the next node).</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -271,15 +313,61 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(1)) since only a few pointer operations are performed.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as no additional memory is required apart from a temporary pointer.</li>
+<li>The time complexity of this solution is <strong>O(1)</strong>. This is because the solution works in constant time. We only perform a fixed number of operations (copying the value and deleting the next node), and there is no need for any traversal or iteration through the linked list. Regardless of the size of the list, these operations always take constant time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> as well. The algorithm only uses a constant amount of extra space (a few pointers), and there are no additional data structures or recursive calls that consume extra memory.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is highly efficient for the given problem, and it makes clever use of pointer manipulation to achieve the task of deleting a node in a singly linked list without access to the previous node.</p>
+<h3 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Problem Understanding</strong>: Normally, deleting a node requires modifying the <code>next</code> pointer of the previous node. However, in this case, we only have access to the node to be deleted.</p>
+</li>
+<li>
+<p><strong>Effective Solution</strong>: The solution works by copying the value from the next node into the current node, and then deleting the next node. This simulates the deletion of the current node.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The solution works in constant time and uses constant space, making it optimal for the problem at hand.</p>
+</li>
+<li>
+<p><strong>Robustness</strong>: This solution handles edge cases effectively, such as when the node to be deleted is the last node in the list. Since the problem guarantees that the node to be deleted is not the last node, there is no need for special handling of this edge case.</p>
+</li>
+</ol>
+<p>This approach is commonly used in scenarios where you need to delete a node in a singly linked list but do not have access to the head of the list or the previous node, such as in certain interview questions or competitive programming problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode828s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode829s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -225,7 +225,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> i;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1038s1hbhb">
+<h2 id="hahahugoshortcode1037s1hbhb">
   
 
   
@@ -237,7 +237,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>val</code>, remove all occurrences of <code>val</code> in <code>nums</code> in-place. The relative order of the elements may be changed. After removing, return the new length of the array.</p>
+<p>The problem requires removing all occurrences of a specific value from a given list (vector in this case) and returning the new length of the list after the removal. Importantly, the order of elements should be preserved, and we are required to perform the operation in-place, without using extra space for another list or array.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>A vector of integers <code>nums</code> and an integer <code>val</code> representing the value to remove.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The length of the modified list after removing all occurrences of <code>val</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,50 +265,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<p>This problem can be solved by iterating through the list and shifting elements that are not equal to the target value <code>val</code> to the left side of the list. This will effectively remove all occurrences of <code>val</code> without the need for extra space. The approach relies on two pointers: one to traverse the list and the other to track the position of the next available slot for valid numbers.</p>
+<p>The idea is to maintain an index <code>i</code>, which will point to the next available position to place a valid number (i.e., a number that is not equal to <code>val</code>). As we traverse through the list, we check each element:</p>
 <ul>
-<li>Use a pointer <code>i</code> to track the position where the next non-<code>val</code> element should be placed.</li>
+<li>If the element is not equal to <code>val</code>, we assign it to <code>nums[i]</code> and increment <code>i</code>.</li>
+<li>By the end of the loop, all valid elements will have been shifted to the beginning of the list, and <code>i</code> will hold the new length of the list.</li>
 </ul>
-</li>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
-<ul>
-<li>Use a for-each loop to traverse through each element in <code>nums</code>.</li>
-<li>For each element, check if it is not equal to <code>val</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Place Non-Val Elements</strong>:</p>
-<ul>
-<li>If an element is not equal to <code>val</code>, place it at the <code>i</code>-th position in the array and increment <code>i</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return New Length</strong>:</p>
-<ul>
-<li>The value of <code>i</code> at the end of the loop will represent the new length of the modified array.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li><strong>Pointer Initialization</strong>: The variable <code>i</code> is initialized to 0, which will track the position for the next non-<code>val</code> element.</li>
-<li><strong>Element Check</strong>: Each element in <code>nums</code> is checked:
-<ul>
-<li>If it is not <code>val</code>, it is copied to the <code>i</code>-th index of the array.</li>
-<li><code>i</code> is incremented to point to the next position.</li>
-</ul>
-</li>
-<li><strong>Final Output</strong>: After the loop, <code>i</code> contains the count of elements that are not <code>val</code>, effectively giving the new length of the array.</li>
+<li><strong>Initialize the Pointer for the Resultant Array:</strong></li>
 </ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The variable <code>i</code> will act as the pointer that tracks the position in the array where the next valid element (non-equal to <code>val</code>) should be placed. It starts at 0, pointing to the first position.</li>
+</ul>
+<ol start="2">
+<li><strong>Iterate Through the List:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> node: nums)
+</span></span></code></pre></div><ul>
+<li>A for-each loop is used to iterate over each element in the <code>nums</code> vector. The loop checks each element (<code>node</code>) to determine if it should be kept in the list.</li>
+</ul>
+<ol start="3">
+<li><strong>Check if the Current Element Should Be Included:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(node <span style="color:#f92672">!=</span> val)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    nums[i] <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the current element <code>node</code> is not equal to <code>val</code>, we assign it to the position <code>nums[i]</code> and then increment <code>i</code>. This ensures that all valid elements are moved to the front, and <code>i</code> tracks the length of the new array (without the removed value).</li>
+</ul>
+<ol start="4">
+<li><strong>Return the New Length of the List:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> i;
+</span></span></code></pre></div><ul>
+<li>The function returns <code>i</code>, which represents the new length of the list, i.e., the number of elements that are not equal to <code>val</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -296,15 +317,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(N)), where (N) is the number of elements in the input array <code>nums</code>.</li>
-<li><strong>Space Complexity:</strong> (O(1)) since the operations are performed in place, and no additional space is used other than variables.</li>
+<li><strong>O(n)</strong>: The algorithm iterates through the <code>nums</code> array exactly once, where <code>n</code> is the number of elements in the array. Each element is either retained or ignored based on its value, making the process linear in time complexity.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses only a constant amount of extra space, regardless of the size of the input array. We do not use any additional data structures to store the modified list; all modifications happen in-place.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>removeElement</code> function efficiently removes all occurrences of a specified value from the list while preserving the order of the remaining elements. It operates in <strong>O(n)</strong> time and <strong>O(1)</strong> space, making it highly efficient. By modifying the list in-place and returning the new length, the algorithm adheres to the problem&rsquo;s constraints and provides an optimal solution.</p>
+<p>This solution is optimal in both time and space complexity, making it ideal for scenarios where the list is large and memory usage needs to be minimized. The approach uses the two-pointer technique to achieve in-place removal without the need for additional memory or complex operations, ensuring the algorithm runs efficiently even for large inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1038s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1037s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

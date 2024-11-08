@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -236,7 +236,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(amount, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1337s1hbhb">
+<h2 id="hahahugoshortcode1347s1hbhb">
   
 
   
@@ -248,7 +248,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer <code>amount</code> and an array of integers <code>coins</code>, where each integer represents a coin denomination. Your goal is to determine how many combinations of coins you can use to make up the given amount. You can use each coin denomination an unlimited number of times.</p>
+<p>The task is to determine the number of ways to make a given amount using a set of coins. You are provided with an integer <code>amount</code> and a list of <code>coins</code>, where each coin has a specific denomination. The goal is to find how many different combinations of the coins can sum up to the specified <code>amount</code>.</p>
+<p>You can use each coin any number of times. For example:</p>
+<ul>
+<li>Given coins <code>[1, 2, 5]</code> and amount <code>5</code>, there are 4 ways to make the amount:
+<ul>
+<li><code>5 = 5</code></li>
+<li><code>5 = 2 + 2 + 1</code></li>
+<li><code>5 = 2 + 1 + 1 + 1</code></li>
+<li><code>5 = 1 + 1 + 1 + 1 + 1</code></li>
+</ul>
+</li>
+</ul>
+<p>The task is to return the number of ways to make the amount using the given coins.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,71 +268,130 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is a classic <strong>dynamic programming</strong> problem that can be solved using a bottom-up approach. The idea is to keep track of the number of ways to achieve each possible sum from <code>0</code> to the <code>amount</code> using the available coins. The solution relies on the <strong>unbounded knapsack problem</strong> approach where each coin can be used an unlimited number of times.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<p><strong>Dynamic Programming Table (Memoization)</strong>: We will use a 2D memoization table <code>memo[amount][idx]</code> to store the results of subproblems. The index <code>idx</code> represents the current coin being considered, and <code>amnt</code> represents the remaining amount that needs to be made.</p>
+</li>
+<li>
+<p><strong>Recursion with Memoization</strong>:</p>
 <ul>
-<li>Use a recursive function with memoization to keep track of the number of ways to make a specific amount using coins from a given index onward.</li>
-<li>Define a 2D array <code>memo</code> where <code>memo[amnt][idx]</code> stores the number of ways to make <code>amnt</code> using coins starting from index <code>idx</code>.</li>
+<li>If we are at the last coin and the remaining amount is <code>0</code>, it means we have found one valid way of making the amount, so we return <code>1</code>.</li>
+<li>If the remaining amount is greater than or equal to the current coin value, we can either:
+<ul>
+<li>Skip the current coin (move to the next coin).</li>
+<li>Use the current coin and reduce the remaining amount by the value of the coin.</li>
 </ul>
+</li>
+<li>We store the result of each subproblem in the memo table to avoid redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Coins</strong>: Sorting the coins in decreasing order helps in optimization. By trying larger coins first, the recursion tree becomes smaller and may terminate earlier, avoiding unnecessary checks.</p>
 </li>
 <li>
 <p><strong>Base Case</strong>:</p>
 <ul>
-<li>If all coins have been considered (<code>idx == nums.size()</code>), return 1 if <code>amnt</code> is zero (meaning a valid combination was found), or 0 otherwise.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursion</strong>:</p>
-<ul>
-<li>For each coin at index <code>idx</code>, explore two scenarios:
-<ul>
-<li><strong>Exclude the current coin</strong>: Recursively call the function to compute combinations without the current coin.</li>
-<li><strong>Include the current coin</strong>: If <code>amnt</code> is greater than or equal to the value of the coin, recursively call the function with the reduced amount (<code>amnt - nums[idx]</code>).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Memoization</strong>:</p>
-<ul>
-<li>Store results in the <code>memo</code> array to avoid redundant calculations.</li>
+<li>If all coins are considered and the remaining amount is <code>0</code>, we have found one valid combination.</li>
+<li>If all coins are considered and the remaining amount is greater than <code>0</code>, no valid combination can be formed from the remaining coins, so we return <code>0</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<p>Let&rsquo;s break down the code and explain how each part works.</p>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">5001</span>][<span style="color:#ae81ff">301</span>];
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
+</span></span></code></pre></div><ul>
+<li>We define a memoization table <code>memo</code> where <code>memo[amnt][idx]</code> stores the number of ways to make the amount <code>amnt</code> using coins from index <code>idx</code> to the end of the <code>nums</code> array. The maximum amount is <code>5001</code>, and the maximum number of coins is <code>301</code>.</li>
+<li>We store the coins in the <code>nums</code> vector.</li>
+</ul>
+<h4 id="2-recursive-dp-function">
+  2. <strong>Recursive DP Function</strong>:
+  <a class="heading-link" href="#2-recursive-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> amnt, <span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> nums.size()) <span style="color:#66d9ef">return</span> amnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[amnt][idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[amnt][idx];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> dp(amnt, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(amnt <span style="color:#f92672">&gt;=</span> nums[idx])
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> dp(amnt <span style="color:#f92672">-</span> nums[idx], idx);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[amnt][idx] <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Function Definition</strong>:</p>
+<p><strong>Base Case</strong>: If <code>idx == nums.size()</code>, it means we have considered all coins. If the remaining amount (<code>amnt</code>) is <code>0</code>, we return <code>1</code> as we found one valid way of making the amount. Otherwise, we return <code>0</code> since no valid way exists.</p>
+</li>
+<li>
+<p><strong>Memoization Check</strong>: If <code>memo[amnt][idx]</code> is not <code>-1</code>, it means we have already calculated the result for this subproblem, so we return the cached value to avoid recomputing it.</p>
+</li>
+<li>
+<p><strong>Recursive Calculation</strong>:</p>
 <ul>
-<li>The <code>change</code> function initializes the coin denominations and prepares the memoization array.</li>
+<li>First, we calculate the number of ways to make the amount <code>amnt</code> without using the current coin (i.e., move to the next coin, <code>idx + 1</code>).</li>
+<li>If the remaining amount (<code>amnt</code>) is greater than or equal to the current coin&rsquo;s value (<code>nums[idx]</code>), we also calculate the number of ways by using the current coin and reduce the amount by <code>nums[idx]</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Sorting Coins</strong>:</p>
-<ul>
-<li>Sort the coins in descending order to optimize the recursive calls (not strictly necessary but can help in some cases).</li>
-</ul>
+<p>The result is stored in <code>memo[amnt][idx]</code> to avoid recomputation.</p>
 </li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li>The <code>dp</code> function is defined to calculate the number of ways to make change for the specified amount.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The final result from the <code>dp</code> function is returned as the answer.</li>
+<h4 id="3-sorting-coins">
+  3. <strong>Sorting Coins</strong>:
+  <a class="heading-link" href="#3-sorting-coins">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cmp</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> b <span style="color:#f92672">&lt;</span> a;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We define a comparison function <code>cmp</code> to sort the coins in descending order. This ensures that we try the largest coins first during the recursion, which can lead to early termination of the recursion tree, optimizing the process.</li>
 </ul>
-</li>
-</ol>
+<h4 id="4-main-function">
+  4. <strong>Main Function</strong>:
+  <a class="heading-link" href="#4-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">change</span>(<span style="color:#66d9ef">int</span> amount, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> coins) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> coins;
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end(), cmp);
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(amount, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>nums</code> vector with the provided <code>coins</code> and sort it in descending order using <code>sort</code> and the custom <code>cmp</code> function.</li>
+<li>We then reset the memoization table (<code>memo</code>) by setting all values to <code>-1</code> to indicate that no subproblems have been solved yet.</li>
+<li>Finally, we call the recursive <code>dp</code> function to compute the number of ways to make the <code>amount</code> using the given coins starting from index <code>0</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -328,15 +399,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(amount * n), where <code>amount</code> is the target amount and <code>n</code> is the number of coin denominations. This accounts for the recursive calls and the memoization.</li>
-<li><strong>Space Complexity</strong>: O(amount * n) for the <code>memo</code> array used for storing results.</li>
+<li><strong>O(amount × n)</strong>: The time complexity of this solution is determined by the size of the memoization table, which has a size of <code>5001 × 301</code>. We are solving each subproblem once and each subproblem takes constant time for recursion and calculation. Thus, the time complexity is <strong>O(amount × n)</strong>, where <code>amount</code> is the target amount and <code>n</code> is the number of coins.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(amount × n)</strong>: The space complexity is determined by the size of the memoization table (<code>memo[5001][301]</code>), which takes up <code>O(amount × n)</code> space. Additionally, the <code>nums</code> array requires space for the coins, which is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to determine the number of ways to make a given amount using the available coins. By using dynamic programming with memoization, we avoid redundant calculations and optimize the process. Sorting the coins in descending order improves performance by reducing the recursion tree&rsquo;s depth.</p>
+<p>The time and space complexity of <strong>O(amount × n)</strong> make this solution feasible for moderate input sizes, and the memoization ensures that subproblems are computed only once, making the solution both time-efficient and space-efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1337s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1347s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -284,7 +284,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of equations and their corresponding values, and you need to evaluate queries based on these equations. Each equation is represented as a pair of strings (e.g., <code>[&quot;a&quot;, &quot;b&quot;]</code>), and the value represents the ratio (e.g., <code>a / b = value</code>). Your task is to calculate the results of a series of queries where each query is also a pair of strings.</p>
+<p>Given a list of equations, each in the form <code>A / B = value</code>, and a list of queries, the task is to evaluate the result of each query in the form <code>A / B</code> using the given equations. For each query, we are to find the result of the division, if possible, or return <code>-1</code> if it is not possible to evaluate the expression. The equations can be considered as undirected edges in a graph where the nodes represent variables (e.g., <code>A</code>, <code>B</code>, etc.), and the values on the edges represent the ratio between those variables.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -292,56 +292,173 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is a variant of the &ldquo;graph traversal&rdquo; problem, where:</p>
+<ol>
+<li>Each variable represents a node.</li>
+<li>Each equation represents an edge with a weight corresponding to the division ratio.</li>
+<li>The task is to find a path between two nodes that satisfies the ratio specified by the query.</li>
+</ol>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Graph Representation</strong>: Use a graph to represent the variables and their relationships. The graph is represented as an adjacency list, where each node (variable) points to other nodes (variables it is related to) along with the ratio.</li>
+<li><strong>Depth-First Search (DFS)</strong>: For each query, perform a DFS starting from the numerator of the query variable, and try to find a path to the denominator. While traversing, we accumulate the ratios of the edges.</li>
+<li><strong>Handling Edge Cases</strong>: If there is no valid path between the numerator and denominator, return <code>-1</code>. If the query is between the same variable (i.e., <code>A / A</code>), return <code>1</code> if it exists in the graph, otherwise return <code>-1</code>.</li>
+</ul>
+<h4 id="process">
+  Process:
+  <a class="heading-link" href="#process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Graph Construction</strong>: Build a graph where each equation adds two directed edges representing the relationship <code>A / B = value</code> and <code>B / A = 1 / value</code>.</li>
+<li><strong>DFS Traversal</strong>: For each query, start DFS from the numerator to the denominator, accumulating the product of edge weights along the way. If there is no path, return <code>-1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-graph-construction">
+  Step 1: Graph Construction
+  <a class="heading-link" href="#step-1-graph-construction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;&gt;</span> graph;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> eqn.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> w <span style="color:#f92672">=</span> val[i];
+</span></span><span style="display:flex;"><span>    graph[eqn[i][<span style="color:#ae81ff">0</span>]].push_back(make_pair(eqn[i][<span style="color:#ae81ff">1</span>], w));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (w <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    graph[eqn[i][<span style="color:#ae81ff">1</span>]].push_back(make_pair(eqn[i][<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> w));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A graph is built using an adjacency list, where each node (<code>string</code> type) points to other nodes along with the division ratio (<code>double</code> type).</li>
+<li>For each equation <code>A / B = value</code>, two directed edges are added:
+<ul>
+<li>One from <code>A</code> to <code>B</code> with weight <code>value</code>.</li>
+<li>One from <code>B</code> to <code>A</code> with weight <code>1 / value</code>.</li>
+</ul>
+</li>
+<li>The loop iterates through all equations, and the graph is populated accordingly.</li>
+</ul>
+<h4 id="step-2-query-processing">
+  Step 2: Query Processing
+  <a class="heading-link" href="#step-2-query-processing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> res <span style="color:#f92672">=</span> dfs(q[i][<span style="color:#ae81ff">0</span>], q[i][<span style="color:#ae81ff">1</span>], vis, graph);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (res <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    ans.push_back(res);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After constructing the graph, we process each query by calling the DFS function for each pair <code>A / B</code> in the query.</li>
+<li>We maintain a set <code>vis</code> to track visited nodes during the DFS to avoid cycles and repeated visits.</li>
+<li>The result of each query is pushed to the <code>ans</code> vector.</li>
+</ul>
+<h4 id="step-3-depth-first-search-dfs">
+  Step 3: Depth-First Search (DFS)
+  <a class="heading-link" href="#step-3-depth-first-search-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">dfs</span>(string start, string end, set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vis, map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">&amp;</span>gph) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (start <span style="color:#f92672">==</span> end) <span style="color:#66d9ef">return</span> gph.count(start) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    vis.insert(start);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (pair<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> x : gph[start]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (vis.count(x.first)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> res <span style="color:#f92672">=</span> x.second <span style="color:#f92672">*</span> dfs(x.first, end, vis, gph);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (res <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The DFS function is designed to search for a path between the <code>start</code> (numerator) and <code>end</code> (denominator) variables in the graph.</li>
+<li><strong>Base Case</strong>: If the <code>start</code> variable equals the <code>end</code> variable, return <code>1</code> if the node exists in the graph. Otherwise, return <code>-1</code>.</li>
+<li><strong>DFS Traversal</strong>: For each adjacent node to <code>start</code>, the DFS is recursively called. The product of the current edge weight (<code>x.second</code>) is multiplied by the result of the recursive DFS call.</li>
+<li><strong>Cycle Avoidance</strong>: To prevent cycles, we use the <code>vis</code> set to track visited nodes during the search.</li>
+<li>If a valid path is found, the accumulated product of edge weights is returned. If no valid path exists, <code>-1</code> is returned.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Graph Representation</strong>:</p>
+<p><strong>Graph Construction</strong>:</p>
 <ul>
-<li>Use a graph to represent the relationships between variables. Each variable is a node, and the edges represent the ratios between them.</li>
-<li>For each equation <code>[&quot;a&quot;, &quot;b&quot;]</code> with a value <code>k</code>, create directed edges:
-<ul>
-<li>From <code>a</code> to <code>b</code> with weight <code>k</code> (representing <code>a / b = k</code>)</li>
-<li>From <code>b</code> to <code>a</code> with weight <code>1/k</code> (representing <code>b / a = 1/k</code>), but only if <code>k</code> is not zero.</li>
-</ul>
-</li>
+<li>Constructing the graph involves iterating over the list of equations (<code>eqn</code>). Each equation requires inserting two directed edges in the graph. Thus, the graph construction takes <code>O(E)</code>, where <code>E</code> is the number of equations.</li>
 </ul>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
+<p><strong>Query Processing</strong>:</p>
 <ul>
-<li>For each query <code>[&quot;c&quot;, &quot;d&quot;]</code>, perform a DFS starting from <code>c</code> to find <code>d</code>.</li>
-<li>Keep track of visited nodes to avoid cycles and ensure that each variable is only processed once during the search.</li>
-</ul>
-</li>
-<li>
-<p><strong>Results Collection</strong>:</p>
-<ul>
-<li>If the target variable is found, return the computed ratio; otherwise, return -1 to indicate that the value cannot be determined.</li>
+<li>For each query, we perform a DFS traversal. In the worst case, the DFS can visit all nodes and edges in the graph. The complexity of DFS for each query is <code>O(V + E)</code>, where <code>V</code> is the number of unique variables (nodes) and <code>E</code> is the number of edges in the graph.</li>
+<li>Therefore, the overall complexity for processing all queries is <code>O(Q * (V + E))</code>, where <code>Q</code> is the number of queries.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Graph Storage</strong>:</p>
+<ul>
+<li>The space complexity for storing the graph is <code>O(V + E)</code>, where <code>V</code> is the number of unique variables and <code>E</code> is the number of equations (edges).</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Stack</strong>:</p>
+<ul>
+<li>In the worst case, the DFS recursion stack can have a depth of <code>V</code>, so the space complexity for the recursion stack is <code>O(V)</code>.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the overall space complexity is <code>O(V + E)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>calcEquation</code> function initializes a graph and processes the input equations to build the relationships.</li>
-<li>For each query, it initializes a set to keep track of visited variables and calls the <code>dfs</code> function to attempt to compute the ratio.</li>
-<li>The <code>dfs</code> function recursively explores the graph, multiplying the weights along the path until it finds the target variable.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(V + E) for constructing the graph and O(Q * (V + E)) for processing the queries, where V is the number of unique variables and E is the number of equations.</li>
-<li><strong>Space Complexity</strong>: O(V + E) to store the graph.</li>
-</ul>
+<p>The solution efficiently solves the problem of evaluating division queries using graph traversal. The key idea is to represent the variables and equations as a graph and then use depth-first search (DFS) to find paths between the queried variables. The graph is built in <code>O(E)</code>, and each query is processed in <code>O(V + E)</code> time, ensuring that the solution works well even for larger inputs. The use of DFS ensures that we can correctly handle the paths between variables while avoiding cycles. The space complexity is also optimal, making this solution both time-efficient and space-efficient.</p>
  
 </div>
   

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> g;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1346s1hbhb">
+<h2 id="hahahugoshortcode1343s1hbhb">
   
 
   
@@ -241,7 +241,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+<p>The problem is to find the maximum sum of a contiguous subarray in an array of integers. This is a classic problem in dynamic programming, often referred to as the <strong>Maximum Subarray Problem</strong> or <strong>Kadane’s Algorithm</strong>. The task is to identify a subarray (which can have any length) within the given array that produces the largest possible sum. The challenge is to achieve this in linear time, O(n), which is crucial when dealing with large input arrays.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,45 +249,81 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Dynamic Programming</strong>:</p>
+<p>The problem is solved efficiently using Kadane’s Algorithm, which operates in linear time (O(n)). This algorithm works by iterating through the array while maintaining two variables:</p>
 <ul>
-<li>Use a variable to keep track of the current subarray sum (<code>l</code>).</li>
-<li>Use another variable to keep track of the maximum sum found so far (<code>g</code>).</li>
+<li><strong><code>l</code> (local maximum):</strong> This keeps track of the current sum of the subarray being considered. If the current element can increase the sum of the previous subarray, <code>l</code> is updated; otherwise, it is reset to the current element.</li>
+<li><strong><code>g</code> (global maximum):</strong> This stores the maximum sum encountered so far. Every time a new local maximum (<code>l</code>) exceeds the global maximum (<code>g</code>), <code>g</code> is updated.</li>
 </ul>
-</li>
-<li>
-<p><strong>Iterate through the Array</strong>:</p>
-<ul>
-<li>For each element in the array:
-<ul>
-<li>Update <code>l</code> to be either the current element alone or the current element added to the previous sum (<code>l + nums[i]</code>).</li>
-<li>Update <code>g</code> to be the maximum of itself and the current sum <code>l</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm iterates through the array and decides whether to include the current element in the ongoing subarray sum or start a new subarray from the current element. The result is the largest possible sum of a contiguous subarray, and it runs in O(n) time complexity, making it an optimal solution for this problem.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>:
-<ul>
-<li>Start both <code>l</code> and <code>g</code> with the first element of the array.</li>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], g <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><ul>
+<li>The variable <code>l</code> is initialized to <code>nums[0]</code>, the first element of the array. This represents the local maximum sum at the start (we assume the first element is part of the subarray).</li>
+<li>The variable <code>g</code> is initialized to <code>nums[0]</code> as well. This stores the maximum subarray sum found so far. Initially, it starts as the first element because we haven&rsquo;t processed any other elements yet.</li>
 </ul>
-</li>
-<li><strong>Iteration</strong>:
-<ul>
-<li>For each subsequent element, check if adding it to <code>l</code> yields a greater sum than starting fresh from the current element.</li>
-<li>Update <code>g</code> with the maximum value between the current <code>g</code> and <code>l</code>.</li>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate Through the Array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>The loop starts from <code>i = 1</code> because the first element is already accounted for in the initialization.</li>
+<li>The iteration goes through each element in the array and decides whether to continue the current subarray or start a new one.</li>
 </ul>
-</li>
+<h4 id="step-3-update-local-maximum-l">
+  Step 3: Update Local Maximum (<code>l</code>)
+  <a class="heading-link" href="#step-3-update-local-maximum-l">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;</span> l <span style="color:#f92672">+</span> nums[i])
+</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">+=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>The decision here checks if adding the current element <code>nums[i]</code> to the existing subarray sum (<code>l + nums[i]</code>) is better than starting a new subarray with just <code>nums[i]</code>.</li>
+<li>If the current element <code>nums[i]</code> is greater than <code>l + nums[i]</code>, it means that the current subarray should be abandoned, and a new subarray starting at <code>nums[i]</code> should be considered. So, <code>l</code> is reset to <code>nums[i]</code>.</li>
+<li>Otherwise, it means the current subarray can be extended by including <code>nums[i]</code>, so <code>l</code> is updated by adding <code>nums[i]</code> to the existing sum.</li>
+</ul>
+<h4 id="step-4-update-global-maximum-g">
+  Step 4: Update Global Maximum (<code>g</code>)
+  <a class="heading-link" href="#step-4-update-global-maximum-g">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>g <span style="color:#f92672">=</span> max(g, l);
+</span></span></code></pre></div><ul>
+<li>After updating the local maximum <code>l</code>, the algorithm compares it to the global maximum <code>g</code>.</li>
+<li>If <code>l</code> is larger than <code>g</code>, <code>g</code> is updated to the new value of <code>l</code>. This ensures that <code>g</code> always holds the largest subarray sum encountered so far.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> g;
+</span></span></code></pre></div><ul>
+<li>After the loop completes, <code>g</code> contains the largest sum of any contiguous subarray, which is then returned as the final result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -296,15 +332,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ), where ( n ) is the number of elements in <code>nums</code>. We only make one pass through the array.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), since we use a constant amount of space for the variables.</li>
+<li><strong>O(n):</strong> The algorithm iterates through the array exactly once, where <code>n</code> is the number of elements in the input array. At each iteration, only constant-time operations are performed (comparisons and additions), so the overall time complexity is O(n).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> The algorithm only uses a constant amount of extra space (for the variables <code>l</code> and <code>g</code>), regardless of the size of the input array. Hence, the space complexity is O(1).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution to the Maximum Subarray Problem uses Kadane’s Algorithm, which is both time and space efficient. By maintaining two variables—<code>l</code> for the current subarray sum and <code>g</code> for the maximum sum found so far—the algorithm efficiently computes the result in a single pass through the array.</p>
+<p>With a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, this algorithm is optimal for solving this problem on large datasets. It avoids the brute-force method of checking all subarrays, which would have a time complexity of <strong>O(n^2)</strong>, by leveraging dynamic programming principles to store and update the best subarray sum at each step.</p>
+<p>Kadane’s Algorithm is a well-known approach for solving problems involving maximum subarrays, and this implementation provides a clean, efficient, and easy-to-understand solution. This approach is widely used in competitive programming and real-world applications where performance is crucial.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1346s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1343s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,18 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You have two jugs with capacities ( x ) and ( y ) liters, and you want to measure exactly ( z ) liters of water. The task is to determine if it is possible to measure exactly ( z ) liters using the two jugs.</p>
+<p>The problem asks us to determine whether it&rsquo;s possible to measure exactly <code>z</code> liters of water using two jugs with capacities <code>x</code> and <code>y</code>. The jugs can be filled to their full capacity, emptied, or water can be transferred from one jug to another. The task is to return <code>true</code> if it&rsquo;s possible to measure exactly <code>z</code> liters, otherwise return <code>false</code>.</p>
+<h3 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The solution is based on the idea that we can measure a specific amount of water using two jugs only if the greatest common divisor (gcd) of the two jug capacities divides the target amount.</li>
+<li>Additionally, the sum of the two jugs must be greater than or equal to the target amount, as we cannot measure more than the combined capacity of the two jugs.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -247,58 +258,125 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use the following approach:</p>
 <ol>
 <li>
 <p><strong>Initial Checks</strong>:</p>
 <ul>
-<li>If the total capacity of the two jugs ( (x + y) ) is less than ( z ), it is impossible to measure ( z ) liters, so return <code>false</code>.</li>
-<li>If either jug has a capacity equal to ( z ), or if the total capacity of both jugs is exactly ( z ), return <code>true</code>.</li>
+<li>If the sum of the two jug capacities <code>x + y</code> is less than <code>z</code>, it&rsquo;s immediately impossible to measure <code>z</code> liters because the total capacity is insufficient.</li>
+<li>If either jug has exactly <code>z</code> liters (i.e., <code>x == z</code> or <code>y == z</code>), we can immediately return <code>true</code>.</li>
+<li>If the sum of both jugs equals <code>z</code> (i.e., <code>x + y == z</code>), we can also immediately return <code>true</code>, as we can simply combine both jugs to reach the target.</li>
 </ul>
 </li>
 <li>
-<p><strong>GCD Check</strong>:</p>
+<p><strong>Greatest Common Divisor (GCD) Approach</strong>:</p>
 <ul>
-<li>If ( z ) is less than the total capacity, check if ( z ) can be expressed as a linear combination of ( x ) and ( y ). This can be done using the greatest common divisor (GCD):
-<ul>
-<li>If ( z ) is divisible by the GCD of ( x ) and ( y ) (i.e., ( z \mod \text{gcd}(x, y) == 0 )), then it is possible to measure ( z ) liters; otherwise, it is not.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>GCD Function</strong>:</p>
-<ul>
-<li>A helper function <code>gcd(int a, int b)</code> is implemented using the Euclidean algorithm to calculate the GCD of two integers.</li>
+<li>If none of the above conditions hold, the problem reduces to a classic water jug problem, which can be solved using the gcd of the two jug capacities.</li>
+<li>The key idea is that if we have two jugs with capacities <code>x</code> and <code>y</code>, and we want to measure <code>z</code>, it is only possible if <code>z</code> is divisible by the gcd of <code>x</code> and <code>y</code>. This is based on the Diophantine equation, which essentially says that any linear combination of <code>x</code> and <code>y</code> can only produce multiples of their gcd. Therefore, for <code>z</code> to be measurable, <code>z % gcd(x, y) == 0</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initial-checks">
+  Step 1: Initial Checks
+  <a class="heading-link" href="#step-1-initial-checks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">+</span> y <span style="color:#f92672">&lt;</span> z) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> z <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> z <span style="color:#f92672">||</span> x <span style="color:#f92672">+</span> y <span style="color:#f92672">==</span> z) <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>First, we check if the combined capacity of both jugs (<code>x + y</code>) is less than <code>z</code>. If it is, we return <code>false</code> because it&rsquo;s not possible to measure <code>z</code> liters.</li>
+<li>We then check if either jug already contains exactly <code>z</code> liters (i.e., <code>x == z</code> or <code>y == z</code>). If this is true, we return <code>true</code> because we can immediately measure <code>z</code> liters.</li>
+<li>Lastly, we check if the sum of the two jugs is exactly <code>z</code>. If this is true, we return <code>true</code> because we can combine the jugs to reach the target.</li>
+</ul>
+<h4 id="step-2-gcd-condition">
+  Step 2: GCD Condition
+  <a class="heading-link" href="#step-2-gcd-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> z <span style="color:#f92672">%</span> gcd(x, y) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>If the above checks fail, we proceed to check the gcd condition. We calculate the greatest common divisor (gcd) of <code>x</code> and <code>y</code>. If <code>z</code> is divisible by the gcd of <code>x</code> and <code>y</code> (<code>z % gcd(x, y) == 0</code>), then it&rsquo;s possible to measure <code>z</code> liters using the two jugs, and we return <code>true</code>. Otherwise, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-3-gcd-calculation">
+  Step 3: GCD Calculation
+  <a class="heading-link" href="#step-3-gcd-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">gcd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> b <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> a : gcd(b, a <span style="color:#f92672">%</span> b);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is a standard implementation of the Euclidean algorithm for calculating the greatest common divisor (gcd). The algorithm works by repeatedly replacing the larger number with the remainder of the division of the two numbers, and the gcd is the last non-zero remainder.</li>
+<li>The recursive function works as follows: if <code>b</code> is zero, <code>a</code> is the gcd. Otherwise, we recursively call <code>gcd(b, a % b)</code> until <code>b</code> becomes zero.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example where <code>x = 3</code>, <code>y = 5</code>, and <code>z = 4</code>:</p>
+<ol>
+<li>
+<p><strong>Initial Check</strong>:</p>
 <ul>
-<li>The main function <code>canMeasureWater</code> checks the conditions outlined above:
-<ul>
-<li>It returns <code>false</code> if ( x + y &lt; z ).</li>
-<li>It returns <code>true</code> if either jug matches ( z ) or if their sum equals ( z ).</li>
-<li>Finally, it checks the divisibility condition using the GCD function.</li>
+<li><code>x + y = 3 + 5 = 8</code>, which is greater than <code>z = 4</code>, so we move to the next check.</li>
+<li>Neither <code>x == z</code> nor <code>y == z</code> holds, as <code>3 != 4</code> and <code>5 != 4</code>.</li>
+<li><code>x + y != z</code>, as <code>3 + 5 = 8</code> and <code>8 != 4</code>.</li>
 </ul>
 </li>
+<li>
+<p><strong>GCD Calculation</strong>:</p>
+<ul>
+<li>We now compute the gcd of <code>x = 3</code> and <code>y = 5</code>.</li>
+<li><code>gcd(3, 5)</code> is <code>1</code> because 3 and 5 are coprime (they have no common divisors other than 1).</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p><strong>Check Divisibility</strong>:</p>
+<ul>
+<li>Finally, we check if <code>z % gcd(x, y) == 0</code>, i.e., <code>4 % 1 == 0</code>. Since this is true, we return <code>true</code>, indicating that it is possible to measure exactly 4 liters using the two jugs.</li>
+</ul>
+</li>
+</ol>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: ( O(\log(\min(x, y))) ) due to the GCD calculation.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ) since only a constant amount of space is used.</li>
-</ul>
+<p>The time complexity of this solution is dominated by the calculation of the greatest common divisor (gcd). The Euclidean algorithm for calculating the gcd takes <strong>O(log(min(x, y)))</strong> time, where <code>x</code> and <code>y</code> are the capacities of the two jugs. Since the gcd calculation is the most expensive operation, the overall time complexity of the solution is <strong>O(log(min(x, y)))</strong>.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity of this solution is <strong>O(1)</strong>, as we are only using a few integer variables to store intermediate results (no additional data structures are used).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem using a mathematical approach based on the properties of the greatest common divisor. By leveraging the gcd, we reduce the problem to a simple check that determines whether the target amount <code>z</code> is divisible by the gcd of the two jug capacities. This approach ensures optimal performance with minimal space usage, making it well-suited for handling large inputs.</p>
  
 </div>
   

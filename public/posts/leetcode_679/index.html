@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -250,70 +250,166 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1422s1hbhb">
+<h2 id="hahahugoshortcode1420s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>nums</code> of 4 numbers, and you need to determine if you can use each of the numbers exactly once along with the basic arithmetic operations (+, -, *, /) to compute the value 24. The order of operations follows the standard precedence rules.</p>
+<p>The problem is to determine if it is possible to calculate 24 from a given list of four numbers using basic arithmetic operations: addition, subtraction, multiplication, and division. The order of operations must respect the usual mathematical precedence, and each number must be used exactly once. If it&rsquo;s possible to compute 24, return <code>true</code>; otherwise, return <code>false</code>.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The approach involves generating all permutations of the input numbers and evaluating every combination of arithmetic operations to see if any yields the value 24. The steps are as follows:</p>
+<p>To solve this problem, we can use a <strong>backtracking</strong> approach combined with <strong>permutations</strong> and <strong>arithmetic operations</strong>. The idea is to recursively explore all the possible ways to combine the four numbers using the four basic operations and check if we can obtain a result close to 24.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Sort the Numbers</strong>: Start by sorting the input numbers to ensure that all permutations are considered in a systematic way.</p>
-</li>
-<li>
-<p><strong>Generate Permutations</strong>: Use <code>next_permutation</code> to generate all possible orders of the numbers.</p>
-</li>
-<li>
-<p><strong>Evaluate Each Combination</strong>: For each permutation of numbers, evaluate all possible combinations of operations. The evaluation is done recursively to check various groupings and operations of the numbers.</p>
-</li>
-<li>
-<p><strong>Check Validity</strong>: A helper function recursively checks if it&rsquo;s possible to achieve the target value (24) using the provided numbers and operations.</p>
-</li>
+<li><strong>Permutations:</strong> We start by generating all the possible permutations of the four numbers. Since the order of numbers matters in arithmetic operations, it&rsquo;s important to try every possible arrangement.</li>
+<li><strong>Operations:</strong> For each permutation of numbers, we recursively try applying all possible pairs of operations (+, -, *, /) to reduce the problem to smaller subproblems (i.e., reducing the set of numbers to fewer elements).</li>
+<li><strong>Base Case:</strong> The base case is when we only have one number left. If that number is 24 (or very close to it, within a small tolerance due to floating-point precision), we return <code>true</code>.</li>
+<li><strong>Backtracking:</strong> We systematically explore every possible operation between two numbers and reduce the problem size by recursively solving smaller subproblems.</li>
+<li><strong>Precision Handling:</strong> Due to floating-point arithmetic, we need to account for small errors by checking if the result is close to 24 (within a tolerance of <code>0.001</code>).</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The backtracking approach ensures that we try all possible combinations and operations, while the recursive structure allows us to reduce the problem progressively.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-judgepoint24-method">
+  Step 1: <code>judgePoint24</code> Method
+  <a class="heading-link" href="#step-1-judgepoint24-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">judgePoint24</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(valid(nums))  <span style="color:#75715e">// Check if a valid expression evaluates to 24 for the current permutation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">while</span>(next_permutation(nums.begin(), nums.end()));  <span style="color:#75715e">// Try all permutations of the numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// Return false if no valid expression was found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We start by sorting the <code>nums</code> vector to ensure that we can iterate over all permutations.</li>
+<li>We use <code>next_permutation</code> to generate all possible orderings of the numbers in <code>nums</code>.</li>
+<li>For each permutation, we call the <code>valid</code> method to check if it is possible to form a valid expression that evaluates to 24.</li>
+<li>If any permutation leads to a valid solution, we return <code>true</code>; otherwise, after checking all permutations, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-2-valid-method-for-4-numbers">
+  Step 2: <code>valid</code> Method (for 4 numbers)
+  <a class="heading-link" href="#step-2-valid-method-for-4-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">valid</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], b <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">1</span>], c <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">2</span>], d <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">3</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Try all possible operations between the four numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(valid(a <span style="color:#f92672">+</span> b, c, d) <span style="color:#f92672">||</span> valid(a <span style="color:#f92672">-</span> b, c, d) <span style="color:#f92672">||</span> valid(a <span style="color:#f92672">*</span> b, c, d) <span style="color:#f92672">||</span> valid(a <span style="color:#f92672">/</span> b, c, d)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(valid(a, b <span style="color:#f92672">+</span> c, d) <span style="color:#f92672">||</span> valid(a, b <span style="color:#f92672">-</span> c, d) <span style="color:#f92672">||</span> valid(a, b <span style="color:#f92672">*</span> c, d) <span style="color:#f92672">||</span> valid(a, b <span style="color:#f92672">/</span> c, d)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(valid(a, b, c <span style="color:#f92672">+</span> d) <span style="color:#f92672">||</span> valid(a, b, c <span style="color:#f92672">-</span> d) <span style="color:#f92672">||</span> valid(a, b, c <span style="color:#f92672">*</span> d) <span style="color:#f92672">||</span> valid(a, b, c <span style="color:#f92672">/</span> d)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// Return false if no valid operations are found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We define <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> as the four numbers in the current permutation.</li>
+<li>We try all possible operations between these numbers in different combinations by recursively calling the <code>valid</code> function.
 <ul>
-<li>The <code>judgePoint24</code> function generates all permutations of the input numbers and checks each permutation for validity using the <code>valid</code> function.</li>
-<li>The <code>valid</code> function performs the arithmetic operations and recursively checks whether combining the current numbers can lead to the target value.</li>
-<li>The base <code>valid</code> function checks if the final result is close to 24 using a small epsilon (0.001) for floating-point precision.</li>
+<li>For each pair of numbers, we try applying addition, subtraction, multiplication, and division (if the divisor is not zero).</li>
+<li>After performing an operation, we recursively call <code>valid</code> to reduce the number of numbers to check.</li>
+</ul>
+</li>
+<li>If any valid combination evaluates to 24, we return <code>true</code>. If not, after all checks, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-3-valid-method-for-3-numbers">
+  Step 3: <code>valid</code> Method (for 3 numbers)
+  <a class="heading-link" href="#step-3-valid-method-for-3-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">valid</span>(<span style="color:#66d9ef">double</span> a, <span style="color:#66d9ef">double</span> b, <span style="color:#66d9ef">double</span> c) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(valid(a <span style="color:#f92672">+</span> b, c) <span style="color:#f92672">||</span> valid(a <span style="color:#f92672">-</span> b, c) <span style="color:#f92672">||</span> valid(a <span style="color:#f92672">*</span> b, c) <span style="color:#f92672">||</span> b <span style="color:#f92672">&amp;&amp;</span> valid(a <span style="color:#f92672">/</span> b, c)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(valid(a, b <span style="color:#f92672">+</span> c) <span style="color:#f92672">||</span> valid(a, b <span style="color:#f92672">-</span> c) <span style="color:#f92672">||</span> valid(a, b <span style="color:#f92672">*</span> c) <span style="color:#f92672">||</span> c <span style="color:#f92672">&amp;&amp;</span> valid(a, b <span style="color:#f92672">/</span> c)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This method works similarly to the previous one but reduces the problem size by considering only three numbers.</li>
+<li>It checks all operations between two numbers and recursively reduces the problem size until only one number remains.</li>
+</ul>
+<h4 id="step-4-valid-method-for-2-numbers">
+  Step 4: <code>valid</code> Method (for 2 numbers)
+  <a class="heading-link" href="#step-4-valid-method-for-2-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">valid</span>(<span style="color:#66d9ef">double</span> a, <span style="color:#66d9ef">double</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(abs(a <span style="color:#f92672">+</span> b <span style="color:#f92672">-</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> <span style="color:#f92672">||</span> abs(a <span style="color:#f92672">-</span> b <span style="color:#f92672">-</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> <span style="color:#f92672">||</span> abs(a <span style="color:#f92672">*</span> b <span style="color:#f92672">-</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> <span style="color:#f92672">||</span> b <span style="color:#f92672">&amp;&amp;</span> (abs(a <span style="color:#f92672">/</span> b <span style="color:#f92672">-</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span>)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The base case occurs when we only have two numbers left.</li>
+<li>We check if applying any of the four operations on <code>a</code> and <code>b</code> results in a value that is close to 24 (within a tolerance of <code>0.001</code> to account for floating-point precision).</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n!), where n is the number of numbers (4 in this case), due to the generation of permutations.</li>
-<li><strong>Space Complexity</strong>: O(n) for recursion and storing intermediate results during evaluations.</li>
+<li><strong>O(n! * n):</strong> The time complexity is dominated by the number of permutations of the four numbers, which is <code>n!</code> (factorial of 4, or 24 permutations). For each permutation, we recursively check all possible ways to combine the numbers using four operations, leading to an overall complexity of O(n! * n) for this backtracking approach. However, this is manageable given that we only deal with four numbers.</li>
 </ul>
-<p>This method is efficient given that the size of the input is fixed (only 4 numbers), making exhaustive searching feasible.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The space complexity is primarily due to the recursion stack and the storage of intermediate results. In the worst case, we may need to store intermediate calculations, which would require O(n) space. Additionally, the function calls to the recursive <code>valid</code> method add to the space complexity.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining whether a given set of four numbers can be combined using basic arithmetic operations to equal 24. By using a combination of permutations and backtracking, the algorithm explores all possible ways to combine the numbers and apply operations. The use of floating-point comparisons with a tolerance ensures that the solution accounts for precision errors. The approach is both time-efficient and space-efficient for the given problem size, making it a robust solution for small input sizes such as the four numbers in this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1422s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1420s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

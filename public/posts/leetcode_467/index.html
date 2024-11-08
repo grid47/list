@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -224,7 +224,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">accumulate</span>(len.begin(), len.end(), <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1310s1hbhb">
+<h2 id="hahahugoshortcode1317s1hbhb">
   
 
   
@@ -236,7 +236,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>p</code>, find the number of unique substrings of <code>p</code> that can be formed using a wraparound string formed by the lowercase English letters <code>a</code> to <code>z</code>. The wraparound string means that after <code>z</code>, it wraps around to <code>a</code>.</p>
+<p>The problem requires finding the number of unique substrings that can be formed from a string <code>p</code> in a wraparound string. A wraparound string is one where after the last character, the string wraps around to the first character in a cyclic manner. The substrings we are interested in must be contiguous, and they need to follow the wraparound rule. The goal is to determine how many distinct substrings can be created from such a string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -244,78 +244,89 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem efficiently, we must think about how we can utilize the cyclic nature of the string and the fact that substrings can overlap. Instead of explicitly generating all substrings and checking for uniqueness, we can leverage dynamic programming (DP) to keep track of the longest possible substring that ends at each character. The key observation is that substrings formed from a continuous sequence of consecutive characters in the alphabet (in a wraparound manner) should be handled effectively using a linear scan.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Understanding Wraparound Substrings</strong>:</p>
+<p><strong>Wraparound Substrings</strong>: If two consecutive characters in the string <code>p</code> form a valid subsequence in a cyclic manner, we should treat them as a part of a larger valid substring.</p>
 <ul>
-<li>A substring can be formed if each character follows the next character in a circular manner from <code>a</code> to <code>z</code>. For example, <code>xyz</code>, <code>ab</code>, and <code>za</code> are valid wraparound substrings.</li>
+<li>For example, if <code>p = &quot;abc&quot;</code>, then the substrings <code>&quot;a&quot;</code>, <code>&quot;b&quot;</code>, <code>&quot;c&quot;</code>, <code>&quot;ab&quot;</code>, <code>&quot;bc&quot;</code>, and <code>&quot;abc&quot;</code> are all valid.</li>
+<li>Similarly, for wraparound behavior, the substring <code>&quot;z&quot;</code> followed by <code>&quot;a&quot;</code> should be treated as part of a larger substring.</li>
 </ul>
 </li>
 <li>
-<p><strong>Tracking Lengths</strong>:</p>
+<p><strong>Dynamic Programming</strong>: We can use a DP approach where:</p>
 <ul>
-<li>Use an array <code>len</code> of size 26 to store the maximum length of valid substrings ending with each character (&lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
-<li>Iterate through the string <code>p</code>, counting the length of consecutive characters that follow the wraparound rule.</li>
+<li>We maintain an array <code>len[26]</code> of size 26 to store the maximum length of a substring that ends with each character (<code>'a'</code>, <code>'b'</code>, &hellip;, <code>'z'</code>).</li>
+<li>As we iterate through the string <code>p</code>, we calculate the length of substrings that end at each character, considering the cyclic nature of the string.</li>
 </ul>
 </li>
 <li>
-<p><strong>Implementation</strong>:</p>
-<ul>
-<li>Initialize the first character in <code>len</code> to <code>1</code> as it can always form a substring by itself.</li>
-<li>For each character in <code>p</code>, check if it continues the wraparound pattern from the previous character:
-<ul>
-<li>If yes, increment the current length <code>cur</code>.</li>
-<li>If no, reset <code>cur</code> to <code>1</code>.</li>
-</ul>
-</li>
-<li>Update the <code>len</code> array for the current character with the maximum value between its current value and <code>cur</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result Calculation</strong>:</p>
-<ul>
-<li>The result is the sum of all values in the <code>len</code> array, which represents the count of unique substrings.</li>
-</ul>
+<p><strong>Accumulate Results</strong>: The total number of unique substrings can be calculated by summing the values stored in the <code>len</code> array, which represent the maximum lengths of substrings that end at each character.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> len(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>len[p[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>len</code> of size 26, where each element corresponds to a character of the alphabet. Initially, all values are set to 0.</li>
+<li>We also initialize <code>cur</code> to 1, representing the current length of the substring that we are examining.</li>
+<li>The first character in the string <code>p</code> is considered as a valid substring of length 1, so we set <code>len[p[0] - 'a'] = 1</code>.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-string">
+  Step 2: Iterate Through the String
+  <a class="heading-link" href="#step-2-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> p.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((p[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">26</span> <span style="color:#f92672">-</span> p[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) cur<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    len[p[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> max(len[p[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>], cur);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start iterating over the string <code>p</code> from the second character (index 1).</li>
+<li>For each character <code>p[i]</code>, we check if it forms a valid substring with the previous character <code>p[i - 1]</code> based on the wraparound condition.
 <ul>
-<li><code>vector&lt;int&gt; len(26, 0);</code> initializes the length array to zero.</li>
-<li><code>len[p[0] - 'a'] = 1;</code> sets the length for the first character.</li>
+<li>The expression <code>(p[i] + 26 - p[i - 1]) % 26 == 1</code> checks whether the characters <code>p[i]</code> and <code>p[i - 1]</code> are consecutive in the alphabet (considering wraparound).</li>
+<li>If this condition holds true, it means that we can extend the current valid substring, so we increment the <code>cur</code> value.</li>
+<li>If the condition doesn&rsquo;t hold, we reset <code>cur</code> to 1 because we cannot extend the current substring.</li>
 </ul>
 </li>
-<li>
-<p><strong>Loop Through String</strong>:</p>
-<ul>
-<li>For each character in <code>p</code> starting from the second character, check the wraparound condition:
-<ul>
-<li><code>(p[i] + 26 - p[i - 1]) % 26 == 1</code> checks if <code>p[i]</code> follows <code>p[i - 1]</code> in a wraparound fashion.</li>
+<li>We then update <code>len[p[i] - 'a']</code> to store the maximum length of a substring that ends with the character <code>p[i]</code>.</li>
 </ul>
-</li>
+<h4 id="step-3-sum-the-results">
+  Step 3: Sum the Results
+  <a class="heading-link" href="#step-3-sum-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">accumulate</span>(len.begin(), len.end(), <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>After iterating through the string and updating the <code>len</code> array, we simply sum all the values in <code>len</code> using <code>accumulate</code>. Each value in <code>len</code> represents the maximum length of substrings that end with the corresponding character. By summing these values, we get the total number of distinct substrings that can be formed from the string <code>p</code> under the wraparound constraint.</li>
 </ul>
-</li>
-<li>
-<p><strong>Update Lengths</strong>:</p>
-<ul>
-<li><code>len[p[i] - 'a'] = max(len[p[i] - 'a'], cur);</code> updates the maximum length of substrings ending with <code>p[i]</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Count</strong>:</p>
-<ul>
-<li><code>return accumulate(len.begin(), len.end(), 0);</code> returns the total count of unique substrings.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -323,15 +334,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the string <code>p</code>, as we only traverse the string once.</li>
-<li><strong>Space Complexity</strong>: O(1), since the size of the <code>len</code> array is constant (26).</li>
+<li><strong>Iterating Through the String</strong>: We iterate through the string <code>p</code> once, which takes <code>O(n)</code> time, where <code>n</code> is the length of the string.</li>
+<li><strong>Accumulate</strong>: We perform a sum operation over the array <code>len</code>, which takes <code>O(26)</code> time since the array has a fixed size of 26.</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity of the solution is <code>O(n)</code>, where <code>n</code> is the length of the string <code>p</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for <code>len</code> Array</strong>: We use an array <code>len</code> of size 26 to store the maximum length of substrings ending with each character, which takes <code>O(1)</code> space (constant space).</li>
+<li><strong>Overall Space Complexity</strong>: The space complexity is <code>O(1)</code> because we only use a constant amount of extra space for the <code>len</code> array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the number of unique substrings in the wraparound string using a dynamic programming approach. The algorithm processes the string in a single pass (<code>O(n)</code> time complexity) and uses constant space (<code>O(1)</code> space complexity), making it highly efficient. The key insight is to track the longest valid substring that ends at each character and sum the results to get the total number of unique substrings. This approach ensures that we consider all possible wraparound substrings without explicitly generating each one, making it optimal for large inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1310s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1317s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

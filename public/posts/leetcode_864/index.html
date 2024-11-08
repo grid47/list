@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -265,7 +265,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1555s1hbhb">
+<h2 id="hahahugoshortcode1554s1hbhb">
   
 
   
@@ -277,7 +277,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the shortest path to collect all keys in a grid while navigating through walls and locked doors. The grid consists of open spaces, walls, keys (lowercase letters), locked doors (uppercase letters), and a starting position represented by &lsquo;@&rsquo;.</p>
+<p>In this problem, you are tasked with finding the shortest path to collect all the keys in a grid. The grid consists of walls, open spaces, starting points, doors, and keys. Each key corresponds to a door, and you can only pass through a door if you have the corresponding key. The goal is to determine the minimum number of steps required to collect all the keys. The grid is given as a list of strings, where each string represents a row in the grid.</p>
+<p>Here&rsquo;s a breakdown of the elements in the grid:</p>
+<ul>
+<li><strong><code>@</code></strong>: Starting point.</li>
+<li><strong><code>#</code></strong>: Wall (impassable).</li>
+<li><strong>Lowercase letters (<code>a</code> to <code>f</code>)</strong>: Keys.</li>
+<li><strong>Uppercase letters (<code>A</code> to <code>F</code>)</strong>: Doors corresponding to the keys.</li>
+</ul>
+<p>The objective is to move from the starting point and collect all the keys in the shortest path while respecting the constraints imposed by doors.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -285,49 +293,127 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution employs a <strong>Breadth-First Search (BFS)</strong> strategy combined with bitmasking to track which keys have been collected. The key idea here is that BFS is ideal for finding the shortest path in an unweighted grid. The bitmask is used to represent the state of the keys that have been collected, allowing the algorithm to efficiently track progress.</p>
+<p>The general approach can be outlined as follows:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<li><strong>BFS Initialization</strong>: Start by locating the position of the <code>@</code> character (the starting point) in the grid.</li>
+<li><strong>Key Counting</strong>: Count the total number of keys (<code>a</code> to <code>f</code>) in the grid. This helps in determining when all keys have been collected.</li>
+<li><strong>Visited States</strong>: Use a 3D array <code>visited[i][j][k]</code> to track the visited states, where:
 <ul>
-<li>Determine the dimensions of the grid and initialize variables.</li>
-<li>Count the total number of keys (<code>K</code>) present in the grid.</li>
-<li>Use a queue to perform a breadth-first search (BFS) and a 3D vector to keep track of visited states defined by the position in the grid and the keys collected.</li>
+<li><code>i</code> and <code>j</code> represent the coordinates of a cell.</li>
+<li><code>k</code> represents the bitmask of keys that have been collected at that point.</li>
 </ul>
 </li>
-<li>
-<p><strong>BFS for Pathfinding</strong>:</p>
-<ul>
-<li>Start BFS from the initial position &lsquo;@&rsquo; with an initial key state of 0 (no keys collected).</li>
-<li>For each position, check all four possible directions (up, down, left, right).</li>
-<li>If the next position is a key, update the key state using a bitmask to indicate which keys have been collected.</li>
-<li>If the next position is a locked door, ensure the corresponding key has been collected before moving through.</li>
-<li>Add valid and unvisited states to the queue for further exploration.</li>
-</ul>
-</li>
-<li>
-<p><strong>Key Collection Check</strong>:</p>
-<ul>
-<li>After processing all positions at the current path length, check if all keys have been collected by comparing the current key state with the bitmask representing all keys collected.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If all keys are collected, return the path length; otherwise, if the queue is exhausted without collecting all keys, return -1.</li>
-</ul>
-</li>
+<li><strong>Queue for BFS</strong>: The BFS queue stores pairs of coordinates and the current state of collected keys.</li>
+<li><strong>Explore Neighbors</strong>: For each cell, explore its four possible neighbors (up, down, left, right), and update the key collection state if a key is picked up.</li>
+<li><strong>Check for Doors</strong>: When a door is encountered, ensure that the corresponding key has already been collected before proceeding.</li>
+<li><strong>Early Termination</strong>: If all keys are collected (i.e., the bitmask is all ones), return the current path length.</li>
+<li><strong>Termination Condition</strong>: If the BFS completes and not all keys are collected, return <code>-1</code>, indicating that it&rsquo;s impossible to collect all keys.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The BFS loop processes each node while managing the current position and collected keys.</li>
-<li>Each direction is checked for walls, keys, and doors.</li>
-<li>The key state is managed using bitwise operations for efficiency.</li>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m<span style="color:#f92672">=</span>grid.size(), n<span style="color:#f92672">=</span>m<span style="color:#f92672">?</span>grid[<span style="color:#ae81ff">0</span>].size()<span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>m <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> path<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, K<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dirs<span style="color:#f92672">=</span>{<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;&gt;</span> visited(m,vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span>(n,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">64</span>,<span style="color:#ae81ff">0</span>))); <span style="color:#75715e">// at most 6 keys, using bitmap 111111
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q; <span style="color:#75715e">//&lt;position, hold keys mapping&gt;
+</span></span></span></code></pre></div><ul>
+<li><strong>Grid Dimensions</strong>: The size of the grid (<code>m</code> rows and <code>n</code> columns) is extracted from the input.</li>
+<li><strong>Path Variable</strong>: <code>path</code> tracks the number of steps taken so far.</li>
+<li><strong>Key Count</strong>: <code>K</code> stores the total number of keys (<code>a</code> to <code>f</code>).</li>
+<li><strong>Visited Array</strong>: A 3D boolean array <code>visited</code> is used to track which grid cells have been visited with which key collection state. The third dimension (64) handles up to 6 keys (since there are 6 possible keys in total, each represented by a bit in a 6-bit number).</li>
+<li><strong>Direction Array</strong>: <code>dirs</code> represents the four possible directions (up, down, left, right) to explore.</li>
+</ul>
+<h4 id="step-2-find-start-position-and-count-keys">
+  Step 2: Find Start Position and Count Keys
+  <a class="heading-link" href="#step-2-find-start-position-and-count-keys">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>m;i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span>n;j<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(grid[i][j]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;@&#39;</span>){
+</span></span><span style="display:flex;"><span>            q.push({i<span style="color:#f92672">*</span>n<span style="color:#f92672">+</span>j,<span style="color:#ae81ff">0</span>});
+</span></span><span style="display:flex;"><span>            visited[i][j][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(grid[i][j]<span style="color:#f92672">&gt;=</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> grid[i][j]<span style="color:#f92672">&lt;=</span><span style="color:#e6db74">&#39;F&#39;</span>) K<span style="color:#f92672">++</span>; <span style="color:#75715e">// total alpha number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This part of the code iterates over the grid to find the starting point (<code>@</code>) and count the total number of keys (<code>a</code> to <code>f</code>), which is stored in <code>K</code>.</li>
+<li>The BFS queue is initialized with the starting position (encoded as a single integer representing <code>(i * n + j)</code>) and the initial key state (<code>0</code> means no keys are collected).</li>
+<li>The visited array is also initialized to mark the start point as visited with no keys collected.</li>
+</ul>
+<h4 id="step-3-bfs-iteration">
+  Step 3: BFS Iteration
+  <a class="heading-link" href="#step-3-bfs-iteration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> size<span style="color:#f92672">=</span>q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>size;i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> a<span style="color:#f92672">=</span>q.front().first<span style="color:#f92672">/</span>n, b<span style="color:#f92672">=</span>q.front().first<span style="color:#f92672">%</span>n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> carry<span style="color:#f92672">=</span>q.front().second;
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(carry<span style="color:#f92672">==</span>((<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span>K)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">return</span> path; <span style="color:#75715e">// if all keys hold, just return
+</span></span></span></code></pre></div><ul>
+<li>The BFS begins by processing each position in the queue. Each element in the queue stores the current position and the keys collected (represented as a bitmask).</li>
+<li>The <code>carry</code> variable holds the bitmask of collected keys, and <code>a</code> and <code>b</code> represent the current coordinates in the grid.</li>
+<li>If <code>carry</code> equals the bitmask where all keys are collected (i.e., <code>((1&lt;&lt;K)-1)</code>), the algorithm terminates and returns the number of steps taken so far.</li>
+</ul>
+<h4 id="step-4-exploring-neighbors">
+  Step 4: Exploring Neighbors
+  <a class="heading-link" href="#step-4-exploring-neighbors">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>;j<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span>a<span style="color:#f92672">+</span>dirs[j], y<span style="color:#f92672">=</span>b<span style="color:#f92672">+</span>dirs[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], k<span style="color:#f92672">=</span>carry;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x<span style="color:#f92672">&gt;=</span>m <span style="color:#f92672">||</span> y<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y<span style="color:#f92672">&gt;=</span>n <span style="color:#f92672">||</span> grid[x][y]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;#&#39;</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(grid[x][y]<span style="color:#f92672">&gt;=</span><span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> grid[x][y]<span style="color:#f92672">&lt;=</span><span style="color:#e6db74">&#39;f&#39;</span>){
+</span></span><span style="display:flex;"><span>        k<span style="color:#f92672">=</span>carry<span style="color:#f92672">|</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span>(grid[x][y]<span style="color:#f92672">-</span><span style="color:#e6db74">&#39;a&#39;</span>)); <span style="color:#75715e">// update hold keys
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(grid[x][y]<span style="color:#f92672">&gt;=</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> grid[x][y]<span style="color:#f92672">&lt;=</span><span style="color:#e6db74">&#39;F&#39;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>(carry <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span>(grid[x][y]<span style="color:#f92672">-</span><span style="color:#e6db74">&#39;A&#39;</span>)))) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>visited[x][y][k]){
+</span></span><span style="display:flex;"><span>        visited[x][y][k]<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        q.push({x<span style="color:#f92672">*</span>n<span style="color:#f92672">+</span>y,k});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each current position, the algorithm explores the four neighbors (up, down, left, right).</li>
+<li>If a key (<code>a</code> to <code>f</code>) is found at a neighbor, the bitmask is updated to reflect the new key collection.</li>
+<li>If a door (<code>A</code> to <code>F</code>) is encountered, the algorithm ensures that the corresponding key has already been collected before proceeding.</li>
+<li>The algorithm continues to process each valid neighbor and marks them as visited with the new key state.</li>
+</ul>
+<h4 id="step-5-final-check-and-return">
+  Step 5: Final Check and Return
+  <a class="heading-link" href="#step-5-final-check-and-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the BFS completes without collecting all keys, it means there is no valid path to collect all keys, and the function returns <code>-1</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -336,15 +422,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n * 2^K), where <code>m</code> is the number of rows, <code>n</code> is the number of columns, and <code>K</code> is the number of keys. Each state can be visited once per possible key combination.</li>
-<li><strong>Space Complexity</strong>: O(m * n * 2^K) for the visited states and the queue.</li>
+<li><strong>O(m * n * 2^k)</strong> where <code>m</code> is the number of rows, <code>n</code> is the number of columns, and <code>k</code> is the number of keys (at most 6). In the worst case, each state of the BFS (a cell with a key state) is processed at most once. Since the number of possible key states is <code>2^k</code>, and the grid has <code>m * n</code> cells, the total time complexity is proportional to <code>O(m * n * 2^k)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n * 2^k)</strong> due to the BFS queue and the visited array, both of which store the state of each grid cell and the corresponding key collection state.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages BFS combined with bitmasking to efficiently solve the problem of finding the shortest path to collect all keys in a grid. By using a bitmask to track the keys collected and a BFS traversal to explore the grid, the solution efficiently computes the minimum steps required to collect all keys, while ensuring that the constraints of doors and keys are respected. The approach handles up to 6 keys and is optimal for grid-based pathfinding problems where keys and doors need to be managed dynamically.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1555s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1554s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

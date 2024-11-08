@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        path.pop_back();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode89s1hbhb">
+<h2 id="hahahugoshortcode88s1hbhb">
   
 
   
@@ -256,63 +256,149 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree and a target sum, return all root-to-leaf paths where the sum of the node values equals the target sum.</p>
-<h3 id="approach">
+<p>The problem requires finding all root-to-leaf paths in a binary tree such that the sum of the node values along each path is equal to a given target sum. For each path that satisfies this condition, we need to return it as a list of integers.</p>
+<p>In other words, given a binary tree, and a target sum, you need to find all paths from the root to any leaf node where the sum of the values in the path equals the target sum. Each path should be returned as a list of integers. The paths can be traversed in any order, and you must return a list of all valid paths.</p>
+<p>For example, given the following binary tree:</p>
+<pre tabindex="0"><code>          5
+         / \
+        4   8
+       /   / \
+      11  13  4
+     /  \      \
+    7    2      1
+</code></pre><p>If the target sum is 22, the solution should return:</p>
+<pre tabindex="0"><code>[ [5, 4, 11, 2], [5, 8, 4, 1] ]
+</code></pre><h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, we can employ a <strong>depth-first search (DFS)</strong> strategy to explore each path in the binary tree. As we traverse the tree, we accumulate the sum of node values along the current path. We can recursively visit the left and right children of each node, keeping track of the sum remaining until we reach a leaf node. Once a leaf node is reached, if the accumulated sum equals the target sum, we add the current path to our list of valid paths.</p>
+<p>Here are the main steps to approach this problem:</p>
 <ol>
-<li>Use a depth-first search (DFS) strategy to explore each path from the root to the leaves.</li>
-<li>Maintain a current path and the remaining sum as you traverse the tree.</li>
-<li>When a leaf node is reached, check if the current path&rsquo;s sum equals the target sum.</li>
-<li>If it does, add the current path to the result list.</li>
+<li>
+<p><strong>Initialize Data Structures:</strong></p>
+<ul>
+<li>A <code>vector&lt;vector&lt;int&gt;&gt;</code> called <code>paths</code> to store all valid root-to-leaf paths.</li>
+<li>A <code>vector&lt;int&gt;</code> called <code>path</code> to store the current path from the root to a leaf node.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Traversal:</strong></p>
+<ul>
+<li>Traverse the binary tree recursively, starting from the root.</li>
+<li>At each node, add the current node&rsquo;s value to the path.</li>
+<li>If a leaf node is reached (i.e., both left and right children are <code>NULL</code>), check if the accumulated sum equals the target sum. If it does, add the path to the result.</li>
+<li>After exploring both the left and right subtrees, backtrack by removing the last node from the path to explore other possible paths.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result:</strong></p>
+<ul>
+<li>Once all paths are explored, return the <code>paths</code> vector containing all valid paths.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong><code>pathSum</code> function</strong>:</p>
-<ul>
-<li><strong>Line 5</strong>: Initialize the result vector <code>paths</code> and the current <code>path</code>.</li>
-<li><strong>Line 6</strong>: Call the helper function <code>findPaths</code> to explore paths from the root.</li>
-<li><strong>Line 7</strong>: Return the collected paths.</li>
+<p>Let&rsquo;s break down the code implementation and understand each part in detail:</p>
+<h4 id="1-pathsum-function">
+  1. <code>pathSum</code> Function:
+  <a class="heading-link" href="#1-pathsum-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pathSum(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> sum) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> paths;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> path;
+</span></span><span style="display:flex;"><span>    findPaths(root, sum, path, paths);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> paths;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function is the main entry point. It initializes an empty <code>vector&lt;vector&lt;int&gt;&gt;</code> called <code>paths</code> to store the valid paths, and an empty <code>vector&lt;int&gt;</code> called <code>path</code> to keep track of the current path as we traverse the tree.</li>
+<li>It then calls the <code>findPaths</code> helper function to perform the DFS and populate the <code>paths</code> vector.</li>
+<li>Finally, it returns the list of paths.</li>
 </ul>
-</li>
-<li>
-<p><strong><code>findPaths</code> function</strong>:</p>
-<ul>
-<li><strong>Line 10</strong>: If the current node is <code>NULL</code>, return (base case).</li>
-<li><strong>Line 12</strong>: Add the current node&rsquo;s value to the <code>path</code>.</li>
-<li><strong>Line 14</strong>: Check if the current node is a leaf and if the remaining sum equals the node&rsquo;s value. If true, add the <code>path</code> to <code>paths</code>.</li>
-<li><strong>Lines 16-17</strong>: Recursively call <code>findPaths</code> for the left and right children, reducing the sum by the current node&rsquo;s value.</li>
-<li><strong>Line 19</strong>: Remove the current node from <code>path</code> to backtrack for the next exploration.</li>
+<h4 id="2-findpaths-helper-function">
+  2. <code>findPaths</code> Helper Function:
+  <a class="heading-link" href="#2-findpaths-helper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">findPaths</span>(TreeNode<span style="color:#f92672">*</span> node, <span style="color:#66d9ef">int</span> sum, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> path, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> paths) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>node) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    path.push_back(node<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(node<span style="color:#f92672">-&gt;</span>left) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>(node<span style="color:#f92672">-&gt;</span>right) <span style="color:#f92672">&amp;&amp;</span> sum <span style="color:#f92672">==</span> node<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>        paths.push_back(path);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    findPaths(node<span style="color:#f92672">-&gt;</span>left, sum <span style="color:#f92672">-</span> node<span style="color:#f92672">-&gt;</span>val, path, paths);
+</span></span><span style="display:flex;"><span>    findPaths(node<span style="color:#f92672">-&gt;</span>right, sum <span style="color:#f92672">-</span> node<span style="color:#f92672">-&gt;</span>val, path, paths);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    path.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is a <strong>recursive function</strong> that traverses the binary tree.</li>
+<li>It first checks if the current <code>node</code> is <code>NULL</code> (base case for recursion). If the node is <code>NULL</code>, the function returns without doing anything.</li>
+<li>The current node&rsquo;s value is added to the <code>path</code> vector.</li>
+<li>Then, it checks if the current node is a <strong>leaf node</strong> (i.e., both left and right children are <code>NULL</code>), and whether the remaining sum (<code>sum == node-&gt;val</code>) matches the target sum. If both conditions are true, it means we&rsquo;ve found a valid path from the root to this leaf, so we add the current path to the <code>paths</code> vector.</li>
+<li>The function recursively calls itself for both the left and right children, reducing the target sum by the current node&rsquo;s value.</li>
+<li>Finally, after exploring both left and right subtrees, the last node is <strong>removed from the path</strong> (backtracking) to explore other possible paths in the tree.</li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="3-backtracking">
+  3. Backtracking:
+  <a class="heading-link" href="#3-backtracking">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The core idea here is <strong>backtracking</strong>. As we explore different paths from the root to the leaves, we build up a path (from the root to the current node). Once we explore a node&rsquo;s left and right subtrees, we backtrack by removing the last node from the path. This ensures that we do not keep any unnecessary data in the <code>path</code> while we are exploring other parts of the tree.</p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack and the path storage.</li>
+<li>We visit each node exactly once during the DFS traversal.</li>
+<li>The space complexity is <strong>O(h)</strong> for the recursion stack, where <code>h</code> is the height of the tree. In the worst case (unbalanced tree), the recursion stack depth can be as large as the number of nodes, i.e., <strong>O(n)</strong>.</li>
 </ul>
+<p>In total, the time and space complexities are optimal for this problem.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(h)</strong> for the recursion stack. In the worst case (if the tree is completely unbalanced), the height of the tree <code>h</code> is equal to <code>n</code>, so the space complexity would be <strong>O(n)</strong>. In the best case (if the tree is balanced), the space complexity is <strong>O(log n)</strong> due to the depth of the recursion stack.</p>
+<p>The additional space used by the <code>path</code> vector is also proportional to the height of the tree, but this does not affect the overall space complexity, which remains <strong>O(h)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds all root-to-leaf paths in a binary tree that sum to a given target. Using a recursive depth-first search approach, it explores all possible paths while maintaining a running sum. The solution is efficient, with a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(h)</strong>, making it suitable for handling large binary trees.</p>
+<p>The backtracking mechanism ensures that each path is constructed properly, and once a leaf node is reached, valid paths are added to the result. This approach is elegant and handles various edge cases, including empty trees and trees with no valid paths, effectively.</p>
+<p>In summary, the algorithm provides a clean and optimal solution for the problem of finding all paths that sum to a given value in a binary tree, and it can be applied to various tree traversal problems with slight adjustments.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode89s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode88s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> helper(num).substr(<span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1051s1hbhb">
+<h2 id="hahahugoshortcode1050s1hbhb">
   
 
   
@@ -254,7 +254,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Convert a non-negative integer <code>num</code> into its English words representation. The function should return the corresponding words for the integer, handling numbers up to 2,147,483,647.</p>
+<p>The task at hand is to convert a given integer <code>num</code> (in the range [0, 2^31 - 1]) into its corresponding English words. For example:</p>
+<ul>
+<li><strong>Input</strong>: <code>123</code></li>
+<li><strong>Output</strong>: <code>&quot;One Hundred Twenty Three&quot;</code></li>
+</ul>
+<p>You need to return the number as a string in English words. The conversion should be efficient and able to handle large numbers up to the billion range (1,000,000,000).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,78 +267,153 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution utilizes a recursive helper function to break down the number into manageable parts (ones, tens, hundreds, and larger units) and converts each part into words.</p>
+<p>To solve this problem, we use a recursive approach to break down the number into smaller parts that are easier to convert into English words. The number is divided into segments such as ones, tens, hundreds, thousands, millions, and billions. We handle these parts separately and combine them into a full English representation.</p>
+<p>The general idea involves:</p>
 <ol>
-<li>
-<p><strong>String Arrays</strong>:</p>
+<li>Using arrays to store the English words for numbers in different ranges (ones, tens, and powers of 1000).</li>
+<li>Recursively breaking down the number into smaller chunks, each representing a number less than 1000.</li>
+<li>Combining the smaller chunks with appropriate scales like thousand, million, and billion.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through the code to understand how it works:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string ones[<span style="color:#ae81ff">20</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34; One&#34;</span>, <span style="color:#e6db74">&#34; Two&#34;</span>, <span style="color:#e6db74">&#34; Three&#34;</span>, <span style="color:#e6db74">&#34; Four&#34;</span>, <span style="color:#e6db74">&#34; Five&#34;</span>, <span style="color:#e6db74">&#34; Six&#34;</span>, <span style="color:#e6db74">&#34; Seven&#34;</span>, <span style="color:#e6db74">&#34; Eight&#34;</span>, <span style="color:#e6db74">&#34; Nine&#34;</span>, <span style="color:#e6db74">&#34; Ten&#34;</span>, <span style="color:#e6db74">&#34; Eleven&#34;</span>, <span style="color:#e6db74">&#34; Twelve&#34;</span>, <span style="color:#e6db74">&#34; Thirteen&#34;</span>, <span style="color:#e6db74">&#34; Fourteen&#34;</span>, <span style="color:#e6db74">&#34; Fifteen&#34;</span>, <span style="color:#e6db74">&#34; Sixteen&#34;</span>, <span style="color:#e6db74">&#34; Seventeen&#34;</span>, <span style="color:#e6db74">&#34; Eighteen&#34;</span>, <span style="color:#e6db74">&#34; Nineteen&#34;</span>};
+</span></span><span style="display:flex;"><span>    string tens[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34; Ten&#34;</span>, <span style="color:#e6db74">&#34; Twenty&#34;</span>, <span style="color:#e6db74">&#34; Thirty&#34;</span>, <span style="color:#e6db74">&#34; Forty&#34;</span>, <span style="color:#e6db74">&#34; Fifty&#34;</span>, <span style="color:#e6db74">&#34; Sixty&#34;</span>, <span style="color:#e6db74">&#34; Seventy&#34;</span>, <span style="color:#e6db74">&#34; Eighty&#34;</span>, <span style="color:#e6db74">&#34; Ninety&#34;</span>};
+</span></span><span style="display:flex;"><span>    string thousands[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34; Thousand&#34;</span>, <span style="color:#e6db74">&#34; Million&#34;</span>, <span style="color:#e6db74">&#34; Billion&#34;</span>};
+</span></span></code></pre></div><ol>
+<li><strong>Data Initialization</strong>:
 <ul>
-<li><code>ones</code>: Maps numbers from 0 to 19 to their English word representation.</li>
-<li><code>tens</code>: Maps multiples of ten from 20 to 90.</li>
-<li><code>thousands</code>: Maps larger units (thousand, million, billion).</li>
+<li>We define three arrays:
+<ul>
+<li><code>ones[20]</code>: Contains words for numbers 0 to 19.</li>
+<li><code>tens[10]</code>: Contains words for multiples of 10 (20, 30, &hellip;, 90).</li>
+<li><code>thousands[4]</code>: Contains words for the scales of thousand (thousand, million, billion).</li>
 </ul>
 </li>
-<li>
-<p><strong>Recursive Helper Function</strong>:</p>
-<ul>
-<li>If <code>n</code> is less than 20, return the corresponding value from <code>ones</code>.</li>
-<li>If <code>n</code> is less than 100, break it down into tens and ones.</li>
-<li>If <code>n</code> is less than 1000, break it down into hundreds, tens, and ones.</li>
-<li>For larger numbers, recursively break them down by powers of 1000 and append the appropriate unit from <code>thousands</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Main Function</strong>:</p>
-<ul>
-<li>Check if <code>num</code> is zero and return &ldquo;Zero&rdquo;.</li>
-<li>Otherwise, call the helper function and format the result to remove leading spaces.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#a6e22e">helper</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">20</span>) 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ones[n];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span>) 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> tens[n <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>] <span style="color:#f92672">+</span> helper(n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000</span>) 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> helper(n <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; Hundred&#34;</span> <span style="color:#f92672">+</span> helper(n <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&gt;=</span> pow(<span style="color:#ae81ff">1000</span>, i)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> helper(n <span style="color:#f92672">/</span> pow(<span style="color:#ae81ff">1000</span>, i)) <span style="color:#f92672">+</span> thousands[i] <span style="color:#f92672">+</span> helper(n <span style="color:#f92672">%</span> (<span style="color:#66d9ef">int</span>)pow(<span style="color:#ae81ff">1000</span>, i));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="2">
+<li><strong>Helper Function</strong>:
+<ul>
+<li>The function <code>helper(int n)</code> is used to convert the number <code>n</code> into words.</li>
+<li><strong>Base Case</strong>: If <code>n &lt; 20</code>, it directly returns the word from the <code>ones</code> array (e.g., &ldquo;One&rdquo;, &ldquo;Two&rdquo;, &hellip;, &ldquo;Nineteen&rdquo;).</li>
+<li>If <code>n</code> is between 20 and 99, it returns the word for tens (from <code>tens</code> array) followed by a recursive call to convert the remainder (i.e., the ones place).</li>
+<li>If <code>n</code> is between 100 and 999, it returns the word for the hundreds place (using recursion) followed by the word &ldquo;Hundred&rdquo;, and then a recursive call for the remainder.</li>
+<li>For numbers larger than 999, the function recursively divides the number into thousands, millions, and billions using the <code>thousands</code> array. The number is divided by a power of 1000, and the corresponding scale is added after converting the smaller segment recursively.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#a6e22e">numberToWords</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Zero&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> helper(num).substr(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="3">
+<li><strong>Main Function</strong>:
+<ul>
+<li>The function <code>numberToWords(int num)</code> is the main entry point. If the number is <code>0</code>, it returns &ldquo;Zero&rdquo;.</li>
+<li>Otherwise, it calls the <code>helper()</code> function to convert the number into English words and uses <code>substr(1)</code> to remove the leading space added in the <code>helper()</code> function.</li>
+</ul>
+</li>
+</ol>
+<h3 id="explanation-of-recursive-approach">
+  Explanation of Recursive Approach
+  <a class="heading-link" href="#explanation-of-recursive-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Input</strong>: A non-negative integer <code>num</code>.</li>
-<li><strong>Output</strong>: A string representing the number in English words.</li>
+<li><strong>Recursive Decomposition</strong>: The number is recursively divided into smaller parts. For instance, 1234 is broken into 1 (thousand), 2 (hundred), and 34 (tens and ones). Each part is processed individually and then combined.</li>
+<li><strong>Combining Results</strong>: For every part, the corresponding word is found from <code>ones[]</code>, <code>tens[]</code>, or <code>thousands[]</code>, and the results are concatenated. If the number is larger than a thousand, it recursively reduces the number until it reaches smaller values (less than 1000).</li>
 </ul>
-<ol>
-<li>Define arrays for <code>ones</code>, <code>tens</code>, and <code>thousands</code> to map numbers to words.</li>
-<li>Implement the <code>helper</code> function to recursively process the number based on its size.</li>
-<li>Handle special cases for numbers less than 20, less than 100, and less than 1000.</li>
-<li>For numbers larger than 999, find the appropriate unit and recursively call <code>helper</code>.</li>
-<li>In the <code>numberToWords</code> function, handle the case for zero and format the output properly.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log n)), as the number is broken down recursively based on its digits.</li>
-<li><strong>Space Complexity</strong>: (O(1)) for the string arrays, although recursive call stack space may add overhead.</li>
+<li>The time complexity is <strong>O(log n)</strong>, where <code>n</code> is the input number. This is because the number is divided by powers of 1000 at each recursive step. Since we only recurse for logarithmic depth (log base 1000), this approach is highly efficient.</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(log n)</strong> as well, primarily due to the recursion stack. For each recursive call, we store intermediate results, which means the depth of the recursion tree is proportional to the logarithm of the number.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This approach efficiently converts any integer between 0 and 2^31 - 1 into its corresponding English words using recursion and pre-defined arrays. The algorithm breaks down the problem into smaller, manageable pieces, handling various number ranges (ones, tens, hundreds, thousands, millions, billions). The use of recursion combined with helper arrays ensures that the solution is both clean and efficient.</p>
+<h4 id="advantages">
+  Advantages:
+  <a class="heading-link" href="#advantages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Zero Input</strong>: Should return &ldquo;Zero&rdquo;.</li>
-<li><strong>Max Integer</strong>: Should correctly format the largest number, <code>2,147,483,647</code>, as &ldquo;Two Billion One Hundred Forty-Seven Million Four Hundred Eighty-Three Thousand Six Hundred Forty-Seven&rdquo;.</li>
+<li><strong>Efficiency</strong>: The time complexity is logarithmic (O(log n)), which ensures fast execution even for large numbers.</li>
+<li><strong>Clarity</strong>: The code structure is simple and easy to understand, leveraging recursion for problem decomposition.</li>
+<li><strong>No Hardcoding</strong>: The solution is general enough to work with any number in the specified range, thanks to the use of dynamic helper arrays (<code>ones[]</code>, <code>tens[]</code>, and <code>thousands[]</code>).</li>
 </ol>
+<h4 id="potential-use-cases">
+  Potential Use Cases:
+  <a class="heading-link" href="#potential-use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Financial Software</strong>: Converting large numbers into words for written checks, invoices, etc.</li>
+<li><strong>Document Automation</strong>: Generating reports or documents that require numbers to be expressed in English words.</li>
+<li><strong>Localization</strong>: Easily adaptable to different languages by adjusting the <code>ones[]</code>, <code>tens[]</code>, and <code>thousands[]</code> arrays.</li>
+</ol>
+<p>This solution provides an optimal balance of efficiency and clarity, making it well-suited for applications where number-to-word conversion is required.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1051s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1050s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,7 +249,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the head of a singly linked list and two integers <code>left</code> and <code>right</code>, reverse the nodes between positions <code>left</code> and <code>right</code>, inclusive, and return the modified list. The problem requires an in-place reversal of a specific sublist without affecting other nodes.</p>
+<p>The problem asks to reverse a portion of a singly linked list from position <code>left</code> to position <code>right</code>. Specifically, the nodes from position <code>left</code> to <code>right</code> (both inclusive) should be reversed while the rest of the list remains unchanged.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>head = [1, 2, 3, 4, 5], left = 2, right = 4</code></li>
+<li>Output: <code>[1, 4, 3, 2, 5]</code></li>
+</ul>
+<p>The positions <code>left</code> and <code>right</code> are 1-indexed, meaning that the first node in the list corresponds to position 1.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -257,41 +263,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem utilizes a <strong>pointer manipulation</strong> technique, specifically by <strong>reversing a portion of the linked list</strong>. We will reverse the sublist in-place, using pointers to re-link the nodes. The key observation here is that we can reverse the sublist in constant time by repeatedly changing the <code>next</code> pointers of the nodes in the sublist.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Create a Dummy Node</strong>: Use a dummy node to simplify edge cases (e.g., reversing from the head).</li>
-<li><strong>Identify Nodes</strong>:
-<ul>
-<li>Traverse to <code>left-1</code>-th position and store the node as <code>pre</code>.</li>
-<li><code>start</code> is the node at the <code>left</code> position, marking the beginning of the section to reverse.</li>
-<li><code>then</code> is the node immediately following <code>start</code>.</li>
-</ul>
-</li>
-<li><strong>Reverse Sublist</strong>:
-<ul>
-<li>For each position from <code>left</code> to <code>right</code>, adjust the pointers to reverse nodes in the target range.</li>
-<li>Update pointers in each iteration to &ldquo;insert&rdquo; <code>then</code> after <code>pre</code> and adjust <code>start</code>&rsquo;s <code>next</code> pointer.</li>
-</ul>
-</li>
-<li><strong>Return Result</strong>: After reversing the required sublist, <code>dummy-&gt;next</code> will point to the head of the modified list.</li>
+<li><strong>Dummy Node</strong>: A dummy node is used to simplify boundary conditions, particularly when reversing a sublist that includes the first node in the linked list.</li>
+<li><strong>Pointer Traversal</strong>: We traverse the list to find the node just before the <code>left</code> position and the node at the <code>left</code> position (where the reversal should begin).</li>
+<li><strong>Sublist Reversal</strong>: Using the pointer <code>then</code>, we move nodes one by one from position <code>left+1</code> to position <code>right</code> and insert them between the node at <code>pre</code> and the node at <code>start</code>. This creates the reversed portion of the list.</li>
+<li><strong>Return Result</strong>: Finally, after performing the reversal, we return the new head of the list, which might have changed due to the manipulation.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Dummy Node Initialization</strong>: Create a dummy node pointing to the head to handle edge cases smoothly.</li>
-<li><strong>Positioning</strong>: Traverse to <code>left-1</code> and set <code>pre</code>.</li>
-<li><strong>Reversal Loop</strong>:
+<p>The code starts by defining a <code>ListNode</code> struct, which represents a node in a singly linked list with an integer value and a pointer to the next node.</p>
+<h4 id="step-1-creating-the-dummy-node">
+  Step 1: Creating the Dummy Node
+  <a class="heading-link" href="#step-1-creating-the-dummy-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> dummy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>dummy<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> head;
+</span></span></code></pre></div><ul>
+<li>A <strong>dummy node</strong> is created with a value of <code>0</code>. This node points to the <code>head</code> of the input list. The dummy node serves as a placeholder to make the list manipulation easier, especially when <code>left</code> equals 1 (i.e., when the sublist to reverse starts at the head of the list).</li>
+</ul>
+<h4 id="step-2-moving-pre-to-the-node-before-left">
+  Step 2: Moving <code>pre</code> to the Node Before <code>left</code>
+  <a class="heading-link" href="#step-2-moving-pre-to-the-node-before-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> pre <span style="color:#f92672">=</span> dummy;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> left; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pre <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The pointer <code>pre</code> starts at the dummy node, and we move it to the node just before the <code>left</code> position by traversing the list for <code>left-1</code> steps.</li>
+</ul>
+<h4 id="step-3-identifying-start-and-then">
+  Step 3: Identifying <code>start</code> and <code>then</code>
+  <a class="heading-link" href="#step-3-identifying-start-and-then">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> start <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> then <span style="color:#f92672">=</span> start<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>After positioning <code>pre</code>, the node at <code>pre-&gt;next</code> is the first node in the sublist to be reversed, referred to as <code>start</code>. The node at <code>start-&gt;next</code> is referred to as <code>then</code>, which is the node that will be moved to the front of the reversed portion during each iteration.</li>
+</ul>
+<h4 id="step-4-reversing-the-sublist">
+  Step 4: Reversing the Sublist
+  <a class="heading-link" href="#step-4-reversing-the-sublist">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> right <span style="color:#f92672">-</span> left; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    start<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> then<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    then<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    pre<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> then;
+</span></span><span style="display:flex;"><span>    then <span style="color:#f92672">=</span> start<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate <code>right - left</code> times, and in each iteration, we move the node <code>then</code> to the front of the sublist that starts after the node <code>pre</code>. Here&rsquo;s how it works:
 <ul>
-<li>For each position in the range <code>[left, right]</code>, adjust pointers to reverse the order.</li>
-<li>Move <code>then</code> to the next node after each insertion.</li>
+<li><code>start-&gt;next = then-&gt;next</code>: We remove <code>then</code> from its current position by linking <code>start</code> to the node after <code>then</code>.</li>
+<li><code>then-&gt;next = pre-&gt;next</code>: We insert <code>then</code> right after <code>pre</code> by setting <code>then-&gt;next</code> to <code>pre-&gt;next</code>.</li>
+<li><code>pre-&gt;next = then</code>: We then move the <code>pre</code> pointer to point to <code>then</code>.</li>
+<li><code>then = start-&gt;next</code>: Finally, we update <code>then</code> to the next node in the sublist that is going to be moved.</li>
 </ul>
 </li>
-<li><strong>Return Modified List</strong>: Return <code>dummy-&gt;next</code> as the head of the modified list.</li>
-</ol>
+</ul>
+<h4 id="step-5-returning-the-new-head">
+  Step 5: Returning the New Head
+  <a class="heading-link" href="#step-5-returning-the-new-head">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dummy<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>After completing the reversal, the head of the list is now <code>dummy-&gt;next</code> since the dummy node is the new head of the list.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -299,10 +364,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the linked list, as we iterate through the list once.</li>
-<li><strong>Space Complexity</strong>: (O(1)), for in-place modification of the list.</li>
-</ul> 
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list. In the worst case, we traverse the list once to move the <code>pre</code> pointer and then perform a constant amount of work for each of the <code>right - left</code> iterations to reverse the sublist. Hence, the time complexity is linear in terms of the number of nodes.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>. The solution uses a constant amount of space, aside from the input list. The only extra space used is for the dummy node and a few pointers (<code>pre</code>, <code>start</code>, and <code>then</code>), which are all of constant space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and solves the problem in <strong>O(n)</strong> time with <strong>O(1)</strong> space complexity. By manipulating the pointers in the linked list, we reverse the desired portion of the list in place without requiring additional space for a new list. The dummy node simplifies handling edge cases, particularly when the sublist to reverse starts at the head of the list. The algorithm performs a series of pointer manipulations that ensure the correct nodes are reversed while maintaining the integrity of the rest of the list. This method is optimal and works for any valid input, including edge cases where the <code>left</code> and <code>right</code> positions coincide or where the sublist to reverse is at the start or end of the list.</p>
+ 
 </div>
   
 

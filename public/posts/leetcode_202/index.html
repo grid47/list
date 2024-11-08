@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> slow <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode601s1hbhb">
+<h2 id="hahahugoshortcode611s1hbhb">
   
 
   
@@ -248,7 +248,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>A &ldquo;happy number&rdquo; is defined as a number which eventually reaches <code>1</code> when replaced by the sum of the square of each digit. If it does not reach <code>1</code>, it enters a cycle that does not include <code>1</code>. The task is to determine if a given number <code>n</code> is a happy number.</p>
+<p>The problem asks us to determine whether a given number <code>n</code> is a <strong>happy number</strong> or not. A <strong>happy number</strong> is defined as follows:</p>
+<ol>
+<li>Starting with any positive integer <code>n</code>, replace <code>n</code> by the sum of the squares of its digits.</li>
+<li>Repeat this process until either:
+<ul>
+<li>The number becomes <code>1</code> (in which case, the number is happy).</li>
+<li>The number loops endlessly in a cycle that does not include <code>1</code> (in which case, the number is not happy).</li>
+</ul>
+</li>
+</ol>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong> <code>19</code></li>
+<li><strong>Output:</strong> <code>True</code> (since <code>1^2 + 9^2 = 82</code>, <code>8^2 + 2^2 = 68</code>, <code>6^2 + 8^2 = 100</code>, <code>1^2 + 0^2 + 0^2 = 1</code>).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,60 +270,91 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to determine whether the process of summing the squares of the digits of a number <code>n</code> leads to a cycle or to <code>1</code>. If it leads to <code>1</code>, the number is happy, and if it leads to a cycle, the number is not happy.</p>
+<p>One way to detect cycles is by using the <strong>Floyd&rsquo;s Cycle-Finding Algorithm</strong> (also known as the <strong>tortoise and hare</strong> algorithm). This approach uses two pointers:</p>
+<ul>
+<li>The <strong>slow pointer</strong> moves one step at a time.</li>
+<li>The <strong>fast pointer</strong> moves two steps at a time.</li>
+</ul>
+<p>If the two pointers meet at some point, a cycle is detected. If they meet at <code>1</code>, it indicates the number is happy.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Sum of Squares of Digits</strong>:</p>
-<ul>
-<li>Create a helper function <code>sqr(int n)</code> that computes the sum of the squares of the digits of <code>n</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Floyd&rsquo;s Cycle Detection</strong>:</p>
-<ul>
-<li>Use the slow and fast pointer technique to detect cycles. This involves two pointers:
-<ul>
-<li><code>slow</code> moves one step at a time (calculating the sum of squares).</li>
-<li><code>fast</code> moves two steps at a time (calculating the sum of squares twice).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Loop Until Convergence</strong>:</p>
-<ul>
-<li>Continue updating the <code>slow</code> and <code>fast</code> pointers until they meet (indicating a cycle) or until <code>slow</code> reaches <code>1</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>If <code>slow</code> equals <code>1</code>, then <code>n</code> is a happy number; otherwise, it is not.</li>
-</ul>
-</li>
+<li>Define a helper function <code>sqr(int n)</code> that computes the sum of the squares of the digits of <code>n</code>.</li>
+<li>Use two pointers (<code>slow</code> and <code>fast</code>) to repeatedly compute the sum of squares and check for a cycle.</li>
+<li>If the two pointers meet at <code>1</code>, the number is happy.</li>
+<li>If the two pointers meet at a value other than <code>1</code>, a cycle exists, and the number is not happy.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-helper-function-sqrint-n">
+  Step 1: Helper Function <code>sqr(int n)</code>
+  <a class="heading-link" href="#step-1-helper-function-sqrint-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sqr</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;   <span style="color:#75715e">// Get the last digit of the number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> tmp <span style="color:#f92672">*</span> tmp;    <span style="color:#75715e">// Add the square of the digit to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        n <span style="color:#f92672">=</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;          <span style="color:#75715e">// Remove the last digit from the number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> This function calculates the sum of the squares of the digits of the integer <code>n</code>.</li>
+<li><strong>Explanation:</strong>
 <ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the helper function <code>sqr(int n)</code> that computes the sum of squares of the digits of <code>n</code>.</li>
-<li><strong>Lines 3-8</strong>:
-<ul>
-<li>Inside the <code>sqr</code> function, calculate the sum of squares by extracting each digit and adding its square to <code>res</code>.</li>
+<li>The <code>while</code> loop runs as long as <code>n</code> is non-zero.</li>
+<li>Inside the loop, the last digit of <code>n</code> is obtained using <code>n % 10</code>, and the square of the digit is added to <code>res</code>.</li>
+<li>The last digit is then removed from <code>n</code> using <code>n = n / 10</code>.</li>
+<li>The function returns <code>res</code>, which is the sum of the squares of the digits of <code>n</code>.</li>
 </ul>
 </li>
-<li><strong>Line 9</strong>: Define the function <code>isHappy(int n)</code>.</li>
-<li><strong>Line 10</strong>: Initialize both <code>slow</code> and <code>fast</code> pointers to <code>n</code>.</li>
-<li><strong>Lines 11-15</strong>:
+</ul>
+<h4 id="step-2-main-function-ishappyint-n">
+  Step 2: Main Function <code>isHappy(int n)</code>
+  <a class="heading-link" href="#step-2-main-function-ishappyint-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isHappy</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> slow <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> fast <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span> {
+</span></span><span style="display:flex;"><span>        slow <span style="color:#f92672">=</span> sqr(slow);   <span style="color:#75715e">// Move the slow pointer one step
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        fast <span style="color:#f92672">=</span> sqr(sqr(fast)); <span style="color:#75715e">// Move the fast pointer two steps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    } <span style="color:#66d9ef">while</span>(slow <span style="color:#f92672">!=</span> fast);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> slow <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If slow pointer reaches 1, return true (happy number)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> This function checks whether the given number <code>n</code> is a happy number using Floyd&rsquo;s Cycle-Finding Algorithm.</li>
+<li><strong>Explanation:</strong>
 <ul>
-<li>Use a do-while loop to update the <code>slow</code> and <code>fast</code> pointers using the <code>sqr</code> function until they are equal.</li>
+<li>The <code>slow</code> and <code>fast</code> pointers are both initialized to <code>n</code>.</li>
+<li>In each iteration of the <code>do-while</code> loop:
+<ul>
+<li>The slow pointer moves one step at a time by calling <code>sqr(slow)</code>.</li>
+<li>The fast pointer moves two steps at a time by calling <code>sqr(sqr(fast))</code>.</li>
 </ul>
 </li>
-<li><strong>Line 16</strong>: Return <code>true</code> if <code>slow</code> is <code>1</code>, indicating that <code>n</code> is a happy number.</li>
+<li>The loop continues until the <code>slow</code> and <code>fast</code> pointers meet. If they meet at <code>1</code>, the function returns <code>true</code>, indicating that the number is happy.</li>
+<li>If the pointers meet at any other value, a cycle is detected, and the function returns <code>false</code>, indicating that the number is not happy.</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -318,15 +363,54 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: The time complexity is not straightforward due to the potential cycles, but in practice, it is (O(\log n)) on average, as the number of digits decreases.</li>
-<li><strong>Space Complexity</strong>: (O(1)) since we use a constant amount of space for variables and do not use any additional data structures.</li>
+<li><strong>O(log n):</strong>
+<ul>
+<li>The sum of squares function (<code>sqr</code>) runs in <strong>O(log n)</strong> because the number of digits in <code>n</code> is proportional to <code>log n</code>.</li>
+<li>The <code>do-while</code> loop runs until a cycle is detected or the slow pointer reaches <code>1</code>. In the worst case, the number of iterations is bounded by the number of distinct values that can be reached by repeatedly summing the squares of digits. This value is typically small for most numbers, but it is influenced by the number of digits in <code>n</code>, which is <strong>O(log n)</strong>.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong>
+<ul>
+<li>The algorithm uses a constant amount of extra space because only two pointers (<code>slow</code> and <code>fast</code>) are maintained, and no additional data structures are used.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The given solution solves the problem of determining whether a number is happy efficiently using Floyd&rsquo;s Cycle-Finding Algorithm. This approach has several advantages:</p>
+<ol>
+<li><strong>Cycle Detection:</strong> It uses the well-known tortoise and hare method to detect cycles in a sequence, ensuring that we do not fall into an infinite loop.</li>
+<li><strong>Efficient:</strong> The algorithm runs in logarithmic time with respect to the number of digits in the input number, which is optimal for this problem.</li>
+<li><strong>Space Optimized:</strong> The space complexity is constant, making the solution memory-efficient.</li>
+</ol>
+<p>This method is ideal for checking whether a number is happy, as it avoids the need for storing previously computed values and effectively detects cycles without excessive memory usage.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode601s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode611s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

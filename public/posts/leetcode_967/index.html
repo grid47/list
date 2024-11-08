@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,82 +234,161 @@
 
   
   <div class="markdown-body">
-    <h2 id="problem-statement">
+    <h3 id="problem-statement">
   Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<p>Generate all <code>n</code>-digit integers where each pair of consecutive digits has a difference of <code>k</code>. The resulting numbers should not contain any leading zeroes.</p>
-<h2 id="approach">
+</h3>
+<p>The problem asks us to generate all numbers of <code>n</code> digits that have the same absolute difference <code>k</code> between every two consecutive digits. Specifically, we are given two inputs:</p>
+<ol>
+<li><code>n</code>: The number of digits in the desired numbers.</li>
+<li><code>k</code>: The absolute difference between every two consecutive digits.</li>
+</ol>
+<p>Our task is to return a list of all such <code>n</code>-digit numbers that satisfy the condition. The digits of each number should follow the condition that the absolute difference between every two consecutive digits is exactly <code>k</code>. For example, if <code>k = 2</code>, then the number <code>202</code> satisfies the condition because the absolute difference between consecutive digits (<code>|2-0| = 2</code> and <code>|0-2| = 2</code>) is <code>2</code>.</p>
+<h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
+<p>We can solve this problem efficiently by building the numbers digit by digit. Let&rsquo;s break down the process:</p>
 <ol>
-<li><strong>Initial Digits</strong>: Start with the digits 1 through 9 as the initial list (<code>cur</code>) because the first digit cannot be zero.</li>
-<li><strong>Build Numbers Iteratively</strong>:
+<li>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>For each iteration from 2 to <code>n</code> (representing the number of digits in the result):
-<ul>
-<li>Create a new vector <code>cur2</code> to store the updated numbers.</li>
-<li>For each number <code>x</code> in <code>cur</code>:
-<ul>
-<li>Get the last digit <code>y</code> of <code>x</code>.</li>
-<li><strong>Add Consecutive Digit</strong>: If <code>y + k</code> is a valid digit (less than 10), append <code>y + k</code> to <code>x</code> and store the result in <code>cur2</code>.</li>
-<li><strong>Subtract Consecutive Digit</strong>: If <code>k &gt; 0</code> and <code>y - k</code> is valid (greater than or equal to 0), append <code>y - k</code> to <code>x</code> and store the result in <code>cur2</code>.</li>
+<li>We start with all one-digit numbers between <code>1</code> and <code>9</code> because we are interested in valid <code>n</code>-digit numbers, and a valid number cannot start with <code>0</code>.</li>
 </ul>
 </li>
-<li>Replace <code>cur</code> with <code>cur2</code> to continue building the next digit level.</li>
+<li>
+<p><strong>Iterative Construction</strong>:</p>
+<ul>
+<li>For each subsequent digit, we check if it is valid based on the previous digit. Specifically, if the current number ends with a digit <code>y</code>, we can append a new digit to it by ensuring the absolute difference between the current and the new digit is exactly <code>k</code>.</li>
+<li>We calculate the possible new digits by adding <code>k</code> to <code>y</code> or subtracting <code>k</code> from <code>y</code>, provided these new digits are within the valid range (<code>0</code> to <code>9</code>).</li>
 </ul>
 </li>
+<li>
+<p><strong>Loop Over Digits</strong>:</p>
+<ul>
+<li>The process is repeated until we reach <code>n</code> digits. Each time we add a digit, we generate all possible numbers from the current list of valid numbers.</li>
 </ul>
 </li>
-<li><strong>Return</strong>: After <code>n</code> iterations, <code>cur</code> will contain all <code>n</code>-digit numbers that meet the criteria.</li>
+<li>
+<p><strong>Final Output</strong>:</p>
+<ul>
+<li>Once we have built all valid numbers of <code>n</code> digits, we return the list of those numbers.</li>
+</ul>
+</li>
 </ol>
-<h2 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<ul>
-<li>The function <code>numsSameConsecDiff</code> takes two integers, <code>n</code> and <code>k</code>, as inputs.</li>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> numsSameConsecDiff(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cur <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>};
+</span></span></code></pre></div><ol>
 <li><strong>Initialization</strong>:
 <ul>
-<li>Start with all one-digit numbers from 1 to 9 in <code>cur</code>.</li>
+<li>We start by initializing a vector <code>cur</code> containing all one-digit numbers from <code>1</code> to <code>9</code>. These are the potential starting points for the numbers we will construct. This step ensures we don’t consider numbers starting with <code>0</code> (which is invalid for <code>n</code>-digit numbers).</li>
 </ul>
 </li>
-<li><strong>Digit Addition</strong>:
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cur2;
+</span></span></code></pre></div><ol start="2">
+<li><strong>Loop Over Number Length</strong>:
 <ul>
-<li>For each digit level from 2 to <code>n</code>:
+<li>
+<p>We begin a loop that will run from <code>i = 2</code> to <code>i = n</code>. In each iteration, we will extend the numbers in the current list <code>cur</code> to the next number, ensuring that they still satisfy the condition of having consecutive digits with the absolute difference <code>k</code>.</p>
+</li>
+<li>
+<p><code>cur2</code> is the new list that will store all the valid numbers that can be generated from the current <code>cur</code>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: cur) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span></code></pre></div><ol start="3">
+<li><strong>Iterating Over Current Numbers</strong>:
 <ul>
-<li>Iterate over each number in <code>cur</code>.</li>
-<li>Calculate the next possible digits by adding or subtracting <code>k</code> from the last digit.</li>
-<li>Append these valid digits to form new numbers in <code>cur2</code>.</li>
+<li>We iterate over each number <code>x</code> in the current list <code>cur</code>. For each number, we extract the last digit <code>y</code> by calculating <code>x % 10</code>. This will help us determine the next digit to append to <code>x</code>.</li>
 </ul>
 </li>
-<li>Update <code>cur</code> with <code>cur2</code> for the next iteration.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(y <span style="color:#f92672">+</span> k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>                    cur2.push_back(x <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> y <span style="color:#f92672">+</span> k);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">-</span> k <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                    cur2.push_back(x <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> y <span style="color:#f92672">-</span> k);
+</span></span></code></pre></div><ol start="4">
+<li><strong>Generating Next Digits</strong>:
+<ul>
+<li><strong>Adding <code>k</code></strong>: If the digit <code>y + k</code> is less than <code>10</code>, we append this digit to <code>x</code> to form a new number. This means we are generating a valid number by adding <code>k</code> to the last digit of <code>x</code>.</li>
+<li><strong>Subtracting <code>k</code></strong>: If <code>k &gt; 0</code> and <code>y - k</code> is greater than or equal to <code>0</code>, we append this digit to <code>x</code> to form another valid number by subtracting <code>k</code> from the last digit of <code>x</code>. The condition <code>k &gt; 0</code> ensures we don’t generate invalid numbers when <code>k = 0</code>.</li>
 </ul>
 </li>
-<li>After building all <code>n</code>-digit numbers, return <code>cur</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            cur <span style="color:#f92672">=</span> cur2;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="5">
+<li><strong>Updating <code>cur</code></strong>:
+<ul>
+<li>After processing all numbers in the current <code>cur</code>, we assign <code>cur2</code> back to <code>cur</code>. This means that in the next iteration, we will work with the new list of numbers that are one digit longer.</li>
 </ul>
-<h2 id="complexity">
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cur;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="6">
+<li><strong>Return Final Result</strong>:
+<ul>
+<li>Once the loop ends, <code>cur</code> contains all the valid numbers that have exactly <code>n</code> digits, and we return this list as the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(2^n), as each digit level potentially doubles the number of possibilities (adding or subtracting <code>k</code>).</li>
-<li><strong>Space Complexity</strong>: O(2^n), for storing possible numbers at each level.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(n * 9 * 2^(n-1))</strong>, where:
+<ul>
+<li><code>n</code> is the number of digits.</li>
+<li>The factor <code>9 * 2^(n-1)</code> represents the potential number of valid numbers that need to be generated for each <code>n</code>. For each number, at most two new digits can be appended (either by adding or subtracting <code>k</code>), and there are at most 9 starting digits.</li>
 </ul>
-<p>This solution efficiently builds all valid numbers by only considering possible next digits, reducing unnecessary computations.</p>
+</li>
+</ul>
+<p>The complexity grows exponentially with <code>n</code>, but since each number is only evaluated once in each iteration, this approach is efficient for typical constraints.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(9 * 2^n)</strong> because we need to store the list of valid numbers in each iteration, which can grow exponentially.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient approach to solving the problem of generating <code>n</code>-digit numbers where the absolute difference between every two consecutive digits is exactly <code>k</code>. The algorithm generates these numbers by building them iteratively, ensuring that we maintain the desired difference between consecutive digits at each step. This approach is highly efficient in terms of time complexity, as it avoids redundant checks and directly generates valid numbers. The space complexity is manageable for typical input sizes, and the solution is designed to scale well with the input constraints.</p>
  
 </div>
   

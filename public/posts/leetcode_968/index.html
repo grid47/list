@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -252,91 +252,145 @@
 
   
   <div class="markdown-body">
-    <h2 id="problem-statement">
+    <h3 id="problem-statement">
   Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<p>Given a binary tree, place the minimum number of cameras to monitor all nodes. Each camera at a node monitors its parent, itself, and its immediate children.</p>
-<h2 id="approach">
+</h3>
+<p>The problem asks us to determine the minimum number of cameras required to monitor all the nodes in a binary tree. A camera can monitor a node if it is placed in either the node itself or in one of its children. Specifically:</p>
+<ul>
+<li>A camera placed on a node can monitor that node and its immediate children.</li>
+<li>The tree’s nodes are either covered by a camera directly placed on them or indirectly covered by a camera on their child nodes.</li>
+</ul>
+<p>We need to calculate the minimum number of cameras required to ensure every node in the binary tree is covered.</p>
+<h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
+<p>This problem is best solved using a depth-first search (DFS) traversal to cover each node, starting from the root and recursively exploring its left and right children. The key idea is to use a greedy approach while traversing the tree. There are three possible states for each node:</p>
 <ol>
-<li>
-<p><strong>Define States</strong>:</p>
-<ul>
-<li>Each node can be in one of three states:
-<ul>
-<li><strong>0</strong>: The node needs a camera.</li>
-<li><strong>1</strong>: The node has a camera.</li>
-<li><strong>2</strong>: The node is covered but does not have a camera.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>DFS Traversal</strong>:</p>
-<ul>
-<li>Use a depth-first search to decide the state of each node starting from the leaves up to the root.</li>
-<li><strong>Base Case</strong>: If the node is <code>nullptr</code>, return <code>2</code> (covered without a camera).</li>
-</ul>
-</li>
-<li>
-<p><strong>Node State Logic</strong>:</p>
-<ul>
-<li>If either child node needs a camera (state 0), place a camera at the current node, increment the result counter <code>res</code>, and return <code>1</code> (has a camera).</li>
-<li>If either child has a camera (state 1), the current node is covered without needing a camera, so return <code>2</code>.</li>
-<li>If both children are covered (state 2), the current node needs a camera, so return <code>0</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>After the DFS completes, check the root node. If it still needs a camera, increment <code>res</code>.</li>
-</ul>
-</li>
+<li><strong>State 0</strong>: The node needs a camera.</li>
+<li><strong>State 1</strong>: The node is covered by a camera, but there is no camera on it.</li>
+<li><strong>State 2</strong>: The node is covered, either because it has a camera, or it’s covered by a camera on one of its children.</li>
 </ol>
-<h2 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this efficiently, we use a DFS strategy to propagate these states from the leaves up to the root, ensuring that each node is covered optimally with the minimum number of cameras.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ol>
+<li><strong>Initialization</strong>:
 <ul>
-<li>
-<p><strong><code>int minCameraCover(TreeNode* root)</code></strong>:</p>
-<ul>
-<li>Calls <code>dfs(root)</code> to determine if the root itself needs a camera.</li>
-<li>Returns the total number of cameras required (<code>res</code>), adding one if the root is unmonitored.</li>
+<li>We initialize <code>res</code> as 0. This variable will store the number of cameras required to cover the entire tree.</li>
 </ul>
 </li>
-<li>
-<p><strong><code>int dfs(TreeNode* root)</code></strong>:</p>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minCameraCover</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (dfs(root) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="2">
+<li><strong>Main Function</strong> (<code>minCameraCover</code>):
 <ul>
-<li>Recursively determines the state of each child.</li>
-<li>Applies the node state rules to decide whether the current node requires or has a camera.</li>
+<li>The function <code>minCameraCover</code> initiates the DFS process on the root node and returns the result.</li>
+<li>We check the result of <code>dfs(root)</code>. If it returns a value less than 1 (i.e., the root node is not covered), we increment the camera count by 1 because a camera needs to be placed at the root. Finally, we add the value of <code>res</code> to account for the total number of cameras needed.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ol start="3">
+<li><strong>DFS Function</strong> (<code>dfs</code>):
+<ul>
+<li>The <code>dfs</code> function is a recursive function that determines the coverage status of the tree starting from the <code>root</code>.</li>
+<li>If the current node is <code>nullptr</code> (i.e., a leaf node or an empty subtree), we return 2. This value means that the node is considered covered (because an empty node does not need a camera).</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> dfs(root<span style="color:#f92672">-&gt;</span>left), right <span style="color:#f92672">=</span> dfs(root<span style="color:#f92672">-&gt;</span>right);
+</span></span></code></pre></div><ol start="4">
+<li><strong>DFS on Left and Right Subtrees</strong>:
+<ul>
+<li>We recursively call the <code>dfs</code> function on the left and right children of the current node. The results are stored in <code>left</code> and <code>right</code>.</li>
+<li>The values returned by <code>dfs</code> represent the coverage state of the respective subtrees:
+<ul>
+<li><code>0</code>: The node needs a camera.</li>
+<li><code>1</code>: The node is covered but does not have a camera.</li>
+<li><code>2</code>: The node is covered, and no camera is required.</li>
 </ul>
 </li>
 </ul>
-<h2 id="complexity">
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> right <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="5">
+<li><strong>Covering the Node</strong>:
+<ul>
+<li>If either the left or right child needs a camera (i.e., <code>left == 0</code> or <code>right == 0</code>), we place a camera on the current node to cover both subtrees.</li>
+<li>We increment the <code>res</code> variable (which tracks the number of cameras) and return <code>1</code>, which indicates that the current node is covered by a camera.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> left <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> right <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ol start="6">
+<li><strong>Returning Coverage Status</strong>:
+<ul>
+<li>If neither child needs a camera, we check if either the left or right child is already covered by a camera (i.e., <code>left == 1 || right == 1</code>). In this case, the current node is covered without a camera, so we return <code>2</code>.</li>
+<li>If neither child is covered and no camera is placed on the current node, we return <code>0</code>, indicating that the current node requires a camera to be covered.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="7">
+<li><strong>End of Function</strong>:
+<ul>
+<li>The DFS function terminates after visiting all the nodes in the tree and determining their coverage status.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes, since each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(h), where <code>h</code> is the height of the tree due to recursive stack space.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is <strong>O(N)</strong>, where <code>N</code> is the number of nodes in the binary tree. Each node is visited exactly once during the DFS traversal, and the operations at each node (checking its left and right children, updating the camera count, etc.) take constant time.</li>
 </ul>
-<p>This approach leverages DFS to minimize the number of cameras by deciding each node&rsquo;s state based on its children&rsquo;s states.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(H)</strong>, where <code>H</code> is the height of the tree. In the worst case (for an unbalanced tree), the height can be equal to <code>N</code>, so the space complexity can be considered <strong>O(N)</strong>. This is the space required for the recursive call stack during the DFS traversal.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the minimum number of cameras required to cover all nodes in a binary tree using a depth-first search approach. The recursive DFS function checks each node and its subtrees, determining whether a camera needs to be placed or if the node is already covered. By propagating the coverage state up from the leaf nodes to the root, we ensure that the tree is covered with the fewest cameras. The solution is optimal in terms of both time and space complexity and is well-suited for trees with a large number of nodes.</p>
  
 </div>
   

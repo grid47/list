@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode194s1hbhb">
+<h2 id="hahahugoshortcode190s1hbhb">
   
 
   
@@ -249,12 +249,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two integer arrays, <code>gas</code> and <code>cost</code>. Each index represents a gas station where:</p>
+<p>The problem asks to determine the starting gas station index from which a car can complete a circular route around all gas stations. Given two lists:</p>
 <ul>
-<li><code>gas[i]</code> is the amount of gas available at station <code>i</code>.</li>
-<li><code>cost[i]</code> is the amount of gas required to travel from station <code>i</code> to the next station.</li>
+<li><strong>gas[i]</strong>: the amount of gas available at the i-th station.</li>
+<li><strong>cost[i]</strong>: the amount of gas required to travel from the i-th station to the next station.</li>
 </ul>
-<p>The goal is to determine the starting gas station index from which you can travel around the circuit once without running out of gas. If no such station exists, return -1.</p>
+<p>We are asked to find the <strong>index of the starting station</strong> such that the car can travel around the entire circle of stations without running out of gas. If it&rsquo;s not possible, we should return <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,52 +262,123 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem requires us to determine if it&rsquo;s possible to complete the circular route, and if so, find the starting station. Here&rsquo;s the step-by-step breakdown:</p>
 <ol>
 <li>
-<p><strong>Total Gas Check</strong>:</p>
+<p><strong>Total Gas and Cost Check</strong>:</p>
 <ul>
-<li>Calculate the total amount of gas available and the total cost required to complete the circuit.</li>
-<li>If the total cost is greater than the total gas, return -1, as it&rsquo;s impossible to complete the circuit.</li>
+<li>If the total gas available is less than the total cost required to travel between the stations, it is impossible to complete the circuit. Thus, we return <code>-1</code> early if <code>total_gas &lt; total_cost</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Finding the Starting Point</strong>:</p>
+<p><strong>Greedy Approach to Find the Starting Station</strong>:</p>
 <ul>
-<li>Traverse through each gas station, maintaining a running total of the current gas in the tank (<code>tank</code>).</li>
-<li>If the tank goes below zero, reset it to zero and update the starting station index (<code>res</code>) to the next station.</li>
-<li>The first station where the gas is sufficient to cover the cost will be the starting station.</li>
+<li>We can apply a <strong>greedy strategy</strong> to determine the valid starting station by simulating the journey. If at any point we run out of gas while traveling from one station to the next, we reset the journey and set the next station as the new potential starting point.</li>
+<li>We track the current fuel in the tank and the total remaining fuel, and if at any point the fuel in the tank drops below zero, we reset the tank and update the candidate starting station. If we can complete the loop successfully, the last valid candidate will be our answer.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 5-8</strong>: Calculate the total gas and total cost. If the total cost exceeds total gas, return -1.</li>
-<li><strong>Line 10</strong>: Reset <code>tank</code> for the second pass to find the starting index.</li>
-<li><strong>Line 11</strong>: Initialize <code>res</code> to store the index of the last station that failed.</li>
-<li><strong>Line 13-19</strong>: Loop through each gas station, updating the <code>tank</code> and checking if it drops below zero. If it does, reset the <code>tank</code> and set <code>res</code> to the current index.</li>
+<h4 id="step-1-calculate-total-gas-and-cost">
+  Step 1: Calculate Total Gas and Cost
+  <a class="heading-link" href="#step-1-calculate-total-gas-and-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>First, we calculate the total amount of gas available and the total amount of gas required to traverse all stations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> tank <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> gas.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    tank <span style="color:#f92672">+=</span> gas[i];    <span style="color:#75715e">// Total gas available
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    net <span style="color:#f92672">+=</span> cost[i];    <span style="color:#75715e">// Total cost required
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><code>tank</code>: Tracks the total amount of gas available at all stations.</li>
+<li><code>net</code>: Tracks the total cost needed to travel between all stations.</li>
 </ul>
-<h3 id="complexity">
+<p>If the total gas is less than the total cost (<code>net &gt; tank</code>), it&rsquo;s impossible to complete the circuit, and we return <code>-1</code> immediately.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (net <span style="color:#f92672">&gt;</span> tank) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h4 id="step-2-simulate-the-journey-to-find-the-start-index">
+  Step 2: Simulate the Journey to Find the Start Index
+  <a class="heading-link" href="#step-2-simulate-the-journey-to-find-the-start-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once we know that completing the circuit is possible, we simulate the journey. We attempt to &ldquo;start&rdquo; at each station and travel to the next. If at any point we run out of gas (i.e., <code>tank &lt; 0</code>), we reset the journey from the next station.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>tank <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> gas.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    tank <span style="color:#f92672">+=</span> gas[i];    <span style="color:#75715e">// Add gas from current station
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    tank <span style="color:#f92672">-=</span> cost[i];   <span style="color:#75715e">// Subtract the cost to travel to the next station
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (tank <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {    <span style="color:#75715e">// If we run out of gas
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        tank <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;      <span style="color:#75715e">// Reset the tank
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">=</span> i;       <span style="color:#75715e">// Set the next station as the candidate start
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>tank</code> keeps track of the fuel in the car as we &ldquo;drive&rdquo; around the stations.</li>
+<li>If <code>tank</code> becomes negative, it means we can&rsquo;t proceed from the current station, so we reset the tank to <code>0</code> and update the candidate starting station <code>res</code> to the current station <code>i</code>.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, after completing the loop, the result <code>res</code> will contain the last valid starting station. Since we are looking for the station number (which is <code>1</code>-indexed), we return <code>res + 1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of gas stations, as we traverse the list twice.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as we are using a constant amount of extra space.</li>
+<li><strong>O(n)</strong>: We iterate over the <code>gas</code> array twice — once to calculate the total gas and cost, and once to simulate the journey and find the starting station. Thus, the time complexity is linear in terms of the number of stations.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We only use a constant amount of space (a few variables) regardless of the size of the input. Therefore, the space complexity is constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages a greedy approach to efficiently determine if a valid starting station exists and identifies that station if it does. It works by first checking if completing the journey is feasible (i.e., if the total gas is at least equal to the total cost), and then simulating the journey to find the correct starting station. The algorithm ensures that we minimize computation and space usage, making it an optimal solution to this problem.</p>
+<p>The approach is both time-efficient (O(n)) and space-efficient (O(1)) for large inputs, as it avoids unnecessary storage and only requires a few simple variables for simulation. The solution elegantly handles edge cases like circular dependencies and situations where the circuit is not possible, returning <code>-1</code> in such cases.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode194s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode190s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

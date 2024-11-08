@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,18 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return an array <code>answer</code> such that <code>answer[i]</code> is equal to the product of all elements of <code>nums</code> except <code>nums[i]</code>. Solve it without using division and in (O(n)) time complexity.</p>
+<p>The problem at hand is to compute the product of all elements in a given array <strong>except the current element</strong> at each index for all indices in the array. Specifically, for each index <code>i</code>, we want to compute the product of all elements of the array except for the element at index <code>i</code>. This must be achieved without using division and in <strong>O(n)</strong> time complexity, where <code>n</code> is the size of the array.</p>
+<p>Given an array <code>nums</code>, you are tasked with constructing an array <code>output</code> where each <code>output[i]</code> is the product of all the numbers in the original array except <code>nums[i]</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Input:  [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>Output: [<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">6</span>]
+</span></span></code></pre></div><p>Explanation:</p>
+<ul>
+<li><code>output[0] = 2 * 3 * 4 = 24</code></li>
+<li><code>output[1] = 1 * 3 * 4 = 12</code></li>
+<li><code>output[2] = 1 * 2 * 4 = 8</code></li>
+<li><code>output[3] = 1 * 2 * 3 = 6</code></li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,32 +260,94 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution builds two auxiliary arrays:</p>
+<p>In order to solve this problem efficiently (in <strong>O(n)</strong> time complexity), we can leverage the concept of prefix and suffix products. Here’s how the approach works:</p>
 <ol>
-<li><strong>Prefix Product Array (<code>pre</code>)</strong>: <code>pre[i]</code> holds the product of all elements from the start up to <code>i</code>.</li>
-<li><strong>Suffix Product Array (<code>suf</code>)</strong>: <code>suf[i]</code> holds the product of all elements from <code>i</code> to the end.</li>
-</ol>
-<p>Then, for each index <code>i</code> in the result array:</p>
+<li>
+<p><strong>Prefix Products</strong>:</p>
 <ul>
-<li><code>answer[i]</code> is computed as the product of <code>pre[i - 1]</code> (all elements before <code>i</code>) and <code>suf[i + 1]</code> (all elements after <code>i</code>).</li>
+<li>The <strong>prefix product</strong> of an index <code>i</code> is the product of all the elements before index <code>i</code> in the array.</li>
+<li>For example, for an index <code>i = 3</code>, the prefix product would be the product of all elements before index 3, i.e., <code>nums[0] * nums[1] * nums[2]</code>.</li>
+<li>We can store the prefix products in an array <code>pre</code>, where <code>pre[i]</code> represents the product of all elements before <code>i</code>.</li>
 </ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</li>
+<li>
+<p><strong>Suffix Products</strong>:</p>
+<ul>
+<li>The <strong>suffix product</strong> of an index <code>i</code> is the product of all elements after index <code>i</code> in the array.</li>
+<li>For example, for an index <code>i = 3</code>, the suffix product would be the product of all elements after index 3, i.e., <code>nums[4] * nums[5]</code>.</li>
+<li>We can store the suffix products in an array <code>suf</code>, where <code>suf[i]</code> represents the product of all elements after <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Product</strong>:</p>
+<ul>
+<li>The product of all elements except for <code>nums[i]</code> can then be computed by multiplying the corresponding values from the prefix and suffix product arrays:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>output[i] <span style="color:#f92672">=</span> pre[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> suf[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><ul>
+<li>For the first element, we consider the suffix product, and for the last element, we consider the prefix product.</li>
+</ul>
+</li>
+</ol>
+<p>This method ensures that each element is processed only once, leading to an <strong>O(n)</strong> time complexity solution, with <strong>O(n)</strong> extra space for storing the prefix and suffix products.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector <code>nums</code> of integers.</li>
-<li><strong>Output</strong>: A vector <code>answer</code> where each <code>answer[i]</code> is the product of all elements in <code>nums</code> except <code>nums[i]</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> productExceptSelf(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>productExceptSelf</code>, which takes a reference to a vector <code>nums</code> as its input. This vector contains the elements of the array.</li>
 </ul>
-<ol>
-<li>Initialize <code>pre</code> and <code>suf</code> vectors of size <code>n</code>, both with initial values of 1.</li>
-<li>Compute <code>pre[i]</code> by multiplying <code>pre[i - 1]</code> by <code>nums[i]</code>.</li>
-<li>Compute <code>suf[i]</code> by multiplying <code>suf[i + 1]</code> by <code>nums[i]</code>.</li>
-<li>Fill <code>answer[i]</code> using <code>pre[i - 1] * suf[i + 1]</code>.</li>
-</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li>The first step inside the function is to determine the size of the <code>nums</code> array and store it in the variable <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pre(n, <span style="color:#ae81ff">1</span>), suf(n, <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>We declare two vectors, <code>pre</code> and <code>suf</code>, both of size <code>n</code>. These vectors will hold the prefix and suffix products, respectively.
+<ul>
+<li>Both vectors are initialized with the value <code>1</code> because we need to start multiplying from <code>1</code> (i.e., the identity element for multiplication).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pre[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        suf[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> nums[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>We initialize the first element of the prefix product array <code>pre[0]</code> with the value of <code>nums[0]</code> (the first element of the array). This is because for the first element, the prefix product is just the first element itself.</li>
+<li>Similarly, we initialize the last element of the suffix product array <code>suf[n - 1]</code> with the value of <code>nums[n - 1]</code> (the last element of the array).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            pre[i] <span style="color:#f92672">=</span> pre[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>We loop through the array starting from the second element (<code>i = 1</code>) and calculate the prefix product for each element. The prefix product at each index <code>i</code> is the product of the element <code>nums[i]</code> and the prefix product of the previous element <code>pre[i - 1]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>            suf[i] <span style="color:#f92672">=</span> suf[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>We loop backward from the second-to-last element (<code>i = n - 2</code>) and calculate the suffix product for each element. The suffix product at each index <code>i</code> is the product of the element <code>nums[i]</code> and the suffix product of the next element <code>suf[i + 1]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            ans[i] <span style="color:#f92672">=</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> pre[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> suf[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>We now compute the final product for each index <code>i</code>. The value at <code>ans[i]</code> is the product of the prefix product at index <code>i - 1</code> (i.e., <code>pre[i - 1]</code>) and the suffix product at index <code>i + 1</code> (i.e., <code>suf[i + 1]</code>).
+<ul>
+<li>For the first index (<code>i = 0</code>), the prefix product is <code>1</code> because there are no elements before index <code>0</code>.</li>
+<li>Similarly, for the last index (<code>i = n - 1</code>), the suffix product is <code>1</code> because there are no elements after index <code>n - 1</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return the array <code>ans</code>, which contains the result of the product of all elements except the current element for each index in the array.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -282,18 +355,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the size of <code>nums</code>, due to single-pass calculations for <code>pre</code>, <code>suf</code>, and <code>answer</code>.</li>
-<li><strong>Space Complexity</strong>: (O(n)), due to the extra storage for <code>pre</code>, <code>suf</code>, and <code>answer</code> arrays.</li>
+<li><strong>O(n)</strong>: The solution performs three separate loops over the array <code>nums</code> to calculate the prefix products, suffix products, and the final result. Each loop iterates through the array once, so the time complexity is linear in the size of the array, i.e., <code>O(n)</code>.</li>
 </ul>
-<h3 id="optimized-approach">
-  Optimized Approach
-  <a class="heading-link" href="#optimized-approach">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use three additional arrays (<code>pre</code>, <code>suf</code>, and <code>ans</code>) to store the prefix products, suffix products, and the final result. Each of these arrays is of size <code>n</code>, so the space complexity is also linear, i.e., <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution could be optimized to (O(1)) additional space (output array excluded) by computing prefix and suffix products in-place.</p>
+<p>This approach efficiently solves the problem of calculating the product of all elements except the current element in an array in linear time, using the prefix and suffix product arrays to avoid using division. The solution is both time-efficient (O(n)) and space-efficient (O(n)), making it an optimal solution for this problem.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Efficient Calculation</strong>: By using the prefix and suffix products, we avoid the need for nested loops or division.</li>
+<li><strong>Space Complexity</strong>: Although we use extra space for the prefix and suffix products, the space complexity is still linear, which is optimal for this problem.</li>
+<li><strong>Edge Cases</strong>: The algorithm handles all edge cases efficiently, including cases with arrays of length 1 or 2.</li>
+</ol>
+<p>This approach is commonly used in problems where you need to compute the product of all elements except one, without using division or requiring multiple nested loops.</p>
  
 </div>
   

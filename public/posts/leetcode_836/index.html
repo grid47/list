@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine whether two rectangles overlap. Each rectangle is defined by its bottom-left and top-right corners given as integer coordinates.</p>
+<p>In this problem, you are given two rectangles defined by their corner coordinates in a 2D plane. The task is to determine whether the two rectangles overlap or not.</p>
+<p>Each rectangle is represented by an array of four integers:</p>
+<ul>
+<li><code>rect1 = [x1, y1, x2, y2]</code> and <code>rect2 = [x3, y3, x4, y4]</code>.
+<ul>
+<li><code>(x1, y1)</code> and <code>(x2, y2)</code> are the coordinates of the bottom-left and top-right corners of the first rectangle.</li>
+<li>Similarly, <code>(x3, y3)</code> and <code>(x4, y4)</code> represent the coordinates of the bottom-left and top-right corners of the second rectangle.</li>
+</ul>
+</li>
+</ul>
+<p>The problem asks to return a boolean value:</p>
+<ul>
+<li><code>true</code> if the two rectangles overlap.</li>
+<li><code>false</code> if they do not overlap.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,43 +263,72 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the key observation is that two rectangles will <strong>not overlap</strong> if any of the following conditions are met:</p>
 <ol>
-<li>
-<p><strong>Extract Coordinates</strong>:</p>
-<ul>
-<li>For each rectangle, extract the coordinates:
-<ul>
-<li><code>rect1</code>: bottom-left (<code>fx1</code>, <code>fy1</code>) and top-right (<code>fx2</code>, <code>fy2</code>)</li>
-<li><code>rect2</code>: bottom-left (<code>sx1</code>, <code>sy1</code>) and top-right (<code>sx2</code>, <code>sy2</code>)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Overlap</strong>:</p>
-<ul>
-<li>The rectangles do not overlap if any of the following conditions are true:
-<ul>
-<li>Rectangle 2 is completely above Rectangle 1: <code>sy1 &gt;= fy2</code></li>
-<li>Rectangle 1 is completely above Rectangle 2: <code>fy1 &gt;= sy2</code></li>
-<li>Rectangle 2 is completely to the right of Rectangle 1: <code>fx1 &gt;= sx2</code></li>
-<li>Rectangle 1 is completely to the right of Rectangle 2: <code>fx2 &lt;= sx1</code></li>
-</ul>
-</li>
-<li>If none of these conditions are true, the rectangles overlap.</li>
-</ul>
-</li>
+<li>One rectangle is completely to the left of the other (i.e., the right edge of one rectangle is to the left of the left edge of the other).</li>
+<li>One rectangle is completely to the right of the other (i.e., the left edge of one rectangle is to the right of the right edge of the other).</li>
+<li>One rectangle is completely above the other (i.e., the bottom edge of one rectangle is above the top edge of the other).</li>
+<li>One rectangle is completely below the other (i.e., the top edge of one rectangle is below the bottom edge of the other).</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>If none of these conditions are true, then the rectangles overlap. The algorithm will check these conditions and return the appropriate result.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-assign-variables-for-rectangle-coordinates">
+  Step 1: Assign Variables for Rectangle Coordinates
+  <a class="heading-link" href="#step-1-assign-variables-for-rectangle-coordinates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fx1 <span style="color:#f92672">=</span> rect1[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fx2 <span style="color:#f92672">=</span> rect1[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fy1 <span style="color:#f92672">=</span> rect1[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> fy2 <span style="color:#f92672">=</span> rect1[<span style="color:#ae81ff">3</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sx1 <span style="color:#f92672">=</span> rect2[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sx2 <span style="color:#f92672">=</span> rect2[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sy1 <span style="color:#f92672">=</span> rect2[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sy2 <span style="color:#f92672">=</span> rect2[<span style="color:#ae81ff">3</span>];
+</span></span></code></pre></div><ul>
+<li>Here, we extract the coordinates of both rectangles <code>rect1</code> and <code>rect2</code>:
 <ul>
-<li>The method takes two vectors representing the rectangles.</li>
-<li>It checks the conditions for no overlap and returns <code>true</code> if the rectangles overlap and <code>false</code> otherwise.</li>
+<li>For <code>rect1</code>, we extract the bottom-left corner <code>(fx1, fy1)</code> and the top-right corner <code>(fx2, fy2)</code>.</li>
+<li>For <code>rect2</code>, we extract the bottom-left corner <code>(sx1, sy1)</code> and the top-right corner <code>(sx2, sy2)</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-check-for-overlap-conditions">
+  Step 2: Check for Overlap Conditions
+  <a class="heading-link" href="#step-2-check-for-overlap-conditions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>((sy1 <span style="color:#f92672">&gt;=</span> fy2) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>         (fy1 <span style="color:#f92672">&gt;=</span> sy2) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>         (fx1 <span style="color:#f92672">&gt;=</span> sx2) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>         (fx2 <span style="color:#f92672">&lt;=</span> sx1));
+</span></span></code></pre></div><ul>
+<li>
+<p>The condition checks if <strong>none</strong> of the following overlap conditions are true:</p>
+<ul>
+<li><strong>Condition 1</strong>: <code>(sy1 &gt;= fy2)</code> — This checks if <code>rect2</code> is completely above <code>rect1</code>. If the bottom of <code>rect2</code> (<code>sy1</code>) is greater than or equal to the top of <code>rect1</code> (<code>fy2</code>), then there is no overlap.</li>
+<li><strong>Condition 2</strong>: <code>(fy1 &gt;= sy2)</code> — This checks if <code>rect2</code> is completely below <code>rect1</code>. If the top of <code>rect2</code> (<code>sy2</code>) is less than or equal to the bottom of <code>rect1</code> (<code>fy1</code>), then there is no overlap.</li>
+<li><strong>Condition 3</strong>: <code>(fx1 &gt;= sx2)</code> — This checks if <code>rect2</code> is completely to the left of <code>rect1</code>. If the right of <code>rect2</code> (<code>sx2</code>) is to the left of the left of <code>rect1</code> (<code>fx1</code>), then there is no overlap.</li>
+<li><strong>Condition 4</strong>: <code>(fx2 &lt;= sx1)</code> — This checks if <code>rect2</code> is completely to the right of <code>rect1</code>. If the left of <code>rect2</code> (<code>sx1</code>) is to the right of the right of <code>rect1</code> (<code>fx2</code>), then there is no overlap.</li>
+</ul>
+</li>
+<li>
+<p>If <strong>any</strong> of these conditions is <code>true</code>, then there is no overlap, and the function will return <code>false</code>. If <strong>none</strong> of these conditions is true, the rectangles overlap, and the function returns <code>true</code>.</p>
+</li>
+<li>
+<p>The <code>!</code> operator negates the condition. Therefore, if any of these four conditions are true (i.e., no overlap), we return <code>false</code>. Otherwise, we return <code>true</code>, indicating that the rectangles do overlap.</p>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -294,10 +337,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The solution performs a constant number of comparisons (just four in total) between the coordinates of the two rectangles. Each comparison involves only basic arithmetic operations, which are constant time operations. Therefore, the time complexity is:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(1), since we perform a constant number of operations regardless of the input size.</li>
-<li><strong>Space Complexity</strong>: O(1), as we only use a fixed amount of space for variables.</li>
+<li><strong>O(1)</strong> — constant time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The algorithm uses a fixed amount of extra space to store the coordinates of the two rectangles (<code>fx1, fx2, fy1, fy2, sx1, sx2, sy1, sy2</code>). No additional space is needed that depends on the size of the input. Therefore, the space complexity is:</p>
+<ul>
+<li><strong>O(1)</strong> — constant space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently determines whether two rectangles overlap by checking the basic geometric properties of their positions. By breaking down the problem into simple conditions that test for non-overlapping cases, we can determine the result in constant time. This approach is optimal and works well even for large inputs since the time and space complexities are both constant.</p>
+<p>This solution provides a clear and intuitive method to solve the problem of determining whether two rectangles overlap, and it is computationally efficient with constant time and space complexities.</p>
  
 </div>
   

@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Flatten a binary tree to a linked list in-place. The linked list should use the right child pointers and should be in the same order as a preorder traversal of the tree.</p>
+<p>The problem is to <strong>flatten a binary tree</strong> into a linked list in-place. The flattening should be done by modifying the tree such that the left child of each node is set to <code>nullptr</code> and the right child points to the next node in a pre-order traversal sequence.</p>
+<p>Given the following binary tree:</p>
+<pre tabindex="0"><code>          1
+         / \
+        2   5
+       / \   \
+      3   4   6
+</code></pre><p>After flattening, the tree should look like:</p>
+<pre tabindex="0"><code>1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+</code></pre><p>The tree structure is modified such that the tree is &ldquo;flattened&rdquo; into a linked list where every node&rsquo;s left child is <code>nullptr</code> and the right child points to the next node in the pre-order traversal.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,49 +282,131 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The goal of the problem is to flatten the binary tree into a linked list using <strong>pre-order traversal</strong>. The steps involved are:</p>
 <ol>
-<li>Recursively traverse the tree.</li>
-<li>For each node:
-<ul>
-<li>Store the original right child.</li>
-<li>Move the left child to the right.</li>
-<li>Set the left child to <code>nullptr</code>.</li>
-<li>Find the last node on the right (after moving the left child) and connect it to the original right child.</li>
-</ul>
+<li>
+<p><strong>Start from the root:</strong> Begin by checking if the root is <code>NULL</code>. If the root is <code>NULL</code>, the tree is already empty, and no further processing is needed.</p>
 </li>
-<li>Continue this process for the right child.</li>
+<li>
+<p><strong>Flatten the left subtree:</strong> Recurse on the left child of the current node. Before moving to the left subtree, store the right child because it will be needed after flattening the left child.</p>
+</li>
+<li>
+<p><strong>Rearrange the nodes:</strong> After flattening the left subtree, make the current node&rsquo;s left child <code>NULL</code> (because it should now be a linked list, so no left child should remain). Then, the right child of the current node should point to the flattened left subtree.</p>
+</li>
+<li>
+<p><strong>Traverse to the end of the right subtree:</strong> Once the left subtree has been flattened, traverse to the end of the newly formed right subtree (which contains the flattened left subtree) and attach the original right subtree to the end of the list.</p>
+</li>
+<li>
+<p><strong>Recursive Flattening:</strong> Recursively call the flatten function on the right child of the current node. This will continue the flattening process.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong><code>flatten</code> function</strong>:
-<ul>
-<li><strong>Line 5</strong>: If the current node (<code>root</code>) is <code>NULL</code>, return (base case).</li>
-<li><strong>Line 7</strong>: Store the original right child in <code>tmp</code>.</li>
-<li><strong>Line 8</strong>: Move the left child to the right.</li>
-<li><strong>Line 9</strong>: Set the left child to <code>nullptr</code>.</li>
-<li><strong>Line 11-12</strong>: Traverse to the end of the new right subtree.</li>
-<li><strong>Line 14</strong>: Connect the last node&rsquo;s right pointer to the stored original right child.</li>
-<li><strong>Line 15</strong>: Recursively flatten the right subtree.</li>
+<p>Let&rsquo;s walk through the code to see how the problem is solved step by step:</p>
+<h4 id="1-function-definition">
+  1. Function Definition:
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flatten</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span>;
+</span></span></code></pre></div><ul>
+<li>This is the base case of the recursive function. If the root is <code>NULL</code>, then there is no tree to flatten, so the function simply returns.</li>
 </ul>
-</li>
+<h4 id="2-temporarily-save-the-right-child">
+  2. Temporarily Save the Right Child:
+  <a class="heading-link" href="#2-temporarily-save-the-right-child">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>right;
+</span></span></code></pre></div><ul>
+<li>We temporarily store the right child of the current root node in the <code>tmp</code> variable. This is done because we will be modifying the tree&rsquo;s structure, and we need to preserve the original right child for later use.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="3-move-the-left-subtree-to-the-right">
+  3. Move the Left Subtree to the Right:
+  <a class="heading-link" href="#3-move-the-left-subtree-to-the-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span></code></pre></div><ul>
+<li>Now, we move the left child of the current node to the right child position. This is the critical operation where we begin transforming the tree into a linked list structure.</li>
+<li>After that, we set the left child to <code>nullptr</code>, since the binary tree should no longer have left children after flattening.</li>
+</ul>
+<h4 id="4-traverse-to-the-end-of-the-new-right-subtree">
+  4. Traverse to the End of the New Right Subtree:
+  <a class="heading-link" href="#4-traverse-to-the-end-of-the-new-right-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(node<span style="color:#f92672">-&gt;</span>right) node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>right;
+</span></span></code></pre></div><ul>
+<li>Now that the left subtree has been moved to the right, we need to find the last node in this newly created right subtree. We do this by iterating through the right child of the current node until we reach the last node (i.e., the node with no right child).</li>
+<li>This step is necessary because we need to attach the original right subtree to the end of the flattened left subtree.</li>
+</ul>
+<h4 id="5-attach-the-original-right-subtree">
+  5. Attach the Original Right Subtree:
+  <a class="heading-link" href="#5-attach-the-original-right-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> tmp;
+</span></span></code></pre></div><ul>
+<li>Once we find the last node in the right subtree, we attach the original right subtree (stored in <code>tmp</code>) to the <code>right</code> child of this last node. This ensures that the original right child is placed correctly in the flattened tree.</li>
+</ul>
+<h4 id="6-recursively-flatten-the-right-subtree">
+  6. Recursively Flatten the Right Subtree:
+  <a class="heading-link" href="#6-recursively-flatten-the-right-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    flatten(root<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Finally, we recursively call the <code>flatten</code> function on the right child of the current node. This will flatten the rest of the tree, starting from the modified right subtree.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack.</li>
-</ul> 
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because each node is visited exactly once during the recursive traversal, and the operations inside each function call (such as setting pointers and traversing the tree) take constant time.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the binary tree. This space is used by the recursion stack. In the worst case (unbalanced tree), the height of the tree could be equal to <code>n</code>, resulting in a space complexity of <strong>O(n)</strong>. In the best case (balanced tree), the height of the tree is <strong>O(log n)</strong>, resulting in a space complexity of <strong>O(log n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently flattens a binary tree into a linked list in place by using pre-order traversal. The algorithm performs the flattening operation in <strong>O(n)</strong> time, where <code>n</code> is the number of nodes in the tree. The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree, due to the recursive function calls. This approach ensures that the tree is transformed into the desired linked list structure without requiring any extra data structures, making it space-efficient.</p>
+<p>The recursive approach is elegant and easy to understand. By recursively flattening the left subtree and attaching the original right subtree at the end, the tree is gradually transformed into a flattened list. This method handles all edge cases, including trees with no nodes or trees with only one node, without requiring additional checks.</p>
+<p>In summary, the problem is solved optimally using a simple recursive strategy that transforms the binary tree into a pre-order linked list. The time complexity and space complexity are both efficient for this type of problem.</p>
+ 
 </div>
   
 

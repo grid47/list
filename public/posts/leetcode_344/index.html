@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -219,7 +219,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1233s1hbhb">
+<h2 id="hahahugoshortcode1232s1hbhb">
   
 
   
@@ -231,7 +231,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a character array <code>s</code>, reverse the array in-place.</p>
+<p>The problem asks you to reverse a string, where the string is represented as a vector of characters. Your task is to implement a function that modifies the given vector in-place, such that the characters are reversed. The input string is mutable, and you should reverse it without using additional space for another string (except for a few auxiliary variables).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -239,28 +239,60 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To reverse the string in-place, we can use a two-pointer technique:</p>
+<p>To solve this problem, we can utilize a two-pointer technique. The idea is to have one pointer at the beginning of the string and the other at the end, and then swap the characters at these two positions. After each swap, we move the pointers inward towards each other until they meet in the middle.</p>
+<p>This technique is efficient because:</p>
 <ol>
-<li><strong>Initialize Two Pointers</strong>: One pointer (<code>i</code>) starts at the beginning of the array, and the other pointer (<code>j</code>) starts at the end.</li>
-<li><strong>Swap Characters</strong>: While the first pointer is less than or equal to the second pointer:
-<ul>
-<li>Swap the characters at the two pointers.</li>
-<li>Move the first pointer forward (<code>i++</code>) and the second pointer backward (<code>j--</code>).</li>
-</ul>
-</li>
-<li>The process continues until the pointers meet or cross each other.</li>
+<li><strong>In-place reversal</strong>: We don&rsquo;t need extra space to store the reversed string. We directly modify the input vector.</li>
+<li><strong>Constant time swaps</strong>: Swapping two characters is a constant-time operation, so the algorithm is efficient.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The key observation here is that reversing a string is simply a process of swapping characters from both ends and moving toward the center.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function accepts a vector of characters.</li>
-<li>The while loop runs as long as <code>i</code> is less than or equal to <code>j</code>, performing swaps and adjusting pointers accordingly.</li>
+<h4 id="step-1-initialize-two-pointers">
+  Step 1: Initialize Two Pointers
+  <a class="heading-link" href="#step-1-initialize-two-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers: <code>i</code> at the beginning of the string (<code>0</code>), and <code>j</code> at the last character (<code>s.size() - 1</code>).</li>
+<li>These pointers will help us traverse the string from both ends.</li>
 </ul>
+<h4 id="step-2-start-the-reversal-loop">
+  Step 2: Start the Reversal Loop
+  <a class="heading-link" href="#step-2-start-the-reversal-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>    swap(s[i<span style="color:#f92672">++</span>], s[j<span style="color:#f92672">--</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop continues as long as <code>i</code> is less than or equal to <code>j</code>. This ensures that the pointers meet in the middle, effectively reversing the string.</li>
+<li>Inside the loop, we swap the characters at positions <code>i</code> and <code>j</code> using the <code>swap</code> function. After the swap:
+<ul>
+<li><code>i++</code> moves the <code>i</code> pointer to the right (toward the middle).</li>
+<li><code>j--</code> moves the <code>j</code> pointer to the left (also toward the middle).</li>
+</ul>
+</li>
+<li>The loop continues swapping characters until the pointers cross each other.</li>
+</ul>
+<h4 id="step-3-end-of-function">
+  Step 3: End of Function
+  <a class="heading-link" href="#step-3-end-of-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the loop finishes, the string has been reversed in-place. The function doesn&rsquo;t need to return anything because the reversal happens directly on the input vector.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -268,15 +300,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ), where ( n ) is the length of the string. Each character is swapped once.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), as the reversal is done in-place and no additional space is used.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of characters in the input string.</li>
+<li>In the worst case, we swap each character exactly once. Since there are <code>n/2</code> swaps, the total number of operations is proportional to <code>n</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we are reversing the string in-place without using any extra space except for a few variables (<code>i</code>, <code>j</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to reverse a string in-place using the two-pointer technique. By iterating over the string only once and swapping characters in-place, the solution achieves an optimal time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the string. The space complexity is constant (<strong>O(1)</strong>), as no extra space is used aside from a few variables.</p>
+<p>This approach is ideal for problems where space efficiency is critical, and the solution leverages the simplicity of swapping characters from both ends to meet in the middle. The algorithm is easy to implement, highly efficient, and works seamlessly for reversing strings in real-time without the need for additional memory allocation.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1233s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1232s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

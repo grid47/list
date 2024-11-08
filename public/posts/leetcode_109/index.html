@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> toBST(head, NULL);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode66s1hbhb">
+<h2 id="hahahugoshortcode67s1hbhb">
   
 
   
@@ -262,7 +262,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Convert a sorted singly linked list into a height-balanced binary search tree (BST).</p>
+<p>Given a singly linked list where elements are sorted in ascending order, the task is to convert the linked list into a balanced binary search tree (BST). A balanced BST is a tree where the height difference between the left and right subtrees of any node is at most one. The goal is to ensure that the constructed BST maintains the order and structure of the linked list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -270,54 +270,174 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Use a two-pointer technique (slow and fast pointers) to find the middle element of the linked list, which will serve as the root of the BST.</li>
-<li>The left half of the list (before the middle) will form the left subtree, and the right half (after the middle) will form the right subtree.</li>
-<li>Recursively apply this process to form the BST:
+<p>To solve the problem of converting a sorted linked list into a balanced binary search tree (BST), we need to carefully approach the problem by maintaining the order of elements while also ensuring that the tree is balanced. A binary search tree is structured such that for any node:</p>
 <ul>
-<li>Set the middle node as the current root.</li>
-<li>Recursively create left and right children using the list segments before and after the middle.</li>
+<li>The left subtree contains values less than the node&rsquo;s value.</li>
+<li>The right subtree contains values greater than the node&rsquo;s value.</li>
+</ul>
+<p>The approach involves the following key steps:</p>
+<ol>
+<li><strong>Divide and Conquer:</strong>
+<ul>
+<li>Use the <strong>middle element</strong> of the linked list as the root of the tree. This ensures the tree is balanced, as it divides the list into two halves (left and right) which will become the left and right subtrees of the root.</li>
+</ul>
+</li>
+<li><strong>Recursive Approach:</strong>
+<ul>
+<li>Recursively apply the same logic to the left and right halves of the list to construct the left and right subtrees.</li>
+</ul>
+</li>
+<li><strong>Linked List Traversal:</strong>
+<ul>
+<li>We need to traverse the linked list while maintaining references to the start and end nodes for each recursive call. This can be done using the <strong>slow and fast pointer technique</strong> (also known as the <strong>tortoise and hare algorithm</strong>), which allows us to find the middle node of the list.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong><code>toBST</code> function</strong>:
-<ul>
-<li><strong>Lines 5-6</strong>: Base case – if <code>start</code> equals <code>end</code>, return <code>NULL</code>.</li>
-<li><strong>Lines 8-11</strong>: Use slow (<code>slw</code>) and fast (<code>fst</code>) pointers to find the middle of the list, with <code>slw</code> ending at the midpoint.</li>
-<li><strong>Line 13</strong>: Create a <code>TreeNode</code> with the middle node’s value.</li>
-<li><strong>Lines 14-15</strong>: Recursively set the left and right children using segments to the left and right of <code>slw</code>.</li>
-<li><strong>Line 16</strong>: Return the root node.</li>
+<h4 id="step-1-helper-function-tobst">
+  Step 1: Helper Function <code>toBST</code>
+  <a class="heading-link" href="#step-1-helper-function-tobst">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">toBST</span>(ListNode<span style="color:#f92672">*</span> start, ListNode<span style="color:#f92672">*</span> end) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(start <span style="color:#f92672">==</span> end) <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> slw <span style="color:#f92672">=</span> start;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> fst <span style="color:#f92672">=</span> start;
+</span></span></code></pre></div><ul>
+<li>The function <code>toBST</code> takes two pointers (<code>start</code> and <code>end</code>) as parameters. It recursively divides the list into halves and constructs the binary search tree.</li>
+<li><code>slw</code> (slow pointer) and <code>fst</code> (fast pointer) are used to find the middle element of the list.</li>
+<li>If <code>start == end</code>, it means the sublist is empty, so we return <code>NULL</code> as there is no node to add to the tree.</li>
 </ul>
-</li>
-<li><strong><code>sortedListToBST</code> function</strong>:
-<ul>
-<li><strong>Lines 19-21</strong>: Base case – if the list is empty, return <code>NULL</code>. Otherwise, call <code>toBST</code> with the full list.</li>
+<h4 id="step-2-finding-the-middle-node">
+  Step 2: Finding the Middle Node
+  <a class="heading-link" href="#step-2-finding-the-middle-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(fst <span style="color:#f92672">!=</span> end <span style="color:#f92672">&amp;&amp;</span> fst<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> end) {
+</span></span><span style="display:flex;"><span>        slw <span style="color:#f92672">=</span> slw<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        fst <span style="color:#f92672">=</span> fst<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>We use the <strong>slow and fast pointer technique</strong> to find the middle of the linked list. The slow pointer <code>slw</code> moves one step at a time, while the fast pointer <code>fst</code> moves two steps at a time.</li>
+<li>When <code>fst</code> reaches the end of the list (or the node before the end), <code>slw</code> will be pointing to the middle node. This middle node is selected as the root of the current subtree.</li>
 </ul>
-</li>
+<h4 id="step-3-constructing-the-node-and-recursive-calls">
+  Step 3: Constructing the Node and Recursive Calls
+  <a class="heading-link" href="#step-3-constructing-the-node-and-recursive-calls">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(slw<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> toBST(start, slw);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> toBST(slw<span style="color:#f92672">-&gt;</span>next, end);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A new <code>TreeNode</code> is created with the value of the middle node <code>slw</code>.</li>
+<li>The function recursively calls itself for the left half of the list (<code>start</code> to <code>slw</code>) to build the left subtree, and for the right half of the list (<code>slw-&gt;next</code> to <code>end</code>) to build the right subtree.</li>
+<li>The constructed node is returned.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-4-main-function-sortedlisttobst">
+  Step 4: Main Function <code>sortedListToBST</code>
+  <a class="heading-link" href="#step-4-main-function-sortedlisttobst">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">sortedListToBST</span>(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> toBST(head, NULL);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The main function <code>sortedListToBST</code> is responsible for initiating the recursion. It calls the helper function <code>toBST</code> with the head of the linked list and <code>NULL</code> as the end pointer.</li>
+<li>If the linked list is empty (<code>head == NULL</code>), it returns <code>NULL</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list. Here’s why:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N \log N)), where (N) is the number of nodes. Each node requires (O(\log N)) steps to locate the midpoint.</li>
-<li><strong>Space Complexity</strong>: (O(\log N)), due to the recursion stack for a balanced tree.</li>
-</ul> 
+<li>Each node in the linked list is visited once while constructing the tree. Specifically, the <strong>slow and fast pointers</strong> allow us to find the middle node in <strong>O(n)</strong> time.</li>
+<li>The tree is built recursively for each half of the list, but the work done for each node is constant (finding the middle and creating a new tree node). Thus, the overall time complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(log n)</strong>, where <code>n</code> is the number of nodes in the linked list. Here’s why:</p>
+<ul>
+<li>The space is used by the <strong>recursive stack</strong> due to the recursive calls to <code>toBST</code>. The maximum depth of recursion corresponds to the height of the binary search tree, which is <strong>O(log n)</strong> in a balanced tree.</li>
+<li>Since the tree is balanced, the maximum recursion depth is <strong>log n</strong>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through an example to understand how the algorithm works. Suppose we have the following sorted linked list:</p>
+<pre tabindex="0"><code>-10 -&gt; -3 -&gt; 0 -&gt; 5 -&gt; 9
+</code></pre><ol>
+<li><strong>Step 1:</strong> The function <code>toBST</code> is called with the entire linked list. The slow and fast pointers find the middle node (<code>0</code>), which becomes the root of the tree.</li>
+<li><strong>Step 2:</strong> We recursively call <code>toBST</code> for the left half (<code>-10 -&gt; -3</code>) and the right half (<code>5 -&gt; 9</code>).
+<ul>
+<li>The middle of the left half is <code>-3</code>, which becomes the left child of <code>0</code>.</li>
+<li>The middle of the right half is <code>5</code>, which becomes the right child of <code>0</code>.</li>
+</ul>
+</li>
+<li><strong>Step 3:</strong> We continue recursively for the sublists:
+<ul>
+<li>For the left subtree (<code>-10</code>), <code>-10</code> becomes the left child of <code>-3</code>.</li>
+<li>For the right subtree (<code>9</code>), <code>9</code> becomes the right child of <code>5</code>.</li>
+</ul>
+</li>
+<li><strong>Step 4:</strong> The recursion terminates when the sublist is empty, and we return the constructed BST.</li>
+</ol>
+<p>The final tree looks like this:</p>
+<pre tabindex="0"><code>         0
+       /   \
+     -3     5
+    /       \
+  -10        9
+</code></pre><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution successfully converts a sorted singly linked list into a balanced binary search tree using the <strong>divide and conquer</strong> approach. By finding the middle node of the list and recursively constructing the tree, we ensure the tree is balanced and the in-order traversal of the tree will give the original sorted list. The time complexity is <strong>O(n)</strong>, and the space complexity is <strong>O(log n)</strong>, making it efficient and suitable for large input sizes. The solution leverages the <strong>slow and fast pointer technique</strong> to efficiently find the middle node in a single pass, ensuring optimal performance.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode66s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode67s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

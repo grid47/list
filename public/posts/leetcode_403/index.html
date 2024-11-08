@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -229,7 +229,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1272s1hbhb">
+<h2 id="hahahugoshortcode1274s1hbhb">
   
 
   
@@ -241,7 +241,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>stones</code> where <code>stones[i]</code> represents the position of the i-th stone on a straight line, determine if a frog can cross to the last stone. The frog starts at the first stone (position <code>0</code>) and can jump to a stone <code>k</code> positions ahead, where <code>k</code> can be one less, the same, or one more than the previous jump. The frog can only jump to stones that exist in the array.</p>
+<p>The problem at hand is a classic dynamic programming problem that involves determining whether a frog can cross a river using stones as stepping points. The frog starts at the first stone and can jump to subsequent stones based on a certain set of rules. Specifically, the frog can jump with varying distances, starting from 1 and increasing or decreasing by 1 unit after each jump.</p>
+<p>Given an array <code>stones</code> representing the positions of stones in the river, the frog must jump across the river from the first stone to the last stone, respecting the following conditions:</p>
+<ul>
+<li>The frog starts at the first stone (position <code>0</code>).</li>
+<li>At each stone, the frog can jump a certain distance, which can either be the same, one unit more, or one unit less than the previous jump, as long as the jump is positive.</li>
+<li>The goal is to determine if the frog can reach the last stone, considering these rules.</li>
+</ul>
+<p>The task is to write a function <code>canCross</code> that returns <code>true</code> if the frog can reach the last stone, and <code>false</code> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,35 +256,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be approached using dynamic programming with a set-based state representation. Here&rsquo;s how we break down the approach:</p>
 <ol>
-<li><strong>Initialization</strong>: Create a map <code>mp</code> to store each stone&rsquo;s position as keys and the set of possible jump distances to that position as values. Start by inserting a jump of <code>1</code> to the first stone.</li>
-<li><strong>Iterate through stones</strong>: For each stone in the list:
-<ul>
-<li>For each possible jump from that stone, calculate the target position (<code>tgt</code>).</li>
-<li>If the target position is the last stone, return <code>true</code>.</li>
-<li>Insert possible jump distances (<code>step + 1</code>, <code>step</code>, <code>step - 1</code>) to the map for the target position, ensuring that the frog can make these jumps.</li>
-</ul>
+<li>
+<p><strong>State Representation</strong>:
+The state of the frog at each stone can be represented by the stone&rsquo;s position and the jump distance it took to get there. For each stone, we maintain a set of possible jump distances that the frog could use to reach that stone. This approach will help us track all possible ways the frog can land on each stone.</p>
 </li>
-<li><strong>Completion Check</strong>: After processing all stones, if the last stone is not reachable, return <code>false</code>.</li>
+<li>
+<p><strong>Dynamic Transitions</strong>:
+We start with the first stone and the initial jump distance of 1 (i.e., the frog can jump 1 unit to reach the next stone). For each stone, we check all possible jump distances that could have led to that stone. From that stone, the frog can:</p>
+<ul>
+<li>Jump the same distance as the previous jump.</li>
+<li>Jump one unit further (i.e., <code>step + 1</code>).</li>
+<li>Jump one unit shorter (i.e., <code>step - 1</code>), as long as the jump distance is positive.</li>
+</ul>
+<p>If the frog can reach the last stone through any of these valid jump distances, we return <code>true</code>. If we exhaust all possibilities and cannot reach the last stone, we return <code>false</code>.</p>
+</li>
+<li>
+<p><strong>Using a Map to Store Possible Jump Distances</strong>:
+To efficiently track the possible jump distances for each stone, we use a map (<code>mp</code>), where the keys represent the stone positions, and the values are sets of possible jump distances that can land on that stone. This allows us to efficiently look up the jump distances at each position and dynamically update them as we move through the stones.</p>
+</li>
+<li>
+<p><strong>Termination Condition</strong>:
+If at any point the frog can jump directly to the last stone, we immediately return <code>true</code>. If the algorithm reaches the end without finding a way to reach the last stone, it returns <code>false</code>.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Map Initialization</strong>: The map <code>mp</code> is initialized with the starting position <code>0</code> having a jump of <code>1</code>.</li>
-<li><strong>Outer Loop</strong>: Iterate through each stone&rsquo;s position:
+<h4 id="step-1-initialize-the-map">
+  Step 1: Initialize the Map
+  <a class="heading-link" href="#step-1-initialize-the-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>mp[<span style="color:#ae81ff">0</span>].insert(<span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li>We use a <code>map</code> to store the possible jump distances for each stone. The key represents the stone position, and the value is a set of possible jump distances that can reach that stone.</li>
+<li>We start by adding the first stone (position <code>0</code>) with an initial jump distance of <code>1</code>, indicating that the frog can jump to the next stone by a distance of <code>1</code>.</li>
+</ul>
+<h4 id="step-2-iterate-through-stones">
+  Step 2: Iterate Through Stones
+  <a class="heading-link" href="#step-2-iterate-through-stones">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> st <span style="color:#f92672">=</span> stones[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> step : mp[st]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tgt <span style="color:#f92672">=</span> st <span style="color:#f92672">+</span> step;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tgt <span style="color:#f92672">==</span> stones[stones.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        mp[tgt].insert(step <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        mp[tgt].insert(step);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(step <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) mp[tgt].insert(step <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each stone in the <code>stones</code> list.</li>
+<li>For each stone <code>st</code>, we iterate over the set of possible jump distances (<code>step</code>) that could have landed on that stone.</li>
+<li>From each valid jump distance, we calculate the target stone position (<code>tgt = st + step</code>).</li>
+<li>If the target stone is the last stone (i.e., <code>tgt == stones[stones.size() - 1]</code>), the frog can reach the last stone, so we return <code>true</code>.</li>
+<li>Otherwise, we update the map <code>mp</code> for the target stone <code>tgt</code>. We add three potential jump distances:
 <ul>
-<li>For each stone, access the set of possible jumps and calculate the target position for each jump.</li>
-<li>If the target position matches the last stone, the frog can cross, so return <code>true</code>.</li>
-<li>Insert new possible jumps for the target position into the map, considering one less, the same, and one more than the previous jump.</li>
+<li><code>step + 1</code>: Jumping one unit further than the current jump.</li>
+<li><code>step</code>: Jumping the same distance as before.</li>
+<li><code>step - 1</code>: Jumping one unit less than the current jump (as long as <code>step - 1 &gt; 0</code>).</li>
 </ul>
 </li>
-<li><strong>Final Check</strong>: If no valid path to the last stone is found after all iterations, return <code>false</code>.</li>
-</ol>
+</ul>
+<h4 id="step-3-return-false-if-no-path-found">
+  Step 3: Return False if No Path Found
+  <a class="heading-link" href="#step-3-return-false-if-no-path-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If the loop completes and no valid path to the last stone has been found, we return <code>false</code>, indicating that the frog cannot reach the last stone.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -285,14 +349,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the number of stones. Each stone might be processed with each possible jump.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the map and the set of jump distances.</li>
-</ul> 
+<li><strong>Initialization</strong>: The initialization of the map with the first stone takes <code>O(1)</code> time.</li>
+<li><strong>Main Loop</strong>: We iterate through all stones (<code>n</code> iterations), and for each stone, we iterate through the set of possible jump distances (<code>step</code>). In the worst case, the number of steps for each stone is proportional to the number of stones, resulting in a time complexity of <strong>O(n^2)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for the Map</strong>: The map stores the possible jump distances for each stone. In the worst case, the number of jump distances for each stone is proportional to <code>n</code>, leading to a space complexity of <strong>O(n^2)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively solves the problem using dynamic programming and a map-based approach to track possible jump distances at each stone. The algorithm is designed to efficiently compute whether the frog can reach the last stone based on the dynamic transitions from each stone. The approach ensures that the solution works even for larger inputs by maintaining a concise state representation for each stone&rsquo;s position.</p>
+<p>The time complexity of <strong>O(n^2)</strong> and space complexity of <strong>O(n^2)</strong> make this solution feasible for moderate-sized inputs. However, for larger inputs, optimizations or alternative approaches might be necessary.</p>
+<p>In summary, this solution demonstrates the use of dynamic programming with a state-based approach to solve a challenging river-crossing problem, offering a clear and efficient way to compute whether the frog can reach the last stone.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1272s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1274s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

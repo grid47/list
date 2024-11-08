@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -262,7 +262,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        inorderTraversal(root<span style="color:#f92672">-&gt;</span>right); <span style="color:#75715e">// Traverse right subtree
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1328s1hbhb">
+<h2 id="hahahugoshortcode1325s1hbhb">
   
 
   
@@ -274,7 +274,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary search tree (BST), find all the modes (the most frequently occurred values) in the BST. If the tree is empty, return an empty array.</p>
+<p>The task is to find the mode(s) in a binary search tree (BST), where the mode is defined as the value(s) that appear most frequently. Given the properties of a BST—where left nodes are smaller than the root and right nodes are larger—finding the mode can be efficiently achieved by leveraging an in-order traversal, which visits nodes in ascending order. The challenge here is to traverse the tree and track frequencies without extra space for storing all nodes, resulting in an optimal, in-place solution.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,81 +282,131 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution employs in-order traversal to visit nodes in ascending order. As we traverse each node, we compare it with the previously visited node to determine if the current value is the same. If it is, we increment the frequency count. If not, we reset the count for the new value. By maintaining the maximum frequency encountered, we can efficiently update the result list whenever a new mode or another equally frequent value is found. Here’s a detailed breakdown of each component:</p>
 <ol>
 <li>
-<p><strong>Inorder Traversal</strong>:</p>
+<p><strong>In-Order Traversal</strong>:</p>
 <ul>
-<li>Perform an inorder traversal of the tree, which retrieves the values in sorted order due to the properties of a BST.</li>
+<li>In-order traversal is ideal for BSTs because it visits nodes in a sorted order, allowing us to detect sequences of identical values.</li>
+<li>During traversal, if the current node’s value matches the previously visited node’s value, we increment the frequency counter. If not, we reset the counter to 1.</li>
 </ul>
 </li>
 <li>
 <p><strong>Tracking Frequencies</strong>:</p>
 <ul>
-<li>Use variables to track the frequency of the current value (<code>currFreq</code>), the maximum frequency observed (<code>maxFreq</code>), and the last value processed (<code>precursor</code>).</li>
+<li>Three main variables help track the frequency: <code>maxFreq</code> (to store the highest frequency encountered), <code>currFreq</code> (current frequency of the value being checked), and <code>precursor</code> (the value of the last visited node).</li>
+<li>When <code>currFreq</code> surpasses <code>maxFreq</code>, we clear the result vector <code>res</code> and add the current node’s value as the new mode. If <code>currFreq</code> equals <code>maxFreq</code>, we add the current node’s value to <code>res</code> since it has the same highest frequency.</li>
 </ul>
 </li>
 <li>
-<p><strong>Updating Modes</strong>:</p>
+<p><strong>Edge Case Handling</strong>:</p>
 <ul>
-<li>During traversal, update the frequency count based on whether the current value is the same as the precursor. If a new maximum frequency is found, reset the result vector and update <code>maxFreq</code>. If the current frequency equals <code>maxFreq</code>, append the value to the result.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Results</strong>:</p>
-<ul>
-<li>After completing the traversal, return the result vector containing all modes.</li>
+<li>If the BST is empty (<code>root == NULL</code>), we immediately return an empty result vector, as there are no nodes to process.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Data Member Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> maxFreq <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, currFreq <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, precursor <span style="color:#f92672">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li><code>maxFreq</code>: Tracks the maximum frequency of any node value encountered so far.</li>
+<li><code>currFreq</code>: Tracks the frequency of the current node value.</li>
+<li><code>precursor</code>: Holds the last visited node’s value, initialized to <code>INT_MIN</code> as a placeholder.</li>
+<li><code>res</code>: Stores the result modes (values that appear with the highest frequency).</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function (<code>findMode</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findMode(TreeNode <span style="color:#f92672">*</span>root) {
+</span></span><span style="display:flex;"><span>    inorderTraversal(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>findMode</code> serves as the main function that initiates the in-order traversal of the BST.</li>
+<li>After traversal, it returns the result vector <code>res</code> containing the modes of the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive In-Order Traversal (<code>inorderTraversal</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inorderTraversal</span>(TreeNode <span style="color:#f92672">*</span>root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    inorderTraversal(root<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (precursor <span style="color:#f92672">==</span> root<span style="color:#f92672">-&gt;</span>val) currFreq<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> currFreq <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (currFreq <span style="color:#f92672">&gt;</span> maxFreq) {
+</span></span><span style="display:flex;"><span>        res.clear();
+</span></span><span style="display:flex;"><span>        maxFreq <span style="color:#f92672">=</span> currFreq;
+</span></span><span style="display:flex;"><span>        res.push_back(root<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (currFreq <span style="color:#f92672">==</span> maxFreq) {
+</span></span><span style="display:flex;"><span>        res.push_back(root<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    precursor <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    inorderTraversal(root<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If the current node is <code>NULL</code>, the function returns immediately, ending recursion for that path.</li>
+<li><strong>Left Subtree Traversal</strong>: The function first recursively traverses the left subtree, consistent with in-order traversal.</li>
+<li><strong>Frequency Check</strong>:
+<ul>
+<li>If the current node’s value equals <code>precursor</code>, it means the same value has been encountered consecutively, so <code>currFreq</code> is incremented.</li>
+<li>If the value differs, <code>currFreq</code> is reset to 1 for this new value.</li>
+</ul>
+</li>
+<li><strong>Updating Results</strong>:
+<ul>
+<li>If <code>currFreq</code> exceeds <code>maxFreq</code>, we clear the <code>res</code> vector (as a new mode with a higher frequency has been found), update <code>maxFreq</code> to <code>currFreq</code>, and add the current node’s value to <code>res</code>.</li>
+<li>If <code>currFreq</code> matches <code>maxFreq</code>, the current node’s value has the same frequency as previous modes, so it’s added to <code>res</code>.</li>
+</ul>
+</li>
+<li><strong>Right Subtree Traversal</strong>: After processing the current node, we traverse the right subtree to complete the in-order traversal.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
 <li>
-<p><strong>Class Definition</strong>:</p>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The <code>Solution</code> class contains the method <code>findMode</code>.</li>
+<li><strong>O(n)</strong>: We visit each node exactly once during the in-order traversal, where <code>n</code> is the number of nodes in the BST.</li>
 </ul>
 </li>
 <li>
-<p><strong>Variable Initialization</strong>:</p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>maxFreq</code> and <code>currFreq</code> are initialized to track frequencies, while <code>precursor</code> stores the last value processed.</li>
-</ul>
-</li>
-<li>
-<p><strong>Main Method</strong>:</p>
-<ul>
-<li><code>findMode</code> initiates the traversal by calling <code>inorderTraversal</code> and returns the results.</li>
-</ul>
-</li>
-<li>
-<p><strong>Traversal Method</strong>:</p>
-<ul>
-<li>The <code>inorderTraversal</code> function recursively visits each node, updating frequencies and managing the result vector based on the frequency conditions.</li>
+<li><strong>O(h)</strong>: The recursion stack requires space proportional to the height of the tree, which is <code>O(log n)</code> for a balanced BST and <code>O(n)</code> for a skewed BST.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree, since each node is visited once during the traversal.</li>
-<li><strong>Space Complexity</strong>: O(n), where n is the size of the result vector in the worst case (if all values are modes), and O(h) for the recursion stack, where h is the height of the tree.</li>
-</ul>
+<p>This solution leverages in-order traversal to efficiently find the modes in a BST. By maintaining a frequency count of consecutive values, we avoid the need for extra storage or additional traversals. The approach is both time-efficient and space-optimized for BST structures, with performance largely determined by tree height. This implementation is ideal for cases where memory constraints are tight, as it only uses minimal extra space for tracking modes and frequencies.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1328s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1325s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -265,13 +265,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a stack that supports the following operations:</p>
+<p>The problem requires us to implement a stack data structure using only queues. Specifically, we need to design a class <code>MyStack</code> that mimics the behavior of a stack using an internal queue for storage. The stack should support the following operations:</p>
 <ol>
-<li><code>push</code>: Push an element onto the stack.</li>
-<li><code>pop</code>: Remove the element on the top of the stack.</li>
-<li><code>top</code>: Get the top element of the stack.</li>
-<li><code>empty</code>: Return whether the stack is empty.</li>
+<li><strong>push(x)</strong>: Pushes element <code>x</code> onto the stack.</li>
+<li><strong>pop()</strong>: Removes and returns the top element of the stack.</li>
+<li><strong>top()</strong>: Returns the top element of the stack without removing it.</li>
+<li><strong>empty()</strong>: Returns <code>true</code> if the stack is empty, otherwise <code>false</code>.</li>
 </ol>
+<p>A stack follows the <strong>Last In, First Out (LIFO)</strong> principle, which means that the last element added to the stack is the first one to be removed.</p>
+<p>The challenge is to implement this stack using only a queue. This requires careful handling of the queue operations to simulate the stack behavior.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -279,51 +281,134 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We can use a single queue to simulate the stack’s LIFO behavior. A queue is a <strong>First In, First Out (FIFO)</strong> structure, which is opposite to the stack’s behavior. However, we can manipulate the queue by shifting elements to simulate the desired stack behavior.</p>
+<p>To achieve this, the key idea is:</p>
 <ul>
-<li><strong>Data Structure</strong>: Utilize a single queue to simulate the stack&rsquo;s behavior.</li>
-<li><strong>Push Operation</strong>:
-<ul>
-<li>Push the new element onto the queue.</li>
-<li>Rotate the queue to maintain the order of elements such that the last pushed element is at the front.</li>
-</ul>
+<li>
+<p><strong>Push operation</strong>: When pushing an element to the stack, we add it to the queue, but to maintain the LIFO order, we need to move all the existing elements behind it. This can be done by rotating the queue after each <code>push</code> operation. By pushing an element and then rotating the queue, the newly pushed element moves to the front of the queue, simulating the top of the stack.</p>
+</li>
+<li>
+<p><strong>Pop operation</strong>: The element at the front of the queue will always represent the top element of the stack, so we can simply dequeue it to simulate the pop behavior.</p>
+</li>
+<li>
+<p><strong>Top operation</strong>: The element at the front of the queue is the current top of the stack, so we return it without modifying the queue.</p>
+</li>
+<li>
+<p><strong>Empty operation</strong>: Simply check if the queue is empty.</p>
 </li>
 </ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using this approach, we can simulate stack operations while using only queue operations. The trick lies in the rotation of the queue elements during the <code>push</code> operation to ensure that the most recently added element stays at the front of the queue, mimicking the stack&rsquo;s LIFO behavior.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Constructor</strong>: Initializes an empty queue.</p>
-</li>
-<li>
-<p><strong>push(int x)</strong>:</p>
-<ul>
-<li>Pushes the element <code>x</code> into the queue.</li>
-<li>Rotates the queue to move all previous elements behind the newly added element.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyStack</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> que;  <span style="color:#75715e">// Step 1: Declare a queue to store the elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Constructor: Initializes the stack (queue in this case)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyStack() {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: Push operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        que.push(x);  <span style="color:#75715e">// Add the element to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// Rotate the queue to make the new element at the front
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> que.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>            que.push(que.front());  <span style="color:#75715e">// Move the front element to the back of the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            que.pop();  <span style="color:#75715e">// Remove the front element after moving it to the back
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 3: Pop operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pop</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> que.front();  <span style="color:#75715e">// Get the front element (top of the stack)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        que.pop();  <span style="color:#75715e">// Remove the front element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// Return the popped element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 4: Top operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">top</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> que.front();  <span style="color:#75715e">// Return the front element (top of the stack)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 5: Empty operation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">empty</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> que.empty();  <span style="color:#75715e">// Check if the queue (stack) is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-1-declare-the-queue">
+  Step 1: Declare the Queue
+  <a class="heading-link" href="#step-1-declare-the-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> que;
+</span></span></code></pre></div><ul>
+<li>A single queue <code>que</code> is declared to store the stack elements. The queue is the only container used, which is a requirement of the problem. The <code>queue</code> is used to simulate the stack&rsquo;s behavior.</li>
 </ul>
-</li>
-<li>
-<p><strong>pop()</strong>:</p>
-<ul>
-<li>Retrieves and removes the element at the front of the queue, which represents the top of the stack.</li>
+<h4 id="step-2-implement-the-push-operation">
+  Step 2: Implement the <code>push</code> Operation
+  <a class="heading-link" href="#step-2-implement-the-push-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>    que.push(x);  <span style="color:#75715e">// Add the element to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Rotate the queue to make the new element at the front
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> que.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        que.push(que.front());  <span style="color:#75715e">// Move the front element to the back of the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        que.pop();  <span style="color:#75715e">// Remove the front element after moving it to the back
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>push</code> operation adds the element <code>x</code> to the queue, but since a queue follows the FIFO principle, we need to rotate the queue elements to simulate the LIFO behavior.</li>
+<li>After adding the element <code>x</code>, we move the existing elements to the back of the queue one by one. The <code>for</code> loop iterates through all elements except the newly added one (<code>que.size() - 1</code> iterations). This ensures that the most recently added element ends up at the front of the queue, simulating the &ldquo;top&rdquo; of the stack.</li>
 </ul>
-</li>
-<li>
-<p><strong>top()</strong>:</p>
-<ul>
-<li>Returns the front element of the queue without removing it, representing the top of the stack.</li>
+<h4 id="step-3-implement-the-pop-operation">
+  Step 3: Implement the <code>pop</code> Operation
+  <a class="heading-link" href="#step-3-implement-the-pop-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pop</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> que.front();  <span style="color:#75715e">// Get the front element (top of the stack)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    que.pop();  <span style="color:#75715e">// Remove the front element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// Return the popped element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>pop</code> operation simply removes and returns the element at the front of the queue, which corresponds to the &ldquo;top&rdquo; of the stack in the LIFO order.</li>
 </ul>
-</li>
-<li>
-<p><strong>empty()</strong>:</p>
-<ul>
-<li>Checks if the queue is empty, returning <code>true</code> if it is, otherwise <code>false</code>.</li>
+<h4 id="step-4-implement-the-top-operation">
+  Step 4: Implement the <code>top</code> Operation
+  <a class="heading-link" href="#step-4-implement-the-top-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">top</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> que.front();  <span style="color:#75715e">// Return the front element (top of the stack)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>top</code> operation returns the element at the front of the queue without removing it, which simulates checking the top of the stack.</li>
 </ul>
-</li>
+<h4 id="step-5-implement-the-empty-operation">
+  Step 5: Implement the <code>empty</code> Operation
+  <a class="heading-link" href="#step-5-implement-the-empty-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">empty</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> que.empty();  <span style="color:#75715e">// Check if the queue (stack) is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>empty</code> operation checks if the queue is empty. If the queue is empty, it means the stack is empty, so we return <code>true</code>; otherwise, we return <code>false</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -332,18 +417,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
 <li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li><code>push</code>: (O(n)) due to the rotation of the queue.</li>
-<li><code>pop</code> and <code>top</code>: (O(1)) as they directly access the front of the queue.</li>
-</ul>
+<p><strong>Push operation</strong>: The <code>push</code> operation involves adding an element to the queue, which is an <code>O(1)</code> operation. However, after adding the element, we need to rotate the queue to simulate the stack&rsquo;s LIFO behavior. This rotation requires <code>O(n)</code> time, where <code>n</code> is the number of elements in the queue. Therefore, the time complexity of the <code>push</code> operation is <strong>O(n)</strong>.</p>
 </li>
 <li>
-<p><strong>Space Complexity</strong>: (O(n)), where (n) is the number of elements in the stack, since all elements are stored in the queue.</p>
+<p><strong>Pop operation</strong>: The <code>pop</code> operation simply removes an element from the front of the queue, which takes <strong>O(1)</strong> time.</p>
+</li>
+<li>
+<p><strong>Top operation</strong>: The <code>top</code> operation retrieves the element from the front of the queue, which is an <strong>O(1)</strong> operation.</p>
+</li>
+<li>
+<p><strong>Empty operation</strong>: The <code>empty</code> operation checks if the queue is empty, which is an <strong>O(1)</strong> operation.</p>
 </li>
 </ul>
+<p>Therefore, the overall time complexities are:</p>
+<ul>
+<li><code>push</code>: <strong>O(n)</strong></li>
+<li><code>pop</code>: <strong>O(1)</strong></li>
+<li><code>top</code>: <strong>O(1)</strong></li>
+<li><code>empty</code>: <strong>O(1)</strong></li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the space needed to store the queue. Since we store all the elements in the queue, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the stack.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution successfully implements a stack using only a queue by leveraging the properties of the queue and rotating its elements during the <code>push</code> operation to simulate the stack’s LIFO behavior. While the <code>push</code> operation is <code>O(n)</code> due to the rotation, both the <code>pop</code>, <code>top</code>, and <code>empty</code> operations are efficient, with a time complexity of <strong>O(1)</strong>.</p>
+<ul>
+<li><strong>Time Complexity</strong>: The <code>push</code> operation has a time complexity of <strong>O(n)</strong>, while <code>pop</code>, <code>top</code>, and <code>empty</code> operations run in <strong>O(1)</strong>.</li>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong> due to the storage of elements in the queue.</li>
+</ul>
+<p>Overall, this solution demonstrates how to use a queue to simulate the behavior of a stack and is efficient for the required operations, making it a useful and interesting approach for implementing stack-like behaviors with limited resources.</p>
  
 </div>
   

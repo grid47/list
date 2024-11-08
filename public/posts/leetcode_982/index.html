@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1645s1hbhb">
+<h2 id="hahahugoshortcode1642s1hbhb">
   
 
   
@@ -244,7 +244,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, the goal is to find the number of triplets <code>(i, j, k)</code> where the bitwise AND of <code>nums[i]</code>, <code>nums[j]</code>, and <code>nums[k]</code> is equal to zero.</p>
+<p>The problem asks to count the number of triplets <code>(i, j, k)</code> in the array <code>nums[]</code> such that:</p>
+<p>[ \text{nums}[i] &amp; \text{nums}[j] &amp; \text{nums}[k] = 0 ]</p>
+<p>where <code>&amp;</code> represents the <strong>bitwise AND</strong> operation. You are tasked with implementing a solution that efficiently counts all such triplets.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,26 +254,108 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to understand the behavior of the <strong>bitwise AND</strong> operation and how it can be leveraged to find triplets satisfying the condition.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Precompute AND Combinations</strong>:</p>
+<p><strong>Bitwise AND</strong>:</p>
 <ul>
-<li>Create a frequency vector <code>mp</code> where <code>mp[x]</code> counts the occurrences of each possible result <code>x</code> that can be obtained from <code>nums[i] &amp; nums[j]</code> for any pair <code>(i, j)</code>.</li>
-<li>Traverse <code>nums</code> with two nested loops, and for each pair <code>(i, j)</code>, calculate <code>nums[i] &amp; nums[j]</code> and increment <code>mp</code> at that index.</li>
+<li>The result of the bitwise AND between two numbers is a number where a bit is set to <code>1</code> if both corresponding bits in the operands are <code>1</code>, otherwise the bit is set to <code>0</code>.</li>
+<li>For the condition <code>nums[i] &amp; nums[j] &amp; nums[k] = 0</code> to hold, all bits in the result of the AND operation between <code>nums[i]</code>, <code>nums[j]</code>, and <code>nums[k]</code> must be zero.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Valid Triplets</strong>:</p>
+<p><strong>Breaking Down the Problem</strong>:</p>
 <ul>
-<li>For each number <code>nums[i]</code> in <code>nums</code>, check all precomputed values in <code>mp</code>.</li>
-<li>For each value <code>j</code> in <code>mp</code>, if <code>(nums[i] &amp; j) == 0</code>, it indicates that adding <code>nums[i]</code> to any pair <code>(nums[a], nums[b])</code> with bitwise AND result <code>j</code> will yield a triplet that satisfies the condition <code>(nums[i] &amp; nums[j] &amp; nums[k]) == 0</code>.</li>
-<li>Increment <code>res</code> by <code>mp[j]</code> for each such <code>j</code>.</li>
+<li>We need to count all triplets <code>(i, j, k)</code> such that the bitwise AND of <code>nums[i]</code>, <code>nums[j]</code>, and <code>nums[k]</code> is zero.</li>
+<li>A brute force solution would involve iterating through all possible triplets, which would be computationally expensive with a time complexity of <strong>O(n^3)</strong>, where <code>n</code> is the size of the array <code>nums[]</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>: The variable <code>res</code> contains the count of all valid triplets.</p>
+<p><strong>Optimized Approach</strong>:</p>
+<ul>
+<li>We can optimize the solution using a <strong>frequency map</strong> (<code>mp</code>) to store the results of pairwise ANDs of the elements in the array.</li>
+<li>Once we have these pairwise AND results stored in the map, we can use another iteration over the array to count the triplets that satisfy the condition using efficient lookups.</li>
+</ul>
 </li>
 </ol>
+<h4 id="algorithm-overview">
+  Algorithm Overview:
+  <a class="heading-link" href="#algorithm-overview">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We first create a frequency map to store the number of occurrences of each possible result from the pairwise bitwise AND operation between the elements of the array.</li>
+<li>Then, for each element in the array, we calculate how many previously stored AND results will satisfy the condition when combined with the current element.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-data-structure-initialization">
+  1. <strong>Data Structure Initialization</strong>:
+  <a class="heading-link" href="#1-data-structure-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp(<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>mp</code> of size <code>2^16</code> (65536) to keep track of the frequency of each possible result of a pairwise AND operation between two elements in <code>nums[]</code>.</li>
+<li>The size <code>2^16</code> is chosen because the bitwise AND of any two numbers in <code>nums[]</code> will result in a number that can be represented in 16 bits (since <code>nums[i]</code> values are constrained to 16 bits).</li>
+</ul>
+<h4 id="2-counting-pairwise-and-results">
+  2. <strong>Counting Pairwise AND Results</strong>:
+  <a class="heading-link" href="#2-counting-pairwise-and-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[nums[i] <span style="color:#f92672">&amp;</span> nums[j]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>We iterate over every pair of elements <code>(i, j)</code> in the array <code>nums[]</code>.</li>
+<li>For each pair <code>(i, j)</code>, we calculate the bitwise AND of <code>nums[i]</code> and <code>nums[j]</code> and increment the corresponding count in the <code>mp</code> vector.</li>
+</ul>
+<h4 id="3-counting-valid-triplets">
+  3. <strong>Counting Valid Triplets</strong>:
+  <a class="heading-link" href="#3-counting-valid-triplets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">16</span>); j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((j <span style="color:#f92672">&amp;</span> nums[i]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) res <span style="color:#f92672">+=</span> mp[j];
+</span></span></code></pre></div><ul>
+<li>Now, we iterate through the array <code>nums[]</code> again, and for each element <code>nums[i]</code>, we check which values of <code>j</code> (from the frequency map <code>mp</code>) satisfy the condition <code>(j &amp; nums[i]) == 0</code>.</li>
+<li>If the condition holds true, it means that the current <code>nums[i]</code> can form a valid triplet with the pairwise AND result <code>j</code> from the frequency map.</li>
+<li>We add the count of such valid pairs to the result <code>res</code>.</li>
+</ul>
+<h4 id="4-returning-the-result">
+  4. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total count of valid triplets.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -279,15 +363,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2 + n * 2^16), where <code>n^2</code> is for filling <code>mp</code> and <code>n * 2^16</code> for checking each element of <code>nums</code> against all values in <code>mp</code>.</li>
-<li><strong>Space Complexity</strong>: O(2^16) for storing the frequency vector <code>mp</code>.</li>
+<li><strong>Pairwise AND Counting</strong>: The first nested loop iterates over all pairs <code>(i, j)</code> in the array. This takes <strong>O(n^2)</strong> time, where <code>n</code> is the size of the array.</li>
+<li><strong>Counting Valid Triplets</strong>: The second nested loop iterates over the array and the possible pairwise AND results (which is <code>2^16 = 65536</code>), making this loop <strong>O(n * 65536)</strong>.
+Since the maximum size of <code>n</code> is typically much smaller than <code>65536</code>, this loop is effectively <strong>O(n)</strong>.</li>
 </ul>
+<p>Thus, the overall time complexity is:
+[
+O(n^2 + n \cdot 65536) = O(n^2)
+]
+This is a significant improvement over the brute-force solution with <strong>O(n^3)</strong> time complexity.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for Frequency Map</strong>: We are using a vector <code>mp</code> of size <code>65536</code> to store the frequency of each possible result of a pairwise AND operation. Thus, the space complexity is <strong>O(65536)</strong>, which is effectively <strong>O(1)</strong> since it is a constant size.</li>
+<li><strong>Space for Input Array</strong>: The input array <code>nums[]</code> takes <strong>O(n)</strong> space.</li>
+</ul>
+<p>Thus, the overall space complexity is:
+[
+O(n + 65536) = O(n)
+]
+The space complexity is linear with respect to the size of the input array.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countTriplets</code> function efficiently counts the number of valid triplets <code>(i, j, k)</code> in the array <code>nums[]</code> that satisfy the condition <code>nums[i] &amp; nums[j] &amp; nums[k] = 0</code>. By using a frequency map to store the results of pairwise AND operations, the solution avoids the computational overhead of a brute force approach and reduces the time complexity to <strong>O(n^2)</strong>. The space complexity is <strong>O(n)</strong>, making the algorithm efficient for large arrays. This solution provides an optimal and scalable approach for solving the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1645s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1642s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

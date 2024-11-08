@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> NULL;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode777s1hbhb">
+<h2 id="hahahugoshortcode776s1hbhb">
   
 
   
@@ -264,7 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary search tree (BST), find the k-th smallest element in it.</p>
+<p>The problem requires us to find the kth smallest element in a binary search tree (BST). Given the root of a BST and an integer <code>k</code>, we need to return the <code>k</code>th smallest element in the tree. In a BST, the elements are organized such that for any node, the left child contains values smaller than the node, and the right child contains values larger than the node. This property enables efficient searching and traversal.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,37 +272,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The efficient way to find the kth smallest element in a BST is by performing an <strong>in-order traversal</strong>. In-order traversal of a BST visits the nodes in ascending order. By traversing the tree in-order, we can visit the elements in sorted order, and the kth smallest element will be encountered exactly after visiting <code>k</code> nodes.</p>
+<p>To avoid recursive overhead, we can implement this traversal iteratively using a stack. We simulate the process of an in-order traversal by maintaining a stack of nodes and iteratively processing the nodes of the BST. Here is a breakdown of how we approach this problem:</p>
+<ol>
+<li>
+<p><strong>In-order Traversal Using Stack</strong>:</p>
 <ul>
-<li><strong>In-Order Traversal</strong>: Utilize the properties of a BST where the in-order traversal yields elements in sorted order.</li>
-<li><strong>Using a Stack</strong>: Implement an iterative in-order traversal using a stack to avoid recursion:
-<ul>
-<li>Push nodes onto the stack until reaching the leftmost node.</li>
-<li>Pop nodes from the stack, decrementing <code>k</code> each time until <code>k</code> reaches zero, which indicates the k-th smallest element.</li>
+<li>We start by pushing the leftmost nodes of the tree onto the stack.</li>
+<li>We then pop nodes from the stack, count them, and move to their right children.</li>
+<li>The moment we pop the kth node from the stack, we know it is the kth smallest element in the BST.</li>
 </ul>
 </li>
+<li>
+<p><strong>Edge Case Handling</strong>:</p>
+<ul>
+<li>The edge case where <code>k</code> exceeds the number of nodes in the tree will not happen based on the problem&rsquo;s constraints (i.e., <code>k</code> is always valid).</li>
+<li>An empty tree would not be passed as input.</li>
 </ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> kthSmallest(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> stk;
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root;
+</span></span></code></pre></div><ul>
+<li>We declare a stack <code>stk</code> to help with the iterative traversal. A stack is needed because it allows us to &ldquo;backtrack&rdquo; to parent nodes once we&rsquo;ve processed all of their left children.</li>
+<li>The variable <code>node</code> points to the root of the tree initially.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">||</span> node) {
+</span></span></code></pre></div><ul>
+<li>The loop runs as long as either the stack is not empty or there are nodes left to visit. The loop ensures that we visit all the nodes in the tree through an in-order traversal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(node) {
+</span></span><span style="display:flex;"><span>                stk.push(node);
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>                stk.pop();
+</span></span><span style="display:flex;"><span>                k<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li><strong>Traverse the left subtree</strong>: If the current node exists (<code>node</code> is not null), we push it onto the stack and move to its left child (<code>node = node-&gt;left</code>).</li>
+<li><strong>Process the current node</strong>: Once there are no more left children (<code>node</code> is null), we pop a node from the stack and visit it.
 <ul>
-<li><strong>Function <code>kthSmallest(TreeNode* root, int k)</code></strong>:
-<ul>
-<li>Initialize an empty stack <code>stk</code> and set a pointer <code>node</code> to <code>root</code>.</li>
-<li>Use a while loop to traverse the tree:
-<ul>
-<li>If <code>node</code> is not null, push it onto the stack and move to its left child.</li>
-<li>If <code>node</code> is null, pop the top node from the stack and decrement <code>k</code>.</li>
-<li>If <code>k</code> equals zero, return the value of the current node (the k-th smallest element).</li>
-<li>Move to the right child of the popped node.</li>
+<li>We decrement <code>k</code> since we have visited one more node.</li>
+<li>If <code>k</code> becomes zero, that means we have found the kth smallest element. We return its value (<code>node-&gt;val</code>).</li>
 </ul>
 </li>
-<li>If the traversal completes without finding the k-th element, return NULL (though this case typically shouldn&rsquo;t occur in a well-formed input).</li>
+<li><strong>Move to the right subtree</strong>: If the current node has a right child, we move to the right child and continue the process.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The function ends when we have found and returned the kth smallest element. The return statement <code>return NULL;</code> will not be executed because the problem guarantees that the kth smallest element always exists.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,14 +344,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(H + k)), where (H) is the height of the tree. The algorithm may need to visit up to (k) nodes.</li>
-<li><strong>Space Complexity</strong>: (O(H)) for the stack space, where (H) is the height of the tree.</li>
-</ul> 
+<li>
+<p><strong>In-order Traversal</strong>: In the worst case, we may need to visit every node in the tree to find the kth smallest element. For each node, we perform constant time operations such as pushing or popping from the stack. Therefore, the time complexity is proportional to the number of nodes in the tree.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <code>O(N)</code> where <code>N</code> is the number of nodes in the tree. However, since we stop the traversal once we&rsquo;ve found the kth smallest element, the time complexity can be considered <code>O(k)</code> in the best case, but in the worst case, we visit all nodes.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Stack Space</strong>: The space complexity is determined by the stack, which stores the nodes along the path of the traversal. In the worst case, the stack will store all nodes from the root to the leftmost node. This will happen when the tree is skewed (i.e., every node has only one child).</p>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(H)</code>, where <code>H</code> is the height of the tree. In the worst case of a completely unbalanced tree, <code>H</code> could be <code>N</code>, where <code>N</code> is the number of nodes. In the best case of a balanced tree, <code>H</code> would be <code>O(log N)</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of finding the kth smallest element in a binary search tree using an iterative in-order traversal with a stack. The in-order traversal allows us to process the nodes in sorted order, and by counting the nodes visited, we can efficiently determine the kth smallest element.</p>
+<h4 id="key-highlights">
+  Key Highlights:
+  <a class="heading-link" href="#key-highlights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>In-order Traversal</strong>: By performing an in-order traversal of the BST, we can visit the elements in ascending order, making it ideal for finding the kth smallest element.</li>
+<li><strong>Iterative Solution</strong>: The stack-based approach allows us to perform the traversal iteratively, avoiding the overhead of recursion and making the solution suitable for large trees.</li>
+<li><strong>Optimal Time and Space Complexity</strong>: The algorithm runs in <code>O(N)</code> time and uses <code>O(H)</code> space, where <code>H</code> is the height of the tree. This is optimal for problems that involve traversing the entire tree.</li>
+<li><strong>Guaranteed Solution</strong>: The problem guarantees that the kth smallest element will always exist, so we don’t need to handle any out-of-bounds errors or edge cases.</li>
+</ul>
+<p>This method is highly efficient for problems that involve BSTs and ensures that the solution is both time and space efficient.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode777s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode776s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

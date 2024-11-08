@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -262,7 +262,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1493s1hbhb">
+<h2 id="hahahugoshortcode1509s1hbhb">
   
 
   
@@ -274,7 +274,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 2D board of characters and a string <code>word</code>, determine if the word exists in the grid. The word can be constructed from letters of sequentially adjacent cells (horizontally or vertically), and the same letter cell may not be used more than once.</p>
+<p>The problem at hand is to determine if a given word exists in a 2D grid of characters. The word can be constructed by sequentially adjacent cells, where adjacent cells are those that share a side (up, down, left, right). A cell may only be used once per word. The task is to implement a function that returns <code>true</code> if the word exists in the grid and <code>false</code> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,66 +282,122 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution leverages a <strong>Depth-First Search (DFS)</strong> algorithm to explore the grid and check if the given word can be formed by traversing adjacent cells. The algorithm performs the following steps:</p>
 <ol>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
+<p><strong>DFS Traversal:</strong>
+The algorithm starts by trying to match the first character of the word with each cell in the grid. Once a match is found, it recursively checks the neighboring cells to find the next character of the word, continuing until the entire word is matched or no further match can be made.</p>
+</li>
+<li>
+<p><strong>Backtracking:</strong>
+As the DFS explores each cell, it marks cells as visited to avoid reusing them in the current word search. If a potential path does not lead to a solution, the cell is unmarked (backtracked), and the search continues with other possible paths.</p>
+</li>
+<li>
+<p><strong>Pruning and Optimization:</strong></p>
 <ul>
-<li>Implement a DFS to explore possible paths for constructing the word starting from each cell in the grid.</li>
+<li>The DFS stops as soon as the entire word is matched (<code>idx == word.size()</code>).</li>
+<li>If a cell does not match the current character of the word or if it has already been visited, the search backtracks immediately.</li>
+<li>The word search is attempted from each cell of the grid. If the word is found starting from any of the cells, the search terminates early and returns <code>true</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Grid Traversal</strong>:</p>
+<p><strong>Edge Cases Handling:</strong></p>
 <ul>
-<li>Iterate through each cell in the grid. For each cell, initiate the DFS if the first character of the word matches the cell&rsquo;s character.</li>
-</ul>
-</li>
-<li>
-<p><strong>DFS Function</strong>:</p>
-<ul>
-<li>Check if the current index in the word matches the character in the grid.</li>
-<li>If the entire word is matched (<code>idx == w.size()</code>), return true.</li>
-<li>Mark the cell as visited to avoid using it again in the same path.</li>
-<li>Recursively explore the four possible directions (up, down, left, right).</li>
-<li>After exploring, unmark the cell as visited to allow for other paths.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If any DFS call returns true, the function returns true. If no paths lead to a match, return false.</li>
+<li>If the word is just one character long, the algorithm checks if any cell in the grid contains that character.</li>
+<li>If the grid has dimensions that are smaller than the length of the word, the search can be skipped early.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Store the grid, word, and its dimensions.</li>
-<li>For each cell, check for a potential match and call the DFS function.</li>
+<h4 id="step-1-class-definition-and-member-variables">
+  Step 1: Class Definition and Member Variables
+  <a class="heading-link" href="#step-1-class-definition-and-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> grid;    <span style="color:#75715e">// The grid to search for the word
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> vis;     <span style="color:#75715e">// Visited cells to avoid revisiting in DFS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m, n;                     <span style="color:#75715e">// Dimensions of the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    string w;                     <span style="color:#75715e">// The word to search for
+</span></span></span></code></pre></div><ul>
+<li><code>grid</code>: Stores the 2D grid of characters in which the word will be searched.</li>
+<li><code>vis</code>: A 2D boolean vector used to mark cells that have already been visited during the DFS.</li>
+<li><code>m, n</code>: Store the number of rows (<code>m</code>) and columns (<code>n</code>) in the grid.</li>
+<li><code>w</code>: The target word to search for in the grid.</li>
 </ul>
-</li>
-<li>
-<p><strong>DFS Logic</strong>:</p>
-<ul>
-<li>Validate the current cell against the corresponding character in the word.</li>
-<li>Mark the current cell as visited and attempt to explore neighboring cells.</li>
-<li>After exploration, backtrack by unmarking the cell.</li>
+<h4 id="step-2-exist-method---main-function-to-check-word-existence">
+  Step 2: <code>exist</code> Method - Main Function to Check Word Existence
+  <a class="heading-link" href="#step-2-exist-method---main-function-to-check-word-existence">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">exist</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> board, string word) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>w <span style="color:#f92672">=</span> word;          <span style="color:#75715e">// Store the word to search for
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> board;      <span style="color:#75715e">// Store the input grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m <span style="color:#f92672">=</span> board.size();  <span style="color:#75715e">// Number of rows in the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> board[<span style="color:#ae81ff">0</span>].size(); <span style="color:#75715e">// Number of columns in the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Try to start the DFS from every cell in the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Special case: if the word is a single character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (w.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> grid[i][j] <span style="color:#f92672">==</span> w[<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                vis.resize(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(n, false)); <span style="color:#75715e">// Reset the visited matrix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (dfs(i, j, <span style="color:#ae81ff">0</span>)) <span style="color:#75715e">// Start DFS from cell (i, j)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If found, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// Return false if no path is found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>exist</code> method initializes necessary member variables with the grid and word.</li>
+<li>It attempts to start the search from every cell in the grid.</li>
+<li>For a special case where the word is just one character, it checks if any cell contains that character directly.</li>
+<li>For each other case, the <code>dfs</code> function is called to start the search from a particular cell, exploring all possible paths recursively.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>If the word can be formed, return true; otherwise, return false.</li>
+<h4 id="step-3-dfs-method---recursive-depth-first-search">
+  Step 3: DFS Method - Recursive Depth-First Search
+  <a class="heading-link" href="#step-3-dfs-method---recursive-depth-first-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, <span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> w.size()) <span style="color:#66d9ef">return</span> true; <span style="color:#75715e">// If the entire word is matched, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (grid[i][j] <span style="color:#f92672">!=</span> w[idx] <span style="color:#f92672">||</span> vis[i][j]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// If current cell doesn&#39;t match the character or is already visited, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#f92672">=</span> true; <span style="color:#75715e">// Mark the current cell as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> ans <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Explore all 4 neighboring cells
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) ans <span style="color:#f92672">|=</span> dfs(i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Explore top cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) ans <span style="color:#f92672">|=</span> dfs(i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Explore left cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) ans <span style="color:#f92672">|=</span> dfs(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// Explore bottom cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) ans <span style="color:#f92672">|=</span> dfs(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// Explore right cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#f92672">=</span> false; <span style="color:#75715e">// Unmark the current cell (backtrack)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans; <span style="color:#75715e">// Return true if any path found, otherwise false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function recursively explores the grid to match characters of the word starting from position <code>(i, j)</code> at index <code>idx</code>.</li>
+<li>If the current cell matches the character at index <code>idx</code> of the word and has not been visited, it marks the cell as visited and recursively explores its neighbors (top, left, bottom, right).</li>
+<li>After exploring all neighbors, the cell is unmarked (backtracked) to allow the search to explore other paths.</li>
+<li>The function returns <code>true</code> if a valid path is found for the entire word, otherwise <code>false</code>.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -349,15 +405,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this algorithm is <strong>O(m * n * 4^L)</strong>, where <code>m</code> and <code>n</code> are the dimensions of the grid, and <code>L</code> is the length of the word.</p>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(m \times n \times 4^L) ), where ( m ) and ( n ) are the dimensions of the grid, and ( L ) is the length of the word. Each cell can branch out in four directions, leading to an exponential growth of paths.</li>
-<li><strong>Space Complexity:</strong> ( O(m \times n) ) for the visited array, plus the recursive call stack which can go as deep as the length of the word.</li>
+<li>Each recursive call of <code>dfs</code> explores up to 4 directions (left, right, top, bottom). In the worst case, it may explore every cell for each character of the word, leading to the <code>4^L</code> factor, where <code>L</code> is the word length.</li>
+<li>The worst case occurs when the algorithm needs to start the DFS from every grid cell, leading to <code>m * n</code> initial searches.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(m * n)</strong>, which is required for:</p>
+<ul>
+<li>The <code>vis</code> matrix used to track visited cells during the DFS traversal.</li>
+<li>The recursion stack, which can grow to a maximum depth of <code>L</code> (the length of the word), but the dominant factor is the grid size, so the space complexity is dominated by the size of the grid.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm effectively solves the problem of finding a word in a 2D grid by using the <strong>DFS (Depth-First Search)</strong> strategy combined with <strong>backtracking</strong>. It efficiently explores all possible paths to construct the word from adjacent cells, pruning unnecessary paths through early termination and backtracking. The solution handles edge cases such as one-character words and large grids gracefully. Though the time complexity is exponential in the worst case, the algorithm is well-suited for moderate-sized grids and word lengths. This approach is optimal for problems involving word search in grids, where multiple possible paths need to be explored.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1493s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1509s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

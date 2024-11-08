@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1252s1hbhb">
+<h2 id="hahahugoshortcode1251s1hbhb">
   
 
   
@@ -244,7 +244,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings, <code>ransomNote</code> and <code>magazine</code>, determine if the <code>ransomNote</code> can be constructed using the letters from the <code>magazine</code>. Each letter in the magazine can only be used once in the ransom note.</p>
+<p>In this problem, you are given two strings: <code>ransomNote</code> and <code>magazine</code>. The task is to determine if you can construct the <code>ransomNote</code> string from the characters available in the <code>magazine</code> string. The characters in the <code>magazine</code> can be used only once, and you are allowed to use multiple occurrences of the same character.</p>
+<p>For example:</p>
+<ul>
+<li>If <code>ransomNote = &quot;aa&quot;</code> and <code>magazine = &quot;aab&quot;</code>, then it&rsquo;s possible to construct the ransom note because the magazine contains the required characters.</li>
+<li>If <code>ransomNote = &quot;aa&quot;</code> and <code>magazine = &quot;ab&quot;</code>, then it&rsquo;s impossible to construct the ransom note because there aren&rsquo;t enough occurrences of the letter &lsquo;a&rsquo;.</li>
+</ul>
+<p>The goal is to return <strong>true</strong> if the ransom note can be constructed from the magazine and <strong>false</strong> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,61 +258,127 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we will use a frequency count for the characters in the <code>magazine</code> string. The steps are as follows:</p>
+<p>The solution to this problem relies on counting the frequency of characters in both the <code>ransomNote</code> and <code>magazine</code> strings and comparing these frequencies. Specifically, the approach follows these steps:</p>
 <ol>
 <li>
-<p><strong>Character Counting</strong>:</p>
-<ul>
-<li>Use a hash map (or <code>std::map</code> in C++) to count the occurrences of each character in the <code>magazine</code>.</li>
-</ul>
+<p><strong>Count Characters in the Magazine</strong>: We first count the frequency of each character in the <code>magazine</code>. This allows us to track how many times each character is available to construct the <code>ransomNote</code>.</p>
 </li>
 <li>
-<p><strong>Ransom Note Construction</strong>:</p>
-<ul>
-<li>Iterate through each character in the <code>ransomNote</code>.</li>
-<li>For each character, check if it exists in the frequency map.</li>
-<li>If it does, decrement its count in the map. If the count reaches zero, remove the character from the map.</li>
-<li>If a character in the <code>ransomNote</code> is not found in the map, return <code>false</code>.</li>
-</ul>
+<p><strong>Check if Each Character in the Ransom Note Can Be Constructed</strong>: For each character in the <code>ransomNote</code>, we check if the <code>magazine</code> has enough of that character. If any character in the <code>ransomNote</code> is missing or not available enough times, we return <strong>false</strong>. Otherwise, we proceed with reducing the count of that character in the <code>magazine</code>.</p>
 </li>
 <li>
-<p><strong>Completion Check</strong>:</p>
-<ul>
-<li>If all characters in <code>ransomNote</code> can be matched with those in <code>magazine</code>, return <code>true</code>.</li>
-</ul>
+<p><strong>Return True if All Characters Are Available</strong>: If we are able to go through the entire <code>ransomNote</code> and find sufficient characters in the <code>magazine</code>, we return <strong>true</strong>, meaning it is possible to construct the ransom note.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The key data structure used here is a map (or hash map), which allows us to efficiently count and check the frequency of characters.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initializing-the-frequency-map-for-the-magazine">
+  Step 1: Initializing the Frequency Map for the Magazine
+  <a class="heading-link" href="#step-1-initializing-the-frequency-map-for-the-magazine">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: magazine)
+</span></span><span style="display:flex;"><span>    mp[x]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We create a <code>map&lt;char, int&gt; mp</code> to store the frequency of each character in the <code>magazine</code>. The keys of the map are the characters from the <code>magazine</code>, and the values are their respective counts.</li>
+<li>We iterate through each character <code>x</code> in the <code>magazine</code> string and increment its count in the map. This will allow us to track how many occurrences of each character we have in the <code>magazine</code>.</li>
+</ul>
+<h4 id="step-2-checking-if-each-character-in-the-ransom-note-can-be-constructed">
+  Step 2: Checking if Each Character in the Ransom Note Can Be Constructed
+  <a class="heading-link" href="#step-2-checking-if-each-character-in-the-ransom-note-can-be-constructed">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> ransomNote.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp.count(ransomNote[j])) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        mp[ransomNote[j]]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp[ransomNote[j]] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(ransomNote[j]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through each character <code>ransomNote[j]</code> in the <code>ransomNote</code> string.</li>
+<li>If the <code>magazine</code> does not contain the character <code>ransomNote[j]</code> (i.e., <code>mp.count(ransomNote[j]) == 0</code>), we immediately return <strong>false</strong> because the character required for the ransom note is not available in the magazine.</li>
+<li>If the character is available, we decrement its count in the map (<code>mp[ransomNote[j]]--</code>) to simulate using one occurrence of that character from the magazine.</li>
+<li>If the count of a character reaches zero, we remove it from the map (<code>mp.erase(ransomNote[j])</code>) to avoid using the same character more times than it is available in the magazine.</li>
+</ul>
+<h4 id="step-3-return-true-if-all-characters-are-available">
+  Step 3: Return True if All Characters Are Available
+  <a class="heading-link" href="#step-3-return-true-if-all-characters-are-available">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we complete the loop without returning <strong>false</strong>, it means that we have successfully checked that the magazine contains all the characters required to construct the ransom note.</li>
+<li>We return <strong>true</strong>, indicating that it is possible to construct the ransom note from the magazine.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>The <code>canConstruct</code> function:
+<li><strong>O(m + n)</strong>, where <code>m</code> is the length of the <code>magazine</code> string and <code>n</code> is the length of the <code>ransomNote</code> string.
 <ul>
-<li>Initializes a map to count characters from <code>magazine</code>.</li>
-<li>Checks each character in <code>ransomNote</code> against the map and updates the counts accordingly.</li>
+<li>The first loop where we count the characters in the <code>magazine</code> takes O(m) time.</li>
+<li>The second loop where we check the characters in the <code>ransomNote</code> takes O(n) time.</li>
+<li>Therefore, the overall time complexity is O(m + n).</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m)</strong>, where <code>m</code> is the number of unique characters in the <code>magazine</code> string.
+<ul>
+<li>We use a map (<code>mp</code>) to store the frequency of characters in the <code>magazine</code>, and the map&rsquo;s size depends on the number of unique characters in the <code>magazine</code>. In the worst case, this could be O(m).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution effectively solves the problem by leveraging a <strong>frequency counting approach</strong> with a <code>map</code> to track the occurrences of characters in the <code>magazine</code> string. Here&rsquo;s a quick summary of the approach and its benefits:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(m + n), where <code>m</code> is the length of <code>magazine</code> and <code>n</code> is the length of <code>ransomNote</code>. This is because we process both strings once.</li>
-<li><strong>Space Complexity</strong>: O(1), as the space used by the map is constant with respect to the number of unique characters (limited to 26 for lowercase English letters).</li>
+<li><strong>Time Complexity</strong>: The solution runs in linear time relative to the lengths of the <code>magazine</code> and <code>ransomNote</code>, making it efficient for large inputs.</li>
+<li><strong>Space Complexity</strong>: The solution uses a map to store the character counts, which ensures that space usage is minimal and proportional to the number of unique characters in the <code>magazine</code>.</li>
 </ul>
+<p>By using a map to count the frequencies and adjust the available characters in the <code>magazine</code> as we go through the <code>ransomNote</code>, this solution ensures that each character is only used as many times as it appears in the <code>magazine</code>, thereby solving the problem correctly and efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1252s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1251s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

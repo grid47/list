@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a linked list, swap every two adjacent nodes and return its head. If the number of nodes is odd, the last node should remain unchanged.</p>
+<p>The problem requires swapping every two adjacent nodes in a singly linked list. Specifically, given a linked list, the task is to modify the list such that every two adjacent nodes are swapped, and return the modified list.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>A singly linked list with <code>n</code> nodes.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>A modified singly linked list where every two adjacent nodes have been swapped. If there is an odd number of nodes, the last node remains unchanged.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,67 +279,121 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be approached iteratively by traversing the linked list while keeping track of the current and next node, swapping them as we go. The key challenge is to properly maintain the links between the nodes to ensure no part of the list is lost during the swap process.</p>
+<h4 id="steps-to-solve-the-problem">
+  Steps to solve the problem:
+  <a class="heading-link" href="#steps-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Base Case</strong>:</p>
+<p><strong>Base Case Check</strong>:</p>
 <ul>
-<li>If the list is empty or contains only one node, return the head as no swaps can be performed.</li>
+<li>If the linked list is empty (<code>head == NULL</code>) or only contains one node (<code>head-&gt;next == NULL</code>), there is no need to perform any swaps. We can simply return the head as-is.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Iterative Swap Process</strong>:</p>
 <ul>
-<li>Define pointers:
+<li>We initialize a pointer <code>cur</code> to the head of the list, and a pointer <code>nxt</code> to the second node (<code>head-&gt;next</code>).</li>
+<li>We also initialize a pointer <code>prv</code> to <code>NULL</code>, which will be used to link the previous node to the swapped pair.</li>
+<li>In each iteration of the loop:
 <ul>
-<li><code>cur</code> to track the current node.</li>
-<li><code>nxt</code> to track the next node (which will be swapped with <code>cur</code>).</li>
-<li><code>ret</code> to store the new head of the modified list (which will be the second node).</li>
-<li><code>prv</code> to keep track of the previous node to correctly link the swapped pairs.</li>
+<li>We swap <code>cur</code> and <code>nxt</code> by updating the next pointers:
+<ul>
+<li><code>cur-&gt;next</code> will point to the node after <code>nxt</code>,</li>
+<li><code>nxt-&gt;next</code> will point to <code>cur</code>.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p><strong>Swapping Process</strong>:</p>
-<ul>
-<li>Iterate through the list while both <code>cur</code> and <code>nxt</code> are not null:
-<ul>
-<li>Update the <code>next</code> of the previous node (<code>prv</code>) to point to the next node (<code>nxt</code>).</li>
-<li>Set <code>prv</code> to the current node (<code>cur</code>).</li>
-<li>Adjust the <code>next</code> pointers to swap <code>cur</code> and <code>nxt</code>.</li>
-<li>Move <code>cur</code> to the next node in the original sequence (which is now the node after the swapped pair).</li>
-<li>Update <code>nxt</code> to the node after <code>cur</code> for the next swap.</li>
+<li>After the swap, <code>cur</code> is updated to the next node (which is now the node that was originally after <code>cur</code>), and <code>nxt</code> is updated to the node after <code>cur</code>.</li>
+<li>We repeat this process until we reach the end of the list.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Return the New Head</strong>: After all swaps, return <code>ret</code>, which points to the new head of the swapped list.</p>
+<p><strong>Return the Head</strong>:</p>
+<ul>
+<li>The modified linked list is returned, starting from <code>ret</code>, which points to the new head of the swapped list (the second node of the original list).</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-base-case-handling">
+  1. Base Case Handling
+  <a class="heading-link" href="#1-base-case-handling">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> NULL <span style="color:#f92672">||</span> head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> head;
+</span></span></code></pre></div><ul>
+<li>The first condition checks if the head is <code>NULL</code>, indicating an empty list. The second condition checks if the list has only one node (<code>head-&gt;next == NULL</code>). In both cases, no swaps are needed, and the original list is returned.</li>
+</ul>
+<h4 id="2-initializing-pointers">
+  2. Initializing Pointers
+  <a class="heading-link" href="#2-initializing-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> cur <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>nxt <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next, <span style="color:#f92672">*</span>ret <span style="color:#f92672">=</span> nxt, <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> NULL;
+</span></span></code></pre></div><ul>
+<li><code>cur</code>: Points to the first node (<code>head</code>) and will be used to track the current node while traversing the list.</li>
+<li><code>nxt</code>: Points to the second node (<code>head-&gt;next</code>) and will be used to track the next node during the swap.</li>
+<li><code>ret</code>: This is a pointer that will eventually point to the new head of the list (which is the second node of the original list).</li>
+<li><code>prv</code>: A pointer initialized to <code>NULL</code>, which will be used to maintain the link to the previous node after swapping.</li>
+</ul>
+<h4 id="3-iterative-loop-for-swapping-pairs">
+  3. Iterative Loop for Swapping Pairs
+  <a class="heading-link" href="#3-iterative-loop-for-swapping-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(cur <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> nxt <span style="color:#f92672">!=</span> NULL) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(prv <span style="color:#f92672">!=</span> NULL) prv<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> nxt;
+</span></span><span style="display:flex;"><span>    prv <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>    cur<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> nxt<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    nxt<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">!=</span> NULL) nxt <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The <code>while</code> loop continues as long as <code>cur</code> and <code>nxt</code> are not <code>NULL</code>, meaning there are still pairs of nodes to swap.</p>
 <ol>
-<li><strong>Base Condition Check</strong>: The function immediately returns the head if it’s null or has only one node.</li>
-<li><strong>Pointer Initialization</strong>:
+<li><strong>Link the Previous Node</strong>: If <code>prv</code> is not <code>NULL</code>, update the <code>next</code> pointer of <code>prv</code> to point to <code>nxt</code>, the new head of the swapped pair.</li>
+<li><strong>Update Pointers</strong>:
 <ul>
-<li><code>cur</code> starts at the head, and <code>nxt</code> points to the second node.</li>
-<li><code>ret</code> stores the new head (the second node).</li>
+<li><code>prv</code> is updated to <code>cur</code> (as <code>cur</code> is now the first node of the swapped pair).</li>
+<li><code>cur-&gt;next</code> is updated to point to <code>nxt-&gt;next</code>, which is the node after <code>nxt</code>.</li>
+<li><code>nxt-&gt;next</code> is updated to point to <code>cur</code>, completing the swap for this pair.</li>
 </ul>
 </li>
-<li><strong>Swapping Logic</strong>:
-<ul>
-<li>In the loop, the pointers are rearranged to perform the swap.</li>
-<li>Ensure to check for <code>cur</code> and <code>nxt</code> being non-null before attempting to access their values.</li>
-</ul>
-</li>
-<li><strong>Return the Result</strong>: Finally, the function returns the new head of the list after all necessary swaps.</li>
+<li><strong>Move to the Next Pair</strong>: <code>cur</code> is updated to <code>cur-&gt;next</code>, which is now the node after <code>cur</code>. If <code>cur</code> is not <code>NULL</code>, <code>nxt</code> is updated to <code>cur-&gt;next</code>, setting up the next pair for swapping.</li>
 </ol>
+</li>
+</ul>
+<h4 id="4-return-the-modified-list">
+  4. Return the Modified List
+  <a class="heading-link" href="#4-return-the-modified-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ret;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, <code>ret</code> points to the new head of the list (the second node of the original list). The modified list is returned.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -327,10 +401,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(N)), where (N) is the number of nodes in the linked list.</li>
-<li><strong>Space Complexity:</strong> (O(1)) since the swapping is done in place and only a constant amount of additional space is used for pointers.</li>
+<li><strong>O(n)</strong>: The algorithm iterates through the linked list once, where <code>n</code> is the number of nodes. In each iteration, the nodes are swapped in constant time, so the overall time complexity is linear.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses a constant amount of extra space, regardless of the size of the input list. The space is used only for a few pointers (<code>cur</code>, <code>nxt</code>, <code>prv</code>, and <code>ret</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>swapPairs</code> function provides an efficient solution to swap every two adjacent nodes in a singly linked list. The algorithm operates in <strong>O(n)</strong> time, making it suitable for large linked lists. By using a few pointers and modifying the next pointers of the nodes, we achieve the desired swaps in a single pass through the list. The algorithm&rsquo;s <strong>O(1)</strong> space complexity makes it very efficient, as it does not require any additional space beyond the given linked list.</p>
+<p>This solution is optimal in terms of both time and space for the problem at hand, making it an excellent choice for swapping nodes in a linked list.</p>
  
 </div>
   

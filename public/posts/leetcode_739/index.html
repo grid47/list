@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -257,7 +257,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>temp</code> where <code>temp[i]</code> is the temperature on the <code>i</code>-th day, return an array <code>ans</code> such that <code>ans[i]</code> is the number of days you have to wait until a warmer temperature. If there is no future day for which this is possible, keep <code>ans[i]</code> at 0.</p>
+<p>The problem requires finding the number of days you have to wait until a warmer temperature for each day in a given list of temperatures. Given an array of daily temperatures <code>temp</code>, the task is to return an array <code>ans</code> such that each element <code>ans[i]</code> is the number of days you have to wait until a warmer temperature for the <code>i</code>-th day. If there is no future day with a warmer temperature, the corresponding entry in <code>ans[i]</code> will be <code>0</code>.</p>
+<p>For example, given the array <code>temp = [73, 74, 75, 71, 69, 72, 76, 73]</code>, the output should be <code>[1, 1, 4, 2, 1, 1, 0, 0]</code>. This is because:</p>
+<ul>
+<li>On day 0 (temperature 73), the next day with a warmer temperature is day 1 (74), so <code>ans[0] = 1</code>.</li>
+<li>On day 1 (temperature 74), the next day with a warmer temperature is day 2 (75), so <code>ans[1] = 1</code>.</li>
+<li>On day 2 (temperature 75), the next warmer temperature is on day 6 (76), so <code>ans[2] = 4</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -265,64 +271,69 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<p>This problem can be solved efficiently using a <strong>stack-based approach</strong>:</p>
 <ul>
-<li>Use a stack to keep track of the indices of the temperatures. The stack will store pairs of temperature values and their corresponding indices.</li>
-<li>Create an output vector <code>ans</code> initialized to 0, of the same size as the input temperature array.</li>
+<li>We will maintain a stack that stores pairs of the form <code>(temperature, index)</code>.</li>
+<li>For each day&rsquo;s temperature:
+<ul>
+<li>If the current temperature is greater than the temperature stored at the top of the stack, we know that the current temperature is the next warmer temperature for the day at the top of the stack.</li>
+<li>We then calculate the difference between the current day and the day at the top of the stack, which gives us the number of days to wait for a warmer temperature for that day.</li>
+<li>We pop the stack and repeat the process until the stack is either empty or the current temperature is not greater than the temperature at the top of the stack.</li>
 </ul>
 </li>
-<li>
-<p><strong>Iterate through the Temperatures</strong>:</p>
-<ul>
-<li>For each temperature <code>temp[i]</code>, check if it is greater than the temperature at the index stored at the top of the stack:
-<ul>
-<li>If so, pop the index from the stack, and calculate the difference between the current index <code>i</code> and the popped index to determine the number of days to wait. Store this value in <code>ans</code>.</li>
+<li>After processing all the temperatures, we return the <code>ans</code> array where each entry represents the number of days to wait for a warmer temperature.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Push Current Temperature</strong>:</p>
-<ul>
-<li>Always push the current temperature and its index onto the stack after processing any previous temperatures.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Cleanup</strong>:</p>
-<ul>
-<li>If there are any remaining indices in the stack after processing all temperatures, it means there were no warmer days for those temperatures, and they remain 0 in the <code>ans</code> vector.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Finally, return the <code>ans</code> vector containing the results.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<ol>
 <li>
-<p><strong>Class</strong>:</p>
+<p><strong>Initialize the stack and the answer array</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains the main method for processing the temperature data.</li>
+<li>We initialize a stack <code>stk</code> to store pairs of the form <code>(temperature, index)</code>.</li>
+<li>We initialize the <code>ans</code> array with the same size as the input <code>temp</code> array, filled with zeros. The <code>ans[i]</code> will represent the number of days to wait until a warmer temperature for the <code>i</code>-th day.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> stk;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(temp.size(), <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Method</strong>:</p>
+<p><strong>Iterate through the <code>temp</code> array</strong>:</p>
 <ul>
-<li><code>vector&lt;int&gt; dailyTemperatures(vector&lt;int&gt;&amp; temp)</code>: Implements the logic to compute the number of days to wait for a warmer temperature.</li>
+<li>For each temperature <code>temp[i]</code> on day <code>i</code>, we check if the stack is not empty and if the current temperature is greater than the temperature at the top of the stack. If so, it means we have found a warmer day for the day stored at the top of the stack.</li>
+<li>We pop the stack and calculate the difference between the current day and the day stored in the stack. This gives us the number of days to wait until a warmer temperature for that day.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> temp.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> temp[i] <span style="color:#f92672">&gt;</span> stk.top().first) {
+</span></span><span style="display:flex;"><span>        pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>        ans[x.second] <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> x.second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    stk.push(make_pair(temp[i], i));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handle the remaining days in the stack</strong>:</p>
+<ul>
+<li>After processing all days, there may still be some days left in the stack for which we didn’t find a warmer temperature. For these days, we set <code>ans[i]</code> to <code>0</code>, which is the default value already initialized in the array.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> x <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span><span style="display:flex;"><span>    ans[x.second] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the result</strong>:</p>
+<ul>
+<li>Finally, we return the <code>ans</code> array that contains the number of days to wait for a warmer temperature for each day.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div></li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -330,10 +341,36 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of days (length of the <code>temp</code> array), since each temperature is processed once.</li>
-<li><strong>Space Complexity</strong>: O(N) in the worst case for the stack if temperatures are in strictly increasing order.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of days (length of the <code>temp</code> array). We traverse the <code>temp</code> array once, and each element is pushed and popped from the stack at most once. Hence, the total time complexity is linear.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of days. We use the <code>stk</code> stack to store the temperatures and their corresponding indices, and the <code>ans</code> array to store the results.</li>
+</ul>
+<p>Thus, the space complexity is also linear due to the usage of the stack and the result array.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This stack-based approach efficiently calculates the number of days to wait for a warmer temperature for each day in the input array. By using a stack to keep track of temperatures and their indices, we ensure that each day is processed in constant time. This solution provides an optimal way to solve the problem with a time complexity of <strong>O(n)</strong>, making it scalable even for large input sizes.</p>
+<p>The key advantage of using a stack here is that it allows us to efficiently find the next warmer temperature for each day, reducing the need for nested loops and making the algorithm significantly faster than brute-force solutions.</p>
  
 </div>
   

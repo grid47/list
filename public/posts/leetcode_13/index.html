@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -246,7 +246,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode179s1hbhb">
+<h2 id="hahahugoshortcode165s1hbhb">
   
 
   
@@ -258,7 +258,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Convert a Roman numeral string into its equivalent integer value.</p>
+<p>The problem requires converting a Roman numeral string to an integer. Roman numerals are a combination of characters representing specific values. The task is to write a function <code>romanToInt</code> that takes a Roman numeral string as input and returns its corresponding integer value.</p>
+<p>For example:</p>
+<ul>
+<li>&ldquo;III&rdquo; should return 3.</li>
+<li>&ldquo;IV&rdquo; should return 4.</li>
+<li>&ldquo;IX&rdquo; should return 9.</li>
+<li>&ldquo;LVIII&rdquo; should return 58.</li>
+<li>&ldquo;MCMXCIV&rdquo; should return 1994.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,52 +274,104 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Utilize a reverse traversal of the Roman numeral string, adjusting the total based on the relative values of consecutive Roman numeral characters.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Roman numerals follow certain conventions:</p>
+<ol>
+<li>If a smaller numeral appears before a larger one, it is subtracted (e.g., &ldquo;IV&rdquo; represents 4, not 6).</li>
+<li>If a numeral is followed by a numeral of equal or smaller value, it is added (e.g., &ldquo;VI&rdquo; represents 6).</li>
+</ol>
+<p>Given these rules, the general approach is:</p>
+<ol>
+<li>Start by converting the last character to its corresponding value.</li>
+<li>Traverse the string from right to left, and for each character:
+<ul>
+<li>Compare the current numeral&rsquo;s value to the previous numeral’s value.</li>
+<li>If the current numeral is smaller than the previous one, subtract its value; otherwise, add its value.</li>
+</ul>
+</li>
+</ol>
+<p>By doing this, we correctly handle cases where smaller numerals precede larger ones (like in &ldquo;IV&rdquo;, &ldquo;IX&rdquo;, etc.).</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Get the length of the input string <code>s</code> and initialize <code>res</code> with the integer value of the last character using the helper function <code>RomToNum</code>.</li>
-<li>Set <code>prv</code> to the value of the last Roman numeral character, and <code>curr</code> to hold the value of the current character being processed.</li>
+<h4 id="step-1-romantoint-function">
+  Step 1: <code>romanToInt</code> Function
+  <a class="heading-link" href="#step-1-romantoint-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">romanToInt</span>(string s)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ln <span style="color:#f92672">=</span> s.length();  <span style="color:#75715e">// Get the length of the input string.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> RomToNum(s[ln<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);  <span style="color:#75715e">// Convert the last character to its integer value.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> prv <span style="color:#f92672">=</span> res, curr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the result <code>res</code> with the value of the last character of the string.</li>
+<li><code>prv</code> stores the previous numeral’s value, which is initially set to the last character&rsquo;s value.</li>
+<li><code>curr</code> is used to store the current numeral&rsquo;s value as we iterate through the string.</li>
 </ul>
-</li>
-<li>
-<p><strong>For Loop</strong>:</p>
-<ul>
-<li>Iterate through the string from the second-to-last character to the first:
-<ul>
-<li>Convert the current Roman numeral character to its integer value using <code>RomToNum</code>.</li>
-<li>Compare <code>curr</code> (the value of the current character) with <code>prv</code> (the value of the previous character):
-<ul>
-<li>If <code>curr</code> is less than <code>prv</code>, subtract <code>curr</code> from <code>res</code> (indicating a subtractive combination, e.g., IV = 4).</li>
-<li>Otherwise, add <code>curr</code> to <code>res</code>.</li>
+<h4 id="step-2-iterate-through-the-string">
+  Step 2: Iterate Through the String
+  <a class="heading-link" href="#step-2-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ln <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)  <span style="color:#75715e">// Start iterating from the second last character.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>    curr <span style="color:#f92672">=</span> RomToNum(s[i]);  <span style="color:#75715e">// Convert the current character to its integer value.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    (curr <span style="color:#f92672">&lt;</span> prv) <span style="color:#f92672">?</span> (res <span style="color:#f92672">-=</span> curr) <span style="color:#f92672">:</span> (res <span style="color:#f92672">+=</span> curr);  <span style="color:#75715e">// Check if current numeral is smaller than previous one.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    prv <span style="color:#f92672">=</span> curr;  <span style="color:#75715e">// Update the previous value to the current value.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We start the loop from the second last character (<code>ln - 2</code>) and move towards the first character of the string.</li>
+<li>The <code>curr</code> variable is updated with the value of the current character.</li>
+<li>If the current numeral’s value is smaller than the previous numeral’s value (<code>curr &lt; prv</code>), we subtract <code>curr</code> from <code>res</code>. This handles cases like &ldquo;IV&rdquo; or &ldquo;IX&rdquo;, where the smaller numeral should be subtracted.</li>
+<li>Otherwise, we add <code>curr</code> to <code>res</code>, which is the case for normal numeral combinations like &ldquo;VI&rdquo; or &ldquo;XII&rdquo;.</li>
+<li>Finally, <code>prv</code> is updated to the current value (<code>curr</code>), so that it can be used for the next iteration.</li>
 </ul>
-</li>
-<li>Update <code>prv</code> to be the value of <code>curr</code> for the next iteration.</li>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the computed result.
+</span></span></span></code></pre></div><ul>
+<li>After processing all the characters, <code>res</code> contains the final integer value, which is returned.</li>
 </ul>
-</li>
+<h4 id="step-4-romtonum-helper-function">
+  Step 4: <code>RomToNum</code> Helper Function
+  <a class="heading-link" href="#step-4-romtonum-helper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">RomToNum</span>(<span style="color:#66d9ef">char</span> s)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (s)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;I&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;   <span style="color:#75715e">// Roman numeral I maps to 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;V&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">5</span>;   <span style="color:#75715e">// Roman numeral V maps to 5.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;X&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Roman numeral X maps to 10.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">50</span>;  <span style="color:#75715e">// Roman numeral L maps to 50.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;C&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">100</span>; <span style="color:#75715e">// Roman numeral C maps to 100.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;D&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">500</span>; <span style="color:#75715e">// Roman numeral D maps to 500.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;M&#39;</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1000</span>; <span style="color:#75715e">// Roman numeral M maps to 1000.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// If the character is not a valid Roman numeral, return 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>This helper function <code>RomToNum</code> takes a Roman numeral character and returns its integer value. For example, &lsquo;I&rsquo; returns 1, &lsquo;V&rsquo; returns 5, and so on.</li>
+<li>The function uses a <code>switch</code> statement to match the character and return the corresponding integer value.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Once all characters have been processed, return the computed integer value <code>res</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Helper Function <code>RomToNum</code></strong>:</p>
-<ul>
-<li>This function converts a single Roman numeral character to its integer value using a switch statement.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -319,15 +379,68 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the length of the Roman numeral string since each character is processed once.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used that scales with input size; only a few integer variables are maintained.</li>
+<li><strong>O(n)</strong>: The time complexity of this solution is O(n), where <code>n</code> is the length of the input string <code>s</code>. This is because we iterate through the string once from right to left, processing each character in constant time (thanks to the <code>RomToNum</code> helper function).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is O(1), since we use a constant amount of extra space (only a few integer variables are used). The space required does not depend on the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently converts a Roman numeral string to an integer by traversing the string from right to left and using a greedy strategy to decide whether to add or subtract the current numeral&rsquo;s value. The solution works in linear time and uses constant space, making it highly efficient for the problem at hand.</p>
+<h4 id="advantages">
+  Advantages:
+  <a class="heading-link" href="#advantages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Time efficiency</strong>: The solution processes the string in a single pass, making it highly efficient for converting Roman numerals to integers.</li>
+<li><strong>Simplicity</strong>: The code is easy to understand and follow, with a clear separation of logic in the main function and the helper function.</li>
+</ul>
+<h4 id="limitations">
+  Limitations:
+  <a class="heading-link" href="#limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>This solution assumes the input string represents a valid Roman numeral within the acceptable range (1 to 3999).</li>
+</ul>
+<h4 id="summary">
+  Summary:
+  <a class="heading-link" href="#summary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This solution provides an optimal and easy-to-understand method for converting a Roman numeral string to its integer equivalent. By using a greedy approach and processing the string from right to left, it ensures that the subtraction rule (for numerals like &ldquo;IV&rdquo; and &ldquo;IX&rdquo;) is handled correctly. The algorithm operates in linear time and constant space, making it an efficient solution to this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode179s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode165s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

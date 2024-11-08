@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> e;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1081s1hbhb">
+<h2 id="hahahugoshortcode1083s1hbhb">
   
 
   
@@ -238,7 +238,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an API <code>isBadVersion(version)</code> that returns whether a given version is bad. You need to find the first bad version in a range from <code>1</code> to <code>n</code>.</p>
+<p>In this problem, you are given an API <code>isBadVersion(int version)</code> that checks if a particular version of a software is a bad version. The function returns <code>true</code> if the version is bad, and <code>false</code> if it is not. The goal is to find the first bad version, given a total of <code>n</code> versions, using the most efficient approach possible.</p>
+<p>The problem can be efficiently solved using a <strong>binary search</strong> strategy. The bad versions are sequential, so if version <code>k</code> is bad, then all versions after <code>k</code> will also be bad. Your task is to implement a function that determines the first bad version out of <code>n</code> versions, with a minimum number of calls to the <code>isBadVersion</code> API.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,56 +247,90 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs a binary search strategy to efficiently find the first bad version:</p>
+<p>To solve this problem, we will employ the <strong>binary search</strong> algorithm. Binary search is ideal for this problem because:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Set the start (<code>s</code>) to <code>1</code> and the end (<code>e</code>) to <code>n</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Binary Search</strong>:</p>
-<ul>
-<li>While the start is less than the end:
-<ul>
-<li>Calculate the middle point <code>mid</code>.</li>
-<li>Use the <code>isBadVersion(mid)</code> API to check if the middle version is bad.
-<ul>
-<li>If it is bad, it means the first bad version could be <code>mid</code> or earlier, so update the end (<code>e</code>) to <code>mid</code>.</li>
-<li>If it is not bad, move the start (<code>s</code>) to <code>mid + 1</code> since the first bad version must be after <code>mid</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return</strong>: Once the loop ends, <code>e</code> will point to the first bad version.</p>
-</li>
+<li>The versions are sequential and ordered, with the first bad version being the smallest bad version.</li>
+<li>The problem guarantees that once a bad version is found, all subsequent versions will also be bad.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The binary search algorithm will help us find the first bad version by narrowing down the search space progressively until we locate the first version that is bad.</p>
+<h3 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: An integer <code>n</code>, representing the total number of versions.</li>
-<li><strong>Output</strong>: The first bad version number.</li>
-</ul>
 <ol>
-<li>Initialize <code>s</code> to <code>1</code> and <code>e</code> to <code>n</code>.</li>
-<li>Perform binary search:
-<ul>
-<li>Calculate <code>mid</code>.</li>
-<li>Check if <code>isBadVersion(mid)</code> is true or false.</li>
-<li>Adjust <code>s</code> or <code>e</code> accordingly.</li>
-</ul>
-</li>
-<li>After the loop, return <code>e</code>, which represents the first bad version.</li>
+<li>If <code>isBadVersion(mid)</code> returns <code>true</code> for a version <code>mid</code>, then all versions greater than <code>mid</code> are bad, and the first bad version could be <code>mid</code> or one of the versions before it.</li>
+<li>If <code>isBadVersion(mid)</code> returns <code>false</code>, then all versions before <code>mid</code> are not bad, and we must search for the bad version among the higher-numbered versions.</li>
 </ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-search-range">
+  Step 1: Initialize Search Range
+  <a class="heading-link" href="#step-1-initialize-search-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, e <span style="color:#f92672">=</span> n;
+</span></span></code></pre></div><ul>
+<li>The variables <code>s</code> and <code>e</code> represent the start and end of the search range. Initially, the search is performed over the entire range of versions, from <code>1</code> to <code>n</code>.</li>
+</ul>
+<h4 id="step-2-begin-binary-search-loop">
+  Step 2: Begin Binary Search Loop
+  <a class="heading-link" href="#step-2-begin-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (s <span style="color:#f92672">&lt;</span> e) {
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as the search range has more than one element (<code>s &lt; e</code>), meaning we haven&rsquo;t narrowed down the range to a single version.</li>
+</ul>
+<h4 id="step-3-calculate-the-middle-point">
+  Step 3: Calculate the Middle Point
+  <a class="heading-link" href="#step-3-calculate-the-middle-point">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> (e <span style="color:#f92672">-</span> s) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>The middle point <code>mid</code> is calculated. To avoid overflow (which can happen if <code>s</code> and <code>e</code> are large values), the formula <code>s + (e - s) / 2</code> is used to find the middle point.</li>
+</ul>
+<h4 id="step-4-check-if-mid-is-a-bad-version">
+  Step 4: Check if <code>mid</code> is a Bad Version
+  <a class="heading-link" href="#step-4-check-if-mid-is-a-bad-version">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (isBadVersion(mid)) {
+</span></span><span style="display:flex;"><span>    e <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>mid</code> is a bad version (<code>isBadVersion(mid)</code> returns <code>true</code>), it means the first bad version is either <code>mid</code> itself or somewhere before <code>mid</code>, so we reduce the search space by updating <code>e</code> to <code>mid</code>.</li>
+<li>If <code>mid</code> is not a bad version, it means the first bad version must be in the higher part of the range, so we update <code>s</code> to <code>mid + 1</code>.</li>
+</ul>
+<h4 id="step-5-return-the-first-bad-version">
+  Step 5: Return the First Bad Version
+  <a class="heading-link" href="#step-5-return-the-first-bad-version">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> e;
+</span></span></code></pre></div><ul>
+<li>At the end of the loop, <code>s</code> will equal <code>e</code>, and both will point to the first bad version. We return <code>e</code> as the result, which represents the first bad version.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -303,26 +338,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log n)) since the search space is halved in each iteration.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as only a constant amount of extra space is used for variables.</li>
+<li>The time complexity of the binary search approach is <strong>O(log n)</strong>, where <code>n</code> is the number of versions.</li>
+<li>This is because, with each iteration of the loop, we reduce the search space by half. Therefore, the number of iterations required to find the first bad version is proportional to the logarithm of <code>n</code> (base 2).</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as the algorithm only uses a constant amount of extra space. The search space is maintained using the variables <code>s</code> and <code>e</code>, and there are no additional data structures used that grow with the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>All Versions Bad</strong>: If all versions are bad, the function should correctly identify the first version as <code>1</code>.</li>
-<li><strong>No Bad Versions</strong>: If there are no bad versions, the function will assume that <code>n</code> is bad.</li>
-</ol>
+<p>The binary search approach is a highly efficient method for solving the problem of finding the first bad version. By leveraging the sequential and ordered nature of the problem, binary search allows us to reduce the search space by half with each iteration, ensuring that we find the first bad version in logarithmic time. This is the optimal solution for the problem, as it minimizes the number of API calls to <code>isBadVersion</code>, making it ideal for large values of <code>n</code>.</p>
+<p>With a time complexity of <strong>O(log n)</strong> and a space complexity of <strong>O(1)</strong>, this solution is both time-efficient and space-efficient. It is an excellent example of applying binary search to problems where the input space can be divided into two distinct categories, such as bad and non-bad versions in this case.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1081s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1083s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

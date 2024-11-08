@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1654s1hbhb">
+<h2 id="hahahugoshortcode1658s1hbhb">
   
 
   
@@ -264,13 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a grid representing a box of oranges. Each cell in the grid can contain:</p>
-<ul>
-<li><code>0</code>: an empty cell,</li>
-<li><code>1</code>: a fresh orange,</li>
-<li><code>2</code>: a rotten orange.</li>
-</ul>
-<p>Every minute, any fresh orange adjacent (4-directionally) to a rotten orange becomes rotten. Your task is to return the minimum number of minutes that must elapse until no fresh oranges remain. If this is impossible, return <code>-1</code>.</p>
+<p>The problem revolves around a grid where each cell can represent an orange: fresh (<code>1</code>), rotten (<code>2</code>), or empty (<code>0</code>). The goal is to determine the minimum time required for all fresh oranges to rot, given that rotten oranges can rot adjacent fresh oranges in all four directions (up, down, left, right) every minute. If there are any fresh oranges that cannot rot due to isolation from rotten ones, the function should return <code>-1</code> as it is impossible to rot all oranges.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,52 +272,118 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Use a queue to track the positions of all rotten oranges.</li>
-<li>Create a 2D vector <code>vis</code> to mark visited cells.</li>
-<li>Define the directions for adjacent cells (up, down, left, right).</li>
-</ul>
-</li>
-<li>
-<p><strong>BFS Implementation</strong>:</p>
-<ul>
-<li>Enqueue all initially rotten oranges into the queue.</li>
-<li>While the queue is not empty:
-<ul>
-<li>Process all oranges in the current level (representing one minute).</li>
-<li>For each rotten orange, check its adjacent cells:
-<ul>
-<li>If an adjacent cell contains a fresh orange, mark it as rotten and enqueue it.</li>
-<li>Keep track of the time taken to rot all fresh oranges.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>After processing, check for any remaining fresh oranges.</li>
-<li>If any fresh oranges are left, return <code>-1</code>.</li>
-<li>Otherwise, return the total time taken minus <code>2</code> (since we need to convert from rotten value to minutes).</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem efficiently, we can employ a <strong>Breadth-First Search (BFS)</strong> approach. BFS is ideal for problems involving spreading or propagation, such as this one where rotten oranges spread rot to their neighboring fresh oranges. The BFS approach ensures that we process the freshest (or closest) rot first, and then work our way outward, minute by minute, as rotten oranges spread their effect.</p>
+<h3 id="key-steps-in-the-approach">
+  Key Steps in the Approach:
+  <a class="heading-link" href="#key-steps-in-the-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li><strong>Identify Initial Rotten Oranges</strong>: We start by identifying all the rotten oranges (represented by <code>2</code>) in the grid. These will be the starting points for our BFS.</li>
+<li><strong>BFS Traversal</strong>: We perform a BFS starting from all the rotten oranges simultaneously, propagating the rot to their adjacent fresh oranges (represented by <code>1</code>). As we propagate the rot, we keep track of the time it takes for each fresh orange to become rotten.</li>
+<li><strong>Tracking Rotting Process</strong>: We track the time step by step as the rot spreads, ensuring that each fresh orange becomes rotten at the earliest possible minute.</li>
+<li><strong>Final Check</strong>: After BFS completes, we check if there are any remaining fresh oranges that could not be rotted. If any such oranges remain, it implies they were isolated from the rotten oranges, and we return <code>-1</code>. Otherwise, the result will be the maximum time it took for the last fresh orange to rot.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> orangesRotting(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;  <span style="color:#75715e">// A queue to store the positions of rotten oranges
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();  <span style="color:#75715e">// Dimensions of the grid
+</span></span></span></code></pre></div><ol>
+<li><strong>Initialize the Queue</strong>:
 <ul>
-<li>The function initializes the queue and performs a BFS to spread rot through adjacent fresh oranges.</li>
-<li>After all possible rotting, it checks for any fresh oranges left and calculates the total time taken.</li>
+<li>We initialize a queue <code>q</code> that will store the positions of the rotten oranges. These positions are used as starting points for the BFS.</li>
+<li>We also retrieve the grid dimensions <code>m</code> and <code>n</code>.</li>
 </ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>                q.push({i, j});  <span style="color:#75715e">// Add the positions of all rotten oranges to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span></code></pre></div><ol start="2">
+<li><strong>Push Rotten Oranges to the Queue</strong>:
+<ul>
+<li>We iterate through the entire grid. Whenever we encounter a rotten orange (value <code>2</code>), we add its position (row and column) to the queue. These will serve as the initial rotten orange points for BFS.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vis(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));  <span style="color:#75715e">// A 2D vector to keep track of visited cells
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initialize the time counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};  <span style="color:#75715e">// Directions for BFS (right, down, left, up)
+</span></span></span></code></pre></div><ol start="3">
+<li><strong>Visited Array and Direction Array</strong>:
+<ul>
+<li>We create a <code>vis</code> 2D vector initialized to 0, which will be used to track whether a cell has already been visited during the BFS.</li>
+<li>The <code>dir</code> array contains the directional deltas (right, down, left, up) used to explore neighboring cells.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {  <span style="color:#75715e">// Perform BFS until the queue is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();  <span style="color:#75715e">// Get the number of rotten oranges in the current round
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();  <span style="color:#75715e">// Get the front element in the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                q.pop();  <span style="color:#75715e">// Pop the element from the queue
+</span></span></span></code></pre></div><ol start="4">
+<li><strong>BFS Loop</strong>:
+<ul>
+<li>The outer <code>while</code> loop continues as long as there are rotten oranges in the queue.</li>
+<li>For each level of BFS (each minute), we process the current batch of rotten oranges, indicated by the <code>sz</code> variable, which holds the number of elements in the queue for that minute.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]]) <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip if the cell is already visited
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark the cell as visited
+</span></span></span></code></pre></div><ol start="5">
+<li><strong>Mark Visited</strong>:
+<ul>
+<li>Before processing a rotten orange, we check if it has been visited already. If it has, we skip the processing. Otherwise, we mark it as visited to avoid revisiting the same cell in future iterations.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {  <span style="color:#75715e">// Explore all four directions (right, down, left, up)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> vis[x][y] <span style="color:#f92672">||</span> grid[x][y] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip if the cell is out of bounds, already visited, or not a fresh orange
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    grid[x][y] <span style="color:#f92672">=</span> grid[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark the fresh orange as rotten (increment the time)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    q.push({x, y});  <span style="color:#75715e">// Push the newly rotten orange into the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="6">
+<li><strong>Rotting Spread</strong>:
+<ul>
+<li>For each rotten orange, we explore its four neighbors. If a neighbor is a fresh orange (<code>1</code>), we turn it into a rotten orange by updating its value to <code>grid[it[0]][it[1]] + 1</code> (indicating the time step).</li>
+<li>We then push the newly rotten orange’s position to the queue for further processing in the next minute.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Initialize `mx` to track the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)  <span style="color:#75715e">// Traverse the grid to check for unrotted fresh oranges and track the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">&gt;</span> mx) mx <span style="color:#f92672">=</span> grid[i][j];  <span style="color:#75715e">// Update the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If any fresh orange is left, return -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// The time taken is the maximum time minus 2 (to account for the initial rotten oranges)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="7">
+<li><strong>Final Check</strong>:
+<ul>
+<li>After BFS completes, we check if there are any fresh oranges (<code>grid[i][j] == 1</code>). If such oranges exist, it means they couldn’t be rotted, and we return <code>-1</code>.</li>
+<li>If all fresh oranges have been rotted, we calculate the maximum time it took to rot the last orange (<code>mx</code>) and return <code>mx - 2</code>, as the initial rotten oranges are marked with a value of <code>2</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -332,14 +392,26 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid. Each cell is processed once.</li>
-<li><strong>Space Complexity</strong>: O(m * n) for the queue and visited array.</li>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid. This is because each cell is visited at most once during the BFS, and we perform constant time operations for each cell.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(m * n)</strong> due to the queue and the <code>vis</code> 2D vector used for marking visited cells. The size of the queue can grow to the maximum number of cells in the grid, and the visited array stores the state of each cell.</p>
+</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of rotting oranges by utilizing a <strong>Breadth-First Search (BFS)</strong> approach. By treating the rotting process as a multi-source BFS where all rotten oranges spread rot simultaneously, we ensure that the time to rot all oranges is minimized. The solution accounts for edge cases such as isolated fresh oranges that cannot be rotted, returning <code>-1</code> in such cases. The approach is both time and space efficient, making it an ideal solution for this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1654s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1658s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1477s1hbhb">
+<h2 id="hahahugoshortcode1475s1hbhb">
   
 
   
@@ -256,7 +256,24 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>arr</code>, the task is to divide it into the maximum number of chunks such that when each chunk is sorted individually and then concatenated, the result is a sorted array.</p>
+<p>The problem asks to find the maximum number of chunks or partitions into which the array can be split such that, when the chunks are independently sorted, the entire array is sorted. In other words, we need to determine how many subarrays (chunks) we can divide the given array <code>arr</code> into such that each subarray, when sorted, leads to a sorted version of the entire array.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p>Input: <code>[4, 3, 2, 1, 0]</code></p>
+</li>
+<li>
+<p>Output: <code>1</code></p>
+<p>Here, only one chunk is needed because the entire array is in reverse order, and sorting the entire array will yield the correct result.</p>
+</li>
+<li>
+<p>Input: <code>[1, 0, 2, 3, 4]</code></p>
+</li>
+<li>
+<p>Output: <code>4</code></p>
+<p>This is because we can divide the array into four chunks, i.e., <code>[1]</code>, <code>[0]</code>, <code>[2, 3, 4]</code>, and when each chunk is sorted, the whole array becomes sorted.</p>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,42 +281,85 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be solved using the concept of tracking the maximum index reached during the process of sorting chunks. Here’s a step-by-step explanation:</p>
 <ol>
 <li>
-<p><strong>Pairing and Sorting</strong>:</p>
-<ul>
-<li>Create a vector of pairs where each pair contains the value from the original array and its corresponding index.</li>
-<li>Sort this vector based on the values.</li>
-</ul>
+<p><strong>Track Original Indices</strong>: To determine how far the elements should move to achieve a sorted order, we need to keep track of their original indices. This is crucial because elements in the original array are not necessarily in their final sorted positions.</p>
 </li>
 <li>
-<p><strong>Chunk Counting</strong>:</p>
-<ul>
-<li>Initialize a variable <code>mx</code> to track the maximum index encountered so far as you iterate through the sorted pairs.</li>
-<li>For each index <code>i</code>, if <code>mx</code> equals <code>i</code>, it indicates that all elements up to index <code>i</code> can form a valid chunk, and you can increment the chunk count (<code>res</code>).</li>
-</ul>
+<p><strong>Sorting with Indices</strong>: By sorting the array while preserving the original indices, we can then compare the indices of elements in the sorted array to determine when we can split the array into valid chunks.</p>
+</li>
+<li>
+<p><strong>Partition Logic</strong>: We iterate through the array, and at each point, we maintain the maximum index encountered from the sorted version of the array. If the current index reaches this maximum, it means we can create a chunk here, as all elements up to this point can be sorted independently.</p>
+</li>
+<li>
+<p><strong>Chunk Count</strong>: The number of times we encounter a maximum index indicates the number of valid partitions we can make. Each time the current index reaches the maximum index seen so far, we can count it as a new chunk.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for counting the maximum chunks.</li>
+<h4 id="step-1-create-pairs-of-values-and-indices">
+  Step 1: Create Pairs of Values and Indices
+  <a class="heading-link" href="#step-1-create-pairs-of-values-and-indices">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> tmp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    tmp.push_back({arr[i], i});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start by creating a vector of pairs <code>tmp</code>, where each pair contains an element from the array and its original index.</li>
+<li>This allows us to sort the elements while keeping track of their positions in the original array.</li>
 </ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>int maxChunksToSorted(vector&lt;int&gt;&amp; arr)</code>: Implements the logic to determine the maximum number of chunks.</li>
+<h4 id="step-2-sort-the-array-based-on-values">
+  Step 2: Sort the Array Based on Values
+  <a class="heading-link" href="#step-2-sort-the-array-based-on-values">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(tmp.begin(), tmp.end());
+</span></span></code></pre></div><ul>
+<li>We then sort the array <code>tmp</code> based on the values of the elements. The sorting algorithm will rearrange the pairs based on the first value of the pair (i.e., the elements of the original array).</li>
+<li>After sorting, the <code>tmp</code> array will contain pairs in increasing order of the element values, but we can still access the original indices through the second part of the pair.</li>
 </ul>
-</li>
+<h4 id="step-3-traverse-and-determine-the-maximum-index">
+  Step 3: Traverse and Determine the Maximum Index
+  <a class="heading-link" href="#step-3-traverse-and-determine-the-maximum-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(mx, tmp[i].second);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mx <span style="color:#f92672">==</span> i){
+</span></span><span style="display:flex;"><span>        res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>mx</code> to keep track of the maximum index encountered so far.</li>
+<li>We then iterate through the sorted array, and for each element, we update <code>mx</code> to be the maximum of the current value of <code>mx</code> and the index of the element in the original array (i.e., <code>tmp[i].second</code>).</li>
+<li>If at any point <code>mx == i</code>, this indicates that all elements up to index <code>i</code> can be sorted into a valid chunk, and we increment the chunk counter <code>res</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop completes, the value of <code>res</code> will represent the maximum number of chunks into which the array can be split such that, when each chunk is sorted, the entire array becomes sorted.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -308,15 +368,60 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where n is the length of the array, due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the pairs of values and indices.</li>
+<li><strong>O(n log n)</strong>: The most computationally expensive step is sorting the array. Sorting a vector of <code>n</code> elements takes O(n log n) time. The subsequent iteration over the array takes O(n) time. Therefore, the overall time complexity is dominated by the sorting step, which is O(n log n).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use additional space to store the <code>tmp</code> vector, which contains <code>n</code> pairs. Therefore, the space complexity is O(n), where <code>n</code> is the length of the input array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the maximum number of chunks into which the array can be split and still remain sorted when each chunk is sorted independently. The key idea behind the solution is to track the maximum index encountered as we sort the array based on element values and their original indices. Each time the current index matches this maximum, we can count it as a valid chunk.</p>
+<h4 id="time-complexity-1">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n log n)</strong> due to the sorting step.</li>
+</ul>
+<h4 id="space-complexity-1">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong> for storing the pairs of elements and their original indices.</li>
+</ul>
+<p>By using sorting and greedy partitioning, we ensure that we can efficiently determine the maximum number of chunks that can be made, providing a scalable solution for larger arrays.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1477s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1475s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

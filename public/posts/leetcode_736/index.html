@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -290,12 +290,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a function that evaluates a nested mathematical expression containing variables, addition, multiplication, and assignment. The expressions follow the format:</p>
-<ul>
-<li><code>&quot;let var1 value1 ... varN valueN expr&quot;</code></li>
-<li><code>&quot;add expr1 expr2&quot;</code></li>
-<li><code>&quot;mult expr1 expr2&quot;</code></li>
-</ul>
+<p>The problem involves evaluating an expression string that follows a set of rules similar to Lisp expressions. The expression can include:</p>
+<ol>
+<li><strong>Arithmetic Operations</strong>: Addition (<code>add</code>) and multiplication (<code>mult</code>).</li>
+<li><strong>Variable Assignment</strong>: You can assign variables using the <code>let</code> keyword, which stores the value of an expression to a variable, and later the variable can be used in other expressions.</li>
+<li><strong>Nested Expressions</strong>: The expressions can be nested using parentheses, much like in traditional mathematical expressions.</li>
+</ol>
+<p>The goal is to evaluate such expressions and return the result as an integer. This involves handling variable storage, evaluating arithmetic operations, and parsing nested expressions correctly.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -303,52 +304,107 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem is based on <strong>recursion</strong> and <strong>map-based variable storage</strong>. We will:</p>
 <ol>
-<li>
-<p><strong>Recursive Evaluation</strong>:</p>
-<ul>
-<li>Use a helper function <code>help</code> to recursively evaluate the expression.</li>
-<li>Maintain a map to store the values of variables.</li>
-</ul>
-</li>
-<li>
-<p><strong>Parsing Expressions</strong>:</p>
-<ul>
-<li>For expressions starting with <code>let</code>, store variable values and evaluate the rest.</li>
-<li>For <code>add</code> and <code>mult</code>, recursively evaluate the two expressions and perform the respective operation.</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Cases</strong>:</p>
-<ul>
-<li>If the expression is a number or a variable (not in parentheses), return its value directly.</li>
-<li>If the expression is enclosed in parentheses, extract the inner expression and process it.</li>
-</ul>
-</li>
+<li>Parse the expression to identify the operation (whether it’s an assignment, addition, multiplication, or a variable lookup).</li>
+<li>Use recursion to handle nested operations and evaluate them.</li>
+<li>Use a hash map (<code>unordered_map</code>) to store variables and their values.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The expression will be evaluated in the following order:</p>
+<ol>
+<li>If the expression is a <strong>number</strong> or a <strong>variable</strong>, return its value.</li>
+<li>If the expression is an operation inside parentheses, recursively evaluate the inner expression.</li>
+<li>If the expression is a <strong>let</strong> statement, recursively evaluate the assigned values and store them in a map for future use.</li>
+<li>For <strong>add</strong> and <strong>mult</strong>, recursively evaluate the operands and return the result of the operation.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<ol>
 <li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the main method for evaluation.</li>
-</ul>
-</li>
+<p><strong><code>evaluate</code> Function</strong>:
+This function serves as the entry point. It calls the helper function <code>help</code>, passing the expression string and an empty map (<code>myMap</code>) to store variable values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">evaluate</span>(string expression) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span>string,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> help(expression,myMap);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Methods</strong>:</p>
+<p><strong><code>help</code> Function</strong>:
+This is a recursive function that evaluates the expression. It checks the type of the expression and takes the appropriate action based on the first character:</p>
 <ul>
-<li><code>int evaluate(string expression)</code>: Initiates the evaluation by calling <code>help</code>.</li>
-<li><code>int help(string expression, unordered_map&lt;string,int&gt; myMap)</code>: Evaluates the expression recursively.</li>
-<li><code>string parse(string &amp;s, int &amp;start)</code>: Helper function to extract individual tokens from the expression string.</li>
+<li>If the expression starts with a <code>-</code> or a digit, it’s a number, and it’s returned as an integer.</li>
+<li>If it’s a variable, it looks up its value in the map.</li>
+<li>If it’s an expression in parentheses, it recursively evaluates the subexpression.</li>
 </ul>
-</li>
+<p>For <code>let</code>, <code>add</code>, and <code>mult</code>, it parses the operands and performs the operation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">help</span>(string expression, unordered_map<span style="color:#f92672">&lt;</span>string,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> myMap) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((expression[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>) <span style="color:#f92672">||</span> (expression[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&amp;&amp;</span> expression[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;9&#39;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stoi(expression);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (expression[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;(&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> myMap[expression];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    string s <span style="color:#f92672">=</span> expression.substr(<span style="color:#ae81ff">1</span>, expression.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    string word <span style="color:#f92672">=</span> parse(s, start);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling <code>let</code> Operation</strong>:
+If the word is <code>let</code>, it assigns values to variables. The function will loop, parsing each variable and its corresponding expression, evaluating them recursively, and storing the result in <code>myMap</code>.</p>
+<ul>
+<li>The loop continues until there are no more variables left to process.</li>
+<li>If there’s no expression for a variable, it simply looks up and evaluates the variable.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;let&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>        string variable <span style="color:#f92672">=</span> parse(s, start);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (start <span style="color:#f92672">&gt;</span> s.size())
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> help(variable, myMap);
+</span></span><span style="display:flex;"><span>        string temp <span style="color:#f92672">=</span> parse(s, start);
+</span></span><span style="display:flex;"><span>        myMap[variable] <span style="color:#f92672">=</span> help(temp, myMap);                    
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling <code>add</code> and <code>mult</code> Operations</strong>:
+For <code>add</code> and <code>mult</code>, the function calls <code>help</code> recursively to evaluate both operands and returns the result of the corresponding operation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;add&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> help(parse(s, start), myMap) <span style="color:#f92672">+</span> help(parse(s, start), myMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;mult&#34;</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> help(parse(s, start), myMap) <span style="color:#f92672">*</span> help(parse(s, start), myMap);
+</span></span></code></pre></div></li>
+<li>
+<p><strong><code>parse</code> Function</strong>:
+This helper function is used to parse expressions. It processes substrings and finds the next word or expression within the string:</p>
+<ul>
+<li>If the word is enclosed in parentheses, it recursively handles nested expressions.</li>
+<li>Otherwise, it extracts the word (a variable or operation) up until the next space.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">parse</span>(string <span style="color:#f92672">&amp;</span>s, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>start) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> end <span style="color:#f92672">=</span> start <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, temp <span style="color:#f92672">=</span> start, count <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s[start] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (count <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (s[end] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>)
+</span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (s[end] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;)&#39;</span>)
+</span></span><span style="display:flex;"><span>                count<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            end<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (end <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[end] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39; &#39;</span>)
+</span></span><span style="display:flex;"><span>            end<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s.substr(temp, end <span style="color:#f92672">-</span> temp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -356,10 +412,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution depends on the number of characters in the expression and the number of nested operations:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of characters in the expression, due to parsing and evaluating each character.</li>
-<li><strong>Space Complexity</strong>: O(V), where V is the number of unique variables stored in the map.</li>
+<li><strong>O(n)</strong> where <code>n</code> is the size of the input expression.</li>
+<li>Each expression is processed once, and each operation (parsing and evaluating) is performed in constant time for each individual element of the expression.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is primarily determined by:</p>
+<ol>
+<li>The <strong>recursive depth</strong> for nested expressions, which can be up to O(n) in the worst case.</li>
+<li>The <strong>unordered_map</strong> used to store variable values, which could contain up to O(n) variables.</li>
+</ol>
+<p>Thus, the space complexity is <strong>O(n)</strong> in the worst case.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the problem of evaluating arithmetic expressions with variables, using recursion and an unordered map for variable storage. By parsing each expression, evaluating it recursively, and keeping track of the values of variables, this approach can correctly evaluate complex expressions, including those with nested operations and variable assignments.</p>
+<p>The use of recursion helps break down the problem into smaller subproblems, while the unordered map ensures that variable lookups and assignments are performed efficiently. This solution is both time-efficient (linear with respect to the size of the expression) and space-efficient, making it suitable for evaluating complex expressions in real-world scenarios.</p>
  
 </div>
   

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -224,7 +224,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode391s1hbhb">
+<h2 id="hahahugoshortcode388s1hbhb">
   
 
   
@@ -236,7 +236,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>columnNumber</code>, convert it to its corresponding column title as it appears in an Excel spreadsheet. For example, <code>1</code> → &ldquo;A&rdquo;, <code>2</code> → &ldquo;B&rdquo;, &hellip;, <code>26</code> → &ldquo;Z&rdquo;, <code>27</code> → &ldquo;AA&rdquo;, and so on.</p>
+<p>The problem asks you to convert a given positive integer, <code>columnNumber</code>, into its corresponding Excel column title. For instance:</p>
+<ul>
+<li>A column number of <code>1</code> corresponds to the title <code>&quot;A&quot;</code>,</li>
+<li>A column number of <code>28</code> corresponds to the title <code>&quot;AB&quot;</code>,</li>
+<li>A column number of <code>701</code> corresponds to the title <code>&quot;ZY&quot;</code>.</li>
+</ul>
+<p>This conversion is analogous to converting a number to a different base (base 26) but with a few unique considerations, such as the fact that the letters used for columns are <code>A</code> to <code>Z</code> (instead of <code>0</code> to <code>9</code>).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -244,63 +250,149 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Base Conversion</strong>:</p>
+<p>To solve this problem, the key insight is to treat the column number as a base-26 number system, where:</p>
 <ul>
-<li>Treat the problem similarly to converting a number to a different base (base 26 in this case).</li>
-<li>Since Excel columns are 1-indexed, adjust the column number by decrementing it before performing the modulo operation.</li>
+<li><code>A</code> corresponds to 1, <code>B</code> corresponds to 2, &hellip;, and <code>Z</code> corresponds to 26.</li>
+<li>The conversion requires adjusting the column number in such a way that the modulus operation gives the correct &ldquo;digit&rdquo; (letter), and the number is repeatedly divided by 26 to determine the next letter.</li>
 </ul>
-</li>
-<li>
-<p><strong>Construct the Title</strong>:</p>
+<h4 id="observations">
+  Observations:
+  <a class="heading-link" href="#observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Use a loop to repeatedly divide the column number by 26:
-<ul>
-<li>Compute the current character using the modulo operation and convert it to a character.</li>
-<li>Prepend the character to the result string.</li>
-<li>Update the column number for the next iteration.</li>
+<li>Excel columns follow a pattern similar to base-26, but there&rsquo;s a shift. The column number starts from 1 (not 0) for <code>A</code>, which means each letter corresponds to a &ldquo;digit&rdquo; in base-26 but offset by one.</li>
+<li>After processing a &ldquo;digit&rdquo; (letter), we reduce the column number by dividing by 26, similar to how we&rsquo;d reduce a number in base conversion.</li>
 </ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The given solution uses a while loop to repeatedly reduce the column number and determine the corresponding letters for the column title.</p>
+<h4 id="step-1-initialize-the-result-string">
+  Step 1: Initialize the Result String
+  <a class="heading-link" href="#step-1-initialize-the-result-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize an empty string <code>res</code> that will hold the final column title. The result will be built from the right to the left, as we process the number from least significant &ldquo;digit&rdquo; (rightmost letter) to most significant.</li>
+</ul>
+<h4 id="step-2-process-the-column-number">
+  Step 2: Process the Column Number
+  <a class="heading-link" href="#step-2-process-the-column-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(columnNumber <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    mod <span style="color:#f92672">=</span> <span style="color:#f92672">--</span>columnNumber <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> x <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">+</span> mod);
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> res;
+</span></span><span style="display:flex;"><span>    columnNumber <span style="color:#f92672">/=</span> <span style="color:#ae81ff">26</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Looping Condition</strong>: We continue the loop as long as <code>columnNumber &gt; 0</code>. This ensures that we process all &ldquo;digits&rdquo; (letters) of the column title.</p>
+</li>
+<li>
+<p><strong>Modulus Operation</strong>:</p>
 <ul>
-<li><strong>Lines 1-2</strong>: Define the function and initialize an empty string <code>res</code> to store the result.</li>
-<li><strong>Line 3</strong>: Start a while loop that continues until the <code>columnNumber</code> is greater than 0.</li>
-<li><strong>Lines 4-6</strong>: Inside the loop:
-<ul>
-<li>Decrement <code>columnNumber</code> to handle the 1-indexed nature.</li>
-<li>Compute the modulo to determine the current character.</li>
-<li>Convert the integer to a corresponding character and prepend it to the result string.</li>
-<li>Update the <code>columnNumber</code> for the next iteration by dividing it by 26.</li>
+<li><code>mod = --columnNumber % 26</code>: The <code>--columnNumber</code> is first decremented by 1 to shift the range from <code>1-26</code> (for the letters <code>A-Z</code>) to <code>0-25</code> (for base-26). We then take the modulus of this adjusted number to get the &ldquo;digit&rdquo; corresponding to the current letter.</li>
+<li>The result is the index of the current letter (<code>0</code> corresponds to <code>A</code>, <code>25</code> corresponds to <code>Z</code>).</li>
 </ul>
 </li>
-<li><strong>Line 7</strong>: Return the resulting string.</li>
+<li>
+<p><strong>Character Conversion</strong>:</p>
+<ul>
+<li><code>char x = ('A' + mod)</code>: Converts the modulus into a character by adding it to the ASCII value of <code>A</code>. This gives us the correct character for the current &ldquo;digit&rdquo;.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p><strong>Build the Result</strong>:</p>
+<ul>
+<li><code>res = x + res</code>: The new character <code>x</code> is added to the front of the <code>res</code> string. This builds the result from right to left, as we&rsquo;re processing the least significant &ldquo;digit&rdquo; first.</li>
+</ul>
+</li>
+<li>
+<p><strong>Column Number Update</strong>:</p>
+<ul>
+<li><code>columnNumber /= 26</code>: Once we&rsquo;ve determined the current &ldquo;digit&rdquo; (letter), we divide the column number by 26 to reduce it and prepare for the next letter in the title.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, we return the result string, which now contains the full column title.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log_{26}(N))), where (N) is the <code>columnNumber</code>, as we divide by 26 in each iteration.</li>
-<li><strong>Space Complexity</strong>: (O(1)) for the variable storage, not counting the space required for the output string.</li>
+<li><strong>O(log₁₆₆ n)</strong>: The time complexity of this algorithm is determined by the number of times we divide the column number by 26. Since we are reducing the number by a factor of 26 each time, the number of iterations is proportional to the logarithm of <code>n</code> to base 26. Thus, the time complexity is <strong>O(log₁₆₆ n)</strong>, where <code>n</code> is the input <code>columnNumber</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(log₁₆₆ n)</strong>: The space complexity is determined by the number of characters we store in the result string <code>res</code>. Each iteration appends one character to the string, and the number of iterations is proportional to the logarithm of the column number. Therefore, the space complexity is <strong>O(log₁₆₆ n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently converts a given column number into its corresponding Excel column title by leveraging a base-26-like conversion, with careful adjustments to account for the way Excel labels columns. The key operations involve modulus and division, ensuring the process is efficient and works in logarithmic time relative to the column number.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm uses a simple conversion method similar to converting a number to a different base.</li>
+<li>The result is built from right to left by repeatedly extracting the current &ldquo;digit&rdquo; and reducing the column number.</li>
+<li>The solution operates in <strong>O(log₁₆₆ n)</strong> time complexity, making it very efficient even for large numbers.</li>
+<li>The space complexity is also <strong>O(log₁₆₆ n)</strong>, as the result is stored as a string and grows logarithmically with the input.</li>
+</ul>
+<p>This approach ensures the solution is both time and space-efficient, providing a quick way to determine the column title for any valid column number.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode391s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode388s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

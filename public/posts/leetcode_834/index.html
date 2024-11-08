@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -274,7 +274,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The objective is to compute the sum of distances from each node to all other nodes in a tree. Given the number of nodes <code>n</code> and a list of edges that define the tree structure, the solution must efficiently calculate the sum of distances for each node.</p>
+<p>In this problem, you are given an undirected tree with <code>n</code> nodes and <code>n-1</code> edges. The nodes are numbered from <code>0</code> to <code>n-1</code>, and the edges are provided as a list of pairs where each pair <code>[u, v]</code> represents an undirected edge between nodes <code>u</code> and <code>v</code>. The task is to calculate the sum of distances between a given node and all other nodes in the tree for each node.</p>
+<p>In other words, for each node <code>i</code>, we need to calculate the sum of the distances from node <code>i</code> to all other nodes in the tree. The distance between two nodes is defined as the number of edges in the shortest path between them.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,46 +283,116 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to avoid calculating the sum of distances for each node separately using a brute-force approach, as this would lead to a time complexity of <code>O(n^2)</code>, which is not optimal for large inputs.</p>
+<p>Instead, we can use the following approach:</p>
 <ol>
-<li>
-<p><strong>Graph Representation</strong>:</p>
-<ul>
-<li>Use an adjacency list to represent the tree, where each node points to its connected nodes.</li>
-</ul>
-</li>
-<li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li><strong>First DFS (<code>dfs1</code>)</strong>:
-<ul>
-<li>Traverse the tree to calculate the count of nodes in the subtree rooted at each node and the total distance sum for the subtree.</li>
-<li>For each node, accumulate the count of nodes from its children and compute the distance contribution from each child to the parent.</li>
-</ul>
-</li>
-<li><strong>Second DFS (<code>dfs2</code>)</strong>:
-<ul>
-<li>Adjust the distance sums for each node based on the parent&rsquo;s distance sum.</li>
-<li>This is done by transferring the distance contribution from the parent to the child, while accounting for the number of nodes in the entire tree.</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>First DFS (dfs1)</strong>: The first DFS computes the sum of distances for the root node (node <code>0</code>), as well as the number of nodes in each subtree rooted at every node.</li>
+<li><strong>Second DFS (dfs2)</strong>: The second DFS propagates the distances from the root node to all other nodes in the tree. It uses the result of the first DFS to efficiently compute the sum of distances for each node by adjusting the sum of distances based on its parent’s value.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This method takes advantage of the structure of the tree and avoids redundant calculations, making the algorithm run in linear time, i.e., <code>O(n)</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>gph.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>());
+</span></span></code></pre></div><ul>
+<li>We initialize the adjacency list <code>gph</code> to represent the tree, where each node has a list of its neighbors.</li>
+<li>The adjacency list is a 2D vector with <code>n</code> rows, where each row corresponds to a node and contains the list of its neighbors.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>cnt.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>res</code> will store the sum of distances from each node to all other nodes. We initialize it with zero values.</li>
+<li><code>cnt</code> will store the size of the subtree rooted at each node. We initialize it with zero values.</li>
+</ul>
+<h4 id="step-2-building-the-tree">
+  Step 2: Building the Tree
+  <a class="heading-link" href="#step-2-building-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> edge: edges) {
+</span></span><span style="display:flex;"><span>    gph[edge[<span style="color:#ae81ff">0</span>]].push_back(edge[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    gph[edge[<span style="color:#ae81ff">1</span>]].push_back(edge[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through the edges and populate the adjacency list <code>gph</code>. For each edge <code>[u, v]</code>, we add <code>v</code> to the list of neighbors of <code>u</code> and <code>u</code> to the list of neighbors of <code>v</code>. This makes the graph undirected.</li>
+</ul>
+<h4 id="step-3-first-dfs-dfs1">
+  Step 3: First DFS (dfs1)
+  <a class="heading-link" href="#step-3-first-dfs-dfs1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs1</span>(<span style="color:#66d9ef">int</span> cur, <span style="color:#66d9ef">int</span> pre) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> nxt : gph[cur]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (pre <span style="color:#f92672">==</span> nxt) 
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        dfs1(nxt, cur);
+</span></span><span style="display:flex;"><span>        cnt[cur] <span style="color:#f92672">+=</span> cnt[nxt];
+</span></span><span style="display:flex;"><span>        res[cur] <span style="color:#f92672">+=</span> res[nxt] <span style="color:#f92672">+</span> cnt[nxt];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    cnt[cur]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The first DFS calculates the sum of distances for the root node and the sizes of the subtrees for each node.</li>
+<li><code>cur</code> represents the current node, and <code>pre</code> represents the parent node.</li>
+<li>We traverse all the neighbors of the current node <code>cur</code>. For each neighbor <code>nxt</code>, we recursively call <code>dfs1</code> to explore the subtree rooted at <code>nxt</code>.</li>
+<li>After visiting a child node <code>nxt</code>, we:
 <ul>
-<li><strong>Graph Construction</strong>: Create the adjacency list using the provided edges.</li>
-<li><strong>Distance Calculation</strong>:
-<ul>
-<li>The first DFS populates <code>cnt</code> (number of nodes in each subtree) and <code>res</code> (sum of distances for each node).</li>
-<li>The second DFS adjusts these distances for all nodes based on their parent values.</li>
+<li>Add the size of the subtree rooted at <code>nxt</code> to the size of the current node’s subtree (<code>cnt[cur] += cnt[nxt]</code>).</li>
+<li>Add the sum of distances for node <code>nxt</code>, as well as the size of the subtree rooted at <code>nxt</code>, to the sum of distances for the current node (<code>res[cur] += res[nxt] + cnt[nxt]</code>).</li>
 </ul>
 </li>
+<li>Finally, we increment <code>cnt[cur]</code> to account for the current node itself.</li>
+</ul>
+<h4 id="step-4-second-dfs-dfs2">
+  Step 4: Second DFS (dfs2)
+  <a class="heading-link" href="#step-4-second-dfs-dfs2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs2</span>(<span style="color:#66d9ef">int</span> cur, <span style="color:#66d9ef">int</span> pre) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> nxt : gph[cur]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (pre <span style="color:#f92672">==</span> nxt) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        res[nxt] <span style="color:#f92672">=</span> res[cur] <span style="color:#f92672">-</span> cnt[nxt] <span style="color:#f92672">+</span> cnt.size() <span style="color:#f92672">-</span> cnt[nxt];
+</span></span><span style="display:flex;"><span>        dfs2(nxt, cur);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The second DFS propagates the sum of distances from the root node to all other nodes.</li>
+<li>Starting from the root node, we compute the sum of distances for each child node using the formula:
+<ul>
+<li><code>res[nxt] = res[cur] - cnt[nxt] + cnt.size() - cnt[nxt]</code></li>
+<li>This formula adjusts the sum of distances for the child node <code>nxt</code> by subtracting the distances from the current node’s sum and then adding the number of nodes not in the subtree rooted at <code>nxt</code>.</li>
+</ul>
+</li>
+<li>This propagation works because for each child node, we can calculate its sum of distances by using the sum of distances of its parent node and adjusting based on the number of nodes in its subtree.</li>
+<li>We recursively call <code>dfs2</code> to propagate the distance sums throughout the tree.</li>
+</ul>
+<h4 id="step-5-final-result">
+  Step 5: Final Result
+  <a class="heading-link" href="#step-5-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the two DFS traversals, the vector <code>res</code> will contain the sum of distances for each node. We return <code>res</code> as the final result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -330,10 +401,106 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes. Both DFS traversals go through each node and edge once.</li>
-<li><strong>Space Complexity</strong>: O(n) for the adjacency list and the result arrays.</li>
+<li><strong>First DFS (dfs1)</strong>: In this traversal, we visit each node and its neighbors once, so the time complexity of the first DFS is <code>O(n)</code>, where <code>n</code> is the number of nodes.</li>
+<li><strong>Second DFS (dfs2)</strong>: Similarly, the second DFS also visits each node and its neighbors once, so its time complexity is also <code>O(n)</code>.</li>
 </ul>
+<p>Therefore, the overall time complexity of the algorithm is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Adjacency List</strong>: The adjacency list <code>gph</code> requires <code>O(n)</code> space to store the tree structure.</li>
+<li><strong>Auxiliary Arrays</strong>: The arrays <code>res</code>, <code>cnt</code>, and the recursion stack all require <code>O(n)</code> space.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="input">
+  Input
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> edges <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>The tree is represented as:</p>
+<pre tabindex="0"><code>      0
+     / \
+    1   2
+       /|\
+      3 4 5
+</code></pre><h4 id="execution">
+  Execution
+  <a class="heading-link" href="#execution">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>First DFS</strong> (dfs1):</p>
+<ul>
+<li>We start from node <code>0</code>:
+<ul>
+<li>For node <code>1</code>, the sum of distances is <code>1</code> (distance from <code>0</code> to <code>1</code>).</li>
+<li>For node <code>2</code>, the sum of distances is <code>1 + 2 = 3</code> (distance from <code>0</code> to <code>2</code>, then from <code>2</code> to its children).</li>
+<li>We compute the sum of distances for the root and subtree sizes.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Second DFS</strong> (dfs2):</p>
+<ul>
+<li>Starting from node <code>0</code>, we propagate the results to the other nodes:
+<ul>
+<li>For node <code>1</code>, the sum of distances is adjusted based on the sum for node <code>0</code>.</li>
+<li>Similarly, we adjust the sum of distances for nodes <code>2</code>, <code>3</code>, <code>4</code>, and <code>5</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="output">
+  Output
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>[<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>]
+</span></span></code></pre></div><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the sum of distances for each node in a tree using two depth-first search (DFS) traversals. The time complexity of <code>O(n)</code> ensures that the solution works well even for large trees. By using a bottom-up approach followed by a top-down propagation of results, the algorithm minimizes redundant calculations and achieves optimal performance. The solution is both space and time efficient, making it ideal for solving problems involving tree structures where distances between nodes need to be computed.</p>
  
 </div>
   

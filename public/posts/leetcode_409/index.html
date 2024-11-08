@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> odd<span style="color:#f92672">?</span> res <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1274s1hbhb">
+<h2 id="hahahugoshortcode1272s1hbhb">
   
 
   
@@ -242,7 +242,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, find the length of the longest palindrome that can be formed by rearranging the characters in <code>s</code>. A palindrome reads the same forward and backward.</p>
+<p>The problem asks us to find the length of the longest palindrome that can be formed by rearranging the characters in a given string. A palindrome is a string that reads the same forwards and backwards. The goal is to determine the length of the longest possible palindrome that can be formed using the characters of the input string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,33 +250,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to focus on understanding the structure of palindromes and how to maximize the number of characters used to form a palindrome.</p>
 <ol>
-<li><strong>Character Count</strong>: Use a map to count the occurrences of each character in the string.</li>
-<li><strong>Calculate Maximum Length</strong>:
+<li>
+<p><strong>Palindrome Structure</strong>:</p>
 <ul>
-<li>Initialize a variable <code>res</code> to store the length of the longest palindrome and a boolean <code>odd</code> to track if any character has an odd count.</li>
-<li>Iterate through the character count map:
-<ul>
-<li>For each character, if its count is odd, set <code>odd</code> to <code>true</code>.</li>
-<li>Add the largest even number less than or equal to the character count to <code>res</code> (which is calculated as <code>(val / 2) * 2</code>).</li>
+<li>A palindrome has the property that characters appear in pairs. For example, in the string &ldquo;abba&rdquo;, the characters &lsquo;a&rsquo; and &lsquo;b&rsquo; appear twice.</li>
+<li>The key observation here is that for a string to form a palindrome, every character except at most one must appear an even number of times. The character that appears an odd number of times can be placed in the center of the palindrome (if necessary), but it can only contribute one occurrence to the palindrome.</li>
 </ul>
 </li>
+<li>
+<p><strong>Steps to Solve</strong>:</p>
+<ul>
+<li><strong>Count Character Frequencies</strong>: We begin by counting the frequency of each character in the string.</li>
+<li><strong>Use Characters with Even Frequencies</strong>: For each character that appears an even number of times, we can use all of its occurrences to form pairs in the palindrome.</li>
+<li><strong>Handle Odd Frequency Characters</strong>: If a character appears an odd number of times, we can use the largest even number of occurrences (i.e., the count minus one) to form pairs, and at most one such character can be placed at the center of the palindrome.</li>
 </ul>
 </li>
-<li><strong>Final Adjustment</strong>: If there is at least one character with an odd count, increment <code>res</code> by 1 to account for the center character of the palindrome.</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>The total length of the palindrome is calculated by summing the lengths of pairs formed by even-frequency characters.</li>
+<li>If there are characters with odd frequencies, one character can be placed at the center, contributing 1 additional character to the palindrome.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Counting Characters</strong>: A loop iterates through each character in the string <code>s</code> and populates the map <code>mp</code> with character counts.</li>
-<li><strong>Building the Result</strong>: A second loop goes through the entries in <code>mp</code>, updating <code>res</code> with even counts and checking for odd counts.</li>
-<li><strong>Returning the Result</strong>: Finally, the function returns <code>res</code>, adding 1 if there was an odd count, allowing for a single central character in the palindrome.</li>
-</ol>
+<h4 id="step-1-count-character-frequencies">
+  Step 1: Count Character Frequencies
+  <a class="heading-link" href="#step-1-count-character-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s)
+</span></span><span style="display:flex;"><span>    mp[x]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We first initialize a <code>map</code> called <code>mp</code> to store the frequency of each character in the string <code>s</code>. The <code>map</code> automatically sorts the characters by their keys (i.e., characters in lexicographical order).</li>
+<li>Then, we iterate over each character <code>x</code> in the string <code>s</code> and update its count in the map. After this step, <code>mp</code> contains each character and its corresponding frequency in the string.</li>
+</ul>
+<h4 id="step-2-calculate-the-length-of-the-palindrome">
+  Step 2: Calculate the Length of the Palindrome
+  <a class="heading-link" href="#step-2-calculate-the-length-of-the-palindrome">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> odd <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [key, val]<span style="color:#f92672">:</span> mp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(val <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) odd <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> (val<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize two variables:
+<ul>
+<li><code>odd</code>, a boolean flag to track whether we have encountered any characters with an odd frequency.</li>
+<li><code>res</code>, an integer to accumulate the total length of the longest palindrome that can be formed.</li>
+</ul>
+</li>
+<li>We then iterate over the <code>map</code> of character frequencies (<code>mp</code>), where <code>key</code> is the character and <code>val</code> is its frequency.
+<ul>
+<li>If <code>val</code> is odd (<code>val % 2</code>), we set the <code>odd</code> flag to <code>true</code>, indicating that we have encountered at least one character with an odd frequency.</li>
+<li>For each character, we add the largest even number of occurrences to the result. This is achieved by calculating <code>(val / 2) * 2</code>, which ensures that we only count the even occurrences of each character (for example, if a character appears 5 times, we add 4 to the result).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-final-adjustment-for-center-character">
+  Step 3: Final Adjustment for Center Character
+  <a class="heading-link" href="#step-3-final-adjustment-for-center-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> odd <span style="color:#f92672">?</span> res <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all characters, we check if we have encountered any character with an odd frequency (<code>odd</code> is <code>true</code>). If so, we can place one character in the center of the palindrome, contributing 1 additional character to the result.</li>
+<li>If there is at least one character with an odd frequency, we add 1 to <code>res</code> to account for this center character.</li>
+<li>Finally, we return the result, which is the length of the longest palindrome that can be formed.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -284,14 +343,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the string <code>s</code>. Each character is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(1), since the map can contain at most 26 characters (assuming only lowercase English letters), making the space usage constant.</li>
-</ul> 
+<li><strong>Counting Frequencies</strong>: The first step, counting the frequency of characters in the string, takes <code>O(n)</code> time, where <code>n</code> is the length of the string.</li>
+<li><strong>Iterating Over the Map</strong>: The second step involves iterating over the map of character frequencies. The number of distinct characters in the string is at most 26 (if the string contains only lowercase English letters). Therefore, this step takes <code>O(26)</code> time, which simplifies to <code>O(1)</code> as it is a constant time operation.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity of the algorithm is dominated by the time it takes to count character frequencies, which is <code>O(n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We are using a <code>map</code> to store the frequencies of characters. In the worst case, if all characters in the string are distinct, the map will contain <code>n</code> entries. Therefore, the space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively solves the problem of finding the length of the longest palindrome that can be formed from a given string by:</p>
+<ul>
+<li>Counting the frequencies of characters in the string.</li>
+<li>Summing up the largest even counts of characters to form pairs in the palindrome.</li>
+<li>Adding 1 character in the center if there are characters with odd frequencies.</li>
+</ul>
+<p>This approach is optimal, with a time complexity of <code>O(n)</code> and space complexity of <code>O(n)</code>, making it efficient even for larger strings. The solution is easy to implement and leverages simple principles of palindrome construction to efficiently calculate the result.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1274s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1272s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

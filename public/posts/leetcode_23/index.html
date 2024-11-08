@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> h<span style="color:#f92672">-&gt;</span>next;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode776s1hbhb">
+<h2 id="hahahugoshortcode775s1hbhb">
   
 
   
@@ -276,7 +276,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Merge <code>k</code> sorted linked lists into a single sorted linked list and return it.</p>
+<p>The problem is to merge <code>k</code> sorted singly linked lists into one sorted linked list. Each list is already sorted in non-decreasing order. The goal is to combine these <code>k</code> lists into one list, maintaining the sorted order.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>A list of <code>k</code> singly linked lists, where each list is sorted in non-decreasing order.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>A single sorted singly linked list that combines all the elements from the <code>k</code> input lists.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -284,46 +304,139 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can efficiently merge the <code>k</code> sorted lists using a <strong>min-heap (priority queue)</strong>. The idea is to keep track of the smallest elements from each list using a priority queue, ensuring that we always append the smallest node from the lists to the merged list. This method is efficient and avoids the need to repeatedly scan the lists.</p>
+<h4 id="steps-to-approach-the-problem">
+  Steps to approach the problem:
+  <a class="heading-link" href="#steps-to-approach-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Use a Min-Heap (Priority Queue)</strong>: Utilize a min-heap to efficiently retrieve the smallest node among the k lists.</li>
-<li><strong>Initialization</strong>:
+<li>
+<p><strong>Priority Queue (Min-Heap)</strong>:</p>
 <ul>
-<li>Define a custom comparator <code>cmp</code> for the priority queue to order nodes based on their values.</li>
-<li>Initialize the priority queue with the head nodes of all non-empty linked lists.</li>
+<li>A min-heap (priority queue) helps in efficiently getting the smallest element from the top of the heap. In this case, it will be used to store the heads of all <code>k</code> lists.</li>
+<li>The priority queue is ordered such that the smallest element is always at the top.</li>
 </ul>
 </li>
-<li><strong>Merging Process</strong>:
+<li>
+<p><strong>Adding List Heads to Min-Heap</strong>:</p>
 <ul>
-<li>Create a dummy head node to facilitate the construction of the merged list.</li>
-<li>While the priority queue is not empty:
-<ul>
-<li>Extract the smallest node (top of the min-heap).</li>
-<li>Add this node to the merged list.</li>
-<li>If the extracted node has a next node, push it onto the priority queue.</li>
+<li>We will first iterate through all the lists and push their heads (if they exist) into the priority queue.</li>
 </ul>
 </li>
+<li>
+<p><strong>Merging Lists</strong>:</p>
+<ul>
+<li>Pop the smallest node from the min-heap and add it to the result list.</li>
+<li>If the node that was popped has a next node, push that next node into the heap.</li>
+<li>Repeat the process until all elements from the lists are added to the merged list.</li>
 </ul>
 </li>
-<li><strong>Return the Merged List</strong>: The merged list starts from the next node of the dummy head.</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>If there are no lists or all lists are empty, the result will also be an empty list.</li>
+<li>If only one list is provided, it will be returned as-is.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Custom Comparator</strong>: Define a <code>cmp</code> class that overrides the <code>operator()</code> to compare <code>ListNode</code> values.</li>
-<li><strong>Function Definition</strong>: The <code>mergeKLists</code> function initializes the min-heap and processes the nodes.</li>
-<li><strong>Node Processing</strong>:
+<h4 id="1-define-a-comparison-class-for-the-priority-queue">
+  1. Define a Comparison Class for the Priority Queue
+  <a class="heading-link" href="#1-define-a-comparison-class-for-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">cmp</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(ListNode<span style="color:#f92672">*</span> a, ListNode<span style="color:#f92672">*</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> b<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The class <code>cmp</code> defines how two nodes should be compared in the priority queue.</li>
+<li>We want the smallest element to be at the top of the queue, so we compare the values of two <code>ListNode</code> objects (<code>a</code> and <code>b</code>), and if <code>a-&gt;val &gt; b-&gt;val</code>, the comparison will return <code>true</code>, which ensures that the heap is ordered from smallest to largest values.</li>
+</ul>
+<h4 id="2-the-mergeklists-function">
+  2. The <code>mergeKLists</code> Function
+  <a class="heading-link" href="#2-the-mergeklists-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">mergeKLists</span>(vector<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*&gt;&amp;</span> lists) {
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*</span>, vector<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*&gt;</span>, cmp<span style="color:#f92672">&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li><strong>Priority Queue</strong>: A priority queue <code>pq</code> is created that stores pointers to <code>ListNode</code> objects, ordered by their values. The <code>cmp</code> class ensures that the nodes with smaller values are prioritized.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: lists) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">!=</span> NULL) 
+</span></span><span style="display:flex;"><span>            pq.push(it);            
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Populating the Queue</strong>: The loop iterates over each linked list in the input vector <code>lists</code>. If a list is not <code>NULL</code>, its head node is pushed into the priority queue. This step ensures that all the list heads are available for merging.</li>
+</ul>
+<h4 id="3-create-a-dummy-head-for-the-merged-list">
+  3. Create a Dummy Head for the Merged List
+  <a class="heading-link" href="#3-create-a-dummy-head-for-the-merged-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> h <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> h;
+</span></span></code></pre></div><ul>
+<li><strong>Dummy Node</strong>: A dummy node <code>h</code> is created to simplify the merging process. The <code>tmp</code> pointer is used to keep track of the current node in the merged list.</li>
+<li><strong>Dummy Node Purpose</strong>: The dummy node acts as a placeholder to easily return the head of the merged list at the end. We don&rsquo;t have to handle special cases for the first node.</li>
+</ul>
+<h4 id="4-merging-process-using-the-priority-queue">
+  4. Merging Process Using the Priority Queue
+  <a class="heading-link" href="#4-merging-process-using-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> it;
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> tmp<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        pq.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it<span style="color:#f92672">-&gt;</span>next)
+</span></span><span style="display:flex;"><span>            pq.push(it<span style="color:#f92672">-&gt;</span>next);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Merging</strong>:
 <ul>
-<li>Push all initial nodes into the priority queue.</li>
-<li>Continuously pop the smallest node, attach it to the merged list, and push its next node until all nodes are processed.</li>
+<li>The while loop continues as long as the priority queue is not empty.</li>
+<li>The smallest node is popped from the queue (<code>pq.top()</code>), and it is added to the <code>tmp</code> node&rsquo;s <code>next</code> pointer, linking it to the merged list.</li>
+<li><code>tmp</code> is then moved to the newly added node (<code>tmp = tmp-&gt;next</code>).</li>
+<li>After processing a node, if it has a <code>next</code> node (i.e., the list hasn&rsquo;t ended), the <code>next</code> node is pushed into the priority queue.</li>
 </ul>
 </li>
-<li><strong>Final Output</strong>: Return the head of the merged linked list.</li>
-</ol>
+</ul>
+<h4 id="5-final-step-and-return">
+  5. Final Step and Return
+  <a class="heading-link" href="#5-final-step-and-return">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> h<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After all nodes are processed, <code>tmp-&gt;next</code> is set to <code>NULL</code> to terminate the merged list.</li>
+<li>The function returns <code>h-&gt;next</code>, which points to the actual head of the merged list, skipping the dummy node.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -331,14 +444,61 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(N \log k)), where (N) is the total number of nodes across all lists, and (k) is the number of linked lists.</li>
-<li><strong>Space Complexity:</strong> (O(k)) for the priority queue storing at most <code>k</code> nodes at any given time.</li>
-</ul> 
+<li>
+<p><strong>O(N log K)</strong>, where:</p>
+<ul>
+<li><code>N</code> is the total number of nodes across all <code>k</code> linked lists.</li>
+<li><code>K</code> is the number of linked lists.</li>
+</ul>
+<p><strong>Explanation</strong>:</p>
+<ul>
+<li><strong>Priority Queue Operations</strong>: The priority queue operations (insertion and removal) take <code>O(log K)</code> time because we maintain a heap of size <code>K</code> (the number of lists).</li>
+<li>We perform these operations for each node in all the lists, so the time complexity is proportional to the number of nodes (<code>N</code>) times the time it takes to perform a heap operation (<code>log K</code>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(K)</strong>, where <code>K</code> is the number of linked lists.
+<ul>
+<li>The priority queue stores at most <code>K</code> nodes at any point, one for each list. Therefore, the space complexity is dominated by the space used by the priority queue, which holds at most <code>K</code> elements.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently merges <code>k</code> sorted linked lists by leveraging a <strong>min-heap (priority queue)</strong>. By pushing the head of each list into the priority queue and continuously extracting the smallest element, we can maintain the sorted order as we build the merged list.</p>
+<p>Key points:</p>
+<ul>
+<li>The use of the min-heap ensures efficient extraction of the smallest element.</li>
+<li>The merging process runs in <strong>O(N log K)</strong> time, making it well-suited for cases with large numbers of lists and nodes.</li>
+<li>The space complexity is <strong>O(K)</strong>, which is optimal for the problem.</li>
+</ul>
+<p>This approach is optimal compared to other methods like brute-force merging, where one would repeatedly traverse and compare elements from all lists. The priority queue reduces the need for repeated comparisons, significantly improving efficiency.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode776s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode775s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -256,7 +256,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mat;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1355s1hbhb">
+<h2 id="hahahugoshortcode1353s1hbhb">
   
 
   
@@ -268,7 +268,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary matrix <code>mat</code> containing only 0s and 1s, find the distance of the nearest 0 for each cell. The distance is defined as the number of steps (up, down, left, right) from the cell to the nearest 0. Cells with 0s have a distance of 0.</p>
+<p>The problem asks to update a matrix of <code>0</code>s and <code>1</code>s such that each cell in the matrix contains the shortest distance to the nearest <code>0</code>. You are given a binary matrix where <code>0</code> represents a cell with no obstacle, and <code>1</code> represents a cell that needs to be updated with the shortest distance to the nearest <code>0</code>. This problem is commonly known as the &ldquo;01 Matrix&rdquo; problem.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,39 +276,124 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The best way to solve this problem is by using <strong>Breadth-First Search (BFS)</strong>, which works efficiently when searching for the shortest path in an unweighted grid-like structure. Here&rsquo;s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>BFS Initialization</strong>:</p>
+<p><strong>Grid Setup</strong>:</p>
 <ul>
-<li>Use a queue to perform a Breadth-First Search (BFS). Initialize the queue with all the cells that contain 0s, as these are the starting points.</li>
+<li>We are given a matrix of size <code>m x n</code>, where <code>m</code> is the number of rows, and <code>n</code> is the number of columns.</li>
+<li>The goal is to calculate the shortest distance from each cell containing <code>1</code> to the nearest cell containing <code>0</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Distance Calculation</strong>:</p>
+<p><strong>Initial Conditions</strong>:</p>
 <ul>
-<li>Maintain a distance variable (<code>dis</code>) which increments at each level of BFS.</li>
-<li>For each cell processed, update its distance and explore its neighboring cells (up, down, left, right). If a neighbor is not yet visited, push it into the queue for further processing.</li>
+<li>Cells containing <code>0</code> already have a distance of <code>0</code> since they are the nearest to themselves.</li>
+<li>We can start from all <code>0</code> cells simultaneously and use BFS to propagate the shortest distance to all <code>1</code> cells.</li>
 </ul>
 </li>
 <li>
-<p><strong>Boundary Checks</strong>:</p>
+<p><strong>BFS Propagation</strong>:</p>
 <ul>
-<li>Ensure that when accessing neighboring cells, you stay within the bounds of the matrix.</li>
+<li>We will use a queue to manage the BFS process. We start by pushing all cells that contain <code>0</code> into the queue.</li>
+<li>We will explore each direction (up, down, left, right) from each <code>0</code> and update the distance of the <code>1</code> cells.</li>
+<li>We will continue this process until all cells have been updated with their shortest distance to a <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>BFS is ideal for this problem because it processes nodes level by level, ensuring that the first time a node (cell) is processed, it is done with the shortest possible distance from a <code>0</code>. This guarantees that the distance calculation is optimal.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-the-bfs-queue">
+  Step 1: Initialize the BFS Queue
+  <a class="heading-link" href="#step-1-initialize-the-bfs-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> mat.size(), n <span style="color:#f92672">=</span> mat[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (mat[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            q.push({i, j});
+</span></span></code></pre></div><ul>
+<li>We start by creating a queue (<code>q</code>) to hold the coordinates of the cells that contain <code>0</code>.</li>
+<li>We then iterate over the matrix. For each cell, if the value is <code>0</code>, we push its coordinates (row <code>i</code>, column <code>j</code>) into the queue. These cells will be the starting points for the BFS.</li>
+</ul>
+<h4 id="step-2-initialize-direction-array-and-visited-matrix">
+  Step 2: Initialize Direction Array and Visited Matrix
+  <a class="heading-link" href="#step-2-initialize-direction-array-and-visited-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dis <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vis;
+</span></span><span style="display:flex;"><span>vis.resize(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><ul>
+<li><code>dis</code> is the distance variable, which starts at <code>0</code> and will increment as we move further from the initial <code>0</code> cells.</li>
+<li>We initialize a <code>visited</code> matrix (<code>vis</code>) of size <code>m x n</code> to track the cells that have already been processed. Initially, all cells are set to <code>0</code> (not visited).</li>
+<li>The <code>dir</code> array is used to simplify the navigation of four directions: right (1), left (-1), down (1), and up (-1).</li>
+</ul>
+<h4 id="step-3-bfs-loop-for-distance-propagation">
+  Step 3: BFS Loop for Distance Propagation
+  <a class="heading-link" href="#step-3-bfs-loop-for-distance-propagation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();                
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        mat[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> dis;
+</span></span><span style="display:flex;"><span>        vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>vis[x][y])
+</span></span><span style="display:flex;"><span>                q.push({x, y});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    dis<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start by processing the cells in the queue using BFS. The outer <code>while</code> loop continues as long as there are cells in the queue.</li>
+<li>Inside the loop, we process all cells at the current distance (<code>dis</code>), indicated by the size of the queue (<code>sz</code>). For each cell, we check if it has been visited. If it has, we skip it. If not, we:
 <ul>
-<li>Initialize a queue with the positions of all 0s in the matrix.</li>
-<li>Set up a 2D vector <code>vis</code> to keep track of visited cells.</li>
-<li>Perform BFS while maintaining the current distance. Update the distance of each cell to the current distance when processing it.</li>
-<li>For each cell processed, check its four neighbors and add them to the queue if they haven&rsquo;t been visited yet.</li>
+<li>Set its value to the current distance (<code>dis</code>), as this is the shortest distance from the nearest <code>0</code>.</li>
+<li>Mark it as visited by setting <code>vis[it[0]][it[1]] = 1</code>.</li>
+<li>For each of the four directions, we check if moving in that direction leads to a valid cell (within bounds and not yet visited). If valid, we push the new cell into the queue.</li>
+</ul>
+</li>
+<li>After processing all cells at the current distance, we increment <code>dis</code> to propagate further.</li>
+</ul>
+<h4 id="step-4-return-the-updated-matrix">
+  Step 4: Return the Updated Matrix
+  <a class="heading-link" href="#step-4-return-the-updated-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mat;
+</span></span></code></pre></div><ul>
+<li>Once BFS completes, the matrix <code>mat</code> will have the shortest distances from each <code>1</code> to the nearest <code>0</code>. We return this matrix as the result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -317,15 +402,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns, since we may need to visit every cell in the matrix.</li>
-<li><strong>Space Complexity</strong>: O(m * n) for the queue and the visited matrix, which may hold up to <code>m * n</code> elements in the worst case.</li>
+<li><strong>BFS Traversal</strong>: We visit every cell in the matrix exactly once. For each cell, we check its four neighbors. Therefore, the time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the matrix.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Queue</strong>: In the worst case, the queue can hold all cells in the matrix. Therefore, the space complexity for the queue is <strong>O(m * n)</strong>.</li>
+<li><strong>Visited Matrix</strong>: We use a <code>visited</code> matrix to keep track of visited cells, which also requires <strong>O(m * n)</strong> space.</li>
+<li>Overall, the space complexity is <strong>O(m * n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of updating the matrix with the shortest distance to the nearest <code>0</code> by leveraging <strong>Breadth-First Search (BFS)</strong>. BFS ensures that each cell is updated with the shortest possible distance from the nearest <code>0</code>. The time and space complexities are both <strong>O(m * n)</strong>, making this solution optimal for large grids. The approach is simple, easy to understand, and efficient in solving this type of shortest-path problem on a grid.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1355s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1353s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

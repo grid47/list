@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> e;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode397s1hbhb">
+<h2 id="hahahugoshortcode396s1hbhb">
   
 
   
@@ -252,7 +252,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code> of size <code>n</code>, find the majority element. The majority element is the element that appears more than <code>n/2</code> times. It is guaranteed that a majority element always exists in the array.</p>
+<p>The task is to find the majority element in a given integer array <code>nums</code>. A majority element is defined as an element that appears more than <strong>n/2</strong> times in the array, where <code>n</code> is the size of the array. If there is no such element, the function should return a value (though the problem guarantees that a majority element will always exist).</p>
+<p>For example:</p>
+<ul>
+<li>In the array <code>[3, 2, 3]</code>, the majority element is <code>3</code>.</li>
+<li>In the array <code>[2, 2, 1, 1, 1, 2, 2]</code>, the majority element is <code>2</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,56 +265,102 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem efficiently, we need to identify the element that appears more than half the times in the array. A brute force approach would involve counting the occurrences of each element, but this could take O(n²) time in the worst case (when checking for each element). Instead, a more efficient approach uses a hash map (or frequency map) to track the count of each element and keep track of the maximum count as we iterate through the array. This approach operates in linear time <strong>O(n)</strong>, where <code>n</code> is the size of the array.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Counting Occurrences</strong>:</p>
-<ul>
-<li>Utilize a hash map (or dictionary) to count the occurrences of each element in the array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Finding the Majority Element</strong>:</p>
-<ul>
-<li>Iterate through the array, updating the count for each element.</li>
-<li>Keep track of the element with the maximum count, which will be the majority element.</li>
-</ul>
-</li>
+<li>We will iterate through the array and maintain a frequency map (<code>map&lt;int, int&gt; mp</code>) that tracks the count of each element.</li>
+<li>As we process each element, we update the count for that element in the map.</li>
+<li>While updating, we also track the element that has the highest frequency (<code>cnt</code>) and update the majority element (<code>e</code>) accordingly.</li>
+<li>After processing the entire array, the element <code>e</code> will be the majority element.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the function <code>majorityElement</code>.</li>
-<li><strong>Line 2</strong>: Initialize <code>e</code> to the first element of the array and <code>cnt</code> to 1 (since we have at least one occurrence of the first element).</li>
-<li><strong>Line 3</strong>: Create a hash map <code>mp</code> to count occurrences of elements.</li>
-<li><strong>Lines 4-8</strong>: Loop through each element <code>x</code> in <code>nums</code>:
-<ul>
-<li>Increment the count of <code>x</code> in the hash map.</li>
-<li>If the count of <code>x</code> exceeds the current maximum count (<code>cnt</code>), update <code>cnt</code> and set <code>e</code> to <code>x</code>.</li>
+<p>Let&rsquo;s go through the code step by step.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>Here, we initialize <code>e</code> as the first element of the array and <code>cnt</code> as <code>1</code> because we have already seen the first element. <code>mp</code> is a frequency map that will store the count of each element in the array.</li>
 </ul>
-</li>
-<li><strong>Line 9</strong>: Return the majority element <code>e</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) {
+</span></span><span style="display:flex;"><span>    mp[x]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate through each element <code>x</code> in the array <code>nums</code>.</li>
+<li>For each element, we increment its count in the map (<code>mp[x]++</code>).</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[x] <span style="color:#f92672">&gt;</span> cnt) {
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> mp[x];
+</span></span><span style="display:flex;"><span>        e <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we check if the current count of the element (<code>mp[x]</code>) exceeds the previously tracked count <code>cnt</code>.</li>
+<li>If the count of the current element is greater than <code>cnt</code>, we update <code>cnt</code> to the new count and update <code>e</code> to the current element (<code>x</code>).</li>
+<li>This ensures that <code>e</code> always holds the element with the highest frequency.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> e;
+</span></span></code></pre></div><ul>
+<li>After processing all elements in the array, we return <code>e</code>, which will hold the majority element, as it has the highest count in the frequency map.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the size of the array <code>nums</code>. This is because we are iterating over the array once, and the map operations (<code>mp[x]++</code>) are O(1) on average. The total time complexity is proportional to the number of elements in the array.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> in the worst case, because we are storing the frequency of each element in the map <code>mp</code>. In the worst case, all elements in the array could be unique, leading to a map of size <code>n</code>. If there are repeated elements, the space usage could be lower, but the worst-case complexity remains O(n).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach effectively solves the problem of finding the majority element in linear time, using a frequency map to track the counts of each element. The solution ensures that we efficiently identify the element with the highest frequency without resorting to a brute-force search.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, as we traverse the array once.</li>
-<li><strong>Space Complexity</strong>: (O(n)) in the worst case due to the hash map storage for the counts.</li>
+<li><strong>Efficient Time Complexity</strong>: The solution runs in linear time <strong>O(n)</strong>, making it suitable for large input arrays.</li>
+<li><strong>Space Complexity</strong>: The space complexity is also <strong>O(n)</strong> due to the usage of a map to store frequencies of elements.</li>
+<li><strong>Majority Element</strong>: This solution guarantees that the majority element will be found, as specified in the problem statement.</li>
 </ul>
+<p>This code is both time-efficient and simple to understand, making it an excellent approach to solving the majority element problem in an optimal manner.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode397s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode396s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

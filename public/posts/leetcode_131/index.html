@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode172s1hbhb">
+<h2 id="hahahugoshortcode171s1hbhb">
   
 
   
@@ -261,65 +261,150 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, partition it such that every substring of the partition is a palindrome. Return all possible palindrome partitioning.</p>
-<h3 id="approach">
+<p>The problem asks to find all possible <strong>palindrome partitioning</strong> of a given string. The goal is to divide the string into several substrings such that each substring is a palindrome. A palindrome is a string that reads the same forward and backward.</p>
+<p>For example, given the string <code>&quot;aab&quot;</code>, the possible palindrome partitions are:</p>
+<pre tabindex="0"><code>[[&#34;a&#34;, &#34;a&#34;, &#34;b&#34;], [&#34;aa&#34;, &#34;b&#34;]]
+</code></pre><h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem of finding all possible palindrome partitions, we can use a <strong>backtracking</strong> approach. This involves exploring each possible way of splitting the string and checking whether the substrings formed during the split are palindromes. If a substring is a palindrome, we add it to the current partition and proceed with the next part of the string.</p>
+<h4 id="key-ideas">
+  Key Ideas:
+  <a class="heading-link" href="#key-ideas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
 <p><strong>Backtracking</strong>:</p>
 <ul>
-<li>Use a backtracking function (<code>bt</code>) to explore all possible partitions of the string.</li>
-<li>For each index, iterate through the string to find potential palindrome substrings.</li>
-<li>If a valid palindrome substring is found, add it to the current partition and recursively continue to find further partitions.</li>
+<li>We start with an empty list to store the current partition of palindromes.</li>
+<li>For each starting index of the string, we iterate over the end indices, and for each substring, we check if it&rsquo;s a palindrome.</li>
+<li>If it is a palindrome, we add it to the current partition and move to the next part of the string. When we reach the end of the string, the current partition is valid and can be added to the result.</li>
 </ul>
 </li>
 <li>
 <p><strong>Palindrome Checking</strong>:</p>
 <ul>
-<li>A helper function (<code>isPal</code>) checks if a substring defined by indices <code>i</code> and <code>j</code> is a palindrome.</li>
+<li>To check whether a given substring is a palindrome, we use a helper function that compares the characters at both ends and moves towards the center.</li>
+<li>If all characters match, the substring is a palindrome.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-main-function">
+  Step 1: <strong>Main Function</strong>
+  <a class="heading-link" href="#step-1-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> partition(string s) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, s, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Parameters</strong>:
 <ul>
-<li>
-<p><strong><code>partition</code> function</strong>:</p>
-<ul>
-<li><strong>Line 3</strong>: Initializes a 2D vector <code>ans</code> to store all the valid partitions.</li>
-<li><strong>Line 4</strong>: A temporary vector <code>tmp</code> is created to hold the current partition being formed.</li>
-<li><strong>Line 5</strong>: Calls the backtracking function starting from index 0.</li>
+<li><code>s</code>: The input string.</li>
 </ul>
 </li>
-<li>
-<p><strong><code>bt</code> function</strong>:</p>
+<li><strong>Variables</strong>:
 <ul>
-<li><strong>Line 8</strong>: If the current index <code>idx</code> equals the size of <code>s</code>, it means a valid partition has been formed, and it is added to <code>ans</code>.</li>
-<li><strong>Line 10</strong>: Loop through the string from <code>idx</code> to the end.</li>
-<li><strong>Line 11</strong>: If the substring from <code>idx</code> to <code>i</code> is a palindrome:
+<li><code>ans</code>: A 2D vector to store all possible palindrome partitions.</li>
+<li><code>tmp</code>: A temporary vector to store the current partition while backtracking.</li>
+</ul>
+</li>
+<li><strong>Logic</strong>:
 <ul>
-<li>Add the palindrome substring to <code>tmp</code>.</li>
-<li>Recur with the next index (<code>i + 1</code>).</li>
-<li>Backtrack by removing the last added substring.</li>
+<li>We call the helper function <code>bt</code> (backtracking) with the initial parameters to start the process of finding palindrome partitions.</li>
+<li>After the backtracking is complete, the <code>ans</code> vector contains all valid palindrome partitions, which is returned as the result.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>
-<p><strong><code>isPal</code> function</strong>:</p>
+<h4 id="step-2-backtracking-function">
+  Step 2: <strong>Backtracking Function</strong>
+  <a class="heading-link" href="#step-2-backtracking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bt</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ans, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>tmp, string s, <span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> s.size()) {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(isPal(s, idx, i)) {
+</span></span><span style="display:flex;"><span>            tmp.push_back(s.substr(idx, i <span style="color:#f92672">-</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>            bt(ans, tmp, s, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            tmp.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Parameters</strong>:
 <ul>
-<li><strong>Line 21</strong>: Checks if the substring between indices <code>i</code> and <code>j</code> is a palindrome.</li>
-<li><strong>Line 23-26</strong>: If characters at <code>i</code> and <code>j</code> are the same, continue inward; otherwise, return false.</li>
+<li><code>ans</code>: The 2D vector to store the final palindrome partitions.</li>
+<li><code>tmp</code>: The current partition being formed.</li>
+<li><code>s</code>: The input string.</li>
+<li><code>idx</code>: The current starting index for the next potential palindrome substring.</li>
+</ul>
+</li>
+<li><strong>Base Case</strong>:
+<ul>
+<li>If <code>idx == s.size()</code>, it means we have explored all characters of the string. The current partition <code>tmp</code> is added to the result.</li>
+</ul>
+</li>
+<li><strong>Recursive Step</strong>:
+<ul>
+<li>For each position <code>i</code> from <code>idx</code> to <code>s.size()</code>, check if the substring from <code>idx</code> to <code>i</code> is a palindrome.</li>
+<li>If it is a palindrome, add it to <code>tmp</code> and recursively continue with the next part of the string by calling <code>bt</code> with <code>i + 1</code> as the new starting index.</li>
+<li>After the recursive call, remove the last palindrome substring (backtrack) to try the next possibility.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-palindrome-checking-function">
+  Step 3: <strong>Palindrome Checking Function</strong>
+  <a class="heading-link" href="#step-3-palindrome-checking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPal</span>(string s, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">!=</span> s[j])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>, j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string to check.</li>
+<li><code>i</code>: The starting index of the substring.</li>
+<li><code>j</code>: The ending index of the substring.</li>
+</ul>
+</li>
+<li><strong>Logic</strong>:
+<ul>
+<li>The function checks if the substring from index <code>i</code> to <code>j</code> is a palindrome.</li>
+<li>It compares the characters at <code>s[i]</code> and <code>s[j]</code>. If they are equal, it moves towards the center by incrementing <code>i</code> and decrementing <code>j</code>. If any mismatch is found, it returns <code>false</code>. If the entire substring is checked without mismatches, it returns <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -330,15 +415,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(2^N)) in the worst case for (N) being the length of the string, since each character can either be included in a partition or not.</li>
-<li><strong>Space Complexity</strong>: (O(N)) for the recursion stack, plus space to store the partitions in <code>ans</code>.</li>
+<li><strong>Backtracking</strong>: The backtracking function generates all possible partitions of the string, which can be exponential in nature. For a string of length <code>n</code>, the number of possible partitions is approximately <code>2^(n-1)</code>, as each character can either be included in the current partition or start a new partition.</li>
+<li><strong>Palindrome Checking</strong>: For each substring, we check if it is a palindrome, which takes <code>O(k)</code> time, where <code>k</code> is the length of the substring. In the worst case, we check every possible substring, which could take up to <code>O(n^2)</code> checks for all substrings.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is approximately <code>O(2^n * n)</code>, where <code>n</code> is the length of the string. The exponential factor comes from generating all possible partitions, and the polynomial factor comes from the palindrome checks.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Recursive Stack</strong>: The depth of the recursive call stack is at most <code>n</code>, as each recursive call explores a new partition.</li>
+<li><strong>Storage for Result</strong>: The <code>ans</code> vector stores all valid palindrome partitions, and the size of <code>ans</code> depends on the number of partitions generated, which in the worst case can be <code>O(2^n)</code>.</li>
+<li><strong>Overall Space Complexity</strong>: The space complexity is <code>O(n^2)</code> due to the space needed for the <code>ans</code> vector and the recursive stack.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages a <strong>backtracking</strong> approach to generate all possible partitions of the string, checking whether each substring is a palindrome. The solution is efficient for relatively small strings, but due to its exponential nature, it may not be suitable for very large strings. The key idea is to build partitions incrementally and prune non-palindromic substrings early, making the approach both elegant and functional for moderate input sizes. By using a recursive backtracking approach combined with palindrome checks, the solution ensures that we explore all valid partitions efficiently while maintaining simplicity and clarity in the code.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode172s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode171s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

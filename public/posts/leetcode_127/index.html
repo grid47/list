@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode154s1hbhb">
+<h2 id="hahahugoshortcode152s1hbhb">
   
 
   
@@ -264,7 +264,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two words, <code>beginWord</code> and <code>endWord</code>, and a dictionary of words, find the length of the shortest transformation sequence from <code>beginWord</code> to <code>endWord</code>. Each transformed word must exist in the dictionary, and only one letter can be changed at a time.</p>
+<p>The &ldquo;Word Ladder&rdquo; problem is a classic graph-based challenge in which we are given two words, a begin word (<code>bg</code>) and an end word (<code>ed</code>), and a dictionary of valid words. The goal is to find the shortest transformation sequence from the <code>begin</code> word to the <code>end</code> word, such that:</p>
+<ul>
+<li>Each transformed word must exist in the dictionary.</li>
+<li>Only one letter can be changed at a time between two consecutive words in the sequence.</li>
+<li>The sequence starts with the <code>begin</code> word and ends with the <code>end</code> word.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><strong>Input</strong>:
+<ul>
+<li><code>begin = &quot;hit&quot;</code></li>
+<li><code>end = &quot;cog&quot;</code></li>
+<li><code>list = [&quot;hot&quot;, &quot;dot&quot;, &quot;dog&quot;, &quot;lot&quot;, &quot;log&quot;, &quot;cog&quot;]</code></li>
+</ul>
+</li>
+<li><strong>Output</strong>: <code>5</code>
+<ul>
+<li>Explanation: The shortest transformation sequence is <code>&quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;</code>, which has a length of 5.</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,73 +292,204 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be modeled as a <strong>graph traversal</strong> problem:</p>
+<ul>
+<li>Each word in the dictionary, as well as the start (<code>bg</code>) and end (<code>ed</code>) words, can be considered as a node in a graph.</li>
+<li>An edge exists between two nodes (words) if you can transform one word into the other by changing exactly one letter.</li>
+</ul>
+<p>We can solve this using <strong>Breadth-First Search (BFS)</strong>, which is well-suited for finding the shortest path in an unweighted graph:</p>
 <ol>
-<li><strong>Initialize a Set</strong>: Create an unordered map to store the words in the dictionary for quick lookup.</li>
-<li><strong>Breadth-First Search (BFS)</strong>:
-<ul>
-<li>Use a queue to explore the words level by level.</li>
-<li>Start by pushing <code>beginWord</code> into the queue.</li>
-<li>Initialize a counter <code>cnt</code> to track the number of transformations.</li>
-</ul>
-</li>
-<li><strong>Process the Queue</strong>:
-<ul>
-<li>While the queue is not empty, determine the number of words at the current level.</li>
-<li>For each word:
-<ul>
-<li>Check if it matches <code>endWord</code>; if it does, return the count of transformations.</li>
-<li>Remove the word from the dictionary to prevent re-processing.</li>
-<li>Generate all possible single-letter transformations.</li>
-<li>If the transformed word exists in the dictionary, push it onto the queue.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Return 0</strong>: If the queue is exhausted without finding <code>endWord</code>, return 0.</li>
+<li><strong>Start with the begin word</strong>: The BFS will begin with the start word and attempt to transform it into the end word.</li>
+<li><strong>Queue Initialization</strong>: A queue will be used to store words at each level of transformation.</li>
+<li><strong>Dictionary Lookup</strong>: A hash map (unordered_map) is used to track valid words and ensure no word is visited more than once.</li>
+<li><strong>Level-wise Traversal</strong>: BFS explores each level one by one, transforming each word at the current level to its valid neighbors (words differing by exactly one letter).</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Steps:</p>
+<ol>
+<li>Initialize the dictionary from the list of words, storing each word as a key in a hash map for quick lookup.</li>
+<li>Use a queue to start BFS with the <code>begin</code> word.</li>
+<li>For each word, attempt to generate all possible valid transformations (i.e., by changing one letter at a time).</li>
+<li>For each valid transformation, check if it matches the end word, or add it to the queue if it&rsquo;s a valid transformation and hasn&rsquo;t been visited.</li>
+<li>Track the number of steps using a counter (<code>cnt</code>) to represent the number of transformations.</li>
+<li>If the queue is exhausted and the end word has not been found, return 0, meaning no valid transformation sequence exists.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition">
+  1. <strong>Function Definition</strong>
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ladderLength(string bg, string ed, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> list)
+</span></span></code></pre></div><p>The function <code>ladderLength</code> takes three parameters:</p>
+<ul>
+<li><code>bg</code>: the starting word.</li>
+<li><code>ed</code>: the target word.</li>
+<li><code>list</code>: a list of valid words (dictionary).</li>
+</ul>
+<h4 id="2-hash-map-initialization">
+  2. <strong>Hash Map Initialization</strong>
+  <a class="heading-link" href="#2-hash-map-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string x: list)
+</span></span><span style="display:flex;"><span>    mp[x] <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li>A hash map <code>mp</code> is created to store the dictionary of words for fast lookup.</li>
+<li>Each word from the list is inserted into the map, where the word is the key, and the value is <code>true</code> (indicating the word exists in the dictionary).</li>
+</ul>
+<h4 id="3-queue-initialization">
+  3. <strong>Queue Initialization</strong>
+  <a class="heading-link" href="#3-queue-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push(bg);
+</span></span></code></pre></div><ul>
+<li>A queue <code>q</code> is initialized to hold the current words at each level of transformation.</li>
+<li>The starting word <code>bg</code> is pushed into the queue as the first word to process.</li>
+</ul>
+<h4 id="4-bfs-loop">
+  4. <strong>BFS Loop</strong>
+  <a class="heading-link" href="#4-bfs-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp <span style="color:#f92672">==</span> ed) <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(tmp))
+</span></span><span style="display:flex;"><span>            mp.erase(tmp);
+</span></span></code></pre></div><ul>
+<li>The variable <code>cnt</code> is initialized to <code>1</code> (the starting word itself).</li>
+<li>The BFS loop begins, and it continues until the queue is empty.
+<ul>
+<li>At each level, the size of the queue (<code>sz</code>) is noted, representing the number of nodes (words) at that level.</li>
+<li>Each word is processed one by one (<code>q.front()</code>), and it is removed from the queue (<code>q.pop()</code>).</li>
+<li>If the current word <code>tmp</code> is equal to the <code>end</code> word <code>ed</code>, we return the current transformation count <code>cnt</code>, as this indicates we&rsquo;ve found the shortest transformation sequence.</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-word-transformation-generation">
+  5. <strong>Word Transformation Generation</strong>
+  <a class="heading-link" href="#5-word-transformation-generation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> tmp.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> tmp[j];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> c1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>        tmp[j] <span style="color:#f92672">=</span> c1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(tmp))
+</span></span><span style="display:flex;"><span>            q.push(tmp);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    tmp[j] <span style="color:#f92672">=</span> c;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each word <code>tmp</code>, we attempt to generate all possible transformations by changing each character one by one.</li>
+<li>For each character in the word, we replace it with each letter from <code>'a'</code> to <code>'z'</code>.</li>
+<li>If the resulting word exists in the dictionary (<code>mp.count(tmp)</code>), it is valid and is added to the queue for processing in the next level.</li>
+</ul>
+<h4 id="6-update-counter-and-continue">
+  6. <strong>Update Counter and Continue</strong>
+  <a class="heading-link" href="#6-update-counter-and-continue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>After processing all words at the current level, the counter <code>cnt</code> is incremented to indicate the next level of transformation.</p>
+<h4 id="7-return-result">
+  7. <strong>Return Result</strong>
+  <a class="heading-link" href="#7-return-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>If the queue is exhausted and we have not found the <code>end</code> word, return <code>0</code>, meaning no valid transformation sequence exists.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><strong>Example 1</strong>:</p>
+<ul>
+<li><strong>Input</strong>:
+<ul>
+<li><code>begin = &quot;hit&quot;</code></li>
+<li><code>end = &quot;cog&quot;</code></li>
+<li><code>list = [&quot;hot&quot;, &quot;dot&quot;, &quot;dog&quot;, &quot;lot&quot;, &quot;log&quot;, &quot;cog&quot;]</code></li>
+</ul>
+</li>
+<li><strong>Step-by-Step</strong>:
+<ul>
+<li>Initialize queue with <code>&quot;hit&quot;</code>.</li>
+<li>The first transformation level explores <code>hit</code> → <code>hot</code>, <code>dot</code>.</li>
+<li>The second level explores <code>hot</code> → <code>dot</code> → <code>dog</code> → <code>lot</code>.</li>
+<li>The third level explores <code>dog</code> → <code>cog</code>.</li>
+<li>Found <code>&quot;cog&quot;</code>, return 5.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Output</strong>: <code>5</code></p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong><code>ladderLength</code> function</strong>:
+<li>
+<p><strong>Time Complexity</strong>: <code>O(N * M * 26)</code></p>
 <ul>
-<li><strong>Line 2-4</strong>: Populate the dictionary map with words from the provided list.</li>
-<li><strong>Line 6</strong>: Initialize a queue and push the <code>beginWord</code>.</li>
-<li><strong>Line 8</strong>: Set a counter to keep track of the number of transformations.</li>
-<li><strong>Line 9-19</strong>: Process each word in the queue:
+<li><code>N</code> is the number of words in the dictionary (<code>list.size()</code>), and <code>M</code> is the length of each word. The <code>26</code> factor comes from the fact that for each word, we try to generate up to 26 possible transformations (one for each letter of the alphabet).</li>
+<li>The worst-case time complexity is proportional to the number of transformations generated for all words.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <code>O(N * M)</code></p>
 <ul>
-<li><strong>Line 10</strong>: Get the current level size.</li>
-<li><strong>Line 11-17</strong>: For each word, check if it matches <code>endWord</code> and generate transformations:
-<ul>
-<li>Change each character to all letters from &lsquo;a&rsquo; to &lsquo;z&rsquo; and check for valid words in the dictionary.</li>
-<li>If a valid transformation is found, push it into the queue.</li>
+<li>The space complexity comes from the dictionary (<code>mp</code>) and the queue (<code>q</code>). In the worst case, the queue will hold all words, and the dictionary will contain all words as keys.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><strong>Line 21</strong>: Return 0 if no transformation sequence is found.</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N \cdot M \cdot 26)), where (N) is the number of words in the dictionary, (M) is the length of each word, and 26 represents the number of letters in the alphabet (for transformations).</li>
-<li><strong>Space Complexity</strong>: (O(N)) for storing the words in the unordered map and the queue.</li>
-</ul> 
+<p>This solution efficiently solves the &ldquo;Word Ladder&rdquo; problem by utilizing a <strong>Breadth-First Search (BFS)</strong> algorithm. By treating the words as nodes in a graph and using BFS to explore the shortest path from the <code>begin</code> word to the <code>end</code> word, it guarantees that the first time we encounter the <code>end</code> word, it will be through the shortest transformation sequence. The use of a queue ensures that each transformation is explored level by level, and the dictionary of words is managed with a hash map for efficient lookups.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode154s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode152s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

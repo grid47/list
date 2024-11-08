@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -249,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1475s1hbhb">
+<h2 id="hahahugoshortcode1473s1hbhb">
   
 
   
@@ -261,7 +261,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array representing couples sitting in a row, where each person is represented by a unique integer, the task is to find the minimum number of swaps required to ensure that each couple sits next to each other.</p>
+<p>The problem at hand is to calculate the minimum number of swaps required to arrange a row of couples such that each couple sits together. We are given a row where each couple consists of two adjacent integers. Each integer represents a person, and the arrangement in the row is such that couples should sit next to each other in the final configuration. The goal is to find the minimum number of swaps required to group all couples together.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Given the row <code>row = [0, 2, 1, 3]</code>, where the couples are <code>(0, 1)</code> and <code>(2, 3)</code>, we need to swap the numbers to ensure that each couple sits together.</p>
+<ul>
+<li>The final row should look like <code>[0, 1, 2, 3]</code> (i.e., the pairs are adjacent).</li>
+<li>The minimum number of swaps needed to achieve this arrangement is 1, as we can swap <code>2</code> and <code>1</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,43 +281,102 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution involves simulating the process of grouping couples together by using a greedy approach with careful tracking of positions. Here&rsquo;s the step-by-step breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Position Mapping</strong>:</p>
+<p><strong>Understanding the Couples</strong>:</p>
 <ul>
-<li>Create an array <code>pos</code> to store the current index of each person.</li>
-<li>Create an array <code>ptn</code> to define the desired pattern where couples should sit together (even indexed with the next index).</li>
+<li>Each person in the row is part of a couple. We know that person <code>i</code> is paired with <code>i + 1</code>, or the other way around.</li>
+<li>Our task is to place each couple next to each other.</li>
 </ul>
 </li>
 <li>
-<p><strong>Swapping Logic</strong>:</p>
+<p><strong>Tracking Positions</strong>:</p>
 <ul>
-<li>Iterate through the array. For each person, determine if they are sitting in the correct position.</li>
-<li>If not, swap them with their couple (using the <code>ptn</code> array to find the couple&rsquo;s expected position).</li>
-<li>Update the position array after each swap and increment the swap count.</li>
+<li>We use two arrays: <code>pos</code> to store the current position of each person, and <code>ptn</code> (for pattern) to help track where each person should ideally go based on the idea of couples sitting together.</li>
+</ul>
+</li>
+<li>
+<p><strong>Simulating the Swaps</strong>:</p>
+<ul>
+<li>We iterate through the row, and if a person is not sitting next to their partner (i.e., a couple is not together), we perform a swap to bring the couple together.</li>
+<li>The swap is done by determining the position of the couple&rsquo;s partner and swapping them. The process continues until all couples are adjacent.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting the Swaps</strong>:</p>
+<ul>
+<li>Each time a swap is made, we increment a counter (<code>res</code>) that tracks the total number of swaps required.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for calculating the minimum swaps.</li>
+<h4 id="step-1-initialize-arrays">
+  Step 1: Initialize Arrays
+  <a class="heading-link" href="#step-1-initialize-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> row.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pos(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ptn(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><code>res</code> will store the result, which is the total number of swaps.</li>
+<li><code>n</code> is the size of the row.</li>
+<li><code>pos</code> is an array where each index represents a person and stores their current position in the row.</li>
+<li><code>ptn</code> is an array that stores the pattern of how couples should ideally be positioned.</li>
 </ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>int minSwapsCouples(vector&lt;int&gt;&amp; row)</code>: This method implements the logic to find the minimum number of swaps needed for couples to sit together.</li>
+<h4 id="step-2-fill-position-arrays">
+  Step 2: Fill Position Arrays
+  <a class="heading-link" href="#step-2-fill-position-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pos[row[i]] <span style="color:#f92672">=</span> i; <span style="color:#75715e">// Store the current position of each person
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ptn[i] <span style="color:#f92672">=</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// Determine the adjacent person for each person (couple)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><code>pos[row[i]] = i</code> stores the position of each person in the <code>pos</code> array.</li>
+<li><code>ptn[i] = (i % 2 == 0) ? i + 1 : i - 1;</code> ensures that each person is paired with the person next to them, forming couples. For even indexed positions, the next person should be at <code>i + 1</code>, and for odd indexed positions, it should be <code>i - 1</code>.</li>
 </ul>
-</li>
+<h4 id="step-3-simulate-the-swaps">
+  Step 3: Simulate the Swaps
+  <a class="heading-link" href="#step-3-simulate-the-swaps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> ptn[pos[ptn[row[i]]]]; j <span style="color:#f92672">!=</span> i; j <span style="color:#f92672">=</span> ptn[pos[ptn[row[i]]]]) {
+</span></span><span style="display:flex;"><span>        swap(row[i], row[j]);
+</span></span><span style="display:flex;"><span>        swap(pos[row[i]], pos[row[j]]);
+</span></span><span style="display:flex;"><span>        res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is the main loop that performs the swapping.</li>
+<li>For each person at position <code>i</code>, we check if they are sitting next to their partner by using <code>ptn[pos[ptn[row[i]]]]</code>. If they are not, we perform the swap by moving the person to the correct position using the <code>swap</code> function.</li>
+<li>After each swap, we also update the positions of the swapped individuals in the <code>pos</code> array and increment the <code>res</code> counter to keep track of the number of swaps.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, after all the swaps are completed, we return the total number of swaps (<code>res</code>), which is the minimum number of swaps required to arrange the couples correctly.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -314,15 +385,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the size of the row array, as each person is processed once.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the position and pattern arrays.</li>
+<li><strong>O(n)</strong>: The outer loop iterates through each element of the row exactly once, and the inner loop, which handles the swap, also performs constant-time operations for each swap. Therefore, the time complexity is linear in terms of the number of people in the row (<code>n</code>).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use two arrays (<code>pos</code> and <code>ptn</code>) to store the positions of the individuals and the pattern of couples, which requires <code>O(n)</code> additional space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively solves the problem of finding the minimum number of swaps required to group couples together using a greedy approach and dynamic tracking of positions. By leveraging the concept of swapping positions and maintaining an array of positions and patterns, we can efficiently compute the result in linear time. This approach ensures that we are minimizing the number of swaps and grouping all couples with minimal computational cost.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the size of the row.</li>
+<li><strong>Space Complexity</strong>: <strong>O(n)</strong>, as we store the positions and patterns of the individuals in arrays.</li>
+</ul>
+<p>This method is efficient and scalable for large input sizes and guarantees optimal performance in solving the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1475s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1473s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

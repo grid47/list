@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1329s1hbhb">
+<h2 id="hahahugoshortcode1326s1hbhb">
   
 
   
@@ -276,7 +276,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given <code>k</code> projects to choose from, each project has a capital requirement and a profit. Your goal is to maximize your capital after selecting <code>k</code> projects, starting with an initial capital <code>w</code>. You can only choose projects that require capital less than or equal to your current capital.</p>
+<p>The task is to maximize the capital after performing <code>k</code> investments. You start with an initial capital <code>w</code> and have <code>k</code> opportunities to invest. Each investment has a cost (<code>capital[i]</code>) and a profit (<code>profit[i]</code>), and you can only invest in a project if you have enough capital to meet the required cost. The goal is to maximize your capital after making <code>k</code> investments. This is a typical problem that requires an efficient strategy for selecting the best investments given a constraint on capital.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -284,94 +284,139 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to make use of a combination of greedy algorithms and data structures like heaps (priority queues). Here&rsquo;s a step-by-step approach to solve the problem:</p>
 <ol>
 <li>
-<p><strong>Data Structure Preparation</strong>:</p>
+<p><strong>Initial Setup</strong>: We start by checking which investments can be made immediately with the initial capital <code>w</code>. We store these investments in a max-heap based on their profit. Investments that require more capital than <code>w</code> will be stored in an array and sorted by the capital requirement. This will allow us to process the investments in an optimal order later.</p>
+</li>
+<li>
+<p><strong>Using the Priority Queue (Max-Heap)</strong>:</p>
 <ul>
-<li>Use a vector of pairs to store the capital and profit of projects that require more capital than the initial amount.</li>
-<li>Use a max-heap (priority queue) to store profits of projects that can be completed with the current capital.</li>
+<li>We initialize a max-heap to store the profits of investments that are eligible for selection based on available capital. Since we want to maximize the profit, we use a max-heap, which allows efficient extraction of the maximum profit at each step.</li>
+<li>For each of the <code>k</code> steps (or until there are no more investments left), we select the investment with the highest profit available, add its profit to our capital, and then push all the subsequent investments whose capital requirement is less than or equal to the updated capital into the heap.</li>
+<li>This greedy strategy ensures that at each step, we choose the investment that gives the maximum possible increase in capital.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initial Population</strong>:</p>
+<p><strong>Looping Through Investments</strong>:</p>
 <ul>
-<li>Loop through all projects. If the project&rsquo;s capital requirement is less than or equal to the initial capital <code>w</code>, add its profit to the max-heap.</li>
+<li>After each selection, we check if there are any remaining investments that can be added to the heap based on the new capital. This is done by checking the capital of each investment and pushing eligible investments into the heap.</li>
+<li>We continue this process for <code>k</code> iterations (or until no more investments can be made).</li>
 </ul>
 </li>
 <li>
-<p><strong>Sorting</strong>:</p>
+<p><strong>Sorting for Efficiency</strong>:</p>
 <ul>
-<li>Sort the projects that need more capital by their capital requirement to facilitate adding projects to the max-heap in the correct order later.</li>
-</ul>
-</li>
-<li>
-<p><strong>Selecting Projects</strong>:</p>
-<ul>
-<li>For <code>k</code> iterations, do the following:
-<ul>
-<li>If the max-heap is not empty, pop the top profit (the highest profit available).</li>
-<li>Increase the current capital by the profit obtained from the project.</li>
-<li>While there are projects in the sorted list that can now be afforded, add their profits to the max-heap.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After selecting <code>k</code> projects, return the final capital.</li>
+<li>We sort the array of investments by their capital requirement to ensure we can efficiently process them in the correct order. This helps minimize the number of times we need to check if a project can be added to the heap, as we can process them in order.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>Data Structures Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> arr;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> capital.size();
+</span></span></code></pre></div><ul>
+<li><code>arr</code>: A vector to store the investments that cannot be immediately selected (i.e., investments with a capital requirement greater than the available capital <code>w</code>).</li>
+<li><code>pq</code>: A priority queue (max-heap) to store the profits of the available investments that can be made.</li>
+<li><code>n</code>: The number of investments available (size of the <code>capital</code> vector).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Eligible Investments</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(capital[i] <span style="color:#f92672">&lt;=</span> w) {
+</span></span><span style="display:flex;"><span>        pq.push(profit[i]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        arr.push_back({capital[i], profit[i]});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>sort(arr.begin(), arr.end());
+</span></span></code></pre></div><ul>
+<li>This loop processes all the investments and categorizes them into two groups:
+<ul>
+<li><strong>Eligible investments</strong>: If the capital required for an investment is less than or equal to <code>w</code>, its profit is added to the priority queue.</li>
+<li><strong>Non-eligible investments</strong>: If the capital required is greater than <code>w</code>, the investment is stored in the array <code>arr</code>.</li>
+</ul>
+</li>
+<li>After categorizing the investments, the array <code>arr</code> is sorted based on the capital requirement. This ensures that when we process the investments later, we can easily pick investments that we can afford with the current capital.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop (Investment Selection)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> w;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> arr.size() <span style="color:#f92672">&amp;&amp;</span> arr[i].first <span style="color:#f92672">&lt;=</span> sum) {
+</span></span><span style="display:flex;"><span>        pq.push(arr[i].second);
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Main Loop</strong>: This loop runs for <code>k</code> iterations or until there are no more investments in the max-heap. In each iteration:
+<ul>
+<li>The investment with the highest profit is selected (i.e., <code>pq.top()</code>), and its profit is added to the current capital (<code>sum</code>).</li>
+<li>The investment is then removed from the heap (<code>pq.pop()</code>).</li>
+<li><strong>Inner Loop</strong>: After selecting an investment, we check if any of the non-eligible investments can now be selected based on the updated capital (<code>sum</code>). If they can, they are pushed into the priority queue for future selection.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum;
+</span></span></code></pre></div><ul>
+<li>After <code>k</code> selections (or fewer, if no more investments can be made), we return the final capital.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
 <li>
-<p><strong>Class Definition</strong>:</p>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The <code>Solution</code> class contains the method <code>findMaximizedCapital</code>.</li>
+<li>Sorting the array <code>arr</code> takes <code>O(n log n)</code> where <code>n</code> is the number of investments.</li>
+<li>The priority queue operations (push and pop) are <code>O(log k)</code>, where <code>k</code> is the number of steps (up to <code>k</code>).</li>
+<li>The total time complexity is dominated by the sorting step, resulting in an overall complexity of <code>O(n log n + k log k)</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Variable Initialization</strong>:</p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>arr</code> holds projects needing more capital, while <code>pq</code> is a max-heap for profits. <code>n</code> stores the number of projects.</li>
-</ul>
-</li>
-<li>
-<p><strong>Main Method</strong>:</p>
-<ul>
-<li><code>findMaximizedCapital</code> iterates through projects to fill the max-heap and sorted array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Project Selection Loop</strong>:</p>
-<ul>
-<li>In the main loop, profit is added to the capital, and further projects are pushed into the heap if their capital requirements are met.</li>
+<li>The space complexity is <code>O(n)</code> due to the additional storage used for the <code>arr</code> and the priority queue.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n log n), where n is the number of projects due to sorting and heap operations.</li>
-<li><strong>Space Complexity</strong>: O(n) for storing projects in the array and max-heap.</li>
-</ul>
+<p>This solution is an efficient approach to solving the problem of maximizing capital through <code>k</code> investments. By using a greedy algorithm and priority queues, the solution ensures that at each step, the investment with the highest profit is selected. Sorting the non-eligible investments allows us to efficiently process them in order, minimizing unnecessary checks. The overall time complexity of the solution is optimal for typical problem constraints, and it handles edge cases where not enough investments can be made efficiently. This approach is well-suited for maximizing capital given a limited number of investment opportunities.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1329s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1326s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

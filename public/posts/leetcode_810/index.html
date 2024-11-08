@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> net <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> nums.size() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1510s1hbhb">
+<h2 id="hahahugoshortcode1507s1hbhb">
   
 
   
@@ -246,7 +246,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In a game with an array of integers, two players take turns to choose an integer and remove it from the array. The player who is unable to make a move (because the array is empty) loses. The goal is to determine if the first player can guarantee a win given the initial array.</p>
+<p>The problem asks whether a player can always win a game given an array of integers. In this game, players take turns XORing one number from the array at a time, and the winner is the player who XORs the last number to 0. Specifically, the problem asks whether the player starting the game can always guarantee a win, assuming both players play optimally.</p>
+<p>The main goal is to determine if the starting player can guarantee a win in the XOR game by evaluating the configuration of the numbers in the array. The rules involve using the XOR operation to modify the game state, and understanding the pattern of winning and losing positions is essential.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -254,55 +255,80 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem revolves around the XOR operation, which has some interesting properties that can be leveraged to solve the problem. The key observation is based on the game theory concept of &ldquo;Nim-sums&rdquo; and the following facts:</p>
 <ol>
 <li>
-<p><strong>XOR Calculation</strong>:</p>
+<p><strong>XOR Operation Properties</strong>:</p>
 <ul>
-<li>Calculate the XOR of all the elements in the array.</li>
-<li>This value determines the game&rsquo;s outcome based on its properties.</li>
+<li>XOR is a bitwise operation where bits are compared in pairs.</li>
+<li>A fundamental property is that XORing a number with itself results in 0: <code>a ^ a = 0</code>.</li>
+<li>XOR is commutative and associative, meaning the order of operations does not matter.</li>
 </ul>
 </li>
 <li>
-<p><strong>Winning Conditions</strong>:</p>
+<p><strong>Game Theory Insight</strong>:</p>
 <ul>
-<li>If the XOR of all elements (<code>net</code>) is zero, the first player will always win if both play optimally. This is because a zero XOR implies that the current player can always respond in a way to maintain a zero XOR state.</li>
-<li>If the array size is even, the first player can always pair numbers to ensure they can match the second player&rsquo;s moves, allowing them to win regardless of the XOR.</li>
-<li>If the XOR is non-zero and the array size is odd, the first player may not have a guaranteed strategy for winning.</li>
+<li>If the XOR of all numbers in the array is 0, the current player cannot win if the opponent plays optimally.</li>
+<li>If the XOR of all numbers is non-zero, the current player can guarantee a win by playing optimally.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Even Number of Elements</strong>:</p>
 <ul>
-<li>The function returns <code>true</code> if the first player can guarantee a win (when <code>net</code> is zero or the array size is even), otherwise returns <code>false</code>.</li>
+<li>If the number of elements in the array is even, the current player can always guarantee a win because the number of moves is balanced, and the opponent will be forced to take the last move.</li>
+<li>If the number of elements in the array is odd, the current player loses if the XOR of all numbers is non-zero (since the opponent can mirror the moves).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Thus, the problem boils down to:</p>
+<ul>
+<li>If the XOR of all numbers is 0, the starting player wins automatically because no matter what the opponent does, the current configuration is already a losing position.</li>
+<li>If the XOR is non-zero, the starting player can only win if the number of elements is even.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains methods to determine the winner of the game.
-<ul>
-<li><code>bool xorGame(vector&lt;int&gt;&amp; nums)</code>: The main function to determine if the first player can guarantee a win.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>nums</code>: A vector of integers representing the array of numbers.</li>
+<h4 id="step-1-initialize-a-net-variable">
+  Step 1: Initialize a Net Variable
+  <a class="heading-link" href="#step-1-initialize-a-net-variable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The variable <code>net</code> is used to store the cumulative XOR of all numbers in the array. Initially, it is set to 0.</li>
 </ul>
-</li>
-<li><strong>Returns</strong>: A boolean indicating whether the first player can guarantee a win.</li>
+<h4 id="step-2-xor-all-elements-in-the-array">
+  Step 2: XOR All Elements in the Array
+  <a class="heading-link" href="#step-2-xor-all-elements-in-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums)
+</span></span><span style="display:flex;"><span>    net <span style="color:#f92672">^=</span> x;
+</span></span></code></pre></div><ul>
+<li>We iterate through each element <code>x</code> in the array <code>nums</code>.</li>
+<li>In each iteration, we perform a bitwise XOR between <code>net</code> and the current element <code>x</code>. This accumulates the XOR of all numbers in the array.</li>
+<li>The XOR operation ensures that the result is 0 if all numbers cancel out each other in terms of bitwise properties.</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<h4 id="step-3-check-for-winning-condition">
+  Step 3: Check for Winning Condition
+  <a class="heading-link" href="#step-3-check-for-winning-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> net <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> nums.size() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Condition 1: <code>net == 0</code></strong>: If the cumulative XOR of all the elements is 0, then the current configuration of the game is already a losing position for the first player, meaning the first player cannot win.</li>
+<li><strong>Condition 2: <code>nums.size() % 2 == 0</code></strong>: If the size of the array is even, then the first player can guarantee a win, because the second player will be forced to take the last move.</li>
+<li>If either of these conditions is true, the function returns <code>true</code>, indicating that the starting player can guarantee a win. Otherwise, it returns <code>false</code>, indicating that the starting player cannot guarantee a win.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,15 +337,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of elements in the array, since we iterate through the array once to compute the XOR.</li>
-<li><strong>Space Complexity</strong>: O(1), as only a few integer variables are used for calculation and no additional space is allocated.</li>
+<li><strong><code>O(n)</code></strong>: The algorithm iterates through all <code>n</code> elements of the array <code>nums</code> once. In each iteration, it performs a constant time XOR operation, making the overall time complexity linear in terms of the size of the input array.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>O(1)</code></strong>: The space complexity is constant because we only use a single integer (<code>net</code>) to accumulate the XOR result. No additional space is required that grows with the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an optimal approach to determining whether the starting player in the XOR game can guarantee a win. By leveraging the properties of the XOR operation and understanding the underlying game theory concepts, we can solve the problem efficiently in linear time.</p>
+<p>The key insights are:</p>
+<ol>
+<li>The XOR of all numbers determines whether the current configuration is a winning or losing position.</li>
+<li>If the XOR is 0, the current player cannot win, as it represents a losing position.</li>
+<li>If the size of the array is even, the first player can always guarantee a win, since the second player will have to take the last move.</li>
+</ol>
+<p>The solution is optimal in both time and space, making it suitable for large inputs. This type of problem is often seen in competitive programming and game theory, where strategic thinking and understanding of mathematical properties are crucial to finding efficient solutions. By applying the XOR operation, which is both fast and simple, we can make the game analysis very efficient, enabling quick determinations of whether a player can guarantee a win or not.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1510s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1507s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

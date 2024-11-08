@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given <code>K</code> eggs and a building with <code>N</code> floors. Your task is to find the minimum number of attempts needed in the worst case to determine the highest floor from which an egg can be dropped without breaking.</p>
+<p>The &ldquo;Super Egg Drop&rdquo; problem is a classic dynamic programming problem that asks you to determine the minimum number of moves required to find the highest floor from which an egg can be dropped without breaking, given a certain number of eggs <code>K</code> and a building with <code>N</code> floors. The key challenge is that if an egg is dropped and it does not break, it can be reused, but if it breaks, it cannot be used again. The goal is to minimize the number of drops required to guarantee finding the critical floor (the highest floor from which an egg can be dropped without breaking) using the fewest possible moves.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -248,50 +248,69 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be solved using dynamic programming (DP). The main idea is to build a DP table where the entry <code>dp[m][k]</code> represents the maximum number of floors that can be checked with <code>k</code> eggs and <code>m</code> moves.</p>
+<p>To solve this problem optimally, we use dynamic programming. The key idea is to maintain a table (<code>dp</code>) where <code>dp[m][k]</code> represents the maximum number of floors that can be tested with <code>k</code> eggs and <code>m</code> moves. The approach leverages the following logic:</p>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p>If we drop an egg from a floor:</p>
 <ul>
-<li>Create a DP table <code>dp</code> with dimensions ((N + 1) \times (K + 1)), initialized to 0.</li>
-<li><code>m</code> is initialized to track the number of moves.</li>
+<li>If the egg breaks, the problem reduces to <code>k-1</code> eggs and <code>m-1</code> moves, and we test the floors below the current floor.</li>
+<li>If the egg does not break, the problem reduces to <code>k</code> eggs and <code>m-1</code> moves, and we test the floors above the current floor.</li>
 </ul>
 </li>
 <li>
-<p><strong>DP Table Filling</strong>:</p>
-<ul>
-<li>Incrementally increase <code>m</code> (the number of moves) until <code>dp[m][K]</code> (maximum floors with <code>K</code> eggs and <code>m</code> moves) is at least <code>N</code>.</li>
-<li>For each <code>k</code> from 1 to <code>K</code>, calculate:
-[
-dp[m][k] = dp[m-1][k-1] + dp[m-1][k] + 1
-]
-where:
-<ul>
-<li><code>dp[m-1][k-1]</code> accounts for the scenario where the egg breaks.</li>
-<li><code>dp[m-1][k]</code> accounts for the scenario where the egg does not break.</li>
-<li>The <code>+1</code> accounts for the current floor being tested.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The minimum number of moves <code>m</code> needed to guarantee determining the highest safe floor is found when <code>dp[m][K]</code> is greater than or equal to <code>N</code>.</li>
-</ul>
+<p>The goal is to find the smallest <code>m</code> such that <code>dp[m][K]</code> (maximum floors that can be tested with <code>K</code> eggs and <code>m</code> moves) is greater than or equal to <code>N</code> (the number of floors in the building).</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem can be thought of as trying to balance the exploration of the floor range while minimizing the number of drops required. The idea is to drop an egg from a floor in such a way that the maximum number of floors we can test in the worst case is maximized, which reduces the number of drops required.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The outer while loop continues until the maximum floors reachable with <code>K</code> eggs meets or exceeds <code>N</code>.</li>
-<li>The inner for loop updates the DP table based on the recurrence relation until the correct number of attempts is found.</li>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(N <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(K <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a 2D vector <code>dp</code> of size <code>(N+1) x (K+1)</code>, where <code>dp[i][j]</code> represents the maximum number of floors that can be tested with <code>j</code> eggs and <code>i</code> moves.</li>
+<li>Initially, the <code>dp</code> table is filled with zeros.</li>
+<li>We start with <code>m = 0</code>, which represents the number of moves.</li>
 </ul>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (dp[m][K] <span style="color:#f92672">&lt;</span> N) {
+</span></span><span style="display:flex;"><span>    m<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> K; <span style="color:#f92672">++</span>k)
+</span></span><span style="display:flex;"><span>        dp[m][k] <span style="color:#f92672">=</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][k] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We increment the number of moves <code>m</code> and compute the values for each number of eggs <code>k</code> from 1 to <code>K</code>.</li>
+<li>The recursive relation used to fill the DP table is:
+[
+dp[m][k] = dp[m-1][k-1] + dp[m-1][k] + 1
+]
+This formula accounts for:
+<ul>
+<li>The case where the egg breaks (<code>dp[m-1][k-1]</code>): The number of floors we can test with one less egg and one less move.</li>
+<li>The case where the egg does not break (<code>dp[m-1][k]</code>): The number of floors we can test with the same number of eggs and one less move.</li>
+<li>The <code>+1</code> accounts for the floor we&rsquo;re testing with the current move.</li>
+</ul>
+</li>
+<li>We continue updating the DP table until the maximum number of floors we can test with <code>K</code> eggs and <code>m</code> moves (<code>dp[m][K]</code>) is greater than or equal to <code>N</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> m;
+</span></span></code></pre></div><ul>
+<li>Once we find the minimum number of moves <code>m</code> such that <code>dp[m][K] &gt;= N</code>, we return <code>m</code>, which represents the minimum number of drops required to find the critical floor in the worst case.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -299,10 +318,22 @@ where:
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity of this solution is <strong>O(K * M)</strong>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(K \cdot m)), where <code>m</code> is the number of moves needed, which can be at most (N).</li>
-<li><strong>Space Complexity</strong>: (O(N \cdot K)) for the DP table.</li>
+<li><code>K</code> is the number of eggs, and</li>
+<li><code>M</code> is the minimum number of moves required such that <code>dp[m][K] &gt;= N</code>.</li>
 </ul>
+<p>In the worst case, <code>M</code> grows logarithmically with respect to <code>N</code>, and since we are updating a table of size <code>K x M</code>, the time complexity is effectively linear in <code>K</code> and logarithmic in <code>N</code>.</p>
+<p>The space complexity is <strong>O(K * M)</strong>, since we store a 2D table of size <code>(M+1) x (K+1)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the Super Egg Drop problem by leveraging dynamic programming to calculate the minimum number of drops required to find the critical floor with <code>K</code> eggs. The approach involves constructing a DP table that iteratively computes the maximum number of floors that can be tested with a given number of moves and eggs. The solution is optimal, with time complexity of <code>O(K * M)</code>, making it feasible for large inputs.</p>
+<p>By using the recursive relation for updating the DP table, the solution avoids brute force and provides an efficient way to determine the minimum number of moves. This approach ensures that even for large values of <code>N</code> (number of floors), the problem can be solved quickly and accurately.</p>
  
 </div>
   

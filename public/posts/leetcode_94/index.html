@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -250,7 +250,20 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the root of a binary tree, return the inorder traversal of its nodes&rsquo; values. In inorder traversal, nodes are visited in the following order: left subtree, root node, and right subtree.</p>
+<p>The problem at hand is to perform an <strong>inorder traversal</strong> of a binary tree. In an inorder traversal, we visit the nodes in the following order:</p>
+<ol>
+<li>Left subtree</li>
+<li>Root node</li>
+<li>Right subtree</li>
+</ol>
+<p>For example, given a binary tree like:</p>
+<pre tabindex="0"><code>       1
+      / \
+     2   3
+    / \
+   4   5
+</code></pre><p>The inorder traversal of this tree would be: <code>[4, 2, 5, 1, 3]</code>.</p>
+<p>The task is to return the list of node values in this order.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,35 +271,106 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution uses an iterative approach with a stack to avoid recursion:</p>
-<ol>
-<li><strong>Initialize Stack</strong>: Use a stack <code>todo</code> to store nodes as we traverse down the left subtree.</li>
-<li><strong>Inorder Traversal</strong>:
+<p>To solve this problem, we can use an <strong>iterative approach</strong> with a stack to simulate the recursive process of inorder traversal. While recursive approaches use the system’s call stack, the iterative approach makes use of an explicit stack data structure.</p>
+<p>In the inorder traversal, we need to:</p>
 <ul>
-<li><strong>Left Subtree</strong>: Traverse to the leftmost node, pushing each node to <code>todo</code> along the way.</li>
-<li><strong>Visit Node</strong>: Pop the top node from <code>todo</code>, add its value to the result list <code>nodes</code>, and move to its right subtree.</li>
-<li><strong>Right Subtree</strong>: Repeat the process by traversing down the left subtree of the current right node.</li>
+<li>Visit the left subtree first, then the node itself, and then the right subtree.</li>
+<li>The key challenge is that we need to ensure that after visiting the left subtree, we can backtrack to the root and then visit the right subtree. A stack can help manage this traversal process.</li>
+</ul>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>Start at the root node of the tree.</li>
+<li>Use a stack to remember nodes to visit. While there are nodes to visit:
+<ul>
+<li>Traverse down the left subtree, pushing nodes onto the stack.</li>
+<li>Once the leftmost node is reached (i.e., <code>root == NULL</code>), pop the stack to visit the node and then move to its right child.</li>
 </ul>
 </li>
-<li><strong>End Condition</strong>: The loop terminates when there are no more nodes left to visit (i.e., <code>root</code> is <code>NULL</code> and <code>todo</code> is empty).</li>
+<li>Repeat until all nodes have been visited.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Stack Initialization</strong>: Initialize an empty stack <code>todo</code> and vector <code>nodes</code> to store results.</li>
-<li><strong>Traversal Loop</strong>:
+<h4 id="step-1-initialize-the-stack-and-result-vector">
+  Step 1: Initialize the Stack and Result Vector
+  <a class="heading-link" href="#step-1-initialize-the-stack-and-result-vector">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nodes;
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> todo;
+</span></span></code></pre></div><ul>
+<li><code>nodes</code> is a vector that will store the result of the inorder traversal.</li>
+<li><code>todo</code> is a stack that will hold the nodes yet to be visited.</li>
+</ul>
+<h4 id="step-2-while-loop-for-traversing-the-tree">
+  Step 2: While Loop for Traversing the Tree
+  <a class="heading-link" href="#step-2-while-loop-for-traversing-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (root <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>todo.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (root) {
+</span></span><span style="display:flex;"><span>        todo.push(root);
+</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The outer <code>while</code> loop continues as long as there are nodes to be processed (<code>root != NULL</code>) or there are nodes in the stack (<code>!todo.empty()</code>).</li>
+<li>The inner <code>while</code> loop traverses the leftmost path of the tree, pushing nodes onto the stack as it goes. This is analogous to going as deep as possible down the left side of the tree.</li>
+<li>Once we reach a node with no left child (<code>root == NULL</code>), the inner loop stops, and we begin to backtrack by popping the stack.</li>
+</ul>
+<h4 id="step-3-process-the-current-node">
+  Step 3: Process the Current Node
+  <a class="heading-link" href="#step-3-process-the-current-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> todo.top();
+</span></span><span style="display:flex;"><span>todo.pop();
+</span></span><span style="display:flex;"><span>nodes.push_back(root<span style="color:#f92672">-&gt;</span>val);
+</span></span></code></pre></div><ul>
+<li>Now that we&rsquo;ve reached a node where the left subtree has been fully explored (or there was no left child), we process the current node by:
 <ul>
-<li>Move to the leftmost node, pushing nodes to <code>todo</code>.</li>
-<li>Visit each node by popping from <code>todo</code>, adding it to <code>nodes</code>, and moving to its right subtree.</li>
+<li>Popping the top node from the stack.</li>
+<li>Adding the node&rsquo;s value to the <code>nodes</code> vector.</li>
 </ul>
 </li>
-<li><strong>Result</strong>: Once the traversal is complete, <code>nodes</code> contains the inorder traversal.</li>
-</ol>
+</ul>
+<h4 id="step-4-move-to-the-right-subtree">
+  Step 4: Move to the Right Subtree
+  <a class="heading-link" href="#step-4-move-to-the-right-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>right;
+</span></span></code></pre></div><ul>
+<li>After processing the current node, we move to its right child, if it exists. If there’s no right child, <code>root</code> becomes <code>NULL</code>, and the algorithm backtracks using the stack.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> nodes;
+</span></span></code></pre></div><ul>
+<li>After the traversal is complete, the <code>nodes</code> vector contains the node values in the correct inorder sequence. We return this vector as the final result.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -294,10 +378,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(n)), for the stack in the worst case (unbalanced tree).</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. We visit each node exactly once during the traversal, and each operation (push and pop from the stack) takes constant time, leading to a total time complexity of <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(h)</strong>, where <code>h</code> is the height of the tree. In the worst case, the tree might be skewed (like a linked list), and the height of the tree could be <code>n</code>. In this case, the space complexity would be <strong>O(n)</strong> due to the stack storing nodes along the path from the root to the leaf.</li>
+<li>In a balanced tree, the height would be <strong>O(log n)</strong>, and thus the space complexity would be <strong>O(log n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The iterative approach to performing an inorder traversal using a stack is efficient and avoids the potential pitfalls of recursion, such as deep recursion calls for very large trees. This approach allows us to traverse the binary tree in <strong>O(n)</strong> time with a space complexity of <strong>O(h)</strong>, where <code>h</code> is the height of the tree. It works well even for trees with large depths and avoids any risk of stack overflow. By leveraging a stack, we maintain an explicit record of nodes to visit, ensuring that we process nodes in the correct inorder sequence, while also keeping track of the traversal state. This approach is optimal for many real-world scenarios where trees may not always be balanced, and deep recursion could be problematic.</p>
  
 </div>
   

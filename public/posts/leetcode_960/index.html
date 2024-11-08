@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1627s1hbhb">
+<h2 id="hahahugoshortcode1639s1hbhb">
   
 
   
@@ -262,7 +262,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of strings <code>strs</code>, each of the same length, you need to determine the minimum number of columns that can be deleted so that each row (string) is sorted in lexicographical order.</p>
+<p>The problem is to determine the minimum number of <strong>columns</strong> that need to be deleted from a list of strings such that the remaining columns are sorted in non-decreasing order. A column is sorted if the characters in that column (when read top-to-bottom) form a sequence that is lexicographically non-decreasing. The goal is to find the smallest number of columns to delete while ensuring that the remaining columns are sorted.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -270,67 +270,113 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be approached by using a <strong>dynamic programming (DP)</strong> technique. The key idea is to treat this as a problem of finding the longest subsequence of columns that are already sorted, and then removing all the others. Here&rsquo;s a step-by-step breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming (DP)</strong>:</p>
+<p><strong>Dynamic Programming Setup</strong>:</p>
 <ul>
-<li>Use a DP array <code>memo</code> to store the maximum number of rows that can be sorted for each column index and the index of the previous column that was included in the sorting.</li>
-<li>Use another array <code>cmem</code> to cache the results of the column validity check to avoid redundant computations.</li>
+<li>We will maintain two memoization tables:
+<ul>
+<li><code>memo[idx][prv]</code>: This table stores the length of the longest valid subsequence starting at column <code>idx</code> with the previous column being <code>prv</code>. If the subsequence ends at column <code>idx</code>, it ensures that the characters at column <code>idx</code> are greater than or equal to the characters in the column <code>prv</code>.</li>
+<li><code>cmem[idx][prv]</code>: This table stores a boolean value indicating whether column <code>idx</code> is lexicographically greater than or equal to column <code>prv</code> across all rows in the input strings.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Column Validity Check</strong>:</p>
+<p><strong>Lexicographical Check</strong>:</p>
 <ul>
-<li>Implement a <code>check</code> function to determine if the characters in the current column (<code>idx</code>) are less than the characters in the previous column (<code>prv</code>) for all strings.</li>
-<li>If any string fails this condition, the function returns false.</li>
+<li>Before considering whether two columns can form a valid subsequence, we need to check if the characters in the current column are greater than or equal to the characters in the previous column for all the strings. This check is done in the <code>check(idx, prv)</code> function, which compares the characters in <code>strs[i][idx]</code> and <code>strs[i][prv]</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursion with Memoization</strong>:</p>
+<p><strong>Recursive DP Function</strong>:</p>
 <ul>
-<li>Define a recursive <code>dp</code> function that takes the current column index and the previous column index as parameters.</li>
-<li>Base Case: If <code>idx</code> is equal to the length of the strings, return 0 (no more columns to process).</li>
-<li>If the result for the current state is already computed, return it from <code>memo</code>.</li>
-<li>Recur for the next column without including the current column and store the result.</li>
-<li>If including the current column is valid (checked by <code>check</code>), also recur by including it and update the result.</li>
+<li>The <code>dp(idx, prv)</code> function computes the length of the longest subsequence of columns starting from column <code>idx</code>, given that the previous column was <code>prv</code>.</li>
+<li>If the characters in the current column (<code>idx</code>) are valid in the context of the previous column (<code>prv</code>), then we can include this column in the subsequence. Otherwise, we skip the current column and proceed to the next.</li>
+<li>The <code>dp</code> function uses memoization to store already computed values for subproblems, which reduces redundant calculations and optimizes the solution.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Calculation</strong>:</p>
+<p><strong>Result Calculation</strong>:</p>
 <ul>
-<li>Subtract the result of the DP function from the total number of columns to get the minimum number of deletions required.</li>
+<li>The final result is computed by subtracting the length of the longest valid subsequence (obtained from the <code>dp(0, -1)</code> call) from the total number of columns. The result represents the minimum number of columns that need to be deleted.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> strs;  <span style="color:#75715e">// A vector of strings to store the input list of strings.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">101</span>][<span style="color:#ae81ff">105</span>], cmem[<span style="color:#ae81ff">101</span>][<span style="color:#ae81ff">105</span>];  <span style="color:#75715e">// Memoization tables to store intermediate results.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> prv) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// This function checks if the column idx is lexicographically greater than or equal to column prv.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(cmem[idx][prv] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> cmem[idx][prv];  <span style="color:#75715e">// Return previously computed result if it exists.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Loop through each string in strs and check if strs[i][idx] &gt;= strs[i][prv].
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> strs.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(strs[i][idx] <span style="color:#f92672">&lt;</span> strs[i][prv])
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> cmem[idx][prv] <span style="color:#f92672">=</span> false;  <span style="color:#75715e">// If any string fails the condition, mark it false.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cmem[idx][prv] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// If all strings pass the condition, mark it true.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> prv) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// This is the recursive DP function to calculate the longest subsequence of columns.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> strs[<span style="color:#ae81ff">0</span>].size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Base case: If we&#39;ve processed all columns, return 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Return memoized result if already computed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Recursively calculate the result without including the current column.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, prv);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If the previous column was -1 (indicating no previous column) or the current column is valid in the context
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// of the previous column, consider including the current column in the subsequence.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(prv <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> check(idx, prv)) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, idx) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Take the maximum between including or excluding the column.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ans;  <span style="color:#75715e">// Memoize the result for future use.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minDeletionSize</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> strs) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>strs <span style="color:#f92672">=</span> strs;  <span style="color:#75715e">// Store the input strings in the strs member variable.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));  <span style="color:#75715e">// Initialize memoization table with -1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        memset(cmem, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(cmem));  <span style="color:#75715e">// Initialize cmem table with -1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> strs[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">-</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Subtract the length of the longest subsequence from the total columns.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
 <li>
-<p><strong><code>minDeletionSize</code> Method</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Initializes the <code>strs</code> member variable and sets the <code>memo</code> and <code>cmem</code> arrays to <code>-1</code>.</li>
-<li>Calls the <code>dp</code> function starting from the first column (<code>idx = 0</code>) with <code>prv = -1</code> (no previous column).</li>
-<li>Returns the number of columns minus the maximum number of sorted rows returned by the DP function.</li>
+<li>The input list of strings is stored in the <code>strs</code> variable. We initialize two memoization tables <code>memo</code> and <code>cmem</code> to store intermediate results for the DP and lexicographical checks.</li>
 </ul>
 </li>
 <li>
-<p><strong><code>dp</code> Method</strong>:</p>
+<p><strong>Check Function</strong>:</p>
 <ul>
-<li>Checks if all columns are processed and returns 0 if so.</li>
-<li>Returns the cached result if already computed.</li>
-<li>Calculates the maximum of not including the current column or including it if valid, using the results from recursive calls.</li>
+<li>The <code>check</code> function compares two columns (<code>idx</code> and <code>prv</code>) for each string. If any character in the column <code>idx</code> is less than the corresponding character in column <code>prv</code>, it returns false, indicating that these columns cannot form a valid subsequence. Otherwise, it returns true.</li>
 </ul>
 </li>
 <li>
-<p><strong><code>check</code> Method</strong>:</p>
+<p><strong>Recursive DP Function</strong>:</p>
 <ul>
-<li>Validates the characters in the current column against the previous column for all strings.</li>
-<li>Caches the result to avoid recomputation.</li>
+<li>The <code>dp</code> function recursively calculates the longest subsequence of columns. It checks if the current column can be included in the subsequence by either skipping the current column or including it if it&rsquo;s lexicographically valid. The results are memoized to avoid redundant computations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>The function <code>minDeletionSize</code> calls the <code>dp</code> function starting from the first column (index 0) with no previous column (<code>-1</code>), and then returns the total number of columns minus the length of the longest valid subsequence.</li>
 </ul>
 </li>
 </ol>
@@ -342,14 +388,32 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N * M^2), where N is the number of strings and M is the length of each string.</li>
-<li><strong>Space Complexity</strong>: O(N * M) for the memoization arrays.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the number of strings and <code>n</code> is the number of columns. This is because we perform a check for every pair of columns (<code>check</code> function) and calculate the longest subsequence using a DP approach. For each pair of columns, we perform a linear scan across all strings, resulting in a complexity of <code>O(m * n)</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(m * n)</strong> due to the storage required for the memoization tables (<code>memo</code> and <code>cmem</code>). These tables store intermediate results for each pair of columns, and thus require space proportional to the size of the input grid (<code>m</code> rows and <code>n</code> columns).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the minimum number of columns to delete in order to make the remaining columns sorted. By using dynamic programming and memoization, we avoid redundant calculations, making the solution both time and space efficient. The approach carefully handles the lexicographical checks for valid subsequences and ensures that we compute the longest subsequence of columns that can remain after deletion.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1627s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1639s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

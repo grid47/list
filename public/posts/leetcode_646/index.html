@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -247,7 +247,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1400s1hbhb">
+<h2 id="hahahugoshortcode1398s1hbhb">
   
 
   
@@ -259,7 +259,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a collection of pairs where each pair consists of two integers. The pairs represent intervals, and your task is to find the longest chain of pairs such that for a pair <code>(a, b)</code> and another pair <code>(c, d)</code>, the condition <code>b &lt; c</code> holds.</p>
+<p>The problem requires us to find the length of the longest chain of pairs where each pair consists of two integers. A pair <code>(a, b)</code> can only follow another pair <code>(c, d)</code> if <code>b &lt; c</code>, meaning the second element of the first pair is strictly less than the first element of the second pair. The goal is to determine the longest sequence of pairs that can form a valid chain.</p>
+<p>For example, given a set of pairs <code>[[1, 2], [2, 3], [3, 4], [5, 6]]</code>, the longest chain would be <code>[[1, 2], [3, 4], [5, 6]]</code>, which has a length of 3.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -267,73 +268,110 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is essentially a variant of the <strong>Longest Increasing Subsequence (LIS)</strong> problem, but with pairs. The basic idea is to sort the pairs and use dynamic programming (DP) to determine the longest valid chain that can be formed.</p>
+<p>Here’s how we solve the problem:</p>
 <ol>
 <li>
-<p><strong>Sorting</strong>:</p>
+<p><strong>Sorting the Pairs</strong>:</p>
 <ul>
-<li>First, sort the pairs based on the first element. If the first elements are equal, sort by the second element. This sorting helps in systematically checking for valid chains.</li>
+<li>First, we sort the pairs. The primary sorting criterion is the first element of each pair, and if two pairs have the same first element, we sort them based on the second element.</li>
+<li>Sorting the pairs ensures that we only need to compare the second element of a pair to determine if it can form a valid chain with another pair.</li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamic Programming (DP)</strong>:</p>
+<p><strong>Dynamic Programming (DP) Setup</strong>:</p>
 <ul>
-<li>Create a <code>dp</code> vector where <code>dp[i]</code> represents the length of the longest chain ending with the <code>i-th</code> pair.</li>
-<li>Initialize all values in <code>dp</code> to 1 since each pair can be a chain of length 1 by itself.</li>
-<li>Use a nested loop: for each pair <code>i</code>, check all previous pairs <code>j</code> to see if they can form a valid chain.</li>
+<li>We use a DP array <code>dp[]</code> where each <code>dp[i]</code> represents the length of the longest chain that ends with the pair at index <code>i</code>.</li>
+<li>Initially, we assume that every pair can form a chain of length <code>1</code>, so we set each <code>dp[i] = 1</code>.</li>
+<li>We then iterate over all pairs and try to extend the chains by comparing the current pair to previous pairs in the sorted order. If the second element of the previous pair is less than the first element of the current pair, we can form a valid chain, and we update <code>dp[i]</code> accordingly.</li>
 </ul>
 </li>
 <li>
-<p><strong>Update DP Values</strong>:</p>
+<p><strong>Max Length Calculation</strong>:</p>
 <ul>
-<li>If the second element of the <code>j-th</code> pair is less than the first element of the <code>i-th</code> pair (<code>pairs[i][0] &gt; pairs[j][1]</code>), update <code>dp[i]</code> to be the maximum of its current value and <code>dp[j] + 1</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Find the Maximum</strong>:</p>
-<ul>
-<li>Keep track of the maximum value in <code>dp</code> during the updates, which represents the length of the longest chain.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Return the maximum chain length found.</li>
+<li>As we iterate through the pairs and update the DP array, we keep track of the maximum value in <code>dp[]</code>, which will be the length of the longest chain.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Sorting</strong>:</p>
-<ul>
-<li>The pairs are sorted using a custom comparator defined in the <code>cmp</code> function.</li>
+<p>Let’s break down the solution step by step to understand how it works:</p>
+<h4 id="1-comparing-pairs">
+  1. <strong>Comparing Pairs</strong>:
+  <a class="heading-link" href="#1-comparing-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cmp</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> b[<span style="color:#ae81ff">0</span>]) <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We define a static comparison function <code>cmp</code> to sort the pairs. If the first elements of two pairs are the same, we sort them by their second elements. Otherwise, we sort them by the first element.</li>
+<li>This ensures that the pairs are sorted in a way that makes it easy to apply the DP approach for finding the longest chain.</li>
 </ul>
-</li>
-<li>
-<p><strong>DP Initialization</strong>:</p>
-<ul>
-<li>Initialize <code>dp</code> with 1&rsquo;s and set <code>mx</code> to track the maximum length.</li>
+<h4 id="2-sorting-the-pairs">
+  2. <strong>Sorting the Pairs</strong>:
+  <a class="heading-link" href="#2-sorting-the-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(pairs.begin(), pairs.end(), cmp);
+</span></span></code></pre></div><ul>
+<li>We sort the input pairs using the comparison function <code>cmp</code>. Sorting is the first step in setting up the problem for the dynamic programming approach.</li>
 </ul>
-</li>
-<li>
-<p><strong>Nested Loop</strong>:</p>
-<ul>
-<li>Iterate through each pair and check for previous pairs to update the <code>dp</code> values.</li>
+<h4 id="3-initializing-dp-array">
+  3. <strong>Initializing DP Array</strong>:
+  <a class="heading-link" href="#3-initializing-dp-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> pairs.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>dp[]</code> array with <code>1</code> since each pair, by itself, can form a chain of length <code>1</code>.</li>
+<li>We also initialize <code>mx = 1</code>, which will store the length of the longest chain.</li>
 </ul>
-</li>
-<li>
-<p><strong>Result Computation</strong>:</p>
-<ul>
-<li>After completing the iterations, <code>mx</code> will contain the length of the longest chain.</li>
+<h4 id="4-dynamic-programming-loop">
+  4. <strong>Dynamic Programming Loop</strong>:
+  <a class="heading-link" href="#4-dynamic-programming-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(pairs[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> pairs[j][<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#f92672">=</span> max(dp[i], dp[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, dp[i]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use two nested loops: the outer loop iterates over each pair, and the inner loop compares the current pair to all the pairs before it.</li>
+<li>If the first element of the current pair is greater than the second element of a previous pair (<code>pairs[i][0] &gt; pairs[j][1]</code>), then the current pair can be added to the chain formed by the previous pair. We update <code>dp[i]</code> to be the maximum of its current value and <code>dp[j] + 1</code>, which represents extending the chain ending at pair <code>j</code> by adding the current pair.</li>
+<li>We also update <code>mx</code> to track the longest chain encountered so far.</li>
 </ul>
-</li>
-</ol>
+<h4 id="5-returning-the-result">
+  5. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+</span></span></code></pre></div><ul>
+<li>Finally, after iterating through all the pairs and updating the <code>dp[]</code> array, we return <code>mx</code>, which contains the length of the longest valid chain.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -341,15 +379,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the number of pairs, due to the nested loop for updating the <code>dp</code> values.</li>
-<li><strong>Space Complexity</strong>: O(n) for the <code>dp</code> array.</li>
+<li><strong>Sorting the pairs</strong> takes <code>O(n log n)</code>, where <code>n</code> is the number of pairs.</li>
+<li><strong>Dynamic programming</strong> involves two nested loops, each iterating over <code>n</code> pairs. The inner loop runs <code>n</code> times for each iteration of the outer loop, resulting in a time complexity of <code>O(n^2)</code>.</li>
 </ul>
+<p>Thus, the total time complexity is dominated by the <code>O(n^2)</code> term from the DP part of the solution. Therefore, the overall time complexity is <strong>O(n^2)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use an array <code>dp[]</code> of size <code>n</code> to store the length of the longest chain for each pair. This results in a space complexity of <strong>O(n)</strong>.</li>
+<li>The space complexity is <strong>O(n)</strong> due to the DP array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to the problem of finding the longest chain of pairs uses a combination of sorting and dynamic programming to efficiently determine the result. By sorting the pairs, we ensure that we only need to compare the second element of a pair with the first element of previous pairs to form a valid chain. The dynamic programming approach allows us to build the longest chain by iterating through the sorted pairs and updating the chain lengths as we go.</p>
+<p>While the time complexity of the solution is <code>O(n^2)</code> due to the nested loops, this approach is straightforward and works well for moderately sized input arrays. The space complexity of <code>O(n)</code> is optimal since we only need to store the DP values.</p>
+<p>This solution is both simple to understand and effective in finding the longest chain of pairs that can form a valid sequence.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1400s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1398s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

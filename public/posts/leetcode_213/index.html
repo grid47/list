@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -234,7 +234,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(dp[n], r1);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode667s1hbhb">
+<h2 id="hahahugoshortcode664s1hbhb">
   
 
   
@@ -246,7 +246,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In a row of houses, each house has a certain amount of money hidden. The robber cannot rob two adjacent houses, as it will alert the police. Given that the houses are arranged in a circle, the robber cannot rob the first and last house simultaneously. The task is to find the maximum amount of money the robber can rob.</p>
+<p>The problem at hand is the &ldquo;House Robber II&rdquo; problem, where you are given a list of non-negative integers representing the amount of money in each house arranged in a circular fashion. You are a thief, and you need to determine the maximum amount of money you can rob tonight, ensuring that:</p>
+<ol>
+<li>You cannot rob two adjacent houses.</li>
+<li>Because the houses are arranged in a circle, robbing the first and last house together is not allowed.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -254,54 +258,107 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution to this problem can be broken down into several logical steps:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming</strong>: Use dynamic programming to keep track of the maximum amount of money that can be robbed up to each house.</p>
-</li>
-<li>
-<p><strong>Two Scenarios</strong>:</p>
+<p><strong>Linear vs Circular Problem:</strong>
+In the classic &ldquo;House Robber I&rdquo; problem, the houses are arranged linearly, and the problem becomes straightforward by using dynamic programming (DP). However, since the houses are arranged in a circle in this problem, it introduces a challenge because the first and last houses are adjacent to each other. This means that we need to solve two subproblems:</p>
 <ul>
-<li><strong>Case 1</strong>: Consider the scenario where the first house is robbed but the last house is not.</li>
-<li><strong>Case 2</strong>: Consider the scenario where the last house is robbed but the first house is not.</li>
+<li>Rob houses excluding the first house.</li>
+<li>Rob houses excluding the last house.</li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamic Programming Array</strong>:</p>
+<p><strong>Dynamic Programming Approach:</strong>
+The dynamic programming approach solves the problem by maintaining an array <code>dp</code>, where <code>dp[i]</code> represents the maximum amount of money that can be robbed from the first <code>i</code> houses. The recurrence relation is as follows:</p>
 <ul>
-<li>Initialize a <code>dp</code> array where <code>dp[i]</code> represents the maximum amount of money that can be robbed from the first <code>i</code> houses.</li>
-<li>For each scenario, fill the <code>dp</code> array based on the recurrence relation:
-[
-dp[i] = \max(dp[i - 1], dp[i - 2] + \text{nums}[i - 1])
-]</li>
-<li>This means at house <code>i</code>, the robber can either:
+<li>For each house <code>i</code>, the maximum money robbed is either:
 <ul>
-<li>Skip the house and take the maximum from the previous house.</li>
-<li>Rob the current house and add its value to the maximum from two houses back.</li>
+<li>Robbing house <code>i</code> and adding the amount robbed from house <code>i-2</code>, or</li>
+<li>Not robbing house <code>i</code> and keeping the amount robbed from house <code>i-1</code>.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Final Result</strong>: Return the maximum value between the two scenarios.</p>
+<p><strong>Two Separate Dynamic Programming Calculations:</strong>
+To avoid the constraint of robbing both the first and last house, the solution is split into two parts:</p>
+<ul>
+<li>One DP calculation where we consider houses from the first to the second-last house.</li>
+<li>Another DP calculation where we consider houses from the second to the last house.
+By solving both subproblems and taking the maximum of the two results, we get the optimal solution.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> rob(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();  <span style="color:#75715e">// Get the number of houses
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> nums[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// If there is only one house, return the value of that house
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Initialize a DP array to store maximum robbed values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Rob houses excluding the last house (from 0 to n-2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Base case: no house to rob
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// Base case: only one house to rob
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#f92672">=</span> max(dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> r1 <span style="color:#f92672">=</span> dp[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Store the result of robbing houses from 0 to n-2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Rob houses excluding the first house (from 1 to n-1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dp.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Resize the DP array for the second case
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Base case: no house to rob
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        dp[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Base case: only one house to rob
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#f92672">=</span> max(dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(dp[n], r1);  <span style="color:#75715e">// Return the maximum of the two cases
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="explanation-of-code">
+  Explanation of Code:
+  <a class="heading-link" href="#explanation-of-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Base Case Handling:</strong>
+At the beginning, we handle the base case where the number of houses is just 1. If there’s only one house, we directly return the amount in that house, as there are no adjacent houses to worry about.</p>
+</li>
+<li>
+<p><strong>First Dynamic Programming Calculation (Excluding the Last House):</strong>
+In the first DP calculation, we initialize the <code>dp</code> array where <code>dp[i]</code> represents the maximum money that can be robbed from the first <code>i</code> houses. We set the base cases for the first two houses:</p>
 <ul>
-<li><strong>rob</strong>: The main function that calculates the maximum money that can be robbed:
-<ul>
-<li>If there&rsquo;s only one house, return its value directly.</li>
-<li>For the first scenario, create a <code>dp</code> array for houses from <code>0</code> to <code>n-2</code>.</li>
-<li>For the second scenario, resize the <code>dp</code> array to handle the houses from <code>1</code> to <code>n-1</code>.</li>
-<li>Calculate the maximum robbed amount for both scenarios and return the maximum of the two.</li>
+<li><code>dp[0] = 0</code>, because no money can be robbed from zero houses.</li>
+<li><code>dp[1] = nums[0]</code>, because if there’s only one house, we can rob it.
+Then, we iterate through all subsequent houses and apply the recurrence relation: <code>dp[i] = max(dp[i - 1], dp[i - 2] + nums[i - 1])</code>. This ensures that we maximize the amount robbed by either skipping or robbing the current house.</li>
 </ul>
 </li>
+<li>
+<p><strong>Second Dynamic Programming Calculation (Excluding the First House):</strong>
+To handle the circular constraint, we need to compute the maximum money robbed from the houses excluding the first house. We adjust the <code>dp</code> array size and reinitialize it. This time, we set the base cases for <code>dp[1] = 0</code> and <code>dp[2] = nums[1]</code>, and we apply the same recurrence relation for the rest of the houses.</p>
+</li>
+<li>
+<p><strong>Final Calculation:</strong>
+Finally, we take the maximum of the two DP results:</p>
+<ul>
+<li><code>r1</code> represents the result from the first DP calculation (excluding the last house).</li>
+<li><code>dp[n]</code> represents the result from the second DP calculation (excluding the first house).
+By returning the maximum of these two values, we ensure that we consider both possibilities and get the optimal solution.</li>
 </ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,15 +366,46 @@ dp[i] = \max(dp[i - 1], dp[i - 2] + \text{nums}[i - 1])
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of houses, as the algorithm traverses the list of houses twice.</li>
-<li><strong>Space Complexity</strong>: (O(n)) due to the use of the <code>dp</code> array, which stores the maximum amounts for each house.</li>
+<li>The algorithm processes the list of houses twice:
+<ol>
+<li>The first pass computes the DP result for houses from the first to the second-last house, which takes <code>O(n)</code>.</li>
+<li>The second pass computes the DP result for houses from the second to the last house, which also takes <code>O(n)</code>.</li>
+</ol>
+</li>
 </ul>
+<p>Thus, the total time complexity is <code>O(n)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the space required to store the <code>dp</code> array. In the worst case, we require space for <code>n</code> elements in the DP array. Therefore, the space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the &ldquo;House Robber II&rdquo; problem by leveraging dynamic programming. By splitting the problem into two subproblems (robbing houses excluding the first and excluding the last house), we can avoid the constraint of robbing adjacent houses in a circular setup. The time and space complexities are optimal for this problem, and the solution ensures that the maximum amount of money can be robbed while following the given constraints.</p>
+<p>The approach is simple, effective, and can be extended to similar problems involving circular arrangements or adjacent constraints.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode667s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode664s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

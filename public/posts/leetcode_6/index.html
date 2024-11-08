@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1377s1hbhb">
+<h2 id="hahahugoshortcode1375s1hbhb">
   
 
   
@@ -248,7 +248,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, find the longest palindromic substring within it.</p>
+<p>The problem requires converting a given string <code>str</code> into a &ldquo;zigzag&rdquo; pattern on a given number of rows <code>n</code> and then reading the pattern row by row to generate the final string. The zigzag pattern is formed by writing the string in a zigzag fashion and then reading it horizontally from top to bottom.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For the string <code>&quot;PAYPALISHIRING&quot;</code> and <code>n = 3</code>, the zigzag pattern will be:</p>
+<pre tabindex="0"><code>P   A   H   N
+A P L S I I G
+Y   I   R
+</code></pre><p>And the final result, when reading the rows left to right, will be: <code>&quot;PAHNAPLSIIGYIR&quot;</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,30 +268,113 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Utilize a center-expansion technique to check for palindromes by expanding around potential centers. Each character (or pair of characters) serves as a possible center of a palindrome, and the expansion continues outward as long as the characters on both sides match.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem can be solved by simulating the creation of the zigzag pattern and then combining the rows into a single string.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Special Case for Single Row (<code>n == 1</code>)</strong>: If there is only one row, the zigzag pattern will simply be the original string itself, as no &ldquo;zigzag&rdquo; can occur.</p>
+</li>
+<li>
+<p><strong>Set Up Rows</strong>: We will create a vector of strings where each string will represent one row of the zigzag pattern. Initially, all rows are empty.</p>
+</li>
+<li>
+<p><strong>Simulate the Zigzag Movement</strong>: Starting from the first character of the string:</p>
+<ul>
+<li>Place the character in the current row.</li>
+<li>Move down to the next row if we&rsquo;re moving downward, and move up if we&rsquo;re moving upward.</li>
+<li>When the topmost or bottommost row is reached, the direction of movement switches.</li>
+</ul>
+</li>
+<li>
+<p><strong>Form the Result String</strong>: After processing all characters, the rows will be populated with the zigzag pattern. We concatenate the strings from each row to form the final result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Initialize <code>lo</code> and <code>len</code> to track the starting index and length of the longest palindrome found.</li>
-<li>Loop through each character in the string:
+<h4 id="step-1-handle-special-case-for-single-row-n--1">
+  Step 1: Handle Special Case for Single Row (<code>n == 1</code>)
+  <a class="heading-link" href="#step-1-handle-special-case-for-single-row-n--1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> str;
+</span></span></code></pre></div><ul>
+<li>If the number of rows is <code>1</code>, the zigzag pattern is just the original string, so we immediately return the string without any modifications.</li>
+</ul>
+<h4 id="step-2-initialize-rows">
+  Step 2: Initialize Rows
+  <a class="heading-link" href="#step-2-initialize-rows">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> s(n, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>s</code> of size <code>n</code>, where each element is an empty string. This will hold the individual rows of the zigzag pattern.</li>
+</ul>
+<h4 id="step-3-simulate-the-zigzag-pattern">
+  Step 3: Simulate the Zigzag Pattern
+  <a class="heading-link" href="#step-3-simulate-the-zigzag-pattern">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> down <span style="color:#f92672">=</span> true; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ridx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    s[ridx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> str[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (down) ridx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> ridx<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((ridx <span style="color:#f92672">==</span> n) <span style="color:#f92672">||</span> (ridx <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)) down <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>down;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>down</code> is a boolean variable that tracks whether we are moving down (true) or up (false) in the zigzag pattern.</li>
+<li><code>ridx</code> is the row index, starting at <code>1</code> (because <code>ridx - 1</code> gives the actual index in the <code>s</code> vector).</li>
+<li>We loop through each character in the string, placing it in the correct row (<code>ridx - 1</code>).</li>
+<li>After placing the character:
 <ul>
-<li>Call <code>pal</code> to check for odd-length palindromes (single character center).</li>
-<li>Call <code>pal</code> to check for even-length palindromes (two-character center).</li>
+<li>If <code>down</code> is <code>true</code>, we increment <code>ridx</code> to move to the next row.</li>
+<li>If <code>down</code> is <code>false</code>, we decrement <code>ridx</code> to move upward.</li>
 </ul>
 </li>
-<li>In the <code>pal</code> function:
-<ul>
-<li>Expand outwards as long as the characters at indices <code>i</code> and <code>j</code> match, while also checking bounds.</li>
-<li>If a longer palindrome is found (i.e., <code>len &lt; j - i - 1</code>), update <code>lo</code> and <code>len</code>.</li>
+<li>When we reach the top row (<code>ridx == 1</code>) or the bottom row (<code>ridx == n</code>), we toggle the direction of movement (<code>down = !down</code>).</li>
 </ul>
-</li>
-<li>After the loop, return the longest palindromic substring using <code>s.substr(lo, len)</code>.</li>
-</ol>
+<h4 id="step-4-combine-the-rows-to-form-the-final-string">
+  Step 4: Combine the Rows to Form the Final String
+  <a class="heading-link" href="#step-4-combine-the-rows-to-form-the-final-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> s[i];
+</span></span></code></pre></div><ul>
+<li>After the loop finishes and all characters are placed in their respective rows, we concatenate the strings from all rows to form the final zigzag string.</li>
+</ul>
+<h4 id="step-5-return-the-final-string">
+  Step 5: Return the Final String
+  <a class="heading-link" href="#step-5-return-the-final-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>We return the final concatenated string as the result of the conversion.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -287,15 +382,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n^2)) - as the expansion may need to check each substring.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used aside from a few variables.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string. This is because we process each character of the string exactly once and perform constant time operations for each character.</li>
+<li>Specifically, we:
+<ul>
+<li>Loop through the string once to fill the rows (O(n)).</li>
+<li>Concatenate all rows into the result string, which in the worst case takes O(n) time.</li>
 </ul>
+</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, which is optimal for this problem.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we use a vector of strings to store the rows of the zigzag pattern. The total number of characters stored across all rows is equal to the length of the input string, resulting in a total space usage of O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently converts the input string into the desired zigzag pattern and then reads it row by row to generate the final result. The algorithm runs in <strong>O(n)</strong> time and uses <strong>O(n)</strong> additional space, making it optimal for large strings. The approach is both simple and effective, leveraging basic string operations and careful management of the direction of movement to simulate the zigzag pattern.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1377s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1375s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

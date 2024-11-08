@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> slow;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode241s1hbhb">
+<h2 id="hahahugoshortcode239s1hbhb">
   
 
   
@@ -256,7 +256,22 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>NULL</code>.</p>
+<p>The problem asks to detect the node at the beginning of a cycle in a singly linked list. A cycle in a linked list occurs when a node&rsquo;s <code>next</code> pointer points back to one of the earlier nodes, forming a loop. Given the head of a singly linked list, the task is to determine the node where the cycle begins, or return <code>NULL</code> if there is no cycle.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p><strong>Input</strong>: <code>head = [3, 2, 0, -4]</code>, <code>pos = 1</code> (where <code>pos</code> indicates the node where the cycle starts).</p>
+</li>
+<li>
+<p><strong>Output</strong>: Return the node where the cycle begins (in this case, the node with value <code>2</code>).</p>
+</li>
+<li>
+<p><strong>Input</strong>: <code>head = [1, 2]</code>, <code>pos = -1</code> (indicating no cycle).</p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>NULL</code> (no cycle).</p>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,40 +279,115 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can leverage Floyd’s Cycle Detection Algorithm, which helps us find if there is a cycle in the linked list, and if so, determines the node where the cycle begins. This algorithm uses two pointers, known as the slow and fast pointers, and is extremely efficient in terms of both time and space complexity.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Two Pointers</strong>:
+<li>
+<p><strong>Cycle Detection</strong>: We use the <strong>Floyd’s Cycle-Finding Algorithm</strong>, which involves two pointers moving at different speeds to determine if a cycle exists.</p>
 <ul>
-<li>Use two pointers, <code>slow</code> and <code>fast</code>, to detect a cycle in the linked list.</li>
-<li>If a cycle is detected, find the entry point of the cycle.</li>
+<li>The <strong>slow pointer</strong> moves one step at a time.</li>
+<li>The <strong>fast pointer</strong> moves two steps at a time.</li>
 </ul>
 </li>
+<li>
+<p><strong>Cycle Start Detection</strong>: Once a cycle is detected, the key idea is to move one pointer back to the head of the list and leave the other pointer where it met the first one. Then, move both pointers one step at a time. The point at which they meet again will be the start of the cycle.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm works in two phases:</p>
+<ol>
+<li><strong>Phase 1</strong>: Use slow and fast pointers to detect if a cycle exists.</li>
+<li><strong>Phase 2</strong>: If a cycle is detected, reset one pointer to the head of the list and move both pointers one step at a time until they meet, which indicates the start of the cycle.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1-5</strong>: Define the <code>ListNode</code> structure for the linked list.</li>
-<li><strong>Line 6</strong>: Define the <code>detectCycle</code> function:
-<ul>
-<li><strong>Line 7</strong>: Check if the head is <code>NULL</code>. If so, return <code>NULL</code>.</li>
-<li><strong>Line 8</strong>: Initialize <code>fast</code> and <code>slow</code> pointers to the head of the list.</li>
-<li><strong>Line 9-14</strong>: Use a while loop to move the <code>slow</code> pointer one step and the <code>fast</code> pointer two steps:
-<ul>
-<li>If <code>fast</code> meets <code>slow</code>, break out of the loop.</li>
+<h4 id="step-1-initial-setup-and-edge-case-handling">
+  Step 1: Initial Setup and Edge Case Handling
+  <a class="heading-link" href="#step-1-initial-setup-and-edge-case-handling">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode <span style="color:#f92672">*</span><span style="color:#a6e22e">detectCycle</span>(ListNode <span style="color:#f92672">*</span>head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li>The function <code>detectCycle</code> is called with <code>head</code>, the first node of the linked list.</li>
+<li>The edge case is checked first: if the list is empty (<code>head == NULL</code>), return <code>NULL</code> since there&rsquo;s no cycle in an empty list.</li>
 </ul>
-</li>
-<li><strong>Line 15</strong>: Check if no cycle was found (i.e., if <code>fast</code> or <code>fast-&gt;next</code> is <code>NULL</code>). If so, return <code>NULL</code>.</li>
-<li><strong>Line 17-21</strong>: Use another while loop to find the entry point of the cycle:
-<ul>
-<li>Move both <code>head</code> and <code>slow</code> pointers one step at a time until they meet. The meeting point is the start of the cycle.</li>
+<h4 id="step-2-initialize-slow-and-fast-pointers">
+  Step 2: Initialize Slow and Fast Pointers
+  <a class="heading-link" href="#step-2-initialize-slow-and-fast-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    ListNode <span style="color:#f92672">*</span>fast <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>slow<span style="color:#f92672">=</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(fast <span style="color:#f92672">&amp;&amp;</span> fast<span style="color:#f92672">-&gt;</span>next) {
+</span></span></code></pre></div><ul>
+<li>Two pointers, <code>slow</code> and <code>fast</code>, are initialized to point to the head of the list.</li>
+<li>The <code>while</code> loop begins, with the condition <code>fast &amp;&amp; fast-&gt;next</code>, ensuring that the loop continues as long as there are at least two nodes for the fast pointer to move.</li>
 </ul>
-</li>
+<h4 id="step-3-detect-the-cycle">
+  Step 3: Detect the Cycle
+  <a class="heading-link" href="#step-3-detect-the-cycle">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(fast <span style="color:#f92672">==</span> slow) <span style="color:#66d9ef">break</span>;
+</span></span></code></pre></div><ul>
+<li>Inside the loop, the <code>slow</code> pointer moves one step at a time (<code>slow = slow-&gt;next</code>), while the <code>fast</code> pointer moves two steps at a time (<code>fast = fast-&gt;next-&gt;next</code>).</li>
+<li>If the <code>fast</code> pointer meets the <code>slow</code> pointer at any point (<code>fast == slow</code>), it indicates the presence of a cycle, and we break out of the loop.</li>
 </ul>
-</li>
+<h4 id="step-4-no-cycle-found">
+  Step 4: No Cycle Found
+  <a class="heading-link" href="#step-4-no-cycle-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>(fast <span style="color:#f92672">&amp;&amp;</span> fast<span style="color:#f92672">-&gt;</span>next)) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li>If the <code>fast</code> pointer reaches the end of the list (<code>fast == NULL</code> or <code>fast-&gt;next == NULL</code>), it means there is no cycle in the list, and we return <code>NULL</code>.</li>
+</ul>
+<h4 id="step-5-find-the-start-of-the-cycle">
+  Step 5: Find the Start of the Cycle
+  <a class="heading-link" href="#step-5-find-the-start-of-the-cycle">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (head <span style="color:#f92672">!=</span> slow) {
+</span></span><span style="display:flex;"><span>        head <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>After detecting a cycle, we reset one pointer (<code>head</code>) to the start of the list. The other pointer (<code>slow</code>) remains at the point where the cycle was detected.</li>
+<li>We then move both pointers one step at a time until they meet. The node where they meet is the start of the cycle.</li>
+</ul>
+<h4 id="step-6-return-the-cycle-start">
+  Step 6: Return the Cycle Start
+  <a class="heading-link" href="#step-6-return-the-cycle-start">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> slow;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Once the pointers meet, we return the <code>slow</code> pointer, which now points to the node at the start of the cycle.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -306,14 +396,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the linked list, since each node is visited at most twice.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as no additional space is used (only two pointers are maintained).</li>
-</ul> 
+<li><strong>O(n)</strong>: In the worst case, the slow pointer and the fast pointer both traverse the entire list before detecting the cycle, and then both pointers need to traverse part of the cycle to meet. Hence, the time complexity is linear in terms of the number of nodes in the list, O(n), where <code>n</code> is the number of nodes in the list.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses a constant amount of extra space. We only use two pointers (<code>slow</code> and <code>fast</code>), regardless of the size of the input list. Therefore, the space complexity is constant, O(1).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently detects the node where a cycle begins in a singly linked list using Floyd&rsquo;s Cycle-Finding Algorithm. Here are the main points to remember:</p>
+<ol>
+<li>
+<p><strong>Efficient Detection</strong>: By using two pointers (slow and fast) moving at different speeds, we can detect a cycle in linear time without using any extra space for auxiliary data structures (like hash sets).</p>
+</li>
+<li>
+<p><strong>Cycle Start Detection</strong>: Once a cycle is detected, resetting one pointer to the head and moving both pointers one step at a time ensures that they meet at the starting point of the cycle.</p>
+</li>
+<li>
+<p><strong>Optimal Performance</strong>: The algorithm runs in linear time, O(n), and uses constant space, O(1), making it optimal for solving this problem.</p>
+</li>
+</ol>
+<p>This approach is widely used for problems involving cycle detection in linked lists and ensures both time and space efficiency. It is one of the most optimal solutions for detecting cycles in singly linked lists.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode241s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode239s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

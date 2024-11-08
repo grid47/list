@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode863s1hbhb">
+<h2 id="hahahugoshortcode864s1hbhb">
   
 
   
@@ -237,7 +237,23 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if two strings <code>s</code> and <code>t</code> are anagrams. Two strings are anagrams if they contain the same characters in the same frequency.</p>
+<p>The task at hand is to determine whether two strings, <code>s</code> and <code>t</code>, are <strong>anagrams</strong> of each other. Two strings are considered anagrams if they contain the same characters with the same frequencies, but potentially in a different order.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p><strong>Input</strong>: s = &ldquo;anagram&rdquo;, t = &ldquo;nagaram&rdquo;</p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>true</code> (Both strings contain the same characters with the same frequencies)</p>
+</li>
+<li>
+<p><strong>Input</strong>: s = &ldquo;rat&rdquo;, t = &ldquo;car&rdquo;</p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>false</code> (The strings contain different characters)</p>
+</li>
+</ul>
+<p>The problem asks to implement a function <code>isAnagram</code> that returns <code>true</code> if the two strings are anagrams and <code>false</code> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,29 +261,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution uses a frequency count with a fixed-size array of 26 elements (for lowercase English letters):</p>
+<p>We can approach this problem using the following steps:</p>
 <ol>
-<li><strong>Count Character Frequencies in <code>s</code></strong>: For each character in <code>s</code>, increment its corresponding index in the <code>ch</code> vector.</li>
-<li><strong>Adjust Frequencies for <code>t</code></strong>: For each character in <code>t</code>, decrement its corresponding index in the <code>ch</code> vector.</li>
-<li><strong>Check for Zero Balance</strong>: If all counts in <code>ch</code> are zero, then <code>s</code> and <code>t</code> have the same character frequencies, and they are anagrams. Otherwise, they are not.</li>
+<li><strong>Count Frequency of Characters</strong>: We can compare the character counts of both strings. If both strings have the same characters with the same frequencies, they are anagrams.</li>
+<li><strong>Efficient Checking</strong>: Instead of comparing characters one-by-one for each string, we can use an efficient method by utilizing an array to store the frequency of each character in both strings.</li>
+<li><strong>Optimization</strong>: Since we only need to compare lowercase English letters, we can use an array of size 26 (to cover letters &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: Strings <code>s</code> and <code>t</code>.</li>
-<li><strong>Output</strong>: <code>true</code> if <code>s</code> and <code>t</code> are anagrams, <code>false</code> otherwise.</li>
+<p>Let&rsquo;s break down the <code>isAnagram</code> function implemented in the given code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isAnagram(string s, string t) {
+</span></span></code></pre></div><ul>
+<li>We define the function <code>isAnagram</code> which takes two strings <code>s</code> and <code>t</code> as input. The goal of this function is to check whether the two input strings are anagrams of each other.</li>
 </ul>
-<ol>
-<li>Initialize a vector <code>ch</code> of size 26 with zeros to count characters.</li>
-<li>For each character in <code>s</code>, increment its position in <code>ch</code>.</li>
-<li>For each character in <code>t</code>, decrement its position in <code>ch</code>.</li>
-<li>If any element in <code>ch</code> is not zero, return <code>false</code>; otherwise, return <code>true</code>.</li>
-</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ch(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>ch</code> of size 26 (corresponding to the 26 lowercase letters &lsquo;a&rsquo; to &lsquo;z&rsquo;) to keep track of the frequency of each character in the strings. Initially, all values in the vector are set to 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s) ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate over each character <code>x</code> in the string <code>s</code>. For each character, we increment the corresponding index in the <code>ch</code> vector. The index for each character is determined by the expression <code>x - 'a'</code>, which shifts the character&rsquo;s ASCII value into a range from 0 (for &lsquo;a&rsquo;) to 25 (for &lsquo;z&rsquo;). For example:
+<ul>
+<li>If <code>x = 'a'</code>, then <code>x - 'a' = 0</code>, so <code>ch[0]</code> is incremented.</li>
+<li>If <code>x = 'b'</code>, then <code>x - 'a' = 1</code>, so <code>ch[1]</code> is incremented.</li>
+</ul>
+</li>
+</ul>
+<p>This loop counts the occurrences of each character in string <code>s</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: t) ch[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>Similarly, we iterate over each character <code>x</code> in the string <code>t</code>. For each character in <code>t</code>, we decrement the corresponding index in the <code>ch</code> vector. The reason for decrementing is to account for the characters in <code>t</code> that are present in <code>s</code>. If the frequencies of each character are equal in both strings, the result of this operation will leave the vector with all zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: ch) <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>After processing both strings, we check the contents of the <code>ch</code> vector. If any value in the vector is not zero, it means that the frequencies of the corresponding character are not balanced between the two strings, meaning the strings are not anagrams. In this case, we return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If all the values in the <code>ch</code> vector are zero, it means the strings have the same character frequencies, so we return <code>true</code>, indicating that <code>s</code> and <code>t</code> are anagrams of each other.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -275,27 +314,58 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the longer string (<code>s</code> or <code>t</code>), since each character is processed in constant time.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the <code>ch</code> vector has a fixed size of 26.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the longer string between <code>s</code> and <code>t</code>. This is because we iterate through each string once to count the character frequencies. Since we iterate over the two strings independently, the time complexity is proportional to the sum of their lengths.</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, or constant space. The space used by the <code>ch</code> vector is fixed at 26 (for each letter in the alphabet), regardless of the size of the input strings. Hence, the space complexity is constant, or <strong>O(1)</strong>, for the frequency counter.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The <code>isAnagram</code> function efficiently checks if two strings are anagrams by comparing their character frequencies. This solution:</p>
+<ul>
+<li>Uses a simple frequency count array of size 26, which makes the approach both time and space efficient.</li>
+<li>Runs in linear time <strong>O(n)</strong>, which is optimal for this problem as we need to inspect each character in both strings.</li>
+<li>Requires constant space <strong>O(1)</strong>, as the size of the character count array is fixed.</li>
+</ul>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Different Lengths</strong>: If <code>s</code> and <code>t</code> have different lengths, they cannot be anagrams.</li>
-<li><strong>Empty Strings</strong>: Two empty strings are considered anagrams.</li>
-<li><strong>Different Characters or Frequencies</strong>: Handles cases where <code>s</code> and <code>t</code> have different character frequencies or characters.</li>
+<li><strong>Efficiency</strong>: The algorithm is efficient in both time and space, making it suitable for large input sizes.</li>
+<li><strong>Space Optimization</strong>: By using a frequency counter of fixed size (26 for lowercase English letters), the space complexity remains constant.</li>
+<li><strong>Simplicity</strong>: The solution is simple and easy to understand, involving just two passes through the strings and a single array to count character occurrences.</li>
+<li><strong>Practicality</strong>: This approach is highly practical for problems involving anagram checking or frequency counting in problems where the input alphabet is fixed and small (like lowercase English letters).</li>
 </ol>
+<p>This method ensures that we can quickly and accurately check if two strings are anagrams, making it a valuable solution for a wide range of applications, from simple string comparison tasks to more complex data processing scenarios.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode863s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode864s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

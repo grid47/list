@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1382s1hbhb">
+<h2 id="hahahugoshortcode1380s1hbhb">
   
 
   
@@ -244,7 +244,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a <code>m x n</code> grid, you need to find the number of unique paths from the top-left corner to the bottom-right corner, where you can only move either down or right at any point in time.</p>
+<p>The problem is to find the total number of unique paths in an <code>m x n</code> grid that lead from the top-left corner <code>(0, 0)</code> to the bottom-right corner <code>(m-1, n-1)</code>. In this grid, movement is restricted to either moving down or to the right at each step.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,51 +252,81 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution utilizes dynamic programming (DP) to calculate the number of unique paths. We create a 2D table, <code>dp</code>, where each cell <code>dp[i][j]</code> represents the number of ways to reach cell <code>(i, j)</code> from the starting position <code>(0, 0)</code>.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming Table</strong>:</p>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>Create a 2D vector <code>dp</code> of size <code>m x n</code> where <code>dp[i][j]</code> represents the number of unique paths to reach cell <code>(i, j)</code>.</li>
+<li>If you are on the first row (i.e., <code>i = 0</code>), you can only move from the left cell. Therefore, every cell in the first row has exactly one way to reach it (moving only from the left).</li>
+<li>Similarly, if you are in the first column (i.e., <code>j = 0</code>), you can only reach each cell by moving down from the cell above, so each cell in the first column has exactly one way to be reached.</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case Initialization</strong>:</p>
+<p><strong>DP Transition</strong>:</p>
 <ul>
-<li>Set <code>dp[0][0]</code> to <code>1</code>, as there&rsquo;s one way to be at the starting cell (by starting there).</li>
-<li>Fill the first row and the first column with <code>1</code> since there is only one way to reach any cell in the first row (by moving right) and the first column (by moving down).</li>
-</ul>
-</li>
-<li>
-<p><strong>Filling the DP Table</strong>:</p>
-<ul>
-<li>Use nested loops to fill the DP table:
-<ul>
-<li>For each cell <code>(i, j)</code>, the number of unique paths to that cell is the sum of the paths from the cell directly above <code>(i - 1, j)</code> and the cell directly to the left <code>(i, j - 1)</code>, thus:
-[
-dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
-]</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The value in <code>dp[m - 1][n - 1]</code> will be the total number of unique paths to reach the bottom-right corner.</li>
+<li>For each cell <code>(i, j)</code>, if it is not in the first row or first column, the number of ways to reach it is the sum of the paths to the cell directly above it <code>(i-1, j)</code> and the cell to its left <code>(i, j-1)</code>.</li>
+<li>This leads to the recurrence relation: <code>dp[i][j] = dp[i-1][j] + dp[i][j-1]</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>: The DP table is initialized with base values.</li>
-<li><strong>Dynamic Filling</strong>: The nested loops populate the DP table based on the defined transition.</li>
+<ol>
+<li>
+<p><strong>Initialize DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> (n, <span style="color:#ae81ff">0</span>));
+</span></span></code></pre></div><ul>
+<li>We create a 2D vector <code>dp</code> of size <code>m x n</code>, initialized to <code>0</code>. This table will store the number of unique paths to each cell.</li>
 </ul>
+</li>
+<li>
+<p><strong>Set the Starting Point</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>The starting cell <code>(0, 0)</code> is set to <code>1</code> since there is only one way to be at the starting position.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize the First Row and First Column</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We populate the first row with <code>1</code>s because each cell in the first row can only be reached from the cell to its left.</li>
+<li>Similarly, each cell in the first column is set to <code>1</code> because these cells can only be reached by moving down from the cell directly above.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fill the DP Table</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        dp[i][j] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">+</span> dp[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>For cells that are not in the first row or first column, the number of paths to reach each cell is calculated as the sum of paths from the top and left cells.</li>
+<li>This builds up the DP table by combining previously computed results to obtain the paths for each cell.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Answer</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>The cell <code>dp[m-1][n-1]</code> contains the total number of unique paths from the top-left to the bottom-right corner.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -304,15 +334,39 @@ dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(m \times n) ) since every cell in the grid is computed once.</li>
-<li><strong>Space Complexity</strong>: ( O(m \times n) ) for storing the DP table.</li>
+<li><strong>O(m * n)</strong>: The code iterates through each cell in the <code>m x n</code> grid once, resulting in a time complexity of <code>O(m * n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>: The <code>dp</code> table requires <code>O(m * n)</code> space to store the number of unique paths for each cell.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This dynamic programming solution is efficient and calculates the number of unique paths in an <code>m x n</code> grid with optimal time and space complexity. By systematically building up the DP table, the solution effectively combines overlapping subproblems, making it a perfect application of the DP paradigm. The approach ensures each cell’s value is computed once, allowing for efficient path counting in grids of any size.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1382s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1380s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

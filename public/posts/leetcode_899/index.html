@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -266,7 +266,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code> and an integer <code>k</code>, you are allowed to perform <code>k</code> operations where each operation consists of moving the first character of <code>s</code> to the end of <code>s</code>. Return the lexicographically smallest string possible after performing these operations.</p>
+<p>The problem asks to return the lexicographically smallest string that can be obtained by performing at most <code>k</code> operations on the given string <code>s</code>. In each operation, you can pick the first character of the string and move it to the back.</p>
+<p>Given the integer <code>k</code> and a string <code>s</code>, we need to find the lexicographically smallest string that can be formed after performing at most <code>k</code> such operations.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,43 +275,55 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be tackled in two different ways depending on the value of <code>k</code>:</p>
 <ol>
 <li>
-<p><strong>Case when <code>k &gt; 1</code></strong>:</p>
-<ul>
-<li>If <code>k</code> is greater than 1, you can rearrange the string freely, so simply sort the string and return the result.</li>
-</ul>
+<p><strong>When <code>k &gt; 1</code></strong>: If the number of operations <code>k</code> is greater than 1, we can always sort the string to obtain the lexicographically smallest string because we can move characters to any position within the string. This is because with enough moves, any permutation of the string is possible.</p>
 </li>
 <li>
-<p><strong>Case when <code>k == 1</code></strong>:</p>
-<ul>
-<li>If <code>k</code> is 1, perform the following:
-<ul>
-<li>Initialize <code>mn</code> with the original string <code>s</code>.</li>
-<li>Generate all possible rotations of the string by concatenating substrings: <code>s.substr(i) + s.substr(0, i)</code>.</li>
-<li>Update <code>mn</code> with the minimum string found among all rotations.</li>
-</ul>
-</li>
-</ul>
+<p><strong>When <code>k == 1</code></strong>: In this case, we can only move the first character to the back at most once, so the strategy involves checking all possible rotations of the string and selecting the lexicographically smallest one. To do this, we iterate over each possible rotation and compare them to find the smallest one.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to generate the ordered queue.
-<ul>
-<li><code>string orderlyQueue(string s, int k)</code>: Computes the lexicographically smallest string after performing the allowed operations.</li>
+<h4 id="when-k--1">
+  <strong>When <code>k &gt; 1</code></strong>
+  <a class="heading-link" href="#when-k--1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    sort(s.begin(), s.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>k &gt; 1</code>, we know that we can perform at least one operation and potentially many more. With <code>k</code> operations, we can effectively rearrange the characters of the string in any order.</li>
+<li>Therefore, the lexicographically smallest string can be obtained by sorting the string. We use the <code>sort</code> function from the standard library to arrange the characters in ascending order.</li>
+<li>Once sorted, the string will be returned as the result.</li>
 </ul>
-</li>
-</ul>
-</li>
+<h4 id="when-k--1-1">
+  <strong>When <code>k == 1</code></strong>
+  <a class="heading-link" href="#when-k--1-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string mn <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> min(mn, s.substr(i) <span style="color:#f92672">+</span> s.substr(<span style="color:#ae81ff">0</span>, i));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mn;
+</span></span></code></pre></div><ul>
+<li>If <code>k == 1</code>, the only operation allowed is moving the first character of the string to the back. This limits the number of operations, so we need to check each possible rotation of the string to find the lexicographically smallest one.</li>
+<li>We initialize the variable <code>mn</code> with the original string <code>s</code> because initially, we assume the original string is the smallest.</li>
+<li>Then, we iterate through all possible rotations of the string by taking the substring starting from index <code>i</code> and concatenating it with the substring from the beginning of the string up to index <code>i</code>. The expression <code>s.substr(i) + s.substr(0, i)</code> generates the rotation starting at index <code>i</code>.</li>
+<li>We use <code>min</code> to update <code>mn</code> with the smallest string encountered in the loop.</li>
+<li>Finally, we return <code>mn</code> after checking all possible rotations.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -319,15 +332,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>:
-<ul>
-<li>O(n log n) for sorting the string when <code>k &gt; 1</code>.</li>
-<li>O(n^2) for checking all rotations when <code>k == 1</code>, where n is the length of the string.</li>
-</ul>
+<li>
+<p><strong>When <code>k &gt; 1</code></strong>: Sorting the string takes <strong>O(n log n)</strong>, where <code>n</code> is the length of the string <code>s</code>. Therefore, the overall time complexity in this case is <strong>O(n log n)</strong>.</p>
 </li>
-<li><strong>Space Complexity</strong>: O(n) for storing the sorted string or the minimum string during rotations.</li>
+<li>
+<p><strong>When <code>k == 1</code></strong>: For each possible rotation of the string, we generate a new substring, which takes <strong>O(n)</strong> time. Since there are <code>n</code> possible rotations to check, the time complexity is <strong>O(n^2)</strong>. Therefore, the overall time complexity in this case is <strong>O(n^2)</strong>.</p>
+</li>
 </ul>
+<p>Thus, the worst-case time complexity is <strong>O(n^2)</strong> when <code>k == 1</code>.</p>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity for both cases is <strong>O(n)</strong> due to the space used for storing the string <code>mn</code>, which has the same length as the input string <code>s</code>. No extra data structures are used that would require additional space proportional to the input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the problem by considering two cases based on the value of <code>k</code>.</p>
+<ol>
+<li>When <code>k &gt; 1</code>, the problem simplifies to sorting the string, which ensures we obtain the lexicographically smallest string in <strong>O(n log n)</strong> time.</li>
+<li>When <code>k == 1</code>, the problem requires checking all possible rotations of the string, which results in <strong>O(n^2)</strong> time complexity. While this may seem inefficient for large strings, it is the optimal solution given the constraint that only one operation is allowed.</li>
+</ol>
+<p>In summary, the solution is both simple and efficient for the given problem, with the primary difference in approach based on the value of <code>k</code>. If <code>k</code> is greater than 1, the problem is reduced to sorting the string, while for <code>k == 1</code>, it requires checking all rotations to find the smallest lexicographical string. This approach guarantees an optimal solution for all inputs.</p>
  
 </div>
   

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode383s1hbhb">
+<h2 id="hahahugoshortcode381s1hbhb">
   
 
   
@@ -244,7 +244,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return the indices of the two numbers such that they add up to the target. Assume that each input has exactly one solution, and you may not use the same element twice.</p>
+<p>The problem at hand is to find two numbers in an array that add up to a specific target value. Given an array of integers, <code>nums</code>, and an integer <code>target</code>, the task is to find two indices such that the numbers at these indices sum up to the target. The solution should return the 1-based indices of these two numbers.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,52 +252,130 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Hash Map</strong>:
-<ul>
-<li>Use a hash map (or unordered map) to store the difference between the target and each element as you iterate through the array.</li>
-<li>For each element, check if it exists in the map:
-<ul>
-<li>If it does, return the indices of the current element and the element stored in the map.</li>
-<li>If it doesn&rsquo;t, store the current element&rsquo;s value and its index in the map.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem efficiently, we can use a <strong>hash map</strong> (in this case, <code>map</code> in C++) to store the numbers we&rsquo;ve already encountered while iterating through the array. This allows us to check in constant time if the complement of the current number (i.e., <code>target - current_number</code>) exists in the array. This approach reduces the time complexity from a brute force <strong>O(n^2)</strong> solution to a more efficient <strong>O(n)</strong> solution.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s break down the code step by step to understand how the solution works:</p>
+<h4 id="step-1-initialize-the-variables">
+  Step 1: Initialize the Variables
+  <a class="heading-link" href="#step-1-initialize-the-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is a vector that will store the two indices of the numbers that sum up to the target. It is initialized with two zeroes as placeholders.</li>
+<li><code>mp</code> is a map (or hash table) that will be used to store the complement of each number as we iterate through the list. The key in the map will be <code>target - nums[i]</code> (the complement), and the value will be the index <code>i</code> of the number.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate Through the Array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(nums[i])) {
+</span></span><span style="display:flex;"><span>        ans[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> mp[nums[i]] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        ans[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        mp[target <span style="color:#f92672">-</span> nums[i]] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The <code>for</code> loop iterates through each element in the array <code>nums</code>.</p>
+<p><strong>Inside the loop</strong>:</p>
 <ul>
-<li><strong>Lines 1-2</strong>: Define the function and initialize a vector <code>ans</code> to hold the two indices.</li>
-<li><strong>Line 3</strong>: Create a map <code>mp</code> to store the values and their corresponding indices.</li>
-<li><strong>Lines 4-11</strong>: Iterate through the array:
+<li>
+<p><strong>Check if the current number exists in the map (<code>mp</code>)</strong>:</p>
 <ul>
-<li>Check if the current number is already in the map.</li>
-<li>If it is, store the indices in <code>ans</code> and return it.</li>
-<li>If it isn’t, compute the difference between the target and the current number and store it in the map with its index.</li>
+<li>If <code>mp.count(nums[i])</code> is true, it means the complement (<code>target - nums[i]</code>) has been encountered before in the array. Therefore, we have found the pair that adds up to the target.</li>
+<li>We then set <code>ans[0] = mp[nums[i]] + 1</code> and <code>ans[1] = i + 1</code> to store the 1-based indices of the two numbers. We return the result immediately.</li>
+</ul>
+</li>
+<li>
+<p><strong>If the complement is not found in the map</strong>:</p>
+<ul>
+<li>We store the complement of the current number (<code>target - nums[i]</code>) as the key in the map, with the current index <code>i</code> as the value. This way, when we encounter the complement in the future, we can easily retrieve the index of the previous number.</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>If no pair is found (which theoretically shouldn&rsquo;t happen according to the problem&rsquo;s constraints, as there is always exactly one solution), we return <code>ans</code>. However, the design assumes the problem guarantees one solution, so we would always return the answer during the loop.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of elements in <code>nums</code>, as we traverse the list once.</li>
-<li><strong>Space Complexity</strong>: (O(N)) for storing elements in the hash map.</li>
-</ul> 
+<li><strong>O(n)</strong>: The solution iterates over the array <code>nums</code> once. During each iteration, we check if a number exists in the map (which takes constant time, O(1), on average), and then we update the map with the complement. Thus, the overall time complexity is O(n), where <code>n</code> is the size of the array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is dominated by the space used by the map <code>mp</code>. In the worst case, the map will store <code>n</code> elements (one for each number in the array). Therefore, the space complexity is O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is highly efficient with a time complexity of O(n) and a space complexity of O(n). It optimally leverages a <strong>hash map</strong> to track the complements of the numbers and check for pairs that sum up to the target in constant time. This approach avoids the need for a nested loop, which would result in a less efficient <strong>O(n^2)</strong> solution.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm relies on the idea of storing the complement of each number in a map as we iterate through the array.</li>
+<li>This allows us to check for the presence of the complement in constant time and return the result once a valid pair is found.</li>
+<li>The time complexity of <strong>O(n)</strong> ensures that the solution is efficient even for large input sizes.</li>
+<li>The use of <strong>O(n)</strong> space for the map is a tradeoff for the time efficiency gained from constant-time lookups.</li>
+</ul>
+<p>This solution is ideal for problems where you need to find pairs that sum up to a specific value in an array, as it ensures minimal time complexity with clear and understandable logic.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode383s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode381s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

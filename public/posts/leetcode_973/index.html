@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -257,7 +257,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1638s1hbhb">
+<h2 id="hahahugoshortcode1637s1hbhb">
   
 
   
@@ -269,7 +269,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of points <code>pts</code> where each point is represented as a vector of two integers (x, y), and an integer <code>k</code>, return the <code>k</code> closest points to the origin (0, 0).</p>
+<p>The problem asks us to find the <code>k</code> closest points to the origin (0, 0) in a 2D plane from a given list of points. Each point is represented as a pair of integers <code>[x, y]</code>. The solution should return the <code>k</code> closest points based on their Euclidean distance to the origin. The Euclidean distance between a point <code>(x, y)</code> and the origin <code>(0, 0)</code> is calculated as:</p>
+<p>[
+\text{distance} = \sqrt{x^2 + y^2}
+]</p>
+<p>However, instead of calculating the exact distance, we can work with the squared Euclidean distance to simplify computations. This approach avoids the computational cost of taking square roots and produces the same ordering of points by distance.</p>
+<p>The task is to return the <code>k</code> points with the smallest squared Euclidean distance.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -277,54 +282,99 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be efficiently solved using a <strong>priority queue</strong> (or heap) with a custom comparator. The steps to solve the problem are as follows:</p>
 <ol>
+<li>
+<p><strong>Use a Priority Queue (Min-Heap)</strong>:</p>
+<ul>
+<li>We can leverage a <strong>max-heap</strong> to keep track of the <code>k</code> closest points. Since we need to find the closest points, the max-heap will allow us to efficiently remove the farthest point when the heap exceeds size <code>k</code>.</li>
+<li>The heap stores the points based on their squared distance from the origin.</li>
+</ul>
+</li>
 <li>
 <p><strong>Custom Comparator</strong>:</p>
 <ul>
-<li>Define a comparator class <code>cmp</code> to compare points based on their squared distance from the origin. This avoids unnecessary floating-point calculations.</li>
-<li>The comparator compares two points by calculating the sum of squares of their coordinates.</li>
+<li>A custom comparator is defined to compare points based on their squared Euclidean distance. The comparator returns <code>true</code> if the squared distance of the first point is greater than that of the second, ensuring that the point with the greater distance is pushed out when the heap exceeds size <code>k</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Priority Queue</strong>:</p>
+<p><strong>Push Points to the Heap</strong>:</p>
 <ul>
-<li>Use a priority queue (min-heap) to store points. The points will be sorted based on their distance from the origin.</li>
-<li>Push all points from <code>pts</code> into the priority queue.</li>
+<li>Iterate through the list of points and push each point onto the heap. If the size of the heap exceeds <code>k</code>, remove the point with the greatest distance from the origin.</li>
 </ul>
 </li>
 <li>
-<p><strong>Extracting Closest Points</strong>:</p>
+<p><strong>Extract the Closest Points</strong>:</p>
 <ul>
-<li>Initialize an empty vector <code>ans</code> to store the <code>k</code> closest points.</li>
-<li>Pop the top <code>k</code> elements from the priority queue and add them to <code>ans</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>After extracting <code>k</code> closest points, return the <code>ans</code> vector.</li>
+<li>Once the heap contains the <code>k</code> closest points, extract them and return them as the result.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong><code>cmp</code> Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">cmp</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> b[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> b[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li><strong>Custom Comparator</strong>:
 <ul>
-<li>Implements the <code>operator()</code> to compare the squared distances of two points.</li>
+<li>The <code>cmp</code> class defines a custom comparator for comparing two points based on their squared Euclidean distance from the origin.</li>
+<li>The <code>operator()</code> method is overloaded to return <code>true</code> if the squared distance of point <code>a</code> is greater than the squared distance of point <code>b</code>. This ensures that the max-heap stores the point with the largest squared distance at the top of the heap.</li>
 </ul>
 </li>
-<li>
-<p><strong><code>kClosest</code> Method</strong>:</p>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> kClosest(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> pts, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, cmp<span style="color:#f92672">&gt;</span> pq;
+</span></span></code></pre></div><ol start="2">
+<li><strong>Priority Queue Initialization</strong>:
 <ul>
-<li>Initializes the priority queue and pushes all points into it.</li>
-<li>Extracts the top <code>k</code> points from the priority queue and stores them in the result vector.</li>
+<li>The <code>priority_queue</code> <code>pq</code> is declared to store points. The queue is sorted using the custom comparator <code>cmp</code>.</li>
+<li>The type <code>vector&lt;vector&lt;int&gt;&gt;</code> represents the priority queue holding the points, where each point is a vector of two integers <code>[x, y]</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : pts) {
+</span></span><span style="display:flex;"><span>            pq.push(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="3">
+<li><strong>Push Points into the Heap</strong>:
+<ul>
+<li>The <code>for</code> loop iterates over each point <code>it</code> in the <code>pts</code> list.</li>
+<li>Each point is pushed onto the priority queue <code>pq</code>. The comparator ensures that the points are ordered by their squared Euclidean distance from the origin.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            ans.push_back(pq.top());
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="4">
+<li><strong>Extract Closest Points</strong>:
+<ul>
+<li>After all points are pushed onto the heap, we create an empty vector <code>ans</code> to store the result.</li>
+<li>The <code>while (k--)</code> loop runs <code>k</code> times, popping the top element from the priority queue (which contains the farthest point) and adding it to the result vector <code>ans</code>.</li>
+<li>The <code>pq.top()</code> gives the point with the smallest squared distance, and <code>pq.pop()</code> removes that point from the heap.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="5">
+<li><strong>Return the Result</strong>:
+<ul>
+<li>After extracting the <code>k</code> closest points, we return the <code>ans</code> vector, which contains the <code>k</code> points closest to the origin.</li>
 </ul>
 </li>
 </ol>
@@ -336,14 +386,35 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where <code>n</code> is the number of points, due to the insertion of points into the priority queue.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing points in the priority queue.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Pushing Points to the Heap</strong>: Each point is pushed onto the priority queue. In the worst case, we push all <code>n</code> points onto the heap, and each <code>push</code> operation takes <code>O(log n)</code> time. So, the time complexity for this step is <code>O(n log n)</code>.</li>
+<li><strong>Extracting the k Closest Points</strong>: Extracting the top <code>k</code> points from the heap takes <code>O(k log n)</code> time because each <code>pop</code> operation takes <code>O(log n)</code> time.</li>
+<li>Therefore, the overall time complexity is <strong>O(n log n)</strong>, where <code>n</code> is the number of points in the input list <code>pts</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the space used to store the priority queue and the result vector. In the worst case, the priority queue stores all <code>n</code> points, and the result vector stores <code>k</code> points.</li>
+<li>Therefore, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of points in the input list <code>pts</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the <code>k</code> closest points to the origin by leveraging a max-heap (priority queue) with a custom comparator. By utilizing the heap, we can ensure that we always have the closest points stored at the top of the heap, and efficiently remove the farthest points when necessary. This approach has a time complexity of <strong>O(n log n)</strong> and a space complexity of <strong>O(n)</strong>, making it suitable for problems where we need to efficiently find the closest <code>k</code> elements based on a distance metric.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1638s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1637s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

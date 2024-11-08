@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -228,7 +228,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> scr;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1546s1hbhb">
+<h2 id="hahahugoshortcode1548s1hbhb">
   
 
   
@@ -240,16 +240,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code> consisting of parentheses only, you need to calculate the <strong>score</strong> of the string. The score is calculated based on the following rules:</p>
+<p>The problem at hand is to calculate the score of a given string that consists of parentheses. The score of a balanced parentheses string is computed using the following rules:</p>
 <ol>
-<li>An empty string has a score of <code>0</code>.</li>
-<li><code>()</code> has a score of <code>1</code>.</li>
-<li>For every additional pair of parentheses <code>(...)</code>, the score is doubled and the score of the inside is added:
-<ul>
-<li>For example, the score of <code>(())</code> is <code>2</code>, and the score of <code>(()())</code> is <code>2 + 1 + 1 = 4</code>.</li>
-</ul>
-</li>
+<li><code>&quot;()&quot;</code> has a score of <code>1</code>.</li>
+<li>If <code>S</code> is a balanced parentheses string, then <code>S = &quot;(A)&quot;</code>, where <code>A</code> is another balanced parentheses string, has a score of <code>2 * score(A)</code>.</li>
+<li>If <code>S</code> is a concatenation of two balanced parentheses strings <code>A</code> and <code>B</code>, i.e., <code>S = &quot;AB&quot;</code>, then <code>score(S) = score(A) + score(B)</code>.</li>
 </ol>
+<p>Given a string <code>s</code> consisting only of <code>'('</code> and <code>')'</code>, we are tasked with computing the score of this string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -257,53 +254,160 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To calculate the score of a balanced parentheses string, we can leverage a <strong>stack</strong> data structure. Here&rsquo;s the general approach:</p>
+<ul>
+<li>
+<p><strong>Iterate through the string</strong>: We need to scan through the entire string and calculate the score based on the parenthesis structure.</p>
+</li>
+<li>
+<p><strong>Use a Stack for Parentheses Matching</strong>: A stack will help us keep track of nested structures and calculate scores for those structures in a bottom-up fashion.</p>
+</li>
+<li>
+<p><strong>Maintain a running score</strong>: As we encounter different elements (either <code>(</code> or <code>)</code>), we need to adjust the running score based on the nesting and structure of the parentheses.</p>
+</li>
+</ul>
+<p>Here’s how the approach works in detail:</p>
 <ol>
-<li><strong>Data Structure</strong>: Use a stack to keep track of scores at different levels of parentheses.</li>
-<li><strong>Iterate through the string</strong>:
+<li>
+<p><strong>Opening Parenthesis <code>(</code></strong>: When encountering an opening parenthesis, we push the current score onto the stack. This serves as a marker for the score at the current level of nesting, and we reset the current score to <code>0</code> to start calculating the score of the new nested section.</p>
+</li>
+<li>
+<p><strong>Closing Parenthesis <code>)</code></strong>: Upon encountering a closing parenthesis, we:</p>
 <ul>
-<li>When encountering a <code>(</code>, push the current score onto the stack and reset the score to <code>0</code>.</li>
-<li>When encountering a <code>)</code>, pop the last score from the stack and calculate the new score:
-<ul>
-<li>If the inner score is <code>0</code>, it means it was <code>()</code>, and we add <code>1</code>.</li>
-<li>If the inner score is greater than <code>0</code>, we double it (for the nested parentheses) and add it to the popped score.</li>
+<li>Calculate the score for the current level based on whether we have an empty nested structure or not.</li>
+<li>If the current score is <code>0</code> (i.e., we just encountered an empty <code>()</code>), we set the score to <code>1</code>.</li>
+<li>If the current score is greater than <code>0</code>, we double it to account for the nested structure.</li>
+<li>We then pop the previous score from the stack and add it to the current score to accumulate the result for the outer structure.</li>
 </ul>
 </li>
-</ul>
+<li>
+<p><strong>Final Score</strong>: After processing the entire string, the final score is stored in the <code>scr</code> variable.</p>
 </li>
-<li><strong>Return the final score</strong> after processing the entire string.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-declare-and-initialize-variables">
+  Step 1: Declare and Initialize Variables
+  <a class="heading-link" href="#step-1-declare-and-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> scr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk;
+</span></span></code></pre></div><ul>
+<li><code>scr</code>: This variable holds the running score for the parentheses string.</li>
+<li><code>stk</code>: The stack is used to store the score at each level of nesting.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-string">
+  Step 2: Iterate Through the String
+  <a class="heading-link" href="#step-2-iterate-through-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">&amp;</span>a : s) {
+</span></span></code></pre></div><ul>
+<li>We loop through each character in the string <code>s</code>.</li>
+</ul>
+<h4 id="step-3-handle-opening-parenthesis-">
+  Step 3: Handle Opening Parenthesis <code>(</code>
+  <a class="heading-link" href="#step-3-handle-opening-parenthesis-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(a <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) {
+</span></span><span style="display:flex;"><span>    stk.push(scr);
+</span></span><span style="display:flex;"><span>    scr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>When we encounter an opening parenthesis <code>(</code>, we push the current running score (<code>scr</code>) onto the stack, as we will need to calculate the score for the next nested section.</li>
+<li>We then reset the current score <code>scr</code> to <code>0</code> to start calculating the score for this new level of parentheses.</li>
+</ul>
+<h4 id="step-4-handle-closing-parenthesis-">
+  Step 4: Handle Closing Parenthesis <code>)</code>
+  <a class="heading-link" href="#step-4-handle-closing-parenthesis-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    scr <span style="color:#f92672">=</span> stk.top() <span style="color:#f92672">+</span> max( <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> scr, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Upon encountering a closing parenthesis <code>)</code>, we compute the score for the current section:
 <ul>
-<li>Initialize <code>scr</code> to <code>0</code> and create a stack to store intermediate scores.</li>
-<li>For each character in the string:
-<ul>
-<li>On encountering <code>(</code>, push the current score to the stack.</li>
-<li>On encountering <code>)</code>, calculate the new score based on the popped score and the current score.</li>
+<li>If <code>scr == 0</code> (i.e., the current section is an empty <code>()</code>), we set <code>scr = 1</code> since <code>()</code> has a score of <code>1</code>.</li>
+<li>If <code>scr &gt; 0</code>, we double the score to account for the nested structure (e.g., <code>()()</code> becomes <code>2 * score</code>).</li>
 </ul>
 </li>
-<li>Return the final score once the loop is complete.</li>
+<li>After updating the score, we pop the previous score from the stack and add it to <code>scr</code>. This ensures that we account for the accumulated score from previous sections at the higher level of nesting.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-5-return-the-final-score">
+  Step 5: Return the Final Score
+  <a class="heading-link" href="#step-5-return-the-final-score">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> scr;
+</span></span></code></pre></div><ul>
+<li>After processing all characters in the string, the value of <code>scr</code> represents the total score for the entire parentheses string.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>.</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the string. We iterate through the string once.</li>
-<li><strong>Space Complexity</strong>: O(n) in the worst case, for the stack storing intermediate scores.</li>
-</ul> 
+<li>We only iterate through the string once, processing each character in constant time.</li>
+<li>Each operation on the stack (push and pop) also takes constant time.</li>
+<li>Thus, the overall time complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string.</p>
+<ul>
+<li>The space used by the stack is proportional to the depth of nesting in the parentheses string. In the worst case (all opening parentheses), the stack will contain up to <code>n/2</code> elements.</li>
+<li>Therefore, the space complexity is <strong>O(n)</strong> in the worst case.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the score of a balanced parentheses string using a stack. By iterating through the string once and using the stack to keep track of nested scores, we are able to compute the final score in linear time. This approach handles various nested structures correctly and computes the score in a straightforward manner.</p>
+<p>The <strong>time complexity</strong> of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string, making it efficient even for large input sizes. The <strong>space complexity</strong> is also <strong>O(n)</strong>, as the stack needs to store scores for each level of nested parentheses.</p>
+<p>This approach is both time and space-efficient and can handle all valid input cases as specified in the problem statement.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1546s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1548s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

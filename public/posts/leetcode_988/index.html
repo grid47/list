@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,7 @@
 </span></span><span style="display:flex;"><span>        recur(node<span style="color:#f92672">-&gt;</span>right, <span style="color:#66d9ef">char</span>(node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">+</span> s);  
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1649s1hbhb">
+<h2 id="hahahugoshortcode1646s1hbhb">
   
 
   
@@ -265,7 +265,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree where each node contains an integer from 0 to 25, representing letters &lsquo;a&rsquo; to &lsquo;z&rsquo;, return the lexicographically smallest string that starts at a leaf and ends at the root.</p>
+<p>The problem asks to find the lexicographically smallest string that starts from any leaf of a binary tree and moves upwards to the root. Each node in the tree contains a value between 0 and 25, representing a letter in the English alphabet (where 0 maps to &lsquo;a&rsquo;, 1 maps to &lsquo;b&rsquo;, and so on). The goal is to find the smallest string from any leaf node to the root, considering that the string is formed by concatenating the node values.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -273,23 +273,84 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Use DFS to traverse each path from root to leaf.</li>
-<li>For each leaf, build a string from the current path&rsquo;s values, converting each integer to its corresponding letter, and reverse the path direction from leaf to root.</li>
-<li>Track the lexicographically smallest string found by comparing it with the current smallest answer.</li>
-</ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem can be solved using a <strong>depth-first search (DFS)</strong> approach. The idea is to traverse the binary tree, starting from the root, and recursively explore the left and right subtrees. For each leaf node encountered, we form a string by concatenating the corresponding letter (based on the node’s value) and compare it with the previously smallest string found.</p>
+<p>Key observations:</p>
+<ol>
+<li><strong>Leaf Nodes</strong>: A leaf node is defined as a node that does not have any children (both left and right children are null). We need to consider all possible paths that end at the leaf nodes.</li>
+<li><strong>Lexicographical Order</strong>: The smallest string from the leaf to the root is determined by lexicographically comparing strings. The idea is to construct the string in reverse order (from leaf to root) and compare it to keep track of the lexicographically smallest one.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Base Case</strong>: If the node is <code>nullptr</code>, return as there’s no path.</li>
-<li><strong>Leaf Node Check</strong>: If a leaf node is reached, convert its path to a string and update <code>ans</code> if it’s lexicographically smaller.</li>
-<li><strong>Recursive Calls</strong>: Traverse left and right children, appending the current node&rsquo;s character to the path.</li>
-</ol>
+<h4 id="1-helper-function-smallestfromleaf">
+  1. <strong>Helper Function (<code>smallestFromLeaf</code>)</strong>:
+  <a class="heading-link" href="#1-helper-function-smallestfromleaf">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;~&#34;</span>;
+</span></span><span style="display:flex;"><span>string <span style="color:#a6e22e">smallestFromLeaf</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    recur(root, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>smallestFromLeaf</code> initializes a variable <code>ans</code> to <code>&quot;~&quot;</code> (a string greater than any possible string formed by node values). It then calls the recursive helper function <code>recur</code> starting with the root of the binary tree.</li>
+<li>The result of the smallest string is stored in <code>ans</code> and returned after the DFS traversal.</li>
+</ul>
+<h4 id="2-recursive-function-recur">
+  2. <strong>Recursive Function (<code>recur</code>)</strong>:
+  <a class="heading-link" href="#2-recursive-function-recur">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recur</span>(TreeNode<span style="color:#f92672">*</span> node, string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>node) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>node<span style="color:#f92672">-&gt;</span>right) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, <span style="color:#66d9ef">char</span>(node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">+</span> s);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>    recur(node<span style="color:#f92672">-&gt;</span>left,  <span style="color:#66d9ef">char</span>(node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">+</span> s);
+</span></span><span style="display:flex;"><span>    recur(node<span style="color:#f92672">-&gt;</span>right, <span style="color:#66d9ef">char</span>(node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">+</span> s);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The function <code>recur</code> performs a DFS traversal of the binary tree. It takes two parameters:</p>
+<ul>
+<li><code>node</code>: the current node being processed.</li>
+<li><code>s</code>: the string constructed so far from the leaf node to the current node.</li>
+</ul>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If the current node is null (<code>if(!node)</code>), we return immediately as there is nothing to process.</li>
+</ul>
+<p><strong>Leaf Node Check</strong>:</p>
+<ul>
+<li>If the current node is a leaf node (both left and right children are null), the string formed by traversing from this leaf to the root is complete. At this point, we compute the string by adding the current node’s corresponding character (<code>char(node-&gt;val + 'a')</code>) to the string <code>s</code>, which holds the characters from the leaf to the root. This string is compared with the current <code>ans</code> to track the lexicographically smallest string.</li>
+</ul>
+<p><strong>Recursive Calls</strong>:</p>
+<ul>
+<li>The function recursively calls itself for the left and right children of the current node, appending the character corresponding to the current node’s value (<code>char(node-&gt;val + 'a')</code>) to the string <code>s</code> being passed down. This continues until all leaf nodes have been processed.</li>
+<li>A debug print statement (<code>cout &lt;&lt; node-&gt;val &lt;&lt; '\n';</code>) is added to print the value of the current node for debugging purposes.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-string-construction">
+  3. <strong>String Construction</strong>:
+  <a class="heading-link" href="#3-string-construction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The string <code>s</code> is built from the leaf to the root, as we append the character for each node while traversing down. By the time we reach a leaf, the string <code>s</code> will have the characters corresponding to that leaf’s path to the root.</li>
+<li>We use <code>char(node-&gt;val + 'a')</code> to convert a node’s integer value to a corresponding letter, ensuring that the node’s value <code>0</code> maps to <code>'a'</code>, <code>1</code> maps to <code>'b'</code>, and so on.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -297,14 +358,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(h), where h is the height of the tree, due to the recursive stack.</li>
-</ul> 
+<li><strong>DFS Traversal</strong>: We are performing a depth-first search on the binary tree, visiting each node exactly once. The time complexity of the DFS traversal is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</li>
+<li><strong>String Comparison</strong>: At each leaf, we compare the current string with the smallest string found so far. Since the maximum length of a string is equal to the height of the tree (which is <strong>O(n)</strong> in the worst case), the string comparison operation takes <strong>O(h)</strong> time, where <code>h</code> is the height of the tree. In the worst case, <code>h = O(n)</code>, so the time complexity of comparing the strings is <strong>O(n)</strong>.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n * h)</strong>, where <code>n</code> is the number of nodes and <code>h</code> is the height of the tree.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Recursive Stack</strong>: The space complexity of the DFS traversal is determined by the depth of the recursion stack, which is <strong>O(h)</strong>, where <code>h</code> is the height of the tree.</li>
+<li><strong>String Storage</strong>: The string <code>s</code> can have at most <code>h</code> characters, so the space used by the string is also <strong>O(h)</strong>.</li>
+</ul>
+<p>Thus, the overall space complexity is <strong>O(h)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the lexicographically smallest string from a leaf to the root of a binary tree. By using a depth-first search approach and maintaining a running string that is constructed from leaf to root, we ensure that the solution is both time-efficient and easy to implement. The time complexity is <strong>O(n * h)</strong>, where <code>n</code> is the number of nodes in the tree and <code>h</code> is the height of the tree, making the approach scalable for larger trees. The space complexity is <strong>O(h)</strong>, as it only requires space proportional to the height of the tree for the recursive stack and the string being built.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1649s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1646s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

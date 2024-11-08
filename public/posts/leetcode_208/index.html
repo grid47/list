@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -274,7 +274,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_2 = obj-&gt;search(word);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_3 = obj-&gt;startsWith(prefix);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode640s1hbhb">
+<h2 id="hahahugoshortcode631s1hbhb">
   
 
   
@@ -286,12 +286,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a Trie (prefix tree) with the following methods:</p>
-<ul>
-<li><code>insert(word)</code>: Inserts a word into the trie.</li>
-<li><code>search(word)</code>: Returns true if the word is in the trie.</li>
-<li><code>startsWith(prefix)</code>: Returns true if there is any word in the trie that starts with the given prefix.</li>
-</ul>
+<p>The problem is to design and implement a data structure called <strong>Trie</strong> (or prefix tree) for storing and searching strings efficiently. A Trie is a specialized tree-like structure used to store associative data, where keys are usually strings. It supports operations like insertion, search, and prefix matching. The operations should be performed in an optimal way, allowing for fast searches, insertions, and prefix lookups.</p>
+<p>In this problem, we are tasked with implementing the following operations:</p>
+<ol>
+<li><strong>Insert</strong>: Insert a word into the Trie.</li>
+<li><strong>Search</strong>: Check whether a word exists in the Trie.</li>
+<li><strong>StartsWith</strong>: Check whether there exists a word in the Trie that starts with a given prefix.</li>
+</ol>
+<p>These operations are expected to be efficient in terms of both time and space, which can be achieved using a Trie data structure.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -299,99 +301,208 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The Trie operates by storing characters of strings in a tree-like structure. Each node in the tree represents a character, and the paths from the root to the leaf nodes represent words or prefixes in the Trie. The primary idea behind the Trie is that strings with common prefixes will share common nodes, which results in significant space optimization.</p>
+<p>We will implement three main functions:</p>
 <ol>
-<li>
-<p><strong>Node Structure</strong>:</p>
-<ul>
-<li>Create a <code>Node</code> class that contains:
-<ul>
-<li>A vector of child nodes (<code>chd</code>) representing each character&rsquo;s children.</li>
-<li>A boolean flag (<code>isWord</code>) to indicate if the node represents the end of a valid word.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Trie Structure</strong>:</p>
-<ul>
-<li>Create a <code>Trie</code> class that contains:
-<ul>
-<li>A pointer to the root node of the trie.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Insertion</strong>:</p>
-<ul>
-<li>Traverse each character of the word:
-<ul>
-<li>If the child node for the character does not exist, create a new node.</li>
-<li>Move to the child node and continue until the word is fully inserted.</li>
-</ul>
-</li>
-<li>Set the <code>isWord</code> flag to true for the last character node.</li>
-</ul>
-</li>
-<li>
-<p><strong>Searching</strong>:</p>
-<ul>
-<li>Traverse the trie according to the characters of the word.</li>
-<li>If a character node does not exist, return false.</li>
-<li>If all characters exist, return the <code>isWord</code> flag of the last character node.</li>
-</ul>
-</li>
-<li>
-<p><strong>Prefix Check</strong>:</p>
-<ul>
-<li>Similar to the search method, but return true if all characters are found, regardless of the <code>isWord</code> flag.</li>
-</ul>
-</li>
+<li><strong>Insert:</strong> Insert each character of the word into the Trie, creating new nodes as necessary.</li>
+<li><strong>Search:</strong> Traverse the Trie using the characters of the word and check if the word exists.</li>
+<li><strong>StartsWith:</strong> Similar to search, but only ensures that the prefix exists without requiring the node to mark the end of a word.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>In the Trie implementation, each node will have:</p>
+<ul>
+<li>A vector of child pointers <code>chd[]</code> representing links to the next character nodes.</li>
+<li>A boolean <code>isWord</code> to mark whether a node represents the end of a valid word.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-node-class-definition">
+  1. <strong>Node Class Definition</strong>
+  <a class="heading-link" href="#1-node-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> chd;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isWord;
+</span></span><span style="display:flex;"><span>    Node(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        chd.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        isWord <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Node Class:</strong> Each node represents a character in the Trie. It has:
 <ul>
-<li><strong>Line 1</strong>: Define the <code>Node</code> class.</li>
-<li><strong>Lines 3-8</strong>: Initialize the <code>Node</code> class with a vector of child nodes and a boolean flag.</li>
-<li><strong>Line 10</strong>: Define the <code>Trie</code> class.</li>
-<li><strong>Lines 12-14</strong>: Initialize the <code>Trie</code> with a root node.</li>
-<li><strong>Lines 16-28</strong>: Define the <code>insert</code> method to add a word to the trie.</li>
-<li><strong>Lines 30-41</strong>: Define the <code>search</code> method to check for the existence of a word.</li>
-<li><strong>Lines 43-54</strong>: Define the <code>startsWith</code> method to check for the existence of a prefix.</li>
+<li><strong><code>chd[]</code>:</strong> A vector of pointers to child nodes. Each child corresponds to a character, and since we are dealing with lowercase English letters, the size of the vector is 26 (corresponding to the 26 letters from &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
+<li><strong><code>isWord</code>:</strong> A boolean that marks whether the current node represents the end of a word. It is set to <code>true</code> when a word ends at that node.</li>
+<li><strong>Constructor:</strong> The constructor initializes the <code>chd</code> vector to contain 26 null pointers (for each letter), and <code>isWord</code> is set to <code>false</code> initially.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+</ul>
+<h4 id="2-trie-class-definition">
+  2. <strong>Trie Class Definition</strong>
+  <a class="heading-link" href="#2-trie-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Trie</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> root;
+</span></span><span style="display:flex;"><span>    Trie() {
+</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#ae81ff">26</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Root Node:</strong> The Trie class contains a root node, which is a starting point for all operations. The <code>root</code> is initialized with a <code>Node</code> of size 26, which corresponds to the 26 lowercase English letters.</li>
+<li><strong>Constructor:</strong> The constructor initializes the Trie by creating a root node.</li>
+</ul>
+<h4 id="3-insert-function">
+  3. <strong>Insert Function</strong>
+  <a class="heading-link" href="#3-insert-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>(string word) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#ae81ff">26</span>);
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Insert Operation:</strong> The <code>insert</code> function takes a word and inserts it into the Trie:
+<ol>
+<li>Start from the root node.</li>
+<li>For each character in the word, check if the corresponding child node exists. If not, create a new node for that character.</li>
+<li>Move to the child node corresponding to the current character.</li>
+<li>After inserting all characters, mark the last node (the node corresponding to the last character of the word) with <code>isWord = true</code>, indicating the end of a valid word.</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-search-function">
+  4. <strong>Search Function</strong>
+  <a class="heading-link" href="#4-search-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">search</span>(string word) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>isWord;        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Search Operation:</strong> The <code>search</code> function checks if a word exists in the Trie:
+<ol>
+<li>Start from the root node.</li>
+<li>For each character in the word, move to the corresponding child node. If a character is not found (i.e., if the child node is <code>NULL</code>), return <code>false</code> immediately.</li>
+<li>Once all characters have been traversed, check if the last node is marked as <code>isWord</code>. If it is, the word exists in the Trie, and the function returns <code>true</code>; otherwise, it returns <code>false</code>.</li>
+</ol>
+</li>
+</ul>
+<h4 id="5-startswith-function">
+  5. <strong>StartsWith Function</strong>
+  <a class="heading-link" href="#5-startswith-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">startsWith</span>(string word) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>chd[word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Prefix Matching:</strong> The <code>startsWith</code> function checks if any word in the Trie starts with the given prefix:
+<ol>
+<li>Similar to the search function, traverse through the characters of the prefix.</li>
+<li>If at any point, the corresponding child node does not exist (<code>NULL</code>), return <code>false</code>.</li>
+<li>If the entire prefix is found in the Trie, return <code>true</code>, indicating that there exists a word that starts with this prefix.</li>
+</ol>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li><strong>Insert Operation:</strong>
 <ul>
-<li><code>insert</code>: (O(m)), where (m) is the length of the word being inserted.</li>
-<li><code>search</code>: (O(m)), where (m) is the length of the word being searched.</li>
-<li><code>startsWith</code>: (O(m)), where (m) is the length of the prefix being checked.</li>
+<li>For each character in the word, we traverse through the Trie and create nodes as necessary. The time complexity is <strong>O(L)</strong>, where <code>L</code> is the length of the word being inserted.</li>
 </ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
+<li><strong>Search Operation:</strong>
 <ul>
-<li>(O(n \cdot m)), where (n) is the number of words and (m) is the average length of the words stored in the trie, due to the storage of the nodes.</li>
+<li>Similar to insertion, for each character in the word, we traverse the Trie. The time complexity is <strong>O(L)</strong>, where <code>L</code> is the length of the word being searched.</li>
+</ul>
+</li>
+<li><strong>StartsWith Operation:</strong>
+<ul>
+<li>The time complexity is also <strong>O(L)</strong>, as we traverse the Trie to check if the given prefix exists.</li>
 </ul>
 </li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity:</strong>
+<ul>
+<li>The space complexity is <strong>O(N)</strong>, where <code>N</code> is the total number of nodes created in the Trie. Since each node contains an array of size 26 for the child nodes, the total space used depends on the number of nodes and the depth of the Trie.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The Trie is an efficient data structure for string-based operations, such as insertion, search, and prefix matching. It significantly reduces the time complexity of these operations compared to a linear search approach. The key advantage of a Trie is its ability to share common prefixes between strings, making it space-efficient when handling large sets of strings with common prefixes.</p>
+<p>The <code>Trie</code> class here supports three essential operations:</p>
+<ol>
+<li><strong>Insert</strong>: Adds a word to the Trie.</li>
+<li><strong>Search</strong>: Checks if a word exists in the Trie.</li>
+<li><strong>StartsWith</strong>: Checks if any word in the Trie starts with a given prefix.</li>
+</ol>
+<p>By using a Trie, these operations can be performed in <strong>O(L)</strong> time, where <code>L</code> is the length of the word or prefix being processed. This makes the Trie a powerful and efficient data structure for applications like autocomplete, dictionary lookups, and pattern matching.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode640s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode631s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

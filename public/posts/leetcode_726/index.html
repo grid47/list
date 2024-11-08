@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -289,7 +289,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string representing a chemical formula, count the number of atoms of each element in the formula. The formula may include parentheses and subscripts to indicate multiples.</p>
+<p>The problem requires us to parse a chemical formula and return a string that represents the atoms and their respective counts in the formula. The formula may contain elements, integers, and parentheses. Our goal is to count the frequency of each element and return them in lexicographical order. Additionally, the formula can contain nested parentheses that imply multiplicative factors for the enclosed atoms.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -297,77 +297,185 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We need to break down and process the formula by:</p>
 <ol>
-<li>
-<p><strong>Parsing the Formula</strong>:</p>
-<ul>
-<li>Use a recursive approach to parse the chemical formula string.</li>
-<li>Identify elements, their counts, and handle nested structures within parentheses.</li>
-</ul>
-</li>
-<li>
-<p><strong>Helper Functions</strong>:</p>
-<ul>
-<li><strong><code>atom(string &amp;eqn, int &amp;i)</code></strong>:
-<ul>
-<li>Extracts the name of an atom (element) starting from index <code>i</code>.</li>
-</ul>
-</li>
-<li><strong><code>num(string &amp;eqn, int &amp;i)</code></strong>:
-<ul>
-<li>Extracts the count of atoms (subscript) starting from index <code>i</code>. If no number is found, it returns <code>1</code>.</li>
-</ul>
-</li>
-<li><strong><code>unit(string &amp;eqn, int &amp;i)</code></strong>:
-<ul>
-<li>Handles individual units of the formula. If the unit is a group (parentheses), it recursively parses it.</li>
-</ul>
-</li>
-<li><strong><code>formula(string &amp;eqn, int &amp;i)</code></strong>:
-<ul>
-<li>Parses the entire formula, managing multiple units and their counts.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Merging Counts</strong>:</p>
-<ul>
-<li>Use a helper function <code>merge(map&lt;string, int&gt; &amp;to, map&lt;string, int&gt; &amp;from, int mul)</code> to update the count of atoms based on the parsed results.</li>
-</ul>
-</li>
-<li>
-<p><strong>Constructing the Result</strong>:</p>
-<ul>
-<li>After parsing the formula, construct the result string in alphabetical order of the elements, appending their counts.</li>
-</ul>
-</li>
+<li><strong>Parsing atoms</strong>: Recognizing elements from the formula which are represented by one or two lowercase letters.</li>
+<li><strong>Counting the frequency of atoms</strong>: Managing the count of atoms, handling nested structures (i.e., parentheses) and their multiplicative factors.</li>
+<li><strong>Managing recursion and multiplicative factors</strong>: Handling nested formulas by recursively breaking down sub-formulas inside parentheses, multiplying their counts appropriately.</li>
+<li><strong>Output</strong>: Generating a lexicographically sorted string representation of the atoms and their frequencies.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm utilizes recursion to handle nested parentheses and applies a multiplicative factor for each group of atoms inside parentheses. We also use maps to store the counts of atoms and their respective frequencies.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Function</strong>:
-<ul>
-<li><code>string countOfAtoms(string eqn)</code>: Main function that initializes parsing and constructs the final result string.</li>
+<h4 id="1-merge-function">
+  1. <strong><code>merge</code> function</strong>
+  <a class="heading-link" href="#1-merge-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>merge</code> function is used to combine atom counts from two maps. It takes two maps <code>to</code> and <code>from</code> and a multiplier <code>mul</code>. For every atom in <code>from</code>, it multiplies its count by <code>mul</code> and adds it to <code>to</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge</span>(map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>to, map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>from, <span style="color:#66d9ef">int</span> mul) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [key, val]<span style="color:#f92672">:</span> from) {
+</span></span><span style="display:flex;"><span>        to[key] <span style="color:#f92672">+=</span> val <span style="color:#f92672">*</span> mul;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>merge</code> function ensures that we can combine atom counts correctly, especially when we deal with nested formulas.</li>
 </ul>
+<h4 id="2-atom-function">
+  2. <strong><code>atom</code> function</strong>
+  <a class="heading-link" href="#2-atom-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>atom</code> function extracts an atom (element) from the formula. An atom is a sequence of lowercase letters, typically starting with a lowercase letter. This function will return the atom as a string and update the index <code>i</code> to the next position.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">atom</span>(string <span style="color:#f92672">&amp;</span>eqn, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i1 <span style="color:#f92672">=</span> i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> islower(eqn[i])) i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eqn.substr(i1, i <span style="color:#f92672">-</span> i1);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function recognizes the start of an atom, finds all the lowercase letters that follow, and returns them as an atom.</li>
+</ul>
+<h4 id="3-num-function">
+  3. <strong><code>num</code> function</strong>
+  <a class="heading-link" href="#3-num-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>num</code> function retrieves the number following an atom or a parenthesis. If no number is found, it defaults to <code>1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">num</span>(string <span style="color:#f92672">&amp;</span>eqn, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i1 <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> isdigit(eqn[i])) i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i1 <span style="color:#f92672">==</span> i <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> stoi(eqn.substr(i1, i <span style="color:#f92672">-</span> i1));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>num</code> function checks if a number follows an atom or parentheses. If it exists, it converts it to an integer; otherwise, it defaults to <code>1</code>.</li>
+</ul>
+<h4 id="4-unit-function">
+  4. <strong><code>unit</code> function</strong>
+  <a class="heading-link" href="#4-unit-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>unit</code> function parses a single unit (either an atom or a sub-formula in parentheses). If the unit is enclosed in parentheses, it recursively calls the <code>formula</code> function to process the contents of the parentheses and applies the multiplicative factor.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> unit(string <span style="color:#f92672">&amp;</span>eqn, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(eqn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cur <span style="color:#f92672">=</span> formula(eqn, <span style="color:#f92672">++</span>i);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> frq <span style="color:#f92672">=</span> num(eqn, <span style="color:#f92672">++</span>i);
+</span></span><span style="display:flex;"><span>        merge(cnt, cur, frq);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        string str <span style="color:#f92672">=</span> atom(eqn, i);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> frq <span style="color:#f92672">=</span> num(eqn, i);
+</span></span><span style="display:flex;"><span>        cnt[str] <span style="color:#f92672">=</span> frq;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>unit</code> function handles the two cases:
+<ol>
+<li>When encountering parentheses, it recursively calls <code>formula</code> and applies the multiplier to the result.</li>
+<li>Otherwise, it processes a single atom and its multiplier.</li>
+</ol>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="5-formula-function">
+  5. <strong><code>formula</code> function</strong>
+  <a class="heading-link" href="#5-formula-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>formula</code> function processes the entire formula. It iterates through the formula, calling <code>unit</code> to process individual atoms or sub-formulas, and combines the counts using the <code>merge</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> formula(string <span style="color:#f92672">&amp;</span>eqn, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> eqn[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;)&#39;</span>) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res <span style="color:#f92672">=</span> unit(eqn, i);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mul <span style="color:#f92672">=</span> num(eqn, i);
+</span></span><span style="display:flex;"><span>        merge(cnt, res, mul);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>formula</code> function handles parsing a larger formula, calling <code>unit</code> for individual units (atoms or sub-formulas) and applying multiplicative factors to each.</li>
+</ul>
+<h4 id="6-countofatoms-function">
+  6. <strong><code>countOfAtoms</code> function</strong>
+  <a class="heading-link" href="#6-countofatoms-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The main function, <code>countOfAtoms</code>, serves as the entry point for solving the problem. It initializes the parsing and then formats the result by iterating over the final atom counts.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">countOfAtoms</span>(string eqn) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> eqn.size();
+</span></span><span style="display:flex;"><span>    string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp <span style="color:#f92672">=</span> formula(eqn, i);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> [key, val]<span style="color:#f92672">:</span> mp) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> (key <span style="color:#f92672">+</span> ((val <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">:</span> to_string(val)));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function initializes the formula parsing by calling <code>formula(eqn, i)</code> to get the atom counts.</li>
+<li>It then constructs the final string, appending each atom followed by its count (unless the count is <code>1</code>).</li>
+<li>The result is returned as a formatted string.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity-on">
+  Time Complexity: <strong>O(n)</strong>
+  <a class="heading-link" href="#time-complexity-on">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the input string, as we parse through the string once.</li>
-<li><strong>Space Complexity</strong>: O(M), where M is the number of unique elements in the formula, as we use a map to store the counts.</li>
+<li>The primary work in the algorithm is parsing the formula, which involves iterating through the string character by character. Each character is processed a constant number of times (depending on whether it belongs to an atom, a number, or a parenthesis).</li>
+<li>The overall time complexity is linear with respect to the size of the formula, <strong>O(n)</strong>, where <code>n</code> is the length of the input string.</li>
 </ul>
+<h4 id="space-complexity-on">
+  Space Complexity: <strong>O(n)</strong>
+  <a class="heading-link" href="#space-complexity-on">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the storage of the atom counts in the map. In the worst case, each atom could be unique, leading to a space complexity of <strong>O(n)</strong>.</li>
+<li>Additionally, the recursion stack for processing nested parentheses adds a small overhead, but this is negligible compared to the space used for the result.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently parses a chemical formula and counts the frequency of each atom, even when nested parentheses are involved. By utilizing recursion, maps, and multiplicative factors, the algorithm ensures that the atoms are counted accurately and returned in lexicographical order. The time complexity of <strong>O(n)</strong> and space complexity of <strong>O(n)</strong> make this approach efficient for processing large formulas.</p>
+<p>The key steps involve:</p>
+<ul>
+<li>Parsing the string to identify atoms, numbers, and parentheses.</li>
+<li>Handling nested parentheses by recursively calling the <code>formula</code> function.</li>
+<li>Merging atom counts correctly and applying multiplicative factors as necessary.</li>
+</ul>
+<p>This solution is highly efficient and robust for counting atoms in complex chemical formulas, and it handles both simple and nested cases gracefully.</p>
  
 </div>
   

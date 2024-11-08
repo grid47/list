@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans.size() <span style="color:#f92672">==</span> n<span style="color:#f92672">?</span> ans: vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode646s1hbhb">
+<h2 id="hahahugoshortcode643s1hbhb">
   
 
   
@@ -261,7 +261,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer <code>n</code> representing the number of courses labeled from <code>0</code> to <code>n-1</code>, and a list of prerequisite pairs <code>pre</code>, where <code>pre[i] = [a, b]</code> indicates that to take course <code>a</code>, you must first complete course <code>b</code>. Return an array of the course order. If it is impossible to complete all courses, return an empty array.</p>
+<p>The problem asks to find the order in which courses can be taken based on prerequisites. Given a number <code>n</code> representing the number of courses and a list of prerequisite pairs, the task is to determine the order in which the courses can be completed. Each course may depend on other courses, and the order of courses must respect these dependencies. If it is not possible to complete all courses (i.e., there is a cycle in the dependency graph), return an empty list. Otherwise, return the valid order of courses.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,44 +269,76 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we use <strong>Topological Sorting</strong> for a Directed Acyclic Graph (DAG). A topological sort orders the vertices of a directed graph in such a way that for every directed edge <code>(u, v)</code>, vertex <code>u</code> appears before vertex <code>v</code> in the ordering. Since the problem involves prerequisites, we can model the courses as a directed graph where:</p>
+<ul>
+<li>Each course is a node.</li>
+<li>A directed edge from course <code>u</code> to course <code>v</code> indicates that course <code>v</code> is a prerequisite for course <code>u</code>.</li>
+</ul>
+<p>We also need to detect cycles in the graph. If there is a cycle, it means that there are courses whose prerequisites depend on each other in a circular manner, making it impossible to complete all courses.</p>
+<p>We can use <strong>Kahn’s Algorithm</strong> for topological sorting using the following steps:</p>
 <ol>
-<li>
-<p><strong>Graph Representation</strong>: Use an adjacency list to represent the directed graph of course dependencies.</p>
-<ul>
-<li><code>gph</code>: A vector of vectors where <code>gph[i]</code> contains all courses that depend on course <code>i</code>.</li>
-<li><code>incnt</code>: A vector that counts the number of prerequisites (incoming edges) for each course.</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Graph</strong>:</p>
-<ul>
-<li>Iterate through the prerequisites list and fill in <code>gph</code> and <code>incnt</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Topological Sorting</strong>:</p>
-<ul>
-<li>Use a queue to manage courses that can be taken (those with no remaining prerequisites).</li>
-<li>For each course taken, reduce the incoming count of its dependent courses. If any dependent course&rsquo;s incoming count reaches zero, add it to the queue.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check Completion</strong>: After processing, if the number of courses added to the result is equal to <code>n</code>, return the result; otherwise, return an empty array.</p>
-</li>
+<li>Construct a directed graph based on the prerequisite relationships.</li>
+<li>Track the in-degrees (number of incoming edges) for each course.</li>
+<li>Use a queue to store courses that have no prerequisites (i.e., courses with an in-degree of zero).</li>
+<li>Process the queue, adding courses to the result and reducing the in-degrees of their neighbors. If a neighbor&rsquo;s in-degree becomes zero, add it to the queue.</li>
+<li>If we process all courses, return the order; otherwise, return an empty list, indicating a cycle.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 3-4</strong>: Initialize the graph and incoming count vectors.</li>
-<li><strong>Line 5-8</strong>: Build the graph by populating <code>gph</code> and <code>incnt</code>.</li>
-<li><strong>Line 10-12</strong>: Initialize the queue with courses that have zero prerequisites.</li>
-<li><strong>Line 13-21</strong>: Process the queue, adding courses to the answer and updating the incoming counts of dependent courses.</li>
-<li><strong>Line 22</strong>: Check if all courses have been accounted for and return the result.</li>
+<p>Let&rsquo;s break down the code in detail:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findOrder(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> pre) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> gph(n);   <span style="color:#75715e">// Graph represented as an adjacency list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> incnt(n, <span style="color:#ae81ff">0</span>);       <span style="color:#75715e">// Array to store in-degrees (prerequisite count)
+</span></span></span></code></pre></div><ul>
+<li><strong>gph</strong>: A graph represented as an adjacency list where each index <code>i</code> holds the list of courses that depend on course <code>i</code>.</li>
+<li><strong>incnt</strong>: An array that tracks the number of prerequisites (in-degrees) for each course.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pre.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            gph[pre[i][<span style="color:#ae81ff">1</span>]].push_back(pre[i][<span style="color:#ae81ff">0</span>]);  <span style="color:#75715e">// Add directed edge from pre[i][1] to pre[i][0]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            incnt[pre[i][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;                   <span style="color:#75715e">// Increment the in-degree of pre[i][0]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each prerequisite pair in the <code>pre</code> list. The first element in the pair <code>pre[i][0]</code> is a course that depends on the second element <code>pre[i][1]</code>. The adjacency list is updated, and the in-degree count for the dependent course (<code>pre[i][0]</code>) is incremented.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(incnt[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)  <span style="color:#75715e">// If a course has no prerequisites, it can be taken first
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                q.push(i);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Queue (q)</strong>: This queue stores courses that have no prerequisites (i.e., courses with an in-degree of zero). These courses can be taken immediately.</li>
+<li>The loop adds all courses with zero in-degree to the queue, signaling that they can be processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> q.front();  <span style="color:#75715e">// Get the course from the front of the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans.push_back(y);    <span style="color:#75715e">// Add it to the result list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            q.pop();
+</span></span></code></pre></div><ul>
+<li><strong>ans</strong>: This vector will store the order in which courses can be taken.</li>
+<li>The <code>while</code> loop processes each course in the queue. For each course <code>y</code>, we add it to the result list <code>ans</code> and then remove it from the queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: gph[y]) {
+</span></span><span style="display:flex;"><span>                incnt[x]<span style="color:#f92672">--</span>;         <span style="color:#75715e">// Decrease the in-degree of the dependent course
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span>(incnt[x] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)   <span style="color:#75715e">// If a dependent course now has no prerequisites, add it to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    q.push(x);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>This inner loop iterates over the neighbors (dependent courses) of the current course <code>y</code>. For each dependent course <code>x</code>, we reduce its in-degree by 1 because we&rsquo;ve now processed one of its prerequisites. If <code>x</code> now has zero prerequisites (in-degree becomes zero), we add it to the queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans.size() <span style="color:#f92672">==</span> n <span style="color:#f92672">?</span> ans : vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>();  <span style="color:#75715e">// If all courses are processed, return the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we check if all courses have been processed. If the size of <code>ans</code> is equal to <code>n</code> (the total number of courses), it means we have a valid order, and we return <code>ans</code>. If not, it indicates a cycle in the graph, and we return an empty vector <code>vector&lt;int&gt;()</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -315,19 +347,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>: (O(n + e)), where (n) is the number of courses and (e) is the number of prerequisite pairs. Each edge and node is processed once.</p>
+<li>The time complexity of the algorithm is <strong>O(V + E)</strong>, where:
+<ul>
+<li><code>V</code> is the number of courses (<code>n</code>).</li>
+<li><code>E</code> is the number of prerequisite pairs (edges in the graph).</li>
+</ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>: (O(n + e)) for the graph representation and the incoming count array.</p>
+<li>Constructing the graph takes <strong>O(E)</strong> time, and processing each course and its dependencies in the queue takes <strong>O(V + E)</strong> time because each course is processed once, and each edge is considered once.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(V + E)</strong>, where:
+<ul>
+<li><code>V</code> is the number of courses (<code>n</code>).</li>
+<li><code>E</code> is the number of prerequisite pairs (edges in the graph).</li>
+</ul>
 </li>
+<li>We use an adjacency list to store the graph, which takes <strong>O(E)</strong> space, and the in-degree array and result array take <strong>O(V)</strong> space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining whether all courses can be completed, respecting their prerequisite constraints. By using <strong>Kahn’s Algorithm</strong> for topological sorting, the algorithm handles both the graph construction and cycle detection in an optimal manner. The approach guarantees that the courses are processed in the correct order if no cycles exist, and the solution is highly scalable, suitable for large input sizes due to its <strong>O(V + E)</strong> time complexity.</p>
+<p>Key points to remember:</p>
+<ul>
+<li><strong>Topological Sorting</strong> is the key to solving this problem.</li>
+<li><strong>Cycle Detection</strong> is crucial for determining whether all courses can be completed.</li>
+<li>The approach uses a <strong>queue-based method</strong> to process courses in order of their prerequisites, making the solution both efficient and easy to understand.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode646s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode643s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

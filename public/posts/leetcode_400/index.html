@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, you need to find the <code>n</code>-th digit in the sequence of integers starting from <code>1</code>. For example, the sequence is <code>1, 2, 3, 4, ..., 10, 11, 12, ...</code> and so on.</p>
+<p>The problem is to find the nth digit in the sequence of positive integers. The sequence starts from 1 and continues with numbers like 1, 2, 3, 4, &hellip;, 10, 11, 12, &hellip;, and so on. Given a positive integer <code>n</code>, the goal is to determine the nth digit in this infinitely growing sequence. For example, if <code>n = 11</code>, the sequence looks like <code>123456789101112...</code>, and the 11th digit is <code>0</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -251,61 +251,178 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be solved by identifying the range in which the nth digit lies and calculating it without constructing the entire sequence explicitly.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Determine the Length of Digits</strong>:</p>
+<p><strong>Increasing Number Lengths</strong>:</p>
 <ul>
-<li>Start with 1-digit numbers and determine how many numbers there are in each group of digit lengths.</li>
-<li>For each length:
+<li>Numbers in the sequence consist of different digit lengths:
 <ul>
-<li>The number of integers with <code>len</code> digits is <code>cnt</code> (starting from <code>9</code> for 1-digit numbers).</li>
-<li>The total number of digits contributed by this group is <code>len * cnt</code>.</li>
+<li>1-digit numbers: <code>1 to 9</code> (9 numbers)</li>
+<li>2-digit numbers: <code>10 to 99</code> (90 numbers)</li>
+<li>3-digit numbers: <code>100 to 999</code> (900 numbers)</li>
+<li>And so on.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p><strong>Finding the Group</strong>:</p>
-<ul>
-<li>Subtract the total number of digits in each group from <code>n</code> until <code>n</code> is less than or equal to the number of digits in the current group.</li>
-<li>Increase the <code>len</code> for the next group and adjust <code>cnt</code> and <code>start</code> accordingly.</li>
+<li>The total number of digits contributed by <code>k</code>-digit numbers is <code>k * 9 * 10^(k-1)</code>. For instance, there are <code>9 * 1</code> digits from 1-digit numbers, <code>90 * 2</code> digits from 2-digit numbers, and so on.</li>
 </ul>
 </li>
 <li>
-<p><strong>Identifying the Specific Digit</strong>:</p>
+<p><strong>Breaking Down the Problem</strong>:</p>
 <ul>
-<li>Once the correct group is found:
-<ul>
-<li>Calculate which specific number corresponds to the <code>n</code>-th digit.</li>
-<li>Convert that number to a string to access the specific digit directly.</li>
-</ul>
-</li>
+<li>We need to identify which group of numbers (1-digit, 2-digit, 3-digit, etc.) contains the nth digit.</li>
+<li>We can reduce the problem step by step by removing the contribution of each group of numbers until we narrow down the exact number and then the exact digit within that number.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Start with <code>len = 1</code> (for 1-digit numbers), <code>cnt = 9</code> (9 numbers), and <code>start = 1</code> (first 1-digit number).</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine the Range</strong>:</p>
+<ul>
+<li>Continuously subtract the number of digits in each range (<code>len * cnt</code>) from <code>n</code> until <code>n</code> is smaller than or equal to the current range.</li>
+<li>Once the range is found, compute the exact number and the digit within that number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Calculation</strong>:</p>
+<ul>
+<li>After determining which number contains the nth digit, calculate its value using the formula and convert it to a string. Return the corresponding digit from this string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span> lli;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> findNthDigit(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        lli len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Start with 1-digit numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        lli cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>;  <span style="color:#75715e">// 9 numbers (1 to 9)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        lli start <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Start from the number 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Find the range that contains the nth digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> (n <span style="color:#f92672">&gt;</span> len <span style="color:#f92672">*</span> cnt) {
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">-=</span> len <span style="color:#f92672">*</span> cnt;  <span style="color:#75715e">// Reduce n by the number of digits in the current range
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            len<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Move to the next length of numbers (2-digit, 3-digit, etc.)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cnt <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Increase the count of numbers in the current range (10, 100, 1000, etc.)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            start <span style="color:#f92672">*=</span> <span style="color:#ae81ff">10</span>;  <span style="color:#75715e">// Adjust the start number (10, 100, 1000, etc.)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Find the number that contains the nth digit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        start <span style="color:#f92672">+=</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> len;  <span style="color:#75715e">// Determine the exact number by calculating the position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        string s <span style="color:#f92672">=</span> to_string(start);  <span style="color:#75715e">// Convert the number to a string to access digits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> s[(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> len] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;  <span style="color:#75715e">// Return the nth digit (converted to an integer)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="explanation-of-the-code">
+  Explanation of the Code:
+  <a class="heading-link" href="#explanation-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
 <ul>
-<li>The <code>findNthDigit</code> function initializes <code>len</code>, <code>cnt</code>, and <code>start</code>.</li>
-<li>It uses a while loop to determine which digit group contains the <code>n</code>-th digit by continuously subtracting the total digits in each group.</li>
-<li>After finding the correct number, it converts it to a string to access the specific digit based on the remaining <code>n</code>.</li>
+<li><code>len</code> represents the current length of the numbers being considered (starting from 1-digit numbers).</li>
+<li><code>cnt</code> represents how many numbers are in the current group of <code>len</code>-digit numbers (starting from 9 for 1-digit numbers).</li>
+<li><code>start</code> is the first number in the current group of <code>len</code>-digit numbers (starting from 1 for 1-digit numbers).</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p><strong>Loop to Identify the Range</strong>:</p>
+<ul>
+<li>The while loop reduces <code>n</code> by subtracting the number of digits in the current range (<code>len * cnt</code>) until <code>n</code> is within the current range.</li>
+<li>In each iteration, <code>len</code> is incremented to move to the next group of numbers, <code>cnt</code> is updated to reflect the number of numbers in that group, and <code>start</code> is adjusted to the first number of that group.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Exact Number</strong>:</p>
+<ul>
+<li>After the loop, <code>start</code> holds the first number in the range containing the nth digit.</li>
+<li>We adjust <code>start</code> by adding <code>(n - 1) / len</code> to find the exact number that contains the nth digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Extract the nth Digit</strong>:</p>
+<ul>
+<li>Convert the number to a string and access the digit at the position <code>(n - 1) % len</code>, where <code>% len</code> gives the position of the digit within the number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Digit</strong>:</p>
+<ul>
+<li>Finally, the digit is returned after converting it from a character to an integer.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Finding the Range</strong>: The while loop iterates while reducing <code>n</code> by the size of each group of numbers. Each iteration involves simple arithmetic and comparisons. Since the number of digits increases exponentially (10, 100, 1000, etc.), the number of iterations is proportional to <code>log n</code> base 10. Thus, the time complexity of the while loop is <code>O(log n)</code>.</p>
+</li>
+<li>
+<p><strong>Finding the nth Digit</strong>: After determining the correct number and converting it to a string, we can access the digit in constant time. Thus, the time complexity for finding the digit is <code>O(1)</code>.</p>
+</li>
+</ol>
+<p>Overall, the time complexity of the solution is <strong>O(log n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(log(n)), as the number of digits increases logarithmically with respect to <code>n</code>.</li>
-<li><strong>Space Complexity</strong>: O(1), since only a few variables are used for calculations and no additional data structures are needed.</li>
+<li>The space complexity is primarily used to store the number in string form. In the worst case, this number can have up to <code>O(log n)</code> digits. Therefore, the space complexity is <strong>O(log n)</strong>.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the nth digit in the sequence of positive integers without constructing the entire sequence. By identifying the group of numbers (1-digit, 2-digit, etc.) containing the nth digit, we reduce the problem size logarithmically. The use of simple arithmetic and string manipulation allows us to determine the exact digit in an optimal manner. The time complexity of <strong>O(log n)</strong> and space complexity of <strong>O(log n)</strong> make this approach both time-efficient and space-efficient, suitable for handling large values of <code>n</code>.</p>
  
 </div>
   

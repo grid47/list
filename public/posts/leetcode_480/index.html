@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -248,7 +248,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1318s1hbhb">
+<h2 id="hahahugoshortcode1315s1hbhb">
   
 
   
@@ -260,7 +260,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code> and an integer <code>k</code>, return the median of the sliding window of size <code>k</code> over the array.</p>
+<p>The task is to find the median of each sliding window of size <code>k</code> as it moves from left to right across a given integer array <code>nums</code>. A sliding window of size <code>k</code> means we consider only <code>k</code> consecutive elements in <code>nums</code> at each position, and for each window, we calculate the median. The median for an odd-sized window is the middle element, while for an even-sized window, it’s the average of the two middle elements. The goal is to efficiently calculate these medians as the window slides one element to the right in each step, until it reaches the end of <code>nums</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,33 +268,31 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we utilize a data structure that allows us to efficiently maintain a sorted window and access the middle elements required to compute the median. Here, a <code>multiset</code> is chosen for its ability to store duplicate values and provide log-time insertion and deletion, which is crucial for managing the dynamic nature of the sliding window.</p>
+<p>The approach consists of several key steps:</p>
 <ol>
 <li>
-<p><strong>Using a Multiset</strong>:</p>
+<p><strong>Initialize the Multiset and Median Iterator</strong>:</p>
 <ul>
-<li>A <code>multiset</code> is used to maintain the current window of size <code>k</code>. This allows for efficient insertion, deletion, and median retrieval.</li>
+<li>First, we populate the multiset <code>win</code> with the first <code>k</code> elements of <code>nums</code>, representing the initial window.</li>
+<li>We then set an iterator, <code>mid</code>, to the middle of this sorted window (<code>k/2</code> elements from the start) to facilitate median calculation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating the Median</strong>:</p>
+<p><strong>Slide the Window and Calculate Medians</strong>:</p>
 <ul>
-<li>The median can be found based on whether <code>k</code> is odd or even:
-<ul>
-<li>If <code>k</code> is odd, the median is the middle element.</li>
-<li>If <code>k</code> is even, the median is the average of the two middle elements.</li>
-</ul>
-</li>
+<li>For each step as the window slides right, we calculate the median based on whether <code>k</code> is even or odd.</li>
+<li>For odd <code>k</code>, the median is the value at the <code>mid</code> iterator, while for even <code>k</code>, it’s the average of the two central elements (the element pointed to by <code>mid</code> and the previous one).</li>
 </ul>
 </li>
 <li>
-<p><strong>Sliding the Window</strong>:</p>
+<p><strong>Update the Multiset</strong>:</p>
 <ul>
-<li>Start by populating the <code>multiset</code> with the first <code>k</code> elements.</li>
-<li>For each new element added to the window, calculate the median and adjust the window:
+<li>After calculating the median for the current window, we slide the window by adding the next element in <code>nums</code> and removing the leftmost element of the previous window.</li>
+<li>We adjust the <code>mid</code> iterator after each insertion and deletion:
 <ul>
-<li>Insert the new element into the <code>multiset</code>.</li>
-<li>Remove the element that is sliding out of the window.</li>
-<li>Update the <code>mid</code> iterator to point to the current median.</li>
+<li>If the inserted element is less than the current median, <code>mid</code> is adjusted to ensure it still points to the middle of the window.</li>
+<li>If the removed element is less than or equal to the current median, <code>mid</code> is adjusted to maintain the correct position.</li>
 </ul>
 </li>
 </ul>
@@ -302,44 +300,61 @@
 <li>
 <p><strong>Return the Result</strong>:</p>
 <ul>
-<li>Collect the medians for all sliding windows in a result vector and return it.</li>
+<li>We continue sliding the window across <code>nums</code> and computing medians until the window reaches the end of the array.</li>
+<li>Finally, we return the list of medians for each window.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Here’s a breakdown of the code and how each part contributes to solving the problem:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
+<p><strong>Initialize the Sliding Window</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>multiset<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> win(nums.begin(), nums.begin() <span style="color:#f92672">+</span> k);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> mid <span style="color:#f92672">=</span> next(win.begin(), k<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> ans;
+</span></span></code></pre></div><p>This initializes the <code>multiset</code> with the first <code>k</code> elements and sets an iterator <code>mid</code> to the middle of the window (<code>k/2</code> from the start). The <code>ans</code> vector will store the medians for each window.</p>
+</li>
+<li>
+<p><strong>Loop to Slide the Window</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> k; ; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> med <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">double</span>)<span style="color:#f92672">*</span>mid <span style="color:#f92672">+</span> (<span style="color:#66d9ef">double</span>)<span style="color:#f92672">*</span>prev(mid, <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> k<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    ans.push_back(med);
+</span></span></code></pre></div><p>The loop starts from the <code>k</code>-th element, representing the next position after the initial window. For each window:</p>
 <ul>
-<li>The function <code>medianSlidingWindow()</code> takes a vector of integers <code>nums</code> and an integer <code>k</code> as input.</li>
+<li>The median is calculated based on the value at <code>mid</code>. If <code>k</code> is even, we also take <code>prev(mid, 1 - k % 2)</code> to get the other central element.</li>
+<li>This median is added to the <code>ans</code> vector.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Initialize a <code>multiset</code> with the first <code>k</code> elements of <code>nums</code>.</li>
-<li>Set an iterator <code>mid</code> to the middle of the <code>multiset</code>.</li>
-</ul>
+<p><strong>Break Condition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> nums.size()) <span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>We exit the loop and return <code>ans</code> when the sliding window has reached the end of the array.</p>
 </li>
 <li>
-<p><strong>Sliding Window Loop</strong>:</p>
-<ul>
-<li>For each new index starting from <code>k</code>, calculate the current median using the <code>mid</code> iterator.</li>
-<li>Insert the new element and adjust the <code>mid</code> if necessary based on the inserted value.</li>
-<li>Erase the element that is sliding out of the window.</li>
-</ul>
+<p><strong>Insert New Element and Adjust <code>mid</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>win.insert(nums[i]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> <span style="color:#f92672">*</span>mid)
+</span></span><span style="display:flex;"><span>    mid<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><p>After calculating the median, we insert the next element in <code>nums</code> into the <code>multiset</code>. If the new element is less than the current median, <code>mid</code> is decremented to keep it pointing to the middle.</p>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>After processing all elements, return the vector of medians.</li>
-</ul>
+<p><strong>Remove the Old Element and Adjust <code>mid</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[i <span style="color:#f92672">-</span> k] <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">*</span>mid)
+</span></span><span style="display:flex;"><span>    mid<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>win.erase(win.lower_bound(nums[i <span style="color:#f92672">-</span> k]));
+</span></span></code></pre></div><p>The leftmost element of the previous window is removed. If this removed element was less than or equal to the current median, <code>mid</code> is incremented to retain its position at the middle of the updated window.</p>
+</li>
+<li>
+<p><strong>Return the Answer</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><p>Once all medians have been calculated, <code>ans</code> is returned as the result.</p>
 </li>
 </ol>
 <h3 id="complexity">
@@ -349,15 +364,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n log k) due to the insertion and deletion in the <code>multiset</code>, where <code>n</code> is the number of elements in <code>nums</code>.</li>
-<li><strong>Space Complexity</strong>: O(k) for the <code>multiset</code> storing the current window of elements.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n log k)</strong>, where <code>n</code> is the length of <code>nums</code> and <code>k</code> is the size of the window. Each insertion and deletion in the <code>multiset</code> takes O(log k) time, and since we perform these operations <code>n - k + 1</code> times, the complexity is <code>O(n log k)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(k)</strong>, as we store only <code>k</code> elements in the <code>multiset</code> at any time, plus a few additional variables for storing iterators and results.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient and elegant way to find the median of each sliding window in a large array. By leveraging a balanced data structure (<code>multiset</code>) with an iterator to the middle element, we can dynamically maintain the sorted window and compute medians in logarithmic time. This approach is particularly suitable for scenarios where the window size <code>k</code> is significantly smaller than the length of <code>nums</code>, providing a well-balanced solution to the sliding window median problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1318s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1315s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

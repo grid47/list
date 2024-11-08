@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -248,7 +248,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (h2 <span style="color:#f92672">-</span> h1) <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">+</span> (m2 <span style="color:#f92672">-</span> m1);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1352s1hbhb">
+<h2 id="hahahugoshortcode1349s1hbhb">
   
 
   
@@ -260,7 +260,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of 24-hour clock time strings, find the minimum difference in minutes between any two times in the list.</p>
+<p>Given a list of time points in &ldquo;HH:MM&rdquo; format, the task is to find the minimum difference in minutes between any two time points. A time difference can wrap around midnight, so the smallest time difference might involve one time point being close to midnight and another just after midnight.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,47 +268,96 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem asks us to calculate the smallest time difference between any two time points, considering the possibility of the time wrapping around midnight. To solve this efficiently, the approach involves sorting the time points, calculating the differences between adjacent times, and considering the wraparound from the last time point back to the first one.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Sorting the Times</strong>:</p>
-<ul>
-<li>First, sort the time strings in ascending order. This helps in calculating the differences easily since the closest times will be adjacent in the sorted list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculating Differences</strong>:</p>
-<ul>
-<li>Loop through the sorted time strings and calculate the absolute time difference between each time and its predecessor. Use modulo arithmetic to wrap around the list and calculate the difference between the last and first times as well.</li>
-</ul>
-</li>
-<li>
-<p><strong>Handling Wrap-around Cases</strong>:</p>
-<ul>
-<li>Since the time is on a 24-hour clock, ensure to consider the wrap-around difference between the last time and the first time in the sorted list. This is done by subtracting the time difference from 1440 (the total number of minutes in a day).</li>
-</ul>
-</li>
-<li>
-<p><strong>Finding Minimum Difference</strong>:</p>
-<ul>
-<li>Track the minimum difference encountered during the iterations.</li>
-</ul>
-</li>
+<li><strong>Sorting Time Points</strong>: By sorting the time points, the problem reduces to finding the minimum time difference between adjacent time points in the sorted list.</li>
+<li><strong>Time Difference Calculation</strong>: The time difference between two times can be computed using their hours and minutes, and we should also account for the case where the times wrap around midnight.</li>
+<li><strong>Circular Wraparound</strong>: The circular nature of time (where after 23:59, the next time is 00:00) is handled by calculating the difference between the last time point and the first one in the sorted list.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Sorting</strong>: The times are sorted to allow easy calculation of differences.</li>
-<li><strong>Difference Calculation</strong>: The <code>timeDiff</code> function calculates the difference in minutes between two time strings:
-<ul>
-<li>Convert hours and minutes from the strings to integers and calculate the difference.</li>
+<h4 id="step-1-sorting-the-time-points">
+  Step 1: Sorting the Time Points
+  <a class="heading-link" href="#step-1-sorting-the-time-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(time.begin(), time.end());
+</span></span></code></pre></div><ul>
+<li>We start by sorting the vector <code>time</code>, which holds the list of time points. Sorting helps because once the time points are in order, the minimum difference will be between consecutive time points, including a special case for the difference between the last and first time point.</li>
 </ul>
-</li>
-<li><strong>Main Loop</strong>: Iterate through the sorted list, calculate differences, and update the minimum difference.</li>
+<h4 id="step-2-initializing-variables">
+  Step 2: Initializing Variables
+  <a class="heading-link" href="#step-2-initializing-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> time.size(), mindiff <span style="color:#f92672">=</span> INT_MAX;
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the number of time points in the list.</li>
+<li><code>mindiff</code> is initialized to the maximum possible integer value (<code>INT_MAX</code>). This will be used to store the smallest time difference as we iterate through the time points.</li>
+</ul>
+<h4 id="step-3-calculating-differences-between-adjacent-time-points">
+  Step 3: Calculating Differences Between Adjacent Time Points
+  <a class="heading-link" href="#step-3-calculating-differences-between-adjacent-time-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> diff <span style="color:#f92672">=</span> abs(timeDiff(time[(i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span>n)<span style="color:#f92672">%</span>n], time[i]));
+</span></span><span style="display:flex;"><span>    diff <span style="color:#f92672">=</span> min(diff, <span style="color:#ae81ff">1440</span> <span style="color:#f92672">-</span> diff); <span style="color:#75715e">// 1440 = 24h in minutes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    mindiff <span style="color:#f92672">=</span> min(mindiff, diff);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each time point in the sorted list. For each time point, we calculate the time difference with the previous one (using modulo arithmetic to handle the circular nature of time).</li>
+<li>The <code>timeDiff</code> function calculates the absolute difference between two time points in minutes.</li>
+<li>After calculating the difference, we consider the wraparound case by calculating <code>1440 - diff</code>, where <code>1440</code> is the total number of minutes in one day (24 hours * 60 minutes). This is done because the time difference might be smaller if we wrap around midnight.</li>
+<li>We then update the <code>mindiff</code> variable to hold the smallest difference found so far.</li>
+</ul>
+<h4 id="step-4-returning-the-result">
+  Step 4: Returning the Result
+  <a class="heading-link" href="#step-4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mindiff;
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>mindiff</code>, which holds the smallest time difference found between any two time points, accounting for the possible wraparound.</li>
+</ul>
+<h4 id="step-5-time-difference-calculation">
+  Step 5: Time Difference Calculation
+  <a class="heading-link" href="#step-5-time-difference-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">timeDiff</span>(string t1, string t2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> h1 <span style="color:#f92672">=</span> stoi(t1.substr(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m1 <span style="color:#f92672">=</span> stoi(t1.substr(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> h2 <span style="color:#f92672">=</span> stoi(t2.substr(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m2 <span style="color:#f92672">=</span> stoi(t2.substr(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (h2 <span style="color:#f92672">-</span> h1) <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">+</span> (m2 <span style="color:#f92672">-</span> m1);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>timeDiff</code> function takes two time strings <code>t1</code> and <code>t2</code> and calculates the difference in minutes between them.</li>
+<li>We extract the hours and minutes from both times using <code>substr</code> and convert them into integers using <code>stoi</code>.</li>
+<li>The function then calculates the total difference in minutes by converting both hours and minutes into minutes and subtracting them.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -317,15 +366,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where n is the number of time strings due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: O(1), since only a few integer variables are used and the input list is modified in-place.</li>
+<li><strong>Sorting the Time Points</strong>: The sorting step takes <code>O(n log n)</code> time, where <code>n</code> is the number of time points in the list.</li>
+<li><strong>Iterating Over Time Points</strong>: After sorting, we iterate over each time point to compute the differences. This takes <code>O(n)</code> time.</li>
+<li><strong>Total Time Complexity</strong>: The overall time complexity is dominated by the sorting step, so it is <code>O(n log n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Auxiliary Space</strong>: We use a constant amount of extra space (besides the input and output), so the space complexity is <code>O(1)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the smallest time difference between any two time points, considering the possibility of time wrapping around midnight. The approach involves sorting the time points, calculating the differences between adjacent points, and handling the circular nature of time. The algorithm runs in <code>O(n log n)</code> time due to the sorting step, and the space complexity is constant, making it both time and space efficient for this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1352s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1349s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode583s1hbhb">
+<h2 id="hahahugoshortcode582s1hbhb">
   
 
   
@@ -255,7 +255,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two non-empty linked lists representing two non-negative integers, where the digits are stored in reverse order, add the two numbers and return the sum as a linked list.</p>
+<p>The problem you&rsquo;re tasked with is a variation of the <strong>Add Two Numbers</strong> problem, which is commonly seen in algorithmic challenges. You are given two non-negative integers represented by linked lists, where the digits are stored in reverse order (i.e., the least significant digit comes first). Each node in the linked list contains a single digit, and the two numbers are stored as linked lists where each node represents one digit of the number. You need to add these two numbers and return the result as a linked list, in the same reverse-order digit format.</p>
+<p><strong>Input:</strong></p>
+<ul>
+<li>Two linked lists, <code>l1</code> and <code>l2</code>, where each node represents a single digit of a number in reverse order.</li>
+<li>Each list has non-negative integers, where the digits are stored in reverse order (least significant digit first).</li>
+</ul>
+<p><strong>Output:</strong></p>
+<ul>
+<li>A linked list that represents the sum of the two numbers, stored in the same reverse order.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,27 +272,105 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Iterate through both linked lists, summing the corresponding digits along with any carry from the previous step. Create new nodes to represent each digit of the sum, which is also stored in reverse order.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The goal of the problem is to simulate the process of adding two numbers digit by digit, considering the possibility of a carry from each addition. The approach follows the standard addition algorithm we use manually.</p>
+<ol>
+<li>
+<p><strong>Simulate the addition of two numbers</strong>:</p>
+<ul>
+<li>Traverse the linked lists <code>l1</code> and <code>l2</code> in parallel, adding the corresponding digits. Since the digits are stored in reverse order, the addition starts from the least significant digit.</li>
+<li>Keep track of the carry from each addition. If the sum of two digits and the carry is greater than 9, there will be a carry for the next higher digit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle differing lengths</strong>:</p>
+<ul>
+<li>The two input linked lists may have different lengths. If one list is shorter, treat its missing digits as 0 during the addition.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle the carry</strong>:</p>
+<ul>
+<li>After finishing the traversal of both lists, if there is still a carry (i.e., if the sum of the last digits was greater than or equal to 10), add a new node for the carry.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the result as a linked list</strong>:</p>
+<ul>
+<li>The result of the addition is stored in a new linked list, where each node holds a single digit of the result in reverse order.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Initialize a dummy head node <code>head</code> and a pointer <code>tail</code> to build the result linked list. Also, initialize a variable <code>rm</code> to keep track of the carry.</li>
-<li>Use a while loop to continue until both lists are fully traversed and there is no remaining carry:
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> head <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> tail <span style="color:#f92672">=</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> rm <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>head</code> is a dummy node used to simplify list manipulation. It does not represent part of the result but helps in easily managing the linked list.</li>
+<li><code>tail</code> points to the last node of the resulting list, allowing us to append new nodes.</li>
+<li><code>rm</code> (short for &ldquo;remainder&rdquo;) holds the carry from each digit addition, initialized to 0.</li>
+</ul>
+<h4 id="step-2-traverse-and-add-corresponding-digits">
+  Step 2: Traverse and Add Corresponding Digits
+  <a class="heading-link" href="#step-2-traverse-and-add-corresponding-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (l1 <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">||</span> l2 <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">||</span> rm <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> no1 <span style="color:#f92672">=</span> (l1 <span style="color:#f92672">!=</span> NULL) <span style="color:#f92672">?</span> l1<span style="color:#f92672">-&gt;</span>val : <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> no2 <span style="color:#f92672">=</span> (l2 <span style="color:#f92672">!=</span> NULL) <span style="color:#f92672">?</span> l2<span style="color:#f92672">-&gt;</span>val : <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> no1 <span style="color:#f92672">+</span> no2 <span style="color:#f92672">+</span> rm;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> digit <span style="color:#f92672">=</span> sum <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    rm <span style="color:#f92672">=</span> sum <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> nxt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(digit);
+</span></span><span style="display:flex;"><span>    tail<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> nxt;
+</span></span><span style="display:flex;"><span>    tail <span style="color:#f92672">=</span> tail<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    l1 <span style="color:#f92672">=</span> (l1 <span style="color:#f92672">!=</span> NULL) <span style="color:#f92672">?</span> l1<span style="color:#f92672">-&gt;</span>next : NULL;
+</span></span><span style="display:flex;"><span>    l2 <span style="color:#f92672">=</span> (l2 <span style="color:#f92672">!=</span> NULL) <span style="color:#f92672">?</span> l2<span style="color:#f92672">-&gt;</span>next : NULL;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop while either of the lists <code>l1</code> or <code>l2</code> has more digits to process, or there is a carry left in <code>rm</code>.</li>
+<li>For each iteration:
 <ul>
-<li>Extract the values from <code>l1</code> and <code>l2</code> (defaulting to 0 if a list is exhausted).</li>
-<li>Compute the total <code>sum</code> of these values and the carry.</li>
-<li>Determine the digit to store in the new node using <code>digit = sum % 10</code>, and update the carry using <code>rm = sum / 10</code>.</li>
-<li>Create a new node for the calculated digit and attach it to the result list.</li>
-<li>Move to the next nodes in <code>l1</code> and <code>l2</code>.</li>
+<li>We extract the value of the current node from <code>l1</code> and <code>l2</code> (if they are not <code>NULL</code>). If a list is shorter than the other, we use <code>0</code> for missing values.</li>
+<li>We calculate the sum of the two current digits and the carry from the previous addition (<code>rm</code>).</li>
+<li>The new digit in the result is the sum modulo 10 (<code>sum % 10</code>), and the new carry is the integer division of the sum by 10 (<code>sum / 10</code>).</li>
+<li>A new node with the result digit is created and appended to the result list.</li>
 </ul>
 </li>
-<li>After the loop, the result linked list starts from <code>head-&gt;next</code>. Clean up by deleting the dummy head and return the result.</li>
-</ol>
+<li>Finally, we move the <code>l1</code> and <code>l2</code> pointers to the next nodes.</li>
+</ul>
+<h4 id="step-3-return-the-result-list">
+  Step 3: Return the Result List
+  <a class="heading-link" href="#step-3-return-the-result-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> res <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop ends, <code>head-&gt;next</code> points to the first valid node in the result list (since <code>head</code> is a dummy node).</li>
+<li>We delete the dummy <code>head</code> node to avoid memory leakage.</li>
+<li>The result is returned, representing the sum of the two input numbers.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -291,15 +378,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity-omaxm-n">
+  Time Complexity: <strong>O(max(m, n))</strong>
+  <a class="heading-link" href="#time-complexity-omaxm-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the maximum length of the two linked lists.</li>
-<li><strong>Space Complexity:</strong> (O(n)) - additional space is used for the resulting linked list.</li>
+<li>Where <code>m</code> is the length of <code>l1</code> and <code>n</code> is the length of <code>l2</code>. We iterate through both lists once, and the operations inside the loop (sum, modulus, assignment) all take constant time. Therefore, the time complexity is linear in the size of the longer list.</li>
 </ul>
+<h4 id="space-complexity-omaxm-n">
+  Space Complexity: <strong>O(max(m, n))</strong>
+  <a class="heading-link" href="#space-complexity-omaxm-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the space required to store the resulting linked list. The maximum possible length of the result list is the larger of the lengths of <code>l1</code> and <code>l2</code>, plus an extra node if there’s a carry left at the end. Hence, the space complexity is also linear.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently handles the addition of two numbers represented as linked lists. By simulating the manual addition process, we can ensure that the solution works even if the lists have different lengths or if there’s a carry left at the end. The algorithm runs in linear time and space, making it well-suited for large inputs. The dummy head simplifies the list-building process and avoids edge case handling, ensuring the code is clean and readable. This solution provides a clear and efficient method for solving the <strong>Add Two Numbers</strong> problem using linked lists.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode583s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode582s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[d];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1646s1hbhb">
+<h2 id="hahahugoshortcode1643s1hbhb">
   
 
   
@@ -247,12 +247,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given:</p>
+<p>The problem asks to determine the minimum cost required to travel on specific days, where we are given a list of days when travel is required and the costs associated with different types of tickets. There are three types of tickets available:</p>
 <ol>
-<li>An array <code>days</code>, where each element represents a day on which you need to travel.</li>
-<li>An array <code>cost</code> where <code>cost[0]</code>, <code>cost[1]</code>, and <code>cost[2]</code> represent the prices for 1-day, 7-day, and 30-day tickets, respectively.</li>
+<li>A 1-day ticket which covers travel for a single day.</li>
+<li>A 7-day ticket which covers travel for seven consecutive days.</li>
+<li>A 30-day ticket which covers travel for thirty consecutive days.</li>
 </ol>
-<p>The goal is to find the minimum cost needed to cover all travel days in <code>days</code>.</p>
+<p>Given these tickets, the goal is to determine the minimum cost to cover all the travel days in the given list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,43 +261,128 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Dynamic Programming (DP)</strong>:
-<ul>
-<li>Let <code>dp[i]</code> represent the minimum cost required to travel up to day <code>i</code>.</li>
-<li>Maintain a boolean vector <code>td</code> to mark days on which travel is required.</li>
-</ul>
-</li>
-</ul>
+<p>To solve this problem, we can use dynamic programming (DP). The basic idea is to compute the minimum cost of covering all travel days by considering the different ticket options available for each day and ensuring that we minimize the cost over the possible choices.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Dynamic Programming</strong>:</p>
 <ul>
-<li>The last day to consider is <code>d = days.back()</code>.</li>
-<li>Create a DP array <code>dp</code> of size <code>d + 1</code> initialized to zero, and a boolean array <code>td</code> of the same size, where <code>td[i]</code> is <code>true</code> if <code>i</code> is a travel day.</li>
-</ul>
-</li>
-<li>
-<p><strong>DP Transition</strong>:</p>
+<li>We can define a <code>dp</code> array where <code>dp[i]</code> represents the minimum cost required to travel from day 1 to day <code>i</code>.</li>
+<li>The main challenge is to choose which ticket to buy on each day to minimize the total cost.</li>
+<li>For each day <code>i</code>, we can either:
 <ul>
-<li>For each day <code>i</code> from <code>1</code> to <code>d</code>:
-<ul>
-<li>If <code>td[i]</code> is <code>false</code>, set <code>dp[i] = dp[i - 1]</code> (no extra cost on non-travel days).</li>
-<li>If <code>td[i]</code> is <code>true</code>, calculate the minimum cost:
-<ul>
-<li>Either buy a 1-day ticket (<code>cost[0] + dp[i - 1]</code>),</li>
-<li>Or a 7-day ticket (<code>cost[1] + dp[max(i - 7, 0)]</code>),</li>
-<li>Or a 30-day ticket (<code>cost[2] + dp[max(i - 30, 0)]</code>).</li>
-</ul>
-</li>
+<li>Use a 1-day ticket, adding <code>cost[0]</code> to the cost of the previous day (<code>dp[i - 1]</code>).</li>
+<li>Use a 7-day ticket, adding <code>cost[1]</code> to the cost of the day that is 7 days earlier (<code>dp[i - 7]</code>).</li>
+<li>Use a 30-day ticket, adding <code>cost[2]</code> to the cost of the day that is 30 days earlier (<code>dp[i - 30]</code>).</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Result</strong>: The minimum cost to cover all required travel days is stored in <code>dp[d]</code>.</p>
+<p><strong>Using a Helper Array</strong>:</p>
+<ul>
+<li>To simplify the problem, we use an array <code>td</code> where <code>td[i]</code> is <code>true</code> if day <code>i</code> is a travel day (i.e., we need to travel on that day), and <code>false</code> otherwise.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>We initialize <code>dp[0]</code> to <code>0</code> since no travel is needed on day 0.</li>
+</ul>
 </li>
 </ol>
+<h4 id="detailed-steps">
+  Detailed Steps:
+  <a class="heading-link" href="#detailed-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>First, we initialize the DP array and a boolean array <code>td</code> to mark the days when travel is needed.</li>
+<li>Then, we iterate through all days from 1 to <code>d</code> (where <code>d</code> is the last day in the list of travel days), and for each day, we compute the minimum cost of travel by considering all three ticket options.</li>
+<li>We use the <code>min</code> function to choose the least cost option at each step.</li>
+<li>Finally, after iterating through all days, <code>dp[d]</code> will contain the minimum cost to travel on all the required days.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>:
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> days.back();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> td(d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, false);
+</span></span></code></pre></div><ul>
+<li>We initialize the variable <code>d</code> to the last day in the <code>days</code> array, which gives the total number of days.</li>
+<li>We initialize a <code>dp</code> array of size <code>d + 1</code> to store the minimum costs. Each entry represents the minimum cost for covering all days up to that point.</li>
+<li>We also create a <code>td</code> array to mark which days are travel days.</li>
+</ul>
+<h4 id="2-marking-travel-days">
+  2. <strong>Marking Travel Days</strong>:
+  <a class="heading-link" href="#2-marking-travel-days">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x : days) td[x] <span style="color:#f92672">=</span> true;
+</span></span></code></pre></div><ul>
+<li>This loop marks all the days in the <code>days</code> array as <code>true</code> in the <code>td</code> array, indicating that we need to travel on those days.</li>
+</ul>
+<h4 id="3-filling-the-dp-array">
+  3. <strong>Filling the DP Array</strong>:
+  <a class="heading-link" href="#3-filling-the-dp-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>td[i]) {
+</span></span><span style="display:flex;"><span>        dp[i] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> cost[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> min(dp[i], cost[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dp[max(i <span style="color:#f92672">-</span> <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0</span>)]);
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> min(dp[i], cost[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> dp[max(i <span style="color:#f92672">-</span> <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">0</span>)]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through all the days from 1 to <code>d</code> (inclusive).</li>
+<li>For each day <code>i</code>, if it is not a travel day (<code>!td[i]</code>), the cost is the same as the previous day (<code>dp[i] = dp[i - 1]</code>).</li>
+<li>If day <code>i</code> is a travel day, we compute the cost for each ticket option:
+<ul>
+<li><strong>1-day ticket</strong>: We add the cost of the 1-day ticket (<code>cost[0]</code>) to the cost of the previous day (<code>dp[i - 1]</code>).</li>
+<li><strong>7-day ticket</strong>: We add the cost of the 7-day ticket (<code>cost[1]</code>) to the cost of the day 7 days before (<code>dp[max(i - 7, 0)]</code>).</li>
+<li><strong>30-day ticket</strong>: We add the cost of the 30-day ticket (<code>cost[2]</code>) to the cost of the day 30 days before (<code>dp[max(i - 30, 0)]</code>).</li>
+</ul>
+</li>
+<li>After calculating the costs for all three ticket options, we pick the minimum value and update <code>dp[i]</code>.</li>
+</ul>
+<h4 id="4-returning-the-final-result">
+  4. <strong>Returning the Final Result</strong>:
+  <a class="heading-link" href="#4-returning-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[d];
+</span></span></code></pre></div><ul>
+<li>After processing all the days, <code>dp[d]</code> contains the minimum cost to travel on all the required days, which is the final answer.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -304,15 +390,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(D), where D is the maximum day in <code>days</code>, as each day up to <code>D</code> is processed once.</li>
-<li><strong>Space Complexity</strong>: O(D), as we use two arrays of size <code>D + 1</code>.</li>
+<li><strong>Initialization</strong>: Initializing the <code>dp</code> and <code>td</code> arrays takes <strong>O(d)</strong> time, where <code>d</code> is the last day in the <code>days</code> array.</li>
+<li><strong>Filling the DP Array</strong>: The loop iterates through all the days from 1 to <code>d</code>. For each day, we perform constant-time operations (checking travel days and updating <code>dp[i]</code>). Therefore, this step takes <strong>O(d)</strong> time.</li>
+<li><strong>Total Time Complexity</strong>: The overall time complexity is <strong>O(d)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>DP Array</strong>: The <code>dp</code> array has a size of <code>d + 1</code>, so it takes <strong>O(d)</strong> space.</li>
+<li><strong>TD Array</strong>: The <code>td</code> array also has a size of <code>d + 1</code>, so it takes <strong>O(d)</strong> space.</li>
+<li><strong>Total Space Complexity</strong>: The overall space complexity is <strong>O(d)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>mincostTickets</code> function provides an optimal solution to the problem of determining the minimum cost to travel on specific days. By using dynamic programming, the solution efficiently computes the minimum cost by considering each type of ticket option and ensuring that the cost is minimized at each step. The time and space complexities are both linear, making this approach highly scalable for large input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1646s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1643s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

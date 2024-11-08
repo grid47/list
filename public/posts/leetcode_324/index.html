@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1221s1hbhb">
+<h2 id="hahahugoshortcode1220s1hbhb">
   
 
   
@@ -262,11 +262,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, rearrange the elements of the array in such a way that they form a &ldquo;wiggle&rdquo; sequence. A wiggle sequence is defined such that for all <code>i</code>:</p>
+<p>The problem asks you to rearrange an input array <code>nums</code> such that the elements alternate between smaller and larger values, also known as <strong>wiggle sorting</strong>. The array should satisfy the following conditions:</p>
 <ul>
-<li><code>nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3] &gt; nums[4]</code> and so on.
-If there is an even number of elements, the last element should not be considered.</li>
+<li><code>nums[0] &lt;= nums[1] &gt;= nums[2] &lt;= nums[3] &gt;= nums[4] ...</code></li>
+<li>The problem is typically solved by rearranging the elements of the array without using extra space for sorting. The goal is to achieve the wiggle property by modifying the input array in-place.</li>
 </ul>
+<p>The challenge lies in achieving the desired result efficiently, both in terms of time and space complexity, while avoiding brute force approaches.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,44 +275,106 @@ If there is an even number of elements, the last element should not be considere
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem can be solved using a three-step process:</p>
+<p>Wiggle sorting can be achieved efficiently with the following approach:</p>
 <ol>
-<li>
-<p><strong>Find the Median</strong>: Use the <code>nth_element</code> function to partition the array and find the median. This allows us to understand how to arrange the elements into two halves: those less than the median and those greater than the median.</p>
-</li>
-<li>
-<p><strong>Wiggle Sorting Logic</strong>:</p>
+<li><strong>Find the Median</strong>: First, find the median of the array, which will be used as a pivot for splitting the array into two sections: elements smaller than the median and elements greater than the median.</li>
+<li><strong>Three-Way Partitioning</strong>: Once the median is identified, we can rearrange the elements by partitioning the array into three regions based on their relationship to the median:
 <ul>
-<li>Define an access function <code>A(i)</code> to reorder the array such that it can be accessed in a wiggle manner: <code>A(i) = nums[(1 + 2 * i) % (n | 1)]</code>.</li>
-<li>This mapping helps distribute the elements in the desired &ldquo;wiggle&rdquo; structure.</li>
+<li>Elements smaller than the median</li>
+<li>Elements equal to the median</li>
+<li>Elements larger than the median</li>
 </ul>
 </li>
-<li>
-<p><strong>Partition the Elements</strong>: Use a three-pointer approach:</p>
-<ul>
-<li>Pointer <code>i</code> for the next position to fill with an element greater than the median.</li>
-<li>Pointer <code>j</code> to traverse through the array.</li>
-<li>Pointer <code>k</code> for the next position to fill with an element less than the median.</li>
-<li>Depending on the comparison of <code>A(j)</code> with the median, either swap elements to the correct position and adjust pointers accordingly.</li>
-</ul>
-</li>
+<li><strong>Rearrange the Array</strong>: After partitioning, we will reorder the elements such that they satisfy the wiggle property. Specifically, alternate elements are swapped into positions that ensure the required <code>&lt;=</code> and <code>&gt;=</code> conditions are met.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This method is efficient and works in <strong>O(n)</strong> time complexity, where <code>n</code> is the number of elements in the array. This approach makes use of the <strong>median of the array</strong> to perform the rearrangement efficiently and does not require extra space beyond the input array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of integers <code>nums</code>.</li>
-<li><strong>Output</strong>: The same vector rearranged into a wiggle sequence.</li>
+<h4 id="step-1-find-the-median">
+  Step 1: Find the Median
+  <a class="heading-link" href="#step-1-find-the-median">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> midptr <span style="color:#f92672">=</span> nums.begin() <span style="color:#f92672">+</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>nth_element(nums.begin(), midptr, nums.end());
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>midptr;
+</span></span></code></pre></div><ul>
+<li>First, we calculate the middle pointer <code>midptr</code> which is the index of the median element. The median is the element that divides the array into two parts: values less than or equal to the median and values greater than or equal to the median.</li>
+<li>The function <code>nth_element</code> is used to partially sort the array such that the element at the <code>midptr</code> position is the median. The <code>nth_element</code> function is a more efficient alternative to fully sorting the array, working in <strong>O(n)</strong> time complexity.</li>
+<li>We store the median value in <code>mid</code>.</li>
 </ul>
+<h4 id="step-2-define-the-index-mapping-function-ai">
+  Step 2: Define the Index Mapping Function (<code>A(i)</code>)
+  <a class="heading-link" href="#step-2-define-the-index-mapping-function-ai">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define A(i) nums[(1 + 2 * i) % (n|1)]
+</span></span></span></code></pre></div><ul>
+<li>This line defines a function-like macro <code>A(i)</code> that is used to map indices to new positions. The purpose of this is to create a wiggle ordering.</li>
+<li>The expression <code>(1 + 2 * i) % (n | 1)</code> ensures that the new index is odd for even values of <code>i</code> and even for odd values of <code>i</code>. This is the key to achieving the wiggle property because:
+<ul>
+<li>Elements at even indices (starting from 0) should be less than or equal to their next element.</li>
+<li>Elements at odd indices should be greater than or equal to their next element.</li>
+<li>By mapping the indices using <code>A(i)</code>, we can enforce this alternating order without needing extra space or complex rearrangement logic.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-partitioning-the-array">
+  Step 3: Partitioning the Array
+  <a class="heading-link" href="#step-3-partitioning-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(A(j) <span style="color:#f92672">&lt;</span> mid)
+</span></span><span style="display:flex;"><span>        swap(A(j), A(k<span style="color:#f92672">--</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(A(j) <span style="color:#f92672">&gt;</span> mid)
+</span></span><span style="display:flex;"><span>        swap(A(i<span style="color:#f92672">++</span>), A(j<span style="color:#f92672">++</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>We define three pointers: <code>i</code>, <code>j</code>, and <code>k</code>:</p>
+<ul>
+<li><code>i</code> is used to track the position of the next element that should go into the smaller-than-median section.</li>
+<li><code>j</code> is used to iterate over the array.</li>
+<li><code>k</code> is used to track the position of the next element that should go into the larger-than-median section.</li>
+</ul>
+</li>
+<li>
+<p>The <code>while</code> loop runs as long as <code>j &lt;= k</code>, ensuring that we iterate through the entire array.</p>
+</li>
+<li>
+<p>Inside the loop, there are three possible conditions:</p>
 <ol>
-<li>Calculate the size <code>n</code> of the input array.</li>
-<li>Use <code>nth_element</code> to find the median and partition the array around it.</li>
-<li>Iterate through the array, using pointers to swap elements into the correct positions based on their relationship to the median.</li>
+<li><strong>If <code>A(j)</code> is smaller than the median</strong>: Swap <code>A(j)</code> with <code>A(k--)</code>. This moves the smaller-than-median element to the end of the array.</li>
+<li><strong>If <code>A(j)</code> is greater than the median</strong>: Swap <code>A(i++)</code> with <code>A(j++)</code>. This moves the larger-than-median element to the front of the array.</li>
+<li><strong>If <code>A(j)</code> is equal to the median</strong>: Just move <code>j</code> forward (<code>j++</code>), since this element is already in the correct section.</li>
 </ol>
+</li>
+<li>
+<p>This partitioning process ensures that all elements are correctly grouped around the median, allowing us to later place the elements in a wiggle order.</p>
+</li>
+</ul>
+<h4 id="step-4-final-rearrangement">
+  Step 4: Final Rearrangement
+  <a class="heading-link" href="#step-4-final-rearrangement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After the partitioning is done, the array is rearranged into the desired wiggle order, satisfying the <code>&lt;=</code> and <code>&gt;=</code> conditions as specified in the problem.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -319,15 +382,45 @@ If there is an even number of elements, the last element should not be considere
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)) due to the linear partitioning operation used to find the median.</li>
-<li><strong>Space Complexity</strong>: (O(1)) since the operation is done in-place without using additional data structures.</li>
+<li><strong>Time complexity</strong>: <code>O(n)</code>, where <code>n</code> is the number of elements in the input array.
+<ul>
+<li>The call to <code>nth_element</code> takes <strong>O(n)</strong> time to find the median.</li>
+<li>The partitioning process inside the <code>while</code> loop runs in <strong>O(n)</strong> time as each element is processed once.</li>
 </ul>
+</li>
+<li>Therefore, the total time complexity is <strong>O(n)</strong>, making the solution very efficient.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space complexity</strong>: <code>O(1)</code>, since we only use a constant amount of extra space to store variables such as pointers and indices. No additional data structures are used, and the operation is performed in-place on the input array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively rearranges an array to achieve the wiggle sort property in <strong>O(n)</strong> time and <strong>O(1)</strong> space, making it an optimal solution for this problem. By finding the median and using three-way partitioning, the algorithm ensures that elements are grouped around the median and placed into a wiggle order without requiring extra space for sorting. The clever use of the <code>nth_element</code> function and the custom index mapping (<code>A(i)</code>) is what makes this solution efficient and elegant, ensuring that the time complexity remains linear even for large arrays. This approach is highly suitable for scenarios where both time and space efficiency are critical, making it ideal for competitive programming and real-world applications.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1221s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1220s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

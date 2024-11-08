@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -293,7 +293,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a codec that encodes a binary tree to a string and decodes a string back to the binary tree. The encoded string should be a representation of the tree structure that allows for complete reconstruction.</p>
+<p>The problem is about designing a <strong>Codec</strong> class that can serialize and deserialize a binary tree. Serialization means converting a binary tree into a string format that can be stored or transmitted, while deserialization means converting that string back into the original binary tree. This is a typical problem that requires efficient techniques to manage and transfer hierarchical data structures like binary trees.</p>
+<p>The problem consists of two core operations:</p>
+<ol>
+<li><em><em>serialize(TreeNode</em> root)</em>* – This function should convert the binary tree into a string.</li>
+<li><strong>deserialize(string data)</strong> – This function should take a string representation of the tree and reconstruct the original binary tree.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -301,53 +306,142 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a depth-first traversal approach to serialize and deserialize the binary tree:</p>
+<p>To solve the problem, the key challenge is how to efficiently convert the tree structure into a string and later recover it from the string. The approach used in this solution is <strong>preorder traversal</strong>, which involves visiting the root node first, followed by recursively visiting the left and right subtrees.</p>
+<p>The approach works in two steps:</p>
 <ol>
 <li>
-<p><strong>Serialization</strong>:</p>
+<p><strong>Serialization</strong>: We use preorder traversal to visit each node. For each node:</p>
 <ul>
-<li>Use a pre-order traversal (root, left, right) to serialize the tree.</li>
-<li>For each node, append its value to a string. If a node is <code>nullptr</code>, append a special marker (e.g., <code>#</code>) to indicate the absence of a node.</li>
-<li>Separate values with spaces for easy parsing during deserialization.</li>
+<li>If the node is not <code>NULL</code>, we append the node’s value to the string.</li>
+<li>If the node is <code>NULL</code>, we append a placeholder (in this case, <code>#</code>) to represent the absence of a node.</li>
 </ul>
+<p>This ensures that every node, whether it is a leaf node or <code>NULL</code>, is included in the string. The string can then be used to reconstruct the tree.</p>
 </li>
 <li>
-<p><strong>Deserialization</strong>:</p>
-<ul>
-<li>Split the serialized string by spaces to reconstruct the tree.</li>
-<li>Use a recursive function to read values from the string and build the tree back, using the same pre-order logic.</li>
-<li>When a <code>#</code> is encountered, return <code>nullptr</code> for that node.</li>
-</ul>
+<p><strong>Deserialization</strong>: To reconstruct the tree from the string, we read the string and recursively build the tree. Every time we encounter a value, we create a new node and recursively reconstruct its left and right subtrees, using the same logic as the serialization step.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A binary tree node <code>root</code> for serialization and a serialized string <code>data</code> for deserialization.</li>
-<li><strong>Output</strong>: The serialized string from the tree and the reconstructed tree from the serialized string.</li>
+<h4 id="treenode-definition">
+  <strong>TreeNode Definition</strong>:
+  <a class="heading-link" href="#treenode-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> left;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> right;
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(NULL), right(NULL) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This structure represents a binary tree node. Each node contains an integer value (<code>val</code>) and pointers to its left and right children (<code>left</code> and <code>right</code>).</li>
 </ul>
-<ol>
-<li>
-<p><strong>Serialize Function</strong>:</p>
+<h4 id="codec-class-declaration">
+  <strong>Codec Class Declaration</strong>:
+  <a class="heading-link" href="#codec-class-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Codec</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string serialize(TreeNode<span style="color:#f92672">*</span> root);
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">deserialize</span>(string data);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>Codec</code> class has two primary functions:
 <ul>
-<li>Takes a pointer to the root of the tree and an output string stream.</li>
-<li>If the node is not <code>nullptr</code>, its value is added to the output stream, followed by recursive calls for the left and right children.</li>
-<li>If the node is <code>nullptr</code>, a <code>#</code> is added to indicate the absence of a node.</li>
+<li><code>serialize(TreeNode* root)</code> which converts the tree to a string.</li>
+<li><code>deserialize(string data)</code> which converts the string back to a tree.</li>
 </ul>
 </li>
-<li>
-<p><strong>Deserialize Function</strong>:</p>
+</ul>
+<h4 id="serialization">
+  <strong>Serialization</strong>:
+  <a class="heading-link" href="#serialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">serialize</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    ostringstream out;
+</span></span><span style="display:flex;"><span>    serialize(root, out);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out.str();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>serialize</code> method starts the serialization process. It creates an <code>ostringstream</code> object (<code>out</code>) to accumulate the serialized data.</li>
+<li>It calls the helper method <code>serialize(root, out)</code> to actually fill up the <code>ostringstream</code> object with the tree&rsquo;s data.</li>
+<li>Finally, it returns the serialized tree as a string.</li>
+</ul>
+<h4 id="helper-method-for-serialization">
+  <strong>Helper Method for Serialization</strong>:
+  <a class="heading-link" href="#helper-method-for-serialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">serialize</span>(TreeNode<span style="color:#f92672">*</span> root, ostringstream<span style="color:#f92672">&amp;</span> out) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root) {
+</span></span><span style="display:flex;"><span>        out <span style="color:#f92672">&lt;&lt;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+</span></span><span style="display:flex;"><span>        serialize(root<span style="color:#f92672">-&gt;</span>left, out);
+</span></span><span style="display:flex;"><span>        serialize(root<span style="color:#f92672">-&gt;</span>right, out);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        out <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;# &#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This method performs <strong>preorder traversal</strong> of the binary tree. For each node:
 <ul>
-<li>Takes an input string stream and reads the next value.</li>
-<li>If the value is <code>#</code>, it returns <code>nullptr</code>. Otherwise, it creates a new node and recursively builds the left and right subtrees.</li>
+<li>If the node is not <code>NULL</code>, the node&rsquo;s value is written to the string (<code>out</code>) followed by a space, and the method is recursively called for the left and right children.</li>
+<li>If the node is <code>NULL</code>, a placeholder (<code>#</code>) is written to represent the absence of a node.</li>
 </ul>
 </li>
-</ol>
+</ul>
+<h4 id="deserialization">
+  <strong>Deserialization</strong>:
+  <a class="heading-link" href="#deserialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">deserialize</span>(string data) {
+</span></span><span style="display:flex;"><span>    istringstream in(data);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> deserialize(in);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>deserialize</code> method is the entry point for deserialization. It takes a string (<code>data</code>) and converts it into an <code>istringstream</code> object (<code>in</code>) to read the values.</li>
+<li>It then calls the helper method <code>deserialize(in)</code> to start building the tree from the stream.</li>
+</ul>
+<h4 id="helper-method-for-deserialization">
+  <strong>Helper Method for Deserialization</strong>:
+  <a class="heading-link" href="#helper-method-for-deserialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">deserialize</span>(istringstream<span style="color:#f92672">&amp;</span> in) {
+</span></span><span style="display:flex;"><span>    string val;
+</span></span><span style="display:flex;"><span>    in <span style="color:#f92672">&gt;&gt;</span> val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (val <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;#&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(stoi(val));
+</span></span><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> deserialize(in);
+</span></span><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> deserialize(in);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The helper method reads values from the input stream (<code>in</code>).</li>
+<li>If the current value is a <code>#</code>, it means the current node is <code>NULL</code>, so the method returns <code>nullptr</code>.</li>
+<li>If the value is a valid number, it creates a new <code>TreeNode</code> with that value, then recursively builds the left and right subtrees by calling <code>deserialize</code> on the stream.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -355,18 +449,64 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>:
+<li>
+<p><strong>serialize</strong>:</p>
 <ul>
-<li>(O(n)) for both serialization and deserialization, where (n) is the number of nodes in the tree, as each node is processed once.</li>
+<li>The serialization process involves visiting each node once. Since there are <code>n</code> nodes in the binary tree, the time complexity is <strong>O(n)</strong>.</li>
 </ul>
 </li>
-<li><strong>Space Complexity</strong>:
+<li>
+<p><strong>deserialize</strong>:</p>
 <ul>
-<li>(O(n)) for the serialized string storage and the recursion stack during deserialization.</li>
+<li>Deserialization also involves reading each node’s value once and reconstructing it. Therefore, the time complexity is <strong>O(n)</strong> as well.</li>
 </ul>
 </li>
 </ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>serialize</strong>:</p>
+<ul>
+<li>The space complexity for storing the string is <strong>O(n)</strong>, as each node (including <code>NULL</code> nodes) is stored in the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>deserialize</strong>:</p>
+<ul>
+<li>During deserialization, we are constructing a binary tree with <code>n</code> nodes, which requires <strong>O(n)</strong> space for the tree structure.</li>
+</ul>
+</li>
+</ul>
+<p>Overall, both the <strong>time complexity</strong> and <strong>space complexity</strong> for both operations are <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution for serializing and deserializing a binary tree using preorder traversal is efficient and easy to implement. By representing <code>NULL</code> nodes with a placeholder (<code>#</code>), the solution handles all cases (including trees with missing nodes or uneven structures) correctly.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Preorder traversal</strong> allows us to store the structure of the tree, including <code>NULL</code> nodes, in a string format.</li>
+<li>The <strong>recursion</strong> used during both serialization and deserialization ensures that the tree is accurately reconstructed.</li>
+<li>Both the <strong>time complexity</strong> and <strong>space complexity</strong> of the solution are optimal for this problem, making it a great choice for handling tree serialization in practice.</li>
+</ul>
+<p>This approach is useful in many real-world applications where binary trees need to be transmitted or stored efficiently, such as in databases, network communications, or data transfer protocols.</p>
  
 </div>
   

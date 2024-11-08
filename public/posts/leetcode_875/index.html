@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> l;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1565s1hbhb">
+<h2 id="hahahugoshortcode1566s1hbhb">
   
 
   
@@ -238,7 +238,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array of integers representing piles of bananas, and you want to determine the minimum speed ( k ) at which you can eat all the bananas within ( H ) hours. At speed ( k ), you can eat ( k ) bananas in one hour, and for any pile that isn&rsquo;t a perfect multiple of ( k ), you still need to spend a full hour to finish it.</p>
+<p>The problem asks us to determine the minimum eating speed of a monkey such that it can eat all the bananas in a given list of piles within a specified number of hours. The monkey can eat a certain number of bananas per hour, and it is constrained by the maximum number of hours it can work, denoted by <code>H</code>.</p>
+<ul>
+<li>
+<p><strong>Input</strong>:</p>
+<ul>
+<li><code>piles</code>: A list of integers representing the number of bananas in each pile.</li>
+<li><code>H</code>: The total number of hours available for the monkey to finish eating.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output</strong>:</p>
+<ul>
+<li>The minimum speed (bananas per hour) at which the monkey should eat to finish eating all the piles within <code>H</code> hours.</li>
+</ul>
+</li>
+</ul>
+<p>The challenge lies in determining the optimal eating speed such that the time taken to eat all piles does not exceed the given <code>H</code> hours.</p>
+<h3 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: <code>piles = [3, 6, 7, 11]</code>, <code>H = 8</code></li>
+<li><strong>Output</strong>: <code>4</code></li>
+<li><strong>Explanation</strong>: The optimal speed is 4 bananas per hour. With this speed, the monkey can finish all piles in exactly 8 hours:
+<ul>
+<li>Pile 1: 3 bananas → 1 hour</li>
+<li>Pile 2: 6 bananas → 2 hours</li>
+<li>Pile 3: 7 bananas → 2 hours</li>
+<li>Pile 4: 11 bananas → 3 hours</li>
+<li>Total = 1 + 2 + 2 + 3 = 8 hours.</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,68 +282,139 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To find the minimum eating speed ( k ):</p>
+<p>The problem involves finding the minimum eating speed, which is the lowest possible integer <code>k</code> such that the monkey can eat all the bananas in <code>H</code> hours. This is a typical example of a <strong>binary search problem</strong>, where we aim to optimize a value (in this case, the eating speed).</p>
+<p>The general approach is as follows:</p>
 <ol>
 <li>
-<p><strong>Binary Search</strong>:</p>
+<p><strong>Binary Search for Eating Speed</strong>:</p>
 <ul>
-<li>Set the left boundary ( l ) to 1 (minimum speed) and the right boundary ( r ) to a sufficiently large number (the maximum value from the piles).</li>
-<li>Perform a binary search on the possible values of ( k ) from ( l ) to ( r ).</li>
+<li>We are looking for the smallest possible eating speed that allows the monkey to finish all the piles in <code>H</code> hours.</li>
+<li>The lower bound of the binary search (<code>l</code>) starts at 1, as the minimum speed cannot be less than 1.</li>
+<li>The upper bound (<code>r</code>) starts at the largest number of bananas in any pile, since eating faster than this value is unnecessary (the monkey could finish any pile in one hour).</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Hours Needed</strong>:</p>
+<p><strong>Check Feasibility of Eating Speed</strong>:</p>
 <ul>
-<li>For each candidate speed ( k ), calculate the total hours ( h ) required to finish all piles:
-<ul>
-<li>For each pile, the hours needed is given by ( \lceil \frac{x}{k} \rceil ) where ( x ) is the number of bananas in that pile.</li>
-</ul>
-</li>
-<li>Sum these hours for all piles.</li>
+<li>For each possible eating speed <code>k</code> (represented by the mid-point in the binary search), we need to calculate how long it would take the monkey to eat all the piles.</li>
+<li>For each pile of bananas, the time taken is calculated as the ceiling of the division of the pile size by <code>k</code> (since the monkey can only eat whole bananas per hour, and any remaining bananas would take an extra hour).</li>
+<li>If the total time exceeds <code>H</code>, then the current speed is too slow, and we need to increase the speed. Otherwise, we check if a slower speed can also satisfy the constraint.</li>
 </ul>
 </li>
 <li>
-<p><strong>Adjust Search Range</strong>:</p>
+<p><strong>Binary Search Logic</strong>:</p>
 <ul>
-<li>If the total hours ( h ) exceeds ( H ), it means ( k ) is too slow, so adjust the left boundary to ( k + 1 ).</li>
-<li>If ( h ) is less than or equal to ( H ), it indicates ( k ) might be valid, and you can try smaller speeds by adjusting the right boundary to ( k - 1 ).</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>When the binary search concludes, the minimum speed ( k ) that allows you to eat all the bananas in ( H ) hours is stored in ( l ).</li>
+<li>If the total time to eat all the piles at a given speed <code>k</code> exceeds <code>H</code>, it means the speed is too slow, and we need to increase the speed (<code>l = k + 1</code>).</li>
+<li>If the total time is within the limit <code>H</code>, we try to find a smaller speed by adjusting the upper bound (<code>r = k - 1</code>).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By performing this binary search, we will efficiently find the minimum speed.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-binary-search-bounds">
+  Step 1: Initialize Binary Search Bounds
+  <a class="heading-link" href="#step-1-initialize-binary-search-bounds">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by initializing the binary search bounds:</p>
 <ul>
-<li>The function initializes the search boundaries and enters a loop until the boundaries converge.</li>
-<li>Inside the loop, it calculates the required hours for the current midpoint ( k ) using a loop over the piles.</li>
-<li>Based on the total hours, it adjusts the search boundaries accordingly.</li>
+<li><code>l = 1</code>: The minimum possible eating speed (the monkey must eat at least one banana per hour).</li>
+<li><code>r = 1000000000</code>: A large upper bound that is guaranteed to encompass any valid speed. We are using an upper bound larger than any pile size, ensuring that we can always find a valid solution.</li>
 </ul>
-<h3 id="complexity">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000000</span>;
+</span></span></code></pre></div><h4 id="step-2-binary-search-loop">
+  Step 2: Binary Search Loop
+  <a class="heading-link" href="#step-2-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We use a <code>while</code> loop to perform binary search, with the condition <code>l &lt;= r</code>. In each iteration, we calculate the midpoint <code>k</code> and check if it is a valid eating speed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Calculate the middle speed to test
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">double</span> h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Total time to eat all piles at speed k
+</span></span></span></code></pre></div><h4 id="step-3-calculate-time-to-eat-all-piles">
+  Step 3: Calculate Time to Eat All Piles
+  <a class="heading-link" href="#step-3-calculate-time-to-eat-all-piles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For the given speed <code>k</code>, we calculate the total time required for the monkey to eat all piles. The time to eat a pile is <code>ceil(x / k)</code>, where <code>x</code> is the number of bananas in the current pile. We sum up the time for all piles.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: piles)
+</span></span><span style="display:flex;"><span>    h <span style="color:#f92672">+=</span> ceil((<span style="color:#66d9ef">double</span>) x <span style="color:#f92672">/</span> k);
+</span></span></code></pre></div><ul>
+<li>We use <code>ceil((double) x / k)</code> to round up the time for each pile, ensuring that the monkey finishes eating each pile in the smallest integer number of hours.</li>
+</ul>
+<h4 id="step-4-adjust-binary-search-bounds">
+  Step 4: Adjust Binary Search Bounds
+  <a class="heading-link" href="#step-4-adjust-binary-search-bounds">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>If the total time <code>h</code> exceeds <code>H</code>, the eating speed <code>k</code> is too slow, and we need to increase the speed. We do this by setting the lower bound to <code>k + 1</code>. If <code>h</code> is less than or equal to <code>H</code>, we try a smaller speed by adjusting the upper bound to <code>k - 1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(h <span style="color:#f92672">&gt;</span> H)   l <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>        r <span style="color:#f92672">=</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h4 id="step-5-return-the-minimum-speed">
+  Step 5: Return the Minimum Speed
+  <a class="heading-link" href="#step-5-return-the-minimum-speed">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the binary search concludes, the lower bound <code>l</code> will hold the minimum speed that satisfies the condition. We return <code>l</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> l;
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n \log m) ), where ( n ) is the number of piles and ( m ) is the maximum number of bananas in any pile. The log factor comes from the binary search.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), as it uses a fixed amount of extra space.</li>
+<li>The binary search loop runs in <strong>O(log(max pile size))</strong> time, where <code>max pile size</code> is the largest pile of bananas.</li>
+<li>Inside each iteration of the binary search, we need to check each pile to calculate the total time, which takes <strong>O(n)</strong> time, where <code>n</code> is the number of piles.</li>
+<li>Thus, the overall time complexity is <strong>O(n log(max pile size))</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we only use a few extra variables (such as <code>h</code>, <code>k</code>, and the binary search bounds) and do not require additional space that grows with the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum eating speed required for the monkey to finish all the piles within the given number of hours using binary search. The approach ensures that we explore all possible speeds while minimizing the number of iterations needed. With a time complexity of <strong>O(n log(max pile size))</strong>, it is well-suited for large inputs, ensuring an optimal solution in a reasonable amount of time.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1565s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1566s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

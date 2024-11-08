@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        swap(fst<span style="color:#f92672">-&gt;</span>val, scd<span style="color:#f92672">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1650s1hbhb">
+<h2 id="hahahugoshortcode1647s1hbhb">
   
 
   
@@ -251,7 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Two nodes in a binary search tree (BST) have been swapped by mistake, violating the BST property. This function identifies and corrects the swapped nodes to restore the BST.</p>
+<p>The problem asks to recover a <strong>binary search tree (BST)</strong> that has two of its nodes swapped by mistake. Given a binary tree where exactly two nodes are swapped, the goal is to identify the two nodes and swap them back to restore the tree’s validity as a BST.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,56 +259,89 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution uses <strong>in-order traversal</strong> to detect the swapped nodes:</p>
+<p>To solve this problem, we need to identify the two nodes that were swapped in the tree and swap them back. The key property of a BST is that during an <strong>in-order traversal</strong>, the node values should be in strictly increasing order.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>In-order Traversal</strong>:
-<ul>
-<li>Perform an in-order traversal, which would normally visit nodes in increasing order for a valid BST.</li>
-<li>During traversal, detect nodes that are out of order by comparing each node with the previous node (<code>prv</code>).</li>
-</ul>
-</li>
-<li><strong>Detect Swapped Nodes</strong>:
-<ul>
-<li>If a node is smaller than the previous node, record the misplaced nodes:
-<ul>
-<li><strong>First misplaced node (<code>fst</code>)</strong>: The first time we detect a violation, <code>prv</code> is recorded as <code>fst</code>.</li>
-<li><strong>Second misplaced node (<code>scd</code>)</strong>: Each subsequent violation records the current node as <code>scd</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Swap the Values</strong>:
-<ul>
-<li>After identifying the two misplaced nodes (<code>fst</code> and <code>scd</code>), swap their values to restore the BST property.</li>
-</ul>
-</li>
+<li>Perform an in-order traversal of the tree.</li>
+<li>While traversing, if we find a node whose value is smaller than its previous node&rsquo;s value, this indicates that a violation of the BST property has occurred.</li>
+<li>The two nodes involved in the violation will be the first node that violates the property (<code>fst</code>) and the second node that violates the property (<code>scd</code>).</li>
+<li>After identifying the swapped nodes, swap their values to restore the tree.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The in-order traversal will help us efficiently identify where the tree structure is incorrect, and by using just three pointers, we can pinpoint the nodes that need to be swapped.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialize Pointers</strong>: Set <code>prv</code> (previous node), <code>fst</code> (first misplaced node), and <code>scd</code> (second misplaced node) to <code>NULL</code>.</li>
-<li><strong>Recursive In-order Traversal</strong> (<code>inorder</code> function):
-<ul>
-<li>Traverse to the leftmost node, checking for order violations.</li>
-<li>If <code>node-&gt;val</code> is less than <code>prv-&gt;val</code>, record nodes:
-<ul>
-<li>On the first violation, set <code>fst</code> to <code>prv</code>.</li>
-<li>On subsequent violations, set <code>scd</code> to <code>node</code>.</li>
+<h4 id="1-class-definition-and-variable-declaration">
+  1. Class Definition and Variable Declaration
+  <a class="heading-link" href="#1-class-definition-and-variable-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> NULL, <span style="color:#f92672">*</span>fst <span style="color:#f92672">=</span> NULL, <span style="color:#f92672">*</span>scd <span style="color:#f92672">=</span> NULL;
+</span></span></code></pre></div><ul>
+<li><strong><code>prv</code></strong>: A pointer used to track the previous node during the in-order traversal.</li>
+<li><strong><code>fst</code></strong>: A pointer that will store the first node involved in the swap violation.</li>
+<li><strong><code>scd</code></strong>: A pointer that will store the second node involved in the swap violation.</li>
 </ul>
-</li>
+<h4 id="2-in-order-traversal-function">
+  2. In-Order Traversal Function
+  <a class="heading-link" href="#2-in-order-traversal-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inorder</span>(TreeNode<span style="color:#f92672">*</span> node)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>node) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#f92672">-&gt;</span>left);
+</span></span></code></pre></div><ul>
+<li>The function <code>inorder</code> performs an in-order traversal of the tree starting from the <code>node</code> passed as an argument.</li>
+<li>If the <code>node</code> is <code>NULL</code>, the function returns without doing anything.</li>
 </ul>
-</li>
-<li><strong>Restore BST</strong>:
-<ul>
-<li>After traversal, swap the values of <code>fst</code> and <code>scd</code> to correct the BST.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (prv <span style="color:#f92672">&amp;&amp;</span> node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> prv<span style="color:#f92672">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>fst)  fst <span style="color:#f92672">=</span> prv;
+</span></span><span style="display:flex;"><span>            scd <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        prv <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <strong>in-order traversal</strong> of the left subtree is done first, and then the value of the current node (<code>node-&gt;val</code>) is compared to the previous node’s value (<code>prv-&gt;val</code>).</li>
+<li>If the current node’s value is less than the previous node’s value (<code>node-&gt;val &lt; prv-&gt;val</code>), a BST property violation has been detected.</li>
+<li>The first violation occurs when we encounter the first node that is out of order, which is stored in <code>fst</code>.</li>
+<li>The second violation node is stored in <code>scd</code>.</li>
+<li>The <code>prv</code> pointer is updated to point to the current node (<code>node</code>) to continue the traversal.</li>
+<li>The traversal then proceeds to the right child of the current node (<code>node-&gt;right</code>).</li>
 </ul>
-</li>
-</ol>
+<h4 id="3-recover-the-tree">
+  3. Recover the Tree
+  <a class="heading-link" href="#3-recover-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> recoverTree(TreeNode<span style="color:#f92672">*</span> node) {
+</span></span><span style="display:flex;"><span>        inorder(node);
+</span></span><span style="display:flex;"><span>        swap(fst<span style="color:#f92672">-&gt;</span>val, scd<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>recoverTree</code> function is the entry point for the solution. It takes the root of the tree as an argument (<code>node</code>).</li>
+<li>The function calls the <code>inorder</code> function to identify the swapped nodes.</li>
+<li>Once the swapped nodes are identified, their values are swapped back using the <code>swap(fst-&gt;val, scd-&gt;val)</code> statement.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -316,15 +349,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes, since each node is visited once during the traversal.</li>
-<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree, due to the recursion stack in the traversal.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because we perform a single in-order traversal of the tree, visiting each node exactly once.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This is the space used by the recursion stack during the in-order traversal. In the worst case (unbalanced tree), the height <code>h</code> could be equal to <code>n</code>, so the space complexity would be <strong>O(n)</strong>. However, for a balanced tree, the space complexity would be <strong>O(log n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of recovering a BST with two swapped nodes by performing an <strong>in-order traversal</strong> of the tree. The <strong>in-order traversal</strong> ensures that we can identify the two swapped nodes in a linear scan of the tree, making this approach time-efficient with a complexity of <strong>O(n)</strong>. The solution uses constant space, aside from the recursion stack, ensuring that the algorithm is space-efficient, with a worst-case space complexity of <strong>O(h)</strong>. This approach efficiently restores the validity of the binary search tree, ensuring the tree structure is properly recovered.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1650s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1647s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

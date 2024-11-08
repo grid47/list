@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -223,7 +223,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[n];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1465s1hbhb">
+<h2 id="hahahugoshortcode1478s1hbhb">
   
 
   
@@ -235,7 +235,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>cost</code> where <code>cost[i]</code> is the cost of stepping on the <code>i</code>-th stair. You can either start from the 0-th stair or the 1-st stair and your goal is to reach the top of the floor, which is one step beyond the last stair. Each time you can either step on the next stair or jump over one stair. Calculate the minimum cost to reach the top of the stairs.</p>
+<p>In this problem, you are given an array <code>cost</code> of length <code>n</code> where <code>cost[i]</code> represents the cost to step on the <code>i</code>-th stair. You are tasked with finding the minimum cost to reach the top of the staircase. However, you are allowed to take a step either from stair <code>i</code> to stair <code>i+1</code> or from stair <code>i</code> to stair <code>i+2</code>.</p>
+<p>The goal is to compute the minimum cost needed to reach the top of the staircase, either by starting from stair 0 or stair 1.</p>
+<h3 id="example">
+  Example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="example-1">
+  Example 1:
+  <a class="heading-link" href="#example-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cost <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span>]
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">15</span>
+</span></span></code></pre></div><p>Explanation: The optimal way is to start at stair 1, and then jump to stair 3 (which is the top). The cost is <code>15</code>.</p>
+<h4 id="example-2">
+  Example 2:
+  <a class="heading-link" href="#example-2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Input:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cost <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><p>Explanation: The optimal way is to start at stair 0, then jump to stair 2, then to stair 3, and so on, with a minimum cost of <code>6</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -243,69 +275,118 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is a classic example of dynamic programming. The idea is to compute the minimum cost of reaching each stair by considering the minimum cost of the two possible ways to get there: either from the previous stair or the stair before that.</p>
+<p>The dynamic programming approach can be broken down into the following steps:</p>
 <ol>
-<li>
-<p><strong>Dynamic Programming Array</strong>:</p>
-<ul>
-<li>Create a <code>dp</code> array where <code>dp[i]</code> represents the minimum cost to reach the <code>i-th</code> stair.</li>
-<li>Initialize <code>dp[0]</code> and <code>dp[1]</code> to <code>0</code>, as there is no cost to start on either of the first two stairs.</li>
-</ul>
-</li>
-<li>
-<p><strong>Fill the DP Array</strong>:</p>
-<ul>
-<li>Iterate from the 2nd stair to the last stair (<code>n</code>).</li>
-<li>For each stair, calculate the minimum cost to reach it by considering the last two stairs:
+<li><strong>Define a DP Array:</strong> We define a <code>dp</code> array where <code>dp[i]</code> represents the minimum cost to reach stair <code>i</code>.</li>
+<li><strong>Base Case:</strong> The base case would be the cost of reaching stair 0 or stair 1, which are both initialized to 0 because no step has been made yet.</li>
+<li><strong>Recurrence Relation:</strong> The cost of reaching stair <code>i</code> can either be from stair <code>i-1</code> or stair <code>i-2</code>. The formula for computing the minimum cost to reach stair <code>i</code> is:
 <ul>
 <li><code>dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The result will be found in <code>dp[n]</code>, which gives the minimum cost to reach the top of the stairs.</li>
-</ul>
-</li>
+<li><strong>Compute Final Result:</strong> Once all the stairs are processed, the final answer will be stored in <code>dp[n]</code>, representing the minimum cost to reach the top of the staircase.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method to compute the minimum cost to climb the stairs.</li>
+<p>Let&rsquo;s break down the code for a deeper understanding:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minCostClimbingStairs(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cost) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> cost.size();  <span style="color:#75715e">// Get the size of the cost array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Create a dp array to store minimum cost to reach each stair
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Starting from the third stair, we calculate the minimum cost to reach each stair
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#f92672">=</span> min(dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> cost[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> cost[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]);  <span style="color:#75715e">// Recurrence relation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Return the minimum cost to reach the top of the stairs (either from the last or second-last stair)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> dp[n];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-1-initialize-the-dp-array">
+  Step 1: Initialize the DP Array
+  <a class="heading-link" href="#step-1-initialize-the-dp-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The array <code>dp</code> is initialized with size <code>n + 1</code> (to account for the &ldquo;top&rdquo; step, which doesn&rsquo;t exist in the cost array but is the destination). Each element of <code>dp</code> is initially set to 0.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// dp[i] will store the minimum cost to reach the i-th stair
+</span></span></span></code></pre></div><h4 id="step-2-iterate-through-the-stairs">
+  Step 2: Iterate Through the Stairs
+  <a class="heading-link" href="#step-2-iterate-through-the-stairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We begin the iteration from <code>i = 2</code> since the first two steps can be reached without any previous steps, and the first base case is handled implicitly in the initialization of <code>dp</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> min(dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> cost[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> cost[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each stair <code>i</code>, we compute the minimum cost to reach that stair from either the previous stair (<code>i-1</code>) or the stair before it (<code>i-2</code>).</li>
+<li>The cost to reach stair <code>i</code> from stair <code>i-1</code> is <code>dp[i-1] + cost[i-1]</code>, while the cost to reach stair <code>i</code> from stair <code>i-2</code> is <code>dp[i-2] + cost[i-2]</code>.</li>
+<li>We take the minimum of these two values and update <code>dp[i]</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>int minCostClimbingStairs(vector&lt;int&gt;&amp; cost)</code>: Implements the logic to calculate and return the minimum climbing cost.</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
+<h4 id="step-3-return-the-final-result">
+  Step 3: Return the Final Result
+  <a class="heading-link" href="#step-3-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the loop has processed all the stairs, <code>dp[n]</code> will contain the minimum cost to reach the top of the staircase.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[n];  <span style="color:#75715e">// Return the minimum cost to reach the top of the stairs
+</span></span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of stairs (length of the <code>cost</code> array).</li>
-<li><strong>Space Complexity</strong>: O(N), due to the use of the <code>dp</code> array to store the minimum costs.</li>
+<li><strong>O(n)</strong>: We only need a single pass through the <code>cost</code> array to fill the <code>dp</code> array, which takes linear time. Thus, the time complexity is <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use an array <code>dp</code> of size <code>n + 1</code> to store the minimum costs, so the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the minimum cost to reach the top of the staircase using dynamic programming. By breaking the problem down into smaller subproblems and storing the results, we avoid redundant calculations and achieve an optimal solution with time complexity O(n) and space complexity O(n).</p>
+<p>The approach ensures that we calculate the minimum cost to reach each stair step by step, considering the two possible ways to reach each stair. This technique works efficiently even for larger input sizes and provides the correct result with minimal computational overhead.</p>
+<p>This solution provides a clear example of how dynamic programming can simplify problems involving optimization, where you need to compute the minimum or maximum of a series of related values.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1465s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1478s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1391s1hbhb">
+<h2 id="hahahugoshortcode1389s1hbhb">
   
 
   
@@ -276,7 +276,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given <code>k</code> sorted integer arrays, you need to find the smallest range that includes at least one number from each of the <code>k</code> arrays. The result should be returned as a vector of two integers representing the start and end of the smallest range.</p>
+<p>The problem asks us to find the smallest range that includes at least one number from each of the given <code>k</code> lists. Each list is an array of integers, and the goal is to determine a range <code>[x, y]</code> such that for every list <code>nums[i]</code>, there exists at least one element in the range <code>[x, y]</code>. The challenge lies in selecting the smallest possible range while ensuring that the range contains at least one element from each list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -284,52 +284,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach for solving this problem involves the following steps:</p>
 <ol>
 <li>
-<p><strong>Flatten the Arrays</strong>:</p>
-<ul>
-<li>Create a vector of pairs where each pair contains an element and its corresponding array index. This will help us track which array each element belongs to.</li>
-</ul>
+<p><strong>Flatten the Input Lists:</strong>
+The first step is to flatten the list of lists into a single list of pairs where each pair consists of a number and the index of the list it came from. This makes it easier to track which list the elements belong to.</p>
 </li>
 <li>
-<p><strong>Sorting</strong>:</p>
-<ul>
-<li>Sort the flattened vector based on the elements. This allows us to efficiently find the smallest range by sliding through the sorted elements.</li>
-</ul>
+<p><strong>Sorting the Elements:</strong>
+Next, we sort the flattened list based on the values of the elements. This allows us to efficiently find potential ranges as we slide through the sorted list.</p>
 </li>
 <li>
-<p><strong>Using a HashMap</strong>:</p>
-<ul>
-<li>Use a hashmap to count the occurrences of elements from each array as we slide through the sorted list. The key is the array index, and the value is the count of elements taken from that array.</li>
-</ul>
+<p><strong>Sliding Window to Find the Smallest Range:</strong>
+The key idea is to use a sliding window approach over the sorted list. The window represents a potential range, and we expand and contract the window by adjusting the start and end points. The goal is to find the smallest range that contains at least one element from each list.</p>
 </li>
 <li>
-<p><strong>Sliding Window</strong>:</p>
-<ul>
-<li>Use two pointers to maintain a window of valid elements. The right pointer expands the window to include more elements, while the left pointer contracts the window to find the smallest range.</li>
-<li>Keep track of how many arrays are represented in the current window. Once all arrays are represented (i.e., count equals <code>k</code>), attempt to minimize the range by moving the left pointer.</li>
-</ul>
+<p><strong>Tracking List Coverage:</strong>
+We maintain a count of how many lists are represented within the current window. When all <code>k</code> lists are represented, we check if the current window forms a smaller range than any previously found range.</p>
 </li>
 <li>
-<p><strong>Update the Result</strong>:</p>
-<ul>
-<li>Whenever a valid range is found (i.e., all arrays are included), check if it is smaller than the previously found range and update the result accordingly.</li>
-</ul>
+<p><strong>Optimization Using a Hash Map:</strong>
+To efficiently keep track of the count of elements from each list in the current window, we use a hash map where the key is the index of the list, and the value is the count of elements from that list within the current window.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>Create a vector of pairs to flatten the input arrays.</li>
-<li>Sort the pairs based on their values.</li>
-<li>Use a hashmap to track counts of elements from each array.</li>
-<li>Iterate through the sorted elements, updating the counts and checking for valid ranges using a sliding window.</li>
-<li>Return the smallest range found.</li>
+<li>
+<p><strong>Flattening the Input Lists:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> arr;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> nums[i].size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        arr.push_back({nums[i][j], i});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We first initialize an empty vector <code>arr</code> to store pairs of values and their corresponding list index.</li>
+<li>We iterate over all the lists in the <code>nums</code> array. For each element in each list, we create a pair where the first element is the value of the element, and the second element is the index of the list it came from. This pair is then added to the <code>arr</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting the Array:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(arr.begin(), arr.end());
+</span></span></code></pre></div><ul>
+<li>We sort the <code>arr</code> vector based on the first element of each pair (i.e., the values from the original lists). This sorting is crucial because it allows us to efficiently slide through the values and find the smallest possible range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">100000</span>, <span style="color:#ae81ff">100000</span>};
+</span></span></code></pre></div><ul>
+<li>We initialize an unordered map <code>mp</code> to keep track of how many times each list is represented in the current window. The key is the list index, and the value is the count of elements from that list in the window.</li>
+<li>We also initialize <code>cnt</code> to count how many lists are currently represented in the window.</li>
+<li><code>j</code> is the start of the sliding window.</li>
+<li><code>ans</code> holds the smallest range found so far, initialized to an arbitrarily large range (from -100000 to 100000).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Expansion and Contraction:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[arr[i].second]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[arr[i].second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">==</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(mp[arr[j].second] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            mp[arr[j].second]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }                
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(arr[i].first <span style="color:#f92672">-</span> arr[j].first <span style="color:#f92672">&lt;</span> ans[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> ans[<span style="color:#ae81ff">0</span>]) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> {arr[j].first, arr[i].first};
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through the sorted list with the variable <code>i</code> representing the end of the sliding window.</li>
+<li>For each element in <code>arr</code>, we update the map <code>mp</code> to reflect that we have included another element from a list. If this is the first element from that list in the current window, we increment <code>cnt</code>.</li>
+<li>Once <code>cnt == k</code>, meaning all <code>k</code> lists are represented in the window, we start shrinking the window from the left by incrementing <code>j</code> as long as the current element at <code>arr[j]</code> appears more than once in the window (i.e., its count in <code>mp</code> is greater than 1).</li>
+<li>We then check if the current window (from <code>arr[j].first</code> to <code>arr[i].first</code>) forms a smaller range than any previously found range. If it does, we update <code>ans</code> to hold the new range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Smallest Range:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the smallest range stored in <code>ans</code>, which contains at least one element from each of the <code>k</code> lists.</li>
+</ul>
+</li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -338,15 +386,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N log N), where <code>N</code> is the total number of elements across all arrays due to sorting. The sliding window operation is O(N).</li>
-<li><strong>Space Complexity</strong>: O(K + N), where <code>K</code> is the number of arrays for the hashmap and <code>N</code> is for the vector storing flattened elements.</li>
+<li><strong>Flattening the Lists:</strong> Flattening all the lists into the <code>arr</code> vector takes <strong>O(n)</strong> time, where <code>n</code> is the total number of elements across all lists.</li>
+<li><strong>Sorting the Array:</strong> Sorting the <code>arr</code> vector takes <strong>O(n log n)</strong> time.</li>
+<li><strong>Sliding Window:</strong> The sliding window logic involves iterating over the array once, so it takes <strong>O(n)</strong> time.</li>
 </ul>
+<p>Therefore, the total time complexity is <strong>O(n log n)</strong> due to the sorting step.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use an unordered map <code>mp</code> to track the count of elements from each list. The size of this map is proportional to the number of distinct lists, which is <strong>O(k)</strong>.</li>
+<li>Additionally, we store the flattened list in the <code>arr</code> vector, which takes <strong>O(n)</strong> space.</li>
+</ul>
+<p>Therefore, the space complexity is <strong>O(n + k)</strong>, where <code>n</code> is the total number of elements across all lists and <code>k</code> is the number of lists.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a sliding window technique to efficiently find the smallest range that includes at least one element from each list. By sorting the elements and maintaining a map to track how many lists are represented in the current window, the algorithm ensures that we can find the optimal range in <strong>O(n log n)</strong> time. This approach is efficient and scalable, making it suitable for handling larger datasets. The use of the sliding window ensures that the solution is both time and space-efficient, making it a robust method for solving this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1391s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1389s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

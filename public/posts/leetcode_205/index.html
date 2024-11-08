@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode618s1hbhb">
+<h2 id="hahahugoshortcode615s1hbhb">
   
 
   
@@ -244,7 +244,25 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Two strings <code>s</code> and <code>t</code> are called isomorphic if the characters in <code>s</code> can be replaced to get <code>t</code>. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character.</p>
+<p>The task is to determine whether two strings <code>s</code> and <code>t</code> are <strong>isomorphic</strong>. Two strings are isomorphic if there is a one-to-one mapping between every character of the first string to every character of the second string. Specifically, for each character <code>s[i]</code> in string <code>s</code>, there should be a corresponding character <code>t[i]</code> in string <code>t</code>, and vice versa, such that:</p>
+<ol>
+<li>Each character in string <code>s</code> maps to exactly one character in string <code>t</code>.</li>
+<li>No two different characters in string <code>s</code> should map to the same character in string <code>t</code>.</li>
+<li>The mapping should be consistent across the entire string.</li>
+</ol>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input:</strong> s = &ldquo;egg&rdquo;, t = &ldquo;add&rdquo;</li>
+<li><strong>Output:</strong> true (since &rsquo;e&rsquo; maps to &lsquo;a&rsquo; and &lsquo;g&rsquo; maps to &rsquo;d&rsquo;)</li>
+<li><strong>Input:</strong> s = &ldquo;foo&rdquo;, t = &ldquo;bar&rdquo;</li>
+<li><strong>Output:</strong> false (since &lsquo;o&rsquo; maps to both &lsquo;a&rsquo; and &lsquo;r&rsquo;, violating the one-to-one mapping rule)</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,75 +270,154 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To check if two strings are isomorphic, we can use a <strong>two-way mapping</strong> approach:</p>
+<ul>
+<li>One map (<code>fwd</code>) will store the mapping from characters in string <code>s</code> to characters in string <code>t</code>.</li>
+<li>The other map (<code>rwd</code>) will store the reverse mapping from characters in string <code>t</code> to characters in string <code>s</code>.</li>
+</ul>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Character Mapping</strong>:</p>
+<li>Initialize two maps: one for the forward mapping (<code>fwd</code>) and one for the reverse mapping (<code>rwd</code>).</li>
+<li>Iterate through each character of both strings.</li>
+<li>For each character at position <code>i</code>:
 <ul>
-<li>Use two hash maps (<code>fwd</code> and <code>rwd</code>) to store the character mappings from <code>s</code> to <code>t</code> and from <code>t</code> to <code>s</code>, respectively.</li>
+<li>Check if there is an existing mapping from <code>s[i]</code> to <code>t[i]</code> in the forward map (<code>fwd</code>). If there is, verify that it matches <code>t[i]</code>. If not, return false.</li>
+<li>Similarly, check the reverse map (<code>rwd</code>) for existing mappings. If a mapping exists, verify it matches the current character of <code>s[i]</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Iterate Through Characters</strong>:</p>
-<ul>
-<li>Loop through each character of both strings:
-<ul>
-<li>For each character <code>s[i]</code>, check if it has already been mapped:
-<ul>
-<li>If it has, verify that the current character in <code>t</code> matches the previously mapped character.</li>
-<li>If it does not match, return <code>false</code>.</li>
-</ul>
-</li>
-<li>Similarly, for <code>t[i]</code>, check the reverse mapping.</li>
-<li>If both mappings are valid, add/update the mappings in <code>fwd</code> and <code>rwd</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If the loop completes without mismatches, return <code>true</code>, indicating that the strings are isomorphic.</li>
-</ul>
-</li>
+<li>If the mappings are consistent across all characters, return true.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-maps">
+  Step 1: Initialize Maps
+  <a class="heading-link" href="#step-1-initialize-maps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> fwd, rwd;
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> We use two maps (<code>fwd</code> and <code>rwd</code>) to store the one-to-one character mappings between the two strings.</li>
+<li><code>fwd</code> stores the mapping from characters in <code>s</code> to characters in <code>t</code>.</li>
+<li><code>rwd</code> stores the reverse mapping from characters in <code>t</code> to characters in <code>s</code>.</li>
+</ul>
+<h4 id="step-2-loop-through-both-strings">
+  Step 2: Loop Through Both Strings
+  <a class="heading-link" href="#step-2-loop-through-both-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fwd.count(s[i])) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(fwd[s[i]] <span style="color:#f92672">!=</span> t[i])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(rwd.count(t[i])) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(rwd[t[i]] <span style="color:#f92672">!=</span> s[i])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fwd[s[i]] <span style="color:#f92672">=</span> t[i];
+</span></span><span style="display:flex;"><span>    rwd[t[i]] <span style="color:#f92672">=</span> s[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> This loop processes each character from both strings <code>s</code> and <code>t</code> at the same index <code>i</code>.</li>
+<li><strong>First Condition:</strong>
 <ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the function <code>isIsomorphic(string s, string t)</code>.</li>
-<li><strong>Line 3</strong>: Initialize two maps (<code>fwd</code> for forward mapping and <code>rwd</code> for reverse mapping).</li>
-<li><strong>Line 4</strong>: Get the size of the strings.</li>
-<li><strong>Lines 5-15</strong>:
-<ul>
-<li>Iterate through the characters of the strings.</li>
-<li>Check existing mappings and validate the current characters.</li>
-<li>If any validation fails, return <code>false</code>.</li>
-<li>Update the mappings after validation.</li>
+<li>If <code>s[i]</code> has been seen before in the <code>fwd</code> map, we check if it maps to the correct character in <code>t[i]</code>. If the mapping is inconsistent (i.e., <code>fwd[s[i]] != t[i]</code>), we return <code>false</code>.</li>
 </ul>
 </li>
-<li><strong>Line 16</strong>: Return <code>true</code> if all mappings are valid.</li>
+<li><strong>Second Condition:</strong>
+<ul>
+<li>If <code>t[i]</code> has been seen before in the <code>rwd</code> map, we check if it maps to the correct character in <code>s[i]</code>. If the mapping is inconsistent (i.e., <code>rwd[t[i]] != s[i]</code>), we return <code>false</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li><strong>Mapping Assignment:</strong>
+<ul>
+<li>After checking, we add the new mappings to both <code>fwd</code> and <code>rwd</code> maps. This establishes the one-to-one relationship between characters in <code>s</code> and <code>t</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> If the entire loop completes without finding any inconsistencies in the mappings, we return <code>true</code>, indicating that the strings are isomorphic.</li>
+</ul>
+<h3 id="time-and-space-complexity">
+  Time and Space Complexity
+  <a class="heading-link" href="#time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the strings, as we traverse each character exactly once.</li>
-<li><strong>Space Complexity</strong>: (O(1)) in terms of the number of distinct characters (at most 256 for extended ASCII), which makes the space usage for the hash maps constant.</li>
+<li><strong>O(n):</strong>
+<ul>
+<li>We iterate over each character in the two strings exactly once. For each character, we perform constant-time operations to check the mappings in the maps and insert new entries.</li>
+<li>Here, <code>n</code> is the length of the strings <code>s</code> and <code>t</code>. Hence, the time complexity is linear with respect to the length of the strings.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong>
+<ul>
+<li>The space used by the two maps (<code>fwd</code> and <code>rwd</code>) grows linearly with the number of distinct characters in the strings <code>s</code> and <code>t</code>.</li>
+<li>In the worst case, each character in <code>s</code> and <code>t</code> is unique, so the space required is proportional to <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining whether two strings are isomorphic by utilizing two maps to track the character mappings between the strings. The algorithm operates in linear time with respect to the length of the strings and uses constant additional space for the mapping checks.</p>
+<p>Key Advantages:</p>
+<ol>
+<li><strong>Efficiency:</strong> The solution runs in O(n) time, which is optimal for this problem, as we must examine each character in both strings.</li>
+<li><strong>Space Complexity:</strong> The space complexity is O(n), which is manageable given that we are only storing mappings between the characters of the two strings.</li>
+<li><strong>Simplicity:</strong> The approach is simple and intuitive, relying on basic map operations to detect inconsistent mappings between the strings.</li>
+</ol>
+<p>The solution is ideal for handling string isomorphism checks with large inputs due to its linear time complexity and manageable space requirements. It ensures that both forward and reverse mappings are consistent throughout the strings, making it robust for different input scenarios.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode618s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode615s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode245s1hbhb">
+<h2 id="hahahugoshortcode246s1hbhb">
   
 
   
@@ -270,7 +270,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a singly linked list, reorder it such that the nodes are arranged in a specific order: the first node followed by the last node, followed by the second node, followed by the second last node, and so forth.</p>
+<p>The problem requires you to reorder a singly linked list in a specific way: the first node should be followed by the last node, then the second node followed by the second last node, and so on. More formally, for a given linked list <code>L0 -&gt; L1 -&gt; L2 -&gt; L3 -&gt; ... -&gt; Ln</code>, we want to reorder the list in the following pattern:</p>
+<p><code>L0 -&gt; Ln -&gt; L1 -&gt; Ln-1 -&gt; L2 -&gt; Ln-2 -&gt; ...</code>.</p>
+<h3 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Input</strong>: <code>head = [1, 2, 3, 4, 5]</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>head = [1, 5, 2, 4, 3]</code></p>
+</li>
+<li>
+<p><strong>Input</strong>: <code>head = [1, 2, 3, 4]</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>head = [1, 4, 2, 3]</code></p>
+</li>
+</ul>
+<p>This problem requires manipulating a singly linked list in a way that the nodes are reordered in alternating positions, starting from both ends of the list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,55 +301,90 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to split the linked list into two halves, reverse the second half, and then merge the two halves in the desired alternating order.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Find the Middle</strong>:</p>
-<ul>
-<li>Use the two-pointer technique (slow and fast pointers) to find the middle of the linked list.</li>
-</ul>
+<p><strong>Find the Middle of the List</strong>: Use the slow and fast pointer technique to find the middle node of the list. The slow pointer moves one step at a time, and the fast pointer moves two steps at a time. When the fast pointer reaches the end, the slow pointer will be at the middle.</p>
 </li>
 <li>
-<p><strong>Reverse the Second Half</strong>:</p>
-<ul>
-<li>Reverse the second half of the linked list starting from the middle node.</li>
-</ul>
+<p><strong>Reverse the Second Half</strong>: After finding the middle, the second half of the list starting from the <code>slow-&gt;next</code> node is reversed. This is done by iterating through the second half and reversing the <code>next</code> pointers.</p>
 </li>
 <li>
-<p><strong>Merge Two Halves</strong>:</p>
-<ul>
-<li>Merge the first half and the reversed second half of the linked list.</li>
-</ul>
+<p><strong>Merge the Two Halves</strong>: After reversing the second half, merge the two halves alternately, starting with the first node of the first half, then the first node of the second half, and so on.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1-7</strong>: Define the <code>ListNode</code> structure for the linked list.</li>
-<li><strong>Line 8</strong>: Define the <code>reorderList</code> function:
-<ul>
-<li><strong>Line 9-12</strong>: Initialize <code>fast</code> and <code>slow</code> pointers to find the middle of the list:
-<ul>
-<li>Move <code>fast</code> two steps and <code>slow</code> one step until <code>fast</code> reaches the end.</li>
+<h4 id="step-1-finding-the-middle-of-the-linked-list">
+  Step 1: Finding the Middle of the Linked List
+  <a class="heading-link" href="#step-1-finding-the-middle-of-the-linked-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> fast <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>slow <span style="color:#f92672">=</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(fast<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">&amp;&amp;</span> fast<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>    slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use two pointers, <code>slow</code> and <code>fast</code>, initialized to the head of the list.</li>
+<li>The <code>fast</code> pointer moves two steps at a time, and the <code>slow</code> pointer moves one step at a time.</li>
+<li>The loop continues until the <code>fast</code> pointer reaches the end of the list, at which point the <code>slow</code> pointer will be at the middle.</li>
 </ul>
-</li>
-<li><strong>Line 13</strong>: Set <code>mid</code> to the node after <code>slow</code> and disconnect the first half from the second.</li>
-<li><strong>Line 14-18</strong>: Reverse the second half of the list:
-<ul>
-<li>Use <code>prev</code> to track the previous node while iterating through <code>mid</code>.</li>
+<h4 id="step-2-split-the-list-and-reverse-the-second-half">
+  Step 2: Split the List and Reverse the Second Half
+  <a class="heading-link" href="#step-2-split-the-list-and-reverse-the-second-half">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> mid <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>slow<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> next, <span style="color:#f92672">*</span>prev <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(mid) {
+</span></span><span style="display:flex;"><span>    next <span style="color:#f92672">=</span> mid<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    mid<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> prev;
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>    mid <span style="color:#f92672">=</span> next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After finding the middle, we split the list into two parts. The first part goes from <code>head</code> to <code>slow</code>, and the second part starts from <code>slow-&gt;next</code>.</li>
+<li>We set <code>slow-&gt;next</code> to <code>NULL</code> to disconnect the first half from the second half.</li>
+<li>Then, we reverse the second half of the list. We use a <code>prev</code> pointer to track the reversed list, and <code>mid</code> moves through the second half, reversing the links one by one.</li>
 </ul>
-</li>
-<li><strong>Line 19-27</strong>: Merge the two halves:
-<ul>
-<li>Use pointers <code>l1</code> (for the first half) and <code>l2</code> (for the reversed second half) to alternate between nodes and reconstruct the list.</li>
-</ul>
-</li>
-</ul>
-</li>
+<h4 id="step-3-merge-the-two-halves">
+  Step 3: Merge the Two Halves
+  <a class="heading-link" href="#step-3-merge-the-two-halves">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> l1 <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>l2 <span style="color:#f92672">=</span> prev;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l1 <span style="color:#f92672">&amp;&amp;</span> l2) {
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> tmp1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    l1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> l2;
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> tmp2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    l2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> tmp1;
+</span></span><span style="display:flex;"><span>    l1 <span style="color:#f92672">=</span> tmp1;
+</span></span><span style="display:flex;"><span>    l2 <span style="color:#f92672">=</span> tmp2;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Now we merge the two halves. We initialize two pointers, <code>l1</code> (pointing to the first half) and <code>l2</code> (pointing to the reversed second half).</li>
+<li>We alternate between nodes from <code>l1</code> and <code>l2</code> by updating the <code>next</code> pointers. Specifically, we first link <code>l1</code> to <code>l2</code>, then <code>l2</code> to the next node of <code>l1</code>, and so on.</li>
+<li>The <code>while</code> loop continues until both <code>l1</code> and <code>l2</code> become <code>NULL</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -335,15 +393,60 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the linked list, since each node is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the reordering is done in place without using any additional data structures.</li>
+<li>
+<p><strong>O(n)</strong>: The algorithm performs three major operations:</p>
+<ol>
+<li>Finding the middle of the list: O(n) where <code>n</code> is the number of nodes in the list.</li>
+<li>Reversing the second half: O(n/2) which is essentially O(n).</li>
+<li>Merging the two halves: O(n).</li>
+</ol>
+<p>As all operations are linear, the overall time complexity is O(n).</p>
+</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses a constant amount of space (apart from the input list), as we are only using a few pointers to traverse and manipulate the list.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively reorders a singly linked list in linear time using a constant amount of space. The main idea is to split the list into two halves, reverse the second half, and then merge the two halves alternately. This approach ensures that the problem is solved optimally in terms of both time and space complexity.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Linear Time Complexity</strong>: The algorithm efficiently processes the list in a single pass for each of the three main steps.</li>
+<li><strong>Constant Space Complexity</strong>: It uses a fixed number of pointers and does not require extra data structures.</li>
+<li><strong>Optimal Solution</strong>: This method is the most optimal approach to reorder the list, leveraging efficient list manipulations without needing to convert the list to other data structures like arrays or vectors.</li>
+</ol>
+<p>This approach is useful when working with large linked lists, as it ensures minimal memory usage and quick execution.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode245s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode246s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

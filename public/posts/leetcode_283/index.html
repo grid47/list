@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, move all <code>0</code>&rsquo;s to the end of it while maintaining the relative order of the non-zero elements. This should be done in-place without making a copy of the array.</p>
+<p>The problem asks you to <strong>move all zeroes in a given array</strong> <code>nums</code> to the end, while maintaining the relative order of the non-zero elements. The goal is to do this with <strong>O(n)</strong> time complexity and <strong>O(1)</strong> extra space.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>nums = [0, 1, 0, 3, 12]</code></li>
+<li>Output: <code>nums = [1, 3, 12, 0, 0]</code></li>
+</ul>
+<p>In this example, all the zeroes have been moved to the end of the array, and the relative order of non-zero elements has been maintained.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -242,48 +248,66 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a two-pointer technique to efficiently move zeros to the end of the array:</p>
+<p>To solve this problem efficiently, we can use the <strong>two-pointer technique</strong> with a swapping approach. The two-pointer approach allows us to traverse the list and rearrange the elements in place without requiring additional space.</p>
+<p><strong>Key idea:</strong></p>
 <ol>
-<li>
-<p><strong>Pointer Initialization</strong>:</p>
-<ul>
-<li>Initialize a pointer <code>j</code> to keep track of the position to place the next non-zero element.</li>
-</ul>
-</li>
-<li>
-<p><strong>First Pass - Moving Non-Zero Elements</strong>:</p>
-<ul>
-<li>Iterate through the array using an index pointer <code>i</code>. For each non-zero element found at index <code>i</code>, swap it with the element at index <code>j</code> and increment <code>j</code>.</li>
-<li>This effectively gathers all non-zero elements at the beginning of the array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Second Pass - Filling with Zeros</strong>:</p>
-<ul>
-<li>After all non-zero elements have been moved, fill the remainder of the array (from index <code>j</code> to the end) with zeros.</li>
-</ul>
-</li>
+<li><strong>Pointer <code>i</code>:</strong> This pointer will traverse the entire array.</li>
+<li><strong>Pointer <code>j</code>:</strong> This pointer will track the position where the next non-zero element should be placed.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>As we traverse through the array, every time we encounter a non-zero element, we swap it with the element at the position indicated by <code>j</code>, and then increment <code>j</code>. After this, the pointer <code>j</code> will keep moving forward to track the next position for non-zero elements. Once all the non-zero elements are moved to the beginning of the array, the rest of the positions (from <code>j</code> onward) will be filled with zeroes.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of integers <code>nums</code>.</li>
-<li><strong>Output</strong>: The modified vector <code>nums</code> with all zeros moved to the end.</li>
+<h4 id="step-1-initialize-the-pointer-j">
+  Step 1: Initialize the Pointer <code>j</code>
+  <a class="heading-link" href="#step-1-initialize-the-pointer-j">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The variable <code>j</code> is initialized to <code>0</code>. This pointer will keep track of the position where the next non-zero element should be placed.</li>
 </ul>
-<ol>
-<li>Initialize a pointer <code>j</code> to <code>0</code>.</li>
-<li>Loop through the array using an index <code>i</code>:
+<h4 id="step-2-traverse-the-array-with-pointer-i">
+  Step 2: Traverse the Array with Pointer <code>i</code>
+  <a class="heading-link" href="#step-2-traverse-the-array-with-pointer-i">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        swap(nums[i], nums[j]), j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop runs through all the elements in the array (<code>nums</code>).</li>
+<li>When the element at index <code>i</code> is non-zero (<code>nums[i] != 0</code>), we swap it with the element at index <code>j</code>.
 <ul>
-<li>If <code>nums[i]</code> is not zero, swap <code>nums[i]</code> with <code>nums[j]</code> and increment <code>j</code>.</li>
+<li>The swap operation ensures that the non-zero element is placed at the correct position.</li>
+<li>After the swap, we increment the pointer <code>j</code> to point to the next position where the next non-zero element will be placed.</li>
 </ul>
 </li>
-<li>After the first loop, fill the array from index <code>j</code> to the end with zeros.</li>
-</ol>
+<li>This loop effectively moves all non-zero elements to the front of the array, while maintaining their relative order.</li>
+</ul>
+<h4 id="step-3-fill-the-remaining-positions-with-zeroes">
+  Step 3: Fill the Remaining Positions with Zeroes
+  <a class="heading-link" href="#step-3-fill-the-remaining-positions-with-zeroes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> nums.size())
+</span></span><span style="display:flex;"><span>    nums[j<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the pointer <code>j</code> points to the first position where a zero should be placed.</li>
+<li>We then enter a <code>while</code> loop that fills all positions from index <code>j</code> to the end of the array with zeroes.</li>
+<li>The loop continues to set <code>nums[j] = 0</code> until <code>j</code> reaches the end of the array.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -291,22 +315,56 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the array, since each element is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the operations are performed in place without using additional space.</li>
+<li>The algorithm consists of two loops:
+<ul>
+<li>The first loop iterates through the entire array once, checking and swapping elements. This takes <code>O(n)</code> time.</li>
+<li>The second loop, which sets the remaining positions to zero, also runs in <code>O(n)</code> time in the worst case.</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+</li>
+<li>Since both loops together only traverse the array a constant number of times, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm only uses a constant amount of extra space. The swapping is done in-place, so no additional arrays or data structures are required.</li>
+<li>Therefore, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>All Zeros</strong>: If <code>nums</code> contains only zeros, the output remains unchanged.</li>
-<li><strong>No Zeros</strong>: If <code>nums</code> contains no zeros, the output remains unchanged.</li>
-<li><strong>Single Element</strong>: If <code>nums</code> has one element, it remains unchanged, regardless of whether it is zero or not.</li>
-</ol>
+<p>This solution provides an <strong>efficient</strong> way to move all zeroes to the end of the array while maintaining the relative order of the non-zero elements. The two-pointer technique, combined with the swap operation, ensures that we can accomplish this task in <strong>O(n)</strong> time and <strong>O(1)</strong> space, making it optimal for large input sizes.</p>
+<p>This approach is ideal for problems where in-place modification of the array is required. By minimizing both the time and space complexity, the solution is well-suited for scenarios where performance is critical.</p>
+<h3 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Optimal time complexity:</strong> <code>O(n)</code> — the algorithm processes the array in a single pass.</li>
+<li><strong>In-place modification:</strong> The array is modified without needing additional memory allocation.</li>
+<li><strong>Space efficiency:</strong> The solution achieves <strong>O(1)</strong> space complexity by avoiding extra space usage.</li>
+<li><strong>Stable ordering of non-zero elements:</strong> The relative order of non-zero elements is preserved during the process.</li>
+</ul>
+<p>This technique, often referred to as the &ldquo;two-pointer&rdquo; approach, is widely applicable in problems that involve rearranging or partitioning an array based on a condition, such as moving zeroes, partitioning odd/even elements, or sorting elements in-place.</p>
  
 </div>
   

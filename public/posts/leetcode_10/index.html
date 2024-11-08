@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode15s1hbhb">
+<h2 id="hahahugoshortcode17s1hbhb">
   
 
   
@@ -256,7 +256,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a regular expression matching function that supports <code>.</code> and <code>*</code> characters. The <code>.</code> character matches any single character, while the <code>*</code> character matches zero or more occurrences of the preceding element.</p>
+<p>The problem at hand is to implement a regular expression matching function that matches a string <code>s</code> against a pattern <code>p</code>. The pattern <code>p</code> may contain:</p>
+<ol>
+<li><strong><code>.</code></strong>: which matches any single character.</li>
+<li><strong><code>*</code></strong>: which matches zero or more of the preceding element.</li>
+</ol>
+<p>You need to determine if the string <code>s</code> matches the pattern <code>p</code> using these rules.</p>
+<p>For example:</p>
+<ul>
+<li><code>isMatch(&quot;aa&quot;, &quot;a*&quot;)</code> → <code>true</code> (because <code>a*</code> can match the string &ldquo;aa&rdquo;).</li>
+<li><code>isMatch(&quot;mississippi&quot;, &quot;mis*is*p*.&quot;)</code> → <code>false</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,66 +274,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use dynamic programming to memoize results of subproblems, allowing the algorithm to efficiently explore possible matches between the string <code>s</code> and the pattern <code>p</code>.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem, we can utilize <strong>Dynamic Programming (DP)</strong>. The basic idea is to recursively explore each character of the string <code>s</code> and the pattern <code>p</code>. We&rsquo;ll use memoization to avoid recomputation and improve efficiency.</p>
+<p>Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Recursive Matching</strong>:</p>
+<ul>
+<li>We start from the beginning of both <code>s</code> and <code>p</code> and recursively check for matches.</li>
+<li>If the current pattern character is <code>*</code>, it could either match zero occurrences of the preceding character or one or more occurrences, which means we need to handle both cases.</li>
+<li>If the pattern character is <code>.</code>, it can match any single character of <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid recalculating the same subproblem multiple times, we&rsquo;ll store the result of each recursive call in a 2D memoization table <code>memo[i][j]</code>. Here, <code>i</code> represents the current index of <code>s</code> and <code>j</code> represents the current index of <code>p</code>.</li>
+<li>If a subproblem has already been computed, we simply return the stored result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-ismatch-function">
+  1. <code>isMatch</code> Function
+  <a class="heading-link" href="#1-ismatch-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isMatch</span>(string s, string p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>p <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    memo.resize(s.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(p.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is the main function that sets up the initial values for the string <code>s</code> and pattern <code>p</code>. It also initializes the memoization table <code>memo</code> with dimensions <code>(s.size() + 1) x (p.size() + 1)</code> to store intermediate results.</li>
+<li>The <code>dp(0, 0)</code> call starts the recursive matching process from the beginning of both the string and the pattern.</li>
+</ul>
+<h4 id="2-dp-function">
+  2. <code>dp</code> Function
+  <a class="heading-link" href="#2-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> s.size() <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> p.size()) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">==</span> p.size()) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>The base cases:
+<ul>
+<li>If both <code>i</code> and <code>j</code> have reached the end of <code>s</code> and <code>p</code> respectively, it means we&rsquo;ve successfully matched the entire string to the pattern, so return <code>true</code>.</li>
+<li>If we&rsquo;ve reached the end of the pattern (<code>j == p.size()</code>) but the string <code>s</code> has not been fully traversed, return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[i][j] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[i][j];
+</span></span></code></pre></div><ul>
+<li>If the result for this specific subproblem (<code>i</code>, <code>j</code>) has already been computed, return the stored result to avoid recomputation.</li>
+</ul>
+<h4 id="3-matching-logic-for--and-">
+  3. Matching Logic for <code>*</code> and <code>.</code>
+  <a class="heading-link" href="#3-matching-logic-for--and-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> p.size() <span style="color:#f92672">&amp;&amp;</span> p[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;*&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> (s[i] <span style="color:#f92672">==</span> p[j] <span style="color:#f92672">||</span> p[j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>))
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">|=</span> dp(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">|=</span> dp(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> (s[i] <span style="color:#f92672">==</span> p[j] <span style="color:#f92672">||</span> p[j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>))
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">|=</span> dp(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>If the next character in the pattern is <code>*</code></strong>: The <code>*</code> can either:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Store the input strings <code>s</code> and <code>p</code> as member variables.</li>
-<li>Create a <code>memo</code> table initialized to -1, which will store the results of previously computed subproblems.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Function <code>dp</code></strong>:</p>
-<ul>
-<li><strong>Base Cases</strong>:
-<ul>
-<li>If both <code>i</code> (index for <code>s</code>) and <code>j</code> (index for <code>p</code>) reach the end of their respective strings, return <code>true</code>.</li>
-<li>If <code>j</code> reaches the end of <code>p</code> but <code>i</code> has not reached the end of <code>s</code>, return <code>false</code>.</li>
-</ul>
-</li>
-<li><strong>Memoization Check</strong>:
-<ul>
-<li>If the result for the current indices <code>i</code> and <code>j</code> has been computed, return the stored result from <code>memo</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Matching Logic</strong>:</p>
-<ul>
-<li>If the next character in <code>p</code> is <code>*</code>:
-<ul>
-<li>Check if the current characters in <code>s</code> and <code>p</code> match, or if <code>p[j]</code> is <code>.</code>. If they match, recursively check for the next character in <code>s</code> while keeping <code>j</code> fixed or skip the <code>*</code> and its preceding character in <code>p</code> by advancing <code>j</code> by 2.</li>
-</ul>
-</li>
-<li>If the next character is not <code>*</code>:
-<ul>
-<li>Check if the current characters in <code>s</code> and <code>p</code> match, or if <code>p[j]</code> is <code>.</code>. If they match, recursively check for the next characters in both strings.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Store Result</strong>:</p>
-<ul>
-<li>Store the result of the current subproblem in <code>memo</code> before returning.</li>
-</ul>
-</li>
-<li>
-<p><strong>Wrapper Function <code>isMatch</code></strong>:</p>
-<ul>
-<li>This function initializes the <code>memo</code> table and starts the recursive matching process from the beginning of both strings.</li>
-</ul>
-</li>
+<li>Match <strong>zero occurrences</strong> of the preceding character, so we recursively check the match starting from <code>i</code> and <code>j + 2</code> (skipping the <code>*</code> and its preceding character).</li>
+<li>Match <strong>one or more occurrences</strong> of the preceding character, so we check if <code>s[i]</code> matches <code>p[j]</code> (or <code>p[j]</code> is a <code>.</code>) and then continue matching from <code>i + 1</code> and <code>j</code>.</li>
 </ol>
+</li>
+<li>
+<p><strong>If the next character in the pattern is not <code>*</code></strong>: We simply check if <code>s[i]</code> matches <code>p[j]</code>, or if <code>p[j]</code> is a <code>.</code> (which can match any character), and then proceed recursively with <code>i + 1</code> and <code>j + 1</code>.</p>
+</li>
+</ul>
+<h4 id="4-storing-the-result">
+  4. Storing the Result
+  <a class="heading-link" href="#4-storing-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[i][j] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After exploring all possible matching conditions for the current pair <code>(i, j)</code>, store the result (<code>ans</code>) in the memoization table to avoid redundant calculations.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -331,15 +387,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(m \times n)) - where (m) is the length of <code>s</code> and (n) is the length of <code>p</code>, as each subproblem is computed once.</li>
-<li><strong>Space Complexity:</strong> (O(m \times n)) - for the <code>memo</code> table.</li>
+<li><strong>O(m * n)</strong>: The time complexity is proportional to the product of the lengths of <code>s</code> and <code>p</code> because we explore each pair of indices <code>(i, j)</code> exactly once, where <code>m</code> is the length of <code>s</code> and <code>n</code> is the length of <code>p</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n)</strong>: The space complexity is dominated by the size of the memoization table, which has dimensions <code>(m + 1) x (n + 1)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a dynamic programming approach with memoization to efficiently solve the problem of regular expression matching. By breaking down the problem into smaller subproblems and storing the results of these subproblems, we avoid redundant calculations and improve the algorithm&rsquo;s efficiency.</p>
+<ul>
+<li><strong>Handling of Special Characters</strong>: The <code>*</code> and <code>.</code> characters are handled carefully, ensuring that they match appropriately, either by matching multiple occurrences (<code>*</code>) or by matching any single character (<code>.</code>).</li>
+<li><strong>Efficiency</strong>: The use of memoization ensures that the time complexity remains manageable even for larger strings and patterns, with an overall complexity of O(m * n), where <code>m</code> and <code>n</code> are the lengths of the string and the pattern, respectively.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode15s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode17s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

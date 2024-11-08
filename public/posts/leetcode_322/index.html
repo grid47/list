@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> INT_MAX<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">?-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1220s1hbhb">
+<h2 id="hahahugoshortcode1233s1hbhb">
   
 
   
@@ -262,7 +262,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>coins</code> representing coin denominations and an integer <code>amount</code> representing a total amount of money, find the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return <code>-1</code>.</p>
+<p>The problem is to find the minimum number of coins required to make up a given amount using a set of available coin denominations. You are given an array of integers <code>coins</code> representing different coin denominations, and an integer <code>amount</code> representing the total amount you need to form. Your task is to return the minimum number of coins needed to make the amount, or return <code>-1</code> if that amount cannot be formed using the given coin denominations.</p>
+<p>This is a classical <strong>dynamic programming</strong> problem that can be solved using either <strong>bottom-up</strong> or <strong>top-down</strong> approaches. Here, we will be using the <strong>top-down approach</strong> (also known as memoization) to efficiently compute the solution.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -270,54 +271,114 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be approached using dynamic programming with memoization. The steps are as follows:</p>
+<p>The problem can be approached using dynamic programming (DP) because it has overlapping subproblems and optimal substructure properties. This means that we can break down the problem into smaller subproblems and store their solutions to avoid redundant calculations.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Sorting Coins</strong>: Sort the <code>coins</code> array in descending order. This helps in exploring larger denominations first, which can potentially lead to fewer coins used.</p>
-</li>
-<li>
-<p><strong>Dynamic Programming Function</strong>:</p>
-<ul>
-<li>Define a recursive function <code>dp(idx, amnt)</code> where <code>idx</code> represents the current coin index being considered and <code>amnt</code> is the remaining amount to be made.</li>
-<li>The base case checks if <code>idx</code> has reached the end of the <code>coins</code> array. If <code>amnt</code> is zero, return 0 (no more coins needed). If <code>amnt</code> is not zero, return <code>INT_MAX - 1</code> (indicating that this path is not valid).</li>
-</ul>
-</li>
-<li>
-<p><strong>Memoization</strong>: Use a 2D vector <code>memo</code> to store results of subproblems to avoid redundant calculations.</p>
-</li>
-<li>
-<p><strong>Decision Making</strong>:</p>
-<ul>
-<li>If the current coin can be used (i.e., <code>amnt &gt;= coin[idx]</code>), calculate the minimum coins needed by:
-<ul>
-<li>Taking the coin (<code>1 + dp(idx, amnt - coin[idx])</code>).</li>
-<li>Not taking the coin (<code>dp(idx + 1, amnt)</code>).</li>
-</ul>
-</li>
-<li>If the current coin cannot be used, skip to the next coin (<code>dp(idx + 1, amnt)</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>: After exploring all options, if the result is still <code>INT_MAX - 1</code>, it means it is impossible to form the <code>amount</code> with the given coins, and return <code>-1</code>. Otherwise, return the number of coins.</p>
-</li>
+<li><strong>Recursive Structure</strong>: To solve for a given amount, we consider whether we include a coin of a particular denomination or not. If we include it, the problem reduces to a smaller amount, and if we don&rsquo;t, we move on to the next coin.</li>
+<li><strong>Memoization</strong>: Since there are overlapping subproblems (i.e., the same amount can be recomputed multiple times), we use memoization to store the results of previously computed subproblems. This ensures that we do not recompute results for the same problem multiple times.</li>
+<li><strong>Optimization by Sorting</strong>: Sorting the coins in descending order is a potential optimization to prioritize larger coins first, though it&rsquo;s not strictly necessary for correctness.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="detailed-approach">
+  Detailed Approach:
+  <a class="heading-link" href="#detailed-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Recursive Relation</strong>: For each coin at index <code>idx</code>, we have two options:</p>
+<ol>
+<li><strong>Use the coin</strong>: If the remaining amount (<code>amnt</code>) is greater than or equal to the current coin value, we reduce the amount and count one more coin.</li>
+<li><strong>Skip the coin</strong>: If we do not use the coin, we move to the next coin in the list.</li>
+</ol>
+</li>
+<li>
+<p>The goal is to minimize the number of coins required to reach the given amount.</p>
+</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of integers <code>coins</code> and an integer <code>amount</code>.</li>
-<li><strong>Output</strong>: An integer representing the minimum number of coins needed to make up the amount.</li>
+<h4 id="step-1-sorting-the-coins">
+  Step 1: Sorting the Coins
+  <a class="heading-link" href="#step-1-sorting-the-coins">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(coins.begin(), coins.end(), cmp);
+</span></span></code></pre></div><ul>
+<li>The coins are sorted in descending order to prioritize larger coin denominations first. Sorting is optional, but it can potentially help to reach a solution faster when trying to minimize the number of coins (although it doesn&rsquo;t affect the correctness of the algorithm).</li>
 </ul>
-<ol>
-<li>Sort the <code>coins</code> array.</li>
-<li>Initialize the memoization table.</li>
-<li>Call the <code>dp</code> function starting from the first coin and the full amount.</li>
-<li>Return the result based on the computed value.</li>
-</ol>
+<h4 id="step-2-memoization-initialization">
+  Step 2: Memoization Initialization
+  <a class="heading-link" href="#step-2-memoization-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>memo.resize(coin.size(), vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(amount <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>The <code>memo</code> table is initialized to store the results of subproblems. The table is a 2D array where <code>memo[idx][amnt]</code> stores the minimum number of coins required to form the amount <code>amnt</code> starting from the coin at index <code>idx</code>.</li>
+<li>The table is initialized with <code>-1</code>, which signifies that a particular subproblem hasn&rsquo;t been solved yet.</li>
+</ul>
+<h4 id="step-3-recursive-dp-function-dp">
+  Step 3: Recursive DP Function (<code>dp</code>)
+  <a class="heading-link" href="#step-3-recursive-dp-function-dp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> amnt) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> coin.size()) <span style="color:#66d9ef">return</span> amnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> INT_MAX <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx][amnt] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][amnt];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(amnt <span style="color:#f92672">&gt;=</span> coin[idx]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> r1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(idx, amnt <span style="color:#f92672">-</span> coin[idx]);            
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> r2 <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, amnt);
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> min(r1, r2);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, amnt);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx][amnt] <span style="color:#f92672">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If we reach the end of the <code>coin</code> list (<code>idx == coin.size()</code>), we check if the remaining amount <code>amnt</code> is zero. If it is, the result is <code>0</code> (no coins needed). Otherwise, if <code>amnt &gt; 0</code>, it is impossible to form the amount with the remaining coins, so we return a large value (<code>INT_MAX - 1</code>).</li>
+<li><strong>Memoization Check</strong>: If the solution for <code>memo[idx][amnt]</code> is already computed (not <code>-1</code>), we return the cached result to avoid redundant computation.</li>
+<li><strong>Recursive Case</strong>: For each coin at index <code>idx</code>, we try two possibilities:
+<ul>
+<li><strong>Use the coin</strong>: If the current amount <code>amnt</code> is greater than or equal to <code>coin[idx]</code>, we recursively call <code>dp(idx, amnt - coin[idx])</code> to check how many coins are required to form the remaining amount.</li>
+<li><strong>Skip the coin</strong>: If we cannot use the coin, we move on to the next coin by calling <code>dp(idx + 1, amnt)</code>.</li>
+<li>We return the minimum of these two results, which represents the optimal choice (the minimum number of coins required).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-final-result">
+  Step 4: Final Result
+  <a class="heading-link" href="#step-4-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>, amount);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans <span style="color:#f92672">==</span> INT_MAX <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ans;
+</span></span></code></pre></div><ul>
+<li>The result of the <code>dp(0, amount)</code> function call gives the minimum number of coins required to form the amount starting from the first coin.</li>
+<li>If the result is <code>INT_MAX - 1</code> (i.e., the amount cannot be formed), we return <code>-1</code>. Otherwise, we return the number of coins required.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -325,15 +386,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n \cdot m)), where (n) is the number of coins and (m) is the amount. The memoization table has dimensions based on the number of coins and the amount.</li>
-<li><strong>Space Complexity</strong>: (O(n \cdot m)) for the memoization table.</li>
+<li><strong>Time complexity</strong>: <code>O(n * m)</code>, where <code>n</code> is the number of coin denominations and <code>m</code> is the target amount.
+<ul>
+<li>The memoization table has <code>n * m</code> entries.</li>
+<li>Each entry is filled once, and the computation for each entry is constant time (<code>O(1)</code>).</li>
+<li>Therefore, the overall time complexity is <code>O(n * m)</code>.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space complexity</strong>: <code>O(n * m)</code>, where <code>n</code> is the number of coin denominations and <code>m</code> is the target amount.
+<ul>
+<li>The space complexity is dominated by the memoization table, which has <code>n * m</code> entries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes dynamic programming with memoization to efficiently solve the coin change problem. By recursively breaking down the problem and storing intermediate results, we avoid redundant calculations, significantly improving efficiency. The approach has a time complexity of <code>O(n * m)</code>, making it suitable for a wide range of inputs. The algorithm ensures that the minimum number of coins is found, or returns <code>-1</code> if it is not possible to form the given amount. This approach is optimal for solving this type of coin change problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1220s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1233s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

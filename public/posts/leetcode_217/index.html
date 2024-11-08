@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -225,7 +225,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode697s1hbhb">
+<h2 id="hahahugoshortcode691s1hbhb">
   
 
   
@@ -237,7 +237,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice in the array, and return <code>false</code> if every element is distinct.</p>
+<p>The task is to determine if a given integer array <code>nums</code> contains any duplicate elements. Specifically, you need to return <code>true</code> if any value appears at least twice in the array, and return <code>false</code> if every element in the array is distinct.</p>
+<p>This is a common problem that tests the ability to check for uniqueness within an array efficiently, which is essential in many applications like data validation, filtering, and handling large datasets.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,37 +246,84 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The most straightforward way to solve this problem is by using a <strong>hash map (or dictionary)</strong>, which allows us to efficiently check if an element has already been seen. Hash maps provide an average time complexity of <code>O(1)</code> for lookups and insertions, making them ideal for this type of problem. Here&rsquo;s the approach in detail:</p>
 <ol>
-<li>
-<p><strong>Use of Map</strong>: A map (or unordered set) is utilized to track the occurrences of each element in the array.</p>
-</li>
-<li>
-<p><strong>Process</strong>:</p>
-<ul>
-<li>Iterate through each element in the <code>nums</code> array.</li>
-<li>For each element, check if it already exists in the map.</li>
-<li>If it exists, return <code>true</code> indicating a duplicate is found.</li>
-<li>If it does not exist, insert it into the map.</li>
-</ul>
-</li>
+<li><strong>Iterate Through the Array</strong>: We go through each element in the array and check if it has already been encountered.</li>
+<li><strong>Check for Duplicates Using a Map</strong>: As we traverse the array, we can use a map (or unordered_map) to store elements as keys. If we find an element that is already in the map, it means a duplicate is present, and we can immediately return <code>true</code>.</li>
+<li><strong>If No Duplicates Are Found</strong>: If the iteration completes without finding any duplicates, we return <code>false</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using a map, we can easily achieve an efficient solution with linear time complexity for both time and space.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>containsDuplicate</strong>: The main function that checks for duplicates:
-<ul>
-<li>Initialize a map to store counts of elements.</li>
-<li>Loop through each element in the array.</li>
-<li>If the element is found in the map, return <code>true</code>.</li>
-<li>Otherwise, add the element to the map.</li>
-<li>If the loop completes without finding duplicates, return <code>false</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> containsDuplicate(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ma;  <span style="color:#75715e">// Step 1: Create a map to track elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums)   <span style="color:#75715e">// Step 2: Iterate through the elements in nums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(ma.count(x)) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Step 3: Check if the element is already in the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> ma[x] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;    <span style="color:#75715e">// Step 4: If not, add the element to the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> false;      <span style="color:#75715e">// Step 5: Return false if no duplicates were found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-1-initialize-the-map">
+  Step 1: Initialize the Map
+  <a class="heading-link" href="#step-1-initialize-the-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ma;
+</span></span></code></pre></div><ul>
+<li>Here, we declare a map <code>ma</code> where the key is the integer from the array and the value is the count of how many times the integer has appeared. This map will help us quickly check if an element is already present.</li>
 </ul>
-</li>
+<h4 id="step-2-iterate-over-the-array">
+  Step 2: Iterate Over the Array
+  <a class="heading-link" href="#step-2-iterate-over-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums)
+</span></span></code></pre></div><ul>
+<li>We iterate over the array <code>nums</code> using a range-based for loop. The variable <code>x</code> represents each element in the array as we loop through it.</li>
+</ul>
+<h4 id="step-3-check-for-duplicates">
+  Step 3: Check for Duplicates
+  <a class="heading-link" href="#step-3-check-for-duplicates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(ma.count(x)) <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>The <code>map::count()</code> function checks whether the element <code>x</code> already exists in the map. If the element is found (<code>count(x) &gt; 0</code>), it means the element has appeared before, so we immediately return <code>true</code> indicating the presence of a duplicate.</li>
+</ul>
+<h4 id="step-4-add-new-elements-to-the-map">
+  Step 4: Add New Elements to the Map
+  <a class="heading-link" href="#step-4-add-new-elements-to-the-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> ma[x] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the element <code>x</code> is not in the map, we add it to the map with a value of 1, indicating that we&rsquo;ve encountered it once.</li>
+</ul>
+<h4 id="step-5-return-false">
+  Step 5: Return False
+  <a class="heading-link" href="#step-5-return-false">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If we finish the loop without finding any duplicates, we return <code>false</code>, indicating that no element in the array has appeared more than once.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -284,15 +332,48 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in the array. Each insertion and lookup in the map takes (O(1)) on average.</li>
-<li><strong>Space Complexity</strong>: (O(n)) in the worst case, where all elements are unique and stored in the map.</li>
+<li>The time complexity is dominated by the <code>for</code> loop that iterates over all the elements in the array <code>nums</code>.</li>
+<li>For each element, the operations <code>ma.count(x)</code> and <code>ma[x] = 1</code> are both average <code>O(1)</code> operations, since <code>count</code> checks for the existence of the element, and inserting into the map has average constant time complexity.</li>
+<li>Therefore, the total time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the input array <code>nums</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is primarily due to the space required to store the map <code>ma</code>. In the worst case, where all elements in <code>nums</code> are distinct, we will store all <code>n</code> elements in the map.</li>
+<li>Hence, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the input array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks for duplicates in the input array using a <strong>map</strong> (or hash map) to track the occurrences of each element. The use of a map allows us to perform the necessary checks and insertions in average constant time, ensuring that the solution works efficiently even for larger input sizes.</p>
+<ul>
+<li><strong>Time Complexity</strong>: The solution runs in linear time, <strong>O(n)</strong>, where <code>n</code> is the number of elements in the array, as it iterates through the array once and performs constant-time operations for each element.</li>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, as we store all elements in the map if no duplicates are found.</li>
+</ul>
+<p>This approach is optimal for solving problems where checking for duplicates in an array or a collection of elements is required, and it can be easily adapted for other similar tasks such as finding the frequency of elements or identifying repeated elements.</p>
+<p>The code is simple and easy to understand, making it an ideal choice for solving this problem in an efficient manner. Using a map for constant-time lookups is a standard technique that can be applied to a wide range of problems involving collections, sets, and arrays.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode697s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode691s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

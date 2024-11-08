@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(left, right);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1262s1hbhb">
+<h2 id="hahahugoshortcode1263s1hbhb">
   
 
   
@@ -253,7 +253,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code> and an integer <code>k</code>, find the length of the longest substring in <code>s</code> where each character appears at least <code>k</code> times.</p>
+<p>The problem asks to find the length of the longest substring in a given string <code>s</code> where each character in the substring appears at least <code>k</code> times. If no such substring exists, the function should return <code>0</code>.</p>
+<p>For example:</p>
+<ul>
+<li>Given the string <code>&quot;aaabb&quot;</code>, and <code>k = 3</code>, the longest substring is <code>&quot;aaa&quot;</code>, as it is the only substring where each character appears at least 3 times.</li>
+<li>For the string <code>&quot;ababbc&quot;</code>, with <code>k = 2</code>, the longest substring is <code>&quot;abb&quot;</code>, as both &lsquo;a&rsquo; and &lsquo;b&rsquo; appear at least 2 times.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,60 +266,166 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be approached using a <strong>divide and conquer</strong> strategy, where we break down the string recursively and find substrings that meet the condition of having characters appear at least <code>k</code> times.</p>
+<h4 id="key-steps-to-solve-the-problem">
+  Key steps to solve the problem:
+  <a class="heading-link" href="#key-steps-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Base Cases</strong>:</p>
+<li><strong>Base cases</strong>:
 <ul>
-<li>If the string is empty or <code>k</code> is greater than the length of the string, return <code>0</code>.</li>
-<li>If <code>k</code> is <code>0</code>, return the length of the string since all characters will satisfy the condition.</li>
+<li>If the string is empty or <code>k</code> is larger than the size of the string, the result is <code>0</code>.</li>
+<li>If <code>k</code> is <code>0</code>, then every substring is valid, and the result is the entire string.</li>
 </ul>
 </li>
-<li>
-<p><strong>Character Frequency Count</strong>:</p>
-<ul>
-<li>Use a hash map to count the frequency of each character in the string.</li>
-</ul>
-</li>
-<li>
-<p><strong>Finding Invalid Characters</strong>:</p>
-<ul>
-<li>Traverse the string to find the first character that appears fewer than <code>k</code> times. This character will be used as a delimiter to split the string into substrings.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Substring Calculation</strong>:</p>
-<ul>
-<li>If all characters meet the frequency requirement (i.e., the entire string is valid), return the length of the string.</li>
-<li>Otherwise, recursively compute the longest valid substring in the two parts of the string:
-<ul>
-<li>From the start of the string to just before the invalid character.</li>
-<li>From just after the invalid character to the end of the string.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Maximum Length</strong>:</p>
-<ul>
-<li>The result is the maximum of the two recursive calls.</li>
-</ul>
-</li>
+<li><strong>Frequency Map</strong>: Create a frequency map to count the occurrence of each character in the string.</li>
+<li><strong>Divide the string</strong>: Traverse the string, and divide it whenever a character occurs less than <code>k</code> times. This ensures that we break down the problem into smaller substrings.</li>
+<li><strong>Recursion</strong>: For each substring, recursively check if the condition holds. If it does, the substring is a valid candidate. We continue this until no valid substrings can be found.</li>
+<li><strong>Combine results</strong>: For substrings that satisfy the condition, return the longest substring by comparing results from both sides.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="the-divide-and-conquer-approach-is-efficient-because-it-progressively-narrows-down-the-search-space-focusing-on-parts-of-the-string-that-may-contain-the-longest-valid-substrings">
+  The divide and conquer approach is efficient because it progressively narrows down the search space, focusing on parts of the string that may contain the longest valid substrings.
+  <a class="heading-link" href="#the-divide-and-conquer-approach-is-efficient-because-it-progressively-narrows-down-the-search-space-focusing-on-parts-of-the-string-that-may-contain-the-longest-valid-substrings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s go through the solution step by step:</p>
+<h4 id="step-1-base-cases">
+  Step 1: Base Cases
+  <a class="heading-link" href="#step-1-base-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(s.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> k <span style="color:#f92672">&gt;</span> s.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> s.size();
+</span></span></code></pre></div><ul>
+<li>The first <code>if</code> checks if the string is empty or if <code>k</code> is greater than the size of the string. In either of these cases, we can return <code>0</code> because there cannot be any valid substring where each character appears at least <code>k</code> times.</li>
+<li>The second <code>if</code> checks if <code>k</code> is <code>0</code>. In that case, the entire string is valid, so we return the size of the string.</li>
+</ul>
+<h4 id="step-2-frequency-map">
+  Step 2: Frequency Map
+  <a class="heading-link" href="#step-2-frequency-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[s[i]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A frequency map <code>mp</code> is created to store the occurrence of each character in the string <code>s</code>.</li>
+<li>We iterate over the string and update the map with the count of each character.</li>
+</ul>
+<h4 id="step-3-splitting-the-string">
+  Step 3: Splitting the String
+  <a class="heading-link" href="#step-3-splitting-the-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(idx <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> mp[s[idx]] <span style="color:#f92672">&gt;=</span> k) idx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> s.size()) <span style="color:#66d9ef">return</span> s.size();
+</span></span></code></pre></div><ul>
+<li>We initialize an index <code>idx</code> to find the first character that appears fewer than <code>k</code> times.</li>
+<li>The <code>while</code> loop checks each character in the string. If the character occurs at least <code>k</code> times (i.e., <code>mp[s[idx]] &gt;= k</code>), we continue moving the index forward.</li>
+<li>If the index reaches the end of the string, it means all characters satisfy the condition, and we return the length of the string as the result.</li>
+</ul>
+<h4 id="step-4-recursive-call-on-substrings">
+  Step 4: Recursive Call on Substrings
+  <a class="heading-link" href="#step-4-recursive-call-on-substrings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> longestSubstring(s.substr(<span style="color:#ae81ff">0</span>, idx), k);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> longestSubstring(s.substr(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), k);
+</span></span></code></pre></div><ul>
+<li>If we encounter a character that appears less than <code>k</code> times, we split the string at that point.</li>
+<li>We recursively call the <code>longestSubstring</code> function on two substrings:
+<ol>
+<li>The left substring before the character at index <code>idx</code>.</li>
+<li>The right substring after the character at index <code>idx</code>.</li>
+</ol>
+</li>
+</ul>
+<h4 id="step-5-combine-results">
+  Step 5: Combine Results
+  <a class="heading-link" href="#step-5-combine-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>(left, right);
+</span></span></code></pre></div><ul>
+<li>We take the maximum length between the two recursively computed substrings, as we are interested in the longest valid substring.</li>
+<li>Finally, the result is returned.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s consider an example to understand how the code works:</p>
+<p><strong>Example 1:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>longestSubstring(<span style="color:#e6db74">&#34;aaabb&#34;</span>, <span style="color:#ae81ff">3</span>);
+</span></span></code></pre></div><ul>
+<li>We first create a frequency map:
 <ul>
-<li>The <code>longestSubstring</code> function uses recursion to break down the problem:
-<ul>
-<li>First, it counts character occurrences.</li>
-<li>It identifies the first character that does not satisfy the condition and uses it to divide the string.</li>
-<li>Recursive calls are made for the two resulting substrings, and the maximum length is computed and returned.</li>
+<li><code>{'a': 3, 'b': 2}</code></li>
 </ul>
 </li>
+<li>We check each character:
+<ul>
+<li>&lsquo;a&rsquo; appears 3 times (&gt;= 3), so we continue.</li>
+<li>&lsquo;b&rsquo; appears 2 times (&lt; 3), so we split the string into two substrings: <code>&quot;aaa&quot;</code> and <code>&quot;bb&quot;</code>.</li>
+</ul>
+</li>
+<li>We recursively call <code>longestSubstring</code> on <code>&quot;aaa&quot;</code> and <code>&quot;bb&quot;</code>.
+<ul>
+<li><code>&quot;aaa&quot;</code> satisfies the condition, so it’s returned with length 3.</li>
+<li><code>&quot;bb&quot;</code> does not satisfy the condition, so it’s returned with length 0.</li>
+</ul>
+</li>
+<li>The final result is <code>max(3, 0) = 3</code>.</li>
+</ul>
+<p><strong>Example 2:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>longestSubstring(<span style="color:#e6db74">&#34;ababbc&#34;</span>, <span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><ul>
+<li>We first create a frequency map:
+<ul>
+<li><code>{'a': 2, 'b': 3, 'c': 1}</code></li>
+</ul>
+</li>
+<li>We check each character:
+<ul>
+<li>&lsquo;a&rsquo; appears 2 times (&gt;= 2), so we continue.</li>
+<li>&lsquo;b&rsquo; appears 3 times (&gt;= 2), so we continue.</li>
+<li>&lsquo;c&rsquo; appears 1 time (&lt; 2), so we split the string into two substrings: <code>&quot;ababb&quot;</code> and <code>&quot;c&quot;</code>.</li>
+</ul>
+</li>
+<li>We recursively call <code>longestSubstring</code> on <code>&quot;ababb&quot;</code> and <code>&quot;c&quot;</code>.
+<ul>
+<li><code>&quot;c&quot;</code> does not satisfy the condition, so it returns length 0.</li>
+<li><code>&quot;ababb&quot;</code> satisfies the condition, so we return length 5.</li>
+</ul>
+</li>
+<li>The final result is <code>max(5, 0) = 5</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -323,15 +434,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the length of the string. In the worst case, the function may be called recursively for each character, and string substrings are created in each call.</li>
-<li><strong>Space Complexity</strong>: O(1) for the frequency map, as it contains a limited number of characters (constant space).</li>
+<li><strong>Time Complexity</strong>: <code>O(n)</code>, where <code>n</code> is the length of the string. In the worst case, we scan each character of the string exactly once. Although we recursively call the function on substrings, the total number of recursive calls will still be linear in terms of the number of characters, since each substring progressively becomes smaller. Therefore, the overall time complexity is <code>O(n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(n)</code>. The space complexity arises from the storage of the frequency map <code>mp</code> and the recursion stack. The map requires space proportional to the number of unique characters in the string (at most <code>n</code>), and the recursion stack can also grow to a depth of <code>n</code> in the worst case.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively handles the problem of finding the longest substring where each character appears at least <code>k</code> times. The approach is based on a divide-and-conquer strategy, where the string is recursively split into smaller substrings until all conditions are met. The use of a frequency map ensures that we can efficiently check each character&rsquo;s count. This approach is optimal with a linear time complexity of <code>O(n)</code> and a space complexity of <code>O(n)</code>, making it suitable for large input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1262s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1263s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

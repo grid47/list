@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode117s1hbhb">
+<h2 id="hahahugoshortcode119s1hbhb">
   
 
   
@@ -247,7 +247,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Convert an integer to its corresponding Roman numeral representation.</p>
+<p>The problem asks us to convert an integer into its Roman numeral representation. Roman numerals are written by combining the following symbols:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Symbol</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>I</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>V</td>
+          <td>5</td>
+      </tr>
+      <tr>
+          <td>X</td>
+          <td>10</td>
+      </tr>
+      <tr>
+          <td>L</td>
+          <td>50</td>
+      </tr>
+      <tr>
+          <td>C</td>
+          <td>100</td>
+      </tr>
+      <tr>
+          <td>D</td>
+          <td>500</td>
+      </tr>
+      <tr>
+          <td>M</td>
+          <td>1000</td>
+      </tr>
+  </tbody>
+</table>
+<p>For example, given the integer <code>3</code>, the Roman numeral would be &ldquo;III&rdquo;. For the integer <code>58</code>, it would be &ldquo;LVIII&rdquo;. The task is to implement a function <code>intToRoman(int num)</code> that converts an integer <code>num</code> into its corresponding Roman numeral.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,42 +294,93 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use a greedy algorithm to subtract the largest possible Roman numeral values from the integer, appending the corresponding symbols to the result string.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem efficiently, we need to break the integer down using the largest possible Roman numeral values first, working our way down to the smallest. The main idea behind this approach is to repeatedly subtract the largest possible Roman numeral value from the number until the number becomes zero. This method leverages <strong>greedy</strong> principles, as we always choose the largest Roman numeral value that is less than or equal to the remaining number.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Roman numeral symbols</strong>: There are specific combinations like &ldquo;IV&rdquo; (4), &ldquo;IX&rdquo; (9), &ldquo;XL&rdquo; (40), &ldquo;XC&rdquo; (90), &ldquo;CD&rdquo; (400), and &ldquo;CM&rdquo; (900) that are used to avoid four consecutive characters of the same type (e.g., 4 would be represented as &ldquo;IV&rdquo;, not &ldquo;IIII&rdquo;).</p>
+</li>
+<li>
+<p><strong>Greedy approach</strong>: The integer is reduced in steps by repeatedly subtracting the largest possible Roman numeral value. Once we subtract a value, we add its corresponding Roman numeral string to the result. This process is repeated until the entire number is converted.</p>
+</li>
+<li>
+<p><strong>Order of symbols</strong>: The symbols should be used in a descending order starting from the largest value (1000, 900, etc.). This ensures that we represent the number optimally.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Create two vectors: <code>nums</code> for the integer values of Roman numerals and <code>chrs</code> for their corresponding symbols.</li>
-<li>Initialize an index <code>idx</code> to track the current position in the <code>nums</code> and <code>chrs</code> arrays.</li>
-<li>Initialize an empty string <code>res</code> to build the resulting Roman numeral.</li>
+<p>Let&rsquo;s go through the code and understand each part of it.</p>
+<h4 id="step-1-initialize-the-numerals-and-symbols">
+  Step 1: Initialize the Numerals and Symbols
+  <a class="heading-link" href="#step-1-initialize-the-numerals-and-symbols">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">900</span>, <span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">400</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span> };
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> chrs <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;M&#34;</span>, <span style="color:#e6db74">&#34;CM&#34;</span>, <span style="color:#e6db74">&#34;D&#34;</span>, <span style="color:#e6db74">&#34;CD&#34;</span>, <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;XC&#34;</span>, <span style="color:#e6db74">&#34;L&#34;</span>, <span style="color:#e6db74">&#34;XL&#34;</span>, <span style="color:#e6db74">&#34;X&#34;</span>, <span style="color:#e6db74">&#34;IX&#34;</span>, <span style="color:#e6db74">&#34;V&#34;</span>, <span style="color:#e6db74">&#34;IV&#34;</span>, <span style="color:#e6db74">&#34;I&#34;</span> };
+</span></span></code></pre></div><ul>
+<li><code>nums</code> holds the integer values corresponding to each Roman numeral (from largest to smallest).</li>
+<li><code>chrs</code> holds the corresponding Roman numeral symbols for the integers in <code>nums</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>While Loop</strong>:</p>
-<ul>
-<li>Continue processing until <code>num</code> is greater than 0:
-<ul>
-<li>Use a nested while loop to repeatedly subtract the current Roman numeral value (<code>nums[idx]</code>) from <code>num</code> as long as <code>num</code> is greater than or equal to that value.</li>
-<li>Append the corresponding Roman numeral symbol (<code>chrs[idx]</code>) to <code>res</code> each time a subtraction occurs.</li>
+<p>Both vectors are in descending order to facilitate the conversion process from the largest value to the smallest.</p>
+<h4 id="step-2-initialize-the-result-string-and-index">
+  Step 2: Initialize the Result String and Index
+  <a class="heading-link" href="#step-2-initialize-the-result-string-and-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li><code>idx</code> is used to iterate over the <code>nums</code> and <code>chrs</code> vectors.</li>
+<li><code>res</code> will hold the final Roman numeral representation of the given integer.</li>
 </ul>
-</li>
-<li>Increment <code>idx</code> to move to the next Roman numeral value.</li>
+<h4 id="step-3-conversion-loop">
+  Step 3: Conversion Loop
+  <a class="heading-link" href="#step-3-conversion-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(num <span style="color:#f92672">&gt;=</span> nums[idx])
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">-=</span> nums[idx];
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> chrs[idx];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    idx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer <code>while</code> loop ensures that the process continues until <code>num</code> becomes zero.</li>
+<li>Inside the loop, the inner <code>while</code> loop checks if the current value (<code>nums[idx]</code>) is less than or equal to <code>num</code>. If it is, we subtract <code>nums[idx]</code> from <code>num</code> and append the corresponding Roman numeral (<code>chrs[idx]</code>) to <code>res</code>.</li>
+<li>The <code>idx++</code> step increments the index to move to the next lower Roman numeral value, ensuring that we consider smaller values once the current one has been fully used.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Once <code>num</code> has been reduced to 0, return the constructed Roman numeral string <code>res</code>.</li>
+<p>This process ensures that the number is gradually reduced while adding the correct Roman numeral symbols to the result string.</p>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once <code>num</code> is reduced to zero, the result string <code>res</code> contains the correct Roman numeral representation, and we return it.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -298,15 +388,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the number of different Roman numeral symbols (constant time as there are only 13 symbols).</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used that scales with input size; only a few variables and strings are used.</li>
+<li>The time complexity is <strong>O(1)</strong> because the maximum number of iterations in the outer loop is limited to the number of Roman numeral symbols, which is constant (13 elements). Thus, the algorithm performs a constant number of iterations for any input, making it very efficient.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a fixed amount of extra space regardless of the input size. The space required for the <code>nums</code> and <code>chrs</code> arrays is constant and does not scale with the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach provides an efficient way to convert an integer into a Roman numeral by following a greedy strategy. By starting with the largest Roman numeral and working our way down, we can ensure that the conversion is done optimally and in constant time.</p>
+<h4 id="advantages">
+  Advantages:
+  <a class="heading-link" href="#advantages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Optimal Efficiency</strong>: With a constant time complexity of O(1), this solution is extremely fast for any valid input.</li>
+<li><strong>Simple and Intuitive</strong>: The algorithm uses a greedy approach, which is easy to understand and implement.</li>
+</ul>
+<h4 id="limitations">
+  Limitations:
+  <a class="heading-link" href="#limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The approach assumes the input number is within the range of valid Roman numerals (i.e., between 1 and 3999).</li>
+</ul>
+<h4 id="summary">
+  Summary:
+  <a class="heading-link" href="#summary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>This solution uses a greedy algorithm that iteratively subtracts the largest Roman numeral value from the integer and appends the corresponding Roman numeral symbol. By processing the number in this way, we can convert any valid integer to its Roman numeral representation in an optimal and efficient manner. The use of two arrays (<code>nums</code> and <code>chrs</code>) ensures that the Roman numeral symbols are applied correctly in a descending order, and the algorithm is very efficient with constant time and space complexity.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode117s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode119s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

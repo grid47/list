@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              7-minute read
             </span>
           </div>
 
@@ -291,7 +291,7 @@
 </span></span><span style="display:flex;"><span>        grid[i][j] <span style="color:#f92672">=</span> c;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode659s1hbhb">
+<h2 id="hahahugoshortcode656s1hbhb">
   
 
   
@@ -303,7 +303,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You need to find all words from a given list that can be formed by sequentially adjacent letters on a 2D board. The same letter cell can be used more than once in a word. Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring.</p>
+<p>The problem is to find all the words from a given list of words that can be formed in a 2D grid of characters. The words can be formed by connecting letters in the grid, moving horizontally or vertically, and each letter from the grid can be used only once per word.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -311,68 +311,142 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Trie Structure</strong>: Use a trie to store the words for efficient searching.</p>
+<p>To solve this problem efficiently, we can employ a <strong>Trie data structure</strong> (prefix tree) combined with <strong>Depth First Search (DFS)</strong> traversal. This approach allows us to check all possible words in the grid while pruning unnecessary search paths.</p>
+<p><strong>Key observations:</strong></p>
 <ul>
-<li>Each node in the trie represents a character in a word and has:
-<ul>
-<li>A <code>val</code> for the character.</li>
-<li>A <code>bool isWord</code> to indicate if the node marks the end of a valid word.</li>
-<li>A <code>word</code> string to store the complete word when reached.</li>
-<li>A <code>next</code> vector to represent children nodes.</li>
+<li><strong>Trie structure:</strong> We can build a Trie for the list of words, where each node represents a character in the word, and paths through the Trie represent prefixes of the words. This way, when searching for words in the grid, we can quickly determine whether the current path is still a valid prefix of any word.</li>
+<li><strong>DFS traversal:</strong> Starting from each cell in the grid, we can perform DFS to explore all possible words by moving horizontally or vertically. If a valid word is formed, we add it to the result list.</li>
+<li><strong>Backtracking:</strong> As we explore the grid, we mark visited cells temporarily and restore them to their original value after the DFS exploration at that position is complete. This ensures that each letter can be used only once per word.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Trie</strong>:</p>
-<ul>
-<li>Iterate through the list of words and insert each word into the trie character by character.</li>
-</ul>
-</li>
-<li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Traverse each cell in the grid, starting a DFS whenever an unvisited cell is reached.</li>
-<li>During DFS:
-<ul>
-<li>Mark the cell as visited by changing its value to a placeholder (e.g., <code>'#'</code>).</li>
-<li>Check if the current character leads to a valid word in the trie. If it does, store the word and mark it as found to prevent duplicates.</li>
-<li>Explore all four possible directions (up, down, left, right).</li>
-<li>Backtrack by resetting the cell to its original value after exploring.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-trie-node-definition">
+  1. Trie Node Definition
+  <a class="heading-link" href="#1-trie-node-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isWord;
+</span></span><span style="display:flex;"><span>    string word;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> next;
+</span></span><span style="display:flex;"><span>    Node(<span style="color:#66d9ef">char</span> val, <span style="color:#66d9ef">bool</span> isWord) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> isWord;
+</span></span><span style="display:flex;"><span>        next.resize(<span style="color:#ae81ff">26</span>, NULL);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>Node</code> class represents a Trie node. Each node stores:
 <ul>
-<li>
-<p><strong>Node Class</strong>:</p>
-<ul>
-<li>Represents a single character in the trie with attributes for the character value, a boolean flag indicating if it&rsquo;s a complete word, the word itself, and a vector for its children.</li>
+<li><code>val</code>: The character stored in the node.</li>
+<li><code>isWord</code>: A boolean flag that indicates whether the current node represents the end of a valid word.</li>
+<li><code>word</code>: The word that ends at this node (only set if <code>isWord</code> is true).</li>
+<li><code>next</code>: A vector of pointers to the next possible nodes (corresponding to the 26 letters of the alphabet).</li>
 </ul>
 </li>
-<li>
-<p><strong>Solution Class</strong>:</p>
-<ul>
-<li><strong>findWords</strong>: Initializes the board and constructs the trie from the provided words. It iterates through each cell to start the DFS.</li>
-<li><strong>dfs</strong>: The recursive function that explores the grid and searches for words in the trie:
-<ul>
-<li>Checks if the current cell is valid and if it corresponds to a character in the trie.</li>
-<li>If a valid word is found, it adds it to the results.</li>
-<li>Marks the cell as visited and explores its neighbors.</li>
 </ul>
-</li>
+<h4 id="2-trie-construction">
+  2. Trie Construction
+  <a class="heading-link" href="#2-trie-construction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string w: words) {
+</span></span><span style="display:flex;"><span>    node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: w) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[c] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>next[c] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(x, false);
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next[c];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>word <span style="color:#f92672">=</span> w;
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each word in the input list <code>words</code>, we traverse through the Trie, creating new nodes as necessary.</li>
+<li>The letter <code>x</code> in the word is mapped to an index using <code>x - 'a'</code> to ensure a proper position in the <code>next</code> vector (which is of size 26).</li>
+<li>At the end of each word, we mark the node as the end of a word (<code>isWord = true</code>) and store the actual word in the <code>word</code> field.</li>
 </ul>
-</li>
+<h4 id="3-dfs-traversal">
+  3. DFS Traversal
+  <a class="heading-link" href="#3-dfs-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>ans, Node<span style="color:#f92672">*</span> node, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> grid[i][j];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span> <span style="color:#f92672">||</span> node<span style="color:#f92672">-&gt;</span>next[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>isWord) {
+</span></span><span style="display:flex;"><span>        ans.push_back(node<span style="color:#f92672">-&gt;</span>word);
+</span></span><span style="display:flex;"><span>        node<span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#&#39;</span>;  <span style="color:#75715e">// Mark the cell as visited.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> dir[k], y <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> dir[k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        dfs(ans, node, x, y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#f92672">=</span> c;  <span style="color:#75715e">// Restore the cell after exploration.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The DFS function explores the grid starting from cell <code>(i, j)</code>.</li>
+<li>We first check if the current character (<code>grid[i][j]</code>) is valid (i.e., not visited and part of a valid Trie path).</li>
+<li>If the character is valid, we move to the corresponding Trie node and recursively explore all 4 possible directions (up, down, left, right).</li>
+<li>If a valid word is formed (i.e., <code>node-&gt;isWord</code> is true), we add it to the result list (<code>ans</code>) and mark the word as found by setting <code>node-&gt;isWord</code> to <code>false</code>.</li>
+<li>We temporarily mark the current cell as visited by setting <code>grid[i][j] = '#'</code> and restore it after the exploration is complete.</li>
+</ul>
+<h4 id="4-main-function-to-find-words">
+  4. Main Function to Find Words
+  <a class="heading-link" href="#4-main-function-to-find-words">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> findWords(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> board, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m <span style="color:#f92672">=</span> board.size(), <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> board[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>grid <span style="color:#f92672">=</span> board;
+</span></span><span style="display:flex;"><span>    root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#e6db74">&#39; &#39;</span>, false);
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(string w: words) {
+</span></span><span style="display:flex;"><span>        node <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: w) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[c] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>next[c] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(x, false);
+</span></span><span style="display:flex;"><span>            node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next[c];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        node<span style="color:#f92672">-&gt;</span>word <span style="color:#f92672">=</span> w;
+</span></span><span style="display:flex;"><span>        node<span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            dfs(ans, root, i, j);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The main function initializes the <code>grid</code> and builds the Trie as described earlier.</li>
+<li>It then starts DFS from each cell of the grid. If a valid word is found during DFS traversal, it is added to the result list <code>ans</code>.</li>
+<li>Finally, the function returns the list of found words.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -381,26 +455,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li>Building the Trie:
 <ul>
-<li>Constructing the trie: (O(k \cdot m)), where (k) is the number of words and (m) is the average length of the words.</li>
-<li>DFS traversal: In the worst case, visiting all cells leads to (O(N \cdot M)) operations, where (N) and (M) are the dimensions of the board.</li>
+<li>For each word in the input list <code>words</code>, we insert each character into the Trie. Since the maximum number of words is <code>W</code> and the maximum word length is <code>L</code>, the time complexity for building the Trie is <strong>O(W * L)</strong>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
+<li>DFS Traversal:
 <ul>
-<li>(O(k \cdot m)) for the trie structure, and (O(N \cdot M)) for the grid if we consider the visited states.</li>
+<li>In the worst case, we explore each cell in the grid and attempt to follow all 4 directions for every cell, which can result in <strong>O(m * n)</strong> DFS calls, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid.</li>
+<li>For each DFS call, we perform constant-time operations (checking the Trie and marking cells as visited), resulting in a total time complexity of <strong>O(m * n * 4)</strong> for all DFS calls.</li>
 </ul>
 </li>
+<li>The overall time complexity is dominated by <strong>O(W * L + m * n * 4)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is driven by the storage required for the Trie, which takes <strong>O(W * L)</strong> space, where <code>W</code> is the number of words and <code>L</code> is the average length of the words.</li>
+<li>The additional space used for DFS recursion and storing the result is <strong>O(m * n)</strong>.</li>
+<li>Therefore, the overall space complexity is <strong>O(W * L + m * n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently finds all words from a list that can be formed in a 2D grid of characters using a Trie and DFS approach. The Trie helps in quickly pruning unnecessary search paths by ensuring that only valid prefixes of words are explored. The DFS traversal explores all possible paths in the grid while avoiding revisiting cells by marking them temporarily. This solution is optimal in terms of both time and space complexity, making it suitable for larger grids and word lists.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode659s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode656s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -219,7 +219,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode206s1hbhb">
+<h2 id="hahahugoshortcode203s1hbhb">
   
 
   
@@ -231,7 +231,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> where every element appears twice except for one, find the single element that appears only once.</p>
+<p>The problem asks to find the <strong>single number</strong> in an array where every other element appears exactly twice, except for one element that appears only once. The goal is to determine the element that appears only once, using the most efficient solution possible.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -239,32 +239,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can leverage the <strong>XOR</strong> (exclusive OR) operation. The XOR operation has the following properties:</p>
 <ol>
-<li><strong>XOR Operation</strong>:
-<ul>
-<li>Utilize the property of the XOR operation:
-<ul>
-<li>( a \oplus a = 0 ) (any number XORed with itself results in zero)</li>
-<li>( a \oplus 0 = a ) (any number XORed with zero results in the number itself)</li>
-</ul>
-</li>
-<li>When we XOR all the numbers in the array, the duplicates will cancel each other out, leaving only the unique number.</li>
-</ul>
-</li>
+<li><strong>a ^ a = 0</strong>: XOR-ing a number with itself results in zero.</li>
+<li><strong>a ^ 0 = a</strong>: XOR-ing a number with zero results in the number itself.</li>
+<li>XOR is <strong>commutative</strong> and <strong>associative</strong>, meaning the order of applying XOR does not matter.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By utilizing these properties, we can iterate through the array and XOR all the numbers. Pairs of identical numbers will cancel each other out (because <strong>x ^ x = 0</strong>), and the only remaining number will be the single number that does not have a duplicate.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-a-variable-to-hold-the-result">
+  Step 1: Initialize a variable to hold the result
+  <a class="heading-link" href="#step-1-initialize-a-variable-to-hold-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>Here, we initialize an integer <code>x</code> to <code>0</code>. This variable will hold the result as we apply the XOR operation throughout the array. Starting from <code>0</code> is important because XOR-ing any number with <code>0</code> leaves the number unchanged.</p>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate through the array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> y: nums)
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">^=</span> y;
+</span></span></code></pre></div><p>In this step, we iterate over each number <code>y</code> in the <code>nums</code> array. For each number <code>y</code>, we apply the XOR operation between <code>x</code> and <code>y</code>, and store the result back into <code>x</code>. Here&rsquo;s what happens for each iteration:</p>
 <ul>
-<li><strong>Line 5</strong>: Initialize an integer variable <code>x</code> to 0.</li>
-<li><strong>Line 6</strong>: Iterate through each number <code>y</code> in the <code>nums</code> array.</li>
-<li><strong>Line 7</strong>: XOR <code>y</code> with <code>x</code>. This accumulates the result such that all duplicate numbers cancel out.</li>
-<li><strong>Line 8</strong>: Return the result in <code>x</code>, which will be the single number.</li>
+<li>If <code>y</code> is a number that appears twice, XOR-ing it with <code>x</code> will cancel it out (i.e., set it to <code>0</code>).</li>
+<li>If <code>y</code> is the single number that appears only once, it will accumulate in <code>x</code> because it doesn’t have a duplicate to cancel it out.</li>
 </ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> x;
+</span></span></code></pre></div><p>After iterating through the entire array, the variable <code>x</code> will contain the value of the number that appears only once. This is because all the numbers that appear twice would have canceled out, leaving the single number that does not have a duplicate.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -272,14 +292,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of elements in the <code>nums</code> array, as we need to iterate through the array once.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as we are using a constant amount of space regardless of the input size.</li>
-</ul> 
+<li><strong>O(n)</strong>: The algorithm iterates through the entire array exactly once, where <code>n</code> is the number of elements in the <code>nums</code> array. Each XOR operation takes constant time (O(1)), and since there are <code>n</code> elements in the array, the total time complexity is O(n).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We are using a constant amount of extra space. The only variable used to store the result is <code>x</code>, which takes up O(1) space. No additional data structures are required, making the space complexity constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is both time-efficient and space-efficient for finding the single number in an array where every other element appears twice. The algorithm uses the XOR operation, which allows us to cancel out pairs of identical numbers, leaving the single number as the result.</p>
+<p>The time complexity of <strong>O(n)</strong> ensures that the solution will run efficiently even for large arrays, and the space complexity of <strong>O(1)</strong> means that the solution only requires a constant amount of additional memory. This approach is optimal for solving this problem and is easy to implement.</p>
+<p>To summarize:</p>
+<ul>
+<li><strong>Optimal Time Complexity</strong>: The algorithm runs in linear time, O(n), where <code>n</code> is the length of the array.</li>
+<li><strong>Optimal Space Complexity</strong>: The algorithm uses only a constant amount of extra space, O(1), making it very efficient in terms of memory usage.</li>
+<li><strong>Efficient XOR Operations</strong>: By exploiting the properties of XOR, the solution efficiently cancels out paired elements and isolates the single element in the array.</li>
+</ul>
+<p>This solution is ideal for situations where you need to find a unique element in an array where every other element has a duplicate. It can be applied to a wide range of similar problems, making it an important technique to master for interview preparation and problem-solving in general.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode206s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode203s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

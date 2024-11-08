@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[n][k];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1512s1hbhb">
+<h2 id="hahahugoshortcode1510s1hbhb">
   
 
   
@@ -251,7 +251,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>nums</code> and an integer <code>k</code>, the goal is to partition the array into <code>k</code> contiguous subarrays such that the sum of their averages is maximized.</p>
+<p>In this problem, we are tasked with dividing an array of integers into <code>k</code> non-empty contiguous subarrays, such that the sum of the averages of the subarrays is maximized. Given an array of integers <code>nums</code> and an integer <code>k</code>, we need to determine the largest possible sum of the averages of these subarrays.</p>
+<p>The problem requires us to partition the array optimally so that each subarray&rsquo;s average contributes to the total sum, and we maximize the sum. The division of the array into subarrays can be tricky because of how averages work, so a strategic approach is necessary.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,82 +260,91 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem optimally, we can use <strong>Dynamic Programming (DP)</strong> with <strong>Memoization</strong>. The main idea is to compute the maximum sum of averages by considering all possible partitions of the array.</p>
+<p>Here&rsquo;s a step-by-step breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming (DP)</strong>:</p>
-<ul>
-<li>Use a 2D memoization table (<code>memo</code>) where <code>memo[i][j]</code> represents the maximum sum of averages that can be obtained by partitioning the first <code>i</code> elements into <code>j</code> parts.</li>
-</ul>
+<p><strong>Dynamic Programming</strong>: We maintain a DP table where <code>memo[i][j]</code> represents the maximum sum of averages we can achieve by partitioning the first <code>i</code> elements of the array into <code>j</code> subarrays.</p>
 </li>
 <li>
-<p><strong>Base Case Initialization</strong>:</p>
-<ul>
-<li>Pre-compute the average of the first <code>i</code> elements and store it in <code>memo[i][1]</code> for <code>1 ≤ i ≤ n</code>, where <code>n</code> is the length of the array. This is done using a cumulative sum <code>cur</code>.</li>
-</ul>
+<p><strong>Precompute Prefix Sums</strong>: Before starting the DP, we precompute the prefix sums of the array so that we can quickly compute the average of any subarray. The prefix sum at index <code>i</code> gives the sum of all elements in <code>nums[0..i-1]</code>. Using this, the average of a subarray from index <code>i</code> to <code>j</code> can be computed as <code>(prefix[j+1] - prefix[i]) / (j - i + 1)</code>.</p>
 </li>
 <li>
-<p><strong>Recursive Search</strong>:</p>
-<ul>
-<li>Implement a recursive function <code>search(n, k, nums)</code> that:
-<ul>
-<li>Checks if the result for <code>memo[n][k]</code> has already been computed.</li>
-<li>Iterates through the array to find possible partitions by considering the last segment from index <code>i</code> to <code>n</code>, updating the maximum sum of averages using previously computed values.</li>
-<li>For each index <code>i</code>, calculate the average of the segment and add it to the result of recursively calling the function for the previous segment with <code>k-1</code> partitions.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Recursive Search with Memoization</strong>: The solution uses recursion to explore all possible ways to partition the array into <code>k</code> subarrays. Each recursion tries to partition the array by considering the last partition to be a subarray from some index <code>i</code> to <code>n</code>, and the rest is handled by the DP table. This allows us to break the problem into subproblems and store results to avoid redundant computations.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Call <code>search(n, k, nums)</code> to get the final result for the entire array and the specified number of partitions.</li>
-</ul>
+<p><strong>Base Case</strong>: The base case is when we have exactly <code>1</code> subarray, in which case the average of the entire array is used as the only element.</p>
+</li>
+<li>
+<p><strong>Transition</strong>: The state transition is based on splitting the array into smaller subarrays, and for each subarray, we compute its average and combine it with the results from previous subarrays.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains methods to calculate the largest sum of averages.
-<ul>
-<li><code>double largestSumOfAverages(vector&lt;int&gt;&amp; nums, int k)</code>: Main function to initialize variables and start the search.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>nums</code>: A vector of integers representing the array.</li>
-<li><code>k</code>: An integer representing the number of partitions.</li>
+<h4 id="step-1-initializing-the-memoization-table">
+  Step 1: Initializing the Memoization Table
+  <a class="heading-link" href="#step-1-initializing-the-memoization-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>memset(memo, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>memo</code> table to store the results of subproblems. The size of the table is <code>[200][200]</code> since the problem constraints suggest that the number of elements in <code>nums</code> is manageable, and <code>k</code> is at most 200. This memoization ensures we don’t compute the same subproblem multiple times, making the solution efficient.</li>
 </ul>
-</li>
-<li><strong>Returns</strong>: The maximum sum of averages after partitioning.</li>
+<h4 id="step-2-calculating-the-prefix-sums-and-initializing-the-first-subarray">
+  Step 2: Calculating the Prefix Sums and Initializing the First Subarray
+  <a class="heading-link" href="#step-2-calculating-the-prefix-sums-and-initializing-the-first-subarray">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    memo[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cur <span style="color:#f92672">/</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through the array and compute the prefix sums (<code>cur</code>). For each prefix sum, we store the average of the first <code>i+1</code> elements in <code>memo[i+1][1]</code>, since this is the maximum sum we can get by using only one subarray from the start of the array to index <code>i</code>.</li>
 </ul>
-</li>
+<h4 id="step-3-recursive-search-function">
+  Step 3: Recursive Search Function
+  <a class="heading-link" href="#step-3-recursive-search-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">search</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[n][k] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        memo[n][k] <span style="color:#f92672">=</span> max(memo[n][k], search(i, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, nums) <span style="color:#f92672">+</span> cur <span style="color:#f92672">/</span> (n <span style="color:#f92672">-</span> i));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is the core recursive function. It computes the maximum sum of averages for <code>n</code> elements and <code>k</code> subarrays.</li>
+<li>First, it checks if the result is already memoized (<code>memo[n][k] &gt; 0</code>), and if so, returns the value.</li>
+<li>It then computes the sum of elements from index <code>i</code> to <code>n</code> (which is part of the last subarray) and recursively calls the <code>search</code> function for the remaining elements (<code>i</code> to <code>n-1</code>) with <code>k-1</code> subarrays.</li>
+<li>The function keeps track of the maximum possible sum by considering all possible ways of splitting the last subarray, and the result is memoized for future use.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li><code>double search(int n, int k, vector&lt;int&gt; &amp;nums)</code>: Helper function to perform the recursive DP search.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>n</code>: The current length of the segment being considered.</li>
-<li><code>k</code>: The remaining number of partitions to create.</li>
-<li><strong>Returns</strong>: The maximum sum of averages for the current segment and partitions.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<h4 id="step-4-final-result">
+  Step 4: Final Result
+  <a class="heading-link" href="#step-4-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">search</span>(n, k, nums);
+</span></span></code></pre></div><ul>
+<li>After initializing the first subarray averages, we call the <code>search</code> function to compute the maximum sum of averages for the entire array with <code>k</code> subarrays.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -343,15 +353,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2 * k), where <code>n</code> is the number of elements in <code>nums</code> and <code>k</code> is the number of partitions since we compute the result for each combination of <code>n</code> and <code>k</code>.</li>
-<li><strong>Space Complexity</strong>: O(n * k) for the memoization table.</li>
+<li><strong>O(n * k)</strong>:
+<ul>
+<li>We have <code>n</code> elements and at most <code>k</code> subarrays. For each state <code>memo[n][k]</code>, we try every possible split of the array into two subarrays, which results in <code>O(n)</code> recursive calls per state.</li>
+<li>Thus, the time complexity is proportional to the number of states (<code>n * k</code>), and each state takes linear time (<code>O(n)</code>) to compute due to the recursive exploration.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * k)</strong>:
+<ul>
+<li>We are using a memoization table of size <code>n * k</code> to store the results for each subproblem, so the space complexity is directly proportional to the number of subproblems (<code>n * k</code>).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of partitioning the array into <code>k</code> subarrays by using dynamic programming with memoization. By breaking the problem into smaller subproblems and storing intermediate results, we avoid redundant calculations and optimize the solution. The recursive approach, combined with efficient memoization, ensures that the solution is computed in a reasonable amount of time, even for larger input sizes.</p>
+<p>In essence, this solution balances both time and space complexities to handle a variety of input sizes while providing an optimal solution to the problem. The approach is elegant, efficient, and applicable to similar problems involving partitioning or dynamic array processing.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1512s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1510s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

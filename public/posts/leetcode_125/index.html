@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -229,7 +229,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode143s1hbhb">
+<h2 id="hahahugoshortcode175s1hbhb">
   
 
   
@@ -241,7 +241,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, determine if it is a palindrome, considering only alphanumeric characters and ignoring case. A palindrome reads the same forwards and backwards.</p>
+<p>The problem is to determine whether a given string <code>s</code> is a palindrome, considering only alphanumeric characters and ignoring cases. A palindrome is a word, phrase, or sequence that reads the same backward as forward. For this problem, we are tasked with checking if the string is a valid palindrome by only considering letters and digits and ignoring spaces, punctuation, and case differences.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p><strong>Input</strong>: <code>&quot;A man, a plan, a canal: Panama&quot;</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>true</code></p>
+<ul>
+<li>Explanation: After removing all non-alphanumeric characters and ignoring the case, the string becomes <code>&quot;amanaplanacanalpanama&quot;</code>, which is the same forwards and backwards.</li>
+</ul>
+</li>
+<li>
+<p><strong>Input</strong>: <code>&quot;race a car&quot;</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>false</code></p>
+<ul>
+<li>Explanation: After removing non-alphanumeric characters, the string becomes <code>&quot;raceacar&quot;</code>, which is not the same forwards and backwards.</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,65 +270,186 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the approach is to use two pointers:</p>
+<ul>
+<li>One pointer (<code>i</code>) starts at the beginning of the string.</li>
+<li>Another pointer (<code>j</code>) starts at the end of the string.
+The idea is to compare the characters at these two pointers while ignoring non-alphanumeric characters and case differences.</li>
+</ul>
+<p>Steps:</p>
 <ol>
-<li>Initialize two pointers:
+<li><strong>Skip Non-Alphanumeric Characters</strong>: Both pointers <code>i</code> and <code>j</code> should skip over any non-alphanumeric characters (such as spaces, punctuation, etc.).</li>
+<li><strong>Character Comparison</strong>: Once both pointers point to alphanumeric characters, compare them:
 <ul>
-<li><code>i</code>: starting from the beginning of the string.</li>
-<li><code>j</code>: starting from the end of the string.</li>
+<li>Convert both characters to lowercase to ignore case.</li>
+<li>If the characters match, move both pointers towards the center of the string (i.e., increment <code>i</code> and decrement <code>j</code>).</li>
 </ul>
 </li>
-<li>Use a while loop to check characters while <code>i</code> is less than or equal to <code>j</code>:
-<ul>
-<li>Skip non-alphanumeric characters by incrementing <code>i</code> or decrementing <code>j</code> as needed.</li>
-<li>Compare the characters at positions <code>i</code> and <code>j</code> after converting them to lowercase.</li>
-<li>If they are equal, move both pointers inward.</li>
-<li>If they are not equal, return <code>false</code> (the string is not a palindrome).</li>
-</ul>
-</li>
-<li>If the loop completes without mismatches, return <code>true</code> (the string is a palindrome).</li>
+<li><strong>Termination Condition</strong>: If at any point the characters don’t match, return <code>false</code> immediately. If the pointers cross (i.e., <code>i</code> becomes greater than <code>j</code>), return <code>true</code>, as the string is a palindrome.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition">
+  1. <strong>Function Definition</strong>
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> isPalindrome(string s)
+</span></span></code></pre></div><p>The function <code>isPalindrome</code> takes a string <code>s</code> as input and returns a boolean indicating whether the string is a valid palindrome based on the given conditions.</p>
+<h4 id="2-pointer-initialization">
+  2. <strong>Pointer Initialization</strong>
+  <a class="heading-link" href="#2-pointer-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>i</code> is initialized to the start of the string.</li>
+<li><code>j</code> is initialized to the last index of the string.</li>
+</ul>
+<h4 id="3-main-loop">
+  3. <strong>Main Loop</strong>
+  <a class="heading-link" href="#3-main-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> j) {
+</span></span></code></pre></div><p>The loop runs as long as the two pointers have not crossed each other (<code>i &lt;= j</code>).</p>
+<h4 id="4-skip-non-alphanumeric-characters">
+  4. <strong>Skip Non-Alphanumeric Characters</strong>
+  <a class="heading-link" href="#4-skip-non-alphanumeric-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>isalnum(s[i])) {
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>; <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>isalnum(s[j])) {
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">--</span>; <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>isalnum(s[i])</code></strong>: This checks if the character at position <code>i</code> is alphanumeric (either a letter or a digit). If it is not alphanumeric, we increment <code>i</code> to skip it and continue the loop.</li>
+<li><strong><code>isalnum(s[j])</code></strong>: Similarly, this checks if the character at position <code>j</code> is alphanumeric. If not, we decrement <code>j</code> to skip it.</li>
+</ul>
+<h4 id="5-character-comparison">
+  5. <strong>Character Comparison</strong>
+  <a class="heading-link" href="#5-character-comparison">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(tolower(s[i]) <span style="color:#f92672">==</span> tolower(s[j])) {
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>, j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li><strong><code>tolower(s[i])</code></strong> and <strong><code>tolower(s[j])</code></strong> convert the characters at <code>i</code> and <code>j</code> to lowercase to ensure case insensitivity.</li>
+<li>If the characters match, both <code>i</code> and <code>j</code> are moved towards the center (<code>i++</code> and <code>j--</code>).</li>
+<li>If the characters do not match, return <code>false</code> immediately since the string is not a palindrome.</li>
+</ul>
+<h4 id="6-return-result">
+  6. <strong>Return Result</strong>
+  <a class="heading-link" href="#6-return-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><p>If the loop finishes without returning <code>false</code>, it means all characters matched appropriately, and the string is a palindrome, so <code>true</code> is returned.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the function with an example.</p>
+<p><strong>Input</strong>: <code>&quot;A man, a plan, a canal: Panama&quot;</code></p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>i = 0</code>, <code>j = 29</code> (the size of the string is 30, so <code>j = 29</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>First Iteration</strong> (<code>i = 0</code>, <code>j = 29</code>):</p>
+<ul>
+<li><code>s[i] = 'A'</code> and <code>s[j] = 'a'</code>.</li>
+<li>Both characters are alphanumeric. After converting to lowercase, they match (<code>'a' == 'a'</code>).</li>
+<li>Move <code>i</code> to 1 and <code>j</code> to 28.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration</strong> (<code>i = 1</code>, <code>j = 28</code>):</p>
+<ul>
+<li><code>s[i] = ' '</code>, which is not alphanumeric, so increment <code>i</code> to 2 and continue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration</strong> (<code>i = 2</code>, <code>j = 28</code>):</p>
+<ul>
+<li><code>s[i] = 'm'</code> and <code>s[j] = 'm'</code>.</li>
+<li>Both characters match, move <code>i</code> to 3 and <code>j</code> to 27.</li>
+</ul>
+</li>
+<li>
+<p><strong>Continue through subsequent iterations</strong>:</p>
+<ul>
+<li>As we move through the string, all corresponding characters match after skipping non-alphanumeric characters and converting to lowercase.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Iteration</strong> (<code>i = 14</code>, <code>j = 15</code>):</p>
+<ul>
+<li>Both pointers meet at the center, and no mismatches are found. The loop ends and <code>true</code> is returned.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Output</strong>: <code>true</code></p>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong><code>isPalindrome</code> function</strong>:
+<li>
+<p><strong>Time Complexity</strong>: <code>O(n)</code></p>
 <ul>
-<li><strong>Line 3</strong>: Initialize two pointers <code>i</code> and <code>j</code>.</li>
-<li><strong>Line 4</strong>: Start a loop that continues while <code>i</code> is less than or equal to <code>j</code>.
+<li>The algorithm makes a single pass through the string, with each character being examined once. The time complexity is proportional to the length of the string, <code>n</code>, where <code>n</code> is the number of characters in the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <code>O(1)</code></p>
 <ul>
-<li><strong>Line 5</strong>: Check if the character at index <code>i</code> is alphanumeric; if not, increment <code>i</code>.</li>
-<li><strong>Line 6</strong>: Check if the character at index <code>j</code> is alphanumeric; if not, decrement <code>j</code>.</li>
-<li><strong>Line 7</strong>: Compare the characters at indices <code>i</code> and <code>j</code> after converting them to lowercase.
-<ul>
-<li>If they match, increment <code>i</code> and decrement <code>j</code>.</li>
-<li>If they don&rsquo;t match, return <code>false</code>.</li>
+<li>The algorithm uses only a fixed amount of extra space (the two integer variables <code>i</code> and <code>j</code>), so the space complexity is constant, <code>O(1)</code>.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><strong>Line 12</strong>: Return <code>true</code> if all checks are passed (the string is a palindrome).</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the length of the string, as we potentially traverse the entire string.</li>
-<li><strong>Space Complexity</strong>: (O(1)), since no additional data structures are used that scale with input size.</li>
-</ul> 
+<p>The <code>isPalindrome</code> function efficiently checks if a given string is a palindrome by considering only alphanumeric characters and ignoring case. It uses a two-pointer technique to traverse the string from both ends, skipping over non-alphanumeric characters and comparing the characters in a case-insensitive manner. The solution runs in linear time, making it optimal for large inputs, and uses constant space, ensuring minimal memory usage. This solution is both time-efficient and space-efficient, making it an ideal approach for palindrome checking problems.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode143s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode175s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

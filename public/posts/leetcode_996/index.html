@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -262,7 +262,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> r <span style="color:#f92672">*</span> r <span style="color:#f92672">==</span> v;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1656s1hbhb">
+<h2 id="hahahugoshortcode1654s1hbhb">
   
 
   
@@ -274,7 +274,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of integers <code>A</code>, find the number of different permutations of <code>A</code> such that the sum of every pair of adjacent elements is a perfect square.</p>
+<p>The problem asks us to find the number of distinct permutations of a given list of integers such that the sum of every two adjacent integers in each permutation forms a perfect square. A perfect square is a number that can be expressed as the square of an integer (e.g., 1, 4, 9, 16, etc.). The task is to generate all such permutations of the input array <code>A</code> and return the count of those permutations that satisfy the condition.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,34 +282,90 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution to this problem can be broken down into a few key parts:</p>
 <ol>
-<li><strong>Sorting</strong>: Start by sorting the array <code>A</code>. This helps in avoiding duplicate permutations.</li>
-<li><strong>Backtracking</strong>: Use a backtracking approach to generate permutations:
-<ul>
-<li>The function <code>pmt</code> is called recursively to explore all permutations starting from the current index <code>idx</code>.</li>
-<li>A <code>seen</code> set is utilized to track numbers that have already been used at the current position to avoid duplicates.</li>
-</ul>
-</li>
-<li><strong>Valid Pair Check</strong>: For each valid permutation, check if the sum of the current element and the previous one is a perfect square using the <code>isSquare</code> function:
-<ul>
-<li>If <code>idx</code> is <code>0</code>, simply add to the count since there&rsquo;s no previous element.</li>
-<li>If not, check if the sum is a perfect square.</li>
-</ul>
-</li>
-<li><strong>Counting Valid Permutations</strong>: Each time a valid permutation is formed (when <code>idx</code> reaches the size of <code>A</code>), increment the count.</li>
+<li><strong>Sorting the Input</strong>: First, we sort the array to help with generating distinct permutations efficiently and avoid duplicate permutations.</li>
+<li><strong>Backtracking for Permutation Generation</strong>: We use a <strong>backtracking</strong> technique to explore all possible permutations of the array. For each permutation, we check if adjacent elements sum to a perfect square.</li>
+<li><strong>Checking for Perfect Squares</strong>: To determine if the sum of two adjacent elements forms a perfect square, we implement a helper function <code>isSquare()</code>, which checks if a number is a perfect square.</li>
+<li><strong>Handling Duplicates</strong>: Since the input array may contain duplicate elements, we utilize a <code>unordered_set</code> to avoid generating the same permutation multiple times.</li>
+<li><strong>Recursive Exploration</strong>: The recursive function <code>pmt()</code> generates the permutations by swapping elements and recursively exploring all possible configurations, ensuring the perfect square condition is met for adjacent elements.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numSquarefulPerms(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> A) {
+</span></span><span style="display:flex;"><span>        sort(A.begin(), A.end());  <span style="color:#75715e">// Sort the input array to make permutation generation easier
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Variable to hold the number of valid permutations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        pmt(A, <span style="color:#ae81ff">0</span>, ans);  <span style="color:#75715e">// Start the permutation generation from index 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the result after all permutations are processed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ol>
+<li><strong>Initial Sorting and Setup</strong>:
 <ul>
-<li>The main function sorts the input array and initializes the count variable <code>ans</code>.</li>
-<li>The recursive function <code>pmt</code> is defined to handle the permutation generation and checking.</li>
-<li>A helper function <code>isSquare</code> is defined to check if a number is a perfect square.</li>
+<li>We begin by sorting the input array <code>A</code>. Sorting is essential because it helps with generating distinct permutations. By sorting the array, we ensure that identical elements are next to each other, which allows us to avoid generating duplicate permutations in subsequent recursive calls.</li>
+<li>The variable <code>ans</code> is initialized to <code>0</code> to count the number of valid permutations that meet the perfect square condition.</li>
+<li>We then call the recursive function <code>pmt()</code>, starting with the first index (<code>0</code>) and passing the <code>ans</code> variable by reference to accumulate the result.</li>
 </ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pmt</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>A, <span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> ans) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">&gt;=</span> A.size()) {  <span style="color:#75715e">// Base case: If we&#39;ve processed all elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#f92672">++</span>ans;  <span style="color:#75715e">// Increment the result as we&#39;ve found a valid permutation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> seen;  <span style="color:#75715e">// Set to track the elements we&#39;ve already considered at this index
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>Backtracking Setup</strong>:
+<ul>
+<li>Inside the recursive function <code>pmt()</code>, we first check if <code>idx</code> (the current index) has reached or exceeded the size of the array. If it has, this means we have a valid permutation, and we increment the <code>ans</code> counter.</li>
+<li>We also declare an <code>unordered_set&lt;int&gt; seen</code> to keep track of elements that have already been used at the current level of recursion. This ensures that we do not generate duplicate permutations when there are repeated elements in the input array.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> A.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (seen.find(A[i]) <span style="color:#f92672">!=</span> seen.end()) <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip if the element has already been used
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            seen.insert(A[i]);  <span style="color:#75715e">// Mark the element as used
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            swap(A[i], A[idx]);  <span style="color:#75715e">// Swap the current element with the element at index `idx`
+</span></span></span></code></pre></div><ol start="3">
+<li><strong>Generating Permutations</strong>:
+<ul>
+<li>We start a loop from index <code>idx</code> and iterate through the remaining elements. If the element <code>A[i]</code> has already been used at this level (i.e., it&rsquo;s in the <code>seen</code> set), we skip it to avoid generating duplicate permutations.</li>
+<li>If the element is valid to use, we insert it into the <code>seen</code> set and then swap <code>A[i]</code> with <code>A[idx]</code> to generate a new permutation.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ((idx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">||</span> (idx <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> isSquare(A[idx] <span style="color:#f92672">+</span> A[idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]))) {
+</span></span><span style="display:flex;"><span>                pmt(A, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ans);  <span style="color:#75715e">// Recursively process the next index if the sum is a perfect square
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>            swap(A[i], A[idx]);  <span style="color:#75715e">// Undo the swap to backtrack and try the next element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="4">
+<li><strong>Checking Adjacent Elements for Perfect Square</strong>:
+<ul>
+<li>The key part of the recursion is checking whether the sum of the current element <code>A[idx]</code> and the previous element <code>A[idx - 1]</code> is a perfect square. If we are at the first index (<code>idx == 0</code>), there is no previous element, so we can proceed without checking. For all other indices, we check if the sum of the adjacent elements forms a perfect square using the <code>isSquare()</code> helper function.</li>
+<li>If the condition is satisfied, we recursively call <code>pmt()</code> for the next index (<code>idx + 1</code>).</li>
+<li>After the recursive call, we undo the swap (i.e., backtrack) to explore other possible permutations by swapping back <code>A[i]</code> and <code>A[idx]</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isSquare</span>(<span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> sqrt(v);  <span style="color:#75715e">// Find the square root of the number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> r <span style="color:#f92672">*</span> r <span style="color:#f92672">==</span> v;  <span style="color:#75715e">// Check if the square of the root is equal to the original number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="5">
+<li><strong>Checking for Perfect Square</strong>:
+<ul>
+<li>The <code>isSquare()</code> function checks if a number <code>v</code> is a perfect square by taking the square root of <code>v</code> and checking if squaring the result gives us back the original number. If it does, then <code>v</code> is a perfect square, and the function returns <code>true</code>; otherwise, it returns <code>false</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -318,13 +374,26 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n!), where <code>n</code> is the number of elements in <code>A</code>. This arises from generating all permutations.</li>
-<li><strong>Space Complexity</strong>: O(n), which is used by the recursion stack and the <code>seen</code> set.</li>
-</ul> 
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is <strong>O(n! * n)</strong>, where <code>n</code> is the length of the input array. The <code>n!</code> factor comes from generating all permutations of the array, and for each permutation, we check adjacent elements (which takes linear time, <code>O(n)</code>).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the array. This is primarily due to the recursive call stack and the <code>seen</code> set used to avoid generating duplicate permutations.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages <strong>backtracking</strong> to generate all distinct permutations of the input array while ensuring that the sum of every two adjacent numbers forms a perfect square. By sorting the array and using a set to avoid duplicate permutations, the algorithm efficiently explores all valid configurations. The solution handles both the permutation generation and the perfect square condition seamlessly, ensuring that the result is correct and optimal. The backtracking approach, combined with the perfect square check, makes this solution both elegant and efficient for the problem at hand.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1656s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1654s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

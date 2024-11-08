@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1423s1hbhb">
+<h2 id="hahahugoshortcode1421s1hbhb">
   
 
   
@@ -267,7 +267,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of words and a maximum width for a line, format the text so that each line has exactly <code>maxWidth</code> characters. Each line should be fully justified, meaning that extra spaces should be distributed evenly among the words.</p>
+<p>The problem is to justify text such that each line has exactly <code>maxWidth</code> characters, with words evenly distributed across the line. Text justification typically involves adjusting spaces between words in a way that each line is exactly <code>maxWidth</code> characters long. The solution needs to handle three cases:</p>
+<ol>
+<li>Evenly distributing spaces across words.</li>
+<li>Adding spaces to fill lines.</li>
+<li>Properly handling the last line, which should be left-justified with no extra space between words.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -275,54 +280,119 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this, we break the input words into multiple lines and justify each line independently. Here’s a breakdown of the approach:</p>
 <ol>
-<li><strong>Initialize Variables</strong>: Create a result vector to store the formatted lines, and initialize variables for tracking the starting index of the current line (<code>begin</code>) and the cumulative length of words in the current line (<code>len</code>).</li>
-<li><strong>Iterate Over Words</strong>: Loop through each word in the input:
+<li>
+<p><strong>Creating Lines of Text</strong>:
+We iterate through the list of words and add each word to the current line until adding another word would exceed <code>maxWidth</code>. If the line becomes too long, we store the words for that line in <code>res</code>, justified as required. We then reset and start collecting words for the next line.</p>
+</li>
+<li>
+<p><strong>Handling Space Distribution</strong>:
+For each line, spaces are distributed between words based on the following cases:</p>
 <ul>
-<li>If adding the current word exceeds the <code>maxWidth</code>, call the helper function to create a justified line from <code>begin</code> to the current word, then reset <code>begin</code> and <code>len</code>.</li>
-<li>Add the current word&rsquo;s length to <code>len</code>.</li>
+<li><strong>Middle Lines</strong>: These lines are justified such that each space between words is as even as possible, with any extra spaces added to the leftmost gaps.</li>
+<li><strong>Last Line</strong>: The final line is left-justified, with each word separated by a single space, and any remaining space is added at the end of the line.</li>
 </ul>
 </li>
-<li><strong>Handle Last Line</strong>: After the loop, handle the last line differently to ensure it is left-justified (spaces added only at the end).</li>
-<li><strong>Justification Logic</strong>: Use a helper function to create a justified string from a range of words:
+<li>
+<p><strong>Constructing Each Line</strong>:
+We use a helper function, <code>connect</code>, to construct each justified line by:</p>
 <ul>
-<li>Calculate the total number of spaces needed and distribute them evenly between the words. If there are leftover spaces, distribute them from the leftmost gap.</li>
-<li>If it’s the last line, left-justify by appending spaces to the end.</li>
+<li>Appending words and spaces to the line according to the spacing rules for middle or last lines.</li>
+<li>Adding additional spaces at the end of the line if it’s shorter than <code>maxWidth</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Adding Spaces Appropriately</strong>:
+The <code>addSpaces</code> helper function calculates the number of spaces to insert between words. For middle lines, it determines the number of spaces based on the remaining space (<code>maxWidth - len</code>). For the last line, each word is separated by a single space, and any extra space is added to the end.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Main Function</strong>:</p>
-<ul>
-<li>Iterate over the words, checking if the cumulative length exceeds <code>maxWidth</code>.</li>
-<li>If it does, call <code>connect</code> to format the current line and reset the tracking variables.</li>
-<li>Finally, format the last line and add it to the result.</li>
+<h4 id="step-1-define-the-main-function">
+  Step 1: Define the Main Function
+  <a class="heading-link" href="#step-1-define-the-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> fullJustify(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words, <span style="color:#66d9ef">int</span> maxWidth) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> words.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> begin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>Here, <code>res</code> is the result vector that will hold all the justified lines.</li>
+<li>We define <code>n</code> as the number of words and initialize <code>begin</code> to track the starting index of each line and <code>len</code> to accumulate the length of words in the current line.</li>
 </ul>
-</li>
-<li>
-<p><strong>Connect Function</strong>:</p>
-<ul>
-<li>Builds a justified string by iterating through the words between <code>begin</code> and <code>end</code>.</li>
-<li>Calls <code>addSpaces</code> to handle spacing between words based on whether it’s the last line or not.</li>
-<li>Adds any remaining spaces at the end of the line if necessary.</li>
+<h4 id="step-2-break-text-into-lines">
+  Step 2: Break Text into Lines
+  <a class="heading-link" href="#step-2-break-text-into-lines">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (len <span style="color:#f92672">+</span> words[i].size() <span style="color:#f92672">+</span> (i <span style="color:#f92672">-</span> begin) <span style="color:#f92672">&gt;</span> maxWidth) {
+</span></span><span style="display:flex;"><span>        res.emplace_back(connect(words, maxWidth, begin, i, len, false));
+</span></span><span style="display:flex;"><span>        begin <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    len <span style="color:#f92672">+=</span> words[i].size();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>res.emplace_back(connect(words, maxWidth, begin, n, len, true));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The loop goes through each word. If adding the next word exceeds <code>maxWidth</code>, it calls <code>connect</code> to create a justified line for the current words and stores it in <code>res</code>.</li>
+<li><code>begin</code> and <code>len</code> are reset to start processing the next line.</li>
+<li>After the loop, we handle the last line by calling <code>connect</code> with <code>is_last = true</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Add Spaces Function</strong>:</p>
-<ul>
-<li>Calculates how many spaces to add based on whether the line is the last one and how many gaps exist.</li>
-<li>Appends the calculated spaces to the current line string.</li>
+<h4 id="step-3-create-justified-lines-with-connect">
+  Step 3: Create Justified Lines with <code>connect</code>
+  <a class="heading-link" href="#step-3-create-justified-lines-with-connect">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">connect</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words, <span style="color:#66d9ef">int</span> maxWidth, <span style="color:#66d9ef">int</span> begin, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">bool</span> is_last) {
+</span></span><span style="display:flex;"><span>    string s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> end <span style="color:#f92672">-</span> begin;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">+=</span> words[begin <span style="color:#f92672">+</span> i];
+</span></span><span style="display:flex;"><span>        addSpaces(i, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, maxWidth <span style="color:#f92672">-</span> len, is_last, <span style="color:#f92672">&amp;</span>s);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">&lt;</span> maxWidth) {
+</span></span><span style="display:flex;"><span>        s.append(maxWidth <span style="color:#f92672">-</span> s.size(), <span style="color:#e6db74">&#39; &#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>connect</code> constructs each justified line.</li>
+<li>It iterates through the words from <code>begin</code> to <code>end</code>. After adding each word, it calls <code>addSpaces</code> to add the necessary spaces.</li>
+<li>Finally, if the line’s length is still less than <code>maxWidth</code>, it pads the line with extra spaces at the end to meet the required width.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-4-add-spaces-with-addspaces">
+  Step 4: Add Spaces with <code>addSpaces</code>
+  <a class="heading-link" href="#step-4-add-spaces-with-addspaces">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSpaces</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> spaceCnt, <span style="color:#66d9ef">int</span> maxWidth, <span style="color:#66d9ef">bool</span> is_last, string <span style="color:#f92672">*</span>s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> spaceCnt) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> spaces <span style="color:#f92672">=</span> is_last <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> maxWidth <span style="color:#f92672">/</span> spaceCnt <span style="color:#f92672">+</span> (i <span style="color:#f92672">&lt;</span> maxWidth <span style="color:#f92672">%</span> spaceCnt);
+</span></span><span style="display:flex;"><span>        s<span style="color:#f92672">-&gt;</span>append(spaces, <span style="color:#e6db74">&#39; &#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>addSpaces</code> decides the number of spaces to add after each word.</li>
+<li>For the last line, it only adds a single space between words.</li>
+<li>For middle lines, it calculates spaces as <code>maxWidth / spaceCnt</code> (equal distribution) plus one extra space for the leftmost gaps when there’s a remainder.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -330,15 +400,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity:</strong> ( O(n) ), where ( n ) is the total number of characters in the <code>words</code>, as each character is processed once.</li>
-<li><strong>Space Complexity:</strong> ( O(n) ), as the result string will store the formatted output, which can be at most ( n ) characters.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The algorithm processes each word once and performs constant-time operations on each word, resulting in an overall time complexity of <code>O(n)</code>, where <code>n</code> is the number of words.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is also <code>O(n)</code>, primarily due to the storage of the output result in <code>res</code> and the use of helper strings during line construction.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently justifies text by managing words and spaces in lines based on simple spacing rules, ensuring that all lines meet the <code>maxWidth</code> requirements. Each line is constructed with balanced spaces or left-justified for the last line, making it optimal and suitable for large text inputs that need precise formatting for display purposes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1423s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1421s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -264,77 +264,189 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1429s1hbhb">
+<h2 id="hahahugoshortcode1427s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of strings <code>words</code> and an integer <code>k</code>, your task is to return the <code>k</code> most frequent strings in <code>words</code>. If two strings have the same frequency, return them in lexicographical order.</p>
+<p>The task is to find the <strong>k most frequent words</strong> in a given list of words. If there are ties (i.e., multiple words have the same frequency), return them in <strong>lexicographical order</strong> (i.e., alphabetical order).</p>
+<p>To solve this, the function must efficiently track the frequency of each word in the list and then return the <code>k</code> most frequent ones in the correct order. The problem requires us to prioritize both the frequency of the words and lexicographical order when frequencies are equal.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a combination of a hash map and a priority queue to efficiently count the frequency of each word and retrieve the most frequent ones. Here are the steps involved:</p>
+<p>To approach this problem, the following steps are executed:</p>
 <ol>
 <li>
-<p><strong>Count Frequencies</strong>:</p>
+<p><strong>Count the Frequency of Each Word</strong>:
+Use an <strong>unordered map (hashmap)</strong> to count how often each word appears in the input list.</p>
+</li>
+<li>
+<p><strong>Use a Custom Comparator with a Priority Queue</strong>:</p>
 <ul>
-<li>Use an unordered map to count the occurrences of each word in the <code>words</code> array.</li>
+<li>A <strong>priority queue (max-heap)</strong> is used to store words based on their frequencies.</li>
+<li>Since a max-heap prioritizes larger values, we need to invert this behavior for this problem using a custom comparator.</li>
+<li>The comparator ensures that the word with the highest frequency is always at the top. If two words have the same frequency, they are ordered lexicographically (alphabetically) in reverse.</li>
 </ul>
 </li>
 <li>
-<p><strong>Priority Queue for Sorting</strong>:</p>
+<p><strong>Extract the k Most Frequent Words</strong>:</p>
 <ul>
-<li>Define a custom comparator for a tuple that contains the frequency and the word. The comparator ensures that when the frequencies are equal, words are sorted in reverse lexicographical order.</li>
-<li>Use a priority queue (min-heap) to store the words along with their frequencies based on the custom comparator.</li>
+<li>After building the heap, the top element of the heap is the most frequent word. We continue popping from the heap until we have extracted <code>k</code> words.</li>
 </ul>
 </li>
 <li>
-<p><strong>Extract Top K Frequent Words</strong>:</p>
+<p><strong>Return the Result</strong>:</p>
 <ul>
-<li>Pop the top <code>k</code> elements from the priority queue to retrieve the most frequent words.</li>
+<li>The result is stored in a vector, which is returned at the end.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-counting-word-frequencies">
+  1. <strong>Counting Word Frequencies</strong>:
+  <a class="heading-link" href="#1-counting-word-frequencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string str: words)
+</span></span><span style="display:flex;"><span>    mp[str]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>An <strong>unordered_map</strong> is used to store the frequency of each word. The key is the word itself, and the value is the count of how many times the word appears in the input <code>words</code> vector.</li>
+<li>As we iterate through each word in the <code>words</code> vector, we increase its corresponding frequency in the map.</li>
+</ul>
+<h4 id="2-custom-comparator-for-priority-queue">
+  2. <strong>Custom Comparator for Priority Queue</strong>:
+  <a class="heading-link" href="#2-custom-comparator-for-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> tup_t <span style="color:#f92672">=</span> tuple<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">cmp</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>() (<span style="color:#66d9ef">const</span> tup_t <span style="color:#f92672">&amp;</span>p1, <span style="color:#66d9ef">const</span> tup_t <span style="color:#f92672">&amp;</span>p2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">&gt;</span>(p1) <span style="color:#f92672">==</span> get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">&gt;</span>(p2)) <span style="color:#66d9ef">return</span> get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>(p1) <span style="color:#f92672">&gt;</span> get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>(p2);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">&gt;</span>(p1) <span style="color:#f92672">&lt;</span> get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span><span style="color:#f92672">&gt;</span>(p2);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>We define a custom comparator class <code>cmp</code> that compares pairs of words and their frequencies.</li>
+<li><strong><code>tup_t</code></strong> is a tuple where the first element is the frequency (<code>int</code>) and the second is the word (<code>string</code>).</li>
+<li>The comparator ensures:
 <ul>
-<li>The <code>topKFrequent</code> function first builds the frequency map.</li>
-<li>It then pushes each word-frequency pair into a priority queue, where the custom comparator ensures correct ordering.</li>
-<li>Finally, it extracts the top <code>k</code> words from the priority queue and returns them in the desired format.</li>
+<li>Words with <strong>higher frequencies</strong> are prioritized (if <code>get&lt;0&gt;(p1) &lt; get&lt;0&gt;(p2)</code>).</li>
+<li>If two words have the <strong>same frequency</strong>, they are ordered in <strong>lexicographical (alphabetical)</strong> order by comparing their string values (<code>get&lt;1&gt;(p1) &gt; get&lt;1&gt;(p2)</code>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-priority-queue-initialization-and-population">
+  3. <strong>Priority Queue Initialization and Population</strong>:
+  <a class="heading-link" href="#3-priority-queue-initialization-and-population">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>tup_t, vector<span style="color:#f92672">&lt;</span>tup_t<span style="color:#f92672">&gt;</span>, cmp<span style="color:#f92672">&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> tp <span style="color:#f92672">=</span> make_tuple(it.second, it.first);
+</span></span><span style="display:flex;"><span>    pq.push(tp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a <strong>priority queue</strong> <code>pq</code> where the elements are tuples of (frequency, word).</li>
+<li>We then iterate through the frequency map <code>mp</code> and push each word-frequency pair (tuple) into the priority queue. The priority queue is automatically ordered according to the custom comparator <code>cmp</code>, ensuring that the most frequent words appear at the top.</li>
+</ul>
+<h4 id="4-extracting-the-k-most-frequent-words">
+  4. <strong>Extracting the k Most Frequent Words</strong>:
+  <a class="heading-link" href="#4-extracting-the-k-most-frequent-words">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> e <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    ans.push_back(get<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span><span style="color:#f92672">&gt;</span>(e));
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize an empty vector <code>ans</code> to store the result.</li>
+<li>We extract the top <code>k</code> elements from the priority queue, which are the most frequent words. Each time we pop an element, we get the word (using <code>get&lt;1&gt;(e)</code>) and push it into the <code>ans</code> vector.</li>
+<li>The <code>pq.top()</code> function gives us the word with the highest frequency, and <code>pq.pop()</code> removes it from the queue.</li>
+</ul>
+<h4 id="5-returning-the-result">
+  5. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After extracting the <code>k</code> most frequent words, we return the result stored in the vector <code>ans</code>.</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N log k), where N is the number of words. This complexity arises from inserting each word into the priority queue and popping <code>k</code> elements from it.</li>
-<li><strong>Space Complexity</strong>: O(N), for storing the frequency count of each word in the unordered map.</li>
+<li><strong>Counting Word Frequencies</strong>: Iterating through the <code>words</code> array to populate the <code>unordered_map</code> takes <strong>O(n)</strong> time, where <code>n</code> is the number of words in the input.</li>
+<li><strong>Building the Priority Queue</strong>: Inserting <code>m</code> (number of unique words) elements into the priority queue takes <strong>O(m log m)</strong> time, where <code>m</code> is the number of unique words.</li>
+<li><strong>Extracting k Words</strong>: Extracting the top <code>k</code> words from the priority queue takes <strong>O(k log m)</strong> time, where <code>m</code> is the number of unique words.</li>
+<li>Thus, the overall time complexity is <strong>O(n + m log m + k log m)</strong>. In the worst case, <code>m</code> can be as large as <code>n</code>, so the time complexity is approximately <strong>O(n log n)</strong>.</li>
 </ul>
-<p>This approach efficiently finds the top <code>k</code> frequent words while handling ties in frequency by utilizing lexicographical order.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(m)</strong>, where <code>m</code> is the number of unique words in the input list. This is because the main space consumption comes from storing the frequency map and the priority queue, both of which store at most <code>m</code> elements.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the <code>k</code> most frequent words in a list while handling ties using lexicographical ordering. The use of a custom comparator in a priority queue ensures that the solution is both time-efficient and correct, as it respects the required sorting criteria. The algorithm efficiently handles large inputs with a time complexity of <strong>O(n log n)</strong>, where <code>n</code> is the size of the input. Additionally, the solution makes use of auxiliary space proportional to the number of unique words in the input.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1429s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1427s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

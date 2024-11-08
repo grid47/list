@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -292,7 +292,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;addWord(word);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_2 = obj-&gt;search(word);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode654s1hbhb">
+<h2 id="hahahugoshortcode652s1hbhb">
   
 
   
@@ -304,7 +304,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You need to implement a <code>WordDictionary</code> class that supports adding words and searching for words in a way that allows for the use of the wildcard character <code>.</code> which can represent any letter.</p>
+<p>The problem is to implement a <strong>WordDictionary</strong> class that supports adding words and searching for them with a potential use of the wildcard character <code>.</code>. The wildcard can represent any letter, allowing the search function to match patterns rather than exact strings. The goal is to provide an efficient way to store and search for words with the possibility of wildcard matching.</p>
+<p>The operations required are:</p>
+<ol>
+<li><strong>addWord(word)</strong> - Adds a word to the dictionary.</li>
+<li><strong>search(word)</strong> - Searches for a word in the dictionary, where <code>.</code> can be used as a wildcard character to match any letter at that position.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -312,63 +317,130 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be solved using a <strong>Trie (Prefix Tree)</strong> data structure, which is particularly useful for problems that involve prefix matching, word lookups, and similar operations. A Trie allows fast insertion and searching of words by storing them character by character.</p>
+<p>To handle the wildcard <code>.</code> character in searches, a depth-first search (DFS) approach is employed where the search function traverses all possible paths for a given wildcard character. This method allows for checking all valid words that match the pattern, including those with wildcards.</p>
+<p>Here’s the breakdown of how the solution works:</p>
 <ol>
 <li>
-<p><strong>Trie Structure</strong>: Use a trie (prefix tree) to store the words. Each node represents a character in a word.</p>
+<p><strong>Trie Structure</strong>: Each node in the Trie represents a character in the word, and each node stores:</p>
 <ul>
-<li>Each node has:
-<ul>
-<li>A <code>val</code> for the character it represents.</li>
-<li>A <code>bool isWord</code> to indicate if the node marks the end of a valid word.</li>
-<li>A <code>next</code> vector that contains pointers to the next characters (children nodes).</li>
-</ul>
-</li>
+<li><strong>isWord</strong>: A boolean that tells whether the node represents the end of a valid word.</li>
+<li><strong>next</strong>: An array of size 26, representing the 26 letters of the alphabet, where each index corresponds to a letter (from <code>'a'</code> to <code>'z'</code>). The array points to the next character node in the Trie.</li>
 </ul>
 </li>
 <li>
-<p><strong>Adding Words</strong>:</p>
+<p><strong>addWord(word)</strong>: To add a word to the Trie, we iterate over each character of the word, and for each character:</p>
 <ul>
-<li>For each character in the word, traverse down the trie. If the character node does not exist, create a new node. Mark the end of the word once the last character is inserted.</li>
+<li>Calculate its corresponding index using <code>word[i] - 'a'</code>.</li>
+<li>If the corresponding child node is <code>NULL</code>, create a new node.</li>
+<li>After processing all characters, mark the last node as representing the end of a valid word.</li>
 </ul>
 </li>
 <li>
-<p><strong>Searching for Words</strong>:</p>
+<p><strong>search(word)</strong>: The search function can handle both exact matches and wildcard matches. For exact matches, the function simply follows the Trie nodes. For wildcard matches (<code>.</code>), it tries all possible paths for each position in the word. If any of those paths leads to a valid word, it returns <code>true</code>.</p>
 <ul>
-<li>Implement a recursive function (<code>bt</code>) to handle searches. If a character is <code>.</code>, recursively search all possible branches of the trie at that position. If a specific character is encountered, follow the respective branch.</li>
+<li><strong>DFS Approach for Wildcard Search</strong>: If the current character in the word is <code>.</code>:
+<ul>
+<li>The function recursively checks all possible branches of the Trie at that position.</li>
+<li>If <code>.</code> appears at the last character, it checks if any of the child nodes mark a valid word.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isWord;   <span style="color:#75715e">// Marks if the node is the end of a word
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> val;      <span style="color:#75715e">// Stores the character at the node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> next;  <span style="color:#75715e">// Stores pointers to the next nodes for each character (26 letters)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    Node(<span style="color:#66d9ef">char</span> val, <span style="color:#66d9ef">bool</span> isWord) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> isWord;
+</span></span><span style="display:flex;"><span>        next.resize(<span style="color:#ae81ff">26</span>, NULL);  <span style="color:#75715e">// Initialize the next array with NULL for each letter of the alphabet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Node Class</strong>: Each node in the Trie represents one character of the word. It contains:
 <ul>
-<li>
-<p><strong>Node Class</strong>:</p>
-<ul>
-<li>Represents a single character in the trie with children and a flag indicating if it&rsquo;s the end of a word.</li>
+<li><strong>val</strong>: The character represented by this node.</li>
+<li><strong>isWord</strong>: A boolean flag indicating whether the node marks the end of a word.</li>
+<li><strong>next</strong>: A vector of size 26 representing all possible next characters (from &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
 </ul>
 </li>
-<li>
-<p><strong>WordDictionary Class</strong>:</p>
-<ul>
-<li><strong>Constructor</strong>: Initializes the root of the trie.</li>
-<li><strong>addWord</strong>: Iterates through the word characters, inserting them into the trie.</li>
-<li><strong>search</strong>: Calls the recursive <code>bt</code> function to search for the word.</li>
-<li><strong>bt Function</strong>:
-<ul>
-<li>Checks for the current character:
-<ul>
-<li>If it’s <code>.</code>, explore all children nodes.</li>
-<li>If it’s a specific character, navigate to the corresponding child.</li>
 </ul>
-</li>
-<li>Determines if the end of a word has been reached.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WordDictionary</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> root;  <span style="color:#75715e">// The root of the Trie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    WordDictionary() {
+</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#e6db74">&#39; &#39;</span>, false);  <span style="color:#75715e">// Initialize the Trie with a dummy root node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addWord</span>(string word) {
+</span></span><span style="display:flex;"><span>        Node<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> code <span style="color:#f92672">=</span> word[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;  <span style="color:#75715e">// Map character to corresponding index (0-25)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[code] <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>                node<span style="color:#f92672">-&gt;</span>next[code] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(word[i], false);  <span style="color:#75715e">// Create a new node if it doesn&#39;t exist
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>            node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next[code];  <span style="color:#75715e">// Move to the next node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        node<span style="color:#f92672">-&gt;</span>isWord <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark the last node as the end of a valid word
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><strong>WordDictionary Class</strong>: This class contains the root of the Trie and methods for adding and searching words.</li>
+<li><strong>addWord(word)</strong>: This method adds a word to the Trie by iterating through each character of the word and creating nodes as needed.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">search</span>(string word) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bt(word, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>root, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Start the recursive search from the root node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><strong>search(word)</strong>: This function calls the helper function <code>bt()</code> to perform a depth-first search (DFS) to find the word.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">bt</span>(string word, Node<span style="color:#f92672">*</span> node, <span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(word[idx] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>) {  <span style="color:#75715e">// Handle the wildcard character &#39;.&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> word.size()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[i] <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">|=</span> node<span style="color:#f92672">-&gt;</span>next[i]<span style="color:#f92672">-&gt;</span>isWord;  <span style="color:#75715e">// Check if any branch ends with a valid word
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span>(res) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If a valid word is found, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If no valid word is found, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[i] <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">|=</span> bt(word, node<span style="color:#f92672">-&gt;</span>next[i], idx<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Recursively check each branch
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span>(res) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If a valid word is found, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If no valid word is found, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> code <span style="color:#f92672">=</span> word[idx] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;  <span style="color:#75715e">// Get the index for the character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>next[code] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If the node doesn&#39;t exist, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>next[code];  <span style="color:#75715e">// Move to the next node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> word.size())
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> node<span style="color:#f92672">-&gt;</span>isWord;  <span style="color:#75715e">// If the last character is reached, check if it&#39;s a valid word
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> bt(word, node, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Recursively check the next character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>bt(word, node, idx)</strong>: This recursive function performs the depth-first search for the word, handling both exact matches and wildcard matches:
+<ul>
+<li>If the current character is <code>.</code> (wildcard), it checks all possible branches for that position and moves on.</li>
+<li>For exact characters, it follows the corresponding node in the Trie and continues the search.</li>
+<li>If the search reaches the end of the word, it checks whether the node marks the end of a valid word.</li>
 </ul>
 </li>
 </ul>
@@ -379,23 +451,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li><strong>addWord(word)</strong>: O(L), where <code>L</code> is the length of the word being added. This is because we need to insert each character of the word into the Trie.</li>
+<li><strong>search(word)</strong>: O(L * 26) in the worst case. This is because for each character (up to length <code>L</code>), if it’s a wildcard, we check all 26 branches. In the worst case, the Trie will have up to 26 branches to explore.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>addWord</strong>: (O(m)), where (m) is the length of the word being added.</li>
-<li><strong>search</strong>: (O(m \cdot 26^d)) in the worst case, where (d) is the number of wildcards in the word (exploring all branches).</li>
+<li><strong>addWord(word)</strong>: O(L), where <code>L</code> is the length of the word. This space is required to store each node in the Trie.</li>
+<li><strong>search(word)</strong>: O(1), aside from the recursive call stack, which can go as deep as the length of the word (<code>L</code>).</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: (O(m \cdot n)), where (m) is the average length of the words stored and (n) is the number of words, due to the trie structure.</p>
-</li>
-</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently implements a Word Dictionary using a <strong>Trie</strong> data structure. By utilizing a Trie, we achieve fast insertion and search operations. The solution handles wildcard characters (<code>.</code>) with a recursive depth-first search (DFS) approach, ensuring that all possible matches are considered. The complexity of the solution is manageable even for large input sizes, making it a suitable choice for word-based searching tasks.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode654s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode652s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

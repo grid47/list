@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode517s1hbhb">
+<h2 id="hahahugoshortcode521s1hbhb">
   
 
   
@@ -247,7 +247,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>k</code>, rotate the array to the right by <code>k</code> steps. The rotation is performed in-place, meaning you must modify the input array directly without using extra space.</p>
+<p>The problem is to rotate an array of integers <code>nums[]</code> to the right by <code>k</code> steps. The array is given as an input, and the goal is to rearrange the elements such that each element is shifted to the right by <code>k</code> positions, with the last elements wrapping around to the beginning of the array.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>Input: <code>nums = [1, 2, 3, 4, 5, 6, 7]</code>, <code>k = 3</code></p>
+</li>
+<li>
+<p>Output: <code>[5, 6, 7, 1, 2, 3, 4]</code></p>
+</li>
+<li>
+<p>Input: <code>nums = [-1, -100, 3, 99]</code>, <code>k = 2</code></p>
+</li>
+<li>
+<p>Output: <code>[3, 99, -1, -100]</code></p>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,61 +276,146 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be solved efficiently by using the <strong>Reverse Subarray Approach</strong>. The idea behind this approach is based on reversing parts of the array in such a way that the required rotation is achieved.</p>
+<p><strong>Steps:</strong></p>
 <ol>
 <li>
-<p><strong>Understanding Rotations</strong>:</p>
-<ul>
-<li>Rotating the array by <code>k</code> steps to the right can be achieved by reversing parts of the array.</li>
-</ul>
+<p><strong>Modulo Operation</strong>: If <code>k</code> is greater than the length of the array (<code>nums.size()</code>), rotating the array <code>k</code> times is equivalent to rotating it <code>k % nums.size()</code> times. This helps reduce unnecessary rotations.</p>
 </li>
 <li>
-<p><strong>Reversal Technique</strong>:</p>
-<ul>
-<li>First, reverse the entire array.</li>
-<li>Then, reverse the first <code>k</code> elements.</li>
-<li>Finally, reverse the remaining elements from index <code>k</code> to the end of the array.</li>
-</ul>
+<p><strong>Reversing the entire array</strong>: First, reverse the entire array. This step places the elements that need to be at the end of the array at the beginning.</p>
 </li>
 <li>
-<p><strong>Implementation</strong>:</p>
-<ul>
-<li>Calculate the effective number of rotations with <code>k = k % nums.size()</code> to handle cases where <code>k</code> is greater than the size of the array.</li>
-<li>Call the <code>rev</code> function three times to perform the necessary reversals.</li>
-</ul>
+<p><strong>Reversing the first <code>k</code> elements</strong>: After reversing the entire array, reverse the first <code>k</code> elements. This brings the elements that should be at the front into their correct positions.</p>
+</li>
+<li>
+<p><strong>Reversing the remaining elements</strong>: Finally, reverse the remaining elements from index <code>k</code> to the end of the array to restore their original order.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that the array is rotated in-place with constant space complexity and time complexity linear to the size of the array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the <code>rotate</code> function, which takes the array <code>nums</code> and the integer <code>k</code>.</li>
-<li><strong>Line 3</strong>: Calculate the effective rotation count.</li>
-<li><strong>Line 4</strong>: Reverse the entire array.</li>
-<li><strong>Line 5</strong>: Reverse the first <code>k</code> elements.</li>
-<li><strong>Line 6</strong>: Reverse the remaining elements.</li>
-<li><strong>Line 8</strong>: Define the helper function <code>rev</code> to reverse elements in the specified range.</li>
+<p>Let&rsquo;s break down the code to understand its working step by step.</p>
+<h4 id="1-the-rotate-function">
+  1. The <code>rotate</code> Function:
+  <a class="heading-link" href="#1-the-rotate-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">rotate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> k <span style="color:#f92672">%</span> nums.size();  <span style="color:#75715e">// Step 1: Adjust the value of k if it&#39;s greater than the array size
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rev(nums, <span style="color:#ae81ff">0</span>, nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Step 2: Reverse the entire array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rev(nums, <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Step 3: Reverse the first k elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rev(nums, k, nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Step 4: Reverse the remaining elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Adjust <code>k</code> with Modulo</strong>: The first operation is to calculate <code>k = k % nums.size()</code>. This ensures that if <code>k</code> is greater than the length of the array, it is reduced to a smaller equivalent number of rotations. For instance, rotating an array of length 5 by 7 positions is equivalent to rotating it by 2 positions.</p>
+</li>
+<li>
+<p><strong>Reversing the Whole Array</strong>: The array is reversed using the <code>rev</code> function. This will effectively place elements that need to be shifted to the front at the end of the array.</p>
+</li>
+<li>
+<p><strong>Reversing the First <code>k</code> Elements</strong>: After the whole array is reversed, the first <code>k</code> elements are reversed again. This step places the elements that need to be at the front in their correct positions.</p>
+</li>
+<li>
+<p><strong>Reversing the Remaining Elements</strong>: Finally, the elements from index <code>k</code> to the end are reversed. This restores their original order after the initial full array reversal.</p>
+</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="2-the-rev-function">
+  2. The <code>rev</code> Function:
+  <a class="heading-link" href="#2-the-rev-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">rev</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>        nums[i] <span style="color:#f92672">=</span> nums[j];
+</span></span><span style="display:flex;"><span>        nums[j] <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>This helper function <code>rev</code> reverses the elements of the array between indices <code>i</code> and <code>j</code>.</p>
+</li>
+<li>
+<p>It uses a <code>while</code> loop to swap elements from both ends of the subarray, moving toward the middle. The loop continues until <code>i</code> is greater than <code>j</code>.</p>
+</li>
+<li>
+<p>The elements at <code>nums[i]</code> and <code>nums[j]</code> are swapped, and the pointers <code>i</code> and <code>j</code> are moved inward (<code>i++</code>, <code>j--</code>), ensuring that all elements in the specified range are reversed.</p>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the array. Each element is reversed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the reversal is done in-place and does not require additional space.</li>
+<li>
+<p><strong>O(n)</strong>: The time complexity is linear because:</p>
+<ul>
+<li>Reversing the entire array takes <code>O(n)</code> where <code>n</code> is the size of the array.</li>
+<li>Reversing the first <code>k</code> elements takes <code>O(k)</code>.</li>
+<li>Reversing the remaining elements (size <code>n-k</code>) takes <code>O(n-k)</code>.</li>
 </ul>
+<p>The total time complexity is therefore <code>O(n)</code> as the dominant factor is the size of the array <code>n</code>.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The solution uses constant space because the reversal of subarrays is done in place, without requiring any extra space besides a few integer variables.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>Reverse Subarray Approach</strong> is an efficient way to solve the problem of rotating an array in-place. By breaking the problem into three reversal operations, we can achieve the desired rotation with only a linear time complexity and constant space complexity.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>In-place Operation</strong>: The solution operates directly on the input array, without needing any additional storage, which saves space.</li>
+<li><strong>Modulo Optimization</strong>: The modulo operation ensures that we handle cases where <code>k</code> is larger than the size of the array efficiently.</li>
+<li><strong>Reversal Trick</strong>: The key trick is reversing the entire array and then reversing the two parts (first <code>k</code> and last <code>n-k</code> elements) to achieve the desired order. This ensures that the solution is both time-efficient and easy to understand.</li>
+</ul>
+<p>This approach is both elegant and efficient, making it a preferred choice for solving array rotation problems in competitive programming and technical interviews.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode517s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode521s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

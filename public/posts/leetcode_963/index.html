@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> sqrt(res);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1629s1hbhb">
+<h2 id="hahahugoshortcode1627s1hbhb">
   
 
   
@@ -251,7 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a set of points in a 2D plane, find the area of the smallest rectangle that can be formed such that all four corners of the rectangle are taken from the provided points. The rectangle must be axis-aligned and must contain no points inside it.</p>
+<p>The problem at hand involves finding the minimum area of a rectangle that can be formed from a set of given points in a 2D plane. The rectangle must have its sides parallel to the axes, and its four corners must be among the provided points. You are tasked with implementing a function that computes the minimum area of such a rectangle, or returns <code>0</code> if no rectangle can be formed.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,71 +259,104 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem relies on the following insights:</p>
 <ol>
 <li>
-<p><strong>Distance Calculation</strong>:</p>
+<p><strong>Rectangle Properties</strong>:</p>
 <ul>
-<li>Define a function <code>d2</code> that calculates the squared Euclidean distance between two points. This avoids floating-point inaccuracies and unnecessary square root calculations.</li>
+<li>A rectangle aligned with the coordinate axes requires two pairs of points with the same x or y coordinates. Thus, any two points can define one diagonal of a rectangle, and the other two corners of the rectangle can be inferred if the other pair of points is available.</li>
+<li>Given two points, we need to find the other two points that complete the rectangle.</li>
 </ul>
 </li>
 <li>
-<p><strong>Mapping Points</strong>:</p>
+<p><strong>Using Pairwise Distances</strong>:</p>
 <ul>
-<li>Use a nested loop to iterate over all pairs of points. For each pair, calculate:
-<ul>
-<li>The center of the potential rectangle formed by these two points.</li>
-<li>The squared length of the line segment between the two points.</li>
-</ul>
-</li>
-<li>Store these pairs in a hash map (<code>m</code>) where the key is a combination of the center coordinates and the squared length.</li>
+<li>We first calculate all pairwise distances between the points to help identify possible diagonals of the rectangle.</li>
+<li>By keeping track of the distances between each pair of points and grouping them by the center of the diagonal (midpoint), we can look for two diagonals that share the same center.</li>
 </ul>
 </li>
 <li>
-<p><strong>Identifying Rectangles</strong>:</p>
+<p><strong>Efficient Search</strong>:</p>
 <ul>
-<li>Iterate through the hash map to find pairs of segments that share the same center and length.</li>
-<li>For each combination of segments, compute the area of the rectangle formed by the endpoints of these segments.</li>
+<li>For each pair of points <code>(i, j)</code> that are diagonally opposite corners of a potential rectangle, we use the midpoint and the distance between them to help identify if the other two corners can be found in the set of given points.</li>
+<li>Once we identify a valid rectangle, we calculate its area using the distance between two adjacent sides.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Minimum Area</strong>:</p>
+<p><strong>Optimizing Search with Hashmaps</strong>:</p>
 <ul>
-<li>Track the minimum area found during the iterations.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Return the square root of the minimum area to get the actual area.</li>
+<li>By utilizing hashmaps to store distances and midpoints, we can efficiently look up the other diagonal points and check for potential rectangles. This allows us to process the points in an optimized manner without having to exhaustively check all pairs of points.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong><code>d2</code> Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    size_t d2(<span style="color:#66d9ef">int</span> x1, <span style="color:#66d9ef">int</span> y1, <span style="color:#66d9ef">int</span> x2, <span style="color:#66d9ef">int</span> y2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (x1 <span style="color:#f92672">-</span> x2) <span style="color:#f92672">*</span> (x1 <span style="color:#f92672">-</span> x2) <span style="color:#f92672">+</span> (y1 <span style="color:#f92672">-</span> y2) <span style="color:#f92672">*</span> (y1 <span style="color:#f92672">-</span> y2);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol>
+<li><strong>Distance Function</strong>:
 <ul>
-<li>Computes the squared distance between two points to be used in area calculations.</li>
+<li>The <code>d2</code> function calculates the squared Euclidean distance between two points <code>(x1, y1)</code> and <code>(x2, y2)</code>. Squaring the distances avoids the computational overhead of square roots and is sufficient for comparing relative distances.</li>
 </ul>
 </li>
-<li>
-<p><strong><code>minAreaFreeRect</code> Method</strong>:</p>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">minAreaFreeRect</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> ps, size_t res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span>size_t, unordered_map<span style="color:#f92672">&lt;</span>size_t, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> m;
+</span></span></code></pre></div><ol start="2">
+<li><strong>Main Function Setup</strong>:
 <ul>
-<li>Initializes a hash map to store potential rectangles.</li>
-<li>Loops through all pairs of points to populate the hash map with centers and lengths.</li>
-<li>Checks each possible rectangle formed by the endpoints to compute and compare areas.</li>
+<li>The function <code>minAreaFreeRect</code> takes a list of points <code>ps</code> and calculates the minimum area of a rectangle that can be formed using these points.</li>
+<li>We use a nested hashmap <code>m</code> to store pairs of points by their <strong>midpoint</strong> and <strong>squared distance</strong>. The structure <code>m[center][len]</code> keeps track of the points that are connected by a diagonal of length <code>len</code> and share the same midpoint.</li>
 </ul>
 </li>
-<li>
-<p><strong>Area Calculation</strong>:</p>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> ps.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> ps.size(); <span style="color:#f92672">++</span>j) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> center <span style="color:#f92672">=</span> ((size_t)(ps[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> ps[j][<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">16</span>) <span style="color:#f92672">+</span> ps[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> ps[j][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> len <span style="color:#f92672">=</span> d2(ps[i][<span style="color:#ae81ff">0</span>], ps[i][<span style="color:#ae81ff">1</span>], ps[j][<span style="color:#ae81ff">0</span>], ps[j][<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>                m[center][len].push_back({ ps[i][<span style="color:#ae81ff">0</span>], ps[i][<span style="color:#ae81ff">1</span>], ps[j][<span style="color:#ae81ff">0</span>], ps[j][<span style="color:#ae81ff">1</span>] });
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ol start="3">
+<li><strong>Generating Midpoints and Distances</strong>:
 <ul>
-<li>For valid rectangles, computes the area using the squared distance and updates the minimum area variable.</li>
+<li>We iterate over all pairs of points <code>(i, j)</code> to compute their <strong>center</strong> (midpoint) and <strong>distance</strong> (<code>len</code>).</li>
+<li>The center is computed as the sum of the x-coordinates and y-coordinates of the two points, and the distance is computed using the <code>d2</code> function.</li>
+<li>The pair of points is then stored in the hashmap <code>m</code> under the corresponding center and distance.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it_c <span style="color:#f92672">=</span> begin(m); it_c <span style="color:#f92672">!=</span> end(m); <span style="color:#f92672">++</span>it_c)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it_l <span style="color:#f92672">=</span> begin(it_c<span style="color:#f92672">-&gt;</span>second); it_l <span style="color:#f92672">!=</span> end(it_c<span style="color:#f92672">-&gt;</span>second); <span style="color:#f92672">++</span>it_l)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> it_l<span style="color:#f92672">-&gt;</span>second.size(); <span style="color:#f92672">++</span>i)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> it_l<span style="color:#f92672">-&gt;</span>second.size(); <span style="color:#f92672">++</span>j) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p1 <span style="color:#f92672">=</span> it_l<span style="color:#f92672">-&gt;</span>second[i], <span style="color:#f92672">&amp;</span>p2 <span style="color:#f92672">=</span> it_l<span style="color:#f92672">-&gt;</span>second[j];
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">auto</span> area <span style="color:#f92672">=</span> d2(p1[<span style="color:#ae81ff">0</span>], p1[<span style="color:#ae81ff">1</span>], p2[<span style="color:#ae81ff">0</span>], p2[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> d2(p1[<span style="color:#ae81ff">0</span>], p1[<span style="color:#ae81ff">1</span>], p2[<span style="color:#ae81ff">2</span>], p2[<span style="color:#ae81ff">3</span>]);
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (res <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> res <span style="color:#f92672">&gt;</span> area) res <span style="color:#f92672">=</span> area;
+</span></span><span style="display:flex;"><span>                    }
+</span></span></code></pre></div><ol start="4">
+<li><strong>Identifying Rectangles</strong>:
+<ul>
+<li>After populating the hashmap, we iterate over each entry to check for pairs of diagonally opposite corners.</li>
+<li>If two pairs of points share the same center and distance, they can form a rectangle. We calculate the area of the rectangle formed by these two pairs using the squared distances of the sides.</li>
+<li>If the area is smaller than the current minimum (<code>res</code>), we update <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sqrt</span>(res);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="5">
+<li><strong>Returning the Result</strong>:
+<ul>
+<li>After checking all possible pairs of diagonals and calculating their areas, the function returns the square root of the smallest area found. If no rectangle is found, <code>res</code> remains 0, and the function returns <code>0</code>.</li>
 </ul>
 </li>
 </ol>
@@ -335,14 +368,26 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2), where N is the number of points. The algorithm involves nested loops to compare each pair of points.</li>
-<li><strong>Space Complexity</strong>: O(N) for storing points and their associated centers and lengths in the hash map.</li>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is <strong>O(n^2)</strong>, where <code>n</code> is the number of points. This is because we iterate over all pairs of points to calculate the midpoints and distances, and we then perform checks for potential rectangles. The overall complexity is dominated by the double iteration over the points, which results in a quadratic time complexity.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also <strong>O(n^2)</strong> due to the use of the nested hashmaps to store the midpoints and distances. The hashmap may store up to <code>n^2</code> pairs of points, each associated with a midpoint and distance.</p>
+</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum area of a rectangle that can be formed by a set of points in the 2D plane. By leveraging hashmaps to store midpoints and distances between pairs of points, we reduce the problem to an efficient search for possible rectangles. The approach is optimized for performance by avoiding unnecessary checks and focusing on the geometric properties of the points. The overall time and space complexity are manageable for moderate-sized input sets, making this solution a good choice for solving this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1629s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1627s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

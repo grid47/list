@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -288,7 +288,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1222s1hbhb">
+<h2 id="hahahugoshortcode1221s1hbhb">
   
 
   
@@ -300,7 +300,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and two integers <code>lower</code> and <code>upper</code>, count the number of ranges <code>[i, j]</code> such that the sum of the elements from index <code>i</code> to index <code>j</code> falls within the inclusive range <code>[lower, upper]</code>.</p>
+<p>The task is to count the number of <strong>range sums</strong> in a given array <code>nums</code> that fall within a specified range <code>[lower, upper]</code>. A range sum is defined as the sum of any subarray (i.e., contiguous segment) of the array. The challenge is to compute the number of such range sums efficiently.</p>
+<p>Given:</p>
+<ul>
+<li>An array <code>nums</code> of integers.</li>
+<li>A lower and upper bound for the range sum, i.e., you need to find all subarrays where the sum of the elements lies within <code>[lower, upper]</code>.</li>
+</ul>
+<p>The problem requires an efficient solution, as a brute force approach that checks every subarray would have a time complexity of <strong>O(n^2)</strong>, which is too slow for large arrays.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -308,42 +314,126 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The approach involves using the <strong>Prefix Sum</strong> technique combined with <strong>Merge Sort</strong> to efficiently count the ranges with sums in the specified interval.</p>
+<p>To solve this problem efficiently, the algorithm uses <strong>prefix sums</strong> combined with a <strong>modified merge sort</strong>. The key observation is that instead of explicitly computing the sum of every subarray, we can use <strong>prefix sums</strong> to reduce the problem to counting how many subarrays satisfy the range condition.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Prefix Sum Calculation</strong>:</p>
+<p><strong>Prefix Sum Calculation</strong>: The prefix sum of an array <code>nums</code> is an array where each element <code>sum[i]</code> represents the sum of the elements from the start of the array to index <code>i-1</code>. For example:</p>
 <ul>
-<li>Calculate the prefix sums of the input array. The prefix sum at index <code>i</code> is the sum of all elements from the start of the array to the <code>i</code>-th index. This allows us to compute the sum of any subarray <code>nums[i..j]</code> as <code>sum[j+1] - sum[i]</code>.</li>
+<li><code>sum[i] = sum[i-1] + nums[i-1]</code>.</li>
+<li>This helps in calculating the sum of any subarray <code>nums[i...j]</code> as <code>sum[j+1] - sum[i]</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Merge Sort for Counting</strong>:</p>
+<p><strong>Modified Merge Sort</strong>:</p>
 <ul>
-<li>Use a modified merge sort to count how many of these prefix sums fall within the specified range when merging the subarrays.</li>
-<li>The count of valid ranges can be efficiently computed during the merge phase by determining how many elements in the right half are within the bounds defined by the current element from the left half.</li>
+<li>Instead of just sorting the prefix sums, we also count how many of the prefix sums fall within the given range <code>[lower, upper]</code>.</li>
+<li>During the merge step of merge sort, we count how many pairs of prefix sums (from the left and right halves) satisfy the condition <code>lower &lt;= sum[right] - sum[left] &lt;= upper</code>.</li>
+<li>This is done efficiently using a two-pointer technique within the merge step.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Counting</strong>:</p>
+<ul>
+<li>For each prefix sum <code>sum[i]</code>, we count how many <code>sum[j]</code> values (from the right half) satisfy the range condition using binary search or two-pointer methods.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By leveraging the divide-and-conquer approach of merge sort, we can solve this problem in <strong>O(n log n)</strong> time, where <code>n</code> is the size of the array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of integers <code>nums</code>, and two integers <code>lower</code> and <code>upper</code>.</li>
-<li><strong>Output</strong>: The count of valid subarray sums.</li>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> sum(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), tmp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) sum[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> sum[i] <span style="color:#f92672">+</span> nums[i];
+</span></span></code></pre></div><ul>
+<li><code>sum[i]</code> stores the prefix sum up to index <code>i-1</code>. Initially, <code>sum[0] = 0</code>.</li>
+<li>We then compute the prefix sum for each element in <code>nums</code>.</li>
 </ul>
-<ol>
-<li>Calculate the prefix sums and store them in a new vector <code>sum</code>.</li>
-<li>Perform a merge sort on the prefix sums while counting valid ranges:
-<ul>
-<li>The <code>merge</code> function compares elements in two halves of the array and counts how many differences fall within the specified bounds.</li>
-<li>The count is updated based on how many sums satisfy the condition for the current element being examined from the left half.</li>
+<h4 id="step-2-calling-merge_sort">
+  Step 2: Calling <code>merge_sort</code>
+  <a class="heading-link" href="#step-2-calling-merge_sort">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>merge_sort(sum, <span style="color:#ae81ff">0</span>, n, tmp);
+</span></span></code></pre></div><ul>
+<li>This starts the modified merge sort process. <code>merge_sort</code> will recursively divide the array into two halves, sort them, and count the valid range sums during the merge step.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-3-merge-sort-recursive-step">
+  Step 3: Merge Sort Recursive Step
+  <a class="heading-link" href="#step-3-merge-sort-recursive-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge_sort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&amp;</span> sum, <span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&amp;</span> tmp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;=</span> right) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> mid <span style="color:#f92672">=</span> (left <span style="color:#f92672">+</span> right) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    merge_sort(sum, left, mid, tmp);
+</span></span><span style="display:flex;"><span>    merge_sort(sum, mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right, tmp);
+</span></span><span style="display:flex;"><span>    merge(sum, left, right, mid, tmp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The merge sort algorithm divides the <code>sum</code> array into two halves recursively until the base case is reached (<code>left &gt;= right</code>).</li>
+<li>After dividing, it merges the two halves and counts the number of valid range sums during the merge.</li>
+</ul>
+<h4 id="step-4-merge-step">
+  Step 4: Merge Step
+  <a class="heading-link" href="#step-4-merge-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&amp;</span> sum, <span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right, <span style="color:#66d9ef">int</span> mid, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&amp;</span> tmp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> high <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, common <span style="color:#f92672">=</span> left;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> left; low <span style="color:#f92672">&lt;=</span> mid; low<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (k <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> sum[k] <span style="color:#f92672">-</span> sum[low] <span style="color:#f92672">&lt;</span> lower) k<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (j <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> sum[j] <span style="color:#f92672">-</span> sum[low] <span style="color:#f92672">&lt;=</span> upper) j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">+=</span> j <span style="color:#f92672">-</span> k;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (high <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> sum[high] <span style="color:#f92672">&lt;</span> sum[low]) tmp[common<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> sum[high<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>        tmp[common<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> sum[low];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (high <span style="color:#f92672">&lt;=</span> right) tmp[common<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> sum[high<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> left; pos <span style="color:#f92672">&lt;=</span> right; pos<span style="color:#f92672">++</span>) sum[pos] <span style="color:#f92672">=</span> tmp[pos];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>In the merge step, we count how many of the prefix sums from the right half are within the range <code>[sum[low] + lower, sum[low] + upper]</code>.</li>
+<li>This is done using two pointers (<code>k</code> and <code>j</code>), which traverse the right half of the array to find the valid prefix sums that satisfy the condition.</li>
+<li>The prefix sums are then merged back into the <code>tmp</code> array in sorted order.</li>
+</ul>
+<h4 id="step-5-counting-the-result">
+  Step 5: Counting the Result
+  <a class="heading-link" href="#step-5-counting-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Finally, after the merge sort process is completed, the total count of valid range sums is stored in the <code>cnt</code> variable, which is returned as the result.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -351,15 +441,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n \log n)) due to the merge sort operation.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the temporary array used in merging.</li>
+<li><strong>Merge Sort</strong>: The merge sort algorithm has a time complexity of <strong>O(n log n)</strong>, where <code>n</code> is the number of elements in the <code>sum</code> array.</li>
+<li><strong>Counting Range Sums</strong>: During the merge step, we are counting valid range sums in <strong>O(n)</strong> time, since each prefix sum is processed once for each merge step.</li>
+<li>Therefore, the overall time complexity is <strong>O(n log n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong> due to the auxiliary space used by the <code>tmp</code> array and the recursive call stack used by the merge sort algorithm.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to count the number of subarrays with sums within a given range using <strong>prefix sums</strong> and <strong>modified merge sort</strong>. The algorithm leverages a divide-and-conquer approach, which reduces the problem to counting valid range sums during the merge step. The time complexity of <strong>O(n log n)</strong> ensures that this solution is optimal for large inputs, while the space complexity remains manageable at <strong>O(n)</strong>. This method is much faster than brute-force approaches and is suitable for real-world applications where performance is critical.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1222s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1221s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

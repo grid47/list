@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1500s1hbhb">
+<h2 id="hahahugoshortcode1497s1hbhb">
   
 
   
@@ -252,7 +252,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a directed acyclic graph (DAG) represented as an adjacency list <code>graph</code>, return all possible paths from the source node (0) to the target node (n - 1).</p>
+<p>In this problem, we are given a directed graph represented as an adjacency list <code>graph</code>, where each node is a non-negative integer. The task is to find all possible paths from the source node (node 0) to the target node (the last node in the graph). Each path must be a sequence of nodes that starts at node 0 and ends at the last node, following the directed edges of the graph.</p>
+<p>This problem is essentially about finding all possible paths in a directed graph, starting from the source and ending at the target. The challenge is to explore all paths efficiently while adhering to the structure of the graph.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,61 +261,108 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solve this problem is to use <strong>breadth-first search (BFS)</strong> with a queue. The BFS technique is ideal for exploring all paths from the source to the target because it processes nodes level by level, ensuring that all possible paths are considered. By maintaining the path as we traverse the graph, we can capture all valid paths from the source to the target.</p>
+<p>Here’s how we can break the problem into smaller steps:</p>
 <ol>
 <li>
-<p><strong>Initialize Data Structures</strong>:</p>
-<ul>
-<li><code>ans</code>: A vector to store all valid paths from source to target.</li>
-<li><code>q</code>: A queue to facilitate breadth-first search (BFS) for exploring paths in the graph.</li>
-</ul>
+<p><strong>Use a Queue for BFS</strong>: We&rsquo;ll utilize a queue where each element contains a node and the path taken to reach that node. This ensures that when we reach a node, we know the exact sequence of nodes leading up to it.</p>
 </li>
 <li>
-<p><strong>Breadth-First Search (BFS)</strong>:</p>
-<ul>
-<li>Start by pushing the source node (0) and the path containing just this node into the queue.</li>
-<li>While the queue is not empty:
-<ul>
-<li>Extract the front element, which contains the current node (<code>x</code>) and the path taken to reach it (<code>t</code>).</li>
-<li>If the current node is the target node (last node in the graph), add the path <code>t</code> to <code>ans</code>.</li>
-<li>For each neighboring node (<code>k</code>) in the adjacency list of the current node, append <code>k</code> to the path <code>t</code>, and push the new state (next node and updated path) into the queue.</li>
-<li>After exploring the neighbor, backtrack by popping <code>k</code> from the path to restore the previous state for the next iteration.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Traverse the Graph</strong>: From the source node, explore all adjacent nodes recursively, adding them to the current path.</p>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Finally, return the vector <code>ans</code>, which contains all the paths from the source to the target.</li>
-</ul>
+<p><strong>Capture Valid Paths</strong>: Once we reach the target node (the last node in the graph), we add the current path to our result.</p>
+</li>
+<li>
+<p><strong>Backtrack Efficiently</strong>: Since we are using BFS, we will not need to explicitly backtrack. The queue takes care of processing the nodes in the correct order.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using this BFS-based approach, we ensure that we explore all potential paths from the source to the target while maintaining efficiency.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s go through the code step by step to understand its implementation:</p>
+<h4 id="step-1-initialize-the-result-and-queue">
+  Step 1: Initialize the Result and Queue
+  <a class="heading-link" href="#step-1-initialize-the-result-and-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push({<span style="color:#ae81ff">0</span>, {<span style="color:#ae81ff">0</span>}});
+</span></span></code></pre></div><ul>
+<li><code>ans</code>: A vector of vectors that will store all valid paths from the source to the target.</li>
+<li><code>q</code>: A queue used to perform the breadth-first search (BFS). Each element in the queue is a pair, where:
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to find all paths from source to target.
-<ul>
-<li><code>vector&lt;vector&lt;int&gt;&gt; allPathsSourceTarget(vector&lt;vector&lt;int&gt;&gt;&amp; graph)</code>: Implements the logic for pathfinding.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>graph</code>: A vector of vectors representing the adjacency list of the graph.</li>
+<li>The first element is a node <code>x</code>.</li>
+<li>The second element is a vector of integers representing the current path taken to reach node <code>x</code>.</li>
 </ul>
 </li>
-<li><strong>Returns</strong>: A vector of vectors containing all possible paths from the source to the target.</li>
+<li>Initially, we push the source node (node 0) into the queue, with the path being <code>{0}</code>.</li>
+</ul>
+<h4 id="step-2-start-bfs-loop">
+  Step 2: Start BFS Loop
+  <a class="heading-link" href="#step-2-start-bfs-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> q.front().first;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t <span style="color:#f92672">=</span> q.front().second;
+</span></span><span style="display:flex;"><span>    q.pop();
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as there are elements in the queue. This ensures that we process all nodes and paths.</li>
+<li>We pop the front element of the queue to get the current node <code>x</code> and the path <code>t</code> taken to reach that node.</li>
+</ul>
+<h4 id="step-3-check-for-target-node">
+  Step 3: Check for Target Node
+  <a class="heading-link" href="#step-3-check-for-target-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> graph.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) ans.push_back(t);
+</span></span></code></pre></div><ul>
+<li>If the current node <code>x</code> is the target node (the last node in the graph, which is <code>graph.size() - 1</code>), we add the current path <code>t</code> to the result <code>ans</code>. This indicates that we’ve found a valid path from the source to the target.</li>
+</ul>
+<h4 id="step-4-explore-adjacent-nodes">
+  Step 4: Explore Adjacent Nodes
+  <a class="heading-link" href="#step-4-explore-adjacent-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> k: graph[x]) {
+</span></span><span style="display:flex;"><span>    t.push_back(k);
+</span></span><span style="display:flex;"><span>    q.push({k, t});
+</span></span><span style="display:flex;"><span>    t.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each adjacent node <code>k</code> to the current node <code>x</code> (i.e., each node that can be reached directly from node <code>x</code>), we do the following:
+<ul>
+<li>Add node <code>k</code> to the current path <code>t</code>.</li>
+<li>Push the new node <code>k</code> and the updated path <code>t</code> into the queue. This ensures that we continue exploring paths from node <code>k</code>.</li>
+<li>After the push, we backtrack by removing node <code>k</code> from the path <code>t</code> using <code>t.pop_back()</code>. This is necessary because we need to keep <code>t</code> intact for future iterations, maintaining the correct path sequence.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the BFS loop has processed all possible paths, we return the result <code>ans</code>, which contains all valid paths from the source to the target node.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -323,15 +371,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(N + E)</strong>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(2^n), where n is the number of nodes in the graph, due to the exponential number of paths in the worst case.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the paths and the queue in the BFS traversal.</li>
+<li><code>N</code> is the number of nodes in the graph (i.e., <code>graph.size()</code>).</li>
+<li><code>E</code> is the total number of edges in the graph (i.e., the sum of the lengths of the adjacency lists in the <code>graph</code>).</li>
 </ul>
+<p>This is because each node and edge is processed at most once during the BFS. For each node, we explore all of its neighbors (edges), and for each edge, we push a new path into the queue. Therefore, the overall time complexity depends on the number of nodes and edges in the graph.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(N + E)</strong> due to:</p>
+<ul>
+<li>The space required for storing the graph, which is <code>O(N + E)</code> as it is represented as an adjacency list.</li>
+<li>The space required for the queue, which could store paths for each possible traversal of the graph. In the worst case, the queue can hold a number of paths proportional to the number of edges.</li>
+</ul>
+<p>Thus, the space complexity is dominated by the graph&rsquo;s adjacency list and the queue that stores the paths during BFS.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses breadth-first search (BFS) to explore all possible paths from the source node (0) to the target node (the last node in the graph). The BFS approach is suitable because it ensures that all paths are considered without unnecessary recomputation. By maintaining the path along with the node being processed, we are able to efficiently capture all valid paths from the source to the target.</p>
+<p>The algorithm is efficient, with a time complexity of O(N + E) and space complexity of O(N + E), making it scalable to large graphs. The use of a queue allows us to explore the graph level by level, ensuring that every potential path is processed correctly. The backtracking step (via <code>t.pop_back()</code>) ensures that paths are managed efficiently without modifying the paths prematurely.</p>
+<p>This method is optimal for finding all paths in a directed graph from a given source to a target, and its clear and straightforward implementation ensures that it can be easily adapted for similar graph traversal problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1500s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1497s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

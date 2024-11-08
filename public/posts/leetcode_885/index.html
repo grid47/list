@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1571s1hbhb">
+<h2 id="hahahugoshortcode1572s1hbhb">
   
 
   
@@ -244,7 +244,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a grid of dimensions <code>rows x cols</code> and a starting position <code>(rStart, cStart)</code>, you need to return all the coordinates of the cells in the grid in a spiral order starting from the given position.</p>
+<p>The problem requires generating a list of coordinates representing a spiral path starting from a given point <code>(rStart, cStart)</code> in a matrix of size <code>rows x cols</code>. The spiral traversal should visit each cell in the matrix exactly once, and the movement should continue until all cells are covered. The challenge is to implement the traversal in such a way that the program can efficiently and correctly handle the specified conditions. The solution should keep track of all visited coordinates and return them in the order they are visited.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,40 +252,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a simulation of the spiral traversal:</p>
+<p>The solution to this problem can be broken down into the following steps:</p>
 <ol>
 <li>
-<p><strong>Initialization</strong>: Start by initializing a result vector with the starting coordinates. Define movement directions (<code>dx</code>, <code>dy</code>) to control the spiral traversal.</p>
+<p><strong>Initialization</strong>: Start by defining the direction of movement (right, down, left, up) and initializing a result array that will store all visited coordinates.</p>
 </li>
 <li>
-<p><strong>Spiral Expansion</strong>:</p>
+<p><strong>Spiral Traversal</strong>: The key idea is to iterate over the matrix in a spiral pattern, adjusting the direction of movement after each complete loop around the matrix. We achieve this by using a series of directional changes:</p>
 <ul>
-<li>Use a loop that expands the spiral outward. The length of each directional movement is determined by the current layer of the spiral (<code>n</code>).</li>
-<li>For each layer:
-<ul>
-<li>Move in the current direction for <code>n / 2 + 1</code> steps, updating the current position <code>(rStart, cStart)</code>.</li>
-<li>After moving, check if the new position is within the bounds of the grid. If it is, add it to the result.</li>
-</ul>
-</li>
-<li>After completing the moves in one direction, update the movement direction to simulate a turn in the spiral (using a clockwise rotation).</li>
+<li>Initially, we start by moving right, then down, left, and up in a repeating pattern.</li>
+<li>Each time the movement completes a full side of the spiral, the direction is updated by rotating the direction vector (dx, dy).</li>
+<li>The traversal continues until all cells in the matrix are visited.</li>
 </ul>
 </li>
 <li>
-<p><strong>Termination</strong>: The process continues until the size of the result matches the total number of cells in the grid.</p>
+<p><strong>Boundary Checking</strong>: As we traverse the matrix, we need to ensure that we stay within the matrix boundaries. If the next step goes out of bounds, we skip that movement and continue in the current direction.</p>
+</li>
+<li>
+<p><strong>Stopping Condition</strong>: The process continues until all cells in the matrix are visited. This is ensured by checking that the size of the result array is equal to <code>rows * cols</code>.</p>
+</li>
+<li>
+<p><strong>Result</strong>: Once all the coordinates are visited, the result array is returned, which contains the list of coordinates in the order they were traversed.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach leverages the simplicity of direction vectors to manage the traversal efficiently, ensuring a smooth spiral motion around the matrix.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Start from the initial position and direction.</li>
-<li>Continue moving in the current direction until the spiral expands sufficiently.</li>
-<li>Rotate the direction after completing a full sweep of the current layer.</li>
-</ul>
+<ol>
+<li>
+<p><strong>Function Signature and Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> spiralMatrixIII(<span style="color:#66d9ef">int</span> rows, <span style="color:#66d9ef">int</span> cols, <span style="color:#66d9ef">int</span> rStart, <span style="color:#66d9ef">int</span> cStart) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res <span style="color:#f92672">=</span> {{rStart, cStart}};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> dx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dy <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, tmp;
+</span></span></code></pre></div><p>The function <code>spiralMatrixIII</code> takes the number of rows and columns, along with the starting position <code>(rStart, cStart)</code>. We initialize a result vector <code>res</code> to store the coordinates starting with the given starting position. The variables <code>dx</code> and <code>dy</code> represent the direction of movement in the x (row) and y (column) axes, respectively. Initially, the direction is set to move right (dx = 0, dy = 1).</p>
+</li>
+<li>
+<p><strong>Outer Loop for Spiral Expansion</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; res.size() <span style="color:#f92672">&lt;</span> rows <span style="color:#f92672">*</span> cols; n<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><p>The outer loop runs until all cells in the matrix are visited, i.e., until the size of the result vector equals <code>rows * cols</code>. The variable <code>n</code> is used to control the number of steps taken in each direction, increasing as the spiral expands.</p>
+</li>
+<li>
+<p><strong>Inner Loop for Directional Movement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    rStart <span style="color:#f92672">+=</span> dx, cStart <span style="color:#f92672">+=</span> dy;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(rStart <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> rStart <span style="color:#f92672">&lt;</span> rows <span style="color:#f92672">&amp;&amp;</span> cStart <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> cStart <span style="color:#f92672">&lt;</span> cols)
+</span></span><span style="display:flex;"><span>        res.push_back({rStart, cStart});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The inner loop iterates <code>n / 2 + 1</code> times, which corresponds to the number of steps to take in the current direction. We update the <code>rStart</code> and <code>cStart</code> coordinates by adding the directional values <code>dx</code> and <code>dy</code>. After updating the coordinates, we check if the new position is within the matrix bounds. If it is, we add the position to the result array <code>res</code>.</p>
+</li>
+<li>
+<p><strong>Updating Direction</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>tmp <span style="color:#f92672">=</span> dx, dx <span style="color:#f92672">=</span> dy, dy <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>tmp;
+</span></span></code></pre></div><p>After completing the steps in one direction, we update the direction by rotating the direction vector <code>(dx, dy)</code>. The vector <code>(dx, dy)</code> is rotated in the order right → down → left → up, ensuring that the traversal continues spirally.</p>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><p>Once all cells are visited, the result vector <code>res</code> is returned, containing the list of coordinates in the order they were visited.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -293,15 +323,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: ( O(rows \times cols) ), as you visit each cell exactly once.</li>
-<li><strong>Space Complexity</strong>: ( O(rows \times cols) ), to store the coordinates of each cell.</li>
-</ul>
+<p>The time complexity of this algorithm is <strong>O(rows * cols)</strong>. The reason for this is that every cell in the matrix is visited exactly once, and each visit involves only a constant amount of work (i.e., checking bounds and adding a coordinate to the result list). Therefore, the total time spent is proportional to the number of cells in the matrix.</p>
+<p>The space complexity is also <strong>O(rows * cols)</strong> because we store the coordinates of all the cells in the result array <code>res</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently computes the spiral traversal of a matrix starting from a given position, ensuring all cells are visited once. The use of direction vectors and boundary checks makes the algorithm both simple and effective. The approach guarantees that the traversal continues until all cells in the matrix are covered, and the solution efficiently handles matrices of varying sizes. The time and space complexity of O(rows * cols) make it suitable for large matrices, while the implementation remains straightforward and easy to understand.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1571s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1572s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

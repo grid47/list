@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -250,7 +250,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given three strings <code>s1</code>, <code>s2</code>, and <code>s3</code>, determine if <code>s3</code> can be formed by an interleaving of <code>s1</code> and <code>s2</code>. Interleaving means maintaining the relative order of characters in <code>s1</code> and <code>s2</code>.</p>
+<p>The problem asks if a given string <code>s3</code> is formed by the interleaving of two strings <code>s1</code> and <code>s2</code>. Specifically, you are given three strings <code>s1</code>, <code>s2</code>, and <code>s3</code>. Your task is to determine if <code>s3</code> is a valid interleaving of <code>s1</code> and <code>s2</code>. An interleaving of two strings means that the characters of both strings appear in <code>s3</code> in the same relative order as they appear in the original strings.</p>
+<p>For example:</p>
+<ul>
+<li>Given <code>s1 = &quot;abc&quot;</code>, <code>s2 = &quot;def&quot;</code>, and <code>s3 = &quot;adbcef&quot;</code>, the result is <code>true</code> because the string <code>s3</code> can be formed by interleaving <code>s1</code> and <code>s2</code>.</li>
+<li>However, if <code>s3 = &quot;abdecf&quot;</code>, the result is <code>false</code> because the relative order of characters in <code>s1</code> and <code>s2</code> is violated.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,45 +263,93 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem is a classic example of <strong>dynamic programming</strong>. The idea is to break down the problem into smaller subproblems, each of which determines whether a substring of <code>s3</code> can be formed by interleaving substrings of <code>s1</code> and <code>s2</code>.</p>
+<p>The dynamic programming approach follows these steps:</p>
 <ol>
-<li><strong>Dynamic Programming with Memoization</strong>:
+<li><strong>Check Base Case</strong>: If the combined length of <code>s1</code> and <code>s2</code> does not match the length of <code>s3</code>, return <code>false</code>. This is because if the lengths don&rsquo;t match, it&rsquo;s impossible for <code>s3</code> to be an interleaving of <code>s1</code> and <code>s2</code>.</li>
+<li><strong>Memoization</strong>: Use a memoization table (<code>memo</code>) to store the results of subproblems and avoid redundant calculations. The table tracks whether it&rsquo;s possible to interleave substrings of <code>s1</code> and <code>s2</code> to form substrings of <code>s3</code>.</li>
+<li><strong>Recursive Function</strong>: Define a recursive function <code>dp(i, j)</code> that checks if it&rsquo;s possible to form the substring <code>s3[i + j:]</code> from <code>s1[i:]</code> and <code>s2[j:]</code>. The recursion proceeds by checking two possibilities:
 <ul>
-<li>Define a recursive function <code>dp(i, j)</code> to check if the substring of <code>s3</code> up to <code>i + j</code> can be formed using the first <code>i</code> characters of <code>s1</code> and the first <code>j</code> characters of <code>s2</code>.</li>
-<li><strong>Base Case</strong>: If <code>i</code> and <code>j</code> reach the end of <code>s1</code> and <code>s2</code>, return <code>true</code>.</li>
-<li><strong>Memoization</strong>: Store results in a <code>memo</code> table to avoid redundant calculations.</li>
+<li>If the character at <code>s1[i]</code> matches <code>s3[i + j]</code>, try to form the remainder of <code>s3</code> by advancing the index <code>i</code>.</li>
+<li>If the character at <code>s2[j]</code> matches <code>s3[i + j]</code>, try to form the remainder of <code>s3</code> by advancing the index <code>j</code>.</li>
 </ul>
 </li>
-<li><strong>Recursive Cases</strong>:
-<ul>
-<li>For each position <code>(i, j)</code> in <code>s1</code> and <code>s2</code>:
-<ul>
-<li>If the character <code>s1[i]</code> matches <code>s3[i + j]</code>, recursively call <code>dp(i + 1, j)</code>.</li>
-<li>If <code>s2[j]</code> matches <code>s3[i + j]</code>, recursively call <code>dp(i, j + 1)</code>.</li>
-</ul>
-</li>
-<li>Use bitwise OR (<code>|</code>) to combine results as any valid path should return <code>true</code>.</li>
-</ul>
-</li>
-<li><strong>Edge Case Check</strong>:
-<ul>
-<li>If <code>s1.size() + s2.size()</code> is not equal to <code>s3.size()</code>, return <code>false</code> immediately as interleaving is impossible.</li>
-</ul>
-</li>
+<li><strong>Final Check</strong>: The recursion starts at the beginning of both strings (<code>i = 0, j = 0</code>) and the final result is stored in <code>memo[0][0]</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialize Variables</strong>: Set <code>s1</code>, <code>s2</code>, <code>s3</code> as class variables for easy access.</li>
-<li><strong>Edge Case</strong>: Check if lengths match.</li>
-<li><strong>Memoization Table</strong>: Initialize <code>memo</code> with <code>-1</code> for unchecked cells.</li>
-<li><strong>Recursive DP Calls</strong>: Start with <code>dp(0, 0)</code> and recursively check all possible interleavings.</li>
-<li><strong>Return Result</strong>: The result of <code>dp(0, 0)</code> indicates if <code>s3</code> can be formed by interleaving <code>s1</code> and <code>s2</code>.</li>
-</ol>
+<h4 id="1-class-definition-and-initialization">
+  1. Class Definition and Initialization
+  <a class="heading-link" href="#1-class-definition-and-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    string s1, s2, s3;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo;
+</span></span></code></pre></div><ul>
+<li><code>s1</code>, <code>s2</code>, and <code>s3</code> are the strings provided for checking interleaving.</li>
+<li><code>memo</code> is a 2D table used for memoization to store intermediate results. Each entry <code>memo[i][j]</code> will hold the result of whether it&rsquo;s possible to interleave <code>s1[i:]</code> and <code>s2[j:]</code> to form <code>s3[i + j:]</code>.</li>
+</ul>
+<h4 id="2-recursive-function-dp">
+  2. Recursive Function (<code>dp</code>)
+  <a class="heading-link" href="#2-recursive-function-dp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> s1.size() <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">==</span> s2.size()) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (memo[i][j] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> j;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> s1.size() <span style="color:#f92672">&amp;&amp;</span> s1[i] <span style="color:#f92672">==</span> s3[k])
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">|=</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">&lt;</span> s2.size() <span style="color:#f92672">&amp;&amp;</span> s2[j] <span style="color:#f92672">==</span> s3[k])
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">|=</span> dp(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[i][j] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If both <code>i == s1.size()</code> and <code>j == s2.size()</code>, it means both strings have been completely used, and we&rsquo;ve formed <code>s3</code> completely, so return <code>true</code>.</li>
+<li><strong>Memoization Check</strong>: If <code>memo[i][j]</code> is not <code>-1</code>, it means we&rsquo;ve already computed this subproblem, so we return its result.</li>
+<li><strong>Recursive Case</strong>: We check two possibilities:
+<ul>
+<li>If the character at <code>s1[i]</code> matches <code>s3[k]</code>, we move to the next index in <code>s1</code> and continue checking.</li>
+<li>If the character at <code>s2[j]</code> matches <code>s3[k]</code>, we move to the next index in <code>s2</code> and continue checking.</li>
+</ul>
+</li>
+<li><strong>Return Memoized Result</strong>: The result of the current subproblem is stored in <code>memo[i][j]</code> to avoid redundant calculations.</li>
+</ul>
+<h4 id="3-main-function-isinterleave">
+  3. Main Function (<code>isInterleave</code>)
+  <a class="heading-link" href="#3-main-function-isinterleave">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isInterleave</span>(string s1, string s2, string s3) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s1 <span style="color:#f92672">=</span> s1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s2 <span style="color:#f92672">=</span> s2;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s3 <span style="color:#f92672">=</span> s3;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s1.size() <span style="color:#f92672">+</span> s2.size() <span style="color:#f92672">!=</span> s3.size()) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    memo.resize(s1.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(s2.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Length Check</strong>: Before proceeding with the recursion, we check if the sum of the lengths of <code>s1</code> and <code>s2</code> is equal to the length of <code>s3</code>. If they don&rsquo;t match, return <code>false</code> because it’s impossible for <code>s3</code> to be an interleaving of <code>s1</code> and <code>s2</code>.</li>
+<li><strong>Memoization Table Initialization</strong>: The <code>memo</code> table is resized to fit the dimensions <code>(s1.size() + 1)</code> and <code>(s2.size() + 1)</code> with all entries initialized to <code>-1</code> to indicate that no subproblem has been solved yet.</li>
+<li><strong>Start Recursion</strong>: The recursion starts with <code>dp(0, 0)</code>, which checks if it&rsquo;s possible to form the interleaving from the beginning of both strings.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -304,10 +357,31 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n \times m)), where (n) and (m) are the lengths of <code>s1</code> and <code>s2</code>, due to memoization reducing redundant calls.</li>
-<li><strong>Space Complexity</strong>: (O(n \times m)), for the <code>memo</code> table.</li>
-</ul> 
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(m * n)</strong>, where <code>m</code> is the length of <code>s1</code> and <code>n</code> is the length of <code>s2</code>. This is because we solve each subproblem once, and the total number of subproblems is proportional to the product of the lengths of <code>s1</code> and <code>s2</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(m * n)</strong>, where <code>m</code> is the length of <code>s1</code> and <code>n</code> is the length of <code>s2</code>. This is due to the memoization table storing results for each subproblem.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to this problem efficiently checks if a given string <code>s3</code> is an interleaving of two strings <code>s1</code> and <code>s2</code> using a <strong>dynamic programming</strong> approach with <strong>memoization</strong>. By recursively checking possible interleavings of substrings and storing the results to avoid redundant calculations, the solution ensures optimal performance. The use of a 2D memoization table allows the problem to be solved in <strong>O(m * n)</strong> time, where <code>m</code> and <code>n</code> are the lengths of the input strings <code>s1</code> and <code>s2</code>. This approach is both time-efficient and space-efficient for this type of problem.</p>
+ 
 </div>
   
 

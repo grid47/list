@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1393s1hbhb">
+<h2 id="hahahugoshortcode1391s1hbhb">
   
 
   
@@ -256,7 +256,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given <code>n</code> functions with unique IDs and a list of logs indicating when each function starts and stops, compute the exclusive time for each function. The exclusive time of a function is the total time spent in that function, excluding the time spent in any child functions.</p>
+<p>The problem asks us to calculate the exclusive execution time of functions in a system where each log entry records the starting or stopping time of a function, along with its unique function ID. The logs are provided as strings where each log contains the function ID, the status (either &ldquo;start&rdquo; or &ldquo;end&rdquo;), and the timestamp of when the event occurred.</p>
+<p>Given <code>n</code> functions, our goal is to compute the exclusive execution time of each function. The exclusive execution time is defined as the total time a function spends executing minus the time it spends in functions that it calls.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,60 +265,108 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to simulate the execution of the functions and manage their start and end times. A stack data structure is ideal for this problem because it allows us to keep track of the functions that are currently executing.</p>
+<p>The solution can be broken down into the following steps:</p>
 <ol>
-<li>
-<p><strong>Data Structure</strong>:</p>
-<ul>
-<li>Use a <code>Log</code> struct to hold the function ID, status (start or end), and the timestamp.</li>
-<li>Use a vector <code>ans</code> to store the exclusive time for each function.</li>
-<li>Use a stack to keep track of the active function logs.</li>
-</ul>
-</li>
-<li>
-<p><strong>Parsing Logs</strong>:</p>
-<ul>
-<li>For each log entry, split the string using the delimiter <code>:</code> to extract the function ID, status, and time.</li>
-<li>Create a <code>Log</code> object for each log entry.</li>
-</ul>
-</li>
-<li>
-<p><strong>Processing Logs</strong>:</p>
-<ul>
-<li>If the log indicates a &ldquo;start&rdquo; event:
-<ul>
-<li>Push the log onto the stack.</li>
-</ul>
-</li>
-<li>If the log indicates an &ldquo;end&rdquo; event:
-<ul>
-<li>Calculate the time spent in the function using the difference between the end time and the start time (considering inclusive counts).</li>
-<li>Add this time to the exclusive time of the current function.</li>
-<li>Pop the function from the stack.</li>
-<li>If there is still a function in the stack (indicating a parent function), subtract the calculated time from the parent function&rsquo;s exclusive time.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After processing all logs, return the <code>ans</code> vector containing the exclusive times for each function.</li>
-</ul>
-</li>
+<li><strong>Parse the Logs</strong>: Each log entry contains a function ID, a status (&ldquo;start&rdquo; or &ldquo;end&rdquo;), and a timestamp. We need to extract this information from the log.</li>
+<li><strong>Track Start and End Times</strong>: Use a stack to keep track of functions that are currently executing. When a function starts, we push it onto the stack. When a function ends, we pop it from the stack and compute its exclusive execution time.</li>
+<li><strong>Adjust the Times</strong>: For each &ldquo;end&rdquo; log, we calculate the time spent by the function and update the time of the function at the top of the stack, which represents the function that called the current function.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Initialize a vector <code>ans</code> of size <code>n</code> to zero.</li>
-<li>Iterate through each log entry, parsing and processing it based on the function status.</li>
-<li>Use assertions to ensure that the function IDs match appropriately when popping from the stack.</li>
-<li>Return the <code>ans</code> vector as the final result.</li>
-</ol>
+<p>Let&rsquo;s go through the code step by step to understand how it works:</p>
+<h4 id="1-data-structures-and-initialization">
+  1. <strong>Data Structures and Initialization</strong>:
+  <a class="heading-link" href="#1-data-structures-and-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>Log<span style="color:#f92672">&gt;</span> stk;
+</span></span></code></pre></div><ul>
+<li>We initialize a <code>vector&lt;int&gt; ans</code> with size <code>n</code> to store the exclusive execution times of each function. The <code>vector</code> is initialized with zeros.</li>
+<li>A stack <code>stk</code> of type <code>Log</code> is used to track functions as they start. Each entry in the stack represents a function that is currently running, including its ID, status, and start time.</li>
+</ul>
+<h4 id="2-iterating-through-the-logs">
+  2. <strong>Iterating Through the Logs</strong>:
+  <a class="heading-link" href="#2-iterating-through-the-logs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string log : logs) {
+</span></span><span style="display:flex;"><span>    stringstream <span style="color:#a6e22e">ss</span>(log);
+</span></span><span style="display:flex;"><span>    string num, adj, time;
+</span></span><span style="display:flex;"><span>    getline(ss, num, <span style="color:#e6db74">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    getline(ss, adj, <span style="color:#e6db74">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    getline(ss, time, <span style="color:#e6db74">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    Log item <span style="color:#f92672">=</span> { stoi(num), adj, stoi(time) };
+</span></span></code></pre></div><ul>
+<li>We iterate through each log in the <code>logs</code> vector. Each log string is passed to a stringstream <code>ss</code> to extract the function ID (<code>num</code>), status (<code>adj</code>), and timestamp (<code>time</code>) using <code>getline()</code>.</li>
+<li>We convert <code>num</code> and <code>time</code> to integers using <code>stoi()</code>, and create a <code>Log</code> structure with the parsed information.</li>
+</ul>
+<h4 id="3-processing-the-start-log">
+  3. <strong>Processing the &ldquo;Start&rdquo; Log</strong>:
+  <a class="heading-link" href="#3-processing-the-start-log">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(item.status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>) {
+</span></span><span style="display:flex;"><span>    stk.push(item);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the log represents a &ldquo;start&rdquo; event, we push the <code>Log</code> object onto the stack. This indicates that a function has started and is currently executing.</li>
+</ul>
+<h4 id="4-processing-the-end-log">
+  4. <strong>Processing the &ldquo;End&rdquo; Log</strong>:
+  <a class="heading-link" href="#4-processing-the-end-log">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    assert(stk.top().id <span style="color:#f92672">==</span> item.id);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> item.time <span style="color:#f92672">-</span> stk.top().time <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    ans[item.id] <span style="color:#f92672">+=</span> t;
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span></code></pre></div><ul>
+<li>If the log represents an &ldquo;end&rdquo; event, we first check that the function ID of the &ldquo;end&rdquo; log matches the function ID of the function at the top of the stack (i.e., the currently executing function).</li>
+<li>We calculate the time spent by the function using the formula <code>t = item.time - stk.top().time + 1</code>, where <code>item.time</code> is the timestamp of the &ldquo;end&rdquo; event and <code>stk.top().time</code> is the timestamp of the corresponding &ldquo;start&rdquo; event.</li>
+<li>We add this time to <code>ans[item.id]</code>, which stores the total exclusive execution time for the function <code>item.id</code>.</li>
+<li>We then pop the function from the stack because it has finished executing.</li>
+</ul>
+<h4 id="5-adjusting-the-time-of-the-calling-function">
+  5. <strong>Adjusting the Time of the Calling Function</strong>:
+  <a class="heading-link" href="#5-adjusting-the-time-of-the-calling-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>stk.empty()){
+</span></span><span style="display:flex;"><span>    assert(stk.top().status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>);
+</span></span><span style="display:flex;"><span>    ans[stk.top().id] <span style="color:#f92672">-=</span> t;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the stack is not empty (i.e., there is a function that called the current function), we subtract the execution time of the current function from the exclusive execution time of the function at the top of the stack. This ensures that the time spent in the current function is not counted as part of the calling function&rsquo;s exclusive time.</li>
+</ul>
+<h4 id="6-returning-the-result">
+  6. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#6-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all logs, the <code>ans</code> vector will contain the exclusive execution times of all functions, which we return.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -325,15 +374,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(L), where L is the number of log entries, since each log is processed once.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the results and the stack in the worst case (when all functions are active).</li>
+<li><strong>O(n)</strong>: We iterate through each log exactly once, where <code>n</code> is the number of logs. Each operation inside the loop (such as parsing the log and pushing or popping from the stack) takes constant time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is determined by the stack, which can store at most <code>n</code> functions in the worst case (when no functions have finished executing).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the exclusive execution time of each function by simulating the function calls using a stack. The stack allows us to keep track of which function is currently running and ensures that we correctly account for the time spent in functions that are called. By maintaining the exclusive execution time of each function, we handle nested calls and accurately compute the total time spent by each function without counting the time spent in its child functions.</p>
+<p>This approach runs in <strong>O(n)</strong> time, where <code>n</code> is the number of log entries, and it uses <strong>O(n)</strong> space, making it optimal for solving the problem. The use of a stack ensures that the solution is both simple and efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1393s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1391s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

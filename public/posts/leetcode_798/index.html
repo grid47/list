@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -225,7 +225,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">distance</span>(change.begin(), max_element(change.begin(), change.end()));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1501s1hbhb">
+<h2 id="hahahugoshortcode1498s1hbhb">
   
 
   
@@ -237,7 +237,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, you want to rotate the array to maximize the score. The score of a rotation is defined as the sum of indices <code>i</code> for which <code>nums[i]</code> is greater than <code>i</code>. Return the index of the rotation that maximizes the score.</p>
+<p>In this problem, we are tasked with finding the best rotation of an array <code>nums</code> that maximizes the score. The score of a rotation is defined by the number of elements in the rotated array that are greater than or equal to their index. For example, if the rotated array is <code>nums'</code>, the score is calculated as the sum of <code>nums'[i] &gt;= i</code> for each index <code>i</code>.</p>
+<p>The objective is to determine the number of rotations that will produce the highest score.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,64 +246,71 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to avoid performing the actual rotations and instead focus on tracking how the rotations affect the score. The idea is to use a <strong>difference array</strong> approach to calculate how each rotation changes the score, and then determine which rotation produces the highest score.</p>
+<p>The main challenge is to efficiently calculate the score for all possible rotations without explicitly rotating the array for each possibility. The solution uses a clever technique involving cumulative sums to determine the best rotation in linear time.</p>
+<p>Here’s a step-by-step explanation of the approach:</p>
 <ol>
 <li>
-<p><strong>Initialize Change Array</strong>:</p>
+<p><strong>Understanding the rotation effect</strong>:</p>
 <ul>
-<li>Create an array <code>change</code> of size <code>n</code> initialized to zero. This array will be used to track the changes in scores for different rotations.</li>
+<li>For each index <code>i</code>, when we rotate the array, the value at index <code>i</code> moves to a new index. The goal is to track how the rotations affect the number of elements that satisfy the condition <code>nums'[i] &gt;= i</code>, where <code>nums'[i]</code> is the value after the rotation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Changes</strong>:</p>
+<p><strong>Tracking the score changes</strong>:</p>
 <ul>
-<li>For each element <code>nums[i]</code>:
-<ul>
-<li>Calculate the rotation index where the current score will be affected. This is given by <code>(i - nums[i] + 1 + n) % n</code>.</li>
-<li>Decrease the value at this index in the <code>change</code> array by 1, indicating that the score will drop for this rotation.</li>
-</ul>
-</li>
+<li>We create a helper array <code>change</code> that tracks how each rotation affects the score. Instead of performing each rotation explicitly, we adjust the score change at each index based on the elements in the array. The <code>change</code> array will help efficiently calculate the score for each possible rotation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Prefix Sum Calculation</strong>:</p>
+<p><strong>Using the difference array technique</strong>:</p>
 <ul>
-<li>Update the <code>change</code> array to compute the cumulative score changes using a prefix sum approach.</li>
-<li>For each index from 1 to <code>n-1</code>, add the previous value and increment the score by 1 for each rotation.</li>
+<li>The difference array allows us to accumulate score changes across multiple rotations in linear time. For each element <code>nums[i]</code>, we calculate the effect of rotating the array such that <code>nums[i]</code> contributes to the score. This is done by marking the index in the <code>change</code> array where the contribution starts and where it ends.</li>
 </ul>
 </li>
 <li>
-<p><strong>Find the Best Rotation</strong>:</p>
+<p><strong>Final calculation</strong>:</p>
 <ul>
-<li>Use <code>max_element</code> to find the index of the maximum score in the <code>change</code> array. This index corresponds to the best rotation.</li>
+<li>After processing all elements, the final step is to calculate the score for each rotation using the cumulative sum of the <code>change</code> array. The rotation that gives the maximum score is the desired result.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s walk through the code to understand how it works:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">bestRotation</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> change(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>The first step is to initialize the size of the input array <code>nums</code> (<code>n</code>). We also create a helper array <code>change</code> of size <code>n</code> to track the score changes for each rotation. Initially, all values in <code>change</code> are set to <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        change[(i <span style="color:#f92672">-</span> nums[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> n) <span style="color:#f92672">%</span> n]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>In this loop, we process each element <code>nums[i]</code> in the array. The goal is to determine the effect of rotating the array such that <code>nums[i]</code> contributes to the score. For each element:
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to determine the best rotation.
-<ul>
-<li><code>int bestRotation(vector&lt;int&gt;&amp; nums)</code>: Implements the logic for calculating the best rotation.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>nums</code>: A vector of integers representing the original array.</li>
+<li>We calculate the position where the rotation starts affecting the score. This is done using the formula <code>(i - nums[i] + 1 + n) % n</code>. This formula accounts for the wrap-around effect of rotations and ensures we handle negative indices correctly by using modulo arithmetic.</li>
+<li>The expression <code>change[(i - nums[i] + 1 + n) % n]--</code> effectively marks the start of a rotation that decreases the score.</li>
 </ul>
 </li>
-<li><strong>Returns</strong>: An integer representing the index of the best rotation that maximizes the score.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        change[i] <span style="color:#f92672">+=</span> change[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>In the second loop, we compute the cumulative sum of the <code>change</code> array. This step propagates the effect of rotations across all indices. The idea is that <code>change[i]</code> holds the cumulative score change for the rotation starting at index <code>i</code>.</li>
+<li>The <code>+1</code> in the expression <code>change[i] += change[i - 1] + 1</code> ensures that we track how each rotation incrementally affects the score.</li>
 </ul>
-</li>
-</ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">distance</span>(change.begin(), max_element(change.begin(), change.end()));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The last step is to find the index with the maximum score change. We use the <code>max_element</code> function to find the maximum value in the <code>change</code> array, and <code>distance(change.begin(), ...)</code> returns the index of the maximum value. This index corresponds to the best rotation that produces the highest score.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,15 +319,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>. Here&rsquo;s why:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the size of the input array. The algorithm passes through the array a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(n), for the additional <code>change</code> array used to store score changes.</li>
+<li>The first loop iterates through each element of the array exactly once, resulting in a time complexity of <strong>O(n)</strong>.</li>
+<li>The second loop also iterates through each element of the array once, so it contributes <strong>O(n)</strong> to the time complexity.</li>
+<li>The <code>max_element</code> function also operates in <strong>O(n)</strong> time to find the maximum value in the <code>change</code> array.</li>
+<li>Therefore, the overall time complexity is <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the array <code>nums</code>. This is because we use an additional array <code>change</code> of size <code>n</code> to track the score changes for each rotation. Apart from that, no other significant data structures are used.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is both time and space efficient, with a linear time complexity of O(n) and a space complexity of O(n). By using the difference array technique, we avoid explicitly rotating the array and instead calculate the effect of each rotation on the score in an optimal manner.</p>
+<p>The key insight behind this approach is the use of the <strong>difference array</strong> to track score changes, which allows us to efficiently compute the score for each rotation without needing to actually rotate the array. This technique ensures that we can find the best rotation in linear time, making the solution suitable for large input sizes.</p>
+<p>This approach is a powerful example of how problem-solving can be optimized by recognizing patterns and leveraging efficient algorithms like difference arrays and cumulative sums.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1501s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1498s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

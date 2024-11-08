@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
 
@@ -238,7 +238,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1343s1hbhb">
+<h2 id="hahahugoshortcode1340s1hbhb">
   
 
   
@@ -250,7 +250,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary array <code>nums</code>, find the maximum length of a contiguous subarray that contains an equal number of 0s and 1s.</p>
+<p>Given a binary array <code>nums</code> containing only 0s and 1s, find the maximum length of a contiguous subarray with an equal number of 0s and 1s.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,60 +258,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialize Variables</strong>:</p>
-<ul>
-<li>Use a variable <code>score</code> to keep track of the difference between the count of 1s and 0s (1 for each 1 and -1 for each 0).</li>
-<li>Use a variable <code>res</code> to store the maximum length found.</li>
-<li>Use a hashmap <code>mp</code> to store the first occurrence of each score.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
-<ul>
-<li>For each element in <code>nums</code>, update <code>score</code>:
-<ul>
-<li>Increment <code>score</code> by 1 if the element is 1.</li>
-<li>Decrement <code>score</code> by 1 if the element is 0.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Equal Count</strong>:</p>
-<ul>
-<li>If <code>score</code> is 0, it means the subarray from the start to the current index has equal numbers of 0s and 1s, so update <code>res</code>.</li>
-<li>If <code>score</code> has been seen before in the hashmap, calculate the length of the subarray between its first occurrence and the current index, updating <code>res</code> if this length is greater.</li>
-<li>If <code>score</code> has not been seen before, store its index in the hashmap.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After processing all elements in <code>nums</code>, return the maximum length stored in <code>res</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This solution leverages a cumulative &ldquo;score&rdquo; approach, where we treat each <code>0</code> as <code>-1</code> and each <code>1</code> as <code>+1</code>. By doing this, any subarray with an equal number of 0s and 1s will have a total score of <code>0</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Start with <code>score = 0</code>, <code>res = 0</code>, and an empty hashmap <code>mp</code>.</li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><code>n</code> stores the size of <code>nums</code>.</li>
+<li><code>score</code> keeps a running total based on the values in <code>nums</code> (adding <code>1</code> for <code>1</code>s and subtracting <code>1</code> for <code>0</code>s).</li>
+<li><code>res</code> keeps track of the maximum length of a subarray with an equal number of <code>0</code>s and <code>1</code>s.</li>
+<li><code>mp</code> is a map that tracks the first index where each cumulative score was seen.</li>
 </ul>
 </li>
 <li>
-<p><strong>Score Calculation</strong>:</p>
-<ul>
-<li>Loop through the array and update <code>score</code> based on the current element.</li>
-<li>Use the hashmap to check for previously encountered scores and compute potential subarray lengths.</li>
+<p><strong>Iterate Through the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    score <span style="color:#f92672">+=</span> nums[i] <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Loop through <code>nums</code>. For each <code>1</code> encountered, increment <code>score</code> by <code>1</code>; for each <code>0</code>, decrement <code>score</code> by <code>1</code>.</li>
+<li>This cumulative score helps identify sections of the array where the count of 0s equals the count of 1s.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Balanced Subarrays</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(score <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) res <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>score</code> is <code>0</code>, then from the start of the array to the current index <code>i</code>, we have an equal count of 0s and 1s. Update <code>res</code> to <code>i + 1</code> (the entire length so far).</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Map for Previous Score Occurrences</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp.count(score))
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, i <span style="color:#f92672">-</span> mp[score]);
+</span></span></code></pre></div><ul>
+<li>If <code>score</code> has been seen before at a previous index, then the subarray between that index and the current index <code>i</code> has an equal count of 0s and 1s. We update <code>res</code> to the maximum length found.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store First Occurrence of Each Score</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp.count(score)) mp[score] <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><ul>
+<li>If <code>score</code> hasn’t been seen before, we store it in <code>mp</code> with the current index <code>i</code>. This ensures that only the first occurrence of each score is stored, which helps maximize the length of any valid subarray found later.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The result <code>res</code> contains the maximum length of a contiguous subarray with an equal count of 0s and 1s.</li>
 </ul>
 </li>
 </ol>
@@ -323,14 +326,22 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the array, as we make a single pass through the array.</li>
-<li><strong>Space Complexity</strong>: O(n), for the hashmap storing the indices of scores.</li>
+<li><strong>Time Complexity</strong>: <code>O(n)</code>, as we only iterate through <code>nums</code> once.</li>
+<li><strong>Space Complexity</strong>: <code>O(n)</code>, due to the usage of the map <code>mp</code>, which can store up to <code>n</code> entries.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by converting it into a cumulative score tracking problem. By mapping each score’s first occurrence, we quickly find the longest subarray with an equal number of 0s and 1s. The solution has optimal time and space complexity for handling large inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1343s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1340s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -274,7 +274,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>h</code> where each element represents the height of a bar in a histogram, find the area of the largest rectangle that can be formed in the histogram.</p>
+<p>The problem is to find the area of the largest rectangle that can be formed in a histogram. Given a histogram represented by an array of integers, where each integer corresponds to the height of a bar in the histogram, the goal is to compute the maximum rectangular area that can be formed within the histogram. The rectangle can be formed by selecting a range of bars in the histogram and calculating the area formed by the shortest bar in that range multiplied by the width of the range.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,67 +282,107 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use a stack-based approach, which helps in finding the nearest smaller bar to the left and right of each bar. This allows us to compute the maximum area for each bar in linear time. The idea behind this approach is:</p>
 <ol>
 <li>
-<p><strong>Use of Stacks</strong>:</p>
-<ul>
-<li>Utilize two stacks to determine the left and right limits for each bar where it can extend without being obstructed by a taller bar.</li>
-</ul>
+<p><strong>Finding Nearest Smaller Bars:</strong>
+For each bar in the histogram, we need to calculate the nearest bar on the left and the nearest bar on the right that is smaller than the current bar. This gives us the range within which the current bar can contribute to the maximum area rectangle.</p>
 </li>
 <li>
-<p><strong>Left Limit Calculation</strong>:</p>
-<ul>
-<li>Iterate through the histogram from left to right.</li>
-<li>For each bar, use a stack to find the nearest bar to the left that is shorter than the current bar. If no such bar exists, set the limit to -1.</li>
-</ul>
+<p><strong>Using a Stack to Track Indices:</strong>
+We use a stack to store the indices of bars in the histogram. This stack helps in maintaining the order of the bars and allows us to efficiently find the nearest smaller bar to the left and right.</p>
 </li>
 <li>
-<p><strong>Right Limit Calculation</strong>:</p>
-<ul>
-<li>Iterate through the histogram from right to left.</li>
-<li>Similar to the left limit, use a stack to find the nearest bar to the right that is shorter than the current bar. If no such bar exists, set the limit to the length of the histogram.</li>
-</ul>
-</li>
-<li>
-<p><strong>Area Calculation</strong>:</p>
-<ul>
-<li>For each bar, calculate the area of the rectangle that can be formed using that bar as the shortest bar. The width is determined by the difference between the left and right limits.</li>
-</ul>
-</li>
-<li>
-<p><strong>Find Maximum Area</strong>:</p>
-<ul>
-<li>Track the maximum area encountered during the area calculations.</li>
-</ul>
+<p><strong>Calculating Maximum Area:</strong>
+For each bar, the maximum area that can be formed with that bar is the height of the bar multiplied by the width of the range between the nearest smaller bars on the left and right.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Left Limit</strong>:</p>
+<h4 id="step-1-finding-nearest-smaller-bar-to-the-left">
+  Step 1: Finding Nearest Smaller Bar to the Left
+  <a class="heading-link" href="#step-1-finding-nearest-smaller-bar-to-the-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> h.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> left(n, <span style="color:#ae81ff">0</span>), right(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> h.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(stk.empty()) {
+</span></span><span style="display:flex;"><span>        left[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        stk.push(i);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> h[i] <span style="color:#f92672">&lt;=</span> h[stk.top()])
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(stk.empty())
+</span></span><span style="display:flex;"><span>            left[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> left[i] <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>        stk.push(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>A stack <code>stk</code> is used to store the indices of bars as we traverse the histogram from left to right.</li>
+<li>The array <code>left</code> stores the index of the nearest bar to the left that is smaller than the current bar. If no such bar exists, we assign <code>-1</code> to indicate the left boundary.</li>
+<li>For each bar, we pop elements from the stack while the current bar is smaller than or equal to the bar at the index stored at the top of the stack. This ensures that the stack only contains indices of bars that are taller than the current bar.</li>
+<li>The index of the nearest smaller bar is recorded in the <code>left</code> array.</li>
+<li>Finally, the current bar’s index is pushed onto the stack for future comparisons.</li>
+</ul>
+<h4 id="step-2-finding-nearest-smaller-bar-to-the-right">
+  Step 2: Finding Nearest Smaller Bar to the Right
+  <a class="heading-link" href="#step-2-finding-nearest-smaller-bar-to-the-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()) stk.pop();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> h.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(stk.empty()) {
+</span></span><span style="display:flex;"><span>        right[i] <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        stk.push(i);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> h[i] <span style="color:#f92672">&lt;=</span> h[stk.top()])
+</span></span><span style="display:flex;"><span>            stk.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(stk.empty())
+</span></span><span style="display:flex;"><span>            right[i] <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> right[i] <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>        stk.push(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After processing the left boundary, we reset the stack and traverse the histogram from right to left to find the nearest smaller bar on the right.</li>
+<li>The <code>right</code> array stores the index of the nearest bar to the right that is smaller than the current bar. If no such bar exists, we assign <code>n</code> (the size of the histogram) to indicate the right boundary.</li>
+<li>The approach is similar to the left boundary, but we now process the histogram in reverse order.</li>
+<li>The <code>right</code> array is populated similarly by pushing the index of the nearest smaller bar on the right.</li>
+</ul>
+<h4 id="step-3-calculating-the-maximum-rectangle-area">
+  Step 3: Calculating the Maximum Rectangle Area
+  <a class="heading-link" href="#step-3-calculating-the-maximum-rectangle-area">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, h[i] <span style="color:#f92672">*</span> (right[i] <span style="color:#f92672">-</span> left[i] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After calculating the left and right boundaries for each bar, we iterate over the histogram to compute the area for each bar.</li>
+<li>The area for each bar is computed as <code>height * width</code>, where:
 <ul>
-<li>Iterate over the heights to populate the <code>left</code> array, which contains the index of the nearest smaller bar to the left for each bar.</li>
+<li><code>height</code> is the height of the current bar (<code>h[i]</code>).</li>
+<li><code>width</code> is the distance between the left and right boundaries, which is calculated as <code>right[i] - left[i] - 1</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Right Limit</strong>:</p>
-<ul>
-<li>Iterate in reverse to populate the <code>right</code> array with the index of the nearest smaller bar to the right for each bar.</li>
+<li>We keep track of the maximum area encountered during the iteration and return it as the result.</li>
 </ul>
-</li>
-<li>
-<p><strong>Area Calculation</strong>:</p>
-<ul>
-<li>For each bar, compute the area using the formula: <code>height[i] * (right[i] - left[i] - 1)</code> and update the maximum area.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -350,10 +390,36 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(n) ) since each bar is pushed and popped from the stack at most once.</li>
-<li><strong>Space Complexity:</strong> ( O(n) ) for the <code>left</code> and <code>right</code> arrays.</li>
+<li><strong>Left and Right Boundary Calculation:</strong> Both the left and right boundary calculations involve iterating over the histogram, and for each bar, we perform constant-time operations (push and pop from the stack). Thus, the time complexity for finding the left and right boundaries is <code>O(n)</code>, where <code>n</code> is the number of bars in the histogram.</li>
+<li><strong>Area Calculation:</strong> After calculating the boundaries, we perform a single pass over the histogram to calculate the area for each bar, which also takes <code>O(n)</code> time.</li>
+<li>Therefore, the overall time complexity of the algorithm is <code>O(n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use two arrays (<code>left</code> and <code>right</code>) of size <code>n</code> to store the boundaries, and a stack that can hold up to <code>n</code> indices at most. Therefore, the space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently computes the area of the largest rectangle that can be formed in a histogram using a stack-based approach. By leveraging stacks to find the nearest smaller bars on the left and right for each bar, the algorithm computes the maximum rectangle area in linear time (<code>O(n)</code>). This approach is both time and space efficient, making it suitable for large input sizes. By using stack-based optimization, this solution avoids the brute-force approach of checking all possible rectangles, significantly improving performance. This makes the algorithm scalable and efficient for real-world applications involving histogram-based problems.</p>
  
 </div>
   

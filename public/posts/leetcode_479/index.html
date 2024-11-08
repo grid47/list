@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stol(to_string(n) <span style="color:#f92672">+</span> s);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1316s1hbhb">
+<h2 id="hahahugoshortcode1313s1hbhb">
   
 
   
@@ -245,7 +245,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, you need to find the largest palindrome made from the product of two <code>n</code>-digit numbers. Return the result modulo <code>1337</code>.</p>
+<p>The task is to find the largest palindrome that can be obtained by multiplying two <code>n</code>-digit numbers. A palindrome is a number that reads the same forwards and backwards. Given <code>n</code>, the goal is to determine this largest palindrome and return it modulo <code>1337</code>. If <code>n</code> is 1, then the result is simply <code>9</code>, as this is the largest single-digit palindrome. For other values of <code>n</code>, we need to find two <code>n</code>-digit numbers whose product forms the largest palindrome.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -253,76 +253,77 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem involves a combination of reverse engineering palindromes and efficiently searching for factors. Instead of checking every possible product of two <code>n</code>-digit numbers to see if it forms a palindrome, we generate potential palindromic candidates directly and then verify if these candidates can be obtained by multiplying two <code>n</code>-digit numbers.</p>
 <ol>
 <li>
-<p><strong>Understanding Palindromes</strong>:</p>
+<p><strong>Handle Small Case for <code>n = 1</code></strong>: When <code>n</code> is 1, the largest palindrome is simply <code>9</code>, as this is the largest product of two single-digit numbers.</p>
+</li>
+<li>
+<p><strong>Generate <code>n</code>-Digit Bounds</strong>: For any <code>n</code>, the largest <code>n</code>-digit number, <code>upper</code>, is given by <code>10^n - 1</code>, and the smallest <code>n</code>-digit number, <code>lower</code>, is <code>10^(n-1)</code>. These values help to define the range within which we search for factors.</p>
+</li>
+<li>
+<p><strong>Loop to Create Palindromic Candidates</strong>:</p>
 <ul>
-<li>A palindrome is a number that reads the same backward as forward.</li>
+<li>For each number <code>i</code> starting from <code>upper</code> and decrementing to <code>lower</code>, we generate a palindromic candidate using the <code>buildPalindrome</code> function. This function takes <code>i</code> and mirrors it to form a palindrome.</li>
+<li>For instance, if <code>i = 123</code>, the function creates the string <code>&quot;123321&quot;</code>, which is a palindromic number.</li>
 </ul>
 </li>
 <li>
-<p><strong>Defining the Range</strong>:</p>
+<p><strong>Check for Valid Factors</strong>:</p>
 <ul>
-<li>For <code>n</code>-digit numbers, the upper limit is (10^n - 1) and the lower limit is (10^{(n-1)}).</li>
-</ul>
-</li>
-<li>
-<p><strong>Building Palindromes</strong>:</p>
-<ul>
-<li>Start from the largest <code>n</code>-digit number and generate candidate palindromes by reflecting the digits.</li>
-</ul>
-</li>
-<li>
-<p><strong>Checking for Products</strong>:</p>
-<ul>
-<li>For each candidate palindrome, check if it can be expressed as a product of two <code>n</code>-digit numbers.</li>
-<li>This is done by iterating through potential factors from the upper limit down to the lower limit.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>If a valid palindrome product is found, return it modulo <code>1337</code>.</li>
+<li>Once we have a palindrome candidate, we loop through potential divisors <code>j</code> starting from <code>upper</code> down to <code>sqrt(cand)</code>. If <code>j * j</code> becomes smaller than the candidate, we stop, as there can’t be any valid divisors larger than <code>sqrt(cand)</code> left.</li>
+<li>For each <code>j</code>, we check if <code>j</code> divides <code>cand</code>. If it does, we verify that the quotient of <code>cand / j</code> is also an <code>n</code>-digit number (i.e., it does not exceed <code>upper</code>). If both conditions are met, we’ve found the largest palindrome, so we return it modulo <code>1337</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s walk through each part of the code in detail:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The function <code>largestPalindrome()</code> takes an integer <code>n</code> as input.</li>
-</ul>
+<p><strong>Special Case for <code>n = 1</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">9</span>;
+</span></span></code></pre></div><p>Here, we check if <code>n</code> is 1. If it is, we directly return 9, as that’s the largest single-digit palindrome.</p>
 </li>
 <li>
-<p><strong>Calculating Upper and Lower Bounds</strong>:</p>
-<ul>
-<li><code>upper</code> is set to (10^n - 1) and <code>lower</code> to (10^{(n-1)}).</li>
-</ul>
+<p><strong>Set Bounds for <code>n</code>-Digit Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> upper <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">10</span>, n) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lower <span style="color:#f92672">=</span> pow(<span style="color:#ae81ff">10</span>, n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><p>We define <code>upper</code> as the largest <code>n</code>-digit number (e.g., for <code>n = 2</code>, <code>upper = 99</code>) and <code>lower</code> as the smallest <code>n</code>-digit number (e.g., for <code>n = 2</code>, <code>lower = 10</code>).</p>
 </li>
 <li>
-<p><strong>Generating Palindromes</strong>:</p>
-<ul>
-<li>Loop from <code>upper</code> down to <code>lower</code> to build potential palindromes using the <code>buildPalindrome()</code> helper function.</li>
-</ul>
+<p><strong>Loop to Create and Check Palindromic Candidates</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> upper; i <span style="color:#f92672">&gt;=</span> lower; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> cand <span style="color:#f92672">=</span> buildPalindrome(i);
+</span></span></code></pre></div><p>Here, we iterate from <code>upper</code> down to <code>lower</code> and generate a palindromic candidate for each <code>i</code> using the <code>buildPalindrome</code> function.</p>
 </li>
 <li>
-<p><strong>Checking Factorization</strong>:</p>
-<ul>
-<li>For each generated palindrome, check if it can be factorized into two <code>n</code>-digit numbers by iterating through possible factors.</li>
-</ul>
+<p><strong>Function to Build a Palindrome</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#a6e22e">buildPalindrome</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    string s <span style="color:#f92672">=</span> to_string(n);
+</span></span><span style="display:flex;"><span>    reverse(s.begin(), s.end());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> stol(to_string(n) <span style="color:#f92672">+</span> s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This helper function takes an integer <code>n</code>, converts it to a string, and reverses it to create a mirrored palindrome. The resulting string is then converted back to a long integer to be used as a palindromic candidate.</p>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Return the result modulo <code>1337</code> when a valid palindrome product is found.</li>
-</ul>
+<p><strong>Check for Valid Divisors</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">long</span> j <span style="color:#f92672">=</span> upper; j <span style="color:#f92672">*</span> j <span style="color:#f92672">&gt;=</span> cand; j<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (cand <span style="color:#f92672">%</span> j <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> cand <span style="color:#f92672">/</span> j <span style="color:#f92672">&lt;=</span> upper) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cand <span style="color:#f92672">%</span> <span style="color:#ae81ff">1337</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For each palindrome candidate <code>cand</code>, we check for divisors starting from <code>upper</code>. If <code>j</code> divides <code>cand</code> and <code>cand / j</code> is an <code>n</code>-digit number, we’ve found the largest valid palindrome, and we return <code>cand % 1337</code>.</p>
+</li>
+<li>
+<p><strong>Return Default</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>If no palindrome is found (which theoretically shouldn’t happen), we return <code>-1</code>.</p>
 </li>
 </ol>
 <h3 id="complexity">
@@ -332,15 +333,36 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n^2) in the worst case, due to the nested loops for generating palindromes and checking their factors.</li>
-<li><strong>Space Complexity</strong>: O(1) since only a constant amount of space is used for variables.</li>
-</ul>
+<p>The time and space complexity of this solution can be analyzed as follows:</p>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is roughly <strong>O(upper^2)</strong>. For each potential palindrome candidate, we loop through divisors up to <code>upper</code>. Although the complexity is quadratic, the constraints ensure that the performance is manageable for small values of <code>n</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we use only a few variables to store the palindrome candidate and divisor.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this solution is an efficient approach to finding the largest palindrome that can be represented as the product of two <code>n</code>-digit numbers. By generating palindromic candidates directly and validating their factors, we avoid unnecessary computations, making this a well-optimized solution for the problem at hand. The approach of building palindromic candidates and verifying divisors is both intuitive and efficient, leveraging mathematical properties to produce a robust solution.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1316s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1313s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

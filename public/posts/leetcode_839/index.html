@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
 
@@ -278,7 +278,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ds.grp;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1532s1hbhb">
+<h2 id="hahahugoshortcode1534s1hbhb">
   
 
   
@@ -290,7 +290,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of strings. Two strings are considered similar if they can be made identical by swapping at most two characters. Your task is to determine how many groups of similar strings can be formed from the list.</p>
+<p>The task is to find the number of similar groups in a given list of strings, where two strings are considered <strong>similar</strong> if you can convert one string into the other by swapping exactly two characters. We need to find the total number of similar groups in the given list of strings.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -298,49 +298,209 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be efficiently solved using the <strong>Union-Find (Disjoint Set Union, DSU)</strong> data structure. Here&rsquo;s how the approach works:</p>
 <ol>
 <li>
-<p><strong>Union-Find Data Structure</strong>:</p>
+<p><strong>Union-Find Data Structure:</strong></p>
 <ul>
-<li>Implement a Union-Find (Disjoint Set Union) data structure to manage groups of similar strings.</li>
-<li>Maintain a count of groups, initialized to the number of strings.</li>
+<li>The Union-Find data structure helps to efficiently handle dynamic connectivity queries. It supports two main operations:
+<ul>
+<li><code>find(x)</code> - Finds the representative (or root) of the set containing element <code>x</code>.</li>
+<li><code>union(x, y)</code> - Merges the sets containing <code>x</code> and <code>y</code>.</li>
+</ul>
+</li>
+<li>The <code>find</code> operation uses path compression, which flattens the tree structure and speeds up future queries.</li>
+<li>The <code>union</code> operation uses union by rank or size to ensure that the tree remains balanced, thus optimizing the performance.</li>
 </ul>
 </li>
 <li>
-<p><strong>Define Similarity</strong>:</p>
+<p><strong>Problem Breakdown:</strong></p>
 <ul>
-<li>Create a function <code>similar</code> that checks if two strings differ by at most two characters. If they do, they are part of the same group.</li>
+<li>We can treat each string as a node in a graph. An edge exists between two nodes if their corresponding strings are <strong>similar</strong>. If two strings are similar, we can group them into the same set using the union operation.</li>
+<li>The number of distinct groups (connected components) will give the number of similar groups.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through the Strings</strong>:</p>
+<p><strong>Checking Similarity:</strong></p>
 <ul>
-<li>Use a nested loop to compare each string with every other string. If two strings are similar, join their respective groups in the Union-Find structure.</li>
+<li>To check if two strings are similar, we can iterate over their characters and count how many positions differ. If they differ at <strong>exactly two positions</strong>, we can consider the strings similar. Otherwise, they are not.</li>
+<li>This check is done in constant time per pair of strings, making it feasible to compare all pairs in the list.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count the Groups</strong>:</p>
+<p><strong>Optimizing the Number of Groups:</strong></p>
 <ul>
-<li>The number of unique groups can be obtained from the Union-Find structure after processing all pairs.</li>
+<li>Initially, each string is in its own group. As we find similar pairs, we perform a <code>union</code> operation to merge the sets, thus reducing the total number of groups.</li>
+<li>The total number of groups is tracked using the <code>grp</code> variable in the Union-Find class.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="union-find-class">
+  Union-Find Class
+  <a class="heading-link" href="#union-find-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> grp;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        grp <span style="color:#f92672">=</span> n;  <span style="color:#75715e">// Initially, each string is in its own group.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        par.resize(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#f92672">=</span> i;  <span style="color:#75715e">// Each element is its own parent (set representative).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> q) {
+</span></span><span style="display:flex;"><span>            grp<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Reduce the number of groups by 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            par[p] <span style="color:#f92672">=</span> q;  <span style="color:#75715e">// Merge the two sets by linking one representative to the other.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// No merging is needed if they are already in the same group.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> par[x]) <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// Base case: the element is its own parent.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> par[x] <span style="color:#f92672">=</span> find(par[x]);  <span style="color:#75715e">// Path compression: flatten the tree for efficient future lookups.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>UF Constructor:</strong></p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2 * m), where n is the number of strings and m is the maximum length of the strings, due to the nested loop and character comparison.</li>
-<li><strong>Space Complexity</strong>: O(n), for the Union-Find structure.</li>
+<li>Initializes the <code>par</code> vector where each element points to itself, indicating that each string starts in its own group.</li>
+<li><code>grp</code> is set to the number of strings initially, as each string is its own group.</li>
 </ul>
+</li>
+<li>
+<p><strong><code>join</code> Method:</strong></p>
+<ul>
+<li>This method performs the union operation. It checks if two elements are in different sets using the <code>find</code> method. If they are, it merges the two sets and decreases the group count (<code>grp</code>).</li>
+<li>If the elements are already in the same set, it does nothing.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>find</code> Method:</strong></p>
+<ul>
+<li>This method finds the root of the set to which an element belongs. It uses path compression to flatten the structure, which helps in speeding up future queries by directly linking the element to its root.</li>
+</ul>
+</li>
+</ol>
+<h4 id="main-solution-class">
+  Main Solution Class
+  <a class="heading-link" href="#main-solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> similar(string <span style="color:#f92672">&amp;</span>a, string <span style="color:#f92672">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> a.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (a[i] <span style="color:#f92672">!=</span> b[i] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">++</span>n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>)  <span style="color:#75715e">// If more than two characters differ, they are not similar.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Strings are similar if they differ in exactly two positions or not at all.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numSimilarGroups</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> A) {
+</span></span><span style="display:flex;"><span>        UF ds(A.size());  <span style="color:#75715e">// Create a Union-Find object for the given strings.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> A.size(); i<span style="color:#f92672">++</span>)  <span style="color:#75715e">// Iterate through all pairs of strings.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> A.size(); j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (similar(A[i], A[j]))  <span style="color:#75715e">// If the strings are similar, join their sets.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    ds.join(i, j);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ds.grp;  <span style="color:#75715e">// The number of remaining groups (similar groups).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong><code>similar</code> Method:</strong></p>
+<ul>
+<li>This helper method checks if two strings are similar. It counts the number of differing positions and returns <code>false</code> if more than two positions differ. If exactly two or fewer positions differ, the strings are considered similar, and the method returns <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>numSimilarGroups</code> Method:</strong></p>
+<ul>
+<li>The method first creates a <code>UF</code> (Union-Find) object, initializing it with the number of strings.</li>
+<li>Then, it iterates through all pairs of strings using nested loops. If two strings are similar (as determined by the <code>similar</code> method), the <code>join</code> method of the Union-Find object is called to merge the sets of these two strings.</li>
+<li>Finally, the method returns the number of groups, which is the value stored in <code>ds.grp</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Union-Find Operations:</strong></p>
+<ul>
+<li>The time complexity of each <code>find</code> and <code>join</code> operation is almost constant, i.e., <strong>O(α(n))</strong>, where <code>α(n)</code> is the inverse Ackermann function, which grows very slowly and is effectively constant for all practical inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Similarity Check:</strong></p>
+<ul>
+<li>Checking the similarity of two strings takes <strong>O(m)</strong> time, where <code>m</code> is the length of each string. In this problem, assuming that all strings are of equal length, the similarity check will be <strong>O(m)</strong> for each pair of strings.</li>
+</ul>
+</li>
+<li>
+<p><strong>Total Time Complexity:</strong></p>
+<ul>
+<li>For <code>n</code> strings, there are <strong>O(n^2)</strong> pairs of strings to check for similarity.</li>
+<li>Therefore, the overall time complexity is <strong>O(n^2 * m)</strong>, where <code>n</code> is the number of strings and <code>m</code> is the length of each string.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of strings. This is because we store the <code>par</code> vector and the group count in the Union-Find structure.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently calculates the number of similar groups in the list of strings using the Union-Find data structure. By checking pairwise similarity of strings and merging the sets accordingly, we can determine the number of distinct groups of similar strings. The use of Union-Find ensures that the solution is optimized, even for larger inputs.</p>
+<p>The time complexity of the solution is <strong>O(n^2 * m)</strong>, which is manageable for moderate values of <code>n</code> and <code>m</code>. The space complexity is <strong>O(n)</strong>, making it a space-efficient solution.</p>
+<p>This approach ensures that we can handle large sets of strings efficiently while providing an accurate count of similar groups.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1532s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1534s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

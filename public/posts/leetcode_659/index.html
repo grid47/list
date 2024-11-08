@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -246,7 +246,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1408s1hbhb">
+<h2 id="hahahugoshortcode1419s1hbhb">
   
 
   
@@ -258,7 +258,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer array <code>nums</code> which is sorted in non-decreasing order. You need to determine if it&rsquo;s possible to split <code>nums</code> into one or more subsequences such that each subsequence is a consecutive sequence of integers.</p>
+<p>The problem asks whether a given list of integers can be split into <strong>one or more subsequences</strong> such that each subsequence is a <strong>consecutive sequence</strong>. A subsequence is defined as a sequence of numbers that can be derived by deleting some or no elements of the array without changing the order of the remaining elements.</p>
+<p>For example:</p>
+<ul>
+<li>For the input <code>nums = [1, 2, 3, 3, 4, 5]</code>, the output should be <code>true</code> because it can be split into subsequences <code>[1, 2, 3]</code> and <code>[3, 4, 5]</code>.</li>
+<li>For the input <code>nums = [1, 2, 3, 4, 5]</code>, the output should be <code>true</code> because it can be split into the subsequence <code>[1, 2, 3, 4, 5]</code>.</li>
+<li>For the input <code>nums = [1, 2, 3, 5, 6]</code>, the output should be <code>false</code> because it cannot form valid consecutive subsequences.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,40 +272,116 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem is based on <strong>greedy</strong> strategy, where we attempt to build valid subsequences as we traverse the array. The two main components in this solution are:</p>
 <ol>
-<li>
-<p><strong>Frequency Count</strong>:</p>
-<ul>
-<li>Use a hash map <code>left</code> to count the occurrences of each number in <code>nums</code>.</li>
-<li>Use another hash map <code>end</code> to keep track of how many subsequences end with a particular number.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
-<ul>
-<li>For each number in <code>nums</code>:
-<ul>
-<li>If there are no occurrences left in <code>left</code>, skip to the next number.</li>
-<li>Decrement the count in <code>left</code> for the current number since we are processing it.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Building Subsequences</strong>:</p>
-<ul>
-<li>If there&rsquo;s a subsequence that ends with <code>num - 1</code>, decrement the count of that subsequence in <code>end</code> and increment the count for the subsequence ending with <code>num</code>.</li>
-<li>If no subsequence ends with <code>num - 1</code>, check if you can start a new subsequence using <code>num</code>, <code>num + 1</code>, and <code>num + 2</code>. If these are available in <code>left</code>, decrement their counts and increment the count for the subsequence ending with <code>num + 2</code>.</li>
-<li>If neither condition is satisfied, return <code>false</code> since it&rsquo;s not possible to create the required subsequences.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Result</strong>:</p>
-<ul>
-<li>If all numbers are processed successfully, return <code>true</code>.</li>
-</ul>
-</li>
+<li><strong>Tracking elements left to process:</strong> Using a <code>left</code> map to count how many occurrences of each number are left to be placed in subsequences.</li>
+<li><strong>Tracking the end of subsequences:</strong> Using an <code>end</code> map to keep track of the number of subsequences that are ending with a specific number.</li>
 </ol>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>A valid subsequence must always contain at least 3 consecutive numbers for the sequence to be valid.</li>
+<li>For any number in the array, we try to either extend an existing subsequence or start a new one by checking if we can use the next consecutive numbers (<code>num + 1</code> and <code>num + 2</code>).</li>
+</ol>
+<p>The logic of the solution is built upon trying to form these valid subsequences in a greedy manner.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-initialization">
+  1. <strong>Initialization</strong>
+  <a class="heading-link" href="#1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> left, end;
+</span></span></code></pre></div><p>Here, we define two hash maps:</p>
+<ul>
+<li><code>left</code>: To track how many occurrences of a number are left to be placed into subsequences.</li>
+<li><code>end</code>: To track how many subsequences are currently ending at a specific number.</li>
+</ul>
+<h4 id="2-populating-the-left-map">
+  2. <strong>Populating the <code>left</code> map</strong>
+  <a class="heading-link" href="#2-populating-the-left-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> num: nums)
+</span></span><span style="display:flex;"><span>    left[num]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>We iterate through the input array <code>nums</code> and populate the <code>left</code> map. This map keeps track of the count of each number in the array, indicating how many times we still need to place that number into a subsequence.</p>
+<h4 id="3-main-processing-loop">
+  3. <strong>Main Processing Loop</strong>
+  <a class="heading-link" href="#3-main-processing-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> num: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(left[num] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    left[num]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(end[num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        end[num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        end[num]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(left[num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> left[num <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        left[num <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        left[num <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        end[num <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="explanation">
+  Explanation:
+  <a class="heading-link" href="#explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<ul>
+<li>
+<p><strong>Skip numbers already processed</strong>:<br>
+The <code>if(left[num] == 0) continue;</code> line skips the current number if it has already been placed in a subsequence, as indicated by the <code>left</code> map.</p>
+</li>
+<li>
+<p><strong>Try to extend an existing subsequence</strong>:<br>
+If a subsequence exists that ends with <code>num - 1</code>, then we can extend it by adding <code>num</code> to that subsequence. We do this by checking if there is any subsequence ending at <code>num - 1</code> (<code>end[num - 1] &gt; 0</code>). If this is the case, we:</p>
+<ul>
+<li>Decrease the count of subsequences ending at <code>num - 1</code> (<code>end[num - 1]--</code>).</li>
+<li>Increase the count of subsequences ending at <code>num</code> (<code>end[num]++</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Create a new subsequence</strong>:<br>
+If no subsequence can be extended, we try to start a new subsequence using the current number. A new subsequence can only be formed if <code>num + 1</code> and <code>num + 2</code> are also available in the <code>left</code> map (i.e., <code>left[num + 1] &gt; 0 &amp;&amp; left[num + 2] &gt; 0</code>). If this condition is true:</p>
+<ul>
+<li>Decrease the count of <code>num + 1</code> and <code>num + 2</code> in the <code>left</code> map.</li>
+<li>Add a new subsequence ending at <code>num + 2</code> by updating the <code>end</code> map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return False for invalid cases</strong>:<br>
+If neither extending an existing subsequence nor starting a new one is possible, we return <code>false</code> because it&rsquo;s impossible to create valid subsequences for this input.</p>
+</li>
+</ul>
+<h4 id="4-returning-the-result">
+  4. <strong>Returning the result</strong>
+  <a class="heading-link" href="#4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><p>If we successfully process all the numbers and form valid subsequences, we return <code>true</code>, indicating that it&rsquo;s possible to split the array into subsequences of consecutive integers.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -307,28 +389,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of elements in <code>nums</code>. Each number is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(N) in the worst case for the hash maps.</li>
+<li><strong>O(n)</strong>: The function iterates through the array <code>nums</code> once. For each number, we perform constant-time operations (updating the <code>left</code> and <code>end</code> maps). Since there are at most <code>n</code> numbers and each operation takes constant time, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input array.</li>
 </ul>
-<h3 id="code-explanation">
-  Code Explanation
-  <a class="heading-link" href="#code-explanation">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use two hash maps, <code>left</code> and <code>end</code>, to store information about the counts of each number in the array and the subsequences ending at each number. In the worst case, where all numbers in the array are distinct, both maps will contain <code>n</code> entries. Therefore, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: The function initializes two hash maps for counting occurrences and managing subsequences.</li>
-<li><strong>Processing</strong>: A single loop iterates over the array and applies the logic to build or extend subsequences based on the conditions outlined.</li>
-<li><strong>Final Check</strong>: If all elements are processed correctly, the function returns <code>true</code>.</li>
-</ol>
-<p>This method efficiently ensures that we can split the array into the required subsequences by leveraging counting techniques and greedy selection based on the current number&rsquo;s surroundings.</p>
+<p>This solution efficiently solves the problem using a greedy approach combined with hash maps to track the available numbers for subsequences and the subsequences themselves. The use of two hash maps (<code>left</code> and <code>end</code>) ensures that we can manage the subsequences dynamically while processing each number. The overall time and space complexity of <strong>O(n)</strong> makes this solution optimal for large inputs. This approach is particularly suitable for scenarios where subsequences must follow specific constraints, such as forming consecutive sequences.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1408s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1419s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

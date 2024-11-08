@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -253,7 +253,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1643s1hbhb">
+<h2 id="hahahugoshortcode1640s1hbhb">
   
 
   
@@ -265,7 +265,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if a given binary tree is a valid binary search tree (BST). A BST is valid if, for every node, its left subtree values are less than the node value, and its right subtree values are greater than the node value.</p>
+<p>The problem asks to determine if a given binary tree is a <strong>valid binary search tree (BST)</strong>. A <strong>binary search tree</strong> is a binary tree where for each node:</p>
+<ul>
+<li>The value of the node must be greater than all the values in its left subtree.</li>
+<li>The value of the node must be less than all the values in its right subtree.</li>
+<li>Both the left and right subtrees must also be binary search trees.</li>
+</ul>
+<p>Given a binary tree, we need to check if it satisfies the above conditions. The task is to implement a function that verifies if a binary tree is a valid BST.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -273,45 +279,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution uses an <strong>iterative in-order traversal</strong>:</p>
+<p>This problem can be solved using <strong>in-order traversal</strong> of the tree. In an <strong>in-order traversal</strong>, the nodes are visited in the following order:</p>
 <ol>
-<li><strong>In-order Traversal with a Stack</strong>:
-<ul>
-<li>Perform an in-order traversal, which visits nodes in ascending order if the tree is a valid BST.</li>
-<li>Use a stack to simulate the traversal without recursion.</li>
-</ul>
-</li>
-<li><strong>Check BST Validity</strong>:
-<ul>
-<li>Track the previous node (<code>prv</code>). For each visited node, check if its value is greater than the previous node.</li>
-<li>If any node is not greater than the previous node, the tree is not a BST.</li>
-</ul>
-</li>
-<li><strong>Edge Case</strong>:
-<ul>
-<li>If the tree is empty, it is considered a valid BST.</li>
-</ul>
-</li>
+<li>Traverse the left subtree.</li>
+<li>Visit the current node.</li>
+<li>Traverse the right subtree.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>For a <strong>valid BST</strong>, during an in-order traversal, the nodes must be visited in strictly increasing order (i.e., each node’s value should be greater than the previous node’s value).</p>
+<p>The approach is as follows:</p>
+<ol>
+<li>Perform an in-order traversal of the tree, starting from the root node.</li>
+<li>As we traverse, keep track of the previously visited node. If we encounter a node whose value is not greater than the value of the previous node, we can immediately conclude that the tree is not a valid BST.</li>
+<li>Use a <strong>stack</strong> to simulate the recursive in-order traversal iteratively, avoiding the overhead of recursion and making the algorithm more efficient in terms of space usage.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialize Stack and Pointers</strong>: Use <code>stk</code> for iterative traversal, <code>node</code> as the current node, and <code>prv</code> to store the last visited node.</li>
-<li><strong>Traverse Left Subtree</strong>: Push nodes onto <code>stk</code> until reaching the leftmost node.</li>
-<li><strong>Visit and Compare</strong>:
-<ul>
-<li>Pop from <code>stk</code>, visit the node, and compare it with <code>prv</code>.</li>
-<li>If <code>prv-&gt;val &gt;= node-&gt;val</code>, return <code>false</code> as this violates BST properties.</li>
+<h4 id="1-class-definition-and-initial-setup">
+  1. Class Definition and Initial Setup
+  <a class="heading-link" href="#1-class-definition-and-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isValidBST(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> stk;
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> root, <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> NULL;
+</span></span></code></pre></div><ul>
+<li>A <code>stack</code> <code>stk</code> is used to help with the iterative in-order traversal.</li>
+<li><code>node</code> is initialized to <code>root</code> and is used to traverse the tree.</li>
+<li><code>prv</code> is a pointer to the previous node, initialized to <code>NULL</code>. It will store the previous node’s value to compare with the current node’s value.</li>
 </ul>
-</li>
-<li><strong>Update Previous</strong>: Set <code>prv</code> to the current node and move to the right subtree.</li>
-<li><strong>Return</strong>: If all nodes are in order, return <code>true</code>.</li>
-</ol>
+<h4 id="2-iterative-in-order-traversal">
+  2. Iterative In-Order Traversal
+  <a class="heading-link" href="#2-iterative-in-order-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">||</span> node) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(node) {
+</span></span><span style="display:flex;"><span>                stk.push(node);
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>                stk.pop();
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as there are nodes to process (<code>stk</code> is not empty) or there is a node to traverse (<code>node</code> is not <code>NULL</code>).</li>
+<li>If <code>node</code> is not <code>NULL</code>, push it onto the stack and move to its left child (<code>node = node-&gt;left</code>).</li>
+<li>If <code>node</code> is <code>NULL</code>, pop the top node from the stack, which is the current node in the in-order traversal.</li>
+</ul>
+<h4 id="3-validity-check-and-node-traversal">
+  3. Validity Check and Node Traversal
+  <a class="heading-link" href="#3-validity-check-and-node-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(prv <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> prv <span style="color:#f92672">-&gt;</span> val <span style="color:#f92672">&gt;=</span> node<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>                prv <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> node<span style="color:#f92672">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>If <code>prv</code> is not <code>NULL</code>, it means we have previously visited a node. At this point, compare the value of the <code>prv</code> node with the value of the current <code>node</code>. If the value of the <code>prv</code> node is greater than or equal to the value of the current node, the tree is not a valid BST, so return <code>false</code>.</li>
+<li>If the values are in the correct order, update <code>prv</code> to the current node and proceed to traverse the right child of the current node (<code>node = node-&gt;right</code>).</li>
+</ul>
+<h4 id="4-conclusion">
+  4. Conclusion
+  <a class="heading-link" href="#4-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>If the loop completes without encountering any violations of the BST properties, return <code>true</code>, indicating that the tree is a valid BST.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -319,15 +372,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree, for the stack in the worst case (unbalanced tree).</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the algorithm is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because in the worst case, we visit each node once during the in-order traversal.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This space is used by the stack, which stores nodes during the traversal. In the worst case (for an unbalanced tree), the height <code>h</code> could be equal to <code>n</code>, resulting in a space complexity of <strong>O(n)</strong>. However, for a balanced tree, the space complexity would be <strong>O(log n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether a binary tree is a valid binary search tree using an <strong>iterative in-order traversal</strong>. By leveraging a stack to simulate the recursion and maintaining a reference to the previous node, the algorithm ensures that the tree’s values are visited in the correct order and verifies the BST property in <strong>O(n)</strong> time. The space complexity is optimized to <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This approach avoids the overhead of recursion and provides a space-efficient solution for validating a binary search tree.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1643s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1640s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

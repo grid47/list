@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -304,7 +304,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1603s1hbhb">
+<h2 id="hahahugoshortcode1602s1hbhb">
   
 
   
@@ -316,7 +316,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a grid representing a network where <code>grid[i][j]</code> is <code>1</code> if there is a direct connection between node <code>i</code> and node <code>j</code>, and a list of initially infected nodes (malware), the goal is to determine which node to remove to minimize the spread of malware.</p>
+<p>The goal is to minimize the spread of malware in a network represented as a graph. Given an <code>n x n</code> adjacency matrix <code>grid</code>, where <code>grid[i][j] = 1</code> means nodes <code>i</code> and <code>j</code> are connected and <code>0</code> otherwise, and an array <code>mw</code> of initially infected nodes, the objective is to remove exactly one infected node such that the total number of nodes eventually infected is minimized. If multiple nodes yield the same result, the smallest index node is preferred.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -324,55 +324,161 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution leverages <strong>Union-Find (UF)</strong> to group uninfected nodes into disjoint sets, then evaluates how removing each infected node impacts the overall spread. By organizing the uninfected nodes into groups, we can determine if an infected node is the only source of infection for a particular group, enabling us to target the most impactful infected node.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Union-Find Data Structure</strong>:</p>
+<p><strong>Initialize Union-Find for Uninfected Nodes</strong>:</p>
 <ul>
-<li>Implement a Union-Find (Disjoint Set Union) structure to group connected nodes together.</li>
-<li>Each node will point to its parent, and the rank will help in union operations to keep the tree flat.</li>
+<li>We create a Union-Find instance (<code>UF</code>) with methods <code>find</code>, <code>join</code>, and <code>size</code> to manage the connected components of uninfected nodes.</li>
+<li><code>find</code> uses path compression to efficiently retrieve the root of a node, while <code>join</code> connects two nodes and ranks their components by size.</li>
 </ul>
 </li>
 <li>
-<p><strong>Identify Good Nodes</strong>:</p>
+<p><strong>Separate Infected and Uninfected Nodes</strong>:</p>
 <ul>
-<li>Create a set of bad (infected) nodes and a set of good nodes (non-infected).</li>
-<li>For each pair of good nodes that are connected, join them in the Union-Find structure.</li>
+<li>We use sets to categorize nodes as infected (<code>bad</code>) or uninfected (<code>good</code>), based on the initial infection list <code>mw</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Track Malware Influence</strong>:</p>
+<p><strong>Group Uninfected Nodes</strong>:</p>
 <ul>
-<li>For each infected node, determine which connected components of good nodes it influences.</li>
-<li>Count the degree of influence for each component (i.e., how many malware nodes are connected to it).</li>
+<li>For each pair of uninfected nodes, if they are connected in the <code>grid</code>, we unify them using the Union-Find <code>join</code> method, establishing groups of connected uninfected nodes.</li>
 </ul>
 </li>
 <li>
-<p><strong>Evaluate Each Malware Node</strong>:</p>
+<p><strong>Map Infected Nodes to Uninfected Groups</strong>:</p>
 <ul>
-<li>For each malware node, calculate how many good nodes it can influence uniquely (i.e., connected components with only one malware connection).</li>
-<li>Track the malware node that maximally influences good nodes, prioritizing the smallest node index in case of a tie.</li>
+<li>We iterate through infected nodes and identify the uninfected groups they can infect by finding the root of each connected uninfected node in the Union-Find structure.</li>
+<li>A dictionary <code>mwg</code> maps each infected node to the set of uninfected groups it could potentially infect.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Calculate Group Impact</strong>:</p>
 <ul>
-<li>Return the node that should be removed to minimize the spread of malware.</li>
+<li>For each uninfected group, we keep a count (<code>deg</code>) of how many infected nodes can infect that group. If only one infected node can infect a particular group, that infected node has a significant impact if removed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine Optimal Node to Remove</strong>:</p>
+<ul>
+<li>We evaluate each infected node, summing the sizes of the uninfected groups it alone can infect. The infected node whose removal yields the maximum decrease in future infections is selected. If there&rsquo;s a tie, we choose the smallest indexed node.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Initialize Union-Find structure and categorize nodes into bad and good.</li>
-<li>Join good nodes based on connections.</li>
-<li>For each malware node, determine its influence on the good nodes and count how many are uniquely connected.</li>
-<li>Find the node with the maximum unique influence and return it.</li>
+<ol>
+<li>
+<p><strong>Union-Find Class Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) par[i] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> q) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(rnk[p] <span style="color:#f92672">&lt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>            par[p] <span style="color:#f92672">=</span> q;
+</span></span><span style="display:flex;"><span>            rnk[q] <span style="color:#f92672">+=</span> rnk[p];
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            par[q] <span style="color:#f92672">=</span> p;
+</span></span><span style="display:flex;"><span>            rnk[p] <span style="color:#f92672">+=</span> rnk[q];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(par[x] <span style="color:#f92672">==</span> x) <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> par[x] <span style="color:#f92672">=</span> find(par[x]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">size</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> rnk[find(x)];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>par</code> stores the parent of each node, and <code>rnk</code> tracks the size of each group.</li>
 </ul>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minMalwareSpread(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> mw) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>        UF<span style="color:#f92672">*</span> uf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UF(n);
+</span></span></code></pre></div><ul>
+<li>Initialize Union-Find with the size of <code>grid</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Categorize Nodes</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> bad(mw.begin(), mw.end()), good;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>bad.count(i)) good.insert(i);
+</span></span></code></pre></div><ul>
+<li><code>bad</code> contains infected nodes; <code>good</code> contains uninfected nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connect Uninfected Nodes</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i : good)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j : good)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j <span style="color:#f92672">&amp;&amp;</span> grid[i][j]) uf<span style="color:#f92672">-&gt;</span>join(i, j);
+</span></span></code></pre></div><ul>
+<li>Connect uninfected nodes if they are connected in the adjacency matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Map Infected Nodes to Uninfected Groups</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mwg;
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> deg;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> m: bad) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> n: good)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(grid[m][n]) mwg[m].insert(uf<span style="color:#f92672">-&gt;</span>find(n));
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> it: mwg[m]) deg[it]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><code>mwg</code> maps infected nodes to uninfected groups they can reach.</li>
+<li><code>deg</code> counts how many infected nodes can reach each uninfected group.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find Optimal Node</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> node <span style="color:#f92672">=</span> mw[<span style="color:#ae81ff">0</span>], res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> mlw: mwg) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> g: mlw.second)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(deg[g] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) cnt <span style="color:#f92672">+=</span> uf<span style="color:#f92672">-&gt;</span>size(g);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> res <span style="color:#f92672">||</span> (cnt <span style="color:#f92672">==</span> res <span style="color:#f92672">&amp;&amp;</span> mlw.first <span style="color:#f92672">&lt;</span> node)) {
+</span></span><span style="display:flex;"><span>                node <span style="color:#f92672">=</span> mlw.first;
+</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">=</span> cnt;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Sum the sizes of uninfected groups that only one infected node can infect.</li>
+<li>Select the node whose removal reduces future infections the most.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -380,15 +486,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(N^2) in the worst case, where N is the number of nodes, due to the nested loop checking connections and unions.</li>
-<li><strong>Space Complexity</strong>: O(N) for storing parent and rank information in the Union-Find structure.</li>
-</ul>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>: <strong>O(n^2)</strong> because we analyze each pair of nodes in the adjacency matrix. Union-Find operations are approximately O(1) due to path compression.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(n)</strong> for storing parent and rank vectors, maps, and sets.</p>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the infected node whose removal will minimize malware spread using a Union-Find structure. By analyzing the relationships between infected nodes and uninfected groups, it optimally targets the most impactful infected node. This approach ensures both efficiency and accuracy, even with larger networks.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1603s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1602s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

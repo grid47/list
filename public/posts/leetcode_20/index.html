@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -227,7 +227,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stk.empty();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode584s1hbhb">
+<h2 id="hahahugoshortcode583s1hbhb">
   
 
   
@@ -239,10 +239,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string containing just the characters <code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>[</code> and <code>]</code>, determine if the input string is valid. An input string is valid if:</p>
+<p>The task is to determine if a string containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, and <code>']'</code> is valid. A string is considered valid if:</p>
+<ol>
+<li>The brackets must close in the correct order. For example, <code>()</code> and <code>[]</code> are valid, but <code>(]</code> and <code>([)]</code> are not.</li>
+<li>Each opening bracket must have a corresponding closing bracket of the same type.</li>
+</ol>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Open brackets are closed by the same type of brackets.</li>
-<li>Open brackets are closed in the correct order.</li>
+<li>A string <code>s</code> of length <code>n</code> containing only the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, and <code>']'</code>.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Return <code>true</code> if the input string is valid, and <code>false</code> if it is not.</li>
 </ul>
 <h3 id="approach">
   Approach
@@ -251,47 +271,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use a <strong>stack</strong> data structure. The stack allows us to keep track of the most recently opened bracket, which helps us ensure that each closing bracket matches the most recent opening bracket.</p>
+<p><strong>Steps to solve the problem:</strong></p>
 <ol>
-<li><strong>Use a Stack</strong>: Utilize a stack to keep track of the opening brackets.</li>
-<li><strong>Iterate Through Each Character</strong>: For each character in the string:
+<li>Initialize an empty stack.</li>
+<li>Traverse through each character of the string:
 <ul>
-<li>If it&rsquo;s an opening bracket, push it onto the stack.</li>
-<li>If it&rsquo;s a closing bracket, check if it matches the top of the stack:
-<ul>
-<li>If it matches, pop the stack.</li>
-<li>If it doesn&rsquo;t match or the stack is empty, return <code>false</code>.</li>
+<li>If the character is an opening bracket (<code>'('</code>, <code>'{'</code>, <code>'['</code>), push it onto the stack.</li>
+<li>If the character is a closing bracket (<code>')'</code>, <code>'}'</code>, <code>']'</code>), check if the stack is not empty and the top of the stack is the corresponding opening bracket. If it is, pop the top of the stack. If not, the string is invalid, and we return <code>false</code>.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><strong>Final Check</strong>: After processing all characters, check if the stack is empty. If it is, the string is valid; otherwise, it is not.</li>
+<li>At the end of the traversal, if the stack is empty, it means all the opening brackets were properly matched with closing brackets, so we return <code>true</code>. If the stack is not empty, it means there are unmatched opening brackets, so we return <code>false</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that we can check for valid bracket sequences in linear time.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Stack Initialization</strong>: A stack is initialized to store opening brackets.</li>
-<li><strong>Loop Through Characters</strong>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isValid(string s) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> stk;  <span style="color:#75715e">// Step 1: Initialize an empty stack to hold opening brackets.
+</span></span></span></code></pre></div><ul>
+<li>We create an empty stack <code>stk</code> that will store characters. The stack will help track the most recent opening bracket.</li>
+<li>The <code>stack&lt;char&gt;</code> ensures that we are storing the characters of the string as <code>char</code> type.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s) {  <span style="color:#75715e">// Step 2: Iterate over each character in the string.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;{&#39;</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;[&#39;</span>) {  <span style="color:#75715e">// Step 3: If the character is an opening bracket.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                stk.push(x);  <span style="color:#75715e">// Step 4: Push the opening bracket onto the stack.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
+</span></span></code></pre></div><ul>
+<li>We loop through each character <code>x</code> in the string <code>s</code>.</li>
+<li>If the character is an opening bracket (<code>'('</code>, <code>'{'</code>, or <code>'['</code>), we push it onto the stack. This marks the beginning of a potential matching bracket pair.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;)&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> stk.top() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) stk.pop();  <span style="color:#75715e">// Step 5: Handle closing bracket &#39;)&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;}&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> stk.top() <span style="color:#f92672">==</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>{<span style="color:#960050;background-color:#1e0010">&#39;</span>) stk.pop();  <span style="color:#75715e">// Step 6: Handle closing bracket &#39;}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;]&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> stk.top() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;[&#39;</span>) stk.pop();  <span style="color:#75715e">// Step 7: Handle closing bracket &#39;]&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// Step 8: Invalid closing bracket or unmatched bracket.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>If the character is a closing bracket (<code>')'</code>, <code>'}'</code>, or <code>']'</code>), we check if the stack is not empty and if the top element of the stack matches the corresponding opening bracket:
 <ul>
-<li>For each character <code>x</code> in the string <code>s</code>:
+<li>For <code>')'</code>, check if the top of the stack is <code>'('</code>.</li>
+<li>For <code>'}'</code>, check if the top of the stack is <code>'{'</code>.</li>
+<li>For <code>']'</code>, check if the top of the stack is <code>'['</code>.</li>
+</ul>
+</li>
+<li>If the top element matches, we pop the top element from the stack, indicating that the current closing bracket has found its matching opening bracket.</li>
+<li>If the stack is empty (no opening bracket to match) or the top of the stack does not match the current closing bracket, we immediately return <code>false</code>, indicating that the string is invalid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stk.empty();  <span style="color:#75715e">// Step 9: If the stack is empty, return true; otherwise, false.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After processing all characters, we check if the stack is empty:
 <ul>
-<li>If <code>x</code> is an opening bracket, push it onto the stack.</li>
-<li>If <code>x</code> is a closing bracket:
-<ul>
-<li>Check if the stack is not empty and if the top of the stack matches the corresponding opening bracket.</li>
-<li>If it matches, pop the stack. If it doesn&rsquo;t match or the stack is empty, return <code>false</code>.</li>
+<li>If the stack is empty, it means that all opening brackets have been matched and closed properly, so we return <code>true</code>.</li>
+<li>If the stack is not empty, it means there are unmatched opening brackets, so we return <code>false</code>.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>Return Result</strong>: After the loop, check if the stack is empty. If it is, return <code>true</code>; otherwise, return <code>false</code>.</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -299,14 +342,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(N)), where (N) is the length of the string, as each character is processed once.</li>
-<li><strong>Space Complexity:</strong> (O(N)) in the worst case, where all characters are opening brackets, requiring space for the stack.</li>
-</ul> 
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>.</li>
+<li>We iterate through the string once, and each operation (push or pop) on the stack takes constant time, <code>O(1)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong> in the worst case.</li>
+<li>In the worst case, all the characters in the string are opening brackets (e.g., <code>&quot;(((((&quot;</code>), so the stack could hold up to <code>n</code> elements.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether a string of parentheses, braces, and brackets is valid by utilizing a stack data structure. It ensures that:</p>
+<ul>
+<li>Each opening bracket has a corresponding closing bracket of the same type.</li>
+<li>The brackets are properly nested and ordered.</li>
+</ul>
+<p>Key points:</p>
+<ul>
+<li>The use of a stack allows us to track the most recent opening bracket and ensures that we can match it with the appropriate closing bracket.</li>
+<li>The solution is optimal, running in <strong>O(n)</strong> time and <strong>O(n)</strong> space, where <code>n</code> is the length of the string.</li>
+</ul>
+<p>This approach is highly effective and commonly used for problems involving balanced parentheses or similar structure matching problems.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode584s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode583s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

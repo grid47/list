@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1235s1hbhb">
+<h2 id="hahahugoshortcode1239s1hbhb">
   
 
   
@@ -250,7 +250,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integer arrays <code>nums1</code> and <code>nums2</code>, return an array of their intersection. Each element in the result must be unique and can be in any order.</p>
+<p>The problem asks us to find the <strong>intersection</strong> of two integer arrays, <code>nums1</code> and <code>nums2</code>. The intersection should include only the unique elements that appear in both arrays. The result must not contain any duplicate elements, even if the intersection contains repeated numbers in either of the arrays.</p>
+<p>For example:</p>
+<ul>
+<li>If <code>nums1 = [1, 2, 2, 1]</code> and <code>nums2 = [2, 2]</code>, the intersection would be <code>[2]</code>.</li>
+</ul>
+<p>The task is to efficiently compute the intersection, ensuring that the result includes only unique elements present in both arrays.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,21 +263,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution to this problem can be approached using the following key steps:</p>
 <ol>
-<li><strong>Use a Set</strong>: Store the elements of the first array (<code>nums1</code>) in an unordered set for efficient look-up.</li>
-<li><strong>Iterate through the Second Array</strong>: For each element in the second array (<code>nums2</code>), check if it exists in the set.</li>
-<li><strong>Add to Result and Remove</strong>: If an element from <code>nums2</code> is found in the set, add it to the result vector and remove it from the set to ensure uniqueness.</li>
+<li>
+<p><strong>Use a Set for One Array</strong>: First, we convert one of the input arrays (<code>nums1</code>) into an unordered set. This will allow us to perform efficient lookups when checking for the presence of elements from <code>nums2</code>. An unordered set has an average time complexity of <strong>O(1)</strong> for both insertion and lookup, making it an ideal data structure for this problem.</p>
+</li>
+<li>
+<p><strong>Check for Common Elements</strong>: Once we have <code>nums1</code> in a set, we iterate over the elements of <code>nums2</code>. For each element in <code>nums2</code>, we check if it exists in the set. If it does, it means that element is present in both arrays, and we add it to the result vector.</p>
+</li>
+<li>
+<p><strong>Ensure Uniqueness</strong>: After finding a common element, we remove it from the set to ensure that the same element is not added more than once to the result vector. This guarantees that the intersection only contains unique elements.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the vector containing the intersection of the two arrays.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach leverages the efficient set lookups and ensures that we are checking each element of <code>nums2</code> only once.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>An unordered set is initialized with the elements of <code>nums1</code>.</li>
-<li>The code then iterates through each element in <code>nums2</code>, checking if it exists in the set. If it does, the element is added to the result vector, and it is erased from the set to avoid duplicates in the intersection.</li>
+<h4 id="step-1-convert-nums1-to-an-unordered-set">
+  Step 1: Convert <code>nums1</code> to an Unordered Set
+  <a class="heading-link" href="#step-1-convert-nums1-to-an-unordered-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> m(nums1.begin(), nums1.end());
+</span></span></code></pre></div><ul>
+<li>The line above initializes an unordered set <code>m</code> that contains all the unique elements from <code>nums1</code>. This is achieved using the constructor of <code>unordered_set</code> that takes a pair of iterators (<code>nums1.begin()</code> and <code>nums1.end()</code>) to insert all elements from <code>nums1</code> into the set.</li>
+<li>Using an unordered set is beneficial because it allows fast <strong>O(1)</strong> average time complexity for both <strong>insertion</strong> and <strong>lookup</strong> operations. This means that we can efficiently check if an element from <code>nums2</code> exists in <code>nums1</code> by simply checking if it exists in <code>m</code>.</li>
+</ul>
+<h4 id="step-2-iterate-through-nums2-and-find-common-elements">
+  Step 2: Iterate Through <code>nums2</code> and Find Common Elements
+  <a class="heading-link" href="#step-2-iterate-through-nums2-and-find-common-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> a : nums2)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (m.count(a)) {
+</span></span><span style="display:flex;"><span>        res.push_back(a);
+</span></span><span style="display:flex;"><span>        m.erase(a);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>for</code> loop iterates through each element <code>a</code> in the array <code>nums2</code>.</li>
+<li>For each element <code>a</code>, the code checks if <code>a</code> is present in the set <code>m</code> using the <code>count</code> method. The <code>count</code> function checks whether the element exists in the set and returns <code>1</code> if it does and <code>0</code> otherwise.</li>
+<li>If <code>a</code> is found in <code>m</code>, it means that <code>a</code> is a common element between <code>nums1</code> and <code>nums2</code>. We add <code>a</code> to the result vector <code>res</code> using <code>res.push_back(a)</code>.</li>
+<li>After adding the element to <code>res</code>, we <strong>erase</strong> it from the set <code>m</code> using <code>m.erase(a)</code>. This ensures that the element is not added to <code>res</code> again, ensuring uniqueness in the result.</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop completes, the result vector <code>res</code> will contain all the unique common elements between <code>nums1</code> and <code>nums2</code>.</li>
+<li>We return this vector as the result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -281,24 +335,54 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li><strong>O(n + m)</strong>, where <code>n</code> is the length of <code>nums1</code> and <code>m</code> is the length of <code>nums2</code>.
 <ul>
-<li>Creating the set takes ( O(n) ), where ( n ) is the number of elements in <code>nums1</code>.</li>
-<li>Checking for membership and inserting into the result takes ( O(m) ), where ( m ) is the number of elements in <code>nums2</code>.</li>
-<li>Overall, the complexity is ( O(n + m) ).</li>
+<li><strong>O(n)</strong> for inserting all elements of <code>nums1</code> into the unordered set <code>m</code>. This takes linear time in terms of the number of elements in <code>nums1</code>.</li>
+<li><strong>O(m)</strong> for iterating through <code>nums2</code> and checking for each element’s presence in the set. The <code>count</code> operation on the unordered set takes <strong>O(1)</strong> on average, so checking all <code>m</code> elements in <code>nums2</code> will take linear time in terms of <code>m</code>.</li>
+<li>Therefore, the overall time complexity is <strong>O(n + m)</strong>, which is optimal for this problem.</li>
 </ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>: ( O(n) ) for storing the set.</p>
-</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of elements in <code>nums1</code>. This is because we are using an unordered set to store the elements of <code>nums1</code>. In the worst case, all elements of <code>nums1</code> are unique, and the set will contain <code>n</code> elements.</li>
+<li>Additionally, we use a result vector <code>res</code> to store the intersection, but this will take <strong>O(min(n, m))</strong> space in the worst case, which does not affect the overall space complexity.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to compute the intersection of two integer arrays by leveraging a hash-based unordered set for fast lookups. The overall time complexity of <strong>O(n + m)</strong> ensures that the solution can handle large arrays efficiently, and the space complexity of <strong>O(n)</strong> is also optimal for this problem.</p>
+<p>Key points:</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(n + m), where <code>n</code> and <code>m</code> are the sizes of <code>nums1</code> and <code>nums2</code>, respectively.</li>
+<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of unique elements in <code>nums1</code>.</li>
+<li>The algorithm is both time-efficient and space-efficient, making it well-suited for problems involving intersection of large arrays.</li>
+<li>The use of an unordered set ensures that we can quickly check for the presence of elements from <code>nums2</code> in <code>nums1</code>, and the erasure step guarantees that we do not add duplicate elements to the result.</li>
+</ul>
+<p>This approach is not only optimal but also simple and easy to implement, making it an excellent choice for solving problems involving the intersection of two arrays.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1235s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1239s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1412s1hbhb">
+<h2 id="hahahugoshortcode1409s1hbhb">
   
 
   
@@ -255,7 +255,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with implementing a printer that can only print one character at a time. When printing a character, if the same character is already printed before, it doesn&rsquo;t count towards the print count. Your goal is to determine the minimum number of times the printer needs to be used to print a given string <code>s</code>.</p>
+<p>The problem asks us to determine the <strong>minimum number of turns</strong> required for a printer to print a given string <code>s</code>, where the printer can only print one character at a time but can print multiple consecutive identical characters in a single turn. The task is to find an optimal strategy to minimize the number of turns needed to print the entire string.</p>
+<ul>
+<li>The printer can print any single character in a turn.</li>
+<li>If consecutive characters are identical, they can be printed together in the same turn.</li>
+<li>The goal is to calculate the minimum number of turns required to print the string <code>s</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,56 +268,89 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use <strong>dynamic programming (DP)</strong> to compute the minimum number of turns required to print substrings of <code>s</code>. The key idea is to break down the problem into smaller subproblems and solve them recursively, then store the results to avoid redundant calculations.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Dynamic Programming (DP) Table</strong>:</p>
-<ul>
-<li>Use a 2D DP array <code>memo</code> to store results for subproblems. <code>memo[l][r]</code> represents the minimum number of prints needed to print the substring <code>s[l...r]</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li>Define a recursive function <code>dp(l, r)</code> that computes the minimum prints required for the substring from index <code>l</code> to <code>r</code>.</li>
-<li>If <code>l &gt; r</code>, return 0 since there are no characters to print.</li>
-<li>If the result for <code>memo[l][r]</code> is already computed, return that value.</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>The base case considers printing a single character, which requires one print. This is handled by initializing <code>ans</code> to <code>1 + dp(l + 1, r)</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Matching Characters</strong>:</p>
-<ul>
-<li>Iterate through the substring from <code>l + 1</code> to <code>r</code>:
-<ul>
-<li>If <code>s[i]</code> matches <code>s[l]</code>, update <code>ans</code> to be the minimum of the current value and the sum of prints required for the segments <code>dp(l + 1, i)</code> and <code>dp(i + 1, r)</code>. This means we can print <code>s[l]</code> first and then print the characters between <code>l</code> and <code>i</code>, followed by printing from <code>i + 1</code> to <code>r</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Store and Return Result</strong>:</p>
-<ul>
-<li>Store the computed value in <code>memo[l][r]</code> and return it.</li>
-</ul>
-</li>
+<li>If two consecutive characters in the string are identical, we can print them together in one turn.</li>
+<li>For any substring, if we can split it into two parts where the first part is already optimally printed, we can then combine the results of the two parts.</li>
+<li>The challenge is to explore all possible splits and select the one that minimizes the number of turns.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: The DP table is initialized to <code>-1</code> to signify uncomputed values.</li>
-<li><strong>Recursive Calls</strong>: The function is called with the entire range of the string to compute the minimum prints needed.</li>
-<li><strong>Memoization</strong>: Results are stored in the <code>memo</code> table to avoid recomputation and speed up the process.</li>
-</ol>
+<p>The solution is implemented in the <code>Solution</code> class. Let&rsquo;s break down the code step by step.</p>
+<h4 id="1-initialization-of-memoization-table">
+  1. <strong>Initialization of Memoization Table</strong>
+  <a class="heading-link" href="#1-initialization-of-memoization-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>string s;
+</span></span></code></pre></div><ul>
+<li>A 2D vector <code>memo</code> is declared to store the results of subproblems. <code>memo[l][r]</code> will store the minimum number of turns required to print the substring from index <code>l</code> to index <code>r</code> in the string.</li>
+<li>A string <code>s</code> is also declared to hold the input string.</li>
+</ul>
+<h4 id="2-dynamic-programming-function-dpint-l-int-r">
+  2. <strong>Dynamic Programming Function: <code>dp(int l, int r)</code></strong>
+  <a class="heading-link" href="#2-dynamic-programming-function-dpint-l-int-r">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">int</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(l <span style="color:#f92672">&gt;</span> r) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[l][r] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[l][r];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> r; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> s[l])
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, dp(l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i) <span style="color:#f92672">+</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[l][r] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If <code>l &gt; r</code>, meaning the substring is empty, return <code>0</code> as no turns are needed for an empty string.</li>
+<li><strong>Memoization Check</strong>: If <code>memo[l][r]</code> is already computed (i.e., not equal to <code>-1</code>), return the stored result to avoid redundant calculations.</li>
+<li><strong>Recursive Case</strong>:
+<ul>
+<li>Initially, we assume that the first character (at index <code>l</code>) is printed alone. This gives us the minimum number of turns as <code>1 + dp(l + 1, r)</code>. This means that we print <code>s[l]</code> in one turn, and then solve the problem for the remaining substring <code>s[l+1...r]</code>.</li>
+<li>We then check for any positions <code>i</code> (from <code>l+1</code> to <code>r</code>) where <code>s[i] == s[l]</code>. If we find such a position, we can combine the printing of characters <code>s[l]</code> to <code>s[i]</code> in a single turn. This results in splitting the problem into two subproblems: <code>dp(l + 1, i)</code> (for the part after <code>s[l]</code>) and <code>dp(i + 1, r)</code> (for the rest of the string).</li>
+<li>The answer for <code>dp(l, r)</code> is the minimum of the current result (<code>ans</code>) and the result of these two subproblems combined.</li>
+</ul>
+</li>
+<li><strong>Memoization Update</strong>: Store the computed result in <code>memo[l][r]</code> to use it later if needed.</li>
+</ul>
+<h4 id="3-main-function-strangeprinterstring-s">
+  3. <strong>Main Function: <code>strangePrinter(string s)</code></strong>
+  <a class="heading-link" href="#3-main-function-strangeprinterstring-s">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">strangePrinter</span>(string s) {
+</span></span><span style="display:flex;"><span>    memo.resize(s.size(), vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(s.size(), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, s.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: The <code>memo</code> table is resized to be a 2D vector with dimensions equal to the length of the string <code>s</code>. Initially, all elements are set to <code>-1</code>, indicating that no subproblem has been solved yet.</li>
+<li><strong>Calling the DP Function</strong>: The <code>dp</code> function is called to compute the minimum number of turns required to print the entire string, starting from index <code>0</code> to the last index of the string.</li>
+<li><strong>Return the Result</strong>: The result of <code>dp(0, s.size() - 1)</code> is returned as the minimum number of turns required to print the entire string <code>s</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -320,15 +358,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^3), where <code>n</code> is the length of the string. The recursive function explores all pairs of indices and checks for matching characters, leading to a cubic time complexity.</li>
-<li><strong>Space Complexity</strong>: O(n^2), for the memoization table that stores results for all pairs of indices.</li>
+<li>The time complexity is <strong>O(n^2)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because we have a nested loop: for each pair of indices <code>(l, r)</code>, we recursively calculate the minimum number of turns. The <code>dp</code> function is called for each possible pair <code>(l, r)</code> once, and for each call, we may check up to <code>r - l</code> positions in the string to check for consecutive characters that match <code>s[l]</code>.</li>
+<li>The DP table <code>memo</code> has a size of <code>n x n</code>, and each entry requires at most <strong>O(n)</strong> operations to compute.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n^2)</strong> due to the <code>memo</code> table, which stores results for each pair of indices <code>(l, r)</code> in the string. Additionally, recursion requires space for the call stack, but the maximum depth of the recursion is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This algorithm efficiently computes the minimum number of turns required to print a string using dynamic programming and memoization. By breaking down the problem into smaller subproblems, it minimizes redundant calculations and ensures optimal performance. The solution handles various string structures, including strings with repeated characters, and provides a result in <strong>O(n^2)</strong> time complexity with <strong>O(n^2)</strong> space complexity. This approach is highly effective for problems involving string manipulation and dynamic programming where overlapping subproblems exist.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1412s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1409s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

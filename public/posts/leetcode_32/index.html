@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> maxL;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1219s1hbhb">
+<h2 id="hahahugoshortcode1223s1hbhb">
   
 
   
@@ -247,7 +247,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string containing just the characters <code>'('</code> and <code>')'</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
+<p>The problem at hand is to find the <strong>length of the longest valid parentheses substring</strong> in a given string <code>s</code>. A valid parentheses string is defined as a string where every opening parenthesis <code>'('</code> has a corresponding closing parenthesis <code>')'</code> and the parentheses are properly nested.</p>
+<p>For example:</p>
+<ul>
+<li>The string <code>&quot;(())&quot;</code> is valid and has a length of 4.</li>
+<li>The string <code>&quot;(()&quot;</code> is not valid, and its longest valid substring is <code>&quot;()&quot;</code>, which has a length of 2.</li>
+<li>The string <code>&quot;)(&quot;</code> is not valid, and its longest valid substring is of length 0.</li>
+</ul>
+<p>Your task is to write an efficient algorithm to determine the length of the longest valid parentheses substring.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,53 +262,69 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use a <strong>stack</strong> data structure. The idea is based on the following observations:</p>
 <ol>
 <li>
-<p><strong>Using a Stack</strong>:</p>
+<p><strong>Valid Parentheses Substrings:</strong> A valid parentheses substring is always balanced, meaning that every opening parenthesis <code>'('</code> has a corresponding closing parenthesis <code>')'</code> and they are properly nested.</p>
+</li>
+<li>
+<p><strong>Stack Data Structure:</strong> We use a stack to keep track of indices of the characters in the string. The stack will help us determine where valid substrings start and end.</p>
+</li>
+<li>
+<p><strong>Processing the String:</strong></p>
 <ul>
-<li>Utilize a stack to keep track of indices of the characters in the string. This helps in determining the position of the last unmatched parenthesis.</li>
+<li>We iterate through each character of the string.</li>
+<li>For each opening parenthesis <code>'('</code>, we push its index onto the stack.</li>
+<li>For each closing parenthesis <code>')'</code>, we check if the stack’s top element corresponds to an opening parenthesis <code>'('</code> (by checking if the character at the index from the stack is <code>'('</code>).</li>
+<li>If they match, we pop the top of the stack and calculate the length of the valid substring.</li>
+<li>If they do not match or if the stack is empty, it means we have encountered an unmatched closing parenthesis, so we push the current index onto the stack.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialize the Stack</strong>:</p>
-<ul>
-<li>Push <code>-1</code> onto the stack to handle the edge case of valid substrings starting from index <code>0</code>.</li>
-</ul>
+<p><strong>Maximum Length Calculation:</strong> Every time we find a valid substring (i.e., a pair of matching parentheses), we calculate its length and update the maximum length found so far.</p>
 </li>
 <li>
-<p><strong>Iterate through the String</strong>:</p>
-<ul>
-<li>For each character in the string:
-<ul>
-<li>If the character is <code>')'</code> and the top of the stack is not <code>-1</code>, check if the character at that index is <code>'('</code>.
-<ul>
-<li>If it is, a valid pair is found; pop the index from the stack and calculate the length of the valid substring by subtracting the new top of the stack from the current index <code>i</code>.</li>
-<li>Update <code>maxL</code> if the new length is greater.</li>
-</ul>
-</li>
-<li>If no valid pair is found or the character is <code>'('</code>, push the current index onto the stack.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Stack Initialization:</strong> To handle edge cases like <code>&quot;(())&quot;</code> or <code>&quot;()&quot;</code> at the start, we initialize the stack with <code>-1</code>, which acts as a base to calculate lengths of valid substrings from the start.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: A stack is initialized with <code>-1</code> to track the last unmatched parenthesis index.</li>
-<li><strong>Traversal</strong>: As the string is traversed:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>stk.push(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> maxL <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a stack and push <code>-1</code> onto it. This helps handle cases where the first character is part of a valid substring.</li>
+<li>We also initialize <code>maxL</code> to keep track of the maximum length of the valid parentheses substring found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> stk.top();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(t <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;)&#39;</span> <span style="color:#f92672">&amp;&amp;</span> s[t] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) {
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>        maxL <span style="color:#f92672">=</span> max(maxL, i <span style="color:#f92672">-</span> stk.top());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        stk.push(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Iteration:</strong> We loop through the string <code>s</code> from index <code>0</code> to <code>s.size() - 1</code>.</li>
+<li><strong>Stack Check:</strong> For each character <code>s[i]</code>:
 <ul>
-<li>When a valid pair is found, the top of the stack is popped, and the length of the valid substring is calculated.</li>
-<li>If the character is <code>'('</code>, its index is simply pushed onto the stack.</li>
+<li>If the stack’s top (<code>t</code>) is not <code>-1</code> and the character is a closing parenthesis <code>')'</code> and the character at index <code>t</code> in <code>s</code> is an opening parenthesis <code>'('</code>, it means we have found a valid pair of parentheses.</li>
+<li>We pop the top of the stack (removing the matching <code>'('</code>), and we calculate the length of the valid substring by subtracting the current top of the stack from <code>i</code>. We update <code>maxL</code> if this length is greater than the current <code>maxL</code>.</li>
 </ul>
 </li>
-<li><strong>Result</strong>: The maximum length of valid parentheses is stored in <code>maxL</code> and returned.</li>
-</ol>
+<li><strong>Push Index:</strong> If the current character does not form a valid pair, we push the current index onto the stack.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> maxL;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, <code>maxL</code> contains the length of the longest valid parentheses substring, which we return.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,15 +332,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)), where (n) is the length of the string since each character is processed once.</li>
-<li><strong>Space Complexity:</strong> (O(n)) in the worst case for the stack when all characters are <code>'('</code>.</li>
+<li><strong>O(n)</strong>: We traverse the string <code>s</code> once, and for each character, we perform a constant-time operation of either pushing or popping from the stack. Since we only push and pop each index once, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: In the worst case, all indices of the string could be pushed onto the stack. Thus, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string. This is due to the space required for the stack.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>longestValidParentheses</strong> function efficiently finds the longest valid parentheses substring using a stack-based approach. The algorithm operates in linear time (<strong>O(n)</strong>) and requires linear space (<strong>O(n)</strong>), making it both time-efficient and space-efficient.</p>
+<p>By processing each character of the string and maintaining a stack of indices, the algorithm can quickly determine the lengths of valid parentheses substrings and update the maximum length encountered. This approach is optimal and works well for large inputs, where performance is crucial.</p>
+<p>This solution is highly applicable to various problems in computational theory and practical applications involving balanced data structures or string manipulations. The stack-based method is a standard approach for problems involving matching or nested parentheses, and this implementation provides an efficient and clean solution to the problem at hand.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1219s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1223s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

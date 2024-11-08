@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -258,7 +258,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers, find all unique quadruplets ((a, b, c, d)) such that (a + b + c + d = \text{target}).</p>
+<p>The problem at hand is to find all unique quadruplets in an array that sum up to a specific target. Specifically, given an integer array <code>nums</code> and an integer <code>target</code>, you need to return all unique quadruplets <code>[nums[i], nums[j], nums[k], nums[l]]</code> such that:</p>
+<ul>
+<li><code>i &lt; j &lt; k &lt; l</code></li>
+<li><code>nums[i] + nums[j] + nums[k] + nums[l] == target</code></li>
+</ul>
+<p>The challenge is to solve this problem in a way that handles large input sizes efficiently while avoiding duplicate quadruplets.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,66 +271,142 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Sorting</strong>: Start by sorting the input array to facilitate the two-pointer technique and to avoid duplicates.</li>
-<li><strong>Using Sets for Uniqueness</strong>: Utilize a set to store unique quadruplets, as it automatically handles duplicates.</li>
-<li><strong>Nested Loops</strong>:
+<p>This problem is a variant of the &ldquo;4Sum&rdquo; problem, which can be solved using a combination of sorting and the two-pointer technique. Here’s the detailed approach for solving the problem efficiently:</p>
+<h4 id="1-sorting">
+  1. <strong>Sorting</strong>:
+  <a class="heading-link" href="#1-sorting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Use two nested loops to fix the first two numbers of the quadruplet.</li>
-<li>For the remaining two numbers, use a two-pointer approach.</li>
+<li>The first step is to sort the input array <code>nums</code> in ascending order. Sorting helps in efficiently checking combinations and avoiding duplicates.</li>
+<li>After sorting, we can use two-pointer techniques to find two numbers that sum up to a given target for each pair of numbers.</li>
 </ul>
-</li>
-<li><strong>Two-Pointer Technique</strong>:
+<h4 id="2-using-a-set-to-track-unique-quadruplets">
+  2. <strong>Using a Set to Track Unique Quadruplets</strong>:
+  <a class="heading-link" href="#2-using-a-set-to-track-unique-quadruplets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Set the pointers: one starting just after the second fixed number and the other at the end of the array.</li>
-<li>Adjust the pointers based on the sum of the two pointers compared to the new target (adjusted for the fixed numbers).</li>
+<li>We use a set to store the quadruplets. The reason for using a set is that it automatically ensures that all quadruplets are unique. Even if the same quadruplet is encountered multiple times, it will only be stored once.</li>
+<li>The set will store each quadruplet as a vector of integers, and the set will internally handle the uniqueness based on the values of the quadruplets.</li>
 </ul>
-</li>
-<li><strong>Collect Results</strong>: Once a valid quadruplet is found, insert it into the set to ensure uniqueness.</li>
-<li><strong>Output</strong>: Convert the set to a vector for the final result.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="3-two-nested-loops-for-first-two-elements">
+  3. <strong>Two Nested Loops for First Two Elements</strong>:
+  <a class="heading-link" href="#3-two-nested-loops-for-first-two-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The outer two loops iterate over the array to select the first two elements of the quadruplet. These loops are indexed by <code>i</code> and <code>j</code> such that <code>i &lt; j</code>.</li>
+<li>For each pair <code>(nums[i], nums[j])</code>, the remaining two numbers that need to sum to a new target are found using the two-pointer technique.</li>
+</ul>
+<h4 id="4-two-pointer-technique-for-the-remaining-two-elements">
+  4. <strong>Two-Pointer Technique for the Remaining Two Elements</strong>:
+  <a class="heading-link" href="#4-two-pointer-technique-for-the-remaining-two-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>After selecting the first two numbers, we calculate a new target, <code>newTarget</code>, which is the original target minus the sum of the first two numbers, i.e., <code>newTarget = target - nums[i] - nums[j]</code>.</li>
+<li>We then use two pointers, <code>low</code> and <code>high</code>, initialized to the positions just after <code>j</code> and at the end of the array, respectively.</li>
+<li>The two-pointer technique is used to find the other two numbers such that their sum equals <code>newTarget</code>. If the sum of the two numbers at <code>low</code> and <code>high</code> is less than <code>newTarget</code>, we increment <code>low</code>. If the sum is greater than <code>newTarget</code>, we decrement <code>high</code>. If the sum is equal to <code>newTarget</code>, we add the quadruplet to the set and move both pointers inward.</li>
+</ul>
+<h4 id="5-storing-the-result">
+  5. <strong>Storing the Result</strong>:
+  <a class="heading-link" href="#5-storing-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Once all quadruplets are found, we transfer the elements from the set into the output vector. The set ensures that there are no duplicates, and the result is a list of unique quadruplets.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Sort the array and initialize a set to store unique quadruplets and a vector for the output.</li>
+<p>Here’s how the solution works in detail:</p>
+<h4 id="step-1-sorting-the-input-array">
+  Step 1: Sorting the Input Array
+  <a class="heading-link" href="#step-1-sorting-the-input-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>The input array <code>nums</code> is sorted in ascending order. This makes it easier to manage the two-pointer approach and helps in skipping duplicate elements.</li>
 </ul>
-</li>
-<li>
-<p><strong>Outer Loops</strong>:</p>
-<ul>
-<li>Iterate over the first two indices (i) and (j) in the sorted array.</li>
+<h4 id="step-2-outer-loops-for-first-two-elements">
+  Step 2: Outer Loops for First Two Elements
+  <a class="heading-link" href="#step-2-outer-loops-for-first-two-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> newTarget <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)target <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)nums[i] <span style="color:#f92672">-</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>)nums[j];
+</span></span></code></pre></div><ul>
+<li>The outer loops iterate over the first two elements, <code>nums[i]</code> and <code>nums[j]</code>, of the potential quadruplet. The condition <code>i &lt; j</code> ensures that the first element comes before the second element.</li>
+<li><code>newTarget</code> is calculated by subtracting <code>nums[i]</code> and <code>nums[j]</code> from the target.</li>
 </ul>
-</li>
-<li>
-<p><strong>Adjust Target</strong>:</p>
-<ul>
-<li>Calculate the new target for the remaining two numbers by subtracting the values at the fixed indices from the original target.</li>
+<h4 id="step-3-two-pointer-approach-for-remaining-elements">
+  Step 3: Two-Pointer Approach for Remaining Elements
+  <a class="heading-link" href="#step-3-two-pointer-approach-for-remaining-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, high <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (low <span style="color:#f92672">&lt;</span> high) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nums[low] <span style="color:#f92672">+</span> nums[high] <span style="color:#f92672">&lt;</span> newTarget) {
+</span></span><span style="display:flex;"><span>        low<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (nums[low] <span style="color:#f92672">+</span> nums[high] <span style="color:#f92672">&gt;</span> newTarget) {
+</span></span><span style="display:flex;"><span>        high<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        set.insert({nums[i], nums[j], nums[low], nums[high]});
+</span></span><span style="display:flex;"><span>        low<span style="color:#f92672">++</span>; high<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After calculating the <code>newTarget</code>, two pointers <code>low</code> and <code>high</code> are used to find two numbers whose sum is equal to <code>newTarget</code>.</li>
+<li>If the sum of <code>nums[low] + nums[high]</code> is less than <code>newTarget</code>, we increment <code>low</code> to increase the sum. If the sum is greater than <code>newTarget</code>, we decrement <code>high</code> to reduce the sum.</li>
+<li>If the sum equals <code>newTarget</code>, we add the quadruplet <code>{nums[i], nums[j], nums[low], nums[high]}</code> to the set and move both pointers inward.</li>
 </ul>
-</li>
-<li>
-<p><strong>Inner Loop with Two Pointers</strong>:</p>
-<ul>
-<li>Use two pointers <code>low</code> and <code>high</code> to find the remaining two numbers.</li>
-<li>If the sum of the two pointed values is less than the new target, increment <code>low</code>.</li>
-<li>If it&rsquo;s greater, decrement <code>high</code>.</li>
-<li>If equal, store the quadruplet in the set and move both pointers.</li>
+<h4 id="step-4-transfer-results-from-set-to-output">
+  Step 4: Transfer Results from Set to Output
+  <a class="heading-link" href="#step-4-transfer-results-from-set-to-output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : set) {
+</span></span><span style="display:flex;"><span>    output.push_back(it);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After all combinations are found, the unique quadruplets stored in the set are transferred to the <code>output</code> vector.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Output</strong>:</p>
-<ul>
-<li>Transfer all unique quadruplets from the set to the output vector.</li>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> output;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the <code>output</code> vector containing all unique quadruplets that sum up to the target.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -333,10 +414,38 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n^3)), where (n) is the size of the input array, as we have nested loops for the first two indices and the two-pointer technique for the last two indices.</li>
-<li><strong>Space Complexity:</strong> (O(1)) for the space used by pointers and fixed variables, but the space used for the set depends on the number of unique quadruplets found.</li>
+<li><strong>Sorting</strong> the array takes <code>O(n log n)</code>.</li>
+<li>The <strong>nested loops</strong> to select the first two elements (<code>i</code> and <code>j</code>) iterate <code>O(n^2)</code> times, where <code>n</code> is the length of the input array.</li>
+<li>The <strong>two-pointer approach</strong> inside the loops runs in <code>O(n)</code> for each pair of <code>i</code> and <code>j</code>.</li>
+<li>Overall, the time complexity is <strong>O(n^3)</strong>, where <code>n</code> is the size of the input array.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is primarily determined by the space needed to store the unique quadruplets, which can be at most <code>O(n^3)</code> in the worst case.</li>
+<li>Additionally, we use a set to store the unique quadruplets and a vector for the result, so the space complexity is <strong>O(n^3)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to the &ldquo;4Sum&rdquo; problem utilizes a combination of sorting and the two-pointer technique, which allows us to efficiently find all unique quadruplets that sum to the target. By sorting the array first and then using a set to store the quadruplets, we can avoid duplicates and ensure the solution is both time-efficient and space-efficient. Although the time complexity is <strong>O(n^3)</strong>, this approach is much faster than a brute-force method, which would have a time complexity of <strong>O(n^4)</strong>. This makes the solution feasible for moderately large input sizes.</p>
  
 </div>
   

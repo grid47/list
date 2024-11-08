@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -263,7 +263,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Perform a level-order traversal on a binary tree, but return the result in bottom-up order (starting from the deepest level).</p>
+<p>The problem at hand involves performing a level order traversal of a binary tree, but the twist is that instead of returning the traversal in the normal order (top to bottom), we need to return it in reverse order (bottom to top). Specifically, you are given the root of a binary tree, and you need to return a 2D array where each subarray contains the nodes of a level in the binary tree, starting from the bottommost level and going upwards.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -271,42 +271,172 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can utilize the <strong>breadth-first search (BFS)</strong> technique to traverse the tree level by level, but with an additional step to reverse the order of the levels at the end. Here&rsquo;s the step-by-step breakdown of the approach:</p>
 <ol>
-<li>Use a queue to perform a level-order traversal, storing each level’s nodes in a temporary vector.</li>
-<li>After processing each level, push the vector onto a stack.</li>
-<li>Once the entire tree is traversed, pop each level from the stack (which gives bottom-up order) and add it to the final result.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<li>
+<p><strong>Level Order Traversal:</strong></p>
 <ul>
-<li><strong>Lines 5-6</strong>: Initialize a queue <code>q</code> and a stack <code>stk</code>. If the root is <code>NULL</code>, return an empty result.</li>
-<li><strong>Line 8</strong>: Push the root node onto the queue.</li>
-<li><strong>Lines 10-18</strong>: While the queue is not empty:
-<ul>
-<li>Create a vector <code>ans</code> for the current level.</li>
-<li>For each node in the current level, add its value to <code>ans</code> and enqueue its left and right children if they exist.</li>
-<li>Push <code>ans</code> onto the stack after completing the level.</li>
+<li>In a standard level order traversal, we use a queue to visit nodes level by level. Starting from the root, we enqueue the left and right children of each node and visit them one by one.</li>
+<li>For each level, we store the values of the nodes in a temporary vector, and once all nodes of the current level are processed, we push the vector into a stack.</li>
 </ul>
 </li>
-<li><strong>Lines 20-24</strong>: Pop each level from <code>stk</code> and add it to the result list <code>ans</code> to achieve the bottom-up order.</li>
-<li><strong>Line 26</strong>: Return <code>ans</code>.</li>
+<li>
+<p><strong>Reverse the Order of Levels:</strong></p>
+<ul>
+<li>Once we have collected the levels in the correct order (from top to bottom), we can reverse the order by popping the vectors from the stack, which gives us the nodes from bottom to top.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-necessary-data-structures">
+  Step 1: Initialize Necessary Data Structures
+  <a class="heading-link" href="#step-1-initialize-necessary-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>q.push(root);
+</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> stk;
+</span></span></code></pre></div><ul>
+<li>We initialize an empty vector <code>ans</code> to store the final result.</li>
+<li>We use a <strong>queue</strong> to perform a level order traversal of the binary tree. The queue helps us visit nodes in the correct order, level by level.</li>
+<li>If the root is <code>NULL</code>, we immediately return the empty result as there is no tree to process.</li>
+<li>We initialize a <strong>stack</strong> <code>stk</code> to temporarily hold the nodes of each level before reversing their order.</li>
+</ul>
+<h4 id="step-2-perform-level-order-traversal">
+  Step 2: Perform Level Order Traversal
+  <a class="heading-link" href="#step-2-perform-level-order-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>left) q.push(tmp<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>right) q.push(tmp<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    stk.push(ans);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop continues as long as there are nodes in the queue.</li>
+<li>For each level, we:
+<ol>
+<li>Determine the size of the current level using <code>q.size()</code>, which tells us how many nodes are in this level.</li>
+<li>Process each node in the current level by:
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(N)), due to storage required for the queue, stack, and result list.</li>
-</ul> 
+<li>Popping the node from the front of the queue (<code>q.front()</code>), adding its value to the temporary vector <code>ans</code>, and then pushing its left and right children (if any) into the queue for the next level.</li>
+</ul>
+</li>
+<li>After processing all nodes at the current level, we push the <code>ans</code> vector into the stack.</li>
+</ol>
+</li>
+</ul>
+<h4 id="step-3-reverse-the-level-order">
+  Step 3: Reverse the Level Order
+  <a class="heading-link" href="#step-3-reverse-the-level-order">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>    ans.push_back(stk.top());
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After the level order traversal is complete, the levels are stored in the stack in top-to-bottom order.</li>
+<li>To get the levels in bottom-to-top order, we pop each level from the stack and add it to the final result vector <code>ans</code>.</li>
+</ul>
+<h4 id="step-4-return-the-final-answer">
+  Step 4: Return the Final Answer
+  <a class="heading-link" href="#step-4-return-the-final-answer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>ans</code> vector, which now contains the nodes from the binary tree, level by level, but starting from the bottommost level.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. Here&rsquo;s the breakdown:</p>
+<ul>
+<li>The <strong>BFS traversal</strong> processes each node exactly once. For each node, we perform constant-time operations like pushing to the queue and popping from it.</li>
+<li><strong>Reversing the order</strong> by popping from the stack also takes linear time, as we pop each level once.
+Thus, the overall time complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This is because:</p>
+<ul>
+<li>We use a <strong>queue</strong> to store nodes during the BFS traversal. In the worst case, the queue will contain all the nodes at the bottommost level, which is approximately <code>n/2</code> nodes. Therefore, the space required for the queue is <strong>O(n)</strong>.</li>
+<li>We also use a <strong>stack</strong> to temporarily hold each level’s nodes. In the worst case, the stack will hold all the levels&rsquo; nodes before reversing them.
+Thus, the overall space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the following binary tree:</p>
+<pre tabindex="0"><code>        3
+       / \
+      9  20
+         /  \
+        15   7
+</code></pre><ol>
+<li><strong>Level 0:</strong> The root node <code>3</code> is the only node at this level. We enqueue its left child <code>9</code> and right child <code>20</code>.</li>
+<li><strong>Level 1:</strong> The nodes at this level are <code>9</code> and <code>20</code>. We enqueue the children of <code>20</code>, which are <code>15</code> and <code>7</code>.</li>
+<li><strong>Level 2:</strong> The nodes at this level are <code>15</code> and <code>7</code>, both of which have no children.</li>
+</ol>
+<p>After completing the level order traversal, the levels in top-to-bottom order are:</p>
+<pre tabindex="0"><code>[[3], [9, 20], [15, 7]]
+</code></pre><p>We then reverse this order using the stack, and the final result is:</p>
+<pre tabindex="0"><code>[[15, 7], [9, 20], [3]]
+</code></pre><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution implements a <strong>bottom-up level order traversal</strong> of a binary tree efficiently using a <strong>queue</strong> for BFS traversal and a <strong>stack</strong> for reversing the order of the levels. The time complexity is <strong>O(n)</strong>, and the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This solution is optimal and well-suited for the problem at hand. The approach ensures that the tree is traversed level by level while maintaining the desired order, making it easy to implement and understand.</p>
+ 
 </div>
   
 

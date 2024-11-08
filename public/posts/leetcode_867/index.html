@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> B;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1558s1hbhb">
+<h2 id="hahahugoshortcode1559s1hbhb">
   
 
   
@@ -238,7 +238,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The objective is to transpose a given matrix ( A ). Transposing a matrix involves flipping it over its diagonal, which means converting the row indices of the original matrix into column indices in the new matrix.</p>
+<p>The problem asks to implement a <strong>matrix transpose</strong> function. The task is to take a given matrix (a 2D array) and return its transpose. The <strong>transpose</strong> of a matrix is obtained by swapping its rows and columns. Specifically, if a matrix <code>A</code> is of size <code>MxN</code>, its transpose <code>B</code> will be of size <code>NxM</code>, and element <code>A[i][j]</code> will be placed at <code>B[j][i]</code>.</p>
+<h3 id="problem-explanation">
+  Problem Explanation
+  <a class="heading-link" href="#problem-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a matrix <code>A</code>, you need to produce a matrix <code>B</code> such that:</p>
+<ul>
+<li><code>B[j][i] = A[i][j]</code></li>
+<li>The number of rows in matrix <code>A</code> becomes the number of columns in matrix <code>B</code>, and vice versa.</li>
+</ul>
+<p>For example, if the input matrix <code>A</code> is:</p>
+<pre tabindex="0"><code>1 2 3
+4 5 6
+</code></pre><p>The transpose of matrix <code>A</code> will be:</p>
+<pre tabindex="0"><code>1 4
+2 5
+3 6
+</code></pre><p>In this example, matrix <code>A</code> is a 2x3 matrix (2 rows and 3 columns), and its transpose <code>B</code> is a 3x2 matrix (3 rows and 2 columns).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,47 +266,53 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solve this problem involves:</p>
 <ol>
-<li>
-<p><strong>Matrix Dimensions</strong>:</p>
-<ul>
-<li>Determine the number of rows ( M ) and columns ( N ) in the input matrix ( A ).</li>
-</ul>
-</li>
-<li>
-<p><strong>Create Transposed Matrix</strong>:</p>
-<ul>
-<li>Initialize a new matrix ( B ) with dimensions ( N \times M ) filled with zeros. This will hold the transposed values.</li>
-</ul>
-</li>
-<li>
-<p><strong>Populate Transposed Matrix</strong>:</p>
-<ul>
-<li>Use two nested loops to iterate through each element of matrix ( A ):
-<ul>
-<li>The outer loop iterates over columns ( j ) (from 0 to ( N-1 )).</li>
-<li>The inner loop iterates over rows ( i ) (from 0 to ( M-1 )).</li>
-<li>Assign ( B[j][i] ) to ( A[i][j] ), effectively swapping rows and columns.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the transposed matrix ( B ).</li>
-</ul>
-</li>
+<li><strong>Identifying the dimensions</strong>: Determine the number of rows (<code>M</code>) and columns (<code>N</code>) in the given matrix <code>A</code>.</li>
+<li><strong>Creating the transposed matrix</strong>: Initialize a new matrix <code>B</code> of size <code>N x M</code> to store the transposed values.</li>
+<li><strong>Filling the transposed matrix</strong>: Iterate through each element of matrix <code>A</code> and assign <code>A[i][j]</code> to <code>B[j][i]</code>.</li>
+<li><strong>Returning the transposed matrix</strong>: After the transformation is complete, return the matrix <code>B</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The key observation here is that the transpose operation involves swapping the indices of the elements, i.e., rows become columns and columns become rows.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>transpose</code> function initializes the new matrix and fills it using nested loops based on the dimensions of the original matrix.</li>
+<ol>
+<li><strong>Matrix Initialization and Size Determination</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> M <span style="color:#f92672">=</span> A.size(), N <span style="color:#f92672">=</span> A[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li>The first line of code retrieves the dimensions of the input matrix <code>A</code>. <code>M</code> represents the number of rows in <code>A</code>, and <code>N</code> represents the number of columns in <code>A</code>. This is done using the <code>.size()</code> function for the 2D vector <code>A</code>.</li>
+<li>The matrix <code>A</code> is assumed to be non-empty, so <code>A[0].size()</code> is used to obtain the number of columns, which is assumed to be consistent across all rows (i.e., <code>A</code> is a well-formed matrix).</li>
+</ul>
+<ol start="2">
+<li><strong>Creating the Transposed Matrix</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> B(N, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(M, <span style="color:#ae81ff">0</span>));
+</span></span></code></pre></div><ul>
+<li>A new matrix <code>B</code> of size <code>N x M</code> is created, which will store the transposed values. Here, <code>N</code> is the number of rows in the transposed matrix (which is equal to the number of columns in the original matrix <code>A</code>), and <code>M</code> is the number of columns in the transposed matrix (which is equal to the number of rows in <code>A</code>).</li>
+<li>The matrix is initialized with all elements set to <code>0</code> using the constructor <code>vector&lt;int&gt;(M, 0)</code>, which creates a vector of size <code>M</code> filled with <code>0</code>s. The outer vector is then repeated <code>N</code> times to form the <code>N x M</code> matrix.</li>
+</ul>
+<ol start="3">
+<li><strong>Filling the Transposed Matrix</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> N; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> M; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        B[j][i] <span style="color:#f92672">=</span> A[i][j];
+</span></span></code></pre></div><ul>
+<li>The nested <code>for</code> loops iterate over each element of the input matrix <code>A</code>. The outer loop runs over the columns of <code>A</code> (indexed by <code>j</code>), and the inner loop runs over the rows of <code>A</code> (indexed by <code>i</code>).</li>
+<li>The assignment <code>B[j][i] = A[i][j]</code> swaps the row and column indices to perform the transpose. For each element in the original matrix, the element at position <code>(i, j)</code> in <code>A</code> is placed at position <code>(j, i)</code> in <code>B</code>.</li>
+</ul>
+<ol start="4">
+<li><strong>Returning the Transposed Matrix</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> B;
+</span></span></code></pre></div><ul>
+<li>After the loops complete, the matrix <code>B</code> will contain the transposed version of matrix <code>A</code>. The function returns the transposed matrix <code>B</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -295,15 +321,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <code>O(M * N)</code>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(M * N), where ( M ) is the number of rows and ( N ) is the number of columns in the input matrix. Each element is accessed and assigned once.</li>
-<li><strong>Space Complexity</strong>: O(N * M) for the new transposed matrix.</li>
+<li><code>M</code> is the number of rows in the input matrix <code>A</code>.</li>
+<li><code>N</code> is the number of columns in the input matrix <code>A</code>.</li>
 </ul>
+<p>This is because we are iterating through each element of the matrix once to perform the transpose operation. The nested loops each run <code>M</code> and <code>N</code> times, respectively, and the assignment operation inside the loops takes constant time <code>O(1)</code>. Therefore, the total time complexity is the product of the number of rows and columns, which is <code>O(M * N)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of the solution is <code>O(M * N)</code>, as we are using an additional matrix <code>B</code> of size <code>N x M</code> to store the transposed result. The space used by the input matrix <code>A</code> is not counted towards the space complexity because we are given it as input and are not modifying it in place.</p>
+<p>The space complexity for storing matrix <code>B</code> is proportional to the size of the input matrix, so it is <code>O(M * N)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code efficiently transposes a matrix by swapping the rows and columns. The process is straightforward and involves creating a new matrix of the appropriate size and copying the values from the original matrix, with the rows and columns swapped. The solution has optimal time and space complexity for the given problem and ensures correctness through its simple, systematic approach to matrix transformation. This approach can be easily generalized for matrices of any size, as long as the input is a valid 2D array.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1558s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1559s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

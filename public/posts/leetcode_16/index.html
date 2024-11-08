@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode344s1hbhb">
+<h2 id="hahahugoshortcode343s1hbhb">
   
 
   
@@ -256,7 +256,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers, find the sum of three integers such that the sum is closest to a given target. Return this sum.</p>
+<p>The problem asks to find the closest sum of three integers in an array <code>nums</code> to a given target value. The sum should be as close as possible to the target, and you need to return the sum of the three integers.</p>
+<p>For example, given the array <code>nums = [-1, 2, 1, -4]</code> and target <code>1</code>, the closest sum is <code>2</code>, as the sum of <code>-1</code>, <code>2</code>, and <code>1</code> is closest to <code>1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,59 +265,142 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use sorting combined with a two-pointer technique to efficiently find the closest sum of three integers.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem is a variation of the popular &ldquo;3-sum&rdquo; problem, but instead of finding the exact sum of three integers that equals the target, we are looking for the sum of three integers that is closest to the target.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sort the Input Array</strong>: Sorting the array makes it easier to use the two-pointer technique, which is crucial for efficiently finding the closest sum. Sorting allows us to avoid unnecessary checks and reduce the problem&rsquo;s complexity.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>: We use a loop to iterate through each element of the array. The element at position <code>i</code> will be one of the three integers in the sum, and for each element, we will use two pointers to find the other two integers.</p>
+</li>
+<li>
+<p><strong>Two Pointers</strong>: For each element <code>i</code>, we maintain two pointers:</p>
+<ul>
+<li><code>front</code>: Initially, this is set to the element immediately following <code>i</code>, i.e., <code>i+1</code>.</li>
+<li><code>back</code>: Initially, this is set to the last element in the array.</li>
+</ul>
+<p>These two pointers will move toward each other to find the sum of the three numbers that is closest to the target.</p>
+</li>
+<li>
+<p><strong>Calculate the Sum</strong>: The sum of the three numbers is calculated as <code>sum1 = nums[i] + nums[front] + nums[back]</code>.</p>
+</li>
+<li>
+<p><strong>Update Closest Sum</strong>: If the absolute difference between <code>sum1</code> and the target is smaller than the current closest sum (<code>sum</code>), update the closest sum.</p>
+</li>
+<li>
+<p><strong>Adjust Pointers</strong>: Based on whether the calculated sum is greater than or less than the target:</p>
+<ul>
+<li>If <code>sum1 &gt; target</code>, move the <code>back</code> pointer to the left to reduce the sum.</li>
+<li>If <code>sum1 &lt; target</code>, move the <code>front</code> pointer to the right to increase the sum.</li>
+<li>If <code>sum1 == target</code>, the sum is exactly equal to the target, and we can immediately return the result since this is the best possible sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Continue Until Completion</strong>: Repeat the process for all elements in the array. The result will be the closest sum to the target.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Sort the input vector <code>nums</code> to enable the two-pointer technique.</li>
-<li>Initialize <code>sum</code> with the sum of the first three elements and <code>sum1</code> to store the current sum of the triplet.</li>
+<h4 id="step-1-sort-the-array">
+  Step 1: Sort the Array
+  <a class="heading-link" href="#step-1-sort-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>Sorting the array ensures that we can efficiently use the two-pointer approach. Sorting takes <code>O(n log n)</code> time, where <code>n</code> is the size of the input array <code>nums</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Outer Loop</strong>:</p>
-<ul>
-<li>Iterate through each element <code>nums[i]</code> in the sorted array:
-<ul>
-<li>Set <code>front</code> pointer to <code>i + 1</code> (next element).</li>
-<li>Set <code>back</code> pointer to the last index of <code>nums</code>.</li>
+<h4 id="step-2-initialize-variables">
+  Step 2: Initialize Variables
+  <a class="heading-link" href="#step-2-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> front;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> nums[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[<span style="color:#ae81ff">2</span>], sum1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>sum</code> stores the initial sum of the first three elements of the sorted array. This will act as the closest sum found so far.</li>
+<li><code>sum1</code> is used to store the sum of the three integers for each iteration.</li>
 </ul>
-</li>
+<h4 id="step-3-iterate-through-the-array">
+  Step 3: Iterate Through the Array
+  <a class="heading-link" href="#step-3-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    front <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> back <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>The loop iterates over each element in the array, treating each element <code>i</code> as one of the three integers in the sum.</li>
+<li><code>front</code> is set to the index after <code>i</code>, and <code>back</code> is set to the last element of the array.</li>
 </ul>
-</li>
-<li>
-<p><strong>Inner While Loop</strong>:</p>
-<ul>
-<li>Continue as long as <code>front</code> is less than <code>back</code>:
-<ul>
-<li>Calculate the current sum of the triplet: <code>sum1 = nums[front] + nums[back] + nums[i]</code>.</li>
-<li>Check if the absolute difference between <code>sum1</code> and <code>target</code> is less than or equal to that of <code>sum</code> and <code>target</code>. If so, update <code>sum</code> to <code>sum1</code>.</li>
+<h4 id="step-4-two-pointer-approach">
+  Step 4: Two-Pointer Approach
+  <a class="heading-link" href="#step-4-two-pointer-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(front <span style="color:#f92672">&lt;</span> back) {
+</span></span><span style="display:flex;"><span>    sum1 <span style="color:#f92672">=</span> nums[front] <span style="color:#f92672">+</span> nums[back] <span style="color:#f92672">+</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>The while loop runs as long as <code>front</code> is less than <code>back</code>. This condition ensures that we are not comparing the same element twice.</li>
+<li>We calculate <code>sum1</code> as the sum of the elements at indices <code>i</code>, <code>front</code>, and <code>back</code>.</li>
 </ul>
-</li>
+<h4 id="step-5-check-for-closest-sum">
+  Step 5: Check for Closest Sum
+  <a class="heading-link" href="#step-5-check-for-closest-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(abs(sum1 <span style="color:#f92672">-</span> target) <span style="color:#f92672">&lt;=</span> abs(sum <span style="color:#f92672">-</span> target)) sum <span style="color:#f92672">=</span> sum1;
+</span></span></code></pre></div><ul>
+<li>If the absolute difference between <code>sum1</code> and the target is smaller than or equal to the absolute difference between the current closest sum (<code>sum</code>) and the target, we update <code>sum</code> to <code>sum1</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Adjust Pointers</strong>:</p>
-<ul>
-<li>If <code>sum1</code> is greater than <code>target</code>, decrement <code>back</code> to reduce the sum.</li>
-<li>If <code>sum1</code> is less than <code>target</code>, increment <code>front</code> to increase the sum.</li>
-<li>If <code>sum1</code> equals <code>target</code>, return <code>sum1</code> immediately since it is the closest possible sum.</li>
+<h4 id="step-6-move-pointers-based-on-comparison">
+  Step 6: Move Pointers Based on Comparison
+  <a class="heading-link" href="#step-6-move-pointers-based-on-comparison">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(sum1 <span style="color:#f92672">&gt;</span> target) back<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(sum1 <span style="color:#f92672">&lt;</span> target) front<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> sum1;
+</span></span></code></pre></div><ul>
+<li>If <code>sum1</code> is greater than the target, we move the <code>back</code> pointer to the left (<code>back--</code>) to reduce the sum.</li>
+<li>If <code>sum1</code> is less than the target, we move the <code>front</code> pointer to the right (<code>front++</code>) to increase the sum.</li>
+<li>If <code>sum1</code> equals the target, we return <code>sum1</code> immediately, as this is the closest possible sum.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After iterating through all possibilities, return the closest sum found in <code>sum</code>.</li>
+<h4 id="step-7-return-final-closest-sum">
+  Step 7: Return Final Closest Sum
+  <a class="heading-link" href="#step-7-return-final-closest-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum;
+</span></span></code></pre></div><ul>
+<li>After iterating through all possible sums, we return the closest sum found.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -324,15 +408,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n^2)) - where (n) is the length of the input array, due to sorting and the nested loops.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no extra space is used apart from a few variables for indexing and storing sums.</li>
+<li>Sorting the array takes <strong>O(n log n)</strong>, where <code>n</code> is the size of the input array.</li>
+<li>The two-pointer approach takes <strong>O(n)</strong> for each iteration of the outer loop.</li>
+<li>The overall time complexity is dominated by the sorting step, so it is <strong>O(n log n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we only use a constant amount of extra space, except for the input and output.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the closest sum of three integers to a given target. By using sorting and the two-pointer technique, we ensure that the solution runs in <strong>O(n log n)</strong> time, which is optimal for this type of problem. The approach is simple, leveraging basic sorting and pointer manipulation to explore the possible sums. This method handles edge cases well, such as when the sum is exactly equal to the target or when no exact match is found.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode344s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode343s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -267,7 +267,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Solution* obj = new Solution(rects);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_1 = obj-&gt;pick();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1324s1hbhb">
+<h2 id="hahahugoshortcode1335s1hbhb">
   
 
   
@@ -279,7 +279,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a data structure that generates a random point in a set of non-overlapping rectangles. Each rectangle is defined by its bottom-left and top-right corners, and you need to ensure that the points are uniformly distributed across all rectangles.</p>
+<p>The task is to design a solution that randomly selects a point from a set of given rectangles, with the probability of choosing a point being proportional to the area of the rectangle. Each rectangle is defined by its coordinates in a 2D space. For example, given rectangles represented as <code>[x1, y1, x2, y2]</code>, the task requires an efficient method to select points within these rectangles such that larger rectangles have a higher chance of selection than smaller ones.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,66 +287,82 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution utilizes an area-weighted approach to ensure that larger rectangles are more likely to be chosen. We calculate and store cumulative areas for each rectangle, which we use to randomly select rectangles with a probability proportional to their area. Here’s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Precompute Areas</strong>:</p>
+<p><strong>Calculate Areas</strong>:</p>
 <ul>
-<li>Calculate the area of each rectangle and maintain a cumulative area in a vector <code>v</code>. This helps in determining the probability distribution of selecting points from each rectangle.</li>
+<li>We compute the area of each rectangle based on its coordinates. For a rectangle defined by <code>[x1, y1, x2, y2]</code>, the area can be calculated as <code>(x2 - x1 + 1) * (y2 - y1 + 1)</code>. This formula accounts for inclusive boundaries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cumulative Area Array</strong>:</p>
+<ul>
+<li>We maintain a cumulative area array <code>v</code> to keep track of the cumulative areas of all rectangles. This allows us to perform a binary search later to efficiently select a rectangle with the desired probability.</li>
+<li>Each element in <code>v</code> represents the cumulative area up to that rectangle, making it easy to determine the probability distribution by the relative area size of each rectangle.</li>
 </ul>
 </li>
 <li>
 <p><strong>Random Selection</strong>:</p>
 <ul>
-<li>Use a random number generator to pick a number from the cumulative area vector.</li>
-<li>Determine which rectangle the random number falls into using binary search (<code>upper_bound</code>).</li>
-<li>Randomly select a point within the chosen rectangle.</li>
-</ul>
-</li>
-<li>
-<p><strong>Implementation Details</strong>:</p>
-<ul>
-<li>The <code>area()</code> function calculates the area of a rectangle given its coordinates.</li>
-<li>The <code>Solution</code> constructor initializes the rectangles and precomputes the cumulative areas.</li>
-<li>The <code>pick()</code> function generates a random point based on the cumulative distribution.</li>
+<li>To pick a point, we generate a random integer <code>d</code> between <code>0</code> and the total area (the last element in <code>v</code>).</li>
+<li>Using binary search (<code>upper_bound</code>), we find which rectangle this random value falls into, based on the cumulative area values stored in <code>v</code>.</li>
+<li>Once we select the rectangle, we randomly pick a point within its boundaries by generating random x and y coordinates.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution consists of three main parts: an area calculation function, the constructor, and the <code>pick</code> function.</p>
 <ol>
 <li>
-<p><strong>Class Definition</strong>:</p>
-<ul>
-<li>The <code>Solution</code> class contains:
-<ul>
-<li>A vector <code>v</code> to store cumulative areas.</li>
-<li>A vector <code>rect</code> to store rectangle coordinates.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Area Calculation</strong>:</p>
-<ul>
-<li>The <code>area(vector&lt;int&gt; r)</code> function calculates the area of a rectangle defined by the corners provided.</li>
+<p><strong>Helper Function for Area Calculation (<code>area</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">area</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (r[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> r[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> (r[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">-</span> r[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function takes a rectangle <code>r</code> represented by <code>[x1, y1, x2, y2]</code> and returns its area. The formula <code>(r[2] - r[0] + 1) * (r[3] - r[1] + 1)</code> computes the area by accounting for the inclusive nature of the boundaries.</li>
 </ul>
 </li>
 <li>
-<p><strong>Constructor</strong>:</p>
-<ul>
-<li>The constructor initializes the rectangles and computes the cumulative areas.</li>
+<p><strong>Constructor (<code>Solution</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> r) {
+</span></span><span style="display:flex;"><span>    rect <span style="color:#f92672">=</span> r;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> re : r) {
+</span></span><span style="display:flex;"><span>        v.push_back(area(re) <span style="color:#f92672">+</span> (v.empty()<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> v.back()));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Parameter Initialization</strong>: The constructor initializes the <code>rect</code> vector with the input rectangles.</li>
+<li><strong>Cumulative Area Calculation</strong>: For each rectangle <code>re</code> in <code>r</code>, we compute its area using <code>area(re)</code> and add it to <code>v</code>. If <code>v</code> is empty, we simply push the area of the first rectangle; otherwise, we add the area of the current rectangle to the last value in <code>v</code> (cumulative sum).</li>
+<li>After processing all rectangles, <code>v</code> stores the cumulative areas, with the last element being the total area covered by all rectangles.</li>
 </ul>
 </li>
 <li>
-<p><strong>Point Picking</strong>:</p>
+<p><strong>Random Point Picker (<code>pick</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pick() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> v.back();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> idz <span style="color:#f92672">=</span> upper_bound(v.begin(), v.end(), d) <span style="color:#f92672">-</span> v.begin();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> r <span style="color:#f92672">=</span> rect[idz];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        rand() <span style="color:#f92672">%</span> (r[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> r[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> r[<span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>        rand() <span style="color:#f92672">%</span> (r[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">-</span> r[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> r[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Random Area Selection</strong>: A random integer <code>d</code> is generated in the range <code>[0, v.back() - 1]</code>, which represents a random point within the total cumulative area.</li>
+<li><strong>Rectangle Selection via Binary Search</strong>: Using <code>upper_bound</code>, we find the first rectangle whose cumulative area exceeds <code>d</code>. This gives us the index <code>idz</code> of the selected rectangle.</li>
+<li><strong>Random Point within Selected Rectangle</strong>: Once the rectangle is chosen, we generate random <code>x</code> and <code>y</code> coordinates within the rectangle&rsquo;s boundaries:
 <ul>
-<li>The <code>pick()</code> function generates a random integer within the range of the total area and finds the corresponding rectangle.</li>
-<li>It then randomly generates a point within the selected rectangle.</li>
+<li><code>x</code> is chosen as <code>rand() % (r[2] - r[0] + 1) + r[0]</code>.</li>
+<li><code>y</code> is chosen as <code>rand() % (r[3] - r[1] + 1) + r[1]</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -357,23 +373,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<ol>
 <li>
 <p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Initialization</strong>: O(n), where n is the number of rectangles for building the cumulative area vector.</li>
-<li><strong>Pick Operation</strong>: O(log n) for the binary search to find the rectangle based on the cumulative area.</li>
+<li><strong>Constructor (<code>Solution</code>)</strong>: Calculating the areas and cumulative sums takes <code>O(n)</code>, where <code>n</code> is the number of rectangles.</li>
+<li><strong>Pick Function (<code>pick</code>)</strong>: Finding the rectangle using <code>upper_bound</code> is <code>O(log n)</code>, and selecting a random point within the rectangle is <code>O(1)</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Space Complexity</strong>: O(n) for storing the cumulative area vector.</p>
-</li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <code>O(n)</code> for storing the cumulative area array <code>v</code> and the input rectangles <code>rect</code>.</li>
 </ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is optimized for selecting a random point from multiple rectangles with an area-weighted probability. By precomputing cumulative areas, we ensure that larger rectangles are more likely to be chosen. The use of binary search within <code>pick</code> allows for efficient rectangle selection, making this approach both time-efficient and scalable. The implementation handles rectangles in 2D space with ease, ensuring that each rectangle’s area directly impacts the selection probability, making this solution ideal for applications requiring weighted random selection.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1324s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1335s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

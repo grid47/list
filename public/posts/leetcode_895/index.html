@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -248,7 +248,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;push(val);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;pop();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1581s1hbhb">
+<h2 id="hahahugoshortcode1579s1hbhb">
   
 
   
@@ -260,11 +260,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a frequency stack that supports the following operations:</p>
-<ul>
-<li><code>push(val)</code>: Push an integer <code>val</code> onto the stack.</li>
-<li><code>pop()</code>: Remove and return the most frequent element in the stack. If there is a tie, the most recently added element among the most frequent ones is removed.</li>
-</ul>
+<p>The problem asks us to implement a <strong>frequency stack</strong> data structure. The stack should support the following operations:</p>
+<ol>
+<li><code>push(val)</code>: Push an integer value <code>val</code> onto the stack.</li>
+<li><code>pop()</code>: Pop and return the integer value that has the highest frequency among all the elements in the stack. If there are multiple elements with the highest frequency, the one that was pushed most recently should be returned.</li>
+</ol>
+<p>Additionally, the structure must efficiently handle these operations in <strong>constant or logarithmic time</strong>. We must design a solution that allows us to keep track of the frequencies of the elements and return the most frequent element quickly when the <code>pop</code> operation is called.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,54 +273,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to efficiently manage both the frequencies of the elements in the stack and ensure that we can easily access the element with the highest frequency that was most recently pushed. We can achieve this by using a combination of:</p>
 <ol>
-<li>
-<p><strong>Data Structures</strong>:</p>
-<ul>
-<li>Use an unordered map (<code>freq</code>) to count the frequency of each element.</li>
-<li>Use another unordered map (<code>m</code>) where the key is the frequency, and the value is a stack of elements that have that frequency.</li>
-<li>Maintain a variable (<code>maxFreq</code>) to track the maximum frequency.</li>
-</ul>
-</li>
-<li>
-<p><strong>Operations</strong>:</p>
-<ul>
-<li><strong>Push</strong>:
-<ul>
-<li>Increment the frequency of the pushed value and update <code>maxFreq</code>.</li>
-<li>Push the value onto the stack corresponding to its frequency.</li>
-</ul>
-</li>
-<li><strong>Pop</strong>:
-<ul>
-<li>Retrieve the top value from the stack corresponding to <code>maxFreq</code>.</li>
-<li>Decrement its frequency and remove it from the stack.</li>
-<li>If the stack for that frequency is empty, decrement <code>maxFreq</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>A frequency map (<code>freq</code>)</strong> to store the frequency of each element.</li>
+<li><strong>A stack map (<code>m</code>)</strong> to group elements by their frequency, which allows us to quickly access the most recent element with the highest frequency.</li>
+<li><strong>A variable (<code>maxFreq</code>)</strong> to keep track of the current maximum frequency, so that we can quickly know which stack to pop from when the <code>pop</code> operation is called.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="the-key-insight">
+  The Key Insight:
+  <a class="heading-link" href="#the-key-insight">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>When an element is pushed, we increment its frequency, update <code>maxFreq</code> if necessary, and push the element into the stack for its current frequency.</li>
+<li>When an element is popped, we access the stack for the current <code>maxFreq</code>, pop the most recent element, and update the frequency map and <code>maxFreq</code> accordingly.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s break down the code and explain how each part works:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FreqStack</span> {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> freq;  <span style="color:#75715e">// Maps an element to its frequency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> m;  <span style="color:#75715e">// Maps a frequency to the stack of elements with that frequency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> maxFreq <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Tracks the highest frequency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    FreqStack() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The class <code>FreqStack</code> maintains:
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class FreqStack</code>: Contains methods to manage the frequency stack.
-<ul>
-<li><code>FreqStack()</code>: Constructor to initialize the frequency stack.</li>
-<li><code>void push(int val)</code>: Method to push a value onto the stack.</li>
-<li><code>int pop()</code>: Method to pop and return the most frequent element.</li>
+<li><code>freq</code>: A map that stores the frequency of each element.</li>
+<li><code>m</code>: A map that associates a frequency with a stack of elements having that frequency.</li>
+<li><code>maxFreq</code>: A variable to track the highest frequency among all elements.</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>
+<p><strong>Push Operation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">int</span> val) {
+</span></span><span style="display:flex;"><span>    maxFreq <span style="color:#f92672">=</span> max(maxFreq, <span style="color:#f92672">++</span>freq[val]);  <span style="color:#75715e">// Increment frequency of val, update maxFreq if needed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    m[freq[val]].push(val);  <span style="color:#75715e">// Push val onto the stack corresponding to its frequency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>push</code> method is responsible for adding an element to the stack.</li>
+<li>First, we increment the frequency of the element <code>val</code> in the <code>freq</code> map.</li>
+<li>Then, we update <code>maxFreq</code> to ensure it reflects the highest frequency.</li>
+<li>Finally, we push <code>val</code> onto the stack corresponding to its current frequency.</li>
 </ul>
+</li>
+<li>
+<p><strong>Pop Operation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pop</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> m[maxFreq].top();  <span style="color:#75715e">// Get the element with the highest frequency
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    m[maxFreq].pop();  <span style="color:#75715e">// Remove the element from the stack
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>m[freq[x]<span style="color:#f92672">--</span>].size()) maxFreq<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Decrease frequency, and update maxFreq if the stack is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// Return the element that was popped
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>pop</code> method removes and returns the element with the highest frequency from the stack.</li>
+<li>We retrieve the element <code>x</code> from the stack corresponding to <code>maxFreq</code>.</li>
+<li>After popping, we check if the stack for the current frequency (<code>freq[x]</code>) is empty. If it is, we decrease <code>maxFreq</code> because there are no more elements with that frequency.</li>
+<li>Finally, we return the element <code>x</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization and Operations</strong>:</p>
+<ul>
+<li>The constructor <code>FreqStack()</code> initializes the data structures: the frequency map (<code>freq</code>), the stack map (<code>m</code>), and the variable <code>maxFreq</code>.</li>
+<li>We can instantiate the stack as follows:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FreqStack<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FreqStack();
+</span></span><span style="display:flex;"><span>obj<span style="color:#f92672">-&gt;</span>push(val);  <span style="color:#75715e">// Push elements onto the stack
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> param_2 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>pop();  <span style="color:#75715e">// Pop and return the most frequent element
+</span></span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -327,15 +366,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(1) for both <code>push</code> and <code>pop</code> operations.</li>
-<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of elements in the stack, to store their frequencies and stacks.</li>
+<li>
+<p><strong>Push Operation</strong>:</p>
+<ul>
+<li>The <code>push</code> operation increments the frequency in the <code>freq</code> map and pushes the element onto the stack in the <code>m</code> map. Both operations take constant time: <strong>O(1)</strong>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Pop Operation</strong>:</p>
+<ul>
+<li>The <code>pop</code> operation involves retrieving the most frequent element from the stack (<code>m[maxFreq].top()</code>), which is done in constant time: <strong>O(1)</strong>.</li>
+<li>Decrementing the frequency and checking if the stack for that frequency is empty also takes constant time: <strong>O(1)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>: Both <code>push</code> and <code>pop</code> operations have constant time complexity: <strong>O(1)</strong>.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>We use two maps:</p>
+<ul>
+<li>The <code>freq</code> map stores the frequency of each element. If there are <code>n</code> distinct elements, the space required is <strong>O(n)</strong>.</li>
+<li>The <code>m</code> map stores stacks for each frequency. In the worst case, where every element has a unique frequency, the space required for the stacks would be proportional to the number of elements in the stack: <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the stack.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>FreqStack</code> class provides an efficient implementation of a frequency stack, where both <code>push</code> and <code>pop</code> operations are handled in constant time. By using a frequency map to track the frequency of each element and a stack map to group elements by frequency, the solution efficiently manages the task of popping the most frequent (and most recently pushed) element. This approach optimizes the operations, making it highly suitable for scenarios where we need frequent retrieval of the most frequent element in a stack. With an optimal time complexity of <strong>O(1)</strong> for both operations and a space complexity of <strong>O(n)</strong>, this solution is both time and space efficient for handling large input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1581s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1579s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

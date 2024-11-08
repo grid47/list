@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -242,7 +242,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1470s1hbhb">
+<h2 id="hahahugoshortcode1468s1hbhb">
   
 
   
@@ -254,7 +254,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of intervals, and you need to find the smallest set of integers such that each interval contains at least two integers from this set. Your goal is to return the size of this smallest set.</p>
+<p>The problem revolves around finding the smallest set of integers such that each set of intervals in the given array intersects with the set of integers at least twice. Each interval in the array is represented by a pair of integers <code>[a, b]</code>, where <code>a</code> is the starting point and <code>b</code> is the endpoint of the interval. You need to return the size of the smallest set of integers that has at least two common points with each interval.</p>
+<p>In simpler terms, you need to determine how many elements are required to cover all the intervals with at least two points of intersection in every interval.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,48 +263,113 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, the key idea is to use a greedy algorithm that minimizes the number of elements in the intersection set. The greedy approach is as follows:</p>
 <ol>
 <li>
-<p><strong>Sorting Intervals</strong>:</p>
-<ul>
-<li>First, sort the intervals based on their ending values. If two intervals have the same ending value, sort them by their starting values in descending order. This ensures that when processing the intervals, we can easily check which integers are needed to satisfy the condition of having at least two integers in each interval.</li>
-</ul>
+<p><strong>Sorting the Intervals</strong>: First, sort the intervals based on their endpoints. Sorting ensures that we always consider the intervals with the smallest endpoint first, which helps in efficiently selecting the necessary points for intersection. If two intervals have the same endpoint, we prioritize intervals with a larger starting point to ensure coverage of both intervals.</p>
 </li>
 <li>
-<p><strong>Greedy Selection</strong>:</p>
-<ul>
-<li>Use two variables, <code>fst</code> and <code>scd</code>, to track the last two selected integers. Initialize them to -1, indicating no integers have been selected yet.</li>
-<li>Iterate through each interval, checking if the current interval already contains both selected integers.</li>
-<li>If both integers are present, continue to the next interval.</li>
-<li>If at least one integer is missing:
-<ul>
-<li>Increment the answer count accordingly (either add one more integer if one is missing or two integers if both are missing).</li>
-<li>Update the selected integers based on the current interval&rsquo;s end.</li>
-</ul>
+<p><strong>Greedy Selection of Points</strong>: For each interval, we want to select the smallest possible set of points that intersects with it at least twice. To achieve this, we maintain two variables <code>fst</code> and <code>scd</code>, which represent the last two points added to the intersection set. By ensuring these two points always intersect with the current interval, we can guarantee that every interval will have at least two points of intersection.</p>
 </li>
-</ul>
+<li>
+<p><strong>Efficient Coverage</strong>: For each interval, we check if the two points <code>fst</code> and <code>scd</code> already cover the interval. If not, we add the necessary points to the set. By doing this greedily, we minimize the size of the set while ensuring it covers all intervals.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method to calculate the size of the intersection.</li>
+<h4 id="step-1-sorting-the-intervals">
+  Step 1: Sorting the Intervals
+  <a class="heading-link" href="#step-1-sorting-the-intervals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end(), [<span style="color:#f92672">&amp;</span>](vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> b[<span style="color:#ae81ff">1</span>]) <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> b[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><ul>
+<li>The intervals are sorted first by their endpoint (<code>a[1]</code> and <code>b[1]</code>). This ensures that we consider the intervals that finish earlier, which helps in covering the intervals optimally.</li>
+<li>If two intervals have the same endpoint, we sort them by their starting point in descending order (<code>a[0] &gt; b[0]</code>), ensuring that the intervals with larger starting points are considered first. This approach helps to select the minimum number of points for intersection.</li>
 </ul>
+<h4 id="step-2-initialize-variables-for-tracking-coverage">
+  Step 2: Initialize Variables for Tracking Coverage
+  <a class="heading-link" href="#step-2-initialize-variables-for-tracking-coverage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, fst <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, scd <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>ans</code>: This variable keeps track of the total number of points in the intersection set.</li>
+<li><code>fst</code>: This represents the first point in the current intersection set.</li>
+<li><code>scd</code>: This represents the second point in the current intersection set.</li>
+</ul>
+<p>Both <code>fst</code> and <code>scd</code> are initialized to <code>-1</code> to represent that no points have been selected yet.</p>
+<h4 id="step-3-iterate-over-each-interval">
+  Step 3: Iterate Over Each Interval
+  <a class="heading-link" href="#step-3-iterate-over-each-interval">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>], b <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> is_fst_in <span style="color:#f92672">=</span> a <span style="color:#f92672">&lt;=</span> fst;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> is_scd_in <span style="color:#f92672">=</span> a <span style="color:#f92672">&lt;=</span> scd;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(is_fst_in <span style="color:#f92672">&amp;&amp;</span> is_scd_in) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> is_fst_in <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    scd <span style="color:#f92672">=</span> is_fst_in <span style="color:#f92672">?</span> fst : b <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    fst <span style="color:#f92672">=</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>For each interval <code>it</code>, we extract the start (<code>a</code>) and end (<code>b</code>) of the interval.</p>
 </li>
 <li>
-<p><strong>Method</strong>:</p>
+<p><strong>Check if the current interval is already covered</strong>:</p>
 <ul>
-<li><code>int intersectionSizeTwo(vector&lt;vector&lt;int&gt;&gt;&amp; nums)</code>: This method performs the main logic of sorting the intervals and calculating the required size.</li>
+<li><code>is_fst_in</code>: Checks if the first point of the intersection set (<code>fst</code>) is inside the current interval by comparing <code>a &lt;= fst</code>.</li>
+<li><code>is_scd_in</code>: Checks if the second point of the intersection set (<code>scd</code>) is inside the current interval by comparing <code>a &lt;= scd</code>.</li>
+</ul>
+<p>If both points already cover the interval (<code>is_fst_in &amp;&amp; is_scd_in</code>), we continue to the next interval without making any changes.</p>
+</li>
+<li>
+<p><strong>If the interval is not covered</strong>:</p>
+<ul>
+<li>We update the total count <code>ans</code>:
+<ul>
+<li>If the first point (<code>fst</code>) is already inside the interval (<code>is_fst_in</code>), we add only 1 point, otherwise, we add 2 points to the intersection set.</li>
 </ul>
 </li>
+<li>We then update the values of <code>fst</code> and <code>scd</code> to ensure that they cover the interval:
+<ul>
+<li><code>scd = is_fst_in ? fst : b - 1</code>: If the first point is already inside the interval, we set <code>scd</code> to <code>fst</code>. Otherwise, we set <code>scd</code> to <code>b - 1</code>, which is the largest possible point inside the interval.</li>
+<li><code>fst = b</code>: We set <code>fst</code> to <code>b</code> as the first point in the intersection set for the current interval.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all the intervals, the total number of points in the intersection set is stored in <code>ans</code>, which is returned as the result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -313,14 +379,34 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where n is the number of intervals, due to sorting.</li>
-<li><strong>Space Complexity</strong>: O(1), as the algorithm only uses a fixed amount of extra space for variables.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the intervals takes <strong>O(n log n)</strong>, where <code>n</code> is the number of intervals.</li>
+<li>The loop that iterates over the intervals takes <strong>O(n)</strong>, where <code>n</code> is the number of intervals.</li>
+<li>Thus, the total time complexity of the algorithm is <strong>O(n log n)</strong>, dominated by the sorting step.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the storage of the intervals in the input array <code>nums</code> and the need to store the sorted intervals in the sorting step.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a greedy approach to find the smallest set of integers that intersects with all intervals at least twice. By sorting the intervals based on their endpoints and ensuring that the last two points in the intersection set always cover each interval, we can achieve the desired result efficiently. The time complexity of the algorithm is <strong>O(n log n)</strong>, which is optimal for this type of problem involving intervals.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1470s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1468s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

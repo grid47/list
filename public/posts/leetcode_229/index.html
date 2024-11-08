@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode773s1hbhb">
+<h2 id="hahahugoshortcode771s1hbhb">
   
 
   
@@ -271,7 +271,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return all elements that appear more than ⌊n/3⌋ times. The algorithm should work in linear time with constant space complexity.</p>
+<p>The problem asks to find all elements in a given list <code>nums</code> that appear more than <code>n/3</code> times, where <code>n</code> is the size of the list. We need to return these majority elements in a vector. If there are multiple such elements, all of them should be included in the result.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -279,36 +279,138 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can leverage the <strong>Boyer-Moore Voting Algorithm</strong>. This algorithm is typically used to find the majority element in an array, and it can be extended to find elements that appear more than <code>n/3</code> times. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Two Potential Majority Candidates:</strong></p>
 <ul>
-<li><strong>Candidate Selection</strong>: Use a modified version of the Boyer-Moore Voting Algorithm to find up to two potential majority candidates.
-<ul>
-<li>Maintain two counters (<code>cnt1</code>, <code>cnt2</code>) for two candidates (<code>cnd1</code>, <code>cnd2</code>).</li>
-<li>Iterate through the array and update the counters based on the candidates&rsquo; current values.</li>
+<li>Given that there can be at most two elements that appear more than <code>n/3</code> times in the array, we maintain two candidate values <code>cnd1</code> and <code>cnd2</code> and their respective counts <code>cnt1</code> and <code>cnt2</code>.</li>
 </ul>
 </li>
-<li><strong>Count Validation</strong>: After identifying candidates, iterate through the array again to count their occurrences and verify if they appear more than ⌊n/3⌋ times.</li>
+<li>
+<p><strong>First Pass: Identify Candidates:</strong></p>
+<ul>
+<li>In the first pass through the array, we identify potential candidates for the majority elements by adjusting the counts. If a number matches one of the candidates, we increment its count. If the count for a candidate reaches zero, we replace that candidate with the current number.</li>
 </ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</li>
+<li>
+<p><strong>Second Pass: Verify Candidates:</strong></p>
+<ul>
+<li>After identifying two potential candidates, we make a second pass through the array to count the occurrences of each candidate. If a candidate appears more than <code>n/3</code> times, it is a valid majority element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Case Handling:</strong></p>
+<ul>
+<li>If the array is empty, we return an empty result immediately.</li>
+<li>If no elements appear more than <code>n/3</code> times, the result will contain no elements.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> result;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> result;
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>result</code> to store the majority elements.</li>
+<li>The variable <code>n</code> stores the size of the input list <code>nums</code>.</li>
+<li>If the list is empty (<code>n == 0</code>), we immediately return an empty result.</li>
+</ul>
+<h4 id="step-2-variables-for-counting">
+  Step 2: Variables for Counting
+  <a class="heading-link" href="#step-2-variables-for-counting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnd1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnd2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We declare two counters <code>cnt1</code> and <code>cnt2</code> for the counts of two potential majority candidates, <code>cnd1</code> and <code>cnd2</code>.</li>
+</ul>
+<h4 id="step-3-first-pass---identify-the-potential-candidates">
+  Step 3: First Pass - Identify the Potential Candidates
+  <a class="heading-link" href="#step-3-first-pass---identify-the-potential-candidates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (val <span style="color:#f92672">==</span> cnd1) cnt1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (val <span style="color:#f92672">==</span> cnd2) cnt2<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (cnt1 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { cnt1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; cnd1 <span style="color:#f92672">=</span> val; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (cnt2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { cnt2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; cnd2 <span style="color:#f92672">=</span> val; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> { cnt1<span style="color:#f92672">--</span>; cnt2<span style="color:#f92672">--</span>; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over the array and for each number <code>val</code>:
 <ul>
-<li><strong>Function <code>majorityElement(vector&lt;int&gt;&amp; nums)</code></strong>:
-<ul>
-<li>Initialize the result vector <code>result</code>, and the size variable <code>n</code>.</li>
-<li>Check if <code>n</code> is zero; if so, return an empty result.</li>
-<li>Use a first loop to identify potential candidates:
-<ul>
-<li>For each value in <code>nums</code>, update the counters based on the current candidates.</li>
+<li>If <code>val</code> matches the first candidate (<code>cnd1</code>), we increment <code>cnt1</code>.</li>
+<li>If <code>val</code> matches the second candidate (<code>cnd2</code>), we increment <code>cnt2</code>.</li>
+<li>If <code>cnt1</code> is zero, we replace <code>cnd1</code> with <code>val</code> and reset <code>cnt1</code> to 1.</li>
+<li>Similarly, if <code>cnt2</code> is zero, we replace <code>cnd2</code> with <code>val</code> and reset <code>cnt2</code> to 1.</li>
+<li>If <code>val</code> doesn&rsquo;t match either candidate, we decrement both <code>cnt1</code> and <code>cnt2</code>.</li>
 </ul>
 </li>
-<li>Use a second loop to count the occurrences of the candidates.</li>
-<li>Compare the counts to n/3; if any candidate count exceeds this threshold, add the candidate to the result.</li>
 </ul>
-</li>
+<p>This ensures that at the end of the loop, <code>cnd1</code> and <code>cnd2</code> are the two candidates that might have counts greater than <code>n/3</code>.</p>
+<h4 id="step-4-second-pass---verify-the-candidates">
+  Step 4: Second Pass - Verify the Candidates
+  <a class="heading-link" href="#step-4-second-pass---verify-the-candidates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>cnt2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (val <span style="color:#f92672">==</span> cnd1) cnt1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (val <span style="color:#f92672">==</span> cnd2) cnt2<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>In the second pass, we reset <code>cnt1</code> and <code>cnt2</code> to zero, and we count the actual occurrences of <code>cnd1</code> and <code>cnd2</code> in the array.</li>
+</ul>
+<h4 id="step-5-check-for-majority-elements">
+  Step 5: Check for Majority Elements
+  <a class="heading-link" href="#step-5-check-for-majority-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> n <span style="color:#f92672">/</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (cnt1 <span style="color:#f92672">&gt;</span> n) result.push_back(cnd1);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (cnt2 <span style="color:#f92672">&gt;</span> n) result.push_back(cnd2);
+</span></span></code></pre></div><ul>
+<li>We check if the counts of <code>cnd1</code> and <code>cnd2</code> are greater than <code>n/3</code>. If they are, we add them to the result vector.</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> result;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>result</code> vector containing all elements that appear more than <code>n/3</code> times.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -317,14 +419,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, since the array is traversed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the space used does not scale with input size, only using a fixed amount of space for counters and candidate storage.</li>
-</ul> 
+<li><strong>First Pass:</strong> The first loop iterates over all <code>n</code> elements, processing each element in constant time. Thus, the time complexity for the first pass is <code>O(n)</code>.</li>
+<li><strong>Second Pass:</strong> The second loop also iterates over all <code>n</code> elements, counting occurrences of the candidates, so its time complexity is also <code>O(n)</code>.</li>
+</ul>
+<p>Therefore, the overall time complexity is <code>O(n)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the space used for storing the candidates (<code>cnd1</code>, <code>cnd2</code>) and their counts (<code>cnt1</code>, <code>cnt2</code>), which takes constant space <code>O(1)</code>.</li>
+<li>The result vector will store at most two elements (since there can be at most two majority elements), so its space complexity is <code>O(1)</code>.</li>
+</ul>
+<p>Thus, the overall space complexity is <code>O(1)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is highly efficient and optimally solves the problem in linear time (<code>O(n)</code>) and constant space (<code>O(1)</code>). The Boyer-Moore Voting Algorithm is well-suited for this problem, as it effectively identifies potential majority elements and then verifies their counts in a second pass. This approach ensures that the solution is scalable and performs well even for large arrays.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm identifies up to two potential majority candidates.</li>
+<li>The first pass selects the candidates, and the second pass counts their occurrences.</li>
+<li>The solution runs in linear time (<code>O(n)</code>) and uses constant space (<code>O(1)</code>), making it optimal for large inputs.</li>
+<li>The edge case of an empty array is handled at the start, ensuring robustness.</li>
+</ul>
+<p>This method efficiently finds all elements that appear more than <code>n/3</code> times in an input list, making it ideal for problems of this type.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode773s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode771s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

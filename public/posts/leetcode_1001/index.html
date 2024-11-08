@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -250,57 +250,178 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode29s1hbhb">
+<h2 id="hahahugoshortcode18s1hbhb">
   
 
   
   <div class="markdown-body">
-    <p>class Solution {
-public:
-vector<!-- raw HTML omitted --> gridIllumination(int n, vector&lt;vector<!-- raw HTML omitted -->&gt;&amp; lamps, vector&lt;vector<!-- raw HTML omitted -->&gt;&amp; queries) {</p>
-<pre><code>    map&lt;int, int&gt; x, y, a_d, d_d;
-    map&lt;int, unordered_set&lt;int&gt;&gt; set;
-    for(int i = 0; i &lt; lamps.size(); i++) {
-        vector&lt;int&gt; axs = lamps[i];
-        if(set[axs[0]].insert(axs[1]).second) {
-            x[axs[0]]++;
-            y[axs[1]]++;
-            a_d[axs[0] + axs[1]]++;
-            d_d[axs[0] - axs[1]]++;
-        }
-    }
-
-    int sz = queries.size();
-    vector&lt;int&gt; res;
-
-    for(int k = 0; k &lt; sz; k++) {
-        vector&lt;int&gt; q = queries[k];
-        int i = q[0], j = q[1];
-        
-        if(x[i] || y[j] || a_d[i + j] || d_d[i - j]) {
-            res.push_back(1);
-            for(int li = i - 1; li &lt;= i + 1; li++)
-            for(int lj = j - 1; lj &lt;= j + 1; lj++){
-                if(set[li].erase(lj)) {
-                    x[li]--;
-                    y[lj]--;
-                    a_d[li + lj]--;
-                    d_d[li - lj]--;
-                }
-            }
-        } else res.push_back(0);
-    }
-
-    return res;
-    
-}
-</code></pre>
-<p>};</p>
+    <h1 id="solution-for-grid-illumination-problem-explanation-and-step-by-step-guide">
+  Solution for Grid Illumination Problem: Explanation and Step-by-Step Guide
+  <a class="heading-link" href="#solution-for-grid-illumination-problem-explanation-and-step-by-step-guide">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The <strong>Grid Illumination Problem</strong> involves a grid with n rows and n columns, where we have several lamps and a list of queries. Each lamp illuminates its entire row, column, and both diagonals. Given a list of lamps and queries, we need to determine if each query cell is illuminated, and if so, turn off any surrounding lamps within a one-cell distance.</p>
+<p>Our goal is to return a list of results where each entry is 1 if the cell in the query is illuminated or 0 if it’s not.</p>
+<h2 id="approach-and-solution">
+  Approach and Solution
+  <a class="heading-link" href="#approach-and-solution">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The approach relies on efficiently storing illumination information for each row, column, and diagonal using hash maps. This reduces the time complexity by allowing quick access to illumination states. We also use a set to track each lamp’s exact position, making it easy to toggle illumination on or off for specific cells and their neighbors.</p>
+<p>Here’s a detailed breakdown of each step in the solution:</p>
+<h3 id="step-1-initialize-hash-maps-and-sets">
+  Step 1: Initialize Hash Maps and Sets
+  <a class="heading-link" href="#step-1-initialize-hash-maps-and-sets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Define four hash maps</strong>:</p>
+<ul>
+<li>
+<p>x for rows</p>
+</li>
+<li>
+<p>y for columns</p>
+</li>
+<li>
+<p>a_d for ascending diagonals</p>
+</li>
+<li>
+<p>d_d for descending diagonals</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Define a set</strong> to store the unique coordinates of each lamp to avoid duplications.</p>
+</li>
+</ol>
+<h3 id="step-2-populate-illumination-information">
+  Step 2: Populate Illumination Information
+  <a class="heading-link" href="#step-2-populate-illumination-information">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Loop through each lamp in the lamps list.</p>
+</li>
+<li>
+<p>For each lamp, if it’s not already in the set, add it.</p>
+</li>
+<li>
+<p>Update the hash maps:</p>
+<ul>
+<li>
+<p>Increment the count in x for the lamp&rsquo;s row.</p>
+</li>
+<li>
+<p>Increment the count in y for the lamp&rsquo;s column.</p>
+</li>
+<li>
+<p>Increment the count in a_d and d_d for its diagonals.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-3-process-each-query">
+  Step 3: Process Each Query
+  <a class="heading-link" href="#step-3-process-each-query">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p>Initialize an empty result list res.</p>
+</li>
+<li>
+<p>For each query in queries:</p>
+<ul>
+<li>Check if the query cell is illuminated by verifying if any value in x, y, a_d, or d_d for the query coordinates is greater than zero.</li>
+</ul>
+</li>
+<li>
+<p>If the cell is illuminated:</p>
+<ul>
+<li>
+<p>Add 1 to the res list.</p>
+</li>
+<li>
+<p>Turn off surrounding lamps within a one-cell radius of the query cell. For each surrounding cell:</p>
+<ul>
+<li>If it’s in the set, remove it and decrement the illumination counts for its row, column, and diagonals.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If the cell is not illuminated, add 0 to the result list.</p>
+</li>
+</ol>
+<h3 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>After processing all queries, return the res list with illumination statuses for each query.</p>
+<h2 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>O(L + Q)</strong>, where L is the number of lamps and Q is the number of queries.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>O(L)</strong> for storing the lamp positions in the set and illumination counts in the hash maps.</li>
+</ul>
+<h2 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>This solution provides an efficient approach to solve the <strong>Grid Illumination Problem</strong> using hash maps for quick access and a set for tracking lamp positions. It is optimized to handle large grids and a high number of queries with minimal complexity.</p>
+<p>This solution’s use of hash maps is crucial for fast lookups, making it an excellent fit for real-world scenarios involving grid illumination and query processing.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode29s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode18s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

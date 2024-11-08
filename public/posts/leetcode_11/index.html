@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode71s1hbhb">
+<h2 id="hahahugoshortcode72s1hbhb">
   
 
   
@@ -242,7 +242,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>height</code> representing the height of vertical lines on a Cartesian plane, find two lines that together with the x-axis form a container that holds the most water. Return the maximum amount of water that can be contained.</p>
+<p>The problem asks to find the <strong>maximum area</strong> of water that can be contained between two lines on a given array <code>height</code>, where each element of the array represents the height of a line drawn at that position. The width between two lines is simply the distance between their positions. We want to maximize the area of the container formed by two lines and the x-axis.</p>
+<p>Given an array <code>height[]</code> where <code>height[i]</code> is the height of the line at index <code>i</code>, we need to determine the largest possible area that can be formed by any two lines in this array.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Input: <code>height = [1,8,6,2,5,4,8,3,7]</code></li>
+<li>Output: <code>49</code> (The maximum area is formed between lines at positions 1 and 8, with heights 8 and 7).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,49 +262,93 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use a two-pointer technique to maximize the area by evaluating the potential area formed by the lines at the two pointers and moving the pointer that points to the shorter line inward.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve the problem efficiently, we can use the <strong>two-pointer technique</strong>. The main idea is to consider the container formed by two lines, one at the beginning (<code>i</code>) and one at the end (<code>j</code>) of the array. We calculate the area formed between the two lines and then move the pointers in such a way that we attempt to maximize the area further.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Area Calculation</strong>: The area between two lines is calculated as:
+[
+\text{Area} = \text{min}(height[i], height[j]) \times (j - i)
+]
+where <code>height[i]</code> and <code>height[j]</code> are the heights of the lines, and <code>(j - i)</code> is the width between them.</p>
+</li>
+<li>
+<p><strong>Strategy to maximize area</strong>:</p>
+<ul>
+<li>Start with two pointers, <code>i</code> at the beginning (0) and <code>j</code> at the end (<code>height.size() - 1</code>).</li>
+<li>Calculate the area formed by the lines at <code>i</code> and <code>j</code>.</li>
+<li>Move the pointer corresponding to the shorter line inward in hopes of finding a taller line, since the area is constrained by the shorter line.</li>
+</ul>
+</li>
+<li>
+<p><strong>Why this works</strong>: Moving the pointer with the shorter line inward gives us a chance to find a taller line, potentially increasing the minimum height (and hence the area), while we know that moving the taller line inward wouldn&rsquo;t increase the area.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Set <code>res</code> to 0 to keep track of the maximum area found.</li>
-<li>Initialize two pointers: <code>i</code> at the start (0) and <code>j</code> at the end of the <code>height</code> array.</li>
+<h4 id="1-initial-setup">
+  1. Initial Setup
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> height.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>res</code> variable to store the maximum area found. Initially, we set it to 0.</li>
+<li>We set <code>i = 0</code> and <code>j = height.size() - 1</code> as the two pointers. <code>i</code> starts from the beginning of the array, and <code>j</code> starts from the end.</li>
 </ul>
-</li>
-<li>
-<p><strong>While Loop</strong>:</p>
-<ul>
-<li>Continue iterating as long as <code>i</code> is less than <code>j</code>:
-<ul>
-<li>Calculate the area formed between the lines at the two pointers using the formula:
-[
-\text{Area} = \min(\text{height}[i], \text{height}[j]) \times (j - i)
-]</li>
-<li>Update <code>res</code> with the maximum area found so far.</li>
-<li>Move the pointer corresponding to the shorter line inward:
-<ul>
-<li>If <code>height[i]</code> is less than <code>height[j]</code>, increment <code>i</code> to consider the next line on the left.</li>
-<li>Otherwise, decrement <code>j</code> to consider the next line on the right.</li>
+<h4 id="2-loop-through-the-array">
+  2. Loop through the Array
+  <a class="heading-link" href="#2-loop-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> j) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, min(height[i], height[j]) <span style="color:#f92672">*</span> (j <span style="color:#f92672">-</span> i));
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop runs as long as <code>i &lt; j</code>. This ensures that the two pointers are not the same line.</li>
+<li>Inside the loop, we calculate the area formed by the lines at positions <code>i</code> and <code>j</code>. The area is determined by the smaller of the two heights (<code>min(height[i], height[j])</code>) and the width between the lines (<code>j - i</code>).</li>
+<li>We update the <code>res</code> variable to store the maximum area found so far using <code>max(res, ...)</code>.</li>
 </ul>
-</li>
+<h4 id="3-move-the-pointers">
+  3. Move the Pointers
+  <a class="heading-link" href="#3-move-the-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(height[i] <span style="color:#f92672">&lt;</span> height[j])
+</span></span><span style="display:flex;"><span>    i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> j<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>After calculating the area, we check which line is shorter. If <code>height[i] &lt; height[j]</code>, we move the pointer <code>i</code> to the right (<code>i++</code>), as moving the shorter line inward gives us a chance to find a taller line.</li>
+<li>If <code>height[i] &gt;= height[j]</code>, we move the pointer <code>j</code> to the left (<code>j--</code>), because the line at <code>j</code> is shorter or equal, and moving it inward might find a taller line.</li>
 </ul>
-</li>
+<h4 id="4-return-the-maximum-area">
+  4. Return the Maximum Area
+  <a class="heading-link" href="#4-return-the-maximum-area">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, we return <code>res</code>, which now holds the maximum area found.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>After exiting the loop, return the maximum area stored in <code>res</code>.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -300,15 +356,61 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the number of elements in the <code>height</code> array, since each element is processed once.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used beyond a few variables.</li>
+<li><strong>O(n)</strong>: The algorithm has a time complexity of O(n), where <code>n</code> is the length of the <code>height</code> array. This is because the two-pointer technique only requires a single traversal through the array. Each pointer (<code>i</code> and <code>j</code>) is moved at most <code>n</code> times, making the solution linear in time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant, O(1), as we are only using a fixed amount of extra space for the <code>res</code> variable and the two pointers <code>i</code> and <code>j</code>. No additional data structures are used that grow with the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the maximum area formed by two lines from an array of heights using the two-pointer technique.</p>
+<h4 id="advantages-of-this-approach">
+  Advantages of this approach:
+  <a class="heading-link" href="#advantages-of-this-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Optimal Efficiency</strong>: With a time complexity of O(n), it efficiently handles even large input sizes.</li>
+<li><strong>Simple Logic</strong>: The logic of comparing the heights at the two pointers and moving the shorter one inward is intuitive and easy to implement.</li>
+</ul>
+<h4 id="limitations">
+  Limitations:
+  <a class="heading-link" href="#limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The solution requires that the height array contains non-negative values, as negative heights do not make sense in the context of the problem.</li>
+</ul>
+<p>By using this two-pointer technique, we avoid the naive O(n^2) approach of checking all pairs of lines, making the solution scalable and optimal for large inputs. This approach is both time and space efficient, ensuring that it can handle even large datasets with ease.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode71s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode72s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

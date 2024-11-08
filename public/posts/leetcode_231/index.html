@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -222,7 +222,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>(n <span style="color:#f92672">&amp;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode795s1hbhb">
+<h2 id="hahahugoshortcode783s1hbhb">
   
 
   
@@ -234,7 +234,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if a given integer ( n ) is a power of two.</p>
+<p>The task is to determine whether a given integer <code>n</code> is a power of two. A power of two is a number that can be expressed as ( 2^k ) where ( k ) is a non-negative integer. For example, the numbers 1, 2, 4, 8, 16, 32, and so on are powers of two. The challenge is to efficiently check if a given integer <code>n</code> satisfies this condition.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -242,33 +242,48 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To check whether a given number is a power of two, we can use a simple and efficient approach based on the properties of binary numbers. The binary representation of powers of two has a very distinctive feature: for a number that is a power of two, there is exactly one bit set to 1 in its binary representation. For instance:</p>
 <ul>
-<li><strong>Bit Manipulation</strong>: A number ( n ) is a power of two if it has exactly one bit set in its binary representation. This can be efficiently checked using the expression <code>!(n &amp; (n - 1))</code>.
+<li>( 1 ) in binary is <code>0001</code></li>
+<li>( 2 ) in binary is <code>0010</code></li>
+<li>( 4 ) in binary is <code>0100</code></li>
+<li>( 8 ) in binary is <code>1000</code></li>
+</ul>
+<p>If we subtract 1 from any of these numbers, all the bits to the right of the leftmost 1 bit (including the leftmost 1 bit) become 1. For example:</p>
 <ul>
-<li><strong>Explanation</strong>:
-<ul>
-<li>If ( n ) is a power of two, subtracting 1 from it will flip all bits after the only set bit, including the set bit itself.</li>
-<li>The bitwise AND operation between ( n ) and ( n - 1 ) will result in zero if ( n ) is a power of two.</li>
+<li>( 4 - 1 = 3 ), which is <code>0011</code> in binary.</li>
+<li>Performing a bitwise AND operation between <code>4</code> (binary <code>0100</code>) and <code>3</code> (binary <code>0011</code>) results in <code>0000</code>.</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Thus, if a number <code>n</code> is a power of two, the result of the bitwise AND operation <code>n &amp; (n - 1)</code> should be 0. This property allows us to efficiently check if a number is a power of two.</p>
+<p>The steps of the solution are:</p>
+<ol>
+<li>Check if the number <code>n</code> is greater than zero.</li>
+<li>Apply the bitwise AND operation between <code>n</code> and <code>n - 1</code>.</li>
+<li>If the result is 0, the number is a power of two. Otherwise, it is not.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Function <code>isPowerOfTwo(int n)</code></strong>:
-<ul>
-<li>Check if ( n ) is less than or equal to zero. If so, return <code>false</code> since powers of two are positive.</li>
-<li>Return the result of <code>!(n &amp; (n - 1))</code>, which will be <code>true</code> if ( n ) is a power of two and <code>false</code> otherwise.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isPowerOfTwo(<span style="color:#66d9ef">int</span> n) {
+</span></span></code></pre></div><ul>
+<li>The function <code>isPowerOfTwo</code> is defined to accept an integer <code>n</code> and returns a boolean value indicating whether <code>n</code> is a power of two.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>First, we check if the number <code>n</code> is less than or equal to zero. If <code>n</code> is less than or equal to zero, it cannot be a power of two because powers of two are always positive integers. So, we immediately return <code>false</code> for any non-positive number.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>(n <span style="color:#f92672">&amp;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span></code></pre></div><ul>
+<li>The key step in the solution is the bitwise operation <code>n &amp; (n - 1)</code>. This operation clears the rightmost set bit of <code>n</code>. If <code>n</code> is a power of two, this operation will result in zero.</li>
+<li>The <code>!</code> operator is used to negate the result. If the result is <code>0</code>, meaning <code>n</code> is a power of two, the function returns <code>true</code>. Otherwise, it returns <code>false</code>.</li>
+</ul>
+<p>Thus, the function checks whether the bitwise AND of <code>n</code> and <code>n - 1</code> is zero, indicating that <code>n</code> is a power of two.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -276,14 +291,79 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(1) ), as it performs a constant-time operation.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), as it uses a fixed amount of space for the computation.</li>
-</ul> 
+<li><strong>Time Complexity</strong>: <code>O(1)</code>
+<ul>
+<li>The bitwise operations used in the function (<code>n &amp; (n - 1)</code>) are constant-time operations. Checking whether a number is a power of two requires only a single comparison and a single bitwise operation, making this solution very efficient.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(1)</code>
+<ul>
+<li>The algorithm uses only a constant amount of space for the integer variable <code>n</code>. There are no additional data structures or recursive calls, so the space complexity is constant.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if a given integer is a power of two using a simple bitwise operation. The key observation is that powers of two have a unique property in their binary representation: they have exactly one bit set to 1. The bitwise operation <code>n &amp; (n - 1)</code> takes advantage of this property to determine if <code>n</code> is a power of two in constant time.</p>
+<h4 id="key-highlights">
+  Key Highlights:
+  <a class="heading-link" href="#key-highlights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Efficient Solution</strong>: The algorithm runs in constant time <code>O(1)</code> due to the direct use of bitwise operations, making it highly efficient even for large integers.</li>
+<li><strong>Simple Logic</strong>: The solution relies on a simple bitwise trick that is both easy to understand and execute.</li>
+<li><strong>Constant Space</strong>: The algorithm uses a fixed amount of space, independent of the size of the input.</li>
+</ul>
+<h4 id="when-to-use">
+  When to Use:
+  <a class="heading-link" href="#when-to-use">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This solution is ideal for problems that require checking powers of two, such as in scenarios involving binary manipulation, network protocols, or memory management tasks. The constant-time and constant-space complexity make this method suitable for applications that need fast checks on large datasets or real-time systems.</p>
+<h4 id="advantages-of-bitwise-approach">
+  Advantages of Bitwise Approach:
+  <a class="heading-link" href="#advantages-of-bitwise-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Speed</strong>: Bitwise operations are typically faster than arithmetic operations because they work directly on the bits of numbers.</li>
+<li><strong>Compactness</strong>: This solution is very compact and easy to implement, with minimal overhead.</li>
+</ul>
+<p>By leveraging the properties of binary numbers, this solution provides a quick and reliable way to determine if a number is a power of two, making it ideal for use in many competitive programming and real-world scenarios.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode795s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode783s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1348s1hbhb">
+<h2 id="hahahugoshortcode1345s1hbhb">
   
 
   
@@ -251,7 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the number of unique pairs <code>(i, j)</code> such that <code>i</code> and <code>j</code> are both numbers in the array and their absolute difference is equal to <code>k</code>. The pair <code>(i, j)</code> is considered the same as <code>(j, i)</code> and should only be counted once.</p>
+<p>The task is to count unique pairs in an array such that the absolute difference between the two numbers in each pair equals a given integer ( k ). This means we need to find how many unique pairs ((a, b)) exist in the array where ( |a - b| = k ). The array can have duplicate elements, and ( k ) can be zero.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,32 +259,74 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we utilize a frequency map (or hash map) that tracks the occurrences of each number in the array. The approach leverages this map to check for each number if there exists another number that would form a valid pair according to the given condition ( |a - b| = k ).</p>
 <ol>
 <li>
-<p><strong>Use a Hash Map</strong>: Utilize a hash map to count the occurrences of each number in the array. This helps in quickly checking if the required pairs exist.</p>
+<p><strong>Building the Frequency Map</strong>: First, we create a map to store each unique number in the array as a key, along with the frequency of that number as the value.</p>
 </li>
 <li>
-<p><strong>Iterate Through the Map</strong>: For each unique number in the map, check for two scenarios:</p>
+<p><strong>Finding Pairs Based on k</strong>:</p>
 <ul>
-<li>When <code>k &gt; 0</code>: Check if <code>i - k</code> exists in the map. If it does, it forms a valid pair <code>(i, i-k)</code>.</li>
-<li>When <code>k == 0</code>: Check if the count of the number <code>i</code> is greater than 1. This indicates that there are duplicates of <code>i</code>, allowing for the pair <code>(i, i)</code>.</li>
+<li>If ( k &gt; 0 ): For each unique number ( i ) in the map, we check if ( i - k ) also exists in the map. This condition ensures that the pair ((i, i - k)) has the required absolute difference of ( k ).</li>
+<li>If ( k == 0 ): We are looking for pairs where both elements are the same, so we simply check if any number appears more than once in the array. If a number&rsquo;s frequency is greater than 1, it forms a valid pair with itself.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Unique Pairs</strong>: Maintain a counter to track the number of unique pairs found.</p>
+<p><strong>Counting Pairs</strong>: For each valid condition met, we increment our result counter.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-create-a-frequency-map">
+  Step 1: Create a Frequency Map
+  <a class="heading-link" href="#step-1-create-a-frequency-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i : nums)
+</span></span><span style="display:flex;"><span>    mp[i]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We iterate over the <code>nums</code> array, populating a map (<code>mp</code>) where each key is a number from the array, and its corresponding value is the count of occurrences.</li>
+<li>This frequency map allows us to check the existence and frequency of any number in constant time.</li>
+</ul>
+<h4 id="step-2-count-valid-pairs">
+  Step 2: Count Valid Pairs
+  <a class="heading-link" href="#step-2-count-valid-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>[i, j] <span style="color:#f92672">:</span> mp)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> mp.count(i <span style="color:#f92672">-</span> k)) <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>      (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> (j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>)) )
+</span></span><span style="display:flex;"><span>        res<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to store the count of valid pairs.</li>
+<li>For each entry <code>[i, j]</code> in the map (<code>i</code> represents the number, and <code>j</code> represents its frequency):
 <ul>
-<li>Populate the map with counts of each number in <code>nums</code>.</li>
-<li>Loop through the entries of the map and apply the above conditions to count valid pairs.</li>
-<li>Finally, return the count of unique pairs.</li>
+<li>If ( k &gt; 0 ): We check if <code>i - k</code> exists in the map. If it does, it means ((i, i - k)) is a valid pair with the difference ( k ), and we increment <code>res</code>.</li>
+<li>If ( k == 0 ): We look for numbers that appear more than once, as they can form pairs with themselves. If <code>j &gt; 1</code>, we increment <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>res</code>, which holds the total count of unique pairs with the given difference ( k ).</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -293,15 +335,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>nums</code>. We traverse the array to create the map and then iterate through the map.</li>
-<li><strong>Space Complexity</strong>: O(n), in the worst case, where all elements in <code>nums</code> are unique, resulting in storing all of them in the map.</li>
+<li><strong>Building the Frequency Map</strong>: This requires <code>O(n)</code> time, where <code>n</code> is the size of the array.</li>
+<li><strong>Counting Valid Pairs</strong>: We iterate over the map, which has a maximum of <code>n</code> unique entries in the worst case. Thus, this step takes <code>O(n)</code> time as well.</li>
+<li><strong>Overall Time Complexity</strong>: <code>O(n)</code>, which is efficient for large arrays.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a map to store the frequency of each number, which requires <code>O(n)</code> space in the worst case.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts unique pairs in an array that have a specific difference. By leveraging a frequency map, we avoid the need for nested loops, reducing the time complexity from <code>O(n^2)</code> to <code>O(n)</code>. This approach is both optimal and intuitive, as it simplifies the process of finding pairs through straightforward conditions based on the difference ( k ). The code is also compact and highly readable, making it a practical solution for real-world applications where performance is critical.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1348s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1345s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

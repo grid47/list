@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary array <code>nums</code> and an integer <code>goal</code>, the task is to count the number of subarrays that sum up to <code>goal</code>.</p>
+<p>The problem asks to find the number of contiguous subarrays within a binary array (i.e., an array of 0s and 1s) that have a specific sum of <code>goal</code>. The binary array is represented by an array <code>nums</code> of integers, and the target sum is given by the integer <code>goal</code>. A subarray is a contiguous portion of the array, and we need to return the total number of subarrays whose sum equals <code>goal</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,48 +259,78 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key insight in solving this problem efficiently lies in using the concept of <strong>at most sum subarrays</strong>. Rather than directly counting subarrays that sum to exactly <code>goal</code>, we can count all subarrays whose sum is <strong>at most <code>goal</code></strong> and use this count to compute the answer for subarrays with an exact sum of <code>goal</code>.</p>
+<p>The approach is based on the <strong>two-pointer</strong> or <strong>sliding window</strong> technique, which helps in efficiently counting the number of subarrays whose sum is at most a given value. The idea is to break the problem down into two simpler subproblems:</p>
 <ol>
-<li>
-<p><strong>Use of Two-Pointer Technique</strong>:</p>
-<ul>
-<li>The problem is solved by counting subarrays with sums at most <code>goal</code> and at most <code>goal - 1</code>.</li>
-<li>The difference between these two counts gives the number of subarrays with an exact sum of <code>goal</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Subarrays with Sum At Most</strong>:</p>
-<ul>
-<li>Define a helper function <code>atmost</code> that counts the number of subarrays whose sum is at most <code>s</code>.</li>
-<li>Initialize pointers <code>j</code> (start of the window) and <code>i</code> (end of the window) and a variable <code>res</code> to store the count of valid subarrays.</li>
-</ul>
-</li>
-<li>
-<p><strong>Sliding Window Logic</strong>:</p>
-<ul>
-<li>Iterate through the array using the <code>i</code> pointer.</li>
-<li>Decrease <code>s</code> by <code>nums[i]</code> for the current element.</li>
-<li>If <code>s</code> becomes negative, increment the <code>j</code> pointer to shrink the window until <code>s</code> is non-negative.</li>
-<li>The count of valid subarrays ending at <code>i</code> is <code>(i - j + 1)</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>The main function calls <code>atmost(nums, goal)</code> and <code>atmost(nums, goal - 1)</code> and returns their difference.</li>
-</ul>
-</li>
+<li><strong>At Most <code>goal</code> Subarrays</strong>: Count the number of subarrays whose sum is at most <code>goal</code>.</li>
+<li><strong>At Most <code>goal - 1</code> Subarrays</strong>: Count the number of subarrays whose sum is at most <code>goal - 1</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The difference between these two counts will give us the number of subarrays whose sum is exactly <code>goal</code>, because:</p>
+<ul>
+<li>Subarrays with a sum at most <code>goal</code> are all subarrays where the sum can be any value from 0 to <code>goal</code>.</li>
+<li>Subarrays with a sum at most <code>goal - 1</code> are all subarrays where the sum can be any value from 0 to <code>goal - 1</code>.</li>
+</ul>
+<p>The number of subarrays whose sum is exactly <code>goal</code> is the difference between the two, i.e.,</p>
+<p>[
+\text{{numSubarraysWithSum}} = \text{{atmost}}(\text{{nums}}, \text{{goal}}) - \text{{atmost}}(\text{{nums}}, \text{{goal}} - 1)
+]</p>
+<p>By using this approach, we avoid the need to generate all possible subarrays, which would be inefficient for larger arrays.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong><code>numSubarraysWithSum</code> Function</strong>:
+This function calculates the number of subarrays whose sum is exactly equal to the <code>goal</code>. It calls the <code>atmost</code> function twice to get the counts for sums at most <code>goal</code> and at most <code>goal - 1</code> and computes their difference.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numSubarraysWithSum</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> goal) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> atmost(nums, goal) <span style="color:#f92672">-</span> atmost(nums, goal <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong><code>atmost</code> Function</strong>:
+This function calculates the number of subarrays whose sum is at most a given value <code>s</code>. The function uses a sliding window (or two-pointer approach) to keep track of the current subarray sum as it iterates through the array. When the sum exceeds <code>s</code>, it shrinks the window from the left by incrementing the pointer <code>j</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">atmost</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// If the sum `s` is negative, no subarray can have a negative sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// `res` will store the result, and `j` is the left pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Iterate through the array with the right pointer `i`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">-=</span> nums[i];  <span style="color:#75715e">// Subtract the current element from the sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Shrink the window from the left until the sum is &lt;= s
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) s <span style="color:#f92672">+=</span> nums[j<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Add the number of valid subarrays ending at index `i`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> (i <span style="color:#f92672">-</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The key points of this function:</p>
 <ul>
-<li>The main function <code>numSubarraysWithSum</code> calculates the result using the <code>atmost</code> helper function.</li>
-<li>The <code>atmost</code> function maintains a sliding window to efficiently count valid subarrays.</li>
+<li>It keeps track of the sum of the current subarray (from <code>j</code> to <code>i</code>).</li>
+<li>If the sum exceeds <code>s</code>, it moves the left pointer <code>j</code> rightward to reduce the sum back to <code>s</code> or below.</li>
+<li>The number of subarrays ending at index <code>i</code> that have a sum at most <code>s</code> is <code>i - j + 1</code>, as it counts all subarrays between indices <code>j</code> and <code>i</code> (inclusive).</li>
+<li>It returns the total number of valid subarrays.</li>
 </ul>
+</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The <code>atmost</code> function uses a sliding window approach. Each index of the array is processed at most twice (once when it is added to the window and once when it is removed), making the time complexity of the <code>atmost</code> function <strong>O(n)</strong>, where <code>n</code> is the size of the input array.</li>
+<li>The <code>numSubarraysWithSum</code> function calls <code>atmost</code> twice, so the overall time complexity is still <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because the algorithm only uses a constant amount of extra space for variables like <code>res</code>, <code>j</code>, and <code>s</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,9 +339,18 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the <code>nums</code> array, since both pointers traverse the array linearly.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used beyond a few variables.</li>
+<li><strong>Time Complexity</strong>: <strong>O(n)</strong> where <code>n</code> is the number of elements in the input array <code>nums</code>. This is because we only pass through the array a constant number of times (using the sliding window technique).</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong>, as we are using only a fixed amount of extra space for our computations, regardless of the input size.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to the problem uses the sliding window technique to efficiently count the number of subarrays with a sum at most a given value. By using the difference between the number of subarrays with sum at most <code>goal</code> and <code>goal - 1</code>, we efficiently count the number of subarrays whose sum is exactly equal to <code>goal</code>. This approach avoids the need for generating all subarrays, making it scalable for large inputs.</p>
+<p>This method offers an optimal solution with linear time complexity, making it a great choice for problems involving subarray sums in a binary array. The use of the sliding window technique ensures that the solution is both efficient and easy to understand.</p>
  
 </div>
   

@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -246,72 +246,200 @@
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a series of squares represented by their positions and sizes on a 1D plane. Each square is defined by its left edge, its side length, and you need to determine the heights of the squares after they have fallen.</p>
+<p>In this problem, you are given a series of falling squares, each represented by a position <code>[left, side_length]</code>, where:</p>
+<ul>
+<li><code>left</code> represents the x-coordinate of the left edge of the square.</li>
+<li><code>side_length</code> represents the side length of the square.</li>
+</ul>
+<p>Each square falls on a 2D plane, starting from a vertical position defined by its bottom edge. As the squares fall, they can potentially stack on top of previously fallen squares.</p>
+<p>Your task is to determine the maximum height of the topmost point of the squares after each square falls, in the order they appear in the input.</p>
+<p>The goal is to return an array of maximum heights after each square falls.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be solved efficiently by simulating the falling of the squares while maintaining information about the positions and heights of the previously fallen squares. To track the height of the squares, we will use the following approach:</p>
 <ol>
 <li>
-<p><strong>Input Parameters</strong>:</p>
+<p><strong>Tracking Previous Squares</strong>:
+We will maintain an array <code>past</code> which stores information about each previously fallen square in the format <code>[left, right, height]</code>, where:</p>
 <ul>
-<li><code>pos</code>: A vector of vectors where each sub-vector contains two integers representing the left edge and the size of the square.</li>
+<li><code>left</code>: x-coordinate of the left edge.</li>
+<li><code>right</code>: x-coordinate of the right edge.</li>
+<li><code>height</code>: the height of the square at that position.</li>
 </ul>
 </li>
 <li>
-<p><strong>Data Structures</strong>:</p>
-<ul>
-<li>Use a vector <code>past</code> to keep track of the past squares and their dimensions.</li>
-<li>Use a vector <code>ans</code> to store the maximum heights after each square falls.</li>
-</ul>
+<p><strong>Calculating New Heights</strong>:
+When a new square falls, we need to check if it overlaps with any previously fallen square. The height of the new square will be determined by the highest square it overlaps with. If the square does not overlap with any previous square, it falls at the base level (height 0).</p>
 </li>
 <li>
-<p><strong>Processing Each Square</strong>:</p>
-<ul>
-<li>For each square described in <code>pos</code>, calculate the current square&rsquo;s boundaries and its initial height.</li>
-<li>Use a helper function <code>search</code> to find the maximum height from the existing squares that overlap with the current square.</li>
-</ul>
+<p><strong>Max Height Calculation</strong>:
+After each square falls, we calculate the maximum height reached by the topmost point of the square, and store this in an output array <code>ans</code>.</p>
 </li>
 <li>
-<p><strong>Height Calculation</strong>:</p>
-<ul>
-<li>In the <code>search</code> function, check if the current square overlaps with any past squares. If it does, update the maximum height accordingly.</li>
-<li>Add the current square to the <code>past</code> vector after calculating its final height.</li>
-</ul>
+<p><strong>Efficient Search for Overlaps</strong>:
+The key part of this solution is efficiently determining the maximum height of squares that overlap with the current square. We use a helper function <code>search</code> to check if the current square overlaps with any previous squares and to find the maximum height of the overlapping squares.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The code consists of two main components:</p>
+<ol>
+<li>The <code>fallingSquares</code> function which processes the falling squares and calculates the maximum heights.</li>
+<li>The <code>search</code> function which checks for overlaps and determines the maximum height of the current square.</li>
+</ol>
+<h4 id="fallingsquares-function">
+  <code>fallingSquares</code> Function:
+  <a class="heading-link" href="#fallingsquares-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> fallingSquares(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> pos) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> past;  <span style="color:#75715e">// To store previously fallen squares&#39; data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;           <span style="color:#75715e">// To store the resulting maximum heights after each square falls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                 <span style="color:#75715e">// To track the maximum height seen so far
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Iterate through each square in the input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> i : pos) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cur <span style="color:#f92672">=</span> {i[<span style="color:#ae81ff">0</span>], i[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> i[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i[<span style="color:#ae81ff">1</span>]};  <span style="color:#75715e">// Define the current square with [left, right, height]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Find the maximum height of squares it overlaps with using the search function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> search(past, cur);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Update the maximum height seen so far
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        h <span style="color:#f92672">=</span> max(h, res);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Add the result (max height) after the current square falls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ans.push_back(h);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the list of maximum heights
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Initialization</strong>: We initialize the <code>past</code> array to store previously fallen squares, the <code>ans</code> array to store the maximum heights, and a variable <code>h</code> to keep track of the highest point reached so far.</p>
+</li>
+<li>
+<p><strong>Processing Each Square</strong>:
+For each square in the input:</p>
 <ul>
-<li>The main function <code>fallingSquares</code> iterates through each square position and calculates the new height after falling.</li>
-<li>The helper function <code>search</code> checks for overlaps with previously fallen squares and determines the maximum height that the current square will reach based on those overlaps.</li>
-<li>Each time a new square is processed, its height is compared against the maximum height seen so far and stored in the result vector.</li>
+<li>We create the <code>cur</code> vector to represent the square&rsquo;s position and height. The <code>left</code> position is the first element in <code>i</code>, and the <code>right</code> is calculated as <code>i[0] + i[1] - 1</code>. The height of the square is <code>i[1]</code> (its side length).</li>
+</ul>
+</li>
+<li>
+<p><strong>Search for Maximum Overlap Height</strong>:
+We call the <code>search</code> function to determine the height of the current square after considering any overlap with previous squares.</p>
+</li>
+<li>
+<p><strong>Update Maximum Height</strong>:
+We update the <code>h</code> variable with the result from the <code>search</code> function, which gives the highest point the current square reaches.</p>
+</li>
+<li>
+<p><strong>Storing the Result</strong>: After each square falls, the maximum height is stored in <code>ans</code>.</p>
+</li>
+</ul>
+<h4 id="search-function">
+  <code>search</code> Function:
+  <a class="heading-link" href="#search-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">search</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> past, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cur) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// To track the maximum height of overlapping squares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Iterate over all previously fallen squares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i : past) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If there is no overlap between the current square and past square, skip it
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (cur[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> i[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">||</span> cur[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> i[<span style="color:#ae81ff">1</span>]) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// If there is overlap, update the maximum height
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        mx <span style="color:#f92672">=</span> max(mx, i[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Set the height of the current square based on the maximum height of overlapping squares
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cur[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+=</span> mx;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add the current square&#39;s information to the past list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    past.push_back(cur);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cur[<span style="color:#ae81ff">2</span>];  <span style="color:#75715e">// Return the height of the current square after considering overlaps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Overlap Check</strong>:
+The function iterates through each square in the <code>past</code> array and checks if the current square overlaps with any of the past squares. The condition <code>if (cur[1] &lt; i[0] || cur[0] &gt; i[1])</code> ensures that we skip squares that do not overlap with the current one.</p>
+</li>
+<li>
+<p><strong>Updating Maximum Height</strong>:
+If the squares overlap, we update the <code>mx</code> variable to store the maximum height of the overlapping squares (<code>mx = max(mx, i[2])</code>).</p>
+</li>
+<li>
+<p><strong>Height Calculation</strong>:
+After determining the maximum height of the overlapping squares, we update the current square’s height by adding the maximum height (<code>cur[2] += mx</code>).</p>
+</li>
+<li>
+<p><strong>Storing the Square</strong>:
+The current square is then added to the <code>past</code> list to be considered for future squares.</p>
+</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2), where N is the number of squares, due to the nested iteration to check overlaps with past squares.</li>
-<li><strong>Space Complexity</strong>: O(N) for storing the past squares.</li>
+<li>The time complexity of this solution is <strong>O(N^2)</strong>, where <code>N</code> is the number of squares in the input <code>pos</code>. This is because for each square, we need to check its overlap with all previously fallen squares, which results in a nested loop.
+<ul>
+<li>The outer loop runs <code>N</code> times (for each square in the input).</li>
+<li>The inner loop (the search function) checks each square in the <code>past</code> array, which can be up to <code>N</code> in size.</li>
 </ul>
+</li>
+</ul>
+<p>Thus, the total time complexity is <strong>O(N^2)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(N)</strong> because the <code>past</code> array stores the information of all squares that have fallen. In the worst case, all squares may fall without any overlap, and hence the space used by <code>past</code> will be proportional to the number of squares.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively simulates the falling squares and tracks the maximum height of each square after each fall. It ensures that overlapping squares are correctly considered, and the maximum height is updated accordingly. While the time complexity of <strong>O(N^2)</strong> may not be optimal for very large inputs, it provides a simple and direct approach to solving the problem. This approach is suitable for cases where the number of falling squares is moderate, and it efficiently computes the result for each step in the sequence.</p>
  
 </div>
   

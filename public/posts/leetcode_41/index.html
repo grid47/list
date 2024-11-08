@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> nums.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1275s1hbhb">
+<h2 id="hahahugoshortcode1273s1hbhb">
   
 
   
@@ -242,7 +242,23 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to find the smallest missing positive integer from a given integer array. The array can contain duplicates, negative numbers, and zero.</p>
+<p>The problem asks to find the <strong>first missing positive integer</strong> from an unsorted array of integers. The array may contain duplicates, negative numbers, and non-positive numbers. We are to find the smallest positive integer that is not present in the array.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p>Input: <code>[3, 4, -1, 1]</code></p>
+</li>
+<li>
+<p>Output: <code>2</code></p>
+</li>
+<li>
+<p>Input: <code>[1, 2, 0]</code></p>
+</li>
+<li>
+<p>Output: <code>3</code></p>
+</li>
+</ul>
+<p>The solution should operate efficiently, ideally in <strong>O(n)</strong> time complexity, where <code>n</code> is the number of elements in the input array. The space complexity should be <strong>O(1)</strong>, meaning no extra space apart from the input array is allowed.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,44 +266,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can utilize the input array itself to track the presence of numbers. The key idea is to rearrange the array such that the value at each index <code>i</code> corresponds to the integer <code>i+1</code>. Once the array is in the correct format, we can easily find the first missing positive number by scanning through the array.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>In-place Rearrangement</strong>: The solution rearranges the numbers in the array so that each number <code>x</code> is placed at the index <code>x-1</code> if <code>x</code> is a positive integer and within the bounds of the array size.</li>
-<li><strong>Two-pass Solution</strong>:
+<li>
+<p><strong>Rearranging the Array:</strong></p>
 <ul>
-<li><strong>First Pass</strong>: Iterate through the array and swap elements to their correct positions as long as the element at the current index is a positive integer, within bounds, and not already in the correct position.</li>
-<li><strong>Second Pass</strong>: After rearranging, iterate through the array again to find the first index where the element does not equal its index + 1, indicating that this index + 1 is the smallest missing positive integer.</li>
+<li>For each positive number <code>x</code> that falls within the range <code>[1, n]</code> (where <code>n</code> is the size of the array), we try to place it at its &ldquo;correct&rdquo; index, which is <code>x - 1</code>.</li>
+<li>We keep swapping the numbers until the current number is in its correct place or out of range.</li>
+</ul>
+</li>
+<li>
+<p><strong>Scanning the Array:</strong></p>
+<ul>
+<li>After rearranging, the first index <code>i</code> where the value is not <code>i + 1</code> is the missing positive integer.</li>
+<li>If all indices are correct, then the first missing positive number will be <code>n + 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edge Cases:</strong></p>
+<ul>
+<li>If the array is empty, the first missing positive integer is <code>1</code>.</li>
+<li>If the array only contains negative numbers or numbers larger than <code>n</code>, the first missing positive integer is still <code>1</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Rearrangement Loop</strong>:</p>
-<ul>
-<li>The loop runs through each element and checks if it’s a valid positive integer that should be placed at its corresponding index.</li>
-<li>If conditions are met, it swaps the current element with the element at its target index and decrements <code>i</code> to check the swapped element again.</li>
+<h4 id="step-1-rearrange-the-array">
+  Step 1: Rearrange the Array
+  <a class="heading-link" href="#step-1-rearrange-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">&amp;&amp;</span> nums[nums[i] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> nums[i]) {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> nums[i] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> nums[nums[i] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        swap(nums[i], nums[nums[i]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]);      
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through each element <code>nums[i]</code>.</li>
+<li>The condition <code>nums[i] &gt; 0 &amp;&amp; nums[i] &lt; nums.size()</code> ensures that the number is positive and lies within the range <code>[1, n]</code>, where <code>n</code> is the size of the array.</li>
+<li>The condition <code>nums[nums[i] - 1] != nums[i]</code> checks if the number is already at its correct position. If not, we swap it with the number at the index <code>nums[i] - 1</code>, which is the correct position for the value <code>nums[i]</code>.</li>
+<li>After a swap, we decrement <code>i</code> to recheck the newly swapped element, as it might need further rearrangement.</li>
 </ul>
-</li>
-<li>
-<p><strong>Missing Positive Check</strong>:</p>
-<ul>
-<li>After rearranging, a second loop checks each index to see if the element at that index matches the expected value (<code>index + 1</code>).</li>
-<li>If a mismatch is found, it returns the expected value as the first missing positive integer.</li>
+<p>This process ensures that all numbers within the range <code>[1, n]</code> are placed at their correct index.</p>
+<h4 id="step-2-scan-for-missing-positive-integer">
+  Step 2: Scan for Missing Positive Integer
+  <a class="heading-link" href="#step-2-scan-for-missing-positive-integer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">!=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After rearranging the array, we scan through each element.</li>
+<li>If the value at index <code>i</code> is not equal to <code>i + 1</code>, it means that <code>i + 1</code> is the first missing positive integer.</li>
+<li>If all indices are correct, we return <code>nums.size() + 1</code>, which is the next missing integer after the array size.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Return</strong>:</p>
-<ul>
-<li>If all numbers from <code>1</code> to <code>n</code> (where <code>n</code> is the size of the array) are present, the function returns <code>n + 1</code> as the smallest missing positive.</li>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> nums.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If all numbers from <code>1</code> to <code>n</code> are present in the array, the smallest missing positive integer is <code>n + 1</code>, so we return that.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -295,15 +359,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: The algorithm runs in (O(n)) since it involves two linear passes through the array.</li>
-<li><strong>Space Complexity</strong>: The space complexity is (O(1)) as it rearranges the array in place without using additional data structures.</li>
+<li>The first loop runs through all the elements once, and each swap operation is done in constant time.</li>
+<li>Each element is swapped at most once, so the time complexity for rearranging the array is <strong>O(n)</strong>, where <code>n</code> is the size of the array.</li>
+<li>The second loop scans the array to check for the first missing positive integer, which also takes <strong>O(n)</strong> time.</li>
+<li>Therefore, the overall time complexity of the solution is <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we only use a constant amount of extra space apart from the input array itself. The swapping operation does not require additional memory, and no other data structures are used.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution solves the problem of finding the first missing positive integer efficiently with <strong>O(n)</strong> time complexity and <strong>O(1)</strong> space complexity. The key idea behind this solution is to rearrange the elements in the array such that each number is placed at its &ldquo;correct&rdquo; position, allowing us to easily identify the missing number in a single scan. This method is optimal for large input sizes and works within the constraints provided by the problem.</p>
+<p>By leveraging the input array itself to track the presence of numbers, the solution avoids the need for additional space or data structures, making it both time and space efficient. This approach is well-suited for solving the problem within the time and space limits specified.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1275s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1273s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

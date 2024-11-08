@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -275,7 +275,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a set of positive integers, find the largest subset such that every pair of elements in the subset is divisible by each other.</p>
+<p>The problem requires finding the largest subset of a given array of integers such that for every pair of integers <code>a</code> and <code>b</code> in the subset, either <code>a</code> divides <code>b</code> or <code>b</code> divides <code>a</code>. The goal is to return this largest divisible subset in the array.</p>
+<h3 id="key-insights">
+  Key Insights
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>A divisible subset consists of elements where every pair of elements satisfies the divisibility condition.</li>
+<li>The problem involves determining which elements in the array can be included in the subset by using dynamic programming (DP) to track the largest possible divisible subset for each element.</li>
+<li>Sorting the array helps because once sorted, any valid divisible subset will have elements in increasing order, ensuring that the divisibility condition can be checked in sequence.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,77 +295,171 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach uses dynamic programming to solve this problem efficiently. The key idea is to iterate over the sorted array, and for each element, find the largest divisible subset that includes that element. We then keep track of the largest subset across all elements.</p>
 <ol>
 <li>
 <p><strong>Sorting</strong>:</p>
 <ul>
-<li>First, sort the input array to ensure that if a number divides another, it will appear before it in the sorted order.</li>
+<li>We start by sorting the array in ascending order. This ensures that we only need to check divisibility in one direction (from smaller to larger elements).</li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamic Programming Table</strong>:</p>
+<p><strong>Dynamic Programming Table (dp)</strong>:</p>
 <ul>
-<li>Use a 2D vector <code>dp</code> where:
-<ul>
-<li><code>dp[i][0]</code> holds the size of the largest divisible subset that ends with <code>nums[i]</code>.</li>
-<li><code>dp[i][1]</code> holds the index of the next number in the subset.</li>
-</ul>
-</li>
-<li>Initialize <code>dp[i][0]</code> to <code>0</code> and <code>dp[i][1]</code> to <code>i</code> for each element.</li>
+<li>We maintain a 2D DP table where each entry <code>dp[i]</code> represents the size of the largest divisible subset that ends at <code>i</code>, and <code>dp[i][1]</code> stores the index of the next element in the subset.</li>
+<li>For each element, we try to extend the subset by checking if any subsequent element is divisible by the current element.</li>
 </ul>
 </li>
 <li>
-<p><strong>Filling the DP Table</strong>:</p>
+<p><strong>Constructing the Result</strong>:</p>
 <ul>
-<li>Iterate through the list in reverse:
-<ul>
-<li>For each number <code>nums[i]</code>, check all subsequent numbers <code>nums[j]</code>:
-<ul>
-<li>If <code>nums[j] % nums[i] == 0</code>, update <code>dp[i][0]</code> and <code>dp[i][1]</code> if the current count is less than the one ending at <code>j</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Finding the Maximum Subset</strong>:</p>
-<ul>
-<li>Iterate through <code>dp</code> to find the maximum size of any divisible subset.</li>
-<li>Trace back using the <code>dp</code> table to construct the largest divisible subset.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result Construction</strong>:</p>
-<ul>
-<li>Start from the index of the largest subset and keep adding elements to the result until reaching back to the starting element.</li>
+<li>After processing all elements, we find the maximum size of the divisible subsets and trace back the elements that form this subset.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The main function <code>largestDivisibleSubset</code> first checks if the input array is empty.</li>
-<li>It sorts the input array and initializes the DP table.</li>
-<li>It iterates to fill in the DP table based on the divisibility condition.</li>
-<li>Finally, it identifies the largest divisible subset and constructs the result.</li>
+<h4 id="step-1-initial-setup-and-sorting">
+  Step 1: Initial Setup and Sorting
+  <a class="heading-link" href="#step-1-initial-setup-and-sorting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> nums;
+</span></span><span style="display:flex;"><span>sort(nums.begin(), nums.end()); 
+</span></span></code></pre></div><ul>
+<li>First, we check if the input array <code>nums</code> is empty. If it is, we return an empty array because there’s no subset to form.</li>
+<li>We then sort the array in ascending order. Sorting helps because once the array is sorted, for any two numbers <code>a</code> and <code>b</code>, if <code>a</code> divides <code>b</code>, <code>a</code> must come before <code>b</code> in the sorted array.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-dp-initialization">
+  Step 2: DP Initialization
+  <a class="heading-link" href="#step-2-dp-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>));
+</span></span></code></pre></div><ul>
+<li>We initialize the DP table <code>dp</code>. The table has <code>n</code> rows, one for each element of the array. Each row contains two columns:
+<ul>
+<li><code>dp[i][0]</code>: This holds the size of the largest divisible subset ending at element <code>i</code>.</li>
+<li><code>dp[i][1]</code>: This stores the index of the next element in the subset (to trace the elements of the largest subset later).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-filling-the-dp-table">
+  Step 3: Filling the DP Table
+  <a class="heading-link" href="#step-3-filling-the-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    dp[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((nums[j] <span style="color:#f92672">%</span> nums[i]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> dp[j][<span style="color:#ae81ff">0</span>]) {
+</span></span><span style="display:flex;"><span>                dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> dp[j][<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>                dp[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    dp[i][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over the array in reverse order to fill the DP table.
+<ul>
+<li>For each element <code>nums[i]</code>, we initialize the size of the largest divisible subset as <code>0</code> and set <code>dp[i][1]</code> to <code>i</code> (the next element in the subset is initially the element itself).</li>
+<li>We then iterate over all subsequent elements (<code>nums[j]</code> where <code>j &gt; i</code>), checking if <code>nums[j] % nums[i] == 0</code>. If true, it means <code>nums[i]</code> divides <code>nums[j]</code>.</li>
+<li>If the size of the divisible subset ending at <code>i</code> is smaller than the size of the subset ending at <code>j</code>, we update <code>dp[i][0]</code> and set <code>dp[i][1]</code> to the index <code>j</code> (indicating that the next element in the subset is <code>nums[j]</code>).</li>
+<li>After checking all <code>j</code>s for the current <code>i</code>, we increment <code>dp[i][0]</code> by 1 to account for <code>nums[i]</code> itself.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-finding-the-maximum-divisible-subset">
+  Step 4: Finding the Maximum Divisible Subset
+  <a class="heading-link" href="#step-4-finding-the-maximum-divisible-subset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mxi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mx <span style="color:#f92672">&lt;=</span> dp[i][<span style="color:#ae81ff">0</span>]) {
+</span></span><span style="display:flex;"><span>        mxi <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        mx <span style="color:#f92672">=</span> dp[i][<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After filling the DP table, we find the largest divisible subset by looking for the entry with the maximum value of <code>dp[i][0]</code>.</li>
+<li>We track both the size of the largest subset (<code>mx</code>) and the index (<code>mxi</code>) where this subset ends.</li>
+</ul>
+<h4 id="step-5-reconstructing-the-subset">
+  Step 5: Reconstructing the Subset
+  <a class="heading-link" href="#step-5-reconstructing-the-subset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> mxi;
+</span></span><span style="display:flex;"><span>ans.push_back(nums[i]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(dp[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> i) {
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> dp[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    ans.push_back(nums[i]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Once we find the largest subset, we reconstruct it by following the indices stored in the <code>dp</code> table.</li>
+<li>Starting from the index <code>mxi</code>, we add <code>nums[i]</code> to the result vector <code>ans</code>. We then trace the subset by following the <code>dp[i][1]</code> (next index in the subset) until we reach the end of the subset (i.e., <code>dp[i][1] == i</code>).</li>
+</ul>
+<h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the reconstructed largest divisible subset.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity of the solution is <strong>O(n^2)</strong>, where <code>n</code> is the size of the input array. This is because for each element <code>i</code>, we are checking every subsequent element <code>j</code> to determine divisibility. Thus, there are <code>O(n^2)</code> checks in total.</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n^2) ) due to the nested loops for filling the DP table.</li>
-<li><strong>Space Complexity</strong>: ( O(n) ) for the DP table and result storage.</li>
+<li>Sorting the array takes <strong>O(n log n)</strong> time.</li>
+<li>Filling the DP table involves a double loop over the array, which takes <strong>O(n^2)</strong> time.</li>
 </ul>
+<p>Thus, the overall time complexity is dominated by the <strong>O(n^2)</strong> term.</p>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity of the solution is <strong>O(n)</strong> because we are storing the DP table, which has <code>n</code> rows and 2 columns. Additionally, we store the final result in a vector of size <code>n</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the largest divisible subset by leveraging dynamic programming. By sorting the array and using a DP table to track the largest subset for each element, the approach efficiently solves the problem within the constraints. The time complexity is manageable for typical problem sizes, and the space complexity is optimal for the problem at hand.</p>
  
 </div>
   

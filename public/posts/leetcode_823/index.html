@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -253,7 +253,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>arr</code>, each element can be used to create binary trees where each node&rsquo;s value is a product of its children. The goal is to find the number of distinct binary trees that can be formed with the elements of <code>arr</code> as node values.</p>
+<p>The problem at hand asks for the number of distinct binary trees that can be formed where each node’s value is an integer from a given list <code>arr</code>. The binary tree must be a valid binary tree in the sense that the value of each node must be a factor of its parent node&rsquo;s value.</p>
+<p>The goal is to compute the total number of such valid binary trees modulo (10^9 + 7). The binary trees must be constructed such that the structure of each tree is valid according to the conditions, and the values at each node must be from the array <code>arr</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,50 +262,95 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to utilize dynamic programming and factorization. The steps involved in solving the problem are:</p>
 <ol>
 <li>
-<p><strong>Sorting</strong>:</p>
+<p><strong>Sorting the Input Array</strong>:</p>
 <ul>
-<li>First, sort the array to ensure that we can always consider smaller elements as potential roots for larger elements.</li>
+<li>Sorting the array ensures that we can work with smaller factors first, which is important because if a number is divisible by another, it will always be placed after it in the sorted array.</li>
+<li>By processing the numbers in increasing order, we can ensure that when considering a number, we have already counted all possible trees that use smaller factors.</li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamic Programming with a Map</strong>:</p>
+<p><strong>Dynamic Programming with Hash Map</strong>:</p>
 <ul>
-<li>Use an unordered map (<code>rootWithCount</code>) to store the number of distinct binary trees that can be formed with each value as the root.</li>
-<li>Initialize the count for the first element in the sorted array to 1 since it can only form one tree (itself).</li>
+<li>Use a hash map, <code>rootWithCount</code>, where the key is a number from <code>arr</code>, and the value is the number of binary trees that can be formed with that number as the root.</li>
+<li>Initially, every number is considered as a potential root of one tree (itself). So, we start by setting the count of each number in the map to <code>1</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Counting Combinations</strong>:</p>
+<p><strong>Factorization for Tree Formation</strong>:</p>
 <ul>
-<li>For each element in <code>arr</code>, iterate through the existing keys in the map:
-<ul>
-<li>Check if the current element can be divided by the key (to see if it can be a product).</li>
-<li>If it can be divided and the quotient exists in the map, compute the number of trees that can be formed using the current key and its quotient. Update the count accordingly.</li>
-</ul>
-</li>
+<li>For each number in <code>arr</code>, check its divisors from the earlier processed numbers.</li>
+<li>If the number <code>arr[i]</code> is divisible by some <code>root</code>, and if the quotient <code>arr[i] / root</code> is also in <code>arr</code>, then a binary tree can be formed by using <code>root</code> as one of the children of <code>arr[i]</code>.</li>
+<li>The number of binary trees that can be formed with <code>arr[i]</code> as the root is updated by adding the product of the counts of <code>root</code> and <code>arr[i] / root</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Count</strong>:</p>
+<p><strong>Modulo Operation</strong>:</p>
 <ul>
-<li>Sum all values in the map to get the total number of distinct binary trees, applying the modulo operation to handle large numbers.</li>
+<li>The answer to the problem may be a large number, so the result is computed modulo (10^9 + 7) to prevent overflow and meet problem requirements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Summation</strong>:</p>
+<ul>
+<li>Once all numbers in <code>arr</code> are processed, sum the values in the <code>rootWithCount</code> map to get the total number of distinct binary trees.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>numFactoredBinaryTrees</code> function initializes a map to count trees for each element.</li>
-<li>It iterates through the sorted array, updating the count of possible trees for each number based on its factors.</li>
-<li>Finally, it aggregates the counts to return the total number of distinct binary trees.</li>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(arr.begin(), arr.end());
+</span></span></code></pre></div><ul>
+<li>We first sort the array <code>arr</code> to ensure that smaller numbers are processed first. This is important because smaller numbers can potentially be used as factors for larger numbers.</li>
 </ul>
+</li>
+<li>
+<p><strong>Initialize the Hash Map</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> rootWithCount;
+</span></span><span style="display:flex;"><span>rootWithCount[arr[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize an unordered map <code>rootWithCount</code> to store the number of binary trees that can be rooted at each value. Initially, the first number in <code>arr</code> is assigned a count of <code>1</code>, because it can form one tree by itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> arr.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> count <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> j : rootWithCount) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> root <span style="color:#f92672">=</span> j.first;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((arr[i] <span style="color:#f92672">%</span> root <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (rootWithCount.find(arr[i]<span style="color:#f92672">/</span>root) <span style="color:#f92672">!=</span> rootWithCount.end())) {
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> rootWithCount[root] <span style="color:#f92672">*</span> rootWithCount[arr[i]<span style="color:#f92672">/</span>root];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    rootWithCount[arr[i]] <span style="color:#f92672">=</span> count;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each number <code>arr[i]</code>, we initialize <code>count</code> to <code>1</code> because the number itself can form a binary tree.</li>
+<li>We then iterate through all previously processed numbers in <code>rootWithCount</code>. For each <code>root</code>, we check if <code>arr[i]</code> is divisible by <code>root</code> and if the quotient <code>arr[i] / root</code> is also in <code>rootWithCount</code>. If both conditions are met, it means we can form a binary tree by using <code>root</code> and <code>arr[i] / root</code> as children.</li>
+<li>The count for <code>arr[i]</code> is updated by adding the product of the counts of <code>root</code> and <code>arr[i] / root</code>, which represents the number of trees formed with <code>root</code> and <code>arr[i] / root</code> as children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> no <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: rootWithCount) no <span style="color:#f92672">=</span> (no <span style="color:#f92672">+</span> it.second) <span style="color:#f92672">%</span> (<span style="color:#66d9ef">int</span>)(<span style="color:#ae81ff">1e9</span><span style="color:#f92672">+</span><span style="color:#ae81ff">7</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> no;
+</span></span></code></pre></div><ul>
+<li>After processing all numbers, the final result is the sum of the values in <code>rootWithCount</code>. This sum represents the total number of distinct binary trees that can be formed.</li>
+<li>The result is taken modulo (10^9 + 7) to handle large numbers and to meet the problem&rsquo;s requirements.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -313,10 +359,29 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2), where N is the number of elements in <code>arr</code>. This is due to the nested iteration through the map for each element.</li>
-<li><strong>Space Complexity</strong>: O(N), for storing the counts in the map.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the array takes (O(n \log n)), where (n) is the size of the array.</li>
+<li>The nested loops for each element in <code>arr</code> take (O(n^2)) in the worst case because for each number, we may check all the numbers before it.</li>
+<li>Thus, the overall time complexity is (O(n^2)), where (n) is the number of elements in <code>arr</code>.</li>
 </ul>
-<p>This approach efficiently calculates the number of distinct binary trees that can be formed using the elements of the array as node values.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)), as we use an unordered map <code>rootWithCount</code> to store counts for each number in <code>arr</code>, and the size of this map is proportional to the number of elements in <code>arr</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the number of distinct binary trees that can be formed by using the numbers in the input array <code>arr</code> as nodes. By leveraging dynamic programming and factorization, it avoids redundant calculations and ensures an optimal solution. The algorithm processes each number and its possible divisors, building the solution progressively, which makes it well-suited for handling large inputs. The use of modular arithmetic ensures that the result fits within the required bounds, making the solution both time-efficient and space-efficient.</p>
  
 </div>
   

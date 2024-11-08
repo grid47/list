@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -248,7 +248,7 @@
 </span></span><span style="display:flex;"><span>        dfs(grid, i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode585s1hbhb">
+<h2 id="hahahugoshortcode584s1hbhb">
   
 
   
@@ -260,7 +260,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 2D grid of &lsquo;1&rsquo;s (land) and &lsquo;0&rsquo;s (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.</p>
+<p>The problem is to count the number of <strong>islands</strong> in a given 2D grid. The grid consists of &lsquo;1&rsquo;s (land) and &lsquo;0&rsquo;s (water). An island is formed by connecting adjacent lands (horizontally or vertically). You are asked to return the number of distinct islands in the grid.</p>
+<p><strong>Problem Input:</strong></p>
+<ul>
+<li>A 2D grid represented by a vector of vectors of characters:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> grid;
+</span></span></code></pre></div>where each element is either &lsquo;1&rsquo; (land) or &lsquo;0&rsquo; (water).</li>
+</ul>
+<p><strong>Problem Output:</strong></p>
+<ul>
+<li>An integer that represents the number of islands in the grid.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>grid <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>],
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>]
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div></li>
+<li><strong>Output:</strong> <code>1</code><br>
+Explanation: The grid contains one island.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,64 +291,99 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, we can use a <strong>Depth-First Search (DFS)</strong> approach. DFS is a natural fit because it allows us to explore an island from any &lsquo;1&rsquo; cell, marking all connected &lsquo;1&rsquo;s as visited as we traverse. By performing DFS for every unvisited &lsquo;1&rsquo;, we effectively count each distinct island.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Traverse the grid, and whenever a &lsquo;1&rsquo; (land) is found, increment the island count and perform a DFS to mark all connected lands as visited (turn them into &lsquo;0&rsquo;s).</li>
-<li>This will help in avoiding counting the same island multiple times.</li>
-</ul>
+<p><strong>Iterate through the grid:</strong> We start by iterating over each cell in the grid. If we encounter a &lsquo;1&rsquo;, it means we have found a new island.</p>
 </li>
 <li>
-<p><strong>Grid Traversal</strong>:</p>
-<ul>
-<li>Iterate through each cell in the grid.</li>
-<li>If a cell contains &lsquo;1&rsquo;, increment the count of islands and initiate a DFS to explore the entire island.</li>
-</ul>
+<p><strong>DFS Traversal:</strong> Once we find a &lsquo;1&rsquo;, we initiate a DFS search starting from that cell. During the DFS, we explore all connected land cells (i.e., all &lsquo;1&rsquo;s connected horizontally or vertically). As we explore, we mark each visited land cell as &lsquo;0&rsquo; to avoid revisiting it.</p>
+</li>
+<li>
+<p><strong>Count Islands:</strong> Each time we start a DFS search, it corresponds to discovering a new island. We increment the island count.</p>
+</li>
+<li>
+<p><strong>Return the result:</strong> After iterating through the entire grid, the island count will reflect the number of distinct islands in the grid.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Line 1</strong>: Define the class <code>Solution</code>.</p>
-</li>
-<li>
-<p><strong>Line 2</strong>: Define the <code>numIslands</code> function that takes a 2D grid as input.</p>
-</li>
-<li>
-<p><strong>Line 3</strong>: Initialize a counter <code>cnt</code> to zero, which will hold the number of islands.</p>
-</li>
-<li>
-<p><strong>Lines 4-6</strong>: Get the dimensions of the grid (<code>m</code> rows and <code>n</code> columns) and iterate through each cell.</p>
-</li>
-<li>
-<p><strong>Line 7</strong>: If a cell contains &lsquo;1&rsquo;:</p>
-<ul>
-<li>Increment the island counter.</li>
-<li>Call the <code>dfs</code> function to explore and mark all connected lands.</li>
+<h4 id="step-1-initialize-and-traverse-the-grid">
+  Step 1: Initialize and Traverse the Grid
+  <a class="heading-link" href="#step-1-initialize-and-traverse-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numIslands</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><code>cnt</code> is used to keep track of the number of islands.</li>
+<li><code>m</code> and <code>n</code> store the number of rows and columns in the grid, respectively.</li>
 </ul>
-</li>
-<li>
-<p><strong>Line 8</strong>: Return the total count of islands.</p>
-</li>
-<li>
-<p><strong>Line 9</strong>: Define the <code>dfs</code> function to perform a depth-first search.</p>
-</li>
-<li>
-<p><strong>Lines 10-12</strong>: Check the boundaries of the grid and return if the current cell is out of bounds or water (&lsquo;0&rsquo;).</p>
-</li>
-<li>
-<p><strong>Line 13</strong>: Mark the current cell as visited by setting it to &lsquo;0&rsquo;.</p>
-</li>
-<li>
-<p><strong>Lines 14-17</strong>: Recursively call <code>dfs</code> for the adjacent cells (up, down, left, right).</p>
-</li>
+<h4 id="step-2-iterate-over-each-cell-in-the-grid">
+  Step 2: Iterate Over Each Cell in the Grid
+  <a class="heading-link" href="#step-2-iterate-over-each-cell-in-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+</span></span><span style="display:flex;"><span>                cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                dfs(grid, i, j);
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>We use two nested loops to iterate through each cell in the grid.</li>
+<li>If a cell contains &lsquo;1&rsquo;, we increment the island count (<code>cnt</code>) and initiate a DFS search from that cell to mark all connected land as visited.</li>
+</ul>
+<h4 id="step-3-dfs-function">
+  Step 3: DFS Function
+  <a class="heading-link" href="#step-3-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>grid, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">==</span> grid.size() <span style="color:#f92672">||</span> j <span style="color:#f92672">==</span> grid[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">||</span> grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ;
+</span></span><span style="display:flex;"><span>        grid[i][j] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>        dfs(grid, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>        dfs(grid, i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        dfs(grid, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>        dfs(grid, i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The DFS function is designed to explore the land cells that are connected to the starting point.</li>
+<li><strong>Base Case:</strong> If the current cell is out of bounds or contains water (&lsquo;0&rsquo;), we return.</li>
+<li><strong>Mark as Visited:</strong> Once we visit a land cell, we mark it as water (&lsquo;0&rsquo;) to prevent revisiting it.</li>
+<li><strong>Recursion:</strong> We then recursively explore the neighboring cells (down, right, up, and left).</li>
+</ul>
+<h4 id="step-4-return-the-number-of-islands">
+  Step 4: Return the Number of Islands
+  <a class="heading-link" href="#step-4-return-the-number-of-islands">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After the grid has been fully processed, we return the number of islands found (<code>cnt</code>).</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -334,15 +392,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(m \times n)), where (m) is the number of rows and (n) is the number of columns in the grid, since each cell is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the recursion stack, which can go up to (O(m \times n)) in the worst case if the grid is filled with &lsquo;1&rsquo;s.</li>
+<li><strong>O(m * n):</strong> In the worst case, the algorithm visits each cell in the grid once. Each DFS call processes a single land cell and marks it as visited. Since we visit every cell exactly once, the time complexity is O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n):</strong> The space complexity is mainly determined by the recursion stack in DFS. In the worst case, we may need to recurse through all the cells in the grid. Therefore, the space complexity is O(m * n). This could be improved to O(min(m, n)) if we use an iterative DFS or BFS approach instead of recursion.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively counts the number of distinct islands in a 2D grid using a DFS approach. Here&rsquo;s a summary of the approach and its efficiency:</p>
+<ol>
+<li><strong>DFS Traversal:</strong> The DFS explores all connected &lsquo;1&rsquo;s (land) starting from any unvisited &lsquo;1&rsquo;, marking them as visited by changing them to &lsquo;0&rsquo;. This ensures we count each island only once.</li>
+<li><strong>Efficiency:</strong> The solution runs in O(m * n) time and uses O(m * n) space due to the recursion stack.</li>
+<li><strong>Space Optimization:</strong> The recursive DFS could be optimized to an iterative approach, but the current recursive solution is simple and efficient for most practical cases.</li>
+</ol>
+<p>Overall, this solution provides a clear and optimal method for counting islands in a grid, making it well-suited for handling large grids effectively.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode585s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode584s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

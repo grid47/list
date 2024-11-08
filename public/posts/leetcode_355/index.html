@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              8-minute read
             </span>
           </div>
 
@@ -339,7 +339,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;follow(followerId,followeeId);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;unfollow(followerId,followeeId);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1237s1hbhb">
+<h2 id="hahahugoshortcode1236s1hbhb">
   
 
   
@@ -351,7 +351,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a simplified version of Twitter where users can post tweets, follow other users, and get a news feed of their tweets.</p>
+<p>The problem involves designing a simplified version of Twitter, where users can post tweets, follow/unfollow other users, and view a news feed that consists of tweets from themselves and their followed users.</p>
+<p>Key operations include:</p>
+<ul>
+<li><strong>Posting a tweet</strong>: A user can post a tweet, and each tweet is associated with a timestamp.</li>
+<li><strong>Getting the news feed</strong>: A user can view their news feed, which includes their own tweets and tweets from the users they follow, sorted by timestamp (most recent first).</li>
+<li><strong>Following and unfollowing users</strong>: A user can follow and unfollow other users, affecting what appears in their news feed.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -359,40 +365,198 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To implement this Twitter-like system, we must manage user information, handle tweet posting, and compute the news feed efficiently. The basic steps and data structures we use are:</p>
 <ol>
 <li>
-<p><strong>Data Structures</strong>:</p>
+<p><strong>User and Tweet Management</strong>:</p>
 <ul>
-<li><strong>Tweet</strong>: A structure to hold tweet ID and timestamp, linked to the next tweet.</li>
-<li><strong>User</strong>: A structure to hold user ID, a set of followed users, and the head of their tweet list.</li>
-<li><strong>Twitter</strong>: The main class to manage users and their interactions.</li>
+<li>Each user has a unique ID, a set of followed users, and a linked list of tweets.</li>
+<li>Each tweet contains an ID, timestamp, and a pointer to the next tweet.</li>
+<li>Users can follow/unfollow other users, which affects the tweets shown in their news feed.</li>
 </ul>
 </li>
 <li>
-<p><strong>Operations</strong>:</p>
+<p><strong>Tweet Ordering</strong>:</p>
 <ul>
-<li><strong>Post Tweet</strong>: Users can post a tweet with a unique ID, which is stored in their linked list of tweets.</li>
-<li><strong>Get News Feed</strong>: Retrieve the 10 most recent tweets from the user&rsquo;s feed, including tweets from followed users, sorted by time.</li>
-<li><strong>Follow/Unfollow</strong>: Users can follow or unfollow other users to customize their news feed.</li>
+<li>The most recent tweets should appear first in the news feed.</li>
+<li>For efficient ordering, we can use a priority queue (heap), where tweets with higher timestamps are given higher priority.</li>
 </ul>
 </li>
 <li>
-<p><strong>Priority Queue</strong>: A min-heap (priority queue) is used to efficiently get the latest tweets from followed users.</p>
+<p><strong>Data Structure</strong>:</p>
+<ul>
+<li><strong>User Map</strong>: A map (<code>userMap</code>) stores each user by their unique ID. This allows us to quickly access a user&rsquo;s data (e.g., followed users, tweets).</li>
+<li><strong>Tweet Linked List</strong>: Each user has a linked list of their tweets, stored in the <code>tweet_head</code> pointer.</li>
+<li><strong>Priority Queue</strong>: To fetch the most recent tweets, we use a priority queue that orders tweets based on their timestamp.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Each user is represented by an instance of the <code>User</code> class, which maintains a list of followed users and their tweets.</li>
-<li>The <code>Twitter</code> class maintains a map of user IDs to <code>User</code> objects.</li>
-<li>The <code>postTweet</code> function adds a new tweet for a user and increments the timestamp.</li>
-<li>The <code>getNewsFeed</code> function retrieves the latest tweets from all followed users, using a priority queue to ensure tweets are sorted by time.</li>
-<li>Users can follow and unfollow others, modifying their list of followed users.</li>
+<h4 id="step-1-define-the-tweet-class">
+  Step 1: Define the <code>Tweet</code> Class
+  <a class="heading-link" href="#step-1-define-the-tweet-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>Tweet</code> class represents an individual tweet:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tweet</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> id;  <span style="color:#75715e">// Unique identifier for the tweet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> time;  <span style="color:#75715e">// Timestamp for when the tweet was posted
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Tweet<span style="color:#f92672">*</span> next;  <span style="color:#75715e">// Pointer to the next tweet in the linked list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    Tweet(<span style="color:#66d9ef">int</span> id, <span style="color:#66d9ef">int</span> time) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>id <span style="color:#f92672">=</span> id;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>time <span style="color:#f92672">=</span> time;
+</span></span><span style="display:flex;"><span>        next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>Tweet</code> class has three data members: <code>id</code>, <code>time</code>, and <code>next</code>.</li>
+<li><code>next</code> is used to create a linked list of tweets for each user, where each tweet points to the next tweet in the sequence.</li>
+</ul>
+<h4 id="step-2-define-the-user-class">
+  Step 2: Define the <code>User</code> Class
+  <a class="heading-link" href="#step-2-define-the-user-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>User</code> class stores information about a user, including their followed users and tweets:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> id;
+</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> followed;  <span style="color:#75715e">// Set of users this user is following
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Tweet<span style="color:#f92672">*</span> tweet_head;  <span style="color:#75715e">// Head of the linked list of tweets
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    User(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>id <span style="color:#f92672">=</span> id;
+</span></span><span style="display:flex;"><span>        follow(id);  <span style="color:#75715e">// Follow self by default
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        tweet_head <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">follow</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        followed.insert(id);  <span style="color:#75715e">// Add the user to the followed list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">unfollow</span>(<span style="color:#66d9ef">int</span> id) {
+</span></span><span style="display:flex;"><span>        followed.erase(id);  <span style="color:#75715e">// Remove the user from the followed list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post</span>(<span style="color:#66d9ef">int</span> id, <span style="color:#66d9ef">int</span> times) {
+</span></span><span style="display:flex;"><span>        Tweet<span style="color:#f92672">*</span> t <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Tweet(id, times);  <span style="color:#75715e">// Create a new tweet
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        t<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> tweet_head;  <span style="color:#75715e">// Insert the tweet at the head of the list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        tweet_head <span style="color:#f92672">=</span> t;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>follow()</strong>: Adds the user to the list of followed users.</li>
+<li><strong>unfollow()</strong>: Removes the user from the list of followed users.</li>
+<li><strong>post()</strong>: Adds a tweet to the user&rsquo;s tweet list by inserting it at the head of the linked list.</li>
+</ul>
+<h4 id="step-3-define-the-twitter-class">
+  Step 3: Define the <code>Twitter</code> Class
+  <a class="heading-link" href="#step-3-define-the-twitter-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>Twitter</code> class manages the main functionalities: posting tweets, following/unfollowing users, and retrieving the news feed:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Twitter</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> timeStamp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Global timestamp for all tweets
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, User<span style="color:#f92672">*&gt;</span> userMap;  <span style="color:#75715e">// Map storing users by their ID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    Twitter() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Constructor to initialize the Twitter system
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">postTweet</span>(<span style="color:#66d9ef">int</span> userId, <span style="color:#66d9ef">int</span> tweetId) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>userMap.count(userId)) {
+</span></span><span style="display:flex;"><span>            User<span style="color:#f92672">*</span> u <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User(userId);  <span style="color:#75715e">// Create a new user if not exists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            userMap[userId] <span style="color:#f92672">=</span> u;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        userMap[userId]<span style="color:#f92672">-&gt;</span>post(tweetId, timeStamp<span style="color:#f92672">++</span>);  <span style="color:#75715e">// Post the tweet with the current timestamp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><code>userMap</code> stores users by their ID, so we can easily retrieve user data.</li>
+<li><code>postTweet()</code> allows a user to post a tweet with a unique ID and timestamp. If the user does not exist, they are created first.</li>
+</ul>
+<h4 id="step-4-implement-the-getnewsfeed-function">
+  Step 4: Implement the <code>getNewsFeed()</code> Function
+  <a class="heading-link" href="#step-4-implement-the-getnewsfeed-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>getNewsFeed()</code> function retrieves the most recent tweets from the user and the users they follow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> getNewsFeed(<span style="color:#66d9ef">int</span> userId) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>userMap.count(userId)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return empty result if user does not exist
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> users <span style="color:#f92672">=</span> userMap[userId]<span style="color:#f92672">-&gt;</span>followed;  <span style="color:#75715e">// Get the list of users the user is following
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        priority_queue<span style="color:#f92672">&lt;</span>Tweet<span style="color:#f92672">*</span>, vector<span style="color:#f92672">&lt;</span>Tweet<span style="color:#f92672">*&gt;</span>, compare<span style="color:#f92672">&gt;</span> pq;  <span style="color:#75715e">// Max-heap to store tweets
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Push the most recent tweet from each followed user into the priority queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> user : users) {
+</span></span><span style="display:flex;"><span>            Tweet<span style="color:#f92672">*</span> t <span style="color:#f92672">=</span> userMap[user]<span style="color:#f92672">-&gt;</span>tweet_head;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (t <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>                pq.push(t);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>) {  <span style="color:#75715e">// Retrieve at most 10 tweets
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            Tweet<span style="color:#f92672">*</span> t <span style="color:#f92672">=</span> pq.top();  <span style="color:#75715e">// Get the tweet with the highest timestamp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();  <span style="color:#75715e">// Remove it from the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            res.push_back(t<span style="color:#f92672">-&gt;</span>id);  <span style="color:#75715e">// Add the tweet&#39;s ID to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            n<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (t<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> NULL)
+</span></span><span style="display:flex;"><span>                pq.push(t<span style="color:#f92672">-&gt;</span>next);  <span style="color:#75715e">// Push the next tweet from the same user
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the result containing tweet IDs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li>We use a <strong>priority queue</strong> to always retrieve the most recent tweet.</li>
+<li>The priority queue is sorted by the tweet&rsquo;s timestamp, ensuring that we get the tweets in descending order of time.</li>
+<li>We push the most recent tweet of each followed user into the queue. If the user has more tweets, the next tweet is pushed into the queue to be processed.</li>
+</ul>
+<h4 id="step-5-implement-the-follow-and-unfollow-functions">
+  Step 5: Implement the <code>follow()</code> and <code>unfollow()</code> Functions
+  <a class="heading-link" href="#step-5-implement-the-follow-and-unfollow-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>These methods manage user relationships:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">follow</span>(<span style="color:#66d9ef">int</span> followerId, <span style="color:#66d9ef">int</span> followeeId) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>userMap.count(followerId)) {
+</span></span><span style="display:flex;"><span>            User<span style="color:#f92672">*</span> u <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User(followerId);
+</span></span><span style="display:flex;"><span>            userMap[followerId] <span style="color:#f92672">=</span> u;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>userMap.count(followeeId)) {
+</span></span><span style="display:flex;"><span>            User<span style="color:#f92672">*</span> u <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> User(followeeId);
+</span></span><span style="display:flex;"><span>            userMap[followeeId] <span style="color:#f92672">=</span> u;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        userMap[followerId]<span style="color:#f92672">-&gt;</span>follow(followeeId);  <span style="color:#75715e">// Make the follower follow the followee
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">unfollow</span>(<span style="color:#66d9ef">int</span> followerId, <span style="color:#66d9ef">int</span> followeeId) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (userMap.count(followerId) <span style="color:#f92672">&amp;&amp;</span> followerId <span style="color:#f92672">!=</span> followeeId)
+</span></span><span style="display:flex;"><span>            userMap[followerId]<span style="color:#f92672">-&gt;</span>unfollow(followeeId);  <span style="color:#75715e">// Make the follower unfollow the followee
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>follow()</code> makes a user follow another user.</li>
+<li><code>unfollow()</code> allows a user to stop following another user, but prevents a user from unfollowing themselves.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -401,27 +565,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li><strong>postTweet</strong>: O(1) — Inserting a tweet is a constant time operation.</li>
+<li><strong>getNewsFeed</strong>: O(N log N), where <code>N</code> is the total number of tweets from the followed users. This is due to the use of the priority queue, where inserting and removing from the heap takes logarithmic time.</li>
+<li><strong>follow/unfollow</strong>: O(1) — Insertion and removal from the set are constant-time operations.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Posting a tweet: ( O(1) )</li>
-<li>Getting news feed: ( O(N \log k) ), where ( N ) is the number of tweets from followed users and ( k ) is the number of users being followed (up to 10 tweets).</li>
-<li>Following/Unfollowing: ( O(1) )</li>
+<li><strong>O(N)</strong> where <code>N</code> is the number of tweets across all users. This accounts for the memory used by the <code>Tweet</code> objects and the <code>userMap</code> storing users and their tweets.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is ( O(M + U) ), where ( M ) is the total number of tweets and ( U ) is the number of users.</li>
-</ul>
-</li>
-</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This Twitter simulation efficiently handles the operations of posting tweets, following/unfollowing users, and retrieving a user&rsquo;s news feed. The use of a priority queue ensures that tweets are ordered by timestamp, and the use of sets allows fast checking of follow relationships. This solution is optimized for both time and space, offering quick access to the latest tweets while maintaining an organized structure for user data.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1237s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1236s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

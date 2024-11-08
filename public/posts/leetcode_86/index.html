@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -244,7 +244,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans<span style="color:#f92672">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1550s1hbhb">
+<h2 id="hahahugoshortcode1552s1hbhb">
   
 
   
@@ -256,7 +256,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a linked list and a value <code>x</code>, partition the linked list such that all nodes with values less than <code>x</code> come before nodes with values greater than or equal to <code>x</code>. The order of nodes in each partition should be preserved.</p>
+<p>Given a singly linked list and an integer <code>x</code>, the task is to partition the list such that all nodes with values less than <code>x</code> appear before nodes with values greater than or equal to <code>x</code>. The relative order of the nodes in each partition should remain the same as in the original list. The goal is to return the head of the new list after performing the partitioning.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,71 +264,119 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use a two-pointer approach by maintaining two separate linked lists:</p>
 <ol>
-<li>
-<p><strong>Create Two Dummy Nodes</strong>:</p>
-<ul>
-<li>Use two dummy nodes to create two separate linked lists:
-<ul>
-<li>One for nodes with values less than <code>x</code> (let&rsquo;s call it <code>p1</code>).</li>
-<li>Another for nodes with values greater than or equal to <code>x</code> (let&rsquo;s call it <code>p2</code>).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Traverse the Original List</strong>:</p>
-<ul>
-<li>Iterate through the original linked list.</li>
-<li>For each node, check its value:
-<ul>
-<li>If it&rsquo;s less than <code>x</code>, add it to the <code>p1</code> list.</li>
-<li>If it&rsquo;s greater than or equal to <code>x</code>, add it to the <code>p2</code> list.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Combine the Two Lists</strong>:</p>
-<ul>
-<li>After traversing the original list, connect the <code>p1</code> list to the <code>p2</code> list by setting the <code>next</code> pointer of the last node of <code>p1</code> to the head of the <code>p2</code> list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the New List</strong>:</p>
-<ul>
-<li>The head of the newly partitioned list is the node next to the dummy head of <code>p1</code>.</li>
-</ul>
-</li>
+<li>One list will contain all nodes with values less than <code>x</code>.</li>
+<li>The other list will contain all nodes with values greater than or equal to <code>x</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>At the end of the partitioning process, we will merge the two lists into one. This approach ensures that the order of nodes in both partitions is maintained as required.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<h4 id="step-1-define-the-listnode-structure">
+  Step 1: Define the ListNode Structure
+  <a class="heading-link" href="#step-1-define-the-listnode-structure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">ListNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#f92672">*</span>next;
+</span></span><span style="display:flex;"><span>    ListNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), next(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#66d9ef">int</span> x, ListNode <span style="color:#f92672">*</span>next) <span style="color:#f92672">:</span> val(x), next(next) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>ListNode</code> structure represents a node in the singly linked list.</li>
+<li>It has two fields:
 <ul>
-<li>Two dummy nodes <code>p1</code> and <code>p2</code> are initialized to help build the two separate lists.</li>
-<li>A pointer <code>ans</code> points to the start of the first list.</li>
+<li><code>val</code>: stores the value of the node.</li>
+<li><code>next</code>: a pointer to the next node in the list.</li>
 </ul>
 </li>
-<li>
-<p><strong>Building Lists</strong>:</p>
+<li>There are three constructors:
 <ul>
-<li>While traversing the input linked list, nodes are added to <code>p1</code> or <code>p2</code> based on their values relative to <code>x</code>.</li>
+<li>The default constructor initializes <code>val</code> to 0 and <code>next</code> to <code>nullptr</code>.</li>
+<li>The second constructor initializes <code>val</code> to the given value and sets <code>next</code> to <code>nullptr</code>.</li>
+<li>The third constructor initializes both <code>val</code> and <code>next</code> with the given arguments.</li>
 </ul>
 </li>
-<li>
-<p><strong>Connecting Lists</strong>:</p>
+</ul>
+<h4 id="step-2-create-new-lists-to-partition-the-original-list">
+  Step 2: Create New Lists to Partition the Original List
+  <a class="heading-link" href="#step-2-create-new-lists-to-partition-the-original-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> p1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> p2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> ans <span style="color:#f92672">=</span> p1, <span style="color:#f92672">*</span>r <span style="color:#f92672">=</span> p2;
+</span></span></code></pre></div><ul>
+<li>Two new dummy nodes <code>p1</code> and <code>p2</code> are created. These dummy nodes are used to build two separate lists:
 <ul>
-<li>Finally, connect the last node of the <code>p1</code> list to the head of the <code>p2</code> list and return the combined list starting from <code>ans-&gt;next</code>.</li>
+<li><code>p1</code>: Will store nodes with values less than <code>x</code>.</li>
+<li><code>p2</code>: Will store nodes with values greater than or equal to <code>x</code>.</li>
 </ul>
 </li>
-</ol>
+<li><code>ans</code> is a pointer to <code>p1</code> (to return the result later).</li>
+<li><code>r</code> is a pointer to <code>p2</code>, which will be used to connect the second partition list to the first.</li>
+</ul>
+<h4 id="step-3-traverse-the-input-list-and-partition-the-nodes">
+  Step 3: Traverse the Input List and Partition the Nodes
+  <a class="heading-link" href="#step-3-traverse-the-input-list-and-partition-the-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(head<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> x) {
+</span></span><span style="display:flex;"><span>        p1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(head<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        p1 <span style="color:#f92672">=</span> p1<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        p2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(head<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        p2 <span style="color:#f92672">=</span> p2<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    head <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through the input list, starting from the <code>head</code>.</li>
+<li>For each node:
+<ul>
+<li>If the node&rsquo;s value is less than <code>x</code>, it is added to the list represented by <code>p1</code> (nodes with values less than <code>x</code>).</li>
+<li>If the node&rsquo;s value is greater than or equal to <code>x</code>, it is added to the list represented by <code>p2</code> (nodes with values greater than or equal to <code>x</code>).</li>
+</ul>
+</li>
+<li>After adding the node, the corresponding pointer (<code>p1</code> or <code>p2</code>) is moved to the next node in that list.</li>
+</ul>
+<h4 id="step-4-merge-the-two-lists">
+  Step 4: Merge the Two Lists
+  <a class="heading-link" href="#step-4-merge-the-two-lists">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>p1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> r<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>After traversing all the nodes in the input list, the <code>p1</code> list (containing nodes less than <code>x</code>) is connected to the <code>p2</code> list (containing nodes greater than or equal to <code>x</code>).</li>
+<li>This is done by linking <code>p1-&gt;next</code> to <code>r-&gt;next</code>, which points to the head of the <code>p2</code> list.</li>
+</ul>
+<h4 id="step-5-return-the-new-head-of-the-partitioned-list">
+  Step 5: Return the New Head of the Partitioned List
+  <a class="heading-link" href="#step-5-return-the-new-head-of-the-partitioned-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li>The merged list is stored starting from <code>ans-&gt;next</code>, because <code>ans</code> is a dummy node. We return <code>ans-&gt;next</code> as the head of the partitioned list, which now satisfies the required condition where nodes with values less than <code>x</code> appear before nodes with values greater than or equal to <code>x</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -336,15 +384,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(n) ), where ( n ) is the number of nodes in the linked list since each node is processed exactly once.</li>
-<li><strong>Space Complexity:</strong> ( O(n) ) for storing new nodes in the two lists. However, the original nodes are not modified; only new nodes are created, leading to additional space usage.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.
+<ul>
+<li>We traverse the entire list once to partition it into two separate lists.</li>
+<li>Then, we merge the two lists by modifying the <code>next</code> pointers, which is a constant-time operation.</li>
+<li>Thus, the total time complexity is linear with respect to the number of nodes.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.
+<ul>
+<li>We create two new lists (one for nodes less than <code>x</code> and one for nodes greater than or equal to <code>x</code>).</li>
+<li>Each new node requires additional space, so the space complexity is proportional to the number of nodes in the input list.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently solves the problem of partitioning a singly linked list around a given value <code>x</code>. By maintaining two separate linked lists for nodes with values less than <code>x</code> and greater than or equal to <code>x</code>, we are able to achieve the required partitioning while maintaining the relative order of nodes in each partition. This approach runs in linear time (<code>O(n)</code>) and uses linear space (<code>O(n)</code>), making it an optimal solution for this problem.</p>
+<p>Key takeaways:</p>
+<ul>
+<li>The algorithm efficiently partitions the linked list into two parts.</li>
+<li>The order of nodes is maintained within each partition.</li>
+<li>A dummy node is used to simplify the process of building the new partitioned list.</li>
+<li>The solution works in linear time and space, which is optimal for this type of problem.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1550s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1552s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

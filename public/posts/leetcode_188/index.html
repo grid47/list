@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(k,prices, true, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode506s1hbhb">
+<h2 id="hahahugoshortcode509s1hbhb">
   
 
   
@@ -244,7 +244,18 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day. You want to maximize your profit by performing at most <code>k</code> transactions. A transaction consists of buying and selling the stock.</p>
+<p>The problem is to find the maximum profit you can achieve from at most <code>k</code> transactions, given an array of stock prices <code>prices[]</code>. Each transaction consists of buying and selling the stock once. You can perform at most <code>k</code> transactions. The objective is to maximize the profit while adhering to the transaction limit.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Given prices = <code>[2, 4, 1]</code> and <code>k = 2</code>, the maximum profit would be <code>2</code> by buying at 2 and selling at 4.</li>
+<li>Given prices = <code>[3, 2, 6, 5, 0, 3]</code> and <code>k = 2</code>, the maximum profit would be <code>7</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,70 +263,187 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem requires finding the best way to buy and sell stocks under the constraint of <code>k</code> transactions. A brute force approach would involve trying every possible combination of transactions, but this would lead to inefficient time complexity. Instead, we can use dynamic programming (DP) to optimize this process.</p>
+<p>In this solution, we use <strong>memoization</strong> to store intermediate results and avoid redundant calculations, making the approach more efficient. The idea is to recursively explore both options at each step: buying or not buying a stock and selling or not selling it, while tracking the number of transactions (<code>cnt</code>) and ensuring that we don&rsquo;t exceed <code>k</code>.</p>
+<h3 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
-<li>
-<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<li><strong>State Representation</strong>: The state is represented by the current index in the <code>prices</code> array, whether we are in the &ldquo;buy&rdquo; phase or the &ldquo;sell&rdquo; phase, and the number of transactions performed so far.</li>
+<li><strong>Memoization</strong>: Memoization is used to store the results of subproblems to avoid redundant work. This optimizes the recursion by storing previously computed results.</li>
+<li><strong>Recursive Transition</strong>: The recursion explores two possible transitions:
 <ul>
-<li>Use a 3D memoization table <code>memo</code> to store results for previously computed states to avoid redundant calculations.</li>
-<li>The states are defined by:
-<ul>
-<li><code>buy</code>: A boolean indicating whether you can buy on this day (<code>true</code> means you can buy).</li>
-<li><code>idx</code>: The current day index.</li>
-<li><code>cnt</code>: The count of transactions made so far.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursion</strong>:</p>
-<ul>
-<li>Define a recursive function <code>dp</code> to explore two choices at each state:
-<ul>
-<li><strong>Skip the current day</strong> and proceed to the next day.</li>
-<li><strong>Buy the stock</strong> if in a buying state or <strong>sell the stock</strong> if in a selling state.</li>
-</ul>
-</li>
-<li>Base cases:
-<ul>
-<li>If the count of transactions (<code>cnt</code>) reaches <code>k</code> or if all days are processed (<code>idx == prices.size()</code>), return 0 (no profit).</li>
-</ul>
-</li>
-<li>Compute the maximum profit possible from the two choices and store the result in the <code>memo</code> table.</li>
+<li>Skip the current day.</li>
+<li>Buy the stock or sell the stock, depending on the current phase (<code>buy</code> or <code>sell</code>).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Declare a 3D array <code>memo</code> for memoization.</li>
-<li><strong>Line 3-4</strong>: Define the recursive function <code>dp</code> with parameters: the number of transactions <code>k</code>, the prices array, a <code>buy</code> flag, the current index <code>idx</code>, and the count of transactions <code>cnt</code>.</li>
-<li><strong>Line 5-9</strong>: Handle base cases and check the memoization table.</li>
-<li><strong>Line 10-14</strong>: Calculate the result by either skipping the day or executing a buy/sell transaction.</li>
-<li><strong>Line 15</strong>: Return the maximum profit stored in the <code>memo</code> table.</li>
-<li><strong>Line 17</strong>: Define the <code>maxProfit</code> function that initializes the memoization table and calls the <code>dp</code> function.</li>
+<h4 id="1-function-signature">
+  1. Function Signature:
+  <a class="heading-link" href="#1-function-signature">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">1001</span>][<span style="color:#ae81ff">100</span>];
+</span></span></code></pre></div><ul>
+<li>A 3D memoization array is defined. The first dimension (<code>2</code>) is for whether we are in a buying or selling phase. The second dimension (<code>1001</code>) tracks the current day (index) in the <code>prices</code> array. The third dimension (<code>100</code>) tracks the number of transactions performed so far.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="2-dp-function">
+  2. <code>dp</code> Function:
+  <a class="heading-link" href="#2-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> prices, <span style="color:#66d9ef">int</span> buy, <span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> cnt) {
+</span></span></code></pre></div><ul>
+<li>The recursive function <code>dp</code> is called with the parameters:
+<ul>
+<li><code>k</code>: The maximum number of transactions allowed.</li>
+<li><code>prices</code>: The array of stock prices.</li>
+<li><code>buy</code>: A boolean flag to indicate whether we are in the buying phase (<code>1</code> for buy, <code>0</code> for sell).</li>
+<li><code>idx</code>: The current index in the <code>prices</code> array.</li>
+<li><code>cnt</code>: The current number of transactions performed.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-base-case">
+  3. Base Case:
+  <a class="heading-link" href="#3-base-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">==</span> k <span style="color:#f92672">||</span> idx <span style="color:#f92672">==</span> prices.size()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If we&rsquo;ve made <code>k</code> transactions or have iterated over all the prices, we return <code>0</code> because no further profit can be made.</li>
+</ul>
+<h4 id="4-memoization-check">
+  4. Memoization Check:
+  <a class="heading-link" href="#4-memoization-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(memo[buy][idx][cnt] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[buy][idx][cnt];
+</span></span></code></pre></div><ul>
+<li>If the result has already been computed for the current state (<code>buy</code>, <code>idx</code>, <code>cnt</code>), we return the stored result from <code>memo</code> to avoid redundant calculations.</li>
+</ul>
+<h4 id="5-recursive-transitions">
+  5. Recursive Transitions:
+  <a class="heading-link" href="#5-recursive-transitions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> dp(k, prices, buy, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, cnt);
+</span></span></code></pre></div><ul>
+<li>This line represents the option where we skip the current day and move to the next day (<code>idx + 1</code>), without making a transaction.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(buy) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, <span style="color:#f92672">-</span>prices[idx] <span style="color:#f92672">+</span> dp(k, prices, false, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, cnt));
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, prices[idx] <span style="color:#f92672">+</span> dp(k, prices, true, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If we&rsquo;re in the &ldquo;buy&rdquo; phase (<code>buy == 1</code>), we attempt to buy the stock on the current day, and the next state will be the &ldquo;sell&rdquo; phase (<code>buy == 0</code>).</li>
+<li>If we&rsquo;re in the &ldquo;sell&rdquo; phase (<code>buy == 0</code>), we attempt to sell the stock, and the next state will be the &ldquo;buy&rdquo; phase (<code>buy == 1</code>) with the transaction count incremented by 1 (<code>cnt + 1</code>).</li>
+<li>The maximum profit is calculated by comparing both options: either skipping the day or performing a buy/sell transaction.</li>
+</ul>
+<h4 id="6-return-memoized-result">
+  6. Return Memoized Result:
+  <a class="heading-link" href="#6-return-memoized-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> memo[buy][idx][cnt] <span style="color:#f92672">=</span> res;
+</span></span></code></pre></div><ul>
+<li>After computing the maximum profit for the current state, we store the result in the <code>memo</code> array and return it.</li>
+</ul>
+<h4 id="7-maxprofit-function">
+  7. <code>maxProfit</code> Function:
+  <a class="heading-link" href="#7-maxprofit-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxProfit</span>(<span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> prices) {
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(k, prices, true, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>maxProfit</code> function initializes the <code>memo</code> array to <code>-1</code> (indicating uncomputed states).</li>
+<li>It then calls the recursive <code>dp</code> function starting from the first day (<code>idx = 0</code>), with <code>buy = true</code> (indicating we are allowed to buy on the first day), and <code>cnt = 0</code> (indicating no transactions have been made).</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(k \times n)), where (n) is the number of days in the prices array, as we potentially explore all combinations of transactions and days.</li>
-<li><strong>Space Complexity</strong>: (O(k \times n)) for the memoization table, plus (O(n)) for the recursion stack in the worst case.</li>
+<li><strong>Time Complexity: O(k * n)</strong>, where <code>n</code> is the number of days in the <code>prices</code> array, and <code>k</code> is the maximum number of allowed transactions. The dynamic programming approach uses memoization to ensure each state is computed only once. The recursion explores <code>k * n</code> unique states, where each state corresponds to a specific combination of transaction count (<code>cnt</code>), day index (<code>idx</code>), and whether we&rsquo;re buying or selling (<code>buy</code>).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity: O(k * n)</strong>, which is the space used by the memoization table (<code>memo[2][1001][100]</code>), storing results for all unique combinations of <code>k</code>, <code>idx</code>, and <code>buy</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum profit achievable with at most <code>k</code> transactions using dynamic programming and memoization. By breaking the problem down into smaller subproblems and storing intermediate results, the solution avoids redundant calculations and achieves optimal performance.</p>
+<h4 id="key-highlights">
+  Key Highlights:
+  <a class="heading-link" href="#key-highlights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Efficient Solution</strong>: The solution is optimized with <strong>O(k * n)</strong> time complexity.</li>
+<li><strong>Memoization</strong>: The use of memoization ensures that we don&rsquo;t recompute the result for the same state multiple times, significantly improving efficiency.</li>
+<li><strong>Dynamic Programming</strong>: The approach makes use of dynamic programming to explore all possible states of the stock prices and transactions.</li>
+<li><strong>Scalable</strong>: This solution can scale to larger inputs, as it avoids brute-force exploration of all combinations.</li>
+</ul>
+<p>This code provides a comprehensive and efficient approach to solving the problem of maximizing profit with at most <code>k</code> stock transactions.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode506s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode509s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

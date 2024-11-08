@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -233,7 +233,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> slow;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1566s1hbhb">
+<h2 id="hahahugoshortcode1567s1hbhb">
   
 
   
@@ -245,7 +245,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the head of a singly linked list, return the middle node of the linked list. If there are two middle nodes, return the second middle node.</p>
+<p>The problem asks us to find the middle node of a singly linked list. A singly linked list consists of nodes where each node has a value (<code>val</code>) and a pointer (<code>next</code>) to the next node in the list. The task is to return the middle node of the linked list.</p>
+<p>If there are two middle nodes (in case of an even number of nodes), the second one should be returned.</p>
+<h3 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given the linked list:</p>
+<p><code>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</code></p>
+<ul>
+<li><strong>Input</strong>: <code>head = [1, 2, 3, 4, 5]</code></li>
+<li><strong>Output</strong>: <code>[3, 4, 5]</code> (The middle node is <code>3</code> in this case)</li>
+</ul>
+<p>For another linked list with an even number of nodes:</p>
+<p><code>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6</code></p>
+<ul>
+<li><strong>Input</strong>: <code>head = [1, 2, 3, 4, 5, 6]</code></li>
+<li><strong>Output</strong>: <code>[4, 5, 6]</code> (The middle node is <code>4</code>, the second of the two middle nodes)</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -253,58 +273,143 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To find the middle node of a linked list, we can use the <strong>two-pointer technique</strong>:</p>
+<p>To solve this problem, we will use a <strong>two-pointer technique</strong> commonly referred to as the <strong>Tortoise and Hare algorithm</strong>. The idea is to use two pointers that traverse the linked list at different speeds. By the time the fast pointer reaches the end of the list, the slow pointer will be at the middle.</p>
+<ul>
+<li><strong>Fast Pointer (Hare)</strong>: This pointer will move two steps at a time. It traverses the linked list at a faster pace.</li>
+<li><strong>Slow Pointer (Tortoise)</strong>: This pointer will move one step at a time. It traverses the linked list at a slower pace.</li>
+</ul>
+<h3 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>The fast pointer moves twice as fast as the slow pointer. This means that when the fast pointer reaches the end of the list, the slow pointer will be positioned at the middle.</li>
+<li>The approach works even for linked lists with an even number of nodes. If the list has an even length, the slow pointer will point to the second of the two middle nodes.</li>
+</ol>
+<h3 id="algorithm">
+  Algorithm:
+  <a class="heading-link" href="#algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Initialize two pointers, <code>slow</code> and <code>fast</code>, both pointing to the head of the linked list.</li>
+<li>Traverse the list with the <code>slow</code> pointer moving one step at a time and the <code>fast</code> pointer moving two steps at a time.</li>
+<li>If the <code>fast</code> pointer reaches the end of the list (<code>fast == nullptr</code>), the <code>slow</code> pointer will be pointing at the middle node.</li>
+<li>The algorithm terminates when the <code>fast</code> pointer cannot proceed further (i.e., when <code>fast</code> or <code>fast-&gt;next</code> is <code>nullptr</code>).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> middleNode(ListNode<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Initialize the slow and fast pointers.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ListNode<span style="color:#f92672">*</span> slow <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>fast <span style="color:#f92672">=</span> head;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Traverse the list with the slow and fast pointers.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// The slow pointer moves one step, and the fast pointer moves two steps.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> (fast <span style="color:#f92672">&amp;&amp;</span> fast<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>            slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next; <span style="color:#75715e">// Move slow pointer by 1 step
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next; <span style="color:#75715e">// Move fast pointer by 2 steps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 3: Return the slow pointer when the fast pointer reaches the end.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> slow;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="step-by-step-explanation">
+  Step-by-Step Explanation:
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
 <li>
-<p><strong>Initialize Two Pointers</strong>:</p>
+<p><strong>Pointer Initialization</strong>:</p>
 <ul>
-<li>Start with two pointers, <code>slow</code> and <code>fast</code>, both pointing to the head of the linked list.</li>
+<li>We initialize two pointers: <code>slow</code> and <code>fast</code>. Both are set to the head of the linked list.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> slow <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>fast <span style="color:#f92672">=</span> head;
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Traverse the List</strong>:</p>
+<p><strong>Traversing the Linked List</strong>:</p>
 <ul>
-<li>Move the <code>slow</code> pointer one step at a time (<code>slow = slow-&gt;next</code>).</li>
-<li>Move the <code>fast</code> pointer two steps at a time (<code>fast = fast-&gt;next-&gt;next</code>).</li>
-<li>Continue this process until the <code>fast</code> pointer reaches the end of the list (i.e., <code>fast</code> is <code>nullptr</code> or <code>fast-&gt;next</code> is <code>nullptr</code>).</li>
+<li>We use a <code>while</code> loop to traverse the list. The loop continues until the <code>fast</code> pointer reaches the end of the list (i.e., <code>fast == nullptr</code>) or the <code>fast-&gt;next</code> pointer is <code>nullptr</code> (for the case when the number of nodes is odd).</li>
+<li>Inside the loop:
+<ul>
+<li>The <code>slow</code> pointer moves one step forward by pointing to <code>slow-&gt;next</code>.</li>
+<li>The <code>fast</code> pointer moves two steps forward by pointing to <code>fast-&gt;next-&gt;next</code>.</li>
 </ul>
 </li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (fast <span style="color:#f92672">&amp;&amp;</span> fast<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>    slow <span style="color:#f92672">=</span> slow<span style="color:#f92672">-&gt;</span>next; <span style="color:#75715e">// Move slow pointer by 1 step
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    fast <span style="color:#f92672">=</span> fast<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next; <span style="color:#75715e">// Move fast pointer by 2 steps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
 <li>
 <p><strong>Return the Middle Node</strong>:</p>
 <ul>
-<li>When the loop ends, the <code>slow</code> pointer will be pointing to the middle node of the list.</li>
-<li>If the list has an even number of nodes, the <code>slow</code> pointer will point to the second middle node, which is the desired result.</li>
+<li>When the loop terminates, the <code>slow</code> pointer will be pointing to the middle node of the list. This is because the <code>fast</code> pointer has traversed the list twice as fast as the <code>slow</code> pointer, ensuring that when <code>fast</code> reaches the end, <code>slow</code> is at the middle.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> slow;
+</span></span></code></pre></div></li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>The function initializes two pointers, <code>slow</code> and <code>fast</code>, both set to the head.</li>
-<li>A while loop iterates as long as <code>fast</code> and <code>fast-&gt;next</code> are not null.</li>
-<li>After exiting the loop, the <code>slow</code> pointer is returned, which represents the middle node of the linked list.</li>
+<li><strong>O(n)</strong>: Both the <code>slow</code> and <code>fast</code> pointers traverse the list only once. Since the <code>fast</code> pointer moves twice as fast as the <code>slow</code> pointer, the total number of iterations is proportional to the length of the list, <code>n</code>. Hence, the time complexity is O(n), where <code>n</code> is the number of nodes in the linked list.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is O(1) because we are using only two additional pointers (<code>slow</code> and <code>fast</code>) to traverse the list. No additional space is used that depends on the size of the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution provides an efficient way to find the middle node of a singly linked list using the <strong>Tortoise and Hare algorithm</strong>, which operates in linear time and constant space. The two-pointer approach ensures that we traverse the list only once, making the algorithm highly efficient, even for large linked lists.</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ), where ( n ) is the number of nodes in the linked list. Each pointer traverses the list once.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), as no extra space is used other than the pointers.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the list.</li>
+<li><strong>Space Complexity</strong>: O(1), as we use a constant amount of extra space.</li>
 </ul>
+<p>This approach works perfectly for both odd and even length lists, making it a versatile solution for finding the middle node.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1566s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1567s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ret;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode842s1hbhb">
+<h2 id="hahahugoshortcode841s1hbhb">
   
 
   
@@ -257,51 +257,94 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the maximum value in each sliding window of size <code>k</code>.</p>
-<h3 id="approach">
+<p>The task at hand is to find the maximum value in a sliding window of size <code>k</code> that moves across an array <code>nums</code>. Specifically, for each window of size <code>k</code>, you need to determine the maximum element within that window as the window slides across the array.</p>
+<p>For example, given the array <code>nums = [1,3,-1,-3,5,3,6,7]</code> and <code>k = 3</code>, the output should be:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>]
+</span></span></code></pre></div><h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution utilizes a deque to maintain indices of elements in the current sliding window, ensuring that the front of the deque always holds the index of the maximum element within the window.</p>
+<p>The problem can be efficiently solved using a <strong>deque</strong> (double-ended queue) to maintain a list of indices of elements that could be the maximum in the current sliding window. Here&rsquo;s how the approach works:</p>
 <ol>
 <li>
-<p><strong>Deque Maintenance</strong>:</p>
+<p><strong>Sliding Window</strong>: As the window moves from left to right, we want to track the maximum value within each window of size <code>k</code>. The window moves by one element at a time.</p>
+</li>
+<li>
+<p><strong>Deque for Efficient Maximum Calculation</strong>:</p>
 <ul>
-<li>Remove elements from the front of the deque if they are outside the current window of size <code>k</code>.</li>
-<li>Remove elements from the back of the deque while the current element is greater than or equal to the element at the deque’s back (to maintain decreasing order).</li>
+<li>The deque will store indices of elements in a way that the values in <code>nums</code> corresponding to these indices are in a <strong>decreasing</strong> order.</li>
+<li>The front of the deque will always store the index of the largest element in the current window. This is because any smaller elements in the window will be discarded as we encounter larger elements, ensuring that the largest element always stays at the front.</li>
+<li>The deque will only store elements that are within the bounds of the current sliding window. Once an index goes out of the window&rsquo;s range, it will be removed from the deque.</li>
 </ul>
 </li>
 <li>
-<p><strong>Window Maximum</strong>:</p>
+<p><strong>Two Key Operations</strong>:</p>
 <ul>
-<li>After processing the first <code>k</code> elements, add the maximum for each window to the result by taking the element at the deque&rsquo;s front.</li>
+<li><strong>Remove Out-of-Bounds Indices</strong>: If the index at the front of the deque is outside the current window (i.e., <code>i - k</code>), we remove it.</li>
+<li><strong>Maintain Order of Elements</strong>: As we encounter a new element <code>nums[i]</code>, we remove indices from the back of the deque while <code>nums[dq.back()] &lt;= nums[i]</code> to maintain the order where the largest element is at the front.</li>
 </ul>
 </li>
+<li>
+<p><strong>Result Computation</strong>: Once the window reaches size <code>k</code>, the element at the front of the deque will be the maximum element for that window. This is added to the result array.</p>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: Vector <code>nums</code> and integer <code>k</code> (size of sliding window).</li>
-<li><strong>Output</strong>: Vector <code>ret</code> where each element is the maximum of a sliding window of size <code>k</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> maxSlidingWindow(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span></code></pre></div><ul>
+<li>We define the <code>maxSlidingWindow</code> function, which accepts a vector <code>nums</code> (the input array) and an integer <code>k</code> (the window size). The goal is to compute the maximum value in each sliding window of size <code>k</code> as it moves through the array.</li>
 </ul>
-<ol>
-<li>Iterate through each element in <code>nums</code> with index <code>i</code>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        deque<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dq;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ret;
+</span></span></code></pre></div><ul>
+<li>We initialize two variables:
 <ul>
-<li>Remove the front element if it’s outside the window (<code>i - k</code>).</li>
-<li>Maintain decreasing order by popping from the back if the current element is greater.</li>
-<li>Add the current index <code>i</code> to the back of the deque.</li>
+<li><code>dq</code> is a deque used to store the indices of the array elements in the current sliding window.</li>
+<li><code>ret</code> is a vector that will hold the result—the maximum values for each sliding window.</li>
 </ul>
 </li>
-<li>Once the first <code>k</code> elements are processed (<code>i &gt;= k - 1</code>), add <code>nums[dq.front()]</code> (max in the current window) to <code>ret</code>.</li>
-</ol>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We start a loop that iterates through the array <code>nums</code> from left to right. The loop variable <code>i</code> represents the current index in the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>dq.empty() <span style="color:#f92672">&amp;&amp;</span> dq.front() <span style="color:#f92672">==</span> i <span style="color:#f92672">-</span> k) dq.pop_front();
+</span></span></code></pre></div><ul>
+<li>This condition checks if the front element of the deque is out of bounds of the current sliding window. If the index at the front is <code>i - k</code>, it means the element at <code>dq.front()</code> is no longer part of the window, so we remove it from the deque.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>dq.empty() <span style="color:#f92672">&amp;&amp;</span> nums[dq.back()] <span style="color:#f92672">&lt;=</span> nums[i]) dq.pop_back();
+</span></span></code></pre></div><ul>
+<li>Here, we maintain the property of the deque: it stores indices in a decreasing order of values in the <code>nums</code> array.
+<ul>
+<li>We repeatedly remove elements from the back of the deque as long as the current element <code>nums[i]</code> is greater than or equal to the element at <code>nums[dq.back()]</code>. This ensures that the deque always stores indices of elements in descending order.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            dq.push_back(i);
+</span></span></code></pre></div><ul>
+<li>After removing all smaller elements from the back of the deque, we add the current index <code>i</code> to the back of the deque. This index will now be part of the current window, and it may be the next maximum value if no larger element is encountered later.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) ret.push_back(nums[dq.front()]);
+</span></span></code></pre></div><ul>
+<li>Once the index <code>i</code> reaches <code>k - 1</code> (i.e., the window has been filled), we add the value corresponding to the front of the deque (<code>nums[dq.front()]</code>) to the result vector <code>ret</code>. The value at <code>dq.front()</code> is the maximum value in the current window because it is the largest element among the current window elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ret;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The loop continues until all elements in <code>nums</code> are processed. Finally, the result vector <code>ret</code>, which contains the maximum values for each sliding window, is returned.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,26 +352,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, since each element is added and removed from the deque at most once.</li>
-<li><strong>Space Complexity</strong>: (O(k)) for the deque, which stores indices within the sliding window.</li>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The <code>for</code> loop runs <code>n</code> times (where <code>n</code> is the size of the <code>nums</code> array).</li>
+<li>In each iteration, each element is pushed and popped from the deque at most once. Therefore, the operations inside the loop take constant time, resulting in an overall time complexity of <strong>O(n)</strong>.</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k)</strong>:
+<ul>
+<li>The deque stores the indices of the elements within the current sliding window, and its size will never exceed <code>k</code> (the size of the window). Thus, the space complexity is <strong>O(k)</strong> for the deque.</li>
+<li>The result vector <code>ret</code> will store <code>n - k + 1</code> elements, so its space complexity is <strong>O(n - k + 1)</strong>, but this is effectively <strong>O(n)</strong> for large <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution leverages the deque data structure to efficiently find the maximum value in a sliding window of size <code>k</code>. The key idea is to maintain the indices of the potential maximum values in a monotonically decreasing order within the deque, ensuring that the element at the front of the deque is always the maximum in the current window. This approach has a time complexity of <strong>O(n)</strong>, making it an optimal solution for this problem.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Small Array or Window Size</strong>: If <code>nums</code> size is less than <code>k</code>, adjust to return empty or partial window results.</li>
-<li><strong>All Elements Same</strong>: Handles duplicates efficiently since it only retains necessary indices.</li>
+<li><strong>Efficient Window Management</strong>: The deque allows us to manage the sliding window efficiently by ensuring that the maximum element is always at the front.</li>
+<li><strong>Linear Time Complexity</strong>: The solution runs in <strong>O(n)</strong> time, making it highly efficient for large input arrays.</li>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(k)</strong> for the deque, which is efficient given that <code>k</code> is the size of the sliding window.</li>
+<li><strong>Practical Application</strong>: This solution is widely used in problems involving sliding windows and dynamic range queries, making it useful in a variety of real-world scenarios like time series analysis, signal processing, and more.</li>
 </ol>
+<p>By using the deque in this manner, we ensure that the solution is both time-efficient and space-efficient, making it suitable for large inputs while maintaining clarity and simplicity in the code.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode842s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode841s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

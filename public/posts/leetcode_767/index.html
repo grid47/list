@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -263,7 +263,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1476s1hbhb">
+<h2 id="hahahugoshortcode1474s1hbhb">
   
 
   
@@ -275,7 +275,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, rearrange its characters so that no two adjacent characters are the same. If this is not possible, return an empty string.</p>
+<p>The problem asks us to reorganize a string <code>s</code> in such a way that no two adjacent characters are the same. If it is not possible to rearrange the string to satisfy this condition, the function should return an empty string. For example:</p>
+<ul>
+<li>Input: <code>&quot;aab&quot;</code></li>
+<li>Output: <code>&quot;aba&quot;</code></li>
+</ul>
+<p>The goal is to find an efficient way to rearrange the string, or determine when it&rsquo;s impossible to do so, while making sure that no two identical characters are adjacent.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,48 +288,105 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, we can employ a greedy algorithm. Here&rsquo;s the high-level strategy:</p>
 <ol>
 <li>
-<p><strong>Frequency Count</strong>:</p>
-<ul>
-<li>Use an array <code>frq</code> to count the frequency of each character.</li>
-<li>Identify the character with the maximum frequency (<code>mfq</code>).</li>
-</ul>
+<p><strong>Frequency Count</strong>: First, we need to calculate the frequency of each character in the string. This will help us identify if it&rsquo;s possible to reorganize the string. If any character appears more than half the length of the string (rounded up), it&rsquo;s impossible to rearrange the string, and we should return an empty string.</p>
 </li>
 <li>
-<p><strong>Feasibility Check</strong>:</p>
-<ul>
-<li>If the most frequent character occurs more than half the length of the string (rounded up), return an empty string as rearrangement is impossible.</li>
-</ul>
+<p><strong>Greedy Rearrangement</strong>: After we determine that rearranging is possible, we will use the most frequent character first and place it in every other position. Then, we will place the remaining characters in the gaps created by the most frequent character.</p>
 </li>
 <li>
-<p><strong>Placement</strong>:</p>
+<p><strong>Rearranging Step</strong>:</p>
 <ul>
-<li>First, place the most frequent character in the even indices of the result string.</li>
-<li>Then, fill the remaining characters in the odd indices until all characters are placed.</li>
+<li>We start by placing the most frequent character in the even-indexed positions.</li>
+<li>Then, we proceed to place the remaining characters in the odd-indexed positions.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By ensuring that the most frequent character is placed first and spaced out as much as possible, we can prevent consecutive occurrences of the same character.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for rearranging the string.</li>
+<h4 id="step-1-frequency-count">
+  Step 1: Frequency Count
+  <a class="heading-link" href="#step-1-frequency-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: s)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">++</span>frq[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">&gt;</span> frq[mfq])
+</span></span><span style="display:flex;"><span>        mfq <span style="color:#f92672">=</span> c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>We create an array <code>frq</code> of size 26 to store the frequency of each character in the string <code>s</code>.</li>
+<li>We also maintain a variable <code>mfq</code> to track the index of the character with the maximum frequency.</li>
+<li>As we iterate over the string, we update the frequency count of each character and check if the current character has a higher frequency than the previous maximum. If so, we update <code>mfq</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>string reorganizeString(string s)</code>: Implements the logic to reorganize the string.</li>
+<h4 id="step-2-check-for-feasibility">
+  Step 2: Check for Feasibility
+  <a class="heading-link" href="#step-2-check-for-feasibility">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> frq[mfq] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> s.size()) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>After calculating the frequency of each character, we check if the most frequent character can be placed in the string such that no two identical characters are adjacent.</li>
+<li>If the count of the most frequent character is greater than half the size of the string (rounded up), then it&rsquo;s impossible to reorganize the string without having two adjacent identical characters. In this case, we return an empty string <code>&quot;&quot;</code>.</li>
 </ul>
-</li>
+<h4 id="step-3-place-the-most-frequent-character">
+  Step 3: Place the Most Frequent Character
+  <a class="heading-link" href="#step-3-place-the-most-frequent-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(frq[mfq]) {
+</span></span><span style="display:flex;"><span>    s[i] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> mfq;
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    frq[mfq]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We now proceed to place the most frequent character (indexed by <code>mfq</code>) in the string. We start placing it in every other position, i.e., at even indices.</li>
+<li>For each placement, we decrement the frequency of the most frequent character (<code>frq[mfq]--</code>) and move to the next available position (<code>i += 2</code>).</li>
+</ul>
+<h4 id="step-4-place-the-remaining-characters">
+  Step 4: Place the Remaining Characters
+  <a class="heading-link" href="#step-4-place-the-remaining-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(frq[j]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> s.size()) i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        s[i] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> j;
+</span></span><span style="display:flex;"><span>        frq[j]<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After placing all occurrences of the most frequent character, we proceed to place the remaining characters.</li>
+<li>For each character (from <code>a</code> to <code>z</code>), we check if it still has occurrences left (i.e., <code>frq[j]</code> is non-zero). If so, we place it in the next available position.</li>
+<li>If we reach the end of the string (i.e., <code>i &gt;= s.size()</code>), we reset the position to 1 (odd indices) to fill the gaps between the already placed characters.</li>
+<li>We continue this process until all characters are placed.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+</span></span></code></pre></div><ul>
+<li>Once all characters are placed successfully, we return the rearranged string <code>s</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -333,15 +395,50 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the string, as each character is processed a limited number of times.</li>
-<li><strong>Space Complexity</strong>: O(1), since the frequency array has a constant size (26 for lowercase letters).</li>
+<li><strong>O(n)</strong>: The time complexity is linear with respect to the length of the string <code>n</code>. This is because:
+<ul>
+<li>We first iterate through the string to count the frequency of each character, which takes O(n) time.</li>
+<li>Then, we iterate over the characters to place them in the result string, which takes another O(n) time.</li>
+<li>The complexity is dominated by the linear pass through the string and frequency array.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we only use a fixed-size array <code>frq</code> of size 26 to store character frequencies and a few integer variables. The space used does not depend on the size of the input string.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient approach to solving the problem of rearranging a string such that no two adjacent characters are the same. The greedy approach ensures that the most frequent character is spaced out as much as possible, preventing consecutive identical characters. The algorithm works in linear time with constant space, making it both time and space-efficient for large inputs.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the size of the input string.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong>, as we use only a fixed number of auxiliary variables.</li>
+</ul>
+<p>By implementing this approach, we can successfully reorganize the string or determine if it&rsquo;s impossible to do so efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1476s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1474s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

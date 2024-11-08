@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1481s1hbhb">
+<h2 id="hahahugoshortcode1491s1hbhb">
   
 
   
@@ -251,7 +251,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if it is possible to transform the string <code>start</code> into the string <code>end</code> by moving the characters &lsquo;L&rsquo; and &lsquo;R&rsquo; to adjacent &lsquo;X&rsquo; characters, while &lsquo;X&rsquo; can occupy any position.</p>
+<p>The problem asks whether it&rsquo;s possible to transform one string, <code>start</code>, into another string, <code>end</code>, by following a specific set of transformation rules. The string consists of characters &lsquo;L&rsquo;, &lsquo;R&rsquo;, and &lsquo;X&rsquo;. The transformation rules are:</p>
+<ol>
+<li>You can move characters &lsquo;L&rsquo; and &lsquo;R&rsquo; left or right across the string, but they can only move in the direction that respects their inherent meaning:
+<ul>
+<li>&lsquo;L&rsquo; can only move left (it cannot move right).</li>
+<li>&lsquo;R&rsquo; can only move right (it cannot move left).</li>
+</ul>
+</li>
+<li>The &lsquo;X&rsquo; characters in the string are placeholders that can be ignored. They do not affect the transformation.</li>
+<li>A character &lsquo;L&rsquo; at position <code>i</code> in the <code>start</code> string can only be transformed into a character &lsquo;L&rsquo; at position <code>j</code> in the <code>end</code> string if <code>j &lt;= i</code> (i.e., &lsquo;L&rsquo; can only move left). Similarly, a character &lsquo;R&rsquo; at position <code>i</code> in the <code>start</code> string can only be transformed into a character &lsquo;R&rsquo; at position <code>j</code> in the <code>end</code> string if <code>j &gt;= i</code> (i.e., &lsquo;R&rsquo; can only move right).</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,64 +269,121 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, the approach involves two main steps:</p>
 <ol>
 <li>
-<p><strong>Filter Non-X Characters</strong>:</p>
-<ul>
-<li>Create two strings <code>s1</code> and <code>s2</code> by extracting all characters from <code>start</code> and <code>end</code> that are not &lsquo;X&rsquo;.</li>
-<li>If <code>s1</code> is not equal to <code>s2</code>, return <code>false</code> since the sequence of non-&lsquo;X&rsquo; characters must match.</li>
-</ul>
+<p><strong>Check if the non-&lsquo;X&rsquo; characters match</strong>: This is the first condition that must be satisfied for a transformation to be possible. We remove all &lsquo;X&rsquo; characters from both <code>start</code> and <code>end</code> and compare the remaining characters. If the characters in the transformed strings don&rsquo;t match, we immediately return <code>false</code>.</p>
 </li>
 <li>
-<p><strong>Two Pointer Technique</strong>:</p>
+<p><strong>Simulate the movement of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters</strong>: After confirming that the non-&lsquo;X&rsquo; characters are in the same order, we then simulate the movement of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters across both strings:</p>
 <ul>
-<li>Initialize two pointers <code>p1</code> and <code>p2</code> to traverse <code>start</code> and <code>end</code> respectively.</li>
-<li>Iterate through both strings:
+<li>For each non-&lsquo;X&rsquo; character in <code>start</code>, we check if it can be moved to the corresponding position in <code>end</code> according to the movement rules for &lsquo;L&rsquo; and &lsquo;R&rsquo;.</li>
+<li>Specifically:
 <ul>
-<li>Skip over &lsquo;X&rsquo; characters using the pointers.</li>
-<li>Check if both pointers have reached the end of their respective strings:
-<ul>
-<li>If both pointers reach the end, return <code>true</code>.</li>
-<li>If one pointer reaches the end before the other, return <code>false</code>.</li>
+<li>&lsquo;L&rsquo; should not appear at a position greater than the corresponding position in <code>end</code> (i.e., &lsquo;L&rsquo; cannot move right).</li>
+<li>&lsquo;R&rsquo; should not appear at a position smaller than the corresponding position in <code>end</code> (i.e., &lsquo;R&rsquo; cannot move left).</li>
 </ul>
 </li>
-<li>Compare the current non-&lsquo;X&rsquo; characters at the pointers:
-<ul>
-<li>If they differ, return <code>false</code>.</li>
-<li>For &lsquo;L&rsquo;, ensure it does not move right; for &lsquo;R&rsquo;, ensure it does not move left:
-<ul>
-<li>If &lsquo;L&rsquo; is found and its position in <code>end</code> is to the right of <code>start</code>, return <code>false</code>.</li>
-<li>If &lsquo;R&rsquo; is found and its position in <code>end</code> is to the left of <code>start</code>, return <code>false</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>If all checks are satisfied, return <code>true</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By following this procedure, we can determine if the transformation is possible.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-remove-x-characters">
+  Step 1: Remove &lsquo;X&rsquo; Characters
+  <a class="heading-link" href="#step-1-remove-x-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (start[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;X&#39;</span>) s1 <span style="color:#f92672">+=</span> start[i];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (end[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;X&#39;</span>) s2 <span style="color:#f92672">+=</span> end[i];
+</span></span></code></pre></div><ul>
+<li>We initialize two empty strings <code>s1</code> and <code>s2</code>, which will hold the non-&lsquo;X&rsquo; characters from <code>start</code> and <code>end</code> respectively.</li>
+<li>We iterate over both strings (<code>start</code> and <code>end</code>) and append each character to <code>s1</code> and <code>s2</code> if it is not &lsquo;X&rsquo;.</li>
+</ul>
+<h4 id="step-2-compare-the-non-x-characters">
+  Step 2: Compare the Non-&lsquo;X&rsquo; Characters
+  <a class="heading-link" href="#step-2-compare-the-non-x-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (s1 <span style="color:#f92672">!=</span> s2) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>Once we have the strings <code>s1</code> and <code>s2</code>, we check if they are equal. If they are not, we immediately return <code>false</code> because the non-&lsquo;X&rsquo; characters in <code>start</code> and <code>end</code> do not match, making the transformation impossible.</li>
+</ul>
+<h4 id="step-3-initialize-pointers-and-start-moving-characters">
+  Step 3: Initialize Pointers and Start Moving Characters
+  <a class="heading-link" href="#step-3-initialize-pointers-and-start-moving-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> p1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, p2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (p1 <span style="color:#f92672">&lt;</span> start.size() <span style="color:#f92672">&amp;&amp;</span> p2 <span style="color:#f92672">&lt;</span> end.size()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (p1 <span style="color:#f92672">&lt;</span> start.size() <span style="color:#f92672">&amp;&amp;</span> start[p1] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;X&#39;</span>) p1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (p2 <span style="color:#f92672">&lt;</span> end.size() <span style="color:#f92672">&amp;&amp;</span> end[p2] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;X&#39;</span>) p2<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers <code>p1</code> and <code>p2</code> to keep track of our current positions in <code>start</code> and <code>end</code>.</li>
+<li>We use the <code>while</code> loops to skip over all &lsquo;X&rsquo; characters in both <code>start</code> and <code>end</code>. These loops ensure that we only compare non-&lsquo;X&rsquo; characters.</li>
+</ul>
+<h4 id="step-4-check-for-matching-characters-and-movement-rules">
+  Step 4: Check for Matching Characters and Movement Rules
+  <a class="heading-link" href="#step-4-check-for-matching-characters-and-movement-rules">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (p1 <span style="color:#f92672">==</span> start.size() <span style="color:#f92672">&amp;&amp;</span> p2 <span style="color:#f92672">==</span> end.size()) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (p1 <span style="color:#f92672">==</span> start.size() <span style="color:#f92672">||</span> p2 <span style="color:#f92672">==</span> end.size()) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (start[p1] <span style="color:#f92672">!=</span> end[p2]) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (start[p1] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">&amp;&amp;</span> p2 <span style="color:#f92672">&gt;</span> p1) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (start[p1] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span> <span style="color:#f92672">&amp;&amp;</span> p2 <span style="color:#f92672">&lt;</span> p1) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>After skipping over &lsquo;X&rsquo; characters, we check if both <code>p1</code> and <code>p2</code> have reached the end of their respective strings. If they have, we return <code>true</code>, meaning the transformation is complete.</li>
+<li>If either pointer reaches the end while the other has not, we return <code>false</code> because the transformation is impossible.</li>
+<li>We then compare the characters at <code>p1</code> and <code>p2</code>. If the characters are different, we return <code>false</code> because we cannot transform one character into another.</li>
+<li>Next, we check the movement rules:
 <ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for transforming the strings.</li>
+<li>If <code>start[p1]</code> is &lsquo;L&rsquo; and <code>p2 &gt; p1</code>, we return <code>false</code> because &lsquo;L&rsquo; cannot move to the right.</li>
+<li>If <code>start[p1]</code> is &lsquo;R&rsquo; and <code>p2 &lt; p1</code>, we return <code>false</code> because &lsquo;R&rsquo; cannot move to the left.</li>
 </ul>
 </li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>bool canTransform(string start, string end)</code>: Implements the logic to determine if the transformation is possible.</li>
 </ul>
-</li>
+<h4 id="step-5-increment-pointers">
+  Step 5: Increment Pointers
+  <a class="heading-link" href="#step-5-increment-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>p1<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>p2<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>If all conditions are met, we increment both pointers to check the next non-&lsquo;X&rsquo; characters.</li>
+</ul>
+<h4 id="final-step-return-true-if-all-conditions-are-satisfied">
+  Final Step: Return True if All Conditions are Satisfied
+  <a class="heading-link" href="#final-step-return-true-if-all-conditions-are-satisfied">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If we reach the end of both strings without violating any conditions, we return <code>true</code>, indicating that it is possible to transform <code>start</code> into <code>end</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -325,15 +392,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the strings, since it processes each character a limited number of times.</li>
-<li><strong>Space Complexity</strong>: O(n), for the strings <code>s1</code> and <code>s2</code> that store non-&lsquo;X&rsquo; characters.</li>
+<li><strong>O(n)</strong>: The solution iterates through both strings twice—once to remove &lsquo;X&rsquo; characters and once to compare the characters and check the movement rules. This results in a linear time complexity, where <code>n</code> is the length of the strings.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We store the non-&lsquo;X&rsquo; characters from both strings in <code>s1</code> and <code>s2</code>, so the space complexity is proportional to the size of the input strings.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach solves the problem efficiently by first checking if the non-&lsquo;X&rsquo; characters match and then simulating the valid movement of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters. It ensures that we only perform necessary operations, resulting in an optimal solution with linear time and space complexity.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>By removing &lsquo;X&rsquo; characters, we simplify the problem and focus only on the positions of &lsquo;L&rsquo; and &lsquo;R&rsquo; characters.</li>
+<li>The movement rules for &lsquo;L&rsquo; and &lsquo;R&rsquo; are critical and help us determine if the transformation is feasible.</li>
+<li>The time complexity of <strong>O(n)</strong> ensures the solution can handle large inputs efficiently.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1481s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1491s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

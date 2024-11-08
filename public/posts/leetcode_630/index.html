@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pq.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1390s1hbhb">
+<h2 id="hahahugoshortcode1388s1hbhb">
   
 
   
@@ -252,7 +252,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of courses where each course has a duration and a deadline. Your goal is to determine the maximum number of courses you can take such that the sum of the durations of the courses you choose does not exceed the respective deadlines. You need to select the courses in such a way that you can complete as many as possible within their deadlines.</p>
+<p>The problem asks us to schedule courses such that the total number of courses attended is maximized without exceeding the given deadlines. We are provided with a list of courses, each represented by a pair of values <code>[duration, deadline]</code>. The duration is the number of days it takes to complete the course, and the deadline is the last day by which the course should be completed. The task is to find the maximum number of courses that can be scheduled while ensuring that no course exceeds its deadline.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,46 +260,91 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution follows a <strong>greedy approach</strong> with the help of a <strong>priority queue</strong> (or max-heap). The idea is to always pick the next course that can be completed within the available time, while attempting to complete as many courses as possible.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Sorting Courses</strong>:</p>
+<p><strong>Sorting the Courses by Deadline:</strong></p>
 <ul>
-<li>First, sort the courses by their deadlines. This allows us to consider courses in the order of their deadlines, ensuring we can optimize our selection.</li>
+<li>The first step is to sort the courses by their deadline (second value of the pair). This ensures that we process the courses in the order they need to be completed, making it easier to track whether we can finish a course by its deadline.</li>
 </ul>
 </li>
 <li>
-<p><strong>Using a Priority Queue</strong>:</p>
+<p><strong>Tracking the Total Time Taken:</strong></p>
 <ul>
-<li>Utilize a max-heap (priority queue) to keep track of the durations of the selected courses. This will allow us to efficiently manage the total duration of courses taken.</li>
-<li>Maintain a running total of the sum of the durations of the selected courses.</li>
+<li>We maintain a running sum of the total time spent on courses (<code>sum</code>). For each course, we try to schedule it, adding its duration to the sum. If at any point, the sum exceeds the course&rsquo;s deadline, we know that scheduling that course would not allow us to meet the deadline, so we discard the longest course that we&rsquo;ve already scheduled (using a priority queue).</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through Courses</strong>:</p>
+<p><strong>Using a Priority Queue (Max-Heap):</strong></p>
 <ul>
-<li>For each course, add its duration to the total sum and push it onto the priority queue.</li>
-<li>If the total duration exceeds the current course&rsquo;s deadline, remove the longest duration from the total (i.e., pop the top element of the priority queue). This ensures that we are always considering the smallest total duration possible within the deadline constraints.</li>
+<li>The priority queue helps us efficiently track and remove the longest course when necessary. By using a max-heap, we can always remove the course that takes the longest time, ensuring that we discard the course that would contribute the most to exceeding the deadline.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Maximizing the Number of Courses:</strong></p>
 <ul>
-<li>The size of the priority queue at the end will represent the maximum number of courses that can be taken without exceeding the deadlines.</li>
+<li>The ultimate goal is to maximize the number of courses scheduled, so we continue adding courses to the schedule until we either cannot fit any more or we’ve processed all courses. The size of the priority queue at the end gives the maximum number of courses that can be scheduled without exceeding their respective deadlines.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>Sort the courses based on their deadlines.</li>
-<li>Iterate through the sorted list and keep adding the durations to a running total and a max-heap.</li>
-<li>If the total exceeds a course&rsquo;s deadline, adjust by removing the longest duration from the heap.</li>
-<li>Finally, return the size of the heap, which corresponds to the number of courses that can be taken.</li>
+<li>
+<p><strong>Sorting the Courses by Deadline:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end(), [<span style="color:#f92672">&amp;</span>](vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>a, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>b) { <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>]; });
+</span></span></code></pre></div><ul>
+<li>We start by sorting the <code>nums</code> array (which contains the courses) based on the deadline (<code>a[1]</code> for course <code>a</code> and <code>b[1]</code> for course <code>b</code>). This allows us to process the courses in the correct order—starting with the ones that have the earliest deadlines.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over Each Course:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : nums) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> it[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    pq.push(it[<span style="color:#ae81ff">0</span>]);
+</span></span></code></pre></div><ul>
+<li>We initialize the <code>sum</code> variable to track the total duration of the courses we’ve scheduled so far. For each course in the sorted list:
+<ul>
+<li>We add the duration of the current course (<code>it[0]</code>) to <code>sum</code>.</li>
+<li>We push the duration of the current course onto the priority queue (<code>pq</code>). The priority queue helps us keep track of the longest course.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking if the Current Course Can Be Scheduled:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (sum <span style="color:#f92672">&gt;</span> it[<span style="color:#ae81ff">1</span>]) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">-=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After adding a course to the schedule, we check if the total time spent on scheduled courses exceeds the current course’s deadline (<code>sum &gt; it[1]</code>).
+<ul>
+<li>If <code>sum</code> exceeds the deadline, we pop the longest course from the priority queue (<code>pq.pop()</code>), and subtract its duration from <code>sum</code>. This effectively removes the course that takes the most time from the schedule, ensuring that we can still make room for more courses.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Maximum Number of Courses:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> pq.size();
+</span></span></code></pre></div><ul>
+<li>After processing all the courses, the size of the priority queue (<code>pq.size()</code>) represents the maximum number of courses that can be scheduled. We return this value as the answer.</li>
+</ul>
+</li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -308,15 +353,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where <code>n</code> is the number of courses. The sorting step takes O(n log n), and each insertion/removal operation on the priority queue takes O(log n).</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the priority queue which in the worst case can hold all the course durations.</li>
+<li><strong>Sorting the Courses:</strong> The sorting step takes <strong>O(n log n)</strong> time, where <code>n</code> is the number of courses.</li>
+<li><strong>Iterating Over the Courses:</strong> Iterating through the courses takes <strong>O(n)</strong> time.</li>
+<li><strong>Priority Queue Operations:</strong> For each course, we perform two operations on the priority queue (push and pop), each of which takes <strong>O(log n)</strong> time. This results in <strong>O(n log n)</strong> time complexity for managing the priority queue.</li>
 </ul>
+<p>Therefore, the total time complexity of the solution is <strong>O(n log n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a priority queue to store the durations of the courses, so the space complexity is <strong>O(n)</strong>, as in the worst case, we may store all courses in the priority queue.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The greedy approach with a priority queue efficiently solves the problem of scheduling courses with deadlines while maximizing the number of courses that can be completed. By sorting the courses based on their deadlines and using a max-heap to manage the total time spent on courses, we can easily discard the longest course whenever the total time exceeds the available time for a course. The time complexity of <strong>O(n log n)</strong> ensures that this approach can handle large inputs efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1390s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1388s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

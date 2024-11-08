@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -232,7 +232,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1623s1hbhb">
+<h2 id="hahahugoshortcode1622s1hbhb">
   
 
   
@@ -244,7 +244,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers representing the lengths of rods, the goal is to form two billboards of equal height by balancing the rods, maximizing the height of the billboards.</p>
+<p>The problem asks us to determine the maximum height of two billboards that can be built from a collection of rods. The rods are of various lengths, and we need to divide them into two groups where the sum of the lengths of the rods in each group is as close as possible. The goal is to return the height of the taller billboard while ensuring that the difference in height between the two billboards is minimized.</p>
+<p>To clarify:</p>
+<ul>
+<li>We are given a set of rods with various lengths.</li>
+<li>We need to assign each rod to one of two billboards, trying to balance the heights of the two billboards.</li>
+<li>The output should be the maximum height of the taller billboard, with the difference between the two being as small as possible.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -252,59 +258,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be approached using dynamic programming (DP) to track the possible heights and the differences between the two billboards as we assign rods. The key insight is to treat the problem as a &ldquo;subset-sum problem&rdquo; where we are trying to partition the rods into two subsets with the sum of their elements being as close as possible.</p>
+<p>To achieve this, we use the following approach:</p>
 <ol>
-<li>
-<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<li><strong>Dynamic Programming (Memoization)</strong>: We use a DP table to store the intermediate results for subproblems. Specifically, we track the difference between the two billboards (let&rsquo;s call this <code>diff</code>) and the maximum possible height difference for that <code>diff</code> at a particular rod index.</li>
+<li><strong>Recursion</strong>: The recursive function checks three possibilities for each rod:
 <ul>
-<li>The function uses recursion and memoization to efficiently calculate the maximum height of the billboards.</li>
-<li>It tracks the index of the current rod and the difference in height between the two sides of the billboard.</li>
+<li>Don&rsquo;t include the current rod in either group.</li>
+<li>Add the rod to the first group (increasing the <code>diff</code>).</li>
+<li>Add the rod to the second group (decreasing the <code>diff</code>).</li>
 </ul>
 </li>
-<li>
-<p><strong>Recursive Function</strong> (<code>dp</code>):</p>
-<ul>
-<li><strong>Base Case</strong>:
-<ul>
-<li>If all rods are considered (<code>idx == rods.size()</code>), return 0 if the height difference is zero; otherwise, return <code>INT_MIN</code> (indicating an impossible state).</li>
-</ul>
-</li>
-<li><strong>Memoization Check</strong>:
-<ul>
-<li>If the result for the current <code>idx</code> and <code>diff</code> is already computed, return that result.</li>
-</ul>
-</li>
-<li><strong>Recursion</strong>:
-<ul>
-<li>The recursive function explores three possibilities:
-<ol>
-<li><strong>Skip the current rod</strong>: Call <code>dp(idx + 1, diff)</code>.</li>
-<li><strong>Add the current rod to the first billboard</strong>: Call <code>dp(idx + 1, diff + rods[idx])</code> and add the current rod&rsquo;s length to the result.</li>
-<li><strong>Add the current rod to the second billboard</strong>: Call <code>dp(idx + 1, abs(diff - rods[idx]))</code> and calculate the new height difference.</li>
+<li><strong>Memoization</strong>: To avoid redundant calculations, we store the results of subproblems in a map, where the key is the current <code>diff</code> (the difference in height between the two billboards) and the value is the maximum possible height for that difference.</li>
 </ol>
-</li>
-</ul>
-</li>
-<li>The maximum of these three values is stored in the memoization table for the current <code>idx</code> and <code>diff</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Calculation</strong>:</p>
-<ul>
-<li>The initial call to <code>dp</code> starts with the first rod and a difference of zero. The result is the maximum height of the balanced billboards.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The class maintains a vector of rods and a memoization structure to store intermediate results.</li>
-<li>The <code>tallestBillboard</code> function initializes the data structures and calls the recursive <code>dp</code> function.</li>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rods;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem;
+</span></span></code></pre></div><ul>
+<li><code>rods</code>: This vector holds the lengths of the rods.</li>
+<li><code>mem</code>: A vector of maps, where each map stores the maximum possible height difference (<code>diff</code>) at each index of the <code>rods</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Recursive DP Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> diff) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> rods.size()) <span style="color:#66d9ef">return</span> diff <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> INT_MIN;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mem[idx].count(diff)) <span style="color:#66d9ef">return</span> mem[idx][diff];
+</span></span></code></pre></div><ul>
+<li><code>idx</code>: This is the index of the current rod we are processing.</li>
+<li><code>diff</code>: This represents the difference in height between the two billboards. A <code>diff</code> of 0 means both billboards are balanced.</li>
+<li>The base case checks if all rods have been processed (<code>idx == rods.size()</code>), and if <code>diff == 0</code>, it returns 0 because the two billboards are perfectly balanced.</li>
+<li>If the difference is not zero, we return <code>INT_MIN</code>, meaning it&rsquo;s an invalid solution (we cannot have a non-zero difference if we have used all rods).</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mem[idx].count(diff)) <span style="color:#66d9ef">return</span> mem[idx][diff];
+</span></span></code></pre></div><ul>
+<li>Before solving a subproblem, we check if it has already been computed and stored in the <code>mem</code> table. If so, we return the stored value to avoid redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion and Choices</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, diff);
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, rods[idx] <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, diff <span style="color:#f92672">+</span> rods[idx]));
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> max(ans, (rods[idx]<span style="color:#f92672">&gt;</span> diff<span style="color:#f92672">?</span> rods[idx] <span style="color:#f92672">-</span> diff:<span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, abs(diff <span style="color:#f92672">-</span> rods[idx])));
+</span></span></code></pre></div><ul>
+<li>The first choice is to skip the current rod and move on to the next one.</li>
+<li>The second choice is to add the current rod to the first group (increase the <code>diff</code>).</li>
+<li>The third choice is to add the current rod to the second group (decrease the <code>diff</code>).</li>
+<li>In each case, the recursive function calls <code>dp</code> for the next rod and the updated <code>diff</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storing the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mem[idx][diff] <span style="color:#f92672">=</span> ans;
+</span></span></code></pre></div><ul>
+<li>The result of the current subproblem is stored in the <code>mem</code> table to avoid recalculating it in the future.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Function to Call the DP</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">tallestBillboard</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> rods) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>rods <span style="color:#f92672">=</span>rods;
+</span></span><span style="display:flex;"><span>    mem.resize(rods.size());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>tallestBillboard</code> function initializes the <code>rods</code> vector and resizes the <code>mem</code> table.</li>
+<li>The function then calls the <code>dp</code> function starting from index 0 and with an initial difference of 0 (since both billboards are empty initially).</li>
+<li>The result returned by <code>dp(0, 0)</code> will be the maximum height of the taller billboard after the optimal partition of the rods.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -312,15 +347,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n * d), where <code>n</code> is the number of rods and <code>d</code> is the maximum possible difference in height. The function processes each rod and each possible height difference.</li>
-<li><strong>Space Complexity</strong>: O(n * d) for the memoization table used to store results of subproblems.</li>
+<li>The solution uses dynamic programming with memoization. The time complexity is dependent on the number of unique subproblems. Since the DP function takes two parameters: <code>idx</code> (the index of the current rod) and <code>diff</code> (the difference in height between the two billboards), the total number of unique subproblems is O(n * D), where <code>n</code> is the number of rods and <code>D</code> is the maximum possible value of <code>diff</code>.</li>
+<li>In the worst case, <code>D</code> could be the sum of all rod lengths, leading to a time complexity of O(n * sum(rods)).</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the <code>mem</code> table, which stores the results for each rod and difference. The space complexity is O(n * D), where <code>n</code> is the number of rods and <code>D</code> is the maximum possible difference in heights between the two billboards.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses dynamic programming and memoization to efficiently compute the tallest possible billboard by partitioning the rods into two subsets with minimal height difference. The approach works by considering all possible ways to assign rods to two billboards and storing the results of subproblems to avoid redundant calculations. The space and time complexities are manageable for typical input sizes and provide an optimal solution for the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1623s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1622s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

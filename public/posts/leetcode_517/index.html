@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -247,7 +247,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1336s1hbhb">
+<h2 id="hahahugoshortcode1346s1hbhb">
   
 
   
@@ -259,7 +259,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer array <code>nums</code>. In one move, you can increment or decrement any element by 1. Your goal is to equalize all elements in the array. Return the minimum number of moves required to equalize the array elements, or -1 if it is not possible.</p>
+<p>The task is to find the minimum number of moves required to make all elements of a given array equal. In one move, you can choose any index <code>i</code> of the array and either increment or decrement all other elements of the array except <code>nums[i]</code>. The goal is to determine the minimum number of moves required to make all elements equal, or return <code>-1</code> if it is not possible to make them equal.</p>
+<p>For example:</p>
+<ul>
+<li>In the array <code>[1, 2, 3]</code>, the sum is <code>6</code> and the number of elements is <code>3</code>. The target value is <code>6 / 3 = 2</code>. To make all elements equal to 2, we can move elements as needed to achieve this target.</li>
+<li>In an array where the sum is not divisible by the number of elements, it is impossible to make all elements equal, and the function should return <code>-1</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -267,92 +272,108 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to carefully consider the nature of the transformation allowed and the conditions for achieving an equal array. The key steps can be broken down as follows:</p>
 <ol>
 <li>
-<p><strong>Calculate the Total Sum</strong>:</p>
+<p><strong>Initial Check for Divisibility</strong>:</p>
 <ul>
-<li>First, compute the sum of all elements in the array using <code>accumulate</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Equalization</strong>:</p>
-<ul>
-<li>If the total sum is not divisible by the number of elements <code>n</code>, return -1 because equalization is impossible.</li>
-<li>If the sum is zero, return 0, as all elements are already equal.</li>
-</ul>
-</li>
-<li>
-<p><strong>Determine Target Value</strong>:</p>
-<ul>
-<li>Calculate the target value <code>hit</code> as <code>sum / n</code>, which represents the desired value for each element after equalization.</li>
+<li>First, we compute the sum of all elements in the array. If the sum is not divisible by the number of elements (<code>n</code>), it is impossible to make all elements equal because each element must eventually be equal to <code>sum / n</code>. In this case, we return <code>-1</code>.</li>
+<li>If the sum is divisible by <code>n</code>, the target value for each element is <code>sum / n</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Prefix and Suffix Sums</strong>:</p>
 <ul>
-<li>Use two vectors, <code>left</code> and <code>right</code>, to store the cumulative sums of the elements to the left and right of each index:
+<li>We calculate two arrays, <code>left</code> and <code>right</code>, where:
 <ul>
-<li><code>left[i]</code> accumulates the sum of elements from the start to the index <code>i-1</code>.</li>
-<li><code>right[i]</code> accumulates the sum of elements from the index <code>i+1</code> to the end.</li>
+<li><code>left[i]</code> holds the cumulative sum of all elements from index <code>0</code> to <code>i-1</code>.</li>
+<li><code>right[i]</code> holds the cumulative sum of all elements from index <code>i+1</code> to <code>n-1</code>.</li>
 </ul>
 </li>
+<li>These arrays help us calculate how much &ldquo;extra&rdquo; or &ldquo;deficit&rdquo; each position has relative to the target value.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Moves</strong>:</p>
+<p><strong>Computing the Moves</strong>:</p>
 <ul>
-<li>For each index in the array:
-<ul>
-<li>Calculate the expected left sum <code>expLeft</code> and the expected right sum <code>expRight</code>.</li>
-<li>Determine how many moves are needed to meet these expectations by comparing <code>expLeft</code> with <code>left[i]</code> and <code>expRight</code> with <code>right[i]</code>.</li>
-<li>Update the result <code>res</code> with the maximum moves needed for each index.</li>
+<li>For each element <code>i</code>, calculate the expected amount that should have been added or subtracted from both the left and right sides to make all values equal to the target. Specifically, we calculate how much &ldquo;excess&rdquo; or &ldquo;deficit&rdquo; is on the left and right sides compared to the expected value (<code>hit = sum / n</code>).</li>
+<li>The total moves required to balance the array is the sum of the left-side excess (<code>lefts</code>) and right-side excess (<code>rights</code>).</li>
 </ul>
 </li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>For each position <code>i</code>, calculate the total moves needed and keep track of the maximum required moves (<code>res</code>) since we need the minimum number of moves for the entire array to be balanced.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Now, let’s break down the code:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The <code>findMinMoves</code> function takes a vector <code>nums</code> as input.</li>
+<p><strong>Initialization and Input Check</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> accumulate(nums.begin(), nums.end(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(sum <span style="color:#f92672">%</span> n <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(sum <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> hit <span style="color:#f92672">=</span> sum <span style="color:#f92672">/</span> n;
+</span></span></code></pre></div><ul>
+<li>We first compute the sum of all elements in <code>nums</code> using <code>accumulate</code>. The function <code>accumulate</code> takes the range of elements and the initial sum (set to 0 here).</li>
+<li>We check if the sum is divisible by <code>n</code> (i.e., <code>sum % n == 0</code>). If it’s not divisible, it’s impossible to make the elements equal, and we return <code>-1</code>.</li>
+<li>If the sum is 0, this means the array is already balanced, and no moves are needed, so we return <code>0</code>.</li>
+<li>The variable <code>hit</code> stores the target value each element should reach, which is <code>sum / n</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initial Checks</strong>:</p>
-<ul>
-<li>Calculate the sum and size of the vector. Perform checks for divisibility and zero sum.</li>
+<p><strong>Prefix and Suffix Sum Arrays</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> left(n, <span style="color:#ae81ff">0</span>), right(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>    left[i] <span style="color:#f92672">=</span> left[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>    right[i] <span style="color:#f92672">=</span> right[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>We initialize two arrays <code>left</code> and <code>right</code> to store cumulative sums.</li>
+<li>The <code>left[i]</code> array computes the sum of elements from the start to <code>i-1</code>.</li>
+<li>The <code>right[i]</code> array computes the sum of elements from <code>i+1</code> to the end of the array.</li>
+<li>These arrays help us quickly calculate the cumulative sums on both sides of an element, which is essential for calculating the amount of excess or deficit at each position.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialize Vectors</strong>:</p>
-<ul>
-<li>Initialize <code>left</code> and <code>right</code> vectors to store cumulative sums.</li>
+<p><strong>Calculate the Minimum Moves</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> expLeft <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> hit;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> expRight <span style="color:#f92672">=</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> i) <span style="color:#f92672">*</span> hit;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> lefts <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> rights <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(expLeft <span style="color:#f92672">&gt;</span> left[i]) {
+</span></span><span style="display:flex;"><span>        lefts <span style="color:#f92672">=</span> expLeft <span style="color:#f92672">-</span> left[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(expRight <span style="color:#f92672">&gt;</span> right[i]) {
+</span></span><span style="display:flex;"><span>        rights <span style="color:#f92672">=</span> expRight <span style="color:#f92672">-</span> right[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, lefts <span style="color:#f92672">+</span> rights);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>In this loop, we iterate over each element <code>i</code> in the array.</li>
+<li>For each element, we calculate <code>expLeft</code> and <code>expRight</code>, which represent the expected sums on the left and right sides of the element if everything were balanced.</li>
+<li>If the actual sum of the left side (<code>left[i]</code>) is less than the expected sum (<code>expLeft</code>), we calculate the deficit (<code>lefts</code>).</li>
+<li>Similarly, if the actual sum of the right side (<code>right[i]</code>) is less than the expected sum (<code>expRight</code>), we calculate the deficit (<code>rights</code>).</li>
+<li>We keep track of the maximum value of <code>lefts + rights</code>, as this represents the minimum moves required to balance the array for the current element.</li>
 </ul>
 </li>
 <li>
-<p><strong>Fill Cumulative Sums</strong>:</p>
-<ul>
-<li>Use loops to fill <code>left</code> and <code>right</code> arrays.</li>
-</ul>
-</li>
-<li>
-<p><strong>Evaluate Moves</strong>:</p>
-<ul>
-<li>Iterate through the elements, compute expected sums, and calculate the required moves for each position.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the maximum moves needed across all indices.</li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum number of moves needed.</li>
 </ul>
 </li>
 </ol>
@@ -363,15 +384,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in the array. This includes the time for calculating the sum and filling the <code>left</code> and <code>right</code> arrays.</li>
-<li><strong>Space Complexity</strong>: O(n), due to the storage of the <code>left</code> and <code>right</code> cumulative sum arrays.</li>
+<li><strong>O(n)</strong>: The time complexity of this solution is linear because:
+<ul>
+<li>We compute the sum of the array in <code>O(n)</code>.</li>
+<li>We compute the prefix and suffix sum arrays in <code>O(n)</code>.</li>
+<li>We perform another <code>O(n)</code> pass to calculate the minimum moves.</li>
 </ul>
+</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use two additional arrays (<code>left</code> and <code>right</code>), each of size <code>n</code>, to store the cumulative sums. Therefore, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently calculates the minimum number of moves required to make all elements of the array equal using a greedy approach. The key observation is that if the sum of the array is divisible by the number of elements, it is possible to make all elements equal by balancing the left and right sums around each element. The use of prefix and suffix sums allows us to compute the required moves efficiently.</p>
+<p>The solution has optimal time and space complexity of <strong>O(n)</strong>, making it suitable for large inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1336s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1346s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

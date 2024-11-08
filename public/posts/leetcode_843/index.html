@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -279,7 +279,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1536s1hbhb">
+<h2 id="hahahugoshortcode1537s1hbhb">
   
 
   
@@ -291,7 +291,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of <code>words</code> and a <code>Master</code> API to guess a secret word. The <code>Master</code> API provides feedback on how many characters in the guessed word match the secret word at the same positions. Your goal is to find the secret word by making guesses.</p>
+<p>In this problem, we are tasked with finding the &ldquo;secret word&rdquo; by interacting with a <code>Master</code> API, which provides feedback on how many characters of our guessed word match the secret word at the exact same positions. The goal is to guess the secret word from a list of candidate words while minimizing the number of guesses required. Each guess yields feedback in the form of the number of characters that match, and the process continues until the secret word is found.</p>
+<p>The challenge is to make the guesses intelligently, leveraging the feedback from previous guesses to eliminate candidates efficiently. We need to come up with an algorithm that minimizes the number of guesses while ensuring correctness.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -299,35 +300,70 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the solution uses a strategy based on eliminating words from the list of possible candidates by using the feedback received after each guess. Here’s a high-level breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Overlap Calculation</strong>:</p>
-<ul>
-<li>Create a function <code>overlap</code> that calculates the best candidate word from the list based on character frequencies in their respective positions.</li>
-<li>Maintain a frequency count of characters for each of the 6 positions across all words.</li>
-<li>Choose the word that maximizes the overlap with the frequency counts.</li>
-</ul>
+<p><strong>Overlapping Word Calculation</strong>: First, we identify a word from the list of candidate words that has the highest &ldquo;overlap&rdquo; with other words in the list. This means choosing the word that most frequently matches other words in terms of character positions.</p>
 </li>
 <li>
-<p><strong>Tally Matching Characters</strong>:</p>
-<ul>
-<li>Implement a function <code>tally</code> that compares two words and counts how many characters are the same at the same positions.</li>
-</ul>
+<p><strong>Feedback-Driven Elimination</strong>: After making a guess, we receive feedback about how many characters match. We then eliminate words from the list that do not match the feedback of the guess. This helps us narrow down the set of potential candidates.</p>
 </li>
 <li>
-<p><strong>Main Guessing Logic</strong>:</p>
-<ul>
-<li>Use the <code>findSecretWord</code> method to guess the secret word iteratively.</li>
-<li>Start with the initial list of words and make guesses using the <code>Master</code> API.</li>
-<li>Each time a guess is made, filter the list of words based on the feedback (number of matching characters) from the <code>Master</code>.</li>
-</ul>
+<p><strong>Efficient Search</strong>: The key to an efficient solution is using the feedback from each guess to quickly reduce the size of the search space. By choosing the word with the highest overlap, we increase the likelihood that the feedback will help eliminate a significant portion of the candidate words.</p>
 </li>
 <li>
-<p><strong>Stopping Condition</strong>:</p>
-<ul>
-<li>Continue guessing until the guess is fully correct (i.e., when the number of matching characters is 6).</li>
-</ul>
+<p><strong>Termination Condition</strong>: The guessing process continues until we find the secret word, which occurs when the number of character matches equals the length of the word (6, in this case).</p>
 </li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code implements the solution in the following way:</p>
+<ol>
+<li>
+<p><strong><code>overlap</code> Function</strong>:
+This function helps in identifying which word from the list has the highest overlap with others based on the frequency of characters in each position. The function creates a frequency table <code>prob</code> where <code>prob[j][k]</code> keeps track of how many times character <code>k</code> appears at position <code>j</code> in the list of words.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> prob(<span style="color:#ae81ff">6</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>));  <span style="color:#75715e">// 6 positions, 26 letters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> words.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">6</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        prob[j][words[i][j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Increment the frequency count for each character at each position
+</span></span></span></code></pre></div><p>The function then iterates through each word in the list, calculating a &ldquo;score&rdquo; for each word based on how often its characters appear at each position. The word with the highest score is chosen as the next guess.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">6</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">+=</span> prob[j][words[i][j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>];  <span style="color:#75715e">// Calculate the overlap score for the current word
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong><code>tally</code> Function</strong>:
+This function compares two words and counts how many characters match at the same positions. It is used to compare the guess with each word in the list after receiving feedback from the <code>Master</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">6</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> (a[i] <span style="color:#f92672">==</span> b[i]);  <span style="color:#75715e">// Increment res if the characters at position i match
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong><code>findSecretWord</code> Function</strong>:
+This is the main function that repeatedly guesses words from the list of candidates and narrows down the possibilities based on the feedback from the <code>Master</code>. The process continues until the secret word is found (when the number of matching characters equals 6).</p>
+<ul>
+<li><strong>Guess Selection</strong>: In each iteration, we select a word to guess using the <code>overlap</code> function.</li>
+<li><strong>Feedback Handling</strong>: The guess is made by calling <code>master.guess()</code>, and the feedback (i.e., the number of matching characters) is stored in <code>match</code>.</li>
+<li><strong>Candidate Elimination</strong>: We create a new list of candidate words that match the feedback from the guess using the <code>tally</code> function. Only words that match the feedback are kept in the list for the next guess.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> match <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(match <span style="color:#f92672">!=</span> <span style="color:#ae81ff">6</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> overlap(words);  <span style="color:#75715e">// Choose the word with the highest overlap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    match <span style="color:#f92672">=</span> master.guess(words[i]);  <span style="color:#75715e">// Make the guess and get the feedback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it : words) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(match <span style="color:#f92672">==</span> tally(it, words[i])) {  <span style="color:#75715e">// Eliminate words that do not match the feedback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            tmp.push_back(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    words <span style="color:#f92672">=</span> tmp;  <span style="color:#75715e">// Update the candidate list for the next guess
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -336,15 +372,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time and space complexity of this solution can be analyzed as follows:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2) in the worst case, where N is the number of words, as we might compare each word with every other word.</li>
-<li><strong>Space Complexity</strong>: O(N) for storing the list of words and the character frequency counts.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The <code>overlap</code> function processes each word in the list and calculates the overlap score in <code>O(n * 6)</code> time, where <code>n</code> is the number of words and 6 is the fixed word length. Thus, the time complexity of <code>overlap</code> is O(n).</li>
+<li>In each iteration of the <code>while</code> loop in <code>findSecretWord</code>, we guess a word and update the list of candidates. The list of candidates decreases over time because we eliminate words that do not match the feedback.</li>
+<li>Each iteration requires <code>O(n)</code> time to filter the words based on feedback.</li>
+<li>In the worst case, the size of the list of candidate words reduces by a constant fraction with each guess, and since there are 6 positions in the word, the algorithm will take at most <code>O(6 * n)</code> time in total. This gives an overall time complexity of <code>O(n)</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the storage of the list of words (<code>words</code>), the frequency table <code>prob</code>, and temporary arrays used in filtering candidates. The space complexity is <code>O(n)</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to guess the secret word by leveraging the feedback from the <code>Master</code> API and narrowing down the list of candidates intelligently. By using a frequency-based approach to determine the word with the highest overlap, we can minimize the number of guesses required to find the secret word. The time complexity is linear with respect to the number of words, making this solution scalable for large input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1536s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1537s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

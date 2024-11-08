@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1557s1hbhb">
+<h2 id="hahahugoshortcode1558s1hbhb">
   
 
   
@@ -242,7 +242,22 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the smallest prime palindrome greater than or equal to a given integer ( n ). A prime palindrome is a number that is both prime and reads the same backward as forward.</p>
+<p>The problem asks to find the <strong>smallest prime palindrome</strong> number greater than or equal to a given integer <code>n</code>. A prime palindrome is a number that is both a palindrome and a prime number. A <strong>palindrome</strong> is a number that reads the same forward and backward, while a <strong>prime number</strong> is a number greater than 1 that has no positive divisors other than 1 and itself. The task is to return the smallest prime palindrome number greater than or equal to <code>n</code>.</p>
+<h3 id="problem-explanation">
+  Problem Explanation
+  <a class="heading-link" href="#problem-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To clarify, the task requires us to:</p>
+<ol>
+<li>Find the smallest palindrome number that is greater than or equal to <code>n</code>.</li>
+<li>Check if the palindrome is also a prime number.</li>
+<li>If it is prime, return that palindrome number.</li>
+<li>If no such number exists, return <code>-1</code>.</li>
+</ol>
+<p>A <strong>palindrome</strong> number is one that reads the same backward as forward, e.g., <code>121</code>, <code>12321</code>. A <strong>prime</strong> number is one that has no divisors other than 1 and itself, e.g., <code>2</code>, <code>3</code>, <code>5</code>, <code>7</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,48 +265,86 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can break it down into a couple of simple steps:</p>
 <ol>
-<li>
-<p><strong>Special Cases</strong>:</p>
-<ul>
-<li>If ( n ) is between 8 and 11 (inclusive), return 11 directly, since it is the smallest prime palindrome in that range.</li>
-</ul>
-</li>
-<li>
-<p><strong>Generate Palindromes</strong>:</p>
-<ul>
-<li>Loop through integers ( x ) from 1 to 99,999.</li>
-<li>Convert ( x ) to a string ( s ).</li>
-<li>Create a palindrome ( y ) by appending ( s ) to its reverse (excluding the last character to avoid duplication).</li>
-<li>This approach generates odd-length palindromes.</li>
-<li>If the generated palindrome ( y ) is greater than or equal to ( n ), check if it is prime.</li>
-</ul>
-</li>
-<li>
-<p><strong>Prime Check</strong>:</p>
-<ul>
-<li>Implement a helper function <code>isPrime</code> to check if a number is prime.</li>
-<li>Handle edge cases where numbers less than 2 are not prime, and treat 2 separately.</li>
-<li>Use trial division to check for factors only up to the square root of the number, incrementing by 2 to skip even numbers.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the first prime palindrome found that meets the conditions.</li>
-</ul>
-</li>
+<li><strong>Generate Palindromes</strong>: We need a way to generate numbers that are palindromes. This can be done efficiently by generating half of the number and reflecting it to form the full number.</li>
+<li><strong>Check Primality</strong>: For each palindrome number, we check if it is prime. If it is, we return that number.</li>
+<li><strong>Optimization</strong>: Since we are interested in the smallest palindrome greater than or equal to <code>n</code>, we should start generating palindromes from numbers greater than or equal to <code>n</code> and stop as soon as we find a prime palindrome.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The main challenge is generating the palindromes and checking whether they are prime. The method involves creating palindromes from numbers and checking if they are prime until we find one that is greater than or equal to <code>n</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-handling-small-cases-special-case-for-numbers-between-8-and-11">
+  Step 1: Handling Small Cases (Special Case for Numbers Between 8 and 11)
+  <a class="heading-link" href="#step-1-handling-small-cases-special-case-for-numbers-between-8-and-11">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">8</span> <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">&amp;&amp;</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">11</span>;
+</span></span></code></pre></div><ul>
+<li>The function first handles a special case for numbers between 8 and 11 (inclusive). These numbers are small and can be handled quickly because the smallest prime palindrome greater than or equal to these values is <code>11</code>.</li>
+</ul>
+<h4 id="step-2-loop-to-generate-palindromes-and-check-for-primality">
+  Step 2: Loop to Generate Palindromes and Check for Primality
+  <a class="heading-link" href="#step-2-loop-to-generate-palindromes-and-check-for-primality">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100000</span>; x<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    string s <span style="color:#f92672">=</span> to_string(x), r(s.rbegin(), s.rend());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> stoi(s <span style="color:#f92672">+</span> r.substr(<span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (y <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">&amp;&amp;</span> isPrime(y)) <span style="color:#66d9ef">return</span> y;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use a loop that generates numbers <code>x</code> from <code>1</code> to <code>99999</code>. For each number <code>x</code>:
 <ul>
-<li>The <code>primePalindrome</code> function initializes the palindrome generation process and checks for primality.</li>
-<li>The <code>isPrime</code> function verifies if a number is prime using efficient methods.</li>
+<li>Convert <code>x</code> into a string <code>s</code>.</li>
+<li>Reverse the string <code>s</code> to create a string <code>r</code>.</li>
+<li>Construct the palindrome <code>y</code> by concatenating <code>s</code> and the substring of <code>r</code> starting from the second character. This creates a palindrome where the second half mirrors the first half (excluding the middle character).</li>
+<li>If <code>y</code> is greater than or equal to <code>n</code> and is prime (checked in the next step), return <code>y</code> as the result.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-prime-checking-function">
+  Step 3: Prime Checking Function
+  <a class="heading-link" href="#step-3-prime-checking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isPrime</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">||</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> num <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">*</span> i <span style="color:#f92672">&lt;=</span> num; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This is a helper function that checks whether a number <code>num</code> is prime.
+<ul>
+<li>If <code>num</code> is less than 2 or an even number greater than 2, it returns <code>false</code> because even numbers greater than 2 cannot be prime.</li>
+<li>Then, the function iterates over odd numbers starting from 3 up to the square root of <code>num</code>, checking if <code>num</code> is divisible by any of them. If it finds a divisor, it returns <code>false</code>, indicating that <code>num</code> is not prime.</li>
+<li>If no divisors are found, the function returns <code>true</code>, indicating that <code>num</code> is prime.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return--1-if-no-prime-palindrome-is-found">
+  Step 4: Return <code>-1</code> if No Prime Palindrome is Found
+  <a class="heading-link" href="#step-4-return--1-if-no-prime-palindrome-is-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the loop completes without finding any prime palindrome greater than or equal to <code>n</code>, the function returns <code>-1</code>. However, this case is highly unlikely because we expect that there are prime palindromes greater than <code>n</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -300,15 +353,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(K * sqrt(M)), where ( K ) is the number of palindromes generated (approximately 100,000) and ( M ) is the largest palindrome checked for primality.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are required beyond a few variables.</li>
+<li><strong>Generating Palindromes</strong>: For each number <code>x</code>, we generate a palindrome by concatenating the string <code>s</code> and a portion of the string <code>r</code>. This takes linear time relative to the number of digits in <code>x</code>. Since <code>x</code> ranges from <code>1</code> to <code>99999</code>, the number of digits in <code>x</code> is at most 5, which is constant. Thus, generating palindromes is effectively O(1).</li>
+<li><strong>Prime Checking</strong>: The <code>isPrime</code> function checks whether a number <code>y</code> is prime. For each number <code>y</code>, the prime check function performs up to <code>O(sqrt(y))</code> operations. However, the number of prime checks we perform is limited, as the palindrome numbers are generally quite large, so the prime checking function operates efficiently on a smaller set of values.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the number of palindromes generated and the time it takes to check each for primality. Given the loop runs for at most 100,000 iterations and each prime check takes O(sqrt(y)), the overall complexity is approximately <strong>O(k * sqrt(y))</strong>, where <code>k</code> is the number of palindrome numbers checked, and <code>y</code> is the value being tested for primality.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: The space complexity is O(1) because we are only using a small amount of extra space (for variables like <code>s</code>, <code>r</code>, <code>y</code>, etc.) and do not store any additional large data structures.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution is efficient and solves the problem of finding the smallest prime palindrome greater than or equal to a given number <code>n</code>. The approach of generating palindromes from numbers and checking them for primality ensures that we efficiently find the answer. The time complexity is dominated by the prime-checking step, but given the constraints, the solution works efficiently for a wide range of inputs. This approach leverages the fact that palindrome numbers have a predictable structure, making the problem solvable in a reasonable amount of time.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1557s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1558s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

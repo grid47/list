@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode823s1hbhb">
+<h2 id="hahahugoshortcode814s1hbhb">
   
 
   
@@ -252,7 +252,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary search tree (BST), find the lowest common ancestor (LCA) of two nodes, <code>p</code> and <code>q</code>. The LCA is defined as the lowest node in <code>T</code> that has both <code>p</code> and <code>q</code> as descendants.</p>
+<p>The problem at hand is to find the <strong>Lowest Common Ancestor (LCA)</strong> of two given nodes in a <strong>Binary Search Tree (BST)</strong>. The Lowest Common Ancestor of two nodes <code>p</code> and <code>q</code> in a tree is defined as the deepest node that is an ancestor of both <code>p</code> and <code>q</code>. In simpler terms, it is the last common node on the path from <code>p</code> to the root and from <code>q</code> to the root.</p>
+<p>In a <strong>Binary Search Tree (BST)</strong>, the key property is that for any given node:</p>
+<ul>
+<li>The <strong>left</strong> subtree contains values less than the node&rsquo;s value.</li>
+<li>The <strong>right</strong> subtree contains values greater than the node&rsquo;s value.</li>
+</ul>
+<p>Thus, given this property, we need to traverse the BST in such a way that we identify the node where the paths to both <code>p</code> and <code>q</code> diverge. This node will be the <strong>Lowest Common Ancestor</strong>.</p>
+<p>The function should return the <strong>LCA node</strong>. If either <code>p</code> or <code>q</code> is not present in the tree, we should assume they are present, and we aim to find the LCA assuming they are valid nodes in the tree.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,29 +267,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In a BST, the value of nodes in the left subtree is smaller than the root, and the value of nodes in the right subtree is larger than the root. Using this property, we can find the LCA by comparing the values of <code>p</code> and <code>q</code> with the value of the current node (<code>root</code>):</p>
+<p>To solve this problem efficiently, we can take advantage of the properties of the <strong>Binary Search Tree (BST)</strong>. The key observation is:</p>
+<ul>
+<li>If both <code>p</code> and <code>q</code> are smaller than the current node&rsquo;s value, then both nodes must lie in the left subtree.</li>
+<li>If both <code>p</code> and <code>q</code> are greater than the current node&rsquo;s value, then both nodes must lie in the right subtree.</li>
+<li>If one node is smaller and the other is greater (or one of them is equal to the current node), we have found the <strong>Lowest Common Ancestor</strong>.</li>
+</ul>
+<p>In simpler terms:</p>
 <ol>
-<li>If both <code>p</code> and <code>q</code> have values greater than <code>root</code>, search in the right subtree.</li>
-<li>If both <code>p</code> and <code>q</code> have values less than <code>root</code>, search in the left subtree.</li>
-<li>If one node is on the left and the other is on the right, or one of them is equal to <code>root</code>, then <code>root</code> is the LCA.</li>
+<li>Start from the root of the tree.</li>
+<li>If both <code>p</code> and <code>q</code> are on the right side of the current node, move to the right child.</li>
+<li>If both <code>p</code> and <code>q</code> are on the left side of the current node, move to the left child.</li>
+<li>If one of <code>p</code> or <code>q</code> is on one side and the other is on the opposite side (or one of them is equal to the current node), the current node is the <strong>LCA</strong>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By leveraging the properties of the BST, this approach ensures that we can efficiently find the LCA in <strong>O(log n)</strong> time on average for balanced BSTs.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: The root of a BST and two nodes <code>p</code> and <code>q</code>.</li>
-<li><strong>Output</strong>: The lowest common ancestor node of <code>p</code> and <code>q</code>.</li>
-<li><strong>Base Condition</strong>: Return the <code>root</code> node if it’s the LCA.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> lowestCommonAncestor(TreeNode<span style="color:#f92672">*</span> root, TreeNode<span style="color:#f92672">*</span> p, TreeNode<span style="color:#f92672">*</span> q) {
+</span></span></code></pre></div><ul>
+<li>We define a <code>Solution</code> class and implement the function <code>lowestCommonAncestor</code> which takes the root of the tree (<code>root</code>), and two nodes (<code>p</code> and <code>q</code>) as inputs. The function will return the <strong>LCA</strong> of nodes <code>p</code> and <code>q</code>.</li>
 </ul>
-<ol>
-<li>Check if both <code>p</code> and <code>q</code> values are greater than <code>root-&gt;val</code>. If so, recursively call on <code>root-&gt;right</code>.</li>
-<li>Check if both <code>p</code> and <code>q</code> values are less than <code>root-&gt;val</code>. If so, recursively call on <code>root-&gt;left</code>.</li>
-<li>If neither of the above conditions is met, return <code>root</code> as it is the LCA.</li>
-</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&amp;&amp;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> q<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> lowestCommonAncestor(root<span style="color:#f92672">-&gt;</span>right, p, q);
+</span></span></code></pre></div><ul>
+<li>We start by checking if both <code>p</code> and <code>q</code> have values greater than the current <code>root</code> node&rsquo;s value. If so, this means both nodes are in the right subtree, and we recursively call the function on the right child of the current root (<code>root-&gt;right</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&amp;&amp;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> q<span style="color:#f92672">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> lowestCommonAncestor(root<span style="color:#f92672">-&gt;</span>left, p, q);
+</span></span></code></pre></div><ul>
+<li>If both <code>p</code> and <code>q</code> have values smaller than the current <code>root</code> node&rsquo;s value, this means both nodes are in the left subtree, and we recursively call the function on the left child of the current root (<code>root-&gt;left</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
+</span></span></code></pre></div><ul>
+<li>If neither of the above conditions is true, this means that <code>p</code> and <code>q</code> are on either side of the current root node, or one of them is the current root itself. In this case, the current <code>root</code> node is the <strong>Lowest Common Ancestor</strong> of <code>p</code> and <code>q</code>, and we return it.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -290,15 +315,65 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(h)), where (h) is the height of the BST. In the worst case, it requires traversing from the root to the leaf node.</li>
-<li><strong>Space Complexity</strong>: (O(h)) for the recursion stack, where (h) is the height of the tree.</li>
+<li>The time complexity of this solution is <strong>O(h)</strong>, where <code>h</code> is the height of the binary search tree. In the worst case, we may have to traverse the entire height of the tree to find the LCA.
+<ul>
+<li>In a <strong>balanced</strong> BST, the height <code>h</code> is <strong>O(log n)</strong>, where <code>n</code> is the number of nodes in the tree.</li>
+<li>In an <strong>unbalanced</strong> tree, the height <code>h</code> can be <strong>O(n)</strong> in the worst case (when the tree degenerates into a linked list).</li>
 </ul>
+</li>
+</ul>
+<p>Thus, the time complexity can be considered <strong>O(log n)</strong> for balanced trees and <strong>O(n)</strong> for unbalanced trees.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> as we are using only a constant amount of extra space for the recursion (no additional data structures are used).</li>
+<li>However, if we consider the recursive stack, the space complexity would be <strong>O(h)</strong>, where <code>h</code> is the height of the tree (this is the maximum depth of recursion in the worst case).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the <strong>Lowest Common Ancestor (LCA)</strong> of two nodes in a <strong>Binary Search Tree (BST)</strong> by exploiting the properties of the tree:</p>
+<ul>
+<li>Nodes with values smaller than the current node are in the left subtree.</li>
+<li>Nodes with values greater than the current node are in the right subtree.</li>
+<li>The <strong>LCA</strong> is the node where the paths to the two given nodes <code>p</code> and <code>q</code> diverge or where one of the nodes is the root.</li>
+</ul>
+<p>By leveraging this property, the algorithm efficiently finds the <strong>LCA</strong> in <strong>O(log n)</strong> time on average for balanced trees. For unbalanced trees, the time complexity can degrade to <strong>O(n)</strong>.</p>
+<h4 id="key-highlights">
+  Key Highlights:
+  <a class="heading-link" href="#key-highlights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Optimal for BSTs</strong>: The solution is highly efficient for binary search trees due to the logarithmic time complexity in balanced trees.</li>
+<li><strong>Simple Recursive Solution</strong>: The approach is based on simple recursion with a straightforward conditional check to determine whether we need to move left or right in the tree.</li>
+<li><strong>Space Efficient</strong>: The space complexity is constant for the recursive call stack, making this solution space efficient.</li>
+</ul>
+<p>This approach is an ideal solution for finding the <strong>Lowest Common Ancestor</strong> in binary search trees and is commonly asked in coding interviews due to its simplicity and effectiveness.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode823s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode814s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -236,7 +236,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1308s1hbhb">
+<h2 id="hahahugoshortcode1307s1hbhb">
   
 
   
@@ -248,7 +248,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to generate all possible permutations of a given vector of integers, ensuring that each permutation is unique, even if there are duplicate integers in the input.</p>
+<p>The problem is to generate all possible <strong>unique permutations</strong> of a given list of integers, <code>nums</code>. The input list can contain duplicates, so it is important to ensure that each permutation is distinct. You are required to return a list of all the unique permutations of the array.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,74 +256,103 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use <strong>backtracking</strong> with a <strong>map</strong> to avoid duplicates. Backtracking is a technique used to explore all possible combinations of elements, and in this case, we will use it to generate all permutations. The key idea is to keep track of the elements we have already used in the current permutation and avoid revisiting them.</p>
+<p>Here is the plan:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Use a map (<code>mp</code>) to track the integers that have already been included in the current permutation to avoid duplicates.</li>
-<li>Create a vector (<code>ans</code>) to store all the generated permutations.</li>
-<li>Use a temporary vector (<code>tmp</code>) to build each permutation.</li>
-</ul>
-</li>
-<li>
-<p><strong>Backtracking Function</strong>:</p>
-<ul>
-<li>Define a helper function <code>bt</code> that will perform the backtracking to generate permutations.</li>
-<li>The function takes the current state of permutations (<code>ans</code>), the current temporary permutation (<code>tmp</code>), the original input vector (<code>nums</code>), the current index (<code>idx</code>), and the map (<code>mp</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current index equals the size of <code>nums</code>, it indicates a complete permutation, which should be added to <code>ans</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Case</strong>:</p>
-<ul>
-<li>Loop through each integer in <code>nums</code>.</li>
-<li>Skip integers that are already included in the current permutation (checked via <code>mp</code>).</li>
-<li>Add the integer to <code>tmp</code>, mark it in <code>mp</code>, and recursively call <code>bt</code> to continue building the permutation.</li>
-<li>After returning from the recursive call, remove the integer from <code>tmp</code> and mark it as unused in <code>mp</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After the backtracking completes, return the vector <code>ans</code>, which contains all unique permutations.</li>
-</ul>
-</li>
+<li><strong>Backtracking</strong>: Generate all possible permutations of the list by exploring each element and recursively adding them to the current permutation until the permutation reaches the required length (the length of the original list).</li>
+<li><strong>Avoiding Duplicates</strong>: Use a <code>map</code> (or any other set-like structure) to keep track of which elements have been used in the current permutation. If an element is already used, we skip it to avoid duplicate permutations.</li>
+<li><strong>Base Case</strong>: When the current permutation reaches the size of the input list, we add it to the result list.</li>
+<li><strong>Recursive Case</strong>: For each element in the list, if it has not been used in the current permutation, we include it, recurse to build the next part of the permutation, and backtrack once we are done with that element.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong>:</p>
+<h4 id="step-1-permute-function">
+  Step 1: <code>permute</code> Function
+  <a class="heading-link" href="#step-1-permute-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> permute(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, nums, <span style="color:#ae81ff">0</span>, mp);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Input</strong>: The function <code>permute</code> takes a vector of integers <code>nums</code> as input.</li>
+<li><strong>Variables</strong>:
 <ul>
-<li>The <code>permute</code> function takes a vector of integers <code>nums</code>.</li>
+<li><code>mp</code>: A <code>map</code> is used to track whether an element has been added to the current permutation or not.</li>
+<li><code>ans</code>: A vector of vectors that will hold all the unique permutations.</li>
+<li><code>tmp</code>: A temporary vector used to build each permutation as we recurse.</li>
+<li>The function then calls the helper function <code>bt</code> to start the backtracking process.</li>
 </ul>
 </li>
-<li>
-<p><strong>Variables</strong>:</p>
-<ul>
-<li><code>mp</code>: A map to keep track of used integers in the current permutation.</li>
-<li><code>ans</code>: A vector to store all unique permutations.</li>
-<li><code>tmp</code>: A temporary vector to build the current permutation.</li>
+<li><strong>Return</strong>: After the backtracking process is completed, the <code>ans</code> vector contains all the unique permutations and is returned.</li>
 </ul>
-</li>
+<h4 id="step-2-bt-backtracking-function">
+  Step 2: <code>bt</code> (Backtracking) Function
+  <a class="heading-link" href="#step-2-bt-backtracking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bt</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ans, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>tmp, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> idx, map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>mp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> nums.size()) {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(nums[i])) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        mp[nums[i]] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        tmp.push_back(nums[i]);
+</span></span><span style="display:flex;"><span>        bt(ans, tmp, nums, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, mp);
+</span></span><span style="display:flex;"><span>        tmp.pop_back();
+</span></span><span style="display:flex;"><span>        mp.erase(nums[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Backtracking Logic</strong>:</p>
-<ul>
-<li>The loop iterates through <code>nums</code>, checking if each integer has already been used in the current permutation.</li>
-<li>After exploring a number, it backtracks by removing it from the temporary vector and marking it as unused.</li>
+<p><strong>Base Case</strong>: When the current index <code>idx</code> reaches the size of <code>nums</code>, the temporary permutation <code>tmp</code> is complete. We add <code>tmp</code> to the result vector <code>ans</code> and return.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> nums.size()) {
+</span></span><span style="display:flex;"><span>    ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop through <code>nums</code></strong>: For each element in <code>nums</code>, we check if it has already been used in the current permutation by checking the map <code>mp</code>. If it has been used, we skip it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(nums[i])) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adding Elements to the Current Permutation</strong>: If the current element has not been used, we mark it as used (<code>mp[nums[i]] = true</code>), add it to the temporary permutation <code>tmp</code>, and recurse to generate the next element of the permutation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mp[nums[i]] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>tmp.push_back(nums[i]);
+</span></span><span style="display:flex;"><span>bt(ans, tmp, nums, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, mp);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Backtracking</strong>: After the recursion call, we remove the last element from <code>tmp</code> (this is the backtracking step) and mark the element as unused in the map (<code>mp.erase(nums[i])</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>tmp.pop_back();
+</span></span><span style="display:flex;"><span>mp.erase(nums[i]);
+</span></span></code></pre></div></li>
 </ul>
-</li>
-</ol>
+<h4 id="step-3-recursion-termination">
+  Step 3: Recursion Termination
+  <a class="heading-link" href="#step-3-recursion-termination">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The recursion terminates when we have explored all elements, and the base case is reached. The result vector <code>ans</code> will contain all the unique permutations.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -331,15 +360,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of generating all permutations of <code>n</code> elements is <code>O(n!)</code> because there are <code>n!</code> possible permutations of the elements. For each permutation, we spend <code>O(n)</code> time to process it (i.e., to construct the permutation using the backtracking approach).</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n \times n!)), where (n) is the number of elements in <code>nums</code>. The (n!) factor accounts for all permutations, and each permutation takes (O(n)) to construct.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the temporary vector and the recursion stack, where (n) is the depth of recursion (equal to the number of elements).</li>
+<li><strong>Time Complexity</strong>: <code>O(n * n!)</code>, where <code>n</code> is the length of the input array <code>nums</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of this solution is determined by:</p>
+<ol>
+<li>The space used to store all permutations: Since there are <code>n!</code> permutations, and each permutation takes <code>O(n)</code> space, the total space used by the result list is <code>O(n * n!)</code>.</li>
+<li>The space used by the recursion stack: The maximum depth of the recursion tree is <code>n</code>, and each call uses <code>O(n)</code> space for the temporary permutation <code>tmp</code> and the map <code>mp</code>. Thus, the total space used by the recursion is <code>O(n)</code>.</li>
+</ol>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(n * n!)</code> for the result, plus <code>O(n)</code> for the recursion stack.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently generates all unique permutations of a list of integers using <strong>backtracking</strong>. By maintaining a map to track which elements have been used in the current permutation, we ensure that duplicate permutations are avoided. The approach is both <strong>time-efficient</strong> and <strong>space-efficient</strong> for generating permutations, given the inherent complexity of the problem.</p>
+<p>The backtracking method ensures that all possible permutations are explored while keeping track of previously used elements to avoid generating duplicates. The solution has a time complexity of <code>O(n * n!)</code>, which is the best possible for generating permutations, and a space complexity of <code>O(n * n!)</code> to store the results. This makes it suitable for handling relatively small to moderate-size input arrays.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1308s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1307s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

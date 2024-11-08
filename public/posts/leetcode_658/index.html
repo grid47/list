@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -256,7 +256,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a sorted array <code>arr</code>, an integer <code>k</code>, and an integer <code>x</code>, find the <code>k</code> closest elements to <code>x</code> in <code>arr</code>. The result should be returned in sorted order.</p>
+<p>Given a <strong>sorted array</strong> <code>arr</code>, an integer <code>k</code>, and an integer <code>x</code>, the task is to find the <strong>k closest elements</strong> to <code>x</code> in the array. The result should be returned in <strong>sorted order</strong>.</p>
+<p>The array <code>arr</code> is sorted in <strong>non-decreasing order</strong>, and we need to determine which <code>k</code> elements are closest to <code>x</code>. We can either use the absolute difference between each element and <code>x</code> to calculate proximity. If there are ties (i.e., two elements with the same distance to <code>x</code>), we should include the smaller element in the result.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -264,46 +265,80 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we aim to find a <strong>subarray</strong> of length <code>k</code> that contains the closest elements to <code>x</code>. The sorted nature of the array allows us to apply <strong>binary search</strong> for efficient processing. Here&rsquo;s how we approach the solution:</p>
 <ol>
 <li>
-<p><strong>Binary Search</strong>:</p>
-<ul>
-<li>Use binary search to efficiently find the starting point of the closest elements.</li>
-<li>Set the left pointer <code>l</code> to <code>0</code> and the right pointer <code>r</code> to <code>arr.size() - k</code>, which allows enough room for <code>k</code> elements to the right.</li>
-</ul>
+<p><strong>Binary Search:</strong><br>
+The key idea is to use binary search to locate the potential starting point for the subarray that contains the closest elements to <code>x</code>. We will perform the binary search to find the position where the <code>k</code> closest elements start in the array.</p>
 </li>
 <li>
-<p><strong>Adjusting Pointers</strong>:</p>
-<ul>
-<li>In each iteration of the binary search:
-<ul>
-<li>Calculate the middle index <code>m</code>.</li>
-<li>Compare the distance of <code>x</code> from <code>arr[m]</code> and <code>arr[m + k]</code>.</li>
-<li>If <code>x</code> is closer to <code>arr[m + k]</code>, move the left pointer <code>l</code> to <code>m + 1</code>, otherwise adjust the right pointer <code>r</code> to <code>m</code>.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Sliding Window/Two Pointers:</strong><br>
+By narrowing down the search window with binary search, we ensure that we can efficiently find the <code>k</code> closest elements. Once we determine the starting index, extracting the result becomes trivial.</p>
 </li>
 <li>
-<p><strong>Extracting Results</strong>:</p>
-<ul>
-<li>Once the binary search is complete, the left pointer <code>l</code> will point to the beginning of the <code>k</code> closest elements.</li>
-<li>Return a vector containing the elements from <code>arr[l]</code> to <code>arr[l + k]</code>.</li>
-</ul>
+<p><strong>Efficient Comparison:</strong><br>
+The problem can be solved in <strong>O(n)</strong> time using a linear scan after finding the correct starting index using binary search.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: The function <code>findClosestElements</code> initializes the left and right pointers for the binary search.</li>
-<li><strong>Binary Search Execution</strong>: The while loop performs the binary search by adjusting the pointers based on the distance comparisons.</li>
-<li><strong>Result Construction</strong>: The result vector is constructed using the range defined by the left pointer.</li>
-</ol>
+<h4 id="1-function-signature">
+  1. <strong>Function Signature</strong>
+  <a class="heading-link" href="#1-function-signature">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findClosestElements(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> x)
+</span></span></code></pre></div><p>This function takes a sorted array <code>arr</code>, an integer <code>k</code>, and an integer <code>x</code>. It returns a vector of the <code>k</code> closest elements to <code>x</code> from the array, sorted in non-decreasing order.</p>
+<h4 id="2-binary-search-initialization">
+  2. <strong>Binary Search Initialization</strong>
+  <a class="heading-link" href="#2-binary-search-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> arr.size() <span style="color:#f92672">-</span> k;
+</span></span></code></pre></div><p>Here, <code>l</code> and <code>r</code> are initialized to represent the possible starting index range for the subarray of length <code>k</code> that will contain the closest elements. We initialize <code>r</code> as <code>arr.size() - k</code> because we are looking for a subarray that ends at <code>r + k - 1</code> without exceeding the size of the array.</p>
+<h4 id="3-binary-search-loop">
+  3. <strong>Binary Search Loop</strong>
+  <a class="heading-link" href="#3-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (l <span style="color:#f92672">&lt;</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> (l <span style="color:#f92672">+</span> r) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">-</span> arr[m] <span style="color:#f92672">&gt;</span> arr[m <span style="color:#f92672">+</span> k] <span style="color:#f92672">-</span> x) {
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> m;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In the binary search loop:</p>
+<ul>
+<li>We calculate the midpoint <code>m</code> of the current search range <code>[l, r]</code>.</li>
+<li>We compare the proximity of <code>x</code> to the first element of the potential subarray (<code>arr[m]</code>) and the last element of the subarray (<code>arr[m + k]</code>).
+<ul>
+<li>If the difference <code>x - arr[m]</code> (distance from <code>x</code> to the starting element of the subarray) is greater than <code>arr[m + k] - x</code> (distance from <code>x</code> to the ending element of the subarray), it indicates that the subarray starting from <code>m + 1</code> will likely be closer to <code>x</code>.</li>
+<li>Otherwise, we keep searching in the left half by adjusting <code>r = m</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-extracting-the-result">
+  4. <strong>Extracting the Result</strong>
+  <a class="heading-link" href="#4-extracting-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(arr.begin() <span style="color:#f92672">+</span> l, arr.begin() <span style="color:#f92672">+</span> l <span style="color:#f92672">+</span> k);
+</span></span></code></pre></div><p>After binary search concludes, <code>l</code> represents the starting index of the <code>k</code> closest elements in the array. We create a new vector using the <code>begin()</code> and <code>end()</code> iterators to extract the <code>k</code> closest elements from the array and return them.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -311,10 +346,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(log(N) + k), where N is the number of elements in the array. The binary search takes O(log(N)) time, and the construction of the result vector takes O(k) time.</li>
-<li><strong>Space Complexity</strong>: O(k) for the result vector returned.</li>
+<li>
+<p><strong>Binary Search:</strong><br>
+The binary search runs in <strong>O(log(n - k))</strong> time, where <code>n</code> is the size of the array. This is because we are reducing the search range by half at each step, searching within a range of possible starting points for the subarray of length <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Subarray Extraction:</strong><br>
+After finding the correct starting point using binary search, the final step involves copying <code>k</code> elements from the array, which takes <strong>O(k)</strong> time.</p>
+</li>
 </ul>
+<p>Thus, the total time complexity is <strong>O(log(n - k) + k)</strong>. In the worst case, this simplifies to <strong>O(log n + k)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We are using <strong>O(k)</strong> additional space to store the result, which contains the <code>k</code> closest elements.</li>
+</ul>
+<p>Therefore, the space complexity is <strong>O(k)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the <code>k</code> closest elements to <code>x</code> in a sorted array using a binary search approach. By narrowing down the range of possible starting indices using binary search, we achieve a <strong>logarithmic time complexity</strong> for the search part, followed by a linear pass to extract the result. This makes the solution both time-efficient and space-efficient, particularly when the number of closest elements <code>k</code> is much smaller than the size of the array <code>n</code>.</p>
+<p>This approach is particularly effective for large arrays, as it reduces the problem of finding the closest <code>k</code> elements to an optimal solution with logarithmic time complexity for searching and linear time complexity for extraction. This solution is ideal for applications where performance is crucial, such as real-time data processing or large-scale analytics.</p>
  
 </div>
   

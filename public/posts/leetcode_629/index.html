@@ -176,7 +176,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -193,7 +193,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -220,7 +220,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp[n][k] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1388s1hbhb">
+<h2 id="hahahugoshortcode1386s1hbhb">
   
 
   
@@ -232,7 +232,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integers <code>n</code> and <code>k</code>, you need to find the number of permutations of integers from <code>1</code> to <code>n</code> such that there are exactly <code>k</code> inverse pairs in the permutation. An inverse pair is defined as a pair of indices <code>(i, j)</code> such that <code>i &lt; j</code> and <code>nums[i] &gt; nums[j]</code>.</p>
+<p>The problem at hand is to find the number of ways to construct a sequence of length <code>n</code> with exactly <code>k</code> inverse pairs. An <strong>inverse pair</strong> is defined as a pair of indices <code>(i, j)</code> such that <code>i &lt; j</code> and <code>arr[i] &gt; arr[j]</code>. The task is to calculate how many permutations of numbers from 1 to <code>n</code> have exactly <code>k</code> inverse pairs. The result should be returned modulo (10^9 + 7).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -240,34 +240,95 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem is based on <strong>Dynamic Programming (DP)</strong>. The idea is to build the solution step by step, leveraging previously computed results to avoid redundant calculations. Let&rsquo;s break down the approach in more detail.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming Table</strong>:</p>
+<p><strong>Inverse Pairs:</strong></p>
 <ul>
-<li>Use a 2D array <code>dp[n + 1][k + 1]</code> where <code>dp[i][j]</code> represents the number of permutations of <code>i</code> integers with exactly <code>j</code> inverse pairs.</li>
-<li>Initialize the array with <code>0</code>. The base case is <code>dp[0][0] = 1</code> since there is one way to have a permutation of zero integers with zero inverse pairs.</li>
+<li>An inverse pair <code>(i, j)</code> is such that <code>arr[i] &gt; arr[j]</code> and <code>i &lt; j</code>. The goal is to find permutations of numbers from <code>1</code> to <code>n</code> that have exactly <code>k</code> inverse pairs.</li>
 </ul>
 </li>
 <li>
-<p><strong>Filling the DP Table</strong>:</p>
+<p><strong>Recursive Approach:</strong></p>
 <ul>
-<li>For each <code>n</code> from <code>1</code> to <code>n</code>, and for each <code>k</code> from <code>0</code> to <code>k</code>, calculate the number of permutations using the formula:
-[
+<li>At each step, we consider adding a new number (from 1 to <code>n</code>) to the sequence. The challenge is to compute how many ways we can add this new number such that we achieve exactly <code>k</code> inverse pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Table (<code>dp</code>):</strong></p>
+<ul>
+<li>The DP table <code>dp[n][k]</code> will store the number of ways to arrange the numbers from <code>1</code> to <code>n</code> such that the sequence contains exactly <code>k</code> inverse pairs.</li>
+<li>Base case: For <code>n = 0</code> (an empty sequence), there are no inverse pairs. Thus, <code>dp[0][0] = 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Relation:</strong></p>
+<ul>
+<li>When trying to find the number of ways to form sequences of length <code>n</code> with <code>k</code> inverse pairs, we can recursively build the sequence by adding numbers from <code>1</code> to <code>n</code>. Adding the number <code>i</code> will introduce a certain number of new inverse pairs depending on where it is placed in the sequence.</li>
+</ul>
+<p>The recursive relation used in the code is:</p>
+<p>[
 dp[n][k] = \sum_{i=0}^{n-1} dp[n-1][k-i]
-]
-This formula considers the number of ways to form permutations of <code>n</code> integers by adding each new integer (from <code>1</code> to <code>n</code>) to all possible positions of a permutation of <code>n-1</code> integers, thereby affecting the inverse pair count.</li>
+]</p>
+<p>Where <code>i</code> represents the number of inverse pairs introduced by placing a new number at a particular position. The sum calculates the total number of ways to form a sequence of length <code>n</code> with exactly <code>k</code> inverse pairs.</p>
+<p>This equation ensures that for each <code>n</code>, the number of inverse pairs is calculated by considering all possible insertions of the <code>n</code>th number.</p>
+</li>
+<li>
+<p><strong>Modulo Operation:</strong></p>
+<ul>
+<li>Since the result can be large, the answer is computed modulo (10^9 + 7) to avoid overflow and to conform to problem constraints.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code with an explanation for each step:</p>
+<ol>
+<li>
+<p><strong>DP Table Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> dp[<span style="color:#ae81ff">1001</span>][<span style="color:#ae81ff">1001</span>] <span style="color:#f92672">=</span> {};
+</span></span></code></pre></div><ul>
+<li>This initializes a DP table <code>dp[1001][1001]</code> where <code>dp[n][k]</code> will store the number of ways to form a sequence of length <code>n</code> with exactly <code>k</code> inverse pairs. The table is initialized to <code>0</code> by default.</li>
 </ul>
 </li>
 <li>
-<p><strong>Optimization</strong>:</p>
-<ul>
-<li>Since the number of permutations for <code>n</code> integers can grow large, apply modulo (10^9 + 7) to prevent overflow.</li>
+<p><strong>Base Case:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>This handles the base case when <code>k = 0</code>. If there are no inverse pairs required (<code>k == 0</code>), the only valid sequence is the sequence in ascending order, so we return <code>1</code> if <code>k == 0</code> and <code>0</code> otherwise.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>The final answer is found in <code>dp[n][k]</code>, which gives the number of permutations of <code>n</code> integers with exactly <code>k</code> inverse pairs.</li>
+<p><strong>Memoization Check:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (dp[n][k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    dp[n][k] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        dp[n][k] <span style="color:#f92672">=</span> (dp[n][k] <span style="color:#f92672">+</span> kInversePairs(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">-</span> i)) <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000000007</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The code checks if the result for <code>dp[n][k]</code> has already been computed. If it has, it returns the stored result.</li>
+<li>If not, it computes the value by iterating over all possible number of inverse pairs <code>i</code> introduced by placing a number in the sequence.</li>
+<li>The recursive call <code>kInversePairs(n - 1, k - i)</code> computes the number of ways to form a sequence of length <code>n-1</code> with <code>k-i</code> inverse pairs. The result is added to the current <code>dp[n][k]</code>, and the sum is taken modulo (10^9 + 7).</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Adjustment:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[n][k] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>After computing the value, the function returns <code>dp[n][k] - 1</code> because the base case of <code>dp[0][0] = 1</code> leads to an off-by-one error, which is corrected by subtracting <code>1</code>.</li>
 </ul>
 </li>
 </ol>
@@ -278,15 +339,41 @@ This formula considers the number of ways to form permutations of <code>n</code>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n * k), as we iterate through each combination of <code>n</code> and <code>k</code>.</li>
-<li><strong>Space Complexity</strong>: O(n * k), due to the storage of the DP table.</li>
+<li>The time complexity is determined by the recursive function calls and the number of elements in the DP table.</li>
+<li>The recursive calls are constrained by the number of elements in the DP table (<code>1001 x 1001</code>), and for each <code>dp[n][k]</code>, we iterate over <code>n</code> possible values.</li>
+<li>Thus, the time complexity is <strong>O(n * k)</strong>, where <code>n</code> is the length of the sequence, and <code>k</code> is the number of inverse pairs.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n * k)</strong>, where <code>n</code> is the size of the sequence and <code>k</code> is the number of inverse pairs. This is because the DP table <code>dp</code> requires space for all combinations of <code>n</code> and <code>k</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently computes the number of ways to form sequences of length <code>n</code> with exactly <code>k</code> inverse pairs using dynamic programming with memoization. The key idea is to break down the problem into smaller subproblems, where each subproblem computes the number of ways to form sequences with fewer numbers and fewer inverse pairs. The solution uses a DP table to store intermediate results, ensuring that each subproblem is computed only once, making the solution both time-efficient and space-efficient. The modulo operation ensures that the result fits within the problem&rsquo;s constraints.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1388s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1386s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

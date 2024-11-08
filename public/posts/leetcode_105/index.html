@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -261,7 +261,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integer arrays, <code>preorder</code> and <code>inorder</code>, representing the preorder and inorder traversals of a binary tree, construct and return the binary tree.</p>
+<p>Given two integer arrays, <strong>preorder</strong> and <strong>inorder</strong>, representing the preorder and inorder traversal sequences of a binary tree, you are tasked with constructing the binary tree from these traversals.</p>
+<ul>
+<li>The <strong>preorder</strong> traversal gives the nodes of the tree in the order: <strong>root -&gt; left subtree -&gt; right subtree</strong>.</li>
+<li>The <strong>inorder</strong> traversal gives the nodes in the order: <strong>left subtree -&gt; root -&gt; right subtree</strong>.</li>
+</ul>
+<p>Your goal is to construct the binary tree from the given traversals and return its root.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,45 +274,169 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can take advantage of the following properties of the <strong>preorder</strong> and <strong>inorder</strong> traversals:</p>
 <ol>
-<li>The first element in the <code>preorder</code> array is always the root of the tree or subtree.</li>
-<li>Use the <code>inorder</code> array to determine the boundary between left and right subtrees.</li>
-<li>Recursively build the tree:
+<li><strong>Preorder Traversal:</strong> The first element of the preorder array is always the root of the tree or subtree.</li>
+<li><strong>Inorder Traversal:</strong> The root of the tree divides the inorder array into two parts:
 <ul>
-<li>For each subtree, determine the root using the next element in <code>preorder</code>.</li>
-<li>Find the root index in <code>inorder</code> using a hash map for O(1) lookups.</li>
-<li>Split the <code>inorder</code> list around the root to define left and right subtrees.</li>
-<li>Recursively apply the same logic to build both left and right subtrees.</li>
+<li>The left part contains the nodes of the left subtree.</li>
+<li>The right part contains the nodes of the right subtree.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>With this in mind, we can recursively build the tree. Here&rsquo;s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Identify Root from Preorder:</strong> The first element in the <strong>preorder</strong> array is the root of the tree. This root will divide the <strong>inorder</strong> array into two segments:</p>
 <ul>
-<li><strong>Lines 4-7</strong>: Store <code>preorder</code> and <code>inorder</code> arrays as class members and create a map <code>mp</code> to store indices of <code>inorder</code> elements for fast lookup.</li>
-<li><strong>Lines 9-12</strong>: The function <code>helper</code> constructs the tree recursively:
-<ul>
-<li><strong>Base Case</strong>: If <code>ps</code> (preorder start index) exceeds bounds or <code>is &gt; ie</code> (inorder start and end indices are out of range), return <code>NULL</code>.</li>
-<li><strong>Recursive Case</strong>: Set <code>root</code> as the node with the current <code>preorder[ps]</code> value. Use <code>mp[root-&gt;val]</code> to split <code>inorder</code> and recursively build left and right subtrees.</li>
+<li>The elements before the root in the <strong>inorder</strong> array represent the left subtree.</li>
+<li>The elements after the root in the <strong>inorder</strong> array represent the right subtree.</li>
 </ul>
 </li>
+<li>
+<p><strong>Recursive Construction:</strong></p>
+<ul>
+<li>After identifying the root, we recursively build the left and right subtrees by slicing the <strong>inorder</strong> array into the left and right parts and adjusting the <strong>preorder</strong> indices accordingly.</li>
+<li>We continue this process recursively until we have processed all the nodes in the arrays.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-the-solution">
+  Step 1: Initialize the Solution
+  <a class="heading-link" href="#step-1-initialize-the-solution">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> preorder, inorder;
+</span></span></code></pre></div><ul>
+<li>The <code>mp</code> map is used to store the index of each element in the <strong>inorder</strong> array. This allows us to quickly find the position of the root element (from <strong>preorder</strong>) in the <strong>inorder</strong> array.</li>
+<li>The <code>preorder</code> and <code>inorder</code> vectors store the traversal arrays, respectively.</li>
+</ul>
+<h4 id="step-2-build-the-tree">
+  Step 2: Build the Tree
+  <a class="heading-link" href="#step-2-build-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">buildTree</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> preorder, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> inorder) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>preorder <span style="color:#f92672">=</span> preorder;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>inorder <span style="color:#f92672">=</span> inorder;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> inorder.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[inorder[i]] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> helper(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, inorder.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The constructor of the class stores the input <code>preorder</code> and <code>inorder</code> arrays.</li>
+<li>We populate the <code>mp</code> map, where the key is the value of the node and the value is the index of that node in the <strong>inorder</strong> array. This helps us find the root’s position in <strong>inorder</strong> efficiently.</li>
+<li>We then call the recursive <code>helper</code> function to build the tree, starting with the first node in <strong>preorder</strong> (index 0) and the entire <strong>inorder</strong> array (indices 0 to <code>inorder.size() - 1</code>).</li>
+</ul>
+<h4 id="step-3-helper-function-to-recursively-build-the-tree">
+  Step 3: Helper Function to Recursively Build the Tree
+  <a class="heading-link" href="#step-3-helper-function-to-recursively-build-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">helper</span>(<span style="color:#66d9ef">int</span> ps, <span style="color:#66d9ef">int</span> is, <span style="color:#66d9ef">int</span> ie) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ps <span style="color:#f92672">&gt;=</span> preorder.size() <span style="color:#f92672">||</span> is <span style="color:#f92672">&gt;</span> ie) <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(preorder[ps]);
+</span></span><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>left  <span style="color:#f92672">=</span> helper(ps <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, is, mp[root<span style="color:#f92672">-&gt;</span>val] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> helper(ps <span style="color:#f92672">+</span> mp[root<span style="color:#f92672">-&gt;</span>val] <span style="color:#f92672">-</span> is <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, mp[root<span style="color:#f92672">-&gt;</span>val] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ie);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>helper</code> function takes the current index <code>ps</code> for <strong>preorder</strong> and the indices <code>is</code> and <code>ie</code> for the current segment of the <strong>inorder</strong> array that we&rsquo;re currently considering.</li>
+<li><strong>Base Case:</strong> If the current <code>ps</code> index is beyond the bounds of <strong>preorder</strong> or if the start index <code>is</code> exceeds the end index <code>ie</code> in <strong>inorder</strong>, return <code>NULL</code> to indicate there are no nodes to process.</li>
+<li><strong>Create the Root Node:</strong> The value of the current node is taken from <strong>preorder[ps]</strong>. A new <code>TreeNode</code> is created for this root.</li>
+<li><strong>Recursive Calls:</strong>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(N)), for the hash map and recursion stack.</li>
-</ul> 
+<li>The left subtree is constructed by recursively calling <code>helper</code> with the next node in <strong>preorder</strong> (<code>ps + 1</code>), and the left segment of the <strong>inorder</strong> array (from <code>is</code> to the index of the root node in <strong>inorder</strong>).</li>
+<li>The right subtree is constructed similarly, but the segment of the <strong>inorder</strong> array is to the right of the root node.</li>
+</ul>
+</li>
+<li>The recursion proceeds until all nodes are processed, and the entire tree is constructed.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because:</p>
+<ul>
+<li>Each node in the <strong>preorder</strong> and <strong>inorder</strong> arrays is visited exactly once.</li>
+<li>The map <code>mp</code> is created in <strong>O(n)</strong> time, and each lookup of the root in <strong>inorder</strong> takes <strong>O(1)</strong> time due to the map.</li>
+<li>The recursive calls ensure that each node is processed once.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong> due to:</p>
+<ol>
+<li>The storage required for the <code>mp</code> map (which has <code>n</code> entries).</li>
+<li>The storage for the <strong>preorder</strong> and <strong>inorder</strong> arrays, which both contain <code>n</code> elements.</li>
+<li>The recursive call stack in the worst case, which can go as deep as the height of the tree, resulting in a space complexity of <strong>O(h)</strong>, where <code>h</code> is the height of the tree. In the worst case (a skewed tree), the height is <strong>O(n)</strong>, so the space complexity is <strong>O(n)</strong>.</li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the following example:</p>
+<ul>
+<li><strong>Preorder</strong>: <code>[3, 9, 20, 15, 7]</code></li>
+<li><strong>Inorder</strong>: <code>[9, 3, 15, 20, 7]</code></li>
+</ul>
+<ol>
+<li>The root of the tree is <code>3</code> (from <strong>preorder[0]</strong>).</li>
+<li>Find <code>3</code> in <strong>inorder</strong>, which splits the array into <code>[9]</code> (left subtree) and <code>[15, 20, 7]</code> (right subtree).</li>
+<li>Recursively construct the left and right subtrees using the appropriate parts of <strong>preorder</strong> and <strong>inorder</strong>.</li>
+</ol>
+<p>After recursion, the constructed tree looks like this:</p>
+<pre tabindex="0"><code>        3
+       / \
+      9  20
+         /  \
+        15   7
+</code></pre><h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently reconstructs a binary tree from its <strong>preorder</strong> and <strong>inorder</strong> traversal arrays. The use of a map for quick lookups of root positions in the <strong>inorder</strong> array ensures that the tree is built in <strong>O(n)</strong> time. The recursive approach elegantly divides the problem into smaller subproblems, making the solution both efficient and easy to understand. The overall time complexity is <strong>O(n)</strong>, and the space complexity is also <strong>O(n)</strong> due to the storage requirements for the map and the recursion.</p>
+ 
 </div>
   
 

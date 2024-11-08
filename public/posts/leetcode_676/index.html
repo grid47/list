@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -264,92 +264,173 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;buildDict(dictionary);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_2 = obj-&gt;search(searchWord);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1419s1hbhb">
+<h2 id="hahahugoshortcode1416s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return the number of longest increasing subsequences (LIS) in the array. An increasing subsequence is defined as a sequence where each element is greater than the previous one.</p>
+<p>The task is to implement a <code>MagicDictionary</code> class that allows for two main operations:</p>
+<ol>
+<li><strong>buildDict()</strong>: This method takes a list of words and builds a dictionary.</li>
+<li><strong>search()</strong>: This method checks if a given word can be formed by modifying exactly one character of any word in the dictionary.</li>
+</ol>
+<p>The goal is to determine if it is possible to convert a given search word into another word from the dictionary by changing exactly one character.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses dynamic programming to find the length of the longest increasing subsequence while also counting how many times this maximum length occurs.</p>
-<ol>
-<li>
-<p><strong>Dynamic Programming Arrays</strong>:</p>
+<p>To solve the problem, we need to handle two operations:</p>
 <ul>
-<li><code>len[i]</code>: Stores the length of the longest increasing subsequence ending at index <code>i</code>.</li>
-<li><code>cnt[i]</code>: Stores the count of the longest increasing subsequences that end at index <code>i</code>.</li>
+<li><strong>Building the Dictionary</strong>: We need to store a collection of words in a way that allows us to efficiently search for a word by modifying one of its characters.</li>
+<li><strong>Searching for a Word</strong>: We need to check whether the word can be converted to any word in the dictionary by changing exactly one character.</li>
 </ul>
-</li>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>For each index <code>i</code>, initialize <code>len[i]</code> and <code>cnt[i]</code> to <code>1</code> since the minimum length of an increasing subsequence that ends with any element is <code>1</code> (the element itself).</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the DP Arrays</strong>:</p>
-<ul>
-<li>For each element <code>nums[i]</code>, iterate through all previous elements <code>nums[j]</code> (where <code>j &lt; i</code>):
-<ul>
-<li>If <code>nums[j] &lt; nums[i]</code>, then:
-<ul>
-<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a subsequence of the same length as <code>len[i]</code>, increment the count at <code>cnt[i]</code> by <code>cnt[j]</code>.</li>
-<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a longer subsequence, update <code>len[i]</code> and set <code>cnt[i]</code> to <code>cnt[j]</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculate the Result</strong>:</p>
-<ul>
-<li>After populating the <code>len</code> and <code>cnt</code> arrays, determine the maximum length of the LIS (<code>max_len</code>).</li>
-<li>Count the total number of subsequences that have this maximum length.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>We will use a map (hashmap) to store substrings of the words, where the key will be the word with one character removed, and the value will be a list of pairs containing the index of the removed character and the character itself. This allows efficient lookups when searching for words with one character modification.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Input</strong>: The function takes a vector of integers, <code>nums</code>.</li>
-<li><strong>Dynamic Programming Logic</strong>: Two loops are used to build the <code>len</code> and <code>cnt</code> arrays, checking all previous indices for potential subsequences.</li>
-<li><strong>Output</strong>: The function returns the total count of the longest increasing subsequences.</li>
-</ol>
+<h4 id="step-1-magicdictionary-class-constructor">
+  Step 1: <code>MagicDictionary</code> Class Constructor
+  <a class="heading-link" href="#step-1-magicdictionary-class-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MagicDictionary</span> {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    MagicDictionary() {
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The class <code>MagicDictionary</code> is designed with an internal map <code>mp</code> that stores words and their modifications. The key of the map is a substring derived by removing one character from a word, and the value is a list of pairs where each pair contains the index of the removed character and the character itself.</li>
+<li>The constructor initializes the object, and there is no need for any complex initialization at this point.</li>
+</ul>
+<h4 id="step-2-builddict-method">
+  Step 2: <code>buildDict</code> Method
+  <a class="heading-link" href="#step-2-builddict-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buildDict</span>(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> dict) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(string s: dict) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.length();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                string t <span style="color:#f92672">=</span> s.substr(<span style="color:#ae81ff">0</span>, i) <span style="color:#f92672">+</span> s.substr(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>                pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> p(i, s[i]);
+</span></span><span style="display:flex;"><span>                mp[t].push_back(p);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>buildDict</code> method takes a list of words (the dictionary) and processes each word one by one.</li>
+<li>For each word, we iterate through its characters, remove one character at a time, and create a substring <code>t</code> that represents the word without that character.</li>
+<li>We then store this substring in the map <code>mp</code> as a key and the removed character and its index as the value (a pair of <code>index</code> and <code>character</code>).</li>
+<li>The idea behind this approach is to create multiple versions of each word by removing one character and storing them in a map. This allows us to later search for words that differ by exactly one character.</li>
+</ul>
+<h4 id="step-3-search-method">
+  Step 3: <code>search</code> Method
+  <a class="heading-link" href="#step-3-search-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">search</span>(string word) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> word.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            string key <span style="color:#f92672">=</span> word.substr(<span style="color:#ae81ff">0</span>, i) <span style="color:#f92672">+</span> word.substr(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> sk : mp[key])
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(sk.first <span style="color:#f92672">==</span> i <span style="color:#f92672">&amp;&amp;</span> sk.second <span style="color:#f92672">!=</span> word[i])
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>search</code> method checks if the given word can be converted into a word in the dictionary by changing exactly one character.</li>
+<li>For each character <code>i</code> in the <code>word</code>, we create a key by removing that character (just as we did during the dictionary build phase).</li>
+<li>We then check if the key exists in the map <code>mp</code>. If it does, we iterate through the list of pairs associated with that key.</li>
+<li>For each pair, we check if the character at the removed index (<code>sk.first == i</code>) does not match the current character in the word (<code>sk.second != word[i]</code>).</li>
+<li>If this condition holds true, it means the word in the dictionary can be formed by changing one character in the given word, so we return <code>true</code>.</li>
+<li>If no such modification is found after checking all characters, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-4-example-usage">
+  Step 4: Example Usage
+  <a class="heading-link" href="#step-4-example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MagicDictionary<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MagicDictionary();
+</span></span><span style="display:flex;"><span>obj<span style="color:#f92672">-&gt;</span>buildDict(dictionary);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> param_2 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>search(searchWord);
+</span></span></code></pre></div><ul>
+<li>The <code>MagicDictionary</code> object is created and initialized.</li>
+<li>The <code>buildDict()</code> method is called to populate the dictionary with words.</li>
+<li>The <code>search()</code> method is called to check if a given search word can be transformed into any dictionary word by modifying exactly one character.</li>
+</ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the length of <code>nums</code>, due to the nested loops for filling <code>len</code> and <code>cnt</code>.</li>
-<li><strong>Space Complexity</strong>: O(n) for the <code>len</code> and <code>cnt</code> arrays, which are used to store intermediate results.</li>
+<li>
+<p><strong><code>buildDict()</code></strong>: The time complexity of the <code>buildDict()</code> method is <code>O(N * L)</code>, where <code>N</code> is the number of words in the dictionary and <code>L</code> is the average length of the words. For each word, we generate <code>L</code> substrings (one for each character removal) and store them in the map. Each insertion into the map takes constant time on average.</p>
+</li>
+<li>
+<p><strong><code>search()</code></strong>: The time complexity of the <code>search()</code> method is <code>O(L * M)</code>, where <code>L</code> is the length of the word being searched, and <code>M</code> is the number of substrings generated for that word. In the worst case, for each character, we will look up the map and iterate through the list of values stored in the map for that key. This can be O(L * M) in the worst case.</p>
+</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the map <code>mp</code>, which stores substrings and their corresponding modifications. This leads to a space complexity of <code>O(N * L)</code>, where <code>N</code> is the number of words and <code>L</code> is the average word length. Each word results in <code>L</code> substrings, and each substring is stored with a list of pairs, so the space complexity is proportional to the total number of such substrings.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>MagicDictionary</code> class efficiently handles both dictionary building and word searching with respect to single character modifications. By preprocessing the dictionary and storing modified versions of each word, the <code>search()</code> operation can be performed efficiently. This approach ensures that we can quickly find whether a given word can be transformed into any word in the dictionary by changing exactly one character.</p>
+<ul>
+<li>The key innovation in this solution is the use of the map to store substrings and their corresponding modifications, which allows for efficient lookups during the search phase.</li>
+<li>While the time complexity can be high for large dictionaries or long words, the approach is optimal for many practical use cases, especially when the dictionary size is moderate.</li>
+</ul>
+<p>This approach provides an elegant solution to the problem and can be used for applications like spell-checking, auto-correction, and word transformation games where minimal changes to words are required.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1419s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1416s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

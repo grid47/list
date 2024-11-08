@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -260,7 +260,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a collection of integers <code>nums</code> that may contain duplicates, return all possible subsets (the power set) without any duplicate subsets.</p>
+<p>The problem requires generating all possible subsets of a list of integers <code>nums</code>, but with a constraint: <strong>duplicate subsets</strong> should be avoided. In other words, if the input contains duplicate elements, only one occurrence of each subset should appear in the final result.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>nums = [1, 2, 2]</code></li>
+<li>Output: <code>[[1, 2, 2], [1, 2], [1], [2, 2], [2], []]</code></li>
+</ul>
+<p>The challenge here is to find an efficient way to generate subsets while ensuring no duplicates are included in the final result.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,31 +274,107 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution can be approached using <strong>backtracking</strong> combined with a <strong>set</strong> (or a map in this case) to ensure that duplicate subsets are not included in the answer. Here&rsquo;s a step-by-step approach to solving the problem:</p>
 <ol>
-<li><strong>Sort the Array</strong>: Start by sorting <code>nums</code> to ensure that duplicates are adjacent. This allows us to handle duplicates efficiently.</li>
-<li><strong>Backtracking with Memoization</strong>:
+<li>
+<p><strong>Sort the Input</strong>: Sorting the list <code>nums</code> is essential to avoid generating duplicate subsets during the backtracking process. By sorting the list, we ensure that identical elements are adjacent, and we can easily skip over them when generating subsets.</p>
+</li>
+<li>
+<p><strong>Backtracking Function</strong>: The backtracking function generates subsets by:</p>
 <ul>
-<li>Use a recursive backtracking function <code>bt</code> to generate all subsets.</li>
-<li>Track each subset in a map <code>mp</code> to avoid duplicates.</li>
-<li>For each index <code>idx</code>, decide whether to include or exclude <code>nums[idx]</code> in the current subset.</li>
+<li>Recursively including or excluding each element in the list.</li>
+<li>Storing each subset in a temporary list <code>tmp</code>.</li>
+<li>Checking for duplicates by using a map (<code>mp</code>) to track the subsets that have already been generated.</li>
 </ul>
 </li>
-<li><strong>End of Recursion</strong>: When reaching the end of <code>nums</code>, check if the current subset <code>tmp</code> is unique using the map <code>mp</code>. If it is, add it to the result.</li>
-<li><strong>Backtrack</strong>: After exploring a choice, undo it (backtrack) by removing the last added element to explore further options.</li>
+<li>
+<p><strong>Tracking Unique Subsets</strong>: The use of a <code>map</code> (or set) is critical to eliminate duplicate subsets. If a subset already exists in the map, it will not be added again.</p>
+</li>
+<li>
+<p><strong>Backtracking Logic</strong>:</p>
+<ul>
+<li>We first decide not to include the current element.</li>
+<li>Then, we decide to include the current element and recurse.</li>
+<li>After backtracking (removing the element from the temporary subset), we move on to the next element.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: Sort <code>nums</code>, clear <code>mp</code>, and call <code>bt</code> with the initial subset <code>tmp</code> as empty.</li>
-<li><strong>Recursive Choices</strong>: At each index <code>idx</code>, make a recursive call to either include or exclude <code>nums[idx]</code> in <code>tmp</code>.</li>
-<li><strong>Duplicate Check</strong>: Before adding <code>tmp</code> to the answer, check if it has been seen using <code>mp</code>.</li>
-<li><strong>Backtrack</strong>: Revert changes to <code>tmp</code> after each recursive call to ensure all possible subsets are explored.</li>
-</ol>
+<h4 id="step-1-initial-setup">
+  Step 1: Initial Setup
+  <a class="heading-link" href="#step-1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> subsetsWithDup(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    sort(nums.begin(), nums.end());  <span style="color:#75715e">// Sort to handle duplicates
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    mp.clear();  <span style="color:#75715e">// Clear the map to avoid stale data from previous calls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    bt(ans, tmp, nums, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Start the backtracking process
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>ans</code>: A vector of vectors that will store all unique subsets.</li>
+<li><code>tmp</code>: A temporary vector used during the backtracking process to store the current subset.</li>
+<li><code>nums</code>: The input list of numbers that needs to be processed.</li>
+<li>The input list <code>nums</code> is sorted to make sure duplicates are adjacent. This is key for eliminating duplicate subsets.</li>
+<li>The backtracking function <code>bt</code> is called, passing the initial values and starting from index <code>0</code>.</li>
+</ul>
+<h4 id="step-2-the-backtracking-function">
+  Step 2: The Backtracking Function
+  <a class="heading-link" href="#step-2-the-backtracking-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bt</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ans, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>tmp, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> nums.size()) {  <span style="color:#75715e">// Base case: if we&#39;ve processed all elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>mp.count(tmp)) {  <span style="color:#75715e">// Check if the subset is unique
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans.push_back(tmp);  <span style="color:#75715e">// Add the subset to the answer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mp[tmp] <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Mark the subset as seen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, nums, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Skip the current element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    tmp.push_back(nums[idx]);  <span style="color:#75715e">// Include the current element in the subset
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    bt(ans, tmp, nums, idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Recurse with the current element included
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    tmp.pop_back();  <span style="color:#75715e">// Backtrack: remove the last added element
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case</strong>: When <code>idx == nums.size()</code>, we&rsquo;ve considered all elements. We check if the current subset <code>tmp</code> has already been added (using <code>mp.count(tmp)</code>). If it hasn&rsquo;t been added before, we push it to the result and mark it as added in the map.</p>
+</li>
+<li>
+<p><strong>Recursion</strong>:</p>
+<ul>
+<li>First, we call <code>bt(ans, tmp, nums, idx + 1)</code> to skip the current element and move on to the next.</li>
+<li>Then, we add the current element <code>nums[idx]</code> to <code>tmp</code> and call <code>bt</code> again to consider this element as part of the current subset.</li>
+<li>After that, we backtrack by removing the last element from <code>tmp</code> using <code>tmp.pop_back()</code> to try other subsets without the current element.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-handling-duplicates">
+  Step 3: Handling Duplicates
+  <a class="heading-link" href="#step-3-handling-duplicates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The sorting step ensures that identical elements are adjacent.</li>
+<li>The map <code>mp</code> is used to track whether a specific subset (represented by a vector) has already been added to the result.</li>
+<li>The check <code>if(!mp.count(tmp))</code> ensures that no duplicate subsets are added.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -300,10 +382,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(2^n)), since each element has two choices (include or exclude).</li>
-<li><strong>Space Complexity</strong>: (O(2^n)) for storing subsets in <code>ans</code>.</li>
-</ul> 
+<li><strong>Sorting</strong>: Sorting the input array <code>nums</code> takes <code>O(n log n)</code>, where <code>n</code> is the length of the input list.</li>
+<li><strong>Backtracking</strong>: In the worst case, the algorithm generates all possible subsets, which is <code>O(2^n)</code>. For each subset, we check if it has been seen before using a map, which takes <code>O(k)</code> time (where <code>k</code> is the size of the subset). In the worst case, this could take up to <code>O(n)</code> time per subset.
+<ul>
+<li>Total time complexity: <strong>O(n log n + 2^n * n)</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Result Storage</strong>: The space required to store the final answer is proportional to the number of unique subsets, which is <code>O(2^n)</code> in the worst case.</li>
+<li><strong>Recursion Stack</strong>: The recursion stack can grow to a depth of <code>n</code>, so the space complexity due to recursion is <code>O(n)</code>.
+<ul>
+<li>Total space complexity: <strong>O(2^n + n)</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently generates all unique subsets of the given list <code>nums</code> using backtracking, sorting, and a map to avoid duplicates. The time complexity of the solution is driven by the exponential number of possible subsets, while the space complexity accounts for the result and recursion stack. The approach is optimal for problems involving subsets and duplicate elements, and it ensures that no duplicate subsets are included in the final result. This solution is both time-efficient and space-efficient, making it well-suited for solving the problem of generating subsets with duplicates.</p>
+ 
 </div>
   
 

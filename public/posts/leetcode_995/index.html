@@ -180,7 +180,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -213,7 +213,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1655s1hbhb">
+<h2 id="hahahugoshortcode1652s1hbhb">
   
 
   
@@ -255,7 +255,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary array <code>nums</code> and an integer <code>k</code>, you can flip any subarray of length <code>k</code> from <code>0</code> to <code>1</code> or from <code>1</code> to <code>0</code>. Your goal is to return the minimum number of flips required to make all elements in the array equal to <code>1</code>. If it is not possible, return <code>-1</code>.</p>
+<p>The problem asks us to determine the minimum number of flips required to make all bits in an array equal to <code>1</code>, where we are allowed to flip exactly <code>k</code> consecutive bits in the array at any point. A bit flip means changing a <code>0</code> to <code>1</code> or vice versa. If it is impossible to flip the bits in such a way that all bits become <code>1</code>, we return <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,33 +263,103 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Tracking Flips</strong>: Use a variable <code>flipped</code> to track the current state of flips affecting the current index. An array <code>hasFlipped</code> is used to record whether a flip starts at each index.</li>
-<li><strong>Iterate Through the Array</strong>: Loop through each index of <code>nums</code>:
-<ul>
-<li>If <code>i &gt;= k</code>, adjust <code>flipped</code> by removing the effect of flips that started <code>k</code> indices earlier.</li>
-<li>If the current value (considering the flips) is <code>0</code>, a flip is needed:
-<ul>
-<li>Check if a flip can be performed without exceeding the array bounds. If <code>i + k &gt; n</code>, return <code>-1</code>.</li>
-<li>Flip the current segment by toggling <code>flipped</code> and marking that a flip has started at index <code>i</code>.</li>
-<li>Increment the result counter <code>res</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Return the Result</strong>: After processing the array, return the total number of flips required.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem efficiently, we can utilize a <strong>greedy algorithm</strong> with the help of a sliding window. The idea is to make sure that when we encounter a <code>0</code> in the array, we flip it, but only if the flip can cover the required range (<code>k</code> consecutive elements). The challenge comes in ensuring that we keep track of all flips made and avoid unnecessary re-flips while working within the bounds of the array.</p>
+<h3 id="key-steps-in-the-approach">
+  Key Steps in the Approach
+  <a class="heading-link" href="#key-steps-in-the-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Iterate Through the Array</strong>:</p>
 <ul>
-<li>The function initializes necessary variables and iterates through <code>nums</code> while adjusting the <code>flipped</code> state and counting the flips.</li>
-<li>The condition checks ensure that flips are only made when necessary and possible.</li>
+<li>We iterate through the array from left to right, checking each bit.</li>
 </ul>
+</li>
+<li>
+<p><strong>Track Flips</strong>:</p>
+<ul>
+<li>We maintain a variable <code>flipped</code> to track the current flip state. If <code>flipped</code> is <code>0</code>, it means the current bit is in its original state. If <code>flipped</code> is <code>1</code>, it means the current bit is flipped.</li>
+</ul>
+</li>
+<li>
+<p><strong>Making Flips</strong>:</p>
+<ul>
+<li>When we encounter a <code>0</code>, we check if the current index allows for a flip of <code>k</code> consecutive bits. If it does, we flip the bits, increment the <code>res</code> (result) counter, and mark this flip in a separate array <code>hasFlipped</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Boundary Check</strong>:</p>
+<ul>
+<li>If we reach a point where flipping <code>k</code> consecutive bits is not possible (i.e., there are not enough remaining bits to flip), we return <code>-1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficient Flip Tracking</strong>:</p>
+<ul>
+<li>To keep track of when a flip stops affecting the array, we use the <code>hasFlipped</code> array to record the positions where the flips begin and end.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minKBitFlips(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size(), flipped <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> hasFlipped(n, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Tracks whether we need to flip at each position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> tmp <span style="color:#f92672">=</span> nums;  <span style="color:#75715e">// Copy of the input array to work on
+</span></span></span></code></pre></div><ol>
+<li><strong>Initialization</strong>:
+<ul>
+<li>We first initialize <code>n</code> to store the size of the array, <code>flipped</code> to track the current flip status, and <code>res</code> to count the number of flips made.</li>
+<li><code>hasFlipped</code> is an array that stores whether a flip is applied at a specific index, allowing us to manage the sliding window effectively.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {  <span style="color:#75715e">// Loop through each bit in the array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;=</span> k) flipped <span style="color:#f92672">^=</span> hasFlipped[i <span style="color:#f92672">-</span> k];  <span style="color:#75715e">// Remove the effect of flips that are out of range
+</span></span></span></code></pre></div><ol start="2">
+<li><strong>Sliding Window Update</strong>:
+<ul>
+<li>We start iterating through the array. For each index <code>i</code>, if <code>i</code> is greater than or equal to <code>k</code>, we remove the effect of the flip that started <code>k</code> positions earlier by using the XOR operation (<code>flipped ^= hasFlipped[i - k]</code>).</li>
+<li>This allows us to track the current flip status without applying unnecessary flips.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (flipped <span style="color:#f92672">==</span> nums[i]) {  <span style="color:#75715e">// If the current bit is in the wrong state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> k <span style="color:#f92672">&gt;</span> nums.size()) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Check if we have enough space for the flip
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                flipped <span style="color:#f92672">^=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Flip the current bit by toggling `flipped`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                hasFlipped[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark that we performed a flip at position `i`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                res<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Increment the flip count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="3">
+<li><strong>Performing a Flip</strong>:
+<ul>
+<li>If the current state of the bit (<code>nums[i]</code>) is not what we want (i.e., it&rsquo;s <code>0</code> and we want <code>1</code>), we check if we have enough space to flip <code>k</code> consecutive bits.</li>
+<li>If there is not enough space to flip, we immediately return <code>-1</code> as it is impossible to achieve the desired outcome.</li>
+<li>If there is enough space, we flip the bit by toggling the <code>flipped</code> variable and mark the flip in <code>hasFlipped</code>. We also increment the <code>res</code> counter to track the number of flips made.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;  <span style="color:#75715e">// Return the minimum number of flips
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="4">
+<li><strong>Return the Result</strong>:
+<ul>
+<li>Once the iteration is complete, we return the total number of flips (<code>res</code>) needed to convert all bits to <code>1</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -298,13 +368,26 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the <code>nums</code> array. Each element is processed in constant time.</li>
-<li><strong>Space Complexity</strong>: O(n), for the auxiliary <code>hasFlipped</code> array used to track flips.</li>
-</ul> 
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the <code>nums</code> array. This is because we loop through the array only once, performing constant time operations for each bit.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong> due to the <code>hasFlipped</code> array, which stores the flip state for each index.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a <strong>greedy approach</strong> with a sliding window mechanism to solve the problem efficiently. By flipping the bits only when necessary and keeping track of the flip effects using the <code>hasFlipped</code> array, the algorithm ensures that we meet the problem&rsquo;s constraints and requirements. The time and space complexity of the solution are both optimal for the given problem, making it an efficient and practical solution. The solution is also well-suited to handle edge cases, such as when it&rsquo;s impossible to flip the bits as required, returning <code>-1</code> in those situations.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1655s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1652s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

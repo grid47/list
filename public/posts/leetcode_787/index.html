@@ -181,7 +181,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -248,7 +248,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> c[sink] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1e8</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> c[sink];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1490s1hbhb">
+<h2 id="hahahugoshortcode1487s1hbhb">
   
 
   
@@ -260,7 +260,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a number of cities, a list of flights represented as edges in a graph, and a maximum number of stops, find the cheapest price for a flight from a source city to a destination city.</p>
+<p>In this problem, we are tasked with finding the <strong>cheapest price</strong> for traveling from a source city (<code>src</code>) to a destination city (<code>sink</code>) within <strong>at most <code>k</code> stops</strong>. We are given a graph where each node represents a city, and each edge represents a direct flight between two cities with a specified cost. The goal is to determine the minimum cost to travel from <code>src</code> to <code>sink</code>, ensuring that the number of stops along the way does not exceed <code>k</code>. If it is not possible to reach the destination within the specified number of stops, we should return <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,81 +268,93 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be solved using a <strong>modified version of the Bellman-Ford algorithm</strong>, which is typically used for finding the shortest paths in graphs with negative weight edges. In this case, instead of finding the shortest path with unlimited stops, we modify the Bellman-Ford algorithm to only allow <strong><code>k + 1</code> iterations</strong>, where <code>k</code> is the maximum allowed number of stops.</p>
+<p>Bellman-Ford works by iteratively relaxing the edges, meaning it updates the distance to each vertex by checking if a shorter path is found through another vertex. By performing the relaxation process for a limited number of iterations (<code>k + 1</code>), we ensure that we only consider paths with up to <code>k</code> stops.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code step by step to understand how it works:</p>
 <ol>
 <li>
 <p><strong>Initialization</strong>:</p>
 <ul>
-<li>Create a distance vector <code>c</code> to store the minimum cost to reach each city. Initialize all cities with a large value (infinity) except for the source city, which is set to zero.</li>
+<li>We start by initializing a vector <code>c</code> of size <code>n</code> (the number of cities) with very large values (<code>1e8</code>), which represent the initial &ldquo;infinity&rdquo; cost of traveling to any city. The distance to the source city (<code>src</code>) is set to <code>0</code> because it costs nothing to be at the source.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> c(n, <span style="color:#ae81ff">1e8</span>);
+</span></span><span style="display:flex;"><span>c[src] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Relaxation for <code>k+1</code> Iterations</strong>:</p>
+<ul>
+<li>The main idea behind the Bellman-Ford algorithm is to repeatedly relax all edges in the graph to update the shortest paths.</li>
+<li>We perform <code>k + 1</code> iterations to allow for paths with at most <code>k</code> stops. In each iteration, we maintain a copy of the current distances in <code>C</code> and update the distance to the cities based on the edges. This ensures that we only consider paths with up to <code>k</code> stops.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; z <span style="color:#f92672">&lt;=</span> k; z<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> C(c);  <span style="color:#75715e">// Make a copy of the current distances
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : a)   <span style="color:#75715e">// Iterate over all flights (edges)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        C[e[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> min(C[e[<span style="color:#ae81ff">1</span>]], c[e[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">+</span> e[<span style="color:#ae81ff">2</span>]);
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> C;  <span style="color:#75715e">// Update the current distances with the new values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>Here, <code>a</code> is the list of flights, where each flight is represented as a vector <code>[u, v, price]</code>, indicating a flight from city <code>u</code> to city <code>v</code> with a cost of <code>price</code>.</li>
+<li>For each flight <code>(u, v, price)</code>, we check if traveling from <code>u</code> to <code>v</code> through the current path offers a cheaper price. If it does, we update the distance to <code>v</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Bellman-Ford Algorithm</strong>:</p>
+<p><strong>Returning the Result</strong>:</p>
 <ul>
-<li>The algorithm iterates through the flights up to ( k + 1 ) times. This is because a valid path can include up to ( k ) stops, leading to ( k + 1 ) vertices in total.</li>
-<li>In each iteration, create a temporary distance vector <code>C</code> based on the current distances in <code>c</code>. For each flight (edge) from city ( u ) to city ( v ) with cost ( w ):
-<ul>
-<li>Update the cost to reach ( v ) if using flight ( (u, v) ) offers a cheaper price:
-[
-C[v] = \min(C[v], c[u] + w)
-]</li>
+<li>After <code>k + 1</code> iterations, the distance to the destination city <code>sink</code> is found in <code>c[sink]</code>. If <code>c[sink]</code> is still <code>1e8</code>, this means it is impossible to reach the destination within <code>k</code> stops, and we return <code>-1</code>.</li>
+<li>Otherwise, we return the minimum cost to reach <code>sink</code>.</li>
 </ul>
-</li>
-<li>After processing all flights, update <code>c</code> with the values from <code>C</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>After ( k + 1 ) iterations, check the distance to the sink. If it remains at the initialized large value, return -1 indicating that the destination cannot be reached within the given number of stops. Otherwise, return the computed cost.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> c[sink] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1e8</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> c[sink];
+</span></span></code></pre></div><ul>
+<li>If <code>c[sink]</code> holds the &ldquo;infinity&rdquo; value, it indicates that no valid path to <code>sink</code> was found within <code>k</code> stops, and the function returns <code>-1</code> to signify that it&rsquo;s impossible to reach the destination.</li>
+<li>Otherwise, the function returns the cost stored in <code>c[sink]</code>, which is the cheapest price to reach the destination.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Class</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains the method to find the cheapest flight price.
+<li>The algorithm runs in <code>O((k + 1) * E)</code> time, where <code>E</code> is the number of edges (flights) in the graph. This is because, in each iteration, we relax all the edges, and we perform <code>k + 1</code> iterations.</li>
+<li>Since the number of edges <code>E</code> is typically much larger than the number of nodes <code>n</code> in a graph, the time complexity is dominated by the edge count, making the time complexity <strong>O((k + 1) * E)</strong>.</li>
+<li>If <code>k</code> is much smaller than the number of cities <code>n</code>, this is much more efficient than running a traditional Dijkstra’s algorithm for each source-destination pair.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>int findCheapestPrice(int n, vector&lt;vector&lt;int&gt;&gt;&amp; a, int src, int sink, int k)</code>: Main function to compute the cheapest price.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>n</code>: Number of cities.</li>
-<li><code>a</code>: Vector of edges, where each edge is represented as a vector <code>[from, to, price]</code>.</li>
-<li><code>src</code>: The source city index.</li>
-<li><code>sink</code>: The destination city index.</li>
-<li><code>k</code>: The maximum number of stops allowed.</li>
+<li>The space complexity is <strong>O(n)</strong>, as we use a vector <code>c</code> of size <code>n</code> to store the minimum costs to reach each city, and a few additional variables for iteration. This is a space-efficient solution, especially for large graphs.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(k * E), where ( E ) is the number of edges (flights) in the graph, as we perform ( k + 1 ) iterations over all edges.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the distances to each city in the vector <code>c</code>.</li>
-</ul>
+<p>The solution efficiently finds the <strong>cheapest flight price</strong> between two cities with <strong>at most <code>k</code> stops</strong> using a modified <strong>Bellman-Ford algorithm</strong>. By performing <code>k + 1</code> iterations of edge relaxation, the algorithm ensures that we only consider paths with up to <code>k</code> stops. This allows us to handle cases where traditional shortest-path algorithms, like Dijkstra’s, may not work due to the constraint on the number of stops.</p>
+<p>This approach is particularly beneficial for graphs with a moderate number of stops (controlled by <code>k</code>) and offers an optimal solution to the problem with respect to both time and space complexity. Bellman-Ford is well-suited for graphs with a large number of edges, making this solution effective for many real-world applications, including flight pricing, network routing, and transportation systems.</p>
+<p>In summary, the Bellman-Ford algorithm is an ideal choice for this problem due to its ability to handle edge relaxation efficiently, even with constraints on the number of stops. By limiting the number of iterations to <code>k + 1</code>, the algorithm optimally computes the shortest path with respect to the number of stops while ensuring that the solution remains both time and space efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1490s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1487s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -222,7 +222,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1413s1hbhb">
+<h2 id="hahahugoshortcode1410s1hbhb">
   
 
   
@@ -234,7 +234,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two integers, <code>n</code> and <code>k</code>. The task is to construct an array of integers from <code>1</code> to <code>n</code> such that the absolute difference between any two consecutive elements is either <code>1</code> or <code>k</code>. The constructed array should maximize the value of <code>k</code>.</p>
+<p>The problem asks us to construct an array of integers from <code>1</code> to <code>n</code> such that:</p>
+<ol>
+<li>The array contains exactly <code>n</code> elements.</li>
+<li>The difference between consecutive elements is as large as possible for exactly <code>k</code> times.</li>
+<li>For the remaining elements, the difference between consecutive elements can be one.</li>
+</ol>
+<p>The goal is to construct the array in such a way that the first <code>k</code> differences are maximized, followed by the regular increments of one.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -242,45 +248,74 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use a two-pointer approach where one pointer starts from the beginning of the array (<code>i = 1</code>) and the other pointer starts from the end (<code>j = n</code>). The strategy is to alternate between the two pointers for the first <code>k</code> steps, maximizing the difference between consecutive elements. After these <code>k</code> steps, we simply fill the remaining positions in a linear increasing order, starting from <code>i</code>.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Use two pointers: one starting from the beginning (<code>i = 1</code>) and the other from the end (<code>j = n</code>) of the range.</li>
-<li>This allows us to alternate between adding the smallest and largest available numbers to the result, ensuring we can achieve the desired differences.</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Result Array</strong>:</p>
-<ul>
-<li>Use a loop that continues until both pointers meet.</li>
-<li>If <code>k &gt; 0</code>, alternate between pushing <code>i</code> and <code>j</code> based on the parity of <code>k</code>.
-<ul>
-<li>If <code>k</code> is odd, push the smaller value (<code>i</code>) and increment it.</li>
-<li>If <code>k</code> is even, push the larger value (<code>j</code>) and decrement it.</li>
-</ul>
-</li>
-<li>Once <code>k</code> reaches <code>0</code>, simply continue pushing the remaining numbers from the start.</li>
-</ul>
-</li>
+<li><strong>Maximizing Differences</strong>: To maximize the difference, we alternate between the smallest available value and the largest available value. This is done by choosing either <code>i++</code> (the current smallest available number) or <code>j--</code> (the current largest available number) based on whether <code>k</code> is odd or even.</li>
+<li><strong>Filling the Remaining Positions</strong>: After <code>k</code> steps, we simply add numbers in increasing order to fill the remaining spots in the array.</li>
+<li><strong>Two-pointer Strategy</strong>: The two-pointer strategy allows us to efficiently alternate between <code>i</code> and <code>j</code>, and then move <code>i</code> alone when no more alternating steps are needed.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: An empty vector <code>res</code> is created to store the result.</li>
-<li><strong>Looping Through</strong>:
+<p>The implementation is done in the <code>constructArray</code> function. Let&rsquo;s go through the code step by step.</p>
+<h4 id="1-function-definition-and-initial-setup">
+  1. <strong>Function Definition and Initial Setup</strong>
+  <a class="heading-link" href="#1-function-definition-and-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> constructArray(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li>The function <code>constructArray</code> takes two parameters: <code>n</code> (the number of elements in the result array) and <code>k</code> (the number of maximum differences to generate).</li>
+<li>A <code>vector&lt;int&gt; res</code> is declared to store the result array that will be returned.</li>
+</ul>
+<h4 id="2-loop-to-generate-the-result-array">
+  2. <strong>Loop to Generate the Result Array</strong>
+  <a class="heading-link" href="#2-loop-to-generate-the-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> n; i <span style="color:#f92672">&lt;=</span> j; ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        res.push_back(k<span style="color:#f92672">--%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">?</span> i<span style="color:#f92672">++:</span> j<span style="color:#f92672">--</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> res.push_back(i<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Two Pointers Initialization</strong>: We initialize two pointers <code>i</code> and <code>j</code>. <code>i</code> starts at <code>1</code> and represents the smallest available number, while <code>j</code> starts at <code>n</code> and represents the largest available number.</li>
+<li><strong>Loop Condition</strong>: The loop runs as long as <code>i &lt;= j</code>, meaning we continue filling the array until all elements are placed.</li>
+<li><strong>Maximizing Differences</strong>:
 <ul>
-<li>The loop runs while <code>i &lt;= j</code>.</li>
-<li>Depending on the value of <code>k</code>, numbers are pushed to the result vector, adjusting <code>i</code> and <code>j</code> as needed.</li>
+<li>If <code>k &gt; 0</code>, the code alternates between adding <code>i++</code> (incrementing the smallest value) and <code>j--</code> (decrementing the largest value). This alternation ensures that the difference between consecutive elements is maximized.</li>
+<li>The <code>k-- % 2</code> condition is used to alternate between picking <code>i</code> and <code>j</code>. The modulo operation helps in alternating between odd and even steps.</li>
 </ul>
 </li>
-<li><strong>Return Result</strong>: After the loop, the constructed array is returned.</li>
-</ol>
+<li><strong>Remaining Positions</strong>: Once <code>k</code> reaches zero, the loop simply adds the next smallest number (<code>i++</code>) without any alternation, as no further maximization of differences is needed.</li>
+</ul>
+<h4 id="3-returning-the-result">
+  3. <strong>Returning the Result</strong>
+  <a class="heading-link" href="#3-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the array <code>res</code> contains the constructed array, which is then returned as the result.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -288,15 +323,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of elements in the resulting array. Each element is processed once.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the result array.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the array. This is because we are iterating through the array once, with each operation inside the loop taking constant time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, as we are storing the result array <code>res</code>, which has <code>n</code> elements.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently constructs the array with alternating maximum differences using a two-pointer approach. By alternating between the smallest and largest available numbers for the first <code>k</code> steps and then simply filling in the remaining elements in increasing order, we achieve the desired result. The time complexity of <strong>O(n)</strong> ensures that the solution scales well with larger inputs, and the space complexity of <strong>O(n)</strong> is optimal for the task.</p>
+<p>The key to this problem is recognizing that maximizing differences can be efficiently achieved by alternating between the smallest and largest available values, and this approach avoids unnecessary complexity while ensuring correctness.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1413s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1410s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

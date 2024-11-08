@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the root of a binary tree, invert the tree and return its root.</p>
+<p>The problem asks us to invert a binary tree. In other words, we need to swap the left and right child nodes for every node in the binary tree. This inversion should be performed recursively, and the final result should return the root of the inverted tree.</p>
+<p>The definition of a <strong>binary tree node</strong> is given as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>We are tasked with creating a function that inverts the binary tree and returns the root of the modified tree.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,44 +271,177 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To invert the binary tree, we can use a <strong>recursive depth-first traversal</strong> approach. At each node, we swap its left and right children, and then recursively invert the left and right subtrees.</p>
+<p>The recursive approach works as follows:</p>
+<ol>
+<li><strong>Base Case</strong>: If the node is <code>NULL</code>, simply return <code>NULL</code>. This is because an empty subtree does not need any inversion.</li>
+<li><strong>Recursive Step</strong>:
 <ul>
-<li><strong>Recursive Traversal</strong>: Use a depth-first approach to traverse the tree.</li>
-<li><strong>Swapping Nodes</strong>: For each node:
-<ul>
-<li>Swap its left and right children.</li>
+<li>Swap the left and right child nodes of the current node.</li>
 <li>Recursively invert the left and right subtrees.</li>
+<li>Return the current node after inverting its children.</li>
 </ul>
 </li>
-</ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</ol>
+<p>This method works because, in a binary tree, every node has a left and right child, and inverting the tree requires flipping the left and right child pointers at every level of the tree.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Function <code>invertTree(TreeNode* root)</code></strong>:
-<ul>
-<li>Base Case: If the <code>root</code> is <code>NULL</code>, return <code>NULL</code>.</li>
-<li>Store the left child in a temporary variable <code>tmp</code>.</li>
-<li>Recursively call <code>invertTree</code> on the right child and assign it to the left child.</li>
-<li>Recursively call <code>invertTree</code> on <code>tmp</code> and assign it to the right child.</li>
-<li>Return the <code>root</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Function to invert a binary tree
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    TreeNode<span style="color:#f92672">*</span> invertTree(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Base case - if the current node is NULL, return NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> NULL;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Temporarily store the left child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        TreeNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 3: Recursively invert the right subtree and assign it to the left child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> invertTree(root<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 4: Recursively invert the left subtree (which was temporarily stored) and assign it to the right child
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> invertTree(tmp);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 5: Return the root node after inversion
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-1-base-case">
+  Step 1: Base Case
+  <a class="heading-link" href="#step-1-base-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li>The base case checks if the current node is <code>NULL</code>. If it is, we simply return <code>NULL</code>. This ensures that we stop the recursion when we reach the leaf nodes, which don&rsquo;t have any children to invert.</li>
 </ul>
-</li>
+<h4 id="step-2-temporary-storage-of-the-left-child">
+  Step 2: Temporary Storage of the Left Child
+  <a class="heading-link" href="#step-2-temporary-storage-of-the-left-child">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>left;
+</span></span></code></pre></div><ul>
+<li>We store the left child of the current node (<code>root-&gt;left</code>) in a temporary variable <code>tmp</code>. This is necessary because we need to swap the left and right children, and we cannot directly overwrite the left child without losing it.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-3-invert-the-right-subtree">
+  Step 3: Invert the Right Subtree
+  <a class="heading-link" href="#step-3-invert-the-right-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> invertTree(root<span style="color:#f92672">-&gt;</span>right);
+</span></span></code></pre></div><ul>
+<li>In this step, we recursively invert the right subtree. The recursive call to <code>invertTree(root-&gt;right)</code> inverts the right subtree of the current node. Once the right subtree is inverted, it is assigned to the left child of the current node.</li>
+</ul>
+<h4 id="step-4-invert-the-left-subtree">
+  Step 4: Invert the Left Subtree
+  <a class="heading-link" href="#step-4-invert-the-left-subtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> invertTree(tmp);
+</span></span></code></pre></div><ul>
+<li>In this step, we recursively invert the left subtree (which was originally the right subtree before swapping) by calling <code>invertTree(tmp)</code>. The left child (<code>tmp</code>) is now assigned to the right child of the current node.</li>
+</ul>
+<h4 id="step-5-return-the-root-node">
+  Step 5: Return the Root Node
+  <a class="heading-link" href="#step-5-return-the-root-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> root;
+</span></span></code></pre></div><ul>
+<li>After swapping the left and right children and recursively inverting the subtrees, we return the current node (<code>root</code>), which is now the root of the inverted binary tree or subtree.</li>
+</ul>
+<h3 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, as each node is visited exactly once.</li>
-<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree. This accounts for the recursive call stack in the worst case (for a skewed tree).</li>
-</ul> 
+<li>Each node is visited exactly once. For each node, we perform constant-time operations: swapping the left and right children and making recursive calls to invert the left and right subtrees.</li>
+<li>Therefore, the total time complexity is proportional to the number of nodes in the tree, i.e., <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the binary tree.</p>
+<ul>
+<li>The space complexity is determined by the depth of the recursive call stack. In the worst case, the tree could be skewed (like a linked list), and the recursion would need to go as deep as the height of the tree. In this case, the space complexity would be <strong>O(n)</strong>.</li>
+<li>In the best case, if the tree is balanced, the recursion depth would be proportional to the height of the tree, which is <strong>O(log n)</strong>.</li>
+</ul>
+<p>Thus, the space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree, which can range from <strong>O(log n)</strong> to <strong>O(n)</strong> depending on the structure of the tree.</p>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Consider the following binary tree:</p>
+<pre tabindex="0"><code>       4
+     /   \
+    2     7
+   / \   / \
+  1   3 6   9
+</code></pre><ul>
+<li>
+<p><strong>Initial Tree</strong>:</p>
+<pre tabindex="0"><code>       4
+     /   \
+    2     7
+   / \   / \
+  1   3 6   9
+</code></pre></li>
+<li>
+<p>After the <code>invertTree</code> function is called on the root node (4):</p>
+<ol>
+<li>Swap the left and right children of node 4.</li>
+<li>Recursively invert the left and right subtrees of node 4.</li>
+</ol>
+</li>
+<li>
+<p><strong>Inverted Tree</strong>:</p>
+<pre tabindex="0"><code>       4
+     /   \
+    7     2
+   / \   / \
+  9   6 3   1
+</code></pre></li>
+<li>
+<p>The left and right subtrees are recursively inverted, and the final tree is the mirror image of the original tree.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this solution, we successfully invert a binary tree using recursion. The algorithm works by swapping the left and right child nodes at each step, then recursively inverting the left and right subtrees. This solution efficiently handles the inversion of the tree in <strong>O(n)</strong> time, where <code>n</code> is the number of nodes, and it uses <strong>O(h)</strong> space, where <code>h</code> is the height of the tree due to the recursion stack.</p>
+<p>This approach is optimal and easy to understand, making it a standard technique for solving problems involving tree manipulations. The recursive method is elegant and leverages the power of recursion to break down the problem into manageable subproblems, leading to an elegant and efficient solution.</p>
+ 
 </div>
   
 

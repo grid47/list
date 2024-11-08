@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1392s1hbhb">
+<h2 id="hahahugoshortcode1390s1hbhb">
   
 
   
@@ -242,7 +242,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a non-negative integer <code>c</code>, determine if it can be expressed as the sum of the squares of two integers. In other words, check if there exist non-negative integers <code>a</code> and <code>b</code> such that ( a^2 + b^2 = c ).</p>
+<p>The problem asks us to determine whether a given integer <code>c</code> can be expressed as the sum of the squares of two non-negative integers. Specifically, the task is to check if there exist two integers <code>a</code> and <code>b</code> such that:</p>
+<p>[
+a^2 + b^2 = c
+]</p>
+<p>For example:</p>
+<ul>
+<li>For <code>c = 5</code>, the answer is <code>true</code> because ( 1^2 + 2^2 = 5 ).</li>
+<li>For <code>c = 3</code>, the answer is <code>false</code> because no two squares sum up to 3.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,44 +258,68 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Use two pointers: one starting from <code>0</code> (left) and another starting from the integer square root of <code>c</code> (right).</li>
-<li>The left pointer will increment to check for larger values, while the right pointer will decrement to check for smaller values.</li>
-</ul>
-</li>
-<li>
-<p><strong>Condition Checking</strong>:</p>
-<ul>
-<li>Calculate the sum of squares ( \text{res} = \text{left}^2 + \text{right}^2 ).</li>
-<li>If ( \text{res} &lt; c ), it means the current sum is too small, so increment the left pointer.</li>
-<li>If ( \text{res} &gt; c ), it means the current sum is too large, so decrement the right pointer.</li>
-<li>If ( \text{res} = c ), return <code>true</code> as we found a valid pair.</li>
-</ul>
-</li>
-<li>
-<p><strong>Termination</strong>:</p>
-<ul>
-<li>The loop continues until the left pointer exceeds the right pointer.</li>
-<li>If no valid pair is found after the loop, return <code>false</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The approach to solving this problem revolves around using two pointers to search for pairs of numbers whose squares sum up to <code>c</code>. The basic idea is to check all possible pairs of numbers <code>a</code> and <code>b</code>, where <code>a</code> is incremented and <code>b</code> is decremented as needed to find a valid pair. This method is efficient due to the use of a two-pointer technique, which avoids checking all possible pairs exhaustively and helps reduce time complexity.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Initialize two pointers: <code>left</code> starting at <code>0</code> and <code>right</code> at <code>sqrt(c)</code>.</li>
-<li>In a loop, calculate the sum of squares for the current pointers.</li>
-<li>Adjust the pointers based on the comparison of the sum with <code>c</code>.</li>
-<li>Return <code>true</code> if a valid pair is found; otherwise, return <code>false</code> after the loop.</li>
-</ol>
+<p>Let’s break down the code step by step to understand how it works:</p>
+<h4 id="1-initial-setup">
+  1. <strong>Initial Setup:</strong>
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> sqrt(c);
+</span></span></code></pre></div><ul>
+<li>We initialize two variables, <code>left</code> and <code>right</code>. The <code>left</code> pointer starts at <code>0</code>, and the <code>right</code> pointer starts at the integer square root of <code>c</code>, i.e., ( \text{sqrt}(c) ).</li>
+<li>The reason we start with <code>right = sqrt(c)</code> is that if the square of any number exceeds <code>c</code>, then it can no longer be part of the sum ( a^2 + b^2 = c ). Thus, the maximum possible value for <code>b</code> would be <code>sqrt(c)</code>.</li>
+</ul>
+<h4 id="2-the-while-loop">
+  2. <strong>The While Loop:</strong>
+  <a class="heading-link" href="#2-the-while-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> left <span style="color:#f92672">*</span> left <span style="color:#f92672">+</span> right <span style="color:#f92672">*</span> right;
+</span></span></code></pre></div><ul>
+<li>We enter a while loop that continues as long as the <code>left</code> pointer is less than or equal to the <code>right</code> pointer.</li>
+<li>Inside the loop, we compute the sum of squares of <code>left</code> and <code>right</code> as <code>res = left * left + right * right</code>.</li>
+</ul>
+<h4 id="3-comparing-the-sum-of-squares">
+  3. <strong>Comparing the Sum of Squares:</strong>
+  <a class="heading-link" href="#3-comparing-the-sum-of-squares">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(res <span style="color:#f92672">&lt;</span> c)
+</span></span><span style="display:flex;"><span>    left<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(res <span style="color:#f92672">&gt;</span> c) 
+</span></span><span style="display:flex;"><span>    right<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If <code>res &lt; c</code>, it means that the sum of squares is too small, and we need to increase the value of <code>left</code> to try and get closer to <code>c</code>. Therefore, we increment <code>left</code>.</li>
+<li>If <code>res &gt; c</code>, the sum of squares is too large, and we need to decrease the value of <code>right</code> to try and get closer to <code>c</code>. Therefore, we decrement <code>right</code>.</li>
+<li>If <code>res == c</code>, we have found a valid pair where ( a^2 + b^2 = c ), and we return <code>true</code>.</li>
+</ul>
+<h4 id="4-return-statement">
+  4. <strong>Return Statement:</strong>
+  <a class="heading-link" href="#4-return-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If we exit the while loop without finding a valid pair, it means that no such pair of integers exists that satisfy the condition ( a^2 + b^2 = c ), so we return <code>false</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -295,15 +327,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(sqrt(c))</strong>, where <code>c</code> is the given integer. This is because the <code>left</code> pointer starts at 0 and increments until it reaches ( \sqrt{c} ), and the <code>right</code> pointer starts at ( \sqrt{c} ) and decrements until it reaches <code>left</code>. The total number of iterations is proportional to the square root of <code>c</code>.</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(√c), as we only iterate until the integer square root of <code>c</code>.</li>
-<li><strong>Space Complexity</strong>: O(1), as we use a constant amount of space for variables.</li>
+<li>The loop runs at most ( \sqrt{c} ) iterations because both the <code>left</code> and <code>right</code> pointers move towards each other from opposite ends of the possible range. Each iteration involves constant-time operations such as calculating the sum of squares, comparison, and pointer adjustments.</li>
+<li>Therefore, the time complexity is <strong>O(sqrt(c))</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity of this solution is <strong>O(1)</strong>. The algorithm uses only a constant amount of extra space for storing the variables <code>left</code>, <code>right</code>, and <code>res</code>. No additional data structures are used that would grow with the size of the input.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if a given integer <code>c</code> can be represented as the sum of two squares by using the two-pointer technique. The two pointers (<code>left</code> and <code>right</code>) are adjusted based on the sum of their squares, effectively narrowing down the search space for a valid pair. By starting from the smallest and largest possible values for <code>a</code> and <code>b</code>, we ensure that we check only valid pairs, and the algorithm runs in <strong>O(sqrt(c))</strong> time, which is optimal for this problem.</p>
+<p>The solution is both time-efficient and space-efficient, making it a great choice for large values of <code>c</code>. The key takeaway is the use of the two-pointer technique, which reduces unnecessary computations and ensures that the algorithm works efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1392s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1390s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

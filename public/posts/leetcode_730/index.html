@@ -177,7 +177,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -198,7 +198,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -253,7 +253,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, count the number of distinct palindromic subsequences in <code>s</code>.</p>
+<p>The problem asks to calculate the number of palindromic subsequences in a given string <code>s</code>. A palindromic subsequence is a sequence of characters from the string that reads the same forward and backward. The task is to count the number of distinct palindromic subsequences in the string, and the result should be given modulo (10^9 + 7).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,81 +261,127 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be solved using <strong>dynamic programming (DP)</strong>. The key observation is that a subsequence is palindromic if the first and last characters of the subsequence are the same, and the subsequence formed by removing the first and last characters is also a palindromic subsequence.</p>
+<p>The solution involves defining a recursive DP function to count palindromic subsequences between two indices <code>i</code> and <code>j</code>. The recursive function breaks the problem into smaller subproblems, counting palindromic subsequences for smaller substrings, and combines the results. Memoization is used to store intermediate results to avoid redundant calculations, improving efficiency.</p>
+<p>The process also accounts for overlapping subsequences and handles cases where the first and last characters are the same, ensuring that we don’t count the same subsequences multiple times.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
 <li>
-<p><strong>Dynamic Programming (DP)</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Use a 2D memoization table <code>memo</code> where <code>memo[i][j]</code> represents the number of distinct palindromic subsequences in the substring <code>s[i...j]</code>.</li>
+<li>The problem is approached with the <code>countPalindromicSubsequences</code> function, which initializes a <code>memo</code> table to store results for subproblems.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countPalindromicSubsequences</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, memo, s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We define a constant <code>mod</code> to store the modulus value, (10^9 + 7), to prevent overflow and ensure the result fits within a standard integer limit.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive Function</strong>:</p>
+<p><strong>Recursive DP Function</strong>:</p>
 <ul>
-<li>Define a function <code>dp(i, j)</code> that calculates the number of palindromic subsequences in the substring from index <code>i</code> to <code>j</code>.</li>
-<li>Base Cases:
-<ul>
-<li>If <code>i &gt; j</code>, return 0 (invalid range).</li>
-<li>If <code>i == j</code>, return 1 (a single character is a palindrome).</li>
+<li>The <code>dp</code> function is a recursive function that computes the number of palindromic subsequences between indices <code>i</code> and <code>j</code>.</li>
 </ul>
-</li>
-<li>If <code>s[i] == s[j]</code>, the count is derived as follows:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>memo, string <span style="color:#f92672">&amp;</span>s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> j) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> j) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[i][j] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> memo[i][j];
+</span></span></code></pre></div><ul>
+<li><strong>Base Cases</strong>:
 <ul>
-<li>Count palindromes formed by both characters: <code>2 * dp(i + 1, j - 1)</code>.</li>
-<li>Handle duplicates:
-<ul>
-<li>Move left and right pointers to find the next occurrences of <code>s[i]</code>.</li>
-<li>Adjust the count based on the positions of the left and right pointers.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>If <code>s[i] != s[j]</code>, the count is the sum of:
-<ul>
-<li><code>dp(i + 1, j)</code> (excluding the left character).</li>
-<li><code>dp(i, j - 1)</code> (excluding the right character).</li>
-<li>Subtract <code>dp(i + 1, j - 1)</code> to avoid double-counting.</li>
+<li>If <code>i &gt; j</code>, the range is invalid, so the result is 0.</li>
+<li>If <code>i == j</code>, there is only one character, which is always a palindrome of length 1.</li>
+<li>If the result for the substring <code>s[i..j]</code> has already been computed (memoized), we return the stored result.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Modulo Operation</strong>:</p>
+<p><strong>Recursive Cases</strong>:</p>
 <ul>
-<li>Use <code>mod = 1e9 + 7</code> to handle large numbers and prevent overflow.</li>
+<li>If the characters at <code>i</code> and <code>j</code> are the same, we compute the number of palindromic subsequences by:
+<ul>
+<li>Doubling the result for the substring <code>s[i+1..j-1]</code>, as the current characters <code>s[i]</code> and <code>s[j]</code> can contribute to new palindromic subsequences.</li>
+<li>Counting the left and right boundaries, adjusting for any overlapping subsequences that may have been counted more than once.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> s[j]) {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, memo, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right <span style="color:#f92672">=</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> s[left] <span style="color:#f92672">!=</span> s[i]) left<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">&amp;&amp;</span> s[right] <span style="color:#f92672">!=</span> s[i]) right<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(left <span style="color:#f92672">&lt;</span> right) ans <span style="color:#f92672">-=</span> dp(left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, memo, s);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(left <span style="color:#f92672">==</span> right) ans <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> ans <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>} 
+</span></span></code></pre></div><ul>
+<li>If the characters at <code>i</code> and <code>j</code> are different, we compute the result by:
+<ul>
+<li>Adding the number of palindromic subsequences for <code>s[i+1..j]</code> and <code>s[i..j-1]</code>, and subtracting the subsequences counted for <code>s[i+1..j-1]</code> (to avoid double counting).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j, memo, s) <span style="color:#f92672">+</span> dp(i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, memo, s) <span style="color:#f92672">-</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, memo, s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Memoization and Modulo Operation</strong>:</p>
+<ul>
+<li>The result is stored in the memo table to avoid redundant calculations. Since the result can be large, we apply the modulo operation to ensure it stays within the limits of standard integer ranges.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> memo[i][j] <span style="color:#f92672">=</span> ans <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> ans <span style="color:#f92672">+</span> mod : ans <span style="color:#f92672">%</span> mod;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Finally, the result for the entire string is computed by calling <code>dp(0, n-1)</code>, which covers the entire range from the first to the last character of the string.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Class</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains methods to solve the problem.</li>
-<li><strong>Method</strong>:
+<li>The function <code>dp(i, j)</code> is called recursively for each pair of indices <code>(i, j)</code>. Since we store the results in the <code>memo</code> table, each pair <code>(i, j)</code> is computed only once. Therefore, the time complexity is <strong>O(n^2)</strong>, where <code>n</code> is the length of the input string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>int countPalindromicSubsequences(string s)</code>: Initializes the memoization table and calls the DP function.</li>
-<li><code>int dp(int i, int j, vector&lt;vector&lt;int&gt;&gt; &amp;memo, string &amp;s)</code>: Implements the recursive logic to count palindromic subsequences.</li>
+<li>The space complexity is <strong>O(n^2)</strong>, as we use a <code>memo</code> table of size <code>n x n</code> to store intermediate results.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(N^2) for the DP table, where N is the length of the string.</li>
-<li><strong>Space Complexity</strong>: O(N^2) for the memoization table.</li>
-</ul>
+<p>This solution leverages dynamic programming with memoization to efficiently count the number of palindromic subsequences in a string, ensuring that overlapping subproblems are solved only once. By considering both the cases where the characters at the boundaries of the substring are the same and where they are different, the algorithm can compute the result without missing any palindromic subsequences.</p>
+<p>The use of a modulo operation ensures that the result remains manageable even for larger strings. The time complexity of <strong>O(n^2)</strong> makes this solution feasible for moderate-sized input strings, and the space complexity is also <strong>O(n^2)</strong> due to the memoization table.</p>
+<p>This approach is optimal for this problem, as it avoids the brute-force method of generating all subsequences, which would be computationally expensive, and instead uses the power of dynamic programming to break down the problem into smaller, manageable subproblems.</p>
+<p>In summary, the solution provides an efficient and scalable way to count palindromic subsequences in a string using dynamic programming with memoization. The algorithm handles both base cases and recursive cases efficiently, ensuring that it performs well even for large input strings.</p>
  
 </div>
   

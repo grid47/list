@@ -179,7 +179,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -208,7 +208,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -259,7 +259,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1547s1hbhb">
+<h2 id="hahahugoshortcode1549s1hbhb">
   
 
   
@@ -271,15 +271,23 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You need to hire exactly <code>k</code> workers out of <code>n</code> available workers, where each worker has a specific quality and a wage that they demand. The goal is to minimize the cost of hiring these workers, which is calculated as follows:</p>
+<p>We are given two arrays: <code>q</code> and <code>wage</code>, representing the quality and wage of <code>n</code> workers, respectively. We also have an integer <code>k</code> which denotes the number of workers we want to hire.</p>
+<p>The goal is to hire exactly <code>k</code> workers such that the <strong>cost</strong> is minimized. The cost to hire <code>k</code> workers is calculated based on their qualities and wages as follows:</p>
 <ul>
 <li>
-<p>If you hire workers with qualities <code>q1, q2, ..., qk</code>, their total cost is:</p>
+<p>For each worker, we are given their quality (<code>q[i]</code>) and wage (<code>wage[i]</code>).</p>
+</li>
+<li>
+<p>The wage of the workers can be chosen based on the worker with the minimum wage per unit quality (i.e., the lowest <code>wage[i] / q[i]</code> ratio).</p>
+</li>
+<li>
+<p>The total cost of hiring <code>k</code> workers will be calculated as:</p>
 <p>[
-\text{Cost} = \frac{\text{Sum of Qualities}}{\text{Quality of Min Wage Worker}} \times \text{Min Wage}
+\text{Total Cost} = \left(\sum \text{qualities of k selected workers}\right) \times \text{minimum wage per unit quality of selected workers}
 ]</p>
 </li>
 </ul>
+<p>We need to find the minimum possible cost to hire exactly <code>k</code> workers.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,47 +295,183 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To minimize the cost of hiring exactly <code>k</code> workers, the following steps are performed:</p>
 <ol>
-<li><strong>Calculate Wage per Quality</strong>: For each worker, compute the wage per unit quality and store the results in a vector of pairs, where each pair contains <code>(wage/quality, quality)</code>.</li>
-<li><strong>Sort Workers</strong>: Sort the workers based on their wage per unit quality.</li>
-<li><strong>Use a Max-Heap</strong>: Maintain a max-heap (priority queue) to keep track of the <code>k</code> workers with the highest qualities among those selected.</li>
-<li><strong>Calculate Minimum Cost</strong>:
+<li>
+<p><strong>Understanding the Cost Formula</strong>:</p>
 <ul>
-<li>Initially, add the first <code>k</code> workers to the max-heap and calculate the initial total quality and cost.</li>
-<li>For the remaining workers, update the heap by replacing the worker with the highest quality (if necessary) and recalculate the total quality and cost.</li>
-<li>Update the minimum cost whenever a new worker is added.</li>
+<li>The cost to hire workers is minimized when the ratio of wage to quality (<code>wage[i] / quality[i]</code>) is minimized. This is because the wage per unit quality is multiplied by the total quality of the workers we hire.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting Workers</strong>:</p>
+<ul>
+<li>First, we calculate the <code>wage[i] / quality[i]</code> ratio for each worker and store them as pairs in a vector. The pairs consist of the ratio followed by the quality of the worker.</li>
+<li>We then sort the workers based on this ratio. The reason for this is that workers with a lower wage-to-quality ratio are more cost-efficient, so we want to prioritize them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using a Priority Queue</strong>:</p>
+<ul>
+<li>After sorting, we will use a priority queue (max-heap) to maintain the <code>k</code> workers with the lowest qualities.</li>
+<li>For each group of <code>k</code> workers, we calculate the cost using the formula:
+[
+\text{Cost} = \left(\text{Sum of qualities of the k workers}\right) \times \text{Wage per unit quality of the worker with the minimum ratio}
+]</li>
+<li>We compute this for every possible group of <code>k</code> workers (in terms of sorted order) and keep track of the minimum cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sliding Window Approach</strong>:</p>
+<ul>
+<li>Initially, the first <code>k</code> workers are added to the priority queue, and the total quality of those workers is calculated.</li>
+<li>For each new worker added, the one with the largest quality is removed (since we want to maintain exactly <code>k</code> workers).</li>
+<li>After each change, we compute the cost for the current group of workers and update the minimum cost accordingly.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Start by creating a vector to store pairs of <code>(wage/quality, quality)</code>.</li>
-<li>Sort this vector based on the wage-to-quality ratio.</li>
-<li>Initialize a max-heap and the total quality for the first <code>k</code> workers.</li>
-<li>As you iterate through the remaining workers, adjust the heap and calculate the cost to keep track of the minimum.</li>
+<h4 id="step-1-create-a-worker-list">
+  Step 1: Create a Worker List
+  <a class="heading-link" href="#step-1-create-a-worker-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> worker;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    worker.push_back({(<span style="color:#66d9ef">double</span>) wage[i] <span style="color:#f92672">/</span> q[i], q[i]});
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>worker</code> to store pairs of <code>wage[i] / q[i]</code> and <code>q[i]</code> for each worker. The ratio <code>wage[i] / q[i]</code> represents the wage per unit quality for the worker, and <code>q[i]</code> is the quality of the worker.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-sort-workers-based-on-the-ratio">
+  Step 2: Sort Workers Based on the Ratio
+  <a class="heading-link" href="#step-2-sort-workers-based-on-the-ratio">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(worker.begin(), worker.end());
+</span></span></code></pre></div><ul>
+<li>We sort the workers in ascending order based on their <code>wage[i] / q[i]</code> ratio, as we want to prioritize workers with the lowest wage-to-quality ratios.</li>
+</ul>
+<h4 id="step-3-initialize-priority-queue-and-first-group-of-workers">
+  Step 3: Initialize Priority Queue and First Group of Workers
+  <a class="heading-link" href="#step-3-initialize-priority-queue-and-first-group-of-workers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> netq <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    pq.push(worker[i].second);
+</span></span><span style="display:flex;"><span>    netq <span style="color:#f92672">+=</span> worker[i].second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize a max-heap priority queue <code>pq</code> to keep track of the <code>k</code> workers with the lowest qualities.</li>
+<li>We also initialize <code>netq</code> to store the sum of the qualities of the first <code>k</code> workers.</li>
+</ul>
+<h4 id="step-4-calculate-initial-minimum-cost">
+  Step 4: Calculate Initial Minimum Cost
+  <a class="heading-link" href="#step-4-calculate-initial-minimum-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> mn <span style="color:#f92672">=</span> netq <span style="color:#f92672">*</span> worker[k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].first;
+</span></span></code></pre></div><ul>
+<li>The initial cost is calculated using the sum of the qualities of the first <code>k</code> workers multiplied by the wage-to-quality ratio of the worker at index <code>k-1</code> (since the workers are sorted by the ratio).</li>
+</ul>
+<h4 id="step-5-slide-the-window-and-update-the-cost">
+  Step 5: Slide the Window and Update the Cost
+  <a class="heading-link" href="#step-5-slide-the-window-and-update-the-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> k; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    netq <span style="color:#f92672">-=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    pq.push(worker[i].second);
+</span></span><span style="display:flex;"><span>    netq <span style="color:#f92672">+=</span> worker[i].second;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> res <span style="color:#f92672">=</span> netq <span style="color:#f92672">*</span> worker[i].first;
+</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> min(mn, res);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each new worker from index <code>k</code> onwards, we slide the window:
+<ul>
+<li>Remove the worker with the largest quality from the priority queue.</li>
+<li>Add the new worker to the priority queue.</li>
+<li>Update the total quality <code>netq</code> by adding the new worker’s quality and subtracting the removed worker’s quality.</li>
+<li>Calculate the cost using the sum of qualities and the current worker’s ratio, then update the minimum cost <code>mn</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-6-return-the-minimum-cost">
+  Step 6: Return the Minimum Cost
+  <a class="heading-link" href="#step-6-return-the-minimum-cost">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mn;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the minimum cost found.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n) for sorting and O(k log k) for maintaining the heap. Overall complexity is dominated by O(n log n).</li>
-<li><strong>Space Complexity</strong>: O(n) for storing the workers and O(k) for the heap.</li>
+<li>Sorting the workers based on the <code>wage[i] / q[i]</code> ratio takes <strong>O(n log n)</strong> time.</li>
+<li>For each worker (after the first <code>k</code> workers), we perform <code>O(log k)</code> operations on the priority queue (insertions and deletions). Thus, iterating through the remaining <code>n - k</code> workers takes <strong>O((n - k) log k)</strong> time.</li>
+<li>Overall, the time complexity is <strong>O(n log n + (n - k) log k)</strong>, which simplifies to <strong>O(n log n)</strong> since <code>n</code> dominates <code>k</code> in large inputs.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We store the worker information in a vector, which requires <strong>O(n)</strong> space.</li>
+<li>The priority queue stores at most <code>k</code> workers at any time, requiring <strong>O(k)</strong> space.</li>
+<li>Overall, the space complexity is <strong>O(n + k)</strong>, which simplifies to <strong>O(n)</strong> since <code>k</code> is smaller than <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively minimizes the total cost of hiring <code>k</code> workers by sorting the workers based on their wage-to-quality ratio and using a sliding window approach with a priority queue. By maintaining a group of <code>k</code> workers with the lowest qualities at each step, we can calculate the optimal cost efficiently.</p>
+<p>The time complexity of the solution is <strong>O(n log n)</strong>, which ensures it performs well even for large input sizes. The space complexity is <strong>O(n)</strong>, which is optimal for storing the worker information and priority queue. This approach provides an efficient and effective solution to the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1547s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1549s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

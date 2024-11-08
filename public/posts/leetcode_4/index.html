@@ -178,7 +178,7 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/crafted-by-me/">Crafted by Me</a></div>
+    <a href="/authors/grid47/">Grid47</a></div>
 
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
@@ -203,7 +203,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -269,7 +269,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two sorted arrays <code>nums1</code> and <code>nums2</code>, find the median of the two sorted arrays. The overall run time complexity should be (O(\log(\min(m, n)))), where (m) and (n) are the lengths of the two arrays.</p>
+<p>The problem is to find the median of two sorted arrays. Given two sorted arrays <code>nums1</code> and <code>nums2</code>, the goal is to find the median of the two arrays combined, without having to merge them explicitly. The median of a sorted array is the middle element if the array has an odd number of elements, or the average of the two middle elements if the array has an even number of elements.</p>
+<p>The challenge is to solve this problem efficiently with a time complexity of <strong>O(log(min(m, n)))</strong>, where <code>m</code> and <code>n</code> are the sizes of the two arrays, instead of the naive <strong>O(m + n)</strong> approach that would involve merging the arrays first.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -277,37 +278,147 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use a binary search technique to partition both arrays into two halves such that the maximum of the left halves is less than or equal to the minimum of the right halves. This allows us to find the median directly.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>To solve this problem optimally, we can utilize a binary search technique on the smaller of the two input arrays. The basic idea is to partition both arrays such that:</p>
+<ul>
+<li>The left partition contains the smaller half of the combined arrays.</li>
+<li>The right partition contains the larger half of the combined arrays.</li>
+</ul>
+<p>The key observation is that, after partitioning the arrays correctly, the median will either be:</p>
+<ul>
+<li>The largest element on the left side (for odd total length).</li>
+<li>The average of the largest element on the left and the smallest element on the right side (for even total length).</li>
+</ul>
+<p>The algorithm works as follows:</p>
+<ol>
+<li>
+<p><strong>Identify the Smaller Array:</strong></p>
+<ul>
+<li>First, we identify which of the two arrays is smaller. This allows us to perform binary search on the smaller array, which minimizes the number of iterations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Partitioning:</strong></p>
+<ul>
+<li>We use binary search on the smaller array to find the correct partition. The partition index divides the array into two parts: the left part and the right part.</li>
+<li>For each partition, we calculate the corresponding partition in the other array. This is done such that the number of elements on the left side (from both arrays) equals the number of elements on the right side, or is one greater if the combined size is odd.</li>
+</ul>
+</li>
+<li>
+<p><strong>Partition Validity:</strong></p>
+<ul>
+<li>At each step, we check whether the partition is valid. The partition is valid if:
+<ul>
+<li>The maximum element on the left side is less than or equal to the minimum element on the right side.</li>
+</ul>
+</li>
+<li>If the partition is invalid, we adjust the partition using binary search.</li>
+</ul>
+</li>
+<li>
+<p><strong>Median Calculation:</strong></p>
+<ul>
+<li>Once we find the correct partition, we calculate the median:
+<ul>
+<li>If the total number of elements is odd, the median is the maximum element on the left side of the partition.</li>
+<li>If the total number of elements is even, the median is the average of the largest element on the left side and the smallest element on the right side.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>Determine the sizes of <code>nums1</code> and <code>nums2</code>. Assign the smaller array to <code>A</code> and the larger one to <code>B</code> to minimize the binary search range.</li>
-<li>Initialize pointers <code>imin</code>, <code>imax</code>, and variables <code>i</code> and <code>j</code> to represent the partition indices.</li>
-<li>Perform binary search:
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> nums1.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums2.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> A <span style="color:#f92672">=</span> (m <span style="color:#f92672">&lt;</span> n)<span style="color:#f92672">?</span> nums1 : nums2;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> B <span style="color:#f92672">=</span> (m <span style="color:#f92672">&lt;</span> n)<span style="color:#f92672">?</span> nums2 : nums1;
+</span></span><span style="display:flex;"><span>m <span style="color:#f92672">=</span> (nums1.size() <span style="color:#f92672">&lt;</span> nums2.size())<span style="color:#f92672">?</span> nums1.size() <span style="color:#f92672">:</span> nums2.size();
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (nums1.size() <span style="color:#f92672">&lt;</span> nums2.size())<span style="color:#f92672">?</span> nums2.size() <span style="color:#f92672">:</span> nums1.size();
+</span></span></code></pre></div><ul>
+<li>We begin by determining the sizes of the two arrays <code>nums1</code> and <code>nums2</code>.</li>
+<li>We assign <code>A</code> to be the smaller array and <code>B</code> to be the larger array. This ensures that we perform binary search on the smaller array to minimize the number of iterations.</li>
+<li>We update the values of <code>m</code> and <code>n</code> to reflect the sizes of <code>A</code> and <code>B</code>, respectively.</li>
+</ul>
+<h4 id="step-2-initialize-binary-search-range">
+  Step 2: Initialize Binary Search Range
+  <a class="heading-link" href="#step-2-initialize-binary-search-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> imin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, imax <span style="color:#f92672">=</span> m, i, j;
+</span></span></code></pre></div><ul>
+<li><code>imin</code> and <code>imax</code> are the bounds for the binary search on the smaller array <code>A</code>. Initially, <code>imin</code> is 0 and <code>imax</code> is the size of <code>A</code> (<code>m</code>).</li>
+<li><code>i</code> will represent the partition index in array <code>A</code>, and <code>j</code> will represent the corresponding partition index in array <code>B</code>.</li>
+</ul>
+<h4 id="step-3-perform-binary-search">
+  Step 3: Perform Binary Search
+  <a class="heading-link" href="#step-3-perform-binary-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(imin <span style="color:#f92672">&lt;=</span> imax)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> ((imin <span style="color:#f92672">+</span> imax) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> ((m <span style="color:#f92672">+</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>((i <span style="color:#f92672">&lt;</span> m) <span style="color:#f92672">&amp;&amp;</span> (B[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> A[i]))
+</span></span><span style="display:flex;"><span>        imin <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>((i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (A[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> B[j]))
+</span></span><span style="display:flex;"><span>        imax <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> lmax;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) lmax <span style="color:#f92672">=</span> B[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(j <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) lmax <span style="color:#f92672">=</span> A[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> lmax <span style="color:#f92672">=</span> max(A[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], B[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(((m <span style="color:#f92672">+</span> n) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> lmax;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> rmin;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> m) rmin <span style="color:#f92672">=</span> B[j];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(j <span style="color:#f92672">==</span> n) rmin <span style="color:#f92672">=</span> A[i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> rmin <span style="color:#f92672">=</span> min(A[i], B[j]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)(lmax <span style="color:#f92672">+</span> rmin) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Inside the binary search loop, we calculate <code>i</code> as the midpoint of the current binary search range <code>[imin, imax]</code>. Then, we compute <code>j</code> as the corresponding partition index in the larger array <code>B</code>.</li>
+<li>We check if the partition is valid:
 <ul>
-<li>Calculate the partition index <code>i</code> for array <code>A</code> and <code>j</code> for array <code>B</code>.</li>
-<li>Adjust <code>imin</code> and <code>imax</code> based on the comparison of elements around the partitions:
-<ul>
-<li>If <code>B[j - 1] &gt; A[i]</code>, move <code>imin</code> up to <code>i + 1</code>.</li>
-<li>If <code>A[i - 1] &gt; B[j]</code>, move <code>imax</code> down to <code>i - 1</code>.</li>
+<li>If <code>i</code> is less than the size of <code>A</code> and the element before <code>j</code> in <code>B</code> is greater than <code>A[i]</code>, it means the partition is too far left, so we move the binary search range right by updating <code>imin</code>.</li>
+<li>If <code>i</code> is greater than 0 and the element before <code>i</code> in <code>A</code> is greater than <code>B[j]</code>, it means the partition is too far right, so we move the binary search range left by updating <code>imax</code>.</li>
 </ul>
 </li>
-<li>If the correct partition is found:
+<li>If the partition is valid, we calculate the maximum value on the left side (<code>lmax</code>), which is either the element before <code>i</code> in <code>A</code>, the element before <code>j</code> in <code>B</code>, or one of them depending on the conditions.</li>
+<li>If the total number of elements is odd, the median is simply <code>lmax</code>.</li>
+<li>Otherwise, we calculate the minimum value on the right side (<code>rmin</code>), which is the smallest of the elements after <code>i</code> in <code>A</code> or <code>j</code> in <code>B</code>. The median is the average of <code>lmax</code> and <code>rmin</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Calculate <code>lmax</code>, the maximum of the left partitions.</li>
-<li>If the combined length of the arrays is odd, return <code>lmax</code> as the median.</li>
-<li>If even, calculate <code>rmin</code>, the minimum of the right partitions, and return the average of <code>lmax</code> and <code>rmin</code>.</li>
+<li>After finding the median using the conditions outlined, we return either <code>lmax</code> or <code>(lmax + rmin) / 2</code> depending on the parity of the total number of elements.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>Return 0 if no median is found (should not reach here if inputs are valid).</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -315,10 +426,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(\log(\min(m, n)))) - due to the binary search on the smaller array.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used beyond a few variables.</li>
+<li>The binary search on the smaller array <code>A</code> runs in <code>O(log(min(m, n)))</code> time. For each iteration of the binary search, we perform constant time comparisons and calculations.</li>
+<li>Therefore, the overall time complexity is <strong>O(log(min(m, n)))</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use only a constant amount of extra space for variables (<code>imin</code>, <code>imax</code>, <code>i</code>, <code>j</code>, etc.), making the space complexity <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to find the median of two sorted arrays with time complexity of <strong>O(log(min(m, n)))</strong>, which is much faster than the naive approach of merging the arrays first. By using binary search and partitioning the arrays correctly, we can find the median without ever needing to combine the arrays, making it an optimal solution for large input sizes. The approach is elegant and leverages the properties of sorted arrays to find the result with minimal computational overhead.</p>
  
 </div>
   
