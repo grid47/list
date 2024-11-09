@@ -3,19 +3,13 @@
 | Q.No. | Question |
 | --- | --- |
 | LeetCode 64 | [Minimum Path Sum](https://grid47.xyz/posts/leetcode-64-minimum-path-sum-solution/) |
-| LeetCode 120 | [Triangle](https://grid47.xyz/posts/leetcode-120-triangle-solution/) |
-| LeetCode 174 | [Dungeon Game](https://grid47.xyz/posts/leetcode-174-dungeon-game-solution/) |
-| LeetCode 221 | [Maximal Square](https://grid47.xyz/posts/leetcode-221-maximal-square-solution/) |
 | LeetCode 279 | [Perfect Squares](https://grid47.xyz/posts/leetcode-279-perfect-squares-solution/) |
 | LeetCode 322 | [Coin Change](https://grid47.xyz/posts/leetcode-322-coin-change-solution/) |
 | LeetCode 474 | [Ones and Zeroes](https://grid47.xyz/posts/leetcode-474-ones-and-zeroes-solution/) |
-| LeetCode 650 | [2 Keys Keyboard](https://grid47.xyz/posts/leetcode-650-2-keys-keyboard-solution/) |
 | LeetCode 746 | [Min Cost Climbing Stairs](https://grid47.xyz/posts/leetcode-746-min-cost-climbing-stairs-solution/) |
-| LeetCode 871 | [Minimum Number of Refueling Stops](https://grid47.xyz/posts/leetcode-871-minimum-number-of-refueling-stops-solution/) |
 | LeetCode 931 | [Minimum Falling Path Sum](https://grid47.xyz/posts/leetcode-931-minimum-falling-path-sum-solution/) |
 | LeetCode 983 | [Minimum Cost For Tickets](https://grid47.xyz/posts/leetcode-983-minimum-cost-for-tickets-solution/) |
 | LeetCode 1049 | [Last Stone Weight II](https://grid47.xyz/posts/leetcode-1049-last-stone-weight-ii-solution/) |
-| LeetCode 1240 | [Tiling a Rectangle with the Fewest Squares](https://grid47.xyz/posts/leetcode-1240-tiling-a-rectangle-with-the-fewest-squares-solution/) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
 
@@ -47,10 +41,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 
 | Q.No. | Question |
 | --- | --- |
-| LeetCode 96 | [Unique Binary Search Trees](https://grid47.xyz/posts/leetcode-96-unique-binary-search-trees-solution/) |
-| LeetCode 312 | [Burst Balloons](https://grid47.xyz/posts/leetcode-312-burst-balloons-solution/) |
 | LeetCode 375 | [Guess Number Higher or Lower II](https://grid47.xyz/posts/leetcode-375-guess-number-higher-or-lower-ii-solution/) |
-| LeetCode 546 | [Remove Boxes](https://grid47.xyz/posts/leetcode-546-remove-boxes-solution/) |
 | LeetCode 1000 | [Minimum Cost to Merge Stones](https://grid47.xyz/posts/leetcode-1000-minimum-cost-to-merge-stones-solution/) |
 | LeetCode 1039 | [Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
 | LeetCode 1130 | [Minimum Cost Tree From Leaf Values](https://grid47.xyz/posts/leetcode-1130-minimum-cost-tree-from-leaf-values-solution/) |
@@ -67,7 +58,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 516 | [Longest Palindromic Subsequence](https://grid47.xyz/posts/leetcode-516-longest-palindromic-subsequence-solution/) |
 | LeetCode 647 | [Palindromic Substrings](https://grid47.xyz/posts/leetcode-647-palindromic-substrings-solution/) |
 | LeetCode 712 | [Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode-712-minimum-ascii-delete-sum-for-two-strings-solution/) |
-| LeetCode 1092 | [Shortest Common Supersequence ](https://grid47.xyz/posts/leetcode-1092-shortest-common-supersequence-solution/) |
 | LeetCode 1143 | [Longest Common Subsequence](https://grid47.xyz/posts/leetcode-1143-longest-common-subsequence-solution/) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
