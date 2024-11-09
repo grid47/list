@@ -65,7 +65,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1305.md" >}}
 ---
 {{< youtube B97Hk1H2x2s >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1306: Jump Game III](https://grid47.xyz/posts/leetcode-1305-all-elements-in-two-binary-search-trees-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1306: Jump Game III](https://grid47.xyz/posts/leetcode-1306-jump-game-iii-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

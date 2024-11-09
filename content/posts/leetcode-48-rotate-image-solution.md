@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/48.md" >}}
 ---
 {{< youtube fMSJSS7eO1w >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #49: Group Anagrams](https://grid47.xyz/posts/leetcode-48-rotate-image-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #49: Group Anagrams](https://grid47.xyz/posts/leetcode-49-group-anagrams-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

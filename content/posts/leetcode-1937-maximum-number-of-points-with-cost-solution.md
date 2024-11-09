@@ -77,7 +77,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1937.md" >}}
 ---
 {{< youtube ik1y7fz8AOc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1941: Check if All Characters Have Equal Number of Occurrences](https://grid47.xyz/posts/leetcode-1937-maximum-number-of-points-with-cost-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1941: Check if All Characters Have Equal Number of Occurrences](https://grid47.xyz/posts/leetcode-1941-check-if-all-characters-have-equal-number-of-occurrences-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

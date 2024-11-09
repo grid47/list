@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2589.md" >}}
 ---
 {{< youtube oK101s3U4GE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2591: Distribute Money to Maximum Children](https://grid47.xyz/posts/leetcode-2589-minimum-time-to-complete-all-tasks-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2591: Distribute Money to Maximum Children](https://grid47.xyz/posts/leetcode-2591-distribute-money-to-maximum-children-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

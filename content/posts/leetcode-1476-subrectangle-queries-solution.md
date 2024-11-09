@@ -49,7 +49,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1476.md" >}}
 ---
 {{< youtube cMBkZMNVDdE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1477: Find Two Non-overlapping Sub-arrays Each With Target Sum](https://grid47.xyz/posts/leetcode-1476-subrectangle-queries-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1477: Find Two Non-overlapping Sub-arrays Each With Target Sum](https://grid47.xyz/posts/leetcode-1477-find-two-non-overlapping-sub-arrays-each-with-target-sum-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

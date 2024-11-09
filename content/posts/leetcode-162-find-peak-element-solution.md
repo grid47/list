@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/162.md" >}}
 ---
 {{< youtube 31foR5tJapQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #167: Two Sum II - Input Array Is Sorted](https://grid47.xyz/posts/leetcode-162-find-peak-element-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #167: Two Sum II - Input Array Is Sorted](https://grid47.xyz/posts/leetcode-167-two-sum-ii-input-array-is-sorted-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

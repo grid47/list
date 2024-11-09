@@ -78,7 +78,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1905.md" >}}
 ---
 {{< youtube mLpW3qfbNJ8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1906: Minimum Absolute Difference Queries](https://grid47.xyz/posts/leetcode-1905-count-sub-islands-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1906: Minimum Absolute Difference Queries](https://grid47.xyz/posts/leetcode-1906-minimum-absolute-difference-queries-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

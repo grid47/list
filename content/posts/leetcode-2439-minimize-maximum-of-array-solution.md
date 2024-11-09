@@ -36,7 +36,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2439.md" >}}
 ---
 {{< youtube AeHMvcKuR0Y >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2441: Largest Positive Integer That Exists With Its Negative](https://grid47.xyz/posts/leetcode-2439-minimize-maximum-of-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2441: Largest Positive Integer That Exists With Its Negative](https://grid47.xyz/posts/leetcode-2441-largest-positive-integer-that-exists-with-its-negative-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

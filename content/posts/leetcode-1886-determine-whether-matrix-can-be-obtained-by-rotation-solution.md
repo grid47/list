@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1886.md" >}}
 ---
 {{< youtube vf_nUx64R0E >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1887: Reduction Operations to Make the Array Elements Equal](https://grid47.xyz/posts/leetcode-1886-determine-whether-matrix-can-be-obtained-by-rotation-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1887: Reduction Operations to Make the Array Elements Equal](https://grid47.xyz/posts/leetcode-1887-reduction-operations-to-make-the-array-elements-equal-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -56,7 +56,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1353.md" >}}
 ---
 {{< youtube EKZhEN9P2-I >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1356: Sort Integers by The Number of 1 Bits](https://grid47.xyz/posts/leetcode-1353-maximum-number-of-events-that-can-be-attended-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1356: Sort Integers by The Number of 1 Bits](https://grid47.xyz/posts/leetcode-1356-sort-integers-by-the-number-of-1-bits-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

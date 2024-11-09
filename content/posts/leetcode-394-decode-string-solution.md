@@ -58,7 +58,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/394.md" >}}
 ---
 {{< youtube kNW1SlfDuJY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #395: Longest Substring with At Least K Repeating Characters](https://grid47.xyz/posts/leetcode-394-decode-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #395: Longest Substring with At Least K Repeating Characters](https://grid47.xyz/posts/leetcode-395-longest-substring-with-at-least-k-repeating-characters-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

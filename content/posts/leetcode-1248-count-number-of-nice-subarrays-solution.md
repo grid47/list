@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1248.md" >}}
 ---
 {{< youtube 4zNK0rhFfcA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1249: Minimum Remove to Make Valid Parentheses](https://grid47.xyz/posts/leetcode-1248-count-number-of-nice-subarrays-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1249: Minimum Remove to Make Valid Parentheses](https://grid47.xyz/posts/leetcode-1249-minimum-remove-to-make-valid-parentheses-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

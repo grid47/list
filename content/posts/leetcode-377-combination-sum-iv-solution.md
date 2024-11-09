@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/377.md" >}}
 ---
 {{< youtube hg_U5GVEM-k >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #378: Kth Smallest Element in a Sorted Matrix](https://grid47.xyz/posts/leetcode-377-combination-sum-iv-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #378: Kth Smallest Element in a Sorted Matrix](https://grid47.xyz/posts/leetcode-378-kth-smallest-element-in-a-sorted-matrix-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

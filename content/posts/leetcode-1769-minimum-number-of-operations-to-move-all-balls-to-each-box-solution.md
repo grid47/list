@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1769.md" >}}
 ---
 {{< youtube R8geTAz_yk8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1770: Maximum Score from Performing Multiplication Operations](https://grid47.xyz/posts/leetcode-1769-minimum-number-of-operations-to-move-all-balls-to-each-box-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1770: Maximum Score from Performing Multiplication Operations](https://grid47.xyz/posts/leetcode-1770-maximum-score-from-performing-multiplication-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -36,7 +36,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2335.md" >}}
 ---
 {{< youtube jcfxf8gjVbE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2336: Smallest Number in Infinite Set](https://grid47.xyz/posts/leetcode-2335-minimum-amount-of-time-to-fill-cups-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2336: Smallest Number in Infinite Set](https://grid47.xyz/posts/leetcode-2336-smallest-number-in-infinite-set-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -44,7 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2553.md" >}}
 ---
 {{< youtube wr1TK3mDUVY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2554: Maximum Number of Integers to Choose From a Range I](https://grid47.xyz/posts/leetcode-2553-separate-the-digits-in-an-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2554: Maximum Number of Integers to Choose From a Range I](https://grid47.xyz/posts/leetcode-2554-maximum-number-of-integers-to-choose-from-a-range-i-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

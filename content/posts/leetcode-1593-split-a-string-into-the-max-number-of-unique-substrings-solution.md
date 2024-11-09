@@ -56,7 +56,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1593.md" >}}
 ---
 {{< youtube fLjeVALxzjg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1594: Maximum Non Negative Product in a Matrix](https://grid47.xyz/posts/leetcode-1593-split-a-string-into-the-max-number-of-unique-substrings-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1594: Maximum Non Negative Product in a Matrix](https://grid47.xyz/posts/leetcode-1594-maximum-non-negative-product-in-a-matrix-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

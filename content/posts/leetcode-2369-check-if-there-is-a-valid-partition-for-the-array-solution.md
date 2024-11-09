@@ -59,7 +59,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2369.md" >}}
 ---
 {{< youtube HywUcx60BRo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2370: Longest Ideal Subsequence](https://grid47.xyz/posts/leetcode-2369-check-if-there-is-a-valid-partition-for-the-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2370: Longest Ideal Subsequence](https://grid47.xyz/posts/leetcode-2370-longest-ideal-subsequence-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

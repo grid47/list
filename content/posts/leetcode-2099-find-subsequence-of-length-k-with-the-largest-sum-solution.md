@@ -41,7 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2099.md" >}}
 ---
 {{< youtube QXvaOym_Awk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2100: Find Good Days to Rob the Bank](https://grid47.xyz/posts/leetcode-2099-find-subsequence-of-length-k-with-the-largest-sum-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2100: Find Good Days to Rob the Bank](https://grid47.xyz/posts/leetcode-2100-find-good-days-to-rob-the-bank-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

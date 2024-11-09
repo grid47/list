@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1441.md" >}}
 ---
 {{< youtube uK6JvnLUcck >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1442: Count Triplets That Can Form Two Arrays of Equal XOR](https://grid47.xyz/posts/leetcode-1441-build-an-array-with-stack-operations-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1442: Count Triplets That Can Form Two Arrays of Equal XOR](https://grid47.xyz/posts/leetcode-1442-count-triplets-that-can-form-two-arrays-of-equal-xor-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

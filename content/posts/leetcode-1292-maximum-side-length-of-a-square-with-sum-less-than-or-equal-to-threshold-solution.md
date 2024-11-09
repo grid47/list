@@ -43,7 +43,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1292.md" >}}
 ---
 {{< youtube 2Y2a9VbqiC4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1296: Divide Array in Sets of K Consecutive Numbers](https://grid47.xyz/posts/leetcode-1292-maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1296: Divide Array in Sets of K Consecutive Numbers](https://grid47.xyz/posts/leetcode-1296-divide-array-in-sets-of-k-consecutive-numbers-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

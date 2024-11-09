@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/115.md" >}}
 ---
 {{< youtube -RDzMJ33nx8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #116: Populating Next Right Pointers in Each Node](https://grid47.xyz/posts/leetcode-115-distinct-subsequences-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #116: Populating Next Right Pointers in Each Node](https://grid47.xyz/posts/leetcode-116-populating-next-right-pointers-in-each-node-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

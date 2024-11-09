@@ -35,7 +35,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2194.md" >}}
 ---
 {{< youtube jGLLCLtNDbQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2196: Create Binary Tree From Descriptions](https://grid47.xyz/posts/leetcode-2194-cells-in-a-range-on-an-excel-sheet-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2196: Create Binary Tree From Descriptions](https://grid47.xyz/posts/leetcode-2196-create-binary-tree-from-descriptions-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

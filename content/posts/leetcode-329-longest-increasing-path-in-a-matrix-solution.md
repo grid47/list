@@ -57,7 +57,7 @@ if(j < n - 1 && !vis[i][j + 1] && mtx[i][j + 1] > mtx[i][j]) res = max(res, 1 + 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/329.md" >}}
 ---
 {{< youtube wCc_nd-GiEc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #330: Patching Array](https://grid47.xyz/posts/leetcode-329-longest-increasing-path-in-a-matrix-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #330: Patching Array](https://grid47.xyz/posts/leetcode-330-patching-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

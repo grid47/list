@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1578.md" >}}
 ---
 {{< youtube 9_9jwd2DHMU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](https://grid47.xyz/posts/leetcode-1578-minimum-time-to-make-rope-colorful-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](https://grid47.xyz/posts/leetcode-1579-remove-max-number-of-edges-to-keep-graph-fully-traversable-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

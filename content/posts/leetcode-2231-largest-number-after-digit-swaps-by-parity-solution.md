@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2231.md" >}}
 ---
 {{< youtube UNbggCsJ6LE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2232: Minimize Result by Adding Parentheses to Expression](https://grid47.xyz/posts/leetcode-2231-largest-number-after-digit-swaps-by-parity-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2232: Minimize Result by Adding Parentheses to Expression](https://grid47.xyz/posts/leetcode-2232-minimize-result-by-adding-parentheses-to-expression-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

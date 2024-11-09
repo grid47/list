@@ -73,7 +73,7 @@ int numSimilarGroups(vector<string>& A) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/839.md" >}}
 ---
 {{< youtube SbLsabsSFt0 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #840: Magic Squares In Grid](https://grid47.xyz/posts/leetcode-839-similar-string-groups-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #840: Magic Squares In Grid](https://grid47.xyz/posts/leetcode-840-magic-squares-in-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

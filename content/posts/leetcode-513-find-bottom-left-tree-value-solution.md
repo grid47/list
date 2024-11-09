@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/513.md" >}}
 ---
 {{< youtube u_by_cTsNJA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #515: Find Largest Value in Each Tree Row](https://grid47.xyz/posts/leetcode-513-find-bottom-left-tree-value-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #515: Find Largest Value in Each Tree Row](https://grid47.xyz/posts/leetcode-515-find-largest-value-in-each-tree-row-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

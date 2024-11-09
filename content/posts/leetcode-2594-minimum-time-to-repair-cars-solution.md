@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2594.md" >}}
 ---
 {{< youtube yZ1o7WcAwxI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2595: Number of Even and Odd Bits](https://grid47.xyz/posts/leetcode-2594-minimum-time-to-repair-cars-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2595: Number of Even and Odd Bits](https://grid47.xyz/posts/leetcode-2595-number-of-even-and-odd-bits-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

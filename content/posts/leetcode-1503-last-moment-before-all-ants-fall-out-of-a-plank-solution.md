@@ -39,7 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1503.md" >}}
 ---
 {{< youtube tl0akFR9IXQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1504: Count Submatrices With All Ones](https://grid47.xyz/posts/leetcode-1503-last-moment-before-all-ants-fall-out-of-a-plank-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1504: Count Submatrices With All Ones](https://grid47.xyz/posts/leetcode-1504-count-submatrices-with-all-ones-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -44,7 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1545.md" >}}
 ---
 {{< youtube 34QYE5HAFy4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1546: Maximum Number of Non-Overlapping Subarrays With Sum Equals Target](https://grid47.xyz/posts/leetcode-1545-find-kth-bit-in-nth-binary-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1546: Maximum Number of Non-Overlapping Subarrays With Sum Equals Target](https://grid47.xyz/posts/leetcode-1546-maximum-number-of-non-overlapping-subarrays-with-sum-equals-target-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

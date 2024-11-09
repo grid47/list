@@ -61,7 +61,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1514.md" >}}
 ---
 {{< youtube kPsDTGcrzGM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1519: Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode-1514-path-with-maximum-probability-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1519: Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode-1519-number-of-nodes-in-the-sub-tree-with-the-same-label-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

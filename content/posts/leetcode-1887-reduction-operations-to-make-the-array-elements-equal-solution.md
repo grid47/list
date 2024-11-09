@@ -41,7 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1887.md" >}}
 ---
 {{< youtube 1etc9Ip8Xm8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1888: Minimum Number of Flips to Make the Binary String Alternating](https://grid47.xyz/posts/leetcode-1887-reduction-operations-to-make-the-array-elements-equal-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1888: Minimum Number of Flips to Make the Binary String Alternating](https://grid47.xyz/posts/leetcode-1888-minimum-number-of-flips-to-make-the-binary-string-alternating-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

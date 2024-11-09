@@ -48,7 +48,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1996.md" >}}
 ---
 {{< youtube DFqwkF9a6KI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1997: First Day Where You Have Been in All the Rooms](https://grid47.xyz/posts/leetcode-1996-the-number-of-weak-characters-in-the-game-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1997: First Day Where You Have Been in All the Rooms](https://grid47.xyz/posts/leetcode-1997-first-day-where-you-have-been-in-all-the-rooms-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2208.md" >}}
 ---
 {{< youtube 4HrGj7pwQww >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2210: Count Hills and Valleys in an Array](https://grid47.xyz/posts/leetcode-2208-minimum-operations-to-halve-array-sum-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2210: Count Hills and Valleys in an Array](https://grid47.xyz/posts/leetcode-2210-count-hills-and-valleys-in-an-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

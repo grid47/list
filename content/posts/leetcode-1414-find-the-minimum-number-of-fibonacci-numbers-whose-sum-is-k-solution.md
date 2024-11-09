@@ -44,7 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1414.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1415: The k-th Lexicographical String of All Happy Strings of Length n](https://grid47.xyz/posts/leetcode-1414-find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1415: The k-th Lexicographical String of All Happy Strings of Length n](https://grid47.xyz/posts/leetcode-1415-the-k-th-lexicographical-string-of-all-happy-strings-of-length-n-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

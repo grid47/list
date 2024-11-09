@@ -34,7 +34,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2811.md" >}}
 ---
 {{< youtube BVkYLy-gzcg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2812: Find the Safest Path in a Grid](https://grid47.xyz/posts/leetcode-2811-check-if-it-is-possible-to-split-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2812: Find the Safest Path in a Grid](https://grid47.xyz/posts/leetcode-2812-find-the-safest-path-in-a-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

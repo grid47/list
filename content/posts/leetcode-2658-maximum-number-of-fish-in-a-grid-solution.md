@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2658.md" >}}
 ---
 {{< youtube qn2ABHbRNnQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2660: Determine the Winner of a Bowling Game](https://grid47.xyz/posts/leetcode-2658-maximum-number-of-fish-in-a-grid-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2660: Determine the Winner of a Bowling Game](https://grid47.xyz/posts/leetcode-2660-determine-the-winner-of-a-bowling-game-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

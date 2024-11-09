@@ -60,7 +60,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3121.md" >}}
 ---
 {{< youtube aIR3Iem0jQM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3122: Minimum Number of Operations to Satisfy Conditions](https://grid47.xyz/posts/leetcode-3121-count-the-number-of-special-characters-ii-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3122: Minimum Number of Operations to Satisfy Conditions](https://grid47.xyz/posts/leetcode-3122-minimum-number-of-operations-to-satisfy-conditions-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

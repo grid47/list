@@ -37,7 +37,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1010.md" >}}
 ---
 {{< youtube gM5Wu42UTQk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1011: Capacity To Ship Packages Within D Days](https://grid47.xyz/posts/leetcode-1010-pairs-of-songs-with-total-durations-divisible-by-60-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1011: Capacity To Ship Packages Within D Days](https://grid47.xyz/posts/leetcode-1011-capacity-to-ship-packages-within-d-days-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

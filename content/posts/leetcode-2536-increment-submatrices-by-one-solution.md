@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2536.md" >}}
 ---
 {{< youtube K4SJb0I-_hw >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2537: Count the Number of Good Subarrays](https://grid47.xyz/posts/leetcode-2536-increment-submatrices-by-one-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2537: Count the Number of Good Subarrays](https://grid47.xyz/posts/leetcode-2537-count-the-number-of-good-subarrays-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

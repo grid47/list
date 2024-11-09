@@ -74,7 +74,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1735.md" >}}
 ---
 {{< youtube fyGNoJKQBRs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1736: Latest Time by Replacing Hidden Digits](https://grid47.xyz/posts/leetcode-1735-count-ways-to-make-array-with-product-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1736: Latest Time by Replacing Hidden Digits](https://grid47.xyz/posts/leetcode-1736-latest-time-by-replacing-hidden-digits-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -94,7 +94,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2019.md" >}}
 ---
 {{< youtube wXal9t8CsGw >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2022: Convert 1D Array Into 2D Array](https://grid47.xyz/posts/leetcode-2019-the-score-of-students-solving-math-expression-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2022: Convert 1D Array Into 2D Array](https://grid47.xyz/posts/leetcode-2022-convert-1d-array-into-2d-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

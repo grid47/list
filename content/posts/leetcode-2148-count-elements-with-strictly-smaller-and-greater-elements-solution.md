@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2148.md" >}}
 ---
 {{< youtube V3SamYLfPtg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2149: Rearrange Array Elements by Sign](https://grid47.xyz/posts/leetcode-2148-count-elements-with-strictly-smaller-and-greater-elements-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2149: Rearrange Array Elements by Sign](https://grid47.xyz/posts/leetcode-2149-rearrange-array-elements-by-sign-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

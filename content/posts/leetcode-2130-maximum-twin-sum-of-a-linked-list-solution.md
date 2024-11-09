@@ -70,7 +70,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2130.md" >}}
 ---
 {{< youtube FnKG0uH2PVc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2131: Longest Palindrome by Concatenating Two Letter Words](https://grid47.xyz/posts/leetcode-2130-maximum-twin-sum-of-a-linked-list-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2131: Longest Palindrome by Concatenating Two Letter Words](https://grid47.xyz/posts/leetcode-2131-longest-palindrome-by-concatenating-two-letter-words-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

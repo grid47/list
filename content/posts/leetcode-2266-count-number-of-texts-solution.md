@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2266.md" >}}
 ---
 {{< youtube LdM0WLfhF_4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2267:  Check if There Is a Valid Parentheses String Path](https://grid47.xyz/posts/leetcode-2266-count-number-of-texts-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2267:  Check if There Is a Valid Parentheses String Path](https://grid47.xyz/posts/leetcode-2267-check-if-there-is-a-valid-parentheses-string-path-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

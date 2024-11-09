@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2048.md" >}}
 ---
 {{< youtube VLLBGEWCHqs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2049: Count Nodes With the Highest Score](https://grid47.xyz/posts/leetcode-2048-next-greater-numerically-balanced-number-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2049: Count Nodes With the Highest Score](https://grid47.xyz/posts/leetcode-2049-count-nodes-with-the-highest-score-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

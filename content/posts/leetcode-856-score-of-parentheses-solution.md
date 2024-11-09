@@ -43,7 +43,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/856.md" >}}
 ---
 {{< youtube iO0zA-N575k >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #857: Minimum Cost to Hire K Workers](https://grid47.xyz/posts/leetcode-856-score-of-parentheses-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #857: Minimum Cost to Hire K Workers](https://grid47.xyz/posts/leetcode-857-minimum-cost-to-hire-k-workers-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

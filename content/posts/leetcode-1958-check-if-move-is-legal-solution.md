@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1958.md" >}}
 ---
 {{< youtube KxK33AcQZpQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1959: Minimum Total Space Wasted With K Resizing Operations](https://grid47.xyz/posts/leetcode-1958-check-if-move-is-legal-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1959: Minimum Total Space Wasted With K Resizing Operations](https://grid47.xyz/posts/leetcode-1959-minimum-total-space-wasted-with-k-resizing-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

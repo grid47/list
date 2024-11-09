@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2477.md" >}}
 ---
 {{< youtube I3lnDUIzIG4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2481: Minimum Cuts to Divide a Circle](https://grid47.xyz/posts/leetcode-2477-minimum-fuel-cost-to-report-to-the-capital-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2481: Minimum Cuts to Divide a Circle](https://grid47.xyz/posts/leetcode-2481-minimum-cuts-to-divide-a-circle-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

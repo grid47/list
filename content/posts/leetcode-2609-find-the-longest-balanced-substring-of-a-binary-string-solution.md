@@ -49,7 +49,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2609.md" >}}
 ---
 {{< youtube _nyH2TA95yY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2610: Convert an Array Into a 2D Array With Conditions](https://grid47.xyz/posts/leetcode-2609-find-the-longest-balanced-substring-of-a-binary-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2610: Convert an Array Into a 2D Array With Conditions](https://grid47.xyz/posts/leetcode-2610-convert-an-array-into-a-2d-array-with-conditions-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

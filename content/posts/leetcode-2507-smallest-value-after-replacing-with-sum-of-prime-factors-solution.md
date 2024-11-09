@@ -49,7 +49,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2507.md" >}}
 ---
 {{< youtube Z11zwNKd89I >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2511: Maximum Enemy Forts That Can Be Captured](https://grid47.xyz/posts/leetcode-2507-smallest-value-after-replacing-with-sum-of-prime-factors-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2511: Maximum Enemy Forts That Can Be Captured](https://grid47.xyz/posts/leetcode-2511-maximum-enemy-forts-that-can-be-captured-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

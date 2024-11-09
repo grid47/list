@@ -41,7 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2672.md" >}}
 ---
 {{< youtube w3L3-aRiNXE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2673: Make Costs of Paths Equal in a Binary Tree](https://grid47.xyz/posts/leetcode-2672-number-of-adjacent-elements-with-the-same-color-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2673: Make Costs of Paths Equal in a Binary Tree](https://grid47.xyz/posts/leetcode-2673-make-costs-of-paths-equal-in-a-binary-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

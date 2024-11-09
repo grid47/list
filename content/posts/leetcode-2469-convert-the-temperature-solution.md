@@ -31,7 +31,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2469.md" >}}
 ---
 {{< youtube pJo95i-uamg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2470: Number of Subarrays With LCM Equal to K](https://grid47.xyz/posts/leetcode-2469-convert-the-temperature-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2470: Number of Subarrays With LCM Equal to K](https://grid47.xyz/posts/leetcode-2470-number-of-subarrays-with-lcm-equal-to-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

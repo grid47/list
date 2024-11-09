@@ -61,7 +61,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2579.md" >}}
 ---
 {{< youtube Gso3ss4daQI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2580: Count Ways to Group Overlapping Ranges](https://grid47.xyz/posts/leetcode-2579-count-total-number-of-colored-cells-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2580: Count Ways to Group Overlapping Ranges](https://grid47.xyz/posts/leetcode-2580-count-ways-to-group-overlapping-ranges-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

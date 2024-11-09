@@ -35,7 +35,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1980.md" >}}
 ---
 {{< youtube aHqn4Dynd1k >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1981: Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode-1980-find-unique-binary-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1981: Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode-1981-minimize-the-difference-between-target-and-chosen-elements-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

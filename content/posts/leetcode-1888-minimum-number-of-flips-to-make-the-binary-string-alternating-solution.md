@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1888.md" >}}
 ---
 {{< youtube MOeuK6gaC2A >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1893: Check if All the Integers in a Range Are Covered](https://grid47.xyz/posts/leetcode-1888-minimum-number-of-flips-to-make-the-binary-string-alternating-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1893: Check if All the Integers in a Range Are Covered](https://grid47.xyz/posts/leetcode-1893-check-if-all-the-integers-in-a-range-are-covered-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

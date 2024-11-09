@@ -78,7 +78,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1722.md" >}}
 ---
 {{< youtube G1vTpGA9Gkc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1725: Number Of Rectangles That Can Form The Largest Square](https://grid47.xyz/posts/leetcode-1722-minimize-hamming-distance-after-swap-operations-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1725: Number Of Rectangles That Can Form The Largest Square](https://grid47.xyz/posts/leetcode-1725-number-of-rectangles-that-can-form-the-largest-square-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

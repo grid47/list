@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2580.md" >}}
 ---
 {{< youtube 5-8-2mDdoGs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2581: Count Number of Possible Root Nodes](https://grid47.xyz/posts/leetcode-2580-count-ways-to-group-overlapping-ranges-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2581: Count Number of Possible Root Nodes](https://grid47.xyz/posts/leetcode-2581-count-number-of-possible-root-nodes-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

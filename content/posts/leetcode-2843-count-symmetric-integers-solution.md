@@ -38,7 +38,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2843.md" >}}
 ---
 {{< youtube KHRfRTVqpVc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2844: Minimum Operations to Make a Special Number](https://grid47.xyz/posts/leetcode-2843-count-symmetric-integers-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2844: Minimum Operations to Make a Special Number](https://grid47.xyz/posts/leetcode-2844-minimum-operations-to-make-a-special-number-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -39,7 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2357.md" >}}
 ---
 {{< youtube rtGJycuTSUo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2358: Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode-2357-make-array-zero-by-subtracting-equal-amounts-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2358: Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode-2358-maximum-number-of-groups-entering-a-competition-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

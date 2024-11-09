@@ -67,7 +67,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1410.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1414: Find the Minimum Number of Fibonacci Numbers Whose Sum Is K](https://grid47.xyz/posts/leetcode-1410-html-entity-parser-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1414: Find the Minimum Number of Fibonacci Numbers Whose Sum Is K](https://grid47.xyz/posts/leetcode-1414-find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

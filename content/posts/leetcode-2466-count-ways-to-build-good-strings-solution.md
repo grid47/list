@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2466.md" >}}
 ---
 {{< youtube t0QkjXhE02g >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2467: Most Profitable Path in a Tree](https://grid47.xyz/posts/leetcode-2466-count-ways-to-build-good-strings-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2467: Most Profitable Path in a Tree](https://grid47.xyz/posts/leetcode-2467-most-profitable-path-in-a-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

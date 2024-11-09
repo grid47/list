@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2011.md" >}}
 ---
 {{< youtube xPKIXpfxvZ8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2012: Sum of Beauty in the Array](https://grid47.xyz/posts/leetcode-2011-final-value-of-variable-after-performing-operations-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2012: Sum of Beauty in the Array](https://grid47.xyz/posts/leetcode-2012-sum-of-beauty-in-the-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

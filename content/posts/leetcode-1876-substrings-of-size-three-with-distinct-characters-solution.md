@@ -37,7 +37,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1876.md" >}}
 ---
 {{< youtube QIyWjKNstAA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1877: Minimize Maximum Pair Sum in Array](https://grid47.xyz/posts/leetcode-1876-substrings-of-size-three-with-distinct-characters-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1877: Minimize Maximum Pair Sum in Array](https://grid47.xyz/posts/leetcode-1877-minimize-maximum-pair-sum-in-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

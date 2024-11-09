@@ -40,7 +40,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2772.md" >}}
 ---
 {{< youtube xpjC9rt9xsM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2778: Sum of Squares of Special Elements ](https://grid47.xyz/posts/leetcode-2772-apply-operations-to-make-all-array-elements-equal-to-zero-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2778: Sum of Squares of Special Elements ](https://grid47.xyz/posts/leetcode-2778-sum-of-squares-of-special-elements-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

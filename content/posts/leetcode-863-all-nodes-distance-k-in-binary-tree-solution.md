@@ -75,7 +75,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/863.md" >}}
 ---
 {{< youtube g1R3yEtHT8E >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #864: Shortest Path to Get All Keys](https://grid47.xyz/posts/leetcode-863-all-nodes-distance-k-in-binary-tree-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #864: Shortest Path to Get All Keys](https://grid47.xyz/posts/leetcode-864-shortest-path-to-get-all-keys-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

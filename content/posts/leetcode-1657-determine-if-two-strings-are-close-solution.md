@@ -57,7 +57,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1657.md" >}}
 ---
 {{< youtube -jXQK-UeChU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1658: Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode-1657-determine-if-two-strings-are-close-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1658: Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode-1658-minimum-operations-to-reduce-x-to-zero-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

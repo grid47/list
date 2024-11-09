@@ -62,7 +62,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2316.md" >}}
 ---
 {{< youtube 2FIK7F0Qs38 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2317: Maximum XOR After Operations ](https://grid47.xyz/posts/leetcode-2316-count-unreachable-pairs-of-nodes-in-an-undirected-graph-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2317: Maximum XOR After Operations ](https://grid47.xyz/posts/leetcode-2317-maximum-xor-after-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

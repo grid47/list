@@ -39,7 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1282.md" >}}
 ---
 {{< youtube RrnhHjJmzj8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1283: Find the Smallest Divisor Given a Threshold](https://grid47.xyz/posts/leetcode-1282-group-the-people-given-the-group-size-they-belong-to-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1283: Find the Smallest Divisor Given a Threshold](https://grid47.xyz/posts/leetcode-1283-find-the-smallest-divisor-given-a-threshold-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

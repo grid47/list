@@ -36,7 +36,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2849.md" >}}
 ---
 {{< youtube r4MaK8AhoLI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2850: Minimum Moves to Spread Stones Over Grid](https://grid47.xyz/posts/leetcode-2849-determine-if-a-cell-is-reachable-at-a-given-time-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2850: Minimum Moves to Spread Stones Over Grid](https://grid47.xyz/posts/leetcode-2850-minimum-moves-to-spread-stones-over-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

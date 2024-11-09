@@ -39,7 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2914.md" >}}
 ---
 {{< youtube mzozXxrB_fk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2915: Length of the Longest Subsequence That Sums to Target](https://grid47.xyz/posts/leetcode-2914-minimum-number-of-changes-to-make-binary-string-beautiful-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2915: Length of the Longest Subsequence That Sums to Target](https://grid47.xyz/posts/leetcode-2915-length-of-the-longest-subsequence-that-sums-to-target-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

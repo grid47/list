@@ -67,7 +67,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1936.md" >}}
 ---
 {{< youtube f_KA5C_13Oc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1937: Maximum Number of Points with Cost](https://grid47.xyz/posts/leetcode-1936-add-minimum-number-of-rungs-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1937: Maximum Number of Points with Cost](https://grid47.xyz/posts/leetcode-1937-maximum-number-of-points-with-cost-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

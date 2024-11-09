@@ -43,7 +43,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/104.md" >}}
 ---
 {{< youtube ScvTcU2Aifs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #105: Construct Binary Tree from Preorder and Inorder Traversal](https://grid47.xyz/posts/leetcode-104-maximum-depth-of-binary-tree-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #105: Construct Binary Tree from Preorder and Inorder Traversal](https://grid47.xyz/posts/leetcode-105-construct-binary-tree-from-preorder-and-inorder-traversal-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

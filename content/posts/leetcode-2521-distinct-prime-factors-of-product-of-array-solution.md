@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2521.md" >}}
 ---
 {{< youtube HKc9PcSzNic >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2522: Partition String Into Substrings With Values at Most K](https://grid47.xyz/posts/leetcode-2521-distinct-prime-factors-of-product-of-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2522: Partition String Into Substrings With Values at Most K](https://grid47.xyz/posts/leetcode-2522-partition-string-into-substrings-with-values-at-most-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

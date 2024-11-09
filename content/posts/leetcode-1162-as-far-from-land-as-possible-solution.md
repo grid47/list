@@ -57,7 +57,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1162.md" >}}
 ---
 {{< youtube fjxb1hQfrZk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1170: Compare Strings by Frequency of the Smallest Character](https://grid47.xyz/posts/leetcode-1162-as-far-from-land-as-possible-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1170: Compare Strings by Frequency of the Smallest Character](https://grid47.xyz/posts/leetcode-1170-compare-strings-by-frequency-of-the-smallest-character-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

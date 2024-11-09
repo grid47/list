@@ -53,7 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1878.md" >}}
 ---
 {{< youtube KAuzn8OcGXk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1879: Minimum XOR Sum of Two Arrays](https://grid47.xyz/posts/leetcode-1878-get-biggest-three-rhombus-sums-in-a-grid-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1879: Minimum XOR Sum of Two Arrays](https://grid47.xyz/posts/leetcode-1879-minimum-xor-sum-of-two-arrays-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

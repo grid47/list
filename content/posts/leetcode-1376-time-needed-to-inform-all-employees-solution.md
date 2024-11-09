@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1376.md" >}}
 ---
 {{< youtube d0xAcl58SXg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree](https://grid47.xyz/posts/leetcode-1376-time-needed-to-inform-all-employees-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree](https://grid47.xyz/posts/leetcode-1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

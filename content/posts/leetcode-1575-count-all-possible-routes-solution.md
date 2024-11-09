@@ -53,7 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1575.md" >}}
 ---
 {{< youtube Uu3gRJu46MQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers](https://grid47.xyz/posts/leetcode-1575-count-all-possible-routes-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers](https://grid47.xyz/posts/leetcode-1577-number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

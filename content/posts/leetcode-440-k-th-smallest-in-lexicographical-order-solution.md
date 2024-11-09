@@ -55,7 +55,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/440.md" >}}
 ---
 {{< youtube wRubz1zhVqk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #443: String Compression](https://grid47.xyz/posts/leetcode-440-k-th-smallest-in-lexicographical-order-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #443: String Compression](https://grid47.xyz/posts/leetcode-443-string-compression-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

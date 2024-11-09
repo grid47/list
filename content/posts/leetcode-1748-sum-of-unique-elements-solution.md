@@ -40,7 +40,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1748.md" >}}
 ---
 {{< youtube MXQyGU493vE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1749: Maximum Absolute Sum of Any Subarray](https://grid47.xyz/posts/leetcode-1748-sum-of-unique-elements-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1749: Maximum Absolute Sum of Any Subarray](https://grid47.xyz/posts/leetcode-1749-maximum-absolute-sum-of-any-subarray-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

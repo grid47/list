@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2570.md" >}}
 ---
 {{< youtube Ou0KdT0OgV8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2571: Minimum Operations to Reduce an Integer to 0](https://grid47.xyz/posts/leetcode-2570-merge-two-2d-arrays-by-summing-values-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2571: Minimum Operations to Reduce an Integer to 0](https://grid47.xyz/posts/leetcode-2571-minimum-operations-to-reduce-an-integer-to-0-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -60,7 +60,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1451.md" >}}
 ---
 {{< youtube ZMdBEJX3gog >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1452: People Whose List of Favorite Companies Is Not a Subset of Another List](https://grid47.xyz/posts/leetcode-1451-rearrange-words-in-a-sentence-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1452: People Whose List of Favorite Companies Is Not a Subset of Another List](https://grid47.xyz/posts/leetcode-1452-people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -54,7 +54,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/33.md" >}}
 ---
 {{< youtube U8XENwh8Oy8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #34: Find First and Last Position of Element in Sorted Array](https://grid47.xyz/posts/leetcode-33-search-in-rotated-sorted-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #34: Find First and Last Position of Element in Sorted Array](https://grid47.xyz/posts/leetcode-34-find-first-and-last-position-of-element-in-sorted-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

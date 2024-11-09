@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2903.md" >}}
 ---
 {{< youtube R731s1mHVWM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2904: Shortest and Lexicographically Smallest Beautiful String](https://grid47.xyz/posts/leetcode-2903-find-indices-with-index-and-value-difference-i-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2904: Shortest and Lexicographically Smallest Beautiful String](https://grid47.xyz/posts/leetcode-2904-shortest-and-lexicographically-smallest-beautiful-string-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -42,7 +42,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1979.md" >}}
 ---
 {{< youtube sJ5pTyUWOZ0 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1980: Find Unique Binary String](https://grid47.xyz/posts/leetcode-1979-find-greatest-common-divisor-of-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1980: Find Unique Binary String](https://grid47.xyz/posts/leetcode-1980-find-unique-binary-string-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

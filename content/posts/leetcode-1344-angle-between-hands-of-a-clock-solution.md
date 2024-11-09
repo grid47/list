@@ -37,7 +37,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1344.md" >}}
 ---
 {{< youtube evs3Po8Km7c >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1347: Minimum Number of Steps to Make Two Strings Anagram](https://grid47.xyz/posts/leetcode-1344-angle-between-hands-of-a-clock-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1347: Minimum Number of Steps to Make Two Strings Anagram](https://grid47.xyz/posts/leetcode-1347-minimum-number-of-steps-to-make-two-strings-anagram-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

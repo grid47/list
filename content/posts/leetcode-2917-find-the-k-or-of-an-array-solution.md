@@ -53,7 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2917.md" >}}
 ---
 {{< youtube jNPKX6McyCg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2918: Minimum Equal Sum of Two Arrays After Replacing Zeros](https://grid47.xyz/posts/leetcode-2917-find-the-k-or-of-an-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2918: Minimum Equal Sum of Two Arrays After Replacing Zeros](https://grid47.xyz/posts/leetcode-2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

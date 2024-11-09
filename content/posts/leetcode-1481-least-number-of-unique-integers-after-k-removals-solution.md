@@ -41,7 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1481.md" >}}
 ---
 {{< youtube Nsp_ta7SlEk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1482: Minimum Number of Days to Make m Bouquets](https://grid47.xyz/posts/leetcode-1481-least-number-of-unique-integers-after-k-removals-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1482: Minimum Number of Days to Make m Bouquets](https://grid47.xyz/posts/leetcode-1482-minimum-number-of-days-to-make-m-bouquets-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

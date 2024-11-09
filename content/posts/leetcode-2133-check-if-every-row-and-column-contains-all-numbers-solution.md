@@ -39,7 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2133.md" >}}
 ---
 {{< youtube 6l0_5Weq-3k >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2134: Minimum Swaps to Group All 1's Together II](https://grid47.xyz/posts/leetcode-2133-check-if-every-row-and-column-contains-all-numbers-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2134: Minimum Swaps to Group All 1's Together II](https://grid47.xyz/posts/leetcode-2134-minimum-swaps-to-group-all-1s-together-ii-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

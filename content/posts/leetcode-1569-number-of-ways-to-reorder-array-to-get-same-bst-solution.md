@@ -62,7 +62,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1569.md" >}}
 ---
 {{< youtube h9bfbNQa1YA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1572: Matrix Diagonal Sum](https://grid47.xyz/posts/leetcode-1569-number-of-ways-to-reorder-array-to-get-same-bst-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1572: Matrix Diagonal Sum](https://grid47.xyz/posts/leetcode-1572-matrix-diagonal-sum-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

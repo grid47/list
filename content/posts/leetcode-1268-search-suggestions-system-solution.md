@@ -49,7 +49,7 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1268.md" >}}
 ---
 {{< youtube PLNDfB0Vg9Y >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1269: Number of Ways to Stay in the Same Place After Some Steps](https://grid47.xyz/posts/leetcode-1268-search-suggestions-system-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1269: Number of Ways to Stay in the Same Place After Some Steps](https://grid47.xyz/posts/leetcode-1269-number-of-ways-to-stay-in-the-same-place-after-some-steps-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

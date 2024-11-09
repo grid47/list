@@ -59,7 +59,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1488.md" >}}
 ---
 {{< youtube EcvhHoFaDoU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://grid47.xyz/posts/leetcode-1488-avoid-flood-in-the-city-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://grid47.xyz/posts/leetcode-1489-find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

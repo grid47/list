@@ -54,7 +54,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1371.md" >}}
 ---
 {{< youtube o17MBWparrI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1372: Longest ZigZag Path in a Binary Tree](https://grid47.xyz/posts/leetcode-1371-find-the-longest-substring-containing-vowels-in-even-counts-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1372: Longest ZigZag Path in a Binary Tree](https://grid47.xyz/posts/leetcode-1372-longest-zigzag-path-in-a-binary-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

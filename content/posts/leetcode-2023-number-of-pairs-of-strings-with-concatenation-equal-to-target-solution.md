@@ -43,7 +43,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2023.md" >}}
 ---
 {{< youtube dEwKOofWa3U >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2024: Maximize the Confusion of an Exam](https://grid47.xyz/posts/leetcode-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2024: Maximize the Confusion of an Exam](https://grid47.xyz/posts/leetcode-2024-maximize-the-confusion-of-an-exam-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

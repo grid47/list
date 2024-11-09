@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2556.md" >}}
 ---
 {{< youtube JvRANmpcKcs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2558: Take Gifts From the Richest Pile](https://grid47.xyz/posts/leetcode-2556-disconnect-path-in-a-binary-matrix-by-at-most-one-flip-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2558: Take Gifts From the Richest Pile](https://grid47.xyz/posts/leetcode-2558-take-gifts-from-the-richest-pile-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

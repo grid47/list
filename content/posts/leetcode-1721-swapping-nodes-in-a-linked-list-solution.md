@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1721.md" >}}
 ---
 {{< youtube KUTRaNOzmoo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1722: Minimize Hamming Distance After Swap Operations](https://grid47.xyz/posts/leetcode-1721-swapping-nodes-in-a-linked-list-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1722: Minimize Hamming Distance After Swap Operations](https://grid47.xyz/posts/leetcode-1722-minimize-hamming-distance-after-swap-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

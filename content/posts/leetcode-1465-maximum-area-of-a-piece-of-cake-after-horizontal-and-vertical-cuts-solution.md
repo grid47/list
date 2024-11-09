@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1465.md" >}}
 ---
 {{< youtube koGHcwtIaLY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1466: Reorder Routes to Make All Paths Lead to the City Zero](https://grid47.xyz/posts/leetcode-1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1466: Reorder Routes to Make All Paths Lead to the City Zero](https://grid47.xyz/posts/leetcode-1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

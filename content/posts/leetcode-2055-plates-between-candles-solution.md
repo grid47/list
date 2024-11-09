@@ -78,7 +78,7 @@ int c = count[r] - count[l] +1;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2055.md" >}}
 ---
 {{< youtube -1IsQyTM6Lg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2058: Find the Minimum and Maximum Number of Nodes Between Critical Points](https://grid47.xyz/posts/leetcode-2055-plates-between-candles-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2058: Find the Minimum and Maximum Number of Nodes Between Critical Points](https://grid47.xyz/posts/leetcode-2058-find-the-minimum-and-maximum-number-of-nodes-between-critical-points-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

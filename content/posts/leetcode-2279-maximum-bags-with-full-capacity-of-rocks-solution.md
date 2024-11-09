@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2279.md" >}}
 ---
 {{< youtube 8s25uCT7vhY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2280: Minimum Lines to Represent a Line Chart](https://grid47.xyz/posts/leetcode-2279-maximum-bags-with-full-capacity-of-rocks-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2280: Minimum Lines to Represent a Line Chart](https://grid47.xyz/posts/leetcode-2280-minimum-lines-to-represent-a-line-chart-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

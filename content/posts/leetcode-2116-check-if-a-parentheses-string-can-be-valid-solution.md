@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2116.md" >}}
 ---
 {{< youtube kyyf-hiGeVc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2120: Execution of All Suffix Instructions Staying in a Grid](https://grid47.xyz/posts/leetcode-2116-check-if-a-parentheses-string-can-be-valid-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2120: Execution of All Suffix Instructions Staying in a Grid](https://grid47.xyz/posts/leetcode-2120-execution-of-all-suffix-instructions-staying-in-a-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

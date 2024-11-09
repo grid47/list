@@ -38,7 +38,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2399.md" >}}
 ---
 {{< youtube uNv8XvliP0o >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2400: Number of Ways to Reach a Position After Exactly k Steps](https://grid47.xyz/posts/leetcode-2399-check-distances-between-same-letters-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2400: Number of Ways to Reach a Position After Exactly k Steps](https://grid47.xyz/posts/leetcode-2400-number-of-ways-to-reach-a-position-after-exactly-k-steps-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

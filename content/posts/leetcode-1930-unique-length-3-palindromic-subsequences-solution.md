@@ -40,7 +40,7 @@ if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.beg
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1930.md" >}}
 ---
 {{< youtube 3THUt0vAFLU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1931: Painting a Grid With Three Different Colors](https://grid47.xyz/posts/leetcode-1930-unique-length-3-palindromic-subsequences-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1931: Painting a Grid With Three Different Colors](https://grid47.xyz/posts/leetcode-1931-painting-a-grid-with-three-different-colors-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

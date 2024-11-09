@@ -38,7 +38,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1963.md" >}}
 ---
 {{< youtube 3YDBT9ZrfaU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1964: Find the Longest Valid Obstacle Course at Each Position](https://grid47.xyz/posts/leetcode-1963-minimum-number-of-swaps-to-make-the-string-balanced-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1964: Find the Longest Valid Obstacle Course at Each Position](https://grid47.xyz/posts/leetcode-1964-find-the-longest-valid-obstacle-course-at-each-position-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

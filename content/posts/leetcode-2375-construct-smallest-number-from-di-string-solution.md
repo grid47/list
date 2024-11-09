@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2375.md" >}}
 ---
 {{< youtube b-vIB0xikOw >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2379: Minimum Recolors to Get K Consecutive Black Blocks](https://grid47.xyz/posts/leetcode-2375-construct-smallest-number-from-di-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2379: Minimum Recolors to Get K Consecutive Black Blocks](https://grid47.xyz/posts/leetcode-2379-minimum-recolors-to-get-k-consecutive-black-blocks-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

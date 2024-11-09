@@ -79,7 +79,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2385.md" >}}
 ---
 {{< youtube 3lcaz9lw448 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2389: Longest Subsequence With Limited Sum](https://grid47.xyz/posts/leetcode-2385-amount-of-time-for-binary-tree-to-be-infected-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2389: Longest Subsequence With Limited Sum](https://grid47.xyz/posts/leetcode-2389-longest-subsequence-with-limited-sum-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

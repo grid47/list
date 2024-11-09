@@ -41,7 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1442.md" >}}
 ---
 {{< youtube e4Yx9KjqzQ8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1443: Minimum Time to Collect All Apples in a Tree](https://grid47.xyz/posts/leetcode-1442-count-triplets-that-can-form-two-arrays-of-equal-xor-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1443: Minimum Time to Collect All Apples in a Tree](https://grid47.xyz/posts/leetcode-1443-minimum-time-to-collect-all-apples-in-a-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

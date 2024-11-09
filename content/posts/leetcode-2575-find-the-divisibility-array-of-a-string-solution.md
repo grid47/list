@@ -40,7 +40,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2575.md" >}}
 ---
 {{< youtube kizI7M64xXQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2576: Find the Maximum Number of Marked Indices](https://grid47.xyz/posts/leetcode-2575-find-the-divisibility-array-of-a-string-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2576: Find the Maximum Number of Marked Indices](https://grid47.xyz/posts/leetcode-2576-find-the-maximum-number-of-marked-indices-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

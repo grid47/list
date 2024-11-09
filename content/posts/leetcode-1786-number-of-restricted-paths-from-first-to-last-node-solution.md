@@ -83,7 +83,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1786.md" >}}
 ---
 {{< youtube YmufKoAmthE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1790: Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode-1786-number-of-restricted-paths-from-first-to-last-node-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1790: Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode-1790-check-if-one-string-swap-can-make-strings-equal-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

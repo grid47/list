@@ -64,7 +64,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1157.md" >}}
 ---
 {{< youtube rPo0zvXvwMQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1160: Find Words That Can Be Formed by Characters](https://grid47.xyz/posts/leetcode-1157-online-majority-element-in-subarray-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1160: Find Words That Can Be Formed by Characters](https://grid47.xyz/posts/leetcode-1160-find-words-that-can-be-formed-by-characters-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

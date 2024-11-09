@@ -53,7 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1552.md" >}}
 ---
 {{< youtube uixgQ1tejRs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1557: Minimum Number of Vertices to Reach All Nodes](https://grid47.xyz/posts/leetcode-1552-magnetic-force-between-two-balls-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1557: Minimum Number of Vertices to Reach All Nodes](https://grid47.xyz/posts/leetcode-1557-minimum-number-of-vertices-to-reach-all-nodes-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

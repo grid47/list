@@ -93,7 +93,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2965.md" >}}
 ---
 {{< youtube 6r-PQyoHHoQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode-2965-find-missing-and-repeated-values-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode-2966-divide-array-into-arrays-with-max-difference-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

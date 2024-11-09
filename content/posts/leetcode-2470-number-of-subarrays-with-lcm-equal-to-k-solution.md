@@ -38,7 +38,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2470.md" >}}
 ---
 {{< youtube xT-O9YJrwh4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level](https://grid47.xyz/posts/leetcode-2470-number-of-subarrays-with-lcm-equal-to-k-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level](https://grid47.xyz/posts/leetcode-2471-minimum-number-of-operations-to-sort-a-binary-tree-by-level-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

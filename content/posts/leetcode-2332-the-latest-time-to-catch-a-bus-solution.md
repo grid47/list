@@ -61,7 +61,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2332.md" >}}
 ---
 {{< youtube TAbfqi-5Zm0 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2333: Minimum Sum of Squared Difference](https://grid47.xyz/posts/leetcode-2332-the-latest-time-to-catch-a-bus-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2333: Minimum Sum of Squared Difference](https://grid47.xyz/posts/leetcode-2333-minimum-sum-of-squared-difference-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

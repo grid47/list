@@ -36,7 +36,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2029.md" >}}
 ---
 {{< youtube 7r34JD5ud-c >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2033: Minimum Operations to Make a Uni-Value Grid](https://grid47.xyz/posts/leetcode-2029-stone-game-ix-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2033: Minimum Operations to Make a Uni-Value Grid](https://grid47.xyz/posts/leetcode-2033-minimum-operations-to-make-a-uni-value-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

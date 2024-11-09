@@ -47,7 +47,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1239.md" >}}
 ---
 {{< youtube d4SPuvkaeoo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1247: Minimum Swaps to Make Strings Equal](https://grid47.xyz/posts/leetcode-1239-maximum-length-of-a-concatenated-string-with-unique-characters-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1247: Minimum Swaps to Make Strings Equal](https://grid47.xyz/posts/leetcode-1247-minimum-swaps-to-make-strings-equal-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

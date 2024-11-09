@@ -51,7 +51,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1749.md" >}}
 ---
 {{< youtube XVVB_ZXsbnI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1750: Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode-1749-maximum-absolute-sum-of-any-subarray-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1750: Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode-1750-minimum-length-of-string-after-deleting-similar-ends-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

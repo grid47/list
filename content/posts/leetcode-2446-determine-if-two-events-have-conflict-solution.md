@@ -32,7 +32,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2446.md" >}}
 ---
 {{< youtube mahSMDuJL9A >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2447: Number of Subarrays With GCD Equal to K](https://grid47.xyz/posts/leetcode-2446-determine-if-two-events-have-conflict-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2447: Number of Subarrays With GCD Equal to K](https://grid47.xyz/posts/leetcode-2447-number-of-subarrays-with-gcd-equal-to-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

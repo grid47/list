@@ -64,7 +64,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1610.md" >}}
 ---
 {{< youtube K2ipSrea1Xs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1611: Minimum One Bit Operations to Make Integers Zero](https://grid47.xyz/posts/leetcode-1610-maximum-number-of-visible-points-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1611: Minimum One Bit Operations to Make Integers Zero](https://grid47.xyz/posts/leetcode-1611-minimum-one-bit-operations-to-make-integers-zero-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

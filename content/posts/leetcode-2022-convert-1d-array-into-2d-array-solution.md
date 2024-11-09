@@ -37,7 +37,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2022.md" >}}
 ---
 {{< youtube l-VLzZ2riTc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2023: Number of Pairs of Strings With Concatenation Equal to Target](https://grid47.xyz/posts/leetcode-2022-convert-1d-array-into-2d-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2023: Number of Pairs of Strings With Concatenation Equal to Target](https://grid47.xyz/posts/leetcode-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

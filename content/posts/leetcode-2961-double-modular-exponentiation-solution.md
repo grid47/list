@@ -45,7 +45,7 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2961.md" >}}
 ---
 {{< youtube I0NpbqgISas >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2962: Count Subarrays Where Max Element Appears at Least K Times](https://grid47.xyz/posts/leetcode-2961-double-modular-exponentiation-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2962: Count Subarrays Where Max Element Appears at Least K Times](https://grid47.xyz/posts/leetcode-2962-count-subarrays-where-max-element-appears-at-least-k-times-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

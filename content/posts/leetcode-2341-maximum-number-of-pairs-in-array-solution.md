@@ -35,7 +35,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2341.md" >}}
 ---
 {{< youtube 9KeeDZ6tcy4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2342: Max Sum of a Pair With Equal Sum of Digits](https://grid47.xyz/posts/leetcode-2341-maximum-number-of-pairs-in-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2342: Max Sum of a Pair With Equal Sum of Digits](https://grid47.xyz/posts/leetcode-2342-max-sum-of-a-pair-with-equal-sum-of-digits-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

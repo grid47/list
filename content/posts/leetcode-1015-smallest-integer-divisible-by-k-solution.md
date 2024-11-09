@@ -33,7 +33,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1015.md" >}}
 ---
 {{< youtube kaEYJUNhQ3k >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1016: Binary String With Substrings Representing 1 To N](https://grid47.xyz/posts/leetcode-1015-smallest-integer-divisible-by-k-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1016: Binary String With Substrings Representing 1 To N](https://grid47.xyz/posts/leetcode-1016-binary-string-with-substrings-representing-1-to-n-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

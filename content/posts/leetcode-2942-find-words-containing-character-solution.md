@@ -42,7 +42,7 @@ private:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2942.md" >}}
 ---
 {{< youtube gJCrdytYtDY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2943: Maximize Area of Square Hole in Grid](https://grid47.xyz/posts/leetcode-2942-find-words-containing-character-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2943: Maximize Area of Square Hole in Grid](https://grid47.xyz/posts/leetcode-2943-maximize-area-of-square-hole-in-grid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

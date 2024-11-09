@@ -60,7 +60,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2513.md" >}}
 ---
 {{< youtube g6L-jnW2n_4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2515: Shortest Distance to Target String in a Circular Array](https://grid47.xyz/posts/leetcode-2513-minimize-the-maximum-of-two-arrays-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2515: Shortest Distance to Target String in a Circular Array](https://grid47.xyz/posts/leetcode-2515-shortest-distance-to-target-string-in-a-circular-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

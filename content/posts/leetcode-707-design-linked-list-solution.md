@@ -101,7 +101,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/707.md" >}}
 ---
 {{< youtube Wf4QhpdVFQo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #712: Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode-707-design-linked-list-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #712: Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode-712-minimum-ascii-delete-sum-for-two-strings-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

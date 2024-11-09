@@ -58,7 +58,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2770.md" >}}
 ---
 {{< youtube _al08ON26RA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2771: Longest Non-decreasing Subarray From Two Arrays](https://grid47.xyz/posts/leetcode-2770-maximum-number-of-jumps-to-reach-the-last-index-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2771: Longest Non-decreasing Subarray From Two Arrays](https://grid47.xyz/posts/leetcode-2771-longest-non-decreasing-subarray-from-two-arrays-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

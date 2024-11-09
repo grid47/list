@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1871.md" >}}
 ---
 {{< youtube v1HpZUnQ4Yo >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1876: Substrings of Size Three with Distinct Characters](https://grid47.xyz/posts/leetcode-1871-jump-game-vii-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1876: Substrings of Size Three with Distinct Characters](https://grid47.xyz/posts/leetcode-1876-substrings-of-size-three-with-distinct-characters-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

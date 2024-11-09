@@ -37,7 +37,7 @@ int findMaxK(vector<int>& nums) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2441.md" >}}
 ---
 {{< youtube Ec0T3so3m2Y >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2442: Count Number of Distinct Integers After Reverse Operations](https://grid47.xyz/posts/leetcode-2441-largest-positive-integer-that-exists-with-its-negative-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2442: Count Number of Distinct Integers After Reverse Operations](https://grid47.xyz/posts/leetcode-2442-count-number-of-distinct-integers-after-reverse-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

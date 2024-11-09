@@ -62,7 +62,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/994.md" >}}
 ---
 {{< youtube nAVKrpJ8LUI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #995: Minimum Number of K Consecutive Bit Flips](https://grid47.xyz/posts/leetcode-994-rotting-oranges-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #995: Minimum Number of K Consecutive Bit Flips](https://grid47.xyz/posts/leetcode-995-minimum-number-of-k-consecutive-bit-flips-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

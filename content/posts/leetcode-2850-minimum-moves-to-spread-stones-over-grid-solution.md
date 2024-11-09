@@ -65,7 +65,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2850.md" >}}
 ---
 {{< youtube __h7BgcH_Cs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2855: Minimum Right Shifts to Sort the Array](https://grid47.xyz/posts/leetcode-2850-minimum-moves-to-spread-stones-over-grid-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2855: Minimum Right Shifts to Sort the Array](https://grid47.xyz/posts/leetcode-2855-minimum-right-shifts-to-sort-the-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

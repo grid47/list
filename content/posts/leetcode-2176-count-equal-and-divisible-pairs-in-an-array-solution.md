@@ -44,7 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2176.md" >}}
 ---
 {{< youtube 25az-hMz2YE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2177: Find Three Consecutive Integers That Sum to a Given Number](https://grid47.xyz/posts/leetcode-2176-count-equal-and-divisible-pairs-in-an-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2177: Find Three Consecutive Integers That Sum to a Given Number](https://grid47.xyz/posts/leetcode-2177-find-three-consecutive-integers-that-sum-to-a-given-number-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

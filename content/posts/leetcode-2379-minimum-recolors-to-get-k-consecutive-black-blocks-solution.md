@@ -38,7 +38,7 @@ int minimumRecolors(string blocks, int k) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2379.md" >}}
 ---
 {{< youtube RRmSKRsT9tg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2380: Time Needed to Rearrange a Binary String](https://grid47.xyz/posts/leetcode-2379-minimum-recolors-to-get-k-consecutive-black-blocks-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2380: Time Needed to Rearrange a Binary String](https://grid47.xyz/posts/leetcode-2380-time-needed-to-rearrange-a-binary-string-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

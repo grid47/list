@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1008.md" >}}
 ---
 {{< youtube 30WqiTVp8Kc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1010: Pairs of Songs With Total Durations Divisible by 60](https://grid47.xyz/posts/leetcode-1008-construct-binary-search-tree-from-preorder-traversal-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1010: Pairs of Songs With Total Durations Divisible by 60](https://grid47.xyz/posts/leetcode-1010-pairs-of-songs-with-total-durations-divisible-by-60-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

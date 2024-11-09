@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2300.md" >}}
 ---
 {{< youtube vO6FxLZpKg4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2302: Count Subarrays With Score Less Than K](https://grid47.xyz/posts/leetcode-2300-successful-pairs-of-spells-and-potions-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2302: Count Subarrays With Score Less Than K](https://grid47.xyz/posts/leetcode-2302-count-subarrays-with-score-less-than-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

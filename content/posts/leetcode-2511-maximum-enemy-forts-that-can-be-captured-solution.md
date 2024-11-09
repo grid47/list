@@ -38,7 +38,7 @@ int captureForts(vector<int>& forts) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2511.md" >}}
 ---
 {{< youtube y7BwYY4UFak >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2512: Reward Top K Students](https://grid47.xyz/posts/leetcode-2511-maximum-enemy-forts-that-can-be-captured-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2512: Reward Top K Students](https://grid47.xyz/posts/leetcode-2512-reward-top-k-students-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

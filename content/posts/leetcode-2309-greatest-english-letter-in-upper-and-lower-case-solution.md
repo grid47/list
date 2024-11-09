@@ -37,7 +37,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2309.md" >}}
 ---
 {{< youtube C37FoUne7gc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2311: Longest Binary Subsequence Less Than or Equal to K](https://grid47.xyz/posts/leetcode-2309-greatest-english-letter-in-upper-and-lower-case-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2311: Longest Binary Subsequence Less Than or Equal to K](https://grid47.xyz/posts/leetcode-2311-longest-binary-subsequence-less-than-or-equal-to-k-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

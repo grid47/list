@@ -50,7 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1502.md" >}}
 ---
 {{< youtube crVb-Fubs0w >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank](https://grid47.xyz/posts/leetcode-1502-can-make-arithmetic-progression-from-sequence-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank](https://grid47.xyz/posts/leetcode-1503-last-moment-before-all-ants-fall-out-of-a-plank-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

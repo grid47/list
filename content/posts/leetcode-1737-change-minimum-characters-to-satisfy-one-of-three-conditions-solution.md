@@ -54,7 +54,7 @@ res = min(res, n - cb[i] + ca[i]);
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1737.md" >}}
 ---
 {{< youtube RRiBv833lVQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1738: Find Kth Largest XOR Coordinate Value](https://grid47.xyz/posts/leetcode-1737-change-minimum-characters-to-satisfy-one-of-three-conditions-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1738: Find Kth Largest XOR Coordinate Value](https://grid47.xyz/posts/leetcode-1738-find-kth-largest-xor-coordinate-value-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

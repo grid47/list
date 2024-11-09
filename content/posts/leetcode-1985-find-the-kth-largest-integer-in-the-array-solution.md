@@ -56,7 +56,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1985.md" >}}
 ---
 {{< youtube lRCaNiqO3xI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks](https://grid47.xyz/posts/leetcode-1985-find-the-kth-largest-integer-in-the-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks](https://grid47.xyz/posts/leetcode-1986-minimum-number-of-work-sessions-to-finish-the-tasks-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

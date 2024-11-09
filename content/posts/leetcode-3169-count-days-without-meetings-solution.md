@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3169.md" >}}
 ---
 {{< youtube 72-mDiuXbLk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3178: Find the Child Who Has the Ball After K Seconds](https://grid47.xyz/posts/leetcode-3169-count-days-without-meetings-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3178: Find the Child Who Has the Ball After K Seconds](https://grid47.xyz/posts/leetcode-3178-find-the-child-who-has-the-ball-after-k-seconds-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

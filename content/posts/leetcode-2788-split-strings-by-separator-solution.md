@@ -51,7 +51,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2788.md" >}}
 ---
 {{< youtube DdjLhSeodGs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2789: Largest Element in an Array after Merge Operations](https://grid47.xyz/posts/leetcode-2788-split-strings-by-separator-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2789: Largest Element in an Array after Merge Operations](https://grid47.xyz/posts/leetcode-2789-largest-element-in-an-array-after-merge-operations-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

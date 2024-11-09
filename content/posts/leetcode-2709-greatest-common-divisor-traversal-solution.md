@@ -102,7 +102,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2709.md" >}}
 ---
 {{< youtube jZ-RVp5CVYY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2710: Remove Trailing Zeros From a String](https://grid47.xyz/posts/leetcode-2709-greatest-common-divisor-traversal-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2710: Remove Trailing Zeros From a String](https://grid47.xyz/posts/leetcode-2710-remove-trailing-zeros-from-a-string-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

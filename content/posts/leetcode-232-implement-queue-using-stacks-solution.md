@@ -72,7 +72,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/232.md" >}}
 ---
 {{< youtube eanwa3ht3YQ >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #235: Lowest Common Ancestor of a Binary Search Tree](https://grid47.xyz/posts/leetcode-232-implement-queue-using-stacks-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #235: Lowest Common Ancestor of a Binary Search Tree](https://grid47.xyz/posts/leetcode-235-lowest-common-ancestor-of-a-binary-search-tree-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

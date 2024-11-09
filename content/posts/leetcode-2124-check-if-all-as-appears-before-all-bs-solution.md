@@ -31,7 +31,7 @@ bool checkString(string s) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2124.md" >}}
 ---
 {{< youtube RgzM3HRkdp8 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode-2124-check-if-all-as-appears-before-all-bs-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode-2125-number-of-laser-beams-in-a-bank-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

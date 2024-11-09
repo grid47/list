@@ -74,7 +74,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1203.md" >}}
 ---
 {{< youtube I4Vwkq7e2xE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1207: Unique Number of Occurrences](https://grid47.xyz/posts/leetcode-1203-sort-items-by-groups-respecting-dependencies-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1207: Unique Number of Occurrences](https://grid47.xyz/posts/leetcode-1207-unique-number-of-occurrences-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

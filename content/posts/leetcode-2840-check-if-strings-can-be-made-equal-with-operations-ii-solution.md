@@ -42,7 +42,7 @@ return true;}
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2840.md" >}}
 ---
 {{< youtube yc9CXLWctOU >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2841: Maximum Sum of Almost Unique Subarray](https://grid47.xyz/posts/leetcode-2840-check-if-strings-can-be-made-equal-with-operations-ii-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2841: Maximum Sum of Almost Unique Subarray](https://grid47.xyz/posts/leetcode-2841-maximum-sum-of-almost-unique-subarray-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

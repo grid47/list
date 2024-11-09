@@ -69,7 +69,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2906.md" >}}
 ---
 {{< youtube CXuoLKjEWIs >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2908: Minimum Sum of Mountain Triplets I](https://grid47.xyz/posts/leetcode-2906-construct-product-matrix-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2908: Minimum Sum of Mountain Triplets I](https://grid47.xyz/posts/leetcode-2908-minimum-sum-of-mountain-triplets-i-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

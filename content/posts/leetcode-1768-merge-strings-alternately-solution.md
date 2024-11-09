@@ -43,7 +43,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1768.md" >}}
 ---
 {{< youtube oFuFTMu2Tgg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1769: Minimum Number of Operations to Move All Balls to Each Box](https://grid47.xyz/posts/leetcode-1768-merge-strings-alternately-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1769: Minimum Number of Operations to Move All Balls to Each Box](https://grid47.xyz/posts/leetcode-1769-minimum-number-of-operations-to-move-all-balls-to-each-box-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

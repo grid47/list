@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1621.md" >}}
 ---
 {{< youtube Zl-atHgL8QY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1624: Largest Substring Between Two Equal Characters](https://grid47.xyz/posts/leetcode-1621-number-of-sets-of-k-non-overlapping-line-segments-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1624: Largest Substring Between Two Equal Characters](https://grid47.xyz/posts/leetcode-1624-largest-substring-between-two-equal-characters-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

@@ -70,7 +70,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3128.md" >}}
 ---
 {{< youtube SgwaC6fRCSE >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](https://grid47.xyz/posts/leetcode-3128-right-triangles-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](https://grid47.xyz/posts/leetcode-3129-find-all-possible-stable-binary-arrays-i-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

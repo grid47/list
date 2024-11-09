@@ -35,7 +35,7 @@ int differenceOfSum(vector<int>& n) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2535.md" >}}
 ---
 {{< youtube wg-szN5zvr4 >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2536: Increment Submatrices by One](https://grid47.xyz/posts/leetcode-2535-difference-between-element-sum-and-digit-sum-of-an-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2536: Increment Submatrices by One](https://grid47.xyz/posts/leetcode-2536-increment-submatrices-by-one-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

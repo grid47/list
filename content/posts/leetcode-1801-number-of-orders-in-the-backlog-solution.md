@@ -84,7 +84,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1801.md" >}}
 ---
 {{< youtube hVVkBM-p1vg >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1802: Maximum Value at a Given Index in a Bounded Array](https://grid47.xyz/posts/leetcode-1801-number-of-orders-in-the-backlog-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1802: Maximum Value at a Given Index in a Bounded Array](https://grid47.xyz/posts/leetcode-1802-maximum-value-at-a-given-index-in-a-bounded-array-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

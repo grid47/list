@@ -97,7 +97,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/943.md" >}}
 ---
 {{< youtube b1HcnDfLzFw >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #945: Minimum Increment to Make Array Unique](https://grid47.xyz/posts/leetcode-943-find-the-shortest-superstring-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #945: Minimum Increment to Make Array Unique](https://grid47.xyz/posts/leetcode-945-minimum-increment-to-make-array-unique-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

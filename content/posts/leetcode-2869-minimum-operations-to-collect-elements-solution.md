@@ -35,7 +35,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2869.md" >}}
 ---
 {{< youtube ohl7rEwEI9A >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](https://grid47.xyz/posts/leetcode-2869-minimum-operations-to-collect-elements-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](https://grid47.xyz/posts/leetcode-2870-minimum-number-of-operations-to-make-array-empty-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

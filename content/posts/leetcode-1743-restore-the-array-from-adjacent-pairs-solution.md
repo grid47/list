@@ -57,7 +57,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1743.md" >}}
 ---
 {{< youtube SGfdp6CFDrA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode-1743-restore-the-array-from-adjacent-pairs-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode-1744-can-you-eat-your-favorite-candy-on-your-favorite-day-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

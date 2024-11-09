@@ -41,7 +41,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1646.md" >}}
 ---
 {{< youtube dy15GcCBdOc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1647: Minimum Deletions to Make Character Frequencies Unique](https://grid47.xyz/posts/leetcode-1646-get-maximum-in-generated-array-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1647: Minimum Deletions to Make Character Frequencies Unique](https://grid47.xyz/posts/leetcode-1647-minimum-deletions-to-make-character-frequencies-unique-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

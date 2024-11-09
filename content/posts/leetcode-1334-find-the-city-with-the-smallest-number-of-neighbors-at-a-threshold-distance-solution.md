@@ -60,7 +60,7 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1334.md" >}}
 ---
 {{< youtube --wKPR3ByJc >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1335: Minimum Difficulty of a Job Schedule](https://grid47.xyz/posts/leetcode-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1335: Minimum Difficulty of a Job Schedule](https://grid47.xyz/posts/leetcode-1335-minimum-difficulty-of-a-job-schedule-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

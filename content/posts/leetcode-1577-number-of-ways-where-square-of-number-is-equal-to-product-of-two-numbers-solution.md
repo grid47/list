@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1577.md" >}}
 ---
 {{< youtube ZNAJbQTv3yk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1578: Minimum Time to Make Rope Colorful](https://grid47.xyz/posts/leetcode-1577-number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1578: Minimum Time to Make Rope Colorful](https://grid47.xyz/posts/leetcode-1578-minimum-time-to-make-rope-colorful-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

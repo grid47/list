@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1968.md" >}}
 ---
 {{< youtube Wmb3YdVYfqM >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1969: Minimum Non-Zero Product of the Array Elements](https://grid47.xyz/posts/leetcode-1968-array-with-elements-not-equal-to-average-of-neighbors-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1969: Minimum Non-Zero Product of the Array Elements](https://grid47.xyz/posts/leetcode-1969-minimum-non-zero-product-of-the-array-elements-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

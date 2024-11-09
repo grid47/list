@@ -56,7 +56,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1110.md" >}}
 ---
 {{< youtube UhKu0q1yXHY >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings](https://grid47.xyz/posts/leetcode-1110-delete-nodes-and-return-forest-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings](https://grid47.xyz/posts/leetcode-1111-maximum-nesting-depth-of-two-valid-parentheses-strings-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

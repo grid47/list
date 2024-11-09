@@ -53,7 +53,7 @@ continue;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1418.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1419: Minimum Number of Frogs Croaking](https://grid47.xyz/posts/leetcode-1418-display-table-of-food-orders-in-a-restaurant-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1419: Minimum Number of Frogs Croaking](https://grid47.xyz/posts/leetcode-1419-minimum-number-of-frogs-croaking-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

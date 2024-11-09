@@ -98,7 +98,7 @@ if(!uf.uni(i, rc[i]))
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1361.md" >}}
 ---
 {{< youtube Mw67DTgUEqk >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1362: Closest Divisors](https://grid47.xyz/posts/leetcode-1361-validate-binary-tree-nodes-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1362: Closest Divisors](https://grid47.xyz/posts/leetcode-1362-closest-divisors-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

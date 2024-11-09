@@ -42,7 +42,7 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/920.md" >}}
 ---
 {{< youtube 7kqUjOW1Dlw >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #921: Minimum Add to Make Parentheses Valid](https://grid47.xyz/posts/leetcode-920-number-of-music-playlists-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #921: Minimum Add to Make Parentheses Valid](https://grid47.xyz/posts/leetcode-921-minimum-add-to-make-parentheses-valid-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

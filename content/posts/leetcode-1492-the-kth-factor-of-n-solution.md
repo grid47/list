@@ -35,7 +35,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1492.md" >}}
 ---
 {{< youtube eD7-AQ2nUsI >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1493: Longest Subarray of 1's After Deleting One Element](https://grid47.xyz/posts/leetcode-1492-the-kth-factor-of-n-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1493: Longest Subarray of 1's After Deleting One Element](https://grid47.xyz/posts/leetcode-1493-longest-subarray-of-1s-after-deleting-one-element-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

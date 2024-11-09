@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2491.md" >}}
 ---
 {{< youtube cueOpK5QMEA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2492: Minimum Score of a Path Between Two Cities](https://grid47.xyz/posts/leetcode-2491-divide-players-into-teams-of-equal-skill-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2492: Minimum Score of a Path Between Two Cities](https://grid47.xyz/posts/leetcode-2492-minimum-score-of-a-path-between-two-cities-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

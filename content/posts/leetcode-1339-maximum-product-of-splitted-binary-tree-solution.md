@@ -53,7 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1339.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold](https://grid47.xyz/posts/leetcode-1339-maximum-product-of-splitted-binary-tree-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold](https://grid47.xyz/posts/leetcode-1343-number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

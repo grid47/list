@@ -51,7 +51,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1333.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://grid47.xyz/posts/leetcode-1333-filter-restaurants-by-vegan-friendly-price-and-distance-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://grid47.xyz/posts/leetcode-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |

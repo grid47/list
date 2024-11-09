@@ -74,7 +74,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1170.md" >}}
 ---
 
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1171: Remove Zero Sum Consecutive Nodes from Linked List](https://grid47.xyz/posts/leetcode-1170-compare-strings-by-frequency-of-the-smallest-character-solution/) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1171: Remove Zero Sum Consecutive Nodes from Linked List](https://grid47.xyz/posts/leetcode-1171-remove-zero-sum-consecutive-nodes-from-linked-list-solution/) |
 | --- |
 {{< notice info >}}
 | [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |
