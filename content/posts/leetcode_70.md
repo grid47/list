@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/climbing-stairs/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/70.jpeg" 
+    alt="A glowing staircase with each step symbolizing progress, slowly leading upwards."
+    caption="Solution to LeetCode 70: Climbing Stairs Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

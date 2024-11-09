@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/set-matrix-zeroes/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/73.jpeg" 
+    alt="A calm matrix with soft light illuminating areas that need to be reset to zero."
+    caption="Solution to LeetCode 73: Set Matrix Zeroes Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

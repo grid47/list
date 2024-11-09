@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/word-search/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/79.jpeg" 
+    alt="A glowing word appearing in a soft matrix of letters, slowly highlighting itself."
+    caption="Solution to LeetCode 79: Word Search Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

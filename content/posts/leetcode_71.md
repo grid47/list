@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/simplify-path/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/71.jpeg" 
+    alt="A smooth, glowing path being simplified, with unnecessary elements fading away."
+    caption="Solution to LeetCode 71: Simplify Path Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

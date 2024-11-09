@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/generate-parentheses/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/22.jpeg" 
+    alt="A swirl of parentheses gently unfolding, forming balanced pairs that radiate a sense of calm."
+    caption="Solution to LeetCode 22: Generate Parentheses Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

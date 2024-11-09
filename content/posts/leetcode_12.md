@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/integer-to-roman/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/12.jpeg" 
+    alt="Roman numerals glowing softly, forming a delicate arc of timeless symbols."
+    caption="Solution to LeetCode 12: Integer to Roman Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

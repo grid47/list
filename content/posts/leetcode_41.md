@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/first-missing-positive/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/41.jpeg" 
+    alt="A bright, floating number slowly revealing itself from a sequence, symbolizing the missing piece."
+    caption="Solution to LeetCode 41: First Missing Positive Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

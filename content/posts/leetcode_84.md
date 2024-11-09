@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/largest-rectangle-in-histogram/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/84.jpeg" 
+    alt="A glowing, soft rectangle appearing in a histogram of light, signifying the largest area."
+    caption="Solution to LeetCode 84: Largest Rectangle in Histogram Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/3.jpeg" 
+    alt="A flowing ribbon with distinct, colorful segments, twisting and avoiding repetition."
+    caption="Solution to LeetCode 3: Longest Substring Without Repeating Characters Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/wildcard-matching/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/44.jpeg" 
+    alt="A soft, flowing ribbon of wildcard characters, shifting and adjusting like a smooth breeze."
+    caption="Solution to LeetCode 44: Wildcard Matching Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

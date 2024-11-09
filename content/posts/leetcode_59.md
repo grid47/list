@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/spiral-matrix-ii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/59.jpeg" 
+    alt="A dynamic, growing spiral matrix with radiant paths expanding outward."
+    caption="Solution to LeetCode 59: Spiral Matrix II Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

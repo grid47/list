@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/gray-code/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/89.jpeg" 
+    alt="A peaceful, spiraling Gray code sequence glowing softly as it shifts from one value to the next."
+    caption="Solution to LeetCode 89: Gray Code Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

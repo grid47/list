@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/19.jpeg" 
+    alt="A single node being gently removed from a glowing chain, leaving a calm, uninterrupted flow."
+    caption="Solution to LeetCode 19: Remove Nth Node From End of List Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

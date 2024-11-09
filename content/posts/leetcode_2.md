@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/add-two-numbers/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/2.jpeg" 
+    alt="Two radiant number paths merging into one continuous light beam, symbolizing addition."
+    caption="Solution to LeetCode 2: Add Two Numbers Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

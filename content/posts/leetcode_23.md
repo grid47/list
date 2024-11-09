@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/merge-k-sorted-lists/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/23.jpeg" 
+    alt="Multiple paths of light merging into one bright, unified stream."
+    caption="Solution to LeetCode 23: Merge k Sorted Lists Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

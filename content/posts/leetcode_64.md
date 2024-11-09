@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/minimum-path-sum/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/64.jpeg" 
+    alt="A glowing, winding path that minimizes distance, with bright, guiding arrows showing the best route."
+    caption="Solution to LeetCode 64: Minimum Path Sum Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
