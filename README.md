@@ -68,7 +68,7 @@
 | 66 | Easy | [Plus One](https://grid47.xyz/posts/leetcode_66/) |
 | 67 | Easy | [Add Binary](https://grid47.xyz/posts/leetcode_67/) |
 | 68 | Hard | [Text Justification](https://grid47.xyz/posts/leetcode_68/) |
-| 69 | Easy | Sqrt(x/) |
+| 69 | Easy | Sqrt(x) |
 | 70 | Easy | [Climbing Stairs](https://grid47.xyz/posts/leetcode_70/) |
 | 71 | Medium | [Simplify Path](https://grid47.xyz/posts/leetcode_71/) |
 | 72 | Medium | [Edit Distance](https://grid47.xyz/posts/leetcode_72/) |
@@ -191,11 +191,11 @@
 | 189 | Medium | [Rotate Array](https://grid47.xyz/posts/leetcode_189/) |
 | 190 | Easy | [Reverse Bits](https://grid47.xyz/posts/leetcode_190/) |
 | 191 | Easy | [Number of 1 Bits](https://grid47.xyz/posts/leetcode_191/) |
-| 192 | Medium | [Word Frequency](https://grid47.xyz/posts/leetcode_192/) |
-| 193 | Easy | [Valid Phone Numbers](https://grid47.xyz/posts/leetcode_193/) |
+| 192 | Medium | Word Frequency |
+| 193 | Easy | Valid Phone Numbers |
 | 194 | Medium | Transpose File |
-| 195 | Easy | [Tenth Line](https://grid47.xyz/posts/leetcode_195/) |
-| 196 | Easy | [Delete Duplicate Emails](https://grid47.xyz/posts/leetcode_196/) |
+| 195 | Easy | Tenth Line |
+| 196 | Easy | Delete Duplicate Emails |
 | 197 | Easy | Rising Temperature |
 | 198 | Medium | [House Robber](https://grid47.xyz/posts/leetcode_198/) |
 | 199 | Medium | [Binary Tree Right Side View](https://grid47.xyz/posts/leetcode_199/) |
@@ -469,7 +469,7 @@
 | 467 | Medium | [Unique Substrings in Wraparound String](https://grid47.xyz/posts/leetcode_467/) |
 | 468 | Medium | [Validate IP Address](https://grid47.xyz/posts/leetcode_468/) |
 | 469 | Medium | [Convex Polygon](https://grid47.xyz/posts/leetcode_469/) |
-| 470 | Medium | Implement Rand10() Using Rand7(/) |
+| 470 | Medium | Implement Rand10() Using Rand7() |
 | 471 | Hard | Encode String with Shortest Length |
 | 472 | Hard | Concatenated Words |
 | 473 | Medium | Matchsticks to Square |
@@ -1049,7 +1049,7 @@
 | 1047 | Easy | Remove All Adjacent Duplicates In String |
 | 1048 | Medium | [Longest String Chain](https://grid47.xyz/posts/leetcode_1048/) |
 | 1049 | Medium | [Last Stone Weight II](https://grid47.xyz/posts/leetcode_1049/) |
-| 1050 | Easy | [Actors and Directors Who Cooperated At Least Three Times](https://grid47.xyz/posts/leetcode_1050/) |
+| 1050 | Easy | Actors and Directors Who Cooperated At Least Three Times |
 | 1051 | Easy | [Height Checker](https://grid47.xyz/posts/leetcode_1051/) |
 | 1052 | Medium | [Grumpy Bookstore Owner](https://grid47.xyz/posts/leetcode_1052/) |
 | 1053 | Medium | [Previous Permutation With One Swap](https://grid47.xyz/posts/leetcode_1053/) |
@@ -1557,7 +1557,7 @@
 | 1555 | Medium | Bank Account Summary |
 | 1556 | Easy | Thousand Separator |
 | 1557 | Medium | [Minimum Number of Vertices to Reach All Nodes](https://grid47.xyz/posts/leetcode_1557/) |
-| 1558 | Medium | [Minimum Numbers of Function Calls to Make Target Array](https://grid47.xyz/posts/leetcode_1558/) |
+| 1558 | Medium | Minimum Numbers of Function Calls to Make Target Array |
 | 1559 | Medium | [Detect Cycles in 2D Grid](https://grid47.xyz/posts/leetcode_1559/) |
 | 1560 | Easy | Most Visited Sector in  a Circular Track |
 | 1561 | Medium | [Maximum Number of Coins You Can Get](https://grid47.xyz/posts/leetcode_1561/) |
@@ -1803,7 +1803,7 @@
 | 1801 | Medium | [Number of Orders in the Backlog](https://grid47.xyz/posts/leetcode_1801/) |
 | 1802 | Medium | [Maximum Value at a Given Index in a Bounded Array](https://grid47.xyz/posts/leetcode_1802/) |
 | 1803 | Hard | Count Pairs With XOR in a Range |
-| 1804 | Medium | Implement Trie II (Prefix Tree/) |
+| 1804 | Medium | Implement Trie II (Prefix Tree) |
 | 1805 | Easy | [Number of Different Integers in a String](https://grid47.xyz/posts/leetcode_1805/) |
 | 1806 | Medium | [Minimum Number of Operations to Reinitialize a Permutation](https://grid47.xyz/posts/leetcode_1806/) |
 | 1807 | Medium | [Evaluate the Bracket Pairs of a String](https://grid47.xyz/posts/leetcode_1807/) |
@@ -3252,7 +3252,7 @@
 | 3250 | Hard | Find the Count of Monotonic Pairs I |
 | 3251 | Hard | Find the Count of Monotonic Pairs II |
 | 3252 | Medium | Premier League Table Ranking II |
-| 3253 | Medium | Construct String with Minimum Cost (Easy/) |
+| 3253 | Medium | Construct String with Minimum Cost (Easy) |
 | 3254 | Medium | Find the Power of K-Size Subarrays I |
 | 3255 | Medium | Find the Power of K-Size Subarrays II |
 | 3256 | Hard | Maximum Value Sum by Placing Three Rooks I |
