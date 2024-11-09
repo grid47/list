@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/102.jpeg" 
+    alt="A tree with soft, glowing rings representing each level, expanding outward."
+    caption="Solution to LeetCode 102: Binary Tree Level Order Traversal Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

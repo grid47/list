@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/surrounded-regions/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/130.jpeg" 
+    alt="A grid of cells gently surrounded by a calming border of light, with certain areas being 'captured."
+    caption="Solution to LeetCode 130: Surrounded Regions Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

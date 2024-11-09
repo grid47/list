@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-consecutive-sequence/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/128.jpeg" 
+    alt="A smooth, radiant path showing consecutive numbers, glowing brighter as the sequence length increases."
+    caption="Solution to LeetCode 128: Longest Consecutive Sequence Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

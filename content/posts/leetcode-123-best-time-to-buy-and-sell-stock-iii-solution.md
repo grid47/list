@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/123.jpeg" 
+    alt="A more complex chart, with several peaks and valleys, showing the optimal times to buy and sell."
+    caption="Solution to LeetCode 123: Best Time to Buy and Sell Stock III Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

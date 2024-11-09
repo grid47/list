@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/105.jpeg" 
+    alt="A tree gently forming from two intertwining paths of glowing nodes, one representing preorder, the other inorder."
+    caption="Solution to LeetCode 105: Construct Binary Tree from Preorder and Inorder Traversal Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

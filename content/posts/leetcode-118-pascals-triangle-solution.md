@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/pascals-triangle/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/118.jpeg" 
+    alt="A soft, glowing triangular pattern of numbers, expanding outward in delicate layers."
+    caption="Solution to LeetCode 118: Pascal's Triangle Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/minimum-depth-of-binary-tree/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/111.jpeg" 
+    alt="A deep tree with soft, glowing light reaching the minimal depth, highlighting the shortest path."
+    caption="Solution to LeetCode 111: Minimum Depth of Binary Tree Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

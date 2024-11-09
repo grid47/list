@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/138.jpeg" 
+    alt="A glowing linked list with a soft, gentle pointer connecting to another, showing the copying process."
+    caption="Solution to LeetCode 138: Copy List with Random Pointer Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

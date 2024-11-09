@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/balanced-binary-tree/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/110.jpeg" 
+    alt="A tree where branches gently balance on either side, with glowing nodes symbolizing equilibrium."
+    caption="Solution to LeetCode 110: Balanced Binary Tree Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

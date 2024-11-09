@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/116.jpeg" 
+    alt="A glowing grid of nodes, with gentle arrows connecting them, showing the next right pointer linkages."
+    caption="Solution to LeetCode 116: Populating Next Right Pointers in Each Node Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
