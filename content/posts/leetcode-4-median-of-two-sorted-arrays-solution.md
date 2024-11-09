@@ -1,0 +1,87 @@
+
++++
+authors = ["grid47"]
+title = "Leetcode 4: Median of Two Sorted Arrays"
+date = "2024-11-01"
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 4: Median of Two Sorted Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Binary Search","Divide and Conquer"]
+categories = [
+    "Hard"
+]
+series = ["Leetcode"]
++++
+
+
+
+[`Problem Link`](https://leetcode.com/problems/median-of-two-sorted-arrays/description/)
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/4.jpeg" 
+    alt="Two parallel streams of light crossing paths to form a central point of convergence."
+    caption="Solution to LeetCode 4: Median of Two Sorted Arrays Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
+---
+**Code:**
+
+{{< highlight cpp >}}
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size();
+        int n = nums2.size();
+
+        vector<int> A = (m < n)? nums1 : nums2;
+        vector<int> B = (m < n)? nums2 : nums1;
+        m = (nums1.size() < nums2.size())? nums1.size() : nums2.size();
+        n = (nums1.size() < nums2.size())? nums2.size() : nums1.size();
+
+        int imin = 0, imax = m, i, j;
+
+        while(imin <= imax)
+        {
+            i = ((imin + imax) / 2);
+            j = ((m + n + 1)/ 2) - i;
+
+                 if((i < m) && (B[j - 1] > A[i]))
+                    imin = i + 1;
+            else if((i > 0) && (A[i - 1] > B[j]))
+                    imax = i - 1;
+            else
+            {
+                int lmax;
+                     if(i == 0) lmax = B[j - 1];
+                else if(j == 0) lmax = A[i - 1];
+                else            lmax = max(A[i - 1], B[j - 1]);
+
+                if(((m + n) % 2) == 1) return lmax;
+
+                int rmin;
+                     if(i == m) rmin = B[j];
+                else if(j == n) rmin = A[i];
+                else            rmin = min(A[i], B[j]);
+
+                return (double)(lmax + rmin) / 2;
+            }
+        }
+        return 0;
+    }
+};
+{{< /highlight >}}
+
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/4.md" >}}
+---
+{{< youtube q6IEA26hvXc >}}
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #5: Longest Palindromic Substring](https://grid47.xyz/posts/leetcode-4-median-of-two-sorted-arrays-solution/) |
+| --- |
+{{< notice info >}}
+| [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |
+{{< /notice >}}
+| |
+{{< notice tip >}}
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
+{{< /notice >}}
+Coupen: {{< clip "coupen" >}}

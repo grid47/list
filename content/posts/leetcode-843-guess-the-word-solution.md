@@ -1,0 +1,91 @@
+
++++
+authors = ["grid47"]
+title = "Leetcode 843: Guess the Word"
+date = "2024-11-01"
+lastmod = "2024-11-06"
+description = "In-depth solution and explanation for Leetcode 843: Guess the Word in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
+tags = ["Array","Math","String","Interactive","Game Theory"]
+categories = [
+    "Hard"
+]
+series = ["Leetcode"]
++++
+
+
+
+[`Problem Link`](https://leetcode.com/problems/guess-the-word/description/)
+
+---
+**Code:**
+
+{{< highlight cpp >}}
+/**
+ * // This is the Master's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class Master {
+ *   public:
+ *     int guess(string word);
+ * };
+ */
+class Solution {
+public:
+    
+    int overlap(vector<string> &words) {
+        vector<vector<int>> prob(6, vector<int>(26, 0));
+        for(int i = 0; i < words.size(); i++)
+            for(int j = 0; j < 6; j++)
+                prob[j][words[i][j] - 'a']++;
+        
+        int idx = -1;
+        long long mx = -1;
+        for(int i = 0; i < words.size(); i++) {
+            long long cur = 0;
+            for(int j = 0; j < 6; j++)
+                cur += prob[j][words[i][j] - 'a'];
+            
+            if(cur > mx) {
+                idx = i;
+                mx = cur;
+            }
+        }
+        return idx;
+    }
+    
+    int tally(string &a, string &b) {
+        int res = 0;
+        for(int i = 0;i < 6; i++)
+            res += (a[i] == b[i]);
+        return res;
+    }
+    
+    void findSecretWord(vector<string>& words, Master& master) {
+        int match = 0, j = 0;
+        while(match != 6) {
+            j++;
+            int i = overlap(words);
+            match = master.guess(words[i]);
+            vector<string> tmp;
+            for(auto it: words)
+                if(match == tally(it, words[i])) {
+                    tmp.push_back(it);
+                }
+            words = tmp;
+        }
+    }
+};
+{{< /highlight >}}
+
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/843.md" >}}
+---
+{{< youtube KCWGtEcBN6c >}}
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #844: Backspace String Compare](https://grid47.xyz/posts/leetcode-843-guess-the-word-solution/) |
+| --- |
+{{< notice info >}}
+| [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |
+{{< /notice >}}
+| |
+{{< notice tip >}}
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
+{{< /notice >}}
+Coupen: {{< clip "coupen" >}}
