@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/max-points-on-a-line/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/149.jpeg" 
+    alt="A smooth line connecting a series of points, each glowing with radiance, showing the maximum points."
+    caption="Solution to LeetCode 149: Max Points on a Line Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

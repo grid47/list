@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/excel-sheet-column-title/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/168.jpeg" 
+    alt="A radiant column title unfolding slowly, forming the Excel-style alphanumeric title."
+    caption="Solution to LeetCode 168: Excel Sheet Column Title Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/linked-list-cycle-ii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/142.jpeg" 
+    alt="A cycle in the linked list gently glowing, with the starting node illuminated to indicate the cycle's start."
+    caption="Solution to LeetCode 142: Linked List Cycle II Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

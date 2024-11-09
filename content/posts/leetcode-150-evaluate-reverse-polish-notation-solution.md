@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/150.jpeg" 
+    alt="A glowing stack of numbers, gently unfolding and calculating the final result step-by-step."
+    caption="Solution to LeetCode 150: Evaluate Reverse Polish Notation Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
