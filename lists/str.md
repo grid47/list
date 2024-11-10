@@ -5,7 +5,6 @@
 | LeetCode 1177 | [Can Make Palindrome from Substring](https://grid47.xyz/posts/leetcode-1177-can-make-palindrome-from-substring-solution/) |
 | LeetCode 131 | [Palindrome Partitioning](https://grid47.xyz/posts/leetcode-131-palindrome-partitioning-solution/) |
 | LeetCode 516 | [Longest Palindromic Subsequence](https://grid47.xyz/posts/leetcode-516-longest-palindromic-subsequence-solution/) |
-| LeetCode 1542 | [Find Longest Awesome Substring](https://grid47.xyz/posts/leetcode-1542-find-longest-awesome-substring-solution/) |
 | LeetCode 647 | [Palindromic Substrings](https://grid47.xyz/posts/leetcode-647-palindromic-substrings-solution/) |
 | LeetCode 1297 | [Maximum Number of Occurrences of a Substring](https://grid47.xyz/posts/leetcode-1297-maximum-number-of-occurrences-of-a-substring-solution/) |
 | LeetCode 402 | [Remove K Digits](https://grid47.xyz/posts/leetcode-402-remove-k-digits-solution/) |
@@ -13,7 +12,6 @@
 | LeetCode 22 | [Generate Parentheses](https://grid47.xyz/posts/leetcode-22-generate-parentheses-solution/) |
 | LeetCode 1405 | [Longest Happy String](https://grid47.xyz/posts/leetcode-1405-longest-happy-string-solution/) |
 | LeetCode 409 | [Longest Palindrome](https://grid47.xyz/posts/leetcode-409-longest-palindrome-solution/) |
-| LeetCode 1312 | [Minimum Insertion Steps to Make a String Palindrome](https://grid47.xyz/posts/leetcode-1312-minimum-insertion-steps-to-make-a-string-palindrome-solution/) |
 | LeetCode 1790 | [Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode-1790-check-if-one-string-swap-can-make-strings-equal-solution/) |
 | LeetCode 791 | [Custom Sort String](https://grid47.xyz/posts/leetcode-791-custom-sort-string-solution/) |
 | LeetCode 792 | [Number of Matching Subsequences](https://grid47.xyz/posts/leetcode-792-number-of-matching-subsequences-solution/) |

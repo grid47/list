@@ -27,13 +27,9 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 673 | [Number of Longest Increasing Subsequence](https://grid47.xyz/posts/leetcode-673-number-of-longest-increasing-subsequence-solution/) |
 | LeetCode 688 | [Knight Probability in Chessboard](https://grid47.xyz/posts/leetcode-688-knight-probability-in-chessboard-solution/) |
 | LeetCode 790 | [Domino and Tromino Tiling](https://grid47.xyz/posts/leetcode-790-domino-and-tromino-tiling-solution/) |
-| LeetCode 801 | [Minimum Swaps To Make Sequences Increasing](https://grid47.xyz/posts/leetcode-801-minimum-swaps-to-make-sequences-increasing-solution/) |
 | LeetCode 808 | [Soup Servings](https://grid47.xyz/posts/leetcode-808-soup-servings-solution/) |
 | LeetCode 935 | [Knight Dialer](https://grid47.xyz/posts/leetcode-935-knight-dialer-solution/) |
 | LeetCode 1155 | [Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
-| LeetCode 1220 | [Count Vowels Permutation](https://grid47.xyz/posts/leetcode-1220-count-vowels-permutation-solution/) |
-| LeetCode 1223 | [Dice Roll Simulation](https://grid47.xyz/posts/leetcode-1223-dice-roll-simulation-solution/) |
-| LeetCode 1269 | [Number of Ways to Stay in the Same Place After Some Steps](https://grid47.xyz/posts/leetcode-1269-number-of-ways-to-stay-in-the-same-place-after-some-steps-solution/) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
 
@@ -42,7 +38,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | Q.No. | Question |
 | --- | --- |
 | LeetCode 375 | [Guess Number Higher or Lower II](https://grid47.xyz/posts/leetcode-375-guess-number-higher-or-lower-ii-solution/) |
-| LeetCode 1000 | [Minimum Cost to Merge Stones](https://grid47.xyz/posts/leetcode-1000-minimum-cost-to-merge-stones-solution/) |
 | LeetCode 1039 | [Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
 | LeetCode 1130 | [Minimum Cost Tree From Leaf Values](https://grid47.xyz/posts/leetcode-1130-minimum-cost-tree-from-leaf-values-solution/) |
 
@@ -54,7 +49,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | --- | --- |
 | LeetCode 5 | [Longest Palindromic Substring](https://grid47.xyz/posts/leetcode-5-longest-palindromic-substring-solution/) |
 | LeetCode 72 | [Edit Distance](https://grid47.xyz/posts/leetcode-72-edit-distance-solution/) |
-| LeetCode 115 | [Distinct Subsequences](https://grid47.xyz/posts/leetcode-115-distinct-subsequences-solution/) |
 | LeetCode 516 | [Longest Palindromic Subsequence](https://grid47.xyz/posts/leetcode-516-longest-palindromic-subsequence-solution/) |
 | LeetCode 647 | [Palindromic Substrings](https://grid47.xyz/posts/leetcode-647-palindromic-substrings-solution/) |
 | LeetCode 712 | [Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode-712-minimum-ascii-delete-sum-for-two-strings-solution/) |
@@ -67,8 +61,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | Q.No. | Question |
 | --- | --- |
 | LeetCode 121 | [Best Time to Buy and Sell Stock](https://grid47.xyz/posts/leetcode-121-best-time-to-buy-and-sell-stock-solution/) |
-| LeetCode 123 | [Best Time to Buy and Sell Stock III](https://grid47.xyz/posts/leetcode-123-best-time-to-buy-and-sell-stock-iii-solution/) |
-| LeetCode 188 | [Best Time to Buy and Sell Stock IV](https://grid47.xyz/posts/leetcode-188-best-time-to-buy-and-sell-stock-iv-solution/) |
 | LeetCode 198 | [House Robber](https://grid47.xyz/posts/leetcode-198-house-robber-solution/) |
 | LeetCode 309 | [Best Time to Buy and Sell Stock with Cooldown](https://grid47.xyz/posts/leetcode-309-best-time-to-buy-and-sell-stock-with-cooldown-solution/) |
 | LeetCode 714 | [Best Time to Buy and Sell Stock with Transaction Fee](https://grid47.xyz/posts/leetcode-714-best-time-to-buy-and-sell-stock-with-transaction-fee-solution/) |

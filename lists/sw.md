@@ -7,7 +7,6 @@
 | LeetCode 1234 | [Replace the Substring for Balanced String](https://grid47.xyz/posts/leetcode-1234-replace-the-substring-for-balanced-string-solution/) |
 | LeetCode 424 | [Longest Repeating Character Replacement](https://grid47.xyz/posts/leetcode-424-longest-repeating-character-replacement-solution/) |
 | LeetCode 1208 | [Get Equal Substrings Within Budget](https://grid47.xyz/posts/leetcode-1208-get-equal-substrings-within-budget-solution/) |
-| LeetCode 992 | [Subarrays with K Different Integers](https://grid47.xyz/posts/leetcode-992-subarrays-with-k-different-integers-solution/) |
 | LeetCode 904 | [Fruit Into Baskets](https://grid47.xyz/posts/leetcode-904-fruit-into-baskets-solution/) |
 | LeetCode 1438 | [Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit](https://grid47.xyz/posts/leetcode-1438-longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit-solution/) |
 | LeetCode 209 | [Minimum Size Subarray Sum](https://grid47.xyz/posts/leetcode-209-minimum-size-subarray-sum-solution/) |

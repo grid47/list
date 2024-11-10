@@ -77,8 +77,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1212004/Bina
 | LeetCode 1361 | [Validate Binary Tree Nodes](https://grid47.xyz/posts/leetcode-1361-validate-binary-tree-nodes-solution/) |
 | LeetCode 429 | [N-ary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode-429-n-ary-tree-level-order-traversal-solution/) |
 | LeetCode 703 | [Kth Largest Element in a Stream](https://grid47.xyz/posts/leetcode-703-kth-largest-element-in-a-stream-solution/) |
-| LeetCode 297 | [Serialize and Deserialize Binary Tree](https://grid47.xyz/posts/leetcode-297-serialize-and-deserialize-binary-tree-solution/) |
-| LeetCode 834 | [Sum of Distances in Tree](https://grid47.xyz/posts/leetcode-834-sum-of-distances-in-tree-solution/) |
 | LeetCode 863 | [All Nodes Distance K in Binary Tree](https://grid47.xyz/posts/leetcode-863-all-nodes-distance-k-in-binary-tree-solution/) |
 | LeetCode 865 | [Smallest Subtree with all the Deepest Nodes](https://grid47.xyz/posts/leetcode-865-smallest-subtree-with-all-the-deepest-nodes-solution/) |
 | LeetCode 872 | [Leaf-Similar Trees](https://grid47.xyz/posts/leetcode-872-leaf-similar-trees-solution/) |
@@ -91,7 +89,6 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1212004/Bina
 | LeetCode 938 | [Range Sum of BST](https://grid47.xyz/posts/leetcode-938-range-sum-of-bst-solution/) |
 | LeetCode 951 | [Flip Equivalent Binary Trees](https://grid47.xyz/posts/leetcode-951-flip-equivalent-binary-trees-solution/) |
 | LeetCode 958 | [Check Completeness of a Binary Tree](https://grid47.xyz/posts/leetcode-958-check-completeness-of-a-binary-tree-solution/) |
-| LeetCode 968 | [Binary Tree Cameras](https://grid47.xyz/posts/leetcode-968-binary-tree-cameras-solution/) |
 | LeetCode 971 | [Flip Binary Tree To Match Preorder Traversal](https://grid47.xyz/posts/leetcode-971-flip-binary-tree-to-match-preorder-traversal-solution/) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)

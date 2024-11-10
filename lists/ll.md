@@ -3,7 +3,6 @@
 | LeetCode 2 | [Add Two Numbers](https://grid47.xyz/posts/leetcode-2-add-two-numbers-solution/) |
 | LeetCode 19 | [Remove Nth Node From End of List](https://grid47.xyz/posts/leetcode-19-remove-nth-node-from-end-of-list-solution/) |
 | LeetCode 21 | [Merge Two Sorted Lists](https://grid47.xyz/posts/leetcode-21-merge-two-sorted-lists-solution/) |
-| LeetCode 23 | [Merge k Sorted Lists](https://grid47.xyz/posts/leetcode-23-merge-k-sorted-lists-solution/) |
 | LeetCode 24 | [Swap Nodes in Pairs](https://grid47.xyz/posts/leetcode-24-swap-nodes-in-pairs-solution/) |
 | LeetCode 138 | [Copy List with Random Pointer](https://grid47.xyz/posts/leetcode-138-copy-list-with-random-pointer-solution/) |
 | LeetCode 141 | [Linked List Cycle](https://grid47.xyz/posts/leetcode-141-linked-list-cycle-solution/) |

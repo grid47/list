@@ -11,7 +11,6 @@
 | LeetCode 78 | [Subsets](https://grid47.xyz/posts/leetcode-78-subsets-solution/) |
 | LeetCode 17 | [Letter Combinations of a Phone Number](https://grid47.xyz/posts/leetcode-17-letter-combinations-of-a-phone-number-solution/) |
 | LeetCode 79 | [Word Search](https://grid47.xyz/posts/leetcode-79-word-search-solution/) |
-| LeetCode 51 | [N-Queens](https://grid47.xyz/posts/leetcode-51-n-queens-solution/) |
 | LeetCode 22 | [Generate Parentheses](https://grid47.xyz/posts/leetcode-22-generate-parentheses-solution/) |
 | LeetCode 90 | [Subsets II](https://grid47.xyz/posts/leetcode-90-subsets-ii-solution/) |
 

@@ -7,7 +7,6 @@
 | LeetCode 881 | [Boats to Save People](https://grid47.xyz/posts/leetcode-881-boats-to-save-people-solution/) |
 | LeetCode 31 | [Next Permutation](https://grid47.xyz/posts/leetcode-31-next-permutation-solution/) |
 | LeetCode 167 | [Two Sum II - Input Array Is Sorted](https://grid47.xyz/posts/leetcode-167-two-sum-ii-input-array-is-sorted-solution/) |
-| LeetCode 42 | [Trapping Rain Water](https://grid47.xyz/posts/leetcode-42-trapping-rain-water-solution/) |
 | LeetCode 556 | [Next Greater Element III](https://grid47.xyz/posts/leetcode-556-next-greater-element-iii-solution/) |
 | LeetCode 1750 | [Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode-1750-minimum-length-of-string-after-deleting-similar-ends-solution/) |
 | LeetCode 1850 | [Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://grid47.xyz/posts/leetcode-1850-minimum-adjacent-swaps-to-reach-the-kth-smallest-number-solution/) |
