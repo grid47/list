@@ -7,7 +7,7 @@ author = "Yasir"
 +++
 
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/profile.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/profile.png" 
     alt="LeetCode heatmap."
     caption=""
     width="900px"
