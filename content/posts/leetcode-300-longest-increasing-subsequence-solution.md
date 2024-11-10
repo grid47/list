@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-increasing-subsequence/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/300.jpeg" 
+    alt="A series of numbers gently connecting to form the longest increasing subsequence, glowing brightly along the way."
+    caption="Solution to LeetCode 300: Longest Increasing Subsequence Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

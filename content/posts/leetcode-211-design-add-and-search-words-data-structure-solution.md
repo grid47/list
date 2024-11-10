@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/design-add-and-search-words-data-structure/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/211.jpeg" 
+    alt="A series of glowing words arranged in a structure, showing efficient searching and adding through soft pathways."
+    caption="Solution to LeetCode 211: Design Add and Search Words Data Structure Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/product-of-array-except-self/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/238.jpeg" 
+    alt="A sequence of glowing numbers representing the product of elements except the current one, showing a smooth transition"
+    caption="Solution to LeetCode 238: Product of Array Except Self Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/valid-anagram/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/242.jpeg" 
+    alt="Two strings gently transforming into each other, with letters rearranging to form valid anagrams."
+    caption="Solution to LeetCode 242: Valid Anagram Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

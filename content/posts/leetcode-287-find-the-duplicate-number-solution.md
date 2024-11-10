@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/find-the-duplicate-number/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/287.jpeg" 
+    alt="A series of numbers, with the duplicate gently glowing and standing out from the rest."
+    caption="Solution to LeetCode 287: Find the Duplicate Number Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

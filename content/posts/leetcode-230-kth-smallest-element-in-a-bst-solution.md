@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/230.jpeg" 
+    alt="A binary search tree with nodes softly glowing, showing the kth smallest element highlighted."
+    caption="Solution to LeetCode 230: Kth Smallest Element in a BST Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

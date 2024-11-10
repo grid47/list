@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/perfect-squares/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/279.jpeg" 
+    alt="A series of glowing squares being formed from numbers, each square glowing brighter as it becomes perfect."
+    caption="Solution to LeetCode 279: Perfect Squares Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

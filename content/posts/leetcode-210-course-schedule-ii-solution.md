@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/course-schedule-ii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/210.jpeg" 
+    alt="A series of tasks gently forming a schedule, with dependencies softly highlighted as the courses unfold."
+    caption="Solution to LeetCode 210: Course Schedule II Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
