@@ -6,6 +6,15 @@ aliases = ["about-me", "about-blog", "contact"]
 author = "Yasir"
 +++
 
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/profile.jpeg" 
+    alt="LeetCode heatmap."
+    caption=""
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 
 Welcome to your ultimate resource for LeetCode solutions, created to make data structures and algorithms (DSA) accessible, understandable, and enjoyable for programmers at all levels. This blog is dedicated to those preparing for technical interviews, honing problem-solving skills, or diving into DSA to strengthen their coding foundations.
 
