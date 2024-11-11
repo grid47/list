@@ -23,10 +23,10 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1326900/grap
 
 | Q.No. | Question |
 | --- | --- |
-| LeetCode 787 | [Cheapest Flights Within K Stops](https://grid47.xyz/posts/leetcode-787-cheapest-flights-within-k-stops-solution/) |
 | LeetCode 743 | [Network Delay Time](https://grid47.xyz/posts/leetcode-743-network-delay-time-solution/) |
-| LeetCode 1514 | [Path with Maximum Probability](https://grid47.xyz/posts/leetcode-1514-path-with-maximum-probability-solution/) |
+| LeetCode 787 | [Cheapest Flights Within K Stops](https://grid47.xyz/posts/leetcode-787-cheapest-flights-within-k-stops-solution/) |
 | LeetCode 1334 | [Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://grid47.xyz/posts/leetcode-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance-solution/) |
+| LeetCode 1514 | [Path with Maximum Probability](https://grid47.xyz/posts/leetcode-1514-path-with-maximum-probability-solution/) |
 | LeetCode 1631 | [Path With Minimum Effort](https://grid47.xyz/posts/leetcode-1631-path-with-minimum-effort-solution/) |
 | LeetCode 1786 | [Number of Restricted Paths From First to Last Node](https://grid47.xyz/posts/leetcode-1786-number-of-restricted-paths-from-first-to-last-node-solution/) |
 
@@ -44,13 +44,13 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | Q.No. | Question |
 | --- | --- |
 | LeetCode 128 | [Longest Consecutive Sequence](https://grid47.xyz/posts/leetcode-128-longest-consecutive-sequence-solution/) |
-| LeetCode 990 | [Satisfiability of Equality Equations](https://grid47.xyz/posts/leetcode-990-satisfiability-of-equality-equations-solution/) |
-| LeetCode 1202 | [Smallest String With Swaps](https://grid47.xyz/posts/leetcode-1202-smallest-string-with-swaps-solution/) |
-| LeetCode 1061 | [Lexicographically Smallest Equivalent String](https://grid47.xyz/posts/leetcode-1061-lexicographically-smallest-equivalent-string-solution/) |
 | LeetCode 547 | [Number of Provinces](https://grid47.xyz/posts/leetcode-547-number-of-provinces-solution/) |
-| LeetCode 1319 | [Number of Operations to Make Network Connected](https://grid47.xyz/posts/leetcode-1319-number-of-operations-to-make-network-connected-solution/) |
 | LeetCode 721 | [Accounts Merge](https://grid47.xyz/posts/leetcode-721-accounts-merge-solution/) |
 | LeetCode 959 | [Regions Cut By Slashes](https://grid47.xyz/posts/leetcode-959-regions-cut-by-slashes-solution/) |
+| LeetCode 990 | [Satisfiability of Equality Equations](https://grid47.xyz/posts/leetcode-990-satisfiability-of-equality-equations-solution/) |
+| LeetCode 1061 | [Lexicographically Smallest Equivalent String](https://grid47.xyz/posts/leetcode-1061-lexicographically-smallest-equivalent-string-solution/) |
+| LeetCode 1202 | [Smallest String With Swaps](https://grid47.xyz/posts/leetcode-1202-smallest-string-with-swaps-solution/) |
+| LeetCode 1319 | [Number of Operations to Make Network Connected](https://grid47.xyz/posts/leetcode-1319-number-of-operations-to-make-network-connected-solution/) |
 
 Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
 

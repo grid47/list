@@ -13,4 +13,4 @@
 | **10** | [Sliding Window](https://grid47.xyz/lists/sw/) |
 | **11** | [Fenwick Tree](https://grid47.xyz/lists/fen/) |
 | **12** | [Backtracking](https://grid47.xyz/lists/bt/) |
-| **13** | [Dynamic Programming](https://grid47.xyz/lists/dp-1/) |
+| **13** | [Dynamic Programming – 1](https://grid47.xyz/lists/dp-1/) |
