@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/utf-8-validation/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/393.jpeg" 
+    alt="A string being validated for UTF-8 encoding, with each valid byte sequence softly glowing."
+    caption="Solution to LeetCode 393: UTF-8 Validation Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

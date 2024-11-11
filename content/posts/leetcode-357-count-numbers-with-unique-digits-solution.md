@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/357.jpeg" 
+    alt="A sequence of numbers with each unique digit softly illuminated, showing how many unique digits are present."
+    caption="Solution to LeetCode 357: Count Numbers with Unique Digits Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

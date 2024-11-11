@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/remove-duplicate-letters/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/316.jpeg" 
+    alt="A series of letters gently disappearing from a word, leaving only the unique letters softly glowing."
+    caption="Solution to LeetCode 316: Remove Duplicate Letters Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

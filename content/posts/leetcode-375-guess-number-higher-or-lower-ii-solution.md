@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/375.jpeg" 
+    alt="Similar to the previous idea, but with multiple guesses and a progressively smaller range."
+    caption="Solution to LeetCode 375: Guess Number Higher or Lower II Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

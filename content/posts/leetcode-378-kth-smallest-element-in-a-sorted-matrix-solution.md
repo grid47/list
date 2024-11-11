@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/378.jpeg" 
+    alt="A matrix where the kth smallest element glows softly, showing its position within the sorted matrix."
+    caption="Solution to LeetCode 378: Kth Smallest Element in a Sorted Matrix Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-absolute-file-path/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/388.jpeg" 
+    alt="A file path glowing as it grows, showing the longest path as it is traced step by step."
+    caption="Solution to LeetCode 388: Longest Absolute File Path Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
