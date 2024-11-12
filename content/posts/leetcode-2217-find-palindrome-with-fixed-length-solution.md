@@ -48,7 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2217.md" >}}
 ---
 {{< youtube yHa83HDgTdk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2218: Maximum Value of K Coins From Piles](https://grid47.xyz/posts/leetcode-2218-maximum-value-of-k-coins-from-piles-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2220: Minimum Bit Flips to Convert Number](https://grid47.xyz/posts/leetcode-2220-minimum-bit-flips-to-convert-number-solution/) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

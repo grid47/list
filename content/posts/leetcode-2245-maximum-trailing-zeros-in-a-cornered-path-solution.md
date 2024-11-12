@@ -65,7 +65,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2245.md" >}}
 ---
 {{< youtube QMRHGd9ftz8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2246: Longest Path With Different Adjacent Characters](https://grid47.xyz/posts/leetcode-2246-longest-path-with-different-adjacent-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2249: Count Lattice Points Inside a Circle](https://grid47.xyz/posts/leetcode-2249-count-lattice-points-inside-a-circle-solution/) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

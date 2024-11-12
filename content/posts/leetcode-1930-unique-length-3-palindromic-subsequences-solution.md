@@ -40,7 +40,7 @@ if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.beg
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1930.md" >}}
 ---
 {{< youtube 3THUt0vAFLU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1931: Painting a Grid With Three Different Colors](https://grid47.xyz/posts/leetcode-1931-painting-a-grid-with-three-different-colors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1935: Maximum Number of Words You Can Type](https://grid47.xyz/posts/leetcode-1935-maximum-number-of-words-you-can-type-solution/) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

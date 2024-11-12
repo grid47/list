@@ -46,7 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1696.md" >}}
 ---
 {{< youtube dHAsYTvbbj4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1697: Checking Existence of Edge Length Limited Paths](https://grid47.xyz/posts/leetcode-1697-checking-existence-of-edge-length-limited-paths-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1700: Number of Students Unable to Eat Lunch](https://grid47.xyz/posts/leetcode-1700-number-of-students-unable-to-eat-lunch-solution/) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

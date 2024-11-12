@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1578.md" >}}
 ---
 {{< youtube 9_9jwd2DHMU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](https://grid47.xyz/posts/leetcode-1579-remove-max-number-of-edges-to-keep-graph-fully-traversable-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1582: Special Positions in a Binary Matrix](https://grid47.xyz/posts/leetcode-1582-special-positions-in-a-binary-matrix-solution/) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
