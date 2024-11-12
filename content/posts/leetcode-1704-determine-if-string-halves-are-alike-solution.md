@@ -46,9 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1704.md" >}}
 ---
 {{< youtube n6svsUO6X8g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/posts/leetcode-1705-maximum-number-of-eaten-apples-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/posts/leetcode-1705-maximum-number-of-eaten-apples-solution/) |
 | --- |
-{{< notice tip >}}
-Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
-{{< /notice >}}
-Coupen: {{< clip "coupen" >}}

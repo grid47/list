@@ -52,9 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2011.md" >}}
 ---
 {{< youtube xPKIXpfxvZ8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2012: Sum of Beauty in the Array](https://grid47.xyz/posts/leetcode-2012-sum-of-beauty-in-the-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2012: Sum of Beauty in the Array](https://grid47.xyz/posts/leetcode-2012-sum-of-beauty-in-the-array-solution/) |
 | --- |
-{{< notice tip >}}
-Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
-{{< /notice >}}
-Coupen: {{< clip "coupen" >}}

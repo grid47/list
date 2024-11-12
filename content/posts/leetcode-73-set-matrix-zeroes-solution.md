@@ -66,9 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/73.md" >}}
 ---
 {{< youtube T41rL0L3Pnw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #74: Search a 2D Matrix](https://grid47.xyz/posts/leetcode-74-search-a-2d-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #74: Search a 2D Matrix](https://grid47.xyz/posts/leetcode-74-search-a-2d-matrix-solution/) |
 | --- |
-{{< notice tip >}}
-Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
-{{< /notice >}}
-Coupen: {{< clip "coupen" >}}

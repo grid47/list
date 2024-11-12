@@ -55,9 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2531.md" >}}
 ---
 {{< youtube MoYeUVe-xPY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2535: Difference Between Element Sum and Digit Sum of an Array](https://grid47.xyz/posts/leetcode-2535-difference-between-element-sum-and-digit-sum-of-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2535: Difference Between Element Sum and Digit Sum of an Array](https://grid47.xyz/posts/leetcode-2535-difference-between-element-sum-and-digit-sum-of-an-array-solution/) |
 | --- |
-{{< notice tip >}}
-Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
-{{< /notice >}}
-Coupen: {{< clip "coupen" >}}

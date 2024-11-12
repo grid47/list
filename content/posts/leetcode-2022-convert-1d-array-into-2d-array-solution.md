@@ -37,9 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2022.md" >}}
 ---
 {{< youtube l-VLzZ2riTc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #2023: Number of Pairs of Strings With Concatenation Equal to Target](https://grid47.xyz/posts/leetcode-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2023: Number of Pairs of Strings With Concatenation Equal to Target](https://grid47.xyz/posts/leetcode-2023-number-of-pairs-of-strings-with-concatenation-equal-to-target-solution/) |
 | --- |
-{{< notice tip >}}
-Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
-{{< /notice >}}
-Coupen: {{< clip "coupen" >}}
